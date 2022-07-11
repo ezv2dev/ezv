@@ -2967,9 +2967,6 @@ input::-webkit-inner-spin-button {
     border-radius: 10px !important;
 }
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
-    .bar p {
-        font-size: 140% !important;
-    }
     .searchbox {
         width: 60% !important;
     }
@@ -3020,7 +3017,7 @@ input::-webkit-inner-spin-button {
     }
     .flatpickr-calendar {
         position: fixed !important;
-        top: 40px !important;
+        top: 50px !important;
         left: 0px !important;
         width: 100% !important;
         padding: 20px !important;

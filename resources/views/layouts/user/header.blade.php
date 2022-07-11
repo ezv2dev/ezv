@@ -924,7 +924,7 @@
                             </div>
 
                             <div>
-                                <div class="bar" style="margin-left: -150px;">
+                                <div class="bar bar-restaurant-detail" style="margin-left: -150px;">
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}</p>
                                         <input type="text" class="form-control input-transparant" name="sLocation"
