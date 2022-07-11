@@ -1176,7 +1176,7 @@
                                     <input class="guest-right-input" type="number" id="total_guest2" value="1"
                                         min="0" readonly>
                                 </button>
-                                <div class="content sidebar-popup" style="left: 973px;" id="popup_guest">
+                                <div class="content sidebar-popup" id="popup_guest">
                                     <div class="row" style="margin-top: 10px;">
 
                                         <div class="reserve-input-row">

@@ -1917,10 +1917,11 @@ li.button-dropdown {
     background-color: white;
     border: 2px solid rgb(255, 116, 0);
     padding: 10px;
-    position: fixed;
+    position: absolute;
     border-radius: 15px;
     width: 275px;
-    left: 958px;
+    left: auto;
+    right: 0;
     margin-top: 20px;
 }
 
@@ -1976,12 +1977,12 @@ li.button-dropdown {
     background-color: white;
     border: 2px solid rgb(255, 116, 0);
     padding: 10px;
-    position: fixed;
+    position: absolute;
     border-radius: 15px;
     width: 275px;
     left:auto !important;
-    right: 50%;
-    transform:translateX(50%);
+    right: 0;
+    transform:translateX(-8%);
     margin-top: 20px;
     z-index: 1;
 }
@@ -3484,11 +3485,11 @@ span.flatpickr-weekday {
     .list-amenities .fa-ellipsis {
         font-size: 28px !important;
     }
-    .sidebar-popup {
+    /* .sidebar-popup {
         margin-left: -1105px !important;
         width: 728px !important;
         padding: 20px !important;
-    }
+    } */
     .sidebar-popup .dayContainer {
         width: 50% !important;
         min-width: 50% !important;
