@@ -61,8 +61,7 @@ class CollaboratorController extends Controller
         abort_if(!$profile, 404);
 
         $user = User::where('id', $profile->created_by)->first();
-        $tags = CollaboratorHasCategory::where('id_collab', $id)
-            ->join('collaborator_category', 'collaborator_has_category.id_category', '=', 'collaborator_category.id_category', 'left')->get();
+        $tags = CollaboratorHasCategory::with('collaboratorCategory')->where('id_collab', $id)->get();
         $category = CollaboratorCategory::get();
         $location = Location::get();
         $photo = CollaboratorPhoto::where('id_collab', $id)->get();
