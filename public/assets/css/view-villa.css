@@ -3306,6 +3306,9 @@ span.flatpickr-weekday {
     .flatpickr-day {
         max-width: 100% !important;
     }
+    span.flatpickr-weekday {
+        max-width: 100% !important;
+    }
     .list-amenities .translate-text-group-items {
         display: none !important;
     }
@@ -3404,9 +3407,22 @@ span.flatpickr-weekday {
         width: fit-content !important;
         margin-right: 20px !important;
     }
-
     .navigationItem span:hover {
         color: #000;
+    }
+}
+
+@media only screen and (max-width: 575px) { 
+    .add-gallery {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) { 
+    .add-gallery {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
     }
 }
 
@@ -3456,20 +3472,6 @@ span.flatpickr-weekday {
     .list-amenities .f-40,
     .list-amenities .fa-ellipsis {
         font-size: 28px !important;
-    }
-    #heightCalendar {
-        padding: 10px !important;
-        width: 100% !important;
-    }
-    .flatpickr-rContainer {
-        width: 100% !important;
-    }
-    .dayContainer {
-        width: 100% !important;
-        min-width: 100% !important;
-    }
-    .flatpickr-day {
-        max-width: 100% !important;
     }
     .sidebar-popup {
         margin-left: -1105px !important;
@@ -3521,6 +3523,29 @@ span.flatpickr-weekday {
     }
     span.flatpickr-weekday {
         max-width: 100% !important;
+    }
+    .flatpickr-rContainer {
+        width: 100% !important;
+    }
+    .dayContainer {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+    .flatpickr-day {
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1099px) { 
+    #heightCalendar {
+        padding: 10px !important;
+        width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1209px) { 
+    #heightCalendar {
+        padding: 50px 30px 30px 30px !important;
     }
 }
 
