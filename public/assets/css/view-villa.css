@@ -1336,6 +1336,14 @@ a.active {
     margin-left: -250px;
 }
 
+.bar-collaborator .guests {
+    min-width: 230px;
+}
+
+.bar-collaborator .guests .input-date .flatpickr-wrapper{
+    padding: 0px !important;
+}
+
 .button {
     background-color: white !important;
     border-radius: 0px 10px 10px 0px !important;
@@ -3220,6 +3228,10 @@ span.flatpickr-weekday {
         padding-right: 0px !important;
         padding-left: 0px !important;
         margin-top: 0px !important;
+    }
+    #page-container .page-content .alert {
+        margin-right: 24px !important;
+        margin-left: 24px !important;
     }
     #page-container .profile-image {
         display: flex !important;

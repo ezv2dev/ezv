@@ -39,7 +39,7 @@
             cursor: pointer;
         }*/
 
-        .col-4.right-bar i:hover {
+        .col-3.right-bar i:hover {
             background: #ff7400;
         }
 

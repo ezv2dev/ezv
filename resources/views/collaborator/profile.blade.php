@@ -229,10 +229,6 @@
                 margin-left: 110px;
             }
 
-            .footer {
-                margin-bottom: 174px;
-            }
-
             .delete {
                 right: 6px;
                 margin-left: -23px;
@@ -304,14 +300,6 @@
             .page-content {
                 margin-top: 0;
                 padding: 0;
-            }
-
-            .rsv,
-            header .villa-list-header-logo,
-            header .search-box,
-            header .right-bar,
-            .social-share {
-                display: none !important;
             }
 
             .profile-image {
@@ -567,6 +555,138 @@
         </header>
         {{-- END HEADER --}}
 
+        {{-- STICKY BOTTOM FOR MOBILE --}}
+        <div class="sticky-bottom-mobile d-xs-block d-md-none">
+            <input class="price-button" onclick="reserve2()"
+                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                value="CONTACT NOW" readonly>
+            <span
+                class="price"><strong>{{ CurrencyConversion::exchangeWithUnit($profile->price) }}</strong>/day</span>
+        </div>
+        {{-- END STICKY BOTTOM FOR MOBILE --}}
+
+        <div class="expand-navbar-mobile" aria-expanded="false">
+            <div class="px-3 pt-2">
+                @auth
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-fill d-flex align-items-center me-3">
+                                @if (Auth::user()->avatar)
+                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
+                                        style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
+                                @else
+                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
+                                        data-src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}"
+                                        class="user-photo" alt="" style="border-radius: 50%">
+                                @endif
+                                <div class="user-details ms-2">
+                                    <div class="user-details-name">
+                                        {{ Auth::user()->first_name }}
+                                        {{ Auth::user()->last_name }}</div>
+                                    <div class="user-details-email">
+                                        <p class="mb-0">{{ Auth::user()->email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
+                                style="background: transparent; border: 0;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <hr>
+                        @php
+                            $role = Auth::user()->role_id;
+                        @endphp
+                        @if ($role == 1 || $role == 2 || $role == 3)
+                            <a class="d-block mb-2" href="{{ route('partner_dashboard') }}"
+                                style="width: fit-content; color:#585656;">
+                                {{ __('user_page.Dashboard') }}
+                            </a>
+                        @endif
+                        <a class="d-block mb-2" href="{{ route('profile_index') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.My Profile') }}
+                        </a>
+                        <a class="d-block mb-2" href="{{ route('change_password') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.Change Password') }}
+                        </a>
+                        <a class="d-block mb-2" href="#!"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                            style="width: fit-content; color:#585656;">
+                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                            {{ __('user_page.Sign Out') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </form>
+                        <hr>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
+                                @if (session()->has('locale'))
+                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                @else
+                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                @endif
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            </a>
+                        </div>
+
+                        <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
+                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+
+                                <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
+                                    aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="d-flex align-items-center">
+                        <div class="flex-fill d-flex align-items-center">
+                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                                style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
+                                id="login">
+                                <i class="fa-solid fa-user"></i>
+                                <p class="mb-0 ms-2" style="color:#585656">Login</p>
+                            </a>
+                        </div>
+                        <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
+                            style="background: transparent; border: 0;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <hr>
+                    <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
+                        style="color: #585656; width: fit-content;" target="_blank">
+                        {{ __('user_page.Become a host') }}
+                    </a>
+                    <div class="d-flex align-items-center">
+                        <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
+                            style="color: white; margin-right: 9px;" id="language">
+                            @if (session()->has('locale'))
+                                <img style="border-radius: 3px; width: 27px;" class="lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                            @else
+                                <img style="border-radius: 3px; width: 27px;" class="lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                            @endif
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                        </a>
+                    </div>
+                @endauth
+            </div>
+
+        </div>
+
         {{-- PROFILE --}}
         <div class="row page-content">
             {{-- LEFT CONTENT --}}
@@ -695,7 +815,7 @@
                 @endauth
                 {{-- END ALERT CONTENT STATUS --}}
 
-                <div class="row top-profile">
+                <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4- col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($profile->image)
@@ -708,17 +828,21 @@
                             @auth
                                 @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="edit_collab_profile()"><i class="fa fa-pencil-alt"
+                                    <a type="button" onclick="edit_collab_profile()" class="edit-collab-profile-btn-dekstop"><i class="fa fa-pencil-alt"
                                             style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
                                             data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
                                 @endif
                             @endauth
 
-                            <div>
-                                <p class="">
+                            <div class="collab-joined-in-dekstop">
+                                <p>
                                     <i class="fa fa-users-rectangle" style="color: #ff7400"></i>
                                     Joined in {{ date_format($user->created_at, 'M Y') }}
                                 </p>
+                            </div>
+                            {{-- SHORT NAME FOR MOBILE --}}
+                            <div class="name-content-mobile ms-3 d-md-none">
+                                <h2 id="name-content-mobile">{{ $user->first_name }} {{ $user->last_name }}</h2>
                             </div>
                         </div>
                     </div>
@@ -954,49 +1078,71 @@
                         <li class="navigationItem">
                             <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('gallery').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
+                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     GALLERY</span>
+                                </span>
                             </a>
                         </li>
                         <li class="navigationItem ">
                             <a id="about-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('description').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     ABOUT</span>
+                                </span>
                             </a>
                         </li>
                         <li class="navigationItem ">
                             <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('amenities').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
+                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     INFORMATION</span>
+                                </span>
                             </a>
                         </li>
                         <li class="navigationItem ">
                             <a id="location-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('location-map').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     LOCATION</span>
+                                </span>
                             </a>
                         </li>
                         <li class="navigationItem">
                             <a id="availability-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('availability').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     AVAILABILITY</span>
+                                </span>
                             </a>
                         </li>
                         <li class="navigationItem">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('review').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
+                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
                                     REVIEW</span>
+                                </span>
+                                
+                            </a>
+                        </li>
+                        <li class="navigationItem d-flex d-md-none">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -1074,7 +1220,7 @@
                     {{-- ADD GALLERY --}}
                     @auth
                         @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                            <section style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
+                            <section class="add-gallery" style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
                                 <form class="dropzone" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
@@ -1589,7 +1735,7 @@
         </div>
 
         {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12" style="padding-left: 10px; padding-right: 10px;">
+        <div class="col-lg-12 bottom-content">
             <div class="col-12">
                 <section id="review" class="section-2">
                 <hr>
@@ -1640,9 +1786,9 @@
                             </div>
                         @else --}}
                             <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
-                            <div class="col-12 d-flex mt-3">
-                                <div class="col-6 d-flex">
-                                    <div class="col-1">
+                            <div class="col-12 mt-3 d-flex review-container">
+                                <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true" role="presentation" focusable="false"
                                             style="display: block; height: 24px; width: 24px; fill: currentcolor;">
@@ -1652,14 +1798,14 @@
                                         </svg>
                                     </div>
                                     <div class="col-8">
-                                        <p>
+                                        <p class="review-txt">
                                             This host has 720 reviews for other places to stay.
                                             <span><a href="#">Show other reviews</a></span>
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-6 d-flex">
-                                    <div class="col-1">
+                                <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                             aria-hidden="true" role="presentation" focusable="false"
                                             style="display: block; height: 24px; width: 24px; fill: currentcolor;">
@@ -1669,7 +1815,7 @@
                                         </svg>
                                     </div>
                                     <div class="col-8">
-                                        <p>
+                                        <p class="review-txt">
                                             We’re here to help your trip go smoothly. Every reservation is covered by
                                             <span><a href="#">EZV's Guest Refund Policy.</a></span>
                                         </p>

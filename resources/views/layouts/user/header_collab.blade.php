@@ -39,7 +39,7 @@
             cursor: pointer;
         }*/
 
-        .col-4.right-bar i:hover {
+        .col-3.right-bar i:hover {
             background: #ff7400;
         }
 
@@ -165,13 +165,13 @@
     @endphp
 
     <div class="row">
-        <div class="col-4 logo villa-list-header-logo" style="display: table;">
+        <div class="col-3 logo villa-list-header-logo flex-fill" style="display: table;">
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; margin-top: 15px;"
                 src="{{ asset('assets/logo.png') }}" alt="oke"></a>
         </div>
 
         {{-- @if ($condition_villa) --}}
-        <div class="col-4 search-box">
+        <div class="col-6 search-box">
             <div id="row_popup" class="row">
                 <div class="col-12 text-center">
                     <div id="searchbox" class="searchbox searchbox-display-block" onclick="popUp()"
@@ -302,7 +302,7 @@
                             </ul>
                         </div>
                         <div>
-                            <div class="bar">
+                            <div class="bar bar-collaborator">
                                 <div class="location">
                                     <p>{{ __('user_page.Location') }}
                                     </p>
@@ -476,7 +476,7 @@
                                             style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                             {{ __('user_page.Add dates') }}</p>
                                     @endIf
-                                    <div style="display: flex; padding: 0px;">
+                                    <div style="display: flex; padding: 0px;" class="input-date">
                                         <input type="text" placeholder="" class="form-control"
                                             name="start_date" id="start_date"
                                             value="{{ $get_start ?? '' }}"
@@ -529,7 +529,7 @@
         </div>
         {{-- @endif --}}
 
-        <div class="col-4 list-villa-user right-bar">
+        <div class="col-7 col-md-3 list-villa-user right-bar">
             @if (Route::is('list') || Route::is('index'))
             <!--
             <form action="{{ route('list') }}" method="POST" id="villa-form">
@@ -632,7 +632,7 @@
                 </div>
             </div>
 
-            <a type="button" onclick="language()" class="navbar-gap"
+            <a type="button" onclick="language()" class="navbar-gap language-btn"
                 style="color: white; margin-right: 9px; width:27px;">
                 @if (session()->has('locale'))
                 <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_'.session('locale').'.svg')}}">
@@ -726,6 +726,10 @@
 
                 </a>
             </div>
+            {{-- button toggler for mobile --}}
+            <button class="navbar-toggler d-flex d-md-none" type="button" id="expand-mobile-btn">
+                <i class="fa-solid fa-bars list-description font-black"></i>
+            </button>
             @else
             @if (Route::current()->uri() == 'villa/{id}' || Route::is('privacy_policy') || Route::is('terms') ||
             Route::is('license'))
@@ -733,7 +737,7 @@
                 value="Become a Host" />
             @endif
 
-            <a type="button" onclick="language()" class="navbar-gap"
+            <a type="button" onclick="language()" class="navbar-gap language-btn"
                 style="color: white; margin-right: 9px; width:27px;">
                 @if (session()->has('locale'))
                 <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_'.session('locale').'.svg')}}">
@@ -833,6 +837,83 @@
                     document.getElementById('add_date_wow').style.display = "block";
                     calendar_wow(2);
                 });
+                function handleResponsive(windowWidth) {
+                    if (windowWidth <= 991) {
+                        $("#search_bar .bar").addClass("row");
+                        $(".bar .location").addClass("col-12 mb-2");
+                        $(".bar .location-restaurant").addClass("col-12 mb-2");
+                        $(".bar .check-in").addClass("col-6 mb-2");
+                        $(".bar .check-out").addClass("col-6 mb-2");
+                        $(".bar-activity-detail .check-out").removeClass("col-6");
+                        $(".bar-collaborator .check-out").removeClass("col-6");
+                        $(".bar-activity-detail .check-out").addClass("col-12");
+                        $(".bar-collaborator .check-out").addClass("col-12");
+                        $(".bar .guests").addClass("col-10");
+                        $(".bar .button").addClass("col-2");
+                    } else {
+                        $("#search_bar .bar").removeClass("row");
+                        $(".bar .location").removeClass("col-12 mb-2");
+                        $(".bar .location-restaurant").removeClass("col-12 mb-2");
+                        $(".bar .check-in").removeClass("col-6 mb-2");
+                        $(".bar .check-out").removeClass("col-6 mb-2");
+                        $(".bar-activity-detail .check-out").removeClass("col-12 mb-2");
+                        $(".bar-collaborator-detail .check-out").removeClass("col-12 mb-2");
+                        $(".bar .guests").removeClass("col-10");
+                        $(".bar .button").removeClass("col-2");
+                    }
+                    if (windowWidth > 1460) {
+                        var gap = (windowWidth - 1360) / 2;
+                        var headerWidth = windowWidth - (gap * 2);
+                        $(".page-content").css("padding-left", gap + "px");
+                        $(".page-content").css("padding-right", gap + "px");
+                        $(".bottom-content").css("padding-left", gap + "px");
+                        $(".bottom-content").css("padding-right", gap + "px");
+                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
+                    }else {
+                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", "auto");
+                        $(".page-content").css("padding-left", "40px");
+                        $(".page-content").css("padding-right", "40px");
+                        $(".bottom-content").css("padding-left", "40px");
+                        $(".bottom-content").css("padding-right", "40px");
+                    }
+                    if (windowWidth > 1359) {
+                        var gap = (windowWidth - 1360) / 2;
+                        var navGap = gap - 20;
+                        $("#sidebar_fix").css("right", gap + "px");
+                        $("#rsv-block-btn .rsv").css("right", navGap + "px");
+                        $("#navbarright").css("right", navGap + "px");
+                    } else {
+                        $("#sidebar_fix").css("right", "0");
+                        $("#rsv-block-btn .rsv").css("right", "-20px");
+                        $("#navbarright").css("right", "0");
+                    }
+                }
+                var windowWidth = $(window).width();
+                handleResponsive(windowWidth);
+                $(window).on("resize", function() {
+                    if ($(this).width() !== windowWidth) {
+                        windowWidth = $(this).width();
+                        handleResponsive(windowWidth);
+                    }
+                })
+                $(".btn-close-expand-navbar-mobile").on("click", function() {
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
+                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                })
+                $("#expand-mobile-btn").on("click", function() {
+                    $("body").css({
+                        "height": "100%",
+                        "overflow": "hidden"
+                    })
+                    $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "true");
+                })
                 $("#loc_sugest").on('click', function () { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list");
                     ids.hide();
