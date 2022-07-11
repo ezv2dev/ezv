@@ -12,4 +12,10 @@ class VillaService extends Model
 
     protected $table = 'villa_service';
     protected $primaryKey = 'id_detail';
+
+    // * Relationship
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'id_service', 'id_service');
+    }
 }

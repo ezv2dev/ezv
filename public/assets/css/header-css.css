@@ -1366,6 +1366,23 @@ input:checked + .switch-background:active::before {
     .bar-collaborator .guests input {
         top: 32px !important;
     }
+    .bar-collaborator .guests a {
+        margin-left: 0px !important;
+        left: 0px !important;
+    }
+    .bar-collaborator .guests {
+        height: 68px !important;
+    }
+    .bar-collaborator-detail .button .cari {
+        margin-left: 0px !important;
+        left: 2% !important;
+    }
+    .bar-collaborator-detail .guests p,
+    .bar-collaborator-detail .guests input {
+        position: absolute !important;
+        width: 25vw !important;
+        left: 28% !important;
+    }
     .row .guests .nav {
         justify-content: center !important;
     }

@@ -1035,135 +1035,107 @@ class ViewController extends Controller
 
     public function villa_update_amenities(Request $request)
     {
-        $this->authorize('listvilla_update');
-        $status = 500;
-
-        try {
-            //insert into database
-            VillaAmenities::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->amenities)) {
-                foreach ($request->amenities as $row) {
-                    VillaAmenities::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_amenities' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
+        VillaAmenities::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->amenities)) {
+            foreach ($request->amenities as $row) {
+                VillaAmenities::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_amenities' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
             }
-
-            VillaBathroom::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->bathroom)) {
-                foreach ($request->bathroom as $row) {
-                    $data = VillaBathroom::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_bathroom' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaBedroom::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->bedroom)) {
-                foreach ($request->bedroom as $row) {
-                    VillaBedroom::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_bedroom' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaKitchen::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->kitchen)) {
-                foreach ($request->kitchen as $row) {
-                    VillaKitchen::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_kitchen' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaSafety::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->safety)) {
-                foreach ($request->safety as $row) {
-                    VillaSafety::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_safety' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaService::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->service)) {
-                foreach ($request->service as $row) {
-                    VillaService::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_service' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaFamily::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->family)) {
-                foreach ($request->family as $row) {
-                    VillaFamily::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_family' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            VillaOutdoor::where('id_villa', $request->id_villa)->delete();
-            if (!empty($request->outdoor)) {
-                foreach ($request->outdoor as $row) {
-                    VillaOutdoor::insert(array(
-                        'id_villa' => $request->id_villa,
-                        'id_outdoor' => $row,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            $status = 200;
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+        VillaBathroom::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->bathroom)) {
+            foreach ($request->bathroom as $row) {
+                $data = VillaBathroom::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_bathroom' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
+            }
         }
+
+        VillaBedroom::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->bedroom)) {
+            foreach ($request->bedroom as $row) {
+                VillaBedroom::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_bedroom' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
+            }
+        }
+
+        VillaKitchen::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->kitchen)) {
+            foreach ($request->kitchen as $row) {
+                VillaKitchen::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_kitchen' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
+            }
+        }
+
+        VillaSafety::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->safety)) {
+            foreach ($request->safety as $row) {
+                VillaSafety::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_safety' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
+            }
+        }
+
+        VillaService::where('id_villa', $request->id_villa)->delete();
+        if (!empty($request->service)) {
+            foreach ($request->service as $row) {
+                VillaService::insert(array(
+                    'id_villa' => $request->id_villa,
+                    'id_service' => $row,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ));
+            }
+        }
+
+        $getAmenities = VillaAmenities::with('amenities')->where('id_villa', $request->id_villa)->get();
+        $getBathroom = VillaBathroom::with('bathroom')->where('id_villa', $request->id_villa)->get();
+        $getBedroom = VillaBedroom::with('bedroom')->where('id_villa', $request->id_villa)->get();
+        $getKitchen = VillaKitchen::with('kitchen')->where('id_villa', $request->id_villa)->get();
+        $getSafety = VillaSafety::with('safety')->where('id_villa', $request->id_villa)->get();
+        $getService = VillaService::with('service')->where('id_villa', $request->id_villa)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Succesfully Updated',
+            'getAmenities' => $getAmenities,
+            'getBathroom' => $getBathroom,
+            'getBedroom' => $getBedroom,
+            'getKitchen' => $getKitchen,
+            'getSafety' => $getSafety,
+            'getService' => $getService,
+        ]);
     }
 
     public function villa_update_tags(Request $request)
@@ -1404,14 +1376,12 @@ class ViewController extends Controller
         }
 
         $deletedVillaPhoto = $villaPhoto->delete();
-        $getPhoto = VillaPhoto::where('id_villa', $request->id)->get();
 
         // check if delete is success or not
         if ($deletedVillaPhoto) {
             return response()->json([
                 'message' => 'Delete Data Successfuly',
                 'status' => 200,
-                'getPhoto' => $getPhoto
             ], 200);
         } else {
             return response()->json([
@@ -1494,28 +1464,22 @@ class ViewController extends Controller
         abort_if($condition, 403);
 
         // delete video
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
         $folder = $villa->uid;
         $path = env("VILLA_FILE_PATH") . $folder;
 
         // remove old video
         if (File::exists($path . '/' . $villaStory->name)) {
-            // File::delete($path . '/' . $villaStory->name);
         }
 
         $deletedVillaStory = $villaStory->delete();
 
         // check if delete is success or not
         if ($deletedVillaStory) {
-            // return back()
-            //     ->with('success', 'Your data has been deleted');
             return response()->json([
                 'message' => 'Delete Data Successfuly',
                 'status' => 200,
             ], 200);
         } else {
-            // return back()
-            //     ->with('error', 'Please check the form below for errors');
             return response()->json([
                 'message' => 'Failed Deleted Data',
                 'status' => 500,
