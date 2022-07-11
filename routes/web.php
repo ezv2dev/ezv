@@ -1015,7 +1015,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::patch('/restaurant/update/contact', [Restaurant\RestaurantListController::class, 'restaurant_update_contact'])->name('restaurant_update_contact');
     Route::post('/restaurant/update/location', [Restaurant\RestaurantListController::class, 'restaurant_update_location'])->name('restaurant_update_location');
     Route::post('/restaurant/update/short-description', [Restaurant\RestaurantListController::class, 'restaurant_update_short_description'])->name('restaurant_update_short_description');
-    Route::patch('/restaurant/update/description', [Restaurant\RestaurantListController::class, 'restaurant_update_description'])->name('restaurant_update_description');
+    Route::post('/restaurant/update/description', [Restaurant\RestaurantListController::class, 'restaurant_update_description'])->name('restaurant_update_description');
     Route::get('/restaurant/get/time', [Restaurant\RestaurantListController::class, 'restaurant_get_time'])->name('restaurant_get_time');
     Route::post('/restaurant/update/time', [Restaurant\RestaurantListController::class, 'restaurant_update_time'])->name('restaurant_update_time');
     Route::post('/restaurant/update/type', [Restaurant\RestaurantListController::class, 'restaurant_update_type'])->name('restaurant_update_type');

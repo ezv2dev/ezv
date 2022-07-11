@@ -16,7 +16,7 @@ class VillaListingController extends Controller
         $data = Villa::insertGetId(array(
             'uid' => rand(10000, 99999) . time(),
             'id_property_type' => 1,
-            'name' => "Villa Name Here",
+            'name' => "Home Name Here",
             'short_description' => "Make your short description here",
             // 'original_name' => $request->name,
             'adult' => "1",
