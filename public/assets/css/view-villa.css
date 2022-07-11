@@ -1922,15 +1922,19 @@ li.button-dropdown {
 }
 
 .sidebar-popup-tamu {
-    background-color: white;
-    border: 2px solid rgb(255, 116, 0);
-    padding: 10px;
-    position: absolute;
-    border-radius: 15px;
     width: 275px;
     left: auto;
     right: 0;
-    margin-top: 20px;
+    position: absolute;
+}
+
+.side-check-in-calendar{
+    width: 728px ;
+    left: auto;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
 }
 
 /* css details reserve */
@@ -3538,6 +3542,8 @@ span.flatpickr-weekday {
     }
     #rsv-block-btn .rsv {
         padding-top: 15px !important;
+        padding-right: 6px !important;
+        font-size: 10px !important;
     }
 }
 
@@ -3563,18 +3569,11 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .side-check-in-calendar,
-    .side-check-in-calendar-collaborator {
+    /* .side-check-in-calendar {
         left: inherit !important;
         margin-left: 0px !important;
         z-index: 1;
-    }
-    .side-check-in-calendar {
-        right: 10px !important;
-    }
-    .side-check-in-calendar-collaborator {
-        right: 0px !important;
-    }
+    } */
     span.flatpickr-weekday {
         max-width: 100% !important;
     }
@@ -3609,8 +3608,8 @@ span.flatpickr-weekday {
 
 @media only screen and (min-width: 992px) {
     .side-check-in-calendar {
-        left: inherit !important;
-        margin-left: 0px !important;
+        left: auto;
+        right: 105%;
     }
 
     /* #heightCalendar {

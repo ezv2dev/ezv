@@ -1145,8 +1145,9 @@
                                     </div>
                                 </div>
 
-                                <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
-                                    style="width: fit-content; margin-left: -675px; margin-top: -17px;">
+                                <!-- <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
+                                    style="width: fit-content; margin-left: -675px; margin-top: -17px;"> -->
+                                <div class="content sidebar-popup side-check-in-calendar" id="popup_check">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -1173,7 +1174,7 @@
                                     <input class="guest-right-input" type="number" id="total_guest2" value="1"
                                         min="0" readonly>
                                 </button>
-                                <div class="content sidebar-popup-tamu" id="popup_guest">
+                                <div class="content sidebar-popup sidebar-popup-tamu" id="popup_guest">
                                     <div class="row" style="margin-top: 10px;">
 
                                         <div class="reserve-input-row">
@@ -3964,32 +3965,7 @@
                     content.style.display = "none";
                 } else {
                     content.style.display = "block";
-                    if ($(window).width() > 991 && $(window).width() < 1260) {
-                        var contentPos = $(window).width() - $("#sidebar_fix").position().left + 5;
-                        content.style.right = contentPos + "px";
-                    }
-                    if ($(window).width() > 1259 && $(window).width() < 1360) {
-                        var contentPos = $(window).width() - $("#sidebar_fix").position().left - 30;
-                        content.style.right = contentPos + "px";
-                    }
-                    if ($(window).width() > 1359) {
-                        var contentPos = $(window).width() - $("#sidebar_fix").position().left;
-                        content.style.right = contentPos + "px";
-                    }
-                    $(window).on("resize", function() {
-                        if ($(this).width() > 991 && $(this).width() < 1260) {
-                            var contentPos = $(this).width() - $("#sidebar_fix").position().left + 5;
-                            content.style.right = contentPos + "px";
-                        }
-                        if ($(this).width() > 1259 && $(this).width() < 1360) {
-                            var contentPos = $(this).width() - $("#sidebar_fix").position().left - 30;
-                            content.style.right = contentPos + "px";
-                        }
-                        if ($(this).width() > 1359) {
-                            var contentPos = $(this).width() - $("#sidebar_fix").position().left;
-                            content.style.right = contentPos + "px";
-                        }
-                    })
+
                     document.addEventListener('mouseup', function(e) {
                         let container = content;
                         if (!container.contains(e.target)) {

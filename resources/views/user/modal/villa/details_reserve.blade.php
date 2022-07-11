@@ -399,7 +399,7 @@
                                 @csrf
                                 @auth
                                     <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
-                                    @endauth
+                                @endauth
                                 <input type="hidden" name="price_total2" id="price_total2" value="">
                                 <div class="row">
                                     <div class="col-12">
@@ -419,7 +419,7 @@
                                             <label for="card-exp-month">Expiration</label>
 
                                                 <input class="form-control" type="text" id="card-exp-month"
-                                                placeholder="mm//yy" value="" />
+                                                placeholder="mm/yy" value="" />
                                                 {{-- <div class="col-md-6">
                                                     <input class="form-control" type="text" id="card-exp-year"
                                                     placeholder="Card expiration year (yyyy)" value="" />
