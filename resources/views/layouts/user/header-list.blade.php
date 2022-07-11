@@ -3445,7 +3445,7 @@
                                             <!-- <i class="fa fa-search" aria-hidden="true"></i> -->&nbsp;
                                             {{ __('user_page.Category') }}
                                         </p>
-                                        <input type="text" style="background-color: #ffffff00;"
+                                        <input type="text" style="background-color: #ffffff00; border:none; padding: 0.4rem 0 0 0; font-size: 140%;"
                                             placeholder="{{ __('user_page.Search here') }}"
                                             value="{{ request()->get('sKeyword') ?? '' }}" id="keyword"
                                             name="sKeyword">
