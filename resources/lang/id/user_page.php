@@ -458,7 +458,8 @@ return [
     "It's FREE" => "GRATIS",
     "Don't show it again" => "Jangan tampilkan lagi",
 
-    "Restaurant Name Here" => "Nama Restoran Disini",
+    "Home Name Here" => "Nama Rumah Disini",
+    "Food Name Here" => "Nama Makanan Disini",
     "Hotel Name Here" => "Nama Hotel Disini",
     "Hotel Room Name Here" => "Nama Kamar Hotel Disini",
     "Wow Name Here" => "Wow Nama Disini",

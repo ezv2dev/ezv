@@ -88,7 +88,7 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div class="sticky-bottom-mobile d-xs-block d-md-none">
-            <a onclick="contact_activity()" type="button" class="rsv-btn-button">
+            <a onclick="contact_restaurant()" type="button" class="rsv-btn-button">
                 {{ __('user_page.CONTACT') }}
             </a>
         </div>
@@ -582,7 +582,7 @@
                                 <div id="name-form" style="display:none;">
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" required="">{{ $restaurant->name }}</textarea>
+                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Make your short description here') }}">{{ $restaurant->name }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameRestaurant();"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -677,7 +677,7 @@
                                     </a>
                                 </div>
                                 <div class="col-4 contact-item">
-                                    <a onclick="contact_activity()" type="button">
+                                    <a onclick="contact_restaurant()" type="button">
                                         <i class="fa-solid fa-phone"></i>
                                     </a>
                                 </div>
@@ -4026,7 +4026,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Restaurant Name Here'){
+            if(formInput.value == 'Food Name Here'){
                 formInput.value = '';
             }
         }
@@ -4038,8 +4038,7 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
 
-            // formInput.value = '{{ $restaurant->name }}';
-            if(formInput.value == 'Restaurant Name Here'){
+            if(formInput.value == 'Food Name Here'){
                 formInput.value = '';
             }
         }
@@ -4052,10 +4051,9 @@
             var formInput = document.getElementById("short-description-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
-            // formInput.value = '{{ $restaurant->short_description }}';
             if(formInput.value == 'Make your short description here'){
                 formInput.value = '';
-            }
+            };
         }
 
         function editShortDescriptionCancel() {
@@ -4064,11 +4062,9 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            // formInput.value = '{{ $restaurant->short_description }}';
             if(formInput.value == 'Make your short description here'){
                 formInput.value = '';
-            }
-            // formInput.value = '{{ $restaurant->short_description }}';
+            };
         }
     </script>
 

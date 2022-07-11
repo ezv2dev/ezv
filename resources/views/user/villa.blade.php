@@ -304,7 +304,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Home Name Here') }}"
                                         required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
@@ -406,7 +406,7 @@
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                        cols="30" rows="3" maxlength="255" required></textarea>
+                                        cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -907,7 +907,7 @@
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
                                         <div class="form-group">
-                                            <textarea name="description" id="description-form-input" class="w-100" rows="5" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
+                                            <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary"
@@ -3208,7 +3208,7 @@
                         echo '</div>';
                         echo '
                         ';
-                        
+
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3221,7 +3221,7 @@
                         echo '</div>';
                         echo '
                         ';
-                        
+
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedrooms') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3234,7 +3234,7 @@
                         echo '</div>';
                         echo '
                         ';
-                        
+
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3247,7 +3247,7 @@
                         echo '</div>';
                         echo '
                         ';
-                        
+
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3260,7 +3260,7 @@
                         echo '</div>';
                         echo '
                         ';
-                        
+
                         echo '<div class="row-modal-amenities translate-text-group padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
