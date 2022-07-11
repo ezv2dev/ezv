@@ -10,147 +10,52 @@ function edit_location() {
     $("#modal-edit_location").modal("show");
 }
 
-$.ajax({
-    //create an ajax request to display.php
-    type: "GET",
-    url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
-        $("#inline").flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            inline: true,
-            mode: "range",
-            showMonths: 2,
-            disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
-                var start = new Date(
-                    instance.formatDate(selectedDates[0], "Y-m-d")
-                );
-                var end = new Date(
-                    instance.formatDate(selectedDates[1], "Y-m-d")
-                );
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $("#min_stay").val();
-                // var total = $('#price').val() * sum_night;
-                var minimum = new Date($("#check_in").val()).fp_incr(min_stay);
-                $.ajax({
-                    type: "GET",
-                    url: "/villa/get_total/" + $("#id_villa").val(),
-                    data: {
-                        start: start.toISOString().split("T")[0],
-                        end: end.toISOString().split("T")[0],
-                        _token: "{{ csrf_token() }}",
-                    },
-                    success: function (data) {
-                        var total = data;
-                        if (sum_night < min_stay) {
-                            alert("minimum stay is " + min_stay + " days");
-                        } else {
-                            $("#check_in").val(
-                                instance.formatDate(selectedDates[0], "Y-m-d")
-                            );
-                            $("#check_out").val(
-                                instance.formatDate(selectedDates[1], "Y-m-d")
-                            );
-                            $("#sum_night").val(sum_night);
-                            $("#total").text(
-                                total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
-                            );
-                            $("#total_all").text(
-                                total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
-                            );
-                        }
-                    },
-                });
-            },
-        });
-    },
-});
+function calendar_availability(months) {
+    if (!$("#check_in").val()) {
+        var check_in_val = "";
+    } else {
+        var check_in_val = $("#check_in").val();
+    }
 
-$.ajax({
-    //create an ajax request to display.php
-    type: "GET",
-    url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
-        $("#inline2").flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            inline: true,
-            mode: "range",
-            showMonths: 1,
-            disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
-                var start = new Date(
-                    instance.formatDate(selectedDates[0], "Y-m-d")
-                );
-                var end = new Date(
-                    instance.formatDate(selectedDates[1], "Y-m-d")
-                );
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $("#min_stay").val();
-                // var total = $('#price').val() * sum_night;
-                var minimum = new Date($("#check_in").val()).fp_incr(min_stay);
-                $.ajax({
-                    type: "GET",
-                    url: "/villa/get_total/" + $("#id_villa").val(),
-                    data: {
-                        start: start.toISOString().split("T")[0],
-                        end: end.toISOString().split("T")[0],
-                        _token: "{{ csrf_token() }}",
-                    },
-                    success: function (data) {
-                        var total = data;
-                        if (sum_night < min_stay) {
-                            alert("minimum stay is " + min_stay + " days");
-                        } else {
-                            $("#check_in").val(
-                                instance.formatDate(selectedDates[0], "Y-m-d")
-                            );
-                            $("#check_out").val(
-                                instance.formatDate(selectedDates[1], "Y-m-d")
-                            );
-                            $("#sum_night").val(sum_night);
-                            $("#total").text(
-                                total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
-                            );
-                            $("#total_all").text(
-                                total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
-                            );
-                        }
-                    },
-                });
-            },
-        });
-    },
-});
+    if (!$("#check_out").val()) {
+        var check_out_val = "";
+    } else {
+        var check_out_val = $("#check_out").val();
+    }
+    $("#inline").flatpickr({
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        inline: true,
+        mode: "range",
+        defaultDate: [check_in_val, check_out_val],
+        showMonths: months,
+        onChange: function (selectedDates, dateStr, instance) {
+            // $('#date_things').val(flatpickr.formatDate("Y-m-d"));
+            let from = instance.formatDate(selectedDates[0], "Y-m-d");
+            let to = instance.formatDate(selectedDates[1], "Y-m-d");
+            $("#check_in").val(from);
+            $("#check_out").val(to);
+
+            calendar_inline_collab(2);
+        },
+    });
+}
 
 $("#clear_date_inline").click(function () {
     // $("#check_in2").val("");
     $("#check_in").val("");
     $("#check_out").val("");
     calendar_inline_collab(2);
+    calendar_availability(2);
+});
+
+$("#clear_date_availability").click(function () {
+    // $("#check_in2").val("");
+    $("#check_in").val("");
+    $("#check_out").val("");
+    calendar_inline_collab(2);
+    calendar_availability(2);
 });
 
 function calendar_inline_collab(months) {
@@ -181,9 +86,13 @@ function calendar_inline_collab(months) {
             $("#check_out").val(to);
             let content = document.getElementById("popup_check");
             content.style.display = "none";
+
+            calendar_availability(2);
         },
     });
 }
+
+calendar_availability(2);
 calendar_inline_collab(2);
 
 // $.ajax({
