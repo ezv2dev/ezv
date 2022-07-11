@@ -1336,6 +1336,14 @@ a.active {
     margin-left: -250px;
 }
 
+.bar-collaborator .guests {
+    min-width: 230px;
+}
+
+.bar-collaborator .guests .input-date .flatpickr-wrapper{
+    padding: 0px !important;
+}
+
 .button {
     background-color: white !important;
     border-radius: 0px 10px 10px 0px !important;
@@ -3219,6 +3227,14 @@ span.flatpickr-weekday {
     .edit-profile-image-btn-dekstop {
         display: none !important;
     }
+    .collab-joined-in-dekstop,
+    .collab-edit-profile-btn-dekstop {
+        display: none !important;
+    }
+    .collab-joined-in-mobile p {
+        font-size: 12.5px !important;
+        text-align: start !important;
+    }
     #name-form {
         margin-top: 5px !important;
     }
@@ -3232,6 +3248,10 @@ span.flatpickr-weekday {
         padding-right: 0px !important;
         padding-left: 0px !important;
         margin-top: 0px !important;
+    }
+    #page-container .page-content .alert {
+        margin-right: 24px !important;
+        margin-left: 24px !important;
     }
     #page-container .profile-image {
         display: flex !important;
@@ -3297,7 +3317,10 @@ span.flatpickr-weekday {
     }
     #heightCalendar {
         padding: 0px !important;
-        width: 95vw !important;
+    }
+    #availability .pd-tlr-10 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
     #availability,
     #description,
@@ -3565,6 +3588,10 @@ span.flatpickr-weekday {
         padding: 10px !important;
         width: 100% !important;
     }
+    .navigationItem__Icon {
+        width: auto !important;
+        height: auto !important;
+    }
 }
 
 @media only screen and (min-width: 1100px) and (max-width: 1209px) { 
@@ -3636,7 +3663,7 @@ span.flatpickr-weekday {
 } */
 @media only screen and (min-width: 1360px) {
     .navright.active {
-        width: 24%;
+        width: fit-content !important;
     }
     .rsv-block .sticky {
         max-width: 1100px !important;
@@ -3753,12 +3780,11 @@ span.flatpickr-weekday {
 }
 
 .date-form {
-    font-size: 12px; 
+    font-size: 14px !important; 
     margin-left: 0px; 
     width:100%; 
     text-align: center; 
     border: none !important; 
     border-color: transparent !important;
-    width:80%; 
     border:0
 }
