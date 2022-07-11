@@ -1385,13 +1385,13 @@
                         </div>
 
                         <div class="row-grid-amenities">
-                            <div class="row-grid-list-amenities translate-text-group">
+                            <div class="row-grid-list-amenities translate-text-group" id="contentFacilities">
                                 @if ($restaurant->facilities->count() > 6)
                                     @for ($i = 0; $i < 6; $i++)
                                         <div class="list-amenities">
                                             <div class="text-align-center" data-maxlength="6">
                                                 <i class="f-40 fa fa-{{ $restaurant->facilities[$i]->icon }}"></i>
-                                                <div class="mb-0">
+                                                <div class="mb-0 max-line">
                                                     <span class="translate-text-group-items">
                                                         {{ $restaurant->facilities[$i]->name }}
                                                     </span>
@@ -1409,7 +1409,7 @@
                                         <div class="list-amenities">
                                             <div class="text-align-center" data-maxlength="6">
                                                 <i class="f-40 fa fa-{{ $item->icon }}"></i>
-                                                <div class="mb-0">
+                                                <div class="mb-0 max-line">
                                                     <span class="translate-text-group-items">
                                                         {{ $item->name }}
                                                     </span>

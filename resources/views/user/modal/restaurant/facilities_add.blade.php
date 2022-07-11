@@ -72,7 +72,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="{{ route('restaurant_store_facilities') }}" method="POST" id="basic-form"
+            <form action="javascript:void(0);" method="POST" id="basic-form"
                     class="js-validation" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_restaurant" id="id_restaurant"
@@ -114,7 +114,7 @@
                 <div class="modal-filter-footer d-flex justify-content-center"
                     style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                     <div class="col-4" style="text-align: center;">
-                        <button type="submit" class="btn btn-sm btn-primary w-100">
+                        <button type="submit" onclick="saveFacilities()" class="btn btn-sm btn-primary w-100">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
