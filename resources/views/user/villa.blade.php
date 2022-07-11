@@ -266,7 +266,7 @@
                                 <div id="displayCategory">
                                     @foreach ($villaHasCategory->take(3) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                            style="background-color: #FF7400; margin-right: 3px;">
+                                            style="background-color: #FF7400;">
                                             {{ $item->villaCategory->name }}
                                         </span>
                                     @endforeach
@@ -769,22 +769,21 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                         <a
                                             href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
                                                 src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
                                                 title="{{ $item->caption }}">
-
                                         </a>
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-icon">
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Add Photo Caption') }}"
                                                         onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button>
+                                                            class="fa fa-pencil"></i></button> --}}
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Swap Photo Position') }}"
@@ -875,14 +874,14 @@
                                 <div id="displayTags">
                                     @forelse ($villaTags->take(5) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                            style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
+                                            style="background-color: #FF7400;">{{ $item->villaFilter->name }}</span>
                                     @empty
                                         <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
                                     @endforelse
                                 </div>
                                 <div id="moreTags">
                                     @if ($villaTags->count() > 5)
-                                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button ml-1"
                                             onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
                                     @endif
                                 </div>
@@ -3209,7 +3208,7 @@
                         echo '</div>';
                         echo '
                         ';
-
+                        
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3222,7 +3221,7 @@
                         echo '</div>';
                         echo '
                         ';
-
+                        
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedrooms') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3235,7 +3234,7 @@
                         echo '</div>';
                         echo '
                         ';
-
+                        
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3248,7 +3247,7 @@
                         echo '</div>';
                         echo '
                         ';
-
+                        
                         echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3261,7 +3260,7 @@
                         echo '</div>';
                         echo '
                         ';
-
+                        
                         echo '<div class="row-modal-amenities translate-text-group padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
@@ -3299,7 +3298,7 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         function view_add_caption(idc) {
             $('#id_photo_caption').val(idc.id_photo);
 
@@ -3307,7 +3306,7 @@
 
             $('#modal-add_caption').modal('show');
         }
-    </script>
+    </script> --}}
 
     {{-- MODAL SHARE --}}
     <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
@@ -3421,7 +3420,7 @@
     </div>
 
     {{-- MODAL ADD PHOTO CAPTION --}}
-    <div class="modal fade" id="modal-add_caption" tabindex="-1" role="dialog"
+    {{-- <div class="modal fade" id="modal-add_caption" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
@@ -3447,7 +3446,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- MODAL CONTACT HOST --}}
     <div class="modal fade" id="modal-contact-host" tabindex="-1" role="dialog"
@@ -3746,56 +3745,6 @@
         }
     </script>
     {{-- END EDIT POSITION PHOTO & VIDEO --}}
-
-    {{-- Guest Count --}}
-    {{-- <script>
-        $('#adult2').on('change', function() {
-            console.log('okeee');
-            var total_adult2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_adult2);
-            $('#adult3').val($('#adult2').val());
-            $('#child3').val($('#child2').val());
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest3').val($('#total_guest2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-
-        $('#child2').on('change', function() {
-            var total_child2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_child2);
-            $('#adult3').val($('#adult2').val());
-            $('#child3').val($('#child2').val());
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest3').val($('#total_guest2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-    </script>
-
-    <script>
-        $('#adult4').on('change', function() {
-            var total_adult4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_adult4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#adult3').val($('#adult4').val());
-            $('#child3').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-            $('#total_guest3').val($('#total_guest4').val());
-        });
-
-        $('#child4').on('change', function() {
-            var total_child4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_child4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#adult3').val($('#adult4').val());
-            $('#child3').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-            $('#total_guest3').val($('#total_guest4').val());
-        });
-    </script> --}}
 
     <script>
         $("#searchbox").click(function() {
@@ -4299,6 +4248,7 @@
     </script>
 
     {{-- Sweetalert Function Delete Photo Gallery --}}
+    {{-- blade-formatter-disable --}}
     <script>
         function delete_photo_photo(ids) {
             var ids = ids;
@@ -4322,11 +4272,9 @@
                                 Swal.fire('Failed', data.message, 'error');
                             }
                         },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                        success: async function(response) {
+                            await Swal.fire('Deleted', response.message, 'success');
+                            $(`#displayPhoto${ids.id_photo}`).remove();
                         }
                     });
                 } else {
@@ -4336,6 +4284,7 @@
             });
         };
     </script>
+    {{-- blade-formatter-enable --}}
 
     {{-- Sweetalert Function Delete Video Gallery --}}
     <script>
