@@ -7,7 +7,6 @@
         padding-left: 35px;
         margin-bottom: 12px;
         cursor: pointer;
-        
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -82,19 +81,18 @@
                     @csrf
                     <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}"> --}}
 
-                    <div class="form-group pt-2 px-4">
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Amenities') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($amenities_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($villa_amenities as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                <div class="form-group pt-2 px-4">
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Amenities') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($amenities_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($villa_amenities as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -108,19 +106,19 @@
                                 </div>
                             @endforeach
                         </div>
-                        <hr>
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Bathroom') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($bathroom_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($bathroom as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Bathroom') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($bathroom_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($bathroom as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -134,19 +132,19 @@
                                 </div>
                             @endforeach
                         </div>
-                        <hr>
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($bedroom_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($bedroom as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($bedroom_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($bedroom as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -160,19 +158,19 @@
                                 </div>
                             @endforeach
                         </div>
-                        <hr>
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Kitchen') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($kitchen_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($kitchen as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Kitchen') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($kitchen_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($kitchen as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -186,19 +184,19 @@
                                 </div>
                             @endforeach
                         </div>
-                        <hr>
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Safety') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($safety_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($safety as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Safety') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($safety_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($safety as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -212,19 +210,19 @@
                                 </div>
                             @endforeach
                         </div>
-                        <hr>
-                        <div class="row">
-                            <label class="form-label"><b>{{ __('user_page.Service') }}</b></label>
-                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($service_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($service as $item) {
-                                                    if ($data->name == $item->name) {
-                                                        $isChecked = 'checked';
-                                                    }
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Service') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($service_m as $data)
+                                <div class="col-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($service as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
                                                 }
                                             }
                                         @endphp
@@ -244,7 +242,7 @@
                             <label class="form-label"><b>{{ __('user_page.Family') }}</b></label>
                             <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($family_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
@@ -270,7 +268,7 @@
                             <label class="form-label"><b>{{ __('user_page.Outdoor') }}</b></label>
                             <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($outdoor_m as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
