@@ -190,10 +190,6 @@ svg {
 }
 
 @media (min-width: 1360px) {
-    .rsv-block .sticky {
-        width: 74% !important;
-    }
-
     .reserve-block {
         right: -9px;
     }
