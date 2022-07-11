@@ -1110,7 +1110,7 @@
                         <div class="col-12 row gallery">
                             @if ($restaurant->photo->count() > 0)
                                 @foreach ($restaurant->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                         <a
                                             href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -1317,25 +1317,28 @@
                                 {!! Str::limit(Translate::translate($restaurant->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
                                 {{-- {!! $restaurant->description ?? 'there is no description yet' !!} --}}
                             </p>
-                            @if (Str::length($restaurant->description) > 600)
-                                <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
-                                    onclick="showMoreDescription();"><span
-                                        style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                    <span style="color: #ff7400;">></span></a>
-                            @endIf
+                            <span id="buttonShowMoreDescription">
+                                @if (Str::length($restaurant->description) > 600)
+
+                                        <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
+                                            onclick="showMoreDescription();"><span
+                                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                            <span style="color: #ff7400;">></span></a>
+                                @endIf
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
-                                        <form action="{{ route('restaurant_update_description') }}" method="post">
-                                            @csrf
-                                            @method('PATCH')
+                                        <form action="javascript:void(0);" method="post">
+                                            {{-- @csrf
+                                            @method('PATCH') --}}
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
                                                 <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -4168,7 +4171,7 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
             btn.classList.remove("d-none");
-            formInput.value = '{{ $restaurant->description }}';
+            // formInput.value = '{{ $restaurant->description }}';
         }
     </script>
     {{-- END UPDATE FORM --}}
@@ -4533,8 +4536,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $(`#displayPhoto${ids.id_photo}`).remove();
                         }
                     });
                 } else {
