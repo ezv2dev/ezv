@@ -1125,7 +1125,7 @@
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
                                             <input class=""
-                                                style="font-size: 15px; margin-left: 0px; width:100%; text-align: center; border: none !important; border-color: transparent !important;"
+                                                style="font-size: 12px; margin-left: 0px; width:100%; text-align: center; border: none !important; border-color: transparent !important;"
                                                 type="text" id="check_in" name="check_in"
                                                 style="width:80%; border:0"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>
@@ -1140,7 +1140,7 @@
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
                                             <input class=""
-                                                style="font-size: 15px; margin-left: 0px; width: 100px; text-align: center; border: none !important; border-color: transparent !important;"
+                                                style="font-size: 12px; margin-left: 0px; width: 100px; text-align: center; border: none !important; border-color: transparent !important;"
                                                 type="text" id="check_out" name="check_out"
                                                 style="width:80%; border:0"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>

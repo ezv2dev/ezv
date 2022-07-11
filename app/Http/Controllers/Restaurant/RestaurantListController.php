@@ -331,28 +331,38 @@ class RestaurantListController extends Controller
 
     public function restaurant_update_description(Request $request)
     {
-        // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
-
         // validation
         $validator = Validator::make($request->all(), [
             'id_restaurant' => ['required', 'integer'],
             'description' => ['string']
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        abort_if(!$restaurant, 404);
+        if (!$restaurant)
+        {
+            return response()->json([
+                'message' => 'Restaurant Not Found',
+                'status' => 404,
+            ]);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
         }
 
         // update
@@ -361,13 +371,20 @@ class RestaurantListController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        $data = Restaurant::where('id_restaurant', $request->id_restaurant)->select('description')->first();
+
         // check if update is success or not
         if ($updatedRestaurant) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated Description Restaurant',
+                'status' => 200,
+                'data' => $data,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Description Restaurant',
+                'status' => 500,
+            ]);
         }
     }
 

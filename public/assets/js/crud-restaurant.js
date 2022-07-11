@@ -35,10 +35,55 @@ function saveShortDescription() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             editShortDescriptionCancel();
+        },
+    });
+}
+
+function saveDescription() {
+    let desc = $("#description-form-input").val();
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/restaurant/update/description",
+        data: {
+            id_restaurant: id_restaurant,
+            description: desc,
+        },
+        success: function (response) {
+            console.log(response);
+            console.log(response.data.description.length);
+
+            let desc_input = document.getElementById("description-form-input");
+
+            $("#description-content").html(response.data.description);
+
+            desc_input.value = response.data.description;
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            if (response.data.description.length > 600) {
+                $("#buttonShowMoreDescription").html("");
+                $("#buttonShowMoreDescription").append(
+                    '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                );
+                $("#modalDescriptionContent").html(response.data.description);
+            } else {
+                $("#buttonShowMoreDescription").html("");
+                $("#btnShowMoreDescription").remove();
+            }
+
+            editDescriptionCancel();
         },
     });
 }
@@ -68,7 +113,7 @@ function saveNameRestaurant() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             editNameCancel();
@@ -112,7 +157,7 @@ $("#updateImageForm").submit(function (e) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             readerImageRestaurant.addEventListener("load", function () {
@@ -179,7 +224,7 @@ function saveCategoryRestaurant() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             let content = "";
@@ -332,7 +377,7 @@ function saveTimeRestaurant() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             let newOpenTime = tConvert(response.data.open_time);
@@ -398,7 +443,7 @@ function saveRestaurantPrice() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             var restaurantTypeInput = $("#restaurant-type-input");
