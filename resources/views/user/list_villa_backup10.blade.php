@@ -12,7 +12,7 @@
         array_push($list, $item->id_villa);
     }
 
-    $scenic_views = App\ScenicViews::all();
+    $scenic_views = App\Models\ScenicViews::all();
     $get_check_in = app('request')->input('sCheck_in');
     $get_check_out = app('request')->input('sCheck_out');
 
@@ -149,13 +149,12 @@
                 <div id="villa-data" class="grid-container-43">
                     @include('user.data_list_villa')
                 </div>
-                <div class="ajax-load text-center mb-5" style="display:none;">
+                <div></div>
+
+                <div class="ajax-load text-center" style="display:none;">
                     <p class="list-loading {{ $textColor }}">
                         {{ __('user_page.Loading More') }}
                     </p>
-                </div>
-                <div id="lazy-show-more" class="text-center" style="display: none;">
-                    <button onclick="loadMoreData(page)" class="btn btn-primary rounded-pill fw-bold" style="font-family:'poppins'">Show More</button>
                 </div>
                 <!-- End Grid 43 -->
                 <div style="height: 35px;">&nbsp;</div>
@@ -178,181 +177,161 @@
 @section('scripts')
     @include('user.modal.villa.list.map')
 
-    {{-- lazy load list --}}
-        {{-- store index function --}}
-        <script>
-            var itemIds = [];
-            function add(items) {
-                if (items.length) {
-                    items.forEach(id => {
-                        if (items.indexOf(id) != -1) {
-                            itemIds.push(id);
-                        }
-                    });
+    <script>
+        var itemIds = [];
+
+        function add(items) {
+            if (items.length) {
+                items.forEach(id => {
+                    if (items.indexOf(id) != -1) {
+                        itemIds.push(id);
+                    }
+                });
+            }
+            console.log(itemIds);
+        }
+    </script>
+    <script>
+        var page = 1;
+        function disabledScrollAction() {
+            $(window).off('scroll');
+        }
+        function enabledScrollAction() {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
+                    page++;
+                    loadMoreData(page);
                 }
-                console.log(itemIds);
-            }
-        </script>
-        {{-- scroll action --}}
-        <script>
-            var page = 1;
-            const widthBreakpoint = 768;
-            function disabledScrollAction() {
-                if($(window).width() < widthBreakpoint){
-                    hideLazyShowMoreButton();
-                } else {
-                    $(window).off('scroll');
-                }
-            }
-            function enabledScrollAction() {
-                if($(window).width() < widthBreakpoint){
-                    hideLazyShowMoreButton();
-                } else {
-                    $(window).scroll(function() {
-                        if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
-                            page++;
-                            loadMoreData(page);
-                        }
-                    });
-                }
-            }
-        </script>
-        {{-- show/hide show more button --}}
-        <script>
-            function hideLazyShowMoreButton() {
-                $('#lazy-show-more').hide();
-            }
-            function showLazyShowMoreButton() {
-                $('#lazy-show-more').show();
-            }
-        </script>
-        {{-- load more action --}}
-        <script>
-            async function loadMoreData(page) {
-                disabledScrollAction();
-
-                // check if link indicator is link list
-                // otherwise link filter
-                var linkIndicator = location.origin + location.pathname;
-                var linkTarget = `{{ route('list') }}`;
-                if (linkIndicator == linkTarget) {
-                    let load = await $.ajax({
-                        url: '?page=' + page,
-                        type: 'get',
-                        beforeSend: function() {
-                            $(".ajax-load").show();
-                        },
-                        data: {
-                            itemIds: itemIds
-                        },
-                    })
-                    .done(function(data) {
-                        console.log(data);
-                        // append data to element
-                        if (data.html == " ") {
-                            $('.ajax-load').html("No more records found");
-                            return;
-                        }
-                        $('.ajax-load').hide();
-                        $("#villa-data").append(data.html);
-
-                        // rerun slick
-                        $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
-                        $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
-                        $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
-                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
-                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
-                        })
-                        $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
-                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
-                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
-                        })
-
-                        $(".js-slider-2").not('.slick-initialized').slick({
-                            rtl: false,
-                            autoplay: false,
-                            autoplaySpeed: 5000,
-                            speed: 800,
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            variableWidth: true,
-                            pauseOnHover: false,
-                            easing: "linear",
-                            arrows: true
-                        });
-                        // rerun change background
-
-                        // changebackground();
-                        enabledScrollAction();
-                    })
-                    .fail(function(jqXHR, ajaxOptions, thrownError) {
-                        alert("Server not responding");
-                        enabledScrollAction();
-                    });
-                } else {
-                    let load = await $.ajax({
-                        url: location.href+'&page=' + page,
-                        type: 'get',
-                        beforeSend: function() {
-                            $(".ajax-load").show();
-                        },
-                        data: {
-                            itemIds: itemIds
-                        },
-                    })
-                    .done(function(data) {
-                        // append data to element
-                        if (data.html == " ") {
-                            $('.ajax-load').html("No more records found");
-                            return;
-                        }
-                        $('.ajax-load').hide();
-                        $("#villa-data").append(data.html);
-
-                        // rerun slick
-                        $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
-                        $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
-                        $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
-                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
-                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
-                        })
-                        $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
-                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
-                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
-                        })
-
-                        $(".js-slider-2").not('.slick-initialized').slick({
-                            rtl: false,
-                            autoplay: false,
-                            autoplaySpeed: 5000,
-                            speed: 800,
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            variableWidth: true,
-                            pauseOnHover: false,
-                            easing: "linear",
-                            arrows: true
-                        });
-                        // rerun change background
-
-                        // changebackground();
-                        enabledScrollAction();
-                    })
-                    .fail(function(jqXHR, ajaxOptions, thrownError) {
-                        alert("Server not responding");
-                        enabledScrollAction();
-                    });
-                }
-                removeSkeletonClass()
-            }
-        </script>
-        <script>
-            $(window).on('load', () => {
-                add(@json($villas->pluck('id_villa')));
             });
-            enabledScrollAction();
-        </script>
-    {{-- end lazy load list --}}
+        }
+    </script>
+    <script>
+        async function loadMoreData(page) {
+            disabledScrollAction();
+
+            // check if link indicator is link list
+            // otherwise link filter
+            var linkIndicator = location.origin + location.pathname;
+            var linkTarget = `{{ route('list') }}`;
+            if (linkIndicator == linkTarget) {
+                let load = await $.ajax({
+                    url: '?page=' + page,
+                    type: 'get',
+                    beforeSend: function() {
+                        $(".ajax-load").show();
+                    },
+                    data: {
+                        itemIds: itemIds
+                    },
+                })
+                .done(function(data) {
+                    console.log(data);
+                    // append data to element
+                    if (data.html == " ") {
+                        $('.ajax-load').html("No more records found");
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    $("#villa-data").append(data.html);
+
+                    // rerun slick
+                    $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
+                    $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
+                    $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
+                        $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
+                        $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
+                    })
+                    $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
+                        $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
+                        $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
+                    })
+
+                    $(".js-slider-2").not('.slick-initialized').slick({
+                        rtl: false,
+                        autoplay: false,
+                        autoplaySpeed: 5000,
+                        speed: 800,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        variableWidth: true,
+                        pauseOnHover: false,
+                        easing: "linear",
+                        arrows: true
+                    });
+                    // rerun change background
+
+                    // changebackground();
+                    enabledScrollAction();
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert("Server not responding");
+                    enabledScrollAction();
+                });
+            } else {
+                let load = await $.ajax({
+                    url: location.href+'&page=' + page,
+                    type: 'get',
+                    beforeSend: function() {
+                        $(".ajax-load").show();
+                    },
+                    data: {
+                        itemIds: itemIds
+                    },
+                })
+                .done(function(data) {
+                    // append data to element
+                    if (data.html == " ") {
+                        $('.ajax-load').html("No more records found");
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    $("#villa-data").append(data.html);
+
+                    // rerun slick
+                    $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
+                    $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
+                    $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
+                        $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
+                        $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
+                    })
+                    $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
+                        $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
+                        $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
+                    })
+
+                    $(".js-slider-2").not('.slick-initialized').slick({
+                        rtl: false,
+                        autoplay: false,
+                        autoplaySpeed: 5000,
+                        speed: 800,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        variableWidth: true,
+                        pauseOnHover: false,
+                        easing: "linear",
+                        arrows: true
+                    });
+                    // rerun change background
+
+                    // changebackground();
+                    enabledScrollAction();
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert("Server not responding");
+                    enabledScrollAction();
+                });
+            }
+
+
+            removeSkeletonClass()
+        }
+    </script>
+    <script>
+        $(window).on('load', () => {
+            add(@json($villas->pluck('id_villa')));
+        });
+        enabledScrollAction();
+    </script>
 
     <script src="{{ asset('assets/js/list-villa-extend.js') }}"></script>
 
