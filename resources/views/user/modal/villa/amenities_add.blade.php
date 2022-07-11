@@ -65,7 +65,6 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-
 </style>
 
 <div class="modal fade" id="modal-edit_amenities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
@@ -77,10 +76,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                <form action="{{ route('villa_update_amenities') }}" method="POST" id="basic-form"
+                {{-- <form action="{{ route('villa_update_amenities') }}" method="POST" id="basic-form"
                     class="js-validation" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
+                    <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}"> --}}
 
                     <div class="form-group pt-2 px-4">
                         <div class="row">
@@ -96,18 +95,17 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_amenities }}"
-                                                    id="{{ $data->id_amenities }}" name="amenities[]"
-                                                    {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_amenities }}"
+                                                id="{{ $data->id_amenities }}" name="amenities[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <hr>
                         <div class="row">
@@ -123,18 +121,17 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_bathroom }}"
-                                                    id="{{ $data->id_bathroom }}" name="bathroom[]"
-                                                    {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_bathroom }}"
+                                                id="{{ $data->id_bathroom }}" name="bathroom[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <hr>
                         <div class="row">
@@ -150,17 +147,17 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_bed }}"
-                                                    id="{{ $data->id_bed }}" name="bedroom[]" {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_bed }}"
+                                                id="{{ $data->id_bed }}" name="bedroom[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <hr>
                         <div class="row">
@@ -176,18 +173,17 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_kitchen }}"
-                                                    id="{{ $data->id_kitchen }}" name="kitchen[]"
-                                                    {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_kitchen }}"
+                                                id="{{ $data->id_kitchen }}" name="kitchen[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <hr>
                         <div class="row">
@@ -203,17 +199,17 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_safety }}"
-                                                    id="{{ $data->id_safety }}" name="safety[]" {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_safety }}"
+                                                id="{{ $data->id_safety }}" name="safety[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <hr>
                         <div class="row">
@@ -229,21 +225,21 @@
                                                         $isChecked = 'checked';
                                                     }
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_service }}"
-                                                    id="{{ $data->id_service }}" name="service[]"
-                                                    {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_service }}"
+                                                id="{{ $data->id_service }}" name="service[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <hr>
-                        {{-- <div class="row">
+                    </div>
+                    <hr>
+                    {{-- <div class="row">
                             <label class="form-label"><b>{{ __('user_page.Family') }}</b></label>
                             <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($family_m as $data)
@@ -295,16 +291,17 @@
                                 @endforeach
                             </div>
                         </div> --}}
-                    </div>
+                </div>
             </div>
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <button type="submit" class="btn btn-primary btn-sm w-100"
+                        onclick="editAmenitiesVilla({{ $villa[0]->id_villa }})">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </div>
     </div>

@@ -12,4 +12,10 @@ class VillaSafety extends Model
 
     protected $table = 'villa_safety';
     protected $primaryKey = 'id_detail';
+
+    // *Relationship
+    public function safety()
+    {
+        return $this->belongsTo(Safety::class, 'id_safety', 'id_safety');
+    }
 }
