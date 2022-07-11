@@ -140,7 +140,7 @@ if (isset($_COOKIE['tema'])) {
                                 <p class="villa-list-name max-line " style="color: #ff7400; position:relative;">
                                     {{-- {{ $data->name ?? __('user_page.There is no name yet') }} --}}
                                     {{ $data->name ?? __('user_page.There is no name yet') }}
-                                    ({{ $data->grade }})
+                                    <!-- ({{ $data->grade }}) -->
                                     <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                         style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                                 </p>
