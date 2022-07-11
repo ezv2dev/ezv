@@ -1,0 +1,1204 @@
+<?php
+
+namespace App\Http\Controllers\Activity;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Activity;
+use Auth;
+use App\Models\ActivityCategory;
+use App\Models\ActivityFacilities;
+use App\Models\ActivityHasFacilities;
+use App\Models\ActivityHasSubcategory;
+use App\Models\Amenities;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Services\FileCompressionService as FileCompression;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\ActivityPhoto;
+use App\Models\ActivityPrice;
+use App\Models\ActivitySave;
+use App\Models\ActivityStory;
+use App\Models\ActivitySubcategory;
+use App\Models\ActivityVideo;
+use App\Models\Location;
+use App\Models\PropertyTypeVilla;
+use App\Models\Villa;
+use File;
+use App\Models\Restaurant;
+use App\Services\DeviceCheckService;
+use App\Models\Hotel;
+
+class ActivityListController extends Controller
+{
+    public function activity_list(Request $request)
+    {
+
+        if (empty($request)) {
+            $req = 0;
+        } else {
+            $req = $request->all();
+        }
+
+        if ($request->location == '') {
+            // $activity = Activity::select('activity.*', DB::raw('(select name from activity_video where id_activity = activity.id_activity order by id_video asc limit 1) as video'), DB::raw('(select name from activity_photo where id_activity = activity.id_activity order by id_photo asc limit 1) as photo'), 'activity_detail_review.average as average', 'activity_detail_review.count_person as person')
+            //     ->join('activity_detail_review', 'activity.id_activity', '=', 'activity_detail_review.id_activity', 'left')
+            //     ->join('location', 'activity.id_location', '=', 'location.id_location', 'left')
+            //     ->inRandomOrder()->get();
+            $activity = Activity::where('status', 1)->inRandomOrder()->get();
+        } else {
+            // $activity = Activity::select('activity.*', DB::raw('(select name from activity_video where id_activity = activity.id_activity order by id_video asc limit 1) as video'), DB::raw('(select name from activity_photo where id_activity = activity.id_activity order by id_photo asc limit 1) as photo'), 'activity_detail_review.average as average', 'activity_detail_review.count_person as person')
+            //     ->join('activity_detail_review', 'activity.id_activity', '=', 'activity_detail_review.id_activity', 'left')
+            //     ->join('location', 'activity.id_location', '=', 'location.id_location', 'left')
+            //     ->where('location.name', 'like', '%' . $request->location . '%')
+            //     ->inRandomOrder()->get();
+            $activity = Activity::whereHas('location', function (Builder $query) use ($request) {
+                $query->where('name', 'like', '%' . $request->location . '%');
+            })->where('status', 1)->inRandomOrder()->get();
+        }
+
+        $amenities = Amenities::all();
+        $locations = Location::all();
+        $facilities = ActivityFacilities::all();
+        $categories = ActivityCategory::all();
+        $subCategory = ActivitySubcategory::all();
+        $subCategoryAll = ActivitySubcategory::all();
+        $property_type = PropertyTypeVilla::all();
+
+        $activityIds = $activity->modelKeys();
+        $activity = Activity::with([
+            'video',
+            'photo',
+            'detailReview',
+            'facilities'
+        ])->whereIn('id_activity', $activityIds)->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
+
+        $activity->each(function ($item, $key) {
+            $item->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);
+        });
+
+        // if (DeviceCheckService::isMobile()) {
+        //     return view('user.m-list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'facilities', 'property_type'));
+        // }
+        // if (DeviceCheckService::isDesktop()) {
+        //     return view('user.list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'facilities', 'property_type'));
+        // }
+        return view('user.list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'subCategoryAll', 'facilities', 'property_type'));
+    }
+
+    public function activity_update_name(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'name' => ['required', 'max:100'],
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        $updatedActivity = $activity->update([
+            'name' => $request->name,
+            'updated_by' => auth()->user()->id,
+        ]);
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_description(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'description' => ['string']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        $updatedActivity = $activity->update([
+            'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+            'updated_by' => auth()->user()->id,
+        ]);
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_short_description(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'short_description' => ['required', 'string', 'max:255'],
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        $updatedActivity = $activity->update([
+            'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
+            'updated_by' => auth()->user()->id,
+        ]);
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_location(Request $request)
+    {
+        // dd($request->all());
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'id_location' => ['required', 'integer'],
+            'latitude' => ['required'],
+            'longitude' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        $updatedActivity = $activity->update([
+            'id_activity' => $request->id_activity,
+            'id_location' => $request->id_location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'updated_by' => auth()->user()->id,
+        ]);
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function Activity_update_time(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'open_time' => ['required'],
+            'closed_time' => ['required']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        $updatedActivity = $activity->update([
+            'open_time' => $request->open_time,
+            'closed_time' => $request->closed_time,
+            'updated_by' => auth()->user()->id,
+        ]);
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_contact(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $rules = [
+            'id_activity' => ['required', 'integer'],
+            'phone' => ['string'],
+            'email' => ['email']
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update
+        if ($request->email) {
+            $updatedActivity = $activity->update([
+                'email' => $request->email,
+                'updated_by' => auth()->user()->id,
+            ]);
+        }
+        if ($request->phone) {
+            $updatedActivity = $activity->update([
+                'phone' => $request->phone,
+                'updated_by' => auth()->user()->id,
+            ]);
+        }
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_image(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        request()->validate([
+            'id_activity' => ['required', 'integer'],
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+        ]);
+
+        $status = 500;
+
+        try {
+            // activity data
+            $activity = Activity::find($request->id_activity);
+
+            // check if activity does not exist, abort 404
+            abort_if(!$activity, 404);
+
+            // check if the editor does not have authorization
+            $this->authorize('activity_update');
+            if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+                abort(403);
+            }
+
+            // image path
+            $folder = strtolower($activity->uid);
+            $path = env("ACTIVITY_FILE_PATH") . $folder;
+            // $path = strtolower($activity->uid);
+
+            // remove old image
+            if (File::exists($path . '/' . $activity->image)) {
+                File::delete($path . '/' . $activity->image);
+            }
+
+            // store process
+            if (!File::isDirectory($path)) {
+                File::makeDirectory($path, 0777, true, true);
+            }
+
+            $ext = strtolower($request->image->getClientOriginalExtension());
+
+            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+                $original_name = $request->image->getClientOriginalName();
+                // dd($original_name);
+                $name_file = time() . "_" . $original_name;
+                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+                //insert into database
+                $updatedActivity = $activity->update([
+                    'image' => $name_file,
+                    'updated_by' => auth()->user()->id
+                ]);
+            }
+
+            if ($updatedActivity) {
+                $status = 200;
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        // check if update is success or not
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_delete_image(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        abort_if(!$request->id, 500);
+
+        $activity = Activity::find($request->id);
+        abort_if(!$activity, 404);
+
+        $this->authorize('activity_update');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by;
+        abort_if($condition, 403);
+
+        // delete video
+        // $path = public_path() . '/foto/gallery/' . $activity->name;
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        // remove old video
+        if (File::exists($path . '/' . $activity->image)) {
+            File::delete($path . '/' . $activity->image);
+        }
+
+        $deletedActivityImage = $activity->update([
+            'image' => NULL,
+            'updated_by' => auth()->user()->id
+        ]);
+
+        // check if delete is success or not
+        if ($deletedActivityImage) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+                'status' => 500,
+            ], 500);
+        }
+    }
+
+    public function activity_store_price(Request $request)
+    {
+        // dd($request->all());
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        request()->validate([
+            'id_activity' => ['required', 'integer'],
+            'name' => ['required', 'string', 'max:100'],
+            // 'description' => ['required', 'string'],
+            'price' => ['required', 'integer'],
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        ]);
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // store process
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->image->getClientOriginalExtension());
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png') {
+            $original_name = $request->image->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+            // dd($name_file);
+
+            //insert into database
+            $createdActivity = ActivityPrice::create([
+                'id_activity' => $request->id_activity,
+                'name' => $request->name,
+                'description' => $request->description,
+                'short_description' => null,
+                'price' => $request->price,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'foto' => $name_file,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+        }
+
+        // check if update is success or not
+        if ($createdActivity) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_delete_price(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        abort_if(!$request->id_price || !$request->id, 500);
+
+        $activity = Activity::find($request->id);
+        $activityPrice = ActivityPrice::find($request->id_price);
+        abort_if(!$activity, 404);
+        abort_if(!$activityPrice, 404);
+
+        $this->authorize('activity_update');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by;
+        abort_if($condition, 403);
+
+        // delete video
+        // $path = public_path() . '/foto/gallery/' . $activity->name;
+        $folder = strtolower($activity->name);
+        $path = env("ACTIVITY_FILE_PATH") . $folder . '/price';
+
+        // remove old video
+        if (File::exists($path . '/' . $activityPrice->foto)) {
+            File::delete($path . '/' . $activityPrice->foto);
+        }
+
+        $deletedActivityPrice = $activityPrice->delete();
+        // check if delete is success or not
+        if ($deletedActivityPrice) {
+            return back()
+                ->with('success', 'Your data has been deleted');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_store_photo(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        $status = 500;
+
+        try {
+            // activity data
+            $activity = Activity::find($request->id_activity);
+
+            // check if activity does not exist, abort 404
+            abort_if(!$activity, 404);
+
+            // check if the editor does not have authorization
+            $this->authorize('activity_update');
+            if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+                abort(403);
+            }
+
+            // store process
+            $folder = strtolower($activity->uid);
+            $path = env("ACTIVITY_FILE_PATH") . $folder;
+            // $path = public_path() . '/foto/activity/' . $activity->name;
+            if (!File::isDirectory($path)) {
+
+                File::makeDirectory($path, 0777, true, true);
+            }
+
+            $ext = strtolower($request->file->getClientOriginalExtension());
+
+            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+                request()->validate([
+                    'id_activity' => ['required', 'integer'],
+                    'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+                ]);
+
+                $original_name = $request->file->getClientOriginalName();
+                // dd($original_name);
+                $name_file = time() . "_" . $original_name;
+                $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+                // check last order
+                $lastOrder = ActivityPhoto::where('id_activity', $request->id_activity)->orderBy('order', 'desc')->select('order')->first();
+                if ($lastOrder) {
+                    $lastOrder = $lastOrder->order + 1;
+                } else {
+                    $lastOrder = 1;
+                    $lastOrder;
+                }
+
+                //insert into database
+                $createdActivity = ActivityPhoto::create([
+                    'id_activity' => $request->id_activity,
+                    'name' => $name_file,
+                    'order' => $lastOrder,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id
+                ]);
+            }
+
+            if ($ext == 'mp4') {
+                $original_name = $request->file->getClientOriginalName();
+                // dd($original_name);
+                $name_file = time() . "_" . $original_name;
+                // isi dengan nama folder tempat kemana file diupload
+                $request->file->move($path, $name_file);
+
+                // check last order
+                $lastOrder = ActivityVideo::where('id_activity', $request->id_activity)->orderBy('order', 'desc')->select('order')->first();
+                if ($lastOrder) {
+                    $lastOrder = $lastOrder->order + 1;
+                } else {
+                    $lastOrder = 1;
+                    $lastOrder;
+                }
+
+                //insert into database
+                $createdActivity = ActivityVideo::create([
+                    'id_activity' => $request->id_activity,
+                    'name' => $name_file,
+                    'order' => $lastOrder,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id
+                ]);
+            }
+
+            if ($createdActivity) {
+                $status = 200;
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        // check if update is success or not
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_update_position_photo(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        $validator = Validator::make($request->all(), [
+            'imageids' => ['required', 'array'],
+            'id' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        $imageids_arr = $request->imageids;
+
+        $activity = Activity::find($request->id);
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        if (count($imageids_arr) > 0) {
+            // Update sort position of images
+            $position = 1;
+            foreach ($imageids_arr as $id) {
+                $find = ActivityPhoto::where('id_photo', $id)->first();
+                abort_if(!$find, 404);
+                $find->update(array(
+                    'order' => $position,
+                    'updated_by' => auth()->user()->id,
+                ));
+
+                $position++;
+            }
+
+            return response()->json([
+                'message' => 'data has been updated'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'data not found'
+            ], 404);
+        }
+    }
+
+    public function activity_update_position_video(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+        $validator = Validator::make($request->all(), [
+            'videoids' => ['required', 'array'],
+            'id' => ['required', 'integer']
+        ]);
+
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        $videoids_arr = $request->videoids;
+
+        $activity = Activity::find($request->id);
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        if (count($videoids_arr) > 0) {
+            // Update sort position of images
+            $position = 1;
+            foreach ($videoids_arr as $id) {
+                $find = ActivityVideo::where('id_video', $id)->first();
+                abort_if(!$find, 404);
+                $find->update(array(
+                    'order' => $position,
+                    'updated_by' => auth()->user()->id,
+                ));
+
+                $position++;
+            }
+
+            return response()->json([
+                'message' => 'data has been updated'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'data not found'
+            ], 404);
+        }
+    }
+
+    public function activity_delete_photo_video(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        abort_if(!$request->id_video || !$request->id, 500);
+
+        $activity = Activity::find($request->id);
+        $activityVideo = ActivityVideo::find($request->id_video);
+        abort_if(!$activity, 404);
+        abort_if(!$activityVideo, 404);
+
+        $this->authorize('activity_update');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by;
+        abort_if($condition, 403);
+
+        // delete video
+        // $path = public_path() . '/foto/gallery/' . $activity->name;
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        // remove old video
+        if (File::exists($path . '/' . $activityVideo->name)) {
+            File::delete($path . '/' . $activityVideo->name);
+        }
+
+        $deletedActivityVideo = $activityVideo->delete();
+        // check if delete is success or not
+        if ($deletedActivityVideo) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+                'status' => 500,
+            ], 500);
+        }
+    }
+
+    public function activity_delete_photo_photo(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        abort_if(!$request->id_photo || !$request->id, 500);
+
+        $activity = Activity::find($request->id);
+        $activityPhoto = ActivityPhoto::find($request->id_photo);
+        abort_if(!$activity, 404);
+        abort_if(!$activityPhoto, 404);
+
+        $this->authorize('activity_update');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by;
+        abort_if($condition, 403);
+
+        // delete photo
+        // $path = public_path() . '/foto/gallery/' . $activity->name;
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        // remove old photo
+        if (File::exists($path . '/' . $activityPhoto->name)) {
+            File::delete($path . '/' . $activityPhoto->name);
+        }
+
+        $deletedActivityPhoto = $activityPhoto->delete();
+        // check if delete is success or not
+        if ($deletedActivityPhoto) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+                'status' => 500,
+            ], 500);
+        }
+    }
+
+    public function activity_store_facilities(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'facilities' => ['array']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update activity has facilities
+        if ($request->facilities) {
+            $activity->facilities()->detach();
+            foreach ($request->facilities as $id_facilities) {
+                ActivityHasFacilities::create([
+                    'id_activity' => $request->id_activity,
+                    'id_facilities' => $id_facilities,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id
+                ]);
+            }
+            $updatedActivity = true;
+        } else {
+            $updatedActivity = $activity->facilities()->detach();
+        }
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_store_subcategory(Request $request)
+    {
+        // dd($request->all());
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'subcategory' => ['array']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // update activity has subcategory
+        if ($request->subcategory) {
+            $activity->subCategory()->detach();
+            foreach ($request->subcategory as $id_subcategory) {
+                ActivityHasSubcategory::create([
+                    'id_activity' => $request->id_activity,
+                    'id_subcategory' => $id_subcategory,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id
+                ]);
+            }
+            $updatedActivity = true;
+        } else {
+            $updatedActivity = $activity->subCategory()->detach();
+        }
+        // dd($updatedActivity);
+
+        // check if update is success or not
+        if ($updatedActivity) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_store_story(Request $request)
+    {
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_activity' => ['required', 'integer'],
+            'title' => ['required', 'string', 'max:100'],
+            'file' => ['required', 'mimes:mp4']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        abort_if(!$activity, 404);
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            abort(403);
+        }
+
+        // store process
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        if ($ext == 'mp4') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // dd($name_file);
+
+            //insert into database
+            $createdStory = ActivityStory::create([
+                'id_activity' => $request->id_activity,
+                'name' => $name_file,
+                'title' => $request->title,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+        }
+
+        // check if update is success or not
+        if ($createdStory) {
+            return back()
+                ->with('success', 'Your data has been created');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function activity_delete_story(Request $request)
+    {
+        abort_if(!auth()->check(), 401);
+
+        abort_if(!$request->id_story || !$request->id, 500);
+
+        $activity = Activity::find($request->id);
+        $activityStory = ActivityStory::find($request->id_story);
+        abort_if(!$activity, 404);
+        abort_if(!$activityStory, 404);
+
+        $this->authorize('activity_update');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by;
+        abort_if($condition, 403);
+
+        // delete video
+        // $path = public_path() . '/foto/gallery/' . $activity->name;
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+
+        // remove old video
+        if (File::exists($path . '/' . $activityStory->name)) {
+            File::delete($path . '/' . $activityStory->name);
+        }
+
+        $deletedActivityStory = $activityStory->delete();
+        // check if delete is success or not
+        if ($deletedActivityStory) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+                'status' => 500,
+            ], 500);
+        }
+    }
+
+    public function activity_video(Request $request)
+    {
+        $id = $request->id;
+        $video = ActivityVideo::where('id_video', $id)->orderBy('order', 'desc')->first();
+        if ($video) {
+            return response()->json($video, 200);
+        }
+        return response()->json([]);
+    }
+
+    public function activity_story(Request $request)
+    {
+        // validation
+        // $validator = Validator::make($request->all(), [
+        //     'id' => ['required', 'integer'],
+        //     'id_story' => ['required', 'integer'],
+        // ]);
+        // if($validator->fails()) {
+        //     abort(500);
+        // }
+
+        $data = ActivityStory::where('id_story', $request->id)->get();
+
+        echo json_encode($data);
+    }
+
+    public function activity_map(Request $request)
+    {
+        if ($request->id) {
+            $data = Activity::with([
+                'video', 'photo', 'location', 'detailReview', 'facilities'
+            ])->where('id_activity', $request->id)->first();
+
+            if (!$data) {
+                return response()->json([
+                    'message' => 'data not found'
+                ], 404);
+            }
+            return response()->json($data, 200);
+        } else {
+            return response()->json([
+                'message' => 'something was wrong'
+            ], 500);
+        }
+    }
+
+    public function activity_price(Request $request)
+    {
+        if ($request->id) {
+            $data = ActivityPrice::where('id_price', $request->id)->first();
+            if (!$data) {
+                return response()->json([
+                    'message' => 'data not found'
+                ], 404);
+            }
+            return response()->json($data, 200);
+        } else {
+            return response()->json([
+                'message' => 'something was wrong'
+            ], 500);
+        }
+    }
+
+    public function activity_update_caption_photo(Request $request)
+    {
+        $this->authorize('activity_update');
+
+        $status = 500;
+
+        try {
+            $activity = ActivityPhoto::where('id_photo', $request->id_photo)->first();
+
+            $update = $activity->update([
+                'caption' => $request->caption,
+                'updated_by' => Auth::user()->id,
+            ]);
+
+            if ($update) {
+                $status = 200;
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function like_things_to_do(Request $request, $id)
+    {
+        if (!auth()->check()) {
+            return redirect(route('login'));
+        }
+
+        // check if there same favorit content
+        $checkSameFavorit = ActivitySave::where([
+            ['id_activity', '=', $request->activity],
+            ['id_user', '=', $request->user],
+        ])->first();
+
+        if ($checkSameFavorit != null) {
+            $checkSameFavorit->delete();
+            $data = 0;
+            return $data;
+        } else {
+            // otherwise, create favorit
+            $data = ActivitySave::create([
+                'id_activity' => $request->activity,
+                'id_user' => $request->user,
+                'created_by' => $request->user,
+                'updated_by' => $request->user
+            ]);
+
+            $data = 1;
+            return $data;
+        };
+    }
+}

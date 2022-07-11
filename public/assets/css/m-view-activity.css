@@ -1,0 +1,447 @@
+.delete-profile i {
+    position: relative;
+    left: -20px;
+    }
+    
+    .text-secondary {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+    text-transform: capitalize;
+    font-size: 12px !important;
+    }
+    
+    .text-secondary::before {
+    content: '\f05a';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #ff7400;
+    }
+
+    .resto-contact {
+    display: flex; 
+    padding-right: 70px; 
+    padding-left: 70px; 
+    margin-top: 18px;
+    }
+    /*
+
+    .add-gallery {
+    padding-right: 10px; 
+    padding-left:5px; 
+    box-sizing: border-box;
+    }
+
+    .menu-block {
+    padding-top:10px; 
+    padding-left:10px; 
+    padding-right:10px;
+    }
+
+    .no-menu {
+    text-align: justify; 
+    padding-top:10px; 
+    padding-bottom:12px; 
+    padding-left:10px; 
+    padding-right:10px;
+    }
+
+    .photosGrid_Menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background: #000;
+    border-bottom: solid 1px #000;
+    margin-left: 7px;
+    margin-right: 5px;
+    }
+
+    .about-menu {
+    padding-top: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    } */
+
+
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .video-position {
+        position: relative;
+        left: 0;
+        top: 0;
+    }
+
+    .radius-5 {
+        border-radius: 5px;
+    }
+
+    .rsv-block {
+        padding-left: 0px;
+        padding-right: 5px;
+    }
+
+    .pd-0 {
+        padding: 0px;
+    }
+
+    .profile-info {
+        padding-left: 40px;
+    }
+
+    .right-0 {
+        padding-right: 0px;
+    }
+
+
+    /* .header-mobile {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 0 30px;
+    }
+
+    .header-mobile a {
+        color: #000;
+    } */
+
+    .mobile-social-share {
+        margin: -15px auto;
+        border: solid 1px #8a8a8a;
+        padding: 10px;
+        border-radius: 15px;
+        height: 50px;
+        }
+
+        .mobile-social-share p {
+        font-size: 10px;
+        color: #000;
+        }
+
+        .mobile-social-share span, .mobile-social-share i {
+        display: block;
+        text-align: center;
+        color: #ff7400;
+        }
+
+        .location-font-size i {
+        font-size: 12px;
+        }
+
+        .amenities-detail-view {
+        display: flex;
+        }
+
+        #description-content {
+        text-align: justify;
+        }
+
+        .navigationItem span:hover {
+        color: #ff7400;
+        }
+
+        .review-bottom {
+            margin: 10px 10px 10px 0;
+        }
+
+        .host-profile img {
+            border-radius: 50%;
+            width: 80px;
+            margin-left: 20px;
+            height: 80px;
+        }
+
+            .related-items h6 {
+            padding: 20px 0 20px 0;
+            display: block;
+            text-align: center;
+            font-family: 'Poppins', san-serif;
+            font-weight: 400;
+            }
+
+        .delete {
+        right: 16px;
+        margin-left: -27px;
+        top: 16px;
+        position: relative;
+        }
+
+        .delete i {
+        background: #000;
+        height: 23px;
+        width: 23px;
+        color: #fff;
+        padding: 3px;
+        text-align: center;
+        border-radius: 3px;
+        }
+
+        .delete i:hover {
+        background: #ff7400;
+        }
+
+        .mob-e-call {
+        display: none;
+        }
+
+        .mobile-price .price-box a {
+        color: #000;
+        text-decoration: underline;
+        }
+
+        .modal-dialog {
+        top: 33%;
+        }
+
+        .host-review {
+        font-size: 12px;
+        margin-left: 110px;
+        }
+
+        .footer {
+        margin-bottom: 174px;
+        }
+
+        .delete {
+        right: 6px;
+        margin-left: -23px;
+        top: 10px;
+        position: relative;
+        }
+
+        .desk-e-call {
+        display: none;
+        }
+
+        .mob-e-call {
+        display: block;
+        }
+
+        .video-player {
+        font-size: 12px;
+        margin-left: 11px;
+        margin-top: 11px;
+        }
+
+        .related-properties {
+        width: 95.9%;
+        }
+
+        #gallery {
+        background: #000;
+        padding-top: 0px !important;
+        border-bottom: solid 1px #000;
+        }
+
+        .video-button {
+        margin-left: 55px !important;
+        margin-top: 45px !important;
+        font-size: 12px;
+        padding: 8px;
+        }
+
+        video.photosGrid__Photo {
+        width: 100%;
+        margin-top: 0;
+        }
+
+        .video-grid {
+        width: calc(33.5% - 1px);
+        height: 113px;
+        margin-right: 0;
+        margin-top: -1px;
+        }
+
+        .extra-info p {
+        margin-right: 20px;
+        }
+
+        .page-content {
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .rsv, header .villa-list-header-logo, header .search-box, header .right-bar, .social-share {
+            display: none !important;
+        }
+
+        .location-font-size {
+        font-size: 22px;
+        margin-top: 22px;
+        margin-bottom: 20px !important;
+        }
+
+        .location-font-size i {
+        font-size: 18px;
+        }
+
+        .profile-info h2 {
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 8px;
+        }
+
+        .profile-info p {
+        font-size: 14px;
+        color: #666464;
+        margin-bottom: -15px;
+        }
+
+        .short-desc {
+        min-height: auto;
+        }
+
+        .navigationItem span {
+        display: none;
+        }
+
+        @-moz-document url-prefix() {
+            .containerSlider3 {
+            margin-left: 0;
+            }
+        }
+
+        .video-title {
+        top: 44px;
+        left: 0;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        }
+
+        /* calendar */
+
+        span.flatpickr-weekday {
+        width: 51px;
+        }
+
+        .flatpickr-container .flatpickr-days {
+        width: 380px !important;
+        }
+
+        .flatpickr-day {
+        max-width: 50px;
+        height: 50px;
+        line-height: 50px;
+        }
+
+        .dayContainer {
+        min-width: 388px;
+        }
+
+        .flatpickr-current-month {
+        font-size: 100%;
+        }
+
+        .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+        top: -8px;
+        }
+
+        .flatpickr-container .flatpickr-weekdays {
+        margin-bottom: 0;
+        }
+
+        .flatpickr-months .flatpickr-month {
+        height: 44px;
+        }
+
+        /* end calendar */
+
+        .member-profile {
+        top: 14px;
+        left: 56px;
+        position: relative;
+        }
+
+        .rsv-block {
+        margin-bottom: -210px;
+        }
+
+        .review-bottom {
+        margin: 0 0 0 10px;
+        }
+
+        .mfp-arrow-left {
+        left: 200px;
+        margin-left: -190px;
+        width: max-content !important;
+        }
+
+        .mfp-arrow-right {
+        right: 15px;
+        }
+    .active-sticky {
+        color: #ff7400;
+    }
+        #sortable-photo {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        #sortable-photo li {
+            padding: 2px;
+            display: table;
+            width: 16.66666667%;
+            float: left;
+            border: 0;
+            background: none;
+        }
+
+        #sortable-photo li img {
+            width: 100%;
+            height: 140px;
+            border-radius: 15px;
+        }
+        #sortable-video {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        #sortable-video li {
+            padding: 2px;
+            display: table;
+            width: 16.66666667%;
+            float: left;
+            border: 0;
+            background: none;
+        }
+
+        #sortable-video li video {
+            width: 100%;
+            height: 140px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+
+        .navigationItem-activity span {
+            display: none;
+          }
+
+          .about-price {
+            padding-top: 12px;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+
+          .photosGrid_Menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            background: #000;
+            border-bottom: solid 1px #000;
+            margin-left: 7px;
+            margin-right: 5px;
+          }

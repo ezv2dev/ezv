@@ -1,0 +1,420 @@
+/* Slider Restaurant */
+
+.containerSlider {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: 4px 16px; */
+    margin-top: -30px;
+}
+
+#cards-container {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.cards {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 1075px;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+
+    /*
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    background: #fff;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 200px;
+    margin: 15px 7.5px;
+    border: none !important;
+}
+
+.card:hover {
+    /*
+    -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+    cursor: pointer;
+}
+
+.card .img {
+    max-width: 100px;
+    height: 100px;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+#slide-left-container,
+#slide-right-container {
+    display: none;
+}
+
+#slide-left-container.active {
+    display: block;
+    cursor: pointer;
+}
+
+#slide-right-container.active {
+    display: block;
+    cursor: pointer;
+}
+
+.slide-left,
+.slide-right {
+    border-color: #ff7400;
+    border-style: solid;
+    height: 20px;
+    width: 20px;
+    margin-top: 30%;
+}
+
+.slide-left {
+    border-width: 4px 0 0 4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-left: 40%;
+}
+
+.slide-right {
+    border-width: 4px 4px 0 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 10%;
+}
+
+/* End Slider Restaurant */
+
+@media (min-width: 1000px) and (max-width: 1280px) {
+    .cards {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 1060px;
+    }
+
+    .card {
+        /* Add shadows to create the "card" effect */
+        background: #fff;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        width: 197px;
+        margin: 15px 7.5px;
+        border: none !important;
+    }
+}
+
+/* Slider Things To Do */
+.containerSlider2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: 4px 16px; */
+    margin-top: -30px;
+}
+
+#cards-container2 {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.cards2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 1075px;
+}
+
+@media (min-width: 1000px) and (max-width: 1280px) {
+    .cards2 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 1060px;
+    }
+
+    .card2 {
+        /* Add shadows to create the "card" effect */
+        background: #fff;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        width: 197px;
+        margin: 15px 7.5px;
+        border: none !important;
+    }
+}
+
+.card2 {
+    /* Add shadows to create the "card" effect */
+
+    /*
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    background: #fff;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 200px;
+    margin: 15px 7.5px;
+}
+
+.card2:hover {
+    /*
+    -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+    cursor: pointer;
+}
+
+.card2 .img {
+    max-width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+#slide-left-container2,
+#slide-right-container2 {
+    display: none;
+}
+
+#slide-left-container2.active,
+#slide-right-container2.active {
+    display: block;
+    cursor: pointer;
+}
+
+.slide-left2,
+.slide-right2 {
+    border-color: #ff7400;
+    border-style: solid;
+    height: 20px;
+    width: 20px;
+    margin-top: 30%;
+}
+
+.slide-left2 {
+    border-width: 4px 0 0 4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-left: 40%;
+}
+
+.slide-right2 {
+    border-width: 4px 4px 0 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 22%;
+}
+
+/* End Slider Things To Do */
+
+@media (min-width: 1000px) and (max-width: 1280px) {
+    .card2 {
+        background: #fff;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        width: 197px;
+        margin: 15px 7.5px;
+    }
+}
+
+/* Slider Story */
+.containerSlider3 {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: 4px 16px; */
+    margin-top: -20px;
+}
+
+#cards-container3 {
+    overflow: hidden;
+    /*
+    margin: 20px;
+    */
+    padding-right: 6px;
+    box-sizing: border-box;
+}
+
+.cards3 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    /* display: flex; */
+    width: 445px;
+    border-top: 0;
+}
+
+.card3 {
+    /* Add shadows to create the "card" effect */
+    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+    background: #fff;
+    border: 0;
+    border-top: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 75px;
+    margin: 15px 7.5px;
+}
+
+.card3:hover {
+    /*-webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+    border-top: 0;
+    cursor: pointer;
+}
+
+.card3 .img {
+    border-top: 0;
+    max-width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+#slide-left-container3,
+#slide-right-container3 {
+    display: none;
+}
+
+#slide-left-container3.active,
+#slide-right-container3.active {
+    display: block;
+    cursor: pointer;
+}
+
+.slide-left3,
+.slide-right3 {
+    border-color: #ff7400;
+    border-style: solid;
+    height: 15px;
+    width: 15px;
+    margin-top: 30%;
+}
+
+.slide-left3 {
+    border-width: 4px 0 0 4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-left: 0%;
+}
+
+.slide-right3 {
+    border-width: 4px 4px 0 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 22%;
+}
+
+/* End Slider Story */
+
+/* Slider Story Admin */
+.containerSlider4 {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: 4px 16px; */
+    margin-top: -30px;
+}
+
+#cards-container4 {
+    overflow: hidden;
+    margin: 20px;
+}
+
+.cards4 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    /* display: flex; */
+    width: 440px;
+    border-top: 0;
+}
+
+.card4 {
+    /* Add shadows to create the "card" effect */
+    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+    background: #fff;
+    border: 0;
+    border-top: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 75px;
+    margin: 5px 7.5px;
+}
+
+.card4:hover {
+    /*-webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+    border-top: 0;
+    cursor: pointer;
+}
+
+.card4 .img {
+    border-top: 0;
+    max-width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+#slide-left-container4,
+#slide-right-container4 {
+    display: none;
+}
+
+#slide-left-container4.active,
+#slide-right-container4.active {
+    display: block;
+    cursor: pointer;
+}
+
+.slide-left4,
+.slide-right4 {
+    border-color: #ff7400;
+    border-style: solid;
+    height: 15px;
+    width: 15px;
+    margin-top: 30%;
+}
+
+.slide-left4 {
+    border-width: 4px 0 0 4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-left: 40%;
+}
+
+.slide-right4 {
+    border-width: 4px 4px 0 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 22%;
+}
+
+.img-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+/* End Slider Story Admin */

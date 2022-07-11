@@ -1,0 +1,33 @@
+.page-item.active .page-link {
+    z-index: 3;
+    background-color: #ff7400 !important;
+    border-color: #ff7400 !important;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    background-color: transparent;
+    border: none;
+}
+
+a.page-link.font-black:hover{
+    color: unset;
+}
+
+.page-item.disabled .page-link {
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
+}
+
+.page-link:hover{
+    background-color: transparent;
+    color: white;
+}

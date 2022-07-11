@@ -1,0 +1,260 @@
+.list-image-content {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.pd-tlr-10 {
+    padding: 10px 4px 0 10px;
+}
+
+/* Price Type */
+.tab-header {
+    background: #ff7400;
+    color: #fff;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.tab-body {
+    padding: 10px;
+}
+
+.table-body,
+.table-header {
+    padding-left: 25px;
+    padding-right: 17px;
+}
+
+.text-expand:hover {
+    overflow: visible;
+    width: fit-content;
+    background: #fff;
+}
+
+.text-expand {
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    bottom: 0;
+    cursor: context-menu;
+}
+
+.reserve-block-activity {
+    display: block;
+    width: 274px;
+    height: auto;
+    top: 110px;
+    margin-left: 15px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.wow-tag-button {
+    border-color: #ff7400;
+    border-radius: 50px !important;
+    height: 23px;
+    font-size: 12px;
+    padding: 0px 8px 0px 8px;
+}
+
+.wow-tag-button:hover {
+    background-color: #ff7400;
+    border: 1px solid #ff7400;
+}
+
+.popular-block-activity {
+    display: block;
+    top: 25px;
+    position: relative;
+    width: 100%;
+    height: auto;
+    /* margin-left: 15px; */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    padding: 15px 15px 0 15px;
+    background: #fff;
+}
+
+.popular-block-activity h4 {
+    text-align: center;
+    margin-bottom: 13px;
+}
+
+.popular-card {
+    width: 99.8%;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.popular-card-header {
+    border-radius: 12px;
+}
+
+.popular-card-price,
+.popular-card-text {
+    text-align: left;
+}
+
+.popular-card-header img {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 12px;
+    max-height: 150px;
+}
+
+.popular-card-body {
+    padding: 15px 0 0 0;
+}
+
+.slick-dots li button:before {
+    font-size: 16px;
+    color: #ff7400;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 0.75;
+    color: #ff7400;
+}
+
+.popular-card-title {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #ff7400;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.popular-card-text p {
+    font-size: 12px;
+    color: #808080;
+    margin-bottom: 0px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.popular-card-price p {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 0px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.headline-list-property {
+    margin-bottom: 0;
+}
+
+.section-2 {
+    margin-right: -2px;
+}
+
+.review-bottom {
+    margin-left: 21px !important;
+}
+
+.host {
+    margin-left: 0;
+}
+
+@media (min-width: 1260px) and (max-width: 1359px) {
+    .reserve-block-activity {
+        width: 252px;
+        margin-left: 16px;
+    }
+
+    .review-bottom {
+        margin-left: 22px !important;
+    }
+
+    .host {
+        margin-left: -2px;
+    }
+
+    .section-2 {
+        margin-right: 0 !important;
+    }
+
+    .table-body,
+    .table-header {
+        padding-right: 14px;
+    }
+
+    .pd-tlr-10 {
+        padding: 10px 0 0 10px;
+    }
+
+    .row-grid-location {
+        margin-right: 0 !important;
+    }
+}
+
+.slick-slider .slick-prev,
+.slick-slider .slick-next {
+    margin-top: 0;
+}
+
+.row-grid-location {
+    margin-right: 3px;
+}
+
+.delete-story {
+    right: -4px;
+    position: relative;
+    top: 38px;
+}
+
+.hr-bottom {
+    width: 73.2%;
+    margin-left: 22px;
+    margin-top: 30px;
+}
+
+.guests {
+    min-width: 230px;
+}
+
+.flatpickr-wrapper {
+    padding: 0 !important;
+}
+
+@media only screen and (max-width: 575px) { 
+    #description .pd-tlr-10 {
+        padding: 0px !important;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) { 
+    #price .table-body {
+        padding-left: 35px !important;
+    }
+    #amenities {
+        padding-left: 25px !important;
+    }
+    #first-detail-content {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) { 
+    #price .pd-tlr-10 {
+        padding-right: 10px !important;
+    }
+    #price .pd-tlr-10 h2 {
+        margin-left: 0px !important;
+    }
+    #price .table-header { 
+        display: none !important;
+    }
+    #price .table-body .slick-track,
+    #price .table-body .slick-track .grid-image-container {
+        width: 100% !important;
+    }
+    #description .pd-tlr-10 {
+        margin-right: 12px !important;
+    }
+}
