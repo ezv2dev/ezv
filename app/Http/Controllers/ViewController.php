@@ -300,7 +300,9 @@ class ViewController extends Controller
             'createdby',
             // 'nearby_restaurant',
             // 'nearby_activities',
-            'propertyType', 'house_rules'));
+            'propertyType',
+            'house_rules'
+        ));
     }
 
     public function like_favorit(Request $request, $id)
@@ -900,56 +902,43 @@ class ViewController extends Controller
 
     public function villa_update_image(Request $request)
     {
-        // dd($request->all());
-        $this->authorize('listvilla_update');
-        $status = 500;
+        $villa = Villa::where('id_villa', $request->id_villa)->first('uid');
+        $folder = $villa->uid;
+        $path = env("VILLA_FILE_PATH") . $folder;
 
-        try {
-            $villa = Villa::where('id_villa', $request->id_villa)->first('uid');
-            // $folder = strtolower($villa->name);
-            // $path = public_path() . '/foto/gallery/' . $folder;
-            $folder = $villa->uid;
-            $path = env("VILLA_FILE_PATH") . $folder;
+        if (!File::isDirectory($path)) {
 
-            if (!File::isDirectory($path)) {
-
-                File::makeDirectory($path, 0777, true, true);
-            }
-
-            $ext = strtolower($request->image->getClientOriginalExtension());
-            // dd($ext);
-
-            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                $original_name = $request->image->getClientOriginalName();
-                // dd($original_name);
-                $find = villa::where('id_villa', $request->id_villa)->first();
-
-                $name_file = time() . "_" . $original_name;
-
-                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
-
-                $find->update(array(
-                    'image' => $name_file,
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-
-
-
-            if ($find) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+            File::makeDirectory($path, 0777, true, true);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        $ext = strtolower($request->image->getClientOriginalExtension());
+        // dd($ext);
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $original_name = $request->image->getClientOriginalName();
+            $find = villa::where('id_villa', $request->id_villa)->first();
+            $name_file = time() . "_" . $original_name;
+            $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+            $updatedVilla = $find->update(array(
+                'image' => $name_file,
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_by' => Auth::user()->id,
+            ));
+        }
+
+        $villaData = Villa::where('id_villa', $request->id_villa)->select('image')->first();
+
+        if ($updatedVilla) {
+            return response()->json([
+                'message' => 'Successfuly Updated Villa Profile',
+                'status' => 200,
+                'data' => $villaData
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Villa Short Description',
+                'status' => 500,
+            ]);
         }
     }
 

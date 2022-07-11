@@ -343,3 +343,55 @@ function editDescriptionVilla(id_villa) {
         },
     });
 }
+
+// ! Change Profile Villa
+$("#imageVilla").on("change", function(ev) {
+    imageProfileVilla = this.files[0];
+
+    readerImageVilla = new FileReader();
+});
+
+$("#updateImageForm").submit(function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    formData.append("image", imageProfileVilla);
+
+    console.log(imageProfileVilla);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/image",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "bottomCenter",
+            });
+
+            readerImageVilla.addEventListener("load", function() {
+                $("#imageProfileVilla").attr(
+                    "src",
+                    readerImageVilla.result
+                );
+            });
+
+            readerImageVilla.readAsDataURL(imageProfileVilla);
+
+            $("#modal-edit_villa_profile").modal("hide");
+        },
+    });
+});
+
+// ! End Change Profile Villa
