@@ -85,7 +85,7 @@
                         <label class="form-label"><b>Category</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($villaCategory as $data)
-                                <div class="col-4">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';

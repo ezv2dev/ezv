@@ -452,18 +452,13 @@
                                 @endauth
                                 {{-- CONTACT --}}
                                 <div class="col-12" id="fix-contact-m"
-                                    style="display: flex; padding-right: 70px; padding-left: 70px; margin-top: 18px;">
-                                    <div class="col-4">
-                                        <a onclick="view_map('{{ $activity->id_activity }}')" type="button">
-                                            <i class="fa-solid fa-location-dot"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
+                                    style="display: flex; padding-right: 70px; justify-content: center; padding-left: 70px; margin-top: 18px;">
+                                    <div style="padding: 0px 6px;">
                                         <a onclick="contact_activity()" type="button">
                                             <i class="fa-solid fa-phone"></i>
                                         </a>
                                     </div>
-                                    <div class="col-3">
+                                    <div style="padding: 0px 6px;">
                                         @if ($activity->email)
                                             <a target="_blank" type="button"
                                                 href="mailto:{{ $activity->email }}">
@@ -606,11 +601,6 @@
                             {{-- CONTACT --}}
                             <div class="col-12 contact-mobile"
                                 style="display: flex; padding-right: 70px; padding-left: 70px; margin-top: 18px;">
-                                <div class="col-4 contact-item">
-                                    <a onclick="view_map('{{ $activity->id_activity }}')" type="button">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                    </a>
-                                </div>
                                 <div class="col-4 contact-item">
                                     <a onclick="contact_activity()" type="button">
                                         <i class="fa-solid fa-phone"></i>
@@ -3740,21 +3730,6 @@
         </div>
     </div>
 
-    <!-- MAP MODAL -->
-    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-map">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.Map') }}</h5>
-                    <button type="button" class="btn-close" onclick="close_map()"></button>
-                </div>
-                <div class="modal-body pb-1" style="height: 500px">
-                    <div id="modal-map-content" style="width:100%;height:100%; border-radius: 10px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
     @include('user.modal.auth.login_register')
 
     @include('layouts.user.footer')
@@ -4768,87 +4743,6 @@
         calendar_wow(2);
     </script>
 
-    {{-- View Maps Activity --}}
-    <script>
-        async function view_map(id) {
-            await $.ajax({
-                type: "get",
-                dataType: 'json',
-                url: `/things-to-do/map/${id}`,
-                statusCode: {
-                    500: () => {
-                        alert(`{{ __('user_page.internal server error') }}`);
-                    },
-                    404: () => {
-                        alert(`{{ __('user_page.No data found') }}`);
-                    },
-                },
-                success: async function(data) {
-                    // declare map
-                    var map = new google.maps.Map(document.getElementById('modal-map-content'), {
-                        zoom: 15,
-                        scrollwheel: true,
-                        draggable: true,
-                        gestureHandling: "greedy",
-                        center: new google.maps.LatLng(data.latitude, data.longitude),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
-                        styles: [{
-                                "featureType": "poi",
-                                "elementType": "all",
-                                "stylers": [{
-                                    "visibility": "off"
-                                }]
-                            },
-                            {
-                                "featureType": "road.local",
-                                "elementType": "all",
-                                "stylers": [{
-                                    "visibility": "on"
-                                }]
-                            },
-                            {
-                                "featureType": "transit.station.airport",
-                                "elementType": "labels.icon",
-                                "stylers": [{
-                                    "visibility": "off"
-                                }]
-                            }
-                        ]
-                    });
-
-                    // add marker to map
-                    const marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(data.latitude, data.longitude),
-                        map: map,
-                        icon: {
-                            url: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png',
-                            size: new google.maps.Size(71, 71),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(17, 34),
-                            scaledSize: new google.maps.Size(35, 35)
-                        }
-                    });
-
-                    // add open google maps
-                    var gotoMapButton = document.createElement("div");
-                    gotoMapButton.setAttribute("style",
-                        "margin: 5px; border: 1px solid; padding: 1px 12px; font: bold 11px Roboto, Arial, sans-serif; color: #000000; background-color: #FFFFFF; cursor: pointer;"
-                    );
-                    gotoMapButton.innerHTML = "Open Google Maps";
-                    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(gotoMapButton);
-                    google.maps.event.addDomListener(gotoMapButton, "click", function() {
-                        var url = `https://maps.google.com/?q=${data.latitude},${data.longitude}`;
-                        window.open(url);
-                    });
-                    $("#modal-map").modal('show');
-                }
-            });
-        }
-
-        function close_map() {
-            $("#modal-map").modal('hide');
-        }
-    </script>
     {{-- modal laguage and currency --}}
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
