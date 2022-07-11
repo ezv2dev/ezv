@@ -1245,14 +1245,14 @@ input:checked + .switch-background:active::before {
     #btn-to-app-store img {
         width: 20% !important;
     }
-    
+
     #btn-to-play-store img {
         width: 26% !important;
     }
 
     .cari {
         position: absolute;
-        margin-left: -29px;
+        right: 10px;
     }
 
     .add-date-wow {
@@ -1481,10 +1481,10 @@ input:checked + .switch-background:active::before {
 }
 
 .add-date-wow {
-    position: absolute; 
-    color: grey; 
-    font-size: 15px !important; 
-    top: 34px; 
-    left: 70px; 
+    position: absolute;
+    color: grey;
+    font-size: 15px !important;
+    top: 34px;
+    left: 70px;
     font-weight: 400 !important;
 }
