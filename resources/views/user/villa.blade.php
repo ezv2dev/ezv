@@ -238,10 +238,10 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($villa[0]->image)
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileVilla" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $villa[0]->image) }}">
                             @else
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileVilla" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
@@ -251,14 +251,6 @@
                                     <a type="button" onclick="edit_villa_profile()"
                                         class="edit-profile-image-btn-dekstop"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    {{-- @if ($villa[0]->image)
-                                        <a class="delete-profile" href="javascript:void(0);"
-                                            onclick="delete_profile_image({'id': '{{ $villa[0]->id_villa }}'})">
-                                            <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                                data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom"
-                                                title="{{ __('user_page.Delete') }}"></i></a>
-                                    @endif --}}
                                 @endif
                             @endauth
                             <div class="property-type">
@@ -359,7 +351,8 @@
                                     @auth
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryVilla()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit property</a>
+                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit
+                                                property</a>
                                         @endif
                                     @endauth
                                 </p>
@@ -898,7 +891,8 @@
                                 @endauth
                             </div>
                             <p id="description-content">
-                                {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                             </p>
                             @if (Str::length($villa[0]->description) > 600)
                                 <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
@@ -3931,7 +3925,8 @@
                 }
                 if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
                     $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop - $footerHeight)
+                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
+                            $footerHeight)
                     });
                 } else {
                     $sidebar.css({
@@ -4317,7 +4312,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: '/villa/${ids.id}/delete/photo/photo/${ids.id_photo}',
+                        url: `/villa/${ids.id}/delete/photo/photo/${ids.id_photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');

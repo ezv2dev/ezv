@@ -465,11 +465,14 @@ input:checked + .switch-background:active::before {
 
 /* The container */
 .container-mode {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    padding-left: 35px;
+    /* padding-left: 35px; */
+    width: 100%;
     cursor: pointer;
-    font-size: 22px;
+    /* font-size: 22px; */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -487,15 +490,22 @@ input:checked + .switch-background:active::before {
 
 /* Create a custom checkbox */
 .checkmark-mode {
-    position: absolute;
-    top: -12px;
-    left: 5px;
-    height: 22px;
-    width: 22px;
+    position: relative;
+    /* top: 50%;
+    transform:translateY(-50%);
+    left: 5px; */
+    height: 100%;
+    width: 100%;
     background-color: transparent;
 }
 
 .checkmark-mode::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    height: 22px;
+    width: 22px;
     /* font-family: "Font Awesome 5 Free";
     font-weight: 800;
     content: "\f185";

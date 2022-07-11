@@ -1,15 +1,15 @@
 <!-- Fade In Default Modal -->
-<div class="modal fade" id="modal-promotion-mobile" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+<div class="modal p-0 fade" id="modal-promotion-mobile" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document" style="margin-top: 55px !important">
-        <div class="modal-content" style="width: 750px !important;">
+    <div class="modal-dialog modal-xl" role="document" style="margin: 55px 0px 0px 0px !important; padding: 0px 6px;">
+        <div class="modal-content modal-content-promotion">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body pb-1">
-                <div class="card bg-dark text-white w-100"
-                    style="font-family: 'Poppins', sans-serif; border-radius: 14px;">
-                    <img class="card-img" style="border-radius: 14px;"
+            <div class="modal-body modal-content-promotion-body">
+                <div class="w-100"
+                    style="font-family: 'Poppins', sans-serif; border-radius: 14px; height: 100%;">
+                    <img class="card-img" style="border-radius: 14px; height: inherit;"
                         src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}">
                     <div class="card-img-overlay d-flex justify-content-center align-items-center">
                         <div class="row text-center">
