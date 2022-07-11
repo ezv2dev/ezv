@@ -1122,26 +1122,26 @@
 
                                 <div class="col-6 p-5-price line-right-orange">
                                     <div class="col-12" style="text-align: center;">
-                                        <button class="collapsible_check"
+                                        <a type="button" class="collapsible_check"
                                             style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
                                             <input class="date-form" type="text" id="check_in" name="check_in"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-6 p-5-price">
                                     <div class="col-12" style="text-align: center;">
-                                        <button class="collapsible_check"
+                                        <a type="button" class="collapsible_check"
                                             style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
                                             <input class="date-form" type="text" id="check_out" name="check_out"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
 
