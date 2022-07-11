@@ -7,6 +7,7 @@
         padding-left: 35px;
         margin-bottom: 12px;
         cursor: pointer;
+        
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
