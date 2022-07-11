@@ -323,7 +323,7 @@
     {{-- Pagination --}}
     <div class="mt-5 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $activity->onEachSide(1)->appends(Request::all())->links() }}
+            {{ $activity->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     {{-- End Pagination --}}

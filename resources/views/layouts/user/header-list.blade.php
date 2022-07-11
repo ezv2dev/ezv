@@ -201,11 +201,11 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                <div class="logged-user-menu" style="height: 30px; width: 45px;">
-                    <label class="container-mode" style="margin-top: 8px;">
+                <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
+                    <label class="container-mode">
                         <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
                             {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                        <span class="checkmark-mode" style="top: -10px;"></span>
+                        <span class="checkmark-mode"></span>
                     </label>
                 </div>
                 <button class="navbar-toggler" type="button" id="expand-mobile-btn">
@@ -3536,12 +3536,12 @@
                 <div style="display: table; margin-right: 0px; float: right;">
                     <!--<h5 style="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>-->
                 </div>
-                <div class="logged-user-menu">
+                <div class="logged-user-menu d-flex align-items-center">
 
-                    <label class="container-mode" style="top: 15px;">
+                    <label class="container-mode">
                         <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
                             {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
-                        <span class="checkmark-mode" style="top: -10px;"></span>
+                        <span class="checkmark-mode"></span>
 
                     </label>
 

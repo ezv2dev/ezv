@@ -238,10 +238,10 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($villa[0]->image)
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileVilla" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $villa[0]->image) }}">
                             @else
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileVilla" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
@@ -251,14 +251,6 @@
                                     <a type="button" onclick="edit_villa_profile()"
                                         class="edit-profile-image-btn-dekstop"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    {{-- @if ($villa[0]->image)
-                                        <a class="delete-profile" href="javascript:void(0);"
-                                            onclick="delete_profile_image({'id': '{{ $villa[0]->id_villa }}'})">
-                                            <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                                data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom"
-                                                title="{{ __('user_page.Delete') }}"></i></a>
-                                    @endif --}}
                                 @endif
                             @endauth
                             <div class="property-type">
@@ -359,7 +351,8 @@
                                     @auth
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryVilla()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit property</a>
+                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit
+                                                property</a>
                                         @endif
                                     @endauth
                                 </p>
@@ -879,26 +872,31 @@
                                 @endauth
                             </h2>
                             <div class="d-flex justify-content-left">
-                                @forelse ($villaTags->take(5) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
-                                @empty
-                                    <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
-                                @endforelse
-                                @if ($villaTags->count() > 5)
-                                    <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
-                                        onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
-                                @endif
+                                <div id="displayTags">
+                                    @forelse ($villaTags->take(5) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
+                                    @empty
+                                        <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
+                                    @endforelse
+                                </div>
+                                <div id="moreTags">
+                                    @if ($villaTags->count() > 5)
+                                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                                            onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
+                                    @endif
+                                </div>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
-                                        <a type="button" onclick="editTagsVilla()"
+                                        <a type="button" onclick="displayTags()"
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
                             </div>
                             <p id="description-content">
-                                {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                             </p>
                             @if (Str::length($villa[0]->description) > 600)
                                 <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
@@ -3128,7 +3126,7 @@
                         onclick="close_subcategory()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div class="row row-border-bottom padding-top-bottom-18px">
+                    <div class="row row-border-bottom padding-top-bottom-18px" id="viewTags">
                         @foreach ($villaTags as $item)
                             <div class='col-md-6'>{{ $item->villaFilter->name }}</div>
                         @endforeach
@@ -3931,7 +3929,8 @@
                 }
                 if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
                     $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop - $footerHeight)
+                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
+                            $footerHeight)
                     });
                 } else {
                     $sidebar.css({
@@ -4317,7 +4316,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: '/villa/${ids.id}/delete/photo/photo/${ids.id_photo}',
+                        url: `/villa/${ids.id}/delete/photo/photo/${ids.id_photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4507,7 +4506,7 @@
             $('#LegalModal').modal('show');
         }
 
-        function editTagsVilla() {
+        function displayTags() {
             $('#ModalTagsVilla').modal('show');
         }
 
