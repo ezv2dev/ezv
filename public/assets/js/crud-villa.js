@@ -27,6 +27,7 @@ function editNameVilla(id_villa) {
 
 function editNameForm(id_villa) {
     var form = document.getElementById("name-form");
+    var formInput = document.getElementById("name-form-input");
     var content = document.getElementById("name-content");
     form.classList.add("d-block");
     content.classList.add("d-none");
@@ -36,6 +37,10 @@ function editNameForm(id_villa) {
         url: "/villa/get/name/" + `${id_villa}`,
         success: function(response) {
             $("#name-form-input").val(response.data);
+
+            if(formInput.value == 'Home Name Here'){
+                formInput.value = '';
+            }
         },
     });
 }
@@ -46,6 +51,10 @@ function editNameCancel() {
     var content = document.getElementById("name-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    if(formInput.value == 'Home Name Here'){
+        formInput.value = '';
+    }
 }
 
 function editShortDesc(id_villa) {
@@ -76,6 +85,7 @@ function editShortDesc(id_villa) {
 function editShortDescriptionForm(id_villa) {
     var form = document.getElementById("short-description-form");
     var content = document.getElementById("short-description-content");
+    var formInput = document.getElementById("short-description-form-input");
     form.classList.add("d-block");
     content.classList.add("d-none");
     $.ajax({
@@ -83,6 +93,10 @@ function editShortDescriptionForm(id_villa) {
         url: "/villa/get/short-description/" + `${id_villa}`,
         success: function(response) {
             $("#short-description-form-input").val(response.data);
+
+            if(formInput.value == 'Make your short description here'){
+                formInput.value = '';
+            }
         },
     });
 }
@@ -93,6 +107,10 @@ function editShortDescriptionCancel() {
     var content = document.getElementById("short-description-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    if(formInput.value == 'Make your short description here'){
+        formInput.value = '';
+    }
 }
 
 function editBedroomVilla(id_villa) {

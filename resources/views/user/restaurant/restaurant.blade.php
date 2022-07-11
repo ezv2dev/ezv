@@ -88,7 +88,7 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div class="sticky-bottom-mobile d-xs-block d-md-none">
-            <a onclick="contact_activity()" type="button" class="rsv-btn-button">
+            <a onclick="contact_restaurant()" type="button" class="rsv-btn-button">
                 {{ __('user_page.CONTACT') }}
             </a>
         </div>
@@ -374,15 +374,15 @@
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-dekstop"
                                     style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    {{-- @if ($restaurant->image)
-                                        <a class="delete-profile" href="javascript:void(0);"
+                                    @if ($restaurant->image)
+                                        <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
                                             {{-- <a href="{{ route('restaurant_delete_image', $restaurant->id_restaurant) }}"> --}}
-                                            {{-- <i class="fa fa-trash" style="color:red; margin-left: 25px;"
+                                            <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
                                                 data-bs-placement="bottom"
-                                                title="{{ __('user_page.Delete') }}"></i></a> --}}
-                                    {{-- @endif --}}
+                                                title="{{ __('user_page.Delete') }}"></i></a>
+                                    @endif
                                 @endif
                             @endauth
                             <div class="date-contact-dekstop">
@@ -563,6 +563,13 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $restaurant->name }}</h2>
+                                @auth
+                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
+                                            style="color:#FF7400; font-weight: 600; font-size: 14pt;">
+                                            {{ __('user_page.Edit Name') }}</a>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -582,7 +589,7 @@
                                 <div id="name-form" style="display:none;">
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" required="">{{ $restaurant->name }}</textarea>
+                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Make your short description here') }}">{{ $restaurant->name }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameRestaurant();"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -602,18 +609,15 @@
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 &nbsp;
                                 <a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
-                                &nbsp;
-                                <a type="button" onclick="editNameForm({{ $restaurant->id_restaurant }})" class="edit-profile-name-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
-                                {{-- @if ($restaurant->image)
-                                    <a class="delete-profile" href="javascript:void(0);"
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
+                                @if ($restaurant->image)
+                                    <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
                                         <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                             data-bs-toggle="popover" data-bs-animation="true"
                                             data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
-                                @endif --}}
+                                @endif
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
@@ -677,7 +681,7 @@
                                     </a>
                                 </div>
                                 <div class="col-4 contact-item">
-                                    <a onclick="contact_activity()" type="button">
+                                    <a onclick="contact_restaurant()" type="button">
                                         <i class="fa-solid fa-phone"></i>
                                     </a>
                                 </div>
@@ -1097,6 +1101,15 @@
                                     <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
                                         <span class="navigationItemText">{{ __('user_page.REVIEW') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem d-flex d-md-none">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
                                 </span>
                             </a>
                         </li>
@@ -1893,7 +1906,7 @@
                                     <div class="about-place-block">
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-lg-6 col-md-6 col-xs-12">
                                                 <form action="{{ route('restaurant_review_store') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id_restaurant"
@@ -2092,6 +2105,21 @@
                                                                     style="width: 200px">{{ __('user_page.Done') }}</button>
                                                             </center>
                                                         </div>
+
+                                                            <div class="col-12 mt-5">
+                                                                {{ __('user_page.Comment') }}
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <button type="submit"
+                                                                    class="btn btn-block btn-sm btn-primary"
+                                                                    style="width: 200px">{{ __('user_page.Done') }}</button>
+                                                            </div>
+
                                                     </div>
                                                 </form>
 
@@ -4026,7 +4054,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Restaurant Name Here'){
+            if(formInput.value == 'Food Name Here'){
                 formInput.value = '';
             }
         }
@@ -4038,8 +4066,7 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
 
-            // formInput.value = '{{ $restaurant->name }}';
-            if(formInput.value == 'Restaurant Name Here'){
+            if(formInput.value == 'Food Name Here'){
                 formInput.value = '';
             }
         }
@@ -4052,10 +4079,9 @@
             var formInput = document.getElementById("short-description-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
-            // formInput.value = '{{ $restaurant->short_description }}';
             if(formInput.value == 'Make your short description here'){
                 formInput.value = '';
-            }
+            };
         }
 
         function editShortDescriptionCancel() {
@@ -4064,11 +4090,9 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            // formInput.value = '{{ $restaurant->short_description }}';
             if(formInput.value == 'Make your short description here'){
                 formInput.value = '';
-            }
-            // formInput.value = '{{ $restaurant->short_description }}';
+            };
         }
     </script>
 

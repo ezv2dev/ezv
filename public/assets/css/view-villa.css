@@ -1585,7 +1585,7 @@ header .search-box input {
 }
 
 .btn-primary {
-    background-color: #ff7400;
+    background-color: #ff7400 !important;
     border-color: #ff7400;
     border-radius: 7px;
     margin-top: 6px;
@@ -1633,7 +1633,7 @@ header .search-box input {
 }
 
 .btn-primary:hover {
-    background-color: #000;
+    background-color: #000 !important;
     border-color: #000;
 }
 
@@ -1983,6 +1983,7 @@ li.button-dropdown {
     right: 50%;
     transform:translateX(50%);
     margin-top: 20px;
+    z-index: 1;
 }
 /* /css details reserve */
 
@@ -2284,7 +2285,7 @@ input[type="number"] {
     background: #ff7400;
 }
 
-.edit-icon, .edit-video-icon {
+.edit-icon, .edit-video-icon, .edit-menu-icon {
     position: absolute !important;
     display: block !important;
     top: 20px !important;
@@ -3197,10 +3198,19 @@ span.flatpickr-weekday {
         font-size: 20px !important;
     }
 }
-
+@media only screen and (max-width: 345px) {
+    .edit-icon, .edit-video-icon, .edit-menu-icon {
+        top: 10px !important;
+        right: 4px !important;
+    }
+}
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
         font-size: 24px !important;
+    }
+    .edit-icon, .edit-video-icon, .edit-menu-icon {
+        top: 10px !important;
+        right: 8px !important;
     }
 }
 
@@ -3740,3 +3750,4 @@ span.flatpickr-weekday {
         width: 80%;
     }
 }
+

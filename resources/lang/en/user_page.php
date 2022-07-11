@@ -462,7 +462,8 @@ return [
     "It's FREE" => "It's FREE",
     "Don't show it again" => "Don't show it again",
 
-    "Restaurant Name Here" => "Restaurant Name Here",
+    "Home Name Here" => "Home Name Here",
+    "Food Name Here" => "Food Name Here",
     "Hotel Name Here" => "Hotel Name Here",
     "Hotel Room Name Here" => "Hotel Room Name Here",
     "Wow Name Here" => "Wow Name Here",
