@@ -618,6 +618,14 @@ function calendar_reserve(months) {
 
                                 $("#counting_part").css("display", "block");
 
+                                if (!total["discount"]) {
+                                    $("#discount_div").removeAttr("style");
+                                    $("#discount_div").css("display", "none");
+                                } else {
+                                    $("#discount").text(total["discount"]);
+                                    $("#discount_div").css("display", "block");
+                                }
+
                                 if (!total["cleaning_fee"]) {
                                     $("#cleaning_div").removeAttr("style");
                                     $("#cleaning_div").css("display", "none");
