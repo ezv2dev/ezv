@@ -1154,12 +1154,12 @@
                                     </div>
                                 @endif
                             @endauth
-                            <hr>
                         </div>
                     </section>
 
                     <section id="amenities" class="section-2">
                         <div class="row-grid-amenities">
+                            <hr>
                             <div>
                                 <h2>
                                     {{ __('user_page.Amenities') }}
@@ -1277,12 +1277,11 @@
                         </div>
                     </section>
 
-                    <div class="section-liner">
-                        <hr>
-                    </div>
-
                     <section id="room" class="section-2">
                         <div class="row pd-tlr-10">
+                        <div class="section-liner">
+                            <hr>
+                        </div>
                             <h2>{{ __('user_page.Rooms') }}
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1755,22 +1754,18 @@
             </div>
             {{-- END RIGHT CONTENT --}}
             <section id="location-map" class="section">
-                <div class="location-liner">
                     <hr>
-                </div>
                 <div class="row-grid-location">
-                    <div>
-                        <h2>
-                            {{ __("user_page.What's nearby ?") }}
-                            @auth
-                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;
-                                    <a type="button" onclick="edit_location()"
-                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
-                                @endif
-                            @endauth
-                        </h2>
-                    </div>
+                    <h2>
+                        {{ __("user_page.What's nearby ?") }}
+                        @auth
+                            @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                &nbsp;
+                                <a type="button" onclick="edit_location()"
+                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
+                            @endif
+                        @endauth
+                    </h2>
                 </div>
                 <div class="row-grid-location">
                     @include('user.modal.hotel.map-location')
@@ -4665,13 +4660,13 @@
 
 {{-- Highlight sticky --}}
     <script>
-        var gallery = $('#gallery').offset().top,
-            description = $('#description').offset().top,
-            amenities = $('#amenities').offset().top,
-			room = $('#room').offset().top,
-            location_menu = $('#location-map').offset().top,
-            review = $('#review').offset().top,
-            host = $('.host').offset().top,
+        var gallery = $('#gallery').offset().top - 200,
+            description = $('#description').offset().top - 150,
+            amenities = $('#amenities').offset().top - 150,
+			room = $('#room').offset().top - 150,
+            location_menu = $('#location-map').offset().top - 150,
+            review = $('#review').offset().top - 150,
+            host = $('.host').offset().top - 200,
             $window = $(window);
 
         $window.scroll(function() {

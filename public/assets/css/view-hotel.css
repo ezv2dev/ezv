@@ -167,6 +167,15 @@ svg {
     padding-right: 10px;
     } */
 
+.section {
+    scroll-margin-top: 2rem;
+}
+
+.section-2 {
+    scroll-margin-top: 3rem;
+    padding-top: 0px !important;
+}    
+
 .section-2 {
     margin: 0 0 0 11px;
 }
@@ -181,6 +190,10 @@ svg {
 }
 
 @media (min-width: 1360px) {
+    .rsv-block .sticky {
+        width: 74% !important;
+    }
+
     .reserve-block {
         right: -9px;
     }
