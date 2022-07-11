@@ -872,20 +872,24 @@
                                 @endauth
                             </h2>
                             <div class="d-flex justify-content-left">
-                                @forelse ($villaTags->take(5) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
-                                @empty
-                                    <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
-                                @endforelse
-                                @if ($villaTags->count() > 5)
-                                    <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
-                                        onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
-                                @endif
+                                <div id="displayTags">
+                                    @forelse ($villaTags->take(5) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
+                                    @empty
+                                        <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
+                                    @endforelse
+                                </div>
+                                <div id="moreTags">
+                                    @if ($villaTags->count() > 5)
+                                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                                            onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
+                                    @endif
+                                </div>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
-                                        <a type="button" onclick="editTagsVilla()"
+                                        <a type="button" onclick="displayTags()"
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
@@ -3122,7 +3126,7 @@
                         onclick="close_subcategory()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div class="row row-border-bottom padding-top-bottom-18px">
+                    <div class="row row-border-bottom padding-top-bottom-18px" id="viewTags">
                         @foreach ($villaTags as $item)
                             <div class='col-md-6'>{{ $item->villaFilter->name }}</div>
                         @endforeach
@@ -4502,7 +4506,7 @@
             $('#LegalModal').modal('show');
         }
 
-        function editTagsVilla() {
+        function displayTags() {
             $('#ModalTagsVilla').modal('show');
         }
 

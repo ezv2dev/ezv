@@ -262,7 +262,7 @@ function editVillaTag(id_villa) {
                 position: "topCenter",
             });
 
-            console.log(response.data.name);
+            console.log(response.data[0].name);
 
             $("#displayTags").html(`
                 <span class="badge rounded-pill fw-normal translate-text-group-items"
