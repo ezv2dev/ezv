@@ -17,4 +17,9 @@ class VillaAmenities extends Model
     {
         return $this->belongsTo(Villa::class, 'id_villa');
     }
+
+    public function amenities()
+    {
+        return $this->belongsTo(Amenities::class, 'id_amenities', 'id_amenities');
+    }
 }

@@ -12,4 +12,10 @@ class VillaKitchen extends Model
 
     protected $table = 'villa_kitchen';
     protected $primaryKey = 'id_detail';
+
+    // * Relationship
+    public function kitchen()
+    {
+        return $this->belongsTo(Kitchen::class, 'id_kitchen', 'id_kitchen');
+    }
 }

@@ -12,4 +12,10 @@ class VillaBathroom extends Model
 
     protected $table = 'villa_bathroom';
     protected $primaryKey = 'id_detail';
+
+    // * Relationship
+    public function bathroom()
+    {
+        return $this->belongsTo(BathRoom::class, 'id_bathroom', 'id_bathroom');
+    }
 }

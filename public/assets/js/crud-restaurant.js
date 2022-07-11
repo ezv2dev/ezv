@@ -495,3 +495,89 @@ function saveRestaurantPrice() {
         },
     });
 }
+
+function saveFacilities() {
+    let facilities = [];
+
+    $("input[name='facilities[]']:checked").each(function () {
+        facilities.push(parseInt($(this).val()));
+    });
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/restaurant/facilities/store",
+        data: {
+            id_restaurant: id_restaurant,
+            facilities: facilities,
+        },
+        success: function (response) {
+            console.log(response);
+
+            $("#modal-add_facilities").modal("hide");
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content;
+
+            if (response.data.length > 5) {
+                for (let i = 0; i < 6; i++) {
+                    if (i == 0) {
+                        content =
+                            '<div class="list-amenities"> <div class="text-align-center" data-maxlength="6"> <i class="f-40 fa fa-' +
+                            response.data[i].icon +
+                            '"></i> <div class="mb-0 max-line"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            ' </span> </div> </div> <div class="mb-0 list-more"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            " </span> </div> </div>";
+                    } else {
+                        content =
+                            content +
+                            '<div class="list-amenities"> <div class="text-align-center" data-maxlength="6"> <i class="f-40 fa fa-' +
+                            response.data[i].icon +
+                            '"></i> <div class="mb-0 max-line"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            ' </span> </div> </div> <div class="mb-0 list-more"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            " </span> </div> </div>";
+                    }
+                }
+                content =
+                    content +
+                    '<div class="list-amenities"> <button class="amenities-button" type="button" onclick="view_amenities()"> <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i> <div style="font-size: 15px;">More</div> </button> </div>';
+            } else {
+                for (let i = 0; i < response.data.length; i++) {
+                    if (i == 0) {
+                        content =
+                            '<div class="list-amenities"> <div class="text-align-center" data-maxlength="6"> <i class="f-40 fa fa-' +
+                            response.data[i].icon +
+                            '"></i> <div class="mb-0 max-line"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            ' </span> </div> </div> <div class="mb-0 list-more"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            " </span> </div> </div>";
+                    } else {
+                        content =
+                            content +
+                            '<div class="list-amenities"> <div class="text-align-center" data-maxlength="6"> <i class="f-40 fa fa-' +
+                            response.data[i].icon +
+                            '"></i> <div class="mb-0 max-line"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            ' </span> </div> </div> <div class="mb-0 list-more"> <span class="translate-text-group-items"> ' +
+                            response.data[i].name +
+                            " </span> </div> </div>";
+                    }
+                }
+            }
+
+            $("#contentFacilities").html(content);
+        },
+    });
+}
