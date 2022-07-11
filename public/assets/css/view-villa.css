@@ -1443,14 +1443,6 @@ a.active {
     background: #ff7400 !important;
 }
 
-input[type="text"] {
-    background: none;
-}
-
-input[type="text"]:focus {
-    outline: none;
-}
-
 ::placeholder {
     font-size: 0.75rem;
 }
@@ -1534,10 +1526,6 @@ header {
     position: relative;
     top: 24px;
     left: -9px;
-}
-
-input[type="text"] {
-    background: none;
 }
 
 header .search-box input {
@@ -3133,8 +3121,9 @@ video {
 }
 
 input[type="text"] {
-    background: none !important;
-    border: none !important;
+    outline: none;
+    background: none;
+    border: none;
     font-size: 150%;
 }
 
