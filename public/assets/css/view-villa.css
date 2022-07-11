@@ -3197,6 +3197,7 @@ span.flatpickr-weekday {
         font-size: 20px !important;
     }
 }
+
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
         font-size: 24px !important;
@@ -3271,6 +3272,10 @@ span.flatpickr-weekday {
         width: 100% !important;
         left: 0px !important;
         margin-left: 0px !important;
+        height: 47px;
+    }
+    .rsv {
+        height: 47px;
     }
     .navigationList {
         padding-left: 10px !important;
@@ -3408,7 +3413,15 @@ span.flatpickr-weekday {
         margin-right: 20px !important;
     }
     .navigationItem span:hover {
-        color: #000;
+        color: #000 !important;
+    }
+
+    .section {
+        scroll-margin-top: 1.3rem;
+    }
+    
+    .section-2 {
+        scroll-margin-top: 2.2rem;
     }
 }
 

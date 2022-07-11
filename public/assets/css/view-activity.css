@@ -149,19 +149,9 @@
     margin-bottom: 0;
 }
 
-.section {
-    scroll-margin-top: 2rem;
-}
-
-.section-2 {
-    scroll-margin-top: 3rem;
-    padding-top: 0px !important;
-    margin-top: 12px;
-}
-
-.section-2 {
+/* .section-2 {
     margin-right: -2px;
-}
+} */
 
 .review-bottom {
     margin-left: 21px !important;
