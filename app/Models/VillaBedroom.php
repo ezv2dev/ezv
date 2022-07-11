@@ -12,4 +12,10 @@ class VillaBedroom extends Model
 
     protected $table = 'villa_bedroom';
     protected $primaryKey = 'id_detail';
+
+    // * Relationship
+    public function bedroom()
+    {
+        return $this->belongsTo(BedRoom::class, 'id_bedroom', 'id_bed');
+    }
 }

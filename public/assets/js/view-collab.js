@@ -23,10 +23,8 @@ $(document).ready(function () {
 $(window).on("resize", function () {
     if ($(this).width() <= 991) {
         calendar_availability(1);
-        calendar_inline_collab(1)
     } else {
         calendar_availability(2);
-        calendar_inline_collab(2)
     }
 });
 

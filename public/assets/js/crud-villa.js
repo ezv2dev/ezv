@@ -38,7 +38,7 @@ function editNameForm(id_villa) {
         success: function(response) {
             $("#name-form-input").val(response.data);
 
-            if(formInput.value == 'Home Name Here'){
+            if (formInput.value == 'Home Name Here') {
                 formInput.value = '';
             }
         },
@@ -52,7 +52,7 @@ function editNameCancel() {
     form.classList.remove("d-block");
     content.classList.remove("d-none");
 
-    if(formInput.value == 'Home Name Here'){
+    if (formInput.value == 'Home Name Here') {
         formInput.value = '';
     }
 }
@@ -94,7 +94,7 @@ function editShortDescriptionForm(id_villa) {
         success: function(response) {
             $("#short-description-form-input").val(response.data);
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         },
@@ -108,7 +108,7 @@ function editShortDescriptionCancel() {
     form.classList.remove("d-block");
     content.classList.remove("d-none");
 
-    if(formInput.value == 'Make your short description here'){
+    if (formInput.value == 'Make your short description here') {
         formInput.value = '';
     }
 }
@@ -413,3 +413,156 @@ $("#updateImageForm").submit(function(e) {
 });
 
 // ! End Change Profile Villa
+
+// ! Edit Amenities
+function editAmenitiesVilla(id_villa) {
+    let amenities = [];
+    let bathroom = [];
+    let bedroom = [];
+    let kitchen = [];
+    let safety = [];
+    let service = [];
+
+    $("input[name='amenities[]']:checked").each(function() {
+        amenities.push(parseInt($(this).val()));
+    });
+    $("input[name='bathroom[]']:checked").each(function() {
+        bathroom.push(parseInt($(this).val()));
+    });
+    $("input[name='bedroom[]']:checked").each(function() {
+        bedroom.push(parseInt($(this).val()));
+    });
+    $("input[name='kitchen[]']:checked").each(function() {
+        kitchen.push(parseInt($(this).val()));
+    });
+    $("input[name='safety[]']:checked").each(function() {
+        safety.push(parseInt($(this).val()));
+    });
+    $("input[name='service[]']:checked").each(function() {
+        service.push(parseInt($(this).val()));
+    });
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/amenities",
+        data: {
+            id_villa: id_villa,
+            amenities: amenities,
+            bathroom: bathroom,
+            bedroom: bedroom,
+            kitchen: kitchen,
+            safety: safety,
+            service: service,
+        },
+        success: function(response) {
+            console.log(response);
+            console.log(response.getAmenities[0].amenities.icon);
+            console.log(response.getBathroom[0].bathroom.icon);
+            console.log(response.getBedroom[0].bedroom.icon);
+            console.log(response.getKitchen[0].kitchen.icon);
+            $("#modal-edit_amenities").modal("hide");
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            $("#listAmenities").html(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getAmenities[0].amenities.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[0].amenities.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getAmenities[0].amenities.name}</span>
+                    </div>
+                </div>
+            `);
+
+            for (i = 1; i < 3; i++) {
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                    </div>
+                </div>
+            `)
+            };
+
+            $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getBathroom[0].bathroom.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getBathroom[0].bathroom.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getBathroom[0].bathroom.name}</span>
+                    </div>
+                </div>
+            `);
+
+            $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getBedroom[0].bedroom.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getBedroom[0].bedroom.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getBedroom[0].bedroom.name}</span>
+                    </div>
+                </div>
+            `);
+
+            $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getKitchen[0].kitchen.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getKitchen[0].kitchen.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getKitchen[0].kitchen.name}</span>
+                    </div>
+                </div>
+            `);
+
+            $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <button class="amenities-button" type="button" onclick="view_amenities()">
+                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                        <div style="font-size: 15px;" class="translate-text-group-items">
+                            More</div>
+                    </button>
+                </div>
+            `);
+        },
+    });
+}
+// ! End Edit Amenities

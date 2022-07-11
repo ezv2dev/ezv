@@ -304,8 +304,8 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Home Name Here') }}"
-                                        required>{{ $villa[0]->name }}</textarea>
+                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                        placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
                                         onclick="editNameVilla({{ $villa[0]->id_villa }})">
@@ -406,7 +406,8 @@
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                        cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
+                                        cols="30" rows="3" maxlength="255"
+                                        placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -520,7 +521,8 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4">
                                                         @foreach ($stories as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStory{{ $item->id_story }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $villa[0]->created_by)
@@ -907,7 +909,8 @@
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
                                         <div class="form-group">
-                                            <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
+                                            <textarea name="description" id="description-form-input" class="w-100" rows="5"
+                                                placeholder="{{ __('user_page.Make your short description here') }}" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary"
@@ -977,7 +980,7 @@
                         </div>
                         @if ($villa_amenities->count() > 0)
                             <div class="row-grid-amenities">
-                                <div class="row-grid-list-amenities translate-text-group">
+                                <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
                                     @if ($villa_amenities->count() >= 6)
                                         @foreach ($villa_amenities->take(6) as $item1)
                                             <div class="list-amenities ">
@@ -1119,26 +1122,24 @@
 
                                 <div class="col-6 p-5-price line-right-orange">
                                     <div class="col-12" style="text-align: center;">
-                                        <button type="button" class="collapsible_check"
+                                        <button class="collapsible_check"
                                             style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
-                                            <input class="date-form"
-                                                type="text" id="check_in" name="check_in"
+                                            <input class="date-form" type="text" id="check_in" name="check_in"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-6 p-5-price">
                                     <div class="col-12" style="text-align: center;">
-                                        <button type="button" class="collapsible_check"
+                                        <button class="collapsible_check"
                                             style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
-                                            <input class="date-form"
-                                                type="text" id="check_out" name="check_out"
+                                            <input class="date-form" type="text" id="check_out" name="check_out"
                                                 placeholder="{{ __('user_page.Add Date') }}" readonly>
                                         </button>
                                     </div>
@@ -3188,87 +3189,86 @@
                 </div>
                 <div class="modal-body modal-body-amenities pb-1" style=" height: 415px; overflow-y: auto;">
                     @php
-                        $amenities = App\Http\Controllers\ViewController::amenities($villa[0]->id_villa);
-                        $bathroom = App\Http\Controllers\ViewController::bathroom($villa[0]->id_villa);
-                        $bedroom = App\Http\Controllers\ViewController::bedroom($villa[0]->id_villa);
-                        $kitchen = App\Http\Controllers\ViewController::kitchen($villa[0]->id_villa);
-                        $safety = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
-                        $service = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
-                        echo '<div class="row-modal-amenities translate-text-group row-border-bottom">';
-                        foreach ($amenities as $item) {
-                            echo "<div class='col-md-6 mb-2'>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
-                        echo '
-                        ';
-
-                        echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
-                        echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
-                        foreach ($bathroom as $item) {
-                            echo "<div class='col-md-6 '>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
-                        echo '
-                        ';
-
-                        echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
-                        echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedrooms') . '</h5></div>';
-                        foreach ($bedroom as $item) {
-                            echo "<div class='col-md-6 '>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
-                        echo '
-                        ';
-
-                        echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
-                        echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
-                        foreach ($kitchen as $item) {
-                            echo "<div class='col-md-8 '>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
-                        echo '
-                        ';
-
-                        echo '<div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">';
-                        echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
-                        foreach ($safety as $item) {
-                            echo "<div class='col-md-6'>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
-                        echo '
-                        ';
-
-                        echo '<div class="row-modal-amenities translate-text-group padding-top-bottom-18px">';
-                        echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
-                        foreach ($service as $item) {
-                            echo "<div class='col-md-6 '>
-                                <span class='translate-text-group-items'>" .
-                                $item->name .
-                                "</span>
-                        </div>";
-                        }
-                        echo '</div>';
+                        $amenitiesGet = App\Http\Controllers\ViewController::amenities($villa[0]->id_villa);
+                        $bathroomGet = App\Http\Controllers\ViewController::bathroom($villa[0]->id_villa);
+                        $bedroomGet = App\Http\Controllers\ViewController::bedroom($villa[0]->id_villa);
+                        $kitchenGet = App\Http\Controllers\ViewController::kitchen($villa[0]->id_villa);
+                        $safetyGet = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
+                        $serviceGet = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
                     @endphp
+                    <div class="row-modal-amenities translate-text-group row-border-bottom" id="moreAmenities">
+                        @foreach ($amenitiesGet as $item)
+                            <div class="col-md-6 mb-2">
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreBathroom">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
+                        </div>
+                        @foreach ($bathroomGet as $item)
+                            <div class="col-md-6">
+                                <span class="translate-text-group-items">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreBedroom">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Bedroom') }}</h5>
+                        </div>
+                        @foreach ($bedroomGet as $item)
+                            <div class="col-md-6">
+                                <span class="translate-text-group-items">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreKitchen">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
+                        </div>
+                        @foreach ($kitchenGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreSafety">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
+                        </div>
+                        @foreach ($safetyGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
+                        </div>
+                        @foreach ($serviceGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="modal-filter-footer" style="height: 20px;"></div>
             </div>
@@ -4167,10 +4167,8 @@
                             }
                         },
                         success: async function(data) {
-                            // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $(`#displayStory${ids.id_story}`).remove();
                         }
                     });
                 } else {
