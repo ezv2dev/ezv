@@ -3134,12 +3134,12 @@
 
     {{-- Highlight sticky --}}
     <script>
-        var gallery = $('#gallery').offset().top,
-            description = $('#description').offset().top,
-            amenities = $('#amenities').offset().top,
-            availability = $('#availability').offset().top,
-            review = $('#review').offset().top,
-            host = $('#host_end').offset().top,
+        var gallery = $('#gallery').offset().top - 200,
+            description = $('#description').offset().top - 150,
+            amenities = $('#amenities').offset().top - 150,
+            availability = $('#availability').offset().top - 150,
+            review = $('#review').offset().top - 150,
+            host = $('#host_end').offset().top - 200,
             $window = $(window);
 
         $window.scroll(function() {
