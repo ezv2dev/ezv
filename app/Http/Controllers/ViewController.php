@@ -902,6 +902,19 @@ class ViewController extends Controller
 
     public function villa_update_image(Request $request)
     {
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_villa' => ['required', 'integer'],
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
+        }
+
         $villa = Villa::where('id_villa', $request->id_villa)->first('uid');
         $folder = $villa->uid;
         $path = env("VILLA_FILE_PATH") . $folder;
@@ -1226,6 +1239,15 @@ class ViewController extends Controller
     public function villa_update_photo(Request $request)
     {
         $this->authorize('listvilla_update');
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_villa' => ['required', 'integer'],
+            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
+        ]);
+        if ($validator->fails()) {
+            abort(500);
+        }
+
         $status = 500;
 
         try {
@@ -1247,6 +1269,11 @@ class ViewController extends Controller
                 $ext = strtolower($berkas->getClientOriginalExtension());
 
                 if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+                    request()->validate([
+                        'id_villa' => ['required', 'integer'],
+                        'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+                    ]);
+
                     $original_name = $berkas->getClientOriginalName();
 
                     $name_file = time() . "_" . $original_name;
