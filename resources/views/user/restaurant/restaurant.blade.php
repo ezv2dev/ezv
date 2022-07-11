@@ -3434,6 +3434,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function share() {
+            $("#modal-share").modal("show");
+        }
+    </script>
     {{-- MODAL CONTACT RESTAURANT --}}
     <div class="modal fade" id="modal-contact_restaurant" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
@@ -3461,42 +3466,7 @@
                         </div>
                         <div class="col-11">
                             <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->createdByDetails->email }}
-                            </b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- MODAL CONTACT ACTIVITY --}}
-    <div class="modal fade" id="modal-contact_activity" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ $restaurant->name }} {{ __('user_page.Contact') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="row">
-                        <div class="col-1">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->phone }}
-                            </b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->createdByDetails->email }}
+                                {{ $restaurant->email }}
                             </b>
                         </div>
                     </div>
@@ -3505,8 +3475,8 @@
         </div>
     </div>
     <script>
-        function contact_activity() {
-            $('#modal-contact_activity').modal('show');
+        function contact_restaurant() {
+            $('#modal-contact_restaurant').modal('show');
         }
     </script>
     {{-- MODAL CONTACT HOST --}}
@@ -4014,50 +3984,6 @@
         });
     </script>
 
-    {{-- <script>
-        $('#check_in3').flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            onChange: function (selectedDates, dateStr, instance) {
-                $('#check_out3').flatpickr({
-                    enableTime: false,
-                    dateFormat: "Y-m-d",
-                    minDate: new Date(dateStr).fp_incr(1),
-                    onChange: function (selectedDates, dateStr, instance) {
-                        var start = new Date($('#check_in3').val());
-                        var end = new Date($('#check_out3').val());
-                        var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                        var min_stay = $('#min_stay').val();
-                        var minimum = new Date($('#check_in3').val()).fp_incr(min_stay);
-                        var total = $('#price').val() * sum_night;
-                        if (sum_night < min_stay) {
-                            alert("minimum stay is " + min_stay + " days");
-                        } else {
-                            $('#sum_night3').val(sum_night);
-                            $("#total3").text(total.toString().replace(
-                                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                "."));
-                            $("#total_all3").text(total.toString().replace(
-                                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                "."));
-                        }
-                        $('#check_in').val($('#check_in3').val());
-                        $('#check_out').val($('#check_out3').val());
-                        $('#sum_night').val($('#sum_night3').val());
-                        $('#total').text(total.toString().replace(
-                            /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                            "."));
-                        $('#total_all').text(total.toString().replace(
-                            /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                            "."));
-                    }
-                });
-            }
-        });
-
-    </script> --}}
-
     <script>
         $("#searchbox").click(function() {
             $("#search_bar").toggleClass("active");
@@ -4246,14 +4172,6 @@
         }
     </script>
     {{-- END UPDATE FORM --}}
-
-    {{-- CONTACT HOST --}}
-    <script>
-        function contactHostForm() {
-            $('#modal-contact-host').modal('show');
-        }
-    </script>
-    {{-- END CONTACT HOST --}}
 
     {{-- DROPZONE JS --}}
     <script src="{{ asset('assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>

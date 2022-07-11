@@ -2394,18 +2394,14 @@
                                         </div>
                                     </div>
                                     <div class="guests">
-                                        <a type="button"
-                                            style="position : absolute; z-index:1; width:100%; height: 60px; margin-left: -90px; margin-top: -8px"
-                                            class="collapsible_wow"></a>
-                                        <p>{{ __('user_page.Date') }}</p>
+                                        <a type="button" class="collapsible_wow"></a>
+                                        <p class="p-wow">{{ __('user_page.Date') }}</p>
 
                                         @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') || (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
-                                            <p id="add_date_wow"
-                                                style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 70px; font-weight: 400;">
+                                            <p id="add_date_wow" class="add-date-wow">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @else
-                                            <p id="add_date_wow"
-                                                style="position: absolute; color: grey; font-size: 15px; top:34px; left: 70px; font-weight: 400;">
+                                            <p id="add_date_wow" class="add-date-wow">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
 

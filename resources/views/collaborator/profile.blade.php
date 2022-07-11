@@ -1359,9 +1359,11 @@
                                 <div class="flatpickr-container" style="display: flex; justify-content: center;">
                                     <div id="heightCalendar"
                                         style="display: table; background-color: white; padding: 70px 80px 80px 80px; border-radius: 15px; box-shadow: 1px 1px 10px #a4a4a4; margin-bottom: 25px;">
-                                        <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
-                                            class="col-lg-12">
-                                            <p style="margin: 0px; font-size: 13px;">Clear Dates</p>
+                                        <div class="col-lg-12"
+                                            style="padding-left: 15px; padding-right: 30px; padding-top: 15px; text-align: right; text-align: center;">
+                                            <a type="button" id="clear_date_availability"
+                                                style="padding-bottom: 20px; margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
+                                            <p style="margin: 0px; font-size: 13px;"></p>
                                         </div>
 
                                         <div class="flatpickr" id="inline" style="text-align: left;">
@@ -1372,13 +1374,6 @@
 
                             </div>
                             <div id="scrollStop"></div>
-                            <div class="mob-e-call">
-                                <div class="flatpickr-container" style="display: flex; justify-content: center;">
-                                    <div class="flatpickr" id="inline2" style="text-align: left;">
-                                        {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
-                                    </div>
-                                </div>
-                            </div>
                             <hr>
                         </div>
                     </section>
