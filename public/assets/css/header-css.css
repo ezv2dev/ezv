@@ -1373,9 +1373,9 @@ input:checked + .switch-background:active::before {
     .bar-collaborator .guests {
         height: 68px !important;
     }
-    .bar-collaborator-detail .button .cari {
+    .bar-collaborator .button .cari {
         margin-left: 0px !important;
-        left: 2% !important;
+        right: 10px !important;
     }
     .bar-collaborator-detail .guests p,
     .bar-collaborator-detail .guests input {

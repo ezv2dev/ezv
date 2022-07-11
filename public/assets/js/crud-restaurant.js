@@ -578,6 +578,28 @@ function saveFacilities() {
             }
 
             $("#contentFacilities").html(content);
+
+            //modal
+            if (response.data.length > 5) {
+                let contentFacilities;
+
+                for (let h = 0; h < response.data.length; h++) {
+                    if (h == 0) {
+                        contentFacilities =
+                            '<div class="col-6 mb-3"> <span class="translate-text-group-items">' +
+                            response.data[h].name +
+                            "</span> </div>";
+                    } else {
+                        contentFacilities =
+                            contentFacilities +
+                            '<div class="col-6 mb-3"> <span class="translate-text-group-items">' +
+                            response.data[h].name +
+                            "</span> </div>";
+                    }
+                }
+
+                $("#contentModalFacilities").html(contentFacilities);
+            }
         },
     });
 }
