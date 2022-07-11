@@ -3537,6 +3537,8 @@ span.flatpickr-weekday {
     }
     #rsv-block-btn .rsv {
         padding-top: 15px !important;
+        padding-right: 6px !important;
+        font-size: 10px !important;
     }
 }
 
