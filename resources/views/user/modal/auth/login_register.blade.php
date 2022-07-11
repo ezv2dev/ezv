@@ -779,7 +779,7 @@
         if (indicator == 'login') {
             $('#trigger-tab-register').removeClass('active');
             $('#content-tab-register').removeClass('active');
-            $('#trigger-tab-login').removeClass('active');
+            $('#trigger-tab-login').addClass('active');
             $('#content-tab-login').addClass('active');
         }
         if (indicator == 'register') {

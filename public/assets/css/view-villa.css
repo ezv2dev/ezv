@@ -3623,6 +3623,14 @@ span.flatpickr-weekday {
     border-radius: 9px !important;
 }
 
+.modal-content-promotion{
+    width: 100%;
+}
+
+.modal-content-promotion-body{
+    height: 415px;
+}
+
 .row-modal-amenities{
     flex-direction: column;
 }
@@ -3633,6 +3641,11 @@ span.flatpickr-weekday {
         width: 100%;
         border-radius: 9px !important;
     }
+
+    .modal-content-promotion{
+        width: 100%;
+    }
+
     .row-modal-amenities{
         flex-direction: column;
     }
@@ -3648,6 +3661,11 @@ span.flatpickr-weekday {
     .row-modal-amenities{
         flex-direction: unset;
     }
+
+
+    .modal-content-promotion{
+        width: 100%;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -3660,6 +3678,10 @@ span.flatpickr-weekday {
     .row-modal-amenities{
         flex-direction: unset;
     }
+
+    .modal-content-promotion-body{
+        height: 515px;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -3671,5 +3693,9 @@ span.flatpickr-weekday {
 
     .row-modal-amenities{
         flex-direction: unset;
+    }
+
+    .modal-content-promotion{
+        width: 80%;
     }
 }
