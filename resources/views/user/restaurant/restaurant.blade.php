@@ -472,7 +472,7 @@
                                 {{-- END CONTACT --}}
                                 {{-- RESTAURANT TYPE --}}
                                 <div class="col-12" style=" margin-top: 18px;" id="type-content">
-                                    <p style="font-size: 12px">
+                                    <p style="font-size: 12px" id="type_price_content">
                                         <span data-bs-toggle="popover" data-bs-animation="true"
                                             data-bs-placement="bottom"
                                             title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
@@ -504,9 +504,10 @@
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <div id="type-form" style="display: none">
-                                            <form action="{{ route('restaurant_update_type') }}" method="post">
-                                                @csrf
-                                                @method('PATCH')
+                                            {{-- <form action="{{ route('restaurant_update_type') }}" method="post"> --}}
+                                            <form action="javascript:void(0);" method="post">
+                                                {{-- @csrf
+                                                @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
@@ -545,7 +546,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveRestaurantPrice();">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -4214,10 +4215,10 @@
         function editTypeFormCancel() {
             var form = $("#type-form");
             var content = $("#type-content");
-            var restaurantTypeInput = $('#restaurant-type-input');
-            var restaurantPriceInput = $('#restaurant-price-input');
-            $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
-            $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
+            // var restaurantTypeInput = $('#restaurant-type-input');
+            // var restaurantPriceInput = $('#restaurant-price-input');
+            // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
+            // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
             $(form).hide();
             $(content).show();
         }

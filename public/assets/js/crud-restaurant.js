@@ -365,3 +365,88 @@ function tConvert(time) {
     }
     return time.join(""); // return adjusted time or original string
 }
+
+function saveRestaurantPrice() {
+    let select_restaurant_type = document.getElementById(
+        "restaurant-type-input"
+    );
+    let type_restaurant =
+        select_restaurant_type.options[select_restaurant_type.selectedIndex]
+            .value;
+
+    let select_restaurant_price = document.getElementById(
+        "restaurant-price-input"
+    );
+    let price_restaurant =
+        select_restaurant_price.options[select_restaurant_price.selectedIndex]
+            .value;
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/restaurant/update/type",
+        data: {
+            id_restaurant: id_restaurant,
+            id_type: type_restaurant,
+            id_price: price_restaurant,
+        },
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "bottomCenter",
+            });
+
+            var restaurantTypeInput = $("#restaurant-type-input");
+            var restaurantPriceInput = $("#restaurant-price-input");
+            $(restaurantTypeInput).val(response.data.id_type);
+            $(restaurantPriceInput).val(response.data.id_price);
+
+            let contentPrice;
+
+            contentPrice =
+                '<span data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
+                response.data.type +
+                '">' +
+                response.data.type +
+                "</span>";
+
+            contentPrice = contentPrice + "<span> - </span>";
+
+            if (response.data.id_price == 1) {
+                contentPrice =
+                    contentPrice +
+                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
+                    response.data.price +
+                    '">$</span>';
+            } else if (response.data.id_price == 2) {
+                contentPrice =
+                    contentPrice +
+                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
+                    response.data.price +
+                    '">$$</span>';
+            } else if (response.data.id_price == 3) {
+                contentPrice =
+                    contentPrice +
+                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
+                    response.data.price +
+                    '">$$$</span>';
+            } else {
+                contentPrice = contentPrice + "<span>No Price Rate Yet</span>";
+            }
+
+            contentPrice =
+                contentPrice +
+                '<a type="button" onclick="editTypeForm()" style="margin-left: 5px; font-size: 10pt; font-weight: 600; color: #ff7400;">Edit</a>';
+
+            $("#type_price_content").html("");
+            $("#type_price_content").append(contentPrice);
+
+            editTypeFormCancel();
+        },
+    });
+}
