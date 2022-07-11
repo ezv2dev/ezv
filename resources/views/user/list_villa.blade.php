@@ -192,7 +192,6 @@
                         }
                     });
                 }
-                console.log(itemIds);
             }
         </script>
         {{-- scroll action --}}
@@ -247,7 +246,6 @@
                         },
                     })
                     .done(function(data) {
-                        console.log(data);
                         // append data to element
                         if (data.html == " ") {
                             $('.ajax-load').html("No more records found");
@@ -363,12 +361,10 @@
             }
             function runAction() {
                 if($(window).width() < widthBreakpoint){
-                    console.log(`window < ${widthBreakpoint}`);
                     showLazyShowMoreButton();
                     enabledScrollAction();
                     disabledScrollAction();
                 } else {
-                    console.log(`window > ${widthBreakpoint}`);
                     hideLazyShowMoreButton();
                     disabledScrollAction();
                     enabledScrollAction();

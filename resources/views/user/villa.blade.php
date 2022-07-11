@@ -174,7 +174,7 @@
                                     <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                                <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
                         </div>
 
@@ -196,7 +196,7 @@
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
-                                <p class="mb-0 ms-2" style="color:#585656">Login</p>
+                                <p class="mb-0 ms-2" style="color:#585656">{{ __('user_page.Login') }}</p>
                             </a>
                         </div>
                         <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
@@ -221,7 +221,7 @@
                                     src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
                 @endauth
@@ -4515,10 +4515,12 @@
         }
     </script>
 
-    @if ($villa[0]->status == 2)
+    @if ($villa[0]->status == '2' && auth()->user()->id == $villa[0]->created_by)
         <script>
-            var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
-            myModal.show()
+            if(!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true'){
+                var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
+                myModal.show()
+            }
         </script>
     @endif
 
@@ -4532,7 +4534,7 @@
                 id: '{{ $villa[0]->id_villa }}'
             },
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 jQuery('.alert').show();
                 jQuery('.alert').html(data.success);
             }
