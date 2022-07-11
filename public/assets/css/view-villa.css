@@ -1727,6 +1727,7 @@ li.button-dropdown {
 .button-dropdown {
     font-size: 140%;
     margin-top: 4px;
+    min-width: 150px;
 }
 
 /*
@@ -3746,7 +3747,4 @@ span.flatpickr-weekday {
     margin-left: 0px; 
     width:100%; 
     text-align: center; 
-    border: none !important; 
-    border-color: transparent !important;
-    border:0
 }
