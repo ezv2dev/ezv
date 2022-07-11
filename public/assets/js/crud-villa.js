@@ -17,7 +17,7 @@ function editNameVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editNameCancel();
@@ -65,7 +65,7 @@ function editShortDesc(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editShortDescriptionCancel();
@@ -163,7 +163,7 @@ function editBedroomVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
         },
     });
@@ -190,7 +190,7 @@ function editCategoryV(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             $.ajax({
@@ -259,7 +259,7 @@ function editVillaTag(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             console.log(response.data[0].name);
@@ -336,7 +336,7 @@ function editDescriptionVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editDescriptionCancel();
@@ -377,7 +377,7 @@ $("#updateImageForm").submit(function(e) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             readerImageVilla.addEventListener("load", function() {

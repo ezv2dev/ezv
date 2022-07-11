@@ -813,17 +813,17 @@
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
+                                                    <button type="button" onclick="position_video()"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Swap Video Position') }}"><i
+                                                            class="fa fa-arrows"></i></button>
                                                     <button href="javascript:void(0);"
                                                         onclick="delete_photo_video({'id': '{{ $villa[0]->id_villa }}', 'id_video': '{{ $item->id_video }}'})"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
                                                 </span>
                                             @endif
                                         @endauth
@@ -4466,7 +4466,7 @@
 
     @if ($villa[0]->status == '2' && auth()->user()->id == $villa[0]->created_by)
         <script>
-            if(!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true'){
+            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
                 var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
                 myModal.show()
             }
