@@ -3050,7 +3050,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body pb-1 translate-text-group">
+                <div class="modal-body pb-1 translate-text-group" id="contentModalFacilities">
                     @forelse ($restaurant->facilities as $item)
                         <div class='col-6 mb-3'>
                             <span class="translate-text-group-items">{{ $item->name }}</span>
