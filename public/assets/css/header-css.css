@@ -267,10 +267,8 @@ body {
     padding-left: 5px !important;
 }
 
-.location-popup-text .location_op:hover {
-    color: #ff7400;
-}
-
+.location-popup-text .location_op,
+.location-popup-text .location_op:hover,
 .location-popup-text .location_op2,
 .location-popup-text .location_op2:hover {
     color: #ff7400;
@@ -1328,6 +1326,9 @@ input:checked + .switch-background:active::before {
     }
     .row .check-in::before {
         background-color: transparent !important;
+    }
+    .bar-restaurant-detail .guests {
+        width: 83.33333333% !important;
     }
     .row .guests {
         margin-left: 0px !important;

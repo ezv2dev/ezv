@@ -3519,6 +3519,9 @@ span.flatpickr-weekday {
         right: 10px !important;
         z-index: 1;
     }
+    span.flatpickr-weekday {
+        max-width: 100% !important;
+    }
 }
 
 @media only screen and (min-width: 992px) {
