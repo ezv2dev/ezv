@@ -1735,6 +1735,7 @@ li.button-dropdown {
 .button-dropdown {
     font-size: 140%;
     margin-top: 4px;
+    min-width: 150px;
 }
 
 /*
@@ -3562,11 +3563,17 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .side-check-in-calendar {
+    .side-check-in-calendar,
+    .side-check-in-calendar-collaborator {
         left: inherit !important;
         margin-left: 0px !important;
-        right: 10px !important;
         z-index: 1;
+    }
+    .side-check-in-calendar {
+        right: 10px !important;
+    }
+    .side-check-in-calendar-collaborator {
+        right: 0px !important;
     }
     span.flatpickr-weekday {
         max-width: 100% !important;
@@ -3784,7 +3791,4 @@ span.flatpickr-weekday {
     margin-left: 0px; 
     width:100%; 
     text-align: center; 
-    border: none !important; 
-    border-color: transparent !important;
-    border:0
 }

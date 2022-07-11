@@ -151,6 +151,7 @@ class XenditController extends Controller
     //payment credit card
     public function creditcard(Request $request)
     {
+        dd($request->all());
         Xendit::setApiKey($this->token);
 
         $params = [
