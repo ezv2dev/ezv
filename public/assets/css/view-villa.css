@@ -3215,6 +3215,14 @@ span.flatpickr-weekday {
     .edit-profile-image-btn-dekstop {
         display: none !important;
     }
+    .collab-joined-in-dekstop,
+    .collab-edit-profile-btn-dekstop {
+        display: none !important;
+    }
+    .collab-joined-in-mobile p {
+        font-size: 12.5px !important;
+        text-align: start !important;
+    }
     #name-form {
         margin-top: 5px !important;
     }
@@ -3293,7 +3301,10 @@ span.flatpickr-weekday {
     }
     #heightCalendar {
         padding: 0px !important;
-        width: 95vw !important;
+    }
+    #availability .pd-tlr-10 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
     #availability,
     #description,
@@ -3553,6 +3564,10 @@ span.flatpickr-weekday {
         padding: 10px !important;
         width: 100% !important;
     }
+    .navigationItem__Icon {
+        width: auto !important;
+        height: auto !important;
+    }
 }
 
 @media only screen and (min-width: 1100px) and (max-width: 1209px) { 
@@ -3624,7 +3639,7 @@ span.flatpickr-weekday {
 } */
 @media only screen and (min-width: 1360px) {
     .navright.active {
-        width: 24%;
+        width: fit-content !important;
     }
     .rsv-block .sticky {
         max-width: 1100px !important;

@@ -302,7 +302,7 @@
                             </ul>
                         </div>
                         <div>
-                            <div class="bar bar-collaborator">
+                            <div class="bar bar-collaborator bar-collaborator-detail" style="margin-left: -150px;">
                                 <div class="location">
                                     <p>{{ __('user_page.Location') }}
                                     </p>
@@ -459,7 +459,7 @@
                                     <input type="text" style="background-color: #ffffff00;"
                                         placeholder="{{ __('user_page.Search here') }}"
                                         value="{{ request()->get('sKeyword') ?? '' }}" id="keyword"
-                                        name="sKeyword">
+                                        name="sKeyword" style="margin-left: -10px;">
                                 </div>
                                 <div class="guests">
                                     <a type="button"

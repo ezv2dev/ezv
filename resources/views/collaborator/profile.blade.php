@@ -145,6 +145,10 @@
             font-size: 12px;
         }
 
+        .reserve-block {
+            top: 140px !important;
+        }
+
         .amenities-detail-view {
             display: flex;
         }
@@ -208,10 +212,6 @@
             background: #ff7400;
         }
 
-        .mob-e-call {
-            display: none;
-        }
-
         .mobile-price .price-box a {
             color: #000;
             text-decoration: underline;
@@ -219,10 +219,6 @@
 
         /* Responshive 480 px > */
         @media only screen and (max-width: 480px) {
-
-            .modal-dialog {
-                top: 33%;
-            }
 
             .host-review {
                 font-size: 12px;
@@ -234,14 +230,6 @@
                 margin-left: -23px;
                 top: 10px;
                 position: relative;
-            }
-
-            .desk-e-call {
-                display: none;
-            }
-
-            .mob-e-call {
-                display: block;
             }
 
             .video-player {
@@ -337,10 +325,6 @@
                 height: 60px;
             }
 
-            .navigationItem span {
-                display: none;
-            }
-
             .story-video-grid {
                 width: 65px;
                 height: 65px;
@@ -400,45 +384,6 @@
                 font-size: 14px;
                 font-family: 'Poppins', sans-serif;
             }
-
-            /* calendar */
-
-            span.flatpickr-weekday {
-                width: 51px;
-            }
-
-            .flatpickr-container .flatpickr-days {
-                width: 380px !important;
-            }
-
-            .flatpickr-day {
-                max-width: 50px;
-                height: 50px;
-                line-height: 50px;
-            }
-
-            .dayContainer {
-                min-width: 388px;
-            }
-
-            .flatpickr-current-month {
-                font-size: 100%;
-            }
-
-            .flatpickr-months .flatpickr-prev-month,
-            .flatpickr-months .flatpickr-next-month {
-                top: -8px;
-            }
-
-            .flatpickr-container .flatpickr-weekdays {
-                margin-bottom: 0;
-            }
-
-            .flatpickr-months .flatpickr-month {
-                height: 44px;
-            }
-
-            /* end calendar */
 
             #review {
                 padding-left: 0;
@@ -828,7 +773,7 @@
                             @auth
                                 @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="edit_collab_profile()" class="edit-collab-profile-btn-dekstop"><i class="fa fa-pencil-alt"
+                                    <a type="button" onclick="edit_collab_profile()" class="collab-edit-profile-btn-dekstop"><i class="fa fa-pencil-alt"
                                             style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
                                             data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
                                 @endif
@@ -843,6 +788,12 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $user->first_name }} {{ $user->last_name }}</h2>
+                                <div class="collab-joined-in-mobile">
+                                    <p>
+                                        <i class="fa fa-users-rectangle" style="color: #ff7400"></i>
+                                        Joined in {{ date_format($user->created_at, 'M Y') }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -872,6 +823,15 @@
                                         </button>
                                     </form>
                                 </div>
+                            @endif
+                        @endauth
+
+                        @auth
+                            @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                &nbsp;
+                                <a type="button" onclick="edit_collab_profile()" class="collab-edit-profile-btn-mobile d-md-none"><i class="fa fa-pencil-alt"
+                                        style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
+                                        data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i> Edit Profile</a>
                             @endif
                         @endauth
 
