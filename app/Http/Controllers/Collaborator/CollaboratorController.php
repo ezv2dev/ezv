@@ -71,9 +71,6 @@ class CollaboratorController extends Controller
         $owner_language = CollaboratorLanguage::where('id_collab', $id)
             ->with('language')
             ->get();
-
-        // dd($owner_language);
-
         if ($profile == null) {
             $this->authorize('collaborator_create');
             $profile = Collaborator::create([
@@ -102,7 +99,6 @@ class CollaboratorController extends Controller
         ]);
 
         $profile = Collaborator::where('id_collab', $request->id_collab)->first();
-        // dd($profile);
 
         $status = 500;
 
