@@ -3751,3 +3751,13 @@ span.flatpickr-weekday {
     }
 }
 
+.date-form {
+    font-size: 12px; 
+    margin-left: 0px; 
+    width:100%; 
+    text-align: center; 
+    border: none !important; 
+    border-color: transparent !important;
+    width:80%; 
+    border:0
+}
