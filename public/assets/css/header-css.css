@@ -1245,8 +1245,22 @@ input:checked + .switch-background:active::before {
     #btn-to-app-store img {
         width: 20% !important;
     }
+    
     #btn-to-play-store img {
         width: 26% !important;
+    }
+
+    .cari {
+        position: absolute;
+        margin-left: -29px;
+    }
+
+    .add-date-wow {
+        left: 156px !important;
+    }
+
+    .p-wow {
+        margin-left: 70px !important;
     }
 }
 
@@ -1438,4 +1452,22 @@ input:checked + .switch-background:active::before {
     #search_bar .nav-link-form-detail {
         margin-left: 0px !important;
     }
+}
+
+.collapsible_wow {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 67px;
+    margin-left: -155px;
+    margin-top: 0px;
+}
+
+.add-date-wow {
+    position: absolute; 
+    color: grey; 
+    font-size: 15px !important; 
+    top: 34px; 
+    left: 70px; 
+    font-weight: 400 !important;
 }

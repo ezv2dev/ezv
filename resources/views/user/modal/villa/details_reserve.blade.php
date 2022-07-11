@@ -319,7 +319,7 @@
                             @guest
                                 <input type="text" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
                                 <input type="text" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
-                                <input type="email" name="email" id="email" value="" placeholder="email">
+                                <input type="email" name="email_va" id="email_va" value="" placeholder="email">
                             @endguest
                                 <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa[0]->id_villa) }}">
                                 <input type="hidden" name="check_in_date" id="check_in_date" value="">

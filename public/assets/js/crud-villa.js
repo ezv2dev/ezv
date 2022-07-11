@@ -17,7 +17,7 @@ function editNameVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editNameCancel();
@@ -27,6 +27,7 @@ function editNameVilla(id_villa) {
 
 function editNameForm(id_villa) {
     var form = document.getElementById("name-form");
+    var formInput = document.getElementById("name-form-input");
     var content = document.getElementById("name-content");
     form.classList.add("d-block");
     content.classList.add("d-none");
@@ -36,6 +37,10 @@ function editNameForm(id_villa) {
         url: "/villa/get/name/" + `${id_villa}`,
         success: function(response) {
             $("#name-form-input").val(response.data);
+
+            if(formInput.value == 'Home Name Here'){
+                formInput.value = '';
+            }
         },
     });
 }
@@ -46,6 +51,10 @@ function editNameCancel() {
     var content = document.getElementById("name-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    if(formInput.value == 'Home Name Here'){
+        formInput.value = '';
+    }
 }
 
 function editShortDesc(id_villa) {
@@ -65,7 +74,7 @@ function editShortDesc(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editShortDescriptionCancel();
@@ -76,6 +85,7 @@ function editShortDesc(id_villa) {
 function editShortDescriptionForm(id_villa) {
     var form = document.getElementById("short-description-form");
     var content = document.getElementById("short-description-content");
+    var formInput = document.getElementById("short-description-form-input");
     form.classList.add("d-block");
     content.classList.add("d-none");
     $.ajax({
@@ -83,6 +93,10 @@ function editShortDescriptionForm(id_villa) {
         url: "/villa/get/short-description/" + `${id_villa}`,
         success: function(response) {
             $("#short-description-form-input").val(response.data);
+
+            if(formInput.value == 'Make your short description here'){
+                formInput.value = '';
+            }
         },
     });
 }
@@ -93,6 +107,10 @@ function editShortDescriptionCancel() {
     var content = document.getElementById("short-description-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    if(formInput.value == 'Make your short description here'){
+        formInput.value = '';
+    }
 }
 
 function editBedroomVilla(id_villa) {
@@ -163,7 +181,7 @@ function editBedroomVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
         },
     });
@@ -190,7 +208,7 @@ function editCategoryV(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             $.ajax({
@@ -200,13 +218,13 @@ function editCategoryV(id_villa) {
                     var length = response.data.length;
 
                     $("#displayCategory").html(`
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">
+                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
                             ${response.data[0]['villa_category']['name']}
                         </span>
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">
+                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
                             ${response.data[1]['villa_category']['name']}
                         </span>
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">
+                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
                             ${response.data[2]['villa_category']['name']}
                         </span>`);
 
@@ -259,20 +277,20 @@ function editVillaTag(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
-            console.log(response.data.name);
+            console.log(response.data[0].name);
 
             $("#displayTags").html(`
                 <span class="badge rounded-pill fw-normal translate-text-group-items"
-            style="background-color: #FF7400; margin-right: 3px;">${response.data[0].name}</span>
+            style="background-color: #FF7400;">${response.data[0].name}</span>
             `)
 
             for (let i = 1; i < 5; i++) {
                 $("#displayTags").append(`
                     <span class="badge rounded-pill fw-normal translate-text-group-items"
-                style="background-color: #FF7400; margin-right: 3px;">${response.data[i].name}</span>
+                style="background-color: #FF7400;">${response.data[i].name}</span>
                 `)
             }
 
@@ -280,7 +298,7 @@ function editVillaTag(id_villa) {
                 $("#moreTags").removeClass("d-none");
                 $("#moreTags").addClass("d-block");
                 $("#moreTags").html(`
-                    <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                    <button class="btn btn-outline-dark btn-sm rounded villa-tag-button ml-1"
                     onclick="view_tags_villa()">More</button>
                 `);
             } else {
@@ -336,7 +354,7 @@ function editDescriptionVilla(id_villa) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "topCenter",
+                position: "topRight",
             });
 
             editDescriptionCancel();
@@ -377,7 +395,7 @@ $("#updateImageForm").submit(function(e) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
-                position: "bottomCenter",
+                position: "topRight",
             });
 
             readerImageVilla.addEventListener("load", function() {

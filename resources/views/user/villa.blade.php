@@ -174,7 +174,7 @@
                                     <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                                <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
                         </div>
 
@@ -196,7 +196,7 @@
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
-                                <p class="mb-0 ms-2" style="color:#585656">Login</p>
+                                <p class="mb-0 ms-2" style="color:#585656">{{ __('user_page.Login') }}</p>
                             </a>
                         </div>
                         <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
@@ -221,7 +221,7 @@
                                     src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
                 @endauth
@@ -266,7 +266,7 @@
                                 <div id="displayCategory">
                                     @foreach ($villaHasCategory->take(3) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                            style="background-color: #FF7400; margin-right: 3px;">
+                                            style="background-color: #FF7400;">
                                             {{ $item->villaCategory->name }}
                                         </span>
                                     @endforeach
@@ -304,7 +304,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Home Name Here') }}"
                                         required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
@@ -406,7 +406,7 @@
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                        cols="30" rows="3" maxlength="255" required></textarea>
+                                        cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -769,22 +769,21 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                         <a
                                             href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
                                                 src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
                                                 title="{{ $item->caption }}">
-
                                         </a>
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-icon">
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Add Photo Caption') }}"
                                                         onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button>
+                                                            class="fa fa-pencil"></i></button> --}}
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Swap Photo Position') }}"
@@ -814,17 +813,17 @@
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
+                                                    <button type="button" onclick="position_video()"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Swap Video Position') }}"><i
+                                                            class="fa fa-arrows"></i></button>
                                                     <button href="javascript:void(0);"
                                                         onclick="delete_photo_video({'id': '{{ $villa[0]->id_villa }}', 'id_video': '{{ $item->id_video }}'})"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
                                                 </span>
                                             @endif
                                         @endauth
@@ -872,20 +871,24 @@
                                 @endauth
                             </h2>
                             <div class="d-flex justify-content-left">
-                                @forelse ($villaTags->take(5) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">{{ $item->villaFilter->name }}</span>
-                                @empty
-                                    <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
-                                @endforelse
-                                @if ($villaTags->count() > 5)
-                                    <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
-                                        onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
-                                @endif
+                                <div id="displayTags">
+                                    @forelse ($villaTags->take(5) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400;">{{ $item->villaFilter->name }}</span>
+                                    @empty
+                                        <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
+                                    @endforelse
+                                </div>
+                                <div id="moreTags">
+                                    @if ($villaTags->count() > 5)
+                                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button ml-1"
+                                            onclick="view_tags_villa()">{{ __('user_page.More') }}</button>
+                                    @endif
+                                </div>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
-                                        <a type="button" onclick="editTagsVilla()"
+                                        <a type="button" onclick="displayTags()"
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
@@ -904,7 +907,7 @@
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
                                         <div class="form-group">
-                                            <textarea name="description" id="description-form-input" class="w-100" rows="5" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
+                                            <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary"
@@ -3122,7 +3125,7 @@
                         onclick="close_subcategory()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div class="row row-border-bottom padding-top-bottom-18px">
+                    <div class="row row-border-bottom padding-top-bottom-18px" id="viewTags">
                         @foreach ($villaTags as $item)
                             <div class='col-md-6'>{{ $item->villaFilter->name }}</div>
                         @endforeach
@@ -3295,7 +3298,7 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         function view_add_caption(idc) {
             $('#id_photo_caption').val(idc.id_photo);
 
@@ -3303,7 +3306,7 @@
 
             $('#modal-add_caption').modal('show');
         }
-    </script>
+    </script> --}}
 
     {{-- MODAL SHARE --}}
     <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
@@ -3417,7 +3420,7 @@
     </div>
 
     {{-- MODAL ADD PHOTO CAPTION --}}
-    <div class="modal fade" id="modal-add_caption" tabindex="-1" role="dialog"
+    {{-- <div class="modal fade" id="modal-add_caption" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
@@ -3443,7 +3446,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- MODAL CONTACT HOST --}}
     <div class="modal fade" id="modal-contact-host" tabindex="-1" role="dialog"
@@ -3742,56 +3745,6 @@
         }
     </script>
     {{-- END EDIT POSITION PHOTO & VIDEO --}}
-
-    {{-- Guest Count --}}
-    {{-- <script>
-        $('#adult2').on('change', function() {
-            console.log('okeee');
-            var total_adult2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_adult2);
-            $('#adult3').val($('#adult2').val());
-            $('#child3').val($('#child2').val());
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest3').val($('#total_guest2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-
-        $('#child2').on('change', function() {
-            var total_child2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_child2);
-            $('#adult3').val($('#adult2').val());
-            $('#child3').val($('#child2').val());
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest3').val($('#total_guest2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-    </script>
-
-    <script>
-        $('#adult4').on('change', function() {
-            var total_adult4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_adult4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#adult3').val($('#adult4').val());
-            $('#child3').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-            $('#total_guest3').val($('#total_guest4').val());
-        });
-
-        $('#child4').on('change', function() {
-            var total_child4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_child4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#adult3').val($('#adult4').val());
-            $('#child3').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-            $('#total_guest3').val($('#total_guest4').val());
-        });
-    </script> --}}
 
     <script>
         $("#searchbox").click(function() {
@@ -4295,6 +4248,7 @@
     </script>
 
     {{-- Sweetalert Function Delete Photo Gallery --}}
+    {{-- blade-formatter-disable --}}
     <script>
         function delete_photo_photo(ids) {
             var ids = ids;
@@ -4318,11 +4272,9 @@
                                 Swal.fire('Failed', data.message, 'error');
                             }
                         },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                        success: async function(response) {
+                            await Swal.fire('Deleted', response.message, 'success');
+                            $(`#displayPhoto${ids.id_photo}`).remove();
                         }
                     });
                 } else {
@@ -4332,6 +4284,7 @@
             });
         };
     </script>
+    {{-- blade-formatter-enable --}}
 
     {{-- Sweetalert Function Delete Video Gallery --}}
     <script>
@@ -4502,7 +4455,7 @@
             $('#LegalModal').modal('show');
         }
 
-        function editTagsVilla() {
+        function displayTags() {
             $('#ModalTagsVilla').modal('show');
         }
 
@@ -4511,10 +4464,12 @@
         }
     </script>
 
-    @if ($villa[0]->status == 2)
+    @if ($villa[0]->status == '2' && auth()->user()->id == $villa[0]->created_by)
         <script>
-            var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
-            myModal.show()
+            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
+                var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
+                myModal.show()
+            }
         </script>
     @endif
 
@@ -4528,7 +4483,7 @@
                 id: '{{ $villa[0]->id_villa }}'
             },
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 jQuery('.alert').show();
                 jQuery('.alert').html(data.success);
             }

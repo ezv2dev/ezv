@@ -1395,7 +1395,6 @@ class ViewController extends Controller
         abort_if($condition, 403);
 
         // delete photo
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
         $folder = $villa->uid;
         $path = env("VILLA_FILE_PATH") . $folder;
 
@@ -1405,13 +1404,14 @@ class ViewController extends Controller
         }
 
         $deletedVillaPhoto = $villaPhoto->delete();
+        $getPhoto = VillaPhoto::where('id_villa', $request->id)->get();
+
         // check if delete is success or not
         if ($deletedVillaPhoto) {
-            // return back()
-            //     ->with('success', 'Your data has been deleted');
             return response()->json([
                 'message' => 'Delete Data Successfuly',
                 'status' => 200,
+                'getPhoto' => $getPhoto
             ], 200);
         } else {
             return response()->json([
