@@ -24,6 +24,8 @@ return [
     'Story' => 'Cerita',
     'Title...' => 'Judul...',
     'Edit Image Profile' => 'Ubah Gambar Profil',
+    'Edit Open Hours' => 'Ubah Waktu Buka',
+    'Edit Contact' => 'Ubah Kontak',
     'Upload Image' => 'Unggah Gambar',
     'km to' => 'km ke',
     'Bedrooms' => 'Kamar Tidur',
@@ -389,6 +391,7 @@ return [
     "Total Before Taxes" => "Jumlah Sebelum Pajak",
 
     "Edit Price" => "Ubah Harga",
+    "Edit Price Range" => "Ubah Rentang Harga",
     "Rooms Availability" => "Ketersediaan Kamar",
     "Regular Price" => "Harga Reguler",
     "Add Special Price" => "Tambah Harga Spesial",

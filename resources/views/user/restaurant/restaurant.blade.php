@@ -396,7 +396,7 @@
                                     @auth
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Open Hours') }}</a>
                                         @endif
                                     @endauth
                                 </p>
@@ -443,7 +443,7 @@
                                             <i class="fa-solid fa-phone"></i>
                                         </a>
                                     </div>
-                                    <div style="padding: 0px 6px;>
+                                    <div style="padding: 0px 6px;">
                                         @if ($restaurant->email)
                                             <a target="_blank" type="button"
                                                 href="mailto:{{ $restaurant->email }}">
@@ -459,7 +459,7 @@
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="edit_contact()"
-                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Contact') }}</a>
                                             @endif
                                         @endauth
                                     </div>
@@ -467,7 +467,8 @@
                                 {{-- END CONTACT --}}
                                 {{-- RESTAURANT TYPE --}}
                                 <div class="col-12" style=" margin-top: 18px;" id="type-content">
-                                    <p style="font-size: 12px" id="type_price_content">
+                                    <p style="font-size: 12px">
+                                        <span id="type_price_content">
                                         <span data-bs-toggle="popover" data-bs-animation="true"
                                             data-bs-placement="bottom"
                                             title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
@@ -487,10 +488,12 @@
                                         @else
                                             <span>{{ __('user_page.no price rate yet') }}</span>
                                         @endif
+                                        </span>
+                                       
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="editTypeForm()"
-                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price Range') }}</a>
                                             @endif
                                         @endauth
                                     </p>
@@ -636,8 +639,8 @@
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
-                                            @csrf
-                                            @method('PATCH')
+                                            <!-- @csrf
+                                            @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -654,7 +657,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeRestaurant();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -752,6 +755,100 @@
                             @endauth
                         </p>
                         {{-- END TAG --}}
+
+                        {{-- RESTAURANT TYPE --}}
+                                <div class="col-12" style=" margin-top: 18px;" id="type-content-mobile">
+                                    <p style="font-size: 12px">
+                                        <span id="type_price_content_mobile">
+                                        <span data-bs-toggle="popover" data-bs-animation="true"
+                                            data-bs-placement="bottom"
+                                            title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
+                                        <span> - </span>
+                                        @if ($restaurant->price->name == 'Cheap Prices')
+                                            <span style="color: #FF7400" data-bs-toggle="popover"
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="{{ Translate::translate($restaurant->price->name) }}">$</span>
+                                        @elseif ($restaurant->price->name == 'Middle Range')
+                                            <span style="color: #FF7400" data-bs-toggle="popover"
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="{{ Translate::translate($restaurant->price->name) }}">$$</span>
+                                        @elseif ($restaurant->price->name == 'Fine Dining')
+                                            <span style="color: #FF7400" data-bs-toggle="popover"
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="{{ Translate::translate($restaurant->price->name) }}">$$$</span>
+                                        @else
+                                            <span>{{ __('user_page.no price rate yet') }}</span>
+                                        @endif
+                                        </span>
+                                       
+                                        @auth
+                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                <a type="button" onclick="editTypeFormMobile()"
+                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price Range') }}</a>
+                                            @endif
+                                        @endauth
+                                    </p>
+
+                                </div>
+                                @auth
+                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        <div id="type-form-mobile" style="display: none">
+                                            {{-- <form action="{{ route('restaurant_update_type') }}" method="post"> --}}
+                                            <form action="javascript:void(0);" method="post">
+                                                {{-- @csrf
+                                                @method('PATCH') --}}
+                                                <input type="hidden" name="id_restaurant"
+                                                    value="{{ $restaurant->id_restaurant }}" required>
+                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                    <div class="col-auto">
+                                                        <select name="id_type" id="restaurant-type-input-mobile"
+                                                            class="form-control">
+                                                            @forelse ($restaurant_type as $item)
+                                                                @php
+                                                                    $isSelected = '';
+                                                                    if ($item->id_type == $restaurant->id_type) {
+                                                                        $isSelected = 'selected';
+                                                                    }
+                                                                @endphp
+                                                                <option value="{{ $item->id_type }}"
+                                                                    {{ $isSelected }}>{{ $item->name }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                    <span class="mx-2">-</span>
+                                                    <div class="col-auto">
+                                                        <select name="id_price" id="restaurant-price-input-mobile"
+                                                            class="form-control">
+                                                            @forelse ($restaurant_price as $item)
+                                                                @php
+                                                                    $isSelected = '';
+                                                                    if ($item->id_price == $restaurant->id_price) {
+                                                                        $isSelected = 'selected';
+                                                                    }
+                                                                @endphp
+                                                                <option value="{{ $item->id_price }}"
+                                                                    {{ $isSelected }}>{{ $item->name }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveRestaurantPriceMobile();">
+                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                    </button>
+                                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                                        onclick="editTypeFormMobileCancel()">
+                                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endif
+                                @endauth
+                                {{-- END RESTAURANT TYPE --}}
+
                         <ul class="stories inner-wrap">
                             @if (Auth::guest() || Auth::user()->role_id == 4)
                                 @if ($restaurant->story->count() == 0 && $restaurant->video->count() == 0)
@@ -4122,6 +4219,26 @@
         function editTypeFormCancel() {
             var form = $("#type-form");
             var content = $("#type-content");
+            // var restaurantTypeInput = $('#restaurant-type-input');
+            // var restaurantPriceInput = $('#restaurant-price-input');
+            // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
+            // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
+            $(form).hide();
+            $(content).show();
+        }
+    </script>
+
+    <script>
+        function editTypeFormMobile() {
+            var form = $("#type-form-mobile");
+            var content = $("#type-content-mobile");
+            $(form).show();
+            $(content).hide();
+        }
+
+        function editTypeFormMobileCancel() {
+            var form = $("#type-form-mobile");
+            var content = $("#type-content-mobile");
             // var restaurantTypeInput = $('#restaurant-type-input');
             // var restaurantPriceInput = $('#restaurant-price-input');
             // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
