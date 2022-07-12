@@ -489,7 +489,7 @@
                                             <span>{{ __('user_page.no price rate yet') }}</span>
                                         @endif
                                         </span>
-                                       
+
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="editTypeForm()"
@@ -588,7 +588,7 @@
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
                                         <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameRestaurant();"
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant" onclick="saveNameRestaurant();"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -780,7 +780,7 @@
                                             <span>{{ __('user_page.no price rate yet') }}</span>
                                         @endif
                                         </span>
-                                       
+
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="editTypeFormMobile()"

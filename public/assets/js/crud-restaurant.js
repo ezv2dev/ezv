@@ -94,6 +94,10 @@ function saveDescription() {
 function saveNameRestaurant() {
     let name_resto = $("#name-form-input").val();
 
+    let btn = document.getElementById("btnSaveRestaurant");
+    btn.textContent = "Saving Name...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -117,6 +121,9 @@ function saveNameRestaurant() {
                 message: response.message,
                 position: "topRight",
             });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
 
             editNameCancel();
         },
@@ -212,6 +219,10 @@ function saveCategoryRestaurant() {
         meal.push(parseInt($(this).val()));
     });
 
+    let btn = document.getElementById("btnsaveCategoryRestaurant");
+    btn.textContent = "Saving Tag...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -231,6 +242,9 @@ function saveCategoryRestaurant() {
             // console.log(response.data.tags.length);
 
             $("#modal-add_tag").modal("hide");
+
+            btn.textContent = "Save";
+            btn.classList.remove("disabled");
 
             iziToast.success({
                 title: "Success",
