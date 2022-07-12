@@ -131,27 +131,40 @@ class ActivityListController extends Controller
     public function activity_update_description(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if (!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Access Denied, Please Login!'
+            ], 500);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'description' => ['string']
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json($validator->errors(), 500);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'Wow Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // update
@@ -160,40 +173,59 @@ class ActivityListController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        //return to json
+        $wowData = Activity::where('id_activity', $request->id_activity)->select('description')->first();
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated Wow Description',
+                'data' => $wowData
+            ], 200);    
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Wow Description',
+            ], 500);
         }
     }
 
     public function activity_update_short_description(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if (!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Access Denied, Please Login!'
+            ], 500);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'short_description' => ['required', 'string', 'max:255'],
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json($validator->errors(), 500);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'Wow Not Found',
+            ],404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // update
@@ -201,13 +233,19 @@ class ActivityListController extends Controller
             'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
             'updated_by' => auth()->user()->id,
         ]);
+
+        $wowData = Activity::where('id_activity', $request->id_activity)->select('short_description')->first();
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated Wow Short Description',
+                'data' => $wowData
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Wow Short Description',
+            ], 500);
         }
     }
 

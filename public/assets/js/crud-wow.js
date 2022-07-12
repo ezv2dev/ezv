@@ -4,7 +4,7 @@ $.ajaxSetup({
     },
 });
 
-let id_restaurant = $("#id_restaurant").val();
+let id_activity = $("#id_activity").val();
 
 //ganti short description restaurant
 function saveShortDescription() {
@@ -15,10 +15,10 @@ function saveShortDescription() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/short-description",
+        url: "/things-to-do/update/short-description",
         data: {
-            id: id_restaurant,
-            short_desc: short_desc,
+            id_activity: id_activity,
+            short_description: short_desc,
         },
         success: function (response) {
             // console.log(response.data.short_description);
@@ -51,9 +51,9 @@ function saveDescription() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/description",
+        url: "/things-to-do/update/description",
         data: {
-            id_restaurant: id_restaurant,
+            id_activity: id_activity,
             description: desc,
         },
         success: function (response) {
