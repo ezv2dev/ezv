@@ -62,7 +62,9 @@ function saveDescription() {
 
             let desc_input = document.getElementById("description-form-input");
 
-            $("#description-content").html(response.data.description);
+            $("#description-content").html(
+                response.data.description.substring(0, 600)
+            );
 
             desc_input.value = response.data.description;
 
