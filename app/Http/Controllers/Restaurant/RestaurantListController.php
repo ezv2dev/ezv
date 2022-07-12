@@ -756,7 +756,7 @@ class RestaurantListController extends Controller
         if (!$restaurant)
         {
             return response()->json([
-                'message' => 'Restaurant Not Found',
+                'message' => 'Food Not Found',
                 'status' => 404,
             ]);
         }

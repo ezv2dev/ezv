@@ -582,7 +582,7 @@
 <script>
     $(function() {
         // Virtual Account
-
+        @guest
         // var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
 
@@ -632,6 +632,7 @@
             $('#err-eml-pay').hide();
             $('#err-eml-pay').text('');
         });
+        @endguest
         $(".chckbrnd2").change(function () {
             $('#va_brand').each(function() {
                 if($(this).find('input[type="radio"]:checked').length > 0) {
@@ -643,6 +644,7 @@
         });
         $("#va-form").submit(function(e) {
             let error = 0;
+            @guest
             let valname = /[0-9]+$/;
             if(!$('#firstname_va').val()) {
                 $('#firstname_va').addClass('is-invalid');
@@ -683,7 +685,7 @@
                     error = 1;
                 }
             }
-
+            @endguest
             $('#va_brand').each(function() {
                 if($(this).find('input[type="radio"]:checked').length == 0) {
                     $('.chckbrnd').css("border", "solid #e04f1a 1px");
@@ -776,11 +778,23 @@
         function displayError(err) {
             let error = JSON.stringify(err, null, 4);
             let xparse = JSON.parse(error);
-            // var parse = JSON.parse(error);
-            //console.log(error);
-            // console.log(parse);
-            $('#res-xnd-pay').text(xparse.message);
-            $('#res-xnd-pay').show();
+            let text = xparse.message;
+            if(text.match("number")) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text(xparse.message);
+                $('#err-cnm-pay').show();
+            }else if(text.match("expiration")) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text(xparse.message);
+                $('#err-exp-pay').show();
+            }else if(text.match("CVN")) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text(xparse.message);
+                $('#err-cvn-pay').show();
+            } else {
+                $('#res-xnd-pay').text("Error from API : " + xparse.message);
+                $('#res-xnd-pay').show();
+            }
         };
 
         function displaySuccess(creditCardToken) {
@@ -810,12 +824,14 @@
         function getTokenData() {
             let exp = $('#card-exp-month').val();
             const split = exp.split("/");
+            var cnum = $('#card-number').val();
+            var cvn = $('#card-cvn').val();
             return {
                 amount: $('#price_total2').val(),
-                card_number: $('#card-number').val(),
+                card_number: cnum.replace(/\s/g, ''),
                 card_exp_month: split[0],
                 card_exp_year: 20 + split[1],
-                card_cvn: $('#card-cvn').val(),
+                card_cvn: $.trim(cvn),
                 currency: $('#currency').val(),
             };
         }
@@ -877,6 +893,7 @@
     });
 </script>
 <script>
+    // OLD
     // $(function() {
     //     var $form = $('#payment-form');
 

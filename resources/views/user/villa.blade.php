@@ -1647,7 +1647,7 @@
                     </div>
                     @auth
                         @if (Auth::user()->role_id == 4)
-                            <hr style="width: 95.3%; margin-left: 26px;">
+                            
                             @if ($villa[0]->userReview)
                                 <section id="user-review" class="section-2" style="margin-left: 25px;">
                                     <div class="about-place-block">
@@ -1729,7 +1729,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
+                                       
                                     </div>
                                 </section>
                             @else
@@ -1744,8 +1744,8 @@
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
                                                     <div class="row">
-                                                        <div class="col-12 d-flex justify-content-start">
-                                                            <div class="col-6">
+                                                        
+                                                            <div class="col-12 col-lg-6">
                                                                 <div class="d-flex">
                                                                     <div class="col-4 review-container">
                                                                         {{ __('user_page.Cleanliness') }}
@@ -1992,7 +1992,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-6">
+                                                            <div class="col-12 col-lg-6">
                                                                 <div class="col-12">
                                                                     {{ __('user_page.Comment') }}
                                                                 </div>
@@ -2007,18 +2007,19 @@
                                                                         style="width: 200px">{{ __('user_page.Done') }}</button>
                                                                 </center>
                                                             </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </form>
 
                                             </div>
                                         </div>
-                                        <hr>
+                                      
                                     </div>
                                 </section>
                             @endif
                         @endif
                     @endauth
+                    <hr>
                 </section>
                 <section class="section-2 host">
                     <h3>{{ __('user_page.Things to know') }}</h3>

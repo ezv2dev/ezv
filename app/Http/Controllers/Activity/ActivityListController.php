@@ -118,13 +118,20 @@ class ActivityListController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        $activityData = Activity::where('id_activity', $request->id_activity)->select('name')->first();
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated Name WoW',
+                'status' => 200,
+                'data' => $activityData
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Name WoW',
+                'status' => 500,
+            ]);
         }
     }
 
@@ -181,7 +188,7 @@ class ActivityListController extends Controller
             return response()->json([
                 'message' => 'Successfuly Updated Wow Description',
                 'data' => $wowData
-            ], 200);    
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Error Updated Wow Description',
@@ -394,74 +401,84 @@ class ActivityListController extends Controller
 
     public function activity_update_image(Request $request)
     {
-        // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
-
         // validation
-        request()->validate([
+        $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
-            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
         ]);
 
-        $status = 500;
-
-        try {
-            // activity data
-            $activity = Activity::find($request->id_activity);
-
-            // check if activity does not exist, abort 404
-            abort_if(!$activity, 404);
-
-            // check if the editor does not have authorization
-            $this->authorize('activity_update');
-            if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-                abort(403);
-            }
-
-            // image path
-            $folder = strtolower($activity->uid);
-            $path = env("ACTIVITY_FILE_PATH") . $folder;
-            // $path = strtolower($activity->uid);
-
-            // remove old image
-            if (File::exists($path . '/' . $activity->image)) {
-                File::delete($path . '/' . $activity->image);
-            }
-
-            // store process
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, 0777, true, true);
-            }
-
-            $ext = strtolower($request->image->getClientOriginalExtension());
-
-            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                $original_name = $request->image->getClientOriginalName();
-                // dd($original_name);
-                $name_file = time() . "_" . $original_name;
-                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
-
-                //insert into database
-                $updatedActivity = $activity->update([
-                    'image' => $name_file,
-                    'updated_by' => auth()->user()->id
-                ]);
-            }
-
-            if ($updatedActivity) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
+        // activity data
+        $activity = Activity::find($request->id_activity);
+
+        // check if activity does not exist, abort 404
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+                'status' => 404,
+            ]);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
+        }
+
+        // image path
+        $folder = strtolower($activity->uid);
+        $path = env("ACTIVITY_FILE_PATH") . $folder;
+        // $path = strtolower($activity->uid);
+
+        // remove old image
+        if (File::exists($path . '/' . $activity->image)) {
+            File::delete($path . '/' . $activity->image);
+        }
+
+        // store process
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->image->getClientOriginalExtension());
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $original_name = $request->image->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+            //insert into database
+            $updatedActivity = $activity->update([
+                'image' => $name_file,
+                'updated_by' => auth()->user()->id
+            ]);
+        }
+
+        $activityData = Activity::where('id_activity', $request->id_activity)->select('image')->first();
+
         // check if update is success or not
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been created');
+        if ($updatedActivity) {
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Profile',
+                'status' => 200,
+                'data' => $activityData
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Short Description',
+                'status' => 500,
+            ]);
         }
     }
 
