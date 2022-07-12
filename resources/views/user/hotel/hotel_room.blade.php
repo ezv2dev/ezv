@@ -861,7 +861,7 @@
                         </div>
                     </section>
                     <section id="amenities" class="section-2">
-                        <div class="pd-tlr-10">
+                        <div class="row-grid-amenities">
                             <h2>
                                 {{ __('user_page.What this room offers') }}
                                 @auth
@@ -872,41 +872,111 @@
                                     @endif
                                 @endauth
                             </h2>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-6 col-xs-12">
-                                    <div class="row amenities-block">
-                                        @foreach ($hotel_amenities->take(3) as $item1)
-                                            <div class="col-4 amenities-detail-view">
-                                                <i class="fa fa-{{ $item1->amenities->icon }}"></i>
-                                                <span>{{ Translate::translate($item1->amenities->name) }}</span>
+                        </div>
+                        
+                        <div class="row-grid-amenities">
+                            <div class="row-grid-list-amenities translate-text-group">
+                                @if ($hotel_amenities->count() >= 6)
+                                    @foreach ($hotel_amenities->take(6) as $item1)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item1->amenities->icon }}"></i>
+                                                <div class="mb-0 max-line">
+                                                    <span class="translate-text-group-items">
+                                                        {{ $item1->amenities->name }}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bathroom->take(3) as $item2)
-                                            <div class="col-4 amenities-detail-view">
-                                                <i class="fa fa-{{ $item2->bathroom->icon }}"></i>
-                                                <span>{{ Translate::translate($item2->bathroom->name) }}</span>
+                                            <div class="mb-0 list-more">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item1->amenities->name }}
+                                                </span>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bedroom->take(3) as $item3)
-                                            <div class="col-4 amenities-detail-view">
-                                                <i class="fa fa-{{ $item3->bedroom->icon }}"></i>
-                                                <span>{{ Translate::translate($item3->bedroom->name) }}</span>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+                                @if ($hotel_amenities->count() < 6)
+                                    @foreach ($hotel_amenities->take(3) as $item1)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item1->amenities->icon }}"></i>
+                                                <div class="mb-0 max-line">
+                                                    <span class="translate-text-group-items">
+                                                        {{ $item1->amenities->name }}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($safety->take(3) as $item4)
-                                            <div class="col-4 amenities-detail-view">
-                                                <i class="fa fa-{{ $item4->safety->icon }}"></i>
-                                                <span>{{ Translate::translate($item4->safety->name) }}</span>
+                                            <div class="mb-0 list-more">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item1->amenities->name }}
+                                                </span>
                                             </div>
-                                        @endforeach
-                                    </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($bathroom->take(3) as $item2)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item2->bathroom->icon }}"></i>
+                                                <div class="mb-0 max-line">
+                                                    <span class="translate-text-group-items">
+                                                        {{ $item2->bathroom->name }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 list-more">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item2->bathroom->name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($bedroom->take(3) as $item3)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item3->bedroom->icon }}"></i>
+                                                <div class="mb-0 max-line">
+                                                    <span class="translate-text-group-items">
+                                                        {{ $item3->bedroom->name }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 list-more">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item3->bedroom->name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($safety->take(3) as $item4)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item4->safety->icon }}"></i>
+                                                <div class="mb-0 max-line">
+                                                    <span class="translate-text-group-items">
+                                                        {{ $item4->safety->name }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 list-more">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item4->safety->name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                <div class="list-amenities">
+                                    <button class="amenities-button" type="button" onclick="view_amenities()">
+                                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                                        <div style="font-size: 15px; font-weight: 600;" class="translate-text-group-items">
+                                            {{ __('user_page.More') }}
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="amenities-box">
-                                <button type="button" onclick="view_amenities()">More amenities</button>
-                            </div>
-                            <hr>
                         </div>
+                        <hr>
                     </section>
                     {{-- <section id="location-map" class="section-2">
                         <div class="pd-tlr-10">
@@ -978,7 +1048,7 @@
 
             {{-- RIGHT CONTENT --}}
             <div class="col-lg-3 col-md-3 col-12">
-                <div class="sidebar" id="sidebar_fix">
+                <div class="sidebar" id="sidebar_fix" style="position: fixed; top: 9px; margin-right: 12px;">
                     <div class="reserve-block">
                         {{-- <input type="hidden" id="id_hotel" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"> --}}
                         {{-- @auth
@@ -1041,8 +1111,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="content sidebar-popup" id="popup_check"
-                                        style="width: 700px; margin-left: -410px; margin-top: 80px;">
+                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
+                                        style="width: 700px; margin-left: -410px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
@@ -1070,7 +1140,7 @@
                                         <input type="number" id="total_guest2" value="1"
                                             style="width: 16px; float: right; border:0;" min="0" readonly>
                                     </button>
-                                    <div class="content sidebar-popup" style="left: 973px;">
+                                    <div class="content sidebar-popup sidebar-popup-tamu">
                                         <div class="row" style="margin-top: 10px;">
 
                                             <div class="reserve-input-row">
@@ -1294,26 +1364,59 @@
                 @endif
 
                 @auth
-                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('hotel') || Route::is('resrtaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
-                        <a type="button" style="top: 0px !important;"
-                            onclick="location.href='{{ route('ahost') }}';"
-                            value="{{ Translate::translate('Become a Host') }}" target="_blank"></a>
-                    @endif
-                    <a type="button" onclick="language()" class="navbar-gap"
-                        style="color: white; margin-right: 9px; width:27px;">
-                        @if (session()->has('locale'))
-                            <img class="language-flag-icon"
-                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                    <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
+                        @php
+                            $cekHotel = App\Models\HotelSave::where('id_hotel', $hotel[0]->id_hotel)
+                                ->where('id_user', Auth::user()->id)
+                                ->first();
+                        @endphp
+
+                        @if ($cekHotel == null)
+                            <div style="width: 48px;" class="text-center">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button favorite-button-22 likeButtonhotel{{ $hotel[0]->id_hotel }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captFav">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
+                            </div>
                         @else
-                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                            <div class="text-center" style="width: 48px;">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button-active favorite-button-22 unlikeButtonhotel{{ $hotel[0]->id_hotel }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captCan">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
+                            </div>
                         @endif
-                    </a>
-                @else
-                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('hotel') || Route::is('restaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
-                        <input type="button" style="top: 0px !important;"
-                            onclick="location.href='{{ route('ahost') }}';"
-                            value="{{ Translate::translate('Become a Host') }}" />
-                    @endif
+                        <div class="text-center icon-center">
+                            <div type="button" class="" onclick="share()" style="text-align: center;">
+                                <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512">
+                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                    <path
+                                        d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
+                                </svg>
+                                <div style="font-size: 10px; color: #aaa;">{{ __('user_page.SHARE') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <a type="button" onclick="language()" class="navbar-gap"
                         style="color: white; margin-right: 9px; width:27px;">
@@ -1323,6 +1426,102 @@
                         @else
                             <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
+                    </a>
+
+                    <div class="logged-user-menu-detail" style="">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            @if (Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
+                                    alt="">
+                            @else
+                                <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                    class="logged-user-photo-detail" alt="">
+                            @endif
+
+                            <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
+                                aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+                                <h6 class="dropdown-header d-flex align-items-center">
+                                    @if (Auth::user()->foto_profile != null)
+                                        <img class="dropdown-user-img"
+                                            src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                    @elseIf (Auth::user()->avatar != null)
+                                        <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
+                                    @else
+                                        <img class="dropdown-user-img"
+                                            src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}">
+                                    @endif
+                                    <div class="dropdown-user-details">
+                                        <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
+                                            {{ Auth::user()->last_name }}</div>
+                                        <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                                    </div>
+                                </h6>
+                                <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
+                                    {{ __('user_page.Dashboard') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('profile_index') }}">
+                                    {{ __('user_page.My Profile') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('change_password') }}">
+                                    {{ __('user_page.Change Password') }}
+                                </a>
+                                <a class="dropdown-item" href="#!"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                                    {{ __('user_page.Sign Out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                    style="display: none">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </form>
+                            </div>
+
+                        </a>
+
+                    </div>
+                @else
+                    <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
+                        <div style="width: 48px;" class="text-center">
+                            <a href="{{ route('login') }}">
+                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="presentation" focusable="false" class="favorite-button favorite-button-22"
+                                    style="display: unset; margin-left: 0px;">
+                                    <path
+                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                    </path>
+                                </svg>
+                                <div style="font-size: 10px; color: #aaa;">{{ __('user_page.FAVORITE') }}
+                                </div>
+                            </a>
+                        </div>
+                        <div style="width: 48px;" class="text-center icon-center">
+                            <div type="button" class="" onclick="share()" style="text-align: center;">
+                                <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512">
+                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                    <path
+                                        d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
+                                </svg>
+                                <div style="font-size: 12px; color: #aaa;">{{ __('user_page.SHARE') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a type="button" onclick="language()" class="navbar-gap"
+                        style="color: white; margin-right: 9px; width:27px;">
+                        @if (session()->has('locale'))
+                            <img class="language-flag-icon"
+                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                        @else
+                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                        @endif
+                    </a>
+
+                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                        style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                        <i class="fa-solid fa-user"></i>
                     </a>
                 @endauth
             </div>
@@ -3555,36 +3754,7 @@
 
     {{-- Like --}}
     @auth
-        <script>
-            function likeFavorit(value) {
-                $.ajax({
-                    type: "GET",
-                    url: `/like/hotel/${value}`,
-                    data: {
-                        hotel: value,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
-                    },
-                    success: function(data) {
-                        if (data == 1) {
-                            $(`#likeButton${value}`).removeClass('list-like-button');
-                            $(`#likeButton${value}`).addClass('list-like-button-active');
-                            $(`#unlikeButton${value}`).removeClass('list-like-button');
-                            $(`#unlikeButton${value}`).addClass('list-like-button-active');
-                            $("#captCan").html("CANCEL");
-                            $("#captFav").html("CANCEL");
-                        } else if (data == 0) {
-                            $(`#likeButton${value}`).removeClass('list-like-button-active');
-                            $(`#likeButton${value}`).addClass('list-like-button');
-                            $(`#unlikeButton${value}`).removeClass('list-like-button-active');
-                            $(`#unlikeButton${value}`).addClass('list-like-button');
-                            $("#captCan").html("FAVORITE");
-                            $("#captFav").html("FAVORITE");
-                        }
-                    },
-                });
-            }
-        </script>
+        @include('components.favorit.like-favorit')
     @endauth
     {{-- End Like --}}
 

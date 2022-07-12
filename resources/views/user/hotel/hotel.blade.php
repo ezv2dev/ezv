@@ -533,7 +533,7 @@
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryHotel()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit property</a>
                                         @endif
                                     @endauth
                                 </p>

@@ -3240,6 +3240,20 @@ span.flatpickr-weekday {
     }
 }
 
+@media only screen and (max-width: 449px) {
+    .list-amenities .f-40,
+    .list-amenities .fa-ellipsis {
+        font-size: 22px !important;
+    }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 767px) {
+    .list-amenities .f-40,
+    .list-amenities .fa-ellipsis {
+        font-size: 28px !important;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .edit-profile-image-btn-dekstop {
         display: none !important;
@@ -3367,10 +3381,6 @@ span.flatpickr-weekday {
     }
     .list-amenities .translate-text-group-items {
         display: none !important;
-    }
-    .list-amenities .f-40,
-    .list-amenities .fa-ellipsis {
-        font-size: 28px !important;
     }
     .review-bottom .review-container {
         border-radius: 10px;
