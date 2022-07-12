@@ -2771,7 +2771,7 @@ input.error {
     right: 0;
     background: #ffffff;
     padding: 5px 37px 0 0;
-    width: 26%;
+    min-width: 26%;
     text-align: right;
     height: 75px;
 }
@@ -3797,4 +3797,8 @@ span.flatpickr-weekday {
     margin-left: 0px; 
     width:100%; 
     text-align: center; 
+}
+
+.date-form::placeholder {
+    font-size: 12px !important; 
 }
