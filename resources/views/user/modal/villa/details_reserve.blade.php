@@ -2,6 +2,72 @@
 @php
     use Illuminate\Support\Facades\Crypt;
 @endphp
+<style>
+    .container-checkbox2 {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-weight: 500 !important;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container-checkbox2 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .container-checkbox2 .checkmark2 {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container-checkbox2:hover input~.checkmark2 {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container-checkbox2 input:checked~.checkmark2 {
+        background-color: #FF7400;
+    }
+
+    /* Create the checkmark2/indicator (hidden when not checked) */
+    .container-checkbox2 .checkmark2:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark2 when checked */
+    .container-checkbox2 input:checked~.checkmark2:after {
+        display: block;
+    }
+
+    /* Style the checkmark2/indicator */
+    .container-checkbox2 .checkmark2:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
 <div class="modal fade" id="modal-details-reserve" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true" style="overflow-y:scroll;">
     <div class="modal-dialog modal-md" role="document" style="overflow-y: initial !important">
