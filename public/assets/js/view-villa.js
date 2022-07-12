@@ -687,6 +687,7 @@ function calendar_reserve(months) {
 
 function calendar_reserve2(months) {
     months = $(window).width() <= 991 ? 1 : 2
+    months == 1 ? $('#popup_check2').addClass('width-full-absolute') : $('#popup_check2').removeClass('width-full-absolute')
     $.ajax({
         //create an ajax request to display.php
         type: "GET",

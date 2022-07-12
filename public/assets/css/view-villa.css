@@ -1952,6 +1952,12 @@ li.button-dropdown {
     z-index: 1000;
 }
 
+.width-full-absolute{
+    width: 100%;
+    position:absolute;
+}
+
+
 .calendar-modal .flatpickr-months .flatpickr-prev-month.flatpickr-next-month,
 .flatpickr-months .flatpickr-next-month.flatpickr-next-month {
     right: 0 /* /*rtl:end:ignore*/;
