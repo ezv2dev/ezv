@@ -2405,7 +2405,7 @@
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
 
-                                        <div style="display: flex; padding: 0px;">
+                                        <div style="display: flex; padding: 0px;" class="input-date">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="start_date" id="start_date"
                                                 value="{{ $_COOKIE['sCheck_in'] ?? '' }}"

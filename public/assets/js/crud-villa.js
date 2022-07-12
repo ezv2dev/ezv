@@ -148,8 +148,6 @@ function editBedroomVilla(id_villa) {
             size: size,
         },
         success: function(response) {
-            // console.log(response.data);
-
             if (response.data.bedroom1 == null) {
                 $("#bedroomID").html(response.data.bedroom);
             } else {
@@ -280,8 +278,6 @@ function editVillaTag(id_villa) {
                 position: "topRight",
             });
 
-            console.log(response.data[0].name);
-
             $("#displayTags").html(`
                 <span class="badge rounded-pill fw-normal translate-text-group-items"
             style="background-color: #FF7400;">${response.data[0].name}</span>
@@ -349,13 +345,24 @@ function editDescriptionVilla(id_villa) {
             villa_description: $('#description-form-input').val()
         },
         success: function(response) {
-            $("#description-content").html(response.data);
+            $("#description-content").html(response.data.substring(0, 600));
 
             iziToast.success({
                 title: "Success",
                 message: response.message,
                 position: "topRight",
             });
+
+            if (response.data.length > 600) {
+                $("#btnShowMoreDescription").html("");
+                $("#btnShowMoreDescription").append(
+                    '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                );
+                $("#modalDescriptionVilla").html(response.data);
+            } else {
+                $("#btnShowMoreDescription").html("");
+                $("#btnShowMoreDescription").remove();
+            }
 
             editDescriptionCancel();
         },
@@ -375,8 +382,6 @@ $("#updateImageForm").submit(function(e) {
     var formData = new FormData(this);
     formData.append("image", imageProfileVilla);
 
-    console.log(imageProfileVilla);
-
     $.ajax({
         type: "POST",
         headers: {
@@ -390,8 +395,6 @@ $("#updateImageForm").submit(function(e) {
         enctype: "multipart/form-data",
         dataType: "json",
         success: function(response) {
-            console.log(response);
-
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -458,11 +461,13 @@ function editAmenitiesVilla(id_villa) {
             service: service,
         },
         success: function(response) {
-            console.log(response);
-            console.log(response.getAmenities[0].amenities.icon);
-            console.log(response.getBathroom[0].bathroom.icon);
-            console.log(response.getBedroom[0].bedroom.icon);
-            console.log(response.getKitchen[0].kitchen.icon);
+            var lengthAmenities = response.getAmenities.length;
+            var lengthBathroom = response.getBathroom.length;
+            var lengthBedroom = response.getBedroom.length;
+            var lengthKitchen = response.getKitchen.length;
+            var lengthSafety = response.getSafety.length;
+            var lengthService = response.getService.length;
+
             $("#modal-edit_amenities").modal("hide");
 
             iziToast.success({
@@ -562,6 +567,117 @@ function editAmenitiesVilla(id_villa) {
                     </button>
                 </div>
             `);
+
+            $("#moreAmenities").html(`
+                <div class="col-md-6 mb-2">
+                    <span class='translate-text-group-items'>
+                        ${response.getAmenities[0].amenities.name}
+                    </span>
+                </div>
+            `);
+
+            for (i = 1; i < lengthAmenities; i++) {
+                $("#moreAmenities").append(`
+                    <div class="col-md-6 mb-2">
+                        <span class='translate-text-group-items'>
+                            ${response.getAmenities[i].amenities.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreBathroomz").html(`
+                <div class="col-md-6">
+                    <span class="translate-text-group-items">
+                        ${response.getBathroom[0].bathroom.name}
+                    </span>
+                </div>
+            `);
+
+            for (j = 1; j < lengthBathroom; j++) {
+                $("#moreBathroomz").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getBathroom[j].bathroom.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreBedroomz").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getBedroom[0].bedroom.name}
+                    </span>
+                </div>
+            `);
+
+            for (k = 1; k < lengthBedroom; k++) {
+                $("#moreBedroomz").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getBedroom[k].bedroom.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            console.log(response.getBedroom[0].bedroom.name);
+            console.log(response.getBathroom[0].bathroom.name);
+
+            $("#moreKitchen").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getKitchen[0].kitchen.name}
+                    </span>
+                </div>
+            `);
+
+            for (l = 1; l < lengthKitchen; l++) {
+                $("#moreKitchen").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getKitchen[l].kitchen.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreSafety").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getSafety[0].safety.name}
+                    </span>
+                </div>
+            `);
+
+            for (m = 1; m < lengthSafety; m++) {
+                $("#moreSafety").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getSafety[m].safety.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreService").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getService[0].service.name}
+                    </span>
+                </div>
+            `);
+
+            for (n = 1; n < lengthService; n++) {
+                $("#moreService").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getService[n].service.name}
+                        </span>
+                    </div>
+                `);
+            }
         },
     });
 }

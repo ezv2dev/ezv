@@ -1196,18 +1196,18 @@ input:checked + .switch-background:active::before {
     #qa-card .card-title {
         text-align: center;
     }
-    .bar-activity .guests a{
-        width: 80% !important;
-    }
     .bar-restaurant .guests p,
     .bar-restaurant .guests input,
     .bar-activity .guests p,
-    .bar-activity .guests input,
-    .bar-collaborator .guests p,
-    .bar-collaborator .guests input {
+    .bar-collaborator .guests p {
         position: absolute !important;
         width: 50vw !important;
         left: 28% !important;
+    }
+    .bar-activity .guests .header-date-input-container,
+    .bar-collaborator .guests .header-date-input-container { 
+        width: 60vw !important;
+        margin-left: 18% !important;
     }
     .page-header-fixed {
         padding-left: 0px !important;
@@ -1219,21 +1219,21 @@ input:checked + .switch-background:active::before {
     .row .check-in .flatpickr-input {
         margin-left: -120px !important;
     }
-    .bar-activity .guests a{
-        width: 70% !important;
-    }
     .bar-villa .check-in a {
         width: 70vw !important;
     }
     .bar-restaurant .guests p,
     .bar-restaurant .guests input,
     .bar-activity .guests p,
-    .bar-activity .guests input,
-    .bar-collaborator .guests p,
-    .bar-collaborator .guests input {
+    .bar-collaborator .guests p {
         position: absolute !important;
         width: 40vw !important;
         left: 28% !important;
+    }
+    .bar-activity .guests .header-date-input-container,
+    .bar-collaborator .guests .header-date-input-container { 
+        width: 40vw !important;
+        margin-left: 26% !important;
     }
     .page-header-fixed {
         padding-left: 4.5rem !important;
@@ -1357,31 +1357,58 @@ input:checked + .switch-background:active::before {
     .row .guests {
         margin-left: 0px !important;
     }
+    .bar-villa .guests,
+    .bar-villa .button,
     .bar-restaurant .guests,
+    .bar-restaurant-detail .guests,
+    .bar-restaurant-detail .button,
     .bar-activity .check-out,
-    .bar-activity-detail .check-out {
+    .bar-activity-detail .check-out,
+    .bar-activity .guests,
+    .bar-activity .button,
+    .bar-collaborator .guests,
+    .bar-collaborator .button {
         height: 68px !important;
     }
     .bar-activity .guests input,
-    .bar-collaborator .guests input {
-        top: 32px !important;
+    .bar-collaborator .guests input { 
+        margin-top: 22px !important;
     }
+    .bar-activity .guests #start_date,
+    .bar-collaborator .guests #start_date,
+    .bar-activity-detail .guests .input-date #start_date { 
+        text-align: end !important;
+        margin-right: 10px !important;
+    }
+    .bar-activity .guests #end_date,
+    .bar-collaborator .guests #end_date,
+    .bar-activity-detail .guests .input-date #end_date { 
+        text-align: start !important;
+    }
+    .bar-activity .guests a,
     .bar-collaborator .guests a {
         margin-left: 0px !important;
         left: 0px !important;
-    }
-    .bar-collaborator .guests {
-        height: 68px !important;
     }
     .bar-collaborator .button .cari {
         margin-left: 0px !important;
         right: 10px !important;
     }
-    .bar-collaborator-detail .guests p,
-    .bar-collaborator-detail .guests input {
+    .bar-collaborator-detail .guests p {
         position: absolute !important;
         width: 25vw !important;
         left: 28% !important;
+    }
+    .bar-restaurant-detail .guests p,
+    .bar-activity-detail .guests .input-date,
+    .bar-collaborator-detail .guests .input-date {
+        margin-left: 60px !important;
+    }
+    .bar-restaurant-detail .guests input {
+        margin-left: 30px !important;
+    }
+    .bar-activity-detail .guests .input-date .flatpickr-wrapper {
+        margin: 0 5px !important;
     }
     .row .guests .nav {
         justify-content: center !important;

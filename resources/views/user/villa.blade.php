@@ -99,9 +99,12 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div class="sticky-bottom-mobile d-xs-block d-md-none">
-            <input class="price-button" onclick="details_reserve()"
-                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+            <input class="price-button" onclick="details_reserve()" id="details_mobile_button"
+                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important; display: none;"
                 value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+            <input class="price-button" onclick="document.getElementById('availability').scrollIntoView();" id="details_mobile_reserve_button"
+                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                value="{{ __('user_page.RESERVE NOW') }}" readonly>
             <span
                 class="price"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}</span>
         </div>
@@ -304,7 +307,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
@@ -405,7 +408,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
+                                    <textarea class="form-control" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
@@ -804,14 +807,28 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo">
-                                        <a class="pointer-normal" onclick="showPromotionMobile()"
-                                            href="javascript:void(0);">
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
-                                        </a>
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
+                                        @guest
+                                            <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                href="javascript:void(0);">
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                        @endguest
+
+                                        @auth
+                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
+                                                    href="javascript:void(0);">
+                                                    <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                        src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                    </video>
+                                                    <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                                </a>
+                                            @endif
+                                        @endauth
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
@@ -1122,8 +1139,7 @@
 
                                 <div class="col-6 p-5-price line-right-orange">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check"
-                                            style="background-color: white;">
+                                        <a type="button" class="collapsible_check" style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
@@ -1134,8 +1150,7 @@
                                 </div>
                                 <div class="col-6 p-5-price">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check"
-                                            style="background-color: white;">
+                                        <a type="button" class="collapsible_check" style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
@@ -3205,69 +3220,75 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBathroom">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
-                        @foreach ($bathroomGet as $item)
-                            <div class="col-md-6">
-                                <span class="translate-text-group-items">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                        <div id="moreBathroomz" class="col-md-12 row">
+                            @foreach ($bathroomGet as $item)
+                                <div class="col-md-6">
+                                    <span class="translate-text-group-items">
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBedroom">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bedroom') }}</h5>
                         </div>
-                        @foreach ($bedroomGet as $item)
-                            <div class="col-md-6">
-                                <span class="translate-text-group-items">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                        <div id="moreBedroomz" class="col-md-12 row">
+                            @foreach ($bedroomGet as $item)
+                                <div class="col-md-6">
+                                    <span class="translate-text-group-items">
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreKitchen">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
-                        @foreach ($kitchenGet as $item)
-                            <div class='col-md-6'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                        <div id="moreKitchen" class="col-md-12 row">
+                            @foreach ($kitchenGet as $item)
+                                <div class='col-md-6'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreSafety">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
-                        @foreach ($safetyGet as $item)
-                            <div class='col-md-6'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                        <div id="moreSafety" class="col-md-12 row">
+                            @foreach ($safetyGet as $item)
+                                <div class='col-md-6'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
-                        @foreach ($serviceGet as $item)
-                            <div class='col-md-6'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                        <div id="moreService" class="col-md-12 row">
+                            @foreach ($serviceGet as $item)
+                                <div class='col-md-6'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="modal-filter-footer" style="height: 20px;"></div>
@@ -4283,8 +4304,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $(`#displayVideo${ids.id_video}`).remove();
                         }
                     });
                 } else {

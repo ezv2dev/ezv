@@ -584,7 +584,7 @@
                                 <div id="name-form" style="display:none;">
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Make your short description here') }}">{{ $restaurant->name }}</textarea>
+                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameRestaurant();"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}

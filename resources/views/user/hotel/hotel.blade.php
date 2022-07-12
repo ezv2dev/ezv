@@ -1522,7 +1522,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="content sidebar-popup" id="popup_check"
+                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
                                         style="width: 700px; margin-left: -410px; margin-top: 80px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
@@ -1551,7 +1551,7 @@
                                         <input type="number" id="total_guest2" value="1"
                                             style="width: 16px; float: right; border:0;" min="0" readonly>
                                     </button>
-                                    <div class="content sidebar-popup" style="left: 973px;">
+                                    <div class="content sidebar-popup sidebar-popup-tamu">
                                         <div class="row" style="margin-top: 10px;">
 
                                             <div class="reserve-input-row">
@@ -2143,249 +2143,247 @@
                                                 <input type="hidden" name="id_hotel"
                                                     value="{{ $hotel[0]->id_hotel }}" readonly required>
                                                 <div class="row">
-                                                    <div class="col-12 d-flex justify-content-start">
-                                                        <div class="col-6">
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Cleanliness') }}
-                                                                </div>
-                                                                <div class="col-8 review-container">
-                                                                    <div class="cm-star-rating">
-                                                                        <input id="food-star-5" type="radio"
-                                                                            name="cleanliness" value="5"
-                                                                            required />
-                                                                        <label for="food-star-5"
-                                                                            title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="food-star-4" type="radio"
-                                                                            name="cleanliness" value="4"
-                                                                            required />
-                                                                        <label for="food-star-4"
-                                                                            title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="food-star-3" type="radio"
-                                                                            name="cleanliness" value="3"
-                                                                            required />
-                                                                        <label for="food-star-3"
-                                                                            title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="food-star-2" type="radio"
-                                                                            name="cleanliness" value="2"
-                                                                            required />
-                                                                        <label for="food-star-2"
-                                                                            title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="food-star-1" type="radio"
-                                                                            name="cleanliness" value="1"
-                                                                            required />
-                                                                        <label for="food-star-1"
-                                                                            title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
+                                                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Cleanliness') }}
                                                             </div>
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Service') }}
-                                                                </div>
-                                                                <div class="col-8 review-container">
-                                                                    <div class="cm-star-rating">
-                                                                        <input id="service-star-5" type="radio"
-                                                                            name="service" value="5" required />
-                                                                        <label for="service-star-5"
-                                                                            title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="service-star-4" type="radio"
-                                                                            name="service" value="4" required />
-                                                                        <label for="service-star-4"
-                                                                            title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="service-star-3" type="radio"
-                                                                            name="service" value="3" required />
-                                                                        <label for="service-star-3"
-                                                                            title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="service-star-2" type="radio"
-                                                                            name="service" value="2" required />
-                                                                        <label for="service-star-2"
-                                                                            title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="service-star-1" type="radio"
-                                                                            name="service" value="1" required />
-                                                                        <label for="service-star-1"
-                                                                            title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Check in') }}
-                                                                </div>
-                                                                <div class="col-8 review-container">
-                                                                    <div class="cm-star-rating">
-                                                                        <input id="atmosphere-star-5" type="radio"
-                                                                            name="check_in" value="5" required />
-                                                                        <label for="atmosphere-star-5"
-                                                                            title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="atmosphere-star-4" type="radio"
-                                                                            name="check_in" value="4" required />
-                                                                        <label for="atmosphere-star-4"
-                                                                            title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="atmosphere-star-3" type="radio"
-                                                                            name="check_in" value="3" required />
-                                                                        <label for="atmosphere-star-3"
-                                                                            title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="atmosphere-star-2" type="radio"
-                                                                            name="check_in" value="2" required />
-                                                                        <label for="atmosphere-star-2"
-                                                                            title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="atmosphere-star-1" type="radio"
-                                                                            name="check_in" value="1" required />
-                                                                        <label for="atmosphere-star-1"
-                                                                            title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Location') }}
-                                                                </div>
-                                                                <div class="col-8 review-container">
-                                                                    <div class="cm-star-rating">
-                                                                        <input id="location-star-5" type="radio"
-                                                                            name="location" value="5" required />
-                                                                        <label for="location-star-5"
-                                                                            title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="location-star-4" type="radio"
-                                                                            name="location" value="4" required />
-                                                                        <label for="location-star-4"
-                                                                            title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="location-star-3" type="radio"
-                                                                            name="location" value="3" required />
-                                                                        <label for="location-star-3"
-                                                                            title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="location-star-2" type="radio"
-                                                                            name="location" value="2" required />
-                                                                        <label for="location-star-2"
-                                                                            title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="location-star-1" type="radio"
-                                                                            name="location" value="1" required />
-                                                                        <label for="location-star-1"
-                                                                            title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Value') }}
-                                                                </div>
-                                                                <div class="col-8 review-container">
-                                                                    <div class="cm-star-rating">
-                                                                        <input id="value-star-5" type="radio"
-                                                                            name="value" value="5" required />
-                                                                        <label for="value-star-5"
-                                                                            title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="value-star-4" type="radio"
-                                                                            name="value" value="4" required />
-                                                                        <label for="value-star-4"
-                                                                            title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="value-star-3" type="radio"
-                                                                            name="value" value="3" required />
-                                                                        <label for="value-star-3"
-                                                                            title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="value-star-2" type="radio"
-                                                                            name="value" value="2" required />
-                                                                        <label for="value-star-2"
-                                                                            title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <input id="value-star-1" type="radio"
-                                                                            name="value" value="1" required />
-                                                                        <label for="value-star-1"
-                                                                            title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                            <i class="active fa fa-star"
-                                                                                aria-hidden="true"></i>
-                                                                        </label>
-                                                                    </div>
+                                                            <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="food-star-5" type="radio"
+                                                                        name="cleanliness" value="5"
+                                                                        required />
+                                                                    <label for="food-star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="food-star-4" type="radio"
+                                                                        name="cleanliness" value="4"
+                                                                        required />
+                                                                    <label for="food-star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="food-star-3" type="radio"
+                                                                        name="cleanliness" value="3"
+                                                                        required />
+                                                                    <label for="food-star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="food-star-2" type="radio"
+                                                                        name="cleanliness" value="2"
+                                                                        required />
+                                                                    <label for="food-star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="food-star-1" type="radio"
+                                                                        name="cleanliness" value="1"
+                                                                        required />
+                                                                    <label for="food-star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <div class="col-12">
-                                                                {{ __('user_page.Comment') }}
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Service') }}
                                                             </div>
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                            <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="service-star-5" type="radio"
+                                                                        name="service" value="5" required />
+                                                                    <label for="service-star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="service-star-4" type="radio"
+                                                                        name="service" value="4" required />
+                                                                    <label for="service-star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="service-star-3" type="radio"
+                                                                        name="service" value="3" required />
+                                                                    <label for="service-star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="service-star-2" type="radio"
+                                                                        name="service" value="2" required />
+                                                                    <label for="service-star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="service-star-1" type="radio"
+                                                                        name="service" value="1" required />
+                                                                    <label for="service-star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
                                                                 </div>
                                                             </div>
-                                                            <center>
-                                                                <button type="submit"
-                                                                    class="btn btn-block btn-sm btn-primary"
-                                                                    style="width: 200px">{{ __('user_page.Done') }}</button>
-                                                            </center>
                                                         </div>
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Check in') }}
+                                                            </div>
+                                                            <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="atmosphere-star-5" type="radio"
+                                                                        name="check_in" value="5" required />
+                                                                    <label for="atmosphere-star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="atmosphere-star-4" type="radio"
+                                                                        name="check_in" value="4" required />
+                                                                    <label for="atmosphere-star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="atmosphere-star-3" type="radio"
+                                                                        name="check_in" value="3" required />
+                                                                    <label for="atmosphere-star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="atmosphere-star-2" type="radio"
+                                                                        name="check_in" value="2" required />
+                                                                    <label for="atmosphere-star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="atmosphere-star-1" type="radio"
+                                                                        name="check_in" value="1" required />
+                                                                    <label for="atmosphere-star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Location') }}
+                                                            </div>
+                                                            <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="location-star-5" type="radio"
+                                                                        name="location" value="5" required />
+                                                                    <label for="location-star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="location-star-4" type="radio"
+                                                                        name="location" value="4" required />
+                                                                    <label for="location-star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="location-star-3" type="radio"
+                                                                        name="location" value="3" required />
+                                                                    <label for="location-star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="location-star-2" type="radio"
+                                                                        name="location" value="2" required />
+                                                                    <label for="location-star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="location-star-1" type="radio"
+                                                                        name="location" value="1" required />
+                                                                    <label for="location-star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Value') }}
+                                                            </div>
+                                                            <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="value-star-5" type="radio"
+                                                                        name="value" value="5" required />
+                                                                    <label for="value-star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="value-star-4" type="radio"
+                                                                        name="value" value="4" required />
+                                                                    <label for="value-star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="value-star-3" type="radio"
+                                                                        name="value" value="3" required />
+                                                                    <label for="value-star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="value-star-2" type="radio"
+                                                                        name="value" value="2" required />
+                                                                    <label for="value-star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="value-star-1" type="radio"
+                                                                        name="value" value="1" required />
+                                                                    <label for="value-star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="col-12">
+                                                            {{ __('user_page.Comment') }}
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <center>
+                                                            <button type="submit"
+                                                                class="btn btn-block btn-sm btn-primary"
+                                                                style="width: 200px">{{ __('user_page.Done') }}</button>
+                                                        </center>
                                                     </div>
                                                 </div>
                                             </form>
@@ -4348,7 +4346,7 @@
     <script>
         function editNameForm() {
             var form = document.getElementById("name-form");
-            var content = document.getElementById("name-hotel");
+            var content = document.getElementById("name-content");
             var formInput = document.getElementById("name-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
@@ -4361,7 +4359,7 @@
         function editNameCancel() {
             var form = document.getElementById("name-form");
             var formInput = document.getElementById("name-form-input");
-            var content = document.getElementById("name-hotel");
+            var content = document.getElementById("name-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->name }}';

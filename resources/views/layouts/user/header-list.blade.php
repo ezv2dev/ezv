@@ -3030,7 +3030,7 @@
                                                 style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
-                                        <div style="display: flex; padding: 0px;">
+                                        <div style="display: flex; padding: 0px;" class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="start_date" id="start_date"
                                                 value="{{ $get_start ?? '' }}"
@@ -3465,7 +3465,7 @@
                                                 style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
-                                        <div style="display: flex; padding: 0px;">
+                                        <div style="display: flex; padding: 0px;" class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="start_date" id="start_date"
                                                 value="{{ $get_start ?? '' }}"
