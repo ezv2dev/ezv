@@ -3798,3 +3798,7 @@ span.flatpickr-weekday {
     width:100%; 
     text-align: center; 
 }
+
+.date-form::placeholder {
+    font-size: 12px !important; 
+}
