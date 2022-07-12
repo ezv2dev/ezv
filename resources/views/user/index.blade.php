@@ -228,6 +228,13 @@
                                     {{-- <p>{{ __('user_page.Things to do') }}</p> --}}
                                     <p>WoW</p>
                                 </div>
+                                <div class="nav-link-form" id="collaborator-form">
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-style nav-link-margin nav-link-style-detail-active" id="collaborator-button"
+                                            target="_blank" href="{{ route('collaborator_list') }}"><img src="{{ asset('assets/icon/menu/collab1.svg') }}" style="width: 29px; height: auto;"></a>
+                                    </li>
+                                    <p>{{ __('user_page.Collaborator') }}</p>
+                                </div>
                             </ul>
                             <!--End of serach option 1 -->
 
