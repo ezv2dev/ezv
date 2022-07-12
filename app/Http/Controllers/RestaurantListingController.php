@@ -19,7 +19,7 @@ class RestaurantListingController extends Controller
         //insert into database
         $data = Restaurant::insertGetId(array(
             'uid' => rand(10000, 99999).time(),
-            'name' => "Restaurant Name Here",
+            'name' => "Food Name Here",
             'id_type' => 1,
             'id_price' => 1,
             'id_location' => 1,

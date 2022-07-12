@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b26dc553bf89934e0a740808e31bbcc5",
+    "content-hash": "2214c334d8d367bac853184bffd7753e",
     "packages": [
         {
             "name": "amrshawky/currency",
@@ -833,16 +833,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.256.0",
+            "version": "v0.257.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "122e51021eb19b53f831904918460671d1e7259d"
+                "reference": "ae109202ee831a1fb70ba824181852e6179c848b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/122e51021eb19b53f831904918460671d1e7259d",
-                "reference": "122e51021eb19b53f831904918460671d1e7259d",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ae109202ee831a1fb70ba824181852e6179c848b",
+                "reference": "ae109202ee831a1fb70ba824181852e6179c848b",
                 "shasum": ""
             },
             "require": {
@@ -871,9 +871,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.256.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.257.0"
             },
-            "time": "2022-07-04T01:10:37+00:00"
+            "time": "2022-07-08T01:28:13+00:00"
         },
         {
             "name": "google/auth",
@@ -7297,6 +7297,74 @@
             "time": "2022-06-24T13:56:11+00:00"
         },
         {
+            "name": "laravel/telescope",
+            "version": "v4.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "d0cf8d6a54a1831dbe189a1f194e8271a4a5435a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/d0cf8d6a54a1831dbe189a1f194e8271a4a5435a",
+                "reference": "d0cf8d6a54a1831dbe189a1f194e8271a4a5435a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0",
+                "php": "^7.3|^8.0",
+                "symfony/var-dumper": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "orchestra/testbench": "^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/v4.9.0"
+            },
+            "time": "2022-04-19T15:48:51+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.5.0",
             "source": {
@@ -9296,5 +9364,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -3815,3 +3815,22 @@ span.flatpickr-weekday {
 .date-form::placeholder {
     font-size: 12px !important; 
 }
+
+#name-form-input{
+    width: 100%; 
+    font-weight: 600; 
+    height: 120px; 
+    font-size: 39px; 
+    resize: none;
+}
+
+#short-description-form-input{
+    width: 100%; 
+    height: 109px; 
+    resize: none;
+}
+
+#name-form-input::placeholder{
+    font-weight: 600 !important; 
+    font-size: 39px !important;
+}

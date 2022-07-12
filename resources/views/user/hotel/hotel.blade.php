@@ -4348,7 +4348,7 @@
     <script>
         function editNameForm() {
             var form = document.getElementById("name-form");
-            var content = document.getElementById("name-hotel");
+            var content = document.getElementById("name-content");
             var formInput = document.getElementById("name-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
@@ -4361,7 +4361,7 @@
         function editNameCancel() {
             var form = document.getElementById("name-form");
             var formInput = document.getElementById("name-form-input");
-            var content = document.getElementById("name-hotel");
+            var content = document.getElementById("name-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->name }}';

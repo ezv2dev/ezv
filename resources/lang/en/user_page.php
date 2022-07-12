@@ -464,6 +464,7 @@ return [
 
     "Home Name Here" => "Home Name Here",
     "Food Name Here" => "Food Name Here",
+    "Restaurant Name Here" => "Restaurant Name Here",
     "Hotel Name Here" => "Hotel Name Here",
     "Hotel Room Name Here" => "Hotel Room Name Here",
     "Wow Name Here" => "Wow Name Here",

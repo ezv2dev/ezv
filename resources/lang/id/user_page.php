@@ -460,6 +460,7 @@ return [
 
     "Home Name Here" => "Nama Rumah Disini",
     "Food Name Here" => "Nama Makanan Disini",
+    "Restaurant Name Here" => "Nama Restoran Disini",
     "Hotel Name Here" => "Nama Hotel Disini",
     "Hotel Room Name Here" => "Nama Kamar Hotel Disini",
     "Wow Name Here" => "Wow Nama Disini",
