@@ -903,17 +903,17 @@ class ViewController extends Controller
     public function villa_update_image(Request $request)
     {
         // validation
-        $validator = Validator::make($request->all(), [
-            'id_villa' => ['required', 'integer'],
-            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'id_villa' => ['required', 'integer'],
+        //     'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'message' => 'something error',
+        //         'status' => 500,
+        //     ]);
+        // }
 
         $villa = Villa::where('id_villa', $request->id_villa)->first('uid');
         $folder = $villa->uid;

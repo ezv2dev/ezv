@@ -14,8 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $restaurant = Restaurant::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
-        $activity = Activity::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
+        $restaurant = Restaurant::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
+        $activity = Activity::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
 
         // fetch restaurant
         // $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
