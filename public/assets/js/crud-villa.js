@@ -148,8 +148,6 @@ function editBedroomVilla(id_villa) {
             size: size,
         },
         success: function(response) {
-            // console.log(response.data);
-
             if (response.data.bedroom1 == null) {
                 $("#bedroomID").html(response.data.bedroom);
             } else {
@@ -280,8 +278,6 @@ function editVillaTag(id_villa) {
                 position: "topRight",
             });
 
-            console.log(response.data[0].name);
-
             $("#displayTags").html(`
                 <span class="badge rounded-pill fw-normal translate-text-group-items"
             style="background-color: #FF7400;">${response.data[0].name}</span>
@@ -349,8 +345,6 @@ function editDescriptionVilla(id_villa) {
             villa_description: $('#description-form-input').val()
         },
         success: function(response) {
-            console.log(response.data);
-            console.log(response.data.length);
             $("#description-content").html(response.data.substring(0, 600));
 
             iziToast.success({
@@ -388,8 +382,6 @@ $("#updateImageForm").submit(function(e) {
     var formData = new FormData(this);
     formData.append("image", imageProfileVilla);
 
-    console.log(imageProfileVilla);
-
     $.ajax({
         type: "POST",
         headers: {
@@ -403,8 +395,6 @@ $("#updateImageForm").submit(function(e) {
         enctype: "multipart/form-data",
         dataType: "json",
         success: function(response) {
-            console.log(response);
-
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -471,14 +461,6 @@ function editAmenitiesVilla(id_villa) {
             service: service,
         },
         success: function(response) {
-            console.log(response);
-            console.log(response.getAmenities[0].amenities.icon);
-            console.log(response.getBathroom[0].bathroom.name);
-            console.log(response.getBedroom[0].bedroom.name);
-            console.log(response.getKitchen[0].kitchen.name);
-            console.log(response.getSafety[0].safety.name);
-            console.log(response.getService[0].service.name);
-
             var lengthAmenities = response.getAmenities.length;
             var lengthBathroom = response.getBathroom.length;
             var lengthBedroom = response.getBedroom.length;
@@ -594,7 +576,7 @@ function editAmenitiesVilla(id_villa) {
                 </div>
             `);
 
-            for (i = 1; i <= lengthAmenities; i++) {
+            for (i = 1; i < lengthAmenities; i++) {
                 $("#moreAmenities").append(`
                     <div class="col-md-6 mb-2">
                         <span class='translate-text-group-items'>
@@ -604,91 +586,94 @@ function editAmenitiesVilla(id_villa) {
                 `);
             }
 
-            $("#moreBathroom").html(`
-                <div class="col-md-6 mb-2">
-                    <span class='translate-text-group-items'>
+            $("#moreBathroomz").html(`
+                <div class="col-md-6">
+                    <span class="translate-text-group-items">
                         ${response.getBathroom[0].bathroom.name}
                     </span>
                 </div>
             `);
 
-            for (i = 1; i <= lengthBathroom; i++) {
-                $("#moreBathroom").append(`
-                    <div class="col-md-6 mb-2">
+            for (j = 1; j < lengthBathroom; j++) {
+                $("#moreBathroomz").append(`
+                    <div class="col-md-6">
                         <span class='translate-text-group-items'>
-                            ${response.getBathroom[i].bathroom.name}
+                            ${response.getBathroom[j].bathroom.name}
                         </span>
                     </div>
                 `);
             }
 
-            $("#moreBedroom").html(`
-                <div class="col-md-6 mb-2">
+            $("#moreBedroomz").html(`
+                <div class="col-md-6">
                     <span class='translate-text-group-items'>
                         ${response.getBedroom[0].bedroom.name}
                     </span>
                 </div>
             `);
 
-            for (i = 1; i <= lengthBedroom; i++) {
-                $("#moreBedroom").append(`
-                    <div class="col-md-6 mb-2">
+            for (k = 1; k < lengthBedroom; k++) {
+                $("#moreBedroomz").append(`
+                    <div class="col-md-6">
                         <span class='translate-text-group-items'>
-                            ${response.getBedroom[i].bedroom.name}
+                            ${response.getBedroom[k].bedroom.name}
                         </span>
                     </div>
                 `);
             }
 
+            console.log(response.getBedroom[0].bedroom.name);
+            console.log(response.getBathroom[0].bathroom.name);
+
             $("#moreKitchen").html(`
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6">
                     <span class='translate-text-group-items'>
                         ${response.getKitchen[0].kitchen.name}
                     </span>
                 </div>
             `);
 
-            for (i = 1; i <= lengthKitchen; i++) {
+            for (l = 1; l < lengthKitchen; l++) {
                 $("#moreKitchen").append(`
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-6">
                         <span class='translate-text-group-items'>
-                            ${response.getKitchen[i].kitchen.name}
+                            ${response.getKitchen[l].kitchen.name}
                         </span>
                     </div>
                 `);
             }
 
             $("#moreSafety").html(`
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6">
                     <span class='translate-text-group-items'>
                         ${response.getSafety[0].safety.name}
                     </span>
                 </div>
             `);
 
-            for (i = 1; i <= lengthSafety; i++) {
+            for (m = 1; m < lengthSafety; m++) {
                 $("#moreSafety").append(`
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-6">
                         <span class='translate-text-group-items'>
-                            ${response.getSafety[i].safety.name}
+                            ${response.getSafety[m].safety.name}
                         </span>
                     </div>
                 `);
             }
 
             $("#moreService").html(`
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6">
                     <span class='translate-text-group-items'>
                         ${response.getService[0].service.name}
                     </span>
                 </div>
             `);
 
-            for (i = 1; i <= lengthService; i++) {
+            for (n = 1; n < lengthService; n++) {
                 $("#moreService").append(`
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-6">
                         <span class='translate-text-group-items'>
-                            ${response.getService[i].service.name}
+                            ${response.getService[n].service.name}
                         </span>
                     </div>
                 `);

@@ -3221,7 +3221,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
-                        <div id="moreBathroom">
+                        <div id="moreBathroomz" class="col-md-12 row">
                             @foreach ($bathroomGet as $item)
                                 <div class="col-md-6">
                                     <span class="translate-text-group-items">
@@ -3235,7 +3235,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bedroom') }}</h5>
                         </div>
-                        <div id="moreBedroom">
+                        <div id="moreBedroomz" class="col-md-12 row">
                             @foreach ($bedroomGet as $item)
                                 <div class="col-md-6">
                                     <span class="translate-text-group-items">
@@ -3249,7 +3249,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
-                        <div id="moreKitchen">
+                        <div id="moreKitchen" class="col-md-12 row">
                             @foreach ($kitchenGet as $item)
                                 <div class='col-md-6'>
                                     <span class='translate-text-group-items'>
@@ -3263,7 +3263,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
-                        <div id="moreSafety">
+                        <div id="moreSafety" class="col-md-12 row">
                             @foreach ($safetyGet as $item)
                                 <div class='col-md-6'>
                                     <span class='translate-text-group-items'>
@@ -3277,7 +3277,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
-                        <div id="moreService">
+                        <div id="moreService" class="col-md-12 row">
                             @foreach ($serviceGet as $item)
                                 <div class='col-md-6'>
                                     <span class='translate-text-group-items'>
