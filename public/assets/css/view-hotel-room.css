@@ -185,11 +185,6 @@
     }
 
     @media (min-width: 1260px) and (max-width: 1359px) {
-        .reserve-block {
-            width: 252px !important;
-            margin-left: 38px;
-        }
-
         .section-2 {
             margin-right: 0 !important;
         }
@@ -342,4 +337,7 @@
 
     .sidebar {
         margin-right: 20px;
+    }
+    .text-orange {
+        color: #ff7400;
     }
