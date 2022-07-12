@@ -175,11 +175,9 @@ $("#updateImageForm").submit(function (e) {
 
             readerImageRestaurant.readAsDataURL(imageProfileRestaurant);
 
-            this.reset();
-
             $("#modal-edit_restaurant_profile").modal("hide");
 
-            $("##imageRestaurant").val("");
+            $("#profileDropzone").attr("src", "");
 
             btn.textContent = "Save Image";
             btn.classList.remove("disabled");
