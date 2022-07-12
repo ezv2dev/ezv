@@ -1281,19 +1281,22 @@
                                 {!! Str::limit(Translate::translate($activity->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
                                 {{-- {!! $restaurant->description ?? 'there is no description yet' !!} --}}
                             </p>
+
+                            <span id="buttonShowMoreDescription">
                             @if (Str::length($activity->description) > 600)
                                 <a id="btnShowMoreDescription" class="d-block" style="font-weight: 600;"
                                     href="javascript:void(0);" onclick="showMoreDescription();"><span
                                         style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
                                     <span style="color: #ff7400;">></span></a>
                             @endIf
-                            </p>
+                            </span>
+
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
-                                        <form action="{{ route('activity_update_description') }}" method="post">
-                                            @csrf
-                                            @method('PATCH')
+                                        <form action="javascript:void(0);" method="post">
+                                            {{-- @csrf
+                                            @method('PATCH') --}}
                                             <input type="hidden" name="id_activity"
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group">
@@ -1301,7 +1304,7 @@
                                                 placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -4101,7 +4104,7 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
             btn.classList.remove("d-none");
-            formInput.value = '{{ $activity->description }}';
+            // formInput.value = '{{ $activity->description }}';
         }
     </script>
     {{-- END UPDATE FORM --}}

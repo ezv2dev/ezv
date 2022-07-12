@@ -51,9 +51,9 @@ function saveDescription() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/description",
+        url: "/things-to-do/update/description",
         data: {
-            id_restaurant: id_restaurant,
+            id_activity: id_activity,
             description: desc,
         },
         success: function (response) {

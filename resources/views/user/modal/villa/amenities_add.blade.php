@@ -76,11 +76,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                {{-- <form action="{{ route('villa_update_amenities') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}"> --}}
-
                 <div class="form-group pt-2 px-4">
                     <div class="row">
                         <label class="form-label"><b>{{ __('user_page.Amenities') }}</b></label>
