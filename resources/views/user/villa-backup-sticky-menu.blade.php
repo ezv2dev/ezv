@@ -68,7 +68,6 @@
 
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
     <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
-
 </head>
 
 <body style="background-color:white">
@@ -100,12 +99,9 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div class="sticky-bottom-mobile d-xs-block d-md-none">
-            <input class="price-button" onclick="details_reserve()" id="details_mobile_button"
-                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important; display: none;"
-                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-            <input class="price-button" onclick="document.getElementById('availability').scrollIntoView();" id="details_mobile_reserve_button"
+            <input class="price-button" onclick="details_reserve()"
                 style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                value="{{ __('user_page.RESERVE NOW') }}" readonly>
+                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
             <span
                 class="price"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}</span>
         </div>
@@ -308,7 +304,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
@@ -409,7 +405,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <textarea class="form-control" name="short_description" id="short-description-form-input"
+                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
@@ -694,79 +690,84 @@
 
                 {{-- STICKY BAR --}}
                 <div class="menu-liner"></div>
-                <nav>
-                    <div class="container">
-                        <ul>
-                            <li class="sectionGallery">
-                                <a href="#sectionGallery">
-                                    <span>
-                                        <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sectionDescription">
-                                <a href="#sectionDescription">
-                                    <span>
-                                        <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.ABOUT') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sectionAvailability">
-                                <a href="#sectionAvailability">
-                                    <span>
-                                        <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.AVAILABILITY') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sectionAmenities">
-                                <a href="#sectionAmenities">
-                                    <span>
-                                        <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.AMENITIES') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sectionLocation">
-                                <a href="#sectionLocation">
-                                    <span>
-                                        <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.LOCATION') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sectionReview">
-                                <a href="#sectionReview">                                
-                                    <span>
-                                        <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.REVIEW') }}</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="first-detail-content d-flex d-md-none">
-                                <a href="#first-detail-content">                                
-                                    <span>
+                <div id="navbar" class="sticky-div">
+                    <ul class="navigationList">
+                        <li class="navigationItem">
+                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('gallery').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem ">
+                            <a id="about-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('description').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.ABOUT') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem">
+                            <a id="availability-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('availability').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.AVAILABILITY') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem ">
+                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('amenities').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.AMENITIES') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem ">
+                            <a id="location-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('location-map').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.LOCATION') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('review').scrollIntoView();">
+                                <span>
+                                    <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i>
+                                    <span class="navigationItemText">{{ __('user_page.REVIEW') }}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navigationItem d-flex d-md-none">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
+                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                                <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 {{-- END STICKY BAR --}}
                 {{-- PAGE CONTENT --}}
                 <div class="js-gallery">
                     {{-- GALLERY --}}
-                    <section id="sectionGallery" class="section">
+                    <section id="gallery" class="section">
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
@@ -803,28 +804,14 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                                </video>
-                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
-                                            </a>
-                                        @endguest
-
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                                    <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                        src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                                    </video>
-                                                    <span class="video-grid-button"><i class="fa fa-play"></i></span>
-                                                </a>
-                                            @endif
-                                        @endauth
+                                    <div class="col-4 grid-photo">
+                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                            href="javascript:void(0);">
+                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                            </video>
+                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                        </a>
                                         @auth
                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
@@ -871,7 +858,7 @@
                     @endauth
                     {{-- END ADD GALLERY --}}
 
-                    <section id="sectionDescription" class="section-2">
+                    <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place">
                             <hr>
@@ -941,7 +928,7 @@
                         </div>
                     </section>
 
-                    <section id="sectionAvailability" class="section-2">
+                    <section id="availability" class="section-2">
                         <div id="scrollStop"></div>
                         <div class="pd-tlr-10">
                             <hr>
@@ -973,7 +960,7 @@
                             </div>
                     </section>
 
-                    <section id="sectionAmenities" class="section-2 div-amenities">
+                    <section id="amenities" class="section-2 div-amenities">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1135,7 +1122,8 @@
 
                                 <div class="col-6 p-5-price line-right-orange">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check" style="background-color: white;">
+                                        <a type="button" class="collapsible_check"
+                                            style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
@@ -1146,7 +1134,8 @@
                                 </div>
                                 <div class="col-6 p-5-price">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check" style="background-color: white;">
+                                        <a type="button" class="collapsible_check"
+                                            style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
@@ -1350,7 +1339,7 @@
                 </div>
             </div>
             {{-- END RIGHT CONTENT --}}
-            <section id="sectionLocation" class="section-2">
+            <section id="location-map" class="section-2">
                 <div class="row-grid-amenities">
                     <hr class="pendek">
                     <div class="section-title">
@@ -1553,7 +1542,7 @@
         {{-- FULL WIDTH ABOVE FOOTER --}}
         <div class="col-lg-12 bottom-content">
             <div class="col-12">
-                <section id="sectionReview" class="section-2">
+                <section id="review" class="section-2">
                     <hr>
                     <div class="review-bottom">
                         @if ($detail->count() > 0)
@@ -1643,7 +1632,7 @@
                     </div>
                     @auth
                         @if (Auth::user()->role_id == 4)
-                            
+                            <hr style="width: 95.3%; margin-left: 26px;">
                             @if ($villa[0]->userReview)
                                 <section id="user-review" class="section-2" style="margin-left: 25px;">
                                     <div class="about-place-block">
@@ -1725,7 +1714,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
+                                        <hr>
                                     </div>
                                 </section>
                             @else
@@ -1740,8 +1729,8 @@
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
                                                     <div class="row">
-                                                        
-                                                            <div class="col-12 col-lg-6">
+                                                        <div class="col-12 d-flex justify-content-start">
+                                                            <div class="col-6">
                                                                 <div class="d-flex">
                                                                     <div class="col-4 review-container">
                                                                         {{ __('user_page.Cleanliness') }}
@@ -1988,7 +1977,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-lg-6">
+                                                            <div class="col-6">
                                                                 <div class="col-12">
                                                                     {{ __('user_page.Comment') }}
                                                                 </div>
@@ -2003,19 +1992,18 @@
                                                                         style="width: 200px">{{ __('user_page.Done') }}</button>
                                                                 </center>
                                                             </div>
-                                                        
+                                                        </div>
                                                     </div>
                                                 </form>
 
                                             </div>
                                         </div>
-                                      
+                                        <hr>
                                     </div>
                                 </section>
                             @endif
                         @endif
                     @endauth
-                    <hr>
                 </section>
                 <section class="section-2 host">
                     <h3>{{ __('user_page.Things to know') }}</h3>
@@ -3217,75 +3205,69 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreBathroom">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
-                        <div id="moreBathroomz" class="col-md-12 row">
-                            @foreach ($bathroomGet as $item)
-                                <div class="col-md-6">
-                                    <span class="translate-text-group-items">
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($bathroomGet as $item)
+                            <div class="col-md-6">
+                                <span class="translate-text-group-items">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreBedroom">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bedroom') }}</h5>
                         </div>
-                        <div id="moreBedroomz" class="col-md-12 row">
-                            @foreach ($bedroomGet as $item)
-                                <div class="col-md-6">
-                                    <span class="translate-text-group-items">
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($bedroomGet as $item)
+                            <div class="col-md-6">
+                                <span class="translate-text-group-items">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreKitchen">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
-                        <div id="moreKitchen" class="col-md-12 row">
-                            @foreach ($kitchenGet as $item)
-                                <div class='col-md-6'>
-                                    <span class='translate-text-group-items'>
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($kitchenGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreSafety">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
-                        <div id="moreSafety" class="col-md-12 row">
-                            @foreach ($safetyGet as $item)
-                                <div class='col-md-6'>
-                                    <span class='translate-text-group-items'>
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($safetyGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
-                        <div id="moreService" class="col-md-12 row">
-                            @foreach ($serviceGet as $item)
-                                <div class='col-md-6'>
-                                    <span class='translate-text-group-items'>
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($serviceGet as $item)
+                            <div class='col-md-6'>
+                                <span class='translate-text-group-items'>
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="modal-filter-footer" style="height: 20px;"></div>
@@ -3619,7 +3601,6 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -4091,43 +4072,72 @@
         }
     </script>
 
-{{-- Hightlight stycky menu --}}
+    {{-- Highlight sticky --}}
     <script>
-        const sections = document.querySelectorAll("section");
-        const navLi = document.querySelectorAll("nav .container ul li");
-        window.onscroll = () => {
-        var current = "";
+        var gallery = $('#gallery').offset().top - 150,
+            description = $('#description').offset().top - 100,
+            availability = $('#availability').offset().top - 100,
+            amenities = $('#amenities').offset().top - 100,
+            locationmap = $('#location-map').offset().top - 100,
+            review = $('#review').offset().top - 150,
+            host = $('.host').offset().top - 150,
+            $window = $(window);
+        $window.scroll(function() {
+            if ($window.scrollTop() >= gallery && $window.scrollTop() < description) {
+                $('#gallery-sticky').addClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
 
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 120) {
-            current = section.getAttribute("id"); }
-        });
+            } else if ($window.scrollTop() >= description && $window.scrollTop() < availability) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').addClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
 
-        navLi.forEach((li) => {
-            li.classList.remove("sticky-active");
-            if (li.classList.contains(current)) {
-            li.classList.add("sticky-active");
-            }
-        });
-        };
-    </script>
+            } else if ($window.scrollTop() >= availability && $window.scrollTop() < amenities) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').addClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
 
-{{-- Sticky Menu --}}
-    <script>
-        /* ========================================== 
-        scrollTop() >= 300
-        Should be equal the the height of the header
-        ========================================== */
+            } else if ($window.scrollTop() >= amenities && $window.scrollTop() < locationmap) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').addClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
 
-        $(window).scroll(function(){
-            if ($(window).scrollTop() >= 485.78125) {
-                $('nav').addClass('fixed-header');
-                $('nav div').addClass('visible-title');
-            }
-            else {
-                $('nav').removeClass('fixed-header');
-                $('nav div').removeClass('visible-title');
+            } else if ($window.scrollTop() >= locationmap && $window.scrollTop() < review) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').addClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+
+            } else if ($window.scrollTop() >= review && $window.scrollTop() < host) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').addClass('active-sticky');
+
+            } else {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#availability-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
             }
         });
     </script>
@@ -4273,7 +4283,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $(`#displayVideo${ids.id_video}`).remove();
+                            showingLoading();
+                            location.reload();
                         }
                     });
                 } else {
