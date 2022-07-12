@@ -129,6 +129,8 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
             if (!total["total_all"] || total["total_all"] == 0) {
                 $("#total_all2_div").css({ display: "none" });
                 $("#details_button").css({ display: "none" });
+                $("#details_mobile_button").css({ display: "none" });
+                $("#details_mobile_reserve_button").css({ display: "inline" });
             } else {
                 $("#total_all2").text(total["total_all"]);
                 $("#total_all2_div").css({
@@ -141,6 +143,8 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
                     "margin-top": "10px",
                     "padding-top": "0px",
                 });
+                $("#details_mobile_button").css({ display: "inline" });
+                $("#details_mobile_reserve_button").css({ display: "none" });
             }
 
             $("#counting_part").css("display", "block");
@@ -299,6 +303,8 @@ function calendar_availability(months) {
                                     $("#details_button").css({
                                         display: "none",
                                     });
+                                    $("#details_mobile_button").css({ display: "none" });
+                                    $("#details_mobile_reserve_button").css({ display: "inline" });
                                 } else {
                                     $("#total_all2").text(total["total_all"]);
                                     $("#total_all2_div").css({
@@ -311,6 +317,8 @@ function calendar_availability(months) {
                                         "margin-top": "10px",
                                         "padding-top": "0px",
                                     });
+                                    $("#details_mobile_button").css({ display: "inline" });
+                                    $("#details_mobile_reserve_button").css({ display: "none" });
                                 }
 
                                 // $("#price_total").val(total["price"]);
@@ -353,6 +361,9 @@ $("#clear1").click(function () {
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
+    $("#details_button").css("display", "none");
+    $("#details_mobile_button").css({ display: "none" });
+    $("#details_mobile_reserve_button").css({ display: "inline" });
     $("#sum_night").val("0");
     $("#total3").text("0");
     $("#tax3").text("0");
@@ -378,6 +389,8 @@ $("#clear_date").click(function () {
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
     $("#details_button").css("display", "none");
+    $("#details_mobile_button").css({ display: "none" });
+    $("#details_mobile_reserve_button").css({ display: "inline" });
     $("#popup_check").css("display", "none");
     $("#sum_night").val("0");
     $("#total3").text("0");
@@ -405,6 +418,8 @@ $("#clear_date2").click(function () {
     $("#counting_part").css("display", "none");
     $("#popup_check2").css("display", "none");
     $("#details_button").css("display", "none");
+    $("#details_mobile_button").css({ display: "none" });
+    $("#details_mobile_reserve_button").css({ display: "inline" });
     // $("#modal-details-reserve").removeClass("show");
     // $(".modal-backdrop").removeClass("show");
     $("#modal-details-reserve").modal("hide");
@@ -590,6 +605,8 @@ function calendar_reserve(months) {
                                     $("#details_button").css({
                                         display: "none",
                                     });
+                                    $("#details_mobile_button").css({ display: "none" });
+                                    $("#details_mobile_reserve_button").css({ display: "inline" });
                                 } else {
                                     $("#total_all2").text(total["total_all"]);
                                     $("#total_all2_div").css({
@@ -602,6 +619,8 @@ function calendar_reserve(months) {
                                         "margin-top": "10px",
                                         "padding-top": "0px",
                                     });
+                                    $("#details_mobile_button").css({ display: "inline" });
+                                    $("#details_mobile_reserve_button").css({ display: "none" });
                                 }
 
                                 $("#tax").text(total["tax"]);
@@ -773,6 +792,8 @@ function calendar_reserve2(months) {
                                     $("#details_button").css({
                                         display: "none",
                                     });
+                                    $("#details_mobile_button").css({ display: "none" });
+                                    $("#details_mobile_reserve_button").css({ display: "inline" });
                                 } else {
                                     $("#total_all2").text(total["total_all"]);
                                     $("#total_all2_div").css({
@@ -785,6 +806,8 @@ function calendar_reserve2(months) {
                                         "margin-top": "10px",
                                         "padding-top": "0px",
                                     });
+                                    $("#details_mobile_button").css({ display: "inline" });
+                                    $("#details_mobile_reserve_button").css({ display: "none" });
                                 }
 
                                 if (!total["discount"]) {
