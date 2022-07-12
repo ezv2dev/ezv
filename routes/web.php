@@ -1188,7 +1188,7 @@ Route::patch('/things-to-do/update/price', [Activity\ActivityPriceController::cl
 Route::patch('/things-to-do/update/name', [Activity\ActivityListController::class, 'activity_update_name'])->name('activity_update_name');
 Route::patch('/things-to-do/update/contact', [Activity\ActivityListController::class, 'activity_update_contact'])->name('activity_update_contact');
 Route::post('/things-to-do/update/location', [Activity\ActivityListController::class, 'activity_update_location'])->name('activity_update_location');
-Route::patch('/things-to-do/update/short-description', [Activity\ActivityListController::class, 'activity_update_short_description'])->name('activity_update_short_description');
+Route::post('/things-to-do/update/short-description', [Activity\ActivityListController::class, 'activity_update_short_description'])->name('activity_update_short_description');
 Route::patch('/things-to-do/update/description', [Activity\ActivityListController::class, 'activity_update_description'])->name('activity_update_description');
 Route::patch('/things-to-do/update/time', [Activity\ActivityListController::class, 'activity_update_time'])->name('activity_update_time');
 Route::post('/things-to-do/update/photo/position', [Activity\ActivityListController::class, 'activity_update_position_photo'])->name('activity_update_photo_photo_position');

@@ -10,6 +10,7 @@
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="EZV2">
@@ -62,6 +63,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk&libraries=places">
     </script>
     <script src="{{ asset('assets/js/errorToString.js') }}"></script>
+
+    <!-- Izitoast -->
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
+    <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -421,7 +427,7 @@
                                             <form action="{{ route('activity_update_time') }}" method="post">
                                                 @csrf
                                                 @method('PATCH')
-                                                <input type="hidden" name="id_activity"
+                                                <input type="hidden" id="id_activity" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
                                                     <div class="col-auto">
@@ -631,7 +637,7 @@
                         </div>
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single">
+                            <span id="short_description_contents" class="translate-text-single">
                                 {{ $activity->short_description }}
                             </span>
                             @auth
@@ -644,14 +650,14 @@
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display: none">
-                                    <form action="{{ route('activity_update_short_description') }}" method="post">
-                                        @csrf
-                                        @method('PATCH')
+                                    <form action="javascript:void(0);" method="post">
+                                        {{-- @csrf
+                                        @method('PATCH') --}}
                                         <input type="hidden" name="id_activity" value="{{ $activity->id_activity }}"
                                             required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                             cols="30" rows="3" maxlength="250" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary">
+                                        <button type="submit" class="btn btn-sm btn-primary" onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
@@ -3764,6 +3770,7 @@
     <script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
     <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-villa.js') }}"></script>
+    <script src="{{ asset('assets/js/crud-wow.js') }}"></script>
     <script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -4032,7 +4039,7 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            formInput.value = '{{ $activity->short_description }}';
+            // formInput.value = '{{ $activity->short_description }}';
 
             if(formInput.value == 'Make your short description here'){
                 formInput.value = '';
