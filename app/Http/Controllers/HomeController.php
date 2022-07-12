@@ -8,23 +8,86 @@ use Illuminate\Http\Request;
 use App\Models\PopularDestinations;
 use App\Services\DeviceCheckService;
 use App\Models\Location;
+use App\Models\Villa;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $restaurant = Restaurant::where('status', 1)->get()->shuffle()->sortBy('grade');
-        $activity = Activity::where('status', 1)->get()->shuffle()->sortBy('grade');
-        $popular_destination = PopularDestinations::with('location')->get();
+        // $restaurant = Restaurant::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
+        // $activity = Activity::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
 
-        // return view('home');
-        // if (DeviceCheckService::isMobile()) {
-        //     return view('user.m-index')->with(compact('restaurant', 'activity', 'popular_destination'));
-        // }
-        // if (DeviceCheckService::isDesktop()) {
-        //     return view('user.index')->with(compact('restaurant', 'activity', 'popular_destination'));
-        // }
-        return view('user.index')->with(compact('restaurant', 'activity', 'popular_destination'));
+        // fetch restaurant
+        $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->limit(9)->get();
+        $restaurant = collect();
+        $restaurant->merge($restaurant_aa);
+        if($restaurant->count() < 9){
+            $restaurant_a = Restaurant::where('status', 1)->where('grade','A')->limit(9 - $restaurant->count())->get();
+            $restaurant_a->each(function ($item, $key) use($restaurant) {
+                $restaurant->push($item);
+            });
+            if($restaurant->count() < 9){
+                $restaurant_b = Restaurant::where('status', 1)->where('grade','B')->limit(9 - $restaurant->count())->get();
+                $restaurant_b->each(function ($item, $key) use($restaurant) {
+                    $restaurant->push($item);
+                });
+                if($restaurant->count() < 9){
+                    $restaurant_c = Restaurant::where('status', 1)->where('grade','C')->limit(9 - $restaurant->count())->get();
+                    $restaurant_c->each(function ($item, $key) use($restaurant) {
+                        $restaurant->push($item);
+                    });
+                    if($restaurant->count() < 9){
+                        $restaurant_d = Restaurant::where('status', 1)->where('grade','D')->limit(9 - $restaurant->count())->get();
+                        $restaurant_d->each(function ($item, $key) use($restaurant) {
+                            $restaurant->push($item);
+                        });
+                        if($restaurant->count() < 9){
+                            $restaurant_null = Activity::where('status', 1)->where('grade', null)->limit(9 - $restaurant->count())->get();
+                            $restaurant_null->each(function ($item, $key) use($restaurant) {
+                                $restaurant->push($item);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        // fetch activity
+        $activity_aa = Activity::where('status', 1)->where('grade','AA')->limit(9)->get();
+        $activity = collect();
+        $activity->merge($activity_aa);
+        if($activity->count() < 9){
+            $activity_a = Activity::where('status', 1)->where('grade','A')->limit(9 - $activity->count())->get();
+            $activity_a->each(function ($item, $key) use($activity) {
+                $activity->push($item);
+            });
+            if($activity->count() < 9){
+                $activity_b = Activity::where('status', 1)->where('grade','B')->limit(9 - $activity->count())->get();
+                $activity_b->each(function ($item, $key) use($activity) {
+                    $activity->push($item);
+                });
+                if($activity->count() < 9){
+                    $activity_c = Activity::where('status', 1)->where('grade','C')->limit(9 - $activity->count())->get();
+                    $activity_c->each(function ($item, $key) use($activity) {
+                        $activity->push($item);
+                    });
+                    if($activity->count() < 9){
+                        $activity_d = Activity::where('status', 1)->where('grade','D')->limit(9 - $activity->count())->get();
+                        $activity_d->each(function ($item, $key) use($activity) {
+                            $activity->push($item);
+                        });
+                        if($activity->count() < 9){
+                            $activity_null = Activity::where('status', 1)->where('grade', null)->limit(9 - $activity->count())->get();
+                            $activity_null->each(function ($item, $key) use($activity) {
+                                $activity->push($item);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        return view('user.index')->with(compact('restaurant', 'activity'));
     }
 
     public function get_lat_long(Request $request)

@@ -321,9 +321,9 @@
                                                         </div>
                                                         @php
                                                             $location = App\Http\Controllers\ViewController::get_location();
-                                                            $hotelName = App\Http\Controllers\HotelController::get_name();
-                                                            $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
-                                                            $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                                                            // $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                            // $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                                                            // $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                         @endphp
                                                         @foreach ($location as $item)
                                                             <div class="col-lg-12 location-popup-desc-container sugest-list"
@@ -339,7 +339,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                        @foreach ($hotelName as $item2)
+                                                        {{-- @foreach ($hotelName as $item2)
                                                             <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                                 style="display: none; cursor: pointer;"
                                                                 onclick="window.open('{{ route('hotel', $item2->id_hotel) }}', '_blank');">
@@ -386,7 +386,7 @@
                                                                         data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                                                 </div>
                                                             </div>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
                                                             style="display: none">
                                                             <p>{{ __('user_page.Location not found') }}</p>
