@@ -237,126 +237,318 @@ if (request()->fCategory) {
 
             <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
                 data-isshow="true">
-                @foreach ($collabFilter->sortBy('order')->take(8) as $item)
-                    <div class="skeleton skeleton-h-3 skeleton-w-100">
-                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                            onclick="collabFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_collab_filter }})">
+                {{-- <ul class="cat-container">
+                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
+                        <a href="javascript:void(0)" id="prices" style="cursor:pointer;"
+                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
                             <div>
-                                <i class="fa fa-solid fa-{{ $item->icon }} text-18 list-description  {{ $textColor }} sub-icon"
-                                    @php
-                                        $isChecked = '';
-                                        $filterIds = explode(',', request()->get('filter'));
-                                    @endphp @if (in_array($item->id_collab_filter, $filterIds))
-                                    style="color: #ff7400 !important;"
-                @endif>
-                </i>
-            </div>
-            <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
-        </div>
-    </div>
-    @endforeach
-
-    <div class="skeleton skeleton-h-3 skeleton-w-100">
-        <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-            onclick="moreSubCategory()">
-
-            <div>
-                <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-            </div>
-            <p class="list-description {{ $textColor }}">
-                {{ __('user_page.More') }}
-            </p>
-
-        </div>
-    </div>
-    </div>
-    </div>
-
-    <div class="col-lg-12 container-grid">
-        @foreach ($collab as $data)
-            <div class="grid-list-container">
-
-                <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
-
-                    <div class="content list-image-content" style="margin: 0; padding: 0; max-width: 1200px !important;">
-                        <input type="hidden" value="{{ $data->id_collab }}" id="id_collab" name="id_collab">
-                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-10"
-                            data-dots="false" data-arrows="true">
-                            @php
-                                $gallery = App\Http\Controllers\Collaborator\CollaboratorController::gallery($data->id_collab);
-                            @endphp
-                            @forelse ($gallery as $item)
-                                <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
-                                    class="col-lg-6 grid-image-container">
-                                    <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
-                                        src="{{ URL::asset('/foto/collaborator/' . $data->id_collab . '/' . $item->photo) }}"
-                                        {{-- src="{{ URL::asset('foto/collaborator/1/1.jpg') }}" --}} alt="EZV_{{ $item->photo }}">
-                                </a>
-                            @empty
-                                @if ($data->image)
-                                    <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
-                                        class="col-lg-6 grid-image-container">
-                                        <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
-                                            src="{{ URL::asset('/foto/collaborator/' . $item->id_collab . '/' . $data->image) }}"
-                                            alt="EZV_{{ $item->photo }}">
-                                    </a>
-                                @else
-                                    <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
-                                        class="col-lg-6 grid-image-container">
-                                        <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
-                                            src="{{ URL::asset('/template/collab/template_profile.jpg') }}"
-                                            alt="EZV_{{ $item->photo }}">
-                                    </a>
-                                @endif
-                            @endforelse
+                                <i
+                                    class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Price</div>
+                        </a>
+                        <div class="price-popup dropdown-menu" style="left: 520px;">
+                            <div class="dropdown-pd-0">
+                                <div class="double-slider">
+                                    <div class="extra-controls form-inline">
+                                        <div class="col-lg-12">
+                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-lg-12 price-popup-display-container">
+                                            <div class="price-popup-display-wrap1">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="min_price" class="price-popup-label">Min</label>
+                                                    <input name="fMinPrice[]" type="text"
+                                                        class="js-input-from form-control price-popup-label"
+                                                        value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="price-popup-display-gap-container">
+                                                <div></div>
+                                            </div>
+                                            <div class="price-popup-display-wrap2">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="max_price" class="price-popup-label">Max</label>
+                                                    <input name="fMaxPrice[]" type="text"
+                                                        class="js-input-to form-control price-popup-label" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="js-range-slider" value="" />
+                                    </div>
+                                    <center>
+                                        <div style="margin-top: 25px;">
+                                            <button type="submit" class="btn btn-choose"
+                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
                         </div>
+                    </li>
+                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
+                        <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
+                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
+                            <div>
+                                <i
+                                    class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Gender</div>
+                        </a>
+                        <div class="price-popup dropdown-menu" style="left: 520px;">
+                            <div class="dropdown-pd-0">
+                                <div class="double-slider">
+                                    <div class="extra-controls form-inline">
+                                        <div class="col-lg-12">
+                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-lg-12 price-popup-display-container">
+                                            <div class="price-popup-display-wrap1">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="min_price" class="price-popup-label">Min</label>
+                                                    <input name="fMinPrice[]" type="text"
+                                                        class="js-input-from form-control price-popup-label"
+                                                        value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="price-popup-display-gap-container">
+                                                <div></div>
+                                            </div>
+                                            <div class="price-popup-display-wrap2">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="max_price" class="price-popup-label">Max</label>
+                                                    <input name="fMaxPrice[]" type="text"
+                                                        class="js-input-to form-control price-popup-label" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="js-range-slider" value="" />
+                                    </div>
+                                    <center>
+                                        <div style="margin-top: 25px;">
+                                            <button type="submit" class="btn btn-choose"
+                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
+                        <a href="javascript:void(0)" id="prices" style="cursor:pointer;"
+                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
+                            <div>
+                                <i
+                                    class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Followers</div>
+                        </a>
+                        <div class="price-popup dropdown-menu" style="left: 520px;">
+                            <div class="dropdown-pd-0">
+                                <div class="double-slider">
+                                    <div class="extra-controls form-inline">
+                                        <div class="col-lg-12">
+                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-lg-12 price-popup-display-container">
+                                            <div class="price-popup-display-wrap1">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="min_price" class="price-popup-label">Min</label>
+                                                    <input name="fMinPrice[]" type="text"
+                                                        class="js-input-from form-control price-popup-label"
+                                                        value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="price-popup-display-gap-container">
+                                                <div></div>
+                                            </div>
+                                            <div class="price-popup-display-wrap2">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="max_price" class="price-popup-label">Max</label>
+                                                    <input name="fMaxPrice[]" type="text"
+                                                        class="js-input-to form-control price-popup-label" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="js-range-slider" value="" />
+                                    </div>
+                                    <center>
+                                        <div style="margin-top: 25px;">
+                                            <button type="submit" class="btn btn-choose"
+                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul> --}}
+                <div class="skeleton skeleton-h-3 skeleton-w-100">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
+                        <div>
+                            <i class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
+                            </i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Price</div>
                     </div>
-
                 </div>
 
-                <div class="desc-container-grid mb-2">
-                    <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
-                        class="grid-overlay-desc"></a>
-                    <div class="skeleton skeleton-h-2 skeleton-w-100">
-                        <div class="text-14 fw-500 {{ $textColor }} list-description"
-                            style="text-transform: capitalize;">
-                            {{ $data->user->first_name }} {{ $data->user->last_name }}</div>
-                    </div>
-                    <div class="grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
-                        <p class="text-14 fw-400 text-grey-2 grid-one-line max-lines">{{ $data->description }}</p>
-                    </div>
-                    <div class="grid-one-line skeleton skeleton-w-50 skeleton-h-1">
-                        <div class="text-14 fw-400 grid-one-line  text-orange ">{{ $data->address }}</div>
-                    </div>
-                    <div class="text-14 grid-one-line mt-1 skeleton">
-                        <span class="text-14 fw-400 {{ $textColor }} list-description">Start from</span>
-                        <span class="fw-600 ml-1 text-14 {{ $textColor }} list-description">IDR
-                            {{ number_format($data->price, 0, ',', '.') }}
-                        </span>
-                    </div>
+                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                    <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
+                        class="grid-sub-cat-content-container text-13">
+                        <div>
+                            <i
+                                class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
+                            </i>
+                        </div>
+                        <div class="price-popup dropdown-menu" style="left: 520px;">
+                            <div class="dropdown-pd-0">
+                                <div class="double-slider">
+                                    <div class="extra-controls form-inline">
+                                        <div class="col-lg-12">
+                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-lg-12 price-popup-display-container">
+                                            <div class="price-popup-display-wrap1">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="min_price" class="price-popup-label">Min</label>
+                                                    <input name="fMinPrice[]" type="text"
+                                                        class="js-input-from form-control price-popup-label"
+                                                        value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="price-popup-display-gap-container">
+                                                <div></div>
+                                            </div>
+                                            <div class="price-popup-display-wrap2">
+                                                <div class="col-lg-12 price-popup-display">
+                                                    <label for="max_price" class="price-popup-label">Max</label>
+                                                    <input name="fMaxPrice[]" type="text"
+                                                        class="js-input-to form-control price-popup-label" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="js-range-slider" value="" />
+                                    </div>
+                                    <center>
+                                        <div style="margin-top: 25px;">
+                                            <button type="submit" class="btn btn-choose"
+                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Gender</div>
                     </a>
-                    <div class="text-14 fw-400 grid-one-line {{ $textColor }} list-description skeleton"
-                        style="display: flex;">
-                        <a href="mailto:{{ $data->email }}?subject=I want to collab">
-                            <div
-                                style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
-                        </a>
-                        <a href="https://api.whatsapp.com/send?text={{ $data->phone }}">
-                            <div
-                                style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; margin-left: 8px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </div>
-                        </a>
-                    </div>
+                </div>
 
+                <div class="skeleton skeleton-h-3 skeleton-w-100">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
+                        <div>
+                            <i class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
+                            </i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Followers</div>
+                    </div>
                 </div>
             </div>
-        @endforeach
+        </div>
 
-    </div>
-    <!-- End Refresh Page -->
+        <div class="col-lg-12 container-grid">
+            @foreach ($collab as $data)
+                <div class="grid-list-container">
+
+                    <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
+
+                        <div class="content list-image-content"
+                            style="margin: 0; padding: 0; max-width: 1200px !important;">
+                            <input type="hidden" value="{{ $data->id_collab }}" id="id_collab" name="id_collab">
+                            <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-10"
+                                data-dots="false" data-arrows="true">
+                                @php
+                                    $gallery = App\Http\Controllers\Collaborator\CollaboratorController::gallery($data->id_collab);
+                                @endphp
+                                @forelse ($gallery as $item)
+                                    <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
+                                        class="col-lg-6 grid-image-container">
+                                        <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
+                                            src="{{ URL::asset('/foto/collaborator/' . $data->id_collab . '/' . $item->photo) }}"
+                                            {{-- src="{{ URL::asset('foto/collaborator/1/1.jpg') }}" --}} alt="EZV_{{ $item->photo }}">
+                                    </a>
+                                @empty
+                                    @if ($data->image)
+                                        <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
+                                            class="col-lg-6 grid-image-container">
+                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
+                                                src="{{ URL::asset('/foto/collaborator/' . $item->id_collab . '/' . $data->image) }}"
+                                                alt="EZV_{{ $item->photo }}">
+                                        </a>
+                                    @else
+                                        <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
+                                            class="col-lg-6 grid-image-container">
+                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto"
+                                                style="display: block;"
+                                                src="{{ URL::asset('/template/collab/template_profile.jpg') }}"
+                                                alt="EZV_{{ $item->photo }}">
+                                        </a>
+                                    @endif
+                                @endforelse
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="desc-container-grid mb-2">
+                        <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
+                            class="grid-overlay-desc"></a>
+                        <div class="skeleton skeleton-h-2 skeleton-w-100">
+                            <div class="text-14 fw-500 {{ $textColor }} list-description"
+                                style="text-transform: capitalize;">
+                                {{ $data->user->first_name }} {{ $data->user->last_name }}</div>
+                        </div>
+                        <div class="grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
+                            <p class="text-14 fw-400 text-grey-2 grid-one-line max-lines">{{ $data->description }}</p>
+                        </div>
+                        <div class="grid-one-line skeleton skeleton-w-50 skeleton-h-1">
+                            <div class="text-14 fw-400 grid-one-line  text-orange ">{{ $data->address }}</div>
+                        </div>
+                        <div class="text-14 grid-one-line mt-1 skeleton">
+                            <span class="text-14 fw-400 {{ $textColor }} list-description">Start from</span>
+                            <span class="fw-600 ml-1 text-14 {{ $textColor }} list-description">IDR
+                                {{ number_format($data->price, 0, ',', '.') }}
+                            </span>
+                        </div>
+                        </a>
+                        <div class="text-14 fw-400 grid-one-line {{ $textColor }} list-description skeleton"
+                            style="display: flex;">
+                            <a href="mailto:{{ $data->email }}?subject=I want to collab">
+                                <div
+                                    style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?text={{ $data->phone }}">
+                                <div
+                                    style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; margin-left: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+        <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
     {{-- modal laguage and currency --}}

@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        abort(500);
+        // abort(500);
         $restaurant = Restaurant::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
         $activity = Activity::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
 
