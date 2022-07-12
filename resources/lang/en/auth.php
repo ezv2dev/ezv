@@ -25,4 +25,8 @@ return [
     'empty_password' => 'The password field is required',
     'min_password' => 'The password must be at least 8 characters.',
     'invalid_password' => 'The confirmation password not match',
+    'empty_va' => 'Please select one of virtual account brand',
+    'empty_cnm' => 'Card number is invalid',
+    'empty_exp' => 'Card exp is invalid',
+    'empty_cvn' => 'Card cvn is invalid',
 ];

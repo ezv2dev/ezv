@@ -809,8 +809,8 @@ input:checked + .switch-background:active::before {
     background-color: #ff7400;
     border-radius: 50px;
     padding: 5px;
-    top: -40px;
-    right: -150px;
+    /* top: -40px;
+    right: -150px; */
 }
 
 .logged-user-menu-detail {

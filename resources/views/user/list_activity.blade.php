@@ -198,7 +198,7 @@
                         <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                     </div>
 
-                    <a href="{{ route('activity', $data->id_activity) }}" target="_blank">
+                    <a href="{{ route('activity', $data->id_activity) }}" target="_blank" class="absolute-right">
                         <div class="video-thumb-container skeleton">
                             <div class="video-thumb-content">
                                 <i class="fas fa-2x fa-play video-button"></i>

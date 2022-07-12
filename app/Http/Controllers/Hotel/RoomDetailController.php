@@ -233,12 +233,12 @@ class RoomDetailController extends Controller
 
         $hotelRoom = HotelTypeDetail::with('bed', 'hotel', 'hotelType', 'typeAmenities')->where('id_hotel_room', $id)->first();
 
-        if (DeviceCheckService::isMobile()) {
-            return view('user.hotel.m-hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
-        }
-        if (DeviceCheckService::isDesktop()) {
-            return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
-        }
+        // if (DeviceCheckService::isMobile()) {
+        //     return view('user.hotel.m-hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
+        // }
+        // if (DeviceCheckService::isDesktop()) {
+        //     return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
+        // }
         return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
     }
 

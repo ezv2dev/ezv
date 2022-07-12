@@ -1952,6 +1952,12 @@ li.button-dropdown {
     z-index: 1000;
 }
 
+.width-full-absolute{
+    width: 100%;
+    position:absolute;
+}
+
+
 .calendar-modal .flatpickr-months .flatpickr-prev-month.flatpickr-next-month,
 .flatpickr-months .flatpickr-next-month.flatpickr-next-month {
     right: 0 /* /*rtl:end:ignore*/;
@@ -3145,13 +3151,18 @@ video {
     font-weight: 400;
 }
 
-input[type="text"] {
+/* input[type="text"] {
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 150%;
+} */
+#check_in, #check_out {
     outline: none;
     background: none;
     border: none;
     font-size: 150%;
 }
-
 .overlay {
     position: absolute;
     top: 0;
@@ -3469,20 +3480,20 @@ span.flatpickr-weekday {
     .section {
         scroll-margin-top: 1.3rem;
     }
-    
+
     .section-2 {
         scroll-margin-top: 2.2rem;
     }
 }
 
-@media only screen and (max-width: 575px) { 
+@media only screen and (max-width: 575px) {
     .add-gallery {
         padding-left: 12px !important;
         padding-right: 12px !important;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 768px) { 
+@media only screen and (min-width: 576px) and (max-width: 768px) {
     .add-gallery {
         padding-left: 24px !important;
         padding-right: 24px !important;
@@ -3615,7 +3626,7 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1099px) { 
+@media only screen and (min-width: 768px) and (max-width: 1099px) {
     #heightCalendar {
         padding: 10px !important;
         width: 100% !important;
@@ -3626,7 +3637,7 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 1100px) and (max-width: 1209px) { 
+@media only screen and (min-width: 1100px) and (max-width: 1209px) {
     #heightCalendar {
         padding: 50px 30px 30px 30px !important;
     }
@@ -3816,31 +3827,31 @@ span.flatpickr-weekday {
 }
 
 .date-form {
-    font-size: 14px !important; 
-    margin-left: 0px; 
-    width:100%; 
-    text-align: center; 
+    font-size: 14px !important;
+    margin-left: 0px;
+    width:100%;
+    text-align: center;
 }
 
 .date-form::placeholder {
-    font-size: 12px !important; 
+    font-size: 12px !important;
 }
 
 #name-form-input{
-    width: 100%; 
-    font-weight: 600; 
-    height: 120px; 
-    font-size: 39px; 
+    width: 100%;
+    font-weight: 600;
+    height: 120px;
+    font-size: 39px;
     resize: none;
 }
 
 #short-description-form-input{
-    width: 100%; 
-    height: 109px; 
+    width: 100%;
+    height: 109px;
     resize: none;
 }
 
 #name-form-input::placeholder{
-    font-weight: 600 !important; 
+    font-weight: 600 !important;
     font-size: 39px !important;
 }
