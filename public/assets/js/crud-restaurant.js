@@ -139,7 +139,11 @@ $("#updateImageForm").submit(function (e) {
     var formData = new FormData(this);
     formData.append("image", imageProfileRestaurant);
 
-    console.log(imageProfileRestaurant);
+    // console.log(imageProfileRestaurant);
+
+    var btn = document.getElementById("btnupdateImageForm");
+    btn.textContent = "Saving Image...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -171,7 +175,14 @@ $("#updateImageForm").submit(function (e) {
 
             readerImageRestaurant.readAsDataURL(imageProfileRestaurant);
 
+            this.reset();
+
             $("#modal-edit_restaurant_profile").modal("hide");
+
+            $("##imageRestaurant").val("");
+
+            btn.textContent = "Save Image";
+            btn.classList.remove("disabled");
         },
     });
 });
