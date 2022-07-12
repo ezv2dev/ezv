@@ -395,11 +395,9 @@ class RestaurantListController extends Controller
             'id' => ['required', 'integer'],
             'short_desc' => ['required', 'string', 'max:255'],
         ]);
+
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+            return response()->json($validator->errors(), 500);
         }
 
         // restaurant data
@@ -1052,10 +1050,7 @@ class RestaurantListController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+            return response()->json($validator->errors(), 500);
         }
         // $request->validate([
         //     'id_restaurant' => ['required', 'integer'],

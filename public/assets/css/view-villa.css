@@ -1932,6 +1932,7 @@ li.button-dropdown {
     width: 728px ;
     left: auto;
     right: 0;
+    z-index: 1;
     top: 50%;
     transform: translateY(-50%);
     position: absolute;

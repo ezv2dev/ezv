@@ -1386,7 +1386,7 @@
                                                 <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                     START-DATE
                                                 </p>
-                                                <input class=""
+                                                <input class="date-form"
                                                     style="font-size: 15px; margin-left: 0px; width:100%; text-align: center; border: none !important; border-color: transparent !important;"
                                                     type="text" id="check_in" name="check_in"
                                                     style="width:80%; border:0" placeholder="Add Date" readonly>
@@ -1400,7 +1400,7 @@
                                                 <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                     END-DATE
                                                 </p>
-                                                <input class=""
+                                                <input class="date-form"
                                                     style="font-size: 15px; margin-left: 0px; width: 100px; text-align: center; border: none !important; border-color: transparent !important;"
                                                     type="text" id="check_out" name="check_out"
                                                     style="width:80%; border:0" placeholder="Add Date" readonly>

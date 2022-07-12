@@ -344,9 +344,14 @@ $("#clear1").click(function () {
     $("#check_in3").val("");
     $("#check_out").val("");
     $("#check_out3").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+        calendar_reserve2(1)
+    } else {
+        calendar_availability(2);
+        calendar_reserve2(2)
+    }
     calendar_reserve(2);
-    calendar_reserve2(2);
-    calendar_availability(2);
     $("#counting_part").css("display", "none");
     $("#sum_night").val("0");
     $("#total3").text("0");
@@ -363,9 +368,14 @@ $("#clear_date").click(function () {
     $("#check_in3").val("");
     $("#check_out").val("");
     $("#check_out3").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+        calendar_reserve2(1)
+    } else {
+        calendar_availability(2);
+        calendar_reserve2(2)
+    }
     calendar_reserve(2);
-    calendar_reserve2(2);
-    calendar_availability(2);
     $("#counting_part").css("display", "none");
     $("#details_button").css("display", "none");
     $("#popup_check").css("display", "none");
@@ -384,9 +394,14 @@ $("#clear_date2").click(function () {
     $("#check_in3").val("");
     $("#check_out").val("");
     $("#check_out3").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+        calendar_reserve2(1)
+    } else {
+        calendar_availability(2);
+        calendar_reserve2(2)
+    }
     calendar_reserve(2);
-    calendar_reserve2(2);
-    calendar_availability(2);
     $("#counting_part").css("display", "none");
     $("#popup_check2").css("display", "none");
     $("#details_button").css("display", "none");
@@ -635,8 +650,13 @@ function calendar_reserve(months) {
                                     );
                                     $("#cleaning_div").css("display", "block");
                                 }
-                                calendar_availability(months);
-                                calendar_reserve2(months);
+                                if ($(window).width() <= 991) {
+                                    calendar_availability(1);
+                                    calendar_reserve2(1)
+                                } else {
+                                    calendar_availability(2);
+                                    calendar_reserve2(2)
+                                }
                             }
                         },
                     });
@@ -794,7 +814,7 @@ function calendar_reserve2(months) {
                                     $("#cleaning_div").css("display", "block");
                                 }
                                 calendar_availability(months);
-                                calendar_reserve(months);
+                                calendar_reserve(2);
                             }
                         },
                     });
