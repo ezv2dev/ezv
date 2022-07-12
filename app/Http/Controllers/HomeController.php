@@ -14,8 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // $restaurant = Restaurant::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
-        // $activity = Activity::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
+        $restaurant = Restaurant::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
+        $activity = Activity::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
 
         // fetch restaurant
         // $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->limit(9)->get();
@@ -132,7 +132,7 @@ class HomeController extends Controller
         $longitudeUser = $request->longitudeUser;
         $ip = request()->ip();
 
-        $url = "http://ipinfo.io/".$ip."/geo";
+        $url = "http://ipinfo.io/" . $ip . "/geo";
 
         try {
             $c = curl_init();
@@ -150,14 +150,13 @@ class HomeController extends Controller
         $loc = $json['loc'];
         $pisah = explode(",", $loc);
 
-        $location = Location::select('id_location','name','latitude','longitude')->get();
+        $location = Location::select('id_location', 'name', 'latitude', 'longitude')->get();
 
         $i = 0;
 
         $data = [];
 
-        foreach ($location as $item)
-        {
+        foreach ($location as $item) {
             $point1 = array('lat' => $pisah[0], 'long' => $pisah[1]);
 
             $lat1 = $point1['lat'];

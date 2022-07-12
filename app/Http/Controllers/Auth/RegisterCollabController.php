@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Collaborator;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class RegisterCollabController extends Controller
 {
@@ -32,7 +33,16 @@ class RegisterCollabController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+
+
+    // protected $redirectTo = '/collaborator-list';
+
+    protected function redirectTo()
+    {
+        $collab_id = Collaborator::where('created_by', Auth::user()->id)->select('id_collab')->first();
+        $link = '/collaborator/' . $collab_id->id_collab;
+        return $link;
+    }
 
     /**
      * Create a new controller instance.
@@ -61,7 +71,6 @@ class RegisterCollabController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role_id' => ['required', 'integer', Rule::in($roles)],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -74,15 +83,24 @@ class RegisterCollabController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            // 'name' => $data['name'],
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            // 'username' => $data['username'],
             'email' => $data['email'],
-            'role_id' => $data['role_id'],
+            'role_id' => 5,
+            'user_code' => rand(0000000001, 9999999999),
             'password' => Hash::make($data['password']),
         ]);
+
+        Collaborator::create([
+            'uid' => rand(0000000001, 9999999999),
+            'status' => 0,
+            'email' => $user->email,
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ]);
+
+        return $user;
     }
 
     protected function landingpage()
