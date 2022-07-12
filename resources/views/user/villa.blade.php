@@ -304,7 +304,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
@@ -405,7 +405,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
+                                    <textarea class="form-control" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <button type="submit" class="btn btn-sm btn-primary"
