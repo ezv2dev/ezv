@@ -13,10 +13,8 @@ function edit_location() {
 $(document).ready(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
-        calendar_reserve2(1)
     } else {
         calendar_availability(2);
-        calendar_reserve2(2)
     }
 });
 
@@ -64,16 +62,24 @@ $("#clear_date_inline").click(function () {
     // $("#check_in2").val("");
     $("#check_in").val("");
     $("#check_out").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+    } else {
+        calendar_availability(2);
+    }
     calendar_inline_collab(2);
-    calendar_availability(2);
 });
 
 $("#clear_date_availability").click(function () {
     // $("#check_in2").val("");
     $("#check_in").val("");
     $("#check_out").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+    } else {
+        calendar_availability(2);
+    }
     calendar_inline_collab(2);
-    calendar_availability(2);
 });
 
 function calendar_inline_collab(months) {
@@ -105,7 +111,11 @@ function calendar_inline_collab(months) {
             let content = document.getElementById("popup_check");
             content.style.display = "none";
 
-            calendar_availability(2);
+            if ($(window).width() <= 991) {
+                calendar_availability(1);
+            } else {
+                calendar_availability(2);
+            }
         },
     });
 }
