@@ -3219,6 +3219,11 @@ span.flatpickr-weekday {
     display: inline;
 }
 
+#type-content-mobile{
+    display: none;
+}
+
+
 @media only screen and (max-width: 345px) {
     .name-content-mobile #name-content-mobile {
         font-size: 20px !important;
@@ -3258,6 +3263,11 @@ span.flatpickr-weekday {
     .edit-profile-image-btn-dekstop {
         display: none !important;
     }
+
+    #type-content-mobile{
+        display: block;
+    }
+
     .collab-joined-in-dekstop,
     .collab-edit-profile-btn-dekstop {
         display: none !important;
