@@ -18,31 +18,31 @@ class HomeController extends Controller
         $activity = Activity::where('status', 1)->limit(5)->get()->shuffle()->sortBy('grade');
 
         // fetch restaurant
-        // $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->limit(9)->get();
+        // $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
         // $restaurant = collect();
         // $restaurant->merge($restaurant_aa);
         // if($restaurant->count() < 9){
-        //     $restaurant_a = Restaurant::where('status', 1)->where('grade','A')->limit(9 - $restaurant->count())->get();
+        //     $restaurant_a = Restaurant::where('status', 1)->where('grade','A')->inRandomOrder()->limit(9 - $restaurant->count())->get();
         //     $restaurant_a->each(function ($item, $key) use($restaurant) {
         //         $restaurant->push($item);
         //     });
         //     if($restaurant->count() < 9){
-        //         $restaurant_b = Restaurant::where('status', 1)->where('grade','B')->limit(9 - $restaurant->count())->get();
+        //         $restaurant_b = Restaurant::where('status', 1)->where('grade','B')->inRandomOrder()->limit(9 - $restaurant->count())->get();
         //         $restaurant_b->each(function ($item, $key) use($restaurant) {
         //             $restaurant->push($item);
         //         });
         //         if($restaurant->count() < 9){
-        //             $restaurant_c = Restaurant::where('status', 1)->where('grade','C')->limit(9 - $restaurant->count())->get();
+        //             $restaurant_c = Restaurant::where('status', 1)->where('grade','C')->inRandomOrder()->limit(9 - $restaurant->count())->get();
         //             $restaurant_c->each(function ($item, $key) use($restaurant) {
         //                 $restaurant->push($item);
         //             });
         //             if($restaurant->count() < 9){
-        //                 $restaurant_d = Restaurant::where('status', 1)->where('grade','D')->limit(9 - $restaurant->count())->get();
+        //                 $restaurant_d = Restaurant::where('status', 1)->where('grade','D')->inRandomOrder()->limit(9 - $restaurant->count())->get();
         //                 $restaurant_d->each(function ($item, $key) use($restaurant) {
         //                     $restaurant->push($item);
         //                 });
         //                 if($restaurant->count() < 9){
-        //                     $restaurant_null = Activity::where('status', 1)->where('grade', null)->limit(9 - $restaurant->count())->get();
+        //                     $restaurant_null = Activity::where('status', 1)->where('grade', null)->inRandomOrder()->limit(9 - $restaurant->count())->get();
         //                     $restaurant_null->each(function ($item, $key) use($restaurant) {
         //                         $restaurant->push($item);
         //                     });
@@ -53,31 +53,31 @@ class HomeController extends Controller
         // }
 
         // fetch activity
-        // $activity_aa = Activity::where('status', 1)->where('grade','AA')->limit(9)->get();
+        // $activity_aa = Activity::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
         // $activity = collect();
         // $activity->merge($activity_aa);
         // if($activity->count() < 9){
-        //     $activity_a = Activity::where('status', 1)->where('grade','A')->limit(9 - $activity->count())->get();
+        //     $activity_a = Activity::where('status', 1)->where('grade','A')->inRandomOrder()->limit(9 - $activity->count())->get();
         //     $activity_a->each(function ($item, $key) use($activity) {
         //         $activity->push($item);
         //     });
         //     if($activity->count() < 9){
-        //         $activity_b = Activity::where('status', 1)->where('grade','B')->limit(9 - $activity->count())->get();
+        //         $activity_b = Activity::where('status', 1)->where('grade','B')->inRandomOrder()->limit(9 - $activity->count())->get();
         //         $activity_b->each(function ($item, $key) use($activity) {
         //             $activity->push($item);
         //         });
         //         if($activity->count() < 9){
-        //             $activity_c = Activity::where('status', 1)->where('grade','C')->limit(9 - $activity->count())->get();
+        //             $activity_c = Activity::where('status', 1)->where('grade','C')->inRandomOrder()->limit(9 - $activity->count())->get();
         //             $activity_c->each(function ($item, $key) use($activity) {
         //                 $activity->push($item);
         //             });
         //             if($activity->count() < 9){
-        //                 $activity_d = Activity::where('status', 1)->where('grade','D')->limit(9 - $activity->count())->get();
+        //                 $activity_d = Activity::where('status', 1)->where('grade','D')->inRandomOrder()->limit(9 - $activity->count())->get();
         //                 $activity_d->each(function ($item, $key) use($activity) {
         //                     $activity->push($item);
         //                 });
         //                 if($activity->count() < 9){
-        //                     $activity_null = Activity::where('status', 1)->where('grade', null)->limit(9 - $activity->count())->get();
+        //                     $activity_null = Activity::where('status', 1)->where('grade', null)->inRandomOrder()->limit(9 - $activity->count())->get();
         //                     $activity_null->each(function ($item, $key) use($activity) {
         //                         $activity->push($item);
         //                     });
@@ -88,31 +88,31 @@ class HomeController extends Controller
         // }
 
         $villa = Villa::where('status', 1)->get()->shuffle()->sortBy('grade');
-        // $villa_aa = Villa::where('status', 1)->where('grade','AA')->limit(9)->get();
+        // $villa_aa = Villa::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
         // $villa = collect();
         // $villa->merge($villa_aa);
         // if($villa->count() < 9){
-        //     $villa_a = Villa::where('status', 1)->where('grade','A')->limit(9 - $villa->count())->get();
+        //     $villa_a = Villa::where('status', 1)->where('grade','A')->inRandomOrder()->limit(9 - $villa->count())->get();
         //     $villa_a->each(function ($item, $key) use($villa) {
         //         $villa->push($item);
         //     });
         //     if($villa->count() < 9){
-        //         $villa_b = Villa::where('status', 1)->where('grade','B')->limit(9 - $villa->count())->get();
+        //         $villa_b = Villa::where('status', 1)->where('grade','B')->inRandomOrder()->limit(9 - $villa->count())->get();
         //         $villa_b->each(function ($item, $key) use($villa) {
         //             $villa->push($item);
         //         });
         //         if($villa->count() < 9){
-        //             $villa_c = Villa::where('status', 1)->where('grade','C')->limit(9 - $villa->count())->get();
+        //             $villa_c = Villa::where('status', 1)->where('grade','C')->inRandomOrder()->limit(9 - $villa->count())->get();
         //             $villa_c->each(function ($item, $key) use($villa) {
         //                 $villa->push($item);
         //             });
         //             if($villa->count() < 9){
-        //                 $villa_d = Villa::where('status', 1)->where('grade','D')->limit(9 - $villa->count())->get();
+        //                 $villa_d = Villa::where('status', 1)->where('grade','D')->inRandomOrder()->limit(9 - $villa->count())->get();
         //                 $villa_d->each(function ($item, $key) use($villa) {
         //                     $villa->push($item);
         //                 });
         //                 if($villa->count() < 9){
-        //                     $villa_null = Villa::where('status', 1)->where('grade', null)->limit(9 - $villa->count())->get();
+        //                     $villa_null = Villa::where('status', 1)->where('grade', null)->inRandomOrder()->limit(9 - $villa->count())->get();
         //                     $villa_null->each(function ($item, $key) use($villa) {
         //                         $villa->push($item);
         //                     });
