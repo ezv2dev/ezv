@@ -1185,7 +1185,7 @@ Route::post('/things-to-do/price/story/store', [Activity\ActivityPriceController
 Route::get('/things-to-do/price/{id}/delete/story/{id_story}', [Activity\ActivityPriceController::class, 'activity_delete_story'])->name('activity_price_delete_story');
 Route::get('/things-to-do/price/story/{id}', [Activity\ActivityPriceController::class, 'activity_story'])->name('activity_price_story');
 Route::patch('/things-to-do/update/price', [Activity\ActivityPriceController::class, 'update_price'])->name('activity_price_update_price');
-Route::patch('/things-to-do/update/name', [Activity\ActivityListController::class, 'activity_update_name'])->name('activity_update_name');
+Route::post('/things-to-do/update/name', [Activity\ActivityListController::class, 'activity_update_name'])->name('activity_update_name');
 Route::patch('/things-to-do/update/contact', [Activity\ActivityListController::class, 'activity_update_contact'])->name('activity_update_contact');
 Route::post('/things-to-do/update/location', [Activity\ActivityListController::class, 'activity_update_location'])->name('activity_update_location');
 Route::post('/things-to-do/update/short-description', [Activity\ActivityListController::class, 'activity_update_short_description'])->name('activity_update_short_description');
@@ -1197,7 +1197,7 @@ Route::post('/things-to-do/photo/store', [Activity\ActivityListController::class
 Route::post('/things-to-do/price/store', [Activity\ActivityListController::class, 'activity_store_price'])->name('activity_store_price');
 Route::post('/things-to-do/story/store', [Activity\ActivityListController::class, 'activity_store_story'])->name('activity_store_story');
 Route::post('/things-to-do/facilities/store', [Activity\ActivityListController::class, 'activity_store_facilities'])->name('activity_store_facilities');
-Route::patch('/things-to-do/update/image', [Activity\ActivityListController::class, 'activity_update_image'])->name('activity_update_image');
+Route::post('/things-to-do/update/image', [Activity\ActivityListController::class, 'activity_update_image'])->name('activity_update_image');
 Route::patch('/things-to-do/{id}/update/cancel-request-update-status', [Activity\ActivityController::class, 'cancel_request_update_status'])->name('activity_cancel_request_update_status');
 Route::get('/things-to-do/{id}/delete/story/{id_story}', [Activity\ActivityListController::class, 'activity_delete_story'])->name('activity_delete_story');
 Route::get('/things-to-do/{id}/delete/image', [Activity\ActivityListController::class, 'activity_delete_image'])->name('activity_delete_image');

@@ -386,10 +386,10 @@
                     <div class="col-lg-4 col-md-4 col-xs-12" style="padding: 0px;">
                         <div class="profile-image">
                             @if ($activity->image)
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img class="lozad imageProfileActivity" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $activity->image) }}">
                             @else
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img class="lozad imageProfileActivity" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
                             @endif
                             @auth
@@ -489,7 +489,8 @@
                             </div>
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
-                                <h2 id="name-content-mobile">{{ $activity->name }}
+                                <h2 id="name-content-mobile">
+                                    <span id="name-content2-mobile">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
@@ -503,7 +504,7 @@
                     </div>
                     <div class="col-lg-8 col-md-6 col-xs-12 profile-info" style="padding-left: 40px;">
                         <h2 id="name-content">
-                            {{ $activity->name }}
+                            <span id="name-content2">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editNameForm()"
@@ -515,23 +516,19 @@
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <form action="{{ route('activity_update_name') }}" method="post">
-                                        @csrf
-                                        @method('patch')
-                                        <input type="hidden" name="id_activity" value="{{ $activity->id_activity }}"
-                                            required>
-                                        <textarea style="width: 100%;" class="form-control" name="name" cols="30" rows="3"
-                                            id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}"
-                                            required>{{ $activity->name }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary"
-                                            style="background-color: #ff7400">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editNameCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
-                                    </form>
+                                    <input type="hidden" name="id_activity" value="{{ $activity->id_activity }}"
+                                        required>
+                                    <textarea style="width: 100%;" class="form-control" name="name" cols="30" rows="3"
+                                        id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}"
+                                        required>{{ $activity->name }}</textarea>
+                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameActivity()"
+                                        style="background-color: #ff7400">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editNameCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                 </div>
                             @endif
                         @endauth
@@ -3362,11 +3359,11 @@
                         @if ($activity->image)
                             <img src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $activity->image) }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
+                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad imageProfileActivity">
                         @else
                             <img src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
+                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad imageProfileActivity">
                         @endif
                         <p class="d-flex align-items-center mb-0">{{ $activity->name }}</p>
                     </div>
@@ -4000,9 +3997,11 @@
         function editNameForm() {
             var form = document.getElementById("name-form");
             var content = document.getElementById("name-content");
+            var contentMobile = document.getElementById("name-content-mobile");
             var formInput = document.getElementById("name-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
+            contentMobile.classList.add("d-none");
 
             if(formInput.value == 'Wow Name Here'){
                 formInput.value = '';
@@ -4013,8 +4012,10 @@
             var form = document.getElementById("name-form");
             var formInput = document.getElementById("name-form-input");
             var content = document.getElementById("name-content");
+            var contentMobile = document.getElementById("name-content-mobile");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
+            contentMobile.classList.remove("d-none");
             formInput.value = '{{ $activity->name }}';
 
             if(formInput.value == 'Wow Name Here'){

@@ -91,24 +91,25 @@ function saveDescription() {
 }
 
 //ganti nama restaurant
-function saveNameRestaurant() {
-    let name_resto = $("#name-form-input").val();
+function saveNameActivity() {
+    let name = $("#name-form-input").val();
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/name",
+        url: "/things-to-do/update/name",
         data: {
-            id: id_restaurant,
-            name: name_resto,
+            id_activity: id_activity,
+            name: name,
         },
         success: function (response) {
-            // console.log(response.data.name);
+            console.log(response.data.name);
             let name_input = document.getElementById("name-form-input");
 
             $("#name-content2").html(response.data.name);
+            $("#name-content2-mobile").html(response.data.name);
 
             name_input.value = response.data.name;
 
@@ -124,29 +125,29 @@ function saveNameRestaurant() {
 }
 
 //Ganti Foto Profile
-let imageProfileRestaurant;
-let readerImageRestaurant;
+let imageProfileActivity;
+let readerImageActivity;
 
-$("#imageRestaurant").on("change", function (ev) {
-    imageProfileRestaurant = this.files[0];
+$("#imageActivity").on("change", function (ev) {
+    imageProfileActivity = this.files[0];
 
-    readerImageRestaurant = new FileReader();
+    readerImageActivity = new FileReader();
 });
 
 $("#updateImageForm").submit(function (e) {
     e.preventDefault();
 
     var formData = new FormData(this);
-    formData.append("image", imageProfileRestaurant);
+    formData.append("image", imageProfileActivity);
 
-    console.log(imageProfileRestaurant);
+    console.log(imageProfileActivity);
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/image",
+        url: "/things-to-do/update/image",
         data: formData,
         cache: false,
         processData: false,
@@ -162,16 +163,16 @@ $("#updateImageForm").submit(function (e) {
                 position: "topRight",
             });
 
-            readerImageRestaurant.addEventListener("load", function () {
-                $("#imageProfileRestaurant").attr(
+            readerImageActivity.addEventListener("load", function () {
+                $(".imageProfileActivity").attr(
                     "src",
-                    readerImageRestaurant.result
+                    readerImageActivity.result
                 );
             });
 
-            readerImageRestaurant.readAsDataURL(imageProfileRestaurant);
+            readerImageActivity.readAsDataURL(imageProfileActivity);
 
-            $("#modal-edit_restaurant_profile").modal("hide");
+            $("#modal-edit_activity_profile").modal("hide");
         },
     });
 });
@@ -210,7 +211,7 @@ function saveCategoryRestaurant() {
         },
         url: "/restaurant/store/tag",
         data: {
-            id: id_restaurant,
+            id: id_activity,
             cuisine: cuisine,
             dietaryfood: dietaryfood,
             dishes: dishes,
@@ -367,9 +368,9 @@ function saveTimeRestaurant() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/time",
+        url: "/things-to-do/update/time",
         data: {
-            id_restaurant: id_restaurant,
+            id_activity: id_activity,
             open_time: open_time,
             closed_time: closed_time,
         },
@@ -433,9 +434,9 @@ function saveRestaurantPrice() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/update/type",
+        url: "/things-to-do/update/type",
         data: {
-            id_restaurant: id_restaurant,
+            id_activity: id_activity,
             id_type: type_restaurant,
             id_price: price_restaurant,
         },
@@ -512,7 +513,7 @@ function saveFacilities() {
         },
         url: "/restaurant/facilities/store",
         data: {
-            id_restaurant: id_restaurant,
+            id_activity: id_activity,
             facilities: facilities,
         },
         success: function (response) {

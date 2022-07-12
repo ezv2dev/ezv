@@ -8,10 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('activity_update_image') }}" method="POST" id="updateImageForm"
-                    class="js-validation" enctype="multipart/form-data" onsubmit="showingLoading()">
-                    @csrf
-                    @method('PATCH')
+                <form action="javascript:void()" method="POST" id="updateImageForm"
+                    class="js-validation" enctype="multipart/form-data">
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                     <div class="form-group">
                         <div class="file-upload" id="file-upload1">
@@ -20,7 +18,7 @@
                                 <img style="width: 100%" src="" alt="">
                             </div>
                             <div class="controls" style="display: none;">
-                                <input type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
+                                <input id="imageActivity" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
                             </div>
                         </div>
                     </div>
