@@ -67,6 +67,11 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+    @media (min-width: 768px) {
+        .hide-if-multi {
+            width: 41.6% !important;
+        }
+    }
 </style>
 <div class="modal fade" id="modal-details-reserve" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true" style="overflow-y:scroll;">
@@ -77,7 +82,7 @@
                 <h5 class="modal-title">{{ Translate::translate('Booking Summary') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-4" style="overflow-y: auto; overflow-x: hidden;">
+            <div id="totalprice" class="modal-body p-4" style="overflow-y: auto; overflow-x: hidden;">
                 <div class="row">
                     <div class="col-9">
                         <p class="price-box">
@@ -376,77 +381,87 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="panel_va" style="display: none; padding:0 0 10px 20px">
+                        <div id="panel_va" style="display: none; padding:0 30px 10px 20px">
                             <form method="POST" id="va-form" action="{{ route('api.createVa') }}">
-                            @csrf
-                            @auth
-                                <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
-                            @endauth
-                            @guest
-                                <input type="text" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
-                                <input type="text" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
-                                <input type="email" name="email_va" id="email_va" value="" placeholder="email">
-                            @endguest
-                                <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa[0]->id_villa) }}">
-                                <input type="hidden" name="check_in_date" id="check_in_date" value="">
-                                <input type="hidden" name="check_out_date" id="check_out_date" value="">
-                                <input type="hidden" name="adult_va" id="adult_va" value="">
-                                <input type="hidden" name="child_va" id="child_va" value="">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    @csrf
+                                    @auth
+                                        <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+                                    @endauth
+                                    @guest
+                                        <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
+                                        <input type="text" class="form-control" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
+                                        <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
+                                        <input type="text" class="form-control" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
+                                        <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
+                                        <input type="email" class="form-control" name="email_va" id="email_va" value="" placeholder="email">
+                                        <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
+                                    @endguest
+                                        <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa[0]->id_villa) }}">
+                                        <input type="hidden" name="check_in_date" id="check_in_date" value="">
+                                        <input type="hidden" name="check_out_date" id="check_out_date" value="">
+                                        <input type="hidden" name="adult_va" id="adult_va" value="">
+                                        <input type="hidden" name="child_va" id="child_va" value="">
 
-                                <div class="row" style="font-size: 13px;">
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/bca-logo.svg') }}">
-                                            <input type="radio" value="BCA" id="bca" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
+                                        <div id="va_brand" class="row" style="font-size: 13px;">
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bca-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BCA" id="bca" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bni-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BNI" id="bni" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bri-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BRI" id="bri" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/mandiri-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="MANDIRI" id="mandiri" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/permata-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="PERMATA" id="permata" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bsi-logo.png') }}"
+                                                        style="width: 50%">
+                                                    <input class="chckbrnd2" type="radio" value="BSI" id="bsi" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small id="err-slc-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <div class="mt-3 col-12 text-center"><input class="price-button" type="submit"
+                                            value="{{ Translate::translate('RESERVE NOW') }}">
+                                        </div>
                                     </div>
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/bni-logo.svg') }}">
-                                            <input type="radio" value="BNI" id="bni" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/bri-logo.svg') }}">
-                                            <input type="radio" value="BRI" id="bri" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/mandiri-logo.svg') }}">
-                                            <input type="radio" value="MANDIRI" id="mandiri" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/permata-logo.svg') }}">
-                                            <input type="radio" value="PERMATA" id="permata" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <label class="container-checkbox2">
-                                            <img src="{{ URL::asset('assets/payment_logo/bsi-logo.png') }}"
-                                                style="width: 50%">
-                                            <input type="radio" value="BSI" id="bsi" name="bank_option"
-                                                autocomplete="off">
-                                            <span class="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 text-center"><input class="price-button" type="submit"
-                                    value="{{ Translate::translate('RESERVE NOW') }}">
                                 </div>
                             </form>
                         </div>
@@ -460,7 +475,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="panel_credit" style="display: none; padding:0 0 10px 20px">
+                        <div id="panel_credit" style="display: none; padding:0 30px 10px 20px">
                             <form method="POST" id="payment-form" action="javascript:void(0);">
                                 @csrf
                                 @auth
@@ -470,10 +485,11 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="card-number">CARD NUMBER</label>
+                                            <label style="margin: 0px; font-weight: 500;">{{ __('user_page.Card Number') }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" type="text" id="card-number"
-                                                    placeholder="Card number" value="" /> <br />
+                                                    placeholder="Card number" value="" onpaste="return false" oncut="return false" />
+                                                <small id="err-cnm-pay" style="display: none;" class="invalid-feedback"></small>
                                                 {{-- <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> --}}
                                             </div>
                                         </div>
@@ -482,10 +498,10 @@
                                 <div class="row">
                                     <div class="col-xs-7 col-md-7">
                                         <div class="form-group">
-                                            <label for="card-exp-month">Expiration</label>
-
-                                                <input class="form-control" type="text" id="card-exp-month"
-                                                placeholder="mm/yy" value="" />
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Expiration') }}</label>
+                                            <input class="form-control" type="text" id="card-exp-month"
+                                            placeholder="mm/yy" value="" />
+                                            <small id="err-exp-pay" style="display: none;" class="invalid-feedback"></small>
                                                 {{-- <div class="col-md-6">
                                                     <input class="form-control" type="text" id="card-exp-year"
                                                     placeholder="Card expiration year (yyyy)" value="" />
@@ -494,16 +510,18 @@
                                     </div>
                                     <div class="col-xs-4 col-md-4 pull-right hide-if-multi">
                                         <div class="form-group">
-                                            <label for="card-cvn">CVN CODE</label>
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Cvn Code') }}</label>
                                             <input class="form-control" type="text" id="card-cvn" placeholder="Cvn"
-                                                value="" /> <br />
+                                                value="" />
+                                            <small id="err-cvn-pay" style="display: none;" class="invalid-feedback"></small>
                                         </div>
                                     </div>
                                 </div>
+                                <small id="res-xnd-pay" style="display: none;" class="invalid-feedback mt-2 mb-2"></small>
                                 <input class="form-control" type="hidden" id="currency"
-                                    placeholder="IDR" value="IDR" /> <br />
+                                    placeholder="IDR" value="IDR" />
 
-                                <div class="col-12 text-center"><input class="price-button" type="submit"
+                                <div class="mt-3 col-12 text-center"><input class="price-button" type="submit"
                                     value="{{ Translate::translate('RESERVE NOW') }}">
                                 </div>
                             </form>
@@ -561,44 +579,193 @@
         </div>
     </div>
 </div>
-
 <script>
     $(function() {
-        var $form = $('#payment-form');
+        // Virtual Account
 
-        $form.submit(function(event) {
-            hideResults();
+        // var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
 
-            Xendit.setPublishableKey(
-                'xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F'
-                );
+        $(document).on("focusout", "#firstname_va", function () {
+            if(!$(this).val()) {
+                $('#firstname_va').addClass('is-invalid');
+                $('#err-fname-pay').text('{{ __('auth.empty_fname') }}');
+                $('#err-fname-pay').show();
+            }
+        });
+        $(document).on("focusout", "#lastname_va", function () {
+            if(!$(this).val()) {
+                $('#lastname_va').addClass('is-invalid');
+                $('#err-lname-pay').text('{{ __('auth.empty_lname') }}');
+                $('#err-lname-pay').show();
+            }
+        });
+        $(document).on("focusout", "#email_va", function () {
+            if(!$(this).val()) {
+                $('#email_va').addClass('is-invalid');
 
-            // Disable the submit button to prevent repeated clicks:
-            $form.find('.submit').prop('disabled', true);
-
-            // Request a token from Xendit:
-            var tokenData = getTokenData();
-
-            Xendit.card.createToken(tokenData, xenditResponseHandler);
-
-            // Prevent the form from being submitted:
-            return false;
+                $('#err-eml-pay').text('{{ __('auth.empty_mail') }}');
+                $('#err-eml-pay').show();
+            } else {
+                if (!regex.test($(this).val())) {
+                    $('#email_va').addClass('is-invalid');
+                    $('#err-eml-pay').text('{{ __('auth.invalid_mail') }}');
+                    $('#err-eml-pay').show();
+                }
+            }
         });
 
-        function xenditResponseHandler(err, creditCardToken) {
-            $form.find('.submit').prop('disabled', false);
+        $(document).on("keyup", "#firstname_va", function () {
+            this.value = this.value.replace(/[0-9]+$/, '');
+            $('#firstname_va').removeClass('is-invalid');
+            $('#err-fname-pay').hide();
+            $('#err-fname-pay').text('');
+        });
+        $(document).on("keyup", "#lastname_va", function () {
+            this.value = this.value.replace(/[0-9]+$/, '');
+            $('#lastname_va').removeClass('is-invalid');
+            $('#err-lname-pay').hide();
+            $('#err-lname-pay').text('');
+        });
+        $(document).on("keyup", "#email_va", function () {
+            $('#email_va').removeClass('is-invalid');
+            $('#err-eml-pay').hide();
+            $('#err-eml-pay').text('');
+        });
+        $(".chckbrnd2").change(function () {
+            $('#va_brand').each(function() {
+                if($(this).find('input[type="radio"]:checked').length > 0) {
+                    $('.chckbrnd').css("border", "");
+                    $('#err-slc-pay').hide();
+                    $('#err-slc-pay').text('');
+                }
+            });
+        });
+        $("#va-form").submit(function(e) {
+            let error = 0;
+            let valname = /[0-9]+$/;
+            if(!$('#firstname_va').val()) {
+                $('#firstname_va').addClass('is-invalid');
+                $('#err-fname-pay').text('{{ __('auth.empty_fname') }}');
+                $('#err-fname-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#firstname_va').val())) {
+                    $('#firstname_va').addClass('is-invalid');
+                    $('#err-fname-pay').text('{{ __('auth.invalid_fname') }}');
+                    $('#err-fname-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#lastname_va').val()) {
+                $('#lastname_va').addClass('is-invalid');
+                $('#err-lname-pay').text('{{ __('auth.empty_lname') }}');
+                $('#err-lname-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#lastname_va').val())) {
+                    $('#lastname_va').addClass('is-invalid');
+                    $('#err-lname-pay').text('{{ __('auth.invalid_lname') }}');
+                    $('#err-lname-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#email_va').val()) {
+                $('#email_va').addClass('is-invalid');
+                $('#err-eml-pay').text('{{ __('auth.empty_mail') }}');
+                $('#err-eml-pay').show();
+                error = 1;
+            } else {
+                if (!regex.test($('#email_va').val())) {
+                    $('#email_va').addClass('is-invalid');
+                    $('#err-eml-pay').text('{{ __('auth.invalid_mail') }}');
+                    $('#err-eml-pay').show();
+                    error = 1;
+                }
+            }
 
-            if (err) {
+            $('#va_brand').each(function() {
+                if($(this).find('input[type="radio"]:checked').length == 0) {
+                    $('.chckbrnd').css("border", "solid #e04f1a 1px");
+                    $('#err-slc-pay').text('{{ __('auth.empty_va') }}');
+                    $('#err-slc-pay').show();
+                    error = 1;
+                }
+            });
+            if(error == 1) {
+                e.preventDefault();
+            }
+        });
+
+        //Credit Card
+
+        $('#card-number').mask('0000 0000 0000 0000');
+        $('#card-exp-month').mask('00/00');
+        $('#card-cvn').mask('0000');
+
+        $(document).on("focusout", "#card-number", function () {
+            if(!$(this).val()) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
+                $('#err-cnm-pay').show();
+            }
+        });
+        $(document).on("focusout", "#card-exp-month", function () {
+            if(!$(this).val()) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                $('#err-exp-pay').show();
+            }
+        });
+        $(document).on("focusout", "#card-cvn", function () {
+            if(!$(this).val()) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                $('#err-cvn-pay').show();
+            }
+        });
+
+        $(document).on("keyup", "#card-number", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-number').removeClass('is-invalid');
+            $('#err-cnm-pay').hide();
+            $('#err-cnm-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        $(document).on("keyup", "#card-exp-month", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-exp-month').removeClass('is-invalid');
+            $('#err-exp-pay').hide();
+            $('#err-exp-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        $(document).on("keyup", "#card-cvn", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-cvn').removeClass('is-invalid');
+            $('#err-cvn-pay').hide();
+            $('#err-cvn-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        //================ Function ================
+        function xenditResponseHandler(err, creditCardToken) {
+            if(err) {
                 return displayError(err);
             }
 
-            if (creditCardToken.status === 'APPROVED' || creditCardToken.status === 'VERIFIED') {
+            if(creditCardToken.status === 'APPROVED' || creditCardToken.status === 'VERIFIED') {
                 displaySuccess(creditCardToken);
             } else if (creditCardToken.status === 'IN_REVIEW') {
-                window.open(creditCardToken.payer_authentication_url, 'sample-inline-frame');
-                $('.overlay').show();
-                $('#three-ds-container').show();
+                // window.open(creditCardToken.payer_authentication_url, 'sample-inline-frame');
+                // $('.overlay').show();
+                // $('#three-ds-container').show();
                 // $('#modal-3ds').modal('show');
+                displayError(creditCardToken);
             } else if (creditCardToken.status === 'FRAUD') {
                 displayError(creditCardToken);
             } else if (creditCardToken.status === 'FAILED') {
@@ -607,28 +774,18 @@
         }
 
         function displayError(err) {
-            $('#three-ds-container').hide();
-            $('.overlay').hide();
-            $('#error .result').text(JSON.stringify(err, null, 4));
-            $('#error').show();
-
-            var requestData = {};
-            $.extend(requestData, getTokenData());
-            $('#error .request-data').text(JSON.stringify(requestData, null, 4));
-
+            let error = JSON.stringify(err, null, 4);
+            let xparse = JSON.parse(error);
+            // var parse = JSON.parse(error);
+            //console.log(error);
+            // console.log(parse);
+            $('#res-xnd-pay').text(xparse.message);
+            $('#res-xnd-pay').show();
         };
 
         function displaySuccess(creditCardToken) {
-            $('#three-ds-container').hide();
-            $('.overlay').hide();
-
-            // $('#success .result').text(JSON.stringify(creditCardToken, null, 4));
-            // $('#success').show();
-
             var requestData = {};
             $.extend(requestData, getTokenData());
-            // $('#success .request-data').text(JSON.stringify(requestData, null, 4));
-
             @auth
             var saveData = $.ajax({
                 type: 'POST',
@@ -645,33 +802,190 @@
                 }
             });
             @endauth
-        saveData.error(function() {
-            alert("Something went wrong");
+            saveData.error(function() {
+                alert("Something went wrong");
+            });
+        }
+
+        function getTokenData() {
+            let exp = $('#card-exp-month').val();
+            const split = exp.split("/");
+            return {
+                amount: $('#price_total2').val(),
+                card_number: $('#card-number').val(),
+                card_exp_month: split[0],
+                card_exp_year: 20 + split[1],
+                card_cvn: $('#card-cvn').val(),
+                currency: $('#currency').val(),
+            };
+        }
+        //================ Function ================
+        $("#payment-form").submit(function(e) {
+            let error = 0;
+            let valname = /[a-zA-Z]+$/;
+            if(!$('#card-number').val()) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
+                $('#err-cnm-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-number').val())) {
+                    $('#card-number').addClass('is-invalid');
+                    $('#err-lname-pay').text('{{ __('auth.empty_cnm') }}');
+                    $('#err-lname-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#card-exp-month').val()) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                $('#err-exp-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-exp-month').val())) {
+                    $('#card-exp-month').addClass('is-invalid');
+                    $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                    $('#err-exp-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#card-cvn').val()) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                $('#err-cvn-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-cvn').val())) {
+                    $('#card-cvn').addClass('is-invalid');
+                    $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                    $('#err-cvn-pay').show();
+                    error = 1;
+                }
+            }
+            if(error == 1) {
+                e.preventDefault();
+            } else {
+                Xendit.setPublishableKey(
+                    'xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F'
+                );
+                $("#payment-form").find('.submit').prop('disabled', true);
+                var tokenData = getTokenData();
+                Xendit.card.createToken(tokenData, xenditResponseHandler);
+                return false;
+            }
         });
-
-    }
-
-    function getTokenData() {
-        let exp = $form.find('#card-exp-month').val();
-        const split = exp.split("/");
-        return {
-            amount: $form.find('#price_total2').val(),
-            card_number: $form.find('#card-number').val(),
-            card_exp_month: split[0],
-            card_exp_year: 20 + split[1],
-            card_cvn: $form.find('#card-cvn').val(),
-            currency: $form.find('#currency').val(),
-            // on_behalf_of: $form.find('#on-behalf-of').val(),
-            // billing_details: $form.find('#should-send-billing-details').prop('checked') ? getBillingDetails() : undefined,
-            // customer: $form.find('#should-send-customer-details').prop('checked') ? getCustomerDetails() : undefined,
-        };
-    }
-
-    function hideResults() {
-        $('#success').hide();
-        $('#error').hide();
-    }
     });
+</script>
+<script>
+    // $(function() {
+    //     var $form = $('#payment-form');
+
+    //     $form.submit(function(event) {
+    //         hideResults();
+
+    //         Xendit.setPublishableKey(
+    //             'xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F'
+    //             );
+
+    //         // Disable the submit button to prevent repeated clicks:
+    //         $form.find('.submit').prop('disabled', true);
+
+    //         // Request a token from Xendit:
+    //         var tokenData = getTokenData();
+
+    //         Xendit.card.createToken(tokenData, xenditResponseHandler);
+
+    //         // Prevent the form from being submitted:
+    //         return false;
+    //     });
+
+    //     function xenditResponseHandler(err, creditCardToken) {
+    //         $form.find('.submit').prop('disabled', false);
+
+    //         if (err) {
+    //             return displayError(err);
+    //         }
+
+    //         if (creditCardToken.status === 'APPROVED' || creditCardToken.status === 'VERIFIED') {
+    //             displaySuccess(creditCardToken);
+    //         } else if (creditCardToken.status === 'IN_REVIEW') {
+    //             window.open(creditCardToken.payer_authentication_url, 'sample-inline-frame');
+    //             $('.overlay').show();
+    //             $('#three-ds-container').show();
+    //             // $('#modal-3ds').modal('show');
+    //         } else if (creditCardToken.status === 'FRAUD') {
+    //             displayError(creditCardToken);
+    //         } else if (creditCardToken.status === 'FAILED') {
+    //             displayError(creditCardToken);
+    //         }
+    //     }
+
+    //     function displayError(err) {
+    //         $('#three-ds-container').hide();
+    //         $('.overlay').hide();
+    //         $('#error .result').text(JSON.stringify(err, null, 4));
+    //         $('#error').show();
+
+    //         var requestData = {};
+    //         $.extend(requestData, getTokenData());
+    //         $('#error .request-data').text(JSON.stringify(requestData, null, 4));
+
+    //     };
+
+    //     function displaySuccess(creditCardToken) {
+    //         $('#three-ds-container').hide();
+    //         $('.overlay').hide();
+
+    //         // $('#success .result').text(JSON.stringify(creditCardToken, null, 4));
+    //         // $('#success').show();
+
+    //         var requestData = {};
+    //         $.extend(requestData, getTokenData());
+    //         // $('#success .request-data').text(JSON.stringify(requestData, null, 4));
+
+    //         @auth
+    //         var saveData = $.ajax({
+    //             type: 'POST',
+    //             url: "/api/xendit/credit_card/charge",
+    //             data: {
+    //                 dataresult: creditCardToken,
+    //                 datarequest: requestData,
+    //                 user: `{{ Auth::user()->id }}`,
+    //                 _token: "{{ csrf_token() }}",
+    //             },
+    //             dataType: "text",
+    //             success: function(resultData) {
+    //                 alert("success ")
+    //             }
+    //         });
+    //         @endauth
+    //     saveData.error(function() {
+    //         alert("Something went wrong");
+    //     });
+
+    // }
+
+    // function getTokenData() {
+    //     let exp = $form.find('#card-exp-month').val();
+    //     const split = exp.split("/");
+    //     return {
+    //         amount: $form.find('#price_total2').val(),
+    //         card_number: $form.find('#card-number').val(),
+    //         card_exp_month: split[0],
+    //         card_exp_year: 20 + split[1],
+    //         card_cvn: $form.find('#card-cvn').val(),
+    //         currency: $form.find('#currency').val(),
+    //         // on_behalf_of: $form.find('#on-behalf-of').val(),
+    //         // billing_details: $form.find('#should-send-billing-details').prop('checked') ? getBillingDetails() : undefined,
+    //         // customer: $form.find('#should-send-customer-details').prop('checked') ? getCustomerDetails() : undefined,
+    //     };
+    // }
+
+    // function hideResults() {
+    //     $('#success').hide();
+    //     $('#error').hide();
+    // }
+    // });
 </script>
 
 <script>

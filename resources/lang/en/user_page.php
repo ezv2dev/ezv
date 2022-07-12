@@ -369,6 +369,9 @@ return [
     'Email Address' => 'Email Address',
     'Confirm Password' => 'Confirm Password',
     'Already registered' => 'Already registered',
+    'Card Number' => 'Card Number',
+    'Expiration' => 'Expiration',
+    'Cvn Code' => 'Cvn Code',
 
     "People" => "People",
     "Beds" => "Beds",
