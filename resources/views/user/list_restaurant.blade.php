@@ -175,7 +175,7 @@
                         <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                     </div>
 
-                    <a href="{{ route('restaurant', $data->id_restaurant) }}" target="_blank">
+                    <a href="{{ route('restaurant', $data->id_restaurant) }}" class="absolute-right" target="_blank">
                         <div class="video-thumb-container skeleton">
                             <div class="video-thumb-content">
                                 <i class="fas fa-2x fa-play video-button"></i>

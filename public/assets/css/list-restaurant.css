@@ -734,17 +734,19 @@
 }
 
 /* END of slider arrow styling */
-
+.absolute-right{
+    left: auto;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+}
 
 .video-thumb-container{
     background-color: #ff7400;
     height: 50px;
     width: 50px;
     border-radius: 50px;
-    position: absolute;
     z-index: 99;
-    right: 10px;
-    top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
