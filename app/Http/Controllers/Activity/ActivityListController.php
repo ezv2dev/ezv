@@ -303,6 +303,23 @@ class ActivityListController extends Controller
         }
     }
 
+    public function activity_get_time(Request $request)
+    {
+        $activity = Activity::find($request->id_activity);
+
+        $openTime = date('H:i', strtotime($activity->open_time));
+        $closedTime = date('H:i', strtotime($activity->closed_time));
+
+        $data = [
+            'open_time' => $openTime,
+            'closed_time' => $closedTime,
+        ];
+        return response()->json([
+            'data' => $data,
+            'message' => 'Get Detail WoW Time',
+        ]);
+    }
+
     public function Activity_update_time(Request $request)
     {
         // check if editor not authenticated
@@ -315,19 +332,31 @@ class ActivityListController extends Controller
             'closed_time' => ['required']
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+                'status' => 404,
+            ]);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
         }
 
         // update
@@ -337,13 +366,26 @@ class ActivityListController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        $openTime = date('H:i', strtotime($request->open_time));
+        $closedTime = date('H:i', strtotime($request->closed_time));
+
+        $data = [
+            'open_time' => $openTime,
+            'closed_time' => $closedTime,
+        ];
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Time',
+                'status' => 200,
+                'data' => $data,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Time',
+                'status' => 500,
+            ]);
         }
     }
 
@@ -985,19 +1027,31 @@ class ActivityListController extends Controller
             'subcategory' => ['array']
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+                'status' => 404,
+            ]);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
         }
 
         // update activity has subcategory
@@ -1017,13 +1071,20 @@ class ActivityListController extends Controller
         }
         // dd($updatedActivity);
 
+        $activity = Activity::find($request->id_activity);
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been created');
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Category',
+                'status' => 200,
+                'data' => $activity->subCategory,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Category',
+                'status' => 500,
+            ]);
         }
     }
 

@@ -177,52 +177,35 @@ $("#updateImageForm").submit(function (e) {
     });
 });
 
-function saveCategoryRestaurant() {
-    let cuisine = [];
-    let dietaryfood = [];
-    let dishes = [];
-    let goodfor = [];
-    let meal = [];
+function saveSubcategoryActivity() {
+    let subcategory = [];
 
-    $("input[name='cuisine[]']:checked").each(function () {
-        cuisine.push(parseInt($(this).val()));
+    $("input[name='subcategory[]']:checked").each(function () {
+        subcategory.push(parseInt($(this).val()));
     });
 
-    $("input[name='dietaryfood[]']:checked").each(function () {
-        dietaryfood.push(parseInt($(this).val()));
-    });
-
-    $("input[name='dishes[]']:checked").each(function () {
-        dishes.push(parseInt($(this).val()));
-    });
-
-    $("input[name='goodfor[]']:checked").each(function () {
-        goodfor.push(parseInt($(this).val()));
-    });
-
-    $("input[name='meal[]']:checked").each(function () {
-        meal.push(parseInt($(this).val()));
-    });
+    let btn = document.getElementById("btnsaveCategoryActivity");
+    btn.textContent = "Saving Tag...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/store/tag",
+        url: "/things-to-do/subcategory/store",
         data: {
-            id: id_activity,
-            cuisine: cuisine,
-            dietaryfood: dietaryfood,
-            dishes: dishes,
-            goodfor: goodfor,
-            meal: meal,
+            id_activity: id_activity,
+            subcategory: subcategory,
         },
         success: function (response) {
             console.log(response);
             // console.log(response.data.tags.length);
 
-            $("#modal-add_tag").modal("hide");
+            $("#modal-add_subcategory").modal("hide");
+
+            btn.textContent = "Save";
+            btn.classList.remove("disabled");
 
             iziToast.success({
                 title: "Success",
@@ -232,135 +215,59 @@ function saveCategoryRestaurant() {
 
             let content = "";
 
-            if (response.data.tags.length > 6) {
+            if (response.data.length > 6) {
                 for (let i = 0; i < 7; i++) {
                     content =
                         content +
                         '<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">' +
-                        response.data.tags[i].name +
+                        response.data[i].name +
                         "</span>";
                 }
                 content =
                     content +
                     '<button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">More</button>';
             } else {
-                for (let i = 0; i < response.data.tags.length; i++) {
+                for (let i = 0; i < response.data.length; i++) {
                     content =
                         content +
                         '<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">' +
-                        response.data.tags[i].name +
+                        response.data[i].name +
                         "</span>";
                 }
             }
             content =
                 content +
-                '&nbsp;<a type="button" onclick="add_tag()" style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit Tags</a>';
+                '&nbsp;<a type="button" onclick="editSubcategory()" style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit Tags</a>';
 
             $("#tagsContent").html(content);
 
             //modal
-            if (response.data.tags.length > 6) {
-                let contentCuisine,
-                    contentDietaryFood,
-                    contentDishes,
-                    contentGoodFor,
-                    contentMeal;
+            if (response.data.length > 6) {
+                let contentSubcategory;
 
-                for (let h = 0; h < response.data.cuisine.length; h++) {
+                for (let h = 0; h < response.data.length; h++) {
                     if (h == 0) {
-                        contentCuisine =
+                        contentSubcategory =
                             '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.cuisine[h].name +
+                            response.data[h].name +
                             "</span></div>";
                     } else {
-                        contentCuisine =
-                            contentCuisine +
+                        contentSubcategory =
+                            contentSubcategory +
                             '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.cuisine[h].name +
+                            response.data[h].name +
                             "</span></div>";
                     }
                 }
 
-                for (let j = 0; j < response.data.dietaryfood.length; j++) {
-                    if (j == 0) {
-                        contentDietaryFood =
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.dietaryfood[j].name +
-                            "</span></div>";
-                    } else {
-                        contentDietaryFood =
-                            contentDietaryFood +
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.dietaryfood[j].name +
-                            "</span></div>";
-                    }
-                }
-
-                for (let k = 0; k < response.data.dishes.length; k++) {
-                    if (k == 0) {
-                        contentDishes =
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.dishes[k].name +
-                            "</span></div>";
-                    } else {
-                        contentDishes =
-                            contentDishes +
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.dishes[k].name +
-                            "</span></div>";
-                    }
-                }
-
-                for (let l = 0; l < response.data.goodfor.length; l++) {
-                    if (l == 0) {
-                        contentGoodFor =
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.goodfor[l].name +
-                            "</span></div>";
-                    } else {
-                        contentGoodFor =
-                            contentGoodFor +
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.goodfor[l].name +
-                            "</span></div>";
-                    }
-                }
-
-                for (let m = 0; m < response.data.meal.length; m++) {
-                    if (m == 0) {
-                        contentMeal =
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.meal[m].name +
-                            "</span></div>";
-                    } else {
-                        contentMeal =
-                            contentMeal +
-                            '<div class="col-md-6"><span class="translate-text-group-items">' +
-                            response.data.meal[m].name +
-                            "</span></div>";
-                    }
-                }
-
-                $("#cuisineModalContent").html("");
-                $("#cuisineModalContent").append(contentCuisine);
-
-                $("#dietaryFoodModalContent").html("");
-                $("#dietaryFoodModalContent").append(contentDietaryFood);
-
-                $("#dishesModalContent").html("");
-                $("#dishesModalContent").append(contentDishes);
-
-                $("#goodForModalContent").html("");
-                $("#goodForModalContent").append(contentGoodFor);
-
-                $("#mealModalContent").html("");
-                $("#mealModalContent").append(contentMeal);
+                $("#subcategoryModalContent").html("");
+                $("#subcategoryModalContent").append(contentSubcategory);
             }
         },
     });
 }
 
-function saveTimeRestaurant() {
+function saveTimeActivity() {
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
     $.ajax({
@@ -386,7 +293,7 @@ function saveTimeRestaurant() {
             let newOpenTime = tConvert(response.data.open_time);
             let newClosedTime = tConvert(response.data.closed_time);
 
-            $("#timeRestaurantContent").html(
+            $("#timeActivityContent").html(
                 newOpenTime + " - " + newClosedTime
             );
 
