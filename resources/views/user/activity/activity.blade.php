@@ -1140,7 +1140,8 @@
                     {{-- END ADD GALLERY --}}
                     {{-- PRICES --}}
                     <section id="price" class="section-2">
-                        <div class="row pd-tlr-10">
+                        <div class="row pd-tlr-10 prices">
+                            <hr>
                             <h2>
                                 {{ __('user_page.Prices') }}
                                 @auth
@@ -1155,7 +1156,6 @@
                                 @endauth
                             </h2>
                         </div>
-
                         <div class="col-12">
                             <div class="row table-header">
                                 <div class="col-4 text-center tab-header">
@@ -1252,7 +1252,8 @@
                             </div>
                         </div>
                     </section>
-                    <section id="description" class="section-2" style="margin-top: 12px;">
+                    <section id="description" class="section-2">
+                        <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
                             <h2>
@@ -1960,8 +1961,8 @@
                         @endcan
                     @endif
                 @endauth
-                <div class="section" id="host_end">
-                    <div class="host">
+                <div class="section">
+                    <div id="endSticky" class="host">
                         {{-- <div class="row">
                                 <div class="col-2">
                                     <img src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $activity->image) }}"
@@ -4352,67 +4353,64 @@
     </script>
 
 {{-- Highlight sticky --}}
-    <script>
-        var gallery = $('#gallery').offset().top - 200,
-            price = $('#price').offset().top - 150,
-            description = $('#description').offset().top - 150,
-            amenities = $('#amenities').offset().top - 150,
-            location_menu = $('#location-map').offset().top - 150,
-            review = $('#review').offset().top - 150,
-            host = $('.host').offset().top - 200,
-            $window = $(window);
 
-        $window.scroll(function() {
-            if ($window.scrollTop() >= gallery && $window.scrollTop() < price) {
-                $('#gallery-sticky').addClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= price && $window.scrollTop() < description) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').addClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= description && $window.scrollTop() < amenities) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').addClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= amenities && $window.scrollTop() < location_menu) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').addClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= location_menu && $window.scrollTop() < review) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').addClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= review && $window.scrollTop() < host) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').addClass('active-sticky');
-            } else {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#price-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            }
+    <script>
+        jQuery(document).ready(function($){
+            $(window).on('scroll', function(){
+                if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#price').offset().top - 60){
+                    $('#gallery-sticky').addClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                }
+                    else if($(window).scrollTop() >= $('#price').offset().top - 60  && $(window).scrollTop() <= $('#description').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#price-sticky').addClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#description').offset().top - 60  && $(window).scrollTop() <= $('#amenities').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#price-sticky').removeClass('active-sticky');
+                        $('#about-sticky').addClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window).scrollTop() <= $('#location-map').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#price-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').addClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#location-map').offset().top -60  && $(window).scrollTop() <= $('#review').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#price-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').addClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#review').offset().top - 60 && $(window).scrollTop() <= $('#endSticky').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#price-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').addClass('active-sticky');
+                    }
+                else {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                    //or use $('.menu').removeClass('addclass');
+                }
+            });
         });
     </script>
 

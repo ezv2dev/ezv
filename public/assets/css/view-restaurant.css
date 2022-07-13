@@ -109,10 +109,6 @@
     text-align: justify;
     }
 
-    .navigationItem span:hover {
-    color: #ff7400;
-    }
-
     /* .review-bottom {
     margin: 10px 10px 10px 0;
     } */
@@ -439,15 +435,6 @@ color: #FEFBE7;
     padding-left: 10px;
     margin-right: 12px;
 }
-
-/* .section-2 hr {
-    width: 99.1%;
-    margin-left: 12px;
-} */
-
-/* .section-2 {
-    margin-left: 1px;
-} */
 
 .row-grid-amenities {
     margin-left: 9px;

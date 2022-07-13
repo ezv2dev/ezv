@@ -68,6 +68,10 @@ label.error.fail-alert {
     color: green;
 } */
 
+.navigationItem span:hover {
+    color: #ff7400;
+    }
+
 .villa-tag-button {
     border-color: #ff7400;
     border-radius: 50px !important;
@@ -3482,6 +3486,10 @@ span.flatpickr-weekday {
     .rsv {
         display: none;
     }
+    .navigationItem span:hover {
+        color: #000;
+        }
+    
 }
 
 @media only screen and (max-width: 575px) {
