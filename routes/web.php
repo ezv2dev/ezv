@@ -1012,7 +1012,7 @@ Route::post('/guessafety-activity/post', [Activity\ActivityController::class, 'a
 
 Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::post('/restaurant/update/name', [Restaurant\RestaurantListController::class, 'restaurant_update_name'])->name('restaurant_update_name');
-    Route::patch('/restaurant/update/contact', [Restaurant\RestaurantListController::class, 'restaurant_update_contact'])->name('restaurant_update_contact');
+    Route::post('/restaurant/update/contact', [Restaurant\RestaurantListController::class, 'restaurant_update_contact'])->name('restaurant_update_contact');
     Route::post('/restaurant/update/location', [Restaurant\RestaurantListController::class, 'restaurant_update_location'])->name('restaurant_update_location');
     Route::post('/restaurant/update/short-description', [Restaurant\RestaurantListController::class, 'restaurant_update_short_description'])->name('restaurant_update_short_description');
     Route::post('/restaurant/update/description', [Restaurant\RestaurantListController::class, 'restaurant_update_description'])->name('restaurant_update_description');

@@ -8,23 +8,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form class="form-edit-contact-container" action="{{ route('restaurant_update_contact') }}" method="POST" enctype="multipart/form-data" id="updateContactForm" onsubmit="showingLoading()">
-                    @csrf
-                    @method('patch')
+                <form class="form-edit-contact-container" action="javascript:void(0);" method="POST" enctype="multipart/form-data" id="updateContactForm">
+                    {{-- @csrf
+                    @method('patch') --}}
                     <input type="hidden" name="id_restaurant" id="id_restaurant" value="{{ $restaurant->id_restaurant }}">
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Phone') }}</label>
-                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="20" value="{{ $restaurant->phone ?? '' }}">
+                        <input type="phone" class="form-control" id="phoneResto" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="20" value="{{ $restaurant->phone ?? '' }}">
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Email') }}</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" maxlength="50" value="{{ $restaurant->email ?? '' }}">
+                        <input type="email" class="form-control" id="emailResto" name="email" placeholder="email@example.com" maxlength="50" value="{{ $restaurant->email ?? '' }}">
                     </div>
                 </form>
 
                 <div class="row items-push">
                     <div class="col-lg-7">
-                        <button type="submit" class="btn btn-sm btn-primary" form="updateContactForm">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveContactResto" form="updateContactForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
@@ -35,8 +35,4 @@
     </div>
 </div>
 <!-- END Fade In Default Modal -->
-<script>
-    function edit_contact() {
-        $('#modal-edit_contact').modal('show');
-    }
-</script>
+

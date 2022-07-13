@@ -444,7 +444,7 @@
                                     </div>
                                     <div style="padding: 0px 6px;">
                                         @if ($restaurant->email)
-                                            <a target="_blank" type="button"
+                                            <a id="btnEmailResto" target="_blank" type="button"
                                                 href="mailto:{{ $restaurant->email }}">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
@@ -2975,6 +2975,10 @@
 
     {{-- MODAL SCRIPT --}}
     <script>
+        function edit_contact() {
+            $('#modal-edit_contact').modal('show');
+        }
+
         function showMoreDescription() {
             $("#modal-show_description").modal("show");
         }
@@ -3542,7 +3546,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $restaurant->name }} {{ __('user_page.Contact') }}</h5>
+                    <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span> {{ __('user_page.Contact') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -3553,7 +3557,7 @@
                         </div>
                         <div class="col-11">
                             <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->phone }}
+                                <span id="restoPhoneInContact">{{ $restaurant->phone }}</span>
                             </b>
                         </div>
                     </div>
@@ -3563,7 +3567,7 @@
                         </div>
                         <div class="col-11">
                             <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->email }}
+                                <span id="restoEmailInContact">{{ $restaurant->email }}</span>
                             </b>
                         </div>
                     </div>
