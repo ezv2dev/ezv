@@ -413,37 +413,33 @@
                                         $open = date_create($activity->open_time);
                                         $closed = date_create($activity->closed_time);
                                     @endphp
-                                    <span id="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
+                                    <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
-                                                style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                                style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Open Hours') }}</a>
                                         @endif
                                     @endauth
                                 </p>
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <div id="time-form" style="display:none;">
-                                            {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
-                                                {{-- @csrf
-                                                @method('PATCH') --}}
-                                                <input type="hidden" id="id_activity" name="id_activity"
+                                            <form action="javascript:void(0)" onsubmit="saveTimeActivity()">
+                                                <input type="hidden" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
                                                     <div class="col-auto">
-                                                        <input type="time" name="open_time" class="form-control"
-                                                            id="open-time-input" value="{{ $activity->open_time }}"
+                                                        <input type="time" name="open_time" class="form-control" id="open-time-input" value="{{ $activity->open_time }}"
                                                             required>
                                                     </div>
                                                     <span class="mx-2">-</span>
                                                     <div class="col-auto">
-                                                        <input type="time" name="closed_time" class="form-control"
-                                                            id="close-time-input" value="{{ $activity->closed_time }}"
+                                                        <input type="time" name="closed_time" class="form-control" id="close-time-input" value="{{ $activity->closed_time }}"
                                                             required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
+                                                    <button type="submit" class="btn btn-sm btn-primary">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -452,7 +448,7 @@
                                                         {{ __('user_page.Cancel') }}
                                                     </button>
                                                 </div>
-                                            {{-- </form> --}}
+                                            </form>
                                         </div>
                                     @endif
                                 @endauth
@@ -466,12 +462,11 @@
                                     </div>
                                     <div style="padding: 0px 6px;">
                                         @if ($activity->email)
-                                            <a target="_blank" type="button"
-                                                href="mailto:{{ $activity->email }}">
+                                            <a target="_blank" type="button" href="mailto:{{ $activity->email }}" class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
                                         @else
-                                            <a type="button" href="javascript:void(0);">
+                                            <a type="button" href="javascript:void(0);" class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope text-secondary"></i>
                                             </a>
                                         @endif
@@ -480,7 +475,7 @@
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="edit_contact()"
-                                                    style="font-size: 12px; color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                                    style="font-size: 12px; color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Contact') }}</a>
                                             @endif
                                         @endauth
                                     </div>
@@ -558,37 +553,33 @@
                                     $open = date_create($activity->open_time);
                                     $closed = date_create($activity->closed_time);
                                 @endphp
-                                {{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}
+                                <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <a type="button" onclick="editTimeFormMobile()"
-                                            style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                            style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Open Hours') }}</a>
                                     @endif
                                 @endauth
                             </p>
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="time-form-mobile" style="display:none;">
-                                        {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
-                                            {{-- @csrf
-                                            @method('PATCH') --}}
+                                        <form action="javascript:void(0)" onsubmit="saveTimeActivityMobile()">
                                             <input type="hidden" name="id_activity"
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
                                                 <div class="col-auto">
-                                                    <input type="time" name="open_time" class="form-control"
-                                                        id="open-time-input" value="{{ $activity->open_time }}"
+                                                    <input type="time" name="open_time" class="form-control" id="open-time-input-mobile" value="{{ $activity->open_time }}"
                                                         required>
                                                 </div>
                                                 <span class="mx-2">-</span>
                                                 <div class="col-auto">
-                                                    <input type="time" name="closed_time" class="form-control"
-                                                        id="close-time-input" value="{{ $activity->closed_time }}"
+                                                    <input type="time" name="closed_time" class="form-control" id="close-time-input-mobile" value="{{ $activity->closed_time }}"
                                                         required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
+                                                <button type="submit" class="btn btn-sm btn-primary">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -597,7 +588,7 @@
                                                     {{ __('user_page.Cancel') }}
                                                 </button>
                                             </div>
-                                        {{-- </form> --}}
+                                        </form>
                                     </div>
                                 @endif
                             @endauth
@@ -612,12 +603,12 @@
                                 <div class="col-3 contact-item">
                                     @if ($activity->email)
                                         <a target="_blank" type="button"
-                                            href="mailto:{{ $activity->email }}">
+                                            href="mailto:{{ $activity->email }}" class="mailto-email-activity">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @else
-                                        <a type="button" href="javascript:void(0);">
-                                            <i class="fa-solid fa-envelope text-secondary"></i>
+                                        <a type="button" href="javascript:void(0)" class="mailto-email-activity">
+                                            <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @endif
                                 </div>
@@ -1334,7 +1325,7 @@
                         </div>
 
                         <div class="row-grid-amenities">
-                            <div class="row-grid-list-amenities translate-text-group">
+                            <div class="row-grid-list-amenities translate-text-group" id="contentFacilities">
                                 @if ($activity->facilities->count() > 6)
                                     @for ($i = 0; $i < 6; $i++)
                                         <div class="list-amenities">
@@ -3095,7 +3086,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body modal-body-amenities pb-1 translate-text-group">
+                <div class="modal-body modal-body-amenities pb-1 translate-text-group" id="contentModalFacilities">
                     @forelse ($activity->facilities as $item)
                         <div class='col-md-6 mb-3'>
                             <span class="translate-text-group-items">{{ $item->name }}</span>
@@ -3700,7 +3691,7 @@
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
+                            <b style="font-size: 15px;" class="price-box modal-content-phone">
                                 {{ $activity->phone }}
                             </b>
                         </div>
@@ -3710,8 +3701,8 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                {{ $activity->createdByDetails->email }}
+                            <b style="font-size: 15px;" class="price-box modal-content-email">
+                                {{ $activity->email }}
                             </b>
                         </div>
                     </div>
@@ -4067,7 +4058,7 @@
         function editTimeForm() {
             var form = $("#time-form");
             var content = $("#time-content");
-            let id_activity = $('#id_activity').val();
+            let id_activity = `{{ $activity->id_activity }}`;
 
             $.ajax({
                 type: "GET",
@@ -4082,26 +4073,45 @@
                     console.log(response);
 
                     $("#open-time-input").val(response.data.open_time);
-                    $("#closed-time-input").val(response.data.closed_time);
+                    $("#close-time-input").val(response.data.closed_time);
+
+                    $(form).show();
+                    $(content).hide();
                 }
             });
-
-            $(form).show();
-            $(content).hide();
         }
 
         function editTimeFormMobile() {
             var form = $("#time-form-mobile");
             var content = $("#time-content-mobile");
-            $(form).show();
-            $(content).hide();
+            let id_activity = `{{ $activity->id_activity }}`;
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/things-to-do/get/time",
+                data: {
+                    id_activity: id_activity,
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    $("#open-time-input-mobile").val(response.data.open_time);
+                    $("#close-time-input-mobile").val(response.data.closed_time);
+
+                    $(form).show();
+                    $(content).hide();
+                }
+            });
         }
 
         function editTimeFormCancel() {
             var form = $("#time-form");
             var content = $("#time-content");
-            // var openTimeInput = $('#open-time-input');
-            // var closeTimeInput = $('#close-time-input');
+            // var openTimeInput = $('.open-time-input');
+            // var closeTimeInput = $('.close-time-input');
             // $(openTimeInput).val('{{ $activity->open_time }}');
             // $(closeTimeInput).val('{{ $activity->closed_time }}');
             $(form).hide();
@@ -4111,10 +4121,10 @@
         function editTimeFormMobileCancel() {
             var form = $("#time-form-mobile");
             var content = $("#time-content-mobile");
-            var openTimeInput = $('#open-time-input');
-            var closeTimeInput = $('#close-time-input');
-            $(openTimeInput).val('{{ $activity->open_time }}');
-            $(closeTimeInput).val('{{ $activity->closed_time }}');
+            // var openTimeInput = $('.open-time-input');
+            // var closeTimeInput = $('.close-time-input');
+            // $(openTimeInput).val('{{ $activity->open_time }}');
+            // $(closeTimeInput).val('{{ $activity->closed_time }}');
             $(form).hide();
             $(content).show();
         }

@@ -8,9 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form class="form-edit-contact-container" action="{{ route('activity_update_contact') }}" method="POST" enctype="multipart/form-data" id="updateContactForm" onsubmit="showingLoading()">
-                    @csrf
-                    @method('patch')
+                <form class="form-edit-contact-container" action="javascript:void(0)" method="POST" enctype="multipart/form-data" id="updateContactForm" onsubmit="saveContactActivity()">
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Phone') }}</label>

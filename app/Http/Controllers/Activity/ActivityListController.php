@@ -397,47 +397,57 @@ class ActivityListController extends Controller
         // validation
         $rules = [
             'id_activity' => ['required', 'integer'],
-            'phone' => ['string'],
-            'email' => ['email']
+            'phone' => ['string', 'nullable'],
+            'email' => ['email', 'nullable']
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+                'status' => 404,
+            ]);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
         }
 
         // update
-        if ($request->email) {
-            $updatedActivity = $activity->update([
-                'email' => $request->email,
-                'updated_by' => auth()->user()->id,
-            ]);
-        }
-        if ($request->phone) {
-            $updatedActivity = $activity->update([
-                'phone' => $request->phone,
-                'updated_by' => auth()->user()->id,
-            ]);
-        }
+        $updatedActivity = $activity->update([
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'updated_by' => auth()->user()->id,
+        ]);
 
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Contact',
+                'status' => 200,
+                'data' => $activity,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Contact',
+                'status' => 500,
+            ]);
         }
     }
 
@@ -974,19 +984,31 @@ class ActivityListController extends Controller
             'facilities' => ['array']
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'status' => 500,
+            ]);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+                'status' => 404,
+            ]);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+                'status' => 403,
+            ]);
         }
 
         // update activity has facilities
@@ -1007,11 +1029,16 @@ class ActivityListController extends Controller
 
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been created');
+            return response()->json([
+                'message' => 'Updated WoW Facilities',
+                'status' => 200,
+                'data' => $activity->facilities,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Updated WoW Facilities',
+                'status' => 500,
+            ]);
         }
     }
 
