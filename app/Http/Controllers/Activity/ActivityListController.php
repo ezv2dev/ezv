@@ -693,7 +693,7 @@ class ActivityListController extends Controller
         // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
+            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
         ]);
         if ($validator->fails()) {
             abort(500);
@@ -755,7 +755,7 @@ class ActivityListController extends Controller
                 ]);
             }
 
-            if ($ext == 'mp4') {
+            if ($ext == 'mp4' || $ext == 'mov') {
                 $original_name = $request->file->getClientOriginalName();
                 // dd($original_name);
                 $name_file = time() . "_" . $original_name;
@@ -1153,7 +1153,7 @@ class ActivityListController extends Controller
 
         $ext = strtolower($request->file->getClientOriginalExtension());
 
-        if ($ext == 'mp4') {
+        if ($ext == 'mp4' || $ext == 'mov') {
             $original_name = $request->file->getClientOriginalName();
             // dd($original_name);
             $name_file = time() . "_" . $original_name;

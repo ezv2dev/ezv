@@ -1242,7 +1242,7 @@ class ViewController extends Controller
         // validation
         $validator = Validator::make($request->all(), [
             'id_villa' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
+            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
         ]);
         if ($validator->fails()) {
             abort(500);
@@ -1296,7 +1296,7 @@ class ViewController extends Controller
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id
                     ]);
-                } elseif ($ext == 'mp4') {
+                } elseif ($ext == 'mp4' || $ext == 'mov') {
                     $original_name = $berkas->getClientOriginalName();
 
                     $name_file = time() . "_" . $original_name;
@@ -1440,7 +1440,7 @@ class ViewController extends Controller
 
                 $ext = strtolower($berkas->getClientOriginalExtension());
 
-                if ($ext == 'mp4') {
+                if ($ext == 'mp4' || $ext == 'mov') {
                     $original_name = $berkas->getClientOriginalName();
 
                     $name_file = time() . "_" . $original_name;
