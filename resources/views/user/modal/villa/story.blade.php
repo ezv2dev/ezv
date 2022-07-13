@@ -55,38 +55,39 @@
 {{-- VIDEO UPLOAD --}}
 <script>
 
-$("#storyVideo").on("change", function(ev) {
-    if(document.getElementById("storyVideo").files.length != 0){
-        $('.story-video-form').css("border", "");
-        $('#err-stry-vid').hide();
-    }
-});
-$(document).on("keyup", "#title", function () {
-    $('#title').css("border", "");
-    $('#err-stry-ttl').hide();
-});
-$("form#updateStoryForm").submit(function(e) {
-    let error = 0;
-    if(document.getElementById("storyVideo").files.length == 0){
-        $('.story-video-form').css("border", "solid #e04f1a 1px");
-        $('#err-stry-vid').show();
-        error = 1;
-    } else {
-        $('.story-video-form').css("border", "");
-        $('#err-stry-vid').hide();
-    }
-    if(!$('#title').val()) {
-        $('#title').css("border", "solid #e04f1a 1px");
-        $('#err-stry-ttl').show();
-        error = 1;
-    } else {
-        $('#title').css("border", "");
-        $('#err-stry-ttl').hide();
-    }
-    if(error == 1) {
-        e.preventDefault();
-    }
-});
+    $("#storyVideo").on("change", function(ev) {
+        if(document.getElementById("storyVideo").files.length != 0){
+            $('.story-video-form').css("border", "");
+            $('#err-stry-vid').hide();
+        }
+    });
+    $(document).on("keyup", "#email_va", function () {
+            $('#title').css("border", "");
+            $('#err-stry-ttl').hide();
+    });
+    $("form#updateStoryForm").submit(function(e) {
+        let error = 0;
+        if(document.getElementById("storyVideo").files.length == 0){
+            $('.story-video-form').css("border", "solid #e04f1a 1px");
+            $('#err-stry-vid').show();
+            error = 1;
+        } else {
+            $('.story-video-form').css("border", "");
+            $('#err-stry-vid').hide();
+        }
+        if(!$('#title').val()) {
+            $('#title').css("border", "solid #e04f1a 1px");
+            $('#err-stry-ttl').show();
+            error = 1;
+        } else {
+            $('#title').css("border", "");
+            $('#err-stry-ttl').hide();
+        }
+        if(error == 1) {
+            e.preventDefault();
+        }
+    });
+
     var storyVideoForm = $(".story-upload").children('.story-video-form');
     var storyVideoInput = $(".story-upload").children('.story-video-input');
     var storyVideoPreview = $(".story-upload").children(".story-video-preview");
@@ -118,11 +119,13 @@ $("form#updateStoryForm").submit(function(e) {
             $(storyVideoInput).children("input").trigger("click");
         });
 
-    $(storyResetInput)
+        $(storyResetInput)
         .click(function() {
             $(storyVideoInput)
                 .children("input")
                 .val("");
             $('.story-title-gap').css("margin-top", "18px");
-.val("");
-}
+            $(storyVideoPreview).hide();
+            $(storyVideoForm).show();
+        });
+</script>
