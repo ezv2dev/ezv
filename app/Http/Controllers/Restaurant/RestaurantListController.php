@@ -152,7 +152,7 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'There is something error',
+                'message' => $validator->errors(),
             ], 500);
         }
 
@@ -209,7 +209,7 @@ class RestaurantListController extends Controller
         // validation
         $rules = [
             'id_restaurant' => ['required', 'integer'],
-            'phone' => ['string'],
+            'phone' => ['numeric'],
             'email' => ['email']
         ];
 
@@ -404,7 +404,7 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'There is something error'
+                'message' => $validator->errors(),
             ], 500);
         }
 

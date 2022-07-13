@@ -127,6 +127,9 @@ textarea.error {
     margin-top: 13px;
     display: flex;
     justify-content: center;
+    padding-top: 4px;
+    margin-left: -12px;
+    padding-left: 10px !important;
 }
 
 .navigationItem {
@@ -198,10 +201,6 @@ hr.pendek {
     .menu-liner {
         width: 95.8% !important;
         margin-left: 13px !important;
-    }
-
-    .navigationList {
-        margin-left: -12px;
     }
 
     .section-2 {
@@ -3348,9 +3347,7 @@ span.flatpickr-weekday {
     .rsv {
         height: 47px;
     }
-    .navigationList {
-        padding-left: 10px !important;
-    }
+
     .about-place,
     .row-grid-amenities {
         padding-right: 12px !important;
@@ -3520,21 +3517,12 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 789px) {
-    .navigationItemText {
-        font-size: 9px !important;
-    }
-}
-
-@media only screen and (min-width: 790px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
     .navigationItemText {
         font-size: 12px !important;
         top: -2px !important;
         position: relative;
     }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
     #page-container .page-content .alert {
         margin-left: 12px !important;
     }
