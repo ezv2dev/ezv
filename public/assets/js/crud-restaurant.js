@@ -242,9 +242,10 @@ $("#updateImageForm").submit(function (e) {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
+
             iziToast.error({
                 title: "Error",
-                message: jqXHR.responseJSON.message,
+                message: jqXHR.responseJSON.message.image[0],
                 position: "topRight",
             });
 

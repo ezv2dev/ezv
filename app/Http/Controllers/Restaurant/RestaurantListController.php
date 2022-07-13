@@ -724,7 +724,7 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->error(),
+                'message' => $validator->errors(),
             ], 500);
         }
         // restaurant data
