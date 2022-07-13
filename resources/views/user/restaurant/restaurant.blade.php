@@ -4762,71 +4762,7 @@
     </script>
 
     {{-- Highlight sticky --}}
-    <!-- <script>
-        var gallery = $('#gallery').offset().top - 200,
-            menu = $('#menu').offset().top - 150,
-            description = $('#description').offset().top - 150,
-            amenities = $('#amenities').offset().top - 150,
-            location_map = $('#location-map').offset().top - 150,
-            review = $('#review').offset().top - 150,
-            host = $('#host_end').offset().top - 200,
-            $window = $(window);
-
-        $window.scroll(() => {
-            if ($window.scrollTop() >= gallery && $window.scrollTop() < menu) {
-                $('#gallery-sticky').addClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= menu && $window.scrollTop() < description) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').addClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= description && $window.scrollTop() < amenities) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').addClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= amenities && $window.scrollTop() < location_map) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').addClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= location_map && $window.scrollTop() < review) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').addClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= review && $window.scrollTop() < host) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').addClass('active-sticky');
-            } else {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            }
-        });
-    </script> -->
-
-<script>
+    <script>
         jQuery(document).ready(function($){
             $(window).on('scroll', function(){
                 if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#menu').offset().top - 60){
