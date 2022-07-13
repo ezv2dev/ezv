@@ -230,8 +230,8 @@
                                 </div>
                                 <div class="nav-link-form" id="collaborator-form">
                                     <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
-                                            target="_blank" href="{{ route('collaborator_list') }}"><img src="{{ asset('assets/icon/menu/collab1.svg') }}" style="width: 29px; height: auto; filter: invert(1);"></a>
+                                        <a class="nav-link nav-link-style nav-link-margin nav-link-style-detail-active" id="collaborator-button"
+                                            target="_blank" href="{{ route('collaborator_list') }}"><img src="{{ asset('assets/icon/menu/collab1.svg') }}" style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
                                     <p>{{ __('user_page.Collab Portal') }}</p>
                                 </div>

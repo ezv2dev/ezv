@@ -7,13 +7,21 @@ $.ajaxSetup({
 let id_restaurant = $("#id_restaurant").val();
 
 //ganti short description restaurant
+
+let short_desc_backup = $("#short-description-form-input").val();
+
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
+
+    let btn = document.getElementById("btnSaveShortDesc");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/short-description",
         data: {
@@ -38,13 +46,40 @@ function saveShortDescription() {
                 position: "topRight",
             });
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
             editShortDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
+            editShortDescriptionCancel();
+
+            let short_desc_input = document.getElementById(
+                "short-description-form-input"
+            );
+
+            short_desc_input.value = short_desc_backup;
         },
     });
 }
 
 function saveDescription() {
     let desc = $("#description-form-input").val();
+
+    let btn = document.getElementById("btnSaveDescription");
+    btn.textContent = "Saving Description...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -86,11 +121,16 @@ function saveDescription() {
             }
 
             editDescriptionCancel();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
         },
     });
 }
 
 //ganti nama restaurant
+let name_resto_backup = $("#name-form-input").val();
+
 function saveNameRestaurant() {
     let name_resto = $("#name-form-input").val();
 
@@ -102,6 +142,7 @@ function saveNameRestaurant() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/name",
         data: {
@@ -122,10 +163,25 @@ function saveNameRestaurant() {
                 position: "topRight",
             });
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
             btn.classList.remove("disabled");
 
             editNameCancel();
+        },
+        error: function (jqXHR, exception) {
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
+            editNameCancel();
+
+            let name_input = document.getElementById("name-form-input");
+            name_input.value = name_resto_backup;
         },
     });
 }
@@ -156,6 +212,7 @@ $("#updateImageForm").submit(function (e) {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/image",
         data: formData,
@@ -186,7 +243,24 @@ $("#updateImageForm").submit(function (e) {
 
             $("#profileDropzone").attr("src", "");
 
-            btn.textContent = "Save Image";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message.image[0],
+                position: "topRight",
+            });
+
+            $("#modal-edit_restaurant_profile").modal("hide");
+
+            $("#profileDropzone").attr("src", "");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> ";
             btn.classList.remove("disabled");
         },
     });
@@ -243,7 +317,7 @@ function saveCategoryRestaurant() {
 
             $("#modal-add_tag").modal("hide");
 
-            btn.textContent = "Save";
+            btn.innerHTML = "<i class='fa fa-check'></i> ";
             btn.classList.remove("disabled");
 
             iziToast.success({
@@ -274,6 +348,11 @@ function saveCategoryRestaurant() {
                         "</span>";
                 }
             }
+
+            if (response.data.tags.length == 0) {
+                content = "there is no tag yet";
+            }
+
             content =
                 content +
                 '&nbsp;<a type="button" onclick="add_tag()" style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit Tags</a>';
@@ -385,6 +464,13 @@ function saveCategoryRestaurant() {
 function saveTimeRestaurant() {
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
+
+    var btn = document.getElementById("btnSaveTimeResto");
+    var btn2 = document.getElementById("btnCancelTimeResto");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+    btn2.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -416,6 +502,10 @@ function saveTimeRestaurant() {
             $("#closed-time-input").val(response.data.closed_time);
 
             editTimeFormCancel();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+            btn2.classList.remove("disabled");
         },
     });
 }
@@ -450,6 +540,12 @@ function saveRestaurantPrice() {
     let price_restaurant =
         select_restaurant_price.options[select_restaurant_price.selectedIndex]
             .value;
+
+    let btn = document.getElementById("btnSaveRestoTime");
+    let btn2 = document.getElementById("btnCancelRestoTime");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+    btn2.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -518,6 +614,10 @@ function saveRestaurantPrice() {
             $("#type_price_content").append(contentPrice);
             $("#type_price_content_mobile").append(contentPrice);
             editTypeFormCancel();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+            btn2.classList.remove("disabled");
         },
     });
 }
@@ -616,6 +716,10 @@ function saveFacilities() {
         facilities.push(parseInt($(this).val()));
     });
 
+    btn = document.getElementById("btnSaveFacilities");
+    btn.textContent = "Saving Facilities...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -689,6 +793,9 @@ function saveFacilities() {
                     }
                 }
             }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
 
             $("#contentFacilities").html(content);
 

@@ -1190,7 +1190,8 @@ Route::patch('/things-to-do/update/contact', [Activity\ActivityListController::c
 Route::post('/things-to-do/update/location', [Activity\ActivityListController::class, 'activity_update_location'])->name('activity_update_location');
 Route::post('/things-to-do/update/short-description', [Activity\ActivityListController::class, 'activity_update_short_description'])->name('activity_update_short_description');
 Route::post('/things-to-do/update/description', [Activity\ActivityListController::class, 'activity_update_description'])->name('activity_update_description');
-Route::patch('/things-to-do/update/time', [Activity\ActivityListController::class, 'activity_update_time'])->name('activity_update_time');
+Route::get('/things-to-do/get/time', [Activity\ActivityListController::class, 'activity_get_time'])->name('activity_get_time');
+Route::post('/things-to-do/update/time', [Activity\ActivityListController::class, 'activity_update_time'])->name('activity_update_time');
 Route::post('/things-to-do/update/photo/position', [Activity\ActivityListController::class, 'activity_update_position_photo'])->name('activity_update_photo_photo_position');
 Route::post('/things-to-do/update/video/position', [Activity\ActivityListController::class, 'activity_update_position_video'])->name('activity_update_photo_video_position');
 Route::post('/things-to-do/photo/store', [Activity\ActivityListController::class, 'activity_store_photo'])->name('activity_store_photo');
