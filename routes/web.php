@@ -82,6 +82,7 @@ use App\Http\Controllers\Auth\RegisterPartnerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -110,7 +111,7 @@ Route::get('/register/partner', [RegisterPartnerController::class, 'showRegistra
 Route::post('/register/partner', [RegisterPartnerController::class, 'register'])->name('register.partner.store');
 
 // collabolator auth
-Route::get('/register/collabs', [RegisterCollabController::class ,'showRegistrationForm'])->name('register.collab');
+Route::get('/register/collabs', [RegisterCollabController::class, 'showRegistrationForm'])->name('register.collab');
 Route::post('/register/collabs', [RegisterCollabController::class, 'register'])->name('register.collab.store');
 
 // GOOGLE SIGN IN
@@ -136,11 +137,11 @@ Route::get('/get-language', [CurrencyController::class, 'language'])->name('get_
 Route::middleware(['auth'])->group(function () {
     Route::get('/like/villa/{id}', [ViewController::class, 'like_favorit'])->name('like_favorit');
     Route::get('/like/restaurant/{id}', [Restaurant\RestaurantController::class, 'like_restaurant'])->name('like_restaurant');
-    Route::get('/like/hotel/{id}', [HotelController::class ,'like_hotel'])->name('like_hotel');
+    Route::get('/like/hotel/{id}', [HotelController::class, 'like_hotel'])->name('like_hotel');
     Route::get('/like/things-to-do/{id}', [Activity\ActivityListController::class, 'like_things_to_do'])->name('like_things_to_do');
 
     Route::get('/dashboard/permission', [PermissionController::class, 'index'])->name('admin_permission');
-    Route::get('/dashboard/permission/datatable', [PermissionController::class ,'datatable'])->name('admin_permission_datatable');
+    Route::get('/dashboard/permission/datatable', [PermissionController::class, 'datatable'])->name('admin_permission_datatable');
     Route::get('/dashboard/permission/create', [PermissionController::class, 'create'])->name('admin_permission_create');
     Route::post('/dashboard/permission/store', [PermissionController::class, 'store'])->name('admin_permission_store');
     Route::get('/dashboard/permission/delete/{id}', [PermissionController::class, 'destroy'])->name('admin_permission_delete');
@@ -204,7 +205,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/account-settings/login-security', [Dashboard\AccountSettingController::class, 'login_security'])->name('login_security');
     Route::get('/account-settings/notification', [Dashboard\AccountSettingController::class, 'notification'])->name('notification_setting');
     Route::get('/account-settings/notification_account', [Dashboard\NotificationController::class, 'notification_account'])->name('notification_account');
-    Route::post('/account-settings/notification1', [Dashboard\NotificationController::class ,'recognition_achievements'])->name('recognition-achievements');
+    Route::post('/account-settings/notification1', [Dashboard\NotificationController::class, 'recognition_achievements'])->name('recognition-achievements');
     Route::post('/account-settings/notification2', [Dashboard\NotificationController::class, 'insights_tips'])->name('insights-tips');
     Route::post('/account-settings/notification3', [Dashboard\NotificationController::class, 'pricing_trends_suggestions'])->name('pricing-trends-suggestions');
     Route::post('/account-settings/notification4', [Dashboard\NotificationController::class, 'hosting_perks'])->name('hosting-perks');
@@ -1319,6 +1320,7 @@ Route::post('/collaborator/update/image', [Collaborator\CollaboratorController::
 Route::post('/colaborator/update/name', [Collaborator\CollaboratorController::class, 'collab_update_name'])->name('collab_update_name');
 Route::post('/colaborator/store/category', [Collaborator\CollaboratorController::class, 'collab_store_category'])->name('collab_store_category');
 Route::post('/colaborator/update/location', [Collaborator\CollaboratorController::class, 'collab_update_location'])->name('collab_update_location');
+Route::post('/colaborator/update/social-media', [Collaborator\CollaboratorController::class, 'collab_update_social_media'])->name('collab_update_social_media');
 Route::get('/collab/story/{id}', [Collaborator\CollaboratorController::class, 'collab_story'])->name('collab_story');
 Route::post('/collab/update/story', [Collaborator\CollaboratorController::class, 'update_story'])->name('collab_update_story');
 Route::get('/collab/{id}/delete/story/{id_story}', [Collaborator\CollaboratorController::class, 'delete_story'])->name('collab_delete_story');
@@ -1394,4 +1396,3 @@ Route::get('id', function () {
 });
 //SESSION
 Route::get('/session/theme', [CookiesController::class, 'set_cookie_theme'])->name('cookie_theme.set');
-
