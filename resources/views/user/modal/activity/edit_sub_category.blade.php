@@ -114,7 +114,7 @@
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
-                    <button id="btnsaveCategoryActivity" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveSubcategoryActivity()">
+                    <button id="btnsaveCategory" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveSubcategoryActivity()">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>

@@ -439,7 +439,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                    <button type="submit" class="btn btn-sm btn-primary btnSaveTime">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -516,7 +516,7 @@
                                     <textarea style="width: 100%;" class="form-control" name="name" cols="30" rows="3"
                                         id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}"
                                         required>{{ $activity->name }}</textarea>
-                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveNameActivity()"
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName" onclick="saveNameActivity()"
                                         style="background-color: #ff7400">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
@@ -579,7 +579,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary btnSaveTime">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -645,7 +645,7 @@
                                             required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                             cols="30" rows="3" maxlength="250" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" onclick="saveShortDescription();">
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
@@ -1293,7 +1293,7 @@
                                                 placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveDescription();">
+                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDescription" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -1859,7 +1859,7 @@
                             @else
                                 {{-- STYLE FOR RATING STAR --}}
                                 <style>
-                                   
+
                                     .cm-star-rating input[type=radio] {
                                         display: none
                                     }
@@ -1883,7 +1883,7 @@
                                     <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">
-                                           
+
                                                 <form action="{{ route('activity_review_store') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id_activity"
@@ -1894,8 +1894,8 @@
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Experience') }}
                                                                 </div>
-                                                           
-                                                            
+
+
                                                                 <div class="col-8 review-container">
                                                                 <div class="cm-star-rating">
                                                                     <input id="star-5" type="radio" name="experience"
@@ -1933,7 +1933,7 @@
 
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                                                             <div class="col-12">
                                                                 {{ __('user_page.Comment') }}
@@ -1952,7 +1952,7 @@
                                                     </div>
                                                 </form>
 
-                                            
+
                                         </div>
                                         <hr>
                                     </div>
