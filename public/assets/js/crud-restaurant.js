@@ -249,10 +249,12 @@ $("#updateImageForm").submit(function (e) {
                 position: "topRight",
             });
 
+            $("#modal-edit_restaurant_profile").modal("hide");
+
+            $("#profileDropzone").attr("src", "");
+
             btn.textContent = "Save Image";
             btn.classList.remove("disabled");
-
-            $("#modal-edit_restaurant_profile").modal("hide");
         },
     });
 });
