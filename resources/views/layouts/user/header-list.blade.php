@@ -3030,7 +3030,8 @@
                                                 style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
-                                        <div style="display: flex; padding: 0px;" class="header-date-input-container">
+                                        <div style="display: flex; padding: 0px;"
+                                            class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="start_date" id="start_date"
                                                 value="{{ $get_start ?? '' }}"
@@ -3445,7 +3446,8 @@
                                             <!-- <i class="fa fa-search" aria-hidden="true"></i> -->&nbsp;
                                             {{ __('user_page.Category') }}
                                         </p>
-                                        <input type="text" style="background-color: #ffffff00; border:none; padding: 0.4rem 0 0 0; font-size: 140%;"
+                                        <input type="text"
+                                            style="background-color: #ffffff00; border:none; padding: 0.4rem 0 0 0; font-size: 140%;"
                                             placeholder="{{ __('user_page.Search here') }}"
                                             value="{{ request()->get('sKeyword') ?? '' }}" id="keyword"
                                             name="sKeyword">
@@ -3465,7 +3467,8 @@
                                                 style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
-                                        <div style="display: flex; padding: 0px;" class="header-date-input-container">
+                                        <div style="display: flex; padding: 0px;"
+                                            class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="start_date" id="start_date"
                                                 value="{{ $get_start ?? '' }}"
@@ -4147,17 +4150,6 @@
 
         <script>
             jQuery(document).ready(function(e) {
-                var navbarHeight = $(".page-header-fixed").innerHeight();
-                if ($('#filter-subcat-bg-color').attr('data-isshow') == "true" &&
-                    $('#filter-cat-bg-color').attr('data-isshow') == "true") {
-                    var originHeight = $('#filter-subcat-bg-color').innerHeight() +
-                        $('#filter-cat-bg-color').innerHeight() + navbarHeight;
-                    $(".grid-container-43").css("margin-top", originHeight + "px");
-                    $('.container-grid-hotel').css("margin-top", originHeight + "px");
-                    $('.container-grid-activity').css("margin-top", originHeight + "px");
-                    $('.container-grid').css("margin-top", originHeight + "px");
-                }
-
                 function t(t) {
                     e(t).bind("click", function(t) {
                         t.preventDefault();
