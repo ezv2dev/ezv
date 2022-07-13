@@ -56,7 +56,7 @@ function saveShortDescription() {
             // console.log(exception);
             iziToast.error({
                 title: "Error",
-                message: jqXHR.responseJSON.message,
+                message: jqXHR.responseJSON.message.short_desc[0],
                 position: "topRight",
             });
 
@@ -174,7 +174,7 @@ function saveNameRestaurant() {
         error: function (jqXHR, exception) {
             iziToast.error({
                 title: "Error",
-                message: jqXHR.responseJSON.message,
+                message: jqXHR.responseJSON.message.name[0],
                 position: "topRight",
             });
 
