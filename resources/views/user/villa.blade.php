@@ -310,6 +310,7 @@
                                 <div id="name-form" style="display:none;">
                                     <textarea name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
+                                    <small id="err-name" style="display: none;" class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         style="background-color: #ff7400"
                                         onclick="editNameVilla({{ $villa[0]->id_villa }})">
@@ -412,6 +413,7 @@
                                     <textarea class="form-control" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
+                                    <small id="err-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -743,7 +745,7 @@
                                 </a>
                             </li>
                             <li class="sectionReview">
-                                <a href="#sectionReview">                                
+                                <a href="#sectionReview">
                                     <span>
                                         <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                             fill="#262626" viewBox="0 0 20 20"></i>
@@ -752,7 +754,7 @@
                                 </a>
                             </li>
                             <li class="first-detail-content d-flex d-md-none">
-                                <a href="#first-detail-content">                                
+                                <a href="#first-detail-content">
                                     <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1643,7 +1645,7 @@
                     </div>
                     @auth
                         @if (Auth::user()->role_id == 4)
-                            
+
                             @if ($villa[0]->userReview)
                                 <section id="user-review" class="section-2" style="margin-left: 25px;">
                                     <div class="about-place-block">
@@ -1725,7 +1727,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                 </section>
                             @else
@@ -1740,7 +1742,7 @@
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
                                                     <div class="row">
-                                                        
+
                                                             <div class="col-12 col-lg-6">
                                                                 <div class="d-flex">
                                                                     <div class="col-4 review-container">
@@ -2003,13 +2005,13 @@
                                                                         style="width: 200px">{{ __('user_page.Done') }}</button>
                                                                 </center>
                                                             </div>
-                                                        
+
                                                     </div>
                                                 </form>
 
                                             </div>
                                         </div>
-                                      
+
                                     </div>
                                 </section>
                             @endif
@@ -4115,7 +4117,7 @@
 
 {{-- Sticky Menu --}}
     <script>
-        /* ========================================== 
+        /* ==========================================
         scrollTop() >= 300
         Should be equal the the height of the header
         ========================================== */
