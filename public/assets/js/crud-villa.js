@@ -1,28 +1,46 @@
+$(document).on("keyup", "textarea#name-form-input", function () {
+    $('#name-form-input').css("border", "");
+    $('#err-name').hide();
+});
+
 function editNameVilla(id_villa) {
-    $.ajax({
-        type: "POST",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/villa/update/name",
-        data: {
-            id_villa: id_villa,
-            villa_name: $('#name-form-input').val()
-        },
-        success: function(response) {
-            $("#name-content2").html(response.data);
-            $("#name-content-mobile").html(response.data);
-            $("#villaTitle").html(response.data + ' - EZV2');
+    let error = 0;
+    if(!$('textarea#name-form-input').val()) {
+        $('#name-form-input').css("border", "solid #e04f1a 1px");
+        $('#err-name').show();
+        error = 1;
+    } else {
+        $('#name-form-input').css("border", "");
+        $('#err-name').hide();
+    }
+    if(error == 1) {
+        return false;
+    } else {
+        $.ajax({
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/villa/update/name",
+            data: {
+                id_villa: id_villa,
+                villa_name: $('#name-form-input').val()
+            },
+            success: function(response) {
+                $("#name-content2").html(response.data);
+                $("#name-content-mobile").html(response.data);
+                $("#villaTitle").html(response.data + ' - EZV2');
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            editNameCancel();
-        },
-    });
+                editNameCancel();
+            },
+        });
+    }
 }
 
 function editNameForm(id_villa) {
@@ -58,6 +76,18 @@ function editNameCancel() {
 }
 
 function editShortDesc(id_villa) {
+    let error = 0;
+    if(!$('textarea#short-description-form-input').val()) {
+        $('#short-description-form-input').css("border", "solid #e04f1a 1px");
+        $('#err-desc').show();
+        error = 1;
+    } else {
+        $('#short-description-form-input').css("border", "");
+        $('#err-desc').hide();
+    }
+    if(error == 1) {
+        return false;
+    } else {
     $.ajax({
         type: "POST",
         headers: {
@@ -80,6 +110,7 @@ function editShortDesc(id_villa) {
             editShortDescriptionCancel();
         },
     });
+    }
 }
 
 function editShortDescriptionForm(id_villa) {
@@ -371,50 +402,66 @@ function editDescriptionVilla(id_villa) {
 
 // ! Change Profile Villa
 $("#imageVilla").on("change", function(ev) {
+    if(document.getElementById("imageVilla").files.length != 0){
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
+
     imageProfileVilla = this.files[0];
 
     readerImageVilla = new FileReader();
 });
-
 $("#updateImageForm").submit(function(e) {
-    e.preventDefault();
+    let error = 0;
+    if(document.getElementById("imageVilla").files.length == 0){
+        $('.image-box').css("border", "solid #e04f1a 1px");
+        $('#err-img').show();
+        error = 1;
+    } else {
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
 
-    var formData = new FormData(this);
-    formData.append("image", imageProfileVilla);
+        var formData = new FormData(this);
+        formData.append("image", imageProfileVilla);
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/villa/update/image",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        enctype: "multipart/form-data",
-        dataType: "json",
-        success: function(response) {
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/update/image",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            readerImageVilla.addEventListener("load", function() {
-                $("#imageProfileVilla").attr(
-                    "src",
-                    readerImageVilla.result
-                );
-            });
+                readerImageVilla.addEventListener("load", function() {
+                    $("#imageProfileVilla").attr(
+                        "src",
+                        readerImageVilla.result
+                    );
+                });
 
-            readerImageVilla.readAsDataURL(imageProfileVilla);
+                readerImageVilla.readAsDataURL(imageProfileVilla);
 
-            $("#modal-edit_villa_profile").modal("hide");
-        },
-    });
+                $("#modal-edit_villa_profile").modal("hide");
+            },
+        });
+    }
 });
-
 // ! End Change Profile Villa
 
 // ! Edit Amenities

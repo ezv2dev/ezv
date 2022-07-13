@@ -29,4 +29,9 @@ return [
     'empty_cnm' => 'Card number is invalid',
     'empty_exp' => 'Card exp is invalid',
     'empty_cvn' => 'Card cvn is invalid',
+    'empty_img' => 'Invalid image',
+    'empty_name' => 'Invalid Name',
+    'empty_desc' => 'Invalid Description',
+    'empty_title' => 'Invalid Title',
+    'empty_video' => 'Invalid Video',
 ];
