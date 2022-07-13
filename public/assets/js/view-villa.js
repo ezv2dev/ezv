@@ -168,20 +168,24 @@ checkCheckInOutDate();
 $(document).ready(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
-        calendar_reserve2(1)
+        calendar_reserve(1);
+        calendar_reserve2(1);
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
+        calendar_reserve(2);
     }
 });
 
 $(window).on("resize", function () {
     if ($(this).width() <= 991) {
         calendar_availability(1);
-        calendar_reserve2(1)
+        calendar_reserve2(1);
+        calendar_reserve(1);
     } else {
         calendar_availability(2);
-        calendar_reserve2(2)
+        calendar_reserve2(2);
+        calendar_reserve(2);
     }
 });
 
@@ -354,10 +358,10 @@ $("#clear1").click(function () {
     $("#check_out3").val("");
     if ($(window).width() <= 991) {
         calendar_availability(1);
-        calendar_reserve2(1)
+        calendar_reserve2(1);
     } else {
         calendar_availability(2);
-        calendar_reserve2(2)
+        calendar_reserve2(2);
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -437,69 +441,6 @@ $("#clear_date_header").click(function () {
     $("#check_in4").val("");
     $("#check_out4").val("");
     calendar_header(2);
-});
-
-$.ajax({
-    //create an ajax request to display.php
-    type: "GET",
-    url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
-        $("#inline2").flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            inline: true,
-            mode: "range",
-            showMonths: 1,
-            disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
-                var start = new Date(
-                    instance.formatDate(selectedDates[0], "Y-m-d")
-                );
-                var end = new Date(
-                    instance.formatDate(selectedDates[1], "Y-m-d")
-                );
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $("#min_stay").val();
-                // var total = $('#price').val() * sum_night;
-                var minimum = new Date($("#check_in").val()).fp_incr(min_stay);
-                $.ajax({
-                    type: "GET",
-                    url: "/villa/get_total/" + $("#id_villa").val(),
-                    data: {
-                        start: start.toISOString().split("T")[0],
-                        end: end.toISOString().split("T")[0],
-                        _token: "{{ csrf_token() }}",
-                    },
-                    success: function (data) {
-                        var total = data;
-                        if (sum_night < min_stay) {
-                            alert("minimum stay is " + min_stay + " days");
-                        } else {
-                            $("#check_in").val(
-                                instance.formatDate(selectedDates[0], "Y-m-d")
-                            );
-                            $("#check_out").val(
-                                instance.formatDate(selectedDates[1], "Y-m-d")
-                            );
-                            $("#sum_night").val(sum_night);
-
-                            $("#total").text(
-                                total
-                                    .toString()
-                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                            );
-                            $("#total_all").text(
-                                total
-                                    .toString()
-                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                            );
-                        }
-                    },
-                });
-            },
-        });
-    },
 });
 
 function calendar_reserve(months) {
