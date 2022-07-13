@@ -4056,19 +4056,24 @@
                     }
                 }
 
-                document.getElementById("myBtnContainer").classList.remove("display-none");
-                document.getElementById("searchbox").classList.add("searchbox-display-block");
-                document.getElementById("searchbox").classList.remove("searchbox-display-none");
-                document.getElementById("search_bar").classList.remove("active");
-                document.getElementById("change_display_block").classList.add("display-none");
-                document.getElementById("change_display_block").classList.remove("display-block");
-                document.getElementById("new-bar-black").classList.remove("header-popup-list");
-                document.getElementById("new-bar-black").classList.remove("search-height");
-                document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
-                document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+                var isFocused = document.querySelector("#loc_sugest") == document.activeElement
+                                ||  document.querySelector("#search_sugest") == document.activeElement;
 
-                var els = document.getElementsByClassName("flatpickr-calendar");
-                addClass(els, 'display-none');
+                if (!isFocused || window.innerWidth > 768) {
+                    document.getElementById("myBtnContainer").classList.remove("display-none");
+                    document.getElementById("searchbox").classList.add("searchbox-display-block");
+                    document.getElementById("searchbox").classList.remove("searchbox-display-none");
+                    document.getElementById("search_bar").classList.remove("active");
+                    document.getElementById("change_display_block").classList.add("display-none");
+                    document.getElementById("change_display_block").classList.remove("display-block");
+                    document.getElementById("new-bar-black").classList.remove("header-popup-list");
+                    document.getElementById("new-bar-black").classList.remove("search-height");
+                    document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
+                    document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+
+                    var els = document.getElementsByClassName("flatpickr-calendar");
+                    addClass(els, 'display-none');
+                }
             }
         </script>
 

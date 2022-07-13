@@ -1359,6 +1359,7 @@
             var lastScrollTop = 0;
             window.addEventListener('scroll', function() {
                 var st = window.pageYOffset || document.documentElement.scrollTop;
+                var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
                 if (window.scrollY == 0) {
                     document.getElementById("ul").classList.remove("ul-display-none");
                     document.getElementById("ul").classList.add("ul-display-block");
@@ -1384,42 +1385,44 @@
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     removeClass(els, 'display-none');
                 } else {
-                    console.log("oke");
-                    document.getElementById("ul").classList.add("ul-display-none");
-                    document.getElementById("ul").classList.remove("ul-display-block");
-                    document.getElementById("bar").classList.add("display-none");
-                    document.querySelector("#searchbox").classList.remove("display-none");
-                    document.querySelector("#searchbox").classList.add("display-block");
-                    document.getElementById("nav").classList.add("position-fixed");
-                    document.getElementById("nav").classList.add("padding-top-0");
-                    document.getElementById("nav").classList.remove("search-height");
+                    if (!isFocused || window.innerWidth > 768) {
+                        console.log("oke");
+                        document.getElementById("ul").classList.add("ul-display-none");
+                        document.getElementById("ul").classList.remove("ul-display-block");
+                        document.getElementById("bar").classList.add("display-none");
+                        document.querySelector("#searchbox").classList.remove("display-none");
+                        document.querySelector("#searchbox").classList.add("display-block");
+                        document.getElementById("nav").classList.add("position-fixed");
+                        document.getElementById("nav").classList.add("padding-top-0");
+                        document.getElementById("nav").classList.remove("search-height");
 
-                    function addClass(elements, className) {
-                        for (var i = 0; i < elements.length; i++) {
-                            var element = elements[i];
-                            if (element.classList) {
-                                element.classList.add(className);
-                            } else {
-                                element.className += ' ' + className;
+                        function addClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.add(className);
+                                } else {
+                                    element.className += ' ' + className;
+                                }
                             }
                         }
-                    }
 
-                    function removeClass(elements, className) {
-                        for (var i = 0; i < elements.length; i++) {
-                            var element = elements[i];
-                            if (element.classList) {
-                                element.classList.remove(className);
-                            } else {
-                                element.className = element.className.replace(new RegExp('(^|\\b)' + className
-                                    .split(' ')
-                                    .join('|') + '(\\b|$)', 'gi'), ' ');
+                        function removeClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.remove(className);
+                                } else {
+                                    element.className = element.className.replace(new RegExp('(^|\\b)' + className
+                                        .split(' ')
+                                        .join('|') + '(\\b|$)', 'gi'), ' ');
+                                }
                             }
                         }
-                    }
 
-                    var els = document.getElementsByClassName("flatpickr-calendar");
-                    addClass(els, 'display-none');
+                        var els = document.getElementsByClassName("flatpickr-calendar");
+                        addClass(els, 'display-none');
+                    }
                 }
             });
         </script>
