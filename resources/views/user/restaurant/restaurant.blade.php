@@ -718,7 +718,7 @@
                                             value="{{ $restaurant->id_restaurant }}" required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                             cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" onclick="saveShortDescription();">
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"

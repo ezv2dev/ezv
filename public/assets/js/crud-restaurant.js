@@ -10,10 +10,15 @@ let id_restaurant = $("#id_restaurant").val();
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
 
+    let btn = document.getElementById("btnSaveShortDesc");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/short-description",
         data: {
@@ -37,6 +42,24 @@ function saveShortDescription() {
                 message: response.message,
                 position: "topRight",
             });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+
+            editShortDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
 
             editShortDescriptionCancel();
         },
@@ -102,6 +125,7 @@ function saveNameRestaurant() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/name",
         data: {
@@ -119,6 +143,18 @@ function saveNameRestaurant() {
             iziToast.success({
                 title: "Success",
                 message: response.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+
+            editNameCancel();
+        },
+        error: function (jqXHR, exception) {
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
                 position: "topRight",
             });
 
@@ -274,6 +310,11 @@ function saveCategoryRestaurant() {
                         "</span>";
                 }
             }
+
+            if (response.data.tags.length == 0) {
+                content = "there is no tag yet";
+            }
+
             content =
                 content +
                 '&nbsp;<a type="button" onclick="add_tag()" style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit Tags</a>';
