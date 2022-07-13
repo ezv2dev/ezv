@@ -374,15 +374,14 @@
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-dekstop"
                                     style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    @if ($restaurant->image)
+                                    {{-- @if ($restaurant->image)
                                         <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
-                                            {{-- <a href="{{ route('restaurant_delete_image', $restaurant->id_restaurant) }}"> --}}
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
                                                 data-bs-placement="bottom"
                                                 title="{{ __('user_page.Delete') }}"></i></a>
-                                    @endif
+                                    @endif --}}
                                 @endif
                             @endauth
                             <div class="date-contact-dekstop">
@@ -608,14 +607,14 @@
                                 &nbsp;
                                 <a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                @if ($restaurant->image)
+                                {{-- @if ($restaurant->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
                                         <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                             data-bs-toggle="popover" data-bs-animation="true"
                                             data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
-                                @endif
+                                @endif --}}
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
@@ -718,7 +717,7 @@
                                             value="{{ $restaurant->id_restaurant }}" required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                             cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" onclick="saveShortDescription();">
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"

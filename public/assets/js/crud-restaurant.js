@@ -7,13 +7,21 @@ $.ajaxSetup({
 let id_restaurant = $("#id_restaurant").val();
 
 //ganti short description restaurant
+
+let short_desc_backup = $("#short-description-form-input").val();
+
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
+
+    let btn = document.getElementById("btnSaveShortDesc");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/short-description",
         data: {
@@ -38,7 +46,30 @@ function saveShortDescription() {
                 position: "topRight",
             });
 
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+
             editShortDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+
+            editShortDescriptionCancel();
+
+            let short_desc_input = document.getElementById(
+                "short-description-form-input"
+            );
+
+            short_desc_input.value = short_desc_backup;
         },
     });
 }
@@ -91,6 +122,8 @@ function saveDescription() {
 }
 
 //ganti nama restaurant
+let name_resto_backup = $("#name-form-input").val();
+
 function saveNameRestaurant() {
     let name_resto = $("#name-form-input").val();
 
@@ -102,6 +135,7 @@ function saveNameRestaurant() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/name",
         data: {
@@ -126,6 +160,21 @@ function saveNameRestaurant() {
             btn.classList.remove("disabled");
 
             editNameCancel();
+        },
+        error: function (jqXHR, exception) {
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+
+            editNameCancel();
+
+            let name_input = document.getElementById("name-form-input");
+            name_input.value = name_resto_backup;
         },
     });
 }
@@ -156,6 +205,7 @@ $("#updateImageForm").submit(function (e) {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/image",
         data: formData,
@@ -188,6 +238,20 @@ $("#updateImageForm").submit(function (e) {
 
             btn.textContent = "Save Image";
             btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Save Image";
+            btn.classList.remove("disabled");
+
+            $("#modal-edit_restaurant_profile").modal("hide");
         },
     });
 });
@@ -274,6 +338,11 @@ function saveCategoryRestaurant() {
                         "</span>";
                 }
             }
+
+            if (response.data.tags.length == 0) {
+                content = "there is no tag yet";
+            }
+
             content =
                 content +
                 '&nbsp;<a type="button" onclick="add_tag()" style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit Tags</a>';

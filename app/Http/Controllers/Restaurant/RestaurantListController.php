@@ -149,11 +149,11 @@ class RestaurantListController extends Controller
             'id' => ['required', 'integer'],
             'name' => ['required', 'max:100'],
         ]);
+
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+                'message' => 'There is something error',
+            ], 500);
         }
 
         // restaurant data
@@ -164,8 +164,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -173,8 +172,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -188,15 +186,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Name Restaurant',
-                'status' => 200,
+                'message' => 'Updated Name Restaurant',
                 'data' => $restaurantData
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Error Updated Name Restaurant',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -263,9 +259,8 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+                'message' => 'There is something error',
+            ], 500);
         }
 
         // restaurant data
@@ -276,8 +271,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -285,8 +279,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -317,15 +310,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Type or Price Restaurant',
-                'status' => 200,
+                'message' => 'Updated Type or Price Restaurant',
                 'data' => $data,
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Error Updated Type or Price Restaurant',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -339,9 +330,8 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+                'message' => 'There is something error',
+            ], 500);
         }
 
         // restaurant data
@@ -352,8 +342,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -361,8 +350,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -376,15 +364,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Description Restaurant',
-                'status' => 200,
+                'message' => 'Updated Description Restaurant',
                 'data' => $data,
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Description Restaurant',
-                'status' => 500,
-            ]);
+                'message' => 'Updated Description Restaurant',
+            ], 500);
         }
     }
 
@@ -397,7 +383,9 @@ class RestaurantListController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 500);
+            return response()->json([
+                'message' => 'There is something error'
+            ], 500);
         }
 
         // restaurant data
@@ -408,8 +396,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -417,8 +404,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -432,15 +418,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Restaurant Short Description',
-                'status' => 200,
+                'message' => 'Updated Restaurant Short Description',
                 'data' => $restaurantData
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Restaurant Short Description',
-                'status' => 500,
-            ]);
+                'message' => 'Updated Restaurant Short Description',
+            ], 500);
         }
     }
 
@@ -519,9 +503,8 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+                'message' => 'There is something error',
+            ], 500);
         }
 
         // restaurant data
@@ -532,8 +515,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -541,8 +523,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -563,15 +544,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Restaurant Time',
-                'status' => 200,
+                'message' => 'Updated Restaurant Time',
                 'data' => $data,
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Restaurant Time',
-                'status' => 500,
-            ]);
+                'message' => 'Updated Restaurant Time',
+            ], 500);
         }
     }
 
@@ -738,17 +717,16 @@ class RestaurantListController extends Controller
     public function restaurant_update_image(Request $request)
     {
         // validation
-        // $validator = Validator::make($request->all(), [
-        //     'id_restaurant' => ['required', 'integer'],
-        //     'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'id_restaurant' => ['required', 'integer'],
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'message' => 'something error',
-        //         'status' => 500,
-        //     ]);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->error(),
+            ], 500);
+        }
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
@@ -805,15 +783,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Restaurant Profile',
-                'status' => 200,
+                'message' => 'Updated Restaurant Profile',
                 'data' => $restaurantData
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Restaurant Short Description',
-                'status' => 500,
-            ]);
+                'message' => 'Updated Restaurant Short Description',
+            ], 500);
         }
     }
 
@@ -1099,13 +1075,13 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Restaurant Facilities',
+                'message' => 'Updated Restaurant Facilities',
                 'status' => 200,
                 'data' => $facilities,
             ]);
         } else {
             return response()->json([
-                'message' => 'Error Updated Restaurant Facilities',
+                'message' => 'Updated Restaurant Facilities',
                 'status' => 500,
             ]);
         }
@@ -1237,9 +1213,8 @@ class RestaurantListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'something error',
-                'status' => 500,
-            ]);
+                'message' => 'There is something error',
+            ], 500);
         }
 
         // restaurant data
@@ -1250,8 +1225,7 @@ class RestaurantListController extends Controller
         {
             return response()->json([
                 'message' => 'Restaurant Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -1259,8 +1233,7 @@ class RestaurantListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         try {
@@ -1344,8 +1317,7 @@ class RestaurantListController extends Controller
 
         if ($status == 200) {
             return response()->json([
-                'message' => 'Successfuly Updated Restaurant Category',
-                'status' => 200,
+                'message' => 'Updated Restaurant Category',
                 'data' => [
                     'tags' => $tags,
                     'cuisine' => $cuisines,
@@ -1354,12 +1326,11 @@ class RestaurantListController extends Controller
                     'goodfor' => $goodfors,
                     'meal' => $meals,
                 ],
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Restaurant Category',
-                'status' => 500,
-            ]);
+                'message' => 'Updated Restaurant Category',
+            ], 500);
         }
     }
 
