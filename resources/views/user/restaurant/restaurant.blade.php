@@ -543,10 +543,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveRestaurantPrice();">
+                                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestoTime" onclick="saveRestaurantPrice();">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                                    <button type="reset" class="btn btn-sm btn-secondary" id="btnCancelRestoTime"
                                                         onclick="editTypeFormCancel()">
                                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                     </button>
@@ -656,11 +656,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeRestaurant();">
+                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
-                                                    onclick="editTimeFormMobileCancel()">
+                                                    id="btnCancelTimeResto" onclick="editTimeFormMobileCancel()">
                                                     <i class="fa fa-xmark"></i>
                                                     {{ __('user_page.Cancel') }}
                                                 </button>
@@ -4157,7 +4157,7 @@
             var content = $("#time-content");
             let id_restaurant = $('#id_restaurant').val();
 
-             $.ajax({
+            $.ajax({
                 type: "GET",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -4171,11 +4171,12 @@
 
                     $("#open-time-input").val(response.data.open_time);
                     $("#closed-time-input").val(response.data.closed_time);
+
+                    $(form).show();
+                    $(content).hide();
                 }
             });
 
-            $(form).show();
-            $(content).hide();
         }
         function editTimeFormMobile() {
             var form = $("#time-form-mobile");

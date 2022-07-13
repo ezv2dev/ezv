@@ -457,6 +457,13 @@ function saveCategoryRestaurant() {
 function saveTimeRestaurant() {
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
+
+    var btn = document.getElementById("btnSaveTimeResto");
+    var btn2 = document.getElementById("btnCancelTimeResto");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+    btn2.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -488,6 +495,10 @@ function saveTimeRestaurant() {
             $("#closed-time-input").val(response.data.closed_time);
 
             editTimeFormCancel();
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+            btn2.classList.remove("disabled");
         },
     });
 }
@@ -522,6 +533,12 @@ function saveRestaurantPrice() {
     let price_restaurant =
         select_restaurant_price.options[select_restaurant_price.selectedIndex]
             .value;
+
+    let btn = document.getElementById("btnSaveRestoTime");
+    let btn2 = document.getElementById("btnCancelRestoTime");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+    btn2.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -590,6 +607,10 @@ function saveRestaurantPrice() {
             $("#type_price_content").append(contentPrice);
             $("#type_price_content_mobile").append(contentPrice);
             editTypeFormCancel();
+
+            btn.textContent = "Done";
+            btn.classList.remove("disabled");
+            btn2.classList.remove("disabled");
         },
     });
 }
