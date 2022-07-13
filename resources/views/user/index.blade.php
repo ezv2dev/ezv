@@ -230,10 +230,10 @@
                                 </div>
                                 <div class="nav-link-form" id="collaborator-form">
                                     <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin nav-link-style-detail-active" id="collaborator-button"
+                                        <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
                                             target="_blank" href="{{ route('collaborator_list') }}"><img src="{{ asset('assets/icon/menu/collab1.svg') }}" style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
-                                    <p>{{ __('user_page.Collaborator') }}</p>
+                                    <p>{{ __('user_page.Collab Portal') }}</p>
                                 </div>
                             </ul>
                             <!--End of serach option 1 -->
@@ -801,7 +801,7 @@
             <div class="container-xxl mx-auto p-0">
                 <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
                     <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
-                    <div class="row-grid">
+                    <div class="row-grid" id="discover-experiences-food">
                         <div class="mb-3">
                             <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
                                 style="border-radius: 15px;">

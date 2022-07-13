@@ -113,9 +113,9 @@
     color: #ff7400;
     }
 
-    .review-bottom {
+    /* .review-bottom {
     margin: 10px 10px 10px 0;
-    }
+    } */
 
     .host-profile img {
     border-radius: 50%;
@@ -585,4 +585,17 @@ video {
     width: 74.3%;
     margin-left: 10px;
     margin-top: 30px;
+}
+
+.d-flex label {
+    width: 40px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #222222;
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
 }

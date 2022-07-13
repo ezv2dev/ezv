@@ -268,8 +268,12 @@ function saveSubcategoryActivity() {
 }
 
 function saveTimeActivity() {
+    console.log('hit saveTimeActivity');
+
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
+    console.log(open_time, closed_time);
+
     $.ajax({
         type: "POST",
         headers: {
@@ -293,14 +297,58 @@ function saveTimeActivity() {
             let newOpenTime = tConvert(response.data.open_time);
             let newClosedTime = tConvert(response.data.closed_time);
 
-            $("#timeActivityContent").html(
+            $(".timeActivityContent").html(
                 newOpenTime + " - " + newClosedTime
             );
 
             $("#open-time-input").val(response.data.open_time);
-            $("#closed-time-input").val(response.data.closed_time);
+            $("#close-time-input").val(response.data.closed_time);
 
             editTimeFormCancel();
+            editTimeFormMobileCancel();
+        },
+    });
+}
+
+function saveTimeActivityMobile() {
+    console.log('hit saveTimeActivityMobile');
+
+    let open_time = $("#open-time-input-mobile").val();
+    let closed_time = $("#close-time-input-mobile").val();
+    console.log(open_time, closed_time);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/things-to-do/update/time",
+        data: {
+            id_activity: id_activity,
+            open_time: open_time,
+            closed_time: closed_time,
+        },
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let newOpenTime = tConvert(response.data.open_time);
+            let newClosedTime = tConvert(response.data.closed_time);
+
+            $(".timeActivityContent").html(
+                newOpenTime + " - " + newClosedTime
+            );
+
+            $("#open-time-input-mobile").val(response.data.open_time);
+            $("#close-time-input-mobile").val(response.data.closed_time);
+
+            editTimeFormCancel();
+            editTimeFormMobileCancel();
         },
     });
 }
@@ -418,7 +466,7 @@ function saveFacilities() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/facilities/store",
+        url: "/things-to-do/facilities/store",
         data: {
             id_activity: id_activity,
             facilities: facilities,
@@ -510,6 +558,49 @@ function saveFacilities() {
 
                 $("#contentModalFacilities").html(contentFacilities);
             }
+        },
+    });
+}
+
+function saveContactActivity() {
+    let phone = $('#modal-edit_contact').find("input[name='phone']").val();
+    let email = $('#modal-edit_contact').find("input[name='email']").val();
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/things-to-do/update/contact",
+        data: {
+            id_activity: id_activity,
+            phone: phone,
+            email: email,
+        },
+        success: function (response) {
+            console.log(response);
+            $('#modal-edit_contact').find("input[name='phone']").val(response.data.phone);
+            $('#modal-edit_contact').find("input[name='email']").val(response.data.email);
+
+            $('#modal-contact_activity').find(".modal-content-phone").text(response.data.phone);
+            $('#modal-contact_activity').find(".modal-content-email").text(response.data.email);
+
+            let mailTo = '';
+            if(response.data.email){
+                mailTo = `mailto:${response.data.email}`;
+                $('.mailto-email-activity').removeAttr('href');
+                $('.mailto-email-activity').attr('href', mailTo);
+            } else {
+                $('.mailto-email-activity').removeAttr('href');
+            }
+
+            $('#modal-edit_contact').modal('hide');
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
         },
     });
 }

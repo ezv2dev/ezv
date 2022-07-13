@@ -783,18 +783,20 @@
                 $('#card-number').addClass('is-invalid');
                 $('#err-cnm-pay').text(xparse.message);
                 $('#err-cnm-pay').show();
-            }else if(text.match("expiration")) {
+            }
+            if(text.match("expiration")) {
                 $('#card-exp-month').addClass('is-invalid');
                 $('#err-exp-pay').text(xparse.message);
                 $('#err-exp-pay').show();
-            }else if(text.match("CVN")) {
+            }
+            if(text.match("CVN")) {
                 $('#card-cvn').addClass('is-invalid');
                 $('#err-cvn-pay').text(xparse.message);
                 $('#err-cvn-pay').show();
-            } else {
-                $('#res-xnd-pay').text("Error from API : " + xparse.message);
-                $('#res-xnd-pay').show();
             }
+            $('#res-xnd-pay').text("Error from API : " + xparse.message);
+            $('#res-xnd-pay').show();
+
         };
 
         function displaySuccess(creditCardToken) {

@@ -56,7 +56,7 @@ function saveShortDescription() {
             // console.log(exception);
             iziToast.error({
                 title: "Error",
-                message: jqXHR.responseJSON.message,
+                message: jqXHR.responseJSON.message.short_desc[0],
                 position: "topRight",
             });
 
@@ -85,6 +85,7 @@ function saveDescription() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/description",
         data: {
@@ -120,10 +121,10 @@ function saveDescription() {
                 $("#btnShowMoreDescription").remove();
             }
 
-            editDescriptionCancel();
-
             btn.innerHTML = "<i class='fa fa-check'></i> Done";
             btn.classList.remove("disabled");
+
+            editDescriptionCancel();
         },
     });
 }
@@ -155,6 +156,8 @@ function saveNameRestaurant() {
 
             $("#name-content2").html(response.data.name);
 
+            $("#nameRestoInContact").html(response.data.name);
+
             name_input.value = response.data.name;
 
             iziToast.success({
@@ -171,7 +174,7 @@ function saveNameRestaurant() {
         error: function (jqXHR, exception) {
             iziToast.error({
                 title: "Error",
-                message: jqXHR.responseJSON.message,
+                message: jqXHR.responseJSON.message.name[0],
                 position: "topRight",
             });
 
@@ -260,7 +263,7 @@ $("#updateImageForm").submit(function (e) {
 
             $("#profileDropzone").attr("src", "");
 
-            btn.innerHTML = "<i class='fa fa-check'></i> ";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
     });
@@ -301,6 +304,7 @@ function saveCategoryRestaurant() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/store/tag",
         data: {
@@ -317,7 +321,7 @@ function saveCategoryRestaurant() {
 
             $("#modal-add_tag").modal("hide");
 
-            btn.innerHTML = "<i class='fa fa-check'></i> ";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
 
             iziToast.success({
@@ -475,6 +479,7 @@ function saveTimeRestaurant() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/time",
         data: {
@@ -551,6 +556,7 @@ function saveRestaurantPrice() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/type",
         data: {
@@ -641,6 +647,7 @@ function saveRestaurantPriceMobile() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/type",
         data: {
@@ -724,6 +731,7 @@ function saveFacilities() {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/facilities/store",
         data: {
@@ -823,3 +831,85 @@ function saveFacilities() {
         },
     });
 }
+
+let phoneResto = $("#phoneResto").val();
+let emailResto = $("#emailResto").val();
+
+//update informasi contact
+$("#updateContactForm").submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    var btn = document.getElementById("btnSaveContactResto");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/restaurant/update/contact",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            $("#modal-edit_contact").modal("hide");
+
+            //change email in icon
+            $("#btnEmailResto").attr("href", "mailto:" + response.data.email);
+
+            //update di modal contact resto
+            $("#restoPhoneInContact").html(response.data.phone);
+            $("#restoEmailInContact").html(response.data.email);
+
+            emailResto = response.data.email;
+            phoneResto = response.data.phone;
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+
+            $("#phoneResto").removeClass("is-invalid");
+            $("#emailResto").removeClass("is-invalid");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            if (jqXHR.responseJSON.message.phone) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message.phone[0],
+                    position: "topRight",
+                });
+                $("#phoneResto").addClass("is-invalid");
+            }
+
+            if (jqXHR.responseJSON.message.email) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message.email[0],
+                    position: "topRight",
+                });
+                $("#emailResto").addClass("is-invalid");
+            }
+
+            $("#emailResto").val(emailResto);
+            $("#phoneResto").val(phoneResto);
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});

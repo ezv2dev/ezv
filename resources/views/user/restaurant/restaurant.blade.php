@@ -444,7 +444,7 @@
                                     </div>
                                     <div style="padding: 0px 6px;">
                                         @if ($restaurant->email)
-                                            <a target="_blank" type="button"
+                                            <a id="btnEmailResto" target="_blank" type="button"
                                                 href="mailto:{{ $restaurant->email }}">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
@@ -2203,7 +2203,7 @@
                         @endcan
                     @endif
                 @endauth
-                <section class="section-2 host">
+                <section id="endSticky" class="section-2">
                     <h3>Things to know</h3>
                     <div class="row">
                                 <div class="col-lg-4 col-md-4 col-xs-12">
@@ -2975,6 +2975,10 @@
 
     {{-- MODAL SCRIPT --}}
     <script>
+        function edit_contact() {
+            $('#modal-edit_contact').modal('show');
+        }
+
         function showMoreDescription() {
             $("#modal-show_description").modal("show");
         }
@@ -3542,7 +3546,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $restaurant->name }} {{ __('user_page.Contact') }}</h5>
+                    <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span> {{ __('user_page.Contact') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -3553,7 +3557,7 @@
                         </div>
                         <div class="col-11">
                             <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->phone }}
+                                <span id="restoPhoneInContact">{{ $restaurant->phone }}</span>
                             </b>
                         </div>
                     </div>
@@ -3563,7 +3567,7 @@
                         </div>
                         <div class="col-11">
                             <b style="font-size: 15px;" class="price-box">
-                                {{ $restaurant->email }}
+                                <span id="restoEmailInContact">{{ $restaurant->email }}</span>
                             </b>
                         </div>
                     </div>
@@ -4759,66 +4763,62 @@
 
     {{-- Highlight sticky --}}
     <script>
-        var gallery = $('#gallery').offset().top - 200,
-            menu = $('#menu').offset().top - 150,
-            description = $('#description').offset().top - 150,
-            amenities = $('#amenities').offset().top - 150,
-            location_map = $('#location-map').offset().top - 150,
-            review = $('#review').offset().top - 150,
-            host = $('#host_end').offset().top - 200,
-            $window = $(window);
-
-        $window.scroll(() => {
-            if ($window.scrollTop() >= gallery && $window.scrollTop() < menu) {
-                $('#gallery-sticky').addClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= menu && $window.scrollTop() < description) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').addClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= description && $window.scrollTop() < amenities) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').addClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= amenities && $window.scrollTop() < location_map) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').addClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= location_map && $window.scrollTop() < review) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').addClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            } else if ($window.scrollTop() >= review && $window.scrollTop() < host) {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').addClass('active-sticky');
-            } else {
-                $('#gallery-sticky').removeClass('active-sticky');
-                $('#menu-sticky').removeClass('active-sticky');
-                $('#about-sticky').removeClass('active-sticky');
-                $('#amenities-sticky').removeClass('active-sticky');
-                $('#location-sticky').removeClass('active-sticky');
-                $('#review-sticky').removeClass('active-sticky');
-            }
+        jQuery(document).ready(function($){
+            $(window).on('scroll', function(){
+                if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#menu').offset().top - 60){
+                    $('#gallery-sticky').addClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                }
+                    else if($(window).scrollTop() >= $('#menu').offset().top - 60  && $(window).scrollTop() <= $('#description').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#menu-sticky').addClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#description').offset().top - 60  && $(window).scrollTop() <= $('#amenities').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#menu-sticky').removeClass('active-sticky');
+                        $('#about-sticky').addClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window).scrollTop() <= $('#location-map').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#menu-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').addClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#location-map').offset().top -60  && $(window).scrollTop() <= $('#review').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#menu-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').addClass('active-sticky');
+                        $('#review-sticky').removeClass('active-sticky');
+                    } else if($(window).scrollTop() >= $('#review').offset().top - 60 && $(window).scrollTop() <= $('#endSticky').offset().top - 60){
+                        $('#gallery-sticky').removeClass('active-sticky');
+                        $('#menu-sticky').removeClass('active-sticky');
+                        $('#about-sticky').removeClass('active-sticky');
+                        $('#amenities-sticky').removeClass('active-sticky');
+                        $('#location-sticky').removeClass('active-sticky');
+                        $('#review-sticky').addClass('active-sticky');
+                    }
+                else {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                    //or use $('.menu').removeClass('addclass');
+                }
+            });
         });
     </script>
 

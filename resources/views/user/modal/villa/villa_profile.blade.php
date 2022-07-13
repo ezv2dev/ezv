@@ -21,12 +21,13 @@
                                 <input id="imageVilla" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
                             </div>
                         </div>
+                        <small id="err-img" style="display: none;" class="invalid-feedback">{{ __('auth.empty_img') }}</small>
                     </div>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center;">
-                            <button type="submit" class="btn btn-sm btn-primary" form="updateImageForm">
+                            <button type="submit" class="btn btn-sm btn-primary">
                                 {{ __('user_page.Save Image') }}
                             </button>
                         </div>

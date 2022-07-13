@@ -413,37 +413,33 @@
                                         $open = date_create($activity->open_time);
                                         $closed = date_create($activity->closed_time);
                                     @endphp
-                                    <span id="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
+                                    <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
-                                                style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                                style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Open Hours') }}</a>
                                         @endif
                                     @endauth
                                 </p>
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <div id="time-form" style="display:none;">
-                                            {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
-                                                {{-- @csrf
-                                                @method('PATCH') --}}
-                                                <input type="hidden" id="id_activity" name="id_activity"
+                                            <form action="javascript:void(0)" onsubmit="saveTimeActivity()">
+                                                <input type="hidden" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
                                                     <div class="col-auto">
-                                                        <input type="time" name="open_time" class="form-control"
-                                                            id="open-time-input" value="{{ $activity->open_time }}"
+                                                        <input type="time" name="open_time" class="form-control" id="open-time-input" value="{{ $activity->open_time }}"
                                                             required>
                                                     </div>
                                                     <span class="mx-2">-</span>
                                                     <div class="col-auto">
-                                                        <input type="time" name="closed_time" class="form-control"
-                                                            id="close-time-input" value="{{ $activity->closed_time }}"
+                                                        <input type="time" name="closed_time" class="form-control" id="close-time-input" value="{{ $activity->closed_time }}"
                                                             required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
+                                                    <button type="submit" class="btn btn-sm btn-primary">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -452,7 +448,7 @@
                                                         {{ __('user_page.Cancel') }}
                                                     </button>
                                                 </div>
-                                            {{-- </form> --}}
+                                            </form>
                                         </div>
                                     @endif
                                 @endauth
@@ -466,12 +462,11 @@
                                     </div>
                                     <div style="padding: 0px 6px;">
                                         @if ($activity->email)
-                                            <a target="_blank" type="button"
-                                                href="mailto:{{ $activity->email }}">
+                                            <a target="_blank" type="button" href="mailto:{{ $activity->email }}" class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
                                         @else
-                                            <a type="button" href="javascript:void(0);">
+                                            <a type="button" href="javascript:void(0);" class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope text-secondary"></i>
                                             </a>
                                         @endif
@@ -480,7 +475,7 @@
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="edit_contact()"
-                                                    style="font-size: 12px; color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                                    style="font-size: 12px; color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Contact') }}</a>
                                             @endif
                                         @endauth
                                     </div>
@@ -558,37 +553,33 @@
                                     $open = date_create($activity->open_time);
                                     $closed = date_create($activity->closed_time);
                                 @endphp
-                                {{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}
+                                <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <a type="button" onclick="editTimeFormMobile()"
-                                            style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit') }}</a>
+                                            style="color:#FF7400; font-weight: 600;">{{ __('user_page.Edit Open Hours') }}</a>
                                     @endif
                                 @endauth
                             </p>
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="time-form-mobile" style="display:none;">
-                                        {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
-                                            {{-- @csrf
-                                            @method('PATCH') --}}
+                                        <form action="javascript:void(0)" onsubmit="saveTimeActivityMobile()">
                                             <input type="hidden" name="id_activity"
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
                                                 <div class="col-auto">
-                                                    <input type="time" name="open_time" class="form-control"
-                                                        id="open-time-input" value="{{ $activity->open_time }}"
+                                                    <input type="time" name="open_time" class="form-control" id="open-time-input-mobile" value="{{ $activity->open_time }}"
                                                         required>
                                                 </div>
                                                 <span class="mx-2">-</span>
                                                 <div class="col-auto">
-                                                    <input type="time" name="closed_time" class="form-control"
-                                                        id="close-time-input" value="{{ $activity->closed_time }}"
+                                                    <input type="time" name="closed_time" class="form-control" id="close-time-input-mobile" value="{{ $activity->closed_time }}"
                                                         required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
+                                                <button type="submit" class="btn btn-sm btn-primary">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -597,7 +588,7 @@
                                                     {{ __('user_page.Cancel') }}
                                                 </button>
                                             </div>
-                                        {{-- </form> --}}
+                                        </form>
                                     </div>
                                 @endif
                             @endauth
@@ -612,12 +603,12 @@
                                 <div class="col-3 contact-item">
                                     @if ($activity->email)
                                         <a target="_blank" type="button"
-                                            href="mailto:{{ $activity->email }}">
+                                            href="mailto:{{ $activity->email }}" class="mailto-email-activity">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @else
-                                        <a type="button" href="javascript:void(0);">
-                                            <i class="fa-solid fa-envelope text-secondary"></i>
+                                        <a type="button" href="javascript:void(0)" class="mailto-email-activity">
+                                            <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @endif
                                 </div>
@@ -1334,7 +1325,7 @@
                         </div>
 
                         <div class="row-grid-amenities">
-                            <div class="row-grid-list-amenities translate-text-group">
+                            <div class="row-grid-list-amenities translate-text-group" id="contentFacilities">
                                 @if ($activity->facilities->count() > 6)
                                     @for ($i = 0; $i < 6; $i++)
                                         <div class="list-amenities">
@@ -1815,21 +1806,29 @@
                             @if ($activity->userReview)
                                 <section id="user-review" class="section-2">
                                     <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
-                                        <h2>{{ __('user_page.Your Review') }}</h2>
-                                        <span>
-                                            <form action="{{ route('activity_review_delete') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id_activity"
-                                                    value="{{ $activity->id_activity }}" required>
-                                                <input type="hidden" name="id_review"
-                                                    value="{{ $activity->userReview->id_review }}" required>
-                                                <span>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('user_page.remove review') }}
-                                                    </button>
-                                                </span>
-                                            </form>
-                                        </span>
+
+                                        <div class="d-flex justify-content-left">
+                                            <h2>{{ __('user_page.Your Review') }}</h2>
+                                            <span>
+                                                <form action="{{ route('activity_review_delete') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id_activity"
+                                                        value="{{ $activity->id_activity }}" required>
+                                                    <input type="hidden" name="id_review"
+                                                        value="{{ $activity->userReview->id_review }}" required>
+                                                    <span>
+                                                        <button type="submit" class="btn">
+                                                        <i class="fa fa-trash"
+                                                            style="color:#ff7400; font-size: 20px"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete') }}"></i>
+                                                        </button>
+                                                    </span>
+                                                </form>
+                                            </span>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-xs-12">
                                                 <div class="row">
@@ -1857,18 +1856,12 @@
                             @else
                                 {{-- STYLE FOR RATING STAR --}}
                                 <style>
-                                    .cm-star-rating {
-                                        direction: rtl;
-                                        display: inline-block;
-                                        /* padding: 20px */
-                                    }
-
+                                   
                                     .cm-star-rating input[type=radio] {
                                         display: none
                                     }
 
                                     .cm-star-rating label {
-                                        color: #bbb;
                                         font-size: 18px;
                                         padding: 0;
                                         cursor: pointer;
@@ -1887,65 +1880,76 @@
                                     <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                           
                                                 <form action="{{ route('activity_review_store') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id_activity"
                                                         value="{{ $activity->id_activity }}" readonly required>
                                                     <div class="row">
-                                                        <div class="col-12 col-md-6 review-container">
-                                                            {{ __('user_page.Experience') }}
-                                                        </div>
-                                                        <div class="col-12 col-md-6 review-container">
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="star-5" type="radio" name="experience"
-                                                                    value="5" required />
-                                                                <label for="star-5"
-                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-4" type="radio" name="experience"
-                                                                    value="4" />
-                                                                <label for="star-4"
-                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-3" type="radio" name="experience"
-                                                                    value="3" />
-                                                                <label for="star-3"
-                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-2" type="radio" name="experience"
-                                                                    value="2" />
-                                                                <label for="star-2"
-                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-1" type="radio" name="experience"
-                                                                    value="1" />
-                                                                <label for="star-1"
-                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                            <div class="d-flex">
+                                                                <div class="col-4 review-container">
+                                                                    {{ __('user_page.Experience') }}
+                                                                </div>
+                                                           
+                                                            
+                                                                <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="star-5" type="radio" name="experience"
+                                                                        value="5" required />
+                                                                    <label for="star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-4" type="radio" name="experience"
+                                                                        value="4" />
+                                                                    <label for="star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-3" type="radio" name="experience"
+                                                                        value="3" />
+                                                                    <label for="star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-2" type="radio" name="experience"
+                                                                        value="2" />
+                                                                    <label for="star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-1" type="radio" name="experience"
+                                                                        value="1" />
+                                                                    <label for="star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                </div>
+                                                                </div>
+
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
-                                                            {{ __('user_page.Comment') }}
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                            <div class="col-12">
+                                                                {{ __('user_page.Comment') }}
                                                             </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <center>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">{{ __('user_page.Done') }}</button>
+                                                            </center>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <button type="submit"
-                                                                class="btn btn-primary">{{ __('user_page.Done') }}</button>
-                                                        </div>
+
                                                     </div>
                                                 </form>
 
-                                            </div>
+                                            
                                         </div>
                                         <hr>
                                     </div>
@@ -3082,7 +3086,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body modal-body-amenities pb-1 translate-text-group">
+                <div class="modal-body modal-body-amenities pb-1 translate-text-group" id="contentModalFacilities">
                     @forelse ($activity->facilities as $item)
                         <div class='col-md-6 mb-3'>
                             <span class="translate-text-group-items">{{ $item->name }}</span>
@@ -3687,7 +3691,7 @@
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
+                            <b style="font-size: 15px;" class="price-box modal-content-phone">
                                 {{ $activity->phone }}
                             </b>
                         </div>
@@ -3697,8 +3701,8 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                {{ $activity->createdByDetails->email }}
+                            <b style="font-size: 15px;" class="price-box modal-content-email">
+                                {{ $activity->email }}
                             </b>
                         </div>
                     </div>
@@ -4054,7 +4058,7 @@
         function editTimeForm() {
             var form = $("#time-form");
             var content = $("#time-content");
-            let id_activity = $('#id_activity').val();
+            let id_activity = `{{ $activity->id_activity }}`;
 
             $.ajax({
                 type: "GET",
@@ -4069,26 +4073,45 @@
                     console.log(response);
 
                     $("#open-time-input").val(response.data.open_time);
-                    $("#closed-time-input").val(response.data.closed_time);
+                    $("#close-time-input").val(response.data.closed_time);
+
+                    $(form).show();
+                    $(content).hide();
                 }
             });
-
-            $(form).show();
-            $(content).hide();
         }
 
         function editTimeFormMobile() {
             var form = $("#time-form-mobile");
             var content = $("#time-content-mobile");
-            $(form).show();
-            $(content).hide();
+            let id_activity = `{{ $activity->id_activity }}`;
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/things-to-do/get/time",
+                data: {
+                    id_activity: id_activity,
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    $("#open-time-input-mobile").val(response.data.open_time);
+                    $("#close-time-input-mobile").val(response.data.closed_time);
+
+                    $(form).show();
+                    $(content).hide();
+                }
+            });
         }
 
         function editTimeFormCancel() {
             var form = $("#time-form");
             var content = $("#time-content");
-            // var openTimeInput = $('#open-time-input');
-            // var closeTimeInput = $('#close-time-input');
+            // var openTimeInput = $('.open-time-input');
+            // var closeTimeInput = $('.close-time-input');
             // $(openTimeInput).val('{{ $activity->open_time }}');
             // $(closeTimeInput).val('{{ $activity->closed_time }}');
             $(form).hide();
@@ -4098,10 +4121,10 @@
         function editTimeFormMobileCancel() {
             var form = $("#time-form-mobile");
             var content = $("#time-content-mobile");
-            var openTimeInput = $('#open-time-input');
-            var closeTimeInput = $('#close-time-input');
-            $(openTimeInput).val('{{ $activity->open_time }}');
-            $(closeTimeInput).val('{{ $activity->closed_time }}');
+            // var openTimeInput = $('.open-time-input');
+            // var closeTimeInput = $('.close-time-input');
+            // $(openTimeInput).val('{{ $activity->open_time }}');
+            // $(closeTimeInput).val('{{ $activity->closed_time }}');
             $(form).hide();
             $(content).show();
         }

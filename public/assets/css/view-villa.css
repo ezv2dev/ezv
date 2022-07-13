@@ -127,6 +127,9 @@ textarea.error {
     margin-top: 13px;
     display: flex;
     justify-content: center;
+    padding-top: 4px;
+    margin-left: -12px;
+    padding-left: 10px !important;
 }
 
 .navigationItem {
@@ -200,10 +203,6 @@ hr.pendek {
         margin-left: 13px !important;
     }
 
-    .navigationList {
-        margin-left: -12px;
-    }
-
     .section-2 {
         margin-right: 0 !important;
     }
@@ -240,11 +239,12 @@ hr.pendek {
     display: block;
 }
 
-/* .sticky-div {
+
+.sticky-div {
     z-index: 1;
-    background-color: white;
-    margin-left: -25px;
-} */
+    background-color: #fff;
+    justify-content: center;
+}
 
 .hide {
     opacity: 0;
@@ -399,7 +399,7 @@ a:hover {
 }
 
 .section {
-    scroll-margin-top: 70px;
+    scroll-margin-top: 55px;
     scroll-padding-top: 0;
 }
 
@@ -473,7 +473,7 @@ a:hover {
     right: 0;
     margin-left: 4px;
     position: fixed;
-    z-index: 16;
+    z-index: 9;
     top: 1px;
     margin-right: 12px;
 }
@@ -1212,13 +1212,14 @@ a.active {
     bottom: 52px;
     }
     */
-/* #navbar {
+#navbar {
     width: 100%;
-    } */
+    }
 
 .navigationItem span {
     margin-top: -12px;
     margin-left: 0;
+    cursor: pointer;
 }
 
 .rsv {
@@ -1228,7 +1229,7 @@ a.active {
     margin-right: 20px;
     font-size: 12px;
     background: #fff;
-    min-width: 325px;
+    min-width: 360px;
     padding: 21px 37px 0 0;
     text-align: right;
     right: -20px;
@@ -1729,9 +1730,10 @@ li.button-dropdown {
     padding: 0px !important;
 }
 
-.nav {
+/* .nav {
     display: block;
-}
+} */
+
 .button-dropdown {
     font-size: 140%;
     margin-top: 4px;
@@ -2265,10 +2267,6 @@ input[type="number"] {
     text-align: justify;
 }
 
-.navigationItem span:hover {
-    color: #ff7400;
-}
-
 .host-profile img {
     border-radius: 50%;
     width: 80px;
@@ -2333,7 +2331,7 @@ input.add-caption {
 }
 
 .active-sticky span,
-.active-sticky {
+.active-sticky, .active-sticky i {
     color: #ff7400;
 }
 
@@ -3333,9 +3331,9 @@ span.flatpickr-weekday {
     #navbarright {
         display: none !important;
     }
-    /* .sticky-div {
+    .sticky-div {
         margin-left: 0px !important;
-    } */
+    }
     .top-profile,
     .profile-info {
         padding-left: 0px !important;
@@ -3349,9 +3347,7 @@ span.flatpickr-weekday {
     .rsv {
         height: 47px;
     }
-    .navigationList {
-        padding-left: 10px !important;
-    }
+
     .about-place,
     .row-grid-amenities {
         padding-right: 12px !important;
@@ -3483,10 +3479,6 @@ span.flatpickr-weekday {
         width: fit-content !important;
         margin-right: 20px !important;
     }
-    .navigationItem span:hover {
-        color: #000 !important;
-    }
-
     .rsv {
         display: none;
     }
@@ -3525,19 +3517,12 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 789px) {
-    .navigationItemText {
-        font-size: 9px !important;
-    }
-}
-
-@media only screen and (min-width: 790px) and (max-width: 1024px) {
-    .navigationItemText {
-        font-size: 10px !important;
-    }
-}
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .navigationItemText {
+        font-size: 12px !important;
+        top: -2px !important;
+        position: relative;
+    }
     #page-container .page-content .alert {
         margin-left: 12px !important;
     }
@@ -3555,10 +3540,10 @@ span.flatpickr-weekday {
         font-size: 10px !important;
     }
     .page-content .sticky {
-        width: 78% !important;
+        width: 72.222222% !important;
     }
     .navright.active {
-        width: 30% !important;
+        width: 32% !important;
         right: -30px !important;
     }
     .page-content {
@@ -3739,7 +3724,7 @@ span.flatpickr-weekday {
     }
     .rsv-block .sticky {
         max-width: 1100px !important;
-        width: 74.444444% !important;
+        width: 72.22222222% !important;
     }
 }
 
@@ -3904,24 +3889,3 @@ span.flatpickr-weekday {
 .container.visible-title {
     margin-left: 25px;
 }
-
-.sticky-active {
-    font-weight: 900;
-}
-
-.sticky-active span {
-    color: #ff7400;
-}
-
-nav {
-    height: 60px;
-    padding: 20px;
-    background: #fff;
-    font-size: 14px;
-    line-height: 1;
-    text-transform: uppercase;
-}
-
-.sectionGallery span:hover, .sectionDescription span:hover, .sectionAvailability span:hover, .sectionAmenities span:hover, .sectionLocation span:hover, .sectionReview span:hover {
-    color: #ff7400;
-} 
