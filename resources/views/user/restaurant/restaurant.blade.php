@@ -421,10 +421,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeRestaurant();">
+                                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                                    <button type="reset" class="btn btn-sm btn-secondary" id="btnCancelTimeResto"
                                                         onclick="editTimeFormCancel()">
                                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                     </button>
@@ -656,11 +656,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
+                                                <button type="submit" class="btn btn-sm btn-primary"  onclick="saveTimeRestaurant();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
-                                                    id="btnCancelTimeResto" onclick="editTimeFormMobileCancel()">
+                                                    onclick="editTimeFormMobileCancel()">
                                                     <i class="fa fa-xmark"></i>
                                                     {{ __('user_page.Cancel') }}
                                                 </button>
@@ -1437,7 +1437,7 @@
                                                 <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveDescription();">
+                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDescription" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"

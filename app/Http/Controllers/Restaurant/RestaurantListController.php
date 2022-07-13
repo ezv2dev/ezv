@@ -477,7 +477,7 @@ class RestaurantListController extends Controller
 
     public function restaurant_get_time(Request $request)
     {
-        $restaurant = Restaurant::find($request->id_restaurant);
+        $restaurant = Restaurant::where('id_restaurant', $request->id_restaurant)->select('open_time','closed_time')->first();
 
         $openTime = date('H:i', strtotime($restaurant->open_time));
         $closedTime = date('H:i', strtotime($restaurant->closed_time));
@@ -486,6 +486,7 @@ class RestaurantListController extends Controller
             'open_time' => $openTime,
             'closed_time' => $closedTime,
         ];
+
         return response()->json([
             'data' => $data,
             'message' => 'Get Detail Restaurant Time',

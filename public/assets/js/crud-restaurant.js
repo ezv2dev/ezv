@@ -46,7 +46,7 @@ function saveShortDescription() {
                 position: "topRight",
             });
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
 
             editShortDescriptionCancel();
@@ -60,7 +60,7 @@ function saveShortDescription() {
                 position: "topRight",
             });
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
 
             editShortDescriptionCancel();
@@ -76,6 +76,10 @@ function saveShortDescription() {
 
 function saveDescription() {
     let desc = $("#description-form-input").val();
+
+    let btn = document.getElementById("btnSaveDescription");
+    btn.textContent = "Saving Description...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -117,6 +121,9 @@ function saveDescription() {
             }
 
             editDescriptionCancel();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
+            btn.classList.remove("disabled");
         },
     });
 }
@@ -156,7 +163,7 @@ function saveNameRestaurant() {
                 position: "topRight",
             });
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
 
             editNameCancel();
@@ -168,7 +175,7 @@ function saveNameRestaurant() {
                 position: "topRight",
             });
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
 
             editNameCancel();
@@ -236,7 +243,7 @@ $("#updateImageForm").submit(function (e) {
 
             $("#profileDropzone").attr("src", "");
 
-            btn.textContent = "Save Image";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save'";
             btn.classList.remove("disabled");
         },
         error: function (jqXHR, exception) {
@@ -253,7 +260,7 @@ $("#updateImageForm").submit(function (e) {
 
             $("#profileDropzone").attr("src", "");
 
-            btn.textContent = "Save Image";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save'";
             btn.classList.remove("disabled");
         },
     });
@@ -310,7 +317,7 @@ function saveCategoryRestaurant() {
 
             $("#modal-add_tag").modal("hide");
 
-            btn.textContent = "Save";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save'";
             btn.classList.remove("disabled");
 
             iziToast.success({
@@ -496,7 +503,7 @@ function saveTimeRestaurant() {
 
             editTimeFormCancel();
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
             btn2.classList.remove("disabled");
         },
@@ -608,7 +615,7 @@ function saveRestaurantPrice() {
             $("#type_price_content_mobile").append(contentPrice);
             editTypeFormCancel();
 
-            btn.textContent = "Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Done'";
             btn.classList.remove("disabled");
             btn2.classList.remove("disabled");
         },
@@ -709,6 +716,10 @@ function saveFacilities() {
         facilities.push(parseInt($(this).val()));
     });
 
+    btn = document.getElementById("btnSaveFacilities");
+    btn.textContent = "Saving Facilities...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -782,6 +793,9 @@ function saveFacilities() {
                     }
                 }
             }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save'";
+            btn.classList.remove("disabled");
 
             $("#contentFacilities").html(content);
 

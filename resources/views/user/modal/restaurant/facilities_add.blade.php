@@ -114,7 +114,7 @@
                 <div class="modal-filter-footer d-flex justify-content-center"
                     style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                     <div class="col-4" style="text-align: center;">
-                        <button type="submit" onclick="saveFacilities()" class="btn btn-sm btn-primary w-100">
+                        <button type="submit" id="btnSaveFacilities" onclick="saveFacilities()" class="btn btn-sm btn-primary w-100">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
