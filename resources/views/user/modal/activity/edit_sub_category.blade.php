@@ -67,7 +67,7 @@
     }
 </style>
 
-<div class="modal fade" id="ModalSubCategoryWow" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+<div class="modal fade" id="modal-add_subcategory" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="height: 550px;">
@@ -76,9 +76,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                <form action="{{ route('activity_store_subcategory') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
+                {{-- <form action="{{ route('activity_store_subcategory') }}" method="POST" id="basic-form"
+                    class="js-validation" enctype="multipart/form-data"> --}}
+                    {{-- @csrf --}}
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
 
                     <div class="form-group pt-2 px-4">
@@ -114,11 +114,11 @@
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <button id="btnsaveCategoryActivity" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveSubcategoryActivity()">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </div>
     </div>

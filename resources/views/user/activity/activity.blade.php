@@ -413,7 +413,7 @@
                                         $open = date_create($activity->open_time);
                                         $closed = date_create($activity->closed_time);
                                     @endphp
-                                    {{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}
+                                    <span id="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
@@ -424,9 +424,9 @@
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <div id="time-form" style="display:none;">
-                                            <form action="{{ route('activity_update_time') }}" method="post">
-                                                @csrf
-                                                @method('PATCH')
+                                            {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
+                                                {{-- @csrf
+                                                @method('PATCH') --}}
                                                 <input type="hidden" id="id_activity" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
@@ -443,7 +443,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -452,7 +452,7 @@
                                                         {{ __('user_page.Cancel') }}
                                                     </button>
                                                 </div>
-                                            </form>
+                                            {{-- </form> --}}
                                         </div>
                                     @endif
                                 @endauth
@@ -569,9 +569,9 @@
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="time-form-mobile" style="display:none;">
-                                        <form action="{{ route('activity_update_time') }}" method="post">
-                                            @csrf
-                                            @method('PATCH')
+                                        {{-- <form action="{{ route('activity_update_time') }}" method="post"> --}}
+                                            {{-- @csrf
+                                            @method('PATCH') --}}
                                             <input type="hidden" name="id_activity"
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -588,7 +588,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="saveTimeActivity()">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -597,7 +597,7 @@
                                                     {{ __('user_page.Cancel') }}
                                                 </button>
                                             </div>
-                                        </form>
+                                        {{-- </form> --}}
                                     </div>
                                 @endif
                             @endauth
@@ -667,7 +667,7 @@
                         @endauth
                         {{-- END SHORT DESCRIPTION --}}
                         {{-- TAG --}}
-                        <p class="text-secondary translate-text-group">
+                        <p id="tagsContent" class="text-secondary translate-text-group">
                             @if ($activity->subCategory->count() > 7)
                                 @foreach ($activity->subCategory->take(7) as $subcategory)
                                     <span class="badge rounded-pill fw-normal translate-text-group-items"
@@ -3154,7 +3154,7 @@
                         onclick="close_subcategory()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <div id="cuisineModalContent" class="row row-border-bottom padding-top-bottom-18px translate-text-group">
                         @foreach ($activity->subCategory as $item)
                             <div class='col-md-6'>
                                 <span class="translate-text-group-items">
@@ -4054,6 +4054,25 @@
         function editTimeForm() {
             var form = $("#time-form");
             var content = $("#time-content");
+            let id_activity = $('#id_activity').val();
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/things-to-do/get/time",
+                data: {
+                    id_activity: id_activity,
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    $("#open-time-input").val(response.data.open_time);
+                    $("#closed-time-input").val(response.data.closed_time);
+                }
+            });
+
             $(form).show();
             $(content).hide();
         }
@@ -4068,10 +4087,10 @@
         function editTimeFormCancel() {
             var form = $("#time-form");
             var content = $("#time-content");
-            var openTimeInput = $('#open-time-input');
-            var closeTimeInput = $('#close-time-input');
-            $(openTimeInput).val('{{ $activity->open_time }}');
-            $(closeTimeInput).val('{{ $activity->closed_time }}');
+            // var openTimeInput = $('#open-time-input');
+            // var closeTimeInput = $('#close-time-input');
+            // $(openTimeInput).val('{{ $activity->open_time }}');
+            // $(closeTimeInput).val('{{ $activity->closed_time }}');
             $(form).hide();
             $(content).show();
         }
@@ -4963,8 +4982,7 @@
 
     <script>
         function editSubcategory() {
-            console.log('sattttt');
-            $('#ModalSubCategoryWow').modal('show');
+            $('#modal-add_subcategory').modal('show');
         }
     </script>
 
