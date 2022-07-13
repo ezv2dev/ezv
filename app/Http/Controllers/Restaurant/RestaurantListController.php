@@ -717,17 +717,16 @@ class RestaurantListController extends Controller
     public function restaurant_update_image(Request $request)
     {
         // validation
-        // $validator = Validator::make($request->all(), [
-        //     'id_restaurant' => ['required', 'integer'],
-        //     'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'id_restaurant' => ['required', 'integer'],
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'message' => 'something error',
-        //         'status' => 500,
-        //     ]);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->error(),
+            ], 500);
+        }
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
@@ -785,14 +784,12 @@ class RestaurantListController extends Controller
         if ($updatedRestaurant) {
             return response()->json([
                 'message' => 'Updated Restaurant Profile',
-                'status' => 200,
                 'data' => $restaurantData
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Updated Restaurant Short Description',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 

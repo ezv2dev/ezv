@@ -7,6 +7,9 @@ $.ajaxSetup({
 let id_restaurant = $("#id_restaurant").val();
 
 //ganti short description restaurant
+
+let short_desc_backup = $("#short-description-form-input").val();
+
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
 
@@ -51,7 +54,6 @@ function saveShortDescription() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-
             iziToast.error({
                 title: "Error",
                 message: jqXHR.responseJSON.message,
@@ -62,6 +64,12 @@ function saveShortDescription() {
             btn.classList.remove("disabled");
 
             editShortDescriptionCancel();
+
+            let short_desc_input = document.getElementById(
+                "short-description-form-input"
+            );
+
+            short_desc_input.value = short_desc_backup;
         },
     });
 }
@@ -114,6 +122,8 @@ function saveDescription() {
 }
 
 //ganti nama restaurant
+let name_resto_backup = $("#name-form-input").val();
+
 function saveNameRestaurant() {
     let name_resto = $("#name-form-input").val();
 
@@ -162,6 +172,9 @@ function saveNameRestaurant() {
             btn.classList.remove("disabled");
 
             editNameCancel();
+
+            let name_input = document.getElementById("name-form-input");
+            name_input.value = name_resto_backup;
         },
     });
 }
@@ -192,6 +205,7 @@ $("#updateImageForm").submit(function (e) {
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
         },
         url: "/restaurant/update/image",
         data: formData,
@@ -224,6 +238,20 @@ $("#updateImageForm").submit(function (e) {
 
             btn.textContent = "Save Image";
             btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.textContent = "Save Image";
+            btn.classList.remove("disabled");
+
+            $("#modal-edit_restaurant_profile").modal("hide");
         },
     });
 });
