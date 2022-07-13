@@ -1815,21 +1815,29 @@
                             @if ($activity->userReview)
                                 <section id="user-review" class="section-2">
                                     <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
-                                        <h2>{{ __('user_page.Your Review') }}</h2>
-                                        <span>
-                                            <form action="{{ route('activity_review_delete') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id_activity"
-                                                    value="{{ $activity->id_activity }}" required>
-                                                <input type="hidden" name="id_review"
-                                                    value="{{ $activity->userReview->id_review }}" required>
-                                                <span>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('user_page.remove review') }}
-                                                    </button>
-                                                </span>
-                                            </form>
-                                        </span>
+
+                                        <div class="d-flex justify-content-left">
+                                            <h2>{{ __('user_page.Your Review') }}</h2>
+                                            <span>
+                                                <form action="{{ route('activity_review_delete') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id_activity"
+                                                        value="{{ $activity->id_activity }}" required>
+                                                    <input type="hidden" name="id_review"
+                                                        value="{{ $activity->userReview->id_review }}" required>
+                                                    <span>
+                                                        <button type="submit" class="btn">
+                                                        <i class="fa fa-trash"
+                                                            style="color:#ff7400; font-size: 20px"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete') }}"></i>
+                                                        </button>
+                                                    </span>
+                                                </form>
+                                            </span>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-xs-12">
                                                 <div class="row">
@@ -1857,18 +1865,12 @@
                             @else
                                 {{-- STYLE FOR RATING STAR --}}
                                 <style>
-                                    .cm-star-rating {
-                                        direction: rtl;
-                                        display: inline-block;
-                                        /* padding: 20px */
-                                    }
-
+                                   
                                     .cm-star-rating input[type=radio] {
                                         display: none
                                     }
 
                                     .cm-star-rating label {
-                                        color: #bbb;
                                         font-size: 18px;
                                         padding: 0;
                                         cursor: pointer;
@@ -1887,65 +1889,76 @@
                                     <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                           
                                                 <form action="{{ route('activity_review_store') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id_activity"
                                                         value="{{ $activity->id_activity }}" readonly required>
                                                     <div class="row">
-                                                        <div class="col-12 col-md-6 review-container">
-                                                            {{ __('user_page.Experience') }}
-                                                        </div>
-                                                        <div class="col-12 col-md-6 review-container">
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="star-5" type="radio" name="experience"
-                                                                    value="5" required />
-                                                                <label for="star-5"
-                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-4" type="radio" name="experience"
-                                                                    value="4" />
-                                                                <label for="star-4"
-                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-3" type="radio" name="experience"
-                                                                    value="3" />
-                                                                <label for="star-3"
-                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-2" type="radio" name="experience"
-                                                                    value="2" />
-                                                                <label for="star-2"
-                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="star-1" type="radio" name="experience"
-                                                                    value="1" />
-                                                                <label for="star-1"
-                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                            <div class="d-flex">
+                                                                <div class="col-4 review-container">
+                                                                    {{ __('user_page.Experience') }}
+                                                                </div>
+                                                           
+                                                            
+                                                                <div class="col-8 review-container">
+                                                                <div class="cm-star-rating">
+                                                                    <input id="star-5" type="radio" name="experience"
+                                                                        value="5" required />
+                                                                    <label for="star-5"
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-4" type="radio" name="experience"
+                                                                        value="4" />
+                                                                    <label for="star-4"
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-3" type="radio" name="experience"
+                                                                        value="3" />
+                                                                    <label for="star-3"
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-2" type="radio" name="experience"
+                                                                        value="2" />
+                                                                    <label for="star-2"
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <input id="star-1" type="radio" name="experience"
+                                                                        value="1" />
+                                                                    <label for="star-1"
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                    </label>
+                                                                </div>
+                                                                </div>
+
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
-                                                            {{ __('user_page.Comment') }}
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                            <div class="col-12">
+                                                                {{ __('user_page.Comment') }}
                                                             </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <center>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">{{ __('user_page.Done') }}</button>
+                                                            </center>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <button type="submit"
-                                                                class="btn btn-primary">{{ __('user_page.Done') }}</button>
-                                                        </div>
+
                                                     </div>
                                                 </form>
 
-                                            </div>
+                                            
                                         </div>
                                         <hr>
                                     </div>

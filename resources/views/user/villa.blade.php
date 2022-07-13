@@ -1721,7 +1721,7 @@
                                 </section>
                             @else
                                 {{-- END STYLE FOR RATING STAR --}}
-                                <section id="add-review" class="section-2 padding-x-2">
+                                <section id="add-review" class="section-2">
                                     <div class="about-place-block">
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">

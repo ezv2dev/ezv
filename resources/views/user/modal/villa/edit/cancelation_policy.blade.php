@@ -317,14 +317,14 @@
 
     .d-flex label {
         width: 40px;
-        vertical-align: middle;
-        text-align: center;
+        display: flex;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         background-color: #222222;
         color: white;
-        padding: 5px 10px;
         border-radius: 50%;
-        transition: all 0.3s ease-out;
         margin-left: 10px;
     }
 
