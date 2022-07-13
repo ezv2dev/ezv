@@ -15,6 +15,10 @@
         cursor: pointer;
     }
 
+    .d-none {
+        display: none;
+    }
+
     .example::-webkit-scrollbar {
         display: none;
     }
@@ -175,7 +179,185 @@
         color: #ff7400 !important;
         cursor: pointer;
     }
+
+    /* START FOLLOWERS SLIDER */
+
+    :root {
+        --bg: #e3e4e8;
+        --bgT: #ff7400;
+        --fg: #000;
+        --inputBg: #fff;
+        --handleBg: #fc9e51;
+        --handleDownBg: #c95b00;
+        --handleTrackBg: #ff7400;
+    }
+
+    .body,
+    input {
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: var(--fg);
+        font: 1em/1.5 "Hind", sans-serif;
+    }
+
+    .body,
+    .range,
+    .range__counter {
+        display: flex;
+        padding-right: 5px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    form,
+    input,
+    .range__input,
+    .range__counter-sr {
+        width: 100%;
+    }
+
+    form {
+        margin: auto;
+        padding: 0 0.75em;
+        max-width: 17em;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .range:not(:last-child) {
+        margin-bottom: 1.5em;
+    }
+
+    .range input[type=range],
+    .range input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .range input[type=range],
+    .range__input-fill {
+        border-radius: 0.25em;
+        height: 0.5em;
+    }
+
+    .range input[type=range] {
+        background-color: #DDDDDE;
+        display: block;
+        margin: 0.5em 0;
+        padding: 0;
+    }
+
+    .range input[type=range]:focus {
+        outline: transparent;
+    }
+
+    .range input[type=range]::-webkit-slider-thumb {
+        background-color: var(--handleBg);
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.1s linear;
+        width: 1.5em;
+        height: 1.5em;
+        z-index: 1;
+    }
+
+    .range input[type=range]::-moz-range-thumb {
+        background-color: var(--handleBg);
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        transform: translateZ(1px);
+        transition: background-color 0.1s linear;
+        width: 1.5em;
+        height: 1.5em;
+        z-index: 1;
+    }
+
+    .range input[type=range]::-moz-focus-outer {
+        border: 0;
+    }
+
+    .range__input,
+    .range__input-fill,
+    .range__counter-column,
+    .range__counter-digit {
+        display: block;
+    }
+
+    .range__input,
+    .range__counter {
+        position: relative;
+    }
+
+    .range__input {
+        margin-right: 0.375em;
+    }
+
+    .range__input:active input[type=range]::-webkit-slider-thumb,
+    .range input[type=range]:focus::-webkit-slider-thumb,
+    .range input[type=range]::-webkit-slider-thumb:hover {
+        background-color: var(--handleDownBg);
+    }
+
+    .range__input:active input[type=range]::-moz-range-thumb,
+    .range input[type=range]:focus::-moz-range-thumb,
+    .range input[type=range]::-moz-range-thumb:hover {
+        background-color: var(--handleDownBg);
+    }
+
+    .range__input-fill,
+    .range__counter-sr {
+        position: absolute;
+        left: 0;
+    }
+
+    .range__input-fill {
+        background-color: var(--handleTrackBg);
+        pointer-events: none;
+        top: calc(50% - 0.25em);
+    }
+
+    .range__counter,
+    .range__counter-digit {
+        height: 1.5em;
+    }
+
+    .range__counter {
+        margin: -30px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .range__counter-sr {
+        color: transparent;
+        letter-spacing: 0.06em;
+        top: 0;
+        text-align: right;
+        z-index: 1;
+    }
+
+    .range__counter-column {
+        transition: transform 0.25s ease-in-out;
+        width: 0.66em;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    .range__counter-column--pause {
+        transition: none;
+    }
+
+    /* END FOLLOWERS SLIDER */
 </style>
+
 @php
 $bgColor = 'bg-body-light';
 $textColor = 'font-black';
@@ -237,226 +419,133 @@ if (request()->fCategory) {
 
             <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
                 data-isshow="true">
-                {{-- <ul class="cat-container">
-                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
-                        <a href="javascript:void(0)" id="prices" style="cursor:pointer;"
-                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
-                            <div>
-                                <i
-                                    class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
-                                </i>
-                            </div>
-                            <div class="list-description {{ $textColor }}">Price</div>
-                        </a>
-                        <div class="price-popup dropdown-menu" style="left: 520px;">
-                            <div class="dropdown-pd-0">
-                                <div class="double-slider">
-                                    <div class="extra-controls form-inline">
-                                        <div class="col-lg-12">
-                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
-                                            </p>
-                                        </div>
-                                        <div class="form-group col-lg-12 price-popup-display-container">
-                                            <div class="price-popup-display-wrap1">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="min_price" class="price-popup-label">Min</label>
-                                                    <input name="fMinPrice[]" type="text"
-                                                        class="js-input-from form-control price-popup-label"
-                                                        value="0" />
-                                                </div>
-                                            </div>
-                                            <div class="price-popup-display-gap-container">
-                                                <div></div>
-                                            </div>
-                                            <div class="price-popup-display-wrap2">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="max_price" class="price-popup-label">Max</label>
-                                                    <input name="fMaxPrice[]" type="text"
-                                                        class="js-input-to form-control price-popup-label" value="0" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="js-range-slider" value="" />
-                                    </div>
-                                    <center>
-                                        <div style="margin-top: 25px;">
-                                            <button type="submit" class="btn btn-choose"
-                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
-                        <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
-                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
-                            <div>
-                                <i
-                                    class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
-                                </i>
-                            </div>
-                            <div class="list-description {{ $textColor }}">Gender</div>
-                        </a>
-                        <div class="price-popup dropdown-menu" style="left: 520px;">
-                            <div class="dropdown-pd-0">
-                                <div class="double-slider">
-                                    <div class="extra-controls form-inline">
-                                        <div class="col-lg-12">
-                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
-                                            </p>
-                                        </div>
-                                        <div class="form-group col-lg-12 price-popup-display-container">
-                                            <div class="price-popup-display-wrap1">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="min_price" class="price-popup-label">Min</label>
-                                                    <input name="fMinPrice[]" type="text"
-                                                        class="js-input-from form-control price-popup-label"
-                                                        value="0" />
-                                                </div>
-                                            </div>
-                                            <div class="price-popup-display-gap-container">
-                                                <div></div>
-                                            </div>
-                                            <div class="price-popup-display-wrap2">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="max_price" class="price-popup-label">Max</label>
-                                                    <input name="fMaxPrice[]" type="text"
-                                                        class="js-input-to form-control price-popup-label" value="0" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="js-range-slider" value="" />
-                                    </div>
-                                    <center>
-                                        <div style="margin-top: 25px;">
-                                            <button type="submit" class="btn btn-choose"
-                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="button-dropdown cat-margin-0 cat-gap skeleton skeleton-h-3 skeleton-w-100">
-                        <a href="javascript:void(0)" id="prices" style="cursor:pointer;"
-                            class="dropdown-toggle list-option grid-sub-cat-content-container text-13">
-                            <div>
-                                <i
-                                    class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
-                                </i>
-                            </div>
-                            <div class="list-description {{ $textColor }}">Followers</div>
-                        </a>
-                        <div class="price-popup dropdown-menu" style="left: 520px;">
-                            <div class="dropdown-pd-0">
-                                <div class="double-slider">
-                                    <div class="extra-controls form-inline">
-                                        <div class="col-lg-12">
-                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
-                                            </p>
-                                        </div>
-                                        <div class="form-group col-lg-12 price-popup-display-container">
-                                            <div class="price-popup-display-wrap1">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="min_price" class="price-popup-label">Min</label>
-                                                    <input name="fMinPrice[]" type="text"
-                                                        class="js-input-from form-control price-popup-label"
-                                                        value="0" />
-                                                </div>
-                                            </div>
-                                            <div class="price-popup-display-gap-container">
-                                                <div></div>
-                                            </div>
-                                            <div class="price-popup-display-wrap2">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="max_price" class="price-popup-label">Max</label>
-                                                    <input name="fMaxPrice[]" type="text"
-                                                        class="js-input-to form-control price-popup-label" value="0" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="js-range-slider" value="" />
-                                    </div>
-                                    <center>
-                                        <div style="margin-top: 25px;">
-                                            <button type="submit" class="btn btn-choose"
-                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul> --}}
-                <div class="skeleton skeleton-h-3 skeleton-w-100">
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
+                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                    <a href="javascript:void(0)" id="price" style="cursor:pointer;"
+                        class="dropdown-toggle grid-sub-cat-content-container text-13">
                         <div>
                             <i class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
                             </i>
                         </div>
                         <div class="list-description {{ $textColor }}">Price</div>
+                    </a>
+                    <div class="price-popup dropdown-menu">
+                        <div class="dropdown-pd-0">
+                            <div class="double-slider">
+                                <div class="extra-controls form-inline">
+                                    <div class="col-lg-12">
+                                        <p class="price-popup-title">Price Range
+                                        </p>
+                                    </div>
+                                    <div class="form-group col-lg-12 price-popup-display-container">
+                                        <div class="price-popup-display-wrap1">
+                                            <div class="col-lg-12 price-popup-display">
+                                                <label for="min_price" class="price-popup-label">Min</label>
+                                                <input name="fMinPrice[]" type="text"
+                                                    class="js-input-from form-control price-popup-label" value="0"
+                                                    style="border: none;" />
+                                            </div>
+                                        </div>
+                                        <div class="price-popup-display-gap-container">
+                                            <div></div>
+                                        </div>
+                                        <div class="price-popup-display-wrap2">
+                                            <div class="col-lg-12 price-popup-display">
+                                                <label for="max_price" class="price-popup-label">Max</label>
+                                                <input name="fMaxPrice[]" type="text"
+                                                    class="js-input-to form-control price-popup-label" value="0"
+                                                    style="border: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="js-range-slider" value="" />
+                                </div>
+                                <center>
+                                    <div style="margin-top: 25px;">
+                                        <button type="submit" class="btn btn-choose"
+                                            style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
-                    <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
-                        class="grid-sub-cat-content-container text-13">
+                {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                    <a href="javascript:void(0)" id="price" style="cursor:pointer;"
+                        class="dropdown-toggle grid-sub-cat-content-container text-13">
                         <div>
                             <i
                                 class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
                             </i>
                         </div>
-                        <div class="price-popup dropdown-menu" style="left: 520px;">
-                            <div class="dropdown-pd-0">
-                                <div class="double-slider">
-                                    <div class="extra-controls form-inline">
-                                        <div class="col-lg-12">
-                                            <p class="price-popup-title">{{ Translate::translate('Price') }}
-                                            </p>
-                                        </div>
-                                        <div class="form-group col-lg-12 price-popup-display-container">
-                                            <div class="price-popup-display-wrap1">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="min_price" class="price-popup-label">Min</label>
-                                                    <input name="fMinPrice[]" type="text"
-                                                        class="js-input-from form-control price-popup-label"
-                                                        value="0" />
-                                                </div>
-                                            </div>
-                                            <div class="price-popup-display-gap-container">
-                                                <div></div>
-                                            </div>
-                                            <div class="price-popup-display-wrap2">
-                                                <div class="col-lg-12 price-popup-display">
-                                                    <label for="max_price" class="price-popup-label">Max</label>
-                                                    <input name="fMaxPrice[]" type="text"
-                                                        class="js-input-to form-control price-popup-label" value="0" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="js-range-slider" value="" />
+                        <div class="list-description {{ $textColor }}">Price</div>
+                    </a>
+                    <div class="price-popup dropdown-menu" style="left: 520px;">
+                        <div class="dropdown-pd-0">
+                            <div class="double-slider">
+                                <div class="extra-controls form-inline">
+                                    <div class="col-lg-12">
+                                        <p class="price-popup-title">{{ Translate::translate('Price') }}
+                                        </p>
                                     </div>
-                                    <center>
-                                        <div style="margin-top: 25px;">
-                                            <button type="submit" class="btn btn-choose"
-                                                style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                    <div class="form-group col-lg-12 price-popup-display-container">
+                                        <div class="price-popup-display-wrap1">
+                                            <div class="col-lg-12 price-popup-display">
+                                                <label for="min_price" class="price-popup-label">Min</label>
+                                                <input name="fMinPrice[]" type="text"
+                                                    class="js-input-from form-control price-popup-label" value="0" />
+                                            </div>
                                         </div>
-                                    </center>
+                                        <div class="price-popup-display-gap-container">
+                                            <div></div>
+                                        </div>
+                                        <div class="price-popup-display-wrap2">
+                                            <div class="col-lg-12 price-popup-display">
+                                                <label for="max_price" class="price-popup-label">Max</label>
+                                                <input name="fMaxPrice[]" type="text"
+                                                    class="js-input-to form-control price-popup-label" value="0" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="js-range-slider" value="" />
                                 </div>
+                                <center>
+                                    <div style="margin-top: 25px;">
+                                        <button type="submit" class="btn btn-choose"
+                                            style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                    </div>
+                                </center>
                             </div>
                         </div>
-                        <div class="list-description {{ $textColor }}">Gender</div>
-                    </a>
-                </div>
+                    </div>
+                </div> --}}
 
-                <div class="skeleton skeleton-h-3 skeleton-w-100">
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
+                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                    <a href="javascript:void(0)" id="followers" style="cursor:pointer;"
+                        class="dropdown-toggle grid-sub-cat-content-container text-13">
                         <div>
                             <i class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
                             </i>
                         </div>
                         <div class="list-description {{ $textColor }}">Followers</div>
+                    </a>
+                    <div class="price-popup dropdown-menu">
+                        <div class="dropdown-pd-0">
+                            <div class="list-description {{ $textColor }}">Followers Range</div>
+                            <div class="body">
+                                <form>
+                                    <input id="range2" name="range2" type="range" min="0" max="1000000"
+                                        value="500000">
+                                </form>
+                            </div>
+
+                            <center>
+                                <div style="margin-top: 25px;">
+                                    <button type="submit" class="btn btn-choose"
+                                        style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                </div>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -487,7 +576,8 @@ if (request()->fCategory) {
                                     @if ($data->image)
                                         <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
                                             class="col-lg-6 grid-image-container">
-                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
+                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto"
+                                                style="display: block;"
                                                 src="{{ URL::asset('/foto/collaborator/' . $item->id_collab . '/' . $data->image) }}"
                                                 alt="EZV_{{ $item->photo }}">
                                         </a>
@@ -558,19 +648,11 @@ if (request()->fCategory) {
     @include('user.modal.collaborator.sub_category')
     {{-- modal laguage and currency --}}
     </div>
-
-    {{-- VIEW VIDEO --}}
-    {{-- @include('user.modal.collab.list.video') --}}
-    {{-- END VIEW VIDEO --}}
 @endsection
 
 
 @section('scripts')
     <script src="{{ asset('assets/js/list-collab-extend.js') }}"></script>
-
-    {{-- VIEW MAP --}}
-    {{-- @include('user.modal.collab.list.map') --}}
-    {{-- END VIEW MAP --}}
 
     {{-- Search --}}
     <script>
@@ -699,6 +781,185 @@ if (request()->fCategory) {
             collabRefreshFilter(subUrl);
         }
     </script>
-
     {{-- END SEARCH FUNCTION --}}
+
+    {{-- FOLLOWERS SLIDER --}}
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            let range2 = new RollCounterRange("#range2");
+        });
+
+        class RollCounterRange {
+            constructor(id) {
+                this.el = document.querySelector(id);
+                this.srValue = null;
+                this.fill = null;
+                this.digitCols = null;
+                this.lastDigits = "";
+                this.rollDuration = 0; // the transition duration from CSS will override this
+                this.trans09 = false;
+
+                if (this.el) {
+                    this.buildSlider();
+                    this.el.addEventListener("input", this.changeValue.bind(this));
+                }
+            }
+            buildSlider() {
+                // create a div to contain the <input>
+                let rangeWrap = document.createElement("div");
+                rangeWrap.className = "range";
+                this.el.parentElement.insertBefore(rangeWrap, this.el);
+
+                // create another div to contain the <input> and fill
+                let rangeInput = document.createElement("span");
+                rangeInput.className = "range__input";
+                rangeWrap.appendChild(rangeInput);
+
+                // range fill, place the <input> and fill inside container <span>
+                let rangeFill = document.createElement("span");
+                rangeFill.className = "range__input-fill";
+                rangeInput.appendChild(this.el);
+                rangeInput.appendChild(rangeFill);
+
+                // create the counter
+                let counter = document.createElement("span");
+                counter.className = "range__counter";
+                rangeWrap.appendChild(counter);
+
+                // screen reader value
+                let srValue = document.createElement("span");
+                srValue.className = "range__counter-sr";
+                srValue.textContent = "0";
+                counter.appendChild(srValue);
+
+                // column for each digit
+                for (let D of this.el.max.split("")) {
+                    let digitCol = document.createElement("span");
+                    digitCol.className = "range__counter-column";
+                    digitCol.setAttribute("aria-hidden", "true");
+                    counter.appendChild(digitCol);
+
+                    // digits (blank, 0–9, fake 0)
+                    for (let d = 0; d <= 15; ++d) {
+                        let digit = document.createElement("span");
+                        digit.className = "range__counter-digit";
+
+                        if (d > 0)
+                            digit.textContent = d == 15 ? 0 : `${d - 1}`;
+
+                        digitCol.appendChild(digit);
+                    }
+                }
+
+                this.srValue = srValue;
+                this.fill = rangeFill;
+                this.digitCols = counter.querySelectorAll(".range__counter-column");
+                this.lastDigits = this.el.value;
+
+                while (this.lastDigits.length < this.digitCols.length)
+                    this.lastDigits = " " + this.lastDigits;
+
+                this.changeValue();
+
+                // use the transition duration from CSS
+                let colCS = window.getComputedStyle(this.digitCols[0]),
+                    transDur = colCS.getPropertyValue("transition-duration"),
+                    msLabelPos = transDur.indexOf("ms"),
+                    sLabelPos = transDur.indexOf("s");
+
+                if (msLabelPos > -1)
+                    this.rollDuration = transDur.substr(0, msLabelPos);
+                else if (sLabelPos > -1)
+                    this.rollDuration = transDur.substr(0, sLabelPos) * 1e3;
+            }
+            changeValue() {
+                // keep the value within range
+                if (+this.el.value > this.el.max)
+                    this.el.value = this.el.max;
+
+                else if (+this.el.value < this.el.min)
+                    this.el.value = this.el.min;
+
+                // update the screen reader value
+                if (this.srValue)
+                    this.srValue.textContent = this.el.value;
+
+                // width of fill
+                if (this.fill) {
+                    let pct = this.el.value / this.el.max,
+                        fillWidth = pct * 100,
+                        thumbEm = 1 - pct;
+
+                    this.fill.style.width = `calc(${fillWidth}% + ${thumbEm}em)`;
+                }
+
+                if (this.digitCols) {
+                    let rangeVal = this.el.value;
+
+                    // add blanks at the start if needed
+                    while (rangeVal.length < this.digitCols.length)
+                        rangeVal = " " + rangeVal;
+
+                    // get the differences between current and last digits
+                    let diffsFromLast = [];
+                    if (this.lastDigits) {
+                        rangeVal.split("").forEach((r, i) => {
+                            let diff = +r - this.lastDigits[i];
+                            diffsFromLast.push(diff);
+                        });
+                    }
+
+                    // roll the digits
+                    this.trans09 = false;
+                    rangeVal.split("").forEach((e, i) => {
+                        let digitH = 1.5,
+                            over9 = false,
+                            under0 = false,
+                            transY = e === " " ? 0 : (-digitH * (+e + 1)),
+                            col = this.digitCols[i];
+
+                        // start handling the 9-to-0 or 0-to-9 transition
+                        if (e == 0 && diffsFromLast[i] == -9) {
+                            transY = -digitH * 15;
+                            over9 = true;
+
+                        } else if (e == 9 && diffsFromLast[i] == 9) {
+                            transY = 0;
+                            under0 = true;
+                        }
+
+                        col.style.transform = `translateY(${transY}em)`;
+                        col.firstChild.textContent = "";
+
+                        // finish the transition
+                        if (over9 || under0) {
+                            this.trans09 = true;
+                            // add a temporary 9
+                            if (under0)
+                                col.firstChild.textContent = e;
+
+                            setTimeout(() => {
+                                if (this.trans09) {
+                                    let pauseClass = "range__counter-column--pause",
+                                        transYAgain = -digitH * (over9 ? 1 : 10);
+
+                                    col.classList.add(pauseClass);
+                                    col.style.transform = `translateY(${transYAgain}em)`;
+                                    void col.offsetHeight;
+                                    col.classList.remove(pauseClass);
+
+                                    // remove the 9
+                                    if (under0)
+                                        col.firstChild.textContent = "";
+                                }
+
+                            }, this.rollDuration);
+                        }
+                    });
+                    this.lastDigits = rangeVal;
+                }
+            }
+        }
+    </script>
+    {{-- END FOLLOWERS SLIDER --}}
 @endsection
