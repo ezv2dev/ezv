@@ -850,10 +850,10 @@
     }
 }
 @media only screen and (max-width: 480px) {
-    .list-like-button-container,
+    /* .list-like-button-container,
     .video-thumb-container {
         top: 40px !important;
-    }
+    } */
 }
 @media only screen and (min-width: 426px) and (max-width: 645px) {
     .container-grid-cat,
