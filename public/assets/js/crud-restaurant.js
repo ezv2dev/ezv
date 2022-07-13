@@ -121,10 +121,10 @@ function saveDescription() {
                 $("#btnShowMoreDescription").remove();
             }
 
-            editDescriptionCancel();
-
             btn.innerHTML = "<i class='fa fa-check'></i> Done";
             btn.classList.remove("disabled");
+
+            editDescriptionCancel();
         },
     });
 }
