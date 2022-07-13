@@ -129,52 +129,65 @@ let imageProfileActivity;
 let readerImageActivity;
 
 $("#imageActivity").on("change", function (ev) {
+    if(document.getElementById("imageActivity").files.length != 0){
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
     imageProfileActivity = this.files[0];
 
     readerImageActivity = new FileReader();
 });
 
 $("#updateImageForm").submit(function (e) {
-    e.preventDefault();
+    let error = 0;
+    if(document.getElementById("imageActivity").files.length == 0){
+        $('.image-box').css("border", "solid #e04f1a 1px");
+        $('#err-img').show();
+        error = 1;
+    } else {
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
 
-    var formData = new FormData(this);
-    formData.append("image", imageProfileActivity);
+        var formData = new FormData(this);
+        formData.append("image", imageProfileActivity);
 
-    console.log(imageProfileActivity);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/image",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function (response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/image",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        enctype: "multipart/form-data",
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
+                readerImageActivity.addEventListener("load", function () {
+                    $(".imageProfileActivity").attr(
+                        "src",
+                        readerImageActivity.result
+                    );
+                });
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                readerImageActivity.readAsDataURL(imageProfileActivity);
 
-            readerImageActivity.addEventListener("load", function () {
-                $(".imageProfileActivity").attr(
-                    "src",
-                    readerImageActivity.result
-                );
-            });
-
-            readerImageActivity.readAsDataURL(imageProfileActivity);
-
-            $("#modal-edit_activity_profile").modal("hide");
-        },
-    });
+                $("#modal-edit_activity_profile").modal("hide");
+            },
+        });
+    }
 });
 
 function saveSubcategoryActivity() {
