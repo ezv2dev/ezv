@@ -21,6 +21,7 @@
                                 <input id="imageActivity" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
                             </div>
                         </div>
+                        <small id="err-img" style="display: none;" class="invalid-feedback">{{ __('auth.empty_img') }}</small>
                     </div>
                     <br>
                     <!-- Submit -->

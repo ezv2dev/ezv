@@ -4,11 +4,13 @@ $(document).ready(function(){
     getSkeletonClass()
 })
 
-window.onload = () => {
+window.addEventListener("load", event => {
+    console.log('window loaded')
     removeSkeletonClass()
-}
+});
 
 function removeSkeletonClass(){
+    console.log('remove class skeleton')
     let skeleton = document.querySelectorAll('.skeleton')
 
     skeleton.forEach(el => {

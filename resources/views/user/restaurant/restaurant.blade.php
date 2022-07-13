@@ -1925,27 +1925,39 @@
                     @if (Auth::user()->role_id != 3)
                         @can('review_create')
                             @if ($restaurant->userReview)
-                                <section id="user-review" class="section-2 padding-x-2">
+                                <section id="user-review" class="section-2">
                                     <div class="about-place-block">
-                                        <h2>{{ __('user_page.Your Review') }}</h2>
-                                        <span>
-                                            <form action="{{ route('restaurant_review_delete') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id_restaurant"
-                                                    value="{{ $restaurant->id_restaurant }}" required>
-                                                <input type="hidden" name="id_review"
-                                                    value="{{ $restaurant->userReview->id_review }}" required>
-                                                <button type="submit"
-                                                    class="btn btn-sm btn-primary">{{ __('user_page.Remove') }}</button>
-                                            </form>
-                                        </span>
+
+                                        <div class="d-flex justify-content-left">
+                                            <h2>{{ __('user_page.Your Review') }}</h2>
+                                            <span>
+                                                <form action="{{ route('restaurant_review_delete') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id_restaurant"
+                                                        value="{{ $restaurant->id_restaurant }}" required>
+                                                    <input type="hidden" name="id_review"
+                                                        value="{{ $restaurant->userReview->id_review }}" required>
+                                                    <button type="submit"
+                                                        class="btn"><i class="fa fa-trash"
+                                                            style="color:#ff7400; font-size: 20px"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete') }}"></i></button>
+                                                </form>
+                                            </span>
+                                        </div>
+
                                         <div class="row">
                                             @if ($restaurant->userReview->comment)
                                                 <div class="col-12">
-                                                    {{ __('user_page.Comment') }}
-                                                </div>
-                                                <div class="col-12">
-                                                    "{{ $restaurant->userReview->comment }}"
+                                                    <div class="col-6 d-flex">
+                                                        <div class="col-6">
+                                                            {{ __('user_page.Comment') }}
+                                                        </div>
+                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                            {{ $restaurant->userReview->comment }}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             @endif
                                             <div class="col-6">

@@ -2048,7 +2048,7 @@
                 @auth
                     @if (Auth::user()->role_id != 3)
                         @if ($hotel[0]->userReview)
-                            <section id="user-review" class="section-2" style="margin-left: 25px;">
+                            <section id="user-review" class="section-2" style="margin-left: 0px;">
                                 <div class="about-place-block">
                                     <div class="d-flex justify-content-left">
                                         <h2>{{ __('user_page.Your Review') }}</h2>
@@ -2062,7 +2062,7 @@
                                                 <button class="delete-profile" type="submit"
                                                     style="background-color: white;">
                                                     <i class="fa fa-trash mt-2"
-                                                        style="color:red; margin-left: 25px; font-size: 20px"
+                                                        style="color:#ff7400; margin-left: 25px; font-size: 20px"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete') }}"></i></button>
@@ -2072,10 +2072,14 @@
                                     <div class="row">
                                         @if ($hotel[0]->userReview->comment)
                                             <div class="col-12">
-                                                {{ __('user_page.Comment') }}
-                                            </div>
-                                            <div class="col-12">
-                                                "{{ $hotel[0]->userReview->comment }}"
+                                                <div class="col-6 d-flex">
+                                                    <div class="col-6">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        {{ $hotel[0]->userReview->comment }}
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endif
                                         <div class="col-6">

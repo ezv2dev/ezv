@@ -77,9 +77,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('activity_store_facilities') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
+                <form action="javascript:void(0)" method="POST" id="basic-form"
+                    class="js-validation" enctype="multipart/form-data" onsubmit="saveFacilities()">
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                     <div class="form-group pt-2 px-4">
                         <div class="row">

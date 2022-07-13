@@ -68,6 +68,10 @@ label.error.fail-alert {
     color: green;
 } */
 
+.navigationItem span:hover {
+    color: #ff7400;
+    }
+
 .villa-tag-button {
     border-color: #ff7400;
     border-radius: 50px !important;
@@ -3482,6 +3486,10 @@ span.flatpickr-weekday {
     .rsv {
         display: none;
     }
+    .navigationItem span:hover {
+        color: #000;
+        }
+    
 }
 
 @media only screen and (max-width: 575px) {
@@ -3888,4 +3896,17 @@ span.flatpickr-weekday {
 
 .container.visible-title {
     margin-left: 25px;
+}
+
+.d-flex label{
+    width: 40px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #222222;
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
 }

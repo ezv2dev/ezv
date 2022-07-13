@@ -129,52 +129,65 @@ let imageProfileActivity;
 let readerImageActivity;
 
 $("#imageActivity").on("change", function (ev) {
+    if(document.getElementById("imageActivity").files.length != 0){
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
     imageProfileActivity = this.files[0];
 
     readerImageActivity = new FileReader();
 });
 
 $("#updateImageForm").submit(function (e) {
-    e.preventDefault();
+    let error = 0;
+    if(document.getElementById("imageActivity").files.length == 0){
+        $('.image-box').css("border", "solid #e04f1a 1px");
+        $('#err-img').show();
+        error = 1;
+    } else {
+        $('.image-box').css("border", "");
+        $('#err-img').hide();
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
 
-    var formData = new FormData(this);
-    formData.append("image", imageProfileActivity);
+        var formData = new FormData(this);
+        formData.append("image", imageProfileActivity);
 
-    console.log(imageProfileActivity);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/image",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function (response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/image",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        enctype: "multipart/form-data",
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
+                readerImageActivity.addEventListener("load", function () {
+                    $(".imageProfileActivity").attr(
+                        "src",
+                        readerImageActivity.result
+                    );
+                });
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                readerImageActivity.readAsDataURL(imageProfileActivity);
 
-            readerImageActivity.addEventListener("load", function () {
-                $(".imageProfileActivity").attr(
-                    "src",
-                    readerImageActivity.result
-                );
-            });
-
-            readerImageActivity.readAsDataURL(imageProfileActivity);
-
-            $("#modal-edit_activity_profile").modal("hide");
-        },
-    });
+                $("#modal-edit_activity_profile").modal("hide");
+            },
+        });
+    }
 });
 
 function saveSubcategoryActivity() {
@@ -268,8 +281,12 @@ function saveSubcategoryActivity() {
 }
 
 function saveTimeActivity() {
+    console.log('hit saveTimeActivity');
+
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
+    console.log(open_time, closed_time);
+
     $.ajax({
         type: "POST",
         headers: {
@@ -293,14 +310,58 @@ function saveTimeActivity() {
             let newOpenTime = tConvert(response.data.open_time);
             let newClosedTime = tConvert(response.data.closed_time);
 
-            $("#timeActivityContent").html(
+            $(".timeActivityContent").html(
                 newOpenTime + " - " + newClosedTime
             );
 
             $("#open-time-input").val(response.data.open_time);
-            $("#closed-time-input").val(response.data.closed_time);
+            $("#close-time-input").val(response.data.closed_time);
 
             editTimeFormCancel();
+            editTimeFormMobileCancel();
+        },
+    });
+}
+
+function saveTimeActivityMobile() {
+    console.log('hit saveTimeActivityMobile');
+
+    let open_time = $("#open-time-input-mobile").val();
+    let closed_time = $("#close-time-input-mobile").val();
+    console.log(open_time, closed_time);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/things-to-do/update/time",
+        data: {
+            id_activity: id_activity,
+            open_time: open_time,
+            closed_time: closed_time,
+        },
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let newOpenTime = tConvert(response.data.open_time);
+            let newClosedTime = tConvert(response.data.closed_time);
+
+            $(".timeActivityContent").html(
+                newOpenTime + " - " + newClosedTime
+            );
+
+            $("#open-time-input-mobile").val(response.data.open_time);
+            $("#close-time-input-mobile").val(response.data.closed_time);
+
+            editTimeFormCancel();
+            editTimeFormMobileCancel();
         },
     });
 }
@@ -418,7 +479,7 @@ function saveFacilities() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/restaurant/facilities/store",
+        url: "/things-to-do/facilities/store",
         data: {
             id_activity: id_activity,
             facilities: facilities,
@@ -510,6 +571,49 @@ function saveFacilities() {
 
                 $("#contentModalFacilities").html(contentFacilities);
             }
+        },
+    });
+}
+
+function saveContactActivity() {
+    let phone = $('#modal-edit_contact').find("input[name='phone']").val();
+    let email = $('#modal-edit_contact').find("input[name='email']").val();
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/things-to-do/update/contact",
+        data: {
+            id_activity: id_activity,
+            phone: phone,
+            email: email,
+        },
+        success: function (response) {
+            console.log(response);
+            $('#modal-edit_contact').find("input[name='phone']").val(response.data.phone);
+            $('#modal-edit_contact').find("input[name='email']").val(response.data.email);
+
+            $('#modal-contact_activity').find(".modal-content-phone").text(response.data.phone);
+            $('#modal-contact_activity').find(".modal-content-email").text(response.data.email);
+
+            let mailTo = '';
+            if(response.data.email){
+                mailTo = `mailto:${response.data.email}`;
+                $('.mailto-email-activity').removeAttr('href');
+                $('.mailto-email-activity').attr('href', mailTo);
+            } else {
+                $('.mailto-email-activity').removeAttr('href');
+            }
+
+            $('#modal-edit_contact').modal('hide');
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
         },
     });
 }

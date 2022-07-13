@@ -1634,9 +1634,9 @@
                     </div>
                     @auth
                         @if (Auth::user()->role_id == 4)
-                            <hr style="width: 95.3%; margin-left: 26px;">
+
                             @if ($villa[0]->userReview)
-                                <section id="user-review" class="section-2" style="margin-left: 25px;">
+                                <section id="user-review" class="section-2">
                                     <div class="about-place-block">
                                         <div class="d-flex justify-content-left">
                                             <h2>{{ __('user_page.Your Review') }}</h2>
@@ -1650,7 +1650,7 @@
                                                     <button class="delete-profile" type="submit"
                                                         style="background-color: white;">
                                                         <i class="fa fa-trash mt-2"
-                                                            style="color:red; margin-left: 25px; font-size: 20px"
+                                                            style="color:#ff7400; margin-left: 25px; font-size: 20px"
                                                             data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
                                                             title="{{ __('user_page.Delete') }}"></i></button>
@@ -1660,10 +1660,14 @@
                                         <div class="row">
                                             @if ($villa[0]->userReview->comment)
                                                 <div class="col-12">
-                                                    {{ __('user_page.Comment') }}
-                                                </div>
-                                                <div class="col-12">
-                                                    "{{ $villa[0]->userReview->comment }}"
+                                                    <div class="col-6 d-flex">
+                                                        <div class="col-6">
+                                                            {{ __('user_page.Comment') }}
+                                                        </div>
+                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                            {{ $villa[0]->userReview->comment }}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             @endif
                                             <div class="col-6">
@@ -3603,6 +3607,7 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>

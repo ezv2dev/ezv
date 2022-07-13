@@ -1,6 +1,6 @@
-(function (factory) {
+(function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["jquery"], function (jQuery) {
+        define(["jquery"], function(jQuery) {
             return factory(jQuery, document, window, navigator);
         });
     } else if (typeof exports === "object") {
@@ -8,15 +8,16 @@
     } else {
         factory(jQuery, document, window, navigator);
     }
-}(function ($, document, window, navigator, undefined) {
+}(function($, document, window, navigator, undefined) {
     "use strict";
 
+    // =================================================================================================================
     // Service
 
     var plugin_count = 0;
 
     // IE8 fix
-    var is_old_ie = (function () {
+    var is_old_ie = (function() {
         var n = navigator.userAgent,
             r = /msie\s\d+/i,
             v;
@@ -41,11 +42,11 @@
             }
 
             var args = slice.call(arguments, 1),
-                bound = function () {
+                bound = function() {
 
                     if (this instanceof bound) {
 
-                        var F = function () {};
+                        var F = function() {};
                         F.prototype = target.prototype;
                         var self = new F();
 
@@ -73,7 +74,7 @@
         };
     }
     if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (searchElement, fromIndex) {
+        Array.prototype.indexOf = function(searchElement, fromIndex) {
             var k;
             if (this == null) {
                 throw new TypeError('"this" is null or not defined');
@@ -103,6 +104,7 @@
 
 
 
+    // =================================================================================================================
     // Template
 
     var base_html =
@@ -130,17 +132,18 @@
 
 
 
+    // =================================================================================================================
     // Core
 
     /**
-        * Main plugin constructor
-        *
-        * @param input {Object} link to base input element
-        * @param options {Object} slider config
-        * @param plugin_count {Number}
-        * @constructor
-        */
-    var IonRangeSlider = function (input, options, plugin_count) {
+     * Main plugin constructor
+     *
+     * @param input {Object} link to base input element
+     * @param options {Object} slider config
+     * @param plugin_count {Number}
+     * @constructor
+     */
+    var IonRangeSlider = function(input, options, plugin_count) {
         this.VERSION = "2.1.7";
         this.input = input;
         this.plugin_count = plugin_count;
@@ -248,8 +251,8 @@
 
 
         /**
-            * get and validate config
-            */
+         * get and validate config
+         */
         var $inp = this.$cache.input,
             val = $inp.prop("value"),
             config, config_from_data, prop;
@@ -386,9 +389,7 @@
 
         // input value extends default config
         if (val !== undefined && val !== "") {
-            val = val.split(config_from_data.input_values_separator || options
-                .input_values_separator ||
-                ";");
+            val = val.split(config_from_data.input_values_separator || options.input_values_separator || ";");
 
             if (val[0] && val[0] == +val[0]) {
                 val[0] = +val[0];
@@ -449,11 +450,11 @@
     IonRangeSlider.prototype = {
 
         /**
-            * Starts or updates the plugin instance
-            *
-            * @param [is_update] {boolean}
-            */
-        init: function (is_update) {
+         * Starts or updates the plugin instance
+         *
+         * @param [is_update] {boolean}
+         */
+        init: function(is_update) {
             this.no_diapason = false;
             this.coords.p_step = this.convertToPercent(this.options.step, true);
 
@@ -481,9 +482,9 @@
         },
 
         /**
-            * Appends slider template to a DOM
-            */
-        append: function () {
+         * Appends slider template to a DOM
+         */
+        append: function() {
             var container_html = '<span class="irs js-irs-' + this.plugin_count + '"></span>';
             this.$cache.input.before(container_html);
             this.$cache.input.prop("readonly", true);
@@ -541,10 +542,10 @@
         },
 
         /**
-            * Determine which handler has a priority
-            * works only for double slider type
-            */
-        setTopHandler: function () {
+         * Determine which handler has a priority
+         * works only for double slider type
+         */
+        setTopHandler: function() {
             var min = this.options.min,
                 max = this.options.max,
                 from = this.options.from,
@@ -558,36 +559,31 @@
         },
 
         /**
-            * Determine which handles was clicked last
-            * and which handler should have hover effect
-            *
-            * @param target {String}
-            */
-        changeLevel: function (target) {
+         * Determine which handles was clicked last
+         * and which handler should have hover effect
+         *
+         * @param target {String}
+         */
+        changeLevel: function(target) {
             switch (target) {
                 case "single":
-                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords
-                        .p_single_fake);
+                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords.p_single_fake);
                     break;
                 case "from":
-                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords
-                        .p_from_fake);
+                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords.p_from_fake);
                     this.$cache.s_from.addClass("state_hover");
                     this.$cache.s_from.addClass("type_last");
                     this.$cache.s_to.removeClass("type_last");
                     break;
                 case "to":
-                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords
-                        .p_to_fake);
+                    this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords.p_to_fake);
                     this.$cache.s_to.addClass("state_hover");
                     this.$cache.s_to.addClass("type_last");
                     this.$cache.s_from.removeClass("type_last");
                     break;
                 case "both":
-                    this.coords.p_gap_left = this.toFixed(this.coords.p_pointer - this.coords
-                        .p_from_fake);
-                    this.coords.p_gap_right = this.toFixed(this.coords.p_to_fake - this.coords
-                        .p_pointer);
+                    this.coords.p_gap_left = this.toFixed(this.coords.p_pointer - this.coords.p_from_fake);
+                    this.coords.p_gap_right = this.toFixed(this.coords.p_to_fake - this.coords.p_pointer);
                     this.$cache.s_to.removeClass("type_last");
                     this.$cache.s_from.removeClass("type_last");
                     break;
@@ -595,19 +591,19 @@
         },
 
         /**
-            * Then slider is disabled
-            * appends extra layer with opacity
-            */
-        appendDisableMask: function () {
+         * Then slider is disabled
+         * appends extra layer with opacity
+         */
+        appendDisableMask: function() {
             this.$cache.cont.append(disable_html);
             this.$cache.cont.addClass("irs-disabled");
         },
 
         /**
-            * Remove slider instance
-            * and ubind all events
-            */
-        remove: function () {
+         * Remove slider instance
+         * and ubind all events
+         */
+        remove: function() {
             this.$cache.cont.remove();
             this.$cache.cont = null;
 
@@ -634,127 +630,75 @@
         },
 
         /**
-            * bind all slider events
-            */
-        bindEvents: function () {
+         * bind all slider events
+         */
+        bindEvents: function() {
             if (this.no_diapason) {
                 return;
             }
 
-            this.$cache.body.on("touchmove.irs_" + this.plugin_count, this.pointerMove.bind(
-                this));
-            this.$cache.body.on("mousemove.irs_" + this.plugin_count, this.pointerMove.bind(
-                this));
+            this.$cache.body.on("touchmove.irs_" + this.plugin_count, this.pointerMove.bind(this));
+            this.$cache.body.on("mousemove.irs_" + this.plugin_count, this.pointerMove.bind(this));
 
             this.$cache.win.on("touchend.irs_" + this.plugin_count, this.pointerUp.bind(this));
             this.$cache.win.on("mouseup.irs_" + this.plugin_count, this.pointerUp.bind(this));
 
-            this.$cache.line.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(
-                this,
-                "click"));
-            this.$cache.line.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(
-                this,
-                "click"));
+            this.$cache.line.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+            this.$cache.line.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
 
             if (this.options.drag_interval && this.options.type === "double") {
-                this.$cache.bar.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this, "both"));
-                this.$cache.bar.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this,
-                    "both"));
+                this.$cache.bar.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "both"));
+                this.$cache.bar.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "both"));
             } else {
-                this.$cache.bar.on("touchstart.irs_" + this.plugin_count, this.pointerClick
-                    .bind(
-                        this, "click"));
-                this.$cache.bar.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(
-                    this, "click"));
+                this.$cache.bar.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+                this.$cache.bar.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
             }
 
             if (this.options.type === "single") {
-                this.$cache.single.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "single"));
-                this.$cache.s_single.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(this, "single"));
-                this.$cache.shad_single.on("touchstart.irs_" + this.plugin_count, this
-                    .pointerClick
-                    .bind(this, "click"));
+                this.$cache.single.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
+                this.$cache.s_single.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
+                this.$cache.shad_single.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
 
-                this.$cache.single.on("mousedown.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "single"));
-                this.$cache.s_single.on("mousedown.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "single"));
-                this.$cache.edge.on("mousedown.irs_" + this.plugin_count, this.pointerClick
-                    .bind(
-                        this, "click"));
-                this.$cache.shad_single.on("mousedown.irs_" + this.plugin_count, this
-                    .pointerClick
-                    .bind(this, "click"));
+                this.$cache.single.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
+                this.$cache.s_single.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
+                this.$cache.edge.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+                this.$cache.shad_single.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
             } else {
-                this.$cache.single.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, null));
-                this.$cache.single.on("mousedown.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, null));
+                this.$cache.single.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, null));
+                this.$cache.single.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, null));
 
-                this.$cache.from.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "from"));
-                this.$cache.s_from.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "from"));
-                this.$cache.to.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this,
-                    "to"));
-                this.$cache.s_to.on("touchstart.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "to"));
-                this.$cache.shad_from.on("touchstart.irs_" + this.plugin_count, this
-                    .pointerClick
-                    .bind(this, "click"));
-                this.$cache.shad_to.on("touchstart.irs_" + this.plugin_count, this.pointerClick
-                    .bind(this, "click"));
+                this.$cache.from.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "from"));
+                this.$cache.s_from.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "from"));
+                this.$cache.to.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "to"));
+                this.$cache.s_to.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "to"));
+                this.$cache.shad_from.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+                this.$cache.shad_to.on("touchstart.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
 
-                this.$cache.from.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this, "from"));
-                this.$cache.s_from.on("mousedown.irs_" + this.plugin_count, this.pointerDown
-                    .bind(
-                        this, "from"));
-                this.$cache.to.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this,
-                    "to"));
-                this.$cache.s_to.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(
-                    this, "to"));
-                this.$cache.shad_from.on("mousedown.irs_" + this.plugin_count, this.pointerClick
-                    .bind(this, "click"));
-                this.$cache.shad_to.on("mousedown.irs_" + this.plugin_count, this.pointerClick
-                    .bind(
-                        this, "click"));
+                this.$cache.from.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "from"));
+                this.$cache.s_from.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "from"));
+                this.$cache.to.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "to"));
+                this.$cache.s_to.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "to"));
+                this.$cache.shad_from.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+                this.$cache.shad_to.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
             }
 
             if (this.options.keyboard) {
-                this.$cache.line.on("keydown.irs_" + this.plugin_count, this.key.bind(this,
-                    "keyboard"));
+                this.$cache.line.on("keydown.irs_" + this.plugin_count, this.key.bind(this, "keyboard"));
             }
 
             if (is_old_ie) {
-                this.$cache.body.on("mouseup.irs_" + this.plugin_count, this.pointerUp.bind(
-                    this));
-                this.$cache.body.on("mouseleave.irs_" + this.plugin_count, this.pointerUp.bind(
-                    this));
+                this.$cache.body.on("mouseup.irs_" + this.plugin_count, this.pointerUp.bind(this));
+                this.$cache.body.on("mouseleave.irs_" + this.plugin_count, this.pointerUp.bind(this));
             }
         },
 
         /**
-            * Mousemove or touchmove
-            * only for handlers
-            *
-            * @param e {Object} event object
-            */
-        pointerMove: function (e) {
+         * Mousemove or touchmove
+         * only for handlers
+         *
+         * @param e {Object} event object
+         */
+        pointerMove: function(e) {
             if (!this.dragging) {
                 return;
             }
@@ -766,12 +710,12 @@
         },
 
         /**
-            * Mouseup or touchend
-            * only for handlers
-            *
-            * @param e {Object} event object
-            */
-        pointerUp: function (e) {
+         * Mouseup or touchend
+         * only for handlers
+         *
+         * @param e {Object} event object
+         */
+        pointerUp: function(e) {
             if (this.current_plugin !== this.plugin_count) {
                 return;
             }
@@ -802,13 +746,13 @@
         },
 
         /**
-            * Mousedown or touchstart
-            * only for handlers
-            *
-            * @param target {String|null}
-            * @param e {Object} event object
-            */
-        pointerDown: function (target, e) {
+         * Mousedown or touchstart
+         * only for handlers
+         *
+         * @param target {String|null}
+         * @param e {Object} event object
+         */
+        pointerDown: function(target, e) {
             e.preventDefault();
             var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             if (e.button === 2) {
@@ -845,13 +789,13 @@
         },
 
         /**
-            * Mousedown or touchstart
-            * for other slider elements, like diapason line
-            *
-            * @param target {String}
-            * @param e {Object} event object
-            */
-        pointerClick: function (target, e) {
+         * Mousedown or touchstart
+         * for other slider elements, like diapason line
+         *
+         * @param target {String}
+         * @param e {Object} event object
+         */
+        pointerClick: function(target, e) {
             e.preventDefault();
             var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             if (e.button === 2) {
@@ -872,16 +816,14 @@
         },
 
         /**
-            * Keyborard controls for focused slider
-            *
-            * @param target {String}
-            * @param e {Object} event object
-            * @returns {boolean|undefined}
-            */
-        key: function (target, e) {
-            if (this.current_plugin !== this.plugin_count || e.altKey || e.ctrlKey || e
-                .shiftKey ||
-                e.metaKey) {
+         * Keyborard controls for focused slider
+         *
+         * @param target {String}
+         * @param e {Object} event object
+         * @returns {boolean|undefined}
+         */
+        key: function(target, e) {
+            if (this.current_plugin !== this.plugin_count || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) {
                 return;
             }
 
@@ -907,12 +849,12 @@
         },
 
         /**
-            * Move by key. Beta
-            * @todo refactor than have plenty of time
-            *
-            * @param right {boolean} direction to move
-            */
-        moveByKey: function (right) {
+         * Move by key. Beta
+         * @todo refactor than have plenty of time
+         *
+         * @param right {boolean} direction to move
+         */
+        moveByKey: function(right) {
             var p = this.coords.p_pointer;
 
             if (right) {
@@ -927,10 +869,10 @@
         },
 
         /**
-            * Set visibility and content
-            * of Min and Max labels
-            */
-        setMinMax: function () {
+         * Set visibility and content
+         * of Min and Max labels
+         */
+        setMinMax: function() {
             if (!this.options) {
                 return;
             }
@@ -945,12 +887,8 @@
                 this.$cache.min.html(this.decorate(this.options.p_values[this.options.min]));
                 this.$cache.max.html(this.decorate(this.options.p_values[this.options.max]));
             } else {
-                this.$cache.min.html(this.decorate(this._prettify(this.options.min), this
-                    .options
-                    .min));
-                this.$cache.max.html(this.decorate(this._prettify(this.options.max), this
-                    .options
-                    .max));
+                this.$cache.min.html(this.decorate(this._prettify(this.options.min), this.options.min));
+                this.$cache.max.html(this.decorate(this._prettify(this.options.max), this.options.max));
             }
 
             this.labels.w_min = this.$cache.min.outerWidth(false);
@@ -958,10 +896,10 @@
         },
 
         /**
-            * Then dragging interval, prevent interval collapsing
-            * using min_interval option
-            */
-        setTempMinInterval: function () {
+         * Then dragging interval, prevent interval collapsing
+         * using min_interval option
+         */
+        setTempMinInterval: function() {
             var interval = this.result.to - this.result.from;
 
             if (this.old_min_interval === null) {
@@ -972,23 +910,26 @@
         },
 
         /**
-            * Restore min_interval option to original
-            */
-        restoreOriginalMinInterval: function () {
+         * Restore min_interval option to original
+         */
+        restoreOriginalMinInterval: function() {
             if (this.old_min_interval !== null) {
                 this.options.min_interval = this.old_min_interval;
                 this.old_min_interval = null;
             }
         },
 
+
+
+        // =============================================================================================================
         // Calculations
 
         /**
-            * All calculations and measures start here
-            *
-            * @param update {boolean=}
-            */
-        calc: function (update) {
+         * All calculations and measures start here
+         *
+         * @param update {boolean=}
+         */
+        calc: function(update) {
             if (!this.options) {
                 return;
             }
@@ -1036,19 +977,12 @@
                     this.coords.p_from_real = this.toFixed(f);
                     this.coords.p_to_real = this.toFixed(t);
 
-                    this.coords.p_single_real = this.checkDiapason(this.coords.p_single_real,
-                        this
-                        .options.from_min, this.options.from_max);
-                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this
-                        .options.from_min, this.options.from_max);
-                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this
-                        .options
-                        .to_min, this.options.to_max);
+                    this.coords.p_single_real = this.checkDiapason(this.coords.p_single_real, this.options.from_min, this.options.from_max);
+                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this.options.from_min, this.options.from_max);
+                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this.options.to_min, this.options.to_max);
 
-                    this.coords.p_single_fake = this.convertToFakePercent(this.coords
-                        .p_single_real);
-                    this.coords.p_from_fake = this.convertToFakePercent(this.coords
-                        .p_from_real);
+                    this.coords.p_single_fake = this.convertToFakePercent(this.coords.p_single_real);
+                    this.coords.p_from_fake = this.convertToFakePercent(this.coords.p_from_real);
                     this.coords.p_to_fake = this.convertToFakePercent(this.coords.p_to_real);
 
                     this.target = null;
@@ -1062,12 +996,9 @@
 
                     this.coords.p_single_real = this.convertToRealPercent(handle_x);
                     this.coords.p_single_real = this.calcWithStep(this.coords.p_single_real);
-                    this.coords.p_single_real = this.checkDiapason(this.coords.p_single_real,
-                        this
-                        .options.from_min, this.options.from_max);
+                    this.coords.p_single_real = this.checkDiapason(this.coords.p_single_real, this.options.from_min, this.options.from_max);
 
-                    this.coords.p_single_fake = this.convertToFakePercent(this.coords
-                        .p_single_real);
+                    this.coords.p_single_fake = this.convertToFakePercent(this.coords.p_single_real);
 
                     break;
 
@@ -1081,17 +1012,11 @@
                     if (this.coords.p_from_real > this.coords.p_to_real) {
                         this.coords.p_from_real = this.coords.p_to_real;
                     }
-                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this
-                        .options.from_min, this.options.from_max);
-                    this.coords.p_from_real = this.checkMinInterval(this.coords.p_from_real,
-                        this
-                        .coords.p_to_real, "from");
-                    this.coords.p_from_real = this.checkMaxInterval(this.coords.p_from_real,
-                        this
-                        .coords.p_to_real, "from");
+                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this.options.from_min, this.options.from_max);
+                    this.coords.p_from_real = this.checkMinInterval(this.coords.p_from_real, this.coords.p_to_real, "from");
+                    this.coords.p_from_real = this.checkMaxInterval(this.coords.p_from_real, this.coords.p_to_real, "from");
 
-                    this.coords.p_from_fake = this.convertToFakePercent(this.coords
-                        .p_from_real);
+                    this.coords.p_from_fake = this.convertToFakePercent(this.coords.p_from_real);
 
                     break;
 
@@ -1105,15 +1030,9 @@
                     if (this.coords.p_to_real < this.coords.p_from_real) {
                         this.coords.p_to_real = this.coords.p_from_real;
                     }
-                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this
-                        .options
-                        .to_min, this.options.to_max);
-                    this.coords.p_to_real = this.checkMinInterval(this.coords.p_to_real, this
-                        .coords
-                        .p_from_real, "to");
-                    this.coords.p_to_real = this.checkMaxInterval(this.coords.p_to_real, this
-                        .coords
-                        .p_from_real, "to");
+                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this.options.to_min, this.options.to_max);
+                    this.coords.p_to_real = this.checkMinInterval(this.coords.p_to_real, this.coords.p_from_real, "to");
+                    this.coords.p_to_real = this.checkMaxInterval(this.coords.p_to_real, this.coords.p_from_real, "to");
 
                     this.coords.p_to_fake = this.convertToFakePercent(this.coords.p_to_real);
 
@@ -1126,26 +1045,16 @@
 
                     handle_x = this.toFixed(handle_x + (this.coords.p_handle * 0.001));
 
-                    this.coords.p_from_real = this.convertToRealPercent(handle_x) - this.coords
-                        .p_gap_left;
+                    this.coords.p_from_real = this.convertToRealPercent(handle_x) - this.coords.p_gap_left;
                     this.coords.p_from_real = this.calcWithStep(this.coords.p_from_real);
-                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this
-                        .options.from_min, this.options.from_max);
-                    this.coords.p_from_real = this.checkMinInterval(this.coords.p_from_real,
-                        this
-                        .coords.p_to_real, "from");
-                    this.coords.p_from_fake = this.convertToFakePercent(this.coords
-                        .p_from_real);
+                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this.options.from_min, this.options.from_max);
+                    this.coords.p_from_real = this.checkMinInterval(this.coords.p_from_real, this.coords.p_to_real, "from");
+                    this.coords.p_from_fake = this.convertToFakePercent(this.coords.p_from_real);
 
-                    this.coords.p_to_real = this.convertToRealPercent(handle_x) + this.coords
-                        .p_gap_right;
+                    this.coords.p_to_real = this.convertToRealPercent(handle_x) + this.coords.p_gap_right;
                     this.coords.p_to_real = this.calcWithStep(this.coords.p_to_real);
-                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this
-                        .options
-                        .to_min, this.options.to_max);
-                    this.coords.p_to_real = this.checkMinInterval(this.coords.p_to_real, this
-                        .coords
-                        .p_from_real, "to");
+                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this.options.to_min, this.options.to_max);
+                    this.coords.p_to_real = this.checkMinInterval(this.coords.p_to_real, this.coords.p_from_real, "to");
                     this.coords.p_to_fake = this.convertToFakePercent(this.coords.p_to_real);
 
                     break;
@@ -1174,15 +1083,11 @@
                     }
 
                     this.coords.p_from_real = this.calcWithStep(new_from);
-                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this
-                        .options.from_min, this.options.from_max);
-                    this.coords.p_from_fake = this.convertToFakePercent(this.coords
-                        .p_from_real);
+                    this.coords.p_from_real = this.checkDiapason(this.coords.p_from_real, this.options.from_min, this.options.from_max);
+                    this.coords.p_from_fake = this.convertToFakePercent(this.coords.p_from_real);
 
                     this.coords.p_to_real = this.calcWithStep(new_to);
-                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this
-                        .options
-                        .to_min, this.options.to_max);
+                    this.coords.p_to_real = this.checkDiapason(this.coords.p_to_real, this.options.to_min, this.options.to_max);
                     this.coords.p_to_fake = this.convertToFakePercent(this.coords.p_to_real);
 
                     break;
@@ -1199,11 +1104,8 @@
                     this.result.from_value = this.options.values[this.result.from];
                 }
             } else {
-                this.coords.p_bar_x = this.toFixed(this.coords.p_from_fake + (this.coords
-                    .p_handle /
-                    2));
-                this.coords.p_bar_w = this.toFixed(this.coords.p_to_fake - this.coords
-                    .p_from_fake);
+                this.coords.p_bar_x = this.toFixed(this.coords.p_from_fake + (this.coords.p_handle / 2));
+                this.coords.p_bar_w = this.toFixed(this.coords.p_to_fake - this.coords.p_from_fake);
 
                 this.result.from_percent = this.coords.p_from_real;
                 this.result.from = this.convertToValue(this.coords.p_from_real);
@@ -1222,9 +1124,9 @@
 
 
         /**
-            * calculates pointer X in percent
-            */
-        calcPointerPercent: function () {
+         * calculates pointer X in percent
+         */
+        calcPointerPercent: function() {
             if (!this.coords.w_rs) {
                 this.coords.p_pointer = 0;
                 return;
@@ -1236,21 +1138,20 @@
                 this.coords.x_pointer = this.coords.w_rs;
             }
 
-            this.coords.p_pointer = this.toFixed(this.coords.x_pointer / this.coords.w_rs *
-                100);
+            this.coords.p_pointer = this.toFixed(this.coords.x_pointer / this.coords.w_rs * 100);
         },
 
-        convertToRealPercent: function (fake) {
+        convertToRealPercent: function(fake) {
             var full = 100 - this.coords.p_handle;
             return fake / full * 100;
         },
 
-        convertToFakePercent: function (real) {
+        convertToFakePercent: function(real) {
             var full = 100 - this.coords.p_handle;
             return real / 100 * full;
         },
 
-        getHandleX: function () {
+        getHandleX: function() {
             var max = 100 - this.coords.p_handle,
                 x = this.toFixed(this.coords.p_pointer - this.coords.p_gap);
 
@@ -1263,7 +1164,7 @@
             return x;
         },
 
-        calcHandlePercent: function () {
+        calcHandlePercent: function() {
             if (this.options.type === "single") {
                 this.coords.w_handle = this.$cache.s_single.outerWidth(false);
             } else {
@@ -1274,17 +1175,16 @@
         },
 
         /**
-            * Find closest handle to pointer click
-            *
-            * @param real_x {Number}
-            * @returns {String}
-            */
-        chooseHandle: function (real_x) {
+         * Find closest handle to pointer click
+         *
+         * @param real_x {Number}
+         * @returns {String}
+         */
+        chooseHandle: function(real_x) {
             if (this.options.type === "single") {
                 return "single";
             } else {
-                var m_point = this.coords.p_from_real + ((this.coords.p_to_real - this.coords
-                    .p_from_real) / 2);
+                var m_point = this.coords.p_from_real + ((this.coords.p_to_real - this.coords.p_from_real) / 2);
                 if (real_x >= m_point) {
                     return this.options.to_fixed ? "from" : "to";
                 } else {
@@ -1294,9 +1194,9 @@
         },
 
         /**
-            * Measure Min and Max labels width in percent
-            */
-        calcMinMax: function () {
+         * Measure Min and Max labels width in percent
+         */
+        calcMinMax: function() {
             if (!this.coords.w_rs) {
                 return;
             }
@@ -1306,9 +1206,9 @@
         },
 
         /**
-            * Measure labels width and X in percent
-            */
-        calcLabels: function () {
+         * Measure labels width and X in percent
+         */
+        calcLabels: function() {
             if (!this.coords.w_rs || this.options.hide_from_to) {
                 return;
             }
@@ -1317,53 +1217,42 @@
 
                 this.labels.w_single = this.$cache.single.outerWidth(false);
                 this.labels.p_single_fake = this.labels.w_single / this.coords.w_rs * 100;
-                this.labels.p_single_left = this.coords.p_single_fake + (this.coords.p_handle /
-                        2) -
-                    (this.labels.p_single_fake / 2);
-                this.labels.p_single_left = this.checkEdges(this.labels.p_single_left, this
-                    .labels
-                    .p_single_fake);
+                this.labels.p_single_left = this.coords.p_single_fake + (this.coords.p_handle / 2) - (this.labels.p_single_fake / 2);
+                this.labels.p_single_left = this.checkEdges(this.labels.p_single_left, this.labels.p_single_fake);
 
             } else {
 
                 this.labels.w_from = this.$cache.from.outerWidth(false);
                 this.labels.p_from_fake = this.labels.w_from / this.coords.w_rs * 100;
-                this.labels.p_from_left = this.coords.p_from_fake + (this.coords.p_handle / 2) -
-                    (
-                        this.labels.p_from_fake / 2);
+                this.labels.p_from_left = this.coords.p_from_fake + (this.coords.p_handle / 2) - (this.labels.p_from_fake / 2);
                 this.labels.p_from_left = this.toFixed(this.labels.p_from_left);
-                this.labels.p_from_left = this.checkEdges(this.labels.p_from_left, this.labels
-                    .p_from_fake);
+                this.labels.p_from_left = this.checkEdges(this.labels.p_from_left, this.labels.p_from_fake);
 
                 this.labels.w_to = this.$cache.to.outerWidth(false);
                 this.labels.p_to_fake = this.labels.w_to / this.coords.w_rs * 100;
-                this.labels.p_to_left = this.coords.p_to_fake + (this.coords.p_handle / 2) - (
-                    this
-                    .labels.p_to_fake / 2);
+                this.labels.p_to_left = this.coords.p_to_fake + (this.coords.p_handle / 2) - (this.labels.p_to_fake / 2);
                 this.labels.p_to_left = this.toFixed(this.labels.p_to_left);
-                this.labels.p_to_left = this.checkEdges(this.labels.p_to_left, this.labels
-                    .p_to_fake);
+                this.labels.p_to_left = this.checkEdges(this.labels.p_to_left, this.labels.p_to_fake);
 
                 this.labels.w_single = this.$cache.single.outerWidth(false);
                 this.labels.p_single_fake = this.labels.w_single / this.coords.w_rs * 100;
-                this.labels.p_single_left = ((this.labels.p_from_left + this.labels.p_to_left +
-                    this
-                    .labels.p_to_fake) / 2) - (this.labels.p_single_fake / 2);
+                this.labels.p_single_left = ((this.labels.p_from_left + this.labels.p_to_left + this.labels.p_to_fake) / 2) - (this.labels.p_single_fake / 2);
                 this.labels.p_single_left = this.toFixed(this.labels.p_single_left);
-                this.labels.p_single_left = this.checkEdges(this.labels.p_single_left, this
-                    .labels
-                    .p_single_fake);
+                this.labels.p_single_left = this.checkEdges(this.labels.p_single_left, this.labels.p_single_fake);
 
             }
         },
 
+
+
+        // =============================================================================================================
         // Drawings
 
         /**
-            * Main function called in request animation frame
-            * to update everything
-            */
-        updateScene: function () {
+         * Main function called in request animation frame
+         * to update everything
+         */
+        updateScene: function() {
             if (this.raf_id) {
                 cancelAnimationFrame(this.raf_id);
                 this.raf_id = null;
@@ -1386,9 +1275,9 @@
         },
 
         /**
-            * Draw handles
-            */
-        drawHandles: function () {
+         * Draw handles
+         */
+        drawHandles: function() {
             this.coords.w_rs = this.$cache.rs.outerWidth(false);
 
             if (!this.coords.w_rs) {
@@ -1421,8 +1310,7 @@
                 return;
             }
 
-            if (this.old_from !== this.result.from || this.old_to !== this.result.to || this
-                .force_redraw || this.is_key) {
+            if (this.old_from !== this.result.from || this.old_to !== this.result.to || this.force_redraw || this.is_key) {
 
                 this.drawLabels();
 
@@ -1449,9 +1337,7 @@
 
                 this.writeToInput();
 
-                if ((this.old_from !== this.result.from || this.old_to !== this.result.to) && !
-                    this
-                    .is_start) {
+                if ((this.old_from !== this.result.from || this.old_to !== this.result.to) && !this.is_start) {
                     this.$cache.input.trigger("change");
                     this.$cache.input.trigger("input");
                 }
@@ -1481,11 +1367,11 @@
         },
 
         /**
-            * Draw labels
-            * measure labels collisions
-            * collapse close labels
-            */
-        drawLabels: function () {
+         * Draw labels
+         * measure labels collisions
+         * collapse close labels
+         */
+        drawLabels: function() {
             if (!this.options) {
                 return;
             }
@@ -1506,8 +1392,7 @@
                     text_single = this.decorate(p_values[this.result.from]);
                     this.$cache.single.html(text_single);
                 } else {
-                    text_single = this.decorate(this._prettify(this.result.from), this.result
-                        .from);
+                    text_single = this.decorate(this._prettify(this.result.from), this.result.from);
                     this.$cache.single.html(text_single);
                 }
 
@@ -1519,8 +1404,7 @@
                     this.$cache.min[0].style.visibility = "visible";
                 }
 
-                if (this.labels.p_single_left + this.labels.p_single_fake > 100 - this.labels
-                    .p_max - 1) {
+                if (this.labels.p_single_left + this.labels.p_single_fake > 100 - this.labels.p_max - 1) {
                     this.$cache.max[0].style.visibility = "hidden";
                 } else {
                     this.$cache.max[0].style.visibility = "visible";
@@ -1535,8 +1419,7 @@
                         text_single += this.options.values_separator;
                         text_single += this.decorate(p_values[this.result.to]);
                     } else {
-                        text_single = this.decorate(p_values[this.result.from] + this.options
-                            .values_separator + p_values[this.result.to]);
+                        text_single = this.decorate(p_values[this.result.from] + this.options.values_separator + p_values[this.result.to]);
                     }
                     text_from = this.decorate(p_values[this.result.from]);
                     text_to = this.decorate(p_values[this.result.to]);
@@ -1548,20 +1431,13 @@
                 } else {
 
                     if (this.options.decorate_both) {
-                        text_single = this.decorate(this._prettify(this.result.from), this
-                            .result
-                            .from);
+                        text_single = this.decorate(this._prettify(this.result.from), this.result.from);
                         text_single += this.options.values_separator;
-                        text_single += this.decorate(this._prettify(this.result.to), this.result
-                            .to);
+                        text_single += this.decorate(this._prettify(this.result.to), this.result.to);
                     } else {
-                        text_single = this.decorate(this._prettify(this.result.from) + this
-                            .options
-                            .values_separator + this._prettify(this.result.to), this.result
-                            .to);
+                        text_single = this.decorate(this._prettify(this.result.from) + this.options.values_separator + this._prettify(this.result.to), this.result.to);
                     }
-                    text_from = this.decorate(this._prettify(this.result.from), this.result
-                        .from);
+                    text_from = this.decorate(this._prettify(this.result.from), this.result.from);
                     text_to = this.decorate(this._prettify(this.result.to), this.result.to);
 
                     this.$cache.single.html(text_single);
@@ -1577,8 +1453,7 @@
                     to_left = this.labels.p_to_left + this.labels.p_to_fake,
                     max = Math.max(single_left, to_left);
 
-                if (this.labels.p_from_left + this.labels.p_from_fake >= this.labels
-                    .p_to_left) {
+                if (this.labels.p_from_left + this.labels.p_from_fake >= this.labels.p_to_left) {
                     this.$cache.from[0].style.visibility = "hidden";
                     this.$cache.to[0].style.visibility = "hidden";
                     this.$cache.single[0].style.visibility = "visible";
@@ -1621,9 +1496,9 @@
         },
 
         /**
-            * Draw shadow intervals
-            */
-        drawShadow: function () {
+         * Draw shadow intervals
+         */
+        drawShadow: function() {
             var o = this.options,
                 c = this.$cache,
 
@@ -1640,8 +1515,7 @@
             if (o.type === "single") {
                 if (o.from_shadow && (is_from_min || is_from_max)) {
                     from_min = this.convertToPercent(is_from_min ? o.from_min : o.min);
-                    from_max = this.convertToPercent(is_from_max ? o.from_max : o.max) -
-                        from_min;
+                    from_max = this.convertToPercent(is_from_max ? o.from_max : o.max) - from_min;
                     from_min = this.toFixed(from_min - (this.coords.p_handle / 100 * from_min));
                     from_max = this.toFixed(from_max - (this.coords.p_handle / 100 * from_max));
                     from_min = from_min + (this.coords.p_handle / 2);
@@ -1655,8 +1529,7 @@
             } else {
                 if (o.from_shadow && (is_from_min || is_from_max)) {
                     from_min = this.convertToPercent(is_from_min ? o.from_min : o.min);
-                    from_max = this.convertToPercent(is_from_max ? o.from_max : o.max) -
-                        from_min;
+                    from_max = this.convertToPercent(is_from_max ? o.from_max : o.max) - from_min;
                     from_min = this.toFixed(from_min - (this.coords.p_handle / 100 * from_min));
                     from_max = this.toFixed(from_max - (this.coords.p_handle / 100 * from_max));
                     from_min = from_min + (this.coords.p_handle / 2);
@@ -1687,9 +1560,9 @@
 
 
         /**
-            * Write values to input element
-            */
-        writeToInput: function () {
+         * Write values to input element
+         */
+        writeToInput: function() {
             if (this.options.type === "single") {
                 if (this.options.values.length) {
                     this.$cache.input.prop("value", this.result.from_value);
@@ -1699,41 +1572,42 @@
                 this.$cache.input.data("from", this.result.from);
             } else {
                 if (this.options.values.length) {
-                    this.$cache.input.prop("value", this.result.from_value + this.options
-                        .input_values_separator + this.result.to_value);
+                    this.$cache.input.prop("value", this.result.from_value + this.options.input_values_separator + this.result.to_value);
                 } else {
-                    this.$cache.input.prop("value", this.result.from + this.options
-                        .input_values_separator + this.result.to);
+                    this.$cache.input.prop("value", this.result.from + this.options.input_values_separator + this.result.to);
                 }
                 this.$cache.input.data("from", this.result.from);
                 this.$cache.input.data("to", this.result.to);
             }
         },
 
+
+
+        // =============================================================================================================
         // Callbacks
 
-        callOnStart: function () {
+        callOnStart: function() {
             this.writeToInput();
 
             if (this.options.onStart && typeof this.options.onStart === "function") {
                 this.options.onStart(this.result);
             }
         },
-        callOnChange: function () {
+        callOnChange: function() {
             this.writeToInput();
 
             if (this.options.onChange && typeof this.options.onChange === "function") {
                 this.options.onChange(this.result);
             }
         },
-        callOnFinish: function () {
+        callOnFinish: function() {
             this.writeToInput();
 
             if (this.options.onFinish && typeof this.options.onFinish === "function") {
                 this.options.onFinish(this.result);
             }
         },
-        callOnUpdate: function () {
+        callOnUpdate: function() {
             this.writeToInput();
 
             if (this.options.onUpdate && typeof this.options.onUpdate === "function") {
@@ -1741,20 +1615,24 @@
             }
         },
 
+
+
+
+        // =============================================================================================================
         // Service methods
 
-        toggleInput: function () {
+        toggleInput: function() {
             this.$cache.input.toggleClass("irs-hidden-input");
         },
 
         /**
-            * Convert real value to percent
-            *
-            * @param value {Number} X in real
-            * @param no_min {boolean=} don't use min value
-            * @returns {Number} X in percent
-            */
-        convertToPercent: function (value, no_min) {
+         * Convert real value to percent
+         *
+         * @param value {Number} X in real
+         * @param no_min {boolean=} don't use min value
+         * @returns {Number} X in percent
+         */
+        convertToPercent: function(value, no_min) {
             var diapason = this.options.max - this.options.min,
                 one_percent = diapason / 100,
                 val, percent;
@@ -1776,12 +1654,12 @@
         },
 
         /**
-            * Convert percent to real values
-            *
-            * @param percent {Number} X in percent
-            * @returns {Number} X in real
-            */
-        convertToValue: function (percent) {
+         * Convert percent to real values
+         *
+         * @param percent {Number} X in percent
+         * @returns {Number} X in real
+         */
+        convertToValue: function(percent) {
             var min = this.options.min,
                 max = this.options.max,
                 min_decimals = min.toString().split(".")[1],
@@ -1849,12 +1727,12 @@
         },
 
         /**
-            * Round percent value with step
-            *
-            * @param percent {Number}
-            * @returns percent {Number} rounded
-            */
-        calcWithStep: function (percent) {
+         * Round percent value with step
+         *
+         * @param percent {Number}
+         * @returns percent {Number} rounded
+         */
+        calcWithStep: function(percent) {
             var rounded = Math.round(percent / this.coords.p_step) * this.coords.p_step;
 
             if (rounded > 100) {
@@ -1867,7 +1745,7 @@
             return this.toFixed(rounded);
         },
 
-        checkMinInterval: function (p_current, p_next, type) {
+        checkMinInterval: function(p_current, p_next, type) {
             var o = this.options,
                 current,
                 next;
@@ -1896,7 +1774,7 @@
             return this.convertToPercent(current);
         },
 
-        checkMaxInterval: function (p_current, p_next, type) {
+        checkMaxInterval: function(p_current, p_next, type) {
             var o = this.options,
                 current,
                 next;
@@ -1925,7 +1803,7 @@
             return this.convertToPercent(current);
         },
 
-        checkDiapason: function (p_num, min, max) {
+        checkDiapason: function(p_num, min, max) {
             var num = this.convertToValue(p_num),
                 o = this.options;
 
@@ -1948,12 +1826,12 @@
             return this.convertToPercent(num);
         },
 
-        toFixed: function (num) {
+        toFixed: function(num) {
             num = num.toFixed(20);
             return +num;
         },
 
-        _prettify: function (num) {
+        _prettify: function(num) {
             if (!this.options.prettify_enabled) {
                 return num;
             }
@@ -1965,13 +1843,12 @@
             }
         },
 
-        prettify: function (num) {
+        prettify: function(num) {
             var n = num.toString();
-            return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + this.options
-                .prettify_separator);
+            return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + this.options.prettify_separator);
         },
 
-        checkEdges: function (left, width) {
+        checkEdges: function(left, width) {
             if (!this.options.force_edges) {
                 return this.toFixed(left);
             }
@@ -1985,7 +1862,7 @@
             return this.toFixed(left);
         },
 
-        validate: function () {
+        validate: function() {
             var o = this.options,
                 r = this.result,
                 v = o.values,
@@ -2074,9 +1951,7 @@
                 o.step = 1;
             }
 
-            if (typeof o.keyboard_step !== "number" || isNaN(o.keyboard_step) || !o
-                .keyboard_step ||
-                o.keyboard_step < 0) {
+            if (typeof o.keyboard_step !== "number" || isNaN(o.keyboard_step) || !o.keyboard_step || o.keyboard_step < 0) {
                 o.keyboard_step = 5;
             }
 
@@ -2114,15 +1989,11 @@
                 }
             }
 
-            if (typeof o.min_interval !== "number" || isNaN(o.min_interval) || !o
-                .min_interval || o
-                .min_interval < 0) {
+            if (typeof o.min_interval !== "number" || isNaN(o.min_interval) || !o.min_interval || o.min_interval < 0) {
                 o.min_interval = 0;
             }
 
-            if (typeof o.max_interval !== "number" || isNaN(o.max_interval) || !o
-                .max_interval || o
-                .max_interval < 0) {
+            if (typeof o.max_interval !== "number" || isNaN(o.max_interval) || !o.max_interval || o.max_interval < 0) {
                 o.max_interval = 0;
             }
 
@@ -2135,7 +2006,7 @@
             }
         },
 
-        decorate: function (num, original) {
+        decorate: function(num, original) {
             var decorated = "",
                 o = this.options;
 
@@ -2166,7 +2037,7 @@
             return decorated;
         },
 
-        updateFrom: function () {
+        updateFrom: function() {
             this.result.from = this.options.from;
             this.result.from_percent = this.convertToPercent(this.result.from);
             if (this.options.values) {
@@ -2174,7 +2045,7 @@
             }
         },
 
-        updateTo: function () {
+        updateTo: function() {
             this.result.to = this.options.to;
             this.result.to_percent = this.convertToPercent(this.result.to);
             if (this.options.values) {
@@ -2182,16 +2053,18 @@
             }
         },
 
-        updateResult: function () {
+        updateResult: function() {
             this.result.min = this.options.min;
             this.result.max = this.options.max;
             this.updateFrom();
             this.updateTo();
         },
 
+
+        // =============================================================================================================
         // Grid
 
-        appendGrid: function () {
+        appendGrid: function() {
             if (!this.options.grid) {
                 return;
             }
@@ -2211,6 +2084,8 @@
 
                 result,
                 html = '';
+
+
 
             this.calcGridMargin();
 
@@ -2265,8 +2140,7 @@
 
                     small_w = this.toFixed(big_w - (small_p * z));
 
-                    html += '<span class="irs-grid-pol small" style="left: ' + small_w +
-                        '%"></span>';
+                    html += '<span class="irs-grid-pol small" style="left: ' + small_w + '%"></span>';
                 }
 
                 html += '<span class="irs-grid-pol" style="left: ' + big_w + '%"></span>';
@@ -2278,9 +2152,7 @@
                     result = this._prettify(result);
                 }
 
-                html += '<span class="irs-grid-text js-grid-text-' + i + '" style="left: ' +
-                    big_w +
-                    '%">' + result + '</span>';
+                html += '<span class="irs-grid-text js-grid-text-' + i + '" style="left: ' + big_w + '%">' + result + '</span>';
             }
             this.coords.big_num = Math.ceil(big_num + 1);
 
@@ -2291,7 +2163,7 @@
             this.cacheGridLabels();
         },
 
-        cacheGridLabels: function () {
+        cacheGridLabels: function() {
             var $label, i,
                 num = this.coords.big_num;
 
@@ -2303,15 +2175,14 @@
             this.calcGridLabels();
         },
 
-        calcGridLabels: function () {
+        calcGridLabels: function() {
             var i, label, start = [],
                 finish = [],
                 num = this.coords.big_num;
 
             for (i = 0; i < num; i++) {
                 this.coords.big_w[i] = this.$cache.grid_labels[i].outerWidth(false);
-                this.coords.big_p[i] = this.toFixed(this.coords.big_w[i] / this.coords.w_rs *
-                    100);
+                this.coords.big_p[i] = this.toFixed(this.coords.big_w[i] / this.coords.w_rs * 100);
                 this.coords.big_x[i] = this.toFixed(this.coords.big_p[i] / 2);
 
                 start[i] = this.toFixed(this.coords.big[i] - this.coords.big_x[i]);
@@ -2330,8 +2201,7 @@
                     finish[num - 1] = 100 + this.coords.grid_gap;
                     start[num - 1] = this.toFixed(finish[num - 1] - this.coords.big_p[num - 1]);
 
-                    this.coords.big_x[num - 1] = this.toFixed(this.coords.big_p[num - 1] - this
-                        .coords.grid_gap);
+                    this.coords.big_x[num - 1] = this.toFixed(this.coords.big_p[num - 1] - this.coords.grid_gap);
                 }
             }
 
@@ -2349,7 +2219,7 @@
 
         // Collisions Calc Beta
         // TODO: Refactor then have plenty of time
-        calcGridCollision: function (step, start, finish) {
+        calcGridCollision: function(step, start, finish) {
             var i, next_i, label,
                 num = this.coords.big_num;
 
@@ -2369,7 +2239,7 @@
             }
         },
 
-        calcGridMargin: function () {
+        calcGridMargin: function() {
             if (!this.options.grid_margin) {
                 return;
             }
@@ -2391,9 +2261,12 @@
             this.$cache.grid[0].style.left = this.coords.grid_gap + "%";
         },
 
+
+
+        // =============================================================================================================
         // Public methods
 
-        update: function (options) {
+        update: function(options) {
             if (!this.input) {
                 return;
             }
@@ -2414,7 +2287,7 @@
             this.init(true);
         },
 
-        reset: function () {
+        reset: function() {
             if (!this.input) {
                 return;
             }
@@ -2423,7 +2296,7 @@
             this.update();
         },
 
-        destroy: function () {
+        destroy: function() {
             if (!this.input) {
                 return;
             }
@@ -2438,15 +2311,17 @@
         }
     };
 
-    $.fn.ionRangeSlider = function (options) {
-        return this.each(function () {
+    $.fn.ionRangeSlider = function(options) {
+        return this.each(function() {
             if (!$.data(this, "ionRangeSlider")) {
-                $.data(this, "ionRangeSlider", new IonRangeSlider(this, options,
-                    plugin_count++));
+                $.data(this, "ionRangeSlider", new IonRangeSlider(this, options, plugin_count++));
             }
         });
     };
 
+
+
+    // =================================================================================================================
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 
@@ -2454,7 +2329,7 @@
 
     // MIT license
 
-    (function () {
+    (function() {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
         for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -2464,35 +2339,35 @@
         }
 
         if (!window.requestAnimationFrame)
-            window.requestAnimationFrame = function (callback, element) {
+            window.requestAnimationFrame = function(callback, element) {
                 var currTime = new Date().getTime();
                 var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                var id = window.setTimeout(function () {
-                        callback(currTime + timeToCall);
-                    },
+                var id = window.setTimeout(function() { callback(currTime + timeToCall); },
                     timeToCall);
                 lastTime = currTime + timeToCall;
                 return id;
             };
 
         if (!window.cancelAnimationFrame)
-            window.cancelAnimationFrame = function (id) {
+            window.cancelAnimationFrame = function(id) {
                 clearTimeout(id);
             };
     }());
 
 }));
 
+
+
 // Trigger
 
-$(function () {
+$(function() {
 
     var $range = $(".js-range-slider"),
         $inputFrom = $(".js-input-from"),
         $inputTo = $(".js-input-to"),
         instance,
         min = 0,
-        max = $("#max_filter_price").val(),
+        max = 1000000,
         from = 0,
         to = 0;
 
@@ -2500,12 +2375,12 @@ $(function () {
         type: "double",
         min: min,
         max: max,
-        from: $("#min_filter_price").val(),
-        to: $("#max_filter_price").val(),
-        prefix: 'IDR ',
+        from: 0,
+        to: 500000,
+        prefix: 'Rp. ',
         onStart: updateInputs,
         onChange: updateInputs,
-        step: 500000,
+        step: 50000,
         prettify_enabled: true,
         prettify_separator: ".",
         values_separator: " - ",
@@ -2524,7 +2399,7 @@ $(function () {
         $inputTo.prop("value", to);
     }
 
-    $inputFrom.on("input", function () {
+    $inputFrom.on("input", function() {
         var val = $(this).prop("value");
 
         // validate
@@ -2539,7 +2414,7 @@ $(function () {
         });
     });
 
-    $inputTo.on("input", function () {
+    $inputTo.on("input", function() {
         var val = $(this).prop("value");
 
         // validate

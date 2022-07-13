@@ -1186,7 +1186,7 @@ Route::get('/things-to-do/price/{id}/delete/story/{id_story}', [Activity\Activit
 Route::get('/things-to-do/price/story/{id}', [Activity\ActivityPriceController::class, 'activity_story'])->name('activity_price_story');
 Route::patch('/things-to-do/update/price', [Activity\ActivityPriceController::class, 'update_price'])->name('activity_price_update_price');
 Route::post('/things-to-do/update/name', [Activity\ActivityListController::class, 'activity_update_name'])->name('activity_update_name');
-Route::patch('/things-to-do/update/contact', [Activity\ActivityListController::class, 'activity_update_contact'])->name('activity_update_contact');
+Route::post('/things-to-do/update/contact', [Activity\ActivityListController::class, 'activity_update_contact'])->name('activity_update_contact');
 Route::post('/things-to-do/update/location', [Activity\ActivityListController::class, 'activity_update_location'])->name('activity_update_location');
 Route::post('/things-to-do/update/short-description', [Activity\ActivityListController::class, 'activity_update_short_description'])->name('activity_update_short_description');
 Route::post('/things-to-do/update/description', [Activity\ActivityListController::class, 'activity_update_description'])->name('activity_update_description');

@@ -149,14 +149,14 @@ class HotelReviewController extends Controller
     {
         // dd($request->all());
         // validation
-        $validator = Validator::make($request->all(), [
-            'id_review' => ['required', 'integer'],
-            'id_hotel' => ['required', 'integer']
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'id_review' => ['required', 'integer'],
+        //     'id_hotel' => ['required', 'integer']
+        // ]);
 
-        if ($validator->fails()) {
-            abort(500);
-        }
+        // if ($validator->fails()) {
+        //     abort(500);
+        // }
 
         $review = HotelReview::find($request->id_review);
 

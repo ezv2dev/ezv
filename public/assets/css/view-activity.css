@@ -5,7 +5,24 @@
 }
 
 .pd-tlr-10 {
-    padding: 10px 4px 0 10px;
+    padding: 10px 4px 0 0;
+}
+
+#price {
+    margin-top: 20px;
+}
+
+.prices {
+    width: 100%;
+}
+
+.prices h2 {
+    padding-left: 0;
+}
+
+
+.page-content {
+    margin-top: 0;
 }
 
 /* Price Type */
@@ -150,12 +167,12 @@
 }
 
 /* .section-2 {
-    margin-right: -2px;
+    scroll-margin-top: 50px;
 } */
 
-.review-bottom {
+/* .review-bottom {
     margin-left: 21px !important;
-}
+} */
 
 .host {
     margin-left: 0;
@@ -256,5 +273,8 @@
     }
     #description .pd-tlr-10 {
         margin-right: 12px !important;
+    }
+    .prices h2 {
+        padding-left: 10px;
     }
 }

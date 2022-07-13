@@ -224,10 +224,6 @@
         max-width: 17em;
     }
 
-    label {
-        font-weight: bold;
-    }
-
     .range:not(:last-child) {
         margin-bottom: 1.5em;
     }
@@ -429,96 +425,94 @@ if (request()->fCategory) {
                         <div class="list-description {{ $textColor }}">Price</div>
                     </a>
                     <div class="price-popup dropdown-menu">
-                        <div class="dropdown-pd-0">
-                            <div class="double-slider">
-                                <div class="extra-controls form-inline">
-                                    <div class="col-lg-12">
-                                        <p class="price-popup-title">Price Range
-                                        </p>
-                                    </div>
-                                    <div class="form-group col-lg-12 price-popup-display-container">
-                                        <div class="price-popup-display-wrap1">
-                                            <div class="col-lg-12 price-popup-display">
-                                                <label for="min_price" class="price-popup-label">Min</label>
-                                                <input name="fMinPrice[]" type="text"
-                                                    class="js-input-from form-control price-popup-label" value="0"
-                                                    style="border: none;" />
-                                            </div>
-                                        </div>
-                                        <div class="price-popup-display-gap-container">
-                                            <div></div>
-                                        </div>
-                                        <div class="price-popup-display-wrap2">
-                                            <div class="col-lg-12 price-popup-display">
-                                                <label for="max_price" class="price-popup-label">Max</label>
-                                                <input name="fMaxPrice[]" type="text"
-                                                    class="js-input-to form-control price-popup-label" value="0"
-                                                    style="border: none;" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="text" class="js-range-slider" value="" />
+                        <div class="double-slider">
+                            <div class="extra-controls form-inline">
+                                <div class="col-lg-12">
+                                    <p class="price-popup-title">Price Range
+                                    </p>
                                 </div>
-                                <center>
-                                    <div style="margin-top: 25px;">
-                                        <button type="submit" class="btn btn-choose"
-                                            style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                <div class="form-group col-lg-12 price-popup-display-container">
+                                    <div class="price-popup-display-wrap1">
+                                        <div class="col-lg-12 price-popup-display">
+                                            <label for="min_price" class="price-popup-label">Min</label>
+                                            <input name="fMinPrice[]" type="text"
+                                                class="js-input-from form-control price-popup-label" value="0"
+                                                style="border: none;" />
+                                        </div>
                                     </div>
-                                </center>
+                                    <div class="price-popup-display-gap-container">
+                                        <div></div>
+                                    </div>
+                                    <div class="price-popup-display-wrap2">
+                                        <div class="col-lg-12 price-popup-display">
+                                            <label for="max_price" class="price-popup-label">Max</label>
+                                            <input name="fMaxPrice[]" type="text"
+                                                class="js-input-to form-control price-popup-label" value="0"
+                                                style="border: none;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="js-range-slider" value="" />
                             </div>
+                            <center>
+                                <div style="margin-top: 25px;">
+                                    <button type="submit" class="btn btn-choose"
+                                        style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>
 
-                {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
-                    <a href="javascript:void(0)" id="price" style="cursor:pointer;"
+                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                    <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
                         class="dropdown-toggle grid-sub-cat-content-container text-13">
                         <div>
                             <i
                                 class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
                             </i>
                         </div>
-                        <div class="list-description {{ $textColor }}">Price</div>
+                        <div class="list-description {{ $textColor }}">Gender</div>
                     </a>
-                    <div class="price-popup dropdown-menu" style="left: 520px;">
-                        <div class="dropdown-pd-0">
-                            <div class="double-slider">
-                                <div class="extra-controls form-inline">
-                                    <div class="col-lg-12">
-                                        <p class="price-popup-title">{{ Translate::translate('Price') }}
-                                        </p>
+                    <div class="price-popup dropdown-menu">
+                        <div>
+                            <p class="price-popup-title">Gender
+                            </p>
+                            <div class="propertytype-input-row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        {{-- @foreach ($property_type as $item)
+                                            @php
+                                                $isChecked = '';
+                                                $propertyIds = explode(',', request()->get('fProperty'));
+                                                if (in_array($item->id_property_type, $propertyIds)) {
+                                                    $isChecked = 'checked';
+                                                }
+                                            @endphp
+                                        @endforeach --}}
+                                        <div class="col-6 mb-3">
+                                            <label class="checkdesign">Male
+                                                <input type="checkbox" name="gender[]" value="Male">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="checkdesign">Female
+                                                <input type="checkbox" name="gender[]" value="Female">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-lg-12 price-popup-display-container">
-                                        <div class="price-popup-display-wrap1">
-                                            <div class="col-lg-12 price-popup-display">
-                                                <label for="min_price" class="price-popup-label">Min</label>
-                                                <input name="fMinPrice[]" type="text"
-                                                    class="js-input-from form-control price-popup-label" value="0" />
-                                            </div>
-                                        </div>
-                                        <div class="price-popup-display-gap-container">
-                                            <div></div>
-                                        </div>
-                                        <div class="price-popup-display-wrap2">
-                                            <div class="col-lg-12 price-popup-display">
-                                                <label for="max_price" class="price-popup-label">Max</label>
-                                                <input name="fMaxPrice[]" type="text"
-                                                    class="js-input-to form-control price-popup-label" value="0" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="text" class="js-range-slider" value="" />
                                 </div>
-                                <center>
-                                    <div style="margin-top: 25px;">
-                                        <button type="submit" class="btn btn-choose"
-                                            style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                    </div>
-                                </center>
+                            </div>
+                            <div style="margin-top: 25px;">
+                                <button type="submit" class="btn btn-choose"
+                                    style="border-radius:12px; width: 100%; padding: 10px;"
+                                    onclick="villaFilter()">Save</button>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
                     <a href="javascript:void(0)" id="followers" style="cursor:pointer;"
