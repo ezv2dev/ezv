@@ -1111,28 +1111,43 @@ class RestaurantListController extends Controller
     public function restaurant_store_story(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
             'id_restaurant' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:100'],
-            'file' => ['required', 'mimes:mp4']
+            'file' => ['required', 'mimes:mp4,mov']
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors(),
+            ], 500);
         }
 
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        abort_if(!$restaurant, 404);
+        if(!$restaurant)
+        {
+            return response()->json([
+                'message' => 'Food Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // store process
@@ -1149,7 +1164,7 @@ class RestaurantListController extends Controller
 
         $ext = strtolower($request->file->getClientOriginalExtension());
 
-        if ($ext == 'mp4') {
+        if ($ext == 'mp4' || $ext == 'mov') {
             $original_name = $request->file->getClientOriginalName();
             // dd($original_name);
             $name_file = time() . "_" . $original_name;
@@ -1168,13 +1183,33 @@ class RestaurantListController extends Controller
             ]);
         }
 
+        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name','id_story')->get();
+        $getUID = Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first();
+
+        $data = [];
+
+        $i = 0;
+
+        foreach ($getStory as $item)
+        {
+            $data[$i]['id_story'] = $item->id_story;
+            $data[$i]['name'] = $item->name;
+            $i++;
+        }
+
+        // return $data;
+
         // check if update is success or not
         if ($createdStory) {
-            return back()
-                ->with('success', 'Your data has been created');
+            return response()->json([
+                'message' => 'Updated Restaurant Story',
+                'data' => $data,
+                'uid' => $getUID->uid,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Updated Restaurant Story',
+            ], 500);
         }
     }
 

@@ -8,8 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('restaurant_store_story') }}" method="POST" enctype="multipart/form-data"
-                    id="storeStoryForm" onsubmit="showingLoading()">
+                <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
+                    id="storeStoryForm">
                     @csrf
                     <input type="hidden" name="id_restaurant" id="id_restaurant"
                         value="{{ $restaurant->id_restaurant }}">
@@ -28,7 +28,7 @@
                                 </video>
                             </div>
                             <div class="story-video-input" style="display: none;">
-                                <input type="file" name="file" accept=".mp4" required />
+                                <input id="inputStoryResto" type="file" name="file" accept=".mp4" required />
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
 
                 <div class="row items-push">
                     <div class="col-lg-7">
-                        <button type="submit" class="btn btn-sm btn-primary" form="storeStoryForm">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveStory" form="storeStoryForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Upload') }}
                         </button>
                     </div>

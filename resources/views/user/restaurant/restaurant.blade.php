@@ -950,46 +950,49 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($restaurant->story as $item)
-                                                            <div class="card4 col-lg-3" style="border-radius: 5px;">
-                                                                <div class="img-wrap">
-                                                                    <div class="video-position">
-                                                                        @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
-                                                                            <a type="button"
-                                                                                onclick="view_story_restaurant({{ $item->id_story }});">
-                                                                            @else
+                                                    <div class="cards4" id="storyContent">
+
+                                                            @foreach ($restaurant->story as $item)
+                                                                <div class="card4 col-lg-3" style="border-radius: 5px;">
+                                                                    <div class="img-wrap">
+                                                                        <div class="video-position">
+                                                                            @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
                                                                                 <a type="button"
-                                                                                    onclick="showPromotionMobile()">
-                                                                        @endif
+                                                                                    onclick="view_story_restaurant({{ $item->id_story }});">
+                                                                                @else
+                                                                                    <a type="button"
+                                                                                        onclick="showPromotionMobile()">
+                                                                            @endif
 
-                                                                        <div class="story-video-player">
-                                                                            <i class="fa fa-play" aria-hidden="true"></i>
-                                                                        </div>
+                                                                            <div class="story-video-player">
+                                                                                <i class="fa fa-play" aria-hidden="true"></i>
+                                                                            </div>
 
-                                                                        <video href="javascript:void(0)"
-                                                                            class="story-video-grid"
-                                                                            style="object-fit: cover;"
-                                                                            src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
-                                                                        </video>
-                                                                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                                            <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_story({'id': '{{ $restaurant->id_restaurant }}', 'id_story': '{{ $item->id_story }}'})">
-                                                                                {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
-                                                                                <i class="fa fa-trash"
-                                                                                    style="color:red; margin-left: 25px;"
-                                                                                    data-bs-toggle="popover"
-                                                                                    data-bs-animation="true"
-                                                                                    data-bs-placement="bottom"
-                                                                                    title="{{ __('user_page.Delete') }}"></i>
+                                                                            <video href="javascript:void(0)"
+                                                                                class="story-video-grid"
+                                                                                style="object-fit: cover;"
+                                                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
+                                                                            </video>
+                                                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                                                <a class="delete-story"
+                                                                                    href="javascript:void(0);"
+                                                                                    onclick="delete_story({'id': '{{ $restaurant->id_restaurant }}', 'id_story': '{{ $item->id_story }}'})">
+                                                                                    {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
+                                                                                    <i class="fa fa-trash"
+                                                                                        style="color:red; margin-left: 25px;"
+                                                                                        data-bs-toggle="popover"
+                                                                                        data-bs-animation="true"
+                                                                                        data-bs-placement="bottom"
+                                                                                        title="{{ __('user_page.Delete') }}"></i>
+                                                                                </a>
+                                                                            @endif
                                                                             </a>
-                                                                        @endif
-                                                                        </a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        @endforeach
+                                                            @endforeach
+
+
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
