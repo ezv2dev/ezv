@@ -83,7 +83,7 @@ class CollaboratorController extends Controller
             ]);
         }
 
-        return view('collaborator.profile', compact('owner_language', 'languages', 'user', 'profile', 'tags', 'category', 'location', 'photo', 'video', 'stories'));
+        return view('collaborator.collaborator', compact('owner_language', 'languages', 'user', 'profile', 'tags', 'category', 'location', 'photo', 'video', 'stories'));
     }
     // profile
 

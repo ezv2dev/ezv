@@ -26,7 +26,8 @@
 
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -482,6 +483,94 @@
             border-radius: 15px;
             object-fit: cover;
         }
+
+        /* Social Media */
+        .social-media {
+            display: flex;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-links a {
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            text-decoration: none;
+            color: #ff7400;
+            margin: 0px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s;
+        }
+
+        .social-links a .fab {
+            font-size: 30px;
+            line-height: 80px;
+            position: relative;
+            z-index: 10;
+            transition: color 0.5s;
+        }
+
+        .social-links a::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: -90px;
+            left: 0;
+            background: #000;
+            background: linear-gradient(-45deg, #ed1c94, #ffec17);
+            position: absolute;
+            transition: 0.5s;
+        }
+
+        .social-links a:hover::after {
+            top: 0;
+        }
+
+        .social-links a:hover .fab {
+            color: #fff;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-10px);
+        }
+
+        .hide-social {
+            display: none;
+        }
+
+        #facebookID:hover+.hide-social {
+            width: 80px;
+            height: 80px;
+            color: red;
+            display: block !important;
+        }
+
+        #instagramID:hover+.hide-social {
+            width: 80px;
+            height: 80px;
+            color: red;
+            display: block;
+        }
+
+        #twitterID:hover+.hide-social {
+            width: 80px;
+            height: 80px;
+            color: red;
+            display: block;
+        }
+
+        #tiktokID:hover+.hide-social {
+            width: 80px;
+            height: 80px;
+            color: red;
+            display: block;
+        }
+
+        /* End Social Media */
     </style>
     {{-- /reorder video --}}
 </head>
@@ -709,10 +798,14 @@
                                             onchange='this.form.submit()'>
                                             <option value="AA" {{ $profile->grade == 'AA' ? 'selected' : '' }}>AA
                                             </option>
-                                            <option value="A" {{ $profile->grade == 'A' ? 'selected' : '' }}>A</option>
-                                            <option value="B" {{ $profile->grade == 'B' ? 'selected' : '' }}>B</option>
-                                            <option value="C" {{ $profile->grade == 'C' ? 'selected' : '' }}>C</option>
-                                            <option value="D" {{ $profile->grade == 'D' ? 'selected' : '' }}>D</option>
+                                            <option value="A" {{ $profile->grade == 'A' ? 'selected' : '' }}>A
+                                            </option>
+                                            <option value="B" {{ $profile->grade == 'B' ? 'selected' : '' }}>B
+                                            </option>
+                                            <option value="C" {{ $profile->grade == 'C' ? 'selected' : '' }}>C
+                                            </option>
+                                            <option value="D" {{ $profile->grade == 'D' ? 'selected' : '' }}>D
+                                            </option>
                                         </select>
                                         <noscript><input type="submit" value="Submit"></noscript>
                                     </div>
@@ -761,7 +854,7 @@
                 {{-- END ALERT CONTENT STATUS --}}
 
                 <div class="row top-profile" id="first-detail-content">
-                    <div class="col-lg-4- col-md-4 col-xs-12 pd-0">
+                    <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($profile->image)
                                 <img
@@ -773,16 +866,17 @@
                             @auth
                                 @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="edit_collab_profile()" class="collab-edit-profile-btn-dekstop"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    <a type="button" onclick="edit_collab_profile()"
+                                        class="edit-profile-image-btn-dekstop"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
                                 @endif
                             @endauth
 
                             <div class="collab-joined-in-dekstop">
                                 <p>
                                     <i class="fa fa-users-rectangle" style="color: #ff7400"></i>
-                                    Joined in {{ date_format($user->created_at, 'M Y') }}
+                                    Joined in {{ date_format($user->created_at, 'M Y') }} <br> <i
+                                        class="fa-solid fa-circle-check" style="color: #ff7400"></i> Identity verified
                                 </p>
                             </div>
                             {{-- SHORT NAME FOR MOBILE --}}
@@ -797,13 +891,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6- col-md-6 col-xs-12 profile-info">
+                    <div class="col-lg-8 col-md-8 col-xs-12 profile-info">
                         <h2 id="name-content">{{ $user->first_name }} {{ $user->last_name }}
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
-                                    &nbsp;<a type="button" onclick="editNameForm()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="editNameForm({{ $profile->created_by }})"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 @endif
                             @endauth
                         </h2>
@@ -813,12 +906,14 @@
                                     <form action="{{ route('collab_update_name') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $user->id }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255" required>{{ $user->first_name }} {{ $user->last_name }}</textarea>
+                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
+                                            required>{{ $user->first_name }} {{ $user->last_name }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> Done
                                         </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <button type="reset" class="btn btn-sm btn-secondary"
+                                            onclick="editNameCancel()">
                                             <i class="fa fa-xmark"></i> Cancel
                                         </button>
                                     </form>
@@ -828,18 +923,39 @@
 
                         @auth
                             @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;
-                                <a type="button" onclick="edit_collab_profile()" class="collab-edit-profile-btn-mobile d-md-none"><i class="fa fa-pencil-alt"
-                                        style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                        data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i> Edit Profile</a>
+                                <a type="button" onclick="edit_collab_profile()"
+                                    class="collab-edit-profile-btn-mobile d-md-none"
+                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;"> Edit
+                                    Profile</a>
                             @endif
                         @endauth
 
-                        {{-- verified and rating --}}
-                        <p style="margin-bottom:10px"><i class="fa-solid fa-star" style="color: #ff7400"></i> 190
-                            Reviews | <i class="fa-solid fa-circle-check" style="color: #ff7400"></i> Identity verified
-                        </p>
-                        {{-- verified and rating --}}
+                        {{-- Follower --}}
+                        <div class="social-media">
+                            <div class="social-links">
+                                <a id="instagramID"><i class="fab fa-instagram"></i></a>
+                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
+                                    110212</p>
+                                <a id="facebookID"><i class="fab fa-facebook-f"></i></a>
+                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
+                                    110212</p>
+                                <a id="twitterID"><i class="fab fa-twitter"></i></a>
+                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
+                                    110212</p>
+                                <a id="tiktokID"><i class="fab fa-tiktok"></i></a>
+                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
+                                    110212</p>
+                            </div>
+                            @auth
+                                @if (Auth::user()->id == $profile->created_by)
+                                    &nbsp;<a type="button" onclick="editSocialMedia()"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;" class="mt-4">Edit
+                                        Social Media</a>
+                                @endif
+                            @endauth
+                        </div>
+
+                        {{-- End Follower --}}
 
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
@@ -860,9 +976,8 @@
                             @endif
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
-                                    &nbsp;<a type="button" onclick="add_tag()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="add_tag()"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;"> Edit Tag</a>
                                 @endif
                             @endauth
                         </p>
@@ -873,9 +988,8 @@
                             {{ $profile->name_location }}
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
-                                    &nbsp;<a type="button" onclick="edit_location()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="edit_location()"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit Location</a>
                                 @endif
                             @endauth
                         </p>
@@ -889,9 +1003,8 @@
                             @endforeach
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
-                                    &nbsp;<a type="button" onclick="edit_collab_language()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="edit_collab_language()"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit Language</a>
                                 @endif
                             @endauth
                         </p>
@@ -933,7 +1046,8 @@
                                                                             <div class="story-video-player"><i
                                                                                     class="fa fa-play"></i>
                                                                             </div>
-                                                                            <video preload href="" class="story-video-grid"
+                                                                            <video preload href=""
+                                                                                class="story-video-grid"
                                                                                 style="object-fit: cover;"
                                                                                 src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
                                                                             </video>
@@ -977,7 +1091,8 @@
                                             @foreach ($stories as $item)
                                                 <div class="card3 col-lg-3 radius-5">
                                                     <div class="img-wrap" style="width: 70px; height: 70px;">
-                                                        <div class="video-position" style="width: 70px; height: 70px;">
+                                                        <div class="video-position"
+                                                            style="width: 70px; height: 70px;">
                                                             <a type="button"
                                                                 onclick="view_story({{ $item->id_story }});"
                                                                 style="height: 70px; width: 70px;">
@@ -1004,31 +1119,6 @@
                             @endif
                         </ul>
                     </div>
-                    <!-- <div class="col-lg-2 col-md-2 col-xs-12 right-0">
-                        <div class="row social-share">
-                            <div class="col-6 text-center icon-center">
-                                @if ($profile->is_favorit)
-                                    <p>
-                                        <a href=""><i class="fa fa-heart" style="color: #f00;  font-size: 18px;"></i>
-                                            <span>CANCEL</span>
-                                        </a>
-                                    </p>
-                                @else
-                                    <p>
-                                        <a href=""><i class="fa fa-heart" style="color: #aaa;  font-size: 18px;"></i>
-                                            <span style="color: #aaa;">FAVORITE</span>
-                                        </a>
-                                    </p>
-                                @endif
-                            </div>
-                            <div class="col-6 text-center icon-center">
-                                <p type="button" class="expand" onclick="share()">
-                                    <i class="fa fa-share" style="font-size: 18px;"></i>
-                                    <span>SHARE</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 {{-- END PROFILE --}}
                 {{-- STICKY BAR --}}
@@ -1039,9 +1129,9 @@
                             <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('gallery').scrollIntoView();">
                                 <span>
-                                    <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    GALLERY</span>
+                                    <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
+                                        GALLERY</span>
                                 </span>
                             </a>
                         </li>
@@ -1050,18 +1140,8 @@
                                 onClick="document.getElementById('description').scrollIntoView();">
                                 <span>
                                     <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    ABOUT</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="navigationItem ">
-                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('amenities').scrollIntoView();">
-                                <span>
-                                    <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    INFORMATION</span>
+                                        fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
+                                        ABOUT</span>
                                 </span>
                             </a>
                         </li>
@@ -1070,8 +1150,8 @@
                                 onClick="document.getElementById('location-map').scrollIntoView();">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    LOCATION</span>
+                                        fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
+                                        LOCATION</span>
                                 </span>
                             </a>
                         </li>
@@ -1080,8 +1160,8 @@
                                 onClick="document.getElementById('availability').scrollIntoView();">
                                 <span>
                                     <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
-                                    fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    AVAILABILITY</span>
+                                        fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
+                                        AVAILABILITY</span>
                                 </span>
                             </a>
                         </li>
@@ -1089,11 +1169,11 @@
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('review').scrollIntoView();">
                                 <span>
-                                    <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
-                                    REVIEW</span>
+                                    <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
+                                        fill="#262626" viewBox="0 0 20 20"></i><span class="navigationItemText">&nbsp
+                                        REVIEW</span>
                                 </span>
-                                
+
                             </a>
                         </li>
                         <li class="navigationItem d-flex d-md-none">
@@ -1112,75 +1192,73 @@
                 <div class="js-gallery">
                     {{-- GALLERY --}}
                     <section id="gallery" class="photosGrid section mb-3">
-                    <div class="col-12 row gallery">
-                        @if ($photo->count() > 0)
+                        <div class="col-12 row gallery">
+                            @if ($photo->count() > 0)
 
-                            @foreach ($photo as $item)
-                            <div class="col-4 grid-photo">
-                                <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
-                                    class="img-lightbox photosGrid__Photo"
-                                    style="background-image: url('{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}')">
-                                    <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                @foreach ($photo as $item)
+                                    <div class="col-4 grid-photo">
+                                        <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
+                                            class="img-lightbox photosGrid__Photo"
+                                            style="background-image: url('{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}')">
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
                                                 src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
                                                 title="{{ $item->caption }}">
-                                </a>
-                                @auth
-                                    @if (Auth::user()->id == $profile->created_by)
-                                    <span class="edit-icon">
-
-
-                                            <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom" type="button"
-                                                        ><i
+                                        </a>
+                                        @auth
+                                            @if (Auth::user()->id == $profile->created_by)
+                                                <span class="edit-icon">
+                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" type="button"><i
                                                             class="fa fa-pencil"></i></button>
-                                            <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        href="javascript:void(0);"
+                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" href="javascript:void(0);"
                                                         type="button" onclick="position_photo()"><i
                                                             class="fa fa-arrows"></i></button>
-                                            <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        href="javascript:void(0);"
+                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" href="javascript:void(0);"
                                                         onclick="delete_photo_photo({'id': `{{ $profile->id_collab }}`, 'id_photo': `{{ $item->id_photo }}`})"><i
                                                             class="fa fa-trash"></i></button>
-                                    </span>
-                                    @endif
-                                @endauth
-                            </div>
-                            @endforeach
+                                                </span>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                @endforeach
 
-                        @endif
-                        @if ($video->count() > 0)
-                            @foreach ($video as $item)
-                            <div class="col-4 grid-photo">
-                                <a class="video-grid" type="button" onclick="view({{ $item->id_video }});">
-                                    <i class="fas fa-2x fa-play video-button"></i>
-                                    <video preload href="" class="photosGrid__Photo" style="object-fit: cover;"
-                                        src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
-                                    </video>
-                                </a>
-                                @auth
-                                    @if (Auth::user()->id == $profile->created_by)
-                                        <a class="delete delete-video" href="javascript:void(0);"
-                                            onclick="delete_photo_video({'id': `{{ $profile->id_collab }}`, 'id_video': `{{ $item->id_video }}`})"><i
-                                                class="fa fa-trash"></i></a>
-                                        <a type="button" class="delete" style="left: -40px !important; "
-                                            onclick="position_video()"><i class="fa fa-pencil"></i></a>
-                                    @endif
-                                @endauth
-                            </div>
-                            @endforeach
-                        @endif
-                        @if ($photo->count() <= 0 && $video->count() <= 0)
-                            there is no gallery yet
-                        @endif
-                    </div>
+                            @endif
+                            @if ($video->count() > 0)
+                                @foreach ($video as $item)
+                                    <div class="col-4 grid-photo">
+                                        <a class="video-grid" type="button"
+                                            onclick="view({{ $item->id_video }});">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                            <video preload href="" class="photosGrid__Photo"
+                                                style="object-fit: cover;"
+                                                src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
+                                            </video>
+                                        </a>
+                                        @auth
+                                            @if (Auth::user()->id == $profile->created_by)
+                                                <a class="delete delete-video" href="javascript:void(0);"
+                                                    onclick="delete_photo_video({'id': `{{ $profile->id_collab }}`, 'id_video': `{{ $item->id_video }}`})"><i
+                                                        class="fa fa-trash"></i></a>
+                                                <a type="button" class="delete" style="left: -40px !important; "
+                                                    onclick="position_video()"><i class="fa fa-pencil"></i></a>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if ($photo->count() <= 0 && $video->count() <= 0)
+                                there is no gallery yet
+                            @endif
+                        </div>
                     </section>
                     {{-- END GALLERY --}}
                     {{-- ADD GALLERY --}}
                     @auth
                         @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                            <section class="add-gallery" style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
+                            <section class="add-gallery"
+                                style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
                                 <form class="dropzone" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
@@ -1197,15 +1275,14 @@
                     <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place">
-                            <h2>About this influencer</h2>
+                            <h2>About</h2>
                             <p id="description-content">
                                 {{ $profile->description }}
                                 @auth
                                     @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
-                                        <a type="button" onclick="editDescriptionForm()"><i class="fa fa-pencil-alt"
-                                                style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                        <a type="button" onclick="editDescriptionForm()"
+                                            style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit Description</a>
                                     @endif
                                 @endauth
                             </p>
@@ -1236,55 +1313,6 @@
                             <hr>
                         </div>
                     </section>
-                    <section id="amenities" class="section-2">
-                        <div class="pd-tlr-10">
-                            <h2>
-                                Information
-                                @auth
-                                    @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;
-                                        <a type="button" onclick="edit_amenities()"><i class="fa fa-pencil-alt"
-                                                style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
-                                    @endif
-                                @endauth
-                            </h2>
-                            {{-- <div class="row">
-                                <div class="col-lg-12 col-md-6 col-xs-12">
-                                    <div class="row amenities-block">
-                                        @foreach ($villa_amenities->take(3) as $item1)
-                                        <div class="col-4 amenities-detail-view">
-                                            <i class="fa fa-{{ $item1->icon }}"></i>
-                                            <span>{{ $item1->name }}</span>
-                                        </div>
-                                        @endforeach
-                                        @foreach ($bathroom->take(3) as $item2)
-                                        <div class="col-4 amenities-detail-view">
-                                            <i class="fa fa-{{ $item2->icon }}"></i>
-                                            <span>{{ $item2->name }}</span>
-                                        </div>
-                                        @endforeach
-                                        @foreach ($bedroom->take(3) as $item3)
-                                        <div class="col-4 amenities-detail-view">
-                                            <i class="fa fa-{{ $item3->icon }}"></i>
-                                            <span>{{ $item3->name }}</span>
-                                        </div>
-                                        @endforeach
-                                        @foreach ($safety->take(3) as $item4)
-                                        <div class="col-4 amenities-detail-view">
-                                            <i class="fa fa-{{ $item4->icon }}"></i>
-                                            <span>{{ $item4->name }}</span>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div> --}}
-                            <div class="amenities-box">
-                                <button type="button" onclick="view_amenities()">More Information</button>
-                            </div>
-                            <hr>
-                        </div>
-                    </section>
                     <section id="location-map" class="section-2">
                         <div class="pd-tlr-10">
                             <div class="d-flex justify-content-between">
@@ -1293,17 +1321,17 @@
                                     @auth
                                         @if (Auth::user()->id == $profile->created_by)
                                             &nbsp;
-                                            <a type="button" onclick="edit_location()"><i class="fa fa-pencil-alt"
-                                                    style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                    data-bs-animation="true" data-bs-placement="bottom"
-                                                    title="Edit"></i></a>
+                                            <a type="button" onclick="edit_location()"
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit
+                                                Location</a>
                                         @endif
                                     @endauth
                                 </h2>
-                                <h6 style="color: #FF7400" class="mt-2">Check Location</h6>
                             </div>
-                            <input type="hidden" value="{{ $profile->latitude }}" name="latitude" id="latitude">
-                            <input type="hidden" value="{{ $profile->longitude }}" name="longitude" id="longitude">
+                            <input type="hidden" value="{{ $profile->latitude }}" name="latitude"
+                                id="latitude">
+                            <input type="hidden" value="{{ $profile->longitude }}" name="longitude"
+                                id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
                             </div>
                         </div>
@@ -1352,9 +1380,8 @@
                         <input type="hidden" id="id_collab" name="id_collab" value="{{ $profile->id_collab }}">
                         @auth
                             @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;<a type="button" onclick="edit_price()"><i class="fa fa-pencil-alt"
-                                        style="color: #FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                        data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                &nbsp;<a type="button" onclick="edit_price()"
+                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit Price</a>
                             @endif
                         @endauth
                         <form method="POST" action="">
@@ -1411,8 +1438,9 @@
 
 
                                     {{-- calendar --}}
-                                    <div class="content sidebar-popup side-check-in-calendar side-check-in-calendar-collaborator" id="popup_check"
-                                    style="margin-left: -675px; width: 700px; padding:0px; z-index: 999; margin-top: -16px;">
+                                    <div class="content sidebar-popup side-check-in-calendar side-check-in-calendar-collaborator"
+                                        id="popup_check"
+                                        style="margin-left: -675px; width: 700px; padding:0px; z-index: 999; margin-top: -16px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
@@ -1425,7 +1453,8 @@
                                                             style="padding-bottom: 20px; margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                         <p style="margin: 0px; font-size: 13px;"></p>
                                                     </div>
-                                                    <div class="flatpickr" id="inline_reserve" style="text-align: left;">
+                                                    <div class="flatpickr" id="inline_reserve"
+                                                        style="text-align: left;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1517,8 +1546,8 @@
         <div id="rsv-block-btn">
             {{-- RESERVE BUTTON TOP RIGHT --}}
             <div class="rsv">IDR
-                <strong>{{ number_format($profile->price, 0, ',', '.') }}</strong>/day <span><a onclick="reserve2()"
-                        type="button" class="rsv-btn-button">CONTACT NOW</a>
+                <strong>{{ number_format($profile->price, 0, ',', '.') }}</strong>/day <span><a
+                        onclick="reserve2()" type="button" class="rsv-btn-button">CONTACT NOW</a>
             </div>
             {{-- END RESERVE BUTTON TOP RIGHT --}}
         </div>
@@ -1541,7 +1570,6 @@
                                         <div style="font-size: 10px; color: #aaa">
                                             {{ __('user_page.FAVORITE') }}</div>
                                     </a>
-
                                 @else
                                     <a href="" style="cursor: pointer;">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -1574,9 +1602,10 @@
                     <a type="button" onclick="language()" class="navbar-gap"
                         style="color: white; margin-right: 9px; width:27px;">
                         @if (session()->has('locale'))
-                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_'.session('locale').'.svg')}}">
+                            <img class="language-flag-icon"
+                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                         @else
-                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg')}}">
+                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
                     </a>
 
@@ -1585,51 +1614,53 @@
                         <!--<h5 style="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>-->
                     </div>
                     <div class="logged-user-menu-detail" style="">
-                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 1px;">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="margin-left: 1px;">
                             @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail" alt="">
+                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
+                                    alt="">
                             @else
-                            <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo-detail"
-                                alt="">
+                                <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                    class="logged-user-photo-detail" alt="">
                             @endif
 
                             <!--
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
-                                    style="margin-right: 0px; left: auto;">
-                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
-                                        <li>
-                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
-                                        </li>
-                                    @endif
-                                    <li>
-                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!" class="dropdown-item"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
-                                            Out</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                            style="display: none">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        </form>
-                                    </li>
-                                </ul>
-                                -->
+                                                                                                                                                                                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                                                                                                                                                                                                    style="margin-right: 0px; left: auto;">
+                                                                                                                                                                                                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+    <li>
+                                                                                                                                                                                                                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
+                                                                                                                                                                                                                                        </li>
+    @endif
+                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
+                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
+                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                        <a href="#!" class="dropdown-item"
+                                                                                                                                                                                                                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
+                                                                                                                                                                                                                                            Out</a>
+                                                                                                                                                                                                                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                                                                                                                                                                                                                            style="display: none">
+                                                                                                                                                                                                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                                                                                                                                                                                        </form>
+                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                -->
 
                             <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
                                 aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
                                 <h6 class="dropdown-header d-flex align-items-center">
-                                    @if (Auth::user()->foto_profile != NULL)
-                                    <img class="dropdown-user-img"
-                                        src="{{ asset('foto_profile/'.Auth::user()->foto_profile) }} ">
-                                    @elseIf (Auth::user()->avatar != NULL)
-                                    <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
+                                    @if (Auth::user()->foto_profile != null)
+                                        <img class="dropdown-user-img"
+                                            src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                    @elseIf (Auth::user()->avatar != null)
+                                        <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
                                     @else
-                                    <img class="dropdown-user-img"
-                                        src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                        <img class="dropdown-user-img"
+                                            src="{{ asset('assets/icon/menu/user_default.svg') }}">
                                     @endif
                                     {{-- @if (Auth::user()->avatar)
                                 <img src="{{ Auth::user()->avatar }}"
@@ -1644,13 +1675,13 @@
                                         <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
                                     </div>
                                 </h6>
-                                <a class="dropdown-item" href="{{route('partner_dashboard')}}">
+                                <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
                                     Dashboard
                                 </a>
-                                <a class="dropdown-item" href="{{route('profile_index')}}">
+                                <a class="dropdown-item" href="{{ route('profile_index') }}">
                                     My Profile
                                 </a>
-                                <a class="dropdown-item" href="{{route('change_password')}}">
+                                <a class="dropdown-item" href="{{ route('change_password') }}">
                                     Change Password
                                 </a>
                                 <a class="dropdown-item" href="#!"
@@ -1658,26 +1689,27 @@
                                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                                     Sign Out
                                 </a>
-                                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                    style="display: none">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </form>
                             </div>
 
                         </a>
                     </div>
-                    @else
-                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('privacy_policy') || Route::is('terms') ||
-                    Route::is('license'))
-                    <input type="button" style="top: 0px !important;" onclick="location.href='{{ route('register.partner') }}';"
-                        value="Become a Host" />
+                @else
+                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('privacy_policy') || Route::is('terms') || Route::is('license'))
+                        <input type="button" style="top: 0px !important;"
+                            onclick="location.href='{{ route('register.partner') }}';" value="Become a Host" />
                     @endif
 
                     <a type="button" onclick="language()" class="navbar-gap"
                         style="color: white; margin-right: 9px; width:27px;">
                         @if (session()->has('locale'))
-                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_'.session('locale').'.svg')}}">
+                            <img class="language-flag-icon"
+                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                         @else
-                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg')}}">
+                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
                     </a>
 
@@ -1693,7 +1725,7 @@
         <div class="col-lg-12 bottom-content">
             <div class="col-12">
                 <section id="review" class="section-2">
-                <hr>
+                    <hr>
                     <div class="review-bottom">
                         {{-- @if ($detail->count() > 0)
                             <h2 style="margin: 0px;">{{ __('user_page.Review') }}</h2>
@@ -1740,45 +1772,45 @@
                                 </div>
                             </div>
                         @else --}}
-                            <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
-                            <div class="col-12 mt-3 d-flex review-container">
-                                <div class="col-12 col-md-6 d-flex">
-                                    <div class="col-1 icon-review-container">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                                            aria-hidden="true" role="presentation" focusable="false"
-                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                            <path
-                                                d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="col-8">
-                                        <p class="review-txt">
-                                            This host has 720 reviews for other places to stay.
-                                            <span><a href="#">Show other reviews</a></span>
-                                        </p>
-                                    </div>
+                        <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
+                        <div class="col-12 mt-3 d-flex review-container">
+                            <div class="col-12 col-md-6 d-flex">
+                                <div class="col-1 icon-review-container">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                        <path
+                                            d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                        </path>
+                                    </svg>
                                 </div>
-                                <div class="col-12 col-md-6 d-flex">
-                                    <div class="col-1 icon-review-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                                            aria-hidden="true" role="presentation" focusable="false"
-                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                            <path
-                                                d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="col-8">
-                                        <p class="review-txt">
-                                            We’re here to help your trip go smoothly. Every reservation is covered by
-                                            <span><a href="#">EZV's Guest Refund Policy.</a></span>
-                                        </p>
-                                    </div>
+                                <div class="col-8">
+                                    <p class="review-txt">
+                                        This host has 720 reviews for other places to stay.
+                                        <span><a href="#">Show other reviews</a></span>
+                                    </p>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-6 d-flex">
+                                <div class="col-1 icon-review-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                        <path
+                                            d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="col-8">
+                                    <p class="review-txt">
+                                        We’re here to help your trip go smoothly. Every reservation is covered by
+                                        <span><a href="#">EZV's Guest Refund Policy.</a></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         {{-- @endif --}}
-                    <hr>
+                        <hr>
                     </div>
                 </section>
 
@@ -1799,32 +1831,9 @@
         @include('user.modal.collab.location')
         @include('user.modal.collab.collab_profile')
         @include('user.modal.collab.tag_add')
+        @include('user.modal.collab.social_media')
     @endauth
     {{-- modal --}}
-
-    {{-- STORY MODAL --}}
-    {{-- <div class="modal fade" id="storymodal" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-content video-container" style="width: 1000px; border-radius: 25px;">
-                <center>
-                    <input type="hidden" id="id_story" name="id_story" value="">
-                    <input type="hidden" id="villa" name="villa" value="{{ $profile->name }}">
-                    <video controls id="video" class="video-modal">
-                        <source src="" type="video/mp4">
-                        Your browser doesn't support HTML5 video tag.
-                    </video>
-                </center>
-                <div class="overlay-desc">
-                    <div class="overlay-desc--wrap">
-                        <h5 class="headline" id="title" style="margin-bottom: 10px"></h5>
-                        <p id="price"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <div class="modal fade" id="storymodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
@@ -1977,7 +1986,10 @@
     <script>
         function view_amenities() {
             $('#modal-amenities').modal('show');
-            // console.log('hit amenities');
+        }
+
+        function editSocialMedia() {
+            $('#modalSocialMedia').modal('show');
         }
     </script>
     {{-- MODAL RESERVE --}}
@@ -2110,8 +2122,7 @@
                         <div class="modal-share-container">
                             <div class="col-lg col-12 p-3 border br-10">
                                 <a type="button" class="d-flex p-0" onclick="copy_link()">
-                                    <div class="pr-5"><i class="fas fa-copy"></i> <span
-                                            class="fw-normal">Copy
+                                    <div class="pr-5"><i class="fas fa-copy"></i> <span class="fw-normal">Copy
                                             Link</span></div>
                                 </a>
                             </div>
@@ -2151,13 +2162,14 @@
     </div>
 
     {{-- MODAL RESERVE II --}}
-    <div class="modal fade" id="modal-reserve2" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-reserve2" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">Reserve Now</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="row">
@@ -2167,8 +2179,7 @@
                             </p>
                         </div>
                         <div class="col-3">
-                            <p class="price-box"><i class="fa fa-star"
-                                    style="color: orange; font-size:14px"></i>
+                            <p class="price-box"><i class="fa fa-star" style="color: orange; font-size:14px"></i>
                                 {{-- @if ($ratting->count() > 0)
                                 {{ $ratting[0]->average }} reviews --}}
                             </p>
@@ -2179,21 +2190,23 @@
                         <div class="row">
                             <div class="col-6 p-5-price line-right">
                                 <p class="price-box text-center"><strong>START-DATE</strong><br>
-                                    <input class="flatpickr text-center" type="text" id="check_in3" name="check_in"
-                                        style="width:80%; border:0" placeholder="Add Date">
+                                    <input class="flatpickr text-center" type="text" id="check_in3"
+                                        name="check_in" style="width:80%; border:0" placeholder="Add Date">
                                 </p>
                             </div>
                             <div class="col-6 p-5-price">
                                 <p class="price-box text-center"><strong>END-DATE</strong><br>
-                                    <input class="flatpickr text-center" type="text" id="check_out3" name="check_out"
-                                        style="width:80%; border:0" placeholder="Add Date" readonly>
+                                    <input class="flatpickr text-center" type="text" id="check_out3"
+                                        name="check_out" style="width:80%; border:0" placeholder="Add Date"
+                                        readonly>
                                 </p>
                             </div>
                         </div>
                         <div class="col-12 p-9-price line-top">
                             <p class="price-box"><strong>GUESTS</strong></p>
                             <button type="button" class="collapsible"><input type="number" id="total_guest4"
-                                    value="1" style="width: 15px; text-align:left; border:0" min="0" readonly>
+                                    value="1" style="width: 15px; text-align:left; border:0" min="0"
+                                    readonly>
                                 Guest</button>
                             <div class="content">
                                 <div class="row" style="margin-top: 10px;">
@@ -2216,7 +2229,8 @@
                                             </a>
                                             <div
                                                 style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                <p><input type="number" id="adult4" name="adult" value="1"
+                                                <p><input type="number" id="adult4" name="adult"
+                                                        value="1"
                                                         style="text-align: center; border:none; width:30px;" readonly>
                                                 </p>
                                             </div>
@@ -2245,7 +2259,8 @@
                                             </a>
                                             <div
                                                 style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                <p><input type="number" id="child4" name="child" value="0"
+                                                <p><input type="number" id="child4" name="child"
+                                                        value="0"
                                                         style="text-align: center; border:none; width:30px;" readonly>
                                                 </p>
                                             </div>
@@ -2274,7 +2289,8 @@
                                             </a>
                                             <div
                                                 style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                <p><input type="number" id="infant4" name="infant" value="0"
+                                                <p><input type="number" id="infant4" name="infant"
+                                                        value="0"
                                                         style="text-align: center; border:none; width:30px;" readonly>
                                                 </p>
                                             </div>
@@ -2300,7 +2316,8 @@
                                             </a>
                                             <div
                                                 style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                <p><input type="number" id="pet4" name="pet" value="0"
+                                                <p><input type="number" id="pet4" name="pet"
+                                                        value="0"
                                                         style="text-align: center; border:none; width:30px;" readonly>
                                                 </p>
                                             </div>
@@ -2322,7 +2339,8 @@
                     <div class="row">
                         <div class="col-7 price-box">Sub Total<input id="sum_night3" value="0"
                                 style="width: 25px; text-align:right; border:0"> nights</div>
-                        <div class="col-5 price-box">IDR <span id="total3" style="font-size:100%">0</span></div>
+                        <div class="col-5 price-box">IDR <span id="total3" style="font-size:100%">0</span>
+                        </div>
                         <div class="col-7 price-box">Service Fee</div>
                         <div class="col-5 price-box">IDR {{ number_format(0, 0, ',', '.') }}</div>
                     </div>
@@ -2354,7 +2372,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">FAQ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <form action="{{ route('villa_store_user_message') }}" method="post">
@@ -2451,8 +2470,8 @@
     </div>
 
     <!-- MAP MODAL -->
-    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-map">
                 <div class="modal-header">
@@ -2500,7 +2519,7 @@
         $(window).scroll(function() {
             if ($(".sticky-div").hasClass("sticky") && $("#rsv-block-btn").css("display") !== "block") {
                 $("#navbarright").addClass("active");
-            }else {
+            } else {
                 $("#navbarright").removeClass("active");
             }
         })
@@ -2589,11 +2608,11 @@
     </script>
 
     {{-- End Header List --}}
-<script>
+    <script>
         function position_photo() {
             $('#edit_position_photo').modal('show');
         }
-</script>
+    </script>
     {{-- EDIT POSITION PHOTO & VIDEO --}}
     {{-- <script>
         $(document).ready(function () {
@@ -2920,7 +2939,7 @@
             url: '/collaborator/update/photo',
             parallelUploads: 50,
             "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
                 alert(errorToString(message));
             },
             init: function() {
@@ -2998,7 +3017,8 @@
                 }
                 if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
                     $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop - $footerHeight)
+                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
+                            $footerHeight)
                     });
                 } else {
                     $sidebar.css({
