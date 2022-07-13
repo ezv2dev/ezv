@@ -3889,3 +3889,16 @@ span.flatpickr-weekday {
 .container.visible-title {
     margin-left: 25px;
 }
+
+.d-flex label{
+    width: 40px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #222222;
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+}

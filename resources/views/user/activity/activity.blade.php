@@ -1830,23 +1830,25 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Experience') }}
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <div class="liner"></div>
-                                                        {{ $activity->userReview->experience }}
-                                                    </div>
-                                                    @if ($activity->userReview->comment)
-                                                        <div class="col-12">
+                                            @if ($activity->userReview->comment)
+                                                <div class="col-12">
+                                                    <div class="col-6 d-flex">
+                                                        <div class="col-6">
                                                             {{ __('user_page.Comment') }}
                                                         </div>
-                                                        <div class="col-12">
-                                                            "{{ $activity->userReview->comment }}"
+                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                            {{ $activity->userReview->comment }}
                                                         </div>
-                                                    @endif
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="col-6 d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Experience') }}
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <div class="liner"></div>
+                                                    {{ $activity->userReview->experience }}
                                                 </div>
                                             </div>
                                         </div>
