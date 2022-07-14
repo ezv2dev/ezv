@@ -28,14 +28,16 @@
                                 </video>
                             </div>
                             <div class="story-video-input" style="display: none;">
-                                <input type="file" name="file" accept=".mp4" required />
+                                <input id="storyVideo" type="file" name="file" accept=".mp4" />
                             </div>
                         </div>
                     </div>
+                    <small id="err-stry-vid" style="display: none;" class="invalid-feedback">{{ __('auth.empty_video') }}</small>
                     <div class="form-group story-title-gap">
                         <input type="text" class="form-control" name="title" id="title" placeholder="Title..."
-                            required>
+                           >
                     </div>
+                    <small id="err-stry-ttl" style="display: none;" class="invalid-feedback">{{ __('auth.empty_title') }}</small>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
@@ -53,6 +55,38 @@
 <!-- END Fade In Default Modal -->
 {{-- VIDEO UPLOAD --}}
 <script>
+    $("#storyVideo").on("change", function(ev) {
+        if(document.getElementById("storyVideo").files.length != 0){
+            $('.story-video-form').css("border", "");
+            $('#err-stry-vid').hide();
+        }
+    });
+    $(document).on("keyup", "#title", function () {
+            $('#title').css("border", "");
+            $('#err-stry-ttl').hide();
+    });
+    $("form#updateStoryForm").submit(function(e) {
+        let error = 0;
+        if(document.getElementById("storyVideo").files.length == 0){
+            $('.story-video-form').css("border", "solid #e04f1a 1px");
+            $('#err-stry-vid').show();
+            error = 1;
+        } else {
+            $('.story-video-form').css("border", "");
+            $('#err-stry-vid').hide();
+        }
+        if(!$('#title').val()) {
+            $('#title').css("border", "solid #e04f1a 1px");
+            $('#err-stry-ttl').show();
+            error = 1;
+        } else {
+            $('#title').css("border", "");
+            $('#err-stry-ttl').hide();
+        }
+        if(error == 1) {
+            e.preventDefault();
+        }
+    });
     var storyVideoForm = $(".story-upload").children('.story-video-form');
     var storyVideoInput = $(".story-upload").children('.story-video-input');
     var storyVideoPreview = $(".story-upload").children(".story-video-preview");
@@ -71,6 +105,7 @@
             console.log(this.files);
             reader.onload = function(e) {
                 var urll = e.target.result;
+                $('.story-title-gap').css("margin-top", "50px");
                 $(storyVideoPreview).children("video").attr("src", urll);
                 $(storyVideoPreview).show();
                 $(storyVideoForm).hide();
@@ -88,6 +123,7 @@
             $(storyVideoInput)
                 .children("input")
                 .val("");
+            $('.story-title-gap').css("margin-top", "18px");
             $(storyVideoPreview).hide();
             $(storyVideoForm).show();
         });
