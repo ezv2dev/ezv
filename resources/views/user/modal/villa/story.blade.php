@@ -61,7 +61,7 @@
             $('#err-stry-vid').hide();
         }
     });
-    $(document).on("keyup", "#email_va", function () {
+    $(document).on("keyup", "#title", function () {
             $('#title').css("border", "");
             $('#err-stry-ttl').hide();
     });

@@ -4324,6 +4324,14 @@
     {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
 
     <script>
+        var $gallery;
+        $(document).ready(function() {
+            $gallery = new SimpleLightbox('.gallery a', {});
+            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
+        });
+    </script>
+
+    <script>
         // Dropzone.autoDiscover = false;
         Dropzone.options.frmTarget = {
             autoProcessQueue: false,
@@ -4429,7 +4437,7 @@
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
                         message.data.photo[0].id_photo+
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-                
+
                     $('.gallery').append(content);
                 }
                 if (message.data.video.length > 0)
@@ -4437,11 +4445,13 @@
                     content = '<div class="col-4 grid-photo"> <a class="pointer-normal" onclick="view_video_restaurant('+
                         message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
                         path+lowerCaseUid+slash+message.data.video[0].name+
-                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
-                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> </span> </div>';
-                    
+                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
+                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
                     $('.gallery').append(content);
                 }
+                
+                $gallery.refresh();
 
                 this.removeFile(file);
             },
@@ -4746,6 +4756,8 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+                            
+                            $gallery.refresh();
                         }
                     });
                 } else {
@@ -5101,13 +5113,7 @@
             });
         });
     </script>
-    <script>
-        (function() {
-            var $gallery = new SimpleLightbox('.gallery a', {});
-            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
-        })();
-    </script>
-
+    
     {{-- LAZY LOAD --}}
     @include('components.lazy-load.lazy-load')
     {{-- END LAZY LOAD --}}

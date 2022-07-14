@@ -76,7 +76,7 @@
                 </div>
 
                 <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
                     @if (request()->get('fCategory') == null)
                         @foreach ($subCategoryAll->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
