@@ -398,6 +398,17 @@
 @section('scripts')
     <script src="{{ asset('assets/js/list-villa-extend.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            if(sessionStorage.getItem('#popup')!=='true')
+            {
+                $('#popup').modal('show');
+                sessionStorage.setItem('#popup',true);
+            }
+        });
+
+    </script>
+
     {{-- Search --}}
     <script>
         $(document).ready(function() {

@@ -70,7 +70,7 @@
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal" style="padding-left: 2.2rem !important;">
                 <div class="col-10">
-                    <h5 class="mb-0">{{ Translate::translate('Sub Category') }}</h5>
+                    <h5 class="mb-0">{{ Translate::translate('Filters') }}</h5>
                 </div>
                 <button type="button" class="btn-close-modal col-2 d-flex justify-content-end pe-3"
                     data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
