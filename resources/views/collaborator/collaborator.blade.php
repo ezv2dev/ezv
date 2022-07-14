@@ -498,7 +498,7 @@
             height: 80px;
             text-align: center;
             text-decoration: none;
-            color: #ff7400;
+            color: #000;
             margin: 0px;
             border-radius: 50%;
             position: relative;
@@ -933,18 +933,14 @@
                         {{-- Follower --}}
                         <div class="social-media">
                             <div class="social-links">
-                                <a id="instagramID"><i class="fab fa-instagram"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="facebookID"><i class="fab fa-facebook-f"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="twitterID"><i class="fab fa-twitter"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="tiktokID"><i class="fab fa-tiktok"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
+                                <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
+                                    id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
+                                    id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
+                                        class="fab fa-twitter" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
+                                        class="fab fa-tiktok" target="_blank"></i></a>
                             </div>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
@@ -1625,30 +1621,30 @@
                             @endif
 
                             <!--
-                                                                                                                                                                                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
-                                                                                                                                                                                                                                    style="margin-right: 0px; left: auto;">
-                                                                                                                                                                                                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                                                                                                                                                                                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                                                                                                                                                                                                                    style="margin-right: 0px; left: auto;">
+                                                                                                                                                                                                                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
     <li>
-                                                                                                                                                                                                                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
-                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
+                                                                                                                                                                                                                                                        </li>
     @endif
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="#!" class="dropdown-item"
-                                                                                                                                                                                                                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
-                                                                                                                                                                                                                                            Out</a>
-                                                                                                                                                                                                                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                                                                                                                                                                                                                            style="display: none">
-                                                                                                                                                                                                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                </ul>
-                                                                                                                                                                                                                                -->
+                                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
+                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
+                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                                                        <a href="#!" class="dropdown-item"
+                                                                                                                                                                                                                                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
+                                                                                                                                                                                                                                                            Out</a>
+                                                                                                                                                                                                                                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                                                                                                                                                                                                                                            style="display: none">
+                                                                                                                                                                                                                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                                                                                                                                                                                                        </form>
+                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                -->
 
                             <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
                                 aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
