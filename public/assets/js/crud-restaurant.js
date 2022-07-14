@@ -1017,6 +1017,10 @@ $("#storeStoryForm").submit(function (e) {
 
                 $("#modal-edit_story").modal("hide");
 
+                if (response.data.length > 4) {
+                    sliderRestaurant();
+                }
+
                 // $("#profileDropzone").attr("src", "");
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
