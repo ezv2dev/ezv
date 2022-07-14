@@ -743,6 +743,7 @@
     right: 10px;
     top: 10px;
     position: absolute;
+    z-index: 99;
 }
 
 .video-thumb-container{

@@ -978,6 +978,14 @@ function showMoreDescription() {
     $("#modal-show_description").modal("show");
 }
 
+function showMoreInsurance() {
+    $("#modal-show_insurance").modal("show");
+}
+
+function showMoreCancelationPolicy() {
+    $("#modal-show_cancelationpolicy").modal("show");
+}
+
 function edit_short_description() {
     $("#modal-edit_short_description").modal("show");
 }
