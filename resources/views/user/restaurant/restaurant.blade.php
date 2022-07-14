@@ -648,7 +648,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                    @method('PATCH') -->
+                                                        @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -1796,7 +1796,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button-22 favorite-button"
                                     style="display: unset; margin-left: 0px;">
@@ -2341,7 +2341,7 @@
                             @guest
                                 <hr>
                                 <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
-                                            </h4> -->
+                                                </h4> -->
                                 {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                 {{-- <div class="container-xxl mx-auto p-0">
@@ -2657,8 +2657,8 @@
                                 @if (Auth::user()->role_id != 3)
                                     <hr>
                                     <!-- <h4 style="margin-bottom: -10px;">
-                                                    {{ __('user_page.Nearby Villas & Things To Do') }}
-                                                </h4> -->
+                                                        {{ __('user_page.Nearby Villas & Things To Do') }}
+                                                    </h4> -->
                                     {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                     {{-- <div class="container-xxl mx-auto p-0">

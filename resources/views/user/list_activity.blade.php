@@ -17,8 +17,8 @@
     $rowLineColor = 'row-line-white';
     $listColor = 'listoption-light';
     $shadowColor = 'box-shadow-light';
-    if(isset($_COOKIE['tema'])){
-        if($_COOKIE['tema'] == 'black'){
+    if (isset($_COOKIE['tema'])) {
+        if ($_COOKIE['tema'] == 'black') {
             $bgColor = 'bg-body-black';
             $textColor = 'font-light';
             $rowLineColor = 'row-line-grey';
@@ -36,7 +36,7 @@
         }
     </style>
 
-    <div id="body-color" class="{{$bgColor}}" style="position: relative; min-height: 100px;">
+    <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
         <div id="div-to-refresh">
             <div class="col-lg-12">
@@ -45,8 +45,8 @@
                     $fcategory = '';
                 @endphp
 
-                <div id="filter-cat-bg-color" style="width:100%;" class="container-grid-cat translate-text-group {{ $bgColor }}"
-                    style="">
+                <div id="filter-cat-bg-color" style="width:100%;"
+                    class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
                     @foreach ($categories->take(6) as $item)
                         <div>
                             <a href="#" class="grid-img-container"
@@ -56,8 +56,8 @@
                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                                 <div class="grid-text translate-text-group-items">
                                     <!-- <span class="translate-text-group-items text-white">
-                                        {{ $item->name }}
-                                    </span> -->
+                                                {{ $item->name }}
+                                            </span> -->
                                     {{ $item->name }}
                                 </div>
                             </a>
@@ -75,8 +75,8 @@
                     </div>
                 </div>
 
-                <div id="filter-subcat-bg-color" style="width: 100%;" class="container-grid-sub-cat translate-text-group {{ $bgColor }}"
-                    style="">
+                <div id="filter-subcat-bg-color" style="width: 100%;"
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
                     @if (request()->get('fCategory') == null)
                         @foreach ($subCategoryAll->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
@@ -99,8 +99,7 @@
             </div>
             @endforeach
             @if ($subCategoryAll->count() > 6)
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                    onclick="moreSubCategory()">
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
                         <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                     </div>
@@ -114,11 +113,11 @@
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                     onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
                     <div>
-                        <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon" @php
-                            $isChecked = '';
-                            $filterIds = explode(',', request()->get('fSubCategory'));
-                        @endphp
-                            @if (in_array($item->id_subcategory, $filterIds))
+                        <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                            @php
+                                $isChecked = '';
+                                $filterIds = explode(',', request()->get('fSubCategory'));
+                            @endphp @if (in_array($item->id_subcategory, $filterIds))
                             style="color: #ff7400 !important;"
             @endif></i>
         </div>
@@ -149,7 +148,7 @@
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
                     @guest
                         <div class="list-like-button-container" style="position: absolute; z-index: 99; top: 10px; left: 10px;">
-                            <a href="{{ route('login') }}" style="cursor: pointer;">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-28">
                                     <path
@@ -262,7 +261,7 @@
                     <a href="{{ route('activity', $data->id_activity) }}" target="_blank"
                         class="grid-overlay-desc"></a>
                     <div class="max-lines skeleton skeleton-w-100 skeleton-h-2">
-                        <span class="text-14 max-lines fw-500 {{$textColor}} list-description">
+                        <span class="text-14 max-lines fw-500 {{ $textColor }} list-description">
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
@@ -273,21 +272,21 @@
                     </div>
                     <div class="skeleton">
                         @if ($data->price->count() <= 0 || !$data->price->sortBy('price')->first()->price)
-                            <div class="text-14 fw-400 grid-one-line {{$textColor}} list-description ">
+                            <div class="text-14 fw-400 grid-one-line {{ $textColor }} list-description ">
                                 {{ __('user_page.Price is unknown') }}
                             </div>
                         @else
-                            <div class="text-14 fw-400 grid-one-line {{$textColor}} list-description">
+                            <div class="text-14 fw-400 grid-one-line {{ $textColor }} list-description">
                                 {{ __('user_page.Start from') }}
-                                <span class="fw-600 ml-1 text-14 {{$textColor}} list-description">
+                                <span class="fw-600 ml-1 text-14 {{ $textColor }} list-description">
                                     {{ CurrencyConversion::exchangeWithUnit($data->price->sortBy('price')->first()->price) }}
                                 </span>
                             </div>
                         @endif
                     </div>
-                    <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        <a class="orange-hover"
-                            href="#!" onclick="view_maps('{{ $data->id_activity }}')"></i><i
+                    <div
+                        class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                        <a class="orange-hover" href="#!" onclick="view_maps('{{ $data->id_activity }}')"></i><i
                                 class="fa-solid fa-location-dot"></i>
                             {{ $data->location->name ?? __('user_page.Location not found') }}
                         </a>

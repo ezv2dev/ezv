@@ -2470,7 +2470,7 @@
                         <div class="text-center icon-center">
                             @guest
                                 <div>
-                                    <a href="{{ route('login') }}">
+                                    <a onclick="loginForm(1)" style="cursor: pointer;">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                             role="presentation" focusable="false"
                                             class="favorite-button-22 favorite-button"
@@ -2744,7 +2744,7 @@
                         <div class="text-center">
                             @guest
                                 <div style="margin-bottom: 0px; font-size: 12px;">
-                                    <a href="{{ route('login') }}">
+                                    <a onclick="loginForm(1)" style="cursor: pointer;">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                             role="presentation" focusable="false"
                                             class="favorite-button-22 favorite-button"

@@ -1500,7 +1500,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button-22 favorite-button"
                                     style="display: unset; margin-left: 0px;">

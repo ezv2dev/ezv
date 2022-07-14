@@ -713,7 +713,10 @@
                             @endif
 
                             @auth
-                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                @if (Auth::user()->id == $activity->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($activity->story->count() == 0)
                                         @if (in_array(Auth::user()->role_id, [1, 2, 3]) || Auth::user()->id == $activity->created_by)
                                             <li class="story">
@@ -1681,7 +1684,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-22"
                                     style="display: unset; margin-left: 0px;">
@@ -4396,7 +4399,7 @@
                     $('#location-sticky').removeClass('active-sticky');
                     $('#review-sticky').removeClass('active-sticky');
                 } else if ($(window).scrollTop() >= $('#price').offset().top - 60 && $(window)
-                .scrollTop() <= $('#description').offset().top - 60) {
+                    .scrollTop() <= $('#description').offset().top - 60) {
                     $('#gallery-sticky').removeClass('active-sticky');
                     $('#price-sticky').addClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
@@ -4428,7 +4431,7 @@
                     $('#location-sticky').addClass('active-sticky');
                     $('#review-sticky').removeClass('active-sticky');
                 } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
-                .scrollTop() <= $('#endSticky').offset().top - 60) {
+                    .scrollTop() <= $('#endSticky').offset().top - 60) {
                     $('#gallery-sticky').removeClass('active-sticky');
                     $('#price-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');

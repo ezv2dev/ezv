@@ -25,7 +25,7 @@
     $rowLineColor = 'row-line-white';
     $listColor = 'listoption-light';
     $shadowColor = 'box-shadow-light';
-    if(isset($_COOKIE['tema'])){
+    if (isset($_COOKIE['tema'])) {
         if ($_COOKIE['tema'] == 'black') {
             $bgColor = 'bg-body-black';
             $textColor = 'font-light';
@@ -64,7 +64,7 @@
                             <a class="grid-img-container" onclick="hotelFilter({{ $item->id_hotel_category }}, null)">
                                 <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                                     @if ($fCategory == $item->id_hotel_category) style="border: 5px solid #ff7400;" @endif
-                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}" >
+                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                                 <div class="grid-text translate-text-group-items">
                                     {{ $item->name }}
                                 </div>
@@ -74,7 +74,8 @@
 
                     <div>
                         <a class="grid-img-container" onclick="moreCategory()">
-                            <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}" data-src="https://source.unsplash.com/random/?bali">
+                            <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
+                                data-src="https://source.unsplash.com/random/?bali">
                             <div class="grid-text">
                                 {{ __('user_page.More') }}
                             </div>
@@ -120,7 +121,7 @@
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
                     @guest
                         <div class="list-like-button-container" style="position: absolute; z-index: 99; top: 10px; left: 10px;">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-28">
                                     <path
@@ -238,13 +239,13 @@
                         </span>
                     </div>
                     <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                            @if ($data->detailReview)
+                                                                                                                                                                                                @if ($data->detailReview)
     {{ $data->detailReview->average }}
 @else
     {{ __('user_page.New') }}
     @endif
-                                                                                                                                                                                            <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
+                                                                                                                                                                                            </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
