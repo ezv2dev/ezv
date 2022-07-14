@@ -10,14 +10,15 @@ class CollaboratorSocialMedia extends Model
     protected $fillable = [
         'id_collab_social',
         'id_collab',
-        'instagram_name',
+        'instagram_link',
         'instagram_follower',
-        'facebook_name',
+        'facebook_link',
         'facebook_follower',
-        'twitter_name',
+        'twitter_link',
         'twitter_follower',
-        'tiktok_name',
+        'tiktok_link',
         'tiktok_follower',
+        'follower_amount'
     ];
 
     protected $table = 'collaborator_social_media';

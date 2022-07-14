@@ -189,7 +189,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -364,18 +364,22 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($hotel[0]->image)
-                                <img class="lozad" src="{{ LazyLoad::show() }}" data-src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
+                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
                             @else
-                                <img class="lozad" src="{{ LazyLoad::show() }}" data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="edit_hotel_profile()" class="edit-profile-image-btn-dekstop"
-                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
+                                    <a type="button" onclick="edit_hotel_profile()"
+                                        class="edit-profile-image-btn-dekstop"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
                                     @if ($hotel[0]->image)
-                                        <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
+                                        <a class="delete-profile edit-profile-image-btn-dekstop"
+                                            href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': '{{ $hotel[0]->id_hotel }}'})">
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
@@ -482,8 +486,8 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Hotel Name Here') }}"
-                                            required>{{ $hotel[0]->name }}</textarea>
+                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
+                                            placeholder="{{ __('user_page.Hotel Name Here') }}" required>{{ $hotel[0]->name }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -501,20 +505,22 @@
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 &nbsp;
-                                <a type="button" onclick="edit_hotel_profile()" class="edit-profile-image-btn-mobile d-md-none"
+                                <a type="button" onclick="edit_hotel_profile()"
+                                    class="edit-profile-image-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    @if ($hotel[0]->image)
-                                    <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
+                                @if ($hotel[0]->image)
+                                    <a class="delete-profile edit-profile-image-btn-mobile d-md-none"
+                                        href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $hotel[0]->id_hotel }}'})">
                                         <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                            data-bs-toggle="popover" data-bs-animation="true"
-                                            data-bs-placement="bottom"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
                                 @endif
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
-                        <p>{{ $hotel[0]->bedroom }} {{ __('user_page.Bedrooms') }} | {{ $hotel[0]->bathroom }}
+                        <p>{{ $hotel[0]->bedroom }} {{ __('user_page.Bedrooms') }} |
+                            {{ $hotel[0]->bathroom }}
                             {{ __('user_page.Bathroom') }} |
                             {{ $hotel[0]->adult }} {{ __('user_page.Adults') }} | {{ $hotel[0]->children }}
                             {{ __('user_page.Children') }}
@@ -533,7 +539,8 @@
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryHotel()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit property</a>
+                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">Edit
+                                                property</a>
                                         @endif
                                     @endauth
                                 </p>
@@ -610,8 +617,8 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required>
-                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30" placeholder="{{ __('user_page.Make your short description here') }}"
-                                            rows="3" maxlength="255" required>{{ $hotel[0]->short_description }}</textarea>
+                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255" required>{{ $hotel[0]->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -631,8 +638,8 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required>
-                                        <textarea name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}"
-                                            required>{{ $hotel[0]->short_description }}</textarea>
+                                        <textarea name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -660,7 +667,10 @@
                                 @endif
                             @endif
                             @auth
-                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                @if (Auth::user()->id == $hotel[0]->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($stories->count() == 0)
                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
                                             <li class="story">
@@ -922,7 +932,7 @@
                                 <span>
                                     <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1126,7 +1136,8 @@
                                 @endauth
                             </div>
                             <p id="description-content">
-                                {!! Str::limit(Translate::translate($hotel[0]->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($hotel[0]->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                                 {{-- {!! substr($villa[0]->description, 0, 600) ?? 'there is no description yet' !!} --}}
                             </p>
                             @if (Str::length($hotel[0]->description) > 600)
@@ -1143,7 +1154,8 @@
                                             <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                                 required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
+                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->description }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -1272,7 +1284,8 @@
                                 <div class="list-amenities">
                                     <button class="amenities-button" type="button" onclick="view_amenities()">
                                         <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                        <div style="font-size: 15px; font-weight: 600;" class="translate-text-group-items">
+                                        <div style="font-size: 15px; font-weight: 600;"
+                                            class="translate-text-group-items">
                                             {{ __('user_page.More') }}
                                         </div>
                                     </button>
@@ -1283,9 +1296,9 @@
 
                     <section id="room" class="section-2">
                         <div class="row pd-tlr-10">
-                        <div class="section-liner">
-                            <hr>
-                        </div>
+                            <div class="section-liner">
+                                <hr>
+                            </div>
                             <h2>{{ __('user_page.Rooms') }}
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1383,7 +1396,8 @@
                                                 @endforelse
                                             </div>
                                         </div>
-                                        <div class="col-6 col-md-2 text-center tab-body type-room" style="cursor: pointer;"
+                                        <div class="col-6 col-md-2 text-center tab-body type-room"
+                                            style="cursor: pointer;"
                                             onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
                                             @for ($i = 0; $i < $item->capacity; $i++)
                                                 <i class="fas fa-user"></i>
@@ -1419,7 +1433,8 @@
                                                 </svg>
                                             @endif
                                         </div>
-                                        <div class="col-6 col-md-2 text-center tab-body price-room" style="cursor: pointer;"
+                                        <div class="col-6 col-md-2 text-center tab-body price-room"
+                                            style="cursor: pointer;"
                                             onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
                                             IDR {{ number_format($item->price) }}
                                             <br>
@@ -1758,7 +1773,7 @@
             </div>
             {{-- END RIGHT CONTENT --}}
             <section id="location-map" class="section">
-                    <hr>
+                <hr>
                 <div class="row-grid-location">
                     <h2>
                         {{ __("user_page.What's nearby ?") }}
@@ -1912,7 +1927,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-22"
                                     style="display: unset; margin-left: 0px;">
@@ -1948,7 +1963,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -2076,7 +2091,8 @@
                                                     <div class="col-6">
                                                         {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                    <div class="col-6"
+                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
                                                         {{ $hotel[0]->userReview->comment }}
                                                     </div>
                                                 </div>
@@ -2155,40 +2171,35 @@
                                                             <div class="col-8 review-container">
                                                                 <div class="cm-star-rating">
                                                                     <input id="food-star-5" type="radio"
-                                                                        name="cleanliness" value="5"
-                                                                        required />
+                                                                        name="cleanliness" value="5" required />
                                                                     <label for="food-star-5"
                                                                         title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                         <i class="active fa fa-star"
                                                                             aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="food-star-4" type="radio"
-                                                                        name="cleanliness" value="4"
-                                                                        required />
+                                                                        name="cleanliness" value="4" required />
                                                                     <label for="food-star-4"
                                                                         title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                         <i class="active fa fa-star"
                                                                             aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="food-star-3" type="radio"
-                                                                        name="cleanliness" value="3"
-                                                                        required />
+                                                                        name="cleanliness" value="3" required />
                                                                     <label for="food-star-3"
                                                                         title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                         <i class="active fa fa-star"
                                                                             aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="food-star-2" type="radio"
-                                                                        name="cleanliness" value="2"
-                                                                        required />
+                                                                        name="cleanliness" value="2" required />
                                                                     <label for="food-star-2"
                                                                         title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                         <i class="active fa fa-star"
                                                                             aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="food-star-1" type="radio"
-                                                                        name="cleanliness" value="1"
-                                                                        required />
+                                                                        name="cleanliness" value="1" required />
                                                                     <label for="food-star-1"
                                                                         title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                         <i class="active fa fa-star"
@@ -2417,8 +2428,7 @@
                             other COVID-19-related guidelines apply<br>
                             <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
                             <span><a href="#">Show More</a></span><br>
-                            <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a
-                                    href="#">Show
+                            <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a href="#">Show
                                     More</a></span>
                         </p>
                         <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
@@ -2429,49 +2439,50 @@
                         <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
                     </div>
                 </div>
-            </secion>
-            <hr>
-            <div class="section" id="host_end">
-                <div class="host">
-                    <div class="row">
-                        <div class="col-2 host-profile">
-                            @if ($hotel[0]->image)
-                                <img
-                                    src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
-                            @else
-                                <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                            @endif
-                        </div>
-                        <div class=" col-10">
-                            <div class="member-profile">
-                                <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
-                                <p>{{ __('user_page.Joined in') }} November 2020</p>
+                </secion>
+                <hr>
+                <div class="section" id="host_end">
+                    <div class="host">
+                        <div class="row">
+                            <div class="col-2 host-profile">
+                                @if ($hotel[0]->image)
+                                    <img
+                                        src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
+                                @else
+                                    <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                            <div class=" col-10">
+                                <div class="member-profile">
+                                    <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
+                                    <p>{{ __('user_page.Joined in') }} November 2020</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="member-profile-desc">
-                        <p class="host-review"><i class="fa fa-heart" style="color: red;"></i> 141
-                            {{ __('user_page.Reviews') }} | <i class="fa fa-check" style="color: green;"></i>
-                            {{ __('user_page.Identity verified') }}
-                        </p>
-                        <button type="button" onclick="contactHostForm()"
-                            class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
-                        <div class="row mt-20">
-                            <div class="col-1 payment-warning-icon">
-                                <i class="fa fa-exclamation-triangle"></i>
+                        <div class="member-profile-desc">
+                            <p class="host-review"><i class="fa fa-heart" style="color: red;"></i> 141
+                                {{ __('user_page.Reviews') }} | <i class="fa fa-check"
+                                    style="color: green;"></i>
+                                {{ __('user_page.Identity verified') }}
+                            </p>
+                            <button type="button" onclick="contactHostForm()"
+                                class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
+                            <div class="row mt-20">
+                                <div class="col-1 payment-warning-icon">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="col-11 payment-warning">
+                                    {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
+                                </div>
                             </div>
-                            <div class="col-11 payment-warning">
-                                {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
-                            </div>
-                        </div>
-                        @guest
-                            <hr>
-                            <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
+                            @guest
+                                <hr>
+                                <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
 
-                            {{-- EDIT TO SWIPE CAROUSEL --}}
+                                {{-- EDIT TO SWIPE CAROUSEL --}}
 
 
-                            {{-- <div class="container-xxl mx-auto p-0">
+                                {{-- <div class="container-xxl mx-auto p-0">
                                 <div class="slick-pop-slider">
                                     <div class="Container1">
                                         <!-- <div class="row col-12 Arrows1"></div> -->
@@ -2662,7 +2673,7 @@
                             </div> --}}
 
 
-                            {{-- <div class="container-xxl mx-auto p-0">
+                                {{-- <div class="container-xxl mx-auto p-0">
                                 <div class="slick-pop-slider">
                                     <div class="Container2">
                                         <!-- <div class="row col-12 Arrows2"></div> -->
@@ -2804,14 +2815,14 @@
                                 </div>
                             </div> --}}
 
-                        @endguest
-                        @auth
-                            @if (Auth::user()->role_id != 3)
-                                <hr>
-                                <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
+                            @endguest
+                            @auth
+                                @if (Auth::user()->role_id != 3)
+                                    <hr>
+                                    <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
 
-                                {{-- EDIT TO SWIPE CAROUSEL --}}
-                                {{-- <div class="container-xxl mx-auto p-0">
+                                    {{-- EDIT TO SWIPE CAROUSEL --}}
+                                    {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container1">
                                             <!-- <div class="row col-12 Arrows1"></div> -->
@@ -3002,7 +3013,7 @@
                                     </div>
                                 </div> --}}
 
-                                {{-- <div class="container-xxl mx-auto p-0">
+                                    {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container2">
                                             <!-- <div class="row col-12 Arrows2"></div> -->
@@ -3145,11 +3156,11 @@
                                         </div>
                                     </div>
                                 </div> --}}
-                            @endif
-                        @endauth
+                                @endif
+                            @endauth
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
         {{-- END FULL WIDTH ABOVE FOOTER --}}
     </div>
@@ -3923,12 +3934,20 @@
     {{-- END MODAL --}}
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
-
-
 
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
@@ -4355,7 +4374,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Hotel Name Here'){
+            if (formInput.value == 'Hotel Name Here') {
                 formInput.value = '';
             }
         }
@@ -4368,7 +4387,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->name }}';
 
-            if(formInput.value == 'Hotel Name Here'){
+            if (formInput.value == 'Hotel Name Here') {
                 formInput.value = '';
             }
         }
@@ -4383,7 +4402,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -4396,7 +4415,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->short_description }}';
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -4664,12 +4683,12 @@
         }
     </script>
 
-{{-- Highlight sticky --}}
+    {{-- Highlight sticky --}}
     <script>
         var gallery = $('#gallery').offset().top - 200,
             description = $('#description').offset().top - 150,
             amenities = $('#amenities').offset().top - 150,
-			room = $('#room').offset().top - 150,
+            room = $('#room').offset().top - 150,
             location_menu = $('#location-map').offset().top - 150,
             review = $('#review').offset().top - 150,
             host = $('.host').offset().top - 200,
@@ -4722,7 +4741,7 @@
                 $('#gallery-sticky').removeClass('active-sticky');
                 $('#about-sticky').removeClass('active-sticky');
                 $('#amenities-sticky').removeClass('active-sticky');
-				$('#room-sticky').removeClass('active-sticky');
+                $('#room-sticky').removeClass('active-sticky');
                 $('#location-sticky').removeClass('active-sticky');
                 $('#review-sticky').removeClass('active-sticky');
             }
@@ -5179,7 +5198,7 @@
     </script>
     @if ($hotel[0]->status == '2' && auth()->user()->id == $hotel[0]->created_by)
         <script>
-            if(!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true'){
+            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
                 var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
                 myModal.show()
             }

@@ -2293,7 +2293,8 @@
                                                 style="width: 20px; height: auto;"> --}}
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                             <!-- <i class="fa fa-search" aria-hidden="true"></i> -->&nbsp;
-                                            {{ __('user_page.Search') }}</p>
+                                            {{ __('user_page.Search') }}
+                                        </p>
 
                                         <input autocomplete="off" type="text"
                                             class="form-control input-transparant" name="sKeyword" value=""
@@ -2469,7 +2470,7 @@
                         <div class="text-center icon-center">
                             @guest
                                 <div>
-                                    <a href="{{ route('login') }}">
+                                    <a onclick="loginForm(1)" style="cursor: pointer;">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                             role="presentation" focusable="false"
                                             class="favorite-button-22 favorite-button"
@@ -2743,7 +2744,7 @@
                         <div class="text-center">
                             @guest
                                 <div style="margin-bottom: 0px; font-size: 12px;">
-                                    <a href="{{ route('login') }}">
+                                    <a onclick="loginForm(1)" style="cursor: pointer;">
                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                             role="presentation" focusable="false"
                                             class="favorite-button-22 favorite-button"
@@ -2823,7 +2824,7 @@
                     @endif
                 </a>
 
-                <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap login-btn"
+                <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap login-btn"
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
                 </a>
@@ -2905,7 +2906,7 @@
                         $(".bottom-content").css("padding-left", gap + "px");
                         $(".bottom-content").css("padding-right", gap + "px");
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
-                    }else {
+                    } else {
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", "auto");
                         $(".page-content").css("padding-left", "40px");
                         $(".page-content").css("padding-right", "40px");

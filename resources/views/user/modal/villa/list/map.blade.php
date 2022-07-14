@@ -258,12 +258,12 @@
     }
 
     .modal-search {
-        cursor: pointer; 
-        border: 2px solid #ff7400; 
-        padding: 9px; 
-        border-radius: 12px; 
+        cursor: pointer;
+        border: 2px solid #ff7400;
+        padding: 9px;
+        border-radius: 12px;
         margin-top: 0.9rem;
-    }    
+    }
 
     @media only screen and (max-width: 767px) {
         .modal-body .w-70 {
@@ -299,7 +299,7 @@
             min-height: 28px !important;
         }
     }
-    @media only screen and (min-width: 992px) and (max-width: 1099px) { 
+    @media only screen and (min-width: 992px) and (max-width: 1099px) {
         .modal-body .w-70 {
             width: 60% !important;
         }
@@ -459,7 +459,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28 ">
                                                     <path
@@ -693,7 +693,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -886,7 +886,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -1122,7 +1122,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -1255,10 +1255,10 @@
         resetAllMarkers();
         // prepare data coordinate
         var data = {
-            latitude_h: map.getBounds().wb.lo,
-            latitude_j: map.getBounds().wb.hi,
-            longitude_h: map.getBounds().Ra.lo,
-            longitude_j: map.getBounds().Ra.hi,
+            latitude_h: map.getBounds().getSouthWest().lat(),
+            longitude_h: map.getBounds().getSouthWest().lng(),
+            latitude_j: map.getBounds().getNorthEast().lat(),
+            longitude_j: map.getBounds().getNorthEast().lng(),
         };
         // refetch data for markers
         await fetchRestaurantsLocation(data);

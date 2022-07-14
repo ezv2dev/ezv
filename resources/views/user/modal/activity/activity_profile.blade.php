@@ -15,7 +15,7 @@
                         <div class="file-upload" id="file-upload1">
                             <div class="image-box dropzone">
                                 <p>{{ __('user_page.Upload Image') }}</p>
-                                <img style="width: 100%" src="" alt="">
+                                <img style="width: 100%" src="" alt="" id="profileDropzone">
                             </div>
                             <div class="controls" style="display: none;">
                                 <input id="imageActivity" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />

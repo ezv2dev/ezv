@@ -54,7 +54,7 @@ class CollaboratorController extends Controller
     {
         $this->authorize('collaborator_index');
 
-        $profile = Collaborator::select('location.name as name_location', 'collaborator.*')
+        $profile = Collaborator::with('collaboratorSocial')->select('location.name as name_location', 'collaborator.*')
             ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
             ->join('users', 'users.id', '=', 'collaborator.created_by')
             ->where('collaborator.id_collab', $id)->first();
@@ -192,7 +192,6 @@ class CollaboratorController extends Controller
     // update category
     public function collab_store_category(Request $request)
     {
-
         // check if editor not authenticated
         abort_if(!auth()->check(), 401);
 
@@ -221,10 +220,10 @@ class CollaboratorController extends Controller
 
         try {
             if ($request->category) {
-                foreach ($request->category as $id_category) {
+                foreach ($request->category as $id_collab_category) {
                     CollaboratorHasCategory::create([
                         'id_collab' => $request->id_collab,
-                        'id_category' => $id_category,
+                        'id_collab_category' => $id_collab_category,
                         'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'created_by' => auth()->user()->id,
@@ -285,37 +284,23 @@ class CollaboratorController extends Controller
     // update social media
     public function collab_update_social_media(Request $request)
     {
-        $this->authorize('collaborator_update');
-        $status = 500;
+        CollaboratorSocialMedia::where('id_collab', $request->id_collab)->delete();
+        CollaboratorSocialMedia::create(
+            [
+                'id_collab' => $request->id_collab,
+                'instagram_link' => $request->instagram_link,
+                'instagram_follower' => $request->instagram_follower,
+                'facebook_link' => $request->facebook_link,
+                'facebook_follower' => $request->facebook_follower,
+                'twitter_link' => $request->twitter_link,
+                'twitter_follower' => $request->twitter_follower,
+                'tiktok_link' => $request->tiktok_link,
+                'tiktok_follower' => $request->tiktok_follower,
+                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+            ]
+        );
 
-        try {
-            CollaboratorSocialMedia::where('id_collab', $request->id_collab)->delete();
-            CollaboratorSocialMedia::create(
-                [
-                    'id_collab' => $request->id_collab,
-                    'instagram_name' => $request->instagram_name,
-                    'instagram_follower' => $request->instagram_follower,
-                    'facebook_name' => $request->facebook_name,
-                    'facebook_follower' => $request->facebook_follower,
-                    'twitter_name' => $request->twitter_name,
-                    'twitter_follower' => $request->twitter_follower,
-                    'tiktok_name' => $request->tiktok_name,
-                    'tiktok_follower' => $request->tiktok_follower
-                ]
-            );
-
-            $status = 200;
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
-        }
-
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
-        }
+        return back()->with('success', 'Your data has been updated');
     }
     // end update social media
 

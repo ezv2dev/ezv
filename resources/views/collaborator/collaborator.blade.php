@@ -498,7 +498,7 @@
             height: 80px;
             text-align: center;
             text-decoration: none;
-            color: #ff7400;
+            color: #000;
             margin: 0px;
             border-radius: 50%;
             position: relative;
@@ -684,7 +684,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -933,18 +933,14 @@
                         {{-- Follower --}}
                         <div class="social-media">
                             <div class="social-links">
-                                <a id="instagramID"><i class="fab fa-instagram"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="facebookID"><i class="fab fa-facebook-f"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="twitterID"><i class="fab fa-twitter"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
-                                <a id="tiktokID"><i class="fab fa-tiktok"></i></a>
-                                <p class="hide-social" style="color: red;">Instagram @genyolngontal_ <br> Followers
-                                    110212</p>
+                                <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
+                                    id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
+                                    id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
+                                        class="fab fa-twitter" target="_blank"></i></a>
+                                <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
+                                        class="fab fa-tiktok" target="_blank"></i></a>
                             </div>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
@@ -959,21 +955,13 @@
 
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
-                            @if ($tags->count() > 3)
-                                @for ($i = 0; $i < 3; $i++)
-                                    <span class="badge rounded-pill fw-normal"
-                                        style="background-color: #FF7400;">{{ $tags[$i]->name }}</span>
-                                @endfor
+                            @forelse ($tags->take(3) as $item)
+                                <span class="badge rounded-pill fw-normal"
+                                    style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
+                            @empty
                                 <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
                                     onclick="view_tag()">More</button>
-                            @else
-                                @forelse ($tags as $tag)
-                                    <span class="badge rounded-pill fw-normal"
-                                        style="background-color: #FF7400;">{{ $tag->name }}</span>
-                                @empty
-                                    there is no category yet
-                                @endforelse
-                            @endif
+                            @endforelse
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_tag()"
@@ -1625,30 +1613,30 @@
                             @endif
 
                             <!--
-                                                                                                                                                                                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
-                                                                                                                                                                                                                                    style="margin-right: 0px; left: auto;">
-                                                                                                                                                                                                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                                                                                                                                                                                                                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                                                                                                                                                                                                                                            style="margin-right: 0px; left: auto;">
+                                                                                                                                                                                                                                                                            @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
     <li>
-                                                                                                                                                                                                                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
-                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                                    <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
+                                                                                                                                                                                                                                                                                </li>
     @endif
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                        <a href="#!" class="dropdown-item"
-                                                                                                                                                                                                                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
-                                                                                                                                                                                                                                            Out</a>
-                                                                                                                                                                                                                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                                                                                                                                                                                                                            style="display: none">
-                                                                                                                                                                                                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                </ul>
-                                                                                                                                                                                                                                -->
+                                                                                                                                                                                                                                                                            <li>
+                                                                                                                                                                                                                                                                                <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
+                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                            <li>
+                                                                                                                                                                                                                                                                                <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
+                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                            <li>
+                                                                                                                                                                                                                                                                                <a href="#!" class="dropdown-item"
+                                                                                                                                                                                                                                                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
+                                                                                                                                                                                                                                                                                    Out</a>
+                                                                                                                                                                                                                                                                                <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                                                                                                                                                                                                                                                                    style="display: none">
+                                                                                                                                                                                                                                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                                                                                                                                                                                                                                </form>
+                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                        -->
 
                             <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
                                 aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
@@ -2502,10 +2490,7 @@
     {{-- GOOGLE MAPS API --}}
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk&libraries=places">
     </script> --}}
-    <script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
     <script src="{{ asset('assets/js/story-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-collab.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -2514,6 +2499,12 @@
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <script>
+        function add_tag() {
+            $('#modal-add_tag').modal('show');
+        }
+    </script>
 
     <script>
         $(window).scroll(function() {

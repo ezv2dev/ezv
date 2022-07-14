@@ -280,6 +280,10 @@
     .container-grid-sub-cat > div:nth-child(1){
         display: block;
     }
+    .container-grid .list-image-content .aspect-ratio-2,
+    .container-grid-activity .list-image-content .aspect-ratio-2 {
+        aspect-ratio: 4/3 !important;
+    }
 }
 
 @media (min-width: 550px) {
@@ -739,6 +743,7 @@
     right: 10px;
     top: 10px;
     position: absolute;
+    z-index: 99;
 }
 
 .video-thumb-container{
@@ -831,9 +836,10 @@
 
 @media only screen and (max-width: 425px) {
     .container-grid-cat,
-    .container-grid-hotel {
-        padding-right: 0.5rem !important;
-        padding-left: 0.5rem !important;
+    .container-grid-hotel,
+    .container-grid-activity {
+        padding-right: 0.8rem !important;
+        padding-left: 0.8rem !important;
     }
 
     .container-grid-sub-cat {

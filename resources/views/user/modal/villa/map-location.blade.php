@@ -371,7 +371,7 @@
                                         <div
                                             style="position: absolute; z-index: 43; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -570,7 +570,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px;  display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -758,7 +758,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -966,7 +966,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -1068,10 +1068,10 @@
         resetAllMarkers();
         // prepare data coordinate
         var data = {
-            latitude_h: map.getBounds().wb.lo,
-            latitude_j: map.getBounds().wb.hi,
-            longitude_h: map.getBounds().Ra.lo,
-            longitude_j: map.getBounds().Ra.hi,
+            latitude_h: map.getBounds().getSouthWest().lat(),
+            longitude_h: map.getBounds().getSouthWest().lng(),
+            latitude_j: map.getBounds().getNorthEast().lat(),
+            longitude_j: map.getBounds().getNorthEast().lng(),
         };
 
         // refetch data for markers
