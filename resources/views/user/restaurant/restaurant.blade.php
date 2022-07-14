@@ -883,7 +883,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
+                                                    <div class="cards4" id="storyContent">
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
@@ -951,48 +951,45 @@
                                                 </div>
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
-
-                                                            @foreach ($restaurant->story as $item)
-                                                                <div class="card4 col-lg-3" style="border-radius: 5px;">
-                                                                    <div class="img-wrap">
-                                                                        <div class="video-position">
-                                                                            @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
+                                                        @foreach ($restaurant->story as $item)
+                                                            <div class="card4 col-lg-3" id="story{{$item->id_story}}" style="border-radius: 5px;">
+                                                                <div class="img-wrap">
+                                                                    <div class="video-position">
+                                                                        @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
+                                                                            <a type="button"
+                                                                                onclick="view_story_restaurant({{ $item->id_story }});">
+                                                                            @else
                                                                                 <a type="button"
-                                                                                    onclick="view_story_restaurant({{ $item->id_story }});">
-                                                                                @else
-                                                                                    <a type="button"
-                                                                                        onclick="showPromotionMobile()">
-                                                                            @endif
+                                                                                    onclick="showPromotionMobile()">
+                                                                        @endif
 
-                                                                            <div class="story-video-player">
-                                                                                <i class="fa fa-play" aria-hidden="true"></i>
-                                                                            </div>
-
-                                                                            <video href="javascript:void(0)"
-                                                                                class="story-video-grid"
-                                                                                style="object-fit: cover;"
-                                                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
-                                                                            </video>
-                                                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                                                <a class="delete-story"
-                                                                                    href="javascript:void(0);"
-                                                                                    onclick="delete_story({'id': '{{ $restaurant->id_restaurant }}', 'id_story': '{{ $item->id_story }}'})">
-                                                                                    {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
-                                                                                    <i class="fa fa-trash"
-                                                                                        style="color:red; margin-left: 25px;"
-                                                                                        data-bs-toggle="popover"
-                                                                                        data-bs-animation="true"
-                                                                                        data-bs-placement="bottom"
-                                                                                        title="{{ __('user_page.Delete') }}"></i>
-                                                                                </a>
-                                                                            @endif
-                                                                            </a>
+                                                                        <div class="story-video-player">
+                                                                            <i class="fa fa-play" aria-hidden="true"></i>
                                                                         </div>
+
+                                                                        <video href="javascript:void(0)"
+                                                                            class="story-video-grid"
+                                                                            style="object-fit: cover;"
+                                                                            src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
+                                                                        </video>
+                                                                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                                            <a class="delete-story"
+                                                                                href="javascript:void(0);" data-restaurant="{{ $restaurant->id_restaurant }}" data-story="{{ $item->id_story }}"
+                                                                                onclick="delete_story(this)">
+                                                                                {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
+                                                                                <i class="fa fa-trash"
+                                                                                    style="color:red; margin-left: 25px;"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ __('user_page.Delete') }}"></i>
+                                                                            </a>
+                                                                        @endif
+                                                                        </a>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
-
-
+                                                            </div>
+                                                        @endforeach
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
@@ -4587,8 +4584,10 @@
 
     {{-- Sweetalert Function Delete Story --}}
     <script>
-        function delete_story(ids) {
-            var ids = ids;
+        function delete_story(e) {
+            var id = e.getAttribute("data-restaurant");
+            var story = e.getAttribute("data-story");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4603,7 +4602,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/restaurant/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4612,8 +4611,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $('#story'+story).remove();
                         }
                     });
                 } else {

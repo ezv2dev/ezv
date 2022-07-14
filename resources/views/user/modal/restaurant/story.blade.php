@@ -23,17 +23,17 @@
                                     <button type="button" class="button-choose-other btn btn-primary">{{ __('user_page.Choose another') }}</button>
                                     <button class="button-reset" type="reset">{{ __('user_page.Remove') }}</button>
                                 </div>
-                                <video class="w-100 story-upload-video-preview" controls>
+                                <video class="w-100 story-upload-video-preview" style="height: 400px !important;" controls>
                                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                                 </video>
                             </div>
                             <div class="story-video-input" style="display: none;">
-                                <input id="inputStoryResto" type="file" name="file" accept=".mp4" required />
+                                <input type="file" name="file" accept=".mp4" required />
                             </div>
                         </div>
                     </div>
                     <div class="form-group story-title-gap">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="{{ __('user_page.Title...') }}"
+                        <input type="text" style="margin-top: 50px;" class="form-control" name="title" id="title" placeholder="{{ __('user_page.Title...') }}"
                             required>
                     </div>
                 </form>
@@ -69,9 +69,9 @@
     $(storyVideoInput)
         .children("input")
         .on('change', function(value) {
-            console.log('storyVideoInput');
+            // console.log('storyVideoInput');
             var reader = new FileReader();
-            console.log(this.files);
+            // console.log(this.files);
             reader.onload = function(e) {
                 var urll = e.target.result;
                 $(storyVideoPreview).children("video").attr("src", urll);
@@ -83,7 +83,7 @@
 
     $(storyChooseOtherInput)
         .on('click', function() {
-            console.log('storyChooseOtherInput');
+            // console.log('storyChooseOtherInput');
             $(storyVideoInput).children("input").trigger("click");
         });
 
