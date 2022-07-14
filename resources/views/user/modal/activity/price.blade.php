@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="form-edit-menu-container" action="javascript:void(0)" method="POST"
-                enctype="multipart/form-data" id="addMenuForm" style="gap: 0px !important;" onsubmit="savePriceActivity()">
+                enctype="multipart/form-data" id="addPriceForm" style="gap: 0px !important;" onsubmit="savePriceActivity()">
                 @csrf
                 <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                 <div class="modal-header">

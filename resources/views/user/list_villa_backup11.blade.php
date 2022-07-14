@@ -105,7 +105,7 @@
                     @endforeach
 
                     <a href="#" class="grid-img-container" onclick="moreCategory()">
-                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}" data-src="https://source.unsplash.com/random/?bali"
+                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}" data-src="https://source.unsplash.com/random/?bali" 
                             >
                         <div class="grid-text">
                             {{ __('user_page.More') }}
@@ -139,33 +139,20 @@
                         </div>
                 </div>
 
+
                 <div id="villa-data" class="grid-container-43">
                     @include('user.data_list_villa')
                 </div>
                 <div></div>
 
-                {{-- TODO comment when lazy load, start --}}
-                {{-- Pagination --}}
-                <div class="mt-5 d-flex justify-content-center" id="footer">
-                    <div class="mt-3">
-                        {{ $villa->links('vendor.pagination.bootstrap-4') }}
-                    </div>
-                </div>
-                {{-- End Pagination --}}
-                {{-- TODO end --}}
-
-                {{-- TODO uncomment when lazy load, start --}}
-                {{-- <div class="ajax-load text-center" style="display: none">
+                <div class="ajax-load text-center" style="display: none">
                     <p class="list-loading {{ $textColor }}">
                         {{ __('user_page.Loading More') }}
                     </p>
-                </div> --}}
-
-                {{-- <div id="lazy-show-more" class="text-center d-none">
+                </div>
+                <div id="lazy-show-more" class="text-center d-none">
                     <button onclick="loadMoreData(page)" class="btn btn-primary rounded-pill fw-bold" style="font-family:'poppins'">Show More</button>
-                </div> --}}
-                {{-- TODO end --}}
-
+                </div>
                 <!-- End Grid 43 -->
                 <div style="height: 35px;">&nbsp;</div>
             </div>
@@ -187,9 +174,209 @@
 @section('scripts')
     @include('user.modal.villa.list.map')
 
-    {{-- TODO uncomment when lazy load, start --}}
-    {{-- @include('components.lazy-load-list.lazy-load-list') --}}
-    {{-- TODO end --}}
+    {{-- lazy load list --}}
+        {{-- store index function --}}
+        <script>
+            var itemIds = [];
+            function add(items) {
+                if (items.length) {
+                    items.forEach(id => {
+                        if (items.indexOf(id) != -1) {
+                            itemIds.push(id);
+                        }
+                    });
+                }
+            }
+        </script>
+        {{-- scroll action --}}
+        <script>
+            var page = 1;
+            const widthBreakpoint = 768;
+            function disabledScrollAction() {
+                $(window).off('scroll');
+            }
+            function enabledScrollAction() {
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
+                        page++;
+                        loadMoreData(page);
+                    }
+                });
+            }
+        </script>
+        {{-- show/hide show more button --}}
+        <script>
+            function hideLazyShowMoreButton() {
+                $('#lazy-show-more').addClass('d-none');
+                $('#lazy-show-more').removeClass('d-block');
+            }
+            function showLazyShowMoreButton() {
+                $('#lazy-show-more').removeClass('d-none');
+                $('#lazy-show-more').addClass('d-block');
+            }
+        </script>
+        {{-- load more action --}}
+        <script>
+            async function loadMoreData(page) {
+                if($(window).width() < widthBreakpoint){
+                    hideLazyShowMoreButton();
+                } else {
+                    disabledScrollAction();
+                }
+
+                // check if link indicator is link list
+                // otherwise link filter
+                var linkIndicator = location.origin + location.pathname;
+                var linkTarget = `{{ route('list') }}`;
+                if (linkIndicator == linkTarget) {
+                    let load = await $.ajax({
+                        url: '?page=' + page,
+                        type: 'get',
+                        beforeSend: function() {
+                            $(".ajax-load").show();
+                        },
+                        data: {
+                            itemIds: itemIds
+                        },
+                    })
+                    .done(function(data) {
+                        // append data to element
+                        if (data.html == " ") {
+                            $('.ajax-load').html("No more records found");
+                            return;
+                        }
+                        $('.ajax-load').hide();
+                        $("#villa-data").append(data.html);
+
+                        // rerun slick
+                        $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
+                        $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
+                        $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
+                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
+                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
+                        })
+                        $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
+                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
+                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
+                        })
+
+                        $(".js-slider-2").not('.slick-initialized').slick({
+                            rtl: false,
+                            autoplay: false,
+                            autoplaySpeed: 5000,
+                            speed: 800,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            variableWidth: true,
+                            pauseOnHover: false,
+                            easing: "linear",
+                            arrows: true
+                        });
+                        // rerun change background
+
+                        // changebackground();
+                        if($(window).width() < widthBreakpoint){
+                            showLazyShowMoreButton();
+                        } else {
+                            enabledScrollAction();
+                        }
+                    })
+                    .fail(function(jqXHR, ajaxOptions, thrownError) {
+                        alert("Server not responding");
+                        if($(window).width() < widthBreakpoint){
+                            showLazyShowMoreButton();
+                        } else {
+                            enabledScrollAction();
+                        }
+                    });
+                } else {
+                    let load = await $.ajax({
+                        url: location.href+'&page=' + page,
+                        type: 'get',
+                        beforeSend: function() {
+                            $(".ajax-load").show();
+                        },
+                        data: {
+                            itemIds: itemIds
+                        },
+                    })
+                    .done(function(data) {
+                        // append data to element
+                        if (data.html == " ") {
+                            $('.ajax-load').html("No more records found");
+                            return;
+                        }
+                        $('.ajax-load').hide();
+                        $("#villa-data").append(data.html);
+
+                        // rerun slick
+                        $('.js-slider-2 .slick-next').not('.slick-initialized').css('display', 'none');
+                        $('.js-slider-2 .slick-prev').not('.slick-initialized').css('display', 'none');
+                        $('.js-slider-2').not('.slick-initialized').mouseenter(function(e) {
+                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'block');
+                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'block');
+                        })
+                        $('.js-slider-2').not('.slick-initialized').mouseleave(function(e) {
+                            $(this).children('.slick-prev').not('.slick-initialized').css('display', 'none');
+                            $(this).children('.slick-next').not('.slick-initialized').css('display', 'none');
+                        })
+
+                        $(".js-slider-2").not('.slick-initialized').slick({
+                            rtl: false,
+                            autoplay: false,
+                            autoplaySpeed: 5000,
+                            speed: 800,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            variableWidth: true,
+                            pauseOnHover: false,
+                            easing: "linear",
+                            arrows: true
+                        });
+                        // rerun change background
+
+                        // changebackground();
+                        if($(window).width() < widthBreakpoint){
+                            showLazyShowMoreButton();
+                        } else {
+                            enabledScrollAction();
+                        }
+                    })
+                    .fail(function(jqXHR, ajaxOptions, thrownError) {
+                        alert("Server not responding");
+                        if($(window).width() < widthBreakpoint){
+                            showLazyShowMoreButton();
+                        } else {
+                            enabledScrollAction();
+                        }
+                    });
+                }
+                removeSkeletonClass()
+            }
+            function runAction() {
+                if($(window).width() < widthBreakpoint){
+                    showLazyShowMoreButton();
+                    enabledScrollAction();
+                    disabledScrollAction();
+                } else {
+                    hideLazyShowMoreButton();
+                    disabledScrollAction();
+                    enabledScrollAction();
+                }
+            }
+        </script>
+        <script>
+            $(window).on('load', () => {
+                add(@json($villas->pluck('id_villa')));
+            });
+
+            $(window).on('load resize', ()=>{
+                runAction();
+            });
+
+            runAction();
+        </script>
+    {{-- end lazy load list --}}
 
     <script src="{{ asset('assets/js/list-villa-extend.js') }}"></script>
 
