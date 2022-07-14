@@ -49,7 +49,7 @@
     $listColor = 'listoption-light';
     $shadowColor = 'box-shadow-light';
     if (isset($_COOKIE['tema'])) {
-        if($_COOKIE['tema'] == 'black'){
+        if ($_COOKIE['tema'] == 'black') {
             $bgColor = 'bg-body-black';
             $textColor = 'font-light';
             $rowLineColor = 'row-line-grey';
@@ -96,7 +96,7 @@
                                 onclick="homesFilter({{ $item->id_villa_category }}, null)">
                                 <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                                     @if ($fCategory == $item->id_villa_category) style="border: 5px solid #ff7400;" @endif
-                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}" >
+                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                                 <div class="grid-text translate-text-group-items">
                                     {{ $item->name }}
                                 </div>
@@ -105,8 +105,8 @@
                     @endforeach
 
                     <a href="#" class="grid-img-container" onclick="moreCategory()">
-                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}" data-src="https://source.unsplash.com/random/?bali"
-                            >
+                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
+                            data-src="https://source.unsplash.com/random/?bali">
                         <div class="grid-text">
                             {{ __('user_page.More') }}
                         </div>
@@ -115,28 +115,39 @@
 
                 <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
                     data-isshow="true">
-                    @foreach ($villaFilter->sortBy('order')->take(8) as $item)
-                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                            onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_villa_filter }})">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Price</div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-bed text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Bedrooms</div>
+                    </div>
+                    @foreach ($amenities->sortBy('order')->take(5) as $item)
+                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
                             <div>
                                 <i
-                                    class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"></i>
+                                    class="fas fa-{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"></i>
                             </div>
                             <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
                         </div>
                     @endforeach
-
-                        <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                            onclick="moreSubCategory()">
-
-                            <div>
-                                <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                            </div>
-                            <p class="list-description {{ $textColor }}">
-                                {{ __('user_page.More') }}
-                            </p>
-
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                         </div>
+                        <div class="list-description {{ $textColor }}">Filters</div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Filters</div>
+                    </div>
                 </div>
 
                 <div id="villa-data" class="grid-container-43">
@@ -148,7 +159,7 @@
                 {{-- Pagination --}}
                 <div class="mt-5 d-flex justify-content-center" id="footer">
                     <div class="mt-3">
-                        {{ $villa->links('vendor.pagination.bootstrap-4') }}
+                        {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
                 {{-- End Pagination --}}
@@ -176,6 +187,7 @@
         @include('user.modal.auth.login_register')
         @include('user.modal.villa.filter')
         @include('user.modal.villa.category')
+        @include('user.modal.filter.filter_modal')
         {{-- modal laguage and currency --}}
     </div>
 
@@ -192,6 +204,7 @@
     {{-- TODO end --}}
 
     <script src="{{ asset('assets/js/list-villa-extend.js') }}"></script>
+    <script src="{{ asset('assets/js/price-range.js') }}"></script>
 
     {{-- Search --}}
     <script>
@@ -252,6 +265,10 @@
 
         function moreSubCategory() {
             $('#modalSubCategory').modal('show');
+        }
+
+        function filterMain() {
+            $('#modalFiltersHome').modal('show');
         }
 
         function villaRefreshFilter(suburl) {

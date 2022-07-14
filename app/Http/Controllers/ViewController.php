@@ -1776,9 +1776,6 @@ class ViewController extends Controller
 
     public function list(Request $request)
     {
-        // $villa = Villa::all();
-
-        $amenities = Amenities::all();
         $host_language = HostLanguage::all();
 
         $accessibility_features = VillaAccessibilityFeatures::all();
@@ -1943,6 +1940,7 @@ class ViewController extends Controller
         $propertyType = PropertyTypeVilla::all();
         $villaCategory = VillaCategory::all();
         $villaFilter = VillaFilter::all();
+        $amenities = Amenities::select('icon', 'name', 'order')->get();
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }
