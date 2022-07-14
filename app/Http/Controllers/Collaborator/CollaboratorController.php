@@ -192,7 +192,6 @@ class CollaboratorController extends Controller
     // update category
     public function collab_store_category(Request $request)
     {
-
         // check if editor not authenticated
         abort_if(!auth()->check(), 401);
 
@@ -221,10 +220,10 @@ class CollaboratorController extends Controller
 
         try {
             if ($request->category) {
-                foreach ($request->category as $id_category) {
+                foreach ($request->category as $id_collab_category) {
                     CollaboratorHasCategory::create([
                         'id_collab' => $request->id_collab,
-                        'id_category' => $id_category,
+                        'id_collab_category' => $id_collab_category,
                         'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'created_by' => auth()->user()->id,

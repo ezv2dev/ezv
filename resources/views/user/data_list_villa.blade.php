@@ -41,7 +41,7 @@ if (isset($_COOKIE['tema'])) {
                     <div class="list-like-button-container"
                         style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                         <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                            onclick="loginForm()">
+                            onclick="loginForm(1)">
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                 focusable="false" class="favorite-button favorite-button-28">
                                 <path
@@ -94,7 +94,7 @@ if (isset($_COOKIE['tema'])) {
                     <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                 </div>
                 <input type="hidden" value="{{ $data->id_villa }}" id="id_villa" name="id_villa">
-                <div class="skeleton skeleton-sm-h-100 skeleton-sm-w-100">
+                <div class="skeleton skeleton-h-lg skeleton-md-h-100 skeleton-w-100">
                     <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                         data-dots="false" data-arrows="true">
                         @php

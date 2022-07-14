@@ -25,7 +25,7 @@
     $rowLineColor = 'row-line-white';
     $listColor = 'listoption-light';
     $shadowColor = 'box-shadow-light';
-    if(isset($_COOKIE['tema'])){
+    if (isset($_COOKIE['tema'])) {
         if ($_COOKIE['tema'] == 'black') {
             $bgColor = 'bg-body-black';
             $textColor = 'font-light';
@@ -60,11 +60,11 @@
                 <div id="filter-cat-bg-color" style="width: 100%;"
                     class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
                     @foreach ($hotelCategory->take(6) as $item)
-                        <div class="skeleton skeleton-h-4 skeleton-w-100">
+                        <div>
                             <a class="grid-img-container" onclick="hotelFilter({{ $item->id_hotel_category }}, null)">
-                                <img class="grid-img-filter lozad"
+                                <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                                     @if ($fCategory == $item->id_hotel_category) style="border: 5px solid #ff7400;" @endif
-                                    src="https://source.unsplash.com/random/?{{ $item->name }}" data-loaded="true">
+                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                                 <div class="grid-text translate-text-group-items">
                                     {{ $item->name }}
                                 </div>
@@ -72,10 +72,10 @@
                         </div>
                     @endforeach
 
-                    <div class="skeleton skeleton-h-4 skeleton-w-100">
+                    <div>
                         <a class="grid-img-container" onclick="moreCategory()">
-                            <img class="grid-img-filter lozad" src="https://source.unsplash.com/random/?bali"
-                                data-loaded="true">
+                            <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
+                                data-src="https://source.unsplash.com/random/?bali">
                             <div class="grid-text">
                                 {{ __('user_page.More') }}
                             </div>
@@ -87,7 +87,7 @@
                     class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
 
                     @foreach ($hotelFilter->take(8) as $item)
-                        <div class="grid-sub-cat-content-container text-13 skeleton skeleton-h-4 skeleton-w-100"
+                        <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
                             <div>
                                 <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
@@ -104,7 +104,7 @@
             </div>
             @endforeach
 
-            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }} skeleton skeleton-h-4 skeleton-w-100"
+            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
                 onclick="moreSubCategory()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
@@ -121,7 +121,7 @@
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
                     @guest
                         <div class="list-like-button-container" style="position: absolute; z-index: 99; top: 10px; left: 10px;">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-28">
                                     <path
@@ -192,7 +192,7 @@
 
                     <div class="content list-image-content" style="margin: 0; padding: 0; max-width: 1200px !important;">
                         <input type="hidden" value="{{ $data->id_hotel }}" id="id_hotel" name="id_hotel">
-                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-10"
+                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-lg"
                             data-dots="false" data-arrows="true">
 
                             @forelse ($data->photo->sortBy('order') as $item)
@@ -239,13 +239,13 @@
                         </span>
                     </div>
                     <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                            @if ($data->detailReview)
+                                                                                                                                                                                                @if ($data->detailReview)
     {{ $data->detailReview->average }}
 @else
     {{ __('user_page.New') }}
     @endif
-                                                                                                                                                                                            <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
+                                                                                                                                                                                            </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}

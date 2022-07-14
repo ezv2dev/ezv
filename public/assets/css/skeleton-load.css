@@ -226,6 +226,21 @@
         border-radius: 0.25rem !important;
     }
 
+    .skeleton-xl-w-lg {
+        width: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xl-w-xl {
+        width: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xl-w-xxl {
+        width: 50rem !important;
+        border-radius: 0.25rem !important;
+    }
+
     .skeleton-xl-w-25 {
         width: 25% !important;
         border-radius: 0.25rem !important;
@@ -293,6 +308,21 @@
     }
     .skeleton-xl-h-10 {
         height: 10rem !important;
+        border-radius: 0.25rem !important;
+    }
+
+    .skeleton-xl-h-lg {
+        height: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xl-h-xl {
+        height: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xl-h-xxl {
+        height: 50rem !important;
         border-radius: 0.25rem !important;
     }
 
@@ -382,6 +412,21 @@
 
     .skeleton-lg-w-10 {
         width: 10rem !important;
+        border-radius: 0.25rem !important;
+    }
+
+    .skeleton-lg-w-lg {
+        width: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-lg-w-xl {
+        width: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-lg-w-xxl {
+        width: 50rem !important;
         border-radius: 0.25rem !important;
     }
 
@@ -543,6 +588,21 @@
         border-radius: 0.25rem !important;
     }
 
+    .skeleton-md-w-lg {
+        width: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-md-w-xl {
+        width: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-md-w-xxl {
+        width: 50rem !important;
+        border-radius: 0.25rem !important;
+    }
+
     .skeleton-md-w-25 {
         width: 25% !important;
         border-radius: 0.25rem !important;
@@ -610,6 +670,21 @@
     }
     .skeleton-md-h-10 {
         height: 10rem !important;
+        border-radius: 0.25rem !important;
+    }
+
+    .skeleton-md-h-lg {
+        height: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-md-h-xl {
+        height: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-md-h-xxl {
+        height: 50rem !important;
         border-radius: 0.25rem !important;
     }
 
@@ -686,6 +761,21 @@
         border-radius: 0.25rem !important;
     }
 
+    .skeleton-sm-w-lg {
+        width: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-sm-w-xl {
+        width: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-sm-w-xxl {
+        width: 50rem !important;
+        border-radius: 0.25rem !important;
+    }
+
     .skeleton-sm-w-25 {
         width: 25% !important;
         border-radius: 0.25rem !important;
@@ -753,6 +843,21 @@
     }
     .skeleton-sm-h-10 {
         height: 10rem !important;
+        border-radius: 0.25rem !important;
+    }
+
+    .skeleton-sm-h-lg {
+        height: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-sm-h-xl {
+        height: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-sm-h-xxl {
+        height: 50rem !important;
         border-radius: 0.25rem !important;
     }
 
@@ -830,6 +935,21 @@
         border-radius: 0.25rem !important;
     }
 
+    .skeleton-xs-w-lg {
+        width: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xs-w-xl {
+        width: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xs-w-xxl {
+        width: 50rem !important;
+        border-radius: 0.25rem !important;
+    }
+
     .skeleton-xs-w-25 {
         width: 25% !important;
         border-radius: 0.25rem !important;
@@ -897,6 +1017,21 @@
     }
     .skeleton-xs-h-10 {
         height: 10rem !important;
+        border-radius: 0.25rem !important;
+    }
+
+    .skeleton-xs-h-lg {
+        height: 20rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xs-h-xl {
+        height: 30rem !important;
+        border-radius: 0.25rem !important;
+    }
+    
+    .skeleton-xs-h-xxl {
+        height: 50rem !important;
         border-radius: 0.25rem !important;
     }
 

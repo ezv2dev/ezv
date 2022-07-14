@@ -29,7 +29,7 @@
         box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);
     }
 
-    .modal-login{
+    .modal-login {
         z-index: 1300;
     }
 
@@ -278,7 +278,10 @@
                         <div class="tab-pane" id="content-tab-login">
                             <div class="login-container">
                                 <div class="col-12 modal-login-title ">
-                                    d
+                                    <div class="alert alert-danger d-none" id="loginAlert"
+                                        style="font-size: 14px; font-weight: 400;" role="alert">
+                                        Make your account today, and save more our best listing.
+                                    </div>
                                     <h3 class="text-center">{{ __('user_page.Log In') }}</h3>
                                     <p class="text-center text-muted">
                                         {{ __('user_page.Log in to continue in our website') }}</p>
@@ -293,10 +296,12 @@
                                                 <input type="email" id="email-login"
                                                     class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                                     name="email" placeholder="{{ __('user_page.Email Address') }}">
-                                                <small id="err-eml-lgn" style="display: none;" class="invalid-feedback"></small>
+                                                <small id="err-eml-lgn" style="display: none;"
+                                                    class="invalid-feedback"></small>
                                                 @if ($errors->has('email'))
                                                     @forelse ($errors->get('email') as $error)
-                                                        <small id="err-bcknd" class="invalid-feedback">{{ $error }}</small>
+                                                        <small id="err-bcknd"
+                                                            class="invalid-feedback">{{ $error }}</small>
                                                     @empty
                                                     @endforelse
                                                 @endif
@@ -309,8 +314,10 @@
                                                 <input type="password" id="password-login"
                                                     class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                                     name="password" placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tp-log" class="fa fa-eye" aria-hidden="true" style="position: absolute; top: 35px; right: 24px;"></i>
-                                                <small id="err-pas-lgn" style="display: none;" class="invalid-feedback"></small>
+                                                <i id="tp-log" class="fa fa-eye" aria-hidden="true"
+                                                    style="position: absolute; top: 35px; right: 24px;"></i>
+                                                <small id="err-pas-lgn" style="display: none;"
+                                                    class="invalid-feedback"></small>
                                                 @if ($errors->has('password'))
                                                     @forelse ($errors->get('password') as $error)
                                                         <small class="invalid-feedback">{{ $error }}</small>
@@ -353,6 +360,10 @@
                         <div class="tab-pane active" id="content-tab-register">
                             <div class="register-container">
                                 <div class="col-12 modal-login-title ">
+                                    <div class="alert alert-danger d-none" id="registerAlert"
+                                        style="font-size: 14px; font-weight: 400;" role="alert">
+                                        Make your account today, and save more our best listing.
+                                    </div>
                                     <h3 class="text-center">{{ __('user_page.Register') }}</h3>
                                     <p class="text-center text-muted">
                                         {{ __('user_page.Create an account free and enjoy it') }}</p>
@@ -366,11 +377,14 @@
                                                     class="login-register-label">{{ __('user_page.Email Address') }}</label>
                                                 <input type="email" id="email-register"
                                                     class="form-control input-text-border {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                                    name="email" placeholder="{{ __('user_page.Email Address') }}">
-                                                <small id="err-eml-rgs" style="display: none;" class="invalid-feedback"></small>
+                                                    name="email"
+                                                    placeholder="{{ __('user_page.Email Address') }}">
+                                                <small id="err-eml-rgs" style="display: none;"
+                                                    class="invalid-feedback"></small>
                                                 @if ($errors->has('email'))
                                                     @forelse ($errors->get('email') as $error)
-                                                        <small id="err-bcknd" class="invalid-feedback">{{ $error }}</small>
+                                                        <small id="err-bcknd"
+                                                            class="invalid-feedback">{{ $error }}</small>
                                                     @empty
                                                     @endforelse
                                                 @endif
@@ -410,8 +424,10 @@
                                                 <input type="password" id="password-register"
                                                     class="form-control input-text-border  {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                                     name="password" placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tp-reg" class="fa fa-eye" aria-hidden="true" style="position: absolute; top: 35px; right: 24px;"></i>
-                                                <small id="err-pas-rgs" style="display: none;" class="invalid-feedback"></small>
+                                                <i id="tp-reg" class="fa fa-eye" aria-hidden="true"
+                                                    style="position: absolute; top: 35px; right: 24px;"></i>
+                                                <small id="err-pas-rgs" style="display: none;"
+                                                    class="invalid-feedback"></small>
                                                 @if ($errors->has('password'))
                                                     @forelse ($errors->get('password') as $error)
                                                         <small class="invalid-feedback">{{ $error }}</small>
@@ -419,15 +435,18 @@
                                                     @endforelse
                                                 @endif
                                             </div>
-                                            <div class="col-lg-6 d-none" style="position: relative;" id="confirmPasswordID">
+                                            <div class="col-lg-6 d-none" style="position: relative;"
+                                                id="confirmPasswordID">
                                                 <label
                                                     class="login-register-label">{{ __('user_page.Confirm Password') }}</label>
                                                 <input type="password" id="password_confirmation"
                                                     class="form-control input-text-border  {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
                                                     name="password_confirmation"
                                                     placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tcp-reg" class="fa fa-eye" aria-hidden="true" style="position: absolute; top: 35px; right: 24px;"></i>
-                                                <small id="err-cpas-rgs" style="display: none;" class="invalid-feedback"></small>
+                                                <i id="tcp-reg" class="fa fa-eye" aria-hidden="true"
+                                                    style="position: absolute; top: 35px; right: 24px;"></i>
+                                                <small id="err-cpas-rgs" style="display: none;"
+                                                    class="invalid-feedback"></small>
                                                 @if ($errors->has('password'))
                                                     @forelse ($errors->get('password_confirmation') as $error)
                                                         <small class="invalid-feedback">{{ $error }}</small>
@@ -494,19 +513,20 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     // Validation
-    $(function () {
+    $(function() {
         // var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
 
-        $("#tp-log, #tp-reg, #tcp-reg").hover(function(){
+        $("#tp-log, #tp-reg, #tcp-reg").hover(function() {
             $(this).css('cursor', 'pointer');
         });
 
         //login
-        $(document).on("click", "#tp-log", function () {
+        $(document).on("click", "#tp-log", function() {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $("#password-login");
             if (input.attr("type") === "password") {
@@ -515,8 +535,8 @@
                 input.attr("type", "password");
             }
         });
-        $(document).on("focusout", "#email-login", function () {
-            if(!$(this).val()) {
+        $(document).on("focusout", "#email-login", function() {
+            if (!$(this).val()) {
                 $('#email-login').addClass('is-invalid');
                 $('#err-bcknd').hide();
                 $('#err-eml-lgn').text('{{ __('auth.empty_mail') }}');
@@ -530,14 +550,14 @@
                 }
             }
         });
-        $(document).on("focusout", "#password-login", function () {
-            if(!$(this).val()) {
+        $(document).on("focusout", "#password-login", function() {
+            if (!$(this).val()) {
                 $('#tp-log').hide();
                 $('#password-login').addClass('is-invalid');
                 $('#err-pas-lgn').text('{{ __('auth.empty_password') }}');
                 $('#err-pas-lgn').show();
             } else {
-                if($('#password-login').val().length < 8) {
+                if ($('#password-login').val().length < 8) {
                     $('#tp-log').hide();
                     $('#password-login').addClass('is-invalid');
                     $('#err-pas-lgn').text('{{ __('auth.min_password') }}');
@@ -546,13 +566,13 @@
                 }
             }
         });
-        $(document).on("keyup", "#email-login", function () {
+        $(document).on("keyup", "#email-login", function() {
             $('#email-login').removeClass('is-invalid');
             $('#err-bcknd').hide();
             $('#err-eml-lgn').hide();
             $('#err-eml-lgn').text('');
         });
-        $(document).on("keyup", "#password-login", function () {
+        $(document).on("keyup", "#password-login", function() {
             $('#password-login').removeClass('is-invalid');
             $('#tp-log').show();
             $('#err-pas-lgn').hide();
@@ -560,43 +580,43 @@
         });
         $("#frmLgn").submit(function(e) {
             let error = 0;
-                if(!$('#email-login').val()) {
+            if (!$('#email-login').val()) {
+                $('#email-login').addClass('is-invalid');
+                $('#err-bcknd').hide();
+                $('#err-eml-lgn').text('{{ __('auth.empty_mail') }}');
+                $('#err-eml-lgn').show();
+                error = 1;
+            } else {
+                if (!regex.test($('#email-login').val())) {
                     $('#email-login').addClass('is-invalid');
                     $('#err-bcknd').hide();
-                    $('#err-eml-lgn').text('{{ __('auth.empty_mail') }}');
+                    $('#err-eml-lgn').text('{{ __('auth.invalid_mail') }}');
                     $('#err-eml-lgn').show();
                     error = 1;
-                } else {
-                    if (!regex.test($('#email-login').val())) {
-                        $('#email-login').addClass('is-invalid');
-                        $('#err-bcknd').hide();
-                        $('#err-eml-lgn').text('{{ __('auth.invalid_mail') }}');
-                        $('#err-eml-lgn').show();
-                        error = 1;
-                    }
                 }
-                if(!$('#password-login').val()) {
+            }
+            if (!$('#password-login').val()) {
+                $('#tp-log').hide();
+                $('#password-login').addClass('is-invalid');
+                $('#err-pas-lgn').text('{{ __('auth.empty_password') }}');
+                $('#err-pas-lgn').show();
+                error = 1;
+            } else {
+                if ($('#password-login').val().length < 8) {
                     $('#tp-log').hide();
                     $('#password-login').addClass('is-invalid');
-                    $('#err-pas-lgn').text('{{ __('auth.empty_password') }}');
+                    $('#err-pas-lgn').text('{{ __('auth.min_password') }}');
                     $('#err-pas-lgn').show();
                     error = 1;
-                } else {
-                    if($('#password-login').val().length < 8) {
-                        $('#tp-log').hide();
-                        $('#password-login').addClass('is-invalid');
-                        $('#err-pas-lgn').text('{{ __('auth.min_password') }}');
-                        $('#err-pas-lgn').show();
-                        error = 1;
-                    }
                 }
-            if(error == 1) {
+            }
+            if (error == 1) {
                 e.preventDefault();
             }
         });
 
         //register
-        $(document).on("click", "#tp-reg", function () {
+        $(document).on("click", "#tp-reg", function() {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $("#password-register");
             if (input.attr("type") === "password") {
@@ -605,7 +625,7 @@
                 input.attr("type", "password");
             }
         });
-        $(document).on("click", "#tcp-reg", function () {
+        $(document).on("click", "#tcp-reg", function() {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $("#password_confirmation");
             if (input.attr("type") === "password") {
@@ -614,9 +634,9 @@
                 input.attr("type", "password");
             }
         });
-        $(document).on("click", "#continueID", function () {
+        $(document).on("click", "#continueID", function() {
             var email = $('#email-register').val();
-            if(!email) {
+            if (!email) {
                 $('#email-register').addClass('is-invalid');
                 $('#err-bcknd').hide();
                 $('#err-eml-rgs').text('{{ __('auth.empty_mail') }}');
@@ -638,8 +658,8 @@
             }
         });
 
-        $(document).on("focusout", "#email-register", function () {
-            if(!$(this).val()) {
+        $(document).on("focusout", "#email-register", function() {
+            if (!$(this).val()) {
                 $('#email-register').addClass('is-invalid');
                 $('#err-bcknd').hide();
                 $('#err-eml-rgs').text('{{ __('auth.empty_mail') }}');
@@ -653,14 +673,14 @@
                 }
             }
         });
-        $(document).on("focusout", "#password-register", function () {
-            if(!$(this).val()) {
+        $(document).on("focusout", "#password-register", function() {
+            if (!$(this).val()) {
                 $('#tp-reg').hide();
                 $('#password-register').addClass('is-invalid');
                 $('#err-pas-rgs').text('{{ __('auth.empty_password') }}');
                 $('#err-pas-rgs').show();
             } else {
-                if($('#password-register').val().length < 8) {
+                if ($('#password-register').val().length < 8) {
                     $('#tp-reg').hide();
                     $('#password-register').addClass('is-invalid');
                     $('#err-pas-rgs').text('{{ __('auth.min_password') }}');
@@ -668,14 +688,14 @@
                 }
             }
         });
-        $(document).on("focusout", "#password_confirmation", function () {
-            if(!$(this).val()) {
+        $(document).on("focusout", "#password_confirmation", function() {
+            if (!$(this).val()) {
                 $('#tcp-reg').hide();
                 $('#password_confirmation').addClass('is-invalid');
                 $('#err-pas-rgs').text('{{ __('auth.empty_password') }}');
                 $('#err-pas-rgs').show();
             } else {
-                if($('#password_confirmation').val().length < 8) {
+                if ($('#password_confirmation').val().length < 8) {
                     $('#tcp-reg').hide();
                     $('#password_confirmation').addClass('is-invalid');
                     $('#err-cpas-rgs').text('{{ __('auth.min_password') }}');
@@ -684,19 +704,19 @@
             }
         });
 
-        $(document).on("keyup", "#email-register", function () {
+        $(document).on("keyup", "#email-register", function() {
             $('#email-register').removeClass('is-invalid');
             $('#err-bcknd').hide();
             $('#err-eml-rgs').hide();
             $('#err-eml-rgs').text('');
         });
-        $(document).on("keyup", "#password-register", function () {
+        $(document).on("keyup", "#password-register", function() {
             $('#password-register').removeClass('is-invalid');
             $('#tp-reg').show();
             $('#err-pas-rgs').hide();
             $('#err-pas-rgs').text('');
         });
-        $(document).on("keyup", "#password_confirmation", function () {
+        $(document).on("keyup", "#password_confirmation", function() {
             $('#password_confirmation').removeClass('is-invalid');
             $('#tcp-reg').show();
             $('#err-cpas-rgs').hide();
@@ -705,7 +725,7 @@
         $("#frmRgs").submit(function(e) {
             let error = 0;
             let CPass = $('#password-register').val();
-            if(!$('#email-register').val()) {
+            if (!$('#email-register').val()) {
                 $('#email-register').addClass('is-invalid');
                 $('#err-bcknd').hide();
                 $('#err-eml-rgs').text('{{ __('auth.empty_mail') }}');
@@ -720,14 +740,14 @@
                     error = 1;
                 }
             }
-            if(!$('#password-register').val()) {
+            if (!$('#password-register').val()) {
                 $('#tp-reg').hide();
                 $('#password-register').addClass('is-invalid');
                 $('#err-pas-rgs').text('{{ __('auth.empty_password') }}');
                 $('#err-pas-rgs').show();
                 error = 1;
             } else {
-                if($('#password-register').val().length < 8) {
+                if ($('#password-register').val().length < 8) {
                     $('#tp-reg').hide();
                     $('#password-register').addClass('is-invalid');
                     $('#err-pas-rgs').text('{{ __('auth.min_password') }}');
@@ -735,21 +755,21 @@
                     error = 1;
                 }
             }
-            if(!$('#password_confirmation').val()) {
+            if (!$('#password_confirmation').val()) {
                 $('#tcp-reg').hide();
                 $('#password_confirmation').addClass('is-invalid');
                 $('#err-cpas-rgs').text('{{ __('auth.empty_password') }}');
                 $('#err-cpas-rgs').show();
                 error = 1;
             } else {
-                if($('#password_confirmation').val().length < 8) {
+                if ($('#password_confirmation').val().length < 8) {
                     $('#tcp-reg').hide();
                     $('#password_confirmation').addClass('is-invalid');
                     $('#err-cpas-rgs').text('{{ __('auth.min_password') }}');
                     $('#err-cpas-rgs').show();
                     error = 1;
                 } else {
-                    if($('#password_confirmation').val() !== CPass) {
+                    if ($('#password_confirmation').val() !== CPass) {
                         $('#tcp-reg').hide();
                         $('#password_confirmation').addClass('is-invalid');
                         $('#err-cpas-rgs').text('{{ __('auth.invalid_password') }}');
@@ -758,7 +778,7 @@
                     }
                 }
             }
-            if(error == 1) {
+            if (error == 1) {
                 e.preventDefault();
             }
         });

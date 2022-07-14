@@ -371,7 +371,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button-22 favorite-button">
                                                     <path
@@ -576,7 +576,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -758,7 +758,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path
@@ -963,7 +963,7 @@
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
                                             <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm()">
+                                                onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
                                                     <path

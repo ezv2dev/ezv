@@ -107,7 +107,7 @@
                 <div class="tabbable column-wrapper">
                     <div class="tab-content tab-content-language column rigth" id="tabs">
                         <div class="tab-pane active" id="editprice">
-                            <form action="{{ route('villa_update_price') }}" method="POST" id="basic-form"
+                            <form action="{{ route('villa_update_price') }}" method="POST" id="edit-price"
                                 class="js-validation" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
@@ -122,8 +122,9 @@
                                         </strong>
                                     </label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="price" name="price"
+                                        <input type="number" min="0" class="form-control" id="villa-price" name="price"
                                             placeholder="Price.." value="{{ $villa[0]->price }}">
+                                        <small id="err-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                                     </div>
                                 </div>
 
@@ -181,18 +182,20 @@
                                         <label>{{ __('user_page.Price') }}</label>
                                         <input type="number" class="form-control" id="special_price"
                                             name="special_price" placeholder="{{ __('user_page.Price') }}..">
+                                        <small id="err-spcl-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>{{ __('user_page.Discount') }}</label>
                                         <input type="number" class="form-control" id="disc" name="disc"
                                             placeholder="{{ __('user_page.Discount') }}..">
+                                        <small id="err-disc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
                                     </div>
                                 </div>
                                 <!-- Submit -->
                                 <div class="row items-push">
                                     <center>
                                         <div class="col-6">
-                                            <button type="submit" class="btn btn-sm btn-primary mt-3"
+                                            <button type="submit" class="btn btn-sm btn-primary mt-3" id="submitPrice"
                                                 style="width: 200px;">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
@@ -252,7 +255,7 @@
                         </div>
 
                         <div class="tab-pane" id="extraPrice">
-                            <form action="{{ route('villa_update_extra') }}" method="POST" id="basic-form"
+                            <form action="{{ route('villa_update_extra') }}" method="POST" id="edit-extra"
                                 class="js-validation" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
@@ -433,6 +436,52 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
+<script>
+$(function() {
+    $("#villa-price").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
+        $('#villa-price').removeClass('is-invalid');
+        $('#err-prc').hide();
+    });
+    $("#special_price").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
+        $('#special_price').removeClass('is-invalid');
+        $('#err-spcl-prc').hide();
+    });
+    $("#disc").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
+        $('#disc').removeClass('is-invalid');
+        $('#err-disc').hide();
+    });
+    $("#edit-price").submit(function(e) {
+        let error = 0;
+        if(!parseInt($('#villa-price').val())) {
+            $('#villa-price').addClass('is-invalid');
+            $('#err-prc').show();
+            error = 1;
+        }
+        if($('#start').val() && $('#end').val()) {
+            if(!$('#special_price').val()) {
+                $('#special_price').addClass('is-invalid');
+                $('#err-spcl-prc').show();
+                error = 1;
+            }
+            if(!$('#disc').val()) {
+                $('#disc').addClass('is-invalid');
+                $('#err-disc').show();
+                error = 1;
+            }
+        }
+        if(error == 1) {
+            e.preventDefault();
+        } else {
+            let btn = document.getElementById("submitPrice");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+        }
+    });
+});
+</script>
 <script>
     function displayPrice(id) {
         let element = document.getElementById("depositPrice");
