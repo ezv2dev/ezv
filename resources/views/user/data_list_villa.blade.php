@@ -94,7 +94,7 @@ if (isset($_COOKIE['tema'])) {
                     <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                 </div>
                 <input type="hidden" value="{{ $data->id_villa }}" id="id_villa" name="id_villa">
-                <div class="skeleton skeleton-sm-h-100 skeleton-sm-w-100">
+                <div class="skeleton skeleton-h-lg skeleton-md-h-100 skeleton-w-100">
                     <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                         data-dots="false" data-arrows="true">
                         @php

@@ -79,7 +79,7 @@
                     style="">
                     @if (request()->get('fCategory') == null)
                         @foreach ($subCategoryAll->take(8) as $item)
-                            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 skeleton skeleton-h-4 skeleton-w-100"
+                            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
                                 <div>
                                     <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
@@ -99,7 +99,7 @@
             </div>
             @endforeach
             @if ($subCategoryAll->count() > 6)
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 skeleton skeleton-h-4 skeleton-w-100"
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                     onclick="moreSubCategory()">
                     <div>
                         <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
@@ -130,7 +130,7 @@
     </div>
     @endforeach
     @if ($subCategory->count() > 6)
-        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 list-description {{ $textColor }} skeleton skeleton-h-4 skeleton-w-100"
+        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 list-description {{ $textColor }} "
             onclick="moreSubCategory()">
             <div>
                 <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>

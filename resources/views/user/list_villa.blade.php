@@ -91,12 +91,12 @@
                 <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }}" style="width: 100%;"
                     data-isshow="true">
                     @foreach ($villaCategory->take(6) as $item)
-                        <div class="skeleton skeleton-h-4 skeleton-w-100">
+                        <div>
                             <a href="#" class="grid-img-container"
                                 onclick="homesFilter({{ $item->id_villa_category }}, null)">
-                                <img class="grid-img-filter lozad"
+                                <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                                     @if ($fCategory == $item->id_villa_category) style="border: 5px solid #ff7400;" @endif
-                                    src="https://source.unsplash.com/random/?{{ $item->name }}" data-loaded="true">
+                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}" >
                                 <div class="grid-text translate-text-group-items">
                                     {{ $item->name }}
                                 </div>
@@ -104,33 +104,28 @@
                         </div>
                     @endforeach
 
-                    <div class="skeleton skeleton-h-4 skeleton-w-100">
-                        <a href="#" class="grid-img-container" onclick="moreCategory()">
-                            <img class="grid-img-filter lozad" src="https://source.unsplash.com/random/?bali"
-                                data-loaded="true">
-                            <div class="grid-text">
-                                {{ __('user_page.More') }}
-                            </div>
-                        </a>
-                    </div>
+                    <a href="#" class="grid-img-container" onclick="moreCategory()">
+                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}" data-src="https://source.unsplash.com/random/?bali" 
+                            >
+                        <div class="grid-text">
+                            {{ __('user_page.More') }}
+                        </div>
+                    </a>
                 </div>
 
                 <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
                     data-isshow="true">
                     @foreach ($villaFilter->sortBy('order')->take(8) as $item)
-                        <div class="skeleton skeleton-h-3 skeleton-w-100">
-                            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                                onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_villa_filter }})">
-                                <div>
-                                    <i
-                                        class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"></i>
-                                </div>
-                                <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
+                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                            onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_villa_filter }})">
+                            <div>
+                                <i
+                                    class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"></i>
                             </div>
+                            <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
                         </div>
                     @endforeach
 
-                    <div class="skeleton skeleton-h-3 skeleton-w-100">
                         <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
                             onclick="moreSubCategory()">
 
@@ -142,7 +137,6 @@
                             </p>
 
                         </div>
-                    </div>
                 </div>
 
 

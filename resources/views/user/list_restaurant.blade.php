@@ -60,7 +60,7 @@
                 <div id="filter-cat-bg-color" style="width:100%;" class="container-grid-cat translate-text-group {{ $bgColor }}"
                     style="">
                     @foreach ($categories->take(6) as $item)
-                        <div class="skeleton skeleton-h-4 skeleton-w-100">
+                        <div>
                             <a href="#" class="grid-img-container"
                                 onclick="foodFilter({{ $item->id_cuisine }}, null)">
                                 <img @if ($fCuisine == $item->id_cuisine) style="border: 5px solid #ff7400;" @endif
@@ -75,7 +75,7 @@
                         </div>
                     @endforeach
 
-                    <div class="skeleton skeleton-h-4 skeleton-w-100" style="cursor:pointer;" onclick="moreCategory()">
+                    <div style="cursor:pointer;" onclick="moreCategory()">
                         <a class="grid-img-container">
                             <img class="grid-img-filter lozad" data-src="https://source.unsplash.com/random/?bali"
                                 src="{{ LazyLoad::show() }}">
@@ -89,7 +89,7 @@
                 <div id="filter-subcat-bg-color" style="width: 100%;" class="container-grid-sub-cat translate-text-group {{ $bgColor }}"
                     style="">
                     @foreach ($subcategories->take(8) as $item)
-                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 skeleton skeleton-h-4 skeleton-w-100"
+                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                             onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})">
                             <div>
                                 <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
@@ -105,7 +105,7 @@
                 </div>
             </div>
             @endforeach
-            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 skeleton skeleton-h-4 skeleton-w-100"
+            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                 onclick="moreSubCategory()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
