@@ -205,7 +205,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -394,17 +394,17 @@
                             @endif
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;" class="edit-profile-image-btn-dekstop"
+                                    &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;"
+                                        class="edit-profile-image-btn-dekstop"
                                         onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }}</a>
-                                    @if ($activity->image)
-                                        {{-- <a href="{{ route('activity_delete_image', $activity->id_activity) }}"> --}}
+                                    {{-- @if ($activity->image)
                                         <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': `{{ $activity->id_activity }}`})"><i
                                                 class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
                                                 data-bs-placement="bottom"
                                                 title="{{ __('user_page.Delete') }}"></i></a>
-                                    @endif
+                                    @endif --}}
                                 @endif
                             @endauth
                             <div class="date-contact-dekstop">
@@ -413,7 +413,8 @@
                                         $open = date_create($activity->open_time);
                                         $closed = date_create($activity->closed_time);
                                     @endphp
-                                    <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
+                                    <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} -
+                                        {{ date_format($closed, 'h:i A') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
@@ -429,12 +430,14 @@
                                                     value="{{ $activity->id_activity }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
                                                     <div class="col-auto">
-                                                        <input type="time" name="open_time" class="form-control" id="open-time-input" value="{{ $activity->open_time }}"
+                                                        <input type="time" name="open_time" class="form-control"
+                                                            id="open-time-input" value="{{ $activity->open_time }}"
                                                             required>
                                                     </div>
                                                     <span class="mx-2">-</span>
                                                     <div class="col-auto">
-                                                        <input type="time" name="closed_time" class="form-control" id="close-time-input" value="{{ $activity->closed_time }}"
+                                                        <input type="time" name="closed_time" class="form-control"
+                                                            id="close-time-input" value="{{ $activity->closed_time }}"
                                                             required>
                                                     </div>
                                                 </div>
@@ -462,16 +465,19 @@
                                     </div>
                                     <div style="padding: 0px 6px;">
                                         @if ($activity->email)
-                                            <a target="_blank" type="button" href="mailto:{{ $activity->email }}" class="mailto-email-activity">
+                                            <a target="_blank" type="button"
+                                                href="mailto:{{ $activity->email }}"
+                                                class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
                                         @else
-                                            <a type="button" href="javascript:void(0);" class="mailto-email-activity">
+                                            <a type="button" href="javascript:void(0);"
+                                                class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope text-secondary"></i>
                                             </a>
                                         @endif
                                     </div>
-                                    <div class="col-1">
+                                    <div style="padding: 0px 6px;">
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="edit_contact()"
@@ -485,7 +491,8 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">
-                                    <span id="name-content2-mobile">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
+                                    <span
+                                        id="name-content2-mobile">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
@@ -499,7 +506,8 @@
                     </div>
                     <div class="col-lg-8 col-md-6 col-xs-12 profile-info" style="padding-left: 40px;">
                         <h2 id="name-content">
-                            <span id="name-content2">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
+                            <span
+                                id="name-content2">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
                             @auth
                                 @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editNameForm()"
@@ -514,14 +522,12 @@
                                     <input type="hidden" name="id_activity" value="{{ $activity->id_activity }}"
                                         required>
                                     <textarea style="width: 100%;" class="form-control" name="name" cols="30" rows="3"
-                                        id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}"
-                                        required>{{ $activity->name }}</textarea>
-                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName" onclick="saveNameActivity()"
-                                        style="background-color: #ff7400">
+                                        id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}" required>{{ $activity->name }}</textarea>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
+                                        onclick="saveNameActivity()" style="background-color: #ff7400">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
-                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                        onclick="editNameCancel()">
+                                    <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                     </button>
                                 </div>
@@ -531,17 +537,16 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;" class="edit-profile-image-btn-mobile d-md-none"
+                                &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;"
+                                    class="edit-profile-image-btn-mobile d-md-none"
                                     onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }}</a>
-                                @if ($activity->image)
-                                    {{-- <a href="{{ route('activity_delete_image', $activity->id_activity) }}"> --}}
+                                {{-- @if ($activity->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': `{{ $activity->id_activity }}`})"><i
                                             class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                            data-bs-toggle="popover" data-bs-animation="true"
-                                            data-bs-placement="bottom"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
-                                @endif
+                                @endif --}}
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
@@ -553,7 +558,8 @@
                                     $open = date_create($activity->open_time);
                                     $closed = date_create($activity->closed_time);
                                 @endphp
-                                <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
+                                <span class="timeActivityContent">{{ date_format($open, 'h:i A') }} -
+                                    {{ date_format($closed, 'h:i A') }}</span>
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         <a type="button" onclick="editTimeFormMobile()"
@@ -569,13 +575,15 @@
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
                                                 <div class="col-auto">
-                                                    <input type="time" name="open_time" class="form-control" id="open-time-input-mobile" value="{{ $activity->open_time }}"
+                                                    <input type="time" name="open_time" class="form-control"
+                                                        id="open-time-input-mobile" value="{{ $activity->open_time }}"
                                                         required>
                                                 </div>
                                                 <span class="mx-2">-</span>
                                                 <div class="col-auto">
-                                                    <input type="time" name="closed_time" class="form-control" id="close-time-input-mobile" value="{{ $activity->closed_time }}"
-                                                        required>
+                                                    <input type="time" name="closed_time" class="form-control"
+                                                        id="close-time-input-mobile"
+                                                        value="{{ $activity->closed_time }}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -602,8 +610,8 @@
                                 </div>
                                 <div class="col-3 contact-item">
                                     @if ($activity->email)
-                                        <a target="_blank" type="button"
-                                            href="mailto:{{ $activity->email }}" class="mailto-email-activity">
+                                        <a target="_blank" type="button" href="mailto:{{ $activity->email }}"
+                                            class="mailto-email-activity">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @else
@@ -644,8 +652,10 @@
                                         <input type="hidden" name="id_activity" value="{{ $activity->id_activity }}"
                                             required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                            cols="30" rows="3" maxlength="250" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="saveShortDescription();">
+                                            cols="30" rows="3" maxlength="250"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->short_description }}</textarea>
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                            onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
@@ -699,7 +709,10 @@
                             @endif
 
                             @auth
-                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                @if (Auth::user()->id == $activity->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($activity->story->count() == 0)
                                         @if (in_array(Auth::user()->role_id, [1, 2, 3]) || Auth::user()->id == $activity->created_by)
                                             <li class="story">
@@ -718,8 +731,8 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($activity->video as $item)
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($activity->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
@@ -783,9 +796,9 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($activity->story as $item)
-                                                            <div class="card4 col-lg-3" style="border-radius: 5px;">
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($activity->story->sortByDesc('updated_at') as $item)
+                                                            <div class="card4 col-lg-3" id="story{{$item->id_story}}" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
@@ -805,8 +818,7 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_activity_story({'id': `{{ $activity->id_activity }}`, 'id_story': `{{ $item->id_story }}`})">
+                                                                            href="javascript:void(0);" data-activity="{{ $activity->id_activity }}" data-story="{{ $item->id_story }}" onclick="delete_story(this)">
                                                                                 {{-- <a href="{{ route('activity_delete_story', ['id' => $activity->id_activity, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -821,7 +833,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                        @foreach ($activity->video as $item)
+                                                        @foreach ($activity->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
@@ -879,7 +891,7 @@
                                     </div>
                                     <div id="cards-container3">
                                         <div class="cards3">
-                                            @foreach ($activity->story as $item)
+                                            @foreach ($activity->story->sortByDesc('updated_at') as $item)
                                                 <div class="card3 col-lg-3" style="border-radius: 5px;">
                                                     <div class="img-wrap">
                                                         <div class="video-position">
@@ -907,7 +919,7 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            @foreach ($activity->video as $item)
+                                            @foreach ($activity->video->sortBy('order') as $item)
                                                 <div class="card3 col-lg-3" style="border-radius: 5px;">
                                                     <div class="img-wrap">
                                                         <div class="video-position">
@@ -1229,7 +1241,8 @@
                                         <h4>
                                             <p>
                                                 <a href="{{ route('activity_price_index', $item->id_price) }}">
-                                                    <span clas="translate-text-group-items">{{ $item->name }}</span>
+                                                    <span
+                                                        clas="translate-text-group-items">{{ $item->name }}</span>
                                                 </a>
                                             </p>
                                         </h4>
@@ -1267,17 +1280,18 @@
                             </h2>
                             <p id="description-content"
                                 style="text-align: justify; padding-top:10px; padding-bottom:12px">
-                                {!! Str::limit(Translate::translate($activity->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($activity->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                                 {{-- {!! $restaurant->description ?? 'there is no description yet' !!} --}}
                             </p>
 
                             <span id="buttonShowMoreDescription">
-                            @if (Str::length($activity->description) > 600)
-                                <a id="btnShowMoreDescription" class="d-block" style="font-weight: 600;"
-                                    href="javascript:void(0);" onclick="showMoreDescription();"><span
-                                        style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                    <span style="color: #ff7400;">></span></a>
-                            @endIf
+                                @if (Str::length($activity->description) > 600)
+                                    <a id="btnShowMoreDescription" class="d-block" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
+                                @endIf
                             </span>
 
                             @auth
@@ -1290,10 +1304,11 @@
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group">
                                                 <textarea name="description" class="form-control" id="description-form-input" class="w-100" rows="5"
-                                                placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->description }}</textarea>
+                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDescription" onclick="saveDescription();">
+                                                <button type="submit" class="btn btn-sm btn-primary"
+                                                    id="btnSaveDescription" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -1415,89 +1430,90 @@
             <div class="col-lg-3 col-md-3 col-12">
                 <div class="sidebar sidebar-activity sidebar-activity-idle" id="sidebar_fix">
                     <div class="reserve-block sidebar-mf">
-                    <style>
-                        .gradient-try {
-                            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-                            background-size: 400% 400%;
-                            animation: gradient 15s ease infinite;
-                            border-radius: 12px;
-                        }
-
-                        .headline-list-property {
-                            color: #FEFBE7;
-                        }
-
-                        @keyframes gradient {
-                            0% {
-                                background-position: 0% 50%;
+                        <style>
+                            .gradient-try {
+                                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                                background-size: 400% 400%;
+                                animation: gradient 15s ease infinite;
+                                border-radius: 12px;
                             }
 
-                            50% {
-                                background-position: 100% 50%;
+                            .headline-list-property {
+                                color: #FEFBE7;
                             }
 
-                            100% {
-                                background-position: 0% 50%;
+                            @keyframes gradient {
+                                0% {
+                                    background-position: 0% 50%;
+                                }
+
+                                50% {
+                                    background-position: 100% 50%;
+                                }
+
+                                100% {
+                                    background-position: 0% 50%;
+                                }
                             }
-                        }
-                    </style>
-                    <div class="gradient-try"
-                        style="box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%); padding: 15px; margin-top:10px; margin-bottom: 10px;">
-                        <center>
-                            <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}</h4>
-                        </center>
-                    </div>
-                    <!-- Random Villa Slider Start -->
-                    <div class="popular-block-activity">
-                        <h4>Popular Villa<h4>
-                                <div class="SlickCarousel3">
-                                    @forelse ($villaRandom as $popular)
-                                        <!-- Start Slider Items -->
-                                        <div>
-                                            <div class="popular-card">
-                                                <div class="popular-card-header"
-                                                    onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
-                                                    style="cursor: pointer;">
-                                                    <img
-                                                        src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
-                                                </div>
-                                                <div>
-                                                    <div class="card-content">
-                                                        <div class="popular-card-title"><a
-                                                                href="{{ route('villa', ['id' => $popular->id_villa]) }}"
-                                                                target="_blank">{{ $popular->name }}</a></div>
-                                                        <div class="popular-card-text">
-                                                            <p>{{ $popular->bedroom }}
-                                                                {{ __('user_page.Bedroom') }},
-                                                                {{ $popular->bathroom }}
-                                                                {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
-                                                                @foreach ($popular->amenities as $item)
-                                                                    <i class="fa fa-{{ $item->icon }}"></i>
-                                                                @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
-                                                            <!-- Description max 100 character -->
-                                                            <p style="text-align: justify;">
-                                                                {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="popular-card-price">
-                                                            <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
-                                                            </p>
+                        </style>
+                        <div class="gradient-try"
+                            style="box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%); padding: 15px; margin-top:10px; margin-bottom: 10px;">
+                            <center>
+                                <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}
+                                </h4>
+                            </center>
+                        </div>
+                        <!-- Random Villa Slider Start -->
+                        <div class="popular-block-activity">
+                            <h4>Popular Villa<h4>
+                                    <div class="SlickCarousel3">
+                                        @forelse ($villaRandom as $popular)
+                                            <!-- Start Slider Items -->
+                                            <div>
+                                                <div class="popular-card">
+                                                    <div class="popular-card-header"
+                                                        onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
+                                                        style="cursor: pointer;">
+                                                        <img
+                                                            src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
+                                                    </div>
+                                                    <div>
+                                                        <div class="card-content">
+                                                            <div class="popular-card-title"><a
+                                                                    href="{{ route('villa', ['id' => $popular->id_villa]) }}"
+                                                                    target="_blank">{{ $popular->name }}</a></div>
+                                                            <div class="popular-card-text">
+                                                                <p>{{ $popular->bedroom }}
+                                                                    {{ __('user_page.Bedroom') }},
+                                                                    {{ $popular->bathroom }}
+                                                                    {{ __('user_page.Bathroom') }}</p>
+                                                                <p style="color: #000;">
+                                                                    @foreach ($popular->amenities as $item)
+                                                                        <i class="fa fa-{{ $item->icon }}"></i>
+                                                                    @endforeach
+                                                                    {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
+                                                                </p>
+                                                                <!-- Description max 100 character -->
+                                                                <p style="text-align: justify;">
+                                                                    {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="popular-card-price">
+                                                                <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- End Slider Items -->
-                                    @empty
+                                            <!-- End Slider Items -->
+                                        @empty
 
-                                    @endforelse
+                                        @endforelse
 
-                                </div>
-                    </div>
-                    <!-- Random Villa Slider End -->
+                                    </div>
+                        </div>
+                        <!-- Random Villa Slider End -->
                     </div>
                 </div>
             </div>
@@ -1663,7 +1679,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-22"
                                     style="display: unset; margin-left: 0px;">
@@ -1698,7 +1714,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -1819,11 +1835,10 @@
                                                         value="{{ $activity->userReview->id_review }}" required>
                                                     <span>
                                                         <button type="submit" class="btn">
-                                                        <i class="fa fa-trash"
-                                                            style="color:#ff7400; font-size: 20px"
-                                                            data-bs-toggle="popover" data-bs-animation="true"
-                                                            data-bs-placement="bottom"
-                                                            title="{{ __('user_page.Delete') }}"></i>
+                                                            <i class="fa fa-trash" style="color:#ff7400; font-size: 20px"
+                                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                                data-bs-placement="bottom"
+                                                                title="{{ __('user_page.Delete') }}"></i>
                                                         </button>
                                                     </span>
                                                 </form>
@@ -1837,7 +1852,8 @@
                                                         <div class="col-6">
                                                             {{ __('user_page.Comment') }}
                                                         </div>
-                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        <div class="col-6"
+                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
                                                             {{ $activity->userReview->comment }}
                                                         </div>
                                                     </div>
@@ -1859,7 +1875,6 @@
                             @else
                                 {{-- STYLE FOR RATING STAR --}}
                                 <style>
-
                                     .cm-star-rating input[type=radio] {
                                         display: none
                                     }
@@ -1884,19 +1899,19 @@
                                         <h2>{{ __('user_page.Give review') }}</h2>
                                         <div class="row">
 
-                                                <form action="{{ route('activity_review_store') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_activity"
-                                                        value="{{ $activity->id_activity }}" readonly required>
-                                                    <div class="row">
-                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                            <div class="d-flex">
-                                                                <div class="col-4 review-container">
-                                                                    {{ __('user_page.Experience') }}
-                                                                </div>
+                                            <form action="{{ route('activity_review_store') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_activity"
+                                                    value="{{ $activity->id_activity }}" readonly required>
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                        <div class="d-flex">
+                                                            <div class="col-4 review-container">
+                                                                {{ __('user_page.Experience') }}
+                                                            </div>
 
 
-                                                                <div class="col-8 review-container">
+                                                            <div class="col-8 review-container">
                                                                 <div class="cm-star-rating">
                                                                     <input id="star-5" type="radio" name="experience"
                                                                         value="5" required />
@@ -1929,28 +1944,28 @@
                                                                         <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
-                                                                </div>
-
                                                             </div>
+
                                                         </div>
-
-                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                            <div class="col-12">
-                                                                {{ __('user_page.Comment') }}
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <textarea name="comment" rows="3" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <center>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">{{ __('user_page.Done') }}</button>
-                                                            </center>
-                                                        </div>
-
                                                     </div>
-                                                </form>
+
+                                                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                        <div class="col-12">
+                                                            {{ __('user_page.Comment') }}
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <center>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">{{ __('user_page.Done') }}</button>
+                                                        </center>
+                                                    </div>
+
+                                                </div>
+                                            </form>
 
 
                                         </div>
@@ -3161,7 +3176,8 @@
                         onclick="close_subcategory()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <div id="cuisineModalContent" class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <div id="cuisineModalContent"
+                        class="row row-border-bottom padding-top-bottom-18px translate-text-group">
                         @foreach ($activity->subCategory as $item)
                             <div class='col-md-6'>
                                 <span class="translate-text-group-items">
@@ -3366,11 +3382,13 @@
                         @if ($activity->image)
                             <img src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $activity->image) }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad imageProfileActivity">
+                                style="height: 48px; width: 48px;"
+                                class="rounded-circle shadow lozad imageProfileActivity">
                         @else
                             <img src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad imageProfileActivity">
+                                style="height: 48px; width: 48px;"
+                                class="rounded-circle shadow lozad imageProfileActivity">
                         @endif
                         <p class="d-flex align-items-center mb-0">{{ $activity->name }}</p>
                     </div>
@@ -3750,7 +3768,17 @@
     {{-- END MODAL --}}
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
@@ -4010,7 +4038,7 @@
             content.classList.add("d-none");
             contentMobile.classList.add("d-none");
 
-            if(formInput.value == 'Wow Name Here'){
+            if (formInput.value == 'Wow Name Here') {
                 formInput.value = '';
             }
         }
@@ -4025,7 +4053,7 @@
             contentMobile.classList.remove("d-none");
             formInput.value = '{{ $activity->name }}';
 
-            if(formInput.value == 'Wow Name Here'){
+            if (formInput.value == 'Wow Name Here') {
                 formInput.value = '';
             }
         }
@@ -4039,7 +4067,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -4052,7 +4080,7 @@
             content.classList.remove("d-none");
             // formInput.value = '{{ $activity->short_description }}';
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -4072,7 +4100,7 @@
                 data: {
                     id_activity: id_activity,
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
 
                     $("#open-time-input").val(response.data.open_time);
@@ -4098,7 +4126,7 @@
                 data: {
                     id_activity: id_activity,
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
 
                     $("#open-time-input-mobile").val(response.data.open_time);
@@ -4171,7 +4199,7 @@
             url: '/things-to-do/photo/store',
             parallelUploads: 50,
             "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
                 alert(errorToString(message));
             },
             init: function() {
@@ -4352,56 +4380,60 @@
         });
     </script>
 
-{{-- Highlight sticky --}}
+    {{-- Highlight sticky --}}
 
     <script>
-        jQuery(document).ready(function($){
-            $(window).on('scroll', function(){
-                if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#price').offset().top - 60){
+        jQuery(document).ready(function($) {
+            $(window).on('scroll', function() {
+                if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
+                        '#price').offset().top - 60) {
                     $('#gallery-sticky').addClass('active-sticky');
                     $('#price-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
                     $('#amenities-sticky').removeClass('active-sticky');
                     $('#location-sticky').removeClass('active-sticky');
                     $('#review-sticky').removeClass('active-sticky');
-                }
-                    else if($(window).scrollTop() >= $('#price').offset().top - 60  && $(window).scrollTop() <= $('#description').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#price-sticky').addClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#description').offset().top - 60  && $(window).scrollTop() <= $('#amenities').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#price-sticky').removeClass('active-sticky');
-                        $('#about-sticky').addClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window).scrollTop() <= $('#location-map').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#price-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').addClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#location-map').offset().top -60  && $(window).scrollTop() <= $('#review').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#price-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').addClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#review').offset().top - 60 && $(window).scrollTop() <= $('#endSticky').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#price-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').addClass('active-sticky');
-                    }
-                else {
+                } else if ($(window).scrollTop() >= $('#price').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#description').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').addClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#amenities').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').addClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#location-map').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').addClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#location-map').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#review').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').addClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#endSticky').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#price-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').addClass('active-sticky');
+                } else {
                     $('#gallery-sticky').removeClass('active-sticky');
                     $('#price-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
@@ -4599,8 +4631,10 @@
 
     {{-- Sweetalert Function Delete Story --}}
     <script>
-        function delete_activity_story(ids) {
-            var ids = ids;
+        function delete_story(e) {
+            var id = e.getAttribute("data-activity");
+            var story = e.getAttribute("data-story");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4615,7 +4649,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/things-to-do/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/things-to-do/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4624,7 +4658,12 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+
+                            //remove element story
+                            $('#story'+story).remove();
+
+                            //update slider ketika story dihapus
+                            sliderRestaurant();
                         }
                     });
                 } else {
@@ -5011,7 +5050,7 @@
 
     @if ($activity->status == '2' && auth()->user()->id == $activity->created_by)
         <script>
-            if(!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true'){
+            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
                 var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
                 myModal.show()
             }

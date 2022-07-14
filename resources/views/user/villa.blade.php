@@ -192,7 +192,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -304,10 +304,11 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
-                                        placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
-                                    <small id="err-name" style="display: none;" class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary"
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
+                                        rows="3" maxlength="55" placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
+                                    <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         style="background-color: #ff7400"
                                         onclick="editNameVilla({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -409,8 +410,9 @@
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
-                                    <small id="err-shrt-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary"
+                                    <small id="err-shrt-desc" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
@@ -913,10 +915,11 @@
                                         <div class="form-group">
                                             <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5"
                                                 placeholder="{{ __('user_page.Make your short description here') }}">{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
-                                            <small id="err-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                                            <small id="err-desc" style="display: none;"
+                                                class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"
+                                            <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
                                                 onclick="editDescriptionVilla({{ $villa[0]->id_villa }})">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                             </button>
@@ -929,6 +932,40 @@
                                 @endif
                             @endauth
                         </div>
+                    </section>
+
+                    <section id="bedroom" class="section-2">
+                        <hr>
+                        <div class="pd-tlr-10">
+                            <h2 class="mb-0">Where you'll sleep</h2>
+                            <div class="Container1">
+                                <div class="Head">
+                                    <span class="Arrows d-flex justify-content-end mb-3"></span>
+                                </div>
+                                <div class="SlickCarouselBedroom">
+                                    @for ($i = 1; $i <= 6; $i++)
+                                        <div>
+                                            <div class="bedroom-card mx-2">
+                                                <div class="card-body mx-auto text-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px"
+                                                        viewBox="0 0 40 28" style="fill: #222222;">
+                                                        <g id="Group_2" data-name="Group 2"
+                                                            transform="translate(-66 524)">
+                                                            <path id="bed_FILL1_wght400_GRAD0_opsz48"
+                                                                d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z"
+                                                                transform="translate(62 -534)" />
+                                                        </g>
+                                                    </svg>
+                                                    <h5 class="my-3">Bedroom {{ $i }}</h5>
+                                                    <p class="mb-0">1 king bed</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>    
+                        </div>
+                        
                     </section>
 
                     <section id="availability" class="section-2">
@@ -1125,8 +1162,7 @@
 
                                 <div class="col-6 p-5-price line-right-orange">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check"
-                                            style="background-color: white;">
+                                        <a type="button" class="collapsible_check" style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-IN') }}
                                             </p>
@@ -1137,8 +1173,7 @@
                                 </div>
                                 <div class="col-6 p-5-price">
                                     <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check"
-                                            style="background-color: white;">
+                                        <a type="button" class="collapsible_check" style="background-color: white;">
                                             <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                 {{ __('user_page.CHECK-OUT') }}
                                             </p>
@@ -1499,7 +1534,7 @@
                 @else
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
                         <div style="width: 48px;" class="text-center">
-                            <a href="{{ route('login') }}">
+                            <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button-22 favorite-button"
                                     style="display: unset; margin-left: 0px;">
@@ -1534,7 +1569,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -1665,7 +1700,8 @@
                                                         <div class="col-6">
                                                             {{ __('user_page.Comment') }}
                                                         </div>
-                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        <div class="col-6"
+                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
                                                             {{ $villa[0]->userReview->comment }}
                                                         </div>
                                                     </div>
@@ -2135,7 +2171,9 @@
                                 </button>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
-                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);" style="text-decoration: underline; color: #ff7400;" href="#">{{ __('user_page.Show more') }}
+                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
+                                    style="text-decoration: underline; color: #ff7400;"
+                                    href="#">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </p>
@@ -2150,10 +2188,12 @@
                             EZV Cover
                         </h2>
                         <p id="description-content">
-                            Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                            Every booking includes free protection from Host cancellations, listing inaccuracies, and
+                            other issues like trouble checking in.
                         </p>
 
-                        <a id="" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreInsurance();">
+                        <a id="" style="font-weight: 600;" href="javascript:void(0);"
+                            onclick="showMoreInsurance();">
                             <span style="text-decoration: underline; color: #ff7400;">Learn more</span>
                         </a>
 
@@ -3602,7 +3642,17 @@
     {{-- END MODAL --}}
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
@@ -3629,7 +3679,9 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+        integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -4103,53 +4155,57 @@
 
     {{-- Highlight sticky --}}
     <script>
-        jQuery(document).ready(function($){
-            $(window).on('scroll', function(){
-                if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#description').offset().top - 60){
+        jQuery(document).ready(function($) {
+            $(window).on('scroll', function() {
+                if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
+                        '#description').offset().top - 60) {
                     $('#gallery-sticky').addClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
                     $('#availability-sticky').removeClass('active-sticky');
                     $('#amenities-sticky').removeClass('active-sticky');
                     $('#location-sticky').removeClass('active-sticky');
                     $('#review-sticky').removeClass('active-sticky');
-                }
-                    else if($(window).scrollTop() >= $('#description').offset().top - 60  && $(window).scrollTop() <= $('#availability').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#about-sticky').addClass('active-sticky');
-                        $('#availability-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#availability').offset().top - 60  && $(window).scrollTop() <= $('#amenities').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#availability-sticky').addClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window).scrollTop() <= $('#location-map').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#availability-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').addClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#location-map').offset().top -60  && $(window).scrollTop() <= $('#review').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#availability-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').addClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#review').offset().top - 60 && $(window).scrollTop() <= $('#endSticky').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#availability-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').addClass('active-sticky');
-                    }
-                else {
+                } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#availability').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').addClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#availability').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#amenities').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').addClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#location-map').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').addClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#location-map').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#review').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').addClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#endSticky').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').addClass('active-sticky');
+                } else {
                     $('#gallery-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
                     $('#availability-sticky').removeClass('active-sticky');
@@ -4496,6 +4552,44 @@
                 },
             }
         });
+    </script>
+
+    <script>
+        // Slick Slier Carousel
+        $(document).ready(function() {
+            $(".SlickCarouselBedroom").slick({
+                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                autoplay: false,
+                autoplaySpeed: 5000, //  Slide Delay
+                speed: 800, // Transition Speed
+                slidesToShow: 4, // Number Of Carousel
+                slidesToScroll: 1, // Slide To Move
+                pauseOnHover: false,
+                appendArrows: $(".Container1 .Head .Arrows"), // Class For Arrows Buttons
+                prevArrow: '<span class="Slick-Prev"></span>',
+                nextArrow: '<span class="Slick-Next"></span>',
+                easing: "linear",
+                responsive: [{
+                        breakpoint: 801,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 641,
+                        settings: {
+                            slidesToShow: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 481,
+                        settings: {
+                            slidesToShow: 1,
+                        }
+                    },
+                ],
+            })
+        })
     </script>
 
     <script>

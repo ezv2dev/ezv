@@ -3622,7 +3622,7 @@
                         <span class="checkmark-mode"></span>
                     </label>
                     <div style="width: 50%;">
-                        <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                        <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                             style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
                             <i class="fa-solid fa-user icon-clear"></i>
                         </a>
@@ -4056,8 +4056,8 @@
                     }
                 }
 
-                var isFocused = document.querySelector("#loc_sugest") == document.activeElement
-                                ||  document.querySelector("#search_sugest") == document.activeElement;
+                var isFocused = document.querySelector("#loc_sugest") == document.activeElement ||
+                    document.querySelector("#search_sugest") == document.activeElement;
 
                 if (!isFocused || window.innerWidth > 768) {
                     document.getElementById("myBtnContainer").classList.remove("display-none");
@@ -4226,7 +4226,17 @@
         </script>
 
         <script>
-            function loginForm() {
+            function loginForm(value) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+
                 $('#LoginModal').modal('show');
             }
         </script>

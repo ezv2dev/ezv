@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('activity_store_story') }}" method="POST" enctype="multipart/form-data"
+                <form action="javascript:void(0)" method="POST" enctype="multipart/form-data"
                     id="storeStoryForm">
                     @csrf
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
@@ -45,7 +45,7 @@
 
                 <div class="row items-push">
                     <div class="col-lg-7">
-                        <button type="submit" class="btn btn-sm btn-primary" form="storeStoryForm">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveStory" form="storeStoryForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Upload') }}
                         </button>
                     </div>

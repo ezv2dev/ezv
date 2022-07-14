@@ -27,7 +27,7 @@
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center;">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" class="btn btn-sm btn-primary" id="btnupdateImageForm">
                                 {{ __('user_page.Save Image') }}
                             </button>
                         </div>

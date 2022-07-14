@@ -1202,7 +1202,7 @@ Route::post('/things-to-do/facilities/store', [Activity\ActivityListController::
 Route::post('/things-to-do/update/image', [Activity\ActivityListController::class, 'activity_update_image'])->name('activity_update_image');
 Route::patch('/things-to-do/{id}/update/cancel-request-update-status', [Activity\ActivityController::class, 'cancel_request_update_status'])->name('activity_cancel_request_update_status');
 Route::get('/things-to-do/{id}/delete/story/{id_story}', [Activity\ActivityListController::class, 'activity_delete_story'])->name('activity_delete_story');
-Route::get('/things-to-do/{id}/delete/image', [Activity\ActivityListController::class, 'activity_delete_image'])->name('activity_delete_image');
+// Route::get('/things-to-do/{id}/delete/image', [Activity\ActivityListController::class, 'activity_delete_image'])->name('activity_delete_image');
 Route::get('/things-to-do/{id}/delete/photo/video/{id_video}', [Activity\ActivityListController::class, 'activity_delete_photo_video'])->name('activity_delete_photo_video');
 Route::get('/things-to-do/{id}/delete/photo/photo/{id_photo}', [Activity\ActivityListController::class, 'activity_delete_photo_photo'])->name('activity_delete_photo_photo');
 Route::get('/things-to-do/{id}/delete/price/{id_price}', [Activity\ActivityListController::class, 'activity_delete_price'])->name('activity_delete_price');
