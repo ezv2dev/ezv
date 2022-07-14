@@ -8,6 +8,7 @@
             text-align: right;
             display: flex;
             position: relative;
+            padding-right: 24px !important;
         }
 
         .right-bar input[type="button"] {
@@ -2920,8 +2921,8 @@
                         $("#rsv-block-btn .rsv").css("right", navGap + "px");
                         $("#navbarright").css("right", navGap + "px");
                     } else {
-                        $("#sidebar_fix").css("right", "0");
-                        $("#rsv-block-btn .rsv").css("right", "-20px");
+                        $("#sidebar_fix").css("right", "10px");
+                        $("#rsv-block-btn .rsv").css("right", "0px");
                         $("#navbarright").css("right", "0");
                     }
                 }

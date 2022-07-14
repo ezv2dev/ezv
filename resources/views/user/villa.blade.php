@@ -3942,28 +3942,25 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $sidebarHeight = $sidebar.innerHeight();
-            var $footerOffsetTop = $("#scrollStop").offset().top;
-            var $footerHeight = $("#heightCalendar").innerHeight();
-            var $sidebarOffset = $sidebar.offset();
+            var $availabilityTop = $("#availability").offset().top;
 
             //console.log($footerOffsetTop);
+            $window.on("resize", function() {
+                $availabilityTop = $("#availability").offset().top;
+            });
 
             $window.scroll(function() {
-                if ($window.scrollTop() > $sidebarOffset.top) {
+                if ($window.scrollTop() >= 0 && $window.scrollTop() < $availabilityTop) {
                     $sidebar.addClass("fixed");
-                } else {
-                    $sidebar.removeClass("fixed");
-                }
-                if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
-                    $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
-                            $footerHeight)
-                    });
-                } else {
                     $sidebar.css({
                         "top": "0",
                     });
+                } else {
+                    $sidebar.css({
+                        "top": $availabilityTop - 10,
+                        "position": "absolute"
+                    });
+                    $sidebar.removeClass("fixed");
                 }
             });
         });
@@ -4084,6 +4081,45 @@
         }
     </script>
 
+    <script>
+        function kingbed_increment() {
+            document.getElementById('kingbed').stepUp();
+        }
+        function kingbed_decrement() {
+            document.getElementById('kingbed').stepDown();
+        }
+        function singlebed_increment() {
+            document.getElementById('singlebed').stepUp();
+        }
+        function singlebed_decrement() {
+            document.getElementById('singlebed').stepDown();
+        }
+        function doublebed_increment() {
+            document.getElementById('doublebed').stepUp();
+        }
+        function doublebed_decrement() {
+            document.getElementById('doublebed').stepDown();
+        }
+        function workingtable_increment() {
+            document.getElementById('workingtable').stepUp();
+        }
+        function workingtable_decrement() {
+            document.getElementById('workingtable').stepDown();
+        }
+        function queenbed_increment() {
+            document.getElementById('queenbed').stepUp();
+        }
+        function queenbed_decrement() {
+            document.getElementById('queenbed').stepDown();
+        }
+        function couch_increment() {
+            document.getElementById('couch').stepUp();
+        }
+        function couch_decrement() {
+            document.getElementById('couch').stepDown();
+        }
+    </script>
+    
     <script>
         function adult_increment() {
             document.getElementById('adult2').stepUp();

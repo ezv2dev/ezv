@@ -65,6 +65,15 @@
 </head>
 
 <body style="background-color:white">
+
+    <div id="untukDelete" style="
+    background: #00000040;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 999;
+    display: none;"></div>
+
     @php
         $condition_villa = Route::is('villa');
         $condition_restaurant = Route::is('restaurant');
@@ -4324,6 +4333,14 @@
     {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
 
     <script>
+        var $gallery;
+        $(document).ready(function() {
+            $gallery = new SimpleLightbox('.gallery a', {});
+            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
+        });
+    </script>
+
+    <script>
         // Dropzone.autoDiscover = false;
         Dropzone.options.frmTarget = {
             autoProcessQueue: false,
@@ -4339,6 +4356,8 @@
                     e.preventDefault();
                     myDropzone.processQueue();
 
+                    $("#button").html('Uploading Gallery...');
+                    $("#button").addClass('disabled');
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4396,6 +4415,9 @@
                     message: message.message.file[0],
                     position: "topRight",
                 });
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
             },
             success: function (file, message, response) {
                 console.log(file);
@@ -4429,7 +4451,7 @@
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
                         message.data.photo[0].id_photo+
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-                
+
                     $('.gallery').append(content);
                 }
                 if (message.data.video.length > 0)
@@ -4439,13 +4461,16 @@
                         path+lowerCaseUid+slash+message.data.video[0].name+
                         '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
                         message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                    
+
                     $('.gallery').append(content);
                 }
+                
+                $gallery.refresh();
 
                 this.removeFile(file);
 
-                runGalleryLightBox();
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
             },
         }
     </script>
@@ -4521,25 +4546,34 @@
     <script>
         $(document).ready(function() {
             var $window = $(window);
-            var $sidebar = $(".sidebar");
-            var $sidebarHeight = $sidebar.innerHeight();
-            var $footerOffsetTop = $(".stopper").offset().top + 1090;
-            var $sidebarOffset = $sidebar.offset();
+            var $sidebar = $("#sidebar_fix");
+            var $amenitiesTop = $("#amenities").offset().top;
+            var $sidebarHeight = $sidebar.height();
+            var $result = $amenitiesTop - $sidebarHeight;
+
+            //console.log($footerOffsetTop);
+            $window.on("resize", function() {
+                $amenitiesTop = $("#amenities").offset().top;
+                $sidebarHeight = $sidebar.height();
+                $result = $amenitiesTop - $sidebarHeight;
+            });
 
             $window.scroll(function() {
-                if ($window.scrollTop() > $sidebarOffset.top) {
+                $amenitiesTop = $("#amenities").offset().top;
+                $sidebarHeight = $sidebar.height();
+                $result = $amenitiesTop - $sidebarHeight;
+                if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {
                     $sidebar.addClass("fixed");
-                } else {
-                    $sidebar.removeClass("fixed");
-                }
-                if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop) {
-                    $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop)
-                    });
-                } else {
                     $sidebar.css({
                         "top": "0",
                     });
+                } else {
+                    console.log($result);
+                    $sidebar.css({
+                        "top": $result,
+                        "position": "absolute"
+                    });
+                    $sidebar.removeClass("fixed");
                 }
             });
         });
@@ -4735,6 +4769,9 @@
                 cancelButtonText: `{{ __('user_page.Cancel') }}`
             }).then((result) => {
                 if (result.isConfirmed) {
+                    let displayBlack = document.getElementById('untukDelete');
+                    displayBlack.style.display = "block";
+
                     $.ajax({
                         type: "get",
                         dataType: 'json',
@@ -4748,7 +4785,9 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
-                            runGalleryLightBox();
+                            
+                            $gallery.refresh();
+                            displayBlack.style.display = "none";
                         }
                     });
                 } else {
@@ -5104,15 +5143,7 @@
             });
         });
     </script>
-    <script>
-        function runGalleryLightBox() {
-            var $gallery = new SimpleLightbox('.gallery a', {});
-            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
-        };
-
-        runGalleryLightBox();
-    </script>
-
+    
     {{-- LAZY LOAD --}}
     @include('components.lazy-load.lazy-load')
     {{-- END LAZY LOAD --}}
