@@ -483,7 +483,7 @@ a:hover {
 }
 
 .fixed {
-    position: fixed;
+    position: fixed !important;
     margin-right: 12px;
 }
 
@@ -3543,12 +3543,10 @@ span.flatpickr-weekday {
     }
     .head-inner-wrap .right-bar {
         width: 30% !important;
+        margin-right: 10px !important;
     }
     .head-inner-wrap .social-share-container .text-center div {
         font-size: 10px !important;
-    }
-    .page-content .sticky {
-        width: 72.222222% !important;
     }
     .navright.active {
         width: 32% !important;
@@ -3604,19 +3602,25 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1259px) {
-    #sidebar_fix {
-        width: 24% !important;
+    .navigationItemText {
+        font-size: 12px !important;
+        top: -2px !important;
+        position: relative;
+    }
+    .page-content .sticky {
+        width: 72.5% !important;
+    }
+    .sidebar {
+        width: 22% !important;
+        right: 20px !important;
     }
     #sidebar_fix .reserve-block {
         width: 100% !important;
         margin-left: 3px;
     }
-    .sidebar-restaurant {
-        right: -24px !important;
-        top: 0px;
-    }
+    .sidebar-restaurant,
     .sidebar-activity {
-        right: -24px !important;
+        right: -10px !important;
         top: 0px;
     }
     .headline-list-property {
@@ -3730,10 +3734,11 @@ span.flatpickr-weekday {
 @media only screen and (min-width: 1360px) {
     .navright.active {
         width: fit-content !important;
+        min-width: fit-content !important;
     }
     .rsv-block .sticky {
         max-width: 1100px !important;
-        width: 72.22222222% !important;
+        width: 72.5% !important;
     }
 }
 

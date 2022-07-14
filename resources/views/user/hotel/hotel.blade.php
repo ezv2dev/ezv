@@ -227,7 +227,7 @@
         </div>
 
         {{-- PROFILE --}}
-        <div class="row page-content">
+        <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
                 {{-- ALERT CONTENT STATUS --}}
@@ -4554,24 +4554,25 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $sidebarHeight = $sidebar.innerHeight();
-            var $footerOffsetTop = $(".stopper").offset().top - 155;
-            var $sidebarOffset = $sidebar.offset();
+            var $roomTop = $("#room").offset().top;
+
+            //console.log($footerOffsetTop);
+            $window.on("resize", function() {
+                $roomTop = $("#room").offset().top;
+            });
 
             $window.scroll(function() {
-                if ($window.scrollTop() > $sidebarOffset.top) {
+                if ($window.scrollTop() >= 0 && $window.scrollTop() < $roomTop) {
                     $sidebar.addClass("fixed");
-                } else {
-                    $sidebar.removeClass("fixed");
-                }
-                if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop) {
-                    $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop)
-                    });
-                } else {
                     $sidebar.css({
                         "top": "0",
                     });
+                } else {
+                    $sidebar.css({
+                        "top": $roomTop - 10,
+                        "position": "absolute"
+                    });
+                    $sidebar.removeClass("fixed");
                 }
             });
         });
