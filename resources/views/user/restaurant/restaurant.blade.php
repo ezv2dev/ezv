@@ -4437,13 +4437,15 @@
                     content = '<div class="col-4 grid-photo"> <a class="pointer-normal" onclick="view_video_restaurant('+
                         message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
                         path+lowerCaseUid+slash+message.data.video[0].name+
-                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
-                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> </span> </div>';
+                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
+                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
                     
                     $('.gallery').append(content);
                 }
 
                 this.removeFile(file);
+
+                runGalleryLightBox();
             },
         }
     </script>
@@ -4746,6 +4748,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+                            runGalleryLightBox();
                         }
                     });
                 } else {
@@ -5102,10 +5105,12 @@
         });
     </script>
     <script>
-        (function() {
+        function runGalleryLightBox() {
             var $gallery = new SimpleLightbox('.gallery a', {});
             var $gallery2 = new SimpleLightbox('.gallery2 a', {});
-        })();
+        };
+
+        runGalleryLightBox();
     </script>
 
     {{-- LAZY LOAD --}}
