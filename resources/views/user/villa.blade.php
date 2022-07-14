@@ -4578,7 +4578,7 @@
                     {
                         breakpoint: 641,
                         settings: {
-                            slidesToShow: 3,
+                            slidesToShow: 2,
                         }
                     },
                     {
