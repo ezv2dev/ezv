@@ -1565,7 +1565,7 @@
                     </div>
                     <!-- Random Villa Slider Start -->
                     <div class="popular-block-activity">
-                        <h4>{{ __('user_page.Popular Villa') }}<h4>
+                        <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
                                 <div class="SlickCarousel3">
                                     <!-- Start Slider Items -->
                                     @forelse ($villaRandom as $popular)

@@ -479,6 +479,7 @@ return [
 
     "data not found" => "data not found",
 
+    "Popular Stays Nearby" => "Popular Stays Nearby" 
     // {{ __('user_page.Map') }}
     // user_page.
     // __
