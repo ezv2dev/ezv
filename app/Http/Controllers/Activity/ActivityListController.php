@@ -89,7 +89,11 @@ class ActivityListController extends Controller
     public function activity_update_name(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -97,19 +101,28 @@ class ActivityListController extends Controller
             'name' => ['required', 'max:100'],
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+            ], 500);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // update
@@ -130,8 +143,7 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Error Updated Name WoW',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -323,7 +335,11 @@ class ActivityListController extends Controller
     public function Activity_update_time(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -334,8 +350,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
-                'status' => 500,
-            ]);
+            ], 500);
         }
 
         // activity data
@@ -346,8 +361,7 @@ class ActivityListController extends Controller
         {
             return response()->json([
                 'message' => 'WoW Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -355,8 +369,7 @@ class ActivityListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -384,15 +397,18 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Error Updated WoW Time',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
     public function activity_update_contact(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $rules = [
@@ -404,8 +420,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
-                'status' => 500,
-            ]);
+            ], 500);
         }
 
         // activity data
@@ -416,8 +431,7 @@ class ActivityListController extends Controller
         {
             return response()->json([
                 'message' => 'WoW Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -425,8 +439,7 @@ class ActivityListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update
@@ -446,8 +459,7 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Error Updated WoW Contact',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -462,8 +474,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
-                'status' => 500,
-            ]);
+            ], 500);
         }
 
         // activity data
@@ -474,8 +485,7 @@ class ActivityListController extends Controller
         {
             return response()->json([
                 'message' => 'WoW Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -483,8 +493,7 @@ class ActivityListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // image path
@@ -529,8 +538,7 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Error Updated WoW Short Description',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -571,7 +579,6 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Failed Delete Data',
-                'status' => 500,
             ], 500);
         }
     }
@@ -928,7 +935,6 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Failed Delete Data',
-                'status' => 500,
             ], 500);
         }
     }
@@ -968,7 +974,6 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Failed Delete Data',
-                'status' => 500,
             ], 500);
         }
     }
@@ -976,7 +981,11 @@ class ActivityListController extends Controller
     public function activity_store_facilities(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -986,8 +995,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
-                'status' => 500,
-            ]);
+            ], 500);
         }
 
         // activity data
@@ -998,8 +1006,7 @@ class ActivityListController extends Controller
         {
             return response()->json([
                 'message' => 'WoW Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -1007,8 +1014,7 @@ class ActivityListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update activity has facilities
@@ -1037,8 +1043,7 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Updated WoW Facilities',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -1046,7 +1051,11 @@ class ActivityListController extends Controller
     {
         // dd($request->all());
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -1056,8 +1065,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
-                'status' => 500,
-            ]);
+            ], 500);
         }
 
         // activity data
@@ -1068,8 +1076,7 @@ class ActivityListController extends Controller
         {
             return response()->json([
                 'message' => 'WoW Not Found',
-                'status' => 404,
-            ]);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -1077,8 +1084,7 @@ class ActivityListController extends Controller
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',
-                'status' => 403,
-            ]);
+            ], 403);
         }
 
         // update activity has subcategory
@@ -1110,8 +1116,7 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Error Updated WoW Category',
-                'status' => 500,
-            ]);
+            ], 500);
         }
     }
 
@@ -1217,7 +1222,6 @@ class ActivityListController extends Controller
         } else {
             return response()->json([
                 'message' => 'Failed Delete Data',
-                'status' => 500,
             ], 500);
         }
     }

@@ -14,6 +14,7 @@ use App\Models\CollaboratorFilter;
 use App\Models\CollaboratorLanguage;
 use App\Models\Location;
 use App\Models\CollaboratorPhoto;
+use App\Models\CollaboratorSocialMedia;
 use App\Models\CollaboratorStory;
 use App\Models\CollaboratorVideo;
 use Collator;
@@ -280,6 +281,43 @@ class CollaboratorController extends Controller
         }
     }
     // update location
+
+    // update social media
+    public function collab_update_social_media(Request $request)
+    {
+        $this->authorize('collaborator_update');
+        $status = 500;
+
+        try {
+            CollaboratorSocialMedia::where('id_collab', $request->id_collab)->delete();
+            CollaboratorSocialMedia::create(
+                [
+                    'id_collab' => $request->id_collab,
+                    'instagram_name' => $request->instagram_name,
+                    'instagram_follower' => $request->instagram_follower,
+                    'facebook_name' => $request->facebook_name,
+                    'facebook_follower' => $request->facebook_follower,
+                    'twitter_name' => $request->twitter_name,
+                    'twitter_follower' => $request->twitter_follower,
+                    'tiktok_name' => $request->tiktok_name,
+                    'tiktok_follower' => $request->tiktok_follower
+                ]
+            );
+
+            $status = 200;
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+    // end update social media
 
     // update language
     public function collab_update_language(Request $request)

@@ -10,6 +10,10 @@ let id_activity = $("#id_activity").val();
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
 
+    let btn = document.getElementById("btnSaveShortDesc");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -38,13 +42,40 @@ function saveShortDescription() {
                 position: "topRight",
             });
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
             editShortDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
+            editShortDescriptionCancel();
+
+            let short_desc_input = document.getElementById(
+                "short-description-form-input"
+            );
+
+            short_desc_input.value = short_desc;
         },
     });
 }
 
 function saveDescription() {
     let desc = $("#description-form-input").val();
+
+    let btn = document.getElementById("btnSaveDescription");
+    btn.textContent = "Saving Description...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -85,7 +116,24 @@ function saveDescription() {
                 $("#btnShowMoreDescription").remove();
             }
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
             editDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            editDescriptionCancel();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
         },
     });
 }
@@ -93,6 +141,10 @@ function saveDescription() {
 //ganti nama restaurant
 function saveNameActivity() {
     let name = $("#name-form-input").val();
+
+    let btn = document.getElementById("btnSaveName");
+    btn.textContent = "Saving Name...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -119,7 +171,25 @@ function saveNameActivity() {
                 position: "topRight",
             });
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
             editNameCancel();
+        },
+        error: function (jqXHR, exception) {
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+
+            editNameCancel();
+
+            let name_input = document.getElementById("name-form-input");
+            name_input.value = name;
         },
     });
 }
@@ -156,6 +226,9 @@ $("#updateImageForm").submit(function (e) {
         var formData = new FormData(this);
         formData.append("image", imageProfileActivity);
 
+        var btn = document.getElementById("btnupdateImageForm");
+        btn.textContent = "Saving Image...";
+        btn.classList.add("disabled");
         $.ajax({
             type: "POST",
             headers: {
@@ -185,6 +258,28 @@ $("#updateImageForm").submit(function (e) {
                 readerImageActivity.readAsDataURL(imageProfileActivity);
 
                 $("#modal-edit_activity_profile").modal("hide");
+
+                $("#profileDropzone").attr("src", "");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+            error: function (jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+
+                $("#modal-edit_activity_profile").modal("hide");
+
+                $("#profileDropzone").attr("src", "");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
             },
         });
     }
@@ -197,7 +292,7 @@ function saveSubcategoryActivity() {
         subcategory.push(parseInt($(this).val()));
     });
 
-    let btn = document.getElementById("btnsaveCategoryActivity");
+    let btn = document.getElementById("btnsaveCategory");
     btn.textContent = "Saving Tag...";
     btn.classList.add("disabled");
 
@@ -276,6 +371,23 @@ function saveSubcategoryActivity() {
                 $("#subcategoryModalContent").html("");
                 $("#subcategoryModalContent").append(contentSubcategory);
             }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            $("#modal-add_subcategory").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
         },
     });
 }
@@ -286,6 +398,10 @@ function saveTimeActivity() {
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
     console.log(open_time, closed_time);
+
+    var btn = $(".btnSaveTime");
+    $(btn).html("Saving...");
+    $(btn).attr("disabled", true);
 
     $.ajax({
         type: "POST",
@@ -319,6 +435,24 @@ function saveTimeActivity() {
 
             editTimeFormCancel();
             editTimeFormMobileCancel();
+
+            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).attr("disabled", false);
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            editTimeFormCancel();
+            editTimeFormMobileCancel();
+
+            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).attr("disabled", false);
         },
     });
 }
@@ -329,6 +463,10 @@ function saveTimeActivityMobile() {
     let open_time = $("#open-time-input-mobile").val();
     let closed_time = $("#close-time-input-mobile").val();
     console.log(open_time, closed_time);
+
+    var btn = $(".btnSaveTime");
+    $(btn).html("Saving...");
+    $(btn).attr("disabled", true);
 
     $.ajax({
         type: "POST",
@@ -362,6 +500,24 @@ function saveTimeActivityMobile() {
 
             editTimeFormCancel();
             editTimeFormMobileCancel();
+
+            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).attr("disabled", false);
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            editTimeFormCancel();
+            editTimeFormMobileCancel();
+
+            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).attr("disabled", false);
         },
     });
 }
@@ -474,6 +630,10 @@ function saveFacilities() {
         facilities.push(parseInt($(this).val()));
     });
 
+    btn = document.getElementById("btnSaveFacilities");
+    btn.textContent = "Saving Facilities...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -548,6 +708,9 @@ function saveFacilities() {
                 }
             }
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+
             $("#contentFacilities").html(content);
 
             //modal
@@ -572,12 +735,30 @@ function saveFacilities() {
                 $("#contentModalFacilities").html(contentFacilities);
             }
         },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            $("#modal-add_facilities").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
     });
 }
 
 function saveContactActivity() {
     let phone = $('#modal-edit_contact').find("input[name='phone']").val();
     let email = $('#modal-edit_contact').find("input[name='email']").val();
+
+    var btn = document.getElementById("btnSaveContact");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -614,6 +795,23 @@ function saveContactActivity() {
                 message: response.message,
                 position: "topRight",
             });
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            iziToast.error({
+                title: "Error",
+                message: jqXHR.responseJSON.message,
+                position: "topRight",
+            });
+
+            $('#modal-edit_contact').modal('hide');
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
         },
     });
 }

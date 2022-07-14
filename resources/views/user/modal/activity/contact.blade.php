@@ -22,7 +22,7 @@
 
                 <div class="row items-push">
                     <div class="col-lg-7">
-                        <button type="submit" class="btn btn-sm btn-primary" form="updateContactForm">
+                        <button type="submit" class="btn btn-sm btn-primary" form="updateContactForm" id="btnSaveContact">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
