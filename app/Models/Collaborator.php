@@ -34,4 +34,9 @@ class Collaborator extends Model
     {
         return $this->hasMany(CollaboratorHasFilter::class, 'id_collab', 'id_collab');
     }
+
+    public function collaboratorSocial()
+    {
+        return $this->hasOne(CollaboratorSocialMedia::class, 'id_collab', 'id_collab');
+    }
 }

@@ -259,10 +259,10 @@
     }
 
     .modal-search {
-        cursor: pointer; 
-        border: 2px solid #ff7400; 
-        padding: 9px; 
-        border-radius: 12px; 
+        cursor: pointer;
+        border: 2px solid #ff7400;
+        padding: 9px;
+        border-radius: 12px;
         margin-top: 0.9rem;
     }
 
@@ -300,7 +300,7 @@
             min-height: 28px !important;
         }
     }
-    @media only screen and (min-width: 992px) and (max-width: 1099px) { 
+    @media only screen and (min-width: 992px) and (max-width: 1099px) {
         .modal-body .w-70 {
             width: 60% !important;
         }
@@ -1272,10 +1272,10 @@
         resetAllMarkers();
         // prepare data coordinate
         var data = {
-            latitude_h: map.getBounds().wb.lo,
-            latitude_j: map.getBounds().wb.hi,
-            longitude_h: map.getBounds().Ra.lo,
-            longitude_j: map.getBounds().Ra.hi,
+            latitude_h: map.getBounds().getSouthWest().lat(),
+            longitude_h: map.getBounds().getSouthWest().lng(),
+            latitude_j: map.getBounds().getNorthEast().lat(),
+            longitude_j: map.getBounds().getNorthEast().lng(),
         };
         // refetch data for markers
         await fetchRestaurantsLocation(data);

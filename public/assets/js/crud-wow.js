@@ -50,11 +50,21 @@ function saveShortDescription() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             btn.innerHTML = "<i class='fa fa-check'></i> Done";
             btn.classList.remove("disabled");
@@ -124,11 +134,21 @@ function saveDescription() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             editDescriptionCancel();
 
@@ -177,11 +197,21 @@ function saveNameActivity() {
             editNameCancel();
         },
         error: function (jqXHR, exception) {
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             btn.innerHTML = "<i class='fa fa-check'></i> Done";
             btn.classList.remove("disabled");
@@ -265,14 +295,23 @@ $("#updateImageForm").submit(function (e) {
                 btn.classList.remove("disabled");
             },
             error: function (jqXHR, exception) {
-                // console.log(jqXHR);
+                // console.log(jqXHR.responseJSON);
                 // console.log(exception);
-
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
 
                 $("#modal-edit_activity_profile").modal("hide");
 
@@ -378,11 +417,21 @@ function saveSubcategoryActivity() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             $("#modal-add_subcategory").modal("hide");
 
@@ -442,11 +491,21 @@ function saveTimeActivity() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             editTimeFormCancel();
             editTimeFormMobileCancel();
@@ -507,11 +566,21 @@ function saveTimeActivityMobile() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             editTimeFormCancel();
             editTimeFormMobileCancel();
@@ -738,11 +807,21 @@ function saveFacilities() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             $("#modal-add_facilities").modal("hide");
 
@@ -802,11 +881,21 @@ function saveContactActivity() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            iziToast.error({
-                title: "Error",
-                message: jqXHR.responseJSON.message,
-                position: "topRight",
-            });
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
 
             $('#modal-edit_contact').modal('hide');
 

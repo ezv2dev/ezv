@@ -9,72 +9,78 @@
             </div>
             <div class="modal-body pb-1">
                 <form action="{{ route('collab_update_social_media') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
+                    enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}">
                     <div class="row mb-12 margin-bottom-12px">
-                        <label class="col-sm-4 col-form-label" for="instagram_name">Instagram <i
+                        <label class="col-sm-4 col-form-label" for="instagram_link">Instagram <i
                                 class="fab fa-instagram"></i> </label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="instagram_name"
-                                name="instagram_name" placeholder="Instagram Name" value="">
+                            <input type="text" class="form-control modal-input" id="instagram_link"
+                                name="instagram_link" placeholder="Instagram Link"
+                                value="{{ $profile->collaboratorSocial->instagram_link ?? '' }}">
                         </div>
                     </div>
                     <div class="row mb-12 margin-bottom-12px">
                         <label class="col-sm-4 col-form-label" for="instagram_follower"></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="instagram_follower"
-                                name="instagram_follower" placeholder="Instagram Follower" value=""
+                            <input type="number" class="form-control modal-input" id="instagram_follower"
+                                name="instagram_follower" placeholder="Instagram Follower"
+                                value="{{ $profile->collaboratorSocial->instagram_follower ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                     </div>
-
                     <div class="row mb-12 margin-bottom-12px">
-                        <label class="col-sm-4 col-form-label" for="facebook_name">Facebook <i
+                        <label class="col-sm-4 col-form-label" for="facebook_link">Facebook <i
                                 class="fab fa-facebook"></i></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="facebook_name"
-                                name="facebook_name" placeholder="Facebook Name" value="">
+                            <input type="text" class="form-control modal-input" id="facebook_link"
+                                name="facebook_link" placeholder="Facebook Link"
+                                value="{{ $profile->collaboratorSocial->facebook_link ?? '' }}">
                         </div>
                     </div>
                     <div class="row mb-12 margin-bottom-12px">
                         <label class="col-sm-4 col-form-label" for="facebook_follower"></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="facebook_follower"
-                                name="facebook_follower" placeholder="Facebook Follower" value=""
+                            <input type="number" class="form-control modal-input" id="facebook_follower"
+                                name="facebook_follower" placeholder="Facebook Follower"
+                                value="{{ $profile->collaboratorSocial->facebook_follower ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                     </div>
-
                     <div class="row mb-12 margin-bottom-12px">
-                        <label class="col-sm-4 col-form-label" for="twitter_name">Twitter <i
+                        <label class="col-sm-4 col-form-label" for="twitter_link">Twitter <i
                                 class="fab fa-twitter"></i></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="twitter_name" name="twitter_name"
-                                placeholder="Twitter Name" value="">
+                            <input type="text" class="form-control modal-input" id="twitter_link" name="twitter_link"
+                                placeholder="Twitter Link"
+                                value="{{ $profile->collaboratorSocial->twitter_link ?? '' }}">
                         </div>
                     </div>
                     <div class="row mb-12 margin-bottom-12px">
                         <label class="col-sm-4 col-form-label" for="twitter_follower"></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="twitter_follower"
-                                name="twitter_follower" placeholder="Twitter Follower" value=""
+                            <input type="number" class="form-control modal-input" id="twitter_follower"
+                                name="twitter_follower" placeholder="Twitter Follower"
+                                value="{{ $profile->collaboratorSocial->twitter_follower ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                     </div>
-
                     <div class="row mb-12 margin-bottom-12px">
-                        <label class="col-sm-4 col-form-label" for="tiktok_name">Tiktok <i
+                        <label class="col-sm-4 col-form-label" for="tiktok_link">Tiktok <i
                                 class="fab fa-tiktok"></i></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="tiktok_name" name="tiktok_name"
-                                placeholder="Tiktok Name" value="">
+                            <input type="text" class="form-control modal-input" id="tiktok_link" name="tiktok_link"
+                                placeholder="Tiktok Link"
+                                value="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}">
                         </div>
                     </div>
                     <div class="row mb-12 margin-bottom-12px">
                         <label class="col-sm-4 col-form-label" for="tiktok_follower"></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control modal-input" id="tiktok_follower"
-                                name="tiktok_follower" placeholder="Tiktok Follower" value=""
+                            <input type="number" class="form-control modal-input" id="tiktok_follower"
+                                name="tiktok_follower" placeholder="Tiktok Follower"
+                                value="{{ $profile->collaboratorSocial->tiktok_follower ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                     </div>

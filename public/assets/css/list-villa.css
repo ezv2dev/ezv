@@ -2996,6 +2996,16 @@ input::-webkit-inner-spin-button {
         margin-left: -120px !important;
     }
 }
+@media only screen and (max-width: 569px) {
+    .list-image-content-villa .slick-slide {
+        width: 100vw !important;
+    }
+}
+@media only screen and (max-width: 575px) { 
+    #villa-data .list-row-gap {
+        padding-right: 2px !important;
+    }
+}
 @media only screen and (max-width: 991px) {
     .flatpickr-rContainer {
         width: 100% !important;

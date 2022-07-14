@@ -1183,7 +1183,7 @@ class RestaurantListController extends Controller
             ]);
         }
 
-        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name','id_story')->get();
+        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name','id_story')->latest()->get();
         $getUID = Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first();
 
         $data = [];

@@ -23,18 +23,24 @@ DROP TABLE IF EXISTS `collaborator_social_media`;
 CREATE TABLE `collaborator_social_media` (
   `id_collab_social` int(11) NOT NULL AUTO_INCREMENT,
   `id_collab` int(11) DEFAULT NULL,
-  `instagram_name` varchar(200) DEFAULT NULL,
+  `instagram_link` varchar(200) DEFAULT NULL,
   `instagram_follower` bigint(20) DEFAULT NULL,
-  `facebook_name` varchar(200) DEFAULT NULL,
+  `facebook_link` varchar(200) DEFAULT NULL,
   `facebook_follower` bigint(20) DEFAULT NULL,
-  `twitter_name` varchar(200) DEFAULT NULL,
+  `twitter_link` varchar(200) DEFAULT NULL,
   `twitter_follower` bigint(20) DEFAULT NULL,
-  `tiktok_name` varchar(200) DEFAULT NULL,
+  `tiktok_link` varchar(200) DEFAULT NULL,
   `tiktok_follower` bigint(20) DEFAULT NULL,
+  `follower_amount` bigint(20) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_collab_social`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `collaborator_social_media` */
+
+insert  into `collaborator_social_media`(`id_collab_social`,`id_collab`,`instagram_link`,`instagram_follower`,`facebook_link`,`facebook_follower`,`twitter_link`,`twitter_follower`,`tiktok_link`,`tiktok_follower`,`follower_amount`,`updated_at`,`created_at`) values 
+(6,23,'https://www.instagram.com/anggakusumap_/',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-07-14 10:39:40','2022-07-14 10:39:40');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

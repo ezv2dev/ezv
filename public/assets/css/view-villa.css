@@ -3569,6 +3569,7 @@ span.flatpickr-weekday {
     }
     #sidebar_fix .reserve-block .p-5-price .collapsible_check input {
         width: 100% !important;
+        font-size: 80% !important;
     }
     .list-amenities .translate-text-group-items {
         display: none !important;
