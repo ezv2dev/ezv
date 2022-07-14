@@ -327,7 +327,7 @@ class Restaurant extends Model
 
     public function story()
     {
-        return $this->hasMany(RestaurantStory::class, 'id_restaurant', 'id_restaurant');
+        return $this->hasMany(RestaurantStory::class, 'id_restaurant', 'id_restaurant')->latest();
     }
 
     public function location()
