@@ -1067,10 +1067,10 @@
         resetAllMarkers();
         // prepare data coordinate
         var data = {
-            latitude_h: map.getBounds().wb.lo,
-            latitude_j: map.getBounds().wb.hi,
-            longitude_h: map.getBounds().Ra.lo,
-            longitude_j: map.getBounds().Ra.hi,
+            latitude_h: map.getBounds().getSouthWest().lat(),
+            longitude_h: map.getBounds().getSouthWest().lng(),
+            latitude_j: map.getBounds().getNorthEast().lat(),
+            longitude_j: map.getBounds().getNorthEast().lng(),
         };
         // refetch data for markers
         await fetchRestaurantsLocation(data);

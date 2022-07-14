@@ -103,6 +103,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -164,7 +165,10 @@ class ActivityListController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
         // activity data
@@ -225,7 +229,10 @@ class ActivityListController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
         // activity data
@@ -350,6 +357,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -420,6 +428,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -474,6 +483,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -995,6 +1005,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -1065,6 +1076,7 @@ class ActivityListController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
+                'errors' => $validator->errors()->all(),
             ], 500);
         }
 
