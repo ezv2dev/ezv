@@ -920,8 +920,8 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': '{{ $restaurant->id_restaurant }}', 'id_video': '{{ $item->id_video }}'})">
+                                                                                href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -1030,8 +1030,8 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': '{{ $restaurant->id_restaurant }}', 'id_video': '{{ $item->id_video }}'})">
+                                                                                href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -1260,7 +1260,7 @@
                             @endif
                             @if ($restaurant->video->count() > 0)
                                 @foreach ($restaurant->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
                                         @auth
                                             @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
                                                 <a class="pointer-normal"
@@ -1285,8 +1285,8 @@
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
-                                                    <button href="javascript:void(0);"
-                                                        onclick="delete_photo_video({'id': '{{ $restaurant->id_restaurant }}', 'id_video': '{{ $item->id_video }}'})"
+                                                    <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
@@ -4434,19 +4434,11 @@
                 }
                 if (message.data.video.length > 0)
                 {
-                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
-                        message.data.photo[0].id_photo+
-                        '"> <a href="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '" title="'+
-                        message.data.photo[0].caption+
-                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
-                        message.data.photo[0].id_photo+
-                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
-                        message.data.photo[0].id_photo+
-                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                    content = '<div class="col-4 grid-photo"> <a class="pointer-normal" onclick="view_video_restaurant('+
+                        message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
+                        path+lowerCaseUid+slash+message.data.video[0].name+
+                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
+                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> </span> </div>';
                     
                     $('.gallery').append(content);
                 }
@@ -4767,7 +4759,9 @@
     {{-- Sweetalert Function Delete Photo --}}
     <script>
         function delete_photo_video(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let video = ids.getAttribute("data-video");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4782,7 +4776,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/photo/video/${ids.id_video}`,
+                        url: `/restaurant/${id}/delete/photo/video/${video}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4791,8 +4785,9 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            // showingLoading();
+                            $('#displayVideo'+video).remove();
+                            // location.reload();
                         }
                     });
                 } else {
