@@ -16,6 +16,9 @@ function editNameVilla(id_villa) {
     if(error == 1) {
         return false;
     } else {
+        let btn = document.getElementById("btnSaveName");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
         $.ajax({
             type: "POST",
             headers: {
@@ -36,8 +39,33 @@ function editNameVilla(id_villa) {
                     message: response.message,
                     position: "topRight",
                 });
-
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
                 editNameCancel();
+            },
+            error: function (jqXHR, exception) {
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editShortDescriptionCancel();
+
+                $('#short-description-form-input').val(response.data);
             },
         });
     }
@@ -75,6 +103,11 @@ function editNameCancel() {
     }
 }
 
+$(document).on("keyup", "textarea#short-description-form-input", function () {
+    $('#short-description-form-input').css("border", "");
+    $('#err-shrt-desc').hide();
+});
+
 function editShortDesc(id_villa) {
     let error = 0;
     if(!$('textarea#short-description-form-input').val()) {
@@ -88,6 +121,9 @@ function editShortDesc(id_villa) {
     if(error == 1) {
         return false;
     } else {
+        let btn = document.getElementById("btnSaveShortDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
     $.ajax({
         type: "POST",
         headers: {
@@ -100,14 +136,39 @@ function editShortDesc(id_villa) {
         },
         success: function(response) {
             $("#short-description-content2").html(response.data);
-
+            $('#short-description-form-input').val(response.data);
             iziToast.success({
                 title: "Success",
                 message: response.message,
                 position: "topRight",
             });
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
+            editShortDescriptionCancel();
+        },
+        error: function (jqXHR, exception) {
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
 
             editShortDescriptionCancel();
+
+            $('#short-description-form-input').val(response.data);
         },
     });
     }
@@ -377,6 +438,9 @@ function editDescriptionVilla(id_villa) {
     if(error == 1) {
         return false;
     } else {
+        let btn = document.getElementById("btnSaveDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
         $.ajax({
             type: "POST",
             headers: {
@@ -406,8 +470,33 @@ function editDescriptionVilla(id_villa) {
                     $("#btnShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
                 }
-
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
                 editDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editShortDescriptionCancel();
+
+                $('#short-description-form-input').val(response.data);
             },
         });
     }
@@ -438,6 +527,9 @@ $("#updateImageForm").submit(function(e) {
         e.preventDefault();
     } else {
         e.preventDefault();
+        let btn = document.getElementById("btnupdateImageForm");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
 
         var formData = new FormData(this);
         formData.append("image", imageProfileVilla);
@@ -469,8 +561,33 @@ $("#updateImageForm").submit(function(e) {
                 });
 
                 readerImageVilla.readAsDataURL(imageProfileVilla);
-
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
                 $("#modal-edit_villa_profile").modal("hide");
+            },
+            error: function (jqXHR, exception) {
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editShortDescriptionCancel();
+
+                $('#short-description-form-input').val(response.data);
             },
         });
     }
