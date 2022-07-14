@@ -308,7 +308,7 @@
                                         rows="3" maxlength="55" placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary"
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         style="background-color: #ff7400"
                                         onclick="editNameVilla({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -412,7 +412,7 @@
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
                                     <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary"
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
@@ -919,7 +919,7 @@
                                                 class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"
+                                            <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
                                                 onclick="editDescriptionVilla({{ $villa[0]->id_villa }})">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                             </button>

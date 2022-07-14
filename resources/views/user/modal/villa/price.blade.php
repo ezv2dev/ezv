@@ -195,7 +195,7 @@
                                 <div class="row items-push">
                                     <center>
                                         <div class="col-6">
-                                            <button type="submit" class="btn btn-sm btn-primary mt-3"
+                                            <button type="submit" class="btn btn-sm btn-primary mt-3" id="submitPrice"
                                                 style="width: 200px;">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
@@ -439,14 +439,17 @@
 <script>
 $(function() {
     $("#villa-price").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
         $('#villa-price').removeClass('is-invalid');
         $('#err-prc').hide();
     });
     $("#special_price").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
         $('#special_price').removeClass('is-invalid');
         $('#err-spcl-prc').hide();
     });
     $("#disc").keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
         $('#disc').removeClass('is-invalid');
         $('#err-disc').hide();
     });
@@ -471,6 +474,10 @@ $(function() {
         }
         if(error == 1) {
             e.preventDefault();
+        } else {
+            let btn = document.getElementById("submitPrice");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
         }
     });
 });
