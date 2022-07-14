@@ -4414,7 +4414,7 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
-                if (message.data.photo.length > 1)
+                if (message.data.photo.length > 0)
                 {
                     content = '<div class="col-4 grid-photo" id="displayPhoto'+
                         message.data.photo[0].id_photo+
@@ -4429,8 +4429,10 @@
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
                         message.data.photo[0].id_photo+
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                
+                    $('.gallery').append(content);
                 }
-                if (message.data.video.length > 1)
+                if (message.data.video.length > 0)
                 {
                     content = '<div class="col-4 grid-photo" id="displayPhoto'+
                         message.data.photo[0].id_photo+
@@ -4445,9 +4447,9 @@
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
                         message.data.photo[0].id_photo+
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                    
+                    $('.gallery').append(content);
                 }
-
-                $('.gallery').append(content);
 
                 this.removeFile(file);
             },
