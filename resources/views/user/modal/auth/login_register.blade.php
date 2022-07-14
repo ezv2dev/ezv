@@ -278,7 +278,9 @@
                         <div class="tab-pane" id="content-tab-login">
                             <div class="login-container">
                                 <div class="col-12 modal-login-title ">
-                                    d
+                                    <div class="alert alert-danger" style="font-size: 14px; font-weight: 400;" role="alert">
+                                        Make your account today, and save more our best listing.
+                                    </div>
                                     <h3 class="text-center">{{ __('user_page.Log In') }}</h3>
                                     <p class="text-center text-muted">
                                         {{ __('user_page.Log in to continue in our website') }}</p>
