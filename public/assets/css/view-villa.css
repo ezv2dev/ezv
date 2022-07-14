@@ -3065,6 +3065,11 @@ video {
     cursor: pointer;
 }
 
+.bedroom-card {
+    border: 1px solid rgba(0, 0, 0, 0.25) !important;
+    border-radius: 0.5rem !important;
+}
+
 .col-4.review-container {
     padding-top: 28px;
 }

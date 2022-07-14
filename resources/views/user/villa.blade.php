@@ -934,6 +934,40 @@
                         </div>
                     </section>
 
+                    <section id="bedroom" class="section-2">
+                        <hr>
+                        <div class="pd-tlr-10">
+                            <h2 class="mb-0">Where you'll sleep</h2>
+                            <div class="Container1">
+                                <div class="Head">
+                                    <span class="Arrows d-flex justify-content-end mb-3"></span>
+                                </div>
+                                <div class="SlickCarouselBedroom">
+                                    @for ($i = 1; $i <= 6; $i++)
+                                        <div>
+                                            <div class="bedroom-card mx-2">
+                                                <div class="card-body mx-auto text-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px"
+                                                        viewBox="0 0 40 28" style="fill: #222222;">
+                                                        <g id="Group_2" data-name="Group 2"
+                                                            transform="translate(-66 524)">
+                                                            <path id="bed_FILL1_wght400_GRAD0_opsz48"
+                                                                d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z"
+                                                                transform="translate(62 -534)" />
+                                                        </g>
+                                                    </svg>
+                                                    <h5 class="my-3">Bedroom {{ $i }}</h5>
+                                                    <p class="mb-0">1 king bed</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>    
+                        </div>
+                        
+                    </section>
+
                     <section id="availability" class="section-2">
                         <div id="scrollStop"></div>
                         <div class="pd-tlr-10">
@@ -4518,6 +4552,44 @@
                 },
             }
         });
+    </script>
+
+    <script>
+        // Slick Slier Carousel
+        $(document).ready(function() {
+            $(".SlickCarouselBedroom").slick({
+                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                autoplay: false,
+                autoplaySpeed: 5000, //  Slide Delay
+                speed: 800, // Transition Speed
+                slidesToShow: 4, // Number Of Carousel
+                slidesToScroll: 1, // Slide To Move
+                pauseOnHover: false,
+                appendArrows: $(".Container1 .Head .Arrows"), // Class For Arrows Buttons
+                prevArrow: '<span class="Slick-Prev"></span>',
+                nextArrow: '<span class="Slick-Next"></span>',
+                easing: "linear",
+                responsive: [{
+                        breakpoint: 801,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 641,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 481,
+                        settings: {
+                            slidesToShow: 1,
+                        }
+                    },
+                ],
+            })
+        })
     </script>
 
     <script>
