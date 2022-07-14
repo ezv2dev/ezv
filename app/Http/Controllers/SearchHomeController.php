@@ -70,81 +70,87 @@ class SearchHomeController extends Controller
             }
         //* end search action
 
+        $ids = $villa->pluck('id_villa');
+        // $villa = Villa::whereIn('id_villa', $ids)->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
+        $villa = Villa::whereIn('id_villa', $ids)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
+        $villa->appends(request()->query());
+        // dd($villa);
+
         // $villa = Villa::whereIn('id_villa', $villaIds)->orderBy('grade')->paginate(5);
-         //* order by grade
-            $villaIds = $villa->modelKeys();
-            $villas = Villa::with('villaHasCategory')
-                ->whereIn('id_villa', $villaIds)
-                ->where('grade', '!=', 'AA')
-                ->where('status', 1)
-                ->inRandomOrder()
-                ->get()->sortBy('grade');
-            $villa_aa = Villa::with('villaHasCategory')
-                ->whereIn('id_villa', $villaIds)
-                ->where('grade', '=', 'AA')
-                ->where('status', 1)
-                ->inRandomOrder()
-                ->get();
+        // //* order by grade
+        //     $villaIds = $villa->modelKeys();
+        //     $villas = Villa::with('villaHasCategory')
+        //         ->whereIn('id_villa', $villaIds)
+        //         ->where('grade', '!=', 'AA')
+        //         ->where('status', 1)
+        //         ->inRandomOrder()
+        //         ->get()->sortBy('grade');
+        //     $villa_aa = Villa::with('villaHasCategory')
+        //         ->whereIn('id_villa', $villaIds)
+        //         ->where('grade', '=', 'AA')
+        //         ->where('status', 1)
+        //         ->inRandomOrder()
+        //         ->get();
 
-            // dd($villaIds);
-            if ($request->itemIds) {
-                $villas = Villa::with('villaHasCategory')
-                    ->whereIn('id_villa', $villaIds)
-                    ->whereNotIn('id_villa', $request->itemIds)
-                    ->where('grade', '!=', 'AA')
-                    ->where('status', 1)
-                    ->inRandomOrder()
-                    ->get()->sortBy('grade');
-                $villa_aa = Villa::with('villaHasCategory')
-                    ->whereIn('id_villa', $villaIds)
-                    ->whereNotIn('id_villa', $request->itemIds)
-                    ->where('grade', '=', 'AA')
-                    ->where('status', 1)
-                    ->inRandomOrder()
-                    ->get();
-            }
+        //     // dd($villaIds);
+        //     if ($request->itemIds) {
+        //         $villas = Villa::with('villaHasCategory')
+        //             ->whereIn('id_villa', $villaIds)
+        //             ->whereNotIn('id_villa', $request->itemIds)
+        //             ->where('grade', '!=', 'AA')
+        //             ->where('status', 1)
+        //             ->inRandomOrder()
+        //             ->get()->sortBy('grade');
+        //         $villa_aa = Villa::with('villaHasCategory')
+        //             ->whereIn('id_villa', $villaIds)
+        //             ->whereNotIn('id_villa', $request->itemIds)
+        //             ->where('grade', '=', 'AA')
+        //             ->where('status', 1)
+        //             ->inRandomOrder()
+        //             ->get();
+        //     }
 
-            if ($villas->count() > 0 && $villa_aa->count() > 0) {
-                $split_count = $villas->count() / 4;
-                $villas_parted = $villas->split(ceil($split_count));
-                for ($i = 0; $i < $villa_aa->count(); $i++) {
-                    if ($i == 0) {
-                        $villa = $villas_parted[0];
-                        $villa->push($villa_aa[0]);
-                    } else {
-                        if (isset($villas_parted[$i])) {
-                            foreach ($villas_parted[$i] as $item) {
-                                $villa->push($item);
-                            }
-                            $villa->push($villa_aa[$i]);
-                        } elseif ($villa_aa[$i]) {
-                            $villa->push($villa_aa[$i]);
-                        }
-                    }
-                }
-            }
-            if ($villas->count() > 0 && $villa_aa->count() <= 0) {
-                $villa = $villas;
-            }
-            if ($villas->count() <= 0 && $villa_aa->count() > 0) {
-                $villa = $villa_aa;
-            }
-            if ($villas->count() <= 0 && $villa_aa->count() <= 0) {
-                $villa = collect([]);
-            }
+        //     if ($villas->count() > 0 && $villa_aa->count() > 0) {
+        //         $split_count = $villas->count() / 4;
+        //         $villas_parted = $villas->split(ceil($split_count));
+        //         for ($i = 0; $i < $villa_aa->count(); $i++) {
+        //             if ($i == 0) {
+        //                 $villa = $villas_parted[0];
+        //                 $villa->push($villa_aa[0]);
+        //             } else {
+        //                 if (isset($villas_parted[$i])) {
+        //                     foreach ($villas_parted[$i] as $item) {
+        //                         $villa->push($item);
+        //                     }
+        //                     $villa->push($villa_aa[$i]);
+        //                 } elseif ($villa_aa[$i]) {
+        //                     $villa->push($villa_aa[$i]);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     if ($villas->count() > 0 && $villa_aa->count() <= 0) {
+        //         $villa = $villas;
+        //     }
+        //     if ($villas->count() <= 0 && $villa_aa->count() > 0) {
+        //         $villa = $villa_aa;
+        //     }
+        //     if ($villas->count() <= 0 && $villa_aa->count() <= 0) {
+        //         $villa = collect([]);
+        //     }
 
-            if ($villa->count() > 0) {
-                $page = 1;
-                $perPage = 5;
-                $villa = new \Illuminate\Pagination\LengthAwarePaginator(
-                    $villa->forPage($page, $perPage),
-                    $villa->count(),
-                    $perPage,
-                    $page
-                );
-            }
-            // dd($villa->pluck('grade', 'id_villa'));
-        //* end order by grade
+        //     if ($villa->count() > 0) {
+        //         $page = $request->page ?? 1;
+        //         $perPage = 5;
+        //         $villa = new \Illuminate\Pagination\LengthAwarePaginator(
+        //             $villa->forPage($page, $perPage),
+        //             $villa->count(),
+        //             $perPage,
+        //             $page
+        //         );
+        //     }
+        //     // dd($villa->pluck('grade', 'id_villa'));
+        // //* end order by grade
 
         //* find nearby function
             $i = 0;
@@ -240,11 +246,11 @@ class SearchHomeController extends Controller
         //* end find nearby function
 
         //* if request is from ajax
-            if ($request->ajax()) {
-                $view = view('user.data_list_villa', compact('villa'))->render();
+            // if ($request->ajax()) {
+            //     $view = view('user.data_list_villa', compact('villa'))->render();
 
-                return response()->json(['html' => $view]);
-            }
+            //     return response()->json(['html' => $view]);
+            // }
         //* end if request is from ajax
 
         // return view('user.list_villa_search', compact('villa', 'amenities', 'host_language', 'accessibility_features', 'accessibility_features_detail', 'propertyType', 'villaCategory', 'villaFilter'));

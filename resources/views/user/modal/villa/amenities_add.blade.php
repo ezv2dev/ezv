@@ -153,6 +153,114 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                King
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="kingbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="kingbed" name="king" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="kingbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Double
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="doublebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="doublebed" name="double" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="doublebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Queen
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="queenbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="queenbed" name="queen" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="queenbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Single
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="singlebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="singlebed" name="single" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="singlebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Working table
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="workingtable_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="workingtable" name="workingtable" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="workingtable_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Couch
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="couch_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="couch" name="couch" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="couch_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="row">
