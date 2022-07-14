@@ -1221,8 +1221,8 @@
                                                 <span class="edit-icon">
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" type="button"
-                                                        title="{{ __('user_page.Add Photo Tag') }}"
-                                                        onclick="add_photo_tag({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}'})"><i
+                                                        title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="{{ $item->id_photo }}"
+                                                        onclick="add_photo_tag(this)"><i
                                                             class="fa fa-pencil"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
@@ -1232,8 +1232,8 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);"
-                                                        onclick="delete_photo_photo({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}'})"><i
+                                                        href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="{{ $item->id_photo }}"
+                                                        onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
                                             @endif
@@ -3159,8 +3159,9 @@
     </script>
 
     <script>
-        function add_photo_tag(idc) {
-            $('#id_photo').val(idc.id_photo);
+        function add_photo_tag(e) {
+            let id_photo = e.getAttribute("data-photo");
+            $('#id_photo').val(id_photo);
 
             // $('#caption_photo').val(idc.caption);
 
@@ -4298,10 +4299,6 @@
             thumbnailWidth: 960,
             url: '/restaurant/photo/store',
             parallelUploads: 50,
-            "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
-                alert(errorToString(message));
-            },
             init: function() {
 
                 var myDropzone = this;
@@ -4323,9 +4320,14 @@
                     formData.append('id_restaurant', value);
                 });
 
-                this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                this.on('queuecomplete', function(file, response, message) {
+                    // console.log(file);
+                    // console.log(response);
+                    // console.log(message);
+                });
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4354,7 +4356,70 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file);// perhaps not remove on xhr errors
+
+                iziToast.error({
+                    title: "Error",
+                    message: message.message.file[0],
+                    position: "topRight",
+                });
+            },
+            success: function (file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/restaurant/";
+                let slash = "/";
+                let uid = message.data.uid.uid;
+                let lowerCaseUid = uid.toLowerCase();
+                let content;
+
+                if (message.data.photo.length > 1)
+                {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
+                        message.data.photo[0].id_photo+
+                        '"> <a href="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '" title="'+
+                        message.data.photo[0].caption+
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                }
+                if (message.data.video.length > 1)
+                {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
+                        message.data.photo[0].id_photo+
+                        '"> <a href="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '" title="'+
+                        message.data.photo[0].caption+
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                }
+
+                $('.gallery').append(content);
+
+                this.removeFile(file);
+            },
         }
     </script>
 
@@ -4629,7 +4694,9 @@
     {{-- Sweetalert Function Delete Photo --}}
     <script>
         function delete_photo_photo(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let photo = ids.getAttribute("data-photo");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4644,7 +4711,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/photo/photo/${ids.id_photo}`,
+                        url: `/restaurant/${id}/delete/photo/photo/${photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4653,7 +4720,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $(`#displayPhoto${ids.id_photo}`).remove();
+                            $(`#displayPhoto${photo}`).remove();
                         }
                     });
                 } else {
