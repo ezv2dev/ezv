@@ -19,12 +19,10 @@ function updateSliderArrowsStatus4(
     }
 }
 
-$(function () {
+function sliderRestaurant() {
     // Scroll products' slider left/right
     let div = $("#cards-container4");
-    let cardCount = $(div)
-        .find(".cards4")
-        .children(".card4").length;
+    let cardCount = $(div).find(".cards4").children(".card4").length;
     let speed = 400;
     let containerWidth = $(".containerSlider4").width();
     let cardWidth = 90;
@@ -34,43 +32,49 @@ $(function () {
     //Remove scrollbars
     $("#slide-right-container4").click(function (e) {
         if ($(div).scrollLeft() + containerWidth < cardCount * cardWidth) {
-            $(div).animate({
-                scrollLeft: $(div).scrollLeft() + cardWidth
-            }, {
-                duration: speed,
-                complete: function () {
-                    setTimeout(
-                        updateSliderArrowsStatus4(
-                            div,
-                            containerWidth,
-                            cardCount,
-                            cardWidth
-                        ),
-                        1005
-                    );
+            $(div).animate(
+                {
+                    scrollLeft: $(div).scrollLeft() + cardWidth,
+                },
+                {
+                    duration: speed,
+                    complete: function () {
+                        setTimeout(
+                            updateSliderArrowsStatus4(
+                                div,
+                                containerWidth,
+                                cardCount,
+                                cardWidth
+                            ),
+                            1005
+                        );
+                    },
                 }
-            });
+            );
         }
         updateSliderArrowsStatus4(div, containerWidth, cardCount, cardWidth);
     });
     $("#slide-left-container4").click(function (e) {
         if ($(div).scrollLeft() + containerWidth > containerWidth) {
-            $(div).animate({
-                scrollLeft: "-=" + cardWidth
-            }, {
-                duration: speed,
-                complete: function () {
-                    setTimeout(
-                        updateSliderArrowsStatus4(
-                            div,
-                            containerWidth,
-                            cardCount,
-                            cardWidth
-                        ),
-                        1005
-                    );
+            $(div).animate(
+                {
+                    scrollLeft: "-=" + cardWidth,
+                },
+                {
+                    duration: speed,
+                    complete: function () {
+                        setTimeout(
+                            updateSliderArrowsStatus4(
+                                div,
+                                containerWidth,
+                                cardCount,
+                                cardWidth
+                            ),
+                            1005
+                        );
+                    },
                 }
-            });
+            );
         }
         updateSliderArrowsStatus4(div, containerWidth, cardCount, cardWidth);
     });
@@ -79,12 +83,19 @@ $(function () {
     $(window).resize(function () {
         try {
             containerWidth = $("#cards-container4").width();
-            updateSliderArrowsStatus4(div, containerWidth, cardCount, cardWidth);
+            updateSliderArrowsStatus4(
+                div,
+                containerWidth,
+                cardCount,
+                cardWidth
+            );
         } catch (error) {
             console.log(
-                `Error occured while trying to get updated slider container width: 
+                `Error occured while trying to get updated slider container width:
             ${error}`
             );
         }
     });
-});
+}
+
+sliderRestaurant();

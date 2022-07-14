@@ -4611,7 +4611,12 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
+
+                            //remove element story
                             $('#story'+story).remove();
+
+                            //update slider ketika story dihapus
+                            sliderRestaurant();
                         }
                     });
                 } else {
