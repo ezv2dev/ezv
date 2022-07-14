@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class VillaCategory extends Model
 {
     protected $fillable = [
-        'icon', 'name',
+        'icon', 'name', 'order'
     ];
 
     protected $table = 'villa_category';

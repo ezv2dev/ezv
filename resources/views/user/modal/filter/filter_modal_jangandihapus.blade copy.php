@@ -72,14 +72,17 @@ $amenities3 = [];
 for ($i = 6; $i < $amenities_length; $i++) {
     array_push($amenities3, $amenities2[$i]);
 }
-
-$category2 = App\Models\VillaCategory::all();
-$category_length = count($category2);
-
-$category3 = [];
-for ($i = 6; $i < $category_length; $i++) {
-    array_push($category3, $category2[$i]);
+$host_language2 = App\Models\HostLanguage::all();
+$host_language_length = count($host_language2);
+$host_language3 = [];
+for ($i = 4; $i < $host_language_length; $i++) {
+    array_push($host_language3, $host_language2[$i]);
 }
+$accessibility_features2 = App\Models\VillaAccessibilityFeatures::all();
+$accessibility_features_detail2 = App\Models\VillaAccessibilitiyFeaturesDetail::all();
+$accessibility_features3 = App\Models\VillaAccessibilityFeatures::whereIn('id_accessibility_features', [2, 3, 4])->get();
+$accessibility_features_detail3 = App\Models\VillaAccessibilitiyFeaturesDetail::whereIn('id_detail_accessibility_features', [5, 6, 7, 8, 9, 10, 11, 12, 13])->get();
+$property_type = App\Models\PropertyTypeVilla::all();
 
 //get from link
 $get_min = app('request')->input('fMinPrice');
@@ -115,8 +118,8 @@ if (!$get_max) {
                                         <div class="col-lg-12"
                                             style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
                                             <label for="fMinPrice" style="font-size: 12px;">Min</label>
-                                            <input name="fMinPrice" style="font-size: 12px; border: none;"
-                                                type="text" class="js-input-from form-control" value="0" />
+                                            <input name="fMinPrice" style="font-size: 12px;" type="text"
+                                                class="js-input-from form-control" value="0" />
                                             <input type="hidden" id="min_filter_price" value="{{ $get_min }}">
                                         </div>
                                     </div>
@@ -131,8 +134,8 @@ if (!$get_max) {
                                         <div class="col-lg-12"
                                             style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
                                             <label for="fMaxPrice" style="font-size: 12px;">Max</label>
-                                            <input name="fMaxPrice" style="font-size: 12px; border: none;"
-                                                type="text" class="js-input-to form-control" value="0" />
+                                            <input name="fMaxPrice" style="font-size: 12px;" type="text"
+                                                class="js-input-to form-control" value="0" />
                                             <input type="hidden" id="max_filter_price" value="{{ $get_max }}">
                                         </div>
                                     </div>
@@ -430,60 +433,120 @@ if (!$get_max) {
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="filter-modal-row">
-                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
-                        {{ Translate::translate('Category') }}</h5>
-                    <div id="modal-category-default" class="col-12">
-                        <div class="row modal-checkbox-row">
-                            @foreach ($category2->take(6) as $item)
+                    <h5 class="filter-modal-row-title col-12" style="cursor: pointer;">
+                        {{ Translate::translate('Property Type') }}</h5>
+                    <div class="propertytype-input-row">
+                        <div class="col-12 propertytype-grid-container">
+                            @php
+                                $i = 0;
+                                $get_property_filter = app('request')->input('fProperty');
+                            @endphp
+
+                            @foreach ($property_type as $item)
                                 @php
                                     $isChecked = '';
-                                    $categoryIds = explode(',', request()->get('fCategory'));
-                                    if (in_array($item->id_villa_category, $categoryIds)) {
+                                    $propertyIds = explode(',', request()->get('fProperty'));
+                                    if (in_array($item->id_property_type, $propertyIds)) {
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-4 checkdesign-gap">
-                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
-                                        <input type="checkbox" name="fCategory[]"
-                                            value="{{ $item->id_villa_category }}" {{ $isChecked }}>
-                                        <span class="checkmark"></span>
+
+                                <div class="propertytypeoption-type-container">
+                                    <input type="checkbox" name="fProperty[]"
+                                        value="{{ $item->id_property_type }}" id="r{{ $i }}"
+                                        {{ $isChecked }} />
+                                    <label class="propertytypemdoal-checkbox-alias" for="r{{ $i }}">
+                                        <div class="propertytypemodal-icon">
+                                            <i class="{{ $item->icon }}"></i>
+                                        </div>
+                                        <div class="propertymodal-text">
+                                            <p>{{ $item->name }}</p>
+                                        </div>
                                     </label>
                                 </div>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
-
                         </div>
-                        <h6 id="show-more-category" class="filter-modal-row-title-secondary"
-                            onclick="showMoreCategory();"
-                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
-                            {{ Translate::translate('Show more') }}
-                        </h6>
                     </div>
+                </div>
 
-                    <div id="modal-category-all" class="col-12 mt-1rem display-none">
-                        <div class="row modal-checkbox-row">
-                            @foreach ($category3 as $item)
-                                @php
-                                    $isChecked = '';
-                                    $categoryIds = explode(',', request()->get('fCategory'));
-                                    if (in_array($item->id_villa_category, $categoryIds)) {
-                                        $isChecked = 'checked';
-                                    }
-                                @endphp
-                                <div class="col-4 checkdesign-gap">
-                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
-                                        <input type="checkbox" name="fCategory[]"
-                                            value="{{ $item->id_villa_category }}" {{ $isChecked }}>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            @endforeach
+                <div class="filter-modal-row">
+                    <h5 class="filter-modal-row-title col-12" style="cursor: pointer;">
+                        {{ Translate::translate('Accessibility Features') }}
+                    </h5>
+                    <p class="modal-filter-text-row modal-fiter-desc">
+                        {{ Translate::translate('This info was provided by the Host and reviewed by EZV.') }}
+                    </p>
 
+                    @foreach ($accessibility_features2->take(1) as $item)
+                        <div id="modal-accessibility-default" class="col-12 mt-2rem">
+                            <h6 class="filter-modal-row-title-secondary" style="margin-bottom: 5px;">
+                                {{ $item->name }}
+                            </h6>
+                            @php
+                                $checked2 = [];
+                                if (isset($_GET['filterAccessibilityDetails'])) {
+                                    $checked2 = $_GET['filterAccessibilityDetails'];
+                                }
+                            @endphp
+                            <div class="row">
+                                @foreach ($accessibility_features_detail2->take(4) as $item2)
+                                    @if ($item2->id_accessibility_features == $item->id_accessibility_features)
+                                        <div class="col-6 font-14 checkdesign-gap">
+                                            <label class="checkdesign checkdesign-modal-filter">{{ $item2->name }}
+                                                <input type="checkbox" name="filterAccessibilityDetails[]"
+                                                    value="{{ $item->id_accessibility_features_detail }}"
+                                                    @if (in_array($item->id_accessibility_features_detail, $checked2)) checked @endif>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                        <h6 id="show-less-category" class="filter-modal-row-title-secondary"
-                            onclick="closeMoreCategory();"
+                    @endforeach
+
+                    <h6 id="show-more-accessibility" class="filter-modal-row-title-secondary"
+                        onclick="showmoreaccessibility();"
+                        style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration:underline;">
+                        {{ Translate::translate('Show more') }}
+                    </h6>
+
+                    <div id="modal-accessibility-all" class="col-12 display-none">
+                        @foreach ($accessibility_features3 as $item)
+                            <h6 class="filter-modal-row-title-secondary"
+                                style="margin-top: 20px; margin-bottom: -5px;">
+                                {{ $item->name }}
+                            </h6>
+                            @php
+                                $checked2 = [];
+                                if (isset($_GET['filterAccessibilityDetails'])) {
+                                    $checked2 = $_GET['filterAccessibilityDetails'];
+                                }
+                            @endphp
+                            <div class="row">
+                                @foreach ($accessibility_features_detail3 as $item2)
+                                    @if ($item2->id_accessibility_features == $item->id_accessibility_features)
+                                        <div class="col-6 font-14 checkdesign-gap">
+                                            <label class="checkdesign checkdesign-modal-filter">{{ $item2->name }}
+                                                <input type="checkbox" name="filterAccessibilityDetails[]"
+                                                    value="{{ $item->id_accessibility_features_detail }}"
+                                                    @if (in_array($item->id_accessibility_features_detail, $checked2)) checked @endif>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h6 id="show-less-accessibility" class="filter-modal-row-title-secondary"
+                            onclick="closemoreaccessibility();"
                             style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
                             {{ Translate::translate('Show less') }}
                         </h6>
@@ -548,6 +611,98 @@ if (!$get_max) {
                     </div>
                 </div>
 
+                <div class="filter-modal-row">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Booking Options') }}</h5>
+
+                    <div class="row col-12 modal-margin-0 margin-top-2rem">
+                        <div class="col-11 modal-padding-0">
+                            <h6 class="filter-modal-row-title-secondary">
+                                {{ Translate::translate('Instant Book') }}
+                            </h6>
+                            <p class="modal-fiter-desc-secondary modal-margin-0">
+                                {{ Translate::translate('Listings you can book without waiting for Host approval') }}
+                            </p>
+                        </div>
+                        <div class="col-1 modal-booking-checkbox">
+                            <input type="checkbox" hidden="hidden" id="instant_book">
+                            <label class="switch" for="instant_book"></label>
+                        </div>
+                    </div>
+                    <div class="row col-12 modal-margin-0 margin-top-2rem">
+                        <div class="col-11 modal-padding-0">
+                            <h6 class="filter-modal-row-title-secondary">
+                                {{ Translate::translate('Self check-in') }}
+                            </h6>
+                            <p class="modal-fiter-desc-secondary modal-margin-0">
+                                {{ Translate::translate('Easy access to the property once you arrive') }}
+                            </p>
+                        </div>
+                        <div class="col-1 modal-booking-checkbox">
+                            <input type="checkbox" hidden="hidden" id="self_check_in">
+                            <label class="switch" for="self_check_in"></label>
+                        </div>
+                    </div>
+                    <div class="row col-12 modal-margin-0 margin-top-2rem">
+                        <div class="col-11 modal-padding-0">
+                            <h6 class="filter-modal-row-title-secondary">
+                                {{ Translate::translate('Free cancellation') }}
+                            </h6>
+                            <p class="modal-fiter-desc-secondary modal-margin-0">
+                                {{ Translate::translate('Only show stays that offer free cancellation') }}
+                            </p>
+                        </div>
+                        <div class="col-1 modal-booking-checkbox">
+                            <input type="checkbox" hidden="hidden" id="free_cancelation">
+                            <label class="switch" for="free_cancelation"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-modal-row" style="border-bottom: 0px;">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Host Languange') }}</h5>
+                    <div id="modal-language-default" class="col-12">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($host_language2->take(4) as $item)
+                                <div class="col-6 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="filterHostLanguage[]"
+                                            value="{{ $item->id_host_language }}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <h6 id="show-more-language" class="filter-modal-row-title-secondary"
+                            onclick="showmorelanguage();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show more') }}
+                        </h6>
+                    </div>
+
+                    <div id="modal-language-all" class="col-12 mt-1rem display-none">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($host_language3 as $item)
+                                <div class="col-6 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="filterHostLanguage[]"
+                                            value="{{ $item->id_host_language }}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <h6 id="show-less-language" class="filter-modal-row-title-secondary"
+                            onclick="closemorelanguage();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show less') }}
+                        </h6>
+                    </div>
+                </div>
+
             </div>
             <!-- Submit -->
             <div class="modal-filter-footer">
@@ -598,6 +753,18 @@ if (!$get_max) {
         document.getElementById('bed_number2').stepDown();
     }
 
+    function showmoreaccessibility() {
+        document.getElementById("modal-accessibility-all").classList.remove("display-none");
+        document.getElementById("modal-accessibility-all").classList.add("display-block");
+        document.getElementById("show-more-accessibility").classList.add("display-none");
+    }
+
+    function closemoreaccessibility() {
+        document.getElementById("modal-accessibility-all").classList.remove("display-block");
+        document.getElementById("modal-accessibility-all").classList.add("display-none");
+        document.getElementById("show-more-accessibility").classList.remove("display-none");
+    }
+
     function showmoreamenities() {
         document.getElementById("modal-amenities-all").classList.remove("display-none");
         document.getElementById("modal-amenities-all").classList.add("display-block");
@@ -610,16 +777,16 @@ if (!$get_max) {
         document.getElementById("show-more-amenities").classList.remove("display-none");
     }
 
-    function showMoreCategory() {
-        document.getElementById("modal-category-all").classList.remove("display-none");
-        document.getElementById("modal-category-all").classList.add("display-block");
-        document.getElementById("show-more-category").classList.add("display-none");
+    function showmorelanguage() {
+        document.getElementById("modal-language-all").classList.remove("display-none");
+        document.getElementById("modal-language-all").classList.add("display-block");
+        document.getElementById("show-more-language").classList.add("display-none");
     }
 
-    function closeMoreCategory() {
-        document.getElementById("modal-category-all").classList.remove("display-block");
-        document.getElementById("modal-category-all").classList.add("display-none");
-        document.getElementById("show-more-category").classList.remove("display-none");
+    function closemorelanguage() {
+        document.getElementById("modal-language-all").classList.remove("display-block");
+        document.getElementById("modal-language-all").classList.add("display-none");
+        document.getElementById("show-more-language").classList.remove("display-none");
     }
 </script>
 <!-- END Fade In Default Modal -->
