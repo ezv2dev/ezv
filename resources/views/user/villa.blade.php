@@ -304,7 +304,7 @@
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Home Name Here') }}" required>{{ $villa[0]->name }}</textarea>
                                     <small id="err-name" style="display: none;" class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary"
@@ -409,7 +409,7 @@
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
-                                    <small id="err-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small><br>
+                                    <small id="err-shrt-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary"
                                         onclick="editShortDesc({{ $villa[0]->id_villa }})">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -911,8 +911,9 @@
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
                                         <div class="form-group">
-                                            <textarea name="description" id="description-form-input" class="w-100" rows="5"
-                                                placeholder="{{ __('user_page.Make your short description here') }}" required>{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
+                                            <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5"
+                                                placeholder="{{ __('user_page.Make your short description here') }}">{{ str_replace('<br>', '&#13;&#10;', $villa[0]->description) }}</textarea>
+                                            <small id="err-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary"
@@ -2134,7 +2135,7 @@
                                 </button>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
-                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);" style="text-decoration: underline; color: #ff7400;" href="#">{{ __('user_page.Show more') }} 
+                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);" style="text-decoration: underline; color: #ff7400;" href="#">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </p>
@@ -2155,7 +2156,7 @@
                         <a id="" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreInsurance();">
                             <span style="text-decoration: underline; color: #ff7400;">Learn more</span>
                         </a>
-                    
+
                     </div>
                     <hr>
                     {{-- End of Insurance --}}
@@ -2383,7 +2384,7 @@
                             {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
-                                
+
                                 {{-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> --}}
 
                                 {{-- EDIT TO SWIPE CAROUSEL --}}

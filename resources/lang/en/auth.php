@@ -16,6 +16,7 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    //login & register
     'empty_fname' => 'The first name field is required',
     'invalid_fname' => 'Invalid first name',
     'empty_lname' => 'The last name field is required',
@@ -25,13 +26,24 @@ return [
     'empty_password' => 'The password field is required',
     'min_password' => 'The password must be at least 8 characters.',
     'invalid_password' => 'The confirmation password not match',
+
+    //detail reserve
     'empty_va' => 'Please select one of virtual account brand',
-    'empty_cnm' => 'Card number is invalid',
-    'empty_exp' => 'Card exp is invalid',
-    'empty_cvn' => 'Card cvn is invalid',
-    'empty_img' => 'Invalid image',
-    'empty_name' => 'Invalid Name',
-    'empty_desc' => 'Invalid Description',
-    'empty_title' => 'Invalid Title',
-    'empty_video' => 'Invalid Video',
+    'empty_cnm' => 'The card number field is required',
+    'empty_exp' => 'The card exp field is required',
+    'empty_cvn' => 'The card cvn field is required',
+
+    //edit desc villa
+    'empty_img' => 'The image field is required',
+    'empty_name' => 'The name field is required',
+    'empty_desc' => 'The description field is required',
+    'empty_short_desc' => 'The short description field is required',
+    'empty_title' => 'The title field is required',
+    'empty_video' => 'The video field is required',
+
+    //price villa
+    'empty_price' => 'The price field is required',
+    'invalid_price' => 'The price field is invalid',
+    'empty_special_price' => 'The special price field is required',
+    'empty_discount' => 'The discount field is required',
 ];
