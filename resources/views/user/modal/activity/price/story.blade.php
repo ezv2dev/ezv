@@ -36,8 +36,7 @@
                     </div>
                     <small id="err-stry-vid" style="display: none;" class="invalid-feedback">{{ __('auth.empty_video') }}</small>
                     <div class="form-group story-title-gap">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="{{ Translate::translate('Title') }}"
-                           ="required">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="{{ Translate::translate('Title') }}">
                     </div>
                     <small id="err-stry-ttl" style="display: none;" class="invalid-feedback">{{ __('auth.empty_title') }}</small>
 
