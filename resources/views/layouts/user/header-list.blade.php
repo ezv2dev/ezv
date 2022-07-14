@@ -4080,9 +4080,13 @@
         <script>
 
             var lastScrollTop = 0;
+            var navbarHeight = $(".page-header-fixed").innerHeight();
+            $(window).on("resize", function () {
+                navbarHeight = Number($(".page-header-fixed").innerHeight() + 30)
+            })
+
             $(window).scroll(function(event) {
                 var st = $(this).scrollTop();
-                var navbarHeight = $(".page-header-fixed").innerHeight();
                 var isShow = true;
                 if (st > 0) {
                     $('#filter-cat-bg-color').css({'transform' : 'translateY(-200px)','transition':'all 0.5s ease'})
@@ -4119,13 +4123,11 @@
                     }else {
                         $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)','transition':'all 0.3s ease'})
                     }
-
-                    $(".grid-container-43").css("margin-top", navbarHeight + 60 + "px");
-                    $('.container-grid').css("margin-top", navbarHeight + 60 + "px");
-                    $('.container-grid-activity').css("margin-top", navbarHeight + 60 + "px");
-                    $('.container-grid-hotel').css("margin-top", navbarHeight + 60 + "px");
-
-                    console.log('more nol', navbarHeight)
+                    
+                    $(".grid-container-43").attr('style', 'margin-top:'+navbarHeight+ 'px !important');
+                    $('.container-grid').attr('style', 'margin-top:'+navbarHeight+ 'px !important');
+                    $('.container-grid-activity').attr('style', 'margin-top:'+navbarHeight+ 'px !important');
+                    $('.container-grid-hotel').attr('style', 'margin-top:'+navbarHeight+ 'px !important');
 
                     if (st > lastScrollTop) {
                         // downscroll code
