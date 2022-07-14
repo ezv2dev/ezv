@@ -934,7 +934,7 @@
                         </div>
                     </section>
 
-                    <section id="bedroom" class="section-2">
+                    {{-- <section id="bedroom" class="section-2">
                         <hr>
                         <div class="pd-tlr-10">
                             <h2 class="mb-0">Where you'll sleep</h2>
@@ -965,8 +965,7 @@
                                 </div>
                             </div>    
                         </div>
-                        
-                    </section>
+                    </section> --}}
 
                     <section id="availability" class="section-2">
                         <div id="scrollStop"></div>
@@ -3274,32 +3273,6 @@
                         @endforeach
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBathroom">
-                        <div class="col-md-12">
-                            <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
-                        </div>
-                        @foreach ($bathroomGet as $item)
-                            <div class="col-md-6">
-                                <span class="translate-text-group-items">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBedroom">
-                        <div class="col-md-12">
-                            <h5 class="mb-3">{{ __('user_page.Bedroom') }}</h5>
-                        </div>
-                        @foreach ($bedroomGet as $item)
-                            <div class="col-md-6">
-                                <span class="translate-text-group-items">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
                         id="moreKitchen">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
@@ -3337,6 +3310,34 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                        id="moreBathroom">
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
+                        </div>
+                        @foreach ($bathroomGet as $item)
+                            <div class="col-md-6">
+                                <span class="translate-text-group-items">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    @for($i = 1; $i <= 3; $i++)
+                        <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
+                            id="moreBedroom">
+                            <div class="col-md-12">
+                                <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i }}</h5>
+                            </div>
+                            @foreach ($bedroomGet as $item)
+                                <div class="col-md-6">
+                                    <span class="translate-text-group-items">
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endfor
                 </div>
                 <div class="modal-filter-footer" style="height: 20px;"></div>
             </div>
@@ -4552,44 +4553,6 @@
                 },
             }
         });
-    </script>
-
-    <script>
-        // Slick Slier Carousel
-        $(document).ready(function() {
-            $(".SlickCarouselBedroom").slick({
-                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
-                autoplay: false,
-                autoplaySpeed: 5000, //  Slide Delay
-                speed: 800, // Transition Speed
-                slidesToShow: 4, // Number Of Carousel
-                slidesToScroll: 1, // Slide To Move
-                pauseOnHover: false,
-                appendArrows: $(".Container1 .Head .Arrows"), // Class For Arrows Buttons
-                prevArrow: '<span class="Slick-Prev"></span>',
-                nextArrow: '<span class="Slick-Next"></span>',
-                easing: "linear",
-                responsive: [{
-                        breakpoint: 801,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 641,
-                        settings: {
-                            slidesToShow: 2,
-                        }
-                    },
-                    {
-                        breakpoint: 481,
-                        settings: {
-                            slidesToShow: 1,
-                        }
-                    },
-                ],
-            })
-        })
     </script>
 
     <script>
