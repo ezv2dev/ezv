@@ -397,16 +397,14 @@
                                     &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;"
                                         class="edit-profile-image-btn-dekstop"
                                         onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }}</a>
-                                    @if ($activity->image)
-                                        {{-- <a href="{{ route('activity_delete_image', $activity->id_activity) }}"> --}}
-                                        <a class="delete-profile edit-profile-image-btn-dekstop"
-                                            href="javascript:void(0);"
+                                    {{-- @if ($activity->image)
+                                        <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': `{{ $activity->id_activity }}`})"><i
                                                 class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
                                                 data-bs-placement="bottom"
                                                 title="{{ __('user_page.Delete') }}"></i></a>
-                                    @endif
+                                    @endif --}}
                                 @endif
                             @endauth
                             <div class="date-contact-dekstop">
@@ -479,7 +477,7 @@
                                             </a>
                                         @endif
                                     </div>
-                                    <div class="col-1">
+                                    <div style="padding: 0px 6px;">
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <a type="button" onclick="edit_contact()"
@@ -542,15 +540,13 @@
                                 &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;"
                                     class="edit-profile-image-btn-mobile d-md-none"
                                     onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }}</a>
-                                @if ($activity->image)
-                                    {{-- <a href="{{ route('activity_delete_image', $activity->id_activity) }}"> --}}
-                                    <a class="delete-profile edit-profile-image-btn-mobile d-md-none"
-                                        href="javascript:void(0);"
+                                {{-- @if ($activity->image)
+                                    <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': `{{ $activity->id_activity }}`})"><i
                                             class="fa fa-trash" style="color:red; margin-left: 25px;"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
-                                @endif
+                                @endif --}}
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
@@ -735,8 +731,8 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($activity->video as $item)
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($activity->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
@@ -800,9 +796,9 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($activity->story as $item)
-                                                            <div class="card4 col-lg-3" style="border-radius: 5px;">
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($activity->story->sortByDesc('updated_at') as $item)
+                                                            <div class="card4 col-lg-3" id="story{{$item->id_story}}" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
@@ -822,8 +818,7 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_activity_story({'id': `{{ $activity->id_activity }}`, 'id_story': `{{ $item->id_story }}`})">
+                                                                            href="javascript:void(0);" data-activity="{{ $activity->id_activity }}" data-story="{{ $item->id_story }}" onclick="delete_story(this)">
                                                                                 {{-- <a href="{{ route('activity_delete_story', ['id' => $activity->id_activity, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -838,7 +833,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                        @foreach ($activity->video as $item)
+                                                        @foreach ($activity->video->sortBy('order') as $item)
                                                             <div class="card4 col-lg-3" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
@@ -896,7 +891,7 @@
                                     </div>
                                     <div id="cards-container3">
                                         <div class="cards3">
-                                            @foreach ($activity->story as $item)
+                                            @foreach ($activity->story->sortByDesc('updated_at') as $item)
                                                 <div class="card3 col-lg-3" style="border-radius: 5px;">
                                                     <div class="img-wrap">
                                                         <div class="video-position">
@@ -924,7 +919,7 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            @foreach ($activity->video as $item)
+                                            @foreach ($activity->video->sortBy('order') as $item)
                                                 <div class="card3 col-lg-3" style="border-radius: 5px;">
                                                     <div class="img-wrap">
                                                         <div class="video-position">
@@ -4636,8 +4631,10 @@
 
     {{-- Sweetalert Function Delete Story --}}
     <script>
-        function delete_activity_story(ids) {
-            var ids = ids;
+        function delete_story(e) {
+            var id = e.getAttribute("data-activity");
+            var story = e.getAttribute("data-story");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4652,7 +4649,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/things-to-do/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/things-to-do/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4661,7 +4658,12 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+
+                            //remove element story
+                            $('#story'+story).remove();
+
+                            //update slider ketika story dihapus
+                            sliderRestaurant();
                         }
                     });
                 } else {

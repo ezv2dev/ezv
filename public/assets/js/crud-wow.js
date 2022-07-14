@@ -6,7 +6,7 @@ $.ajaxSetup({
 
 let id_activity = $("#id_activity").val();
 
-//ganti short description restaurant
+//ganti short description activity
 function saveShortDescription() {
     let short_desc = $("#short-description-form-input").val();
 
@@ -607,87 +607,86 @@ function tConvert(time) {
     return time.join(""); // return adjusted time or original string
 }
 
-function saveRestaurantPrice() {
-    let select_restaurant_type = document.getElementById(
-        "restaurant-type-input"
-    );
-    let type_restaurant =
-        select_restaurant_type.options[select_restaurant_type.selectedIndex]
-            .value;
+let priceImageActivity;
+// $("#modal-add_price").find("input[name='image']").on("change", function (ev) {
+//     priceImageActivity = this.files[0];
+// });
+$("#modal-add_price").find("input[name='image']").eq(0).on("change", function (ev) {
+    priceImageActivity = this.files[0];
+    console.log('hit data');
+});
 
-    let select_restaurant_price = document.getElementById(
-        "restaurant-price-input"
-    );
-    let price_restaurant =
-        select_restaurant_price.options[select_restaurant_price.selectedIndex]
-            .value;
+function savePriceActivity() {
+    let id_activity = $("#modal-add_price").find("input[name='id_activity']").val();
+    let name = $("#modal-add_price").find("input[name='name']").val();
+    let price = $("#modal-add_price").find("input[name='price']").val();
+    let start_date = $("#modal-add_price").find("input[name='start_date']").val();
+    let end_date = $("#modal-add_price").find("input[name='end_date']").val();
+    let description = $("#modal-add_price").find("input[name='description']").val();
+
+    var formData = new FormData($('#addPriceForm'));
+    console.log(formData);
+
+    let btn = document.getElementById("btnSavePrice");
+    btn.textContent = "Saving Price...";
+    btn.classList.add("disabled");
+
+    var formData = new FormData(this);
+    formData.append("id_activity", id_activity);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("start_date", start_date);
+    formData.append("end_date", end_date);
+    formData.append("description", description);
+    formData.append("image", priceImageActivity);
 
     $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/things-to-do/update/type",
-        data: {
-            id_activity: id_activity,
-            id_type: type_restaurant,
-            id_price: price_restaurant,
-        },
+        url: "/things-to-do/price/store",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
         success: function (response) {
             console.log(response);
+            $("#modal-add_price").find("input[name='id_activity']").val('');
+            $("#modal-add_price").find("input[name='name']").val('');
+            $("#modal-add_price").find("input[name='price']").val('');
+            $("#modal-add_price").find("input[name='start_date']").val('');
+            $("#modal-add_price").find("input[name='end_date']").val('');
+            $("#modal-add_price").find("input[name='description']").val('');
+            $("#modal-add_price").find("input[name='image']").val('');
 
             iziToast.success({
                 title: "Success",
                 message: response.message,
                 position: "topRight",
             });
-
-            var restaurantTypeInput = $("#restaurant-type-input");
-            var restaurantPriceInput = $("#restaurant-price-input");
-            $(restaurantTypeInput).val(response.data.id_type);
-            $(restaurantPriceInput).val(response.data.id_price);
-
-            let contentPrice;
-
-            contentPrice =
-                '<span data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
-                response.data.type +
-                '">' +
-                response.data.type +
-                "</span>";
-
-            contentPrice = contentPrice + "<span> - </span>";
-
-            if (response.data.id_price == 1) {
-                contentPrice =
-                    contentPrice +
-                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
-                    response.data.price +
-                    '">$</span>';
-            } else if (response.data.id_price == 2) {
-                contentPrice =
-                    contentPrice +
-                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
-                    response.data.price +
-                    '">$$</span>';
-            } else if (response.data.id_price == 3) {
-                contentPrice =
-                    contentPrice +
-                    '<span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="' +
-                    response.data.price +
-                    '">$$$</span>';
+        },
+        error: function (jqXHR, exception) {
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
             } else {
-                contentPrice = contentPrice + "<span>No Price Rate Yet</span>";
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
             }
 
-            contentPrice =
-                contentPrice +
-                '<a type="button" onclick="editTypeForm()" style="margin-left: 5px; font-size: 10pt; font-weight: 600; color: #ff7400;">Edit</a>';
-
-            $("#type_price_content").html("");
-            $("#type_price_content").append(contentPrice);
-
-            editTypeFormCancel();
+            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.classList.remove("disabled");
         },
     });
 }
@@ -904,3 +903,158 @@ function saveContactActivity() {
         },
     });
 }
+
+//add save story
+let storyActivity;
+var storyVideoForm = $(".story-upload").children(".story-video-form");
+var storyVideoInput = $(".story-upload").children(".story-video-input");
+var storyVideoPreview = $(".story-upload").children(".story-video-preview");
+
+$(storyVideoInput)
+    .children("input")
+    .on("change", function (value) {
+        storyActivity = this.files[0];
+    });
+
+$("#storeStoryForm").submit(function (e) {
+    e.preventDefault();
+
+    //validasi
+    if (
+        storyActivity.type.includes("video/mp4") ||
+        storyActivity.type.includes("video/mov")
+    ) {
+        var formData = new FormData(this);
+
+        var btn = document.getElementById("btnSaveStory");
+        btn.textContent = "Saving Story...";
+        btn.classList.add("disabled");
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                Accept: "application/json",
+            },
+            url: "/things-to-do/story/store",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/activity/";
+                let slash = "/";
+                let uid = response.uid;
+                var lowerCaseUid = uid.toLowerCase();
+                let content;
+
+                for (let i = 0; i < response.data.length; i++) {
+                    if (i == 0) {
+                        content =
+                            '<div class="card4 col-lg-3" id="story' +
+                            response.data[i].id_story +
+                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
+                            response.data[i].id_story +
+                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                            path +
+                            lowerCaseUid +
+                            slash +
+                            response.data[i].name +
+                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
+                            id_activity +
+                            '" data-story="' +
+                            response.data[i].id_story +
+                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                    } else {
+                        content =
+                            content +
+                            '<div class="card4 col-lg-3" id="story' +
+                            response.data[i].id_story +
+                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
+                            response.data[i].id_story +
+                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                            path +
+                            lowerCaseUid +
+                            slash +
+                            response.data[i].name +
+                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
+                            id_activity +
+                            '" data-story="' +
+                            response.data[i].id_story +
+                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                    }
+                }
+
+                // console.log(content);
+
+                $(storyVideoInput).children("input").val("");
+                $(storyVideoPreview).hide();
+                $(storyVideoForm).show();
+
+                $("#storyContent").html("");
+                $("#storyContent").append(content);
+                $("#title").val("");
+
+                $("#modal-edit_story").modal("hide");
+
+                if (response.data.length > 4) {
+                    sliderRestaurant();
+                }
+
+                // $("#profileDropzone").attr("src", "");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+            error: function (jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                $("#modal-edit_story").modal("hide");
+
+                // $("#profileDropzone").attr("src", "");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+        });
+    } else {
+        $(storyVideoInput).children("input").val("");
+        $(storyVideoPreview).hide();
+        $(storyVideoForm).show();
+        $("#title").val("");
+
+        iziToast.error({
+            title: "Error",
+            message: "The file must be a file of type: <b>mp4 / mov</b>",
+            position: "topRight",
+        });
+    }
+    // console.log(readerStoryActivity);
+});

@@ -595,12 +595,17 @@ class ActivityListController extends Controller
 
     public function activity_store_price(Request $request)
     {
-        // dd($request->all());
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
-        request()->validate([
+        request()->validate();
+        // validation
+        $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:100'],
             // 'description' => ['required', 'string'],
@@ -610,16 +615,30 @@ class ActivityListController extends Controller
             'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // store process
@@ -633,7 +652,7 @@ class ActivityListController extends Controller
 
         $ext = strtolower($request->image->getClientOriginalExtension());
 
-        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png') {
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $original_name = $request->image->getClientOriginalName();
             // dd($original_name);
             $name_file = time() . "_" . $original_name;
@@ -656,13 +675,19 @@ class ActivityListController extends Controller
             ]);
         }
 
+        $activityPrice = ActivityPrice::where('id_activity', $request->id_activity)->get();
+
         // check if update is success or not
         if ($createdActivity) {
-            return back()
-                ->with('success', 'Your data has been created');
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Contact',
+                'status' => 200,
+                'data' => $activityPrice,
+            ]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Contact',
+            ], 500);
         }
     }
 
@@ -1135,28 +1160,42 @@ class ActivityListController extends Controller
     public function activity_store_story(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:100'],
-            'file' => ['required', 'mimes:mp4']
+            'file' => ['required', 'mimes:mp4,mov']
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity)
+        {
+            return response()->json([
+                'message' => 'WoW Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // store process
@@ -1189,13 +1228,31 @@ class ActivityListController extends Controller
             ]);
         }
 
+        $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name','id_story')->latest()->get();
+        $getUID = Activity::where('id_activity', $request->id_activity)->select('uid')->first();
+
+        $data = [];
+
+        $i = 0;
+
+        foreach ($getStory as $item)
+        {
+            $data[$i]['id_story'] = $item->id_story;
+            $data[$i]['name'] = $item->name;
+            $i++;
+        }
+
         // check if update is success or not
         if ($createdStory) {
-            return back()
-                ->with('success', 'Your data has been created');
+            return response()->json([
+                'message' => 'Updated WoW Story',
+                'data' => $data,
+                'uid' => $getUID->uid,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Updated WoW Story',
+            ], 500);
         }
     }
 
