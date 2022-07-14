@@ -2134,12 +2134,31 @@
                                 </button>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
-                                <a href="#">{{ __('user_page.Add Date') }} <i
-                                        class="fas fa-chevron-right"></i></a>
+                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);" style="text-decoration: underline; color: #ff7400;" href="#">{{ __('user_page.Show more') }} 
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                             </p>
                         </div>
                     </div>
                     <hr>
+                </section>
+                <section>
+                    {{-- Insurance --}}
+                    <div class="">
+                        <h2>
+                            EZV Cover
+                        </h2>
+                        <p id="description-content">
+                            Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                        </p>
+
+                        <a id="" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreInsurance();">
+                            <span style="text-decoration: underline; color: #ff7400;">Learn more</span>
+                        </a>
+                    
+                    </div>
+                    <hr>
+                    {{-- End of Insurance --}}
                 </section>
                 <div class="section">
                     <div>
@@ -2364,7 +2383,7 @@
                             {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
-                                <hr>
+                                
                                 {{-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> --}}
 
                                 {{-- EDIT TO SWIPE CAROUSEL --}}
@@ -3097,6 +3116,8 @@
         @include('user.modal.villa.category_villa')
     @endauth
     @include('user.modal.villa.description')
+    @include('user.modal.villa.insurance')
+    @include('user.modal.villa.cancelation-policy-modal')
 
     {{-- MORE TAG MODAL --}}
     <div class="modal fade" id="modal-subcategory" tabindex="-1" role="dialog"
