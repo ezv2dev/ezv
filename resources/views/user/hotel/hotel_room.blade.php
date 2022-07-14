@@ -321,8 +321,9 @@
                                         <input type="hidden" name="id_hotel_room"
                                             value="{{ $hotelRoom->id_hotel_room }}" required>
                                         <input type="text" style="width: 100%;" class="form-control" name="name"
-                                            id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Hotel Room Name Here') }}" value="{{ $hotelRoom->name }}"
-                                            required>
+                                            id="name-form-input" maxlength="100"
+                                            placeholder="{{ __('user_page.Hotel Room Name Here') }}"
+                                            value="{{ $hotelRoom->name }}" required>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -366,8 +367,8 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel_room"
                                             value="{{ $hotelRoom->id_hotel_room }}" required>
-                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30" placeholder="{{ __('user_page.Make your short description here') }}"
-                                            rows="3" maxlength="255" required>{{ $hotelRoom->short_description }}</textarea>
+                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255" required>{{ $hotelRoom->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -387,8 +388,8 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotelRoom->id_hotel_room }}"
                                             required>
-                                        <textarea name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}"
-                                            required>{{ $hotelRoom->short_description }}</textarea>
+                                        <textarea name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotelRoom->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -825,7 +826,8 @@
                                 @endauth
                             </h2>
                             <p id="description-content">
-                                {!! Str::limit(Translate::translate($hotelRoom->room_description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($hotelRoom->room_description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                                 {{-- {!! substr($villa[0]->description, 0, 600) ?? 'there is no description yet' !!} --}}
                             </p>
                             @if (Str::length($hotelRoom->room_description) > 600)
@@ -873,7 +875,7 @@
                                 @endauth
                             </h2>
                         </div>
-                        
+
                         <div class="row-grid-amenities">
                             <div class="row-grid-list-amenities translate-text-group">
                                 @if ($hotel_amenities->count() >= 6)
@@ -969,7 +971,8 @@
                                 <div class="list-amenities">
                                     <button class="amenities-button" type="button" onclick="view_amenities()">
                                         <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                        <div style="font-size: 15px; font-weight: 600;" class="translate-text-group-items">
+                                        <div style="font-size: 15px; font-weight: 600;"
+                                            class="translate-text-group-items">
                                             {{ __('user_page.More') }}
                                         </div>
                                     </button>
@@ -1373,8 +1376,7 @@
 
                         @if ($cekHotel == null)
                             <div style="width: 48px;" class="text-center">
-                                <a style="cursor: pointer;"
-                                    onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
+                                <a style="cursor: pointer;" onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                         role="presentation" focusable="false"
                                         class="favorite-button favorite-button-22 likeButtonhotel{{ $hotel[0]->id_hotel }}"
@@ -1389,8 +1391,7 @@
                             </div>
                         @else
                             <div class="text-center" style="width: 48px;">
-                                <a style="cursor: pointer;"
-                                    onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
+                                <a style="cursor: pointer;" onclick="likeFavorit({{ $hotel[0]->id_hotel }}, 'hotel')">
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                         role="presentation" focusable="false"
                                         class="favorite-button-active favorite-button-22 unlikeButtonhotel{{ $hotel[0]->id_hotel }}"
@@ -1519,7 +1520,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -2669,7 +2670,17 @@
     </script>
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
@@ -3030,7 +3041,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Hotel Room Name Here'){
+            if (formInput.value == 'Hotel Room Name Here') {
                 formInput.value = '';
             }
         }
@@ -3043,7 +3054,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $hotelRoom->name }}';
 
-            if(formInput.value == 'Hotel Room Name Here'){
+            if (formInput.value == 'Hotel Room Name Here') {
                 formInput.value = '';
             }
         }
@@ -3056,7 +3067,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -3069,7 +3080,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $hotelRoom->short_description }}';
 
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             }
         }
@@ -3136,7 +3147,7 @@
             url: '/admin/hotel/room/store_gallery',
             parallelUploads: 50,
             "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
                 alert(errorToString(message));
             },
             init: function() {

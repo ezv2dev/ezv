@@ -189,7 +189,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -1948,7 +1948,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -3923,12 +3923,20 @@
     {{-- END MODAL --}}
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
-
-
 
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>

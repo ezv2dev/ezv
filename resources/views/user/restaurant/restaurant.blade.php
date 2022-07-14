@@ -73,7 +73,8 @@
     @endphp
 
     @include('components.notification.notification')
-    @component('components.loading.loading-type1') @endcomponent
+    @component('components.loading.loading-type1')
+    @endcomponent
     {{-- <input type="hidden" id="min_stay" name="min_stay" value="{{ $restaurant->min_stay }}">
     <input type="hidden" id="price" name="price" value="{{ $restaurant->price }}">
     <input type="hidden" id="price3" name="price" value="{{ $restaurant->price }}"> --}}
@@ -179,7 +180,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -233,7 +234,8 @@
                                     method="post">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <input type="hidden" name="id_restaurant"
+                                        value="{{ $restaurant->id_restaurant }}">
                                     <button class="btn"
                                         type="submit">{{ __('user_page.request activation') }}</button>
                                 </form>
@@ -248,7 +250,8 @@
                                     method="post">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <input type="hidden" name="id_restaurant"
+                                        value="{{ $restaurant->id_restaurant }}">
                                     <button class="btn"
                                         type="submit">{{ __('user_page.request deactivation') }}</button>
                                 </form>
@@ -372,8 +375,9 @@
                             @endif
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-dekstop"
-                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
+                                    &nbsp;<a type="button" onclick="edit_restaurant_profile()"
+                                        class="edit-profile-image-btn-dekstop"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
                                     {{-- @if ($restaurant->image)
                                         <a class="delete-profile edit-profile-image-btn-dekstop" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
@@ -391,7 +395,8 @@
                                         $open = date_create($restaurant->open_time);
                                         $closed = date_create($restaurant->closed_time);
                                     @endphp
-                                    <span id="timeRestaurantContent">{{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}</span>
+                                    <span id="timeRestaurantContent">{{ date_format($open, 'h:i A') }} -
+                                        {{ date_format($closed, 'h:i A') }}</span>
                                     @auth
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"
@@ -421,11 +426,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
+                                                    <button type="submit" class="btn btn-sm btn-primary"
+                                                        id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary" id="btnCancelTimeResto"
-                                                        onclick="editTimeFormCancel()">
+                                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                                        id="btnCancelTimeResto" onclick="editTimeFormCancel()">
                                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                     </button>
                                                 </div>
@@ -468,25 +474,25 @@
                                 <div class="col-12" style=" margin-top: 18px;" id="type-content">
                                     <p style="font-size: 12px">
                                         <span id="type_price_content">
-                                        <span data-bs-toggle="popover" data-bs-animation="true"
-                                            data-bs-placement="bottom"
-                                            title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
-                                        <span> - </span>
-                                        @if ($restaurant->price->name == 'Cheap Prices')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$</span>
-                                        @elseif ($restaurant->price->name == 'Middle Range')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$$</span>
-                                        @elseif ($restaurant->price->name == 'Fine Dining')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$$$</span>
-                                        @else
-                                            <span>{{ __('user_page.no price rate yet') }}</span>
-                                        @endif
+                                            <span data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom"
+                                                title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
+                                            <span> - </span>
+                                            @if ($restaurant->price->name == 'Cheap Prices')
+                                                <span style="color: #FF7400" data-bs-toggle="popover"
+                                                    data-bs-animation="true" data-bs-placement="bottom"
+                                                    title="{{ Translate::translate($restaurant->price->name) }}">$</span>
+                                            @elseif ($restaurant->price->name == 'Middle Range')
+                                                <span style="color: #FF7400" data-bs-toggle="popover"
+                                                    data-bs-animation="true" data-bs-placement="bottom"
+                                                    title="{{ Translate::translate($restaurant->price->name) }}">$$</span>
+                                            @elseif ($restaurant->price->name == 'Fine Dining')
+                                                <span style="color: #FF7400" data-bs-toggle="popover"
+                                                    data-bs-animation="true" data-bs-placement="bottom"
+                                                    title="{{ Translate::translate($restaurant->price->name) }}">$$$</span>
+                                            @else
+                                                <span>{{ __('user_page.no price rate yet') }}</span>
+                                            @endif
                                         </span>
 
                                         @auth
@@ -543,11 +549,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestoTime" onclick="saveRestaurantPrice();">
+                                                    <button type="submit" class="btn btn-sm btn-primary"
+                                                        id="btnSaveRestoTime" onclick="saveRestaurantPrice();">
                                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                     </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary" id="btnCancelRestoTime"
-                                                        onclick="editTypeFormCancel()">
+                                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                                        id="btnCancelRestoTime" onclick="editTypeFormCancel()">
                                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                     </button>
                                                 </div>
@@ -573,7 +580,8 @@
                     <div class="col-lg-8 col-md-8 col-xs-12 profile-info">
                         {{-- SHORT NAME --}}
                         <h2 id="name-content">
-                            <span id="name-content2">{{ $restaurant->name ?? __('user_page.There is no name yet') }}</span>
+                            <span
+                                id="name-content2">{{ $restaurant->name ?? __('user_page.There is no name yet') }}</span>
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editNameForm()"
@@ -584,17 +592,17 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant" onclick="saveNameRestaurant();"
-                                            style="background-color: #ff7400">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editNameCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <input type="hidden" name="id_restaurant"
+                                        value="{{ $restaurant->id_restaurant }}" required>
+                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                        placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant"
+                                        onclick="saveNameRestaurant();" style="background-color: #ff7400">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
 
                                 </div>
                             @endif
@@ -605,7 +613,8 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 &nbsp;
-                                <a type="button" onclick="edit_restaurant_profile()" class="edit-profile-image-btn-mobile d-md-none"
+                                <a type="button" onclick="edit_restaurant_profile()"
+                                    class="edit-profile-image-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
                                 {{-- @if ($restaurant->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
@@ -639,7 +648,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                            @method('PATCH') -->
+                                                    @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -656,7 +665,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary"  onclick="saveTimeRestaurant();">
+                                                <button type="submit" class="btn btn-sm btn-primary"
+                                                    onclick="saveTimeRestaurant();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -679,8 +689,7 @@
                                 </div>
                                 <div class="col-3 contact-item">
                                     @if ($restaurant->email)
-                                        <a target="_blank" type="button"
-                                            href="mailto:{{ $restaurant->email }}">
+                                        <a target="_blank" type="button" href="mailto:{{ $restaurant->email }}">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     @else
@@ -702,7 +711,8 @@
                         </div>
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span id="short_description_contents">{{ Translate::translate($restaurant->short_description) ?? __('user_page.There is no description yet') }}</span>
+                            <span
+                                id="short_description_contents">{{ Translate::translate($restaurant->short_description) ?? __('user_page.There is no description yet') }}</span>
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -713,17 +723,19 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                            cols="30" rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="saveShortDescription();">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <input type="hidden" name="id_restaurant"
+                                        value="{{ $restaurant->id_restaurant }}" required>
+                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
+                                        cols="30" rows="3" maxlength="255"
+                                        placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                        onclick="saveShortDescription();">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editShortDescriptionCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                 </div>
                             @endif
                         @endauth
@@ -756,97 +768,98 @@
                         {{-- END TAG --}}
 
                         {{-- RESTAURANT TYPE --}}
-                                <div class="col-12" style=" margin-top: 18px;" id="type-content-mobile">
-                                    <p style="font-size: 12px">
-                                        <span id="type_price_content_mobile">
-                                        <span data-bs-toggle="popover" data-bs-animation="true"
-                                            data-bs-placement="bottom"
-                                            title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
-                                        <span> - </span>
-                                        @if ($restaurant->price->name == 'Cheap Prices')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$</span>
-                                        @elseif ($restaurant->price->name == 'Middle Range')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$$</span>
-                                        @elseif ($restaurant->price->name == 'Fine Dining')
-                                            <span style="color: #FF7400" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom"
-                                                title="{{ Translate::translate($restaurant->price->name) }}">$$$</span>
-                                        @else
-                                            <span>{{ __('user_page.no price rate yet') }}</span>
-                                        @endif
-                                        </span>
+                        <div class="col-12" style=" margin-top: 18px;" id="type-content-mobile">
+                            <p style="font-size: 12px">
+                                <span id="type_price_content_mobile">
+                                    <span data-bs-toggle="popover" data-bs-animation="true"
+                                        data-bs-placement="bottom"
+                                        title="{{ $restaurant->type->name }}">{{ $restaurant->type->name }}</span>
+                                    <span> - </span>
+                                    @if ($restaurant->price->name == 'Cheap Prices')
+                                        <span style="color: #FF7400" data-bs-toggle="popover"
+                                            data-bs-animation="true" data-bs-placement="bottom"
+                                            title="{{ Translate::translate($restaurant->price->name) }}">$</span>
+                                    @elseif ($restaurant->price->name == 'Middle Range')
+                                        <span style="color: #FF7400" data-bs-toggle="popover"
+                                            data-bs-animation="true" data-bs-placement="bottom"
+                                            title="{{ Translate::translate($restaurant->price->name) }}">$$</span>
+                                    @elseif ($restaurant->price->name == 'Fine Dining')
+                                        <span style="color: #FF7400" data-bs-toggle="popover"
+                                            data-bs-animation="true" data-bs-placement="bottom"
+                                            title="{{ Translate::translate($restaurant->price->name) }}">$$$</span>
+                                    @else
+                                        <span>{{ __('user_page.no price rate yet') }}</span>
+                                    @endif
+                                </span>
 
-                                        @auth
-                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <a type="button" onclick="editTypeFormMobile()"
-                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price Range') }}</a>
-                                            @endif
-                                        @endauth
-                                    </p>
-
-                                </div>
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        <div id="type-form-mobile" style="display: none">
-                                            {{-- <form action="{{ route('restaurant_update_type') }}" method="post"> --}}
-                                            <form action="javascript:void(0);" method="post">
-                                                {{-- @csrf
-                                                @method('PATCH') --}}
-                                                <input type="hidden" name="id_restaurant"
-                                                    value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
-                                                    <div class="col-auto">
-                                                        <select name="id_type" id="restaurant-type-input-mobile"
-                                                            class="form-control">
-                                                            @forelse ($restaurant_type as $item)
-                                                                @php
-                                                                    $isSelected = '';
-                                                                    if ($item->id_type == $restaurant->id_type) {
-                                                                        $isSelected = 'selected';
-                                                                    }
-                                                                @endphp
-                                                                <option value="{{ $item->id_type }}"
-                                                                    {{ $isSelected }}>{{ $item->name }}</option>
-                                                            @empty
-                                                            @endforelse
-                                                        </select>
-                                                    </div>
-                                                    <span class="mx-2">-</span>
-                                                    <div class="col-auto">
-                                                        <select name="id_price" id="restaurant-price-input-mobile"
-                                                            class="form-control">
-                                                            @forelse ($restaurant_price as $item)
-                                                                @php
-                                                                    $isSelected = '';
-                                                                    if ($item->id_price == $restaurant->id_price) {
-                                                                        $isSelected = 'selected';
-                                                                    }
-                                                                @endphp
-                                                                <option value="{{ $item->id_price }}"
-                                                                    {{ $isSelected }}>{{ $item->name }}</option>
-                                                            @empty
-                                                            @endforelse
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="saveRestaurantPriceMobile();">
-                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                                    </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                                        onclick="editTypeFormMobileCancel()">
-                                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <a type="button" onclick="editTypeFormMobile()"
+                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price Range') }}</a>
                                     @endif
                                 @endauth
-                                {{-- END RESTAURANT TYPE --}}
+                            </p>
+
+                        </div>
+                        @auth
+                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                <div id="type-form-mobile" style="display: none">
+                                    {{-- <form action="{{ route('restaurant_update_type') }}" method="post"> --}}
+                                    <form action="javascript:void(0);" method="post">
+                                        {{-- @csrf
+                                                @method('PATCH') --}}
+                                        <input type="hidden" name="id_restaurant"
+                                            value="{{ $restaurant->id_restaurant }}" required>
+                                        <div class="form-group d-flex justify-content-center align-items-center">
+                                            <div class="col-auto">
+                                                <select name="id_type" id="restaurant-type-input-mobile"
+                                                    class="form-control">
+                                                    @forelse ($restaurant_type as $item)
+                                                        @php
+                                                            $isSelected = '';
+                                                            if ($item->id_type == $restaurant->id_type) {
+                                                                $isSelected = 'selected';
+                                                            }
+                                                        @endphp
+                                                        <option value="{{ $item->id_type }}" {{ $isSelected }}>
+                                                            {{ $item->name }}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                            <span class="mx-2">-</span>
+                                            <div class="col-auto">
+                                                <select name="id_price" id="restaurant-price-input-mobile"
+                                                    class="form-control">
+                                                    @forelse ($restaurant_price as $item)
+                                                        @php
+                                                            $isSelected = '';
+                                                            if ($item->id_price == $restaurant->id_price) {
+                                                                $isSelected = 'selected';
+                                                            }
+                                                        @endphp
+                                                        <option value="{{ $item->id_price }}" {{ $isSelected }}>
+                                                            {{ $item->name }}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary"
+                                                onclick="saveRestaurantPriceMobile();">
+                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                            </button>
+                                            <button type="reset" class="btn btn-sm btn-secondary"
+                                                onclick="editTypeFormMobileCancel()">
+                                                <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
+                        @endauth
+                        {{-- END RESTAURANT TYPE --}}
 
                         <ul class="stories inner-wrap">
                             @if (Auth::guest() || Auth::user()->role_id == 4)
@@ -952,7 +965,9 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($restaurant->story as $item)
-                                                            <div class="card4 col-lg-3" id="story{{$item->id_story}}" style="border-radius: 5px;">
+                                                            <div class="card4 col-lg-3"
+                                                                id="story{{ $item->id_story }}"
+                                                                style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
@@ -974,7 +989,9 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-restaurant="{{ $restaurant->id_restaurant }}" data-story="{{ $item->id_story }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-restaurant="{{ $restaurant->id_restaurant }}"
+                                                                                data-story="{{ $item->id_story }}"
                                                                                 onclick="delete_story(this)">
                                                                                 {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -1126,7 +1143,7 @@
                                 <span>
                                     <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.GALLERY') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1136,7 +1153,7 @@
                                 <span>
                                     <i aria-label="Posts" class="fa-solid fa-book navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.MENU') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.MENU') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1146,7 +1163,7 @@
                                 <span>
                                     <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.ABOUT') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.ABOUT') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1156,7 +1173,7 @@
                                 <span>
                                     <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.FACILITIES') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.FACILITIES') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1166,7 +1183,7 @@
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.LOCATION') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.LOCATION') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1186,7 +1203,7 @@
                                 <span>
                                     <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
-                                        <span class="navigationItemText">{{ __('user_page.REVIEW') }}</span>
+                                    <span class="navigationItemText">{{ __('user_page.REVIEW') }}</span>
                                 </span>
                             </a>
                         </li>
@@ -1312,7 +1329,7 @@
                     {{-- MENU --}}
                     <section id="menu" class="section-2 menu-gallery">
                         <div class="about-place-block">
-                        <hr>
+                            <hr>
                             <h2>Menu
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1401,7 +1418,7 @@
                     <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place-block">
-                        <hr>
+                            <hr>
                             <h2>
                                 {{ __('user_page.About this place') }}
                                 @auth
@@ -1413,16 +1430,16 @@
                             </h2>
                             <p id="description-content"
                                 style="text-align: justify; padding-top:10px; padding-bottom:12px">
-                                {!! Str::limit(Translate::translate($restaurant->description), 600, ' ...') ?? __('user_page.There is no description yet') !!}
+                                {!! Str::limit(Translate::translate($restaurant->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
                                 {{-- {!! $restaurant->description ?? 'there is no description yet' !!} --}}
                             </p>
                             <span id="buttonShowMoreDescription">
                                 @if (Str::length($restaurant->description) > 600)
-
-                                        <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
-                                            onclick="showMoreDescription();"><span
-                                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                            <span style="color: #ff7400;">></span></a>
+                                    <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
                                 @endIf
                             </span>
                             @auth
@@ -1434,10 +1451,12 @@
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
+                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDescription" onclick="saveDescription();">
+                                                <button type="submit" class="btn btn-sm btn-primary"
+                                                    id="btnSaveDescription" onclick="saveDescription();">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -1454,7 +1473,7 @@
 
                     <section id="amenities" class="section-2">
                         <div class="row-grid-amenities">
-                        <hr>
+                            <hr>
                             <div>
                                 <h2>
                                     {{ __('user_page.Facilities') }}
@@ -1557,69 +1576,70 @@
             {{-- RIGHT CONTENT --}}
             <div class="col-lg-3 col-md-3 col-12">
                 <div class="sidebar sidebar-idle sidebar-restaurant" id="sidebar_fix">
-                <div class="reserve-block sidebar-mf">
-                    <div class="gradient-try">
-                        <center>
-                            <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}!</h4>
-                        </center>
-                    </div>
-                    <!-- Random Villa Slider Start -->
-                    <div class="popular-block-activity">
-                        <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
-                                <div class="SlickCarousel3">
-                                    <!-- Start Slider Items -->
-                                    @forelse ($villaRandom as $popular)
-                                        <div>
-                                            <div class="popular-card">
-                                                <div class="popular-card-header"
-                                                    onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
-                                                    style="cursor: pointer;">
-                                                    <img
-                                                        src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
-                                                </div>
-                                                <div>
-                                                    <div class="card-content">
-                                                        <div class="popular-card-title"><a
-                                                                href="{{ route('villa', ['id' => $popular->id_villa]) }}"
-                                                                target="_blank">{{ $popular->name }}</a></div>
-                                                        <div class="popular-card-text">
-                                                            <p>{{ $popular->bedroom }}
-                                                                {{ __('user_page.Bedroom') }},
-                                                                {{ $popular->bathroom }}
-                                                                {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
-                                                                @foreach ($popular->amenities as $item)
-                                                                    <i class="fa fa-{{ $item->icon }}"></i>
-                                                                @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
-                                                            <!-- Description max 100 character -->
-                                                            <p style="text-align: justify;">
-                                                                @if (!empty($popular->description))
-                                                                    {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
-                                                                @else
-                                                                    {{ __('user_page.There is no description yet') }}
-                                                                @endif
-
-                                                            </p>
-                                                        </div>
-                                                        <div class="popular-card-price">
-                                                            @if (!empty($popular->price))
-                                                                <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
+                    <div class="reserve-block sidebar-mf">
+                        <div class="gradient-try">
+                            <center>
+                                <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}!
+                                </h4>
+                            </center>
+                        </div>
+                        <!-- Random Villa Slider Start -->
+                        <div class="popular-block-activity">
+                            <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
+                                    <div class="SlickCarousel3">
+                                        <!-- Start Slider Items -->
+                                        @forelse ($villaRandom as $popular)
+                                            <div>
+                                                <div class="popular-card">
+                                                    <div class="popular-card-header"
+                                                        onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
+                                                        style="cursor: pointer;">
+                                                        <img
+                                                            src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
+                                                    </div>
+                                                    <div>
+                                                        <div class="card-content">
+                                                            <div class="popular-card-title"><a
+                                                                    href="{{ route('villa', ['id' => $popular->id_villa]) }}"
+                                                                    target="_blank">{{ $popular->name }}</a></div>
+                                                            <div class="popular-card-text">
+                                                                <p>{{ $popular->bedroom }}
+                                                                    {{ __('user_page.Bedroom') }},
+                                                                    {{ $popular->bathroom }}
+                                                                    {{ __('user_page.Bathroom') }}</p>
+                                                                <p style="color: #000;">
+                                                                    @foreach ($popular->amenities as $item)
+                                                                        <i class="fa fa-{{ $item->icon }}"></i>
+                                                                    @endforeach
+                                                                    {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
                                                                 </p>
-                                                            @endIf
+                                                                <!-- Description max 100 character -->
+                                                                <p style="text-align: justify;">
+                                                                    @if (!empty($popular->description))
+                                                                        {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
+                                                                    @else
+                                                                        {{ __('user_page.There is no description yet') }}
+                                                                    @endif
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="popular-card-price">
+                                                                @if (!empty($popular->price))
+                                                                    <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
+                                                                    </p>
+                                                                @endIf
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @empty
-                                    @endforelse
-                                    <!-- End Slider Items -->
-                                </div>
+                                        @empty
+                                        @endforelse
+                                        <!-- End Slider Items -->
+                                    </div>
+                        </div>
+                        <!-- End Random Slider -->
                     </div>
-                    <!-- End Random Slider -->
-                </div>
                 </div>
             </div>
             {{-- END RIGHT CONTENT --}}
@@ -1813,7 +1833,7 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm()" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a>
@@ -1934,11 +1954,9 @@
                                                         value="{{ $restaurant->id_restaurant }}" required>
                                                     <input type="hidden" name="id_review"
                                                         value="{{ $restaurant->userReview->id_review }}" required>
-                                                    <button type="submit"
-                                                        class="btn"><i class="fa fa-trash"
-                                                            style="color:#ff7400; font-size: 20px"
-                                                            data-bs-toggle="popover" data-bs-animation="true"
-                                                            data-bs-placement="bottom"
+                                                    <button type="submit" class="btn"><i class="fa fa-trash"
+                                                            style="color:#ff7400; font-size: 20px" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
                                                             title="{{ __('user_page.Delete') }}"></i></button>
                                                 </form>
                                             </span>
@@ -1951,7 +1969,8 @@
                                                         <div class="col-6">
                                                             {{ __('user_page.Comment') }}
                                                         </div>
-                                                        <div class="col-6" style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        <div class="col-6"
+                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
                                                             {{ $restaurant->userReview->comment }}
                                                         </div>
                                                     </div>
@@ -2019,40 +2038,40 @@
                                                             </div>
                                                             <div class="col-8 review-container">
                                                                 <div class="cm-star-rating">
-                                                                    <input id="food-star-5" type="radio"
-                                                                        name="food" value="5" required />
+                                                                    <input id="food-star-5" type="radio" name="food"
+                                                                        value="5" required />
                                                                     <label for="food-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="food-star-4" type="radio"
-                                                                        name="food" value="4" required />
+                                                                    <input id="food-star-4" type="radio" name="food"
+                                                                        value="4" required />
                                                                     <label for="food-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="food-star-3" type="radio"
-                                                                        name="food" value="3" required />
+                                                                    <input id="food-star-3" type="radio" name="food"
+                                                                        value="3" required />
                                                                     <label for="food-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="food-star-2" type="radio"
-                                                                        name="food" value="2" required />
+                                                                    <input id="food-star-2" type="radio" name="food"
+                                                                        value="2" required />
                                                                     <label for="food-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="food-star-1" type="radio"
-                                                                        name="food" value="1" required />
+                                                                    <input id="food-star-1" type="radio" name="food"
+                                                                        value="1" required />
                                                                     <label for="food-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -2066,37 +2085,37 @@
                                                                     <input id="service-star-5" type="radio"
                                                                         name="service" value="5" required />
                                                                     <label for="service-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="service-star-4" type="radio"
                                                                         name="service" value="4" required />
                                                                     <label for="service-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="service-star-3" type="radio"
                                                                         name="service" value="3" required />
                                                                     <label for="service-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="service-star-2" type="radio"
                                                                         name="service" value="2" required />
                                                                     <label for="service-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="service-star-1" type="radio"
                                                                         name="service" value="1" required />
                                                                     <label for="service-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -2107,40 +2126,40 @@
                                                             </div>
                                                             <div class="col-8 review-container">
                                                                 <div class="cm-star-rating">
-                                                                    <input id="value-star-5" type="radio"
-                                                                        name="value" value="5" required />
+                                                                    <input id="value-star-5" type="radio" name="value"
+                                                                        value="5" required />
                                                                     <label for="value-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="value-star-4" type="radio"
-                                                                        name="value" value="4" required />
+                                                                    <input id="value-star-4" type="radio" name="value"
+                                                                        value="4" required />
                                                                     <label for="value-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="value-star-3" type="radio"
-                                                                        name="value" value="3" required />
+                                                                    <input id="value-star-3" type="radio" name="value"
+                                                                        value="3" required />
                                                                     <label for="value-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="value-star-2" type="radio"
-                                                                        name="value" value="2" required />
+                                                                    <input id="value-star-2" type="radio" name="value"
+                                                                        value="2" required />
                                                                     <label for="value-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
-                                                                    <input id="value-star-1" type="radio"
-                                                                        name="value" value="1" required />
+                                                                    <input id="value-star-1" type="radio" name="value"
+                                                                        value="1" required />
                                                                     <label for="value-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -2154,37 +2173,37 @@
                                                                     <input id="atmosphere-star-5" type="radio"
                                                                         name="atmosphere" value="5" required />
                                                                     <label for="atmosphere-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="atmosphere-star-4" type="radio"
                                                                         name="atmosphere" value="4" required />
                                                                     <label for="atmosphere-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="atmosphere-star-3" type="radio"
                                                                         name="atmosphere" value="3" required />
                                                                     <label for="atmosphere-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="atmosphere-star-2" type="radio"
                                                                         name="atmosphere" value="2" required />
                                                                     <label for="atmosphere-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                     <input id="atmosphere-star-1" type="radio"
                                                                         name="atmosphere" value="1" required />
                                                                     <label for="atmosphere-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}" class="rating-star">
-                                                                        <i class="active fa fa-star"
-                                                                            aria-hidden="true"></i>
+                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                        class="rating-star">
+                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -2200,8 +2219,7 @@
                                                             </div>
                                                         </div>
                                                         <center>
-                                                            <button type="submit"
-                                                                class="btn btn-block btn-sm btn-primary"
+                                                            <button type="submit" class="btn btn-block btn-sm btn-primary"
                                                                 style="width: 200px">{{ __('user_page.Done') }}</button>
                                                         </center>
                                                     </div>
@@ -2218,86 +2236,86 @@
                 <section id="endSticky" class="section-2">
                     <h3>Things to know</h3>
                     <div class="row">
-                                <div class="col-lg-4 col-md-4 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
 
 
-                                    <p>
-                                        @if (!isset($restaurant_rules))
-                                            {{ __('user_page.No data found') }}
-                                        @endif
+                            <p>
+                                @if (!isset($restaurant_rules))
+                                    {{ __('user_page.No data found') }}
+                                @endif
 
-                                        @if (isset($restaurant_rules))
-                                            @if ($restaurant_rules->children == 'yes')
-                                                <i class="fas fa-child"></i>
-                                                {{ __('user_page.Childrens are allowed') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->infants == 'yes')
-                                                <i class="fas fa-child"></i>
-                                                {{ __('user_page.Infants are allowed') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->pets == 'yes')
-                                                <i class="fas fa-paw"></i>
-                                                {{ __('user_page.Pets are allowed') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->smoking == 'yes')
-                                                <i class="fas fa-smoking"></i>
-                                                {{ __('user_page.Smoking is allowed') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->events == 'yes')
-                                                <i class="fas fa-calendar"></i>
-                                                {{ __('user_page.Events are allowed') }}<br>
-                                            @endif
-
-                                            @if ($restaurant_rules->children == 'no')
-                                                <i class="fas fa-ban"></i> {{ __('user_page.No children') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->infants == 'no')
-                                                <i class="fas fa-ban"></i> {{ __('user_page.No infants') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->pets == 'no')
-                                                <i class="fas fa-ban"></i> {{ __('user_page.No pets') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->smoking == 'no')
-                                                <i class="fas fa-ban"></i> {{ __('user_page.No smoking') }}<br>
-                                            @endif
-                                            @if ($restaurant_rules->events == 'no')
-                                                <i class="fas fa-ban"></i> {{ __('user_page.No events') }}<br>
-                                            @endif
-                                        @endif
-                                    </p>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-xs-12">
-                                    <div class="d-flex">
-                                        <h6>{{ __('user_page.Health & Safety') }}</h6>
-                                        @auth
-                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                &nbsp;<a type="button" onclick="editRestaurantGuestSafety()"
-                                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
-                                            @endif
-                                        @endauth
-                                    </div>
-
-                                    <p>
-                                        @forelse ($restaurant->guestSafety->take(5) as $item)
-                                            <i class="fas fa-{{ $item->icon }}"></i>
-                                            {{ $item->guest_safety }}<br>
-                                        @empty
-                                            {{ __('user_page.No data found') }}
-                                        @endforelse
-                                    </p>
-                                    @php
-                                        $countGuest = count($restaurant->guestSafety);
-                                    @endphp
-                                    @if ($countGuest > 5)
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="showMoreRestaurantGuestSafety()">
-                                                {{ __('user_page.Show more') }}
-                                                <i class="fas fa-chevron-right"></i>
-                                            </a>
-                                        </p>
+                                @if (isset($restaurant_rules))
+                                    @if ($restaurant_rules->children == 'yes')
+                                        <i class="fas fa-child"></i>
+                                        {{ __('user_page.Childrens are allowed') }}<br>
                                     @endif
-                                </div>
+                                    @if ($restaurant_rules->infants == 'yes')
+                                        <i class="fas fa-child"></i>
+                                        {{ __('user_page.Infants are allowed') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->pets == 'yes')
+                                        <i class="fas fa-paw"></i>
+                                        {{ __('user_page.Pets are allowed') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->smoking == 'yes')
+                                        <i class="fas fa-smoking"></i>
+                                        {{ __('user_page.Smoking is allowed') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->events == 'yes')
+                                        <i class="fas fa-calendar"></i>
+                                        {{ __('user_page.Events are allowed') }}<br>
+                                    @endif
+
+                                    @if ($restaurant_rules->children == 'no')
+                                        <i class="fas fa-ban"></i> {{ __('user_page.No children') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->infants == 'no')
+                                        <i class="fas fa-ban"></i> {{ __('user_page.No infants') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->pets == 'no')
+                                        <i class="fas fa-ban"></i> {{ __('user_page.No pets') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->smoking == 'no')
+                                        <i class="fas fa-ban"></i> {{ __('user_page.No smoking') }}<br>
+                                    @endif
+                                    @if ($restaurant_rules->events == 'no')
+                                        <i class="fas fa-ban"></i> {{ __('user_page.No events') }}<br>
+                                    @endif
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="d-flex">
+                                <h6>{{ __('user_page.Health & Safety') }}</h6>
+                                @auth
+                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;<a type="button" onclick="editRestaurantGuestSafety()"
+                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                    @endif
+                                @endauth
                             </div>
+
+                            <p>
+                                @forelse ($restaurant->guestSafety->take(5) as $item)
+                                    <i class="fas fa-{{ $item->icon }}"></i>
+                                    {{ $item->guest_safety }}<br>
+                                @empty
+                                    {{ __('user_page.No data found') }}
+                                @endforelse
+                            </p>
+                            @php
+                                $countGuest = count($restaurant->guestSafety);
+                            @endphp
+                            @if ($countGuest > 5)
+                                <p>
+                                    <a href="javascript:void(0)" onclick="showMoreRestaurantGuestSafety()">
+                                        {{ __('user_page.Show more') }}
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
                 </section>
                 <div class="section" id="host_end">
                     <div class="host">
@@ -2310,7 +2328,8 @@
                                 <div class="col-9 col-sm-10 col-lg-11">
                                     <div class="member-profile">
                                         <h4>{{ __('user_page.Hosted by') }}
-                                            {{ $restaurant->createdByDetails->first_name }} {{ $restaurant->createdByDetails->last_name }}</h4>
+                                            {{ $restaurant->createdByDetails->first_name }}
+                                            {{ $restaurant->createdByDetails->last_name }}</h4>
                                         <p>{{ __('user_page.Joined in') }}
                                             {{ date('j F, Y', strtotime($restaurant->createdByDetails->created_at)) }}
                                         </p>
@@ -2322,7 +2341,7 @@
                             @guest
                                 <hr>
                                 <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
-                                    </h4> -->
+                                            </h4> -->
                                 {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                 {{-- <div class="container-xxl mx-auto p-0">
@@ -2638,8 +2657,8 @@
                                 @if (Auth::user()->role_id != 3)
                                     <hr>
                                     <!-- <h4 style="margin-bottom: -10px;">
-                                            {{ __('user_page.Nearby Villas & Things To Do') }}
-                                        </h4> -->
+                                                    {{ __('user_page.Nearby Villas & Things To Do') }}
+                                                </h4> -->
                                     {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                     {{-- <div class="container-xxl mx-auto p-0">
@@ -3220,8 +3239,8 @@
                         <h5 class="mb-3">{{ __('user_page.Cuisine') }}</h5>
                         <div id="cuisineModalContent">
                             @foreach ($restaurant->cuisine as $item)
-                            <div class='col-md-6'><span
-                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                                <div class='col-md-6'><span
+                                        class="translate-text-group-items">{{ $item->name }}</span></div>
                             @endforeach
                         </div>
                     </div>
@@ -3229,8 +3248,8 @@
                         <h5 class="mb-3">{{ __('user_page.Dietary Food') }}</h5>
                         <div id="dietaryFoodModalContent">
                             @foreach ($restaurant->dietaryfood as $item)
-                            <div class='col-md-6'><span
-                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                                <div class='col-md-6'><span
+                                        class="translate-text-group-items">{{ $item->name }}</span></div>
                             @endforeach
                         </div>
                     </div>
@@ -3238,8 +3257,8 @@
                         <h5 class="mb-3">{{ __('user_page.Dishes') }}</h5>
                         <div id="dishesModalContent">
                             @foreach ($restaurant->dishes as $item)
-                            <div class='col-md-6'><span
-                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                                <div class='col-md-6'><span
+                                        class="translate-text-group-items">{{ $item->name }}</span></div>
                             @endforeach
                         </div>
                     </div>
@@ -3247,8 +3266,8 @@
                         <h5 class="mb-3">{{ __('user_page.Good For') }}</h5>
                         <div id="goodForModalContent">
                             @foreach ($restaurant->goodfor as $item)
-                            <div class='col-md-6'><span
-                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                                <div class='col-md-6'><span
+                                        class="translate-text-group-items">{{ $item->name }}</span></div>
                             @endforeach
                         </div>
                     </div>
@@ -3256,8 +3275,8 @@
                         <h5 class="mb-3">{{ __('user_page.Meal') }}</h5>
                         <div id="mealModalContent">
                             @foreach ($restaurant->meal as $item)
-                            <div class='col-md-6'><span
-                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                                <div class='col-md-6'><span
+                                        class="translate-text-group-items">{{ $item->name }}</span></div>
                             @endforeach
                         </div>
                     </div>
@@ -3558,7 +3577,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
                 <div class="modal-header">
-                    <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span> {{ __('user_page.Contact') }}</h5>
+                    <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span>
+                        {{ __('user_page.Contact') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -3706,7 +3726,17 @@
     {{-- END MODAL --}}
 
     <script>
-        function loginForm() {
+        function loginForm(value) {
+            console.log(value);
+            if (value == 1) {
+                $('#loginAlert').removeClass('d-none');
+                $('#registerAlert').removeClass('d-none');
+            }
+            if (value == 2) {
+                $('#loginAlert').addClass('d-none');
+                $('#registerAlert').addClass('d-none');
+            }
+
             $('#LoginModal').modal('show');
         }
     </script>
@@ -3741,7 +3771,7 @@
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <script>
-        window.onscroll = function () {
+        window.onscroll = function() {
             myFunction();
             if ((document.getElementById("popup_check").style.display = "block")) {
                 document.getElementById("popup_check").style.display = "none";
@@ -4125,7 +4155,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Food Name Here'){
+            if (formInput.value == 'Food Name Here') {
                 formInput.value = '';
             }
         }
@@ -4137,7 +4167,7 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
 
-            if(formInput.value == 'Food Name Here'){
+            if (formInput.value == 'Food Name Here') {
                 formInput.value = '';
             }
         }
@@ -4150,7 +4180,7 @@
             var formInput = document.getElementById("short-description-form-input");
             form.classList.add("d-block");
             content.classList.add("d-none");
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             };
         }
@@ -4161,7 +4191,7 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            if(formInput.value == 'Make your short description here'){
+            if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
             };
         }
@@ -4182,7 +4212,7 @@
                 data: {
                     id_restaurant: id_restaurant,
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
 
                     $("#open-time-input").val(response.data.open_time);
@@ -4194,6 +4224,7 @@
             });
 
         }
+
         function editTimeFormMobile() {
             var form = $("#time-form-mobile");
             var content = $("#time-content-mobile");
@@ -4299,7 +4330,7 @@
             url: '/restaurant/photo/store',
             parallelUploads: 50,
             "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
                 alert(errorToString(message));
             },
             init: function() {
@@ -4366,7 +4397,7 @@
             url: '/restaurant/menu/store_multi',
             parallelUploads: 50,
             "error": function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
                 alert(errorToString(message));
             },
             init: function() {
@@ -4613,7 +4644,7 @@
                             await Swal.fire('Deleted', data.message, 'success');
 
                             //remove element story
-                            $('#story'+story).remove();
+                            $('#story' + story).remove();
 
                             //update slider ketika story dihapus
                             sliderRestaurant();
@@ -4781,53 +4812,57 @@
 
     {{-- Highlight sticky --}}
     <script>
-        jQuery(document).ready(function($){
-            $(window).on('scroll', function(){
-                if($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $('#menu').offset().top - 60){
+        jQuery(document).ready(function($) {
+            $(window).on('scroll', function() {
+                if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
+                        '#menu').offset().top - 60) {
                     $('#gallery-sticky').addClass('active-sticky');
                     $('#menu-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
                     $('#amenities-sticky').removeClass('active-sticky');
                     $('#location-sticky').removeClass('active-sticky');
                     $('#review-sticky').removeClass('active-sticky');
-                }
-                    else if($(window).scrollTop() >= $('#menu').offset().top - 60  && $(window).scrollTop() <= $('#description').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#menu-sticky').addClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#description').offset().top - 60  && $(window).scrollTop() <= $('#amenities').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#menu-sticky').removeClass('active-sticky');
-                        $('#about-sticky').addClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window).scrollTop() <= $('#location-map').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#menu-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').addClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#location-map').offset().top -60  && $(window).scrollTop() <= $('#review').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#menu-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').addClass('active-sticky');
-                        $('#review-sticky').removeClass('active-sticky');
-                    } else if($(window).scrollTop() >= $('#review').offset().top - 60 && $(window).scrollTop() <= $('#endSticky').offset().top - 60){
-                        $('#gallery-sticky').removeClass('active-sticky');
-                        $('#menu-sticky').removeClass('active-sticky');
-                        $('#about-sticky').removeClass('active-sticky');
-                        $('#amenities-sticky').removeClass('active-sticky');
-                        $('#location-sticky').removeClass('active-sticky');
-                        $('#review-sticky').addClass('active-sticky');
-                    }
-                else {
+                } else if ($(window).scrollTop() >= $('#menu').offset().top - 60 && $(window).scrollTop() <=
+                    $('#description').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').addClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#amenities').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').addClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#location-map').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').addClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#location-map').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#review').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').addClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#endSticky').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#menu-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#location-sticky').removeClass('active-sticky');
+                    $('#review-sticky').addClass('active-sticky');
+                } else {
                     $('#gallery-sticky').removeClass('active-sticky');
                     $('#menu-sticky').removeClass('active-sticky');
                     $('#about-sticky').removeClass('active-sticky');
@@ -5036,7 +5071,7 @@
 
     @if ($restaurant->status == '2' && auth()->user()->id == $restaurant->created_by)
         <script>
-            if(!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true'){
+            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
                 var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
                 myModal.show()
             }
