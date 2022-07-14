@@ -955,21 +955,13 @@
 
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
-                            @if ($tags->count() > 3)
-                                @for ($i = 0; $i < 3; $i++)
-                                    <span class="badge rounded-pill fw-normal"
-                                        style="background-color: #FF7400;">{{ $tags[$i]->name }}</span>
-                                @endfor
+                            @forelse ($tags->take(3) as $item)
+                                <span class="badge rounded-pill fw-normal"
+                                    style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
+                            @empty
                                 <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
                                     onclick="view_tag()">More</button>
-                            @else
-                                @forelse ($tags as $tag)
-                                    <span class="badge rounded-pill fw-normal"
-                                        style="background-color: #FF7400;">{{ $tag->name }}</span>
-                                @empty
-                                    there is no category yet
-                                @endforelse
-                            @endif
+                            @endforelse
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_tag()"
@@ -1621,30 +1613,30 @@
                             @endif
 
                             <!--
-                                                                                                                                                                                                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
-                                                                                                                                                                                                                                                    style="margin-right: 0px; left: auto;">
-                                                                                                                                                                                                                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                                                                                                                                                                                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                                                                                                                                                                                                                                        style="margin-right: 0px; left: auto;">
+                                                                                                                                                                                                                                                                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
     <li>
-                                                                                                                                                                                                                                                            <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
-                                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                                <a href="{{ route('admin_dashboard') }}" class="dropdown-item">Dashboard</a>
+                                                                                                                                                                                                                                                                            </li>
     @endif
-                                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
-                                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                                        <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
-                                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                                    <li>
-                                                                                                                                                                                                                                                        <a href="#!" class="dropdown-item"
-                                                                                                                                                                                                                                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
-                                                                                                                                                                                                                                                            Out</a>
-                                                                                                                                                                                                                                                        <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                                                                                                                                                                                                                                            style="display: none">
-                                                                                                                                                                                                                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                                </ul>
-                                                                                                                                                                                                                                                -->
+                                                                                                                                                                                                                                                                        <li>
+                                                                                                                                                                                                                                                                            <a href="{{ route('profile_index') }}" class="dropdown-item">My Profile</a>
+                                                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                        <li>
+                                                                                                                                                                                                                                                                            <a href="{{ route('profile_index') }}" class="dropdown-item">Change Password</a>
+                                                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                        <li>
+                                                                                                                                                                                                                                                                            <a href="#!" class="dropdown-item"
+                                                                                                                                                                                                                                                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign
+                                                                                                                                                                                                                                                                                Out</a>
+                                                                                                                                                                                                                                                                            <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                                                                                                                                                                                                                                                                style="display: none">
+                                                                                                                                                                                                                                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                                                                                                                                                                                                                            </form>
+                                                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                    -->
 
                             <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
                                 aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
@@ -2498,10 +2490,7 @@
     {{-- GOOGLE MAPS API --}}
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk&libraries=places">
     </script> --}}
-    <script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
     <script src="{{ asset('assets/js/story-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-collab.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -2510,6 +2499,12 @@
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <script>
+        function add_tag() {
+            $('#modal-add_tag').modal('show');
+        }
+    </script>
 
     <script>
         $(window).scroll(function() {
