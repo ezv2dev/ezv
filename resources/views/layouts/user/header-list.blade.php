@@ -4078,20 +4078,58 @@
         </script>
 
         <script>
+
             var lastScrollTop = 0;
             $(window).scroll(function(event) {
                 var st = $(this).scrollTop();
                 var navbarHeight = $(".page-header-fixed").innerHeight();
                 var isShow = true;
-
                 if (st > 0) {
+                    $('#filter-cat-bg-color').css({'transform' : 'translateY(-200px)'})
+
+
+                    // ketika resize screen
+                    $(window).on("resize", function () {
+                        if ($(this).scrollTop() > 0) {
+                            if ($(this).width() <= 425) {
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-104px)'})
+                            }else if ($(this).width() <= 950) {
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-164px)'})
+                            }else if ($(this).width() <= 968) {
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-114px)'})
+                            }else if ($(this).width() <= 949) {
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-164px)'})
+                            } else if($(this).width() <= 991){
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-114px)'})
+                            }else {
+                                $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)'})
+                            }
+                        }
+                    });
+
+                    if ($(this).width() <= 425) {
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-104px)'})
+                    }else if ($(this).width() <= 950) {
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-164px)'})
+                    }else if ($(this).width() <= 968) {
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-114px)'})
+                    }else if ($(this).width() <= 949) {
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-164px)'})
+                    } else if($(this).width() <= 991){
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-114px)'})
+                    }else {
+                        $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)'})
+                    }
+                    
+
                     if (st > lastScrollTop) {
                         // downscroll code
+
                         $('#filter-subcat-bg-color').removeClass('nav-down');
                         $('#filter-subcat-bg-color').addClass('nav-up')
                         $('#filter-cat-bg-color').removeClass('nav-down');
                         isShow = false;
-                        $('#filter-subcat-bg-color').attr('data-isshow', "false");
+                        // $('#filter-subcat-bg-color').attr('data-isshow', "false");
                         $('#filter-cat-bg-color').attr('data-isshow', "false");
                         $('#filter-cat-bg-color').addClass('nav-up');
                         if (!isShow) {
@@ -4108,7 +4146,7 @@
                         $('#filter-cat-bg-color').addClass('nav-down')
                         isShow = true;
                         $('#filter-subcat-bg-color').attr('data-isshow', "true");
-                        $('#filter-cat-bg-color').attr('data-isshow', "true");
+                        // $('#filter-cat-bg-color').attr('data-isshow', "true");
                         if (isShow) {
                             var originHeight = $('#filter-subcat-bg-color').innerHeight() +
                                 $('#filter-cat-bg-color').innerHeight() + navbarHeight;
@@ -4119,12 +4157,15 @@
                         }
                     }
                 } else {
+                    $('#filter-cat-bg-color').css({'transform' : 'translateY(0px)'})
+                    $('#filter-subcat-bg-color').css({'transform' : 'translateY(0px)'})
+
                     $('#filter-subcat-bg-color').removeClass('nav-up');
                     $('#filter-subcat-bg-color').addClass('nav-down');
                     $('#filter-cat-bg-color').removeClass('nav-up');
                     $('#filter-cat-bg-color').addClass('nav-down')
                     isShow = true;
-                    $('#filter-subcat-bg-color').attr('data-isshow', "true");
+                    // $('#filter-subcat-bg-color').attr('data-isshow', "true");
                     $('#filter-cat-bg-color').attr('data-isshow', "true");
                     if (isShow) {
                         var originHeight = $('#filter-subcat-bg-color').innerHeight() +
