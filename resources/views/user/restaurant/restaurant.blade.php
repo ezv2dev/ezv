@@ -65,6 +65,15 @@
 </head>
 
 <body style="background-color:white">
+
+    <div id="untukDelete" style="
+    background: #00000040;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 999;
+    display: none;"></div>
+
     @php
         $condition_villa = Route::is('villa');
         $condition_restaurant = Route::is('restaurant');
@@ -4347,6 +4356,8 @@
                     e.preventDefault();
                     myDropzone.processQueue();
 
+                    $("#button").html('Uploading Gallery...');
+                    $("#button").addClass('disabled');
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4404,6 +4415,9 @@
                     message: message.message.file[0],
                     position: "topRight",
                 });
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
             },
             success: function (file, message, response) {
                 console.log(file);
@@ -4454,6 +4468,9 @@
                 $gallery.refresh();
 
                 this.removeFile(file);
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
             },
         }
     </script>
@@ -4752,6 +4769,9 @@
                 cancelButtonText: `{{ __('user_page.Cancel') }}`
             }).then((result) => {
                 if (result.isConfirmed) {
+                    let displayBlack = document.getElementById('untukDelete');
+                    displayBlack.style.display = "block";
+
                     $.ajax({
                         type: "get",
                         dataType: 'json',
@@ -4767,6 +4787,7 @@
                             $(`#displayPhoto${photo}`).remove();
                             
                             $gallery.refresh();
+                            displayBlack.style.display = "none";
                         }
                     });
                 } else {
