@@ -168,12 +168,10 @@ checkCheckInOutDate();
 $(document).ready(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
-        calendar_reserve(1);
         calendar_reserve2(1);
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
-        calendar_reserve(2);
     }
 });
 
@@ -181,11 +179,9 @@ $(window).on("resize", function () {
     if ($(this).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
-        calendar_reserve(1);
     } else {
         calendar_availability(2);
         calendar_reserve2(2);
-        calendar_reserve(2);
     }
 });
 
