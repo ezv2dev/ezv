@@ -3949,6 +3949,8 @@
             error: function(file, message, xhr) {
                 this.removeFile(file);// perhaps not remove on xhr errors
 
+                console.log(message);
+
                 for (let i = 0; i < message.message.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -3956,7 +3958,7 @@
                         position: "topRight",
                     });
                 }
-                
+
                 $("#button").html('Upload');
                 $("#button").removeClass('disabled');
             },

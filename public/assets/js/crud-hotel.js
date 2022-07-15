@@ -1,87 +1,10 @@
-//Change language
-$(".check-lang").change(function () {
-    $('#check_lang').each(function() {
-        if($(this).find('input[type="checkbox"]:checked').length > 0) {
-            $('.check-lang').css("border", "");
-            $('#err-slc-lang').hide();
-            $('#err-slc-lang').text('');
-        }
-    });
-});
-function editLangCollab(id_collab) {
-    let error = 0;
-
-    $('#check_lang').each(function() {
-        if($(this).find('input[type="checkbox"]:checked').length == 0) {
-            $('.check-lang').css("border", "solid #e04f1a 1px");
-            $('#err-slc-lang').show();
-            error = 1;
-        }
-    });
-    if (error == 1) {
-        return false;
-    } else {
-        // let btn = document.getElementById("btnSaveLang");
-        // btn.textContent = "Saving...";
-        // btn.classList.add("disabled");
-        // $.ajax({
-        //     type: "POST",
-        //     headers: {
-        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //     },
-        //     url: "/collab/update/language",
-        //     data: {
-        //         id: id_collab,
-        //         name: $("#name-form-input").val(),
-        //     },
-        //     success: function (response) {
-        //         $("#name-content").html(response.data);
-        //         $("#name-content-mobile").html(response.data);
-        //         $("#collabTitle").html(response.data + " - EZV2");
-
-        //         iziToast.success({
-        //             title: "Success",
-        //             message: response.message,
-        //             position: "topRight",
-        //         });
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Done";
-        //         btn.classList.remove("disabled");
-        //         editNameCancel();
-        //     },
-        //     error: function (jqXHR, exception) {
-        //         if (jqXHR.responseJSON.errors) {
-        //             for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-        //                 iziToast.error({
-        //                     title: "Error",
-        //                     message: jqXHR.responseJSON.errors[i],
-        //                     position: "topRight",
-        //                 });
-        //             }
-        //         } else {
-        //             iziToast.error({
-        //                 title: "Error",
-        //                 message: jqXHR.responseJSON.message,
-        //                 position: "topRight",
-        //             });
-        //         }
-
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Done";
-        //         btn.classList.remove("disabled");
-
-        //         editNameCancel();
-        //     },
-        // });
-    }
-}
 //Change name
 $(document).on("keyup", "textarea#name-form-input", function () {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
 
-let id_collab = $("#id_collab").val();
-
-function editNameCollab(id_collab) {
+function editNameHotel(id_hotel) {
     let error = 0;
     if (!$("textarea#name-form-input").val()) {
         $("#name-form-input").css("border", "solid #e04f1a 1px");
@@ -104,13 +27,13 @@ function editNameCollab(id_collab) {
             },
             url: "/colaborator/update/name",
             data: {
-                id: id_collab,
+                id_hotel: id_hotel,
                 name: $("#name-form-input").val(),
             },
             success: function (response) {
                 $("#name-content").html(response.data);
                 $("#name-content-mobile").html(response.data);
-                $("#collabTitle").html(response.data + " - EZV2");
+                $("#hotelTitle").html(response.data + " - EZV2");
 
                 iziToast.success({
                     title: "Success",
@@ -147,48 +70,118 @@ function editNameCollab(id_collab) {
     }
 }
 
-//Change profile pic
-let imageProfileCollab;
-let readerImageCollab;
-
-$("#imageCollab").on("change", function (ev) {
-    if(document.getElementById("imageCollab").files.length != 0){
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
-    }
-    imageProfileCollab = this.files[0];
-
-    readerImageCollab = new FileReader();
+//Change short desc
+$(document).on("keyup", "textarea#short-description-form-input", function () {
+    $("#short-description-form-input").css("border", "");
+    $("#err-shrt-desc").hide();
 });
 
-$("#updateImageForm").submit(function (e) {
+function editShortDesc(id_hotel) {
     let error = 0;
-    if(document.getElementById("imageCollab").files.length == 0){
-        $('.image-box').css("border", "solid #e04f1a 1px");
-        $('#err-img').show();
+    if (!$("textarea#short-description-form-input").val()) {
+        $("#short-description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-shrt-desc").show();
         error = 1;
     } else {
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
+        $("#short-description-form-input").css("border", "");
+        $("#err-shrt-desc").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
+        return false;
+    } else {
+        let btn = document.getElementById("btnSaveShortDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/hotel/update/short-description",
+            data: {
+                id_hotel: id_hotel,
+                short_description: $("#short-description-form-input").val(),
+            },
+            success: function (response) {
+                $("#short-description-content").html(response.data);
+                $("#short-description-form-input").val(response.data);
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                editShortDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editShortDescriptionCancel();
+
+                $("#short-description-form-input").val(response.data);
+            },
+        });
+    }
+}
+
+//change profile pic
+$("#imageHotel").on("change", function (ev) {
+    if (document.getElementById("imageHotel").files.length != 0) {
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
+    }
+
+    imageProfileHotel = this.files[0];
+
+    readerImageHotel = new FileReader();
+});
+
+//Change profile pic
+$("#updateImageForm").submit(function (e) {
+    let error = 0;
+    if (document.getElementById("imageHotel").files.length == 0) {
+        $(".image-box").css("border", "solid #e04f1a 1px");
+        $("#err-img").show();
+        error = 1;
+    } else {
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
+    }
+    if (error == 1) {
         e.preventDefault();
     } else {
-
         e.preventDefault();
         let btn = document.getElementById("btnupdateImageForm");
         btn.textContent = "Saving...";
         btn.classList.add("disabled");
 
         var formData = new FormData(this);
-        formData.append("image", imageProfileCollab);
+        formData.append("image", imageProfileHotel);
 
         $.ajax({
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: "/collaborator/update/image",
+            url: "/hotel/update/image",
             data: formData,
             cache: false,
             processData: false,
@@ -202,17 +195,17 @@ $("#updateImageForm").submit(function (e) {
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function () {
-                    $("#imageProfileCollab").attr(
+                readerImageHotel.addEventListener("load", function () {
+                    $("#imageProfileHotel").attr(
                         "src",
-                        readerImageVilla.result
+                        readerImageHotel.result
                     );
                 });
 
-                readerImageVilla.readAsDataURL(imageProfileCollab);
+                readerImageHotel.readAsDataURL(imageProfileHotel);
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
-                $("#modal-edit_collab_profile").modal("hide");
+                $("#modal-edit_hotel_profile").modal("hide");
             },
             error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
@@ -233,62 +226,41 @@ $("#updateImageForm").submit(function (e) {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
-                $("#modal-edit_collab_profile").modal("hide");
+                $("#modal-edit_hotel_profile").modal("hide");
             },
         });
     }
 });
 
-//Change description
-$(document).on("keyup", "textarea#description-form-input", function () {
-    $('#description-form-input').css("border", "");
-    $('#err-desc').hide();
-});
-function editDescriptionForm() {
-    var form = document.getElementById("description-form");
-    var content = document.getElementById("description-content");
-    var btn = document.getElementById("btnShowMoreDescription");
-    form.classList.add("d-block");
-    content.classList.add("d-none");
-    btn.classList.add("d-none");
-}
 
-function editDescriptionCancel() {
-    var form = document.getElementById("description-form");
-    var formInput = document.getElementById("description-form-input");
-    var content = document.getElementById("description-content");
-    var btn = document.getElementById("btnShowMoreDescription");
-    form.classList.remove("d-block");
-    content.classList.remove("d-none");
-    btn.classList.remove("d-none");
-}
-function saveDescription(id_collab) {
+//Change long desc
+function editDescriptionHotel(id_hotel) {
     let error = 0;
-    if(!$('textarea#description-form-input').val()) {
-        $('#description-form-input').css("border", "solid #e04f1a 1px");
-        $('#err-desc').show();
+    if (!$("textarea#description-form-input").val()) {
+        $("#description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-desc").show();
         error = 1;
     } else {
-        $('#description-form-input').css("border", "");
-        $('#err-desc').hide();
+        $("#description-form-input").css("border", "");
+        $("#err-desc").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         return false;
     } else {
-        let btn = document.getElementById("btnSaveDescription");
-        btn.textContent = "Saving Description...";
+        let btn = document.getElementById("btnSaveDesc");
+        btn.textContent = "Saving...";
         btn.classList.add("disabled");
         $.ajax({
             type: "POST",
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: "/collab/update/description",
+            url: "/hotel/update/description",
             data: {
-                id_collab: id_collab,
-                collab_description: $('#description-form-input').val()
+                id_hotel: id_hotel,
+                description: $("#description-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#description-content").html(response.data.substring(0, 600));
 
                 iziToast.success({
@@ -302,7 +274,7 @@ function saveDescription(id_collab) {
                     $("#btnShowMoreDescription").append(
                         '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
                     );
-                    //$("#modalDescriptionVilla").html(response.data);
+                    $("#modalDescriptionHotel").html(response.data);
                 } else {
                     $("#btnShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
@@ -312,7 +284,7 @@ function saveDescription(id_collab) {
                 editDescriptionCancel();
             },
             error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -333,7 +305,7 @@ function saveDescription(id_collab) {
 
                 editDescriptionCancel();
 
-                $('#description-form-input').val(jqXHR.responseJSON.data);
+                $("#description-form-input").val(response.data);
             },
         });
     }

@@ -11,11 +11,11 @@
                 <span class="text-dark" style="font-size: 11pt;">We have many international travelers who appreciate influencer who can speak their language.</span>
             </div>
 
-            <form action="{{ route('collab_update_language') }}" method="post">
+            {{-- <form action="{{ route('collab_update_language') }}" method="post">
                 @csrf
-                <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}">
+                <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}"> --}}
                 @foreach ($languages as $item)
-                <div class="form-check">
+                <div id="check_lang" class="form-check">
                     @php
                         $isChecked = "";
                         foreach ($owner_language as $owner_lang) {
@@ -24,15 +24,16 @@
                             }
                         }
                     @endphp
-                    <input class="form-check-input" type="checkbox" name="language[]" id="languages" style="width: 20px;
+                    <input class="form-check-input check-lang" type="checkbox" name="language[]" id="languages" style="width: 20px;
                     height: 20px;" value="{{ $item->id_host_language }}" {{ $isChecked }}>
                     <label class="form-check-label" style="margin-left: 10px; margin-top: 3px;">
                     {{$item->name}}
                     </label>
                 </div>
                 @endforeach
-                <button type="submit" class="btn btn-primary float-right">Save</button>
-            </form>
+                <small id="err-slc-lang" style="display: none;" class="invalid-feedback">Select one language</small><br>
+                <button type="submit" class="btn btn-primary float-right" id="btnSaveLang" onclick="editLangCollab({{ $profile->id_collab }});">Save</button>
+            {{-- </form> --}}
 
         </div>
         {{-- <div class="modal-footer"> --}}
