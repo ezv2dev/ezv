@@ -430,7 +430,7 @@
                                                         <a href="javascript:void(0)"
                                                             class="dropdown-toggle input-guest">
                                                         </a>
-                                                        <a style="margin-left: 20px;" class="dropdown-toggle-icon">
+                                                        <a style="margin-left: 10px;" class="dropdown-toggle-icon">
                                                             {{ __('user_page.Add') }}
                                                         </a>
 
