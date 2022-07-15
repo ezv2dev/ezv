@@ -3898,7 +3898,6 @@
                 $("#button").click(function(e) {
                     e.preventDefault();
                     myDropzone.processQueue();
-
                     $("#button").html('Uploading Gallery...');
                     $("#button").addClass('disabled');
                 });
@@ -3944,10 +3943,9 @@
                     });
 
                     // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
+                        file.previewElement.appendChild(removeButton);
                 });
             },
-            ,
             error: function(file, message, xhr) {
                 this.removeFile(file);// perhaps not remove on xhr errors
 
@@ -3994,10 +3992,9 @@
                 }
                 if (message.data.video.length > 0)
                 {
-                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="view_video_restaurant('+
-                        message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
+                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="showPromotionMobile()" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
                         path+lowerCaseUid+slash+message.data.video[0].name+
-                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="'+
+                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="'+
                         message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     $('.gallery').append(content);
@@ -4457,7 +4454,7 @@
     <script>
         function delete_photo_video(ids) {
             let id = ids.getAttribute("data-id");
-            let video = ids.getAttribte("data-video");
+            let video = ids.getAttribute("data-video");
 
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
