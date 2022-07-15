@@ -3224,7 +3224,27 @@ span.flatpickr-weekday {
 #type-content-mobile{
     display: none;
 }
+#edit_position_photo .modal-footer input {
+    width: 60%;
+    margin-left: 20%;
+}
 
+#edit_position_photo .modal-dialog {
+    position: absolute !important;
+    top: 0px !important;
+    left: 0px !important;
+    right: 0px !important;
+    bottom: 0px !important;
+}
+
+#edit_position_photo .modal-dialog .modal-content {
+    height: 100% !important;
+    margin: 0px !important;
+}
+#edit_position_photo .modal-dialog .modal-content .modal-body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
 
 @media only screen and (max-width: 345px) {
     .name-content-mobile #name-content-mobile {
@@ -3235,6 +3255,27 @@ span.flatpickr-weekday {
     .edit-icon, .edit-video-icon, .edit-menu-icon {
         top: 10px !important;
         right: 4px !important;
+    }
+}
+@media only screen and (max-width: 374px) {
+    #edit_position_photo .modal-body #sortable-photo li {
+        width: 100% !important;
+    }
+}
+@media only screen and (min-width: 375px) and (max-width: 499px) {
+    #edit_position_photo .modal-body #sortable-photo li {
+        width: 50% !important;
+    }
+}
+@media only screen and (min-width: 500px) and (max-width: 991px) {
+    #edit_position_photo .modal-body #sortable-photo li {
+        width: 33.33% !important;
+    }
+}
+@media only screen and (max-width: 991px) {
+    #edit_position_photo .modal-body {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
     }
 }
 @media only screen and (min-width: 346px) and (max-width: 767px) {
@@ -3460,7 +3501,7 @@ span.flatpickr-weekday {
     .sticky-bottom-mobile .rsv-btn-button {
         display: block !important;
         text-align: center !important;
-        padding: 15px 10px !important;
+        padding: 10px !important;
     }
     .social-share-container {
         padding: 7px !important;

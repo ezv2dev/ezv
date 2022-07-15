@@ -2427,12 +2427,12 @@
                         there is no image yet
                         @endforelse
                     </ul> --}}
-
-                    <div style="clear: both; margin-top: 20px;">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos" value='Submit'
                             onclick="save_reorder_photo()">
                     </div>
-
                 </div>
             </div>
         </div>
