@@ -7,92 +7,7 @@
                 <h7 class="modal-title">{{ __('user_page.Edit Bedroom, Bathroom, Adult, & Children') }}</h7>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body pb-1">
-                <div class="row mb-12 margin-bottom-12px">
-                    <label class="col-sm-4 col-form-label" for="price">{{ __('user_page.Bedrooms') }}</label>
-                    <div class="col-sm-8">
-                        <div class="editnumberoption_container">
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="1" id="o1" name="bedroom"
-                                    @if ($villa[0]->bedroom == 1) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o1">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">1</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="2" id="o2" name="bedroom"
-                                    @if ($villa[0]->bedroom == 2) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o2">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">2</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="3" id="o3" name="bedroom"
-                                    @if ($villa[0]->bedroom == 3) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o3">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">3</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="4" id="o4" name="bedroom"
-                                    @if ($villa[0]->bedroom == 4) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o4">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">4</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="5" id="o5" name="bedroom"
-                                    @if ($villa[0]->bedroom == 5) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o5">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">5</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="6" id="o6" name="bedroom"
-                                    @if ($villa[0]->bedroom == 6) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="o6">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">6</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container" class="" onclick="showBedroom()"
-                                id="moreBedroom">
-                                <label class="editnumberoption-checkbox-alias">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">more</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container display-none" onclick="hideBedroom()"
-                                id="hideBedroom">
-                                <label class="editnumberoption-checkbox-alias">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">hide</p>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="modal-body pb-1" style="height: 450px; overflow-x: hidden; overflow-y: auto; border-radius: 0px;">
                 <div class="row mb-12 margin-bottom-12px display-none" id="bedroomForm">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
@@ -101,6 +16,7 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
                 </div>
+                {{--
                 <div class="row mb-12 margin-bottom-12px">
                     <label class="col-sm-4 col-form-label" for="price">Beds</label>
                     <div class="col-sm-8">
@@ -187,6 +103,8 @@
 
                     </div>
                 </div>
+                --}}
+
                 <div class="row mb-12 margin-bottom-12px display-none" id="bedsForm">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
@@ -484,9 +402,230 @@
 
                     </div>
                 </div>
+                <div class="row mb-12 margin-bottom-12px">
+                    <label class="col-sm-4 col-form-label" for="price">{{ __('user_page.Bedrooms') }}</label>
+                    <div class="col-sm-8">
+                        <div class="editnumberoption_container">
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="1" id="o1" name="bedroom"
+                                    @if ($villa[0]->bedroom == 1) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o1">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">1</p>
+                                    </div>
+                                </label>
+                            </div>
 
-                <!-- Submit -->
-                <div class="row items-push">
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="2" id="o2" name="bedroom"
+                                    @if ($villa[0]->bedroom == 2) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o2">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">2</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="3" id="o3" name="bedroom"
+                                    @if ($villa[0]->bedroom == 3) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o3">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">3</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="4" id="o4" name="bedroom"
+                                    @if ($villa[0]->bedroom == 4) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o4">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">4</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="5" id="o5" name="bedroom"
+                                    @if ($villa[0]->bedroom == 5) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o5">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">5</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="6" id="o6" name="bedroom"
+                                    @if ($villa[0]->bedroom == 6) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="o6">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">6</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container" class="" onclick="showBedroom()"
+                                id="moreBedroom">
+                                <label class="editnumberoption-checkbox-alias">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">more</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="roomnumber-filter-container display-none" onclick="hideBedroom()"
+                                id="hideBedroom">
+                                <label class="editnumberoption-checkbox-alias">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">hide</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                    <div class="row">
+                        <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
+                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($bedroom_m as $data)
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($bedroom as $item) {
+                                                if ($data->name == $item->name) {
+                                                    $isChecked = 'checked';
+                                                }
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input type="checkbox" value="{{ $data->id_bed }}"
+                                                id="{{ $data->id_bed }}" name="bedroom[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                King
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="kingbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="kingbed" name="king" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="kingbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Double
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="doublebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="doublebed" name="double" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="doublebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Queen
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="queenbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="queenbed" name="queen" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="queenbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Single
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="singlebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="singlebed" name="single" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="singlebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Working table
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="workingtable_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="workingtable" name="workingtable" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="workingtable_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="reserve-input-row">
+                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                Couch
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                <a type="button" onclick="couch_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                </a>
+                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                    <p><input type="number" id="couch" name="couch" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                </div>
+                                <a type="button" onclick="couch_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <hr>
+            </div>
+            <div class="modal-footer" style="background-color: white;">
+                 <!-- Submit -->
+                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
                         <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
                             onclick="editBedroomVilla({{ $villa[0]->id_villa }})">
@@ -495,7 +634,6 @@
                     </div>
                 </div>
                 <!-- END Submit -->
-                <br>
             </div>
         </div>
     </div>
