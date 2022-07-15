@@ -2063,10 +2063,22 @@ span.flatpickr-weekday {
     .grid-text{
         font-size: 80%;
     }
+    #collaborator-form {
+        display: none !important;
+    }
+    .expand-navbar-mobile .collab-expand {
+        display: block !important;
+    }
 }
 @media only screen and (min-width: 501px) and (max-width: 649px) {
     .grid-text{
         font-size: 90%;
+    }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 991px) {
+    .expand-navbar-mobile .collab-expand {
+        display: none !important;
     }
 }
 
@@ -2378,4 +2390,8 @@ span.flatpickr-weekday {
     #navbar-first-dekstop {
         width: 32% !important;
     }
+}
+
+input::placeholder {
+    font-size: 14px !important;
 }
