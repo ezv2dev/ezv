@@ -209,7 +209,7 @@ class CollaboratorController extends Controller
                 unset($name[0]);
                 $last_name = implode(" ", $name);
                 $user = User::where('id', $request->id)->first();
-                if($user->update(array(
+                if ($user->update(array(
                     'first_name' => $first_name,
                     'last_name' => $last_name,
                     'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
@@ -232,6 +232,20 @@ class CollaboratorController extends Controller
         }
     }
     // updatename
+
+    public function collab_update_gender(Request $request)
+    {
+        $collab = Collaborator::where('id_collab', $request->id)->first();
+        if ($collab) {
+            $collab->update(array(
+                'gender' => $request->gender[0],
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_by' => Auth::user()->id,
+            ));
+        }
+
+        return response()->json(['success' => true, 'message' => 'Succesfully Updated Collaborator Gender',  'data' => $request->gender]);
+    }
 
     // update category
     public function collab_store_category(Request $request)

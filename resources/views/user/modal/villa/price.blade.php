@@ -531,6 +531,9 @@ $(function() {
     });
 
     let multiEvent = [];
+    var eventData = [];
+    let d;
+    let e;
 
     let calendar2 = $('#calendar2').fullCalendar({
         defaultView: 'month',
@@ -562,19 +565,34 @@ $(function() {
             $('#startNotAvailable').val(start);
             $('#endNotAvailable').val(end);
             var title = "Not Available";
-            var eventData;
-            eventData = {
+
+            var tempEvent;
+            tempEvent = {
                 title: title,
                 start: start,
                 end: endtemp,
             }
+
             multiEvent.push([start, end]);
+            eventData.push({'start': start,'end': endtemp,'title':title});
+            e = uniqBy(eventData, JSON.stringify);
+
+            d = uniqBy(multiEvent, JSON.stringify);
+            console.log(d);
             // multiEvent.push(end);
-            calendar2.fullCalendar('renderEvent', eventData, true);
+            calendar2.fullCalendar('renderEvent',tempEvent, true);
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
         }
     });
+
+    function uniqBy(multiEvent, key) {
+        let seen = new Set();
+        return multiEvent.filter(item => {
+            let k = key(item);
+            return seen.has(k) ? false : seen.add(k);
+        });
+    }
 
     //add data availability to db
     $(".btn-submit-availability").click(function(){
@@ -585,7 +603,7 @@ $(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url:"{{ route('villa_not_available') }}",
-            data:{multiEvent: multiEvent, id: id_villa_fullcalendar},
+            data:{multiEvent: d, id: id_villa_fullcalendar},
             success:function(data){
                 alert(data.message);
                 location.reload();
