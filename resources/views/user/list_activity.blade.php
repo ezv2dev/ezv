@@ -101,11 +101,13 @@
             @if ($subCategoryAll->count() > 6)
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
-                        <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        <div>
+                            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <p class="text-13 list-description {{ $textColor }} m-0">
+                            {{ __('user_page.More') }}
+                        </p>
                     </div>
-                    <p class="text-13 list-description {{ $textColor }} ">
-                        {{ __('user_page.More') }}
-                    </p>
                 </div>
             @endif
         @else

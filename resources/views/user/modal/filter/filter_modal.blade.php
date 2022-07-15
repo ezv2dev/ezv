@@ -62,6 +62,53 @@
     .orange {
         color: #FF7400;
     }
+    
+    .roomnumberoption-container::-webkit-scrollbar {
+        visibility: hidden;
+    }
+
+    .roomnumberoption-container{
+        overflow-x: scroll;
+    }
+
+    .filter-modal-body{
+        overflow-x: hidden;
+    }
+
+    @media (max-width: 575px) { 
+        .roomnumberoption-container{
+            width: 45%;
+        }
+    }
+    @media (min-width: 576px) { 
+        .roomnumberoption-container{
+            width: 67%;
+        }
+    }
+    @media (min-width: 768px) {
+        .roomnumberoption-container{
+            width: 67%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    }
+
 </style>
 
 @php

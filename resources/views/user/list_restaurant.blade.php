@@ -98,26 +98,28 @@
                                         $isChecked = '';
                                         $filterIds = explode(',', request()->get('fSubCategory'));
                                     @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                    style="color: #ff7400 !important;"
-                    @endif></i>
-                </div>
-                <div>
-                    <span
-                        class="translate-text-group-items list-description {{ $textColor }}">{{ $item->name }}</span>
+                                    style="color: #ff7400 !important;"@endif>
+                                </i>
+                            </div>
+                        <div>
+                    <span class="translate-text-group-items list-description {{ $textColor }}">{{ $item->name }}</span>
                 </div>
             </div>
             @endforeach
             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                 <div>
-                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                    <div>
+                        <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <p class="m-0 list-description {{ $textColor }}">
+                        {{ __('user_page.More') }}
+                    </p>
                 </div>
-                <p class=" list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
-                </p>
             </div>
         </div>
 
     </div>
+    
     <div class="col-lg-12 container-grid translate-text-group">
         @php
             $local = '<script>

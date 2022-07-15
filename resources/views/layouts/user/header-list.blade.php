@@ -201,16 +201,6 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
-                    style="cursor: pointer; width: 50px; border: none; margin: 0; padding: 0;">
-                    <p>
-                        <span class="top-search">
-                            <img src="{{ asset('assets/icon/menu/search.svg') }}"
-                                style="width: 20px; height: auto;">
-                            <!-- <i class="fa fa-search"></i> -->
-                        </span>
-                    </p>
-                </div>
                 <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
                     <label class="container-mode">
                         <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
@@ -4091,15 +4081,8 @@
 
             var lastScrollTop = 0;
             $(window).scroll(function(event) {
-                var navbarHeight = $(".page-header-fixed").innerHeight() + 30;
                 var st = $(this).scrollTop();
                 var isShow = true;
-                
-                if ($(this).width() <= 425) {
-                    navbarHeight = $(".page-header-fixed").innerHeight() 
-                }else if ($(this).width() <= 950) {
-                    navbarHeight = $(".page-header-fixed").innerHeight() + 30
-                }
 
                 if (st > 0) {
                     $('#filter-cat-bg-color').css({'transform' : 'translateY(-200px)','transition':'all 0.5s ease'})
@@ -4136,18 +4119,17 @@
                     }else {
                         $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)','transition':'all 0.3s ease'})
                     }
-                    
-                    let tambah  = st < 60 ? 0 : 90
-                    var marginTop = navbarHeight + $('#filter-subcat-bg-color').innerHeight() + tambah
+
+                    let tambah  = 60
+                    var marginTop = $("#new-bar-black").innerHeight() + $('#filter-subcat-bg-color').innerHeight() + tambah
                     $(".grid-container-43").attr('style', 'margin-top:'+marginTop + 'px !important');
                     $('.container-grid').attr('style', 'margin-top:'+marginTop + 'px !important');
                     $('.container-grid-activity').attr('style', 'margin-top:'+marginTop+ 'px !important');
                     $('.container-grid-hotel').attr('style', 'margin-top:'+marginTop+ 'px !important');
 
-                    
                     if (st > lastScrollTop) {
                         // downscroll code
-
+                        $('#filter-subcat-bg-color').css({'transition':'all 0.3s ease'})
                         $('#filter-subcat-bg-color').removeClass('nav-down');
                         $('#filter-subcat-bg-color').addClass('nav-up')
                         $('#filter-cat-bg-color').removeClass('nav-down');
@@ -4162,6 +4144,7 @@
                         //     $('.container-grid-hotel').css("margin-top", navbarHeight + 60 + "px");
                         // }
                     } else {
+                        $('#filter-subcat-bg-color').css({'transition':'all 0s ease'})
                         // uproll code
                         $('#filter-subcat-bg-color').removeClass('nav-up');
                         $('#filter-subcat-bg-color').addClass('nav-down')
@@ -4169,10 +4152,11 @@
                         $('#filter-cat-bg-color').addClass('nav-down')
                         isShow = true;
                         $('#filter-subcat-bg-color').attr('data-isshow', "true");
+
                         // $('#filter-cat-bg-color').attr('data-isshow', "true");
                         // if (isShow) {
-                            var originHeight = $('#filter-subcat-bg-color').innerHeight() +
-                                $('#filter-cat-bg-color').innerHeight() + navbarHeight;
+                            // var originHeight = $('#filter-subcat-bg-color').innerHeight() +
+                            //     $('#filter-cat-bg-color').innerHeight() + navbarHeight;
                             // $(".grid-container-43").css("margin-top", originHeight + "px");
                             // $('.container-grid-hotel').css("margin-top", originHeight + "px");
                             // $('.container-grid-activity').css("margin-top", originHeight + "px");
@@ -4192,13 +4176,14 @@
                     $('#filter-cat-bg-color').attr('data-isshow', "true");
                     
                     // if (isShow) {
-                        var originHeight = $('#filter-subcat-bg-color').innerHeight() +
-                            $('#filter-cat-bg-color').innerHeight() + navbarHeight;
-                            console.log(originHeight)
-                        $(".grid-container-43").css("margin-top", originHeight + "px");
-                        $('.container-grid-hotel').css("margin-top", originHeight + "px");
-                        $('.container-grid-activity').css("margin-top", originHeight + "px");
-                        $('.container-grid').css("margin-top", originHeight + "px");
+                        let add = $(this).width() > 949 ? 30 : 0
+                        // var originHeight = $('#filter-subcat-bg-color').outerHeight() +
+                        //     $('#filter-cat-bg-color').outerHeight() + $("#new-bar-black").outerHeight() + add;
+                        $(".grid-container-43").attr('style', 'margin-top:""');
+                        $('.container-grid-hotel').attr('style', 'margin-top:""');
+
+                        $('.container-grid-activity').attr('style', 'margin-top:""');
+                        $('.container-grid').attr('style', 'margin-top:""');
                         
                     // }
 
