@@ -228,7 +228,7 @@ class CollaboratorController extends Controller
         } else {
             // return back()
             //     ->with('error', 'Please check the form below for errors');
-            return response()->json(['success' => true, 'message' => 'Succesfully Updated Collaborator Name',  'data' => $request->name]);
+            return response()->json(['errors' => true, 'message' => 'Fail Updated Collaborator Name',  'data' => $request->name]);
         }
     }
     // updatename

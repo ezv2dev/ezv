@@ -611,11 +611,13 @@ class HotelDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Name',  'data' => $request->name]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Fail Updated Hotel Name',  'data' => $request->name]);
         }
     }
 
@@ -786,11 +788,13 @@ class HotelDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['data' => $request->short_description, 'message' => 'Succesfully Updated Hotel Short Description']);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['data' => $request->short_description, 'errors' => 'Failed Updated Hotel Short Description']);
         }
     }
 
@@ -946,11 +950,13 @@ class HotelDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Description Hotel',  'data' => $request->description]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Succesfully Updated Description Hotel',  'data' => $request->description]);
         }
     }
 

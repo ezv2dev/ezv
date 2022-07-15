@@ -91,7 +91,7 @@
 
 
 .container-grid-cat{
-    grid-template-columns: repeat( 2, minmax(0, 1fr) );
+    grid-template-columns: repeat( 5, minmax(0, 1fr) );
     grid-template-rows: repeat(1, auto) !important;
     gap: 10px;
     display: grid;
@@ -234,15 +234,15 @@
     }
 
     .container-grid-cat > div:nth-child(4){
-        display: none;
+        display: block;
     }
 
     .container-grid-cat > div:nth-child(3){
-        display: none;
+        display: block;
     }
 
     .container-grid-cat > div:nth-child(2){
-        display: none;
+        display: block;
     }
 
     .container-grid-cat > div:nth-child(1){
@@ -848,19 +848,29 @@
     }
 
     .container-grid-sub-cat {
-        top: 180px !important;
+        top: 230px !important;
     }
 
     .grid-img-filter{
-        height: 80px !important;
+        height: 60px !important;
+        width: 60px !important;
+        border-radius: 5px;
+        aspect-ratio: 1/1;
+        box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
+    }
+
+    .container-grid-cat .grid-img-container .grid-text {
+        font-size: 0.7rem !important;
+        color: #5d5d5d;
+        top: 60px;
+        font-weight: 400;
+    }
+
+    .list-slider .slick-list {
+        margin-right: -2px;
     }
 }
-@media only screen and (max-width: 480px) {
-    /* .list-like-button-container,
-    .video-thumb-container {
-        top: 40px !important;
-    } */
-}
+
 @media only screen and (min-width: 426px) and (max-width: 645px) {
     .container-grid-cat,
     .container-grid-hotel {
@@ -871,6 +881,10 @@
     .container-grid-sub-cat{
         padding-right: 1.5rem !important;
         padding-left: 1.5rem !important;
+    }
+
+    .container-grid-sub-cat{
+        top: 300px;
     }
 
     .grid-img-filter{
@@ -900,7 +914,7 @@
 @media only screen and (min-width: 426px) and (max-width: 949px) {
 
     .container-grid-sub-cat {
-        top: 250px;
+        top: 300px;
     }
     .grid-container-43,
     .container-grid,
@@ -915,7 +929,7 @@
 }
 @media only screen and (min-width: 950px) and (max-width: 991px) {
     .container-grid-sub-cat {
-        top: 200px !important;
+        top: 250px !important;
     }
 
     .grid-img-filter{
@@ -930,22 +944,13 @@
     }
 }
 @media only screen and (max-width: 991px) {
-    .search-box {
-        height: 0px !important;
-    }
-    #searchbox{
-        display: none !important;
-    }
-    .searchbar-list-display-block {
-        top: 0px !important;
-    }
     .container-grid-cat {
-        top: 72px !important;
+        top: 132px !important;
         padding-top: 1rem !important;
     }
 
     .container-grid-cat .grid-img-container .grid-text {
-        font-size: 1.5rem !important;
+        font-size: 1.5rem;
     }
 }
 

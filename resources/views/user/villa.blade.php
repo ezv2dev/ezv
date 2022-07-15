@@ -3949,11 +3949,15 @@
             error: function(file, message, xhr) {
                 this.removeFile(file);// perhaps not remove on xhr errors
 
-                iziToast.error({
-                    title: "Error",
-                    message: message.message.file[0],
-                    position: "topRight",
-                });
+                console.log(message);
+
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
 
                 $("#button").html('Upload');
                 $("#button").removeClass('disabled');
@@ -3992,7 +3996,7 @@
                 }
                 if (message.data.video.length > 0)
                 {
-                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="showPromotionMobile()" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
+                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="view('+message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
                         path+lowerCaseUid+slash+message.data.video[0].name+
                         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="'+
                         message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4152,45 +4156,6 @@
                     });
                 }
             });
-        }
-    </script>
-
-    <script>
-        function kingbed_increment() {
-            document.getElementById('kingbed').stepUp();
-        }
-        function kingbed_decrement() {
-            document.getElementById('kingbed').stepDown();
-        }
-        function singlebed_increment() {
-            document.getElementById('singlebed').stepUp();
-        }
-        function singlebed_decrement() {
-            document.getElementById('singlebed').stepDown();
-        }
-        function doublebed_increment() {
-            document.getElementById('doublebed').stepUp();
-        }
-        function doublebed_decrement() {
-            document.getElementById('doublebed').stepDown();
-        }
-        function workingtable_increment() {
-            document.getElementById('workingtable').stepUp();
-        }
-        function workingtable_decrement() {
-            document.getElementById('workingtable').stepDown();
-        }
-        function queenbed_increment() {
-            document.getElementById('queenbed').stepUp();
-        }
-        function queenbed_decrement() {
-            document.getElementById('queenbed').stepDown();
-        }
-        function couch_increment() {
-            document.getElementById('couch').stepUp();
-        }
-        function couch_decrement() {
-            document.getElementById('couch').stepDown();
         }
     </script>
 
