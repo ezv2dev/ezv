@@ -521,6 +521,11 @@ class Villa extends Model
         return $this->hasMany(VillaHasFilter::class, 'id_villa', 'id_villa');
     }
 
+    public function villaHasAmenities()
+    {
+        return $this->hasMany(VillaAmenities::class, 'id_villa', 'id_villa');
+    }
+
     public function villaFilter()
     {
         return $this->belongsToMany(VillaFilter::class, 'villa_has_filter', 'id_villa', 'id_villa_filter', 'id_villa', 'id_villa_filter');
