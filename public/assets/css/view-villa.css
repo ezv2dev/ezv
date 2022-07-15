@@ -3782,7 +3782,7 @@ span.flatpickr-weekday {
 @media only screen and (min-width: 1360px) {
     .navright.active {
         width: fit-content !important;
-        min-width: 400px !important;
+        min-width: 390px !important;
     }
     .rsv-block .sticky {
         width: 72% !important;
