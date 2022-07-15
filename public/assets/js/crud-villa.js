@@ -215,6 +215,9 @@ function editBedroomVilla(id_villa) {
     var children1 = $("input[name='children1']").val();
     var size = $("input[name='size']").val();
 
+    saveBedroomDetail(id_villa);
+    return;
+
     $.ajax({
         type: "POST",
         headers: {
@@ -271,6 +274,39 @@ function editBedroomVilla(id_villa) {
             });
         },
     });
+}
+
+function saveBedroomDetail(id_villa) {
+    console.log('hit saveBedroomDetail');
+    let content = $('.bedroomDetailFormContent').eq(0);
+    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+    let bedroomIds = [];
+    let bathroomIds = [];
+    for (let index = 0; index < bedroomRawContent.length; index++) {
+        bedroomIds.push(bedroomRawContent.eq(index).val());
+    }
+    for (let index = 0; index < bathroomRawContent.length; index++) {
+        bathroomIds.push(bathroomRawContent.eq(index).val());
+    }
+
+    let bedRawContent = content.find('.bedroomDetailFormContentBed');
+    let bed = [];
+    for (let index = 0; index < bedRawContent.length; index++) {
+        bed.push({
+            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+        });
+    }
+
+    let formData = {
+        id_villa: id_villa,
+        bathroom_ids: bathroomIds,
+        bedroom_ids: bedroomIds,
+        bed: bed
+    };
+
+    console.log(formData);
 }
 
 function editCategoryV(id_villa) {
