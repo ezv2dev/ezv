@@ -52,7 +52,7 @@
     </style>
     {{-- function get data --}}
 
-    <div id="body-color" class="{{ $bgColor }}" style="position: style;">
+    <div id="body-color" class="{{ $bgColor }}" style="position: relative;">
         <!-- Page Content -->
         <div id="div-to-refresh">
             <!-- Refresh Page -->

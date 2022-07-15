@@ -9,8 +9,8 @@
             </div>
             <div class="modal-body" style="padding: 1rem 2rem 2rem 2rem !important;" id="modalDescriptionVilla">
                 <p>
-                Cancellation policy
-Before you book, make sure you're comfortable with this Host's cancellation policy. Keep in mind that Airbnb's Extenuating Circumstances policy doesn't cover cancellations due to illness or travel disruptions caused by COVID-19.
+                Before you book, make sure you're comfortable with this Host's <em>cancellation policy</em>.<br><br>
+                Keep in mind that EZV's Extenuating Circumstances policy doesn't cover cancellations due to illness or travel disruptions caused by COVID-19.
                 </p>
             </div>
         </div>

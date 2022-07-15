@@ -128,7 +128,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <div class="row">
                         <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
@@ -262,7 +262,7 @@
                         </div>
                         </div>
                     </div>
-                    <hr>
+                    <hr> -->
                     <div class="row">
                         <label class="form-label"><b>{{ __('user_page.Kitchen') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">

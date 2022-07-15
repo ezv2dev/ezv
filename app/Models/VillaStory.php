@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class VillaStory extends Model
 {
     protected $fillable = [
-        'title', 'name', 'id_villa', 'thumbnail'
+        'title', 'name', 'id_villa', 'thumbnail', 'created_by', 'updated_by'
     ];
 
     protected $table = 'villa_story';

@@ -1,19 +1,21 @@
 $(document).on("keyup", "textarea#name-form-input", function () {
-    $('#name-form-input').css("border", "");
-    $('#err-name').hide();
+    $("#name-form-input").css("border", "");
+    $("#err-name").hide();
 });
+
+let id_villa = $("#id_villa").val();
 
 function editNameVilla(id_villa) {
     let error = 0;
-    if(!$('textarea#name-form-input').val()) {
-        $('#name-form-input').css("border", "solid #e04f1a 1px");
-        $('#err-name').show();
+    if (!$("textarea#name-form-input").val()) {
+        $("#name-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-name").show();
         error = 1;
     } else {
-        $('#name-form-input').css("border", "");
-        $('#err-name').hide();
+        $("#name-form-input").css("border", "");
+        $("#err-name").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         return false;
     } else {
         let btn = document.getElementById("btnSaveName");
@@ -22,17 +24,17 @@ function editNameVilla(id_villa) {
         $.ajax({
             type: "POST",
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             url: "/villa/update/name",
             data: {
                 id_villa: id_villa,
-                villa_name: $('#name-form-input').val()
+                villa_name: $("#name-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#name-content2").html(response.data);
                 $("#name-content-mobile").html(response.data);
-                $("#villaTitle").html(response.data + ' - EZV2');
+                $("#villaTitle").html(response.data + " - EZV2");
 
                 iziToast.success({
                     title: "Success",
@@ -44,7 +46,108 @@ function editNameVilla(id_villa) {
                 editNameCancel();
             },
             error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editNameCancel();
+            },
+        });
+    }
+}
+
+function editNameForm(id_villa) {
+    var form = document.getElementById("name-form");
+    var formInput = document.getElementById("name-form-input");
+    var content = document.getElementById("name-content");
+    form.classList.add("d-block");
+    content.classList.add("d-none");
+
+    $.ajax({
+        type: "GET",
+        url: "/villa/get/name/" + `${id_villa}`,
+        success: function (response) {
+            $("#name-form-input").val(response.data);
+
+            if (formInput.value == "Home Name Here") {
+                formInput.value = "";
+            }
+        },
+    });
+}
+
+function editNameCancel() {
+    var form = document.getElementById("name-form");
+    var formInput = document.getElementById("name-form-input");
+    var content = document.getElementById("name-content");
+    form.classList.remove("d-block");
+    content.classList.remove("d-none");
+
+    if (formInput.value == "Home Name Here") {
+        formInput.value = "";
+    }
+}
+
+$(document).on("keyup", "textarea#short-description-form-input", function () {
+    $("#short-description-form-input").css("border", "");
+    $("#err-shrt-desc").hide();
+});
+
+function editShortDesc(id_villa) {
+    let error = 0;
+    if (!$("textarea#short-description-form-input").val()) {
+        $("#short-description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-shrt-desc").show();
+        error = 1;
+    } else {
+        $("#short-description-form-input").css("border", "");
+        $("#err-shrt-desc").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let btn = document.getElementById("btnSaveShortDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/update/short-description",
+            data: {
+                id_villa: id_villa,
+                short_desc: $("#short-description-form-input").val(),
+            },
+            success: function (response) {
+                $("#short-description-content2").html(response.data);
+                $("#short-description-form-input").val(response.data);
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                editShortDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -65,112 +168,9 @@ function editNameVilla(id_villa) {
 
                 editShortDescriptionCancel();
 
-                $('#short-description-form-input').val(response.data);
+                $("#short-description-form-input").val(response.data);
             },
         });
-    }
-}
-
-function editNameForm(id_villa) {
-    var form = document.getElementById("name-form");
-    var formInput = document.getElementById("name-form-input");
-    var content = document.getElementById("name-content");
-    form.classList.add("d-block");
-    content.classList.add("d-none");
-
-    $.ajax({
-        type: "GET",
-        url: "/villa/get/name/" + `${id_villa}`,
-        success: function(response) {
-            $("#name-form-input").val(response.data);
-
-            if (formInput.value == 'Home Name Here') {
-                formInput.value = '';
-            }
-        },
-    });
-}
-
-function editNameCancel() {
-    var form = document.getElementById("name-form");
-    var formInput = document.getElementById("name-form-input");
-    var content = document.getElementById("name-content");
-    form.classList.remove("d-block");
-    content.classList.remove("d-none");
-
-    if (formInput.value == 'Home Name Here') {
-        formInput.value = '';
-    }
-}
-
-$(document).on("keyup", "textarea#short-description-form-input", function () {
-    $('#short-description-form-input').css("border", "");
-    $('#err-shrt-desc').hide();
-});
-
-function editShortDesc(id_villa) {
-    let error = 0;
-    if(!$('textarea#short-description-form-input').val()) {
-        $('#short-description-form-input').css("border", "solid #e04f1a 1px");
-        $('#err-shrt-desc').show();
-        error = 1;
-    } else {
-        $('#short-description-form-input').css("border", "");
-        $('#err-shrt-desc').hide();
-    }
-    if(error == 1) {
-        return false;
-    } else {
-        let btn = document.getElementById("btnSaveShortDesc");
-        btn.textContent = "Saving...";
-        btn.classList.add("disabled");
-    $.ajax({
-        type: "POST",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/villa/update/short-description",
-        data: {
-            id_villa: id_villa,
-            short_desc: $('#short-description-form-input').val()
-        },
-        success: function(response) {
-            $("#short-description-content2").html(response.data);
-            $('#short-description-form-input').val(response.data);
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
-            editShortDescriptionCancel();
-        },
-        error: function (jqXHR, exception) {
-            if(jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
-                        position: "topRight",
-                    });
-                }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
-
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
-
-            editShortDescriptionCancel();
-
-            $('#short-description-form-input').val(response.data);
-        },
-    });
     }
 }
 
@@ -183,11 +183,11 @@ function editShortDescriptionForm(id_villa) {
     $.ajax({
         type: "GET",
         url: "/villa/get/short-description/" + `${id_villa}`,
-        success: function(response) {
+        success: function (response) {
             $("#short-description-form-input").val(response.data);
 
-            if (formInput.value == 'Make your short description here') {
-                formInput.value = '';
+            if (formInput.value == "Make your short description here") {
+                formInput.value = "";
             }
         },
     });
@@ -200,8 +200,8 @@ function editShortDescriptionCancel() {
     form.classList.remove("d-block");
     content.classList.remove("d-none");
 
-    if (formInput.value == 'Make your short description here') {
-        formInput.value = '';
+    if (formInput.value == "Make your short description here") {
+        formInput.value = "";
     }
 }
 
@@ -222,7 +222,7 @@ function editBedroomVilla(id_villa) {
     $.ajax({
         type: "POST",
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         url: "/villa/update/bedroom",
         data: {
@@ -239,7 +239,7 @@ function editBedroomVilla(id_villa) {
             children1: children1,
             size: size,
         },
-        success: function(response) {
+        success: function (response) {
             if (response.data.bedroom1 == null) {
                 $("#bedroomID").html(response.data.bedroom);
             } else {
@@ -279,22 +279,22 @@ function editBedroomVilla(id_villa) {
 
 function editCategoryV(id_villa) {
     var villaCategory = [];
-    $("input[name='villaCategory[]']:checked").each(function() {
+    $("input[name='villaCategory[]']:checked").each(function () {
         villaCategory.push(parseInt($(this).val()));
     });
 
     $.ajax({
         type: "POST",
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         url: "/villa/update/category",
         data: {
             id_villa: id_villa,
-            villaCategory: villaCategory
+            villaCategory: villaCategory,
         },
-        success: function(response) {
-            $("#ModalCategoryVilla").modal('hide');
+        success: function (response) {
+            $("#ModalCategoryVilla").modal("hide");
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -304,18 +304,18 @@ function editCategoryV(id_villa) {
             $.ajax({
                 type: "GET",
                 url: "/villa/get/category/" + `${id_villa}`,
-                success: function(response) {
+                success: function (response) {
                     var length = response.data.length;
 
                     $("#displayCategory").html(`
                         <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[0]['villa_category']['name']}
+                            ${response.data[0]["villa_category"]["name"]}
                         </span>
                         <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[1]['villa_category']['name']}
+                            ${response.data[1]["villa_category"]["name"]}
                         </span>
                         <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[2]['villa_category']['name']}
+                            ${response.data[2]["villa_category"]["name"]}
                         </span>`);
 
                     if (length > 3) {
@@ -330,40 +330,39 @@ function editCategoryV(id_villa) {
                     }
 
                     $("#moreSubCategory").html(`
-                        <div class='col-md-6'>${response.data[0]['villa_category']['name']}</div>
-                    `)
+                        <div class='col-md-6'>${response.data[0]["villa_category"]["name"]}</div>
+                    `);
                     for (let i = 1; i < length; i++) {
                         $("#moreSubCategory").append(`
-                            <div class='col-md-6'>${response.data[i]['villa_category']['name']}</div>
-                        `)
+                            <div class='col-md-6'>${response.data[i]["villa_category"]["name"]}</div>
+                        `);
                     }
                 },
             });
         },
     });
-
 }
 
 function editVillaTag(id_villa) {
     var villaFilter = [];
-    $("input[name='villaFilter[]']:checked").each(function() {
+    $("input[name='villaFilter[]']:checked").each(function () {
         villaFilter.push(parseInt($(this).val()));
     });
 
     $.ajax({
         type: "POST",
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         url: "/villa/update/tags",
         data: {
             id_villa: id_villa,
-            villaFilter: villaFilter
+            villaFilter: villaFilter,
         },
-        success: function(response) {
+        success: function (response) {
             var length = response.data.length;
 
-            $("#ModalTagsVilla").modal('hide');
+            $("#ModalTagsVilla").modal("hide");
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -373,13 +372,13 @@ function editVillaTag(id_villa) {
             $("#displayTags").html(`
                 <span class="badge rounded-pill fw-normal translate-text-group-items"
             style="background-color: #FF7400;">${response.data[0].name}</span>
-            `)
+            `);
 
             for (let i = 1; i < 5; i++) {
                 $("#displayTags").append(`
                     <span class="badge rounded-pill fw-normal translate-text-group-items"
                 style="background-color: #FF7400;">${response.data[i].name}</span>
-                `)
+                `);
             }
 
             if (length > 5) {
@@ -395,14 +394,13 @@ function editVillaTag(id_villa) {
 
             $("#viewTags").html(`
                 <div class='col-md-6'>${response.data[0].name}</div>
-            `)
+            `);
             for (let i = 1; i < length; i++) {
                 $("#viewTags").append(`
                     <div class='col-md-6'>${response.data[i].name}</div>
-                `)
+                `);
             }
         },
-
     });
 }
 
@@ -427,15 +425,15 @@ function editDescriptionCancel() {
 
 function editDescriptionVilla(id_villa) {
     let error = 0;
-    if(!$('textarea#description-form-input').val()) {
-        $('#description-form-input').css("border", "solid #e04f1a 1px");
-        $('#err-desc').show();
+    if (!$("textarea#description-form-input").val()) {
+        $("#description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-desc").show();
         error = 1;
     } else {
-        $('#description-form-input').css("border", "");
-        $('#err-desc').hide();
+        $("#description-form-input").css("border", "");
+        $("#err-desc").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         return false;
     } else {
         let btn = document.getElementById("btnSaveDesc");
@@ -444,14 +442,14 @@ function editDescriptionVilla(id_villa) {
         $.ajax({
             type: "POST",
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             url: "/villa/update/description",
             data: {
                 id_villa: id_villa,
-                villa_description: $('#description-form-input').val()
+                villa_description: $("#description-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#description-content").html(response.data.substring(0, 600));
 
                 iziToast.success({
@@ -475,7 +473,7 @@ function editDescriptionVilla(id_villa) {
                 editDescriptionCancel();
             },
             error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -494,36 +492,36 @@ function editDescriptionVilla(id_villa) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
 
-                editShortDescriptionCancel();
+                editDescriptionCancel();
 
-                $('#short-description-form-input').val(response.data);
+                $("#description-form-input").val(response.data);
             },
         });
     }
 }
 
 // ! Change Profile Villa
-$("#imageVilla").on("change", function(ev) {
-    if(document.getElementById("imageVilla").files.length != 0){
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
+$("#imageVilla").on("change", function (ev) {
+    if (document.getElementById("imageVilla").files.length != 0) {
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
     }
 
     imageProfileVilla = this.files[0];
 
     readerImageVilla = new FileReader();
 });
-$("#updateImageForm").submit(function(e) {
+$("#updateImageForm").submit(function (e) {
     let error = 0;
-    if(document.getElementById("imageVilla").files.length == 0){
-        $('.image-box').css("border", "solid #e04f1a 1px");
-        $('#err-img').show();
+    if (document.getElementById("imageVilla").files.length == 0) {
+        $(".image-box").css("border", "solid #e04f1a 1px");
+        $("#err-img").show();
         error = 1;
     } else {
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
@@ -546,14 +544,14 @@ $("#updateImageForm").submit(function(e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function() {
+                readerImageVilla.addEventListener("load", function () {
                     $("#imageProfileVilla").attr(
                         "src",
                         readerImageVilla.result
@@ -566,7 +564,7 @@ $("#updateImageForm").submit(function(e) {
                 $("#modal-edit_villa_profile").modal("hide");
             },
             error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -584,10 +582,7 @@ $("#updateImageForm").submit(function(e) {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
-
-                editShortDescriptionCancel();
-
-                $('#short-description-form-input').val(response.data);
+                $("#modal-edit_villa_profile").modal("hide");
             },
         });
     }
@@ -603,22 +598,22 @@ function editAmenitiesVilla(id_villa) {
     let safety = [];
     let service = [];
 
-    $("input[name='amenities[]']:checked").each(function() {
+    $("input[name='amenities[]']:checked").each(function () {
         amenities.push(parseInt($(this).val()));
     });
-    $("input[name='bathroom[]']:checked").each(function() {
+    $("input[name='bathroom[]']:checked").each(function () {
         bathroom.push(parseInt($(this).val()));
     });
-    $("input[name='bedroom[]']:checked").each(function() {
+    $("input[name='bedroom[]']:checked").each(function () {
         bedroom.push(parseInt($(this).val()));
     });
-    $("input[name='kitchen[]']:checked").each(function() {
+    $("input[name='kitchen[]']:checked").each(function () {
         kitchen.push(parseInt($(this).val()));
     });
-    $("input[name='safety[]']:checked").each(function() {
+    $("input[name='safety[]']:checked").each(function () {
         safety.push(parseInt($(this).val()));
     });
-    $("input[name='service[]']:checked").each(function() {
+    $("input[name='service[]']:checked").each(function () {
         service.push(parseInt($(this).val()));
     });
 
@@ -637,7 +632,7 @@ function editAmenitiesVilla(id_villa) {
             safety: safety,
             service: service,
         },
-        success: function(response) {
+        success: function (response) {
             var lengthAmenities = response.getAmenities.length;
             var lengthBathroom = response.getBathroom.length;
             var lengthBedroom = response.getBedroom.length;
@@ -684,8 +679,8 @@ function editAmenitiesVilla(id_villa) {
                             class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                     </div>
                 </div>
-            `)
-            };
+            `);
+            }
 
             $("#listAmenities").append(`
                 <div class="list-amenities">
@@ -859,3 +854,154 @@ function editAmenitiesVilla(id_villa) {
     });
 }
 // ! End Edit Amenities
+
+//add save story
+let storyVilla;
+var storyVideoForm = $(".story-upload").children(".story-video-form");
+var storyVideoInput = $(".story-upload").children(".story-video-input");
+var storyVideoPreview = $(".story-upload").children(".story-video-preview");
+
+$("#storyVideo").on("change", function (value) {
+    storyVilla = this.files[0];
+});
+
+$("#updateStoryForm").submit(function (e) {
+    e.preventDefault();
+
+    //validasi
+    if (
+        storyVilla.type.includes("video/mp4") ||
+        storyVilla.type.includes("video/mov")
+    ) {
+        let validate = validateStory();
+
+        if (validate > 0) {
+        } else {
+            var formData = new FormData(this);
+            console.log(formData);
+
+            var btn = document.getElementById("btnSaveStory");
+            btn.textContent = "Saving Story...";
+            btn.classList.add("disabled");
+
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                    Accept: "application/json",
+                },
+                url: "/villa/update/story",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/gallery/";
+                    let slash = "/";
+                    let uid = response.uid;
+                    var lowerCaseUid = uid.toLowerCase();
+                    let content;
+
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (i == 0) {
+                            content =
+                                '<div class="card4 col-lg-3" id="displayStory' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-villa="' +
+                                id_villa +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        } else {
+                            content =
+                                content +
+                                '<div class="card4 col-lg-3" id="displayStory' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-villa="' +
+                                id_villa +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        }
+                    }
+
+                    // console.log(content);
+
+                    $(storyVideoInput).children("input").val("");
+                    $(storyVideoPreview).hide();
+                    $(storyVideoForm).show();
+
+                    $("#storyContent").html("");
+                    $("#storyContent").append(content);
+                    $("#title").val("");
+
+                    $("#modal-edit_story").modal("hide");
+
+                    if (response.data.length > 4) {
+                        sliderRestaurant();
+                    }
+
+                    // $("#profileDropzone").attr("src", "");
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+                error: function (jqXHR, exception) {
+                    console.log(jqXHR);
+                    // console.log(exception);
+
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message.file[0],
+                        position: "topRight",
+                    });
+
+                    $("#modal-edit_story").modal("hide");
+
+                    // $("#profileDropzone").attr("src", "");
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+            });
+        }
+    } else {
+        $(storyVideoInput).children("input").val("");
+        $(storyVideoPreview).hide();
+        $(storyVideoForm).show();
+        $("#title").val("");
+
+        iziToast.error({
+            title: "Error",
+            message: "The file must be a file of type: <b>mp4 / mov</b>",
+            position: "topRight",
+        });
+    }
+    // console.log(readerStoryRestaurant);
+});
