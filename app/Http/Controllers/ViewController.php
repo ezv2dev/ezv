@@ -1420,59 +1420,100 @@ class ViewController extends Controller
 
     public function villa_update_story(Request $request)
     {
-        $this->authorize('listvilla_update');
-        $status = 500;
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_villa' => ['required', 'integer'],
+            'title' => ['required', 'string', 'max:100'],
+            'file' => ['required', 'mimes:mp4,mov']
+        ]);
 
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                $status = 500;
-            } else {
-                $find = Villa::where('id_villa', $request->id_villa)->get();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = $find[0]->uid;
-                $path = env("VILLA_FILE_PATH") . $folder;
-                if (!File::isDirectory($path)) {
-
-                    File::makeDirectory($path, 0777, true, true);
-                }
-
-                $ext = strtolower($berkas->getClientOriginalExtension());
-
-                if ($ext == 'mp4' || $ext == 'mov') {
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    $data = VillaStory::insert(array(
-                        'title' => $request->title,
-                        'name' => $name_file,
-                        'id_villa' => $request->id_villa,
-                        // 'thumbnail' => $find[0]->image,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            if ($data) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+            ], 500);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        // restaurant data
+        $villa = Villa::find($request->id_villa);
+
+        // check if restaurant does not exist, abort 404
+        if(!$villa)
+        {
+            return response()->json([
+                'message' => 'Homes Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('listvilla_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // store process
+        // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+        $folder = strtolower($villa->uid);
+        // dd($folder);
+        $path = env("VILLA_FILE_PATH") . $folder;
+        // dd($path);
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // dd($name_file);
+
+            //insert into database
+            $createdStory = VillaStory::create([
+                'id_villa' => $request->id_villa,
+                'name' => $name_file,
+                'title' => $request->title,
+                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'created_by' => Auth::user()->id,
+                'updated_by' => Auth::user()->id,
+            ]);
+        }
+
+        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name','id_story')->latest()->get();
+        $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
+
+        $data = [];
+
+        $i = 0;
+
+        foreach ($getStory as $item)
+        {
+            $data[$i]['id_story'] = $item->id_story;
+            $data[$i]['name'] = $item->name;
+            $i++;
+        }
+
+        // return $data;
+
+        // check if update is success or not
+        if ($createdStory) {
+            return response()->json([
+                'message' => 'Updated Homes Story',
+                'data' => $data,
+                'uid' => $getUID->uid,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Updated Homes Story',
+            ], 500);
         }
     }
 

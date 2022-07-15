@@ -459,7 +459,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
+                                                    <div class="cards4" id="storyContent">
                                                         @foreach ($video as $item)
                                                             <div class="card4 col-lg-3 radius-5">
                                                                 <div class="img-wrap">
@@ -523,7 +523,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
+                                                    <div class="cards4" id="storyContent">
                                                         @foreach ($stories as $item)
                                                             <div class="card4 col-lg-3 radius-5"
                                                                 id="displayStory{{ $item->id_story }}">
@@ -546,8 +546,8 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_story({'id': '{{ $villa[0]->id_villa }}', 'id_story': '{{ $item->id_story }}'})">
+                                                                                href="javascript:void(0);" data-villa="{{ $villa[0]->id_villa }}" data-story="{{ $item->id_story }}"
+                                                                                onclick="delete_story(this)">
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
                                                                                     data-bs-toggle="popover"
@@ -963,7 +963,7 @@
                                         </div>
                                     @endfor
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </section> --}}
 
@@ -4119,7 +4119,7 @@
             document.getElementById('couch').stepDown();
         }
     </script>
-    
+
     <script>
         function adult_increment() {
             document.getElementById('adult2').stepUp();
@@ -4258,7 +4258,9 @@
     {{-- Sweetalert Function Delete Story --}}
     <script>
         function delete_story(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-villa");
+            let story = ids.getAttribute("data-story")
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4273,7 +4275,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/villa/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/villa/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4281,7 +4283,10 @@
                         },
                         success: async function(data) {
                             await Swal.fire('Deleted', data.message, 'success');
-                            $(`#displayStory${ids.id_story}`).remove();
+                            $(`#displayStory${story}`).remove();
+
+                            //update slider ketika story dihapus
+                            sliderRestaurant();
                         }
                     });
                 } else {
