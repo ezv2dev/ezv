@@ -843,6 +843,15 @@
 }
 
 @media only screen and (max-width: 425px) {
+
+    .top-search {
+        padding: 4px 12px !important;
+        font-size: 0.8rem !important;
+        height: 30px !important;
+        border-radius: 40px !important;
+        width: 45px !important;
+    }
+
     .container-grid-cat, .container-grid-hotel, .container-grid-activity {
         padding-right: 0.8rem !important;
         padding-left: 0.8rem !important;

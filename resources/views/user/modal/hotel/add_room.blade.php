@@ -12,9 +12,11 @@
                 padding-top: 0;
                 padding-bottom: 0;
             ">
-                <form action="{{ route('store_room') }}" method="POST" id="basic-form" class="js-validation"
+                {{-- <form action="{{ route('store_room') }}" method="POST" id="basic-form" class="js-validation"
+                    enctype="multipart/form-data"> --}}
+                <form action="javascript:void(0);" method="POST" id="add-room-hotel" class="js-validation"
                     enctype="multipart/form-data">
-                    @csrf
+                    {{-- @csrf --}}
                     <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
 
                     <div class="mt-4"></div>
@@ -22,7 +24,8 @@
                     <div class="row mb-4" style="padding-left: 10px;">
                         <label for="" class="col-md-4">{{ __('user_page.Name of Room') }}</label>
                         <div class="col-md-8">
-                            <input type="text" name="name_room" id="name_room" class="modal-input form-control" placeholder="{{ __('user_page.Name of Room') }} Hotel.." required />
+                            <input type="text" name="name_room" id="name_room" class="modal-input form-control" placeholder="{{ __('user_page.Name of Room') }} Hotel.." />
+                            <small id="err-rname" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                         </div>
                     </div>
 
@@ -44,8 +47,8 @@
                         <div class="col-md-8">
                             <input type="text" class="form-control modal-input" id="room_size" name="room_size"
                                 placeholder="{{ __('user_page.Room Size') }}.."
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                required>
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <small id="err-rsize" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                         </div>
                     </div>
 
@@ -54,8 +57,8 @@
                         <div class="col-md-8">
                             <input type="text" class="form-control modal-input" id="capacity" name="capacity"
                                 placeholder="{{ __('user_page.Total Max People') }}.."
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                required>
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <small id="err-cap" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                         </div>
                     </div>
 
@@ -74,17 +77,27 @@
                         <label for="" class="col-md-4">{{ __('user_page.Total Rooms') }}</label>
                         <div class="col-md-8">
                             <input type="number" class="form-control modal-input" id="number_of_room" name="number_of_room"
-                                placeholder="{{ __('user_page.Number of Room') }}.." min="1" required>
+                                placeholder="{{ __('user_page.Number of Room') }}.." min="1">
+                            <small id="err-numrom" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4" style="padding-left: 10px">
+                        <label for="" class="col-md-4">Status</label>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control modal-input" id="status" name="status"
+                                placeholder="Status apa ini?" min="1">
+                            <small id="err-status" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                         </div>
                     </div>
 
                     <div class="row mb-4" style="padding-left: 10px">
                         <label for="" class="col-md-4">{{ __('user_page.Price') }} (IDR)</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control modal-input" id="price" name="price"
+                            <input type="text" class="form-control modal-input" id="frm-price" name="price"
                                 placeholder="{{ __('user_page.Price per Night') }}.."
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                required>
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <small id="err-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                         </div>
                     </div>
 
@@ -92,7 +105,7 @@
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center; margin-top: -30px;">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" class="btn btn-sm btn-primary" id="btnaddroomForm">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
@@ -104,4 +117,105 @@
         </div>
     </div>
 </div>
+<script>
+//Add room hotel
+$("#").keyup(function () {
+
+});
+$("#add-room-hotel").submit(function (e) {
+    let error = 0;
+    if(!$('#name_room').val()) {
+        $('#name_room').addClass('is-invalid');
+        $('#err-rname').show();
+        error = 1;
+    }
+    if(!$('#room_size').val()) {
+        $('#room_size').addClass('is-invalid');
+        $('#err-rsize').show();
+        error = 1;
+    }
+    if(!$('#number_of_room').val()) {
+        $('#number_of_room').addClass('is-invalid');
+        $('#err-numrom').show();
+        error = 1;
+    }
+    if(!$('#capacity').val()) {
+        $('#capacity').addClass('is-invalid');
+        $('#err-cap').show();
+        error = 1;
+    }
+    if(!$('#status').val()) {
+        $('#status').addClass('is-invalid');
+        $('#err-status').show();
+        error = 1;
+    }
+    if(!$('#frm-price').val()) {
+        $('#frm-price').addClass('is-invalid');
+        $('#err-prc').show();
+        error = 1;
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
+        var btn = document.getElementById("btnaddroomForm");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/hotel/add-room",
+            data: {
+                id_hotel: $('#id_hotel').val(),
+                name_room: $('#name_room').val(),
+                id_hotel_type: $('#id_hotel_type').val(),
+                id_bed: $('#id_bed').val(),
+                room_size: $('#room_size').val(),
+                name_room: $('#number_of_room').val(),
+                capacity: $('#capacity').val(),
+                status: $('#status').val(),
+                price: $('#price').val(),
+            },
+            success: function (response) {
+                $("#name-content").html(response.data);
+                $("#name-content-mobile").html(response.data);
+                $("#hotelTitle").html(response.data + " - EZV2");
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                editNameCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editNameCancel();
+            },
+        });
+    }
+});
+</script>
 <!-- END Fade In Default Modal -->
