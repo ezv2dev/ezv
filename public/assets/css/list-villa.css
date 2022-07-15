@@ -1814,7 +1814,7 @@ li.button-dropdown {
     margin-top: 318.391px !important;
     padding-left: 102px;
     padding-right: 102px;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
 }
 
 .grid-image-container {
@@ -2927,9 +2927,14 @@ input::-webkit-inner-spin-button {
 
 /* End SAFARI */
 
-.nav-down {
+#filter-cat-bg-color.nav-down {
     transform: translateY(0px);
     transition: all 0.5s ease;
+}
+
+#filter-subcat-bg-color.nav-down {
+    transform: translateY(0px);
+    transition: all 0.3s ease;
 }
 
 #filter-cat-bg-color.nav-up {

@@ -201,16 +201,6 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
-                    style="cursor: pointer; width: 50px; border: none; margin: 0; padding: 0;">
-                    <p>
-                        <span class="top-search">
-                            <img src="{{ asset('assets/icon/menu/search.svg') }}"
-                                style="width: 20px; height: auto;">
-                            <!-- <i class="fa fa-search"></i> -->
-                        </span>
-                    </p>
-                </div>
                 <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
                     <label class="container-mode">
                         <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
@@ -4130,7 +4120,7 @@
                         $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)','transition':'all 0.3s ease'})
                     }
 
-                    let tambah  =  60
+                    let tambah  = 60
                     var marginTop = $("#new-bar-black").innerHeight() + $('#filter-subcat-bg-color').innerHeight() + tambah
                     $(".grid-container-43").attr('style', 'margin-top:'+marginTop + 'px !important');
                     $('.container-grid').attr('style', 'margin-top:'+marginTop + 'px !important');
@@ -4139,7 +4129,7 @@
 
                     if (st > lastScrollTop) {
                         // downscroll code
-
+                        $('#filter-subcat-bg-color').css({'transition':'all 0.3s ease'})
                         $('#filter-subcat-bg-color').removeClass('nav-down');
                         $('#filter-subcat-bg-color').addClass('nav-up')
                         $('#filter-cat-bg-color').removeClass('nav-down');
@@ -4154,6 +4144,7 @@
                         //     $('.container-grid-hotel').css("margin-top", navbarHeight + 60 + "px");
                         // }
                     } else {
+                        $('#filter-subcat-bg-color').css({'transition':'all 0s ease'})
                         // uproll code
                         $('#filter-subcat-bg-color').removeClass('nav-up');
                         $('#filter-subcat-bg-color').addClass('nav-down')
@@ -4161,7 +4152,6 @@
                         $('#filter-cat-bg-color').addClass('nav-down')
                         isShow = true;
                         $('#filter-subcat-bg-color').attr('data-isshow', "true");
-
 
                         // $('#filter-cat-bg-color').attr('data-isshow', "true");
                         // if (isShow) {
@@ -4186,16 +4176,14 @@
                     $('#filter-cat-bg-color').attr('data-isshow', "true");
                     
                     // if (isShow) {
-                        let subCatOffset = $('#filter-subcat-bg-color').position()
                         let add = $(this).width() > 949 ? 30 : 0
                         // var originHeight = $('#filter-subcat-bg-color').outerHeight() +
                         //     $('#filter-cat-bg-color').outerHeight() + $("#new-bar-black").outerHeight() + add;
-                        console.log(subCatOffset.top, $('#filter-subcat-bg-color').outerHeight())
-                        var originHeight = $('#filter-subcat-bg-color').outerHeight() + subCatOffset.top  + add;
-                        $(".grid-container-43").attr('style', 'margin-top:'+originHeight + 'px !important');
-                        $('.container-grid-hotel').attr('style', 'margin-top:'+originHeight + 'px !important');
-                        $('.container-grid-activity').attr('style', 'margin-top:'+originHeight + 'px !important');
-                        $('.container-grid').attr('style', 'margin-top:'+originHeight + 'px !important');
+                        $(".grid-container-43").attr('style', 'margin-top:""');
+                        $('.container-grid-hotel').attr('style', 'margin-top:""');
+
+                        $('.container-grid-activity').attr('style', 'margin-top:""');
+                        $('.container-grid').attr('style', 'margin-top:""');
                         
                     // }
 
