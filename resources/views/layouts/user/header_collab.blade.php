@@ -884,7 +884,7 @@
                         $("#navbarright").css("right", navGap + "px");
                     } else {
                         $("#sidebar_fix").css("right", "0");
-                        $("#rsv-block-btn .rsv").css("right", "-20px");
+                        $("#rsv-block-btn .rsv").css("right", "10px");
                         $("#navbarright").css("right", "0");
                     }
                 }

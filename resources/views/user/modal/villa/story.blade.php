@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('villa_update_story') }}" method="POST" enctype="multipart/form-data"
+                <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
                     id="updateStoryForm">
                     @csrf
                     <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
@@ -40,7 +40,7 @@
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button class="btn btn-sm btn-primary" id="updateStoryForm">
+                            <button class="btn btn-sm btn-primary" id="btnSaveStory" form="updateStoryForm">
                                 <i class="fa fa-check"></i> {{ __('user_page.Upload') }}
                             </button>
                         </div>
@@ -65,7 +65,8 @@
             $('#title').css("border", "");
             $('#err-stry-ttl').hide();
     });
-    $("form#updateStoryForm").submit(function(e) {
+
+    function validateStory() {
         let error = 0;
         if(document.getElementById("storyVideo").files.length == 0){
             $('.story-video-form').css("border", "solid #e04f1a 1px");
@@ -86,7 +87,9 @@
         if(error == 1) {
             e.preventDefault();
         }
-    });
+
+        return error;
+    };
 
     var storyVideoForm = $(".story-upload").children('.story-video-form');
     var storyVideoInput = $(".story-upload").children('.story-video-input');

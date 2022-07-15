@@ -83,7 +83,7 @@
                     </a>
                 @endif
                 @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
-                    <a class="d-block mb-2" href="{{ route('collaborator_list') }}" style="width: fit-content; color:#585656;">
+                    <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_list') }}" style="width: fit-content; color:#585656;">
                         {{ __('user_page.Collab Portal') }}
                     </a>
                 @endif
@@ -147,6 +147,10 @@
                     </button>
                 </div>
                 <hr>
+                <a class="navbar-gap collab-expand mb-3" style="color: #585656; width: fit-content;"
+                    target="_blank" href="{{ route('collaborator_list') }}">
+                    {{ __('user_page.Collab Portal') }}
+                </a>
                 <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3" style="color: #585656; width: fit-content;"
                     target="_blank">
                     {{ __('user_page.Become a host') }}

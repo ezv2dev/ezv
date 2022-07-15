@@ -10,6 +10,7 @@
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="EZV2">
@@ -1263,9 +1264,7 @@
                     <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place">
-                            <h2>About</h2>
-                            <p id="description-content">
-                                {{ $profile->description }}
+                            <h2>About
                                 @auth
                                     @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
@@ -1273,25 +1272,43 @@
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">Edit Description</a>
                                     @endif
                                 @endauth
+                            </h2>
+                            <p id="description-content"
+                                style="text-align: justify; padding-top:10px; padding-bottom:12px">
+                                {!! Str::limit(Translate::translate($profile->description), 600, ' ...') ??
+                                    __('user_page.There is no description yet') !!}
+                                {{-- {!! $restaurant->description ?? 'there is no description yet' !!} --}}
                             </p>
+
+                            <span id="buttonShowMoreDescription">
+                                @if (Str::length($profile->description) > 600)
+                                    <a id="btnShowMoreDescription" class="d-block" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
+                                @endIf
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
-                                        <form action="{{ route('collab_update_description') }}" method="post">
+                                        <form action="javascript:void(0);" method="post">
+                                        {{-- <form action="{{ route('collab_update_description') }}" method="post"> --}}
                                             @csrf
                                             <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}"
                                                 required>
                                             <div class="form-group">
-                                                <textarea value="{{ $profile->description }}" name="description" id="description-form-input" class="w-100"
-                                                    rows="5" required>{{ $profile->description }}</textarea>
+                                                <textarea class="form-control" value="{{ $profile->description }}" name="description" id="description-form-input" class="w-100"
+                                                    rows="5">{{ $profile->description }}</textarea>
+                                                <small id="err-desc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-check"></i> Done
+                                                <button type="submit" class="btn btn-sm btn-primary"
+                                                id="btnSaveDescription" onclick="saveDescription();">
+                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
                                                     onclick="editDescriptionCancel()">
-                                                    <i class="fa fa-xmark"></i> Cancel
+                                                    <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -2492,6 +2509,7 @@
     </script> --}}
     <script src="{{ asset('assets/js/story-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-collab.js') }}"></script>
+    <script src="{{ asset('assets/js/crud-collaborator.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -2517,19 +2535,8 @@
     </script>
 
     <script>
-        function editDescriptionForm() {
-            var form = document.getElementById("description-form");
-            var content = document.getElementById("description-content");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-        }
-
-        function editDescriptionCancel() {
-            var form = document.getElementById("description-form");
-            var formInput = document.getElementById("description-form-input");
-            var content = document.getElementById("description-content");
-            form.classList.remove("d-block");
-            content.classList.remove("d-none");
+        function showMoreDescription() {
+            $("#modal-show_description").modal("show");
         }
     </script>
 
@@ -2994,24 +3001,31 @@
         // Semi Fixed
         $(document).ready(function() {
             var $window = $(window);
+            var $bottomScreen = $window.scrollTop() - $window.innerHeight();
             var $sidebar = $("#sidebar_fix");
-            var $sidebarHeight = $sidebar.innerHeight();
-            var $footerOffsetTop = $("#scrollStop").offset().top;
-            var $footerHeight = $("#heightCalendar").innerHeight();
-            var $sidebarOffset = $sidebar.offset();
+            var $sidebarHeight = $sidebar.height() / 2 - 50;
+            var $availabilityTop = $("#availability").offset().top;
+
+            //console.log($footerOffsetTop);
+            $window.on("resize", function() {
+                $availabilityTop = $("#availability").offset().top;
+                $bottomScreen = $window.scrollTop() + $window.innerHeight();
+                $sidebarHeight = ($sidebar.height() / 2) - 50;
+            });
 
             $window.scroll(function() {
-                if ($window.scrollTop() > $sidebarOffset.top) {
-                    $sidebar.addClass("fixed");
-                } else {
-                    $sidebar.removeClass("fixed");
-                }
-                if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
+                $availabilityTop = $("#availability").offset().top;
+                $bottomScreen = $window.scrollTop() + $window.innerHeight();
+                $sidebarHeight = ($sidebar.height() / 2) - 50;
+                if ($window.scrollTop() < $bottomScreen && $window.scrollTop() + $sidebarHeight > $availabilityTop) {
                     $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
-                            $footerHeight)
+                        "top": $availabilityTop - 57,
+                        "position": "absolute"
                     });
+                    $sidebar.removeClass("fixed");
+                    
                 } else {
+                    $sidebar.addClass("fixed");
                     $sidebar.css({
                         "top": "0",
                     });
