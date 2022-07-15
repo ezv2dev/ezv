@@ -550,7 +550,8 @@ class CollaboratorController extends Controller
             $find = Collaborator::where('id_collab', $request->id_collab)->first();
 
             $find->update(array(
-                'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+                //'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+                'description' => str_replace(array("\r\n"), "<br><br>", $request->collab_description),
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
@@ -563,11 +564,13 @@ class CollaboratorController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Description Collaborator',  'data' => $request->collab_description]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Please check the form below for errors',  'data' => $request->collab_description]);
         }
     }
 

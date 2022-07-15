@@ -66,8 +66,6 @@ function editNameVilla(id_villa) {
                 btn.classList.remove("disabled");
 
                 editNameCancel();
-
-                $("#short-description-form-input").val(response.data);
             },
         });
     }
@@ -494,9 +492,9 @@ function editDescriptionVilla(id_villa) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
 
-                editShortDescriptionCancel();
+                editDescriptionCancel();
 
-                $("#short-description-form-input").val(response.data);
+                $("#description-form-input").val(response.data);
             },
         });
     }
@@ -584,10 +582,7 @@ $("#updateImageForm").submit(function (e) {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
-
-                editShortDescriptionCancel();
-
-                $("#short-description-form-input").val(response.data);
+                $("#modal-edit_villa_profile").modal("hide");
             },
         });
     }
