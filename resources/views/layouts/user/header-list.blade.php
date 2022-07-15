@@ -4127,7 +4127,7 @@
                         $('#filter-subcat-bg-color').css({'transform' : 'translateY(-109px)','transition':'all 0.3s ease'})
                     }
                     
-                    let tambah  = st < 30 ? 0 : 90
+                    let tambah  = st < 60 ? 0 : 90
                     var marginTop = navbarHeight + $('#filter-subcat-bg-color').innerHeight() + tambah
                     $(".grid-container-43").attr('style', 'margin-top:'+marginTop + 'px !important');
                     $('.container-grid').attr('style', 'margin-top:'+marginTop + 'px !important');
