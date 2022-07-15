@@ -523,6 +523,8 @@
                                         required>
                                     <textarea style="width: 100%;" class="form-control" name="name" cols="30" rows="3"
                                         id="name-form-input" maxlength="100" placeholder="{{ __('user_page.Wow Name Here') }}" required>{{ $activity->name }}</textarea>
+                                    <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         onclick="saveNameActivity()" style="background-color: #ff7400">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -653,7 +655,9 @@
                                             required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                             cols="30" rows="3" maxlength="250"
-                                            placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->short_description }}</textarea>
+                                            placeholder="{{ __('user_page.Make your short description here') }}">{{ $activity->short_description }}</textarea>
+                                        <small id="err-shrt-desc" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                         <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                             onclick="saveShortDescription();">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -1304,7 +1308,9 @@
                                                 value="{{ $activity->id_activity }}" required>
                                             <div class="form-group">
                                                 <textarea name="description" class="form-control" id="description-form-input" class="w-100" rows="5"
-                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $activity->description }}</textarea>
+                                                    placeholder="{{ __('user_page.Make your short description here') }}">{{ $activity->description }}</textarea>
+                                                <small id="err-desc" style="display: none;"
+                                                class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
@@ -4228,7 +4234,7 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    
+
                 });
 
                 this.on("complete", function(file, response, message) {
@@ -4322,7 +4328,7 @@
 
                     $('.gallery').append(content);
                 }
-                
+
                 $gallery.refresh();
 
                 this.removeFile(file);
@@ -4562,12 +4568,14 @@
                             {{ __('user_page.there is no image yet') }}
                         @endforelse
                     </ul>
-                </div>
+
+                    </div>
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos"
                             value="{{ __('user_page.Submit') }}" onclick="save_reorder_photo()">
                     </div>
+
                 </div>
             </div>
         </div>
@@ -5103,7 +5111,7 @@
             });
         });
     </script>
-    
+
     @include('components.lazy-load.lazy-load')
     @include('components.promotion.mobile-app')
 
@@ -5143,3 +5151,4 @@
         </script>
     @endif
 </body>
+</html>

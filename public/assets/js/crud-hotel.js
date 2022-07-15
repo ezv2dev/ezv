@@ -153,8 +153,6 @@ $("#imageHotel").on("change", function (ev) {
 
     readerImageHotel = new FileReader();
 });
-
-//Change profile pic
 $("#updateImageForm").submit(function (e) {
     let error = 0;
     if (document.getElementById("imageHotel").files.length == 0) {
@@ -234,6 +232,10 @@ $("#updateImageForm").submit(function (e) {
 
 
 //Change long desc
+$(document).on("keyup", "textarea#description-form-input", function () {
+    $("#description-form-input").css("border", "");
+    $("#err-desc").hide();
+});
 function editDescriptionHotel(id_hotel) {
     let error = 0;
     if (!$("textarea#description-form-input").val()) {

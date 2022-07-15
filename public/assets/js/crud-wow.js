@@ -7,221 +7,274 @@ $.ajaxSetup({
 let id_activity = $("#id_activity").val();
 
 //ganti short description activity
+$(document).on("keyup", "textarea#short-description-form-input", function () {
+    $("#short-description-form-input").css("border", "");
+    $("#err-shrt-desc").hide();
+});
+
 function saveShortDescription() {
-    let short_desc = $("#short-description-form-input").val();
+    let error = 0;
+    if (!$("textarea#short-description-form-input").val()) {
+        $("#short-description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-shrt-desc").show();
+        error = 1;
+    } else {
+        $("#short-description-form-input").css("border", "");
+        $("#err-shrt-desc").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let short_desc = $("#short-description-form-input").val();
 
-    let btn = document.getElementById("btnSaveShortDesc");
-    btn.textContent = "Saving...";
-    btn.classList.add("disabled");
+        let btn = document.getElementById("btnSaveShortDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/short-description",
-        data: {
-            id_activity: id_activity,
-            short_description: short_desc,
-        },
-        success: function (response) {
-            // console.log(response.data.short_description);
-            let short_desc_input = document.getElementById(
-                "short-description-form-input"
-            );
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/short-description",
+            data: {
+                id_activity: id_activity,
+                short_description: short_desc,
+            },
+            success: function (response) {
+                // console.log(response.data.short_description);
+                let short_desc_input = document.getElementById(
+                    "short-description-form-input"
+                );
 
-            $("#short_description_contents").html(
-                response.data.short_description
-            );
+                $("#short_description_contents").html(
+                    response.data.short_description
+                );
 
-            short_desc_input.value = response.data.short_description;
+                short_desc_input.value = response.data.short_description;
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
 
-            editShortDescriptionCancel();
-        },
-        error: function (jqXHR, exception) {
-            // console.log(jqXHR);
-            // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                editShortDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
 
-            editShortDescriptionCancel();
+                editShortDescriptionCancel();
 
-            let short_desc_input = document.getElementById(
-                "short-description-form-input"
-            );
+                let short_desc_input = document.getElementById(
+                    "short-description-form-input"
+                );
 
-            short_desc_input.value = short_desc;
-        },
-    });
+                short_desc_input.value = short_desc;
+            },
+        });
+    }
 }
+
+$(document).on("keyup", "textarea#description-form-input", function () {
+    $("#description-form-input").css("border", "");
+    $("#err-desc").hide();
+});
 
 function saveDescription() {
-    let desc = $("#description-form-input").val();
+    let error = 0;
+    if (!$("textarea#description-form-input").val()) {
+        $("#description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-desc").show();
+        error = 1;
+    } else {
+        $("#description-form-input").css("border", "");
+        $("#err-desc").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let desc = $("#description-form-input").val();
 
-    let btn = document.getElementById("btnSaveDescription");
-    btn.textContent = "Saving Description...";
-    btn.classList.add("disabled");
+        let btn = document.getElementById("btnSaveDescription");
+        btn.textContent = "Saving Description...";
+        btn.classList.add("disabled");
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/description",
-        data: {
-            id_activity: id_activity,
-            description: desc,
-        },
-        success: function (response) {
-            console.log(response);
-            console.log(response.data.description.length);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/description",
+            data: {
+                id_activity: id_activity,
+                description: desc,
+            },
+            success: function (response) {
+                console.log(response);
+                console.log(response.data.description.length);
 
-            let desc_input = document.getElementById("description-form-input");
+                let desc_input = document.getElementById("description-form-input");
 
-            $("#description-content").html(
-                response.data.description.substring(0, 600)
-            );
-
-            desc_input.value = response.data.description;
-
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-
-            if (response.data.description.length > 600) {
-                $("#buttonShowMoreDescription").html("");
-                $("#buttonShowMoreDescription").append(
-                    '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                $("#description-content").html(
+                    response.data.description.substring(0, 600)
                 );
-                $("#modalDescriptionContent").html(response.data.description);
-            } else {
-                $("#buttonShowMoreDescription").html("");
-                $("#btnShowMoreDescription").remove();
-            }
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
+                desc_input.value = response.data.description;
 
-            editDescriptionCancel();
-        },
-        error: function (jqXHR, exception) {
-            // console.log(jqXHR);
-            // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+
+                if (response.data.description.length > 600) {
+                    $("#buttonShowMoreDescription").html("");
+                    $("#buttonShowMoreDescription").append(
+                        '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                    );
+                    $("#modalDescriptionContent").html(response.data.description);
+                } else {
+                    $("#buttonShowMoreDescription").html("");
+                    $("#btnShowMoreDescription").remove();
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
 
-            editDescriptionCancel();
+                editDescriptionCancel();
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
-        },
-    });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+            },
+        });
+    }
 }
 
-//ganti nama restaurant
+//ganti nama wow
+$(document).on("keyup", "textarea#name-form-input", function () {
+    $("#name-form-input").css("border", "");
+    $("#err-name").hide();
+});
 function saveNameActivity() {
-    let name = $("#name-form-input").val();
+    let error = 0;
+    if (!$("textarea#name-form-input").val()) {
+        $("#name-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-name").show();
+        error = 1;
+    } else {
+        $("#name-form-input").css("border", "");
+        $("#err-name").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let name = $("#name-form-input").val();
 
-    let btn = document.getElementById("btnSaveName");
-    btn.textContent = "Saving Name...";
-    btn.classList.add("disabled");
+        let btn = document.getElementById("btnSaveName");
+        btn.textContent = "Saving Name...";
+        btn.classList.add("disabled");
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/name",
-        data: {
-            id_activity: id_activity,
-            name: name,
-        },
-        success: function (response) {
-            console.log(response.data.name);
-            let name_input = document.getElementById("name-form-input");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/name",
+            data: {
+                id_activity: id_activity,
+                name: name,
+            },
+            success: function (response) {
+                console.log(response.data.name);
+                let name_input = document.getElementById("name-form-input");
 
-            $("#name-content2").html(response.data.name);
-            $("#name-content2-mobile").html(response.data.name);
+                $("#name-content2").html(response.data.name);
+                $("#name-content2-mobile").html(response.data.name);
 
-            name_input.value = response.data.name;
+                name_input.value = response.data.name;
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
 
-            editNameCancel();
-        },
-        error: function (jqXHR, exception) {
-            if(jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                editNameCancel();
+            },
+            error: function (jqXHR, exception) {
+                if(jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
 
-            editNameCancel();
+                editNameCancel();
 
-            let name_input = document.getElementById("name-form-input");
-            name_input.value = name;
-        },
-    });
+                let name_input = document.getElementById("name-form-input");
+                name_input.value = name;
+            },
+        });
+    }
 }
 
 //Ganti Foto Profile
