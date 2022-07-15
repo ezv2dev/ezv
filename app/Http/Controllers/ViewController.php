@@ -1244,8 +1244,11 @@ class ViewController extends Controller
             'id_villa' => ['required', 'integer'],
             'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors(),
+            ], 500);
         }
 
         $status = 500;
@@ -1268,11 +1271,21 @@ class ViewController extends Controller
 
                 $ext = strtolower($berkas->getClientOriginalExtension());
 
+                $photo = [];
+                $video = [];
+
                 if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                    request()->validate([
+
+                    $validator2 = Validator::make($request->all(), [
                         'id_villa' => ['required', 'integer'],
                         'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
                     ]);
+
+                    if ($validator2->fails()) {
+                        return response()->json([
+                            'message' => $validator2->errors(),
+                        ], 500);
+                    }
 
                     $original_name = $berkas->getClientOriginalName();
 
@@ -1296,6 +1309,9 @@ class ViewController extends Controller
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id
                     ]);
+
+                    array_push($photo, $data->id_photo);
+
                 } elseif ($ext == 'mp4' || $ext == 'mov') {
                     $original_name = $berkas->getClientOriginalName();
 
@@ -1321,6 +1337,8 @@ class ViewController extends Controller
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id
                     ]);
+
+                    array_push($video, $data->id_video);
                 }
             }
 
@@ -1331,12 +1349,21 @@ class ViewController extends Controller
             $status = 500;
         }
 
+        $villaReturn = [
+            'photo' => VillaPhoto::whereIn('id_photo', $photo)->get(),
+            'video' => VillaVideo::whereIn('id_video', $video)->get(),
+            'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
+        ];
+
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Update Gallery Homes',
+                'data' => $villaReturn,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Update Gallery Homes',
+            ], 500);
         }
     }
 
