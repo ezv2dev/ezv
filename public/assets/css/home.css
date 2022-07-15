@@ -925,11 +925,15 @@ input[type="text"]:focus {
     display: block;
 }
 
+input[type="text"]::placeholder {
+    font-size: 14px !important;
+}
+
 .button-dropdown {
-    font-size: 150%;
-    margin-top: 0px;
+    font-size: 14px;
     color: #4c4c4c;
     margin-top: -2px;
+    width: 180px;
 }
 
 .button {
@@ -2390,8 +2394,4 @@ span.flatpickr-weekday {
     #navbar-first-dekstop {
         width: 32% !important;
     }
-}
-
-input::placeholder {
-    font-size: 14px !important;
 }
