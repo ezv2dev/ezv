@@ -65,7 +65,7 @@
 </style>
 
 @php
-$amenities2 = App\Models\Amenities::all();
+$amenities2 = App\Models\Amenities::orderBy('order')->get();
 $amenities_length = count($amenities2);
 
 $amenities3 = [];
@@ -73,7 +73,7 @@ for ($i = 6; $i < $amenities_length; $i++) {
     array_push($amenities3, $amenities2[$i]);
 }
 
-$category2 = App\Models\VillaCategory::all();
+$category2 = App\Models\VillaCategory::orderBy('order')->get();
 $category_length = count($category2);
 
 $category3 = [];
@@ -82,14 +82,17 @@ for ($i = 6; $i < $category_length; $i++) {
 }
 
 //get from link
-$get_min = app('request')->input('fMinPrice');
+$get_min = request()->get('fMinPrice');
 if (!$get_min) {
     $get_min = 0;
 }
-$get_max = app('request')->input('fMaxPrice');
+
+$get_max = request()->get('fMaxPrice');
 if (!$get_max) {
-    $get_max = 100000000;
+    $get_max = 200000000;
 }
+
+$get_category = request()->get('fCategory');
 @endphp
 
 <div class="modal fade" id="modalFiltersHome" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
@@ -116,7 +119,8 @@ if (!$get_max) {
                                             style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
                                             <label for="fMinPrice" style="font-size: 12px;">Min</label>
                                             <input name="fMinPrice" style="font-size: 12px; border: none;"
-                                                type="text" class="js-input-from form-control" value="0" />
+                                                type="text" class="js-input-from form-control"
+                                                value="{{ $get_min }}" />
                                             <input type="hidden" id="min_filter_price" value="{{ $get_min }}">
                                         </div>
                                     </div>
@@ -132,7 +136,8 @@ if (!$get_max) {
                                             style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
                                             <label for="fMaxPrice" style="font-size: 12px;">Max</label>
                                             <input name="fMaxPrice" style="font-size: 12px; border: none;"
-                                                type="text" class="js-input-to form-control" value="0" />
+                                                type="text" class="js-input-to form-control"
+                                                value="{{ $get_max }}" />
                                             <input type="hidden" id="max_filter_price" value="{{ $get_max }}">
                                         </div>
                                     </div>
@@ -404,7 +409,7 @@ if (!$get_max) {
                             <div class="roomnumber-filter-container">
                                 <input type="radio" value="6" id="b6" name="fBathroom"
                                     @if ($get_beds_filter == 6) checked @endif />
-                                <label class="roomnumberoption-checkbox-alias" for="o6">
+                                <label class="roomnumberoption-checkbox-alias" for="b6">
                                     <div class="">
                                         <p style="font-size: 13px; margin: 0px;">6</p>
                                     </div>
@@ -553,7 +558,7 @@ if (!$get_max) {
             <div class="modal-filter-footer">
                 <button type="submit"
                     style="width:150px; border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
-                    class="btn btn-primary btn-lg btn-block" onclick="villaFilter()">
+                    class="btn btn-primary btn-lg btn-block" onclick="homesFilter()">
                     {{ Translate::translate('Save') }}
                 </button>
             </div>
@@ -563,7 +568,7 @@ if (!$get_max) {
 </div>
 
 <script>
-    $("input[name='fProperty[]']").on('click', function() {
+    $("input[name='fCategory[]']").on('click', function() {
         var $box = $(this);
         if ($box.is(":checked")) {
             var group = "input:checkbox[name='" + $box.attr("name") + "']";

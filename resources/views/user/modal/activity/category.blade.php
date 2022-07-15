@@ -268,7 +268,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="mdoal-footer border-0">
+            <div class="modal-footer border-0">
             </div>
         </div>
     </div>

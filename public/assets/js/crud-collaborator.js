@@ -1,3 +1,77 @@
+//ganti nama
+$(document).on("keyup", "textarea#name-form-input", function () {
+    $("#name-form-input").css("border", "");
+    $("#err-name").hide();
+});
+
+let id_collab = $("#id_collab").val();
+
+function editNameCollab(id_collab) {
+    let error = 0;
+    if (!$("textarea#name-form-input").val()) {
+        $("#name-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-name").show();
+        error = 1;
+    } else {
+        $("#name-form-input").css("border", "");
+        $("#err-name").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let btn = document.getElementById("btnSaveName");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/colaborator/update/name",
+            data: {
+                id: id_collab,
+                name: $("#name-form-input").val(),
+            },
+            success: function (response) {
+                $("#name-content").html(response.data);
+                $("#name-content-mobile").html(response.data);
+                $("#collabTitle").html(response.data + " - EZV2");
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                editNameCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editNameCancel();
+            },
+        });
+    }
+}
+
 //Ganti Foto Profile
 let imageProfileCollab;
 let readerImageCollab;
@@ -25,78 +99,72 @@ $("#updateImageForm").submit(function (e) {
     if(error == 1) {
         e.preventDefault();
     } else {
+
         e.preventDefault();
+        let btn = document.getElementById("btnupdateImageForm");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
 
         var formData = new FormData(this);
         formData.append("image", imageProfileCollab);
 
-        var btn = document.getElementById("btnupdateImageForm");
-        btn.textContent = "Saving Image...";
-        btn.classList.add("disabled");
-        // $.ajax({
-        //     type: "POST",
-        //     headers: {
-        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //     },
-        //     url: "/collaborator/update/image",
-        //     data: formData,
-        //     cache: false,
-        //     processData: false,
-        //     contentType: false,
-        //     enctype: "multipart/form-data",
-        //     dataType: "json",
-        //     success: function (response) {
-        //         iziToast.success({
-        //             title: "Success",
-        //             message: response.message,
-        //             position: "topRight",
-        //         });
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/collaborator/update/image",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function (response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-        //         readerImageCollab.addEventListener("load", function () {
-        //             $(".imageProfileCollab").attr(
-        //                 "src",
-        //                 readerImageCollab.result
-        //             );
-        //         });
+                readerImageVilla.addEventListener("load", function () {
+                    $("#imageProfileCollab").attr(
+                        "src",
+                        readerImageVilla.result
+                    );
+                });
 
-        //         readerImageCollab.readAsDataURL(imageProfileCollab);
+                readerImageVilla.readAsDataURL(imageProfileCollab);
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                $("#modal-edit_collab_profile").modal("hide");
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
 
-        //         $("#modal-edit_activity_profile").modal("hide");
-
-        //         $("#profileDropzone").attr("src", "");
-
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Save";
-        //         btn.classList.remove("disabled");
-        //     },
-        //     error: function (jqXHR, exception) {
-        //         // console.log(jqXHR.responseJSON);
-        //         // console.log(exception);
-        //         if(jqXHR.responseJSON.errors) {
-        //             for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-        //                 iziToast.error({
-        //                     title: "Error",
-        //                     message: jqXHR.responseJSON.errors[i],
-        //                     position: "topRight",
-        //                 });
-        //             }
-        //         } else {
-        //             iziToast.error({
-        //                 title: "Error",
-        //                 message: jqXHR.responseJSON.message,
-        //                 position: "topRight",
-        //             });
-        //         }
-
-        //         $("#modal-edit_activity_profile").modal("hide");
-
-        //         $("#profileDropzone").attr("src", "");
-
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Save";
-        //         btn.classList.remove("disabled");
-        //     },
-        // });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                $("#modal-edit_collab_profile").modal("hide");
+            },
+        });
     }
 });
+
+//edit desc
 $(document).on("keyup", "textarea#description-form-input", function () {
     $('#description-form-input').css("border", "");
     $('#err-desc').hide();
@@ -119,7 +187,7 @@ function editDescriptionCancel() {
     content.classList.remove("d-none");
     btn.classList.remove("d-none");
 }
-function saveDescription() {
+function saveDescription(id_collab) {
     let error = 0;
     if(!$('textarea#description-form-input').val()) {
         $('#description-form-input').css("border", "solid #e04f1a 1px");

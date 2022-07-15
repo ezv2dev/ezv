@@ -4158,45 +4158,6 @@
     </script>
 
     <script>
-        function kingbed_increment() {
-            document.getElementById('kingbed').stepUp();
-        }
-        function kingbed_decrement() {
-            document.getElementById('kingbed').stepDown();
-        }
-        function singlebed_increment() {
-            document.getElementById('singlebed').stepUp();
-        }
-        function singlebed_decrement() {
-            document.getElementById('singlebed').stepDown();
-        }
-        function doublebed_increment() {
-            document.getElementById('doublebed').stepUp();
-        }
-        function doublebed_decrement() {
-            document.getElementById('doublebed').stepDown();
-        }
-        function workingtable_increment() {
-            document.getElementById('workingtable').stepUp();
-        }
-        function workingtable_decrement() {
-            document.getElementById('workingtable').stepDown();
-        }
-        function queenbed_increment() {
-            document.getElementById('queenbed').stepUp();
-        }
-        function queenbed_decrement() {
-            document.getElementById('queenbed').stepDown();
-        }
-        function couch_increment() {
-            document.getElementById('couch').stepUp();
-        }
-        function couch_decrement() {
-            document.getElementById('couch').stepDown();
-        }
-    </script>
-
-    <script>
         function adult_increment() {
             document.getElementById('adult2').stepUp();
             document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) + parseInt(

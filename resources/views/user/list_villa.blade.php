@@ -128,67 +128,69 @@
                         <div class="list-description {{ $textColor }}">Bedrooms</div>
                     </div>
                     @foreach ($amenities->sortBy('order')->take(5) as $item)
-                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13">
-                            <div>
-                                <i
-                                    class="fas fa-{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"></i>
-                            </div>
-                            <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
-                        </div>
-                    @endforeach
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
-                        <div>
-                            <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Filters</div>
-                    </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
-                        <div>
-                            <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Filters</div>
-                    </div>
+                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                            onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_amenities }})">
+                            <i class="fas fa-{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                @php
+                                    $amenitiesIds = explode(',', request()->get('fAmenities'));
+                                @endphp @if (in_array($item->id_amenities, $amenitiesIds))
+                                style="color: #ff7400;"
+                    @endif></i>
+                    <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
                 </div>
-
-                <div id="villa-data" class="grid-container-43">
-                    @include('user.data_list_villa')
-                </div>
-                <div></div>
-
-                {{-- TODO comment when lazy load, start --}}
-                {{-- Pagination --}}
-                <div class="mt-5 d-flex justify-content-center" id="footer">
-                    <div class="mt-3">
-                        {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+                @endforeach
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                    <div>
+                        <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                     </div>
+                    <div class="list-description {{ $textColor }}">Filters</div>
                 </div>
-                {{-- End Pagination --}}
-                {{-- TODO end --}}
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                    <div>
+                        <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <div class="list-description {{ $textColor }}">Filters</div>
+                </div>
+            </div>
 
-                {{-- TODO uncomment when lazy load, start --}}
-                {{-- <div class="ajax-load text-center" style="display: none">
+            <div id="villa-data" class="grid-container-43">
+                @include('user.data_list_villa')
+            </div>
+            <div></div>
+
+            {{-- TODO comment when lazy load, start --}}
+            {{-- Pagination --}}
+            <div class="mt-5 d-flex justify-content-center" id="footer">
+                <div class="mt-3">
+                    {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+                </div>
+            </div>
+            {{-- End Pagination --}}
+            {{-- TODO end --}}
+
+            {{-- TODO uncomment when lazy load, start --}}
+            {{-- <div class="ajax-load text-center" style="display: none">
                     <p class="list-loading {{ $textColor }}">
                         {{ __('user_page.Loading More') }}
                     </p>
                 </div> --}}
 
-                {{-- <div id="lazy-show-more" class="text-center d-none">
+            {{-- <div id="lazy-show-more" class="text-center d-none">
                     <button onclick="loadMoreData(page)" class="btn btn-primary rounded-pill fw-bold" style="font-family:'poppins'">Show More</button>
                 </div> --}}
-                {{-- TODO end --}}
+            {{-- TODO end --}}
 
-                <!-- End Grid 43 -->
-                <div style="height: 35px;">&nbsp;</div>
-            </div>
+            <!-- End Grid 43 -->
+            <div style="height: 35px;">&nbsp;</div>
         </div>
-        <!-- End Page Content -->
-        {{-- modal laguage and currency --}}
-        @include('user.modal.filter.filter_language')
-        @include('user.modal.auth.login_register')
-        @include('user.modal.villa.filter')
-        @include('user.modal.villa.category')
-        @include('user.modal.filter.filter_modal')
-        {{-- modal laguage and currency --}}
+    </div>
+    <!-- End Page Content -->
+    {{-- modal laguage and currency --}}
+    @include('user.modal.filter.filter_language')
+    @include('user.modal.auth.login_register')
+    @include('user.modal.villa.category')
+    @include('user.modal.filter.filter_modal')
+    {{-- modal laguage and currency --}}
     </div>
 
     {{-- VIEW VIDEO --}}
@@ -365,36 +367,58 @@
             setCookie2("sAdult", sAdultFormInput, 1);
             setCookie2("sChild", sChildFormInput, 1);
 
-            var filterFormInput = [];
-            $("input[name='filter[]']:checked").each(function() {
-                filterFormInput.push(parseInt($(this).val()));
+            // var filterFormInput = [];
+            // $("input[name='filter[]']:checked").each(function() {
+            //     filterFormInput.push(parseInt($(this).val()));
+            // });
+
+            var fMaxPriceFormInput = $("input[name='fMaxPrice']").val();
+            var fMinPriceFormInput = $("input[name='fMinPrice']").val();
+            var fBedroomFormInput = $("input[name='fBedroom']:checked").val();
+            var fBathroomFormInput = $("input[name='fBathroom']:checked").val();
+            var fBedsFormInput = $("input[name='fBeds']:checked").val();
+            var fAmenitiesFormInput = [];
+
+            var fCategoryFormInput = [];
+            $("input[name='fCategory[]']:checked").each(function() {
+                fCategoryFormInput.push(parseInt($(this).val()));
             });
+            if (valueCategory != null) {
+                fCategoryFormInput.push(valueCategory);
+            }
+            if (valueClick != null) {
+                $("input[name='fAmenities[]']:checked").each(function() {
+                    fAmenitiesFormInput.push(parseInt($(this).val()));
+                });
+                if (fAmenitiesFormInput.includes(valueClick) == true) {
+                    var filterCheck = fAmenitiesFormInput.filter(unCheck);
 
-            if (filterFormInput.includes(valueClick) == true) {
-                var filterCheck = filterFormInput.filter(unCheck);
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueClick;
+                    }
 
-                function unCheck(dataCheck) {
-                    return dataCheck != valueClick;
+                    var filteredArray = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    fAmenitiesFormInput.push(valueClick);
+
+                    var filteredArray = fAmenitiesFormInput.filter(function(item, pos) {
+                        return fAmenitiesFormInput.indexOf(item) == pos;
+                    });
                 }
-
-                var filteredArray = filterCheck.filter(function(item, pos) {
-                    return filterCheck.indexOf(item) == pos;
-                });
             } else {
-                filterFormInput.push(valueClick);
+                $("input[name='fAmenities[]']:checked").each(function() {
+                    fAmenitiesFormInput.push(parseInt($(this).val()));
+                });
 
-                var filteredArray = filterFormInput.filter(function(item, pos) {
-                    return filterFormInput.indexOf(item) == pos;
+                var filteredArray = fAmenitiesFormInput.filter(function(item, pos) {
+                    return fAmenitiesFormInput.indexOf(item) == pos;
                 });
             }
 
-            if (valueCategory == null) {
-                var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}`;
-            } else {
-                var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}`;
-            }
+            var subUrl =
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${fCategoryFormInput}&fAmenities=${filteredArray}`;
 
             villaRefreshFilter(subUrl);
         }
