@@ -1617,7 +1617,7 @@
                 </div>
                 <hr class="hr-bottom">
             </section>
-            <div class="section" id="host_end">
+            <div class="section" id="endSticky">
                 <div class="host">
                     <div class="row">
                         <div class="col-2 host-profile">
@@ -3343,7 +3343,7 @@
     </script>
 
     {{-- Highlight sticky --}}
-    <script>
+    <!-- <script>
         var gallery = $('#gallery').offset().top - 200,
             description = $('#description').offset().top - 150,
             amenities = $('#amenities').offset().top - 150,
@@ -3390,6 +3390,56 @@
                 $('#availability-sticky').removeClass('active-sticky');
                 $('#review-sticky').removeClass('active-sticky');
             }
+        });
+    </script> -->
+
+    <script>
+        jQuery(document).ready(function($) {
+            $(window).on('scroll', function() {
+                if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
+                        '#description').offset().top - 60) {
+                    $('#gallery-sticky').addClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#amenities').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').addClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#availability').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').addClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#availability').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#review').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').addClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
+                    .scrollTop() <= $('#endSticky').offset().top - 60) {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#review-sticky').addClass('active-sticky');
+                } else {
+                    $('#gallery-sticky').removeClass('active-sticky');
+                    $('#about-sticky').removeClass('active-sticky');
+                    $('#amenities-sticky').removeClass('active-sticky');
+                    $('#availability-sticky').removeClass('active-sticky');
+                    $('#review-sticky').removeClass('active-sticky');
+                    //or use $('.menu').removeClass('addclass');
+                }
+            });
         });
     </script>
 
