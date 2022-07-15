@@ -3007,6 +3007,15 @@ input::-webkit-inner-spin-button {
     }
 }
 @media only screen and (max-width: 991px) {
+    .search-box {
+        height: 0px !important;
+    }
+    #searchbox {
+        display: none !important;
+    }
+    .searchbar-list-display-block {
+        top: 0px !important;
+    }
     .flatpickr-rContainer {
         width: 100% !important;
     }
