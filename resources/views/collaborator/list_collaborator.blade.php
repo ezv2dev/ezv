@@ -415,7 +415,7 @@ if (request()->fCategory) {
 
             <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
                 data-isshow="true">
-                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
                     <a href="javascript:void(0)" id="price" style="cursor:pointer;"
                         class="dropdown-toggle grid-sub-cat-content-container text-13">
                         <div>
@@ -481,15 +481,6 @@ if (request()->fCategory) {
                             <div class="propertytype-input-row">
                                 <div class="col-12">
                                     <div class="row">
-                                        {{-- @foreach ($property_type as $item)
-                                            @php
-                                                $isChecked = '';
-                                                $propertyIds = explode(',', request()->get('fProperty'));
-                                                if (in_array($item->id_property_type, $propertyIds)) {
-                                                    $isChecked = 'checked';
-                                                }
-                                            @endphp
-                                        @endforeach --}}
                                         <div class="col-6 mb-3">
                                             <label class="checkdesign">Male
                                                 <input type="checkbox" name="gender[]" value="Male">
@@ -541,6 +532,34 @@ if (request()->fCategory) {
                             </center>
                         </div>
                     </div>
+                </div> --}}
+
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                    <div>
+                        <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <div class="list-description {{ $textColor }}">Price</div>
+                </div>
+
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                    <div>
+                        <i class="fas fa-mars-and-venus text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <div class="list-description {{ $textColor }}">Gender</div>
+                </div>
+
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                    <div>
+                        <i class="fas fa-circle-user text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <div class="list-description {{ $textColor }}">Followers</div>
+                </div>
+
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                    <div>
+                        <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                    </div>
+                    <div class="list-description {{ $textColor }}">Filters</div>
                 </div>
             </div>
         </div>
@@ -570,16 +589,14 @@ if (request()->fCategory) {
                                     @if ($data->image)
                                         <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
                                             class="col-lg-6 grid-image-container">
-                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto"
-                                                style="display: block;"
+                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
                                                 src="{{ URL::asset('/foto/collaborator/' . $item->id_collab . '/' . $data->image) }}"
                                                 alt="EZV_{{ $item->photo }}">
                                         </a>
                                     @else
                                         <a href="{{ route('collaborator', $data->id_collab) }}" target="_blank"
                                             class="col-lg-6 grid-image-container">
-                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto"
-                                                style="display: block;"
+                                            <img class="img-fluid grid-image aspect-ratio-1 h-auto" style="display: block;"
                                                 src="{{ URL::asset('/template/collab/template_profile.jpg') }}"
                                                 alt="EZV_{{ $item->photo }}">
                                         </a>
@@ -640,6 +657,7 @@ if (request()->fCategory) {
     @include('user.modal.collaborator.category')
     @include('user.modal.auth.login_register')
     @include('user.modal.collaborator.sub_category')
+    @include('user.modal.collab.filter_collab')
     {{-- modal laguage and currency --}}
     </div>
 @endsection
@@ -715,6 +733,10 @@ if (request()->fCategory) {
     </script>
 
     <script>
+        function filterCollab() {
+            $('#modalFiltersCollab').modal('show');
+        }
+
         function collabFilter(valueCategory, valueClick) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sStart = $("input[name='start_date']").val();

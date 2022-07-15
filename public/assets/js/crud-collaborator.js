@@ -1,18 +1,19 @@
 //Change language
-$(".check-lang").change(function () {
+$(".check-lang").change(function() {
     $('#check_lang').each(function() {
-        if($(this).find('input[type="checkbox"]:checked').length > 0) {
+        if ($(this).find('input[type="checkbox"]:checked').length > 0) {
             $('.check-lang').css("border", "");
             $('#err-slc-lang').hide();
             $('#err-slc-lang').text('');
         }
     });
 });
+
 function editLangCollab(id_collab) {
     let error = 0;
 
     $('#check_lang').each(function() {
-        if($(this).find('input[type="checkbox"]:checked').length == 0) {
+        if ($(this).find('input[type="checkbox"]:checked').length == 0) {
             $('.check-lang').css("border", "solid #e04f1a 1px");
             $('#err-slc-lang').show();
             error = 1;
@@ -74,7 +75,7 @@ function editLangCollab(id_collab) {
     }
 }
 //Change name
-$(document).on("keyup", "textarea#name-form-input", function () {
+$(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
@@ -107,7 +108,7 @@ function editNameCollab(id_collab) {
                 id: id_collab,
                 name: $("#name-form-input").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 $("#name-content").html(response.data);
                 $("#name-content-mobile").html(response.data);
                 $("#collabTitle").html(response.data + " - EZV2");
@@ -121,7 +122,7 @@ function editNameCollab(id_collab) {
                 btn.classList.remove("disabled");
                 editNameCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -151,8 +152,8 @@ function editNameCollab(id_collab) {
 let imageProfileCollab;
 let readerImageCollab;
 
-$("#imageCollab").on("change", function (ev) {
-    if(document.getElementById("imageCollab").files.length != 0){
+$("#imageCollab").on("change", function(ev) {
+    if (document.getElementById("imageCollab").files.length != 0) {
         $('.image-box').css("border", "");
         $('#err-img').hide();
     }
@@ -161,9 +162,9 @@ $("#imageCollab").on("change", function (ev) {
     readerImageCollab = new FileReader();
 });
 
-$("#updateImageForm").submit(function (e) {
+$("#updateImageForm").submit(function(e) {
     let error = 0;
-    if(document.getElementById("imageCollab").files.length == 0){
+    if (document.getElementById("imageCollab").files.length == 0) {
         $('.image-box').css("border", "solid #e04f1a 1px");
         $('#err-img').show();
         error = 1;
@@ -171,7 +172,7 @@ $("#updateImageForm").submit(function (e) {
         $('.image-box').css("border", "");
         $('#err-img').hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
 
@@ -195,14 +196,14 @@ $("#updateImageForm").submit(function (e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function () {
+                readerImageVilla.addEventListener("load", function() {
                     $("#imageProfileCollab").attr(
                         "src",
                         readerImageVilla.result
@@ -214,7 +215,7 @@ $("#updateImageForm").submit(function (e) {
                 btn.classList.remove("disabled");
                 $("#modal-edit_collab_profile").modal("hide");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -240,10 +241,11 @@ $("#updateImageForm").submit(function (e) {
 });
 
 //Change description
-$(document).on("keyup", "textarea#description-form-input", function () {
+$(document).on("keyup", "textarea#description-form-input", function() {
     $('#description-form-input').css("border", "");
     $('#err-desc').hide();
 });
+
 function editDescriptionForm() {
     var form = document.getElementById("description-form");
     var content = document.getElementById("description-content");
@@ -262,9 +264,10 @@ function editDescriptionCancel() {
     content.classList.remove("d-none");
     btn.classList.remove("d-none");
 }
+
 function saveDescription(id_collab) {
     let error = 0;
-    if(!$('textarea#description-form-input').val()) {
+    if (!$('textarea#description-form-input').val()) {
         $('#description-form-input').css("border", "solid #e04f1a 1px");
         $('#err-desc').show();
         error = 1;
@@ -272,7 +275,7 @@ function saveDescription(id_collab) {
         $('#description-form-input').css("border", "");
         $('#err-desc').hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         return false;
     } else {
         let btn = document.getElementById("btnSaveDescription");
@@ -311,8 +314,8 @@ function saveDescription(id_collab) {
                 btn.classList.remove("disabled");
                 editDescriptionCancel();
             },
-            error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+            error: function(jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -337,4 +340,32 @@ function saveDescription(id_collab) {
             },
         });
     }
+}
+
+function updateGender(id_collab) {
+    var genderArray = [];
+    $("input[name='gender[]']:checked").each(function() {
+        genderArray.push($(this).val());
+    });
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/update/gender",
+        data: {
+            id: id_collab,
+            gender: genderArray,
+        },
+        success: function(response) {
+            $("#genderID").html(response.data);
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+            $('#modal-add_gender').modal('hide');
+        }
+    });
 }

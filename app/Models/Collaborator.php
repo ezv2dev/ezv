@@ -14,7 +14,7 @@ class Collaborator extends Model
      * @var array
      */
     protected $fillable = [
-        'id_collab', 'uid', 'grade', 'description', 'short_description', 'id_location', 'address', 'latitude', 'longitude', 'phone', 'email', 'price', 'discount', 'image', 'status', 'views', 'created_by', 'updated_by'
+        'id_collab', 'uid', 'gender', 'grade', 'description', 'short_description', 'id_location', 'address', 'latitude', 'longitude', 'phone', 'email', 'price', 'discount', 'image', 'status', 'views', 'created_by', 'updated_by'
     ];
 
     protected $table = 'collaborator';
