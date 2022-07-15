@@ -729,16 +729,16 @@ class ActivityListController extends Controller
 
     public function activity_store_photo(Request $request)
     {
-        // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
-
         // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
         ]);
+
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $status = 500;
@@ -748,12 +748,18 @@ class ActivityListController extends Controller
             $activity = Activity::find($request->id_activity);
 
             // check if activity does not exist, abort 404
-            abort_if(!$activity, 404);
+            if(!$activity){
+                return response()->json([
+                    'message' => 'WoW Not Found'
+                ], 404);
+            }
 
             // check if the editor does not have authorization
             $this->authorize('activity_update');
             if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-                abort(403);
+                return response()->json([
+                    'message' => 'This action is unauthorized'
+                ], 403);
             }
 
             // store process
@@ -767,11 +773,20 @@ class ActivityListController extends Controller
 
             $ext = strtolower($request->file->getClientOriginalExtension());
 
+            $photo = [];
+            $video = [];
+
             if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                request()->validate([
+                $validator2 = Validator::make($request->all(), [
                     'id_activity' => ['required', 'integer'],
                     'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
                 ]);
+
+                if ($validator2->fails()) {
+                    return response()->json([
+                        'message' => $validator2->errors()->all(),
+                    ], 500);
+                }
 
                 $original_name = $request->file->getClientOriginalName();
                 // dd($original_name);
@@ -795,6 +810,8 @@ class ActivityListController extends Controller
                     'created_by' => auth()->user()->id,
                     'updated_by' => auth()->user()->id
                 ]);
+
+                array_push($photo, $createdActivity->id_photo);
             }
 
             if ($ext == 'mp4' || $ext == 'mov') {
@@ -821,6 +838,8 @@ class ActivityListController extends Controller
                     'created_by' => auth()->user()->id,
                     'updated_by' => auth()->user()->id
                 ]);
+
+                array_push($video, $createdActivity->id_video);
             }
 
             if ($createdActivity) {
@@ -830,13 +849,22 @@ class ActivityListController extends Controller
             $status = 500;
         }
 
+        $data = [
+            'photo' => ActivityPhoto::whereIn('id_photo', $photo)->get(),
+            'video' => ActivityVideo::whereIn('id_video', $video)->get(),
+            'uid' => Activity::where('id_activity', $request->id_activity)->select('uid')->first(),
+        ];
+
         // check if update is success or not
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been created');
+        if ($createdActivity) {
+            return response()->json([
+                'message' => 'Update Gallery Wow',
+                'data' => $data,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Update Gallery Wow',
+            ], 500);
         }
     }
 

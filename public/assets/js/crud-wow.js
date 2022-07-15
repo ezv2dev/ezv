@@ -372,7 +372,7 @@ function saveSubcategoryActivity() {
                 }
                 content =
                     content +
-                    '<button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">More</button>';
+                    '<button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_subcategory">More</button>';
             } else {
                 for (let i = 0; i < response.data.length; i++) {
                     content =

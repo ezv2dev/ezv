@@ -1247,7 +1247,7 @@ class ViewController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->errors(),
+                'message' => $validator->errors()->all(),
             ], 500);
         }
 
