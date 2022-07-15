@@ -1318,6 +1318,7 @@ Route::get('/collaborator-list', [Collaborator\CollaboratorController::class, 'c
 Route::get('/collaborator/{id}', [Collaborator\CollaboratorController::class, 'collaborator'])->name('collaborator');
 Route::post('/collaborator/update/image', [Collaborator\CollaboratorController::class, 'collab_update_image'])->name('collab_update_image');
 Route::post('/colaborator/update/name', [Collaborator\CollaboratorController::class, 'collab_update_name'])->name('collab_update_name');
+Route::post('/colaborator/update/gender', [Collaborator\CollaboratorController::class, 'collab_update_gender'])->name('collab_update_gender');
 Route::post('/colaborator/store/category', [Collaborator\CollaboratorController::class, 'collab_store_category'])->name('collab_store_category');
 Route::post('/colaborator/update/location', [Collaborator\CollaboratorController::class, 'collab_update_location'])->name('collab_update_location');
 Route::post('/colaborator/update/social-media', [Collaborator\CollaboratorController::class, 'collab_update_social_media'])->name('collab_update_social_media');
