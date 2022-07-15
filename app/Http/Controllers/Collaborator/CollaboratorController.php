@@ -91,6 +91,7 @@ class CollaboratorController extends Controller
     // update profile
     public function collab_update_image(Request $request)
     {
+        /*
         $this->authorize('collaborator_update');
 
         // validation
@@ -150,6 +151,45 @@ class CollaboratorController extends Controller
             return back()
                 ->with('error', 'Please check the form below for errors');
         }
+        */
+        $profile = Collaborator::where('id_collab', $request->id_collab)->first('uid');
+        $folder = $profile->uid;
+        $path = env("COLLAB_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->image->getClientOriginalExtension());
+        // dd($ext);
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $original_name = $request->image->getClientOriginalName();
+            $find = Collaborator::where('id_collab', $request->id_collab)->first();
+            $name_file = time() . "_" . $original_name;
+            $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+            $updatedCollab = $find->update(array(
+                'image' => $name_file,
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_by' => Auth::user()->id,
+            ));
+        }
+
+        $profileData = Collaborator::where('id_collab', $request->id_collab)->select('image')->first();
+
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Collaborator Profile',
+                'status' => 200,
+                'data' => $profileData
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Error Updated Collaborator Profile',
+                'status' => 500,
+            ]);
+        }
     }
     // update profile
 
@@ -169,22 +209,26 @@ class CollaboratorController extends Controller
                 unset($name[0]);
                 $last_name = implode(" ", $name);
                 $user = User::where('id', $request->id)->first();
-                $user->update(array(
+                if($user->update(array(
                     'first_name' => $first_name,
                     'last_name' => $last_name,
                     'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                ));
+                ))) {
+                    $status = 200;
+                }
             }
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 500;
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Collaborator Name',  'data' => $request->name]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Fail Updated Collaborator Name',  'data' => $request->name]);
         }
     }
     // updatename
@@ -434,7 +478,7 @@ class CollaboratorController extends Controller
         abort_if($condition, 403);
 
         // delete video
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $profile->name;
         $folder = $collabStory->collab->uid;
         $path = env("COLLAB_FILE_PATH") . $folder;
 
@@ -476,7 +520,7 @@ class CollaboratorController extends Controller
         abort_if($condition, 403);
 
         // delete photo
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $profile->name;
         $folder = $collab->uid;
         $path = env("COLLAB_FILE_PATH") . $folder;
 
@@ -515,7 +559,7 @@ class CollaboratorController extends Controller
         abort_if($condition, 403);
 
         // delete photo
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $profile->name;
         $folder = $collab->uid;
         $path = env("COLLAB_FILE_PATH") . $folder;
 

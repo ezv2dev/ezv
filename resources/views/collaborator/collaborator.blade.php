@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>{{ $user->first_name }} {{ $user->last_name }} - EZV2</title>
+    <title id="collabTitle">{{ $user->first_name }} {{ $user->last_name }} - EZV2</title>
 
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
@@ -60,7 +60,8 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/js/errorToString.js') }}"></script>
-
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
+    <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -858,10 +859,11 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($profile->image)
-                                <img
-                                    src="{{ URL::asset('/foto/collaborator/' . strtolower($profile->id_collab) . '/' . $profile->image) }}">
+                                <img id="imageProfileCollab" class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/foto/collaborator/' . strtolower($profile->id_collab) . '/' . $profile->image) }}">
                             @else
-                                <img src="{{ URL::asset('/template/collabs/template-profile.webp') }}">
+                                <img id="imageProfileCollab" class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/template/collabs/template-profile.webp') }}">
                             @endif
 
                             @auth
@@ -904,20 +906,22 @@
                         @auth
                             @if (Auth::user()->id == $profile->created_by)
                                 <div id="name-form" style="display:none;">
-                                    <form action="{{ route('collab_update_name') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $user->id }}" required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
-                                            required>{{ $user->first_name }} {{ $user->last_name }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary"
-                                            style="background-color: #ff7400">
-                                            <i class="fa fa-check"></i> Done
+                                    {{-- <form action="{{ route('collab_update_name') }}" method="post"> --}}
+                                        {{-- @csrf --}}
+                                        <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255">
+                                            {{ $user->first_name }} {{ $user->last_name }}
+                                        </textarea>
+                                        <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
+                                            style="background-color: #ff7400" onclick="editNameCollab({{ $user->id }})">
+                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
                                             onclick="editNameCancel()">
-                                            <i class="fa fa-xmark"></i> Cancel
+                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                         </button>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             @endif
                         @endauth
@@ -1303,7 +1307,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
-                                                id="btnSaveDescription" onclick="saveDescription();">
+                                                id="btnSaveDescription" onclick="saveDescription({{ $profile->id_collab }});">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -2423,12 +2427,12 @@
                         there is no image yet
                         @endforelse
                     </ul> --}}
-
-                    <div style="clear: both; margin-top: 20px;">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos" value='Submit'
                             onclick="save_reorder_photo()">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -3023,7 +3027,7 @@
                         "position": "absolute"
                     });
                     $sidebar.removeClass("fixed");
-                    
+
                 } else {
                     $sidebar.addClass("fixed");
                     $sidebar.css({

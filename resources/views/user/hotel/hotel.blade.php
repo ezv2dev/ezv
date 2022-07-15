@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>{{ $hotel[0]->name }} - EZV2</title>
+    <title id="hotelTitle">{{ $hotel[0]->name }} - EZV2</title>
 
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="EZV2">
@@ -73,7 +74,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
+    <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
     <style>
         .brd-radius {
             border-radius: 10px;
@@ -364,10 +366,10 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($hotel[0]->image)
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
                             @else
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
@@ -482,13 +484,15 @@
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <form action="{{ route('hotel_update_name') }}" method="post">
+                                    {{-- <form action="{{ route('hotel_update_name') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                            required>
-                                        <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
+                                            required> --}}
+                                        <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
                                             placeholder="{{ __('user_page.Hotel Name Here') }}" required>{{ $hotel[0]->name }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary"
+                                        <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName" onclick="editNameHotel({{ $hotel[0]->id_hotel }})"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
@@ -496,7 +500,7 @@
                                             onclick="editNameCancel()">
                                             <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                         </button>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             @endif
                         @endauth
@@ -613,20 +617,22 @@
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <form action="{{ route('hotel_update_short_description') }}" method="post">
+                                    {{-- <form action="{{ route('hotel_update_short_description') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                            required>
-                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
-                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255" required>{{ $hotel[0]->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            required> --}}
+                                        <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
+                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255">{{ $hotel[0]->short_description }}</textarea>
+                                        <small id="err-shrt-desc" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
                                             onclick="editShortDescriptionCancel()">
                                             <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                         </button>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             @endif
                         @endauth
@@ -634,20 +640,22 @@
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <form action="{{ route('hotel_update_short_description') }}" method="post">
+                                    {{-- <form action="{{ route('hotel_update_short_description') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                            required>
-                                        <textarea name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
+                                            required> --}}
+                                        <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
                                             placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary">
+                                        <small id="err-shrt-desc" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
+                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
                                             <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                         </button>
                                         <button type="reset" class="btn btn-sm btn-secondary"
                                             onclick="editShortDescriptionCancel()">
                                             <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                         </button>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             @endif
                         @endauth
@@ -1149,16 +1157,19 @@
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
-                                        <form action="{{ route('hotel_update_description') }}" method="post">
+                                        {{-- <form action="{{ route('hotel_update_description') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                                required>
+                                                required> --}}
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
+                                                <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5"
                                                     placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->description }}</textarea>
+                                                <small id="err-desc" style="display: none;"
+                                                class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
+                                                onclick="editDescriptionHotel({{ $hotel[0]->id_hotel }})">
                                                     <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
@@ -1166,7 +1177,7 @@
                                                     <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
                                                 </button>
                                             </div>
-                                        </form>
+                                        {{-- </form> --}}
                                     </div>
                                 @endif
                             @endauth
@@ -2412,7 +2423,7 @@
                     @endif
                 @endauth
             </section>
-            <section id="endSticky" 
+            <section id="endSticky"
             class="section-2">
                 <h3>{{ __('user_page.Things to know') }}</h3>
                 <div class="row">
@@ -3861,12 +3872,12 @@
                             {{ __('user_page.there is no image yet') }}
                         @endforelse
                     </ul>
-
-                    <div style="clear: both; margin-top: 20px;">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos"
                             value="{{ __('user_page.Submit') }}" onclick="save_reorder_photo()">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -3970,6 +3981,7 @@
     <script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
     <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-hotel.js') }}"></script>
+    <script src="{{ asset('assets/js/crud-hotel.js') }}"></script>
     <script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

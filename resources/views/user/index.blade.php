@@ -430,7 +430,7 @@
                                                         <a href="javascript:void(0)"
                                                             class="dropdown-toggle input-guest">
                                                         </a>
-                                                        <a style="margin-left: 20px;" class="dropdown-toggle-icon">
+                                                        <a style="margin-left: 10px;" class="dropdown-toggle-icon">
                                                             {{ __('user_page.Add') }}
                                                         </a>
 
@@ -766,189 +766,192 @@
         </div>
     </section>
 
-    <div class="header-4-4 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
-        <div class="mx-auto d-flex flex-lg-row flex-column hero">
-            <div class="col-12">
-                <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load"
-                    data-src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}"
-                    style="border-radius: 14px; height: 400px; background-position:center; background-size: cover;">
-                    <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="text-white text-center" style="font-size: 62px;" id="text-download-app">
-                                {{ __('user_page.Download The App') }}
-                            </p>
-                            <p class="text-white text-center" style="margin-top: -20px;">
-                                {{ __('user_page.Unlock all the features today') }}
-                            </p>
-
-                            <p style="text-align: center;">
-                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                    <img style="width:18%;"
-                                        src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                </a>
-                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                    <img style="width:21%;"
-                                        src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
-                                </a>
-                            </p>
+    <div class="header-4-4 position-relative" style="font-family: 'Poppins', sans-serif">
+        <div class="container-xxl mx-auto p-0">
+            <div class="mx-auto d-flex flex-lg-row flex-column hero">
+                <div class="col-12">
+                    <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load"
+                        data-src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}"
+                        style="border-radius: 14px; height: 400px; background-position:center; background-size: cover;">
+                        <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
+                            <div>
+                                <p class="text-white text-center" style="font-size: 62px;" id="text-download-app">
+                                    {{ __('user_page.Download The App') }}
+                                </p>
+                                <p class="text-white text-center" style="margin-top: -20px;">
+                                    {{ __('user_page.Unlock all the features today') }}
+                                </p>
+    
+                                <p style="text-align: center;">
+                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                        <img style="width:18%;"
+                                            src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                    </a>
+                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                        <img style="width:21%;"
+                                            src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </section>
+            {{-- end hero --}}
+            {{-- experience --}}
+    
+            {{-- Restaurant --}}
+            <section class="h-100 w-100 bg-white">
+                <div class="container-xxl mx-auto p-0">
+                    <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
+                        <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
+                        <div class="row-grid" id="discover-experiences-food">
+                            <div class="mb-3">
+                                <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
+                                    style="border-radius: 15px;">
+                                    <img src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/media/photos/desktop/restaurant.webp') }}"
+                                        class="card-img lozad index-experience-img img-overlay" alt="...">
+                                    <div
+                                        class="card-img-overlay card-overlay d-flex justify-content-center align-items-center">
+                                        <div class="text-center">
+                                            <h1 class="card-title">{{ __('user_page.Food') }}</h1>
+                                            <a href="{{ route('restaurant_list') }}"
+                                                class="btn btn-company text-white btn-sm">{{ __('user_page.Explore') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row-grid-img">
+                                    @if ($restaurant->count() > 9)
+                                        @for ($i = 0; $i < 9; $i++)
+                                            <div>
+                                                <a href="{{ route('restaurant', $restaurant[$i]->id_restaurant) }}"
+                                                    class="grid-img-container">
+                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                        data-src="{{ URL::asset('/foto/restaurant/' . $restaurant[$i]->uid . '/' . $restaurant[$i]->image) }}">
+                                                    <div class="grid-text">
+                                                        {{ $restaurant[$i]->name }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endfor
+                                    @else
+                                        @forelse ($restaurant as $item)
+                                            <div>
+                                                <a href="{{ route('restaurant', $item->id_restaurant) }}"
+                                                    class="grid-img-container">
+                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                        data-src="{{ URL::asset('/foto/restaurant/' . $item->uid . '/' . $item->image) }}">
+                                                    <div class="grid-text">
+                                                        {{ $item->name }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @empty
+                                            {{ __('user_page.there is no content yet') }}
+                                        @endforelse
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            {{-- Things To Do --}}
+            <section class="h-100 w-100 bg-white">
+                <div class="container-xxl mx-auto p-0">
+                    <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
+                        <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
+                        <div class="row-grid" id="discover-experiences-things-todo">
+                            <div class="mb-3">
+                                <div class="row-grid-img">
+                                    @if ($activity->count() > 9)
+                                        @for ($i = 0; $i < 9; $i++)
+                                            <div>
+                                                <a href="{{ route('activity', $activity[$i]->id_activity) }}"
+                                                    class="grid-img-container">
+                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                        data-src="{{ URL::asset('/foto/activity/' . $activity[$i]->uid . '/' . $activity[$i]->image) }}">
+                                                    <div class="grid-text">
+                                                        {{ $activity[$i]->name }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endfor
+                                    @else
+                                        @forelse ($activity as $item)
+                                            <div>
+                                                <a href="{{ route('activity', $item->id_activity) }}"
+                                                    class="grid-img-container">
+                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                        data-src="{{ URL::asset('/foto/activity/' . $item->uid . '/' . $item->image) }}">
+                                                    <div class="grid-text">
+                                                        {{ $item->name }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @empty
+                                            {{ __('user_page.there is no content yet') }}
+                                        @endforelse
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
+                                    style="border-radius: 15px;">
+                                    <img src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/media/photos/desktop/activity.webp') }}"
+                                        class="card-img lozad index-experience-img img-overlay" alt="...">
+                                    <div
+                                        class="card-img-overlay card-overlay d-flex justify-content-center align-items-center">
+                                        <div class="text-center">
+                                            {{-- <h1 class="card-title">{{ __('user_page.Things To Do') }}</h1> --}}
+                                            <h1>WoW</h1>
+                                            <a href="{{ route('activity_list') }}"
+                                                class="btn btn-company text-white btn-sm">{{ __('user_page.Explore') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {{-- end experience --}}
+    
+            {{-- QA desktop --}}
+            <section class="h-100 w-100" style="box-sizing: border-box;">
+                <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
+                    style="font-family: 'Poppins', sans-serif">
+                    <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
+                        <div class="col-12">
+                            <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
+                                data-src='{{ URL::asset('assets/media/photos/desktop/villa.webp') }}'>
+                                <div class="p-0 h-100 card-overlay">
+                                    <div style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); padding: 3rem 6rem" class="container-xxl mx-auto h-100" id="qa-card">
+                                        <div class="col-12 d-flex flex-column justify-content-between text-white h-100 align-items-center align-items-sm-start">
+                                            <h1 class="card-title flex-sm-fill" style="font-size: 28px;font-weight: 400;display: block;word-wrap: break-word;max-width: 300px;line-height: 1.5;">
+                                                {{-- __('user_page.Learn about listing your home, hotel, restaurant, or activity') --}}
+                                                {{ __('user_page.Learn about listing your home, hotel, food, or wow') }}
+                                            </h1>
+                                            <div>
+                                                <a href="{{ route('ahost') }}" class="btn btn-company text-white"
+                                                    target="_blank">{{ __('user_page.Ask a Super Host') }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        </section>
-        {{-- end hero --}}
-        {{-- experience --}}
-
-        {{-- Restaurant --}}
-        <section class="h-100 w-100 bg-white">
-            <div class="container-xxl mx-auto p-0">
-                <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
-                    <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
-                    <div class="row-grid" id="discover-experiences-food">
-                        <div class="mb-3">
-                            <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
-                                style="border-radius: 15px;">
-                                <img src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/media/photos/desktop/restaurant.webp') }}"
-                                    class="card-img lozad index-experience-img img-overlay" alt="...">
-                                <div
-                                    class="card-img-overlay card-overlay d-flex justify-content-center align-items-center">
-                                    <div class="text-center">
-                                        <h1 class="card-title">{{ __('user_page.Food') }}</h1>
-                                        <a href="{{ route('restaurant_list') }}"
-                                            class="btn btn-company text-white btn-sm">{{ __('user_page.Explore') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="row-grid-img">
-                                @if ($restaurant->count() > 9)
-                                    @for ($i = 0; $i < 9; $i++)
-                                        <div>
-                                            <a href="{{ route('restaurant', $restaurant[$i]->id_restaurant) }}"
-                                                class="grid-img-container">
-                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ URL::asset('/foto/restaurant/' . $restaurant[$i]->uid . '/' . $restaurant[$i]->image) }}">
-                                                <div class="grid-text">
-                                                    {{ $restaurant[$i]->name }}
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @endfor
-                                @else
-                                    @forelse ($restaurant as $item)
-                                        <div>
-                                            <a href="{{ route('restaurant', $item->id_restaurant) }}"
-                                                class="grid-img-container">
-                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ URL::asset('/foto/restaurant/' . $item->uid . '/' . $item->image) }}">
-                                                <div class="grid-text">
-                                                    {{ $item->name }}
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @empty
-                                        {{ __('user_page.there is no content yet') }}
-                                    @endforelse
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {{-- Things To Do --}}
-        <section class="h-100 w-100 bg-white">
-            <div class="container-xxl mx-auto p-0">
-                <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
-                    <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
-                    <div class="row-grid" id="discover-experiences-things-todo">
-                        <div class="mb-3">
-                            <div class="row-grid-img">
-                                @if ($activity->count() > 9)
-                                    @for ($i = 0; $i < 9; $i++)
-                                        <div>
-                                            <a href="{{ route('activity', $activity[$i]->id_activity) }}"
-                                                class="grid-img-container">
-                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ URL::asset('/foto/activity/' . $activity[$i]->uid . '/' . $activity[$i]->image) }}">
-                                                <div class="grid-text">
-                                                    {{ $activity[$i]->name }}
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @endfor
-                                @else
-                                    @forelse ($activity as $item)
-                                        <div>
-                                            <a href="{{ route('activity', $item->id_activity) }}"
-                                                class="grid-img-container">
-                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ URL::asset('/foto/activity/' . $item->uid . '/' . $item->image) }}">
-                                                <div class="grid-text">
-                                                    {{ $item->name }}
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @empty
-                                        {{ __('user_page.there is no content yet') }}
-                                    @endforelse
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
-                                style="border-radius: 15px;">
-                                <img src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/media/photos/desktop/activity.webp') }}"
-                                    class="card-img lozad index-experience-img img-overlay" alt="...">
-                                <div
-                                    class="card-img-overlay card-overlay d-flex justify-content-center align-items-center">
-                                    <div class="text-center">
-                                        {{-- <h1 class="card-title">{{ __('user_page.Things To Do') }}</h1> --}}
-                                        <h1>WoW</h1>
-                                        <a href="{{ route('activity_list') }}"
-                                            class="btn btn-company text-white btn-sm">{{ __('user_page.Explore') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        {{-- end experience --}}
-
-        {{-- QA desktop --}}
-        <section class="h-100 w-100" style="box-sizing: border-box;">
-            <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
-                style="font-family: 'Poppins', sans-serif">
-                <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
-                    <div class="col-12">
-                        <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
-                            data-src='{{ URL::asset('assets/media/photos/desktop/villa.webp') }}'>
-                            <div class="p-0 h-100 card-overlay">
-                                <div style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); padding: 3rem 6rem" class="container-xxl mx-auto h-100" id="qa-card">
-                                    <div class="col-12 d-flex flex-column justify-content-between text-white h-100 align-items-center align-items-sm-start">
-                                        <h1 class="card-title flex-sm-fill" style="font-size: 28px;font-weight: 400;display: block;word-wrap: break-word;max-width: 300px;line-height: 1.5;">
-                                            {{-- __('user_page.Learn about listing your home, hotel, restaurant, or activity') --}}
-                                            {{ __('user_page.Learn about listing your home, hotel, food, or wow') }}
-                                        </h1>
-                                        <div>
-                                            <a href="{{ route('ahost') }}" class="btn btn-company text-white"
-                                                target="_blank">{{ __('user_page.Ask a Super Host') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         {{-- modal laguage and currency --}}
         @include('user.modal.filter.filter_language')

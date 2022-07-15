@@ -1247,7 +1247,7 @@ class ViewController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->errors(),
+                'message' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -1283,7 +1283,7 @@ class ViewController extends Controller
 
                     if ($validator2->fails()) {
                         return response()->json([
-                            'message' => $validator2->errors(),
+                            'message' => $validator2->errors()->all(),
                         ], 500);
                     }
 
@@ -1855,60 +1855,60 @@ class ViewController extends Controller
         $villa->appends(request()->query());
 
         // TODO uncomment when lazy load, start
-            // $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->inRandomOrder()->get()->sortBy('grade');
-            // $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
-            // if ($request->itemIds) {
-            //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
-            //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
-            // }
+        // $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->inRandomOrder()->get()->sortBy('grade');
+        // $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
+        // if ($request->itemIds) {
+        //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
+        //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
+        // }
 
-            // if ($villas->count() > 0 && $villa_aa->count() > 0) {
-            //     $split_count = $villas->count() / 4;
-            //     $villas_parted = $villas->split(ceil($split_count));
-            //     for ($i = 0; $i < $villa_aa->count(); $i++) {
-            //         if ($i == 0) {
-            //             $villa = $villas_parted[0];
-            //             $villa->push($villa_aa[0]);
-            //         } else {
-            //             if (isset($villas_parted[$i])) {
-            //                 foreach ($villas_parted[$i] as $item) {
-            //                     $villa->push($item);
-            //                 }
-            //                 $villa->push($villa_aa[$i]);
-            //             } elseif ($villa_aa[$i]) {
-            //                 $villa->push($villa_aa[$i]);
-            //             }
-            //         }
-            //     }
-            // }
+        // if ($villas->count() > 0 && $villa_aa->count() > 0) {
+        //     $split_count = $villas->count() / 4;
+        //     $villas_parted = $villas->split(ceil($split_count));
+        //     for ($i = 0; $i < $villa_aa->count(); $i++) {
+        //         if ($i == 0) {
+        //             $villa = $villas_parted[0];
+        //             $villa->push($villa_aa[0]);
+        //         } else {
+        //             if (isset($villas_parted[$i])) {
+        //                 foreach ($villas_parted[$i] as $item) {
+        //                     $villa->push($item);
+        //                 }
+        //                 $villa->push($villa_aa[$i]);
+        //             } elseif ($villa_aa[$i]) {
+        //                 $villa->push($villa_aa[$i]);
+        //             }
+        //         }
+        //     }
+        // }
 
-            // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
-            //     $villa = $villas;
-            // }
+        // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
+        //     $villa = $villas;
+        // }
 
-            // if ($villas->count() <= 0 && $villa_aa->count() > 0) {
-            //     $villa = $villa_aa;
-            // }
-            // if ($villas->count() <= 0 && $villa_aa->count() <= 0) {
-            //     $villa = collect([]);
-            // }
+        // if ($villas->count() <= 0 && $villa_aa->count() > 0) {
+        //     $villa = $villa_aa;
+        // }
+        // if ($villas->count() <= 0 && $villa_aa->count() <= 0) {
+        //     $villa = collect([]);
+        // }
 
-            // if ($villa->count() > 0) {
-            //     // dd($villa->pluck('grade', 'id_villa'));
-            //     $page = 1;
-            //     $perPage = 5;
-            //     $villa = new \Illuminate\Pagination\LengthAwarePaginator(
-            //         $villa->forPage($page, $perPage),
-            //         $villa->count(),
-            //         $perPage,
-            //         $page
-            //     );
-            // }
+        // if ($villa->count() > 0) {
+        //     // dd($villa->pluck('grade', 'id_villa'));
+        //     $page = 1;
+        //     $perPage = 5;
+        //     $villa = new \Illuminate\Pagination\LengthAwarePaginator(
+        //         $villa->forPage($page, $perPage),
+        //         $villa->count(),
+        //         $perPage,
+        //         $page
+        //     );
+        // }
 
-            // if ($request->ajax()) {
-            //     $view = view('user.data_list_villa', compact('villa'))->render();
-            //     return response()->json(['html' => $view]);
-            // }
+        // if ($request->ajax()) {
+        //     $view = view('user.data_list_villa', compact('villa'))->render();
+        //     return response()->json(['html' => $view]);
+        // }
         // TODO end
 
         $villa->each(function ($item, $key) {
@@ -2008,7 +2008,7 @@ class ViewController extends Controller
         $propertyType = PropertyTypeVilla::all();
         $villaCategory = VillaCategory::all();
         $villaFilter = VillaFilter::all();
-        $amenities = Amenities::select('icon', 'name', 'order')->get();
+        $amenities = Amenities::select('icon', 'name', 'order', 'id_amenities')->get();
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }

@@ -753,8 +753,8 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': `{{ $activity->id_activity }}`, 'id_video': `{{ $item->id_video }}`})">
+                                                                                href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('activity_delete_story', ['id' => $activity->id_activity, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -854,8 +854,8 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': `{{ $activity->id_activity }}`, 'id_video': `{{ $item->id_video }}`})">
+                                                                                href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('activity_delete_story', ['id' => $activity->id_activity, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -1054,7 +1054,7 @@
                         <div class="col-12 row gallery">
                             @if ($activity->photo->count() > 0)
                                 @foreach ($activity->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{$item->id_photo}}">
                                         <a
                                             href="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -1064,11 +1064,11 @@
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-icon">
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" type="button"
                                                         title="{{ __('user_page.Add Photo Caption') }}"
                                                         onclick="view_add_caption({'id': '{{ $activity->id_activity }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button>
+                                                            class="fa fa-pencil"></i></button> --}}
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Swap Photo Position') }}"
@@ -1077,8 +1077,8 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);"
-                                                        onclick="delete_photo_photo({'id': `{{ $activity->id_activity }}`, 'id_photo': `{{ $item->id_photo }}`})"><i
+                                                        href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-photo="{{ $item->id_photo }}"
+                                                        onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
                                             @endif
@@ -1088,7 +1088,7 @@
                             @endif
                             @if ($activity->video->count() > 0)
                                 @foreach ($activity->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
                                         @auth
                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
                                                 <a class="pointer-normal"
@@ -1109,8 +1109,8 @@
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
-                                                    <button href="javascript:void(0);"
-                                                        onclick="delete_photo_video({'id': `{{ $activity->id_activity }}`, 'id_video': `{{ $item->id_video }}`})"
+                                                    <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
@@ -3815,6 +3815,13 @@
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
+    <script>
+        var $gallery;
+        $(document).ready(function() {
+            $gallery = new SimpleLightbox('.gallery a', {});
+        });
+    </script>
+
     {{-- REF --}}
     <script>
         function setCookie(name, value, days) {
@@ -4198,10 +4205,6 @@
             autoProcessQueue: false,
             url: '/things-to-do/photo/store',
             parallelUploads: 50,
-            "error": function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-                alert(errorToString(message));
-            },
             init: function() {
                 var myDropzone = this;
 
@@ -4210,6 +4213,8 @@
                     e.preventDefault();
                     myDropzone.processQueue();
 
+                    $("#button").html('Uploading Gallery...');
+                    $("#button").addClass('disabled');
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4223,8 +4228,11 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                    
+                });
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4253,7 +4261,75 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file);// perhaps not remove on xhr errors
+
+                for (let i = 0; i < message.message.length; i++)
+                {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
+            success: function (file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/activity/";
+                let slash = "/";
+                let uid = message.data.uid.uid;
+                let lowerCaseUid = uid.toLowerCase();
+                let content;
+
+                if (message.data.photo.length > 0)
+                {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
+                        message.data.photo[0].id_photo+
+                        '"> <a href="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
+                        path+lowerCaseUid+slash+message.data.photo[0].name+
+                        '" title="'+
+                        message.data.photo[0].caption+
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $activity->id_activity }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-photo="'+
+                        message.data.photo[0].id_photo+
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+                if (message.data.video.length > 0)
+                {
+                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="view_video_activity('+
+                        message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
+                        path+lowerCaseUid+slash+message.data.video[0].name+
+                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="'+
+                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+                
+                $gallery.refresh();
+
+                this.removeFile(file);
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
         }
     </script>
     {{-- END DROPZONE JS --}}
@@ -4486,12 +4562,12 @@
                             {{ __('user_page.there is no image yet') }}
                         @endforelse
                     </ul>
-
-                    <div style="clear: both; margin-top: 20px;">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos"
                             value="{{ __('user_page.Submit') }}" onclick="save_reorder_photo()">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -4686,7 +4762,9 @@
     {{-- Sweetalert Function Delete Photo Gallery --}}
     <script>
         function delete_photo_photo(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let photo = ids.getAttribute("data-photo");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4701,7 +4779,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/things-to-do/${ids.id}/delete/photo/photo/${ids.id_photo}`,
+                        url: `/things-to-do/${id}/delete/photo/photo/${photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4710,7 +4788,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $("#displayPhoto"+photo).remove();
+                            $gallery.refresh();
                         }
                     });
                 } else {
@@ -4724,7 +4803,9 @@
     {{-- Sweetalert Function Delete Video Gallery --}}
     <script>
         function delete_photo_video(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let video = ids.getAttribute("data-video");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -4739,7 +4820,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/things-to-do/${ids.id}/delete/photo/video/${ids.id_video}`,
+                        url: `/things-to-do/${id}/delete/photo/video/${video}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4748,7 +4829,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $("#displayVideo"+video).remove();
+                            // location.reload();
                         }
                     });
                 } else {
@@ -5021,12 +5103,7 @@
             });
         });
     </script>
-    <script>
-        (function() {
-            var $gallery = new SimpleLightbox('.gallery a', {});
-        })();
-    </script>
-
+    
     @include('components.lazy-load.lazy-load')
     @include('components.promotion.mobile-app')
 

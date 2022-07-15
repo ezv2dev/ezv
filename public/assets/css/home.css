@@ -925,11 +925,15 @@ input[type="text"]:focus {
     display: block;
 }
 
+input[type="text"]::placeholder {
+    font-size: 14px !important;
+}
+
 .button-dropdown {
-    font-size: 150%;
-    margin-top: 0px;
+    font-size: 14px;
     color: #4c4c4c;
     margin-top: -2px;
+    width: 180px;
 }
 
 .button {
@@ -2061,7 +2065,7 @@ span.flatpickr-weekday {
 
 @media only screen and (max-width: 500px) {
     .grid-text{
-        font-size: 80%;
+        font-size: 75%;
     }
     #collaborator-form {
         display: none !important;
@@ -2158,10 +2162,7 @@ span.flatpickr-weekday {
     }
     .row-grid,
     .row-grid-img {
-        gap: 0px !important;
-    }
-    .row-grid-img .grid-img {
-        border-radius: 0px !important;
+        gap: 5px !important;
     }
     #discover-experiences-food {
         display: block !important;
@@ -2360,6 +2361,9 @@ span.flatpickr-weekday {
         max-width: 1360px !important;
         margin: 0 auto !important;
     }
+    .footer-block {
+        max-width: 1360px !important;
+    }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1069px) {
@@ -2390,8 +2394,4 @@ span.flatpickr-weekday {
     #navbar-first-dekstop {
         width: 32% !important;
     }
-}
-
-input::placeholder {
-    font-size: 14px !important;
 }
