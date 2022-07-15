@@ -423,6 +423,10 @@ function editDescriptionCancel() {
     btn.classList.remove("d-none");
 }
 
+$(document).on("keyup", "textarea#description-form-input", function () {
+    $("#description-form-input").css("border", "");
+    $("#err-desc").hide();
+});
 function editDescriptionVilla(id_villa) {
     let error = 0;
     if (!$("textarea#description-form-input").val()) {

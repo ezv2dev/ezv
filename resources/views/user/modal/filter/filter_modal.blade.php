@@ -77,12 +77,12 @@
 
     @media (max-width: 575px) { 
         .roomnumberoption-container{
-            width: 45%;
+            width: 49%;
         }
     }
     @media (min-width: 576px) { 
         .roomnumberoption-container{
-            width: 67%;
+            width: 71%;
         }
     }
     @media (min-width: 768px) {
@@ -497,7 +497,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-4 checkdesign-gap">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="fCategory[]"
                                             value="{{ $item->id_villa_category }}" {{ $isChecked }}>
@@ -524,7 +524,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-4 checkdesign-gap">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="fCategory[]"
                                             value="{{ $item->id_villa_category }}" {{ $isChecked }}>
@@ -555,7 +555,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-4 checkdesign-gap">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="fAmenities[]"
                                             value="{{ $item->id_amenities }}" {{ $isChecked }}>
@@ -582,7 +582,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-4 checkdesign-gap">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="fAmenities[]"
                                             value="{{ $item->id_amenities }}" {{ $isChecked }}>

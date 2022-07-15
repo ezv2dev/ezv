@@ -201,6 +201,16 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
+                <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
+                    style="cursor: pointer; width: 50px; border: none; margin: 0px;">
+                    <p>
+                        <span class="top-search">
+                            <img src="{{ asset('assets/icon/menu/search.svg') }}"
+                                style="width: 20px; height: auto;">
+                            <!-- <i class="fa fa-search"></i> -->
+                        </span>
+                    </p>
+                </div>
                 <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
                     <label class="container-mode">
                         <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
