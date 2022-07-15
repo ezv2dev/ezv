@@ -74,9 +74,11 @@ use App\Models\VillaExtraPet;
 use App\Models\VillaFamily;
 use App\Models\VillaOutdoor;
 use App\Models\VillaSave;
+use App\Models\Bed;
 use App\Models\NotificationOwner;
 use App\Services\DestinationNearbyVillaService as Nearby;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
+
 
 class ViewController extends Controller
 {
@@ -179,6 +181,7 @@ class ViewController extends Controller
         $safety = VillaSafety::select('safety.icon as icon', 'safety.name as name')->join('safety', 'villa_safety.id_safety', '=', 'safety.id_safety', 'left')->where('id_villa', $id)->get();
         $service = VillaService::select('service.icon as icon', 'service.name as name')->join('service', 'villa_service.id_service', '=', 'service.id_service', 'left')->where('id_villa', $id)->get();
         $detail = DetailReview::where('id_villa', $id)->get();
+        $bed = Bed::all();
 
         $createdby = Villa::select('users.first_name', 'users.last_name', 'users.id', 'owner_profile.about as about_owner')
             ->where('id_villa', $id)
@@ -301,7 +304,8 @@ class ViewController extends Controller
             // 'nearby_restaurant',
             // 'nearby_activities',
             'propertyType',
-            'house_rules'
+            'house_rules',
+            'bed'
         ));
     }
 

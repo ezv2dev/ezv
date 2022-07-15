@@ -4177,6 +4177,9 @@
             form.classList.remove("d-block");
             content.classList.remove("d-none");
 
+            //mengembalikan value sebelum disave ketika klik button cancel
+            formInput.value = name_resto_backup;
+
             if (formInput.value == 'Food Name Here') {
                 formInput.value = '';
             }
@@ -4200,6 +4203,10 @@
             var formInput = document.getElementById("short-description-form-input");
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
+
+            //mengembalikan value sebelum disave ketika klik button cancel
+            formInput.value = short_desc_backup;
+
             content.classList.remove("d-none");
             if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
@@ -4464,7 +4471,7 @@
 
                     $('.gallery').append(content);
                 }
-                
+
                 $gallery.refresh();
 
                 this.removeFile(file);
@@ -4785,7 +4792,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
-                            
+
                             $gallery.refresh();
                             displayBlack.style.display = "none";
                         }
@@ -5143,7 +5150,7 @@
             });
         });
     </script>
-    
+
     {{-- LAZY LOAD --}}
     @include('components.lazy-load.lazy-load')
     {{-- END LAZY LOAD --}}
