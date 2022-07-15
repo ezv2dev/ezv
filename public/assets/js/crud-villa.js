@@ -5,7 +5,9 @@ $(document).on("keyup", "textarea#name-form-input", function () {
 
 let id_villa = $("#id_villa").val();
 
-function editNameVilla(id_villa) {
+let nameVillaBackup = $("#name-form-input").val();
+
+function editNameVilla() {
     let error = 0;
     if (!$("textarea#name-form-input").val()) {
         $("#name-form-input").css("border", "solid #e04f1a 1px");
@@ -35,6 +37,9 @@ function editNameVilla(id_villa) {
                 $("#name-content2").html(response.data);
                 $("#name-content-mobile").html(response.data);
                 $("#villaTitle").html(response.data + " - EZV2");
+
+                var formInput = document.getElementById("name-form-input");
+                formInput.value = response.data;
 
                 iziToast.success({
                     title: "Success",
@@ -71,24 +76,16 @@ function editNameVilla(id_villa) {
     }
 }
 
-function editNameForm(id_villa) {
+function editNameForm() {
     var form = document.getElementById("name-form");
     var formInput = document.getElementById("name-form-input");
     var content = document.getElementById("name-content");
     form.classList.add("d-block");
     content.classList.add("d-none");
 
-    $.ajax({
-        type: "GET",
-        url: "/villa/get/name/" + `${id_villa}`,
-        success: function (response) {
-            $("#name-form-input").val(response.data);
-
-            if (formInput.value == "Home Name Here") {
-                formInput.value = "";
-            }
-        },
-    });
+    if (formInput.value == "Home Name Here") {
+        formInput.value = "";
+    }
 }
 
 function editNameCancel() {
@@ -97,6 +94,8 @@ function editNameCancel() {
     var content = document.getElementById("name-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    formInput.value = nameVillaBackup;
 
     if (formInput.value == "Home Name Here") {
         formInput.value = "";
