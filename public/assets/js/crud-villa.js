@@ -107,7 +107,9 @@ $(document).on("keyup", "textarea#short-description-form-input", function () {
     $("#err-shrt-desc").hide();
 });
 
-function editShortDesc(id_villa) {
+let shortDescBackup = $("#short-description-form-input").val();
+
+function editShortDesc() {
     let error = 0;
     if (!$("textarea#short-description-form-input").val()) {
         $("#short-description-form-input").css("border", "solid #e04f1a 1px");
@@ -167,29 +169,22 @@ function editShortDesc(id_villa) {
 
                 editShortDescriptionCancel();
 
-                $("#short-description-form-input").val(response.data);
+                $("#short-description-form-input").val(shortDescBackup);
             },
         });
     }
 }
 
-function editShortDescriptionForm(id_villa) {
+function editShortDescriptionForm() {
     var form = document.getElementById("short-description-form");
     var content = document.getElementById("short-description-content");
     var formInput = document.getElementById("short-description-form-input");
     form.classList.add("d-block");
     content.classList.add("d-none");
-    $.ajax({
-        type: "GET",
-        url: "/villa/get/short-description/" + `${id_villa}`,
-        success: function (response) {
-            $("#short-description-form-input").val(response.data);
 
-            if (formInput.value == "Make your short description here") {
-                formInput.value = "";
-            }
-        },
-    });
+    if (formInput.value == "Make your short description here") {
+        formInput.value = "";
+    }
 }
 
 function editShortDescriptionCancel() {
@@ -198,6 +193,8 @@ function editShortDescriptionCancel() {
     var content = document.getElementById("short-description-content");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
+
+    formInput.value = shortDescBackup;
 
     if (formInput.value == "Make your short description here") {
         formInput.value = "";

@@ -409,7 +409,7 @@
                                 <div id="short-description-form" style="display:none;">
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
-                                        placeholder="{{ __('user_page.Make your short description here') }}" required></textarea>
+                                        placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $villa[0]->short_description }}</textarea>
                                     <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
