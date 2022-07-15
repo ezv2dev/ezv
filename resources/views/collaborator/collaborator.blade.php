@@ -2994,24 +2994,31 @@
         // Semi Fixed
         $(document).ready(function() {
             var $window = $(window);
+            var $bottomScreen = $window.scrollTop() - $window.innerHeight();
             var $sidebar = $("#sidebar_fix");
-            var $sidebarHeight = $sidebar.innerHeight();
-            var $footerOffsetTop = $("#scrollStop").offset().top;
-            var $footerHeight = $("#heightCalendar").innerHeight();
-            var $sidebarOffset = $sidebar.offset();
+            var $sidebarHeight = $sidebar.height() / 2 - 50;
+            var $availabilityTop = $("#availability").offset().top;
+
+            //console.log($footerOffsetTop);
+            $window.on("resize", function() {
+                $availabilityTop = $("#availability").offset().top;
+                $bottomScreen = $window.scrollTop() + $window.innerHeight();
+                $sidebarHeight = ($sidebar.height() / 2) - 50;
+            });
 
             $window.scroll(function() {
-                if ($window.scrollTop() > $sidebarOffset.top) {
-                    $sidebar.addClass("fixed");
-                } else {
-                    $sidebar.removeClass("fixed");
-                }
-                if ($window.scrollTop() + $sidebarHeight > $footerOffsetTop + $footerHeight) {
+                $availabilityTop = $("#availability").offset().top;
+                $bottomScreen = $window.scrollTop() + $window.innerHeight();
+                $sidebarHeight = ($sidebar.height() / 2) - 50;
+                if ($window.scrollTop() < $bottomScreen && $window.scrollTop() + $sidebarHeight > $availabilityTop) {
                     $sidebar.css({
-                        "top": -($window.scrollTop() + $sidebarHeight - $footerOffsetTop -
-                            $footerHeight)
+                        "top": $availabilityTop - 57,
+                        "position": "absolute"
                     });
+                    $sidebar.removeClass("fixed");
+                    
                 } else {
+                    $sidebar.addClass("fixed");
                     $sidebar.css({
                         "top": "0",
                     });
