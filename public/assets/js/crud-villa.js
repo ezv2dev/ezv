@@ -453,6 +453,8 @@ $(document).on("keyup", "textarea#description-form-input", function () {
     $("#err-desc").hide();
 });
 
+let desc_backup = $("#description-form-input").val();
+
 function editDescriptionVilla(id_villa) {
     let error = 0;
     if (!$("textarea#description-form-input").val()) {
@@ -504,6 +506,9 @@ function editDescriptionVilla(id_villa) {
                 }
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
+
+                desc_backup = response.data;
+
                 editDescriptionCancel();
             },
             error: function (jqXHR, exception) {
@@ -547,6 +552,9 @@ function editDescriptionCancel() {
     var content = document.getElementById("description-content");
     var btn = document.getElementById("btnShowMoreDescription");
     form.classList.remove("d-block");
+
+    formInput.value = desc_backup;
+
     content.classList.remove("d-none");
     btn.classList.remove("d-none");
 }
