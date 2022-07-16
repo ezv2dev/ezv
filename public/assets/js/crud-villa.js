@@ -40,6 +40,7 @@ function editNameVilla() {
 
                 var formInput = document.getElementById("name-form-input");
                 formInput.value = response.data;
+                nameVillaBackup = response.data;
 
                 iziToast.success({
                     title: "Success",
@@ -145,6 +146,9 @@ function editShortDesc() {
                 });
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
+
+                shortDescBackup = response.data;
+
                 editShortDescriptionCancel();
             },
             error: function (jqXHR, exception) {
@@ -277,8 +281,8 @@ function editBedroomVilla(id_villa) {
 }
 
 function saveBedroomDetail(id_villa) {
-    console.log('hit saveBedroomDetail');
-    let content = $('.bedroomDetailFormContent').eq(0);
+    console.log("hit saveBedroomDetail");
+    let content = $(".bedroomDetailFormContent").eq(0);
     let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
     let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
     let bedroomIds = [];
@@ -290,7 +294,7 @@ function saveBedroomDetail(id_villa) {
         bathroomIds.push(bathroomRawContent.eq(index).val());
     }
 
-    let bedRawContent = content.find('.bedroomDetailFormContentBed');
+    let bedRawContent = content.find(".bedroomDetailFormContentBed");
     let bed = [];
     for (let index = 0; index < bedRawContent.length; index++) {
         bed.push({
@@ -303,7 +307,7 @@ function saveBedroomDetail(id_villa) {
         id_villa: id_villa,
         bathroom_ids: bathroomIds,
         bedroom_ids: bedroomIds,
-        bed: bed
+        bed: bed,
     };
 
     console.log(formData);
