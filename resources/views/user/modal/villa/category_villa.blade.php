@@ -113,7 +113,7 @@
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
                     <button type="submit" class="btn btn-primary btn-sm w-100" id="btnSaveCategoryV"
-                        onclick="editCategoryV({{ $villa[0]->id_villa }})">
+                        onclick="editCategoryV()">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
