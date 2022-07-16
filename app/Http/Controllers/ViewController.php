@@ -78,6 +78,7 @@ use App\Models\Bed;
 use App\Models\NotificationOwner;
 use App\Services\DestinationNearbyVillaService as Nearby;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
+use DataTables;
 
 
 class ViewController extends Controller
@@ -901,7 +902,7 @@ class ViewController extends Controller
             'updated_by' => Auth::user()->id,
         ));
 
-        return response()->json(['success' => true, 'message' => 'Succesfully Updated Description Villa',  'data' => $request->villa_description]);
+        return response()->json(['success' => true, 'message' => 'Updated Description Villa',  'data' => $request->villa_description]);
     }
 
     public function villa_update_image(Request $request)
@@ -1021,7 +1022,7 @@ class ViewController extends Controller
             ));
         }
 
-        return response()->json(['success' => true, 'message' => 'Succesfully Updated Villa Name',  'data' => $request->villa_name]);
+        return response()->json(['success' => true, 'message' => 'Updated Villa Name',  'data' => $request->villa_name]);
     }
 
     public function villa_get_name($id)
@@ -1040,7 +1041,7 @@ class ViewController extends Controller
             'updated_by' => Auth::user()->id,
         ));
 
-        return response()->json(['data' => $request->short_desc, 'message' => 'Succesfully Updated Villa Short Description']);
+        return response()->json(['data' => $request->short_desc, 'message' => 'Updated Villa Short Description']);
     }
 
     public function villa_get_short_description($id)
@@ -2787,5 +2788,24 @@ class ViewController extends Controller
             'message' => 'Success sent a message to Owner',
             'status' => 200,
         ], 200);
+    }
+
+    public function datatable_availability(Request $request, $id)
+    {
+        if ($request->ajax())
+        {
+            $data = DB::table('villa_availability')
+                ->select('id_villa_availability', 'id_villa', 'start','end')
+                ->where("id_villa", $id)
+                ->get();
+
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($data) {
+                $aksi = ' <a href="" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
+                return $aksi;
+            })
+            ->rawColumns(['aksi'])->make(true);
+        }
     }
 }

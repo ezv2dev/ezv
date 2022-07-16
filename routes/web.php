@@ -765,6 +765,8 @@ Route::get('/villa/review/{id}', [ViewController::class, 'review'])->name('villa
 Route::get('/villa/availabality/{id}', [ViewController::class, 'availabality'])->name('villa_availabality');
 Route::post('/villa/confirm/store', [VillabookingController::class, 'user_store'])->name('villa_booking_user_store');
 
+Route::get('/villa/availability/{id}/datatable', [ViewController::class, 'datatable_availability'])->name('villa_availability_datatable');
+
 Route::get('/villa/favorit/{id}', [VillasaveController::class, 'favorit'])->name('villa_favorit');
 
 Route::get('/villa/video/{id}', [ViewController::class, 'villa_video'])->name('list-villa_video');

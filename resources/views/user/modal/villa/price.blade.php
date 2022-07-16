@@ -287,7 +287,46 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="dataAvailability">
-
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="container" style="margin-top: 30px;">
+                                                    <div class="datatable">
+                                                        <table class="table table-bordered table-hover" style="color: #383838" id="dataTable" width="100%" cellspacing="0">
+                                                            <thead style="color: #383838;" class="thead-dark table-borderless">
+                                                                <tr>
+                                                                    <th class="text-center">No</th>
+                                                                    <th class="text-center">Start Date</th>
+                                                                    <th class="text-center">End Date</th>
+                                                                    <th class="text-center">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {{-- <tr>
+                                                                    <td class="text-center">1</th>
+                                                                    <td class="text-center">2022-02-02</th>
+                                                                    <td class="text-center">2022-02-02</th>
+                                                                    <td class="text-center">Delete</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center">2</th>
+                                                                    <td class="text-center">2022-02-02</th>
+                                                                    <td class="text-center">2022-02-02</th>
+                                                                    <td class="text-center">Delete</th>
+                                                                </tr> --}}
+                                                            </tbody>
+                                                                <tfoot style="color: #383838">
+                                                                    <tr>
+                                                                        <th class="text-center">No</th>
+                                                                        <th class="text-center">Start Date</th>
+                                                                        <th class="text-center">End Date</th>
+                                                                        <th class="text-center">Action</th>
+                                                                    </tr>
+                                                                </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -721,4 +760,40 @@ $(function() {
         }
     });
 
+</script>
+
+<!-- Page JS Plugins -->
+<script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
+
+<!-- Page JS Code -->
+<script src="{{ asset('assets/js/pages/be_tables_datatables.min.js') }}"></script>
+
+<script>
+    // load_tabel_first();
+    let id_villa = $('#id_villa').val();
+
+    var table = $('#dataTable').dataTable({
+        processing: true,
+        serverSide: true,
+        autowidth: true,
+        ajax: "/villa/availability/"+id_villa+"/datatable",
+        columns: [
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', class:'text-center font-size-sm' },
+            { data: 'start', name: 'start', class:'font-w600 font-size-sm' },
+            { data: 'end', name: 'end', class:'font-w600 font-size-sm' },
+            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
+            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
+            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
+            { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
+        ],
+        responsive: true
+    });
 </script>
