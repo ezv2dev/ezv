@@ -380,7 +380,7 @@ if (request()->fCategory) {
 @section('content')
     <div id="body-color" class="{{ $bgColor }}">
         <!-- Page Content -->
-        <div id="div-to-refresh">
+        <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
 
             <div class="col-12">
@@ -564,7 +564,7 @@ if (request()->fCategory) {
             </div>
         </div>
 
-        <div class="col-lg-12 container-grid">
+        <div class="col-lg-12 container-grid container__grid">
             @foreach ($collab as $data)
                 <div class="grid-list-container">
 

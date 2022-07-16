@@ -448,7 +448,7 @@
     <!-- END Hero -->
 
     <!-- Page Content -->
-    <div id="div-to-refresh">
+    <div id="div-to-refresh" class="container__list">
         <div class="content" id="content">
             <!-- Simple Gallery -->
             @foreach ($hotels as $data)

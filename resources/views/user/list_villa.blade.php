@@ -69,7 +69,7 @@
 
     <div id="body-color" class="{{ $bgColor }}">
         <!-- Page Content -->
-        <div id="div-to-refresh">
+        <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12" style="position: relative; min-height: 100px;">
                 <div class="w-100" id="view-map-button-float">
@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <div id="villa-data" class="grid-container-43">
+            <div id="villa-data" class="grid-container-43 container__grid">
                 @include('user.data_list_villa')
             </div>
             <div></div>
