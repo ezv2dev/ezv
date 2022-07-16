@@ -319,6 +319,10 @@ function editCategoryV(id_villa) {
         villaCategory.push(parseInt($(this).val()));
     });
 
+    let btn = document.getElementById("btnSaveCategoryV");
+    btn.textContent = "Saving Category...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -331,50 +335,54 @@ function editCategoryV(id_villa) {
         },
         success: function (response) {
             $("#ModalCategoryVilla").modal("hide");
+
+            btn.innerHTML = '<i class="fa fa-check"></i> Save';
+            btn.classList.remove("disabled");
+
             iziToast.success({
                 title: "Success",
                 message: response.message,
                 position: "topRight",
             });
 
-            $.ajax({
-                type: "GET",
-                url: "/villa/get/category/" + `${id_villa}`,
-                success: function (response) {
-                    var length = response.data.length;
+            var length = response.data.length;
 
-                    $("#displayCategory").html(`
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[0]["villa_category"]["name"]}
-                        </span>
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[1]["villa_category"]["name"]}
-                        </span>
-                        <span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">
-                            ${response.data[2]["villa_category"]["name"]}
-                        </span>`);
+            let content;
 
-                    if (length > 3) {
-                        $("#moreCategory").removeClass("d-none");
-                        $("#moreCategory").addClass("d-block");
-                        $("#moreCategory").html(`
-                            <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
-                            onclick="view_subcategory()">More</button>
-                        `);
-                    } else {
-                        $("#moreCategory").addClass("d-none");
-                    }
+            for (let j = 0; j < length; j++) {
+                if (j == 0) {
+                    content = `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                } else if (j < 3) {
+                    content =
+                        content +
+                        `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                } else if (j > 2) {
+                } else {
+                }
+            }
 
-                    $("#moreSubCategory").html(`
-                        <div class='col-md-6'>${response.data[0]["villa_category"]["name"]}</div>
+            $("#displayCategory").html(content);
+
+            if (length > 3) {
+                $("#moreCategory").removeClass("d-none");
+                $("#moreCategory").addClass("d-block");
+                $("#moreCategory").html(`
+                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                        onclick="view_subcategory()">More</button>
                     `);
-                    for (let i = 1; i < length; i++) {
-                        $("#moreSubCategory").append(`
-                            <div class='col-md-6'>${response.data[i]["villa_category"]["name"]}</div>
-                        `);
-                    }
-                },
-            });
+            } else {
+                $("#moreCategory").removeClass("d-block");
+                $("#moreCategory").addClass("d-none");
+            }
+
+            $("#moreSubCategory").html(`
+                    <div class='col-md-6'>${response.data[0]["villa_category"]["name"]}</div>
+                `);
+            for (let i = 1; i < length; i++) {
+                $("#moreSubCategory").append(`
+                        <div class='col-md-6'>${response.data[i]["villa_category"]["name"]}</div>
+                    `);
+            }
         },
     });
 }

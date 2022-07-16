@@ -1188,14 +1188,9 @@ class ViewController extends Controller
             ));
         }
 
-        return response()->json(['success' => true, 'message' => 'Succesfully Updated']);
-    }
+        $data = VillaHasCategory::with('villaCategory')->where('id_villa', $request->id_villa)->get();
 
-    public function villa_get_category($id)
-    {
-        $data = VillaHasCategory::with('villaCategory')->where('id_villa', $id)->get();
-
-        return response()->json(['success' => true, 'message' => 'Succesfully Updated', 'data' => $data]);
+        return response()->json(['success' => true, 'data' => $data, 'message' => 'Updated Property Type']);
     }
 
     public function villa_update_property_type(Request $request)

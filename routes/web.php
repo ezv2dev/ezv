@@ -450,7 +450,7 @@ Route::get('/villa/get/short-description/{id}', [ViewController::class, 'villa_g
 Route::post('/villa/update/amenities', [ViewController::class, 'villa_update_amenities'])->name('villa_update_amenities');
 Route::post('/villa/update/tags', [ViewController::class, 'villa_update_tags'])->name('villa_update_tags');
 Route::post('/villa/update/category', [ViewController::class, 'villa_update_category'])->name('villa_update_category');
-Route::get('/villa/get/category/{id}', [ViewController::class, 'villa_get_category'])->name('villa_get_category');
+// Route::get('/villa/get/category/{id}', [ViewController::class, 'villa_get_category'])->name('villa_get_category');
 Route::post('/villa/update/story', [ViewController::class, 'villa_update_story'])->name('villa_update_story');
 Route::post('/villa/update/photo', [ViewController::class, 'villa_update_photo'])->name('villa_update_photo');
 Route::post('/villa/update/image', [ViewController::class, 'villa_update_image'])->name('villa_update_image');
