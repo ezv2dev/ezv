@@ -656,8 +656,8 @@
         grid-template-rows: repeat(1, auto);
         gap: 15px;
         display: grid;
-        padding-left: 102px;
-        padding-right: 102px;
+        padding-left: 30px;
+        padding-right: 30px;
         /* margin-top: 305px; */
         margin-bottom: 40px;
         /* transition: all 0.3s ease; */
