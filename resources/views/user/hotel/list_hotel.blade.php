@@ -54,7 +54,7 @@
 
     <div id="body-color" class="{{ $bgColor }}" style="position: relative;">
         <!-- Page Content -->
-        <div id="div-to-refresh">
+        <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12">
                 <div id="filter-cat-bg-color" style="width: 100%;"
@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 container-grid-hotel">
+    <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">

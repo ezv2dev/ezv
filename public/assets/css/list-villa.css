@@ -1811,7 +1811,7 @@ li.button-dropdown {
 }
 
 .grid-container-43 {
-    margin-top: 318.391px !important;
+    margin-top: 20px ;
     padding-left: 102px;
     padding-right: 102px;
     transition: all 0.2s ease;
@@ -3002,11 +3002,16 @@ input::-webkit-inner-spin-button {
     }
 
     .grid-container-43 {
-        margin-top: 318.391px !important;
+        /* margin-top: 318.391px !important; */
         padding-left: 30px;
         padding-right: 30px;
         transition: all 0.2s ease;
     }
+
+    .slick-slide {
+        width: 768px;
+    }
+    
 }
 @media only screen and (max-width: 320px) {
     .pagination .page-item {

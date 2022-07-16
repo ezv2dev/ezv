@@ -46,7 +46,7 @@
 
     <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
-        <div id="div-to-refresh">
+        <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12">
                 @php
@@ -120,7 +120,7 @@
 
     </div>
     
-    <div class="col-lg-12 container-grid translate-text-group">
+    <div class="col-lg-12 container-grid container__grid translate-text-group">
         @php
             $local = '<script>
                 document.write(localStorage.getItem(mode))

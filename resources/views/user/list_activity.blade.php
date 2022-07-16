@@ -38,7 +38,7 @@
 
     <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
-        <div id="div-to-refresh">
+        <div id="div-to-refresh" class="container__list">
             <div class="col-lg-12">
 
                 @php
@@ -144,7 +144,7 @@
 
     </div>
     <!-- Refresh Page -->
-    <div class="col-lg-12 container-grid-activity">
+    <div class="col-lg-12 container-grid-activity container__grid">
         @foreach ($activitys as $data)
             <div class="grid-list-container">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
