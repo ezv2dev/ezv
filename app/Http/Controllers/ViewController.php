@@ -738,13 +738,11 @@ class ViewController extends Controller
 
     public function villa_update_price(Request $request)
     {
-        // dd($request->all());
         $this->authorize('listvilla_update');
         $status = 500;
 
         try {
             $find = villa::where('id_villa', $request->id_villa)->first();
-            // dd($request->commission);
 
             $find->update(array(
                 'price' => $request->price,
@@ -753,13 +751,20 @@ class ViewController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            // dd($find);
-
             if ($request->disc == '') {
                 $disc = 0;
             } else {
                 $disc = $request->disc;
             }
+
+            if ($request->instant_book) {
+                $instant_book = 'yes';
+            } else {
+                $instant_book = 'no';
+            }
+
+            $villaInstant = Villa::where('id_villa', $request->id_villa);
+            $villaInstant->update(array('instant_book' => $instant_book));
 
             $data = VillaDetailPrice::insertGetId(array(
                 'id_villa' => $request->id_villa,
@@ -1253,7 +1258,7 @@ class ViewController extends Controller
         $villa = Villa::find($request->id_villa);
 
         // check if restaurant does not exist, abort 404
-        if(!$villa){
+        if (!$villa) {
             return response()->json([
                 'message' => 'Homes Not Found'
             ], 404);
@@ -1466,8 +1471,7 @@ class ViewController extends Controller
         $villa = Villa::find($request->id_villa);
 
         // check if restaurant does not exist, abort 404
-        if(!$villa)
-        {
+        if (!$villa) {
             return response()->json([
                 'message' => 'Homes Not Found',
             ], 404);
@@ -1516,15 +1520,14 @@ class ViewController extends Controller
             ]);
         }
 
-        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name','id_story')->latest()->get();
+        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story')->latest()->get();
         $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
 
         $data = [];
 
         $i = 0;
 
-        foreach ($getStory as $item)
-        {
+        foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
             $i++;
@@ -2792,20 +2795,19 @@ class ViewController extends Controller
 
     public function datatable_availability(Request $request, $id)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $data = DB::table('villa_availability')
-                ->select('id_villa_availability', 'id_villa', 'start','end')
+                ->select('id_villa_availability', 'id_villa', 'start', 'end')
                 ->where("id_villa", $id)
                 ->get();
 
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('aksi', function ($data) {
-                $aksi = ' <a href="" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
-                return $aksi;
-            })
-            ->rawColumns(['aksi'])->make(true);
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($data) {
+                    $aksi = ' <a href="" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])->make(true);
         }
     }
 }

@@ -113,6 +113,7 @@ return [
     'Under' => 'Under',
     'Pets' => 'Pets',
     'VIEW DETAILS' => 'VIEW DETAILS',
+    'QUICK ENQUIRY' => 'QUICK ENQUIRY',
     'RESERVE NOW' => 'RESERVE NOW',
     'Become a Host' => 'Become a Host',
     'Hosted by' => 'Hosted by',
@@ -400,6 +401,7 @@ return [
     "Edit Price" => "Edit Price",
     "Rooms Availability" => "Rooms Availability",
     "Regular Price" => "Regular Price",
+    "Instant Book" => "Instant Book",
     "Add Special Price" => "Add Special Price",
     "Discount" => "Discount",
     "Start date" => "Start date",
@@ -479,7 +481,7 @@ return [
 
     "data not found" => "data not found",
 
-    "Popular Stays Nearby" => "Popular Stays Nearby" 
+    "Popular Stays Nearby" => "Popular Stays Nearby"
     // {{ __('user_page.Map') }}
     // user_page.
     // __

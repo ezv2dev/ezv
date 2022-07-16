@@ -440,7 +440,10 @@
                                 @endif
                             @endif
                             @auth
-                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                @if (Auth::user()->id == $villa[0]->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($stories->count() == 0)
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <li class="story">
@@ -481,7 +484,9 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="{{ $item->id_video }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $villa[0]->id_villa }}"
+                                                                                data-video="{{ $item->id_video }}"
                                                                                 onclick="delete_photo_video(this)">
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -546,7 +551,9 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-villa="{{ $villa[0]->id_villa }}" data-story="{{ $item->id_story }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-villa="{{ $villa[0]->id_villa }}"
+                                                                                data-story="{{ $item->id_story }}"
                                                                                 onclick="delete_story(this)">
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -583,7 +590,9 @@
                                                                             </video>
                                                                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                                 <a class="delete-story"
-                                                                                    href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="{{ $item->id_video }}"
+                                                                                    href="javascript:void(0);"
+                                                                                    data-id="{{ $villa[0]->id_villa }}"
+                                                                                    data-video="{{ $item->id_video }}"
                                                                                     onclick="delete_photo_video(this)">
                                                                                     <i class="fa fa-trash"
                                                                                         style="color:red; margin-left: 25px;"
@@ -797,7 +806,8 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="{{ $item->id_photo }}"
+                                                        href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
+                                                        data-photo="{{ $item->id_photo }}"
                                                         onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
@@ -838,10 +848,11 @@
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Swap Video Position') }}"><i
                                                             class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
+                                                    <button href="javascript:void(0);"
+                                                        data-id="{{ $villa[0]->id_villa }}"
+                                                        data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                        data-bs-animation="true" data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
@@ -1378,9 +1389,23 @@
 
                         <div class="col-12 p-5-price text-center"
                             style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
-                            <input class="price-button" onclick="details_reserve()"
-                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                            @if ($villa[0]->instant_book == 'yes')
+                                <input class="price-button" onclick="details_reserve()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                            @else
+                                @guest
+                                    <input class="price-button" onclick="loginForm(2)"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                                @endguest
+
+                                @auth
+                                    <input class="price-button" onclick="details_quick_enquiry()"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                                @endauth
+                            @endif
                         </div>
 
                         <div class="rightbar-advert-container"
@@ -3340,7 +3365,7 @@
                             </div>
                         @endforeach
                     </div>
-                    @for($i = 1; $i <= 3; $i++)
+                    @for ($i = 1; $i <= 3; $i++)
                         <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
                             id="moreBedroom">
                             <div class="col-md-12">
@@ -3370,8 +3395,12 @@
     <script>
         function details_reserve() {
             $('#modal-details-reserve').modal('show');
-            document.getElementsByTagName('html')[0].style.overflowY = "hidden";
             $('#modal-details-reserve').css('padding-right', '0px');
+        }
+
+        function details_quick_enquiry() {
+            $('#modal-quick-enquiry').modal('show');
+            $('#modal-quick-enquiry').css('padding-right', '0px');
         }
 
         $(document).ready(function() {
@@ -3678,6 +3707,9 @@
     </script>
 
     @include('user.modal.villa.details_reserve')
+    @auth
+        @include('user.modal.villa.quick_enquiry')
+    @endauth
 
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
@@ -3969,11 +4001,11 @@
                     });
 
                     // Add the button to the file preview element.
-                        file.previewElement.appendChild(removeButton);
+                    file.previewElement.appendChild(removeButton);
                 });
             },
             error: function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
 
                 console.log(message);
 
@@ -3988,7 +4020,7 @@
                 $("#button").html('Upload');
                 $("#button").removeClass('disabled');
             },
-            success: function (file, message, response) {
+            success: function(file, message, response) {
                 console.log(file);
                 // console.log(response);
                 console.log(message);
@@ -4005,27 +4037,29 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
-                if (message.data.photo.length > 0)
-                {
-                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
-                        message.data.photo[0].id_photo+
-                        '"> <a href="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '" title="'+
-                        message.data.photo[0].caption+
-                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="'+ message.data.photo[0].id_photo+
+                if (message.data.photo.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
+                        message.data.photo[0].id_photo +
+                        '"> <a href="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' +
+                        message.data.photo[0].caption +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
+                        message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     $('.gallery').append(content);
                 }
-                if (message.data.video.length > 0)
-                {
-                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="view('+message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
-                        path+lowerCaseUid+slash+message.data.video[0].name+
-                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="'+
-                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                if (message.data.video.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
+                        '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
+                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     $('.gallery').append(content);
                 }
@@ -4470,7 +4504,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayVideo"+video).remove();
+                            $("#displayVideo" + video).remove();
                         }
                     });
                 } else {
