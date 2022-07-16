@@ -1237,8 +1237,6 @@ class ViewController extends Controller
 
     public function villa_update_photo(Request $request)
     {
-        $this->authorize('listvilla_update');
-        // validation
         $validator = Validator::make($request->all(), [
             'id_villa' => ['required', 'integer'],
             'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
@@ -1250,102 +1248,106 @@ class ViewController extends Controller
             ], 500);
         }
 
-        $status = 500;
+        // restaurant data
+        $villa = Villa::find($request->id_villa);
 
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                //
+        // check if restaurant does not exist, abort 404
+        if(!$villa){
+            return response()->json([
+                'message' => 'Homes Not Found'
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('listvilla_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized'
+            ], 403);
+        }
+
+        // store process
+        // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+        $folder = strtolower($villa->uid);
+        $path = env("VILLA_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        $photo = [];
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $validator2 = Validator::make($request->all(), [
+                'id_villa' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+            ]);
+
+            if ($validator2->fails()) {
+                return response()->json([
+                    'message' => $validator2->errors()->all(),
+                ], 500);
+            }
+
+            $original_name = $request->file->getClientOriginalName();
+
+            $name_file = time() . "_" . $original_name;
+
+            $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+            // check last order
+            $lastOrder = VillaPhoto::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
             } else {
-                //cek the directori first
-                $find = Villa::where('id_villa', $request->id_villa)->get();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = $find[0]->uid;
-                $path = env("VILLA_FILE_PATH") . $folder;
-
-                if (!File::isDirectory($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                }
-
-                $ext = strtolower($berkas->getClientOriginalExtension());
-
-                $photo = [];
-                $video = [];
-
-                if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-
-                    $validator2 = Validator::make($request->all(), [
-                        'id_villa' => ['required', 'integer'],
-                        'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
-                    ]);
-
-                    if ($validator2->fails()) {
-                        return response()->json([
-                            'message' => $validator2->errors()->all(),
-                        ], 500);
-                    }
-
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-                    $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
-
-                    // check last order
-                    $lastOrder = VillaPhoto::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
-                    if ($lastOrder) {
-                        $lastOrder = $lastOrder->order + 1;
-                    } else {
-                        $lastOrder = 1;
-                        $lastOrder;
-                    }
-
-                    //insert into database
-                    $data = villaphoto::create([
-                        'name' => $name_file,
-                        'id_villa' => $request->id_villa,
-                        'order' => $lastOrder,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-
-                    array_push($photo, $data->id_photo);
-
-                } elseif ($ext == 'mp4' || $ext == 'mov') {
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    // check last order
-                    $lastOrder = VillaVideo::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
-                    if ($lastOrder) {
-                        $lastOrder = $lastOrder->order + 1;
-                    } else {
-                        $lastOrder = 1;
-                        $lastOrder;
-                    }
-
-                    //insert into database
-                    $data = villavideo::create([
-                        'name' => $name_file,
-                        'id_villa' => $request->id_villa,
-                        'order' => $lastOrder,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-
-                    array_push($video, $data->id_video);
-                }
+                $lastOrder = 1;
+                $lastOrder;
             }
 
-            if ($data) {
-                $status = 200;
+            //insert into database
+            $createdVilla = VillaPhoto::create([
+                'id_villa' => $request->id_villa,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            // $photo['id_photo'] = $createdRestaurant->id_photo;
+            array_push($photo, $createdVilla->id_photo);
+        }
+
+        $video = [];
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // check last order
+            $lastOrder = VillaVideo::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
+            } else {
+                $lastOrder = 1;
+                $lastOrder;
             }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+
+            //insert into database
+            $createdVilla = VillaVideo::create([
+                'id_villa' => $request->id_villa,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            array_push($video, $createdVilla->id_video);
         }
 
         $villaReturn = [
