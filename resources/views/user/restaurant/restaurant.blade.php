@@ -4590,7 +4590,7 @@
             });
 
             $window.scroll(function() {
-                $amenitiesTop = $("#amenities").offset().top;
+                $amenitiesTop = $("#amenities").offset().top + 110;
                 $sidebarHeight = $sidebar.height();
                 $result = $amenitiesTop - $sidebarHeight;
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {
