@@ -3979,7 +3979,8 @@
                 });
 
                 this.on("addedfile", function(file) {
-
+                    $(".dz-image-add").css("border", "");
+                    $('#err-dz').hide();
                     // Create the remove button
                     var removeButton = Dropzone.createElement(
                         "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
