@@ -121,9 +121,9 @@ function editNameRoom(id_room) {
                 hotel_room_name: $("#name-form-input").val(),
             },
             success: function (response) {
-                $("#name-content").html(response.data);
-                $("#name-content-mobile").html(response.data);
-                $("#hotelTitle").html(response.data + " - EZV2");
+                $("#name-content").html(response.data + " - " + $('#name-hotel').val());
+                $("#name-content-mobile").html(response.data + " - " + $('#name-hotel').val());
+                $("#hotelTitle").html(response.data + " - " + $('#name-hotel').val() + " - EZV2");
 
                 var formInput = document.getElementById("name-form-input");
                 formInput.value = response.data;

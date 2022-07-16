@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title id="hotelTitle"> {{ $hotel[0]->name }} - EZV2</title>
+    <title id="hotelTitle">{{ $hotelRoom->name }} - {{ $hotel[0]->name }} - EZV2</title>
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -321,6 +321,7 @@
                                 <div id="name-form" style="display:none;">
                                     {{-- <form action="{{ route('room_update_name') }}" method="post">
                                         @csrf --}}
+                                    <input type="hidden" id="name-hotel" value="{{ $hotel[0]->name }}">
                                     <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
                                         rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}" required>{{ $hotelRoom->name }}</textarea>
                                     <small id="err-name" style="display: none;"
