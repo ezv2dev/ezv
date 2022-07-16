@@ -4088,74 +4088,15 @@
         </script>
 
         <script>
-            $(window).on("resize", function () {
-                $('.container__list').attr('style', 'margin-top:'+$('#new-bar-black').innerHeight()+'px !important')
+            $(document).ready( function () {
+                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
             })
-            var lastScrollTop = 0;
+            $(window).on("resize", function () {
+                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
+            })
             $(window).scroll(function(event) {
-                let tambah = 0
-                if($(this).width() > 0 && $(this).width() < 500){
-                    tambah = 110
-                }else if($(this).width() < 645){
-                    tambah = 150
-                }else if($(this).width() > 646 && $(this).width() < 990){
-                    tambah = 140
-                }else if($(this).width() > 991){
-                    tambah = 110
-                }
-
-                var st = $(this).scrollTop();
-                var isShow = true;
-
-                const div = document.querySelector('#filter-cat-bg-color')  
-                    const {  
-                    top: t,  
-                    left: l  
-                } = div.getBoundingClientRect();  
-                const {  
-                    scrollX,  
-                    scrollY  
-                } = window  
-                const topPos = t + scrollX  
-                const leftPos = l + scrollY 
-
-                if (st > 0) {
-                    if (st > lastScrollTop) {
-                        // scroll down
-                        if($(this).width() < 645){
-                            if(topPos < 25 ){
-                                $('.container__grid').css({'opacity':'0.6', 'transition': 'opacity .5s'})
-                                $('#filter-subcat-bg-color').css({'opacity':'0.6', 'transition': 'opacity .5s'})
-                            }
-                        }else{
-                            if(topPos < 40 ){
-                                $('.container__grid').css({'opacity':'0.6', 'transition': 'opacity .5s'})
-                                $('#filter-subcat-bg-color').css({'opacity':'0.6', 'transition': 'opacity .5s'})
-                            }
-                        }
-    
-                        if(topPos < 10 ){
-                            $('.container__grid').css({'margin-top':$('#filter-subcat-bg-color').innerHeight()+$('#new-bar-black').innerHeight() + tambah + 20+'px','opacity':'1','transition': 'opacity .5s'}) 
-                            $('#filter-subcat-bg-color').css({'position' : 'fixed','top':$('#new-bar-black').innerHeight()+'px'})
-                            $('#filter-cat-bg-color').css({'position' : 'fixed','top':'-150px','transition':'all 0.3s ease'})
-                            $('#filter-subcat-bg-color').css({'opacity':'1', 'transition': 'opacity .6s','border-top':'0px'})
-                        }
-                    }else{
-                        if(st < $('#new-bar-black').innerHeight()){
-                            $('.container__list').attr('style', 'margin-top:'+$('#new-bar-black').innerHeight()+'px !important')
-                            $('.container__grid').css({'margin-top':'','transition': 'opacity .5s'})
-                            $('#filter-subcat-bg-color').css({'position' : 'relative','top':'','border-top':'0.4px solid #c8c8c8'})
-                            $('#filter-cat-bg-color').css({'position' : 'relative','top':'','transition':'all 0.3s ease'})
-                        }
-                    }
-                } else {
-                    $('.container__list').attr('style', 'margin-top:'+$('#new-bar-black').innerHeight()+'px !important')
-                    $('.container__grid').css({'margin-top':'','transition': 'opacity .5s'})
-                    $('#filter-subcat-bg-color').css({'position' : 'relative','top':'','border-top':'0.4px solid #c8c8c8'})
-                    $('#filter-cat-bg-color').css({'position' : 'relative','top':'','transition':'all 0.3s ease'})
-                }
-                lastScrollTop = st;
-            });
+                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
+            })
         </script>
 
         <script>

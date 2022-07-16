@@ -56,7 +56,7 @@
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
-            <div class="col-lg-12">
+            
                 <div id="filter-cat-bg-color" style="width: 100%;"
                     class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
                     @foreach ($hotelCategory->take(6) as $item)
@@ -83,38 +83,39 @@
                     </div>
                 </div>
 
-                <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                <div class="stickySubCategory">
+                            <div id="filter-subcat-bg-color" style="width: 100%;"
+                                class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
 
-                    @foreach ($hotelFilter->take(8) as $item)
-                        <div class="grid-sub-cat-content-container text-13 "
-                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
+                                @foreach ($hotelFilter->take(8) as $item)
+                                    <div class="grid-sub-cat-content-container text-13 "
+                                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
+                                        <div>
+                                            <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                                @php
+                                                    $isChecked = '';
+                                                    $filterIds = explode(',', request()->get('filter'));
+                                                @endphp @if (in_array($item->id_hotel_filter, $filterIds))
+                                                style="color: #ff7400 !important;"
+                                @endif></i>
+                            </div>
+                            <div class="list-description {{ $textColor }} translate-text-group-items">
+                                {{ $item->name }}
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
+                            onclick="moreSubCategory()">
                             <div>
-                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                    @php
-                                        $isChecked = '';
-                                        $filterIds = explode(',', request()->get('filter'));
-                                    @endphp @if (in_array($item->id_hotel_filter, $filterIds))
-                                    style="color: #ff7400 !important;"
-                    @endif></i>
+                                <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">
+                                {{ __('user_page.More') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-description {{ $textColor }} translate-text-group-items">
-                    {{ $item->name }}
-                </div>
-            </div>
-            @endforeach
-
-            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
-                <div>
-                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                </div>
-                <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
