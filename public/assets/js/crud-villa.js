@@ -313,7 +313,7 @@ function saveBedroomDetail(id_villa) {
     console.log(formData);
 }
 
-function editCategoryV(id_villa) {
+function editCategoryV() {
     var villaCategory = [];
     $("input[name='villaCategory[]']:checked").each(function () {
         villaCategory.push(parseInt($(this).val()));
