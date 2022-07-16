@@ -109,6 +109,7 @@ return [
     'Under' => 'Di Bawah',
     'Pets' => 'Hewan peliharaan',
     'VIEW DETAILS' => 'LIHAT DETAIL',
+    'QUICK ENQUIRY' => 'PERTANYAAN CEPAT',
     'RESERVE NOW' => 'PESAN SEKARANG',
     'Become a Host' => 'Menjadi Tuan Rumah',
     'Hosted by' => 'Diselenggarakan oleh',
@@ -422,6 +423,7 @@ return [
     'Villa Availability' => 'Ketersediaan Vila',
     'Extra Price' => 'Harga Ekstra',
     'Regular Price' => 'Harga Biasa',
+    'Instant Book' => 'Pesan Langsung',
     'Commission' => 'Komisi',
     'Add Special Price' => 'Tambah Harga Spesial',
     'Edit Guest' => 'Ubah Tamu',
@@ -471,6 +473,6 @@ return [
     "Make your short description here" => "Buat deskripsi singkat Anda di sini",
 
     "data not found" => "data tidak ditemukan",
-    "Popular Stays Nearby" => "Penginapan Populer Terdekat" 
+    "Popular Stays Nearby" => "Penginapan Populer Terdekat"
 
 ];
