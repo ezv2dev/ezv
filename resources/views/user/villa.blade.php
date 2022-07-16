@@ -296,7 +296,7 @@
                             <span id="name-content2">{{ $villa[0]->name }}</span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editNameForm({{ $villa[0]->id_villa }})"
+                                    &nbsp;<a type="button" onclick="editNameForm()"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 @endif
                             @endauth
@@ -310,7 +310,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         style="background-color: #ff7400"
-                                        onclick="editNameVilla({{ $villa[0]->id_villa }})">
+                                        onclick="editNameVilla()">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
@@ -399,7 +399,7 @@
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button"
-                                        onclick="editShortDescriptionForm({{ $villa[0]->id_villa }})"
+                                        onclick="editShortDescriptionForm()"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Description') }}</a>
                                 @endif
                             @endauth
@@ -413,7 +413,7 @@
                                     <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
-                                        onclick="editShortDesc({{ $villa[0]->id_villa }})">
+                                        onclick="editShortDesc()">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary"
@@ -3979,7 +3979,8 @@
                 });
 
                 this.on("addedfile", function(file) {
-
+                    $(".dz-image-add").css("border", "");
+                    $('#err-dz').hide();
                     // Create the remove button
                     var removeButton = Dropzone.createElement(
                         "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"

@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="col-sm-12">
-                        <input id="searchTextFieldRestaurant" type="text" class="form-control" size="50" onkeydown="preventPressEnterKey(event)">
+                        <input id="searchTextFieldRestaurant" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
                         <div id="mapRestaurant" style="width:100%;height:280px;"></div>
                         <input type="hidden" class="form-control" id="latitudeRestaurant" name="latitude"
                             placeholder="Enter a latitude.." value="{{ $activity->latitude }}">

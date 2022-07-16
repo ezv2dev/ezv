@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="col-sm-12">
-                        <input id="searchTextFieldVilla" type="text" class="form-control" size="50" onkeydown="preventPressEnterKey(event)">
+                        <input id="searchTextFieldVilla" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
                         <div id="mapVilla" style="width:100%;height:280px;"></div>
                         <input type="hidden" class="form-control" id="latitudeVilla" name="latitude" placeholder="Enter a latitude.." value="{{ $villa[0]->latitude }}">
                         <input type="hidden" class="form-control" id="longitudeVilla" name="longitude" placeholder="Enter a longitude.." value="{{ $villa[0]->longitude }}">

@@ -1098,7 +1098,7 @@
                     @auth
                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                             <section class="add-gallery">
-                                <form class="dropzone" id="frmTarget">
+                                <form class="dropzone dz-image-add" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
                                         <span>{{ __('user_page.Click here to upload your files') }}</span>
@@ -1106,6 +1106,7 @@
                                     <input type="hidden" value="{{ $hotel[0]->id_hotel }}" id="id_hotel"
                                         name="id_hotel">
                                 </form>
+                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -4508,12 +4509,19 @@
             init: function() {
 
                 var myDropzone = this;
-
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    myDropzone.processQueue();
-
+                    if(!myDropzone.files.length) {
+                        $(".dz-image-add").css("border", "solid #e04f1a 1px");
+                        $('#err-dz').show();
+                    } else {
+                        $(".dz-image-add").css("border", "");
+                        $('#err-dz').hide();
+                        myDropzone.processQueue();
+                        $("#button").html('Uploading Gallery...');
+                        $("#button").addClass('disabled');
+                    }
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4532,6 +4540,8 @@
                 });
 
                 this.on("addedfile", function(file) {
+                    $(".dz-image-add").css("border", "");
+                    $('#err-dz').hide();
 
                     // Create the remove button
                     var removeButton = Dropzone.createElement(
