@@ -413,154 +413,154 @@ if (request()->fCategory) {
                 </div>
             </div>
 
-            <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
-                data-isshow="true">
-                {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
-                    <a href="javascript:void(0)" id="price" style="cursor:pointer;"
-                        class="dropdown-toggle grid-sub-cat-content-container text-13">
-                        <div>
-                            <i class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
-                            </i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Price</div>
-                    </a>
-                    <div class="price-popup dropdown-menu">
-                        <div class="double-slider">
-                            <div class="extra-controls form-inline">
-                                <div class="col-lg-12">
-                                    <p class="price-popup-title">Price Range
-                                    </p>
-                                </div>
-                                <div class="form-group col-lg-12 price-popup-display-container">
-                                    <div class="price-popup-display-wrap1">
-                                        <div class="col-lg-12 price-popup-display">
-                                            <label for="min_price" class="price-popup-label">Min</label>
-                                            <input name="fMinPrice[]" type="text"
-                                                class="js-input-from form-control price-popup-label" value="0"
-                                                style="border: none;" />
-                                        </div>
-                                    </div>
-                                    <div class="price-popup-display-gap-container">
-                                        <div></div>
-                                    </div>
-                                    <div class="price-popup-display-wrap2">
-                                        <div class="col-lg-12 price-popup-display">
-                                            <label for="max_price" class="price-popup-label">Max</label>
-                                            <input name="fMaxPrice[]" type="text"
-                                                class="js-input-to form-control price-popup-label" value="0"
-                                                style="border: none;" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="text" class="js-range-slider" value="" />
-                            </div>
-                            <center>
-                                <div style="margin-top: 25px;">
-                                    <button type="submit" class="btn btn-choose"
-                                        style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
-                    <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
-                        class="dropdown-toggle grid-sub-cat-content-container text-13">
-                        <div>
-                            <i
-                                class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
-                            </i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Gender</div>
-                    </a>
-                    <div class="price-popup dropdown-menu">
-                        <div>
-                            <p class="price-popup-title">Gender
-                            </p>
-                            <div class="propertytype-input-row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-6 mb-3">
-                                            <label class="checkdesign">Male
-                                                <input type="checkbox" name="gender[]" value="Male">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <label class="checkdesign">Female
-                                                <input type="checkbox" name="gender[]" value="Female">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-top: 25px;">
-                                <button type="submit" class="btn btn-choose"
-                                    style="border-radius:12px; width: 100%; padding: 10px;"
-                                    onclick="villaFilter()">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
-                    <a href="javascript:void(0)" id="followers" style="cursor:pointer;"
-                        class="dropdown-toggle grid-sub-cat-content-container text-13">
-                        <div>
-                            <i class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
-                            </i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Followers</div>
-                    </a>
-                    <div class="price-popup dropdown-menu">
-                        <div class="dropdown-pd-0">
-                            <div class="list-description {{ $textColor }}">Followers Range</div>
-                            <div class="body">
-                                <form>
-                                    <input id="range2" name="range2" type="range" min="0" max="1000000"
-                                        value="500000">
-                                </form>
-                            </div>
-
-                            <center>
-                                <div style="margin-top: 25px;">
-                                    <button type="submit" class="btn btn-choose"
-                                        style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+        </div>
+        <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory" style="width: 100%;"
+            data-isshow="true">
+            {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                <a href="javascript:void(0)" id="price" style="cursor:pointer;"
+                    class="dropdown-toggle grid-sub-cat-content-container text-13">
                     <div>
-                        <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                        <i class="fa fa-solid fa-dollar-sign text-18 list-description  {{ $textColor }} sub-icon">
+                        </i>
                     </div>
                     <div class="list-description {{ $textColor }}">Price</div>
+                </a>
+                <div class="price-popup dropdown-menu">
+                    <div class="double-slider">
+                        <div class="extra-controls form-inline">
+                            <div class="col-lg-12">
+                                <p class="price-popup-title">Price Range
+                                </p>
+                            </div>
+                            <div class="form-group col-lg-12 price-popup-display-container">
+                                <div class="price-popup-display-wrap1">
+                                    <div class="col-lg-12 price-popup-display">
+                                        <label for="min_price" class="price-popup-label">Min</label>
+                                        <input name="fMinPrice[]" type="text"
+                                            class="js-input-from form-control price-popup-label" value="0"
+                                            style="border: none;" />
+                                    </div>
+                                </div>
+                                <div class="price-popup-display-gap-container">
+                                    <div></div>
+                                </div>
+                                <div class="price-popup-display-wrap2">
+                                    <div class="col-lg-12 price-popup-display">
+                                        <label for="max_price" class="price-popup-label">Max</label>
+                                        <input name="fMaxPrice[]" type="text"
+                                            class="js-input-to form-control price-popup-label" value="0"
+                                            style="border: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="text" class="js-range-slider" value="" />
+                        </div>
+                        <center>
+                            <div style="margin-top: 25px;">
+                                <button type="submit" class="btn btn-choose"
+                                    style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                            </div>
+                        </center>
+                    </div>
                 </div>
+            </div>
 
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+            <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                <a href="javascript:void(0)" id="gender" style="cursor:pointer;"
+                    class="dropdown-toggle grid-sub-cat-content-container text-13">
                     <div>
-                        <i class="fas fa-mars-and-venus text-18 list-description {{ $textColor }} sub-icon"></i>
+                        <i
+                            class="fa fa-solid fa-mars-and-venus text-18 list-description  {{ $textColor }} sub-icon">
+                        </i>
                     </div>
                     <div class="list-description {{ $textColor }}">Gender</div>
-                </div>
-
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                </a>
+                <div class="price-popup dropdown-menu">
                     <div>
-                        <i class="fas fa-circle-user text-18 list-description {{ $textColor }} sub-icon"></i>
+                        <p class="price-popup-title">Gender
+                        </p>
+                        <div class="propertytype-input-row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <label class="checkdesign">Male
+                                            <input type="checkbox" name="gender[]" value="Male">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label class="checkdesign">Female
+                                            <input type="checkbox" name="gender[]" value="Female">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px;">
+                            <button type="submit" class="btn btn-choose"
+                                style="border-radius:12px; width: 100%; padding: 10px;"
+                                onclick="villaFilter()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
+                <a href="javascript:void(0)" id="followers" style="cursor:pointer;"
+                    class="dropdown-toggle grid-sub-cat-content-container text-13">
+                    <div>
+                        <i class="fa fa-solid fa-circle-user text-18 list-description  {{ $textColor }} sub-icon">
+                        </i>
                     </div>
                     <div class="list-description {{ $textColor }}">Followers</div>
-                </div>
+                </a>
+                <div class="price-popup dropdown-menu">
+                    <div class="dropdown-pd-0">
+                        <div class="list-description {{ $textColor }}">Followers Range</div>
+                        <div class="body">
+                            <form>
+                                <input id="range2" name="range2" type="range" min="0" max="1000000"
+                                    value="500000">
+                            </form>
+                        </div>
 
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
-                    <div>
-                        <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        <center>
+                            <div style="margin-top: 25px;">
+                                <button type="submit" class="btn btn-choose"
+                                    style="border-radius:12px; width: 100%; padding: 10px;">{{ Translate::translate('Save') }}</button>
+                            </div>
+                        </center>
                     </div>
-                    <div class="list-description {{ $textColor }}">Filters</div>
                 </div>
+            </div> --}}
+
+            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                <div>
+                    <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">Price</div>
+            </div>
+
+            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                <div>
+                    <i class="fas fa-mars-and-venus text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">Gender</div>
+            </div>
+
+            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                <div>
+                    <i class="fas fa-circle-user text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">Followers</div>
+            </div>
+
+            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterCollab()">
+                <div>
+                    <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">Filters</div>
             </div>
         </div>
 

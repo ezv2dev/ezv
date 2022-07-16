@@ -48,7 +48,6 @@
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
-            <div class="col-lg-12">
                 @php
                     if (request()->fCuisine) {
                         $fCuisine = request()->fCuisine;
@@ -87,38 +86,39 @@
                     </div>
                 </div>
 
-                <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
-                    @foreach ($subcategories->take(8) as $item)
-                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})">
-                            <div>
-                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                    @php
-                                        $isChecked = '';
-                                        $filterIds = explode(',', request()->get('fSubCategory'));
-                                    @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                    style="color: #ff7400 !important;"@endif>
-                                </i>
+                <div class="stickySubCategory">
+                            <div id="filter-subcat-bg-color" style="width: 100%;"
+                                class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                                @foreach ($subcategories->take(8) as $item)
+                                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                                        onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})">
+                                        <div>
+                                            <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                                @php
+                                                    $isChecked = '';
+                                                    $filterIds = explode(',', request()->get('fSubCategory'));
+                                                @endphp @if (in_array($item->id_subcategory, $filterIds))
+                                                style="color: #ff7400 !important;"@endif>
+                                            </i>
+                                        </div>
+                                    <div>
+                                <span class="translate-text-group-items list-description {{ $textColor }}">{{ $item->name }}</span>
                             </div>
-                        <div>
-                    <span class="translate-text-group-items list-description {{ $textColor }}">{{ $item->name }}</span>
-                </div>
-            </div>
-            @endforeach
-            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
-                <div>
-                    <div>
-                        <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        @endforeach
+                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
+                            <div>
+                                <div>
+                                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                                </div>
+                                <p class="m-0 list-description {{ $textColor }}">
+                                    {{ __('user_page.More') }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="m-0 list-description {{ $textColor }}">
-                        {{ __('user_page.More') }}
-                    </p>
-                </div>
-            </div>
-        </div>
 
-    </div>
+                </div>
     
     <div class="col-lg-12 container-grid container__grid translate-text-group">
         @php

@@ -25,7 +25,7 @@
                         <label for="" class="col-md-4">{{ __('user_page.Name of Room') }}</label>
                         <div class="col-md-8">
                             <input type="text" name="name_room" id="name_room" class="modal-input form-control" placeholder="{{ __('user_page.Name of Room') }} Hotel.." />
-                            <small id="err-rname" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <small id="err-rname" style="display: none;" class="invalid-feedback">{{ __('auth.name_room') }}</small>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                             <input type="text" class="form-control modal-input" id="room_size" name="room_size"
                                 placeholder="{{ __('user_page.Room Size') }}.."
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                            <small id="err-rsize" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <small id="err-rsize" style="display: none;" class="invalid-feedback">{{ __('auth.room_size') }}</small>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                             <input type="text" class="form-control modal-input" id="capacity" name="capacity"
                                 placeholder="{{ __('user_page.Total Max People') }}.."
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                            <small id="err-cap" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <small id="err-cap" style="display: none;" class="invalid-feedback">{{ __('auth.total_cap') }}</small>
                         </div>
                     </div>
 
@@ -78,16 +78,17 @@
                         <div class="col-md-8">
                             <input type="number" class="form-control modal-input" id="number_of_room" name="number_of_room"
                                 placeholder="{{ __('user_page.Number of Room') }}.." min="1">
-                            <small id="err-numrom" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <small id="err-numrom" style="display: none;" class="invalid-feedback">{{ __('auth.total_room') }}</small>
                         </div>
                     </div>
 
                     <div class="row mb-4" style="padding-left: 10px">
                         <label for="" class="col-md-4">Status</label>
                         <div class="col-md-8">
-                            <input type="number" class="form-control modal-input" id="status" name="status"
-                                placeholder="Status apa ini?" min="1">
-                            <small id="err-status" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <select class="form-control modal-input" name="status" id="status">
+                                <option value="1" selected>Available</option>
+                                <option value="0">Not Available</option>
+                            </select>
                         </div>
                     </div>
 
@@ -97,7 +98,7 @@
                             <input type="text" class="form-control modal-input" id="frm-price" name="price"
                                 placeholder="{{ __('user_page.Price per Night') }}.."
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                            <small id="err-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                            <small id="err-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                         </div>
                     </div>
 
@@ -119,8 +120,25 @@
 </div>
 <script>
 //Add room hotel
-$("#").keyup(function () {
-
+$("#name_room").keyup(function () {
+    $('#name_room').removeClass('is-invalid');
+    $('#err-rname').hide();
+});
+$("#room_size").keyup(function () {
+    $('#room_size').removeClass('is-invalid');
+    $('#err-rsize').hide();
+});
+$("#number_of_room").keyup(function () {
+    $('#number_of_room').removeClass('is-invalid');
+    $('#err-numrom').hide();
+});
+$("#capacity").keyup(function () {
+    $('#capacity').removeClass('is-invalid');
+    $('#err-cap').hide();
+});
+$("#frm-price").keyup(function () {
+    $('#frm-price').removeClass('is-invalid');
+    $('#err-prc').hide();
 });
 $("#add-room-hotel").submit(function (e) {
     let error = 0;
@@ -142,11 +160,6 @@ $("#add-room-hotel").submit(function (e) {
     if(!$('#capacity').val()) {
         $('#capacity').addClass('is-invalid');
         $('#err-cap').show();
-        error = 1;
-    }
-    if(!$('#status').val()) {
-        $('#status').addClass('is-invalid');
-        $('#err-status').show();
         error = 1;
     }
     if(!$('#frm-price').val()) {

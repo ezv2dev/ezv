@@ -672,11 +672,13 @@ class HotelDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Profile',  'data' => $request->name]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Fail Updated Hotel Profile',  'data' => $request->name]);
         }
     }
 

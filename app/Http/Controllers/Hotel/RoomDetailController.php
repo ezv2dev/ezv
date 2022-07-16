@@ -297,11 +297,13 @@ class RoomDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Profile']);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Fail Updated Hotel Profile']);
         }
     }
 
@@ -1250,14 +1252,14 @@ class RoomDetailController extends Controller
 
             if (Auth::user()->id == 1 || Auth::user()->id == 2) {
                 $find->update(array(
-                    'name' => $request->name,
+                    'name' => $request->hotel_room_name,
                     'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                     'updated_by' => Auth::user()->id,
                 ));
             } else {
                 $find->update(array(
-                    'name' => $request->name,
-                    'original_name' => $request->name,
+                    'name' => $request->hotel_room_name,
+                    'original_name' => $request->hotel_room_name,
                     'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                     'updated_by' => Auth::user()->id,
                 ));
@@ -1271,11 +1273,13 @@ class RoomDetailController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json(['success' => true, 'message' => 'Succesfully Updated Villa Name',  'data' => $request->hotel_room_name]);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json(['errors' => true, 'message' => 'Succesfully Updated Villa Name',  'data' => $request->hotel_room_name]);
         }
     }
 

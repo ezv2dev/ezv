@@ -56,7 +56,7 @@
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
-            <div class="col-lg-12">
+            
                 <div id="filter-cat-bg-color" style="width: 100%;"
                     class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
                     @foreach ($hotelCategory->take(6) as $item)
@@ -83,38 +83,39 @@
                     </div>
                 </div>
 
-                <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                <div class="stickySubCategory">
+                            <div id="filter-subcat-bg-color" style="width: 100%;"
+                                class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
 
-                    @foreach ($hotelFilter->take(8) as $item)
-                        <div class="grid-sub-cat-content-container text-13 "
-                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
+                                @foreach ($hotelFilter->take(8) as $item)
+                                    <div class="grid-sub-cat-content-container text-13 "
+                                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
+                                        <div>
+                                            <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                                @php
+                                                    $isChecked = '';
+                                                    $filterIds = explode(',', request()->get('filter'));
+                                                @endphp @if (in_array($item->id_hotel_filter, $filterIds))
+                                                style="color: #ff7400 !important;"
+                                @endif></i>
+                            </div>
+                            <div class="list-description {{ $textColor }} translate-text-group-items">
+                                {{ $item->name }}
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
+                            onclick="moreSubCategory()">
                             <div>
-                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                    @php
-                                        $isChecked = '';
-                                        $filterIds = explode(',', request()->get('filter'));
-                                    @endphp @if (in_array($item->id_hotel_filter, $filterIds))
-                                    style="color: #ff7400 !important;"
-                    @endif></i>
+                                <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">
+                                {{ __('user_page.More') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-description {{ $textColor }} translate-text-group-items">
-                    {{ $item->name }}
-                </div>
-            </div>
-            @endforeach
-
-            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
-                <div>
-                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                </div>
-                <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
@@ -175,13 +176,13 @@
                                 <i class="fas fa-2x fa-play video-button"></i>
                                 @if ($data->video->count() > 0)
                                     <video class="video-thumb lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->name) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
                                 @elseif ($data->photo->count() > 0)
                                     <img class="video-thumb lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->name) . '/' . $data->photo->last()->name) }}">
+                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
                                 @elseif ($data->image != null)
                                     <img class="video-thumb lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->name) . '/' . $data->image) }}">
+                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->uid) . '/' . $data->image) }}">
                                 @else
                                     <img class="video-thumb lozad" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
@@ -200,7 +201,7 @@
                                     class="col-lg-6 grid-image-container">
                                     <img class="lozad img-fluid grid-image aspect-ratio-3 h-auto" style="display: block;"
                                         src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->name) . '/' . $item->name) }}"
+                                        data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->uid) . '/' . $item->name) }}"
                                         alt="EZV_{{ $item->name }}">
                                 </a>
                             @empty
@@ -209,7 +210,7 @@
                                         class="col-lg-6 grid-image-container">
                                         <img class="lozad img-fluid grid-image aspect-ratio-3 h-auto"
                                             style="display: block;" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->name) . '/' . $item->name) }}"
+                                            data-src="{{ URL::asset('/foto/hotel/' . strtolower($data->uid) . '/' . $item->name) }}"
                                             alt="EZV_{{ $data->image }}">
                                     </a>
                                 @else
@@ -238,48 +239,40 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
-                    <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                                @if ($data->detailReview)
-    {{ $data->detailReview->average }}
-@else
-    {{ __('user_page.New') }}
-    @endif
-                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                            </div> -->
-                    <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
-                        <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
-                            {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
-                        </span>
-                    </div>
-                    <div class="skeleton">
-                        <a class="text-14 fw-400 grid-one-line text-orange mt-1 " href="#!"
-                            onclick="view_maps('{{ $data->id_hotel }}')"><i
-                                class="fa-solid text-orange fa-location-dot"></i>
-                            {{ $data->location_name ?? __('user_page.Location not found') }}
-                        </a>
-                    </div>
-                    <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        @if ($data->price)
-                            <span class=" fw-600 {{ $textColor }} list-description ">
-                                {{ CurrencyConversion::exchangeWithUnit($data->price) }}
-                            </span>
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                /{{ __('user_page.night') }}
-                            </span>
-                        @else
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                {{ __('user_page.Price is unknown') }}
-                            </span>
-                        @endif
-                    </div>
-                    <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-2 skeleton">
-                        <span><a class="orange-hover"
-                                onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
-                    </div>
+
+                    <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
+                        {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
+                    </span>
+                </div>
+                <div class="skeleton">
+                    <a class="text-14 fw-400 grid-one-line text-orange mt-1 " href="#!"
+                        onclick="view_maps('{{ $data->id_hotel }}')"><i
+                            class="fa-solid text-orange fa-location-dot"></i>
+                        {{ $data->location_name ?? __('user_page.Location not found') }}
                     </a>
                 </div>
+                <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                    @if ($data->price)
+                        <span class=" fw-600 {{ $textColor }} list-description ">
+                            {{ CurrencyConversion::exchangeWithUnit($data->price) }}
+                        </span>
+                        <span class="fw-400 {{ $textColor }} list-description">
+                            /{{ __('user_page.night') }}
+                        </span>
+                    @else
+                        <span class="fw-400 {{ $textColor }} list-description">
+                            {{ __('user_page.Price is unknown') }}
+                        </span>
+                    @endif
+                </div>
+                <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-2 skeleton">
+                    <span><a class="orange-hover"
+                            onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                </div>
+                </a>
             </div>
-        @endforeach
+    </div>
+    @endforeach
     </div>
     <div class="col-12" id="view-map-button-float">
         <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">

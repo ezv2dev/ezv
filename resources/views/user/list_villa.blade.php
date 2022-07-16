@@ -113,7 +113,7 @@
                     </a>
                 </div>
 
-                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }}" style="width: 100%;"
+                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory" style="width: 100%;"
                     data-isshow="true">
                     <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
                         <div>
