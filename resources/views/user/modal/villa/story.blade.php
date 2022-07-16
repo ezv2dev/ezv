@@ -66,7 +66,7 @@
             $('#err-stry-ttl').hide();
     });
 
-    function validateStory() {
+    $("#updateStoryForm").submit(function (e) {
         let error = 0;
         if(document.getElementById("storyVideo").files.length == 0){
             $('.story-video-form').css("border", "solid #e04f1a 1px");
@@ -87,9 +87,7 @@
         if(error == 1) {
             e.preventDefault();
         }
-
-        return error;
-    };
+    });
 
     var storyVideoForm = $(".story-upload").children('.story-video-form');
     var storyVideoInput = $(".story-upload").children('.story-video-input');
