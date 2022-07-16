@@ -64,6 +64,8 @@ function saveShortDescription() {
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
 
+                short_desc_backup = response.data.short_description;
+
                 editShortDescriptionCancel();
             },
             error: function (jqXHR, exception) {
@@ -127,7 +129,9 @@ function saveDescription() {
                 console.log(response);
                 console.log(response.data.description.length);
 
-                let desc_input = document.getElementById("description-form-input");
+                let desc_input = document.getElementById(
+                    "description-form-input"
+                );
 
                 $("#description-content").html(
                     response.data.description.substring(0, 600)
@@ -146,7 +150,9 @@ function saveDescription() {
                     $("#buttonShowMoreDescription").append(
                         '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
                     );
-                    $("#modalDescriptionContent").html(response.data.description);
+                    $("#modalDescriptionContent").html(
+                        response.data.description
+                    );
                 } else {
                     $("#buttonShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
@@ -216,6 +222,8 @@ function saveNameRestaurant() {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
+
+                name_resto_backup = response.data.name;
 
                 editNameCancel();
             },
