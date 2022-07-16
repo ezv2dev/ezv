@@ -3000,6 +3000,13 @@ input::-webkit-inner-spin-button {
     .row .check-in .flatpickr-input {
         margin-left: -120px !important;
     }
+
+    .grid-container-43 {
+        margin-top: 318.391px !important;
+        padding-left: 30px;
+        padding-right: 30px;
+        transition: all 0.2s ease;
+    }
 }
 @media only screen and (max-width: 569px) {
     .list-image-content-villa .slick-slide {

@@ -25,7 +25,7 @@ function editNameHotel(id_hotel) {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: "/colaborator/update/name",
+            url: "/hotel/update/name",
             data: {
                 id_hotel: id_hotel,
                 name: $("#name-form-input").val(),

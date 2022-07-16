@@ -46,4 +46,6 @@ return [
     'invalid_price' => 'The price field is invalid',
     'empty_special_price' => 'The special price field is required',
     'empty_discount' => 'The discount field is required',
+
+    'empty_file' => 'The file field is required',
 ];

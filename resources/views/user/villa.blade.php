@@ -809,8 +809,22 @@
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
                                     <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
-                                        <a class="pointer-normal" onclick="showPromotionMobile()"
-                                            href="javascript:void(0);">
+                                        @auth
+                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                <a class="pointer-normal"
+                                                    onclick="view({{ $item->id_video }})"
+                                                    href="javascript:void(0);">
+                                                @else
+                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                        href="javascript:void(0);">
+                                            @endif
+                                        @endauth
+
+                                            @guest
+                                            <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                href="javascript:void(0);">
+                                            @endguest
+
                                             <video href="javascript:void(0)" class="photo-grid" loading="lazy"
                                                 src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
                                             </video>
@@ -847,7 +861,7 @@
                     @auth
                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                             <section class="add-gallery">
-                                <form class="dropzone" id="frmTarget">
+                                <form class="dropzone dz-image-add" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
                                         <span>{{ __('user_page.Click here to upload your files') }}</span>
@@ -855,6 +869,7 @@
                                     <input type="hidden" value="{{ $villa[0]->id_villa }}" id="id_villa"
                                         name="id_villa">
                                 </form>
+                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -3405,10 +3420,12 @@
                         @guest
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
-                                    <a type="button" class="d-flex p-0 copier"
-                                        href="{{ route('villa', $villa[0]->id_villa) }}" onclick="copyURI(event)">
+                                <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
+                                <button onclick="share_function()">Copy link</button> -->
+                                    <button type="button" class="d-flex p-0 copier"
+                                        onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('villa', $villa[0]->id_villa) }}&display=popup"
@@ -3899,9 +3916,16 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    myDropzone.processQueue();
-                    $("#button").html('Uploading Gallery...');
-                    $("#button").addClass('disabled');
+                    if(!myDropzone.files.length) {
+                        $(".dz-image-add").css("border", "solid #e04f1a 1px");
+                        $('#err-dz').show();
+                    } else {
+                        $(".dz-image-add").css("border", "");
+                        $('#err-dz').hide();
+                        myDropzone.processQueue();
+                        $("#button").html('Uploading Gallery...');
+                        $("#button").addClass('disabled');
+                    }
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4775,8 +4799,7 @@
     {{-- Copy current URL to clipboard --}}
     <script>
         function copyURI(evt) {
-            evt.preventDefault();
-            navigator.clipboard.writeText(evt.target.getAttribute('href')).then(() => {
+            navigator.clipboard.writeText(location.origin + location.pathname).then(() => {
                 alert("Link copied");
             }, () => {
                 alert("Oooppsss... failed");
