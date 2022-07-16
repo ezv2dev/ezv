@@ -316,7 +316,7 @@
                                 <div class="row">
                                     <div class="col-11">
                                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
-                                            style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important;">
+                                            style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important; margin-left: -30px;">
                                             <li class="active modal-price-title">
                                                 <a class="tab1 filter-language-option-text" href="#importCalendar"
                                                     data-toggle="tab"
@@ -403,45 +403,41 @@
                                     <div class="tab-pane" id="dataAvailability">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="container" style="margin-top: 30px;">
-                                                    <div class="datatable">
-                                                        <table class="table table-bordered table-hover"
-                                                            style="color: #383838" id="dataTable" width="100%"
-                                                            cellspacing="0">
-                                                            <thead style="color: #383838;"
-                                                                class="thead-dark table-borderless">
-                                                                <tr>
-                                                                    <th class="text-center">No</th>
-                                                                    <th class="text-center">Start Date</th>
-                                                                    <th class="text-center">End Date</th>
-                                                                    <th class="text-center">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {{-- <tr>
-                                                                    <td class="text-center">1</th>
-                                                                    <td class="text-center">2022-02-02</th>
-                                                                    <td class="text-center">2022-02-02</th>
-                                                                    <td class="text-center">Delete</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center">2</th>
-                                                                    <td class="text-center">2022-02-02</th>
-                                                                    <td class="text-center">2022-02-02</th>
-                                                                    <td class="text-center">Delete</th>
-                                                                </tr> --}}
-                                                            </tbody>
-                                                            <tfoot style="color: #383838">
-                                                                <tr>
-                                                                    <th class="text-center">No</th>
-                                                                    <th class="text-center">Start Date</th>
-                                                                    <th class="text-center">End Date</th>
-                                                                    <th class="text-center">Action</th>
-                                                                </tr>
-                                                            </tfoot>
-                                                        </table>
-                                                    </div>
-                                                </div>
+                                                <table class="table table-bordered table-hover"
+                                                        style="color: #383838" id="dataTable" width="100%"
+                                                        cellspacing="0">
+                                                        <thead style="color: #383838;"
+                                                            class="thead-dark table-borderless">
+                                                            <tr>
+                                                                <th class="text-center">No</th>
+                                                                <th class="text-center">Start Date</th>
+                                                                <th class="text-center">End Date</th>
+                                                                <th class="text-center">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {{-- <tr>
+                                                                <td class="text-center">1</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">Delete</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center">2</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">Delete</th>
+                                                            </tr> --}}
+                                                        </tbody>
+                                                        <tfoot style="color: #383838">
+                                                            <tr>
+                                                                <th class="text-center">No</th>
+                                                                <th class="text-center">Start Date</th>
+                                                                <th class="text-center">End Date</th>
+                                                                <th class="text-center">Action</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
                                             </div>
                                         </div>
                                     </div>
