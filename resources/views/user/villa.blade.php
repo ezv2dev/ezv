@@ -809,8 +809,22 @@
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
                                     <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
-                                        <a class="pointer-normal" onclick="showPromotionMobile()"
-                                            href="javascript:void(0);">
+                                        @auth
+                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                <a class="pointer-normal"
+                                                    onclick="view({{ $item->id_video }})"
+                                                    href="javascript:void(0);">
+                                                @else
+                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                        href="javascript:void(0);">
+                                            @endif
+                                        @endauth
+
+                                            @guest
+                                            <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                href="javascript:void(0);">
+                                            @endguest
+
                                             <video href="javascript:void(0)" class="photo-grid" loading="lazy"
                                                 src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
                                             </video>
