@@ -159,13 +159,6 @@
             <div></div>
 
             {{-- TODO comment when lazy load, start --}}
-            {{-- Pagination --}}
-            <div class="mt-5 d-flex justify-content-center" id="footer">
-                <div class="mt-3">
-                    {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
-                </div>
-            </div>
-            {{-- End Pagination --}}
             {{-- TODO end --}}
 
             {{-- TODO uncomment when lazy load, start --}}
@@ -184,6 +177,13 @@
             <div style="height: 35px;">&nbsp;</div>
         </div>
     </div>
+    {{-- Pagination --}}
+    <div class="mt-5 d-flex justify-content-center" id="footer">
+        <div class="mt-3">
+            {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+        </div>
+    </div>
+    {{-- End Pagination --}}
     <!-- End Page Content -->
     {{-- modal laguage and currency --}}
     @include('user.modal.filter.filter_language')

@@ -3422,10 +3422,10 @@
                                 <div class="col-lg col-12 p-3 border br-10">
                                 <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
                                 <button onclick="share_function()">Copy link</button> -->
-                                    <a type="button" class="d-flex p-0 copier"
-                                        href="{{ route('villa', $villa[0]->id_villa) }}" onclick="copyURI(event)">
+                                    <button type="button" class="d-flex p-0 copier"
+                                        onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('villa', $villa[0]->id_villa) }}&display=popup"

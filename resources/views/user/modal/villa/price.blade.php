@@ -208,50 +208,91 @@
                         </div>
 
                         <div class="tab-pane" id="availablity">
-                            <div class="row"
-                            style="margin-bottom: 15px; background: #1B2430; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
-                                <div class="col-12">
-                                    <span style="color: #fff; margin-left: 8px;">
-                                        <strong>
-                                            {{ __('user_page.Import Calendar') }}
-                                        </strong>
-                                    </span>
+                            <div class="modal-header-editprice">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <ul class="nav filter-language-option-container nav-tabs sideTab column"
+                                            style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important;">
+                                            <li class="active modal-price-title">
+                                                <a class="tab1 filter-language-option-text" href="#importCalendar" data-toggle="tab" style="font-size: 12pt;
+                                                    font-weight: 600;">
+                                                    Import Calendar
+                                                </a>
+                                            </li>
+                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                                <a class="filter-language-option-text" href="#addAvailability" data-toggle="tab" style="font-size: 12pt;
+                                                    font-weight: 600; margin-left: -50px;">
+                                                    Add Availability
+                                                </a>
+                                            </li>
+                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                                <a class="filter-language-option-text" href="#dataAvailability" data-toggle="tab" style="font-size: 12pt;
+                                                    font-weight: 600; margin-left: -50px;">
+                                                    Data Availability
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row items-push d-flex justify-content-end">
-                                <div class="col-6 d-flex justify-content-end">
-                                    <div class="form-group">
-                                        <div class="file-upload">
-                                            <div class="image-box dropzone"
-                                            style="margin: 0; padding: 0; background: none; height: 50px; border: none; min-height: 0;">
-                                                <a class="btn btn-sm btn-success mt-2" style="curson: pointer; width: 200px;">
-                                                    <i class="fa fa-add"></i> {{ __('user_page.Import type file', ['type' => '.ics']) }}
-                                                </a>
-                                            </div>
-                                            <div style="display: none;">
-                                                <input type="file" id="getICSFile" name="ics" />
+
+                            <div class="tabbable column-wrapper">
+                                <div class="tab-content tab-content-language column rigth" id="tabs">
+                                    <div class="tab-pane active" id="importCalendar">
+                                        <div class="row"
+                                        style="margin-bottom: 15px; background: #1B2430; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
+                                            <div class="col-12">
+                                                <span style="color: #fff; margin-left: 8px;">
+                                                    <strong>
+                                                        {{ __('user_page.Import Calendar') }}
+                                                    </strong>
+                                                </span>
                                             </div>
                                         </div>
+                                        <div class="row items-push d-flex justify-content-end">
+                                            <div class="col-6 d-flex justify-content-end">
+                                                <div class="form-group">
+                                                    <div class="file-upload">
+                                                        <div class="image-box dropzone"
+                                                        style="margin: 0; padding: 0; background: none; height: 50px; border: none; min-height: 0;">
+                                                            <a class="btn btn-sm btn-success mt-2" style="curson: pointer; width: 200px;">
+                                                                <i class="fa fa-add"></i> {{ __('user_page.Import type file', ['type' => '.ics']) }}
+                                                            </a>
+                                                        </div>
+                                                        <div style="display: none;">
+                                                            <input type="file" id="getICSFile" name="ics" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span id="msgImportICS"></span>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="addAvailability">
+                                        <hr class="mt-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="calendar2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row items-push">
+                                            <center>
+                                                <div class="col-6">
+                                                    <button type="submit" class="btn btn-sm btn-danger mt-2 btn-submit-availability" name="action"
+                                                        value="not_available" style="width: 200px;">
+                                                        <i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}
+                                                    </button>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="dataAvailability">
+
                                     </div>
                                 </div>
-                                <span id="msgImportICS"></span>
                             </div>
-                            <hr class="mt-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div id="calendar2"></div>
-                                </div>
-                            </div>
-                            <div class="row items-push">
-                                <center>
-                                    <div class="col-6">
-                                        <button type="submit" class="btn btn-sm btn-danger mt-2 btn-submit-availability" name="action"
-                                            value="not_available" style="width: 200px;">
-                                            <i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}
-                                        </button>
-                                    </div>
-                                </center>
-                            </div>
+
+
                         </div>
 
                         <div class="tab-pane" id="extraPrice">
