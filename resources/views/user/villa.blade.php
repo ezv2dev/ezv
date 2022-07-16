@@ -3419,6 +3419,8 @@
                         @guest
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
+                                <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
+                                <button onclick="share_function()">Copy link</button> -->
                                     <a type="button" class="d-flex p-0 copier"
                                         href="{{ route('villa', $villa[0]->id_villa) }}" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
@@ -4789,8 +4791,7 @@
     {{-- Copy current URL to clipboard --}}
     <script>
         function copyURI(evt) {
-            evt.preventDefault();
-            navigator.clipboard.writeText(evt.target.getAttribute('href')).then(() => {
+            navigator.clipboard.writeText(location.origin + location.pathname).then(() => {
                 alert("Link copied");
             }, () => {
                 alert("Oooppsss... failed");
