@@ -247,6 +247,9 @@
     .nav-tabs>li {
         width: auto !important;
     }
+    input::-ms-reveal, input::-ms-clear {
+        display: none;
+    }
 </style>
 
 <div id="LoginModal" class="modal modal-login fade bs-example-modal-lg">
@@ -556,15 +559,15 @@
                 $('#password-login').addClass('is-invalid');
                 $('#err-pas-lgn').text('{{ __('auth.empty_password') }}');
                 $('#err-pas-lgn').show();
-            } else {
-                if ($('#password-login').val().length < 8) {
-                    $('#tp-log').hide();
-                    $('#password-login').addClass('is-invalid');
-                    $('#err-pas-lgn').text('{{ __('auth.min_password') }}');
-                    $('#err-pas-lgn').show();
-                    error = 1;
-                }
-            }
+            }// else {
+            //     if ($('#password-login').val().length < 8) {
+            //         $('#tp-log').hide();
+            //         $('#password-login').addClass('is-invalid');
+            //         $('#err-pas-lgn').text('{{ __('auth.min_password') }}');
+            //         $('#err-pas-lgn').show();
+            //         error = 1;
+            //     }
+            // }
         });
         $(document).on("keyup", "#email-login", function() {
             $('#email-login').removeClass('is-invalid');
