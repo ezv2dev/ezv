@@ -903,12 +903,14 @@
                                 {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
                                     __('user_page.There is no description yet') !!}
                             </p>
+                            <span id="buttonShowMoreDescription">
                             @if (Str::length($villa[0]->description) > 600)
                                 <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
                                     onclick="showMoreDescription();"><span
                                         style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
                                     <span style="color: #ff7400;">></span></a>
                             @endIf
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">

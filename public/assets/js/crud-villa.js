@@ -448,29 +448,11 @@ function editVillaTag(id_villa) {
     });
 }
 
-function editDescriptionForm() {
-    var form = document.getElementById("description-form");
-    var content = document.getElementById("description-content");
-    var btn = document.getElementById("btnShowMoreDescription");
-    form.classList.add("d-block");
-    content.classList.add("d-none");
-    btn.classList.add("d-none");
-}
-
-function editDescriptionCancel() {
-    var form = document.getElementById("description-form");
-    var formInput = document.getElementById("description-form-input");
-    var content = document.getElementById("description-content");
-    var btn = document.getElementById("btnShowMoreDescription");
-    form.classList.remove("d-block");
-    content.classList.remove("d-none");
-    btn.classList.remove("d-none");
-}
-
 $(document).on("keyup", "textarea#description-form-input", function () {
     $("#description-form-input").css("border", "");
     $("#err-desc").hide();
 });
+
 function editDescriptionVilla(id_villa) {
     let error = 0;
     if (!$("textarea#description-form-input").val()) {
@@ -500,6 +482,10 @@ function editDescriptionVilla(id_villa) {
             success: function (response) {
                 $("#description-content").html(response.data.substring(0, 600));
 
+                console.log(response.data.length);
+
+                $("#description-form-input").val(response.data);
+
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -507,13 +493,13 @@ function editDescriptionVilla(id_villa) {
                 });
 
                 if (response.data.length > 600) {
-                    $("#btnShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").append(
+                    $("#buttonShowMoreDescription").html("");
+                    $("#buttonShowMoreDescription").append(
                         '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
                     );
                     $("#modalDescriptionVilla").html(response.data);
                 } else {
-                    $("#btnShowMoreDescription").html("");
+                    $("#buttonShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
                 }
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
@@ -541,11 +527,28 @@ function editDescriptionVilla(id_villa) {
                 btn.classList.remove("disabled");
 
                 editDescriptionCancel();
-
-                $("#description-form-input").val(response.data);
             },
         });
     }
+}
+
+function editDescriptionForm() {
+    var form = document.getElementById("description-form");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.add("d-block");
+    content.classList.add("d-none");
+    btn.classList.add("d-none");
+}
+
+function editDescriptionCancel() {
+    var form = document.getElementById("description-form");
+    var formInput = document.getElementById("description-form-input");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.remove("d-block");
+    content.classList.remove("d-none");
+    btn.classList.remove("d-none");
 }
 
 // ! Change Profile Villa
@@ -559,6 +562,7 @@ $("#imageVilla").on("change", function (ev) {
 
     readerImageVilla = new FileReader();
 });
+
 $("#updateImageForm").submit(function (e) {
     let error = 0;
     if (document.getElementById("imageVilla").files.length == 0) {
