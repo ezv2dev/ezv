@@ -340,12 +340,12 @@
     }
 
     .container-grid-sub-cat{
-        grid-template-columns: repeat( 4, minmax(0, 1fr) );
+        grid-template-columns: repeat( 6, minmax(0, 1fr) );
         grid-template-rows: repeat(1, auto) !important;
         gap: 10px;
         display: grid;
-        padding-left: 102px;
-        padding-right: 102px;
+        padding-left: 30px;
+        padding-right: 30px;
         position: fixed;
         z-index: 222;
         top: 210px;
@@ -369,11 +369,11 @@
     }
 
     .container-grid-sub-cat > div:nth-child(5){
-        display: none;
+        display: flex;
     }
 
     .container-grid-sub-cat > div:nth-child(4){
-        display: none;
+        display: flex;
     }
 
     .container-grid-sub-cat > div:nth-child(3){

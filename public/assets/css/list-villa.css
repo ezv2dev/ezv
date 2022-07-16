@@ -279,7 +279,7 @@ video {
     flex-direction: column;
     margin: 0 auto;
     width: 100%;
-    min-width: 320px;
+    min-width: none !important;
     min-height: 100vh;
 }
 
@@ -3008,6 +3008,16 @@ input::-webkit-inner-spin-button {
         transition: all 0.2s ease;
     }
 }
+@media only screen and (max-width: 320px) {
+    .pagination .page-item {
+        width: 9.09% !important;
+    }
+}
+@media only screen and (min-width: 321px) and (max-width: 768px) { 
+    .pagination .page-item {
+        width: 30px !important;
+    }
+}
 @media only screen and (max-width: 569px) {
     .list-image-content-villa .slick-slide {
         width: 100vw !important;
@@ -3019,6 +3029,19 @@ input::-webkit-inner-spin-button {
     }
 }
 @media only screen and (max-width: 991px) {
+    .pagination {
+        width: 100vw !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        justify-content: center !important;
+    }
+    .pagination .page-item.active .page-link {
+        margin-top: 2px !important;
+    }
+    .pagination .page-item .page-link {
+        width: 100% !important;
+        height: 30px !important;
+    }
     .search-box {
         height: 0px !important;
     }
