@@ -603,8 +603,10 @@
                                 <div id="name-form" style="display:none;">
                                     <input type="hidden" name="id_restaurant"
                                         value="{{ $restaurant->id_restaurant }}" required>
-                                    <textarea style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
                                         placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
+                                    <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant"
                                         onclick="saveNameRestaurant();" style="background-color: #ff7400">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -737,6 +739,8 @@
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
+                                    <small id="err-shrt-desc" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="saveShortDescription();">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
@@ -1321,7 +1325,7 @@
                     @auth
                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                             <section id="add-gallery" class="add-gallery">
-                                <form class="dropzone" id="frmTarget">
+                                <form class="dropzone dz-image-add" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
                                         <span>{{ __('user_page.Click here to upload your files') }}</span>
@@ -1329,6 +1333,7 @@
                                     <input type="hidden" value="{{ $restaurant->id_restaurant }}" id="id_restaurant"
                                         name="id_restaurant">
                                 </form>
+                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -1408,7 +1413,7 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <section id="add-menu" class="add-menu">
-                                    <form class="dropzone" id="frmMenu">
+                                    <form class="dropzone dz-mn" id="frmMenu">
                                         @csrf
                                         <div class="dz-message" data-dz-message>
                                             <span>{{ __('user_page.Click here to upload your files') }}</span>
@@ -1416,6 +1421,7 @@
                                         <input type="hidden" value="{{ $restaurant->id_restaurant }}"
                                             id="id_restaurant" name="id_restaurant">
                                     </form>
+                                    <small id="err-dz-mn" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                     <button type="submit" id="button_menu"
                                         class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                                 </section>
@@ -1460,8 +1466,10 @@
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
-                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100 form-control" rows="5"
+                                                    placeholder="{{ __('user_page.Make your short description here') }}">{{ $restaurant->description }}</textarea>
+                                                <small id="err-desc" style="display: none;"
+                                                class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
@@ -4361,10 +4369,17 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    myDropzone.processQueue();
+                    if(!myDropzone.files.length) {
+                        $(".dz-image-add").css("border", "solid #e04f1a 1px");
+                        $('#err-dz').show();
+                    } else {
+                        $(".dz-image-add").css("border", "");
+                        $('#err-dz').hide();
+                        myDropzone.processQueue();
 
-                    $("#button").html('Uploading Gallery...');
-                    $("#button").addClass('disabled');
+                        $("#button").html('Uploading Gallery...');
+                        $("#button").addClass('disabled');
+                    }
                 });
 
                 this.on('sending', function(file, xhr, formData) {
@@ -4500,8 +4515,17 @@
                 // Update selector to match your button
                 $("#button_menu").click(function(e) {
                     e.preventDefault();
-                    myDropzone.processQueue();
+                    if(!myDropzone.files.length) {
+                        $(".dz-mn").css("border", "solid #e04f1a 1px");
+                        $('#err-dz-mn').show();
+                    } else {
+                        $(".dz-mn").css("border", "");
+                        $('#err-dz-mn').hide();
+                        myDropzone.processQueue();
 
+                        $("#button_menu").html('Uploading Gallery...');
+                        $("#button_menu").addClass('disabled');
+                    }
                 });
 
                 this.on('sending', function(file, xhr, formData) {
