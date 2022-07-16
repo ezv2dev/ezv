@@ -818,11 +818,10 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
                                         @auth
                                             @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
-                                                <a class="pointer-normal"
-                                                    onclick="view({{ $item->id_video }})"
+                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
                                                     href="javascript:void(0);">
                                                 @else
                                                     <a class="pointer-normal" onclick="showPromotionMobile()"
@@ -830,7 +829,7 @@
                                             @endif
                                         @endauth
 
-                                            @guest
+                                        @guest
                                             <a class="pointer-normal" onclick="showPromotionMobile()"
                                                 href="javascript:void(0);">
                                             @endguest
@@ -880,7 +879,8 @@
                                     <input type="hidden" value="{{ $villa[0]->id_villa }}" id="id_villa"
                                         name="id_villa">
                                 </form>
-                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
+                                <small id="err-dz" style="display: none;"
+                                    class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -930,12 +930,12 @@
                                     __('user_page.There is no description yet') !!}
                             </p>
                             <span id="buttonShowMoreDescription">
-                            @if (Str::length($villa[0]->description) > 600)
-                                <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
-                                    onclick="showMoreDescription();"><span
-                                        style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                    <span style="color: #ff7400;">></span></a>
-                            @endIf
+                                @if (Str::length($villa[0]->description) > 600)
+                                    <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
+                                @endIf
                             </span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -3449,10 +3449,9 @@
                         @guest
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
-                                <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                <button onclick="share_function()">Copy link</button> -->
-                                    <button type="button" class="d-flex p-0 copier"
-                                        onclick="copyURI(event)">
+                                    <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
+                                    <button onclick="share_function()">Copy link</button> -->
+                                    <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
                                 </div>
@@ -3948,7 +3947,7 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    if(!myDropzone.files.length) {
+                    if (!myDropzone.files.length) {
                         $(".dz-image-add").css("border", "solid #e04f1a 1px");
                         $('#err-dz').show();
                     } else {
@@ -4227,8 +4226,10 @@
                 document.getElementById('child2').value);
             document.getElementById('total_guest3').value = document.getElementById('total_guest2').value;
             document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+            document.getElementById('total_guest5').value = document.getElementById('total_guest2').value;
             document.getElementById('adult3').value = document.getElementById('adult2').value;
             document.getElementById('adult4').value = document.getElementById('adult2').value;
+            document.getElementById('adult5').value = document.getElementById('adult2').value;
             document.getElementById('adult_va').value = document.getElementById('adult2').value;
         }
 
@@ -4238,8 +4239,10 @@
                 parseInt(document.getElementById('child2').value);
             document.getElementById('total_guest3').value = document.getElementById('total_guest2').value;
             document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+            document.getElementById('total_guest5').value = document.getElementById('total_guest2').value;
             document.getElementById('adult3').value = document.getElementById('adult2').value;
             document.getElementById('adult4').value = document.getElementById('adult2').value;
+            document.getElementById('adult5').value = document.getElementById('adult2').value;
             document.getElementById('adult_va').value = document.getElementById('adult2').value;
         }
 
@@ -4249,8 +4252,10 @@
                 parseInt(document.getElementById('child2').value);
             document.getElementById('total_guest3').value = document.getElementById('total_guest2').value;
             document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+            document.getElementById('total_guest5').value = document.getElementById('total_guest2').value;
             document.getElementById('child3').value = document.getElementById('child2').value;
             document.getElementById('child4').value = document.getElementById('child2').value;
+            document.getElementById('child5').value = document.getElementById('child2').value;
             document.getElementById('child_va').value = document.getElementById('child2').value;
         }
 
@@ -4260,8 +4265,10 @@
                 parseInt(document.getElementById('child2').value);
             document.getElementById('total_guest3').value = document.getElementById('total_guest2').value;
             document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+            document.getElementById('total_guest5').value = document.getElementById('total_guest2').value;
             document.getElementById('child3').value = document.getElementById('child2').value;
             document.getElementById('child4').value = document.getElementById('child2').value;
+            document.getElementById('child5').value = document.getElementById('child2').value;
             document.getElementById('child_va').value = document.getElementById('child2').value;
         }
 
@@ -4269,24 +4276,28 @@
             document.getElementById('infant2').stepUp();
             document.getElementById('infant3').value = document.getElementById('infant2').value;
             document.getElementById('infant4').value = document.getElementById('infant2').value;
+            document.getElementById('infant5').value = document.getElementById('infant2').value;
         }
 
         function infant_decrement() {
             document.getElementById('infant2').stepDown();
             document.getElementById('infant3').value = document.getElementById('infant2').value;
             document.getElementById('infant4').value = document.getElementById('infant2').value;
+            document.getElementById('infant5').value = document.getElementById('infant2').value;
         }
 
         function pet_increment() {
             document.getElementById('pet2').stepUp();
             document.getElementById('pet3').value = document.getElementById('pet2').value;
             document.getElementById('pet4').value = document.getElementById('pet2').value;
+            document.getElementById('pet5').value = document.getElementById('pet2').value;
         }
 
         function pet_decrement() {
             document.getElementById('pet2').stepDown();
             document.getElementById('pet3').value = document.getElementById('pet2').value;
             document.getElementById('pet4').value = document.getElementById('pet2').value;
+            document.getElementById('pet5').value = document.getElementById('pet2').value;
         }
     </script>
 

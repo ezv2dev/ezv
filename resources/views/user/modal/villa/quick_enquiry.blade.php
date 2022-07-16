@@ -102,7 +102,7 @@ use Illuminate\Support\Facades\Crypt;
                                     </p>
                                     <input class=""
                                         style="font-size: 15px; margin-left: 0px; width:100%; text-align: center; border: none !important; border-color: transparent !important;"
-                                        type="text" id="check_in3" name="check_in" style="width:80%; border:0"
+                                        type="text" id="check_in5" name="check_in" style="width:80%; border:0"
                                         placeholder="{{ Translate::translate('Add Date') }}" readonly>
                                 </button>
                             </div>
@@ -115,7 +115,7 @@ use Illuminate\Support\Facades\Crypt;
                                     </p>
                                     <input class=""
                                         style="font-size: 15px; margin-left: 0px; width: 100px; text-align: center; border: none !important; border-color: transparent !important;"
-                                        type="text" id="check_out3" name="check_out" style="width:80%; border:0"
+                                        type="text" id="check_out5" name="check_out" style="width:80%; border:0"
                                         placeholder="{{ Translate::translate('Add Date') }}" readonly>
                                 </button>
                             </div>
@@ -146,10 +146,10 @@ use Illuminate\Support\Facades\Crypt;
                         <button type="button" class="collapsible2">{{ Translate::translate('Number of Guest') }}
                             <p class="guest-right">
                                 {{ Translate::translate('guest') }}</p>
-                            <input class="guest-right-input" type="number" id="total_guest4" value="1"
+                            <input class="guest-right-input" type="number" id="total_guest5" value="1"
                                 min="0" readonly>
                         </button>
-                        <div class="content sidebar-popup2" style="left: 633px;" id="popup_guest2">
+                        <div class="content sidebar-popup2" style="left: 633px;" id="popup_guest4">
                             <div class="row" style="margin-top: 10px;">
 
                                 <div class="reserve-input-row">
@@ -172,7 +172,7 @@ use Illuminate\Support\Facades\Crypt;
                                         </a>
                                         <div
                                             style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                            <p><input type="number" id="adult4" name="adult" value="1"
+                                            <p><input type="number" id="adult5" name="adult" value="1"
                                                     min="1"
                                                     style="text-align: center; border:none; width:30px;"
                                                     min="0" readonly></p>
@@ -204,7 +204,7 @@ use Illuminate\Support\Facades\Crypt;
                                         </a>
                                         <div
                                             style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                            <p><input type="number" id="child4" name="child" value="0"
+                                            <p><input type="number" id="child5" name="child" value="0"
                                                     style="text-align: center; border:none; width:30px;"
                                                     min="0" readonly></p>
                                         </div>
@@ -235,7 +235,7 @@ use Illuminate\Support\Facades\Crypt;
                                         </a>
                                         <div
                                             style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                            <p><input type="number" id="infant4" name="infant" value="0"
+                                            <p><input type="number" id="infant5" name="infant" value="0"
                                                     style="text-align: center; border:none; width:30px;"
                                                     min="0" readonly></p>
                                         </div>
@@ -262,7 +262,7 @@ use Illuminate\Support\Facades\Crypt;
                                         </a>
                                         <div
                                             style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                            <p><input type="number" id="pet4" name="pet" value="0"
+                                            <p><input type="number" id="pet5" name="pet" value="0"
                                                     style="text-align: center; border:none; width:30px;"
                                                     min="0" readonly></p>
                                         </div>
@@ -286,7 +286,7 @@ use Illuminate\Support\Facades\Crypt;
                                     {{ Translate::translate('Total Nights') }}</p>
                             </div>
                             <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                <input id="sum_night3" value="0"
+                                <input id="sum_night4" value="0"
                                     style="font-size: 12px; text-align:left; width: 20px; border:0"><span
                                     style="font-size: 12px;">nights</span>
                             </div>
@@ -394,3 +394,28 @@ use Illuminate\Support\Facades\Crypt;
         </div>
     </div>
 </div>
+
+<script>
+    $('#check_in4').flatpickr({
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        onChange: function(selectedDates, dateStr, instance) {
+            $('#check_out4').flatpickr({
+                enableTime: false,
+                dateFormat: "Y-m-d",
+                minDate: new Date(dateStr).fp_incr(1),
+                onChange: function(selectedDates, dateStr, instance) {
+                    var start = new Date($('#check_in4').val());
+                    var end = new Date($('#check_out4').val());
+                    var sum_night = (end - start) / 1000 / 60 / 60 / 24;
+                    var min_stay = $('#min_stay').val();
+                    var minimum = new Date($('#check_in4').val()).fp_incr(min_stay);
+                    if (sum_night < min_stay) {
+                        alert("minimum stay is " + min_stay + " days");
+                    }
+                }
+            });
+        }
+    });
+</script>
