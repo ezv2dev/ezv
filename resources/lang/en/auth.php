@@ -48,4 +48,9 @@ return [
     'empty_discount' => 'The discount field is required',
 
     'empty_file' => 'The file field is required',
+
+    'total_room' => 'The total rooms field is required',
+    'total_cap' => 'The total capaciti field is required',
+    'room_size' => 'The rooms size field is required',
+    'name_room' => 'The room name field is required',
 ];

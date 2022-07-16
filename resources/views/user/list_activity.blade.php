@@ -39,8 +39,6 @@
     <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
-            <div class="col-lg-12">
-
                 @php
                     $fcategory = '';
                 @endphp
@@ -74,11 +72,44 @@
                         </a>
                     </div>
                 </div>
-
-                <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
-                    @if (request()->get('fCategory') == null)
-                        @foreach ($subCategoryAll->take(8) as $item)
+                <div class="stickySubCategory">
+                            <div id="filter-subcat-bg-color" style="width: 100%;"
+                                class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
+                                @if (request()->get('fCategory') == null)
+                                    @foreach ($subCategoryAll->take(8) as $item)
+                                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                                            onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
+                                            <div>
+                                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                                    @php
+                                                        $isChecked = '';
+                                                        $filterIds = explode(',', request()->get('fSubCategory'));
+                                                    @endphp @if (in_array($item->id_subcategory, $filterIds))
+                                                    style="color: #ff7400 !important;"
+                                    @endif>
+                                    </i>
+                            </div>
+                            <div>
+                                <span class="translate-text-group-items list-description {{ $textColor }}">
+                                    {{ $item->name }}
+                                </span>
+                            </div>
+                        </div>
+                        @endforeach
+                        @if ($subCategoryAll->count() > 6)
+                            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
+                                <div>
+                                    <div>
+                                        <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                                    </div>
+                                    <p class="text-13 list-description {{ $textColor }} m-0">
+                                        {{ __('user_page.More') }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+                    @else
+                        @foreach ($subCategory->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
                                 <div>
@@ -88,47 +119,14 @@
                                             $filterIds = explode(',', request()->get('fSubCategory'));
                                         @endphp @if (in_array($item->id_subcategory, $filterIds))
                                         style="color: #ff7400 !important;"
-                        @endif>
-                        </i>
-                </div>
-                <div>
-                    <span class="translate-text-group-items list-description {{ $textColor }}">
-                        {{ $item->name }}
-                    </span>
-                </div>
-            </div>
-            @endforeach
-            @if ($subCategoryAll->count() > 6)
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
+                        @endif></i>
+                    </div>
                     <div>
-                        <div>
-                            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                        </div>
-                        <p class="text-13 list-description {{ $textColor }} m-0">
-                            {{ __('user_page.More') }}
-                        </p>
+                        <span class="translate-text-group-items list-description {{ $textColor }}">
+                            {{ $item->name }}
+                        </span>
                     </div>
                 </div>
-            @endif
-        @else
-            @foreach ($subCategory->take(8) as $item)
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                    onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
-                    <div>
-                        <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                            @php
-                                $isChecked = '';
-                                $filterIds = explode(',', request()->get('fSubCategory'));
-                            @endphp @if (in_array($item->id_subcategory, $filterIds))
-                            style="color: #ff7400 !important;"
-            @endif></i>
-        </div>
-        <div>
-            <span class="translate-text-group-items list-description {{ $textColor }}">
-                {{ $item->name }}
-            </span>
-        </div>
-    </div>
     @endforeach
     @if ($subCategory->count() > 6)
         <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 list-description {{ $textColor }} "

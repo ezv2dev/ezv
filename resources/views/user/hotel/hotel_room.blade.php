@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title> {{ $hotel[0]->name }} - EZV2</title>
+    <title id="hotelTitle">{{ $hotelRoom->name }} - {{ $hotel[0]->name }} - EZV2</title>
     <meta name="description" content="EZV2 ">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="EZV2">
@@ -67,6 +68,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
+    <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
 </head>
 
 <body style="background-color:white">
@@ -222,10 +225,10 @@
                     <div class="col-lg-4- col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($hotelRoom->image)
-                                <img
+                                <img id="imageProfileHotelRoom"
                                     src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotelRoom->image) }}">
                             @else
-                                <img src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                <img id="imageProfileHotelRoom" src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
                             @auth
@@ -316,23 +319,22 @@
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <form action="{{ route('room_update_name') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id_hotel_room"
-                                            value="{{ $hotelRoom->id_hotel_room }}" required>
-                                        <input type="text" style="width: 100%;" class="form-control" name="name"
-                                            id="name-form-input" maxlength="100"
-                                            placeholder="{{ __('user_page.Hotel Room Name Here') }}"
-                                            value="{{ $hotelRoom->name }}" required>
-                                        <button type="submit" class="btn btn-sm btn-primary"
-                                            style="background-color: #ff7400">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editNameCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
-                                    </form>
+                                    {{-- <form action="{{ route('room_update_name') }}" method="post">
+                                        @csrf --}}
+                                    <input type="hidden" id="name-hotel" value="{{ $hotel[0]->name }}">
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
+                                        rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}" required>{{ $hotelRoom->name }}</textarea>
+                                    <small id="err-name" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
+                                        style="background-color: #ff7400"
+                                        onclick="editNameRoom({{ $hotelRoom->id_hotel_room }})">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
+                                    {{-- </form> --}}
                                 </div>
                             @endif
                         @endauth
@@ -800,7 +802,7 @@
                     @auth
                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                             <section style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
-                                <form class="dropzone" id="frmTarget">
+                                <form class="dropzone dz-image-add" id="frmTarget">
                                     @csrf
                                     <div class="dz-message" data-dz-message>
                                         <span>{{ __('user_page.Click here to upload your files') }}</span>
@@ -808,6 +810,7 @@
                                     <input type="hidden" value="{{ $hotelRoom->id_hotel_room }}" id="id_hotel_room"
                                         name="id_hotel_room">
                                 </form>
+                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button" class="btn btn-primary">Upload</button>
                             </section>
                         @endif
@@ -2654,6 +2657,7 @@
     <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-hotel-room.js') }}"></script>
     <script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
+    <script src="{{ asset('assets/js/crud-hotel-room.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -3157,8 +3161,16 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    myDropzone.processQueue();
-
+                    if(!myDropzone.files.length) {
+                        $(".dz-image-add").css("border", "solid #e04f1a 1px");
+                        $('#err-dz').show();
+                    } else {
+                        $(".dz-image-add").css("border", "");
+                        $('#err-dz').hide();
+                        myDropzone.processQueue();
+                        $("#button").html('Uploading Gallery...');
+                        $("#button").addClass('disabled');
+                    }
                 });
 
                 this.on('sending', function(file, xhr, formData) {

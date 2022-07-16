@@ -4403,7 +4403,8 @@
                 });
 
                 this.on("addedfile", function(file) {
-
+                    $(".dz-image-add").css("border", "");
+                    $('#err-dz').hide();
                     // Create the remove button
                     var removeButton = Dropzone.createElement(
                         "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
@@ -4544,7 +4545,8 @@
                 });
 
                 this.on("addedfile", function(file) {
-
+                    $(".dz-mn").css("border", "");
+                    $('#err-dz-mn').hide();
                     // Create the remove button
                     var removeButton = Dropzone.createElement(
                         "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
@@ -4590,7 +4592,7 @@
             });
 
             $window.scroll(function() {
-                $amenitiesTop = $("#amenities").offset().top;
+                $amenitiesTop = $("#amenities").offset().top + 110;
                 $sidebarHeight = $sidebar.height();
                 $result = $amenitiesTop - $sidebarHeight;
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {

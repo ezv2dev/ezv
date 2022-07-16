@@ -8,8 +8,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('room_update_image') }}" method="POST" id="basic-form" class="js-validation"
-                    enctype="multipart/form-data" onsubmit="showingLoading()">
+                {{-- <form action="{{ route('room_update_image') }}" method="POST" id="basic-form" class="js-validation"
+                    enctype="multipart/form-data" onsubmit="showingLoading()"> --}}
+                <form action="javascript:void();" method="POST" id="updateImageForm" class="js-validation"
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_hotel_room" id="id_hotel_room" value="{{ $hotelRoom->id_hotel_room }}">
                     <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
@@ -26,15 +28,16 @@
                                 <img style="width: 100%" src="" alt="">
                             </div>
                             <div class="controls" style="display: none;">
-                                <input type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
+                                <input id="imageRoom" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
                             </div>
                         </div>
+                        <small id="err-img" style="display: none;" class="invalid-feedback">{{ __('auth.empty_img') }}</small>
                     </div>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center;">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" class="btn btn-sm btn-primary" id="btnupdateImageForm">
                                 {{ __('user_page.Save Image') }}
                             </button>
                         </div>
