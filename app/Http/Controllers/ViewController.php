@@ -1362,7 +1362,7 @@ class ViewController extends Controller
             'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
         ];
 
-        if ($status == 200) {
+        if ($createdVilla) {
             return response()->json([
                 'message' => 'Update Gallery Homes',
                 'data' => $villaReturn,
