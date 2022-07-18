@@ -141,7 +141,8 @@
     aria-labelledby="modal-default-fadein" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content modal-content-editprice" style="border-radius:15px;">
-            <div class="modal-header-editprice">
+            <div class="modal-header-editprice"
+            style="border-bottom: 0.1rem solid #2C3333 !important;">
                 <div class="row">
                     <div class="col-11">
                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
@@ -312,7 +313,9 @@
                         </div>
 
                         <div class="tab-pane" id="availablity">
-                            <div class="modal-header-editprice">
+                            <div class="modal-header-editprice" style="
+                            margin-top: -10px;
+                            margin-bottom: -20px;">
                                 <div class="row">
                                     <div class="col-11">
                                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
@@ -381,7 +384,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="addAvailability">
-                                        <hr class="mt-3">
+                                        {{-- <hr class="mt-3"> --}}
                                         <div class="row">
                                             <div class="col-12">
                                                 <div id="calendar2"></div>

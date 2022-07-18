@@ -113,8 +113,8 @@
                     </a>
                 </div>
 
-                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory" style="width: 100%;"
-                    data-isshow="true">
+                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory"
+                    style="width: 100%;" data-isshow="true">
                     <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
                         <div>
                             <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
@@ -261,17 +261,17 @@
 
     {{-- SEARCH FUNCTION --}}
     <script>
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
+        // function moreCategory() {
+        //     $('#categoryModal').modal('show');
+        // }
 
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
+        // function moreSubCategory() {
+        //     $('#modalSubCategory').modal('show');
+        // }
 
-        function filterMain() {
-            $('#modalFiltersHome').modal('show');
-        }
+        // function filterMain() {
+        //     $('#modalFiltersHome').modal('show');
+        // }
 
         function villaRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/homes/search?${suburl}`;
@@ -378,14 +378,41 @@
             var fBathroomFormInput = $("input[name='fBathroom']:checked").val();
             var fBedsFormInput = $("input[name='fBeds']:checked").val();
             var fAmenitiesFormInput = [];
-
             var fCategoryFormInput = [];
-            $("input[name='fCategory[]']:checked").each(function() {
-                fCategoryFormInput.push(parseInt($(this).val()));
-            });
+
+
             if (valueCategory != null) {
-                fCategoryFormInput.push(valueCategory);
+                $("input[name='fCategory[]']").prop("checked", false);
+                $("input[name='fCategory[]']:checked").each(function() {
+                    fCategoryFormInput.push(parseInt($(this).val()));
+                });
+                if (fCategoryFormInput.includes(valueCategory) == true) {
+                    var filterCheck = fCategoryFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueCategory;
+                    }
+
+                    var filteredCategory = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    fCategoryFormInput.push(valueCategory);
+
+                    var filteredCategory = fCategoryFormInput.filter(function(item, pos) {
+                        return fCategoryFormInput.indexOf(item) == pos;
+                    });
+                }
+            } else {
+                $("input[name='fCategory[]']:checked").each(function() {
+                    fCategoryFormInput.push(parseInt($(this).val()));
+                });
+
+                var filteredCategory = fCategoryFormInput.filter(function(item, pos) {
+                    return fCategoryFormInput.indexOf(item) == pos;
+                });
             }
+
             if (valueClick != null) {
                 $("input[name='fAmenities[]']:checked").each(function() {
                     fAmenitiesFormInput.push(parseInt($(this).val()));
@@ -418,7 +445,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${fCategoryFormInput}&fAmenities=${filteredArray}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${filteredCategory}&fAmenities=${filteredArray}`;
 
             villaRefreshFilter(subUrl);
         }

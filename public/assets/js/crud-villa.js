@@ -215,9 +215,6 @@ function editBedroomVilla(id_villa) {
     var children1 = $("input[name='children1']").val();
     var size = $("input[name='size']").val();
 
-    saveBedroomDetail(id_villa);
-    return;
-
     $.ajax({
         type: "POST",
         headers: {
@@ -274,39 +271,159 @@ function editBedroomVilla(id_villa) {
             });
         },
     });
+
+    saveBedroomDetail(id_villa);
 }
 
-function saveBedroomDetail(id_villa) {
+async function saveBedroomDetail(id_villa) {
     console.log("hit saveBedroomDetail");
-    let content = $(".bedroomDetailFormContent").eq(0);
-    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
-    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
-    let bedroomIds = [];
-    let bathroomIds = [];
-    for (let index = 0; index < bedroomRawContent.length; index++) {
-        bedroomIds.push(bedroomRawContent.eq(index).val());
-    }
-    for (let index = 0; index < bathroomRawContent.length; index++) {
-        bathroomIds.push(bathroomRawContent.eq(index).val());
-    }
+    console.log($(".bedroomDetailFormContent").length);
+    let formData = [];
+    for (let i = 0; i < $(".bedroomDetailFormContent").length; i++) {
+        const content = $(".bedroomDetailFormContent").eq(i);
 
-    let bedRawContent = content.find(".bedroomDetailFormContentBed");
-    let bed = [];
-    for (let index = 0; index < bedRawContent.length; index++) {
-        bed.push({
-            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
-            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+        let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+        let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+        let bedroomIds = [];
+        let bathroomIds = [];
+        for (let index = 0; index < bedroomRawContent.length; index++) {
+            bedroomIds.push(bedroomRawContent.eq(index).val());
+        }
+        for (let index = 0; index < bathroomRawContent.length; index++) {
+            bathroomIds.push(bathroomRawContent.eq(index).val());
+        }
+
+        let bedRawContent = content.find(".bedroomDetailFormContentBed");
+        let bed = [];
+        for (let index = 0; index < bedRawContent.length; index++) {
+            bed.push({
+                id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+                qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+            });
+        }
+
+        formData.push({
+            bathroom_ids: bathroomIds,
+            bedroom_ids: bedroomIds,
+            bed: bed,
         });
     }
+    await $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/bedroom/detail",
+        data: {
+            id_villa: id_villa,
+            data: formData
+        },
+        cache: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function (response) {
+            if (response.room_count) {
+                $("#bedroomID").html(response.room_count);
+            }
+            if (response.bed_count) {
+                $("#bedsID").html(response.bed_count);
+            }
 
-    let formData = {
-        id_villa: id_villa,
-        bathroom_ids: bathroomIds,
-        bedroom_ids: bedroomIds,
-        bed: bed,
-    };
+            let content = ``;
+            for (let index = 0; index < response.data.length; index++) {
+                const data = response.data[index];
+                content += contentBedroomDetail(index, data);
+            }
 
-    console.log(formData);
+            $('#bedroom-detail-content').html(content);
+
+            // iziToast.success({
+            //     title: "Success",
+            //     message: response.message,
+            //     position: "topRight",
+            // });
+        },
+        error: function (jqXHR, exception) {
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+        },
+    });
+}
+
+function contentBedroomDetail(count, data) {
+    let bedroomAmenities = ``;
+    if(data.villa_bedroom_detail_bedroom_amenities){
+        for (let index = 0; index < data.villa_bedroom_detail_bedroom_amenities.length; index++) {
+            const item = data.villa_bedroom_detail_bedroom_amenities[index];
+            bedroomAmenities += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.name}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let bathroomAmenities = ``;
+    if(data.villa_bedroom_detail_bathroom_amenities){
+        for (let index = 0; index < data.villa_bedroom_detail_bathroom_amenities.length; index++) {
+            const item = data.villa_bedroom_detail_bathroom_amenities[index];
+            bathroomAmenities += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.name}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let bed = ``;
+    if(data.villa_bedroom_detail_bed){
+        for (let index = 0; index < data.villa_bedroom_detail_bed.length; index++) {
+            const item = data.villa_bedroom_detail_bed[index];
+            bed += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.bed.name}
+                    </span>
+                    <span>
+                        x${item.qty}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let content = `
+        <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+            <div class="col-md-12">
+                <h5 class="mb-3">Bedroom ${count+1}</h5>
+            </div>
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    ${bedroomAmenities}
+                    ${bed}
+                </div>
+                <div class="col-md-6">
+                    ${bathroomAmenities}
+                </div>
+            </div>
+        </div>
+    `;
+
+    return content;
 }
 
 function editCategoryV() {
@@ -1055,4 +1172,196 @@ $("#updateStoryForm").submit(function (e) {
         });
     }
     // console.log(readerStoryRestaurant);
+});
+
+//save house rules
+$("#houseRuleForm").submit(function (e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveHouseRules");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/houserules/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+
+            if (response.data.children == "yes") {
+                content += '<i class="fas fa-child"></i> Childrens are allowed';
+                content += "<br>";
+            }
+            if (response.data.children == "no") {
+                content += '<i class="fas fa-ban"></i> No children';
+                content += "<br>";
+            }
+
+            if (response.data.infants == "yes") {
+                content += '<i class="fas fa-child"></i> Infants are allowed';
+                content += "<br>";
+            }
+            if (response.data.infants == "no") {
+                content += '<i class="fas fa-ban"></i> No infants';
+                content += "<br>";
+            }
+
+            if (response.data.pets == "yes") {
+                content += '<i class="fas fa-paw"></i> Pets are allowed';
+                content += "<br>";
+            }
+            if (response.data.pets == "no") {
+                content += '<i class="fas fa-ban"></i> No pets';
+                content += "<br>";
+            }
+
+            if (response.data.smoking == "yes") {
+                content += '<i class="fas fa-smoking"></i> Smoking is allowed';
+                content += "<br>";
+            }
+            if (response.data.smoking == "no") {
+                content += '<i class="fas fa-ban"></i> No smoking';
+                content += "<br>";
+            }
+
+            if (response.data.events == "yes") {
+                content += '<i class="fas fa-calendar"></i> Events are allowed';
+                content += "<br>";
+            }
+            if (response.data.events == "no") {
+                content += '<i class="fas fa-ban"></i> No events';
+                content += "<br>";
+            }
+
+            $("#houseRuleContent").html(content);
+
+            $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});
+
+$("#guestSafetyForm").submit(function (e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveGuestSafety");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/guessafety/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+            let contentModal = "";
+
+            for (let i = 0; i < 4; i++) {
+                content +=
+                    '<i class="fas fa-' +
+                    response.data[i].icon +
+                    '"></i> <span class="translate-text-single">' +
+                    response.data[i].guest_safety +
+                    "</span><br>";
+            }
+
+            $("#btnShowMoreGuestSafety").html("");
+
+            content +=
+                '<p style="margin-bottom: 0px !important"> <a href="javascript:void(0)" onclick="showMoreGuestSafety()">Show more <i class="fas fa-chevron-right"></i> </a> </p>';
+
+            $("#guestSafetyContent").html(content);
+
+            for (let j = 0; j < response.data.length; j++) {
+                contentModal +=
+                    '<p> <i class="fas fa-' +
+                    response.data[j].icon +
+                    '"></i> <span class="translate-text-group-items">' +
+                    response.data[j].guest_safety +
+                    '</span> </p> <p style="font-size: 12px; margin-top: -20px;"> <span class="translate-text-group-items">' +
+                    response.data[j].description +
+                    "</span> </p>";
+            }
+
+            $("#guestSafetyContentModal").html(contentModal);
+
+            $("#modal-edit-guest-safety").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
 });

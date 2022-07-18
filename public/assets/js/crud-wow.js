@@ -882,8 +882,43 @@ function saveFacilities() {
         },
     });
 }
-
+$("#emailWow").keyup(function (e) {
+    $("#emailWow").removeClass("is-invalid");
+    $("#err-email").hide();
+});
+$("#phoneWow").keyup(function (e) {
+    $("#phoneWow").removeClass("is-invalid");
+    $("#err-phone").hide();
+});
 function saveContactActivity() {
+    let error = 0;
+    let regexMail = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
+    if (!$("#phoneWow").val()) {
+        $("#phoneWow").addClass("is-invalid");
+        $("#err-phone").show();
+        error = 1;
+    } else {
+            $("#phoneWow").removeClass("is-invalid");
+            $("#err-phone").hide();
+    }
+    if (!$("#emailWow").val()) {
+        $("#emailWow").addClass("is-invalid");
+        $("#err-email").show();
+        error = 1;
+    } else {
+        if (!regexMail.test($("#emailWow").val())) {
+            $("#emailWow").addClass("is-invalid");
+            $("#err-email").show();
+            error = 1;
+        } else {
+            $("#emailWow").removeClass("is-invalid");
+            $("#err-email").hide();
+        }
+    }
+
+    if (error == 1) {
+        return false;
+    } else {
     let phone = $('#modal-edit_contact').find("input[name='phone']").val();
     let email = $('#modal-edit_contact').find("input[name='email']").val();
 
@@ -955,6 +990,7 @@ function saveContactActivity() {
             btn.classList.remove("disabled");
         },
     });
+    }
 }
 
 //add save story

@@ -399,7 +399,7 @@
                     <h1 class="card-title">Questions<br>about <br>hosting?</h1>
                     <p>You can host anything, anywhere...</p>
                     <div>
-                        <a href="#" class="btn btn-company text-white">Ask a Superhost</a>
+                        <a href="#" class="btn btn-company text-white">{{ Translate::translate('Learn More') }}</a>
                     </div>
                 </div>
             </div>

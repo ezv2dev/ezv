@@ -488,7 +488,7 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
                 </div>
-                <hr>
+                <hr class="hr-hide" style="display: none;">
                     {{--
                     <div class="row">
                         <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
@@ -625,7 +625,7 @@
                     </div>
                      --}}
                      <div id="bedroomDetailForm"></div>
-                <hr>
+                     {{-- <hr class="hr-hide" style="display: none;"> --}}
             </div>
             <div class="modal-footer" style="background-color: white;">
                  <!-- Submit -->
@@ -1143,7 +1143,7 @@
             for (let i = 0; i < count; i++) {
                 content += contentBedroomDetailForm(i+1, null);
             }
-
+            $('.hr-hide').show();
             $('#bedroomDetailForm').html(content);
         }
 
@@ -1155,7 +1155,7 @@
             for (let i = 0; i < count; i++) {
                 content += contentBedroomDetailForm(i+1, null);
             }
-
+            $('.hr-hide').show();
             $('#bedroomDetailForm').html(content);
         }
     }
@@ -1217,15 +1217,17 @@
                                 {{ $data->name }}
                             </div>
                             <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="decrement_qty_bed('bed${count}{{ $data->name }}')" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                <a type="button" onclick="decrement_qty_bed('bed${count}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                    <!-- <i class="fa-solid fa-minus" style="padding:30%"></i> -->
+                                    <i class="fa fa-circle-minus fa-lg" aria-hidden="true"></i>
                                 </a>
                                 <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
                                     <input type="hidden" name="id_bed" value="{{ $data->id_bed }}" readonly="">
                                     <p><input type="number" id="bed${count}{{ $data->name }}" name="qty" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
                                 </div>
-                                <a type="button" onclick="increment_qty_bed('bed${count}{{ $data->name }}')" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                <a type="button" onclick="increment_qty_bed('bed${count}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                    <!-- <i class="fa-solid fa-plus" style="padding:30%"></i> -->
+                                    <i class="fa fa-circle-plus fa-lg" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>

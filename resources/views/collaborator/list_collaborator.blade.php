@@ -719,13 +719,13 @@ if (request()->fCategory) {
 
     {{-- FILTER RESTAURANT LIST --}}
     <script>
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
+        // function moreCategory() {
+        //     $('#categoryModal').modal('show');
+        // }
 
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
+        // function moreSubCategory() {
+        //     $('#modalSubCategory').modal('show');
+        // }
 
         function collabRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/collaborator/search?${suburl}`;
@@ -733,9 +733,9 @@ if (request()->fCategory) {
     </script>
 
     <script>
-        function filterCollab() {
-            $('#modalFiltersCollab').modal('show');
-        }
+        // function filterCollab() {
+        //     $('#modalFiltersCollab').modal('show');
+        // }
 
         function collabFilter(valueCategory, valueClick) {
             var sLocationFormInput = $("input[name='sLocation']").val();

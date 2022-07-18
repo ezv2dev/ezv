@@ -224,25 +224,29 @@
         gap: 10px;
         display: grid;
     }
-    @media only screen and (max-width: 545px) { 
+
+    @media only screen and (max-width: 545px) {
         .category-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-        }   
+        }
     }
-    @media only screen and (min-width: 546px) and (max-width: 768px) { 
+
+    @media only screen and (min-width: 546px) and (max-width: 768px) {
         .category-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
-        }   
+        }
     }
-    @media only screen and (min-width: 769px) and (max-width: 991px) { 
+
+    @media only screen and (min-width: 769px) and (max-width: 991px) {
         .category-grid {
             grid-template-columns: repeat(4, minmax(0, 1fr));
-        }   
+        }
     }
-    @media only screen and (min-width: 992px) and (max-width: 1199px) { 
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
         .category-grid {
             grid-template-columns: repeat(8, minmax(0, 1fr));
-        }   
+        }
     }
 </style>
 
@@ -261,7 +265,7 @@
             <div class="modal-body modal-body-category d-flex align-content-start flex-wrap" style="overflow-y:scroll;">
                 <div class="category-grid translate-text-group">
                     @foreach ($categories as $item)
-                        <div class="grid-img-container" onclick="wowFilter({{ $item->id_category }}, null, 1)">
+                        <div class="grid-img-container" onclick="wowFilter({{ $item->id_category }}, null, 1, true)">
                             <img @if ($fcategory == $item->id_category) style="border: 5px solid #ff7400;" @endif
                                 class="grid-img lozad" style="width: 100%; heigth: 100%;" src="{{ LazyLoad::show() }}"
                                 data-src="https://source.unsplash.com/random/?{{ $item->name }}">

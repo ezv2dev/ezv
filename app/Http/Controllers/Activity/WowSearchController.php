@@ -59,6 +59,8 @@ class WowSearchController extends Controller
         $subCategory = ActivitySubcategory::where('id_category', $fCategory)->get();
         $subCategoryAll = ActivitySubcategory::all();
 
+        // dd($subCategoryAll);
+
         return view('user.list_activity', compact('activity', 'categories', 'subCategory', 'subCategoryAll'));
     }
 

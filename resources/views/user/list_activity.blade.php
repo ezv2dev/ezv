@@ -39,79 +39,43 @@
     <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
-                @php
-                    $fcategory = '';
-                @endphp
+            @php
+                $fcategory = '';
+            @endphp
 
-                <div id="filter-cat-bg-color" style="width:100%;"
-                    class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
-                    @foreach ($categories->take(6) as $item)
-                        <div>
-                            <a href="#" class="grid-img-container"
-                                onclick="wowFilter({{ $item->id_category }}, null, 1)">
-                                <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
-                                    @if (request()->get('fCategory') == $item->id_category) style="border: 5px solid #ff7400;" @endif
-                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
-                                <div class="grid-text translate-text-group-items">
-                                    <!-- <span class="translate-text-group-items text-white">
-                                                {{ $item->name }}
-                                            </span> -->
-                                    {{ $item->name }}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-
-                    <div style="cursor:pointer;" onclick="moreCategory()">
-                        <a class="grid-img-container">
+            <div id="filter-cat-bg-color" style="width:100%;"
+                class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                @foreach ($categories->take(6) as $item)
+                    <div>
+                        <a href="#" class="grid-img-container"
+                            onclick="wowFilter({{ $item->id_category }}, null, 1, true)">
                             <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
-                                data-src="https://source.unsplash.com/random/?bali">
-                            <div class="grid-text">
-                                {{ __('user_page.More') }}
+                                @if (request()->get('fCategory') == $item->id_category) style="border: 5px solid #ff7400;" @endif
+                                data-src="https://source.unsplash.com/random/?{{ $item->name }}">
+                            <div class="grid-text translate-text-group-items">
+                                {{ $item->name }}
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="stickySubCategory">
-                            <div id="filter-subcat-bg-color" style="width: 100%;"
-                                class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
-                                @if (request()->get('fCategory') == null)
-                                    @foreach ($subCategoryAll->take(8) as $item)
-                                        <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                                            onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
-                                            <div>
-                                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                                    @php
-                                                        $isChecked = '';
-                                                        $filterIds = explode(',', request()->get('fSubCategory'));
-                                                    @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                                    style="color: #ff7400 !important;"
-                                    @endif>
-                                    </i>
-                            </div>
-                            <div>
-                                <span class="translate-text-group-items list-description {{ $textColor }}">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
+                @endforeach
+
+                <div style="cursor:pointer;" onclick="moreCategory()">
+                    <a class="grid-img-container">
+                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
+                            data-src="https://source.unsplash.com/random/?bali">
+                        <div class="grid-text">
+                            {{ __('user_page.More') }}
                         </div>
-                        @endforeach
-                        @if ($subCategoryAll->count() > 6)
-                            <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
-                                <div>
-                                    <div>
-                                        <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                                    </div>
-                                    <p class="text-13 list-description {{ $textColor }} m-0">
-                                        {{ __('user_page.More') }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endif
-                    @else
-                        @foreach ($subCategory->take(8) as $item)
+                    </a>
+                </div>
+            </div>
+            <div class="stickySubCategory">
+                <div id="filter-subcat-bg-color" style="width: 100%;"
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
+                    @if (request()->get('fCategory') == null)
+                        @foreach ($subCategoryAll->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
-                                onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)">
+                                onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
                                 <div>
                                     <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
                                         @php
@@ -119,14 +83,47 @@
                                             $filterIds = explode(',', request()->get('fSubCategory'));
                                         @endphp @if (in_array($item->id_subcategory, $filterIds))
                                         style="color: #ff7400 !important;"
-                        @endif></i>
-                    </div>
+                        @endif>
+                        </i>
+                </div>
+                <div>
+                    <span class="translate-text-group-items list-description {{ $textColor }}">
+                        {{ $item->name }}
+                    </span>
+                </div>
+            </div>
+            @endforeach
+            @if ($subCategoryAll->count() > 6)
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
-                        <span class="translate-text-group-items list-description {{ $textColor }}">
-                            {{ $item->name }}
-                        </span>
+                        <div>
+                            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <p class="text-13 list-description {{ $textColor }} m-0">
+                            {{ __('user_page.More') }}
+                        </p>
                     </div>
                 </div>
+            @endif
+        @else
+            @foreach ($subCategory->take(8) as $item)
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                    onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
+                    <div>
+                        <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                            @php
+                                $isChecked = '';
+                                $filterIds = explode(',', request()->get('fSubCategory'));
+                            @endphp @if (in_array($item->id_subcategory, $filterIds))
+                            style="color: #ff7400 !important;"
+            @endif></i>
+        </div>
+        <div>
+            <span class="translate-text-group-items list-description {{ $textColor }}">
+                {{ $item->name }}
+            </span>
+        </div>
+    </div>
     @endforeach
     @if ($subCategory->count() > 6)
         <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13 list-description {{ $textColor }} "
@@ -413,7 +410,7 @@
     </script>
 
     <script>
-        function wowFilter(valueCategory, valueSub, clearSub) {
+        function wowFilter(valueCategory, valueSub, clearSub, unCheckCategory) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sKeywordFormInput = $("input[name='sKeyword']").val();
             var sStart = $("input[name='start_date']").val();
@@ -433,11 +430,13 @@
             setCookie2("sCheck_in", sStart, 1);
             setCookie2("sCheck_out", sEnd, 1);
 
-            var url_wow = window.location.href;
-            var url2 = new URL(url_wow);
+            if (unCheckCategory == true) {
+                var url_wow = window.location.href;
+                var url2 = new URL(url_wow);
 
-            if (url2.searchParams.get('fCategory') == valueCategory) {
-                valueCategory = '';
+                if (url2.searchParams.get('fCategory') == valueCategory) {
+                    valueCategory = '';
+                }
             }
 
             var filterFormInput = [];
@@ -462,7 +461,6 @@
                     return filterFormInput.indexOf(item) == pos;
                 });
             }
-            console.log(`satttt${valueSub}`);
 
             if (clearSub == 1) {
                 var subUrl =
@@ -486,13 +484,13 @@
             }
         });
 
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
+        // function moreCategory() {
+        //     $('#categoryModal').modal('show');
+        // }
 
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
+        // function moreSubCategory() {
+        //     $('#modalSubCategory').modal('show');
+        // }
     </script>
 
     {{-- VIEW MAP --}}

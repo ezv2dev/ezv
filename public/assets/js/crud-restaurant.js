@@ -906,86 +906,123 @@ function saveFacilities() {
     });
 }
 
+//update informasi contact
 let phoneResto = $("#phoneResto").val();
 let emailResto = $("#emailResto").val();
 
-//update informasi contact
+$("#phoneResto").keyup(function (e) {
+    $("#phoneResto").removeClass("is-invalid");
+    $("#err-phone").hide();
+});
+$("#emailResto").keyup(function (e) {
+    $("#emailResto").removeClass("is-invalid");
+    $("#err-email").hide();
+});
 $("#updateContactForm").submit(function (e) {
-    e.preventDefault();
-
-    var formData = new FormData(this);
-
-    var btn = document.getElementById("btnSaveContactResto");
-    btn.textContent = "Saving...";
-    btn.classList.add("disabled");
-
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/restaurant/update/contact",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
-
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-
-            $("#modal-edit_contact").modal("hide");
-
-            //change email in icon
-            $("#btnEmailResto").attr("href", "mailto:" + response.data.email);
-
-            //update di modal contact resto
-            $("#restoPhoneInContact").html(response.data.phone);
-            $("#restoEmailInContact").html(response.data.email);
-
-            emailResto = response.data.email;
-            phoneResto = response.data.phone;
-
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-
+    let error = 0;
+    let regexMail = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
+    if (!$("#phoneResto").val()) {
+        $("#phoneResto").addClass("is-invalid");
+        $("#err-phone").show();
+        error = 1;
+    } else {
             $("#phoneResto").removeClass("is-invalid");
+            $("#err-phone").hide();
+    }
+    if (!$("#emailResto").val()) {
+        $("#emailResto").addClass("is-invalid");
+        $("#err-email").show();
+        error = 1;
+    } else {
+        if (!regexMail.test($("#emailResto").val())) {
+            $("#emailResto").addClass("is-invalid");
+            $("#err-email").show();
+            error = 1;
+        } else {
             $("#emailResto").removeClass("is-invalid");
-        },
-        error: function (jqXHR, exception) {
-            console.log(jqXHR);
-            // console.log(exception);
+            $("#err-email").hide();
+        }
+    }
 
-            if (jqXHR.responseJSON.message.phone) {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message.phone[0],
+    if (error == 1) {
+        return false;
+    } else {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        var btn = document.getElementById("btnSaveContactResto");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/restaurant/update/contact",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
                     position: "topRight",
                 });
-                $("#phoneResto").addClass("is-invalid");
-            }
 
-            if (jqXHR.responseJSON.message.email) {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message.email[0],
-                    position: "topRight",
-                });
-                $("#emailResto").addClass("is-invalid");
-            }
+                $("#modal-edit_contact").modal("hide");
 
-            $("#emailResto").val(emailResto);
-            $("#phoneResto").val(phoneResto);
+                //change email in icon
+                $("#btnEmailResto").attr("href", "mailto:" + response.data.email);
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-        },
-    });
+                //update di modal contact resto
+                $("#restoPhoneInContact").html(response.data.phone);
+                $("#restoEmailInContact").html(response.data.email);
+
+                emailResto = response.data.email;
+                phoneResto = response.data.phone;
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+
+                $("#phoneResto").removeClass("is-invalid");
+                $("#emailResto").removeClass("is-invalid");
+            },
+            error: function (jqXHR, exception) {
+                console.log(jqXHR);
+                // console.log(exception);
+
+                if (jqXHR.responseJSON.message.phone) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message.phone[0],
+                        position: "topRight",
+                    });
+                    $("#phoneResto").addClass("is-invalid");
+                }
+
+                if (jqXHR.responseJSON.message.email) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message.email[0],
+                        position: "topRight",
+                    });
+                    $("#emailResto").addClass("is-invalid");
+                }
+
+                $("#emailResto").val(emailResto);
+                $("#phoneResto").val(phoneResto);
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+        });
+    }
 });
 
 //add save story

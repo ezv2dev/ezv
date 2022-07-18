@@ -317,7 +317,7 @@
                                                 <input type="password" id="password-login"
                                                     class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                                     name="password" placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tp-log" class="fa fa-eye" aria-hidden="true"
+                                                <i id="tp-log" class="fa fa-eye-slash" aria-hidden="true"
                                                     style="position: absolute; top: 35px; right: 24px;"></i>
                                                 <small id="err-pas-lgn" style="display: none;"
                                                     class="invalid-feedback"></small>
@@ -427,7 +427,7 @@
                                                 <input type="password" id="password-register"
                                                     class="form-control input-text-border  {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                                     name="password" placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tp-reg" class="fa fa-eye" aria-hidden="true"
+                                                <i id="tp-reg" class="fa fa-eye-slash" aria-hidden="true"
                                                     style="position: absolute; top: 35px; right: 24px;"></i>
                                                 <small id="err-pas-rgs" style="display: none;"
                                                     class="invalid-feedback"></small>
@@ -446,7 +446,7 @@
                                                     class="form-control input-text-border  {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
                                                     name="password_confirmation"
                                                     placeholder="{{ __('user_page.Password') }}">
-                                                <i id="tcp-reg" class="fa fa-eye" aria-hidden="true"
+                                                <i id="tcp-reg" class="fa fa-eye-slash" aria-hidden="true"
                                                     style="position: absolute; top: 35px; right: 24px;"></i>
                                                 <small id="err-cpas-rgs" style="display: none;"
                                                     class="invalid-feedback"></small>
@@ -530,7 +530,7 @@
 
         //login
         $(document).on("click", "#tp-log", function() {
-            $(this).toggleClass("fa-eye fa-eye-slash");
+            $(this).toggleClass("fa-eye-slash fa-eye");
             var input = $("#password-login");
             if (input.attr("type") === "password") {
                 input.attr("type", "text");
@@ -620,7 +620,7 @@
 
         //register
         $(document).on("click", "#tp-reg", function() {
-            $(this).toggleClass("fa-eye fa-eye-slash");
+            $(this).toggleClass("fa-eye-slash fa-eye");
             var input = $("#password-register");
             if (input.attr("type") === "password") {
                 input.attr("type", "text");
@@ -629,7 +629,7 @@
             }
         });
         $(document).on("click", "#tcp-reg", function() {
-            $(this).toggleClass("fa-eye fa-eye-slash");
+            $(this).toggleClass("fa-eye-slash fa-eye");
             var input = $("#password_confirmation");
             if (input.attr("type") === "password") {
                 input.attr("type", "text");

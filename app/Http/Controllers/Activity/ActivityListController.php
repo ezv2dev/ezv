@@ -33,13 +33,6 @@ class ActivityListController extends Controller
 {
     public function activity_list(Request $request)
     {
-
-        if (empty($request)) {
-            $req = 0;
-        } else {
-            $req = $request->all();
-        }
-
         if ($request->location == '') {
             // $activity = Activity::select('activity.*', DB::raw('(select name from activity_video where id_activity = activity.id_activity order by id_video asc limit 1) as video'), DB::raw('(select name from activity_photo where id_activity = activity.id_activity order by id_photo asc limit 1) as photo'), 'activity_detail_review.average as average', 'activity_detail_review.count_person as person')
             //     ->join('activity_detail_review', 'activity.id_activity', '=', 'activity_detail_review.id_activity', 'left')
@@ -83,13 +76,13 @@ class ActivityListController extends Controller
         // if (DeviceCheckService::isDesktop()) {
         //     return view('user.list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'facilities', 'property_type'));
         // }
-        return view('user.list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'subCategoryAll', 'facilities', 'property_type'));
+        return view('user.list_activity', compact('activity', 'amenities', 'locations', 'categories', 'subCategory', 'subCategoryAll', 'facilities', 'property_type'));
     }
 
     public function activity_update_name(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -111,8 +104,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -151,8 +143,7 @@ class ActivityListController extends Controller
     public function activity_update_description(Request $request)
     {
         // check if editor not authenticated
-        if (!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Access Denied, Please Login!'
             ], 500);
@@ -175,8 +166,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'Wow Not Found',
             ], 404);
@@ -215,8 +205,7 @@ class ActivityListController extends Controller
     public function activity_update_short_description(Request $request)
     {
         // check if editor not authenticated
-        if (!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Access Denied, Please Login!'
             ], 500);
@@ -239,11 +228,10 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'Wow Not Found',
-            ],404);
+            ], 404);
         }
 
         // check if the editor does not have authorization
@@ -342,7 +330,7 @@ class ActivityListController extends Controller
     public function Activity_update_time(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -365,8 +353,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -412,7 +399,7 @@ class ActivityListController extends Controller
     public function activity_update_contact(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -436,8 +423,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -491,8 +477,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -596,7 +581,7 @@ class ActivityListController extends Controller
     public function activity_store_price(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -626,8 +611,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -748,7 +732,7 @@ class ActivityListController extends Controller
             $activity = Activity::find($request->id_activity);
 
             // check if activity does not exist, abort 404
-            if(!$activity){
+            if (!$activity) {
                 return response()->json([
                     'message' => 'WoW Not Found'
                 ], 404);
@@ -1044,7 +1028,7 @@ class ActivityListController extends Controller
     public function activity_store_facilities(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -1066,8 +1050,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -1115,7 +1098,7 @@ class ActivityListController extends Controller
     {
         // dd($request->all());
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -1137,8 +1120,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -1188,7 +1170,7 @@ class ActivityListController extends Controller
     public function activity_store_story(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -1211,8 +1193,7 @@ class ActivityListController extends Controller
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        if (!$activity)
-        {
+        if (!$activity) {
             return response()->json([
                 'message' => 'WoW Not Found',
             ], 404);
@@ -1256,15 +1237,14 @@ class ActivityListController extends Controller
             ]);
         }
 
-        $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name','id_story')->latest()->get();
+        $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name', 'id_story')->latest()->get();
         $getUID = Activity::where('id_activity', $request->id_activity)->select('uid')->first();
 
         $data = [];
 
         $i = 0;
 
-        foreach ($getStory as $item)
-        {
+        foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
             $i++;

@@ -530,13 +530,13 @@
             restaurantRefreshFilter(subUrl);
         }
 
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
+        // function moreCategory() {
+        //     $('#categoryModal').modal('show');
+        // }
 
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
+        // function moreSubCategory() {
+        //     $('#modalSubCategory').modal('show');
+        // }
     </script>
 
     {{-- <script>

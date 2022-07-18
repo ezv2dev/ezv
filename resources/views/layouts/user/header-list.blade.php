@@ -169,6 +169,14 @@
         .guests {
             min-width: 241px;
         }
+
+        .btn-filter-header{
+            outline:none;
+            background:#ff7400;
+            border-radius:40px;
+            margin-right:5px;
+            padding: 0 12px;
+        }
     </style>
 
     @php
@@ -201,12 +209,25 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
+            
+                <button type="button" class="btn-filter-header" 
+                    @if($condition_villa)
+                        onclick="filterMain();"
+                    @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
+                        onclick="moreSubCategory();"
+                    @elseif($condition_collaborator)
+                        onclick="filterCollab();"
+                    @endif
+                    >
+                    <img src="{{ asset('assets/icon/menu/filter.svg') }}" style="width: 20px; height: auto;">
+                </button>
+            
+            
                 <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
                     style="cursor: pointer; width: 50px; border: none; margin: 0px;">
                     <p>
                         <span class="top-search">
-                            <img src="{{ asset('assets/icon/menu/search.svg') }}"
-                                style="width: 20px; height: auto;">
+                            <img src="{{ asset('assets/icon/menu/search.svg') }}" style="width: 20px; height: auto;">
                             <!-- <i class="fa fa-search"></i> -->
                         </span>
                     </p>
@@ -411,8 +432,8 @@
                                         </p>
                                         </a>
                                     @else
-                                        <a href="{{ route('restaurant_list') }}" id="restaurant-form" target="_blank"
-                                            class="nav-link-form-detail">
+                                        <a href="{{ route('restaurant_list') }}" id="restaurant-form"
+                                            target="_blank" class="nav-link-form-detail">
                                             @if ($condition_restaurant)
                                                 <div
                                                     class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-style-detail-active nav-link-icon-style-detail">
@@ -3031,7 +3052,8 @@
                                             class="collapsible_wow"></a>
                                         <p>{{ __('user_page.Date') }}</p>
 
-                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') || (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
+                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') ||
+                                            (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
                                             <p id="add_date_wow"
                                                 style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
@@ -3055,7 +3077,7 @@
 
                                     <div class="button">
                                         <button class="d-block ms-auto me-1"
-                                            onclick="wowFilter({{ request()->get('fCategory') ?? '1' }}, {{ request()->get('fSubCategory') ?? 'null' }}, null)"
+                                            onclick="wowFilter({{ request()->get('fCategory') ?? '1' }}, {{ request()->get('fSubCategory') ?? 'null' }}, null, false)"
                                             style="z-index: 1; border: none; background: transparent;">
                                             <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
@@ -3468,7 +3490,8 @@
                                             class="collapsible_wow"></a>
                                         <p>{{ __('user_page.Date') }}</p>
 
-                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') || (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
+                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') ||
+                                            (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
                                             <p id="add_date_wow"
                                                 style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
@@ -4088,14 +4111,20 @@
         </script>
 
         <script>
-            $(document).ready( function () {
-                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
+            $(document).ready(function() {
+                $('.stickySubCategory').css({
+                    'top': $('#new-bar-black').innerHeight() + 'px'
+                })
             })
-            $(window).on("resize", function () {
-                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
+            $(window).on("resize", function() {
+                $('.stickySubCategory').css({
+                    'top': $('#new-bar-black').innerHeight() + 'px'
+                })
             })
             $(window).scroll(function(event) {
-                $('.stickySubCategory').css({'top' : $('#new-bar-black').innerHeight() +'px'})
+                $('.stickySubCategory').css({
+                    'top': $('#new-bar-black').innerHeight() + 'px'
+                })
             })
         </script>
 

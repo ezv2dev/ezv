@@ -283,7 +283,7 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Right Section -->
     </div>
-    <hr class="list-row row-line-white" style="margin-top: 29px;">
+    <hr class="list-row row-line-grey" style="margin-top: 29px;">
 @endforeach
 
 @include('user.modal.villa.list.share')
