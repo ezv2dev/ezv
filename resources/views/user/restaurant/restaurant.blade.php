@@ -4584,7 +4584,7 @@
             var $sidebarHeight = $sidebar.height();
             var $result = $amenitiesTop - $sidebarHeight;
 
-            //console.log($footerOffsetTop);
+            console.log($amenitiesOffsetTop);
             $window.on("resize", function() {
                 $amenitiesTop = $("#amenities").offset().top;
                 $sidebarHeight = $sidebar.height();
