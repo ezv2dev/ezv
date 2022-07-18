@@ -1385,6 +1385,7 @@ class ViewController extends Controller
         $quick->first_name = $request->first_name;
         $quick->last_name = $request->last_name;
         $quick->email_sender = $request->email;
+        $quick->email_receiver = $request->email_receiver;
         $quick->phone = $request->phone;
         $quick->additional_information = $request->additional_information;
 
