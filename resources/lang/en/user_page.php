@@ -234,7 +234,7 @@ return [
     'Discover Experiences' => 'Discover Experiences',
     'Explore' => 'Explore',
     'there is no content yet' => 'there is no content yet',
-    "Learn about listing your home, hotel, food, or wow" => "Learn about listing your home, hotel, food, or wow",
+    "Learn about listing your home, hotel, food, or business" => "Learn about listing your home, hotel, food, or business",
     'Ask a Super Host' => 'Ask a Super Host',
     'Learn More' => 'Learn More',
 

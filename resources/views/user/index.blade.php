@@ -936,11 +936,11 @@
                                         <div class="col-12 d-flex flex-column justify-content-between text-white h-100 align-items-center align-items-sm-start">
                                             <h1 class="card-title flex-sm-fill" style="font-size: 28px;font-weight: 400;display: block;word-wrap: break-word;max-width: 300px;line-height: 1.5;">
                                                 {{-- __('user_page.Learn about listing your home, hotel, restaurant, or activity') --}}
-                                                {{ __('user_page.Learn about listing your home, hotel, food, or wow') }}
+                                                {{ __('user_page.Learn about listing your home, hotel, food, or business') }}
                                             </h1>
                                             <div>
                                                 <a href="{{ route('ahost') }}" class="btn btn-company text-white"
-                                                    target="_blank">{{ __('user_page.Learn More') }}</a>
+                                                    target="_blank">{{ __("user_page.Let's Go") }}</a>
                                             </div>
                                         </div>
                                     </div>

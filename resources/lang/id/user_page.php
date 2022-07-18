@@ -229,7 +229,7 @@ return [
     'Discover Experiences' => 'Temukan Pengalaman',
     'Explore' => 'Jelajahi',
     'there is no content yet' => 'belum ada konten',
-    "Learn about listing your home, hotel, food, or wow" => "Pelajari tentang mencantumkan rumah, hotel, kuliner, atau wow",
+    "Learn about listing your home, hotel, food, or business" => "Pelajari tentang mencantumkan rumah, hotel, kuliner, atau bisnis",
     'Ask a Super Host' => 'Tanyakan pada Super Host',
     'Learn More' => 'Pelajari Selengkapnya',
 
