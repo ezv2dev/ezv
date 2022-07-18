@@ -371,10 +371,15 @@
                             </div>
                         </div>
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}
-
+                        @php
+                            $bedCount = 0;
+                            for ($i=0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
+                                $bedCount = $bedCount + $villa[0]->villaBedroomDetail[$i]->bed_count;
+                            }
+                        @endphp
                         <p style="font-size: 13px"><span id="bedroomID">{{ $villa[0]->bedroom }}</span>
                             {{ __('user_page.Bedrooms') }}
-                            | <span id="bedsID">{{ $villa[0]->beds }}</span> Beds | <span
+                            | <span id="bedsID">{{ $bedCount }}</span> Beds | <span
                                 id="bathroomID">{{ $villa[0]->bathroom }}</span>
                             {{ __('user_page.Bathroom') }} |
                             <span id="adultID">{{ $villa[0]->adult }}</span> {{ __('user_page.Adults') }} |
@@ -3362,7 +3367,7 @@
                             </div>
                         @endforeach
                     </div>
-                    @for ($i = 1; $i <= 3; $i++)
+                    {{-- @for ($i = 1; $i <= 3; $i++)
                         <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
                             id="moreBedroom">
                             <div class="col-md-12">
@@ -3376,7 +3381,49 @@
                                 </div>
                             @endforeach
                         </div>
-                    @endfor
+                    @endfor --}}
+                    <div id="bedroom-detail-content">
+                        @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
+                            <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                                <div class="col-md-12">
+                                    <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i+1 }}</h5>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
+                                            <div class="col-md-12">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item->name }}
+                                                </span>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                        @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
+                                            <div class="col-md-12">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item->bed->name }}
+                                                </span>
+                                                <span>
+                                                    x{{ $item->qty }}
+                                                </span>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                    <div class="col-md-6">
+                                        @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $item)
+                                            <div class="col-md-12">
+                                                <span class="translate-text-group-items">
+                                                    {{ $item->name }}
+                                                </span>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
                 <div class="modal-filter-footer" style="height: 20px;"></div>
             </div>

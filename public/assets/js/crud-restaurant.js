@@ -910,7 +910,43 @@ let phoneResto = $("#phoneResto").val();
 let emailResto = $("#emailResto").val();
 
 //update informasi contact
+var regexMail = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
+$("#phoneResto").keyup(function (e) {
+    $("#phoneResto").removeClass("is-invalid");
+    $("#err-email").hide();
+});
+$("#emailResto").keyup(function (e) {
+    $("#emailResto").removeClass("is-invalid");
+    $("#err-phone").hide();
+});
 $("#updateContactForm").submit(function (e) {
+    let error = 0;
+    if (!$("#phoneResto").val()) {
+        $("#phoneResto").addClass("is-invalid");
+        $("#err-phone").show();
+        error = 1;
+    } else {
+            $("#phoneResto").removeClass("is-invalid");
+            $("#err-phone").hide();
+    }
+    if (!$("#emailResto").val()) {
+        $("#emailResto").addClass("is-invalid");
+        $("#err-email").show();
+        error = 1;
+    } else {
+        if (!regexMail.test($(this).val())) {
+            $("#phoneResto").addClass("is-invalid");
+            $("#err-email").show();
+            error = 1;
+        } else {
+            $("#emailResto").removeClass("is-invalid");
+            $("#err-email").hide();
+        }
+    }
+
+    if (error == 1) {
+        return false;
+    } else {
     e.preventDefault();
 
     var formData = new FormData(this);
@@ -986,6 +1022,7 @@ $("#updateContactForm").submit(function (e) {
             btn.classList.remove("disabled");
         },
     });
+    }
 });
 
 //add save story
