@@ -211,13 +211,13 @@
     {{-- Search --}}
     <script>
         $(document).ready(function() {
-            $('.js-slider-2 .slick-next').css('display', 'none');
-            $('.js-slider-2 .slick-prev').css('display', 'none');
-            $('.js-slider-2').mouseenter(function(e) {
+            $('.js-slider .slick-next').css('display', 'none');
+            $('.js-slider .slick-prev').css('display', 'none');
+            $('.js-slider').mouseenter(function(e) {
                 $(this).children('.slick-prev').css('display', 'block');
                 $(this).children('.slick-next').css('display', 'block');
             })
-            $('.js-slider-2').mouseleave(function(e) {
+            $('.js-slider').mouseleave(function(e) {
                 $(this).children('.slick-prev').css('display', 'none');
                 $(this).children('.slick-next').css('display', 'none');
             })
