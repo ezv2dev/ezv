@@ -142,7 +142,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content modal-content-editprice" style="border-radius:15px;">
             <div class="modal-header-editprice"
-            style="border-bottom: 1px solid #2C3333 !important;">
+            style="border-bottom: 0.1rem solid #2C3333 !important;">
                 <div class="row">
                     <div class="col-11">
                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
