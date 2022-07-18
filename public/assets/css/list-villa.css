@@ -2961,6 +2961,17 @@ input::-webkit-inner-spin-button {
     width: 100% !important;
     border-radius: 10px !important;
 }
+
+.slick-dots {
+    display: flex !important;
+    width: fit-content !important;
+    max-width: 150px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+.slick-slider.slick-dotted.slick-dotted-white .slick-dots li button::before {
+    color: black !important;
+}
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
     .searchbox {
         width: 60% !important;
@@ -3031,6 +3042,14 @@ input::-webkit-inner-spin-button {
 @media only screen and (max-width: 575px) { 
     #villa-data .list-row-gap {
         padding-right: 2px !important;
+    }
+    .slick-arrow {
+        display: none !important;
+    }
+}
+@media only screen and (min-width: 576px) { 
+    .slick-dots {
+        display: none !important;
     }
 }
 @media only screen and (max-width: 991px) {

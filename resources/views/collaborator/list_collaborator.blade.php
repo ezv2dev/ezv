@@ -573,7 +573,7 @@ if (request()->fCategory) {
                         <div class="content list-image-content"
                             style="margin: 0; padding: 0; max-width: 1200px !important;">
                             <input type="hidden" value="{{ $data->id_collab }}" id="id_collab" name="id_collab">
-                            <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-10"
+                            <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-10"
                                 data-dots="false" data-arrows="true">
                                 @php
                                     $gallery = App\Http\Controllers\Collaborator\CollaboratorController::gallery($data->id_collab);
@@ -669,13 +669,13 @@ if (request()->fCategory) {
     {{-- Search --}}
     <script>
         $(document).ready(function() {
-            $(".js-slider .slick-next").css("display", "none");
-            $(".js-slider .slick-prev").css("display", "none");
-            $(".js-slider").mouseenter(function(e) {
+            $(".js-slider-2 .slick-next").css("display", "none");
+            $(".js-slider-2 .slick-prev").css("display", "none");
+            $(".js-slider-2").mouseenter(function(e) {
                 $(this).children(".slick-prev").css("display", "block");
                 $(this).children(".slick-next").css("display", "block");
             });
-            $(".js-slider").mouseleave(function(e) {
+            $(".js-slider-2").mouseleave(function(e) {
                 $(this).children(".slick-prev").css("display", "none");
                 $(this).children(".slick-next").css("display", "none");
             });
