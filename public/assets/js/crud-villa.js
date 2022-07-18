@@ -215,9 +215,6 @@ function editBedroomVilla(id_villa) {
     var children1 = $("input[name='children1']").val();
     var size = $("input[name='size']").val();
 
-    saveBedroomDetail(id_villa);
-    return;
-
     $.ajax({
         type: "POST",
         headers: {
@@ -274,6 +271,8 @@ function editBedroomVilla(id_villa) {
             });
         },
     });
+
+    saveBedroomDetail(id_villa);
 }
 
 async function saveBedroomDetail(id_villa) {
@@ -330,13 +329,19 @@ async function saveBedroomDetail(id_villa) {
                 $("#bedsID").html(response.bed_count);
             }
 
-            console.log(response);
+            let content = ``;
+            for (let index = 0; index < response.data.length; index++) {
+                const data = response.data[index];
+                content += contentBedroomDetail(index, data);
+            }
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+            $('#bedroom-detail-content').html(content);
+
+            // iziToast.success({
+            //     title: "Success",
+            //     message: response.message,
+            //     position: "topRight",
+            // });
         },
         error: function (jqXHR, exception) {
             if(jqXHR.responseJSON.errors) {
@@ -356,6 +361,69 @@ async function saveBedroomDetail(id_villa) {
             }
         },
     });
+}
+
+function contentBedroomDetail(count, data) {
+    let bedroomAmenities = ``;
+    if(data.villa_bedroom_detail_bedroom_amenities){
+        for (let index = 0; index < data.villa_bedroom_detail_bedroom_amenities.length; index++) {
+            const item = data.villa_bedroom_detail_bedroom_amenities[index];
+            bedroomAmenities += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.name}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let bathroomAmenities = ``;
+    if(data.villa_bedroom_detail_bathroom_amenities){
+        for (let index = 0; index < data.villa_bedroom_detail_bathroom_amenities.length; index++) {
+            const item = data.villa_bedroom_detail_bathroom_amenities[index];
+            bathroomAmenities += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.name}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let bed = ``;
+    if(data.villa_bedroom_detail_bed){
+        for (let index = 0; index < data.villa_bedroom_detail_bed.length; index++) {
+            const item = data.villa_bedroom_detail_bed[index];
+            bed += `
+                <div class="col-md-12">
+                    <span class="translate-text-group-items">
+                        ${item.bed.name}
+                    </span>
+                    <span>
+                        x${item.qty}
+                    </span>
+                </div>
+            `;
+        }
+    }
+    let content = `
+        <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+            <div class="col-md-12">
+                <h5 class="mb-3">Bedroom ${count+1}</h5>
+            </div>
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    ${bedroomAmenities}
+                    ${bed}
+                </div>
+                <div class="col-md-6">
+                    ${bathroomAmenities}
+                </div>
+            </div>
+        </div>
+    `;
+
+    return content;
 }
 
 function editCategoryV() {

@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Email') }}</label>
-                        <input type="email" class="form-control" id="emailResto" name="email" placeholder="email@example.com" maxlength="50" value="{{ $restaurant->email ?? '' }}">
+                        <input type="text" class="form-control" id="emailResto" name="email" placeholder="email@example.com" maxlength="50" value="{{ $restaurant->email ?? '' }}">
                         <small id="err-email" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mail') }}</small>
                     </div>
                 </form>

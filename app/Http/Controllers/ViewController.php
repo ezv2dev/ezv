@@ -904,11 +904,11 @@ class ViewController extends Controller
                 });
 
                 // save bedroom bedroom amenities
-                if(collect($item['bedroom_ids'])->count() > 0){
+                if(isset($item['bedroom_ids'])){
                     $createdDetail->villaBedroomDetailBedroomAmenities()->sync($item['bedroom_ids']);
                 }
                 // save bedroom bathroom amenities
-                if(collect($item['bathroom_ids'])->count() > 0){
+                if(isset($item['bathroom_ids'])){
                     $createdDetail->villaBedroomDetailBathroomAmenities()->sync($item['bathroom_ids']);
                 }
             });
@@ -917,7 +917,8 @@ class ViewController extends Controller
             $createdDetail = VillaBedroomDetail::with([
                 'villaBedroomDetailBed',
                 'villaBedroomDetailBedroomAmenities',
-                'villaBedroomDetailBathroomAmenities'
+                'villaBedroomDetailBathroomAmenities',
+                'villaBedroomDetailBed.bed'
             ])->where('id_villa', $request->id_villa)->get();
 
             if($createdDetail){

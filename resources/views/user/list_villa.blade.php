@@ -261,17 +261,17 @@
 
     {{-- SEARCH FUNCTION --}}
     <script>
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
+        // function moreCategory() {
+        //     $('#categoryModal').modal('show');
+        // }
 
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
+        // function moreSubCategory() {
+        //     $('#modalSubCategory').modal('show');
+        // }
 
-        function filterMain() {
-            $('#modalFiltersHome').modal('show');
-        }
+        // function filterMain() {
+        //     $('#modalFiltersHome').modal('show');
+        // }
 
         function villaRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/homes/search?${suburl}`;

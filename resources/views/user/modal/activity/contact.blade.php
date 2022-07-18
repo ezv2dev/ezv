@@ -12,11 +12,13 @@
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Phone') }}</label>
-                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="20" value="{{ $activity->phone ?? '' }}">
+                        <input type="number" class="form-control" id="phoneWow" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="13" value="{{ $activity->phone ?? '' }}">
+                        <small id="err-phone" style="display: none;" class="invalid-feedback">{{ __('auth.empty_phone') }}</small>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Email') }}</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" maxlength="50" value="{{ $activity->email ?? '' }}">
+                        <input type="text" class="form-control" id="emailWow" name="email" placeholder="email@example.com" maxlength="50" value="{{ $activity->email ?? '' }}">
+                        <small id="err-email" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mail') }}</small>
                     </div>
                 </form>
 
