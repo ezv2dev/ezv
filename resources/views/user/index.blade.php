@@ -885,7 +885,7 @@
                                 <div class="row-grid-img">
                                     @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
                                         <div>
-                                            <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)"
+                                            <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
                                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}">
