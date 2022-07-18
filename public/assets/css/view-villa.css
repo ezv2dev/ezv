@@ -3283,6 +3283,14 @@ span.flatpickr-weekday {
         padding-left: 3rem !important;
         padding-right: 3rem !important;
     }
+
+    .roomnumber-filter-container, .editnumberoption-checkbox-alias {
+        padding: 0 !important;
+    }
+
+    .editnumberoption_container {
+        gap: 2px;
+    }
 }
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
@@ -3969,4 +3977,10 @@ span.flatpickr-weekday {
     color: white;
     border-radius: 50%;
     margin-left: 10px;
+}
+
+#modal-map-content {
+    border: solid 1px #c0c0c0;
+    border-radius: 10px;
+    padding: 10px;
 }
