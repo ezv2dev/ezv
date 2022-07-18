@@ -203,7 +203,7 @@
 
                     <div class="content list-image-content" style="margin: 0; padding: 0; max-width: 1200px !important;">
                         <input type="hidden" value="{{ $data->id_restaurant }}" id="id_restaurant" name="id_restaurant">
-                        <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-lg"
+                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-lg"
                             data-dots="false" data-arrows="true">
 
                             @forelse ($data->photo->sortBy('order') as $item)
@@ -414,13 +414,13 @@
     {{-- Search --}}
     <script>
         $(document).ready(function() {
-            $('.js-slider-2 .slick-next').css('display', 'none');
-            $('.js-slider-2 .slick-prev').css('display', 'none');
-            $('.js-slider-2').mouseenter(function(e) {
+            $('.js-slider .slick-next').css('display', 'none');
+            $('.js-slider .slick-prev').css('display', 'none');
+            $('.js-slider').mouseenter(function(e) {
                 $(this).children('.slick-prev').css('display', 'block');
                 $(this).children('.slick-next').css('display', 'block');
             })
-            $('.js-slider-2').mouseleave(function(e) {
+            $('.js-slider').mouseleave(function(e) {
                 $(this).children('.slick-prev').css('display', 'none');
                 $(this).children('.slick-next').css('display', 'none');
             })
