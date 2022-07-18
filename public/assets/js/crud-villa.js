@@ -1,9 +1,10 @@
-$(document).on("keyup", "textarea#name-form-input", function () {
-    $("#name-form-input").css("border", "");
-    $("#err-name").hide();
+$.ajaxSetup({
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
 });
 
-let id_villa = $("#id_villa").val();
+// let id_villa = $("#id_villa").val();
 
 let nameVillaBackup = $("#name-form-input").val();
 
@@ -102,11 +103,6 @@ function editNameCancel() {
         formInput.value = "";
     }
 }
-
-$(document).on("keyup", "textarea#short-description-form-input", function () {
-    $("#short-description-form-input").css("border", "");
-    $("#err-shrt-desc").hide();
-});
 
 let shortDescBackup = $("#short-description-form-input").val();
 
@@ -447,11 +443,6 @@ function editVillaTag(id_villa) {
         },
     });
 }
-
-$(document).on("keyup", "textarea#description-form-input", function () {
-    $("#description-form-input").css("border", "");
-    $("#err-desc").hide();
-});
 
 let desc_backup = $("#description-form-input").val();
 

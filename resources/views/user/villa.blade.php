@@ -296,7 +296,7 @@
                             <span id="name-content2">{{ $villa[0]->name }}</span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editNameForm()"
+                                &nbsp;<a type="button" onclick="editNameForm()"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 @endif
                             @endauth
@@ -331,7 +331,7 @@
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
                                     |</a>
                                 &nbsp;
-                                <a type="button" onclick="editNameForm({{ $villa[0]->id_villa }})"
+                                <a type="button" onclick="editNameForm()"
                                     class="edit-profile-name-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 {{-- @if ($villa[0]->image)
