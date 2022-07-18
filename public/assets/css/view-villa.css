@@ -3847,11 +3847,44 @@ span.flatpickr-weekday {
     flex-direction: column;
 }
 
+/* map mobile */
+    .mobile-map{
+        position: fixed;
+        width: 100%;
+        height: 90% !important;
+        left: 0;
+        z-index: 99;
+        top: 0px;
+    }
+    .mobile-map-desc{
+        position: fixed;
+        bottom: 15%;
+        z-index: 999;
+        width: 94%;
+        border-radius: 12px;
+        background-color: white;
+    }
+/* end map mobile */
+
+/* Small device (portrait phone, less than 576px) */
+@media (max-width: 576px) {
+    .modal-map{
+        height: 220px;
+    }
+    #modal-map-content{
+        display: none;
+    }
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .modal-content-amenities{
         width: 100%;
         border-radius: 9px !important;
+    }
+
+    .modal-map{
+        height: 220px;
     }
 
     .modal-content-promotion{
@@ -3860,6 +3893,9 @@ span.flatpickr-weekday {
 
     .row-modal-amenities{
         flex-direction: column;
+    }
+    #modal-map-content{
+        display: none;
     }
 }
 
@@ -3874,9 +3910,17 @@ span.flatpickr-weekday {
         flex-direction: unset;
     }
 
+    .modal-map{
+        height: 500px;
+    }
+
 
     .modal-content-promotion{
         width: 100%;
+    }
+
+    #modal-map-content{
+        display: block;
     }
 }
 
@@ -3894,6 +3938,10 @@ span.flatpickr-weekday {
     .modal-content-promotion-body{
         height: 515px;
     }
+
+    #modal-map-content{
+        display: block;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -3909,6 +3957,10 @@ span.flatpickr-weekday {
 
     .modal-content-promotion{
         width: 80%;
+    }
+
+    #modal-map-content{
+        display: block;
     }
 }
 

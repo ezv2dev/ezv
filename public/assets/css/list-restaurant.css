@@ -442,7 +442,6 @@
         grid-template-columns: repeat( 8, minmax(0, 1fr) );
         grid-template-rows: repeat(1, auto) !important;
         gap: 10px;
-        display: grid;
         padding-left: 102px;
         padding-right: 102px;
         z-index: 333;
@@ -593,6 +592,12 @@
         padding-right: 50px;
         /* margin-top: 305px; */
         /* transition: all 0.3s ease; */
+    }
+}
+
+@media (min-width: 991px) {
+    .container-grid-sub-cat{
+        display: grid;
     }
 }
 
@@ -899,10 +904,6 @@
         padding-right: 1.5rem !important;
         padding-left: 1.5rem !important;
     }
-/* 
-    .container-grid-sub-cat{
-        top: 300px;
-    } */
 
     .grid-img-filter{
         height: 140px;

@@ -2395,3 +2395,8 @@ span.flatpickr-weekday {
         width: 32% !important;
     }
 }
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, 0) !important;
+    border-color: rgba(255, 255, 255, 0) !important;
+}
