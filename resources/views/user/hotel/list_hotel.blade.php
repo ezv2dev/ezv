@@ -229,7 +229,7 @@
 
                 </div>
 
-                <div class="desc-container-grid mb-2">
+                <div class="desc-container-grid ">
                     <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
                         style="height: 50px;"></a>
                     <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
@@ -239,7 +239,8 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
-
+                </div>
+                <div class="skeleton mb-2">
                     <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                         {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                     </span>
@@ -271,8 +272,8 @@
                 </div>
                 </a>
             </div>
+        @endforeach
     </div>
-    @endforeach
     </div>
     <div class="col-12" id="view-map-button-float">
         <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
