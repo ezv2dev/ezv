@@ -440,6 +440,7 @@ Route::post('/villa/update/video/position', [ViewController::class, 'update_posi
 Route::post('/villa/update/price', [ViewController::class, 'villa_update_price'])->name('villa_update_price');
 Route::post('/villa/update/not_available', [ViewController::class, 'villa_not_available'])->name('villa_not_available');
 Route::post('/villa/update/bedroom', [ViewController::class, 'villa_update_bedroom'])->name('villa_update_bedroom');
+Route::post('/villa/update/bedroom/detail', [ViewController::class, 'villa_update_bedroom_detail'])->name('villa_update_bedroom_detail');
 Route::post('/villa/update/guest', [ViewController::class, 'villa_update_guest'])->name('villa_update_guest');
 Route::post('/villa/update/location', [ViewController::class, 'villa_update_location'])->name('villa_update_location');
 Route::post('/villa/update/description', [ViewController::class, 'villa_update_description'])->name('villa_update_description');

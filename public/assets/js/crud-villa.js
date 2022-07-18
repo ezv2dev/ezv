@@ -276,37 +276,86 @@ function editBedroomVilla(id_villa) {
     });
 }
 
-function saveBedroomDetail(id_villa) {
+async function saveBedroomDetail(id_villa) {
     console.log("hit saveBedroomDetail");
-    let content = $(".bedroomDetailFormContent").eq(0);
-    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
-    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
-    let bedroomIds = [];
-    let bathroomIds = [];
-    for (let index = 0; index < bedroomRawContent.length; index++) {
-        bedroomIds.push(bedroomRawContent.eq(index).val());
-    }
-    for (let index = 0; index < bathroomRawContent.length; index++) {
-        bathroomIds.push(bathroomRawContent.eq(index).val());
-    }
+    console.log($(".bedroomDetailFormContent").length);
+    let formData = [];
+    for (let i = 0; i < $(".bedroomDetailFormContent").length; i++) {
+        const content = $(".bedroomDetailFormContent").eq(i);
 
-    let bedRawContent = content.find(".bedroomDetailFormContentBed");
-    let bed = [];
-    for (let index = 0; index < bedRawContent.length; index++) {
-        bed.push({
-            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
-            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+        let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+        let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+        let bedroomIds = [];
+        let bathroomIds = [];
+        for (let index = 0; index < bedroomRawContent.length; index++) {
+            bedroomIds.push(bedroomRawContent.eq(index).val());
+        }
+        for (let index = 0; index < bathroomRawContent.length; index++) {
+            bathroomIds.push(bathroomRawContent.eq(index).val());
+        }
+
+        let bedRawContent = content.find(".bedroomDetailFormContentBed");
+        let bed = [];
+        for (let index = 0; index < bedRawContent.length; index++) {
+            bed.push({
+                id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+                qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+            });
+        }
+
+        formData.push({
+            bathroom_ids: bathroomIds,
+            bedroom_ids: bedroomIds,
+            bed: bed,
         });
     }
+    await $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/bedroom/detail",
+        data: {
+            id_villa: id_villa,
+            data: formData
+        },
+        cache: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function (response) {
+            if (response.room_count) {
+                $("#bedroomID").html(response.room_count);
+            }
+            if (response.bed_count) {
+                $("#bedsID").html(response.bed_count);
+            }
 
-    let formData = {
-        id_villa: id_villa,
-        bathroom_ids: bathroomIds,
-        bedroom_ids: bedroomIds,
-        bed: bed,
-    };
+            console.log(response);
 
-    console.log(formData);
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+        },
+        error: function (jqXHR, exception) {
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+        },
+    });
 }
 
 function editCategoryV() {

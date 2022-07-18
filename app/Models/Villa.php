@@ -571,6 +571,10 @@ class Villa extends Model
         return $this->hasMany(VillaView::class, 'id_villa', 'id_villa');
     }
 
+    public function villaBedroomDetail() {
+        return $this->hasMany(VillaBedroomDetail::class, 'id_villa', 'id_villa');
+    }
+
     public function showVilla()
     {
         if (auth()->id() == null) {

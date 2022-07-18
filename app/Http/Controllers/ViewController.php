@@ -77,6 +77,8 @@ use App\Models\VillaOutdoor;
 use App\Models\VillaSave;
 use App\Models\Bed;
 use App\Models\NotificationOwner;
+use App\Models\VillaBedroomDetail;
+use App\Models\VillaBedroomDetailBed;
 use App\Services\DestinationNearbyVillaService as Nearby;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
 use DataTables;
@@ -833,6 +835,114 @@ class ViewController extends Controller
         ));
 
         return response()->json(['success' => true, 'message' => 'Succesfully Updated',  'data' => $request->all()]);
+    }
+
+    public function villa_update_bedroom_detail(Request $request)
+    {
+        // check if editor not authenticated
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_villa' => ['integer', 'required'],
+            'data' => ['array', 'nullable'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // villa data
+        $villa = Villa::find($request->id_villa);
+
+        // check if villa does not exist, abort 404
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        try {
+            // remove old bedroom detail
+            $removedDetail = VillaBedroomDetail::where('id_villa', $request->id_villa)->delete();
+
+            collect($request->data)->each(function($item, $key) use ($request){
+                // save bedroom detail
+                if($request->id_villa){
+                    $createdDetail = VillaBedroomDetail::create([
+                        'id_villa' => $request->id_villa,
+                        'created_by' => auth()->user()->id,
+                        'updated_by' => auth()->user()->id,
+                    ]);
+                }
+
+                // save bedroom detail bed
+                collect($item['bed'])->each(function($item, $key) use ($createdDetail) {
+                    if($item['qty'] != 0){
+                        VillaBedroomDetailBed::create([
+                            'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,
+                            'id_bed' => $item['id_bed'],
+                            'qty' => $item['qty'],
+                            'created_by' => auth()->user()->id,
+                            'updated_by' => auth()->user()->id,
+                        ]);
+                    }
+                });
+
+                // save bedroom bedroom amenities
+                if(collect($item['bedroom_ids'])->count() > 0){
+                    $createdDetail->villaBedroomDetailBedroomAmenities()->sync($item['bedroom_ids']);
+                }
+                // save bedroom bathroom amenities
+                if(collect($item['bathroom_ids'])->count() > 0){
+                    $createdDetail->villaBedroomDetailBathroomAmenities()->sync($item['bathroom_ids']);
+                }
+            });
+
+            // get created bedroom detail
+            $createdDetail = VillaBedroomDetail::with([
+                'villaBedroomDetailBed',
+                'villaBedroomDetailBedroomAmenities',
+                'villaBedroomDetailBathroomAmenities'
+            ])->where('id_villa', $request->id_villa)->get();
+
+            if($createdDetail){
+                $bedCount = 0;
+                for ($i=0; $i < $createdDetail->count(); $i++) {
+                    $bedCount = $bedCount + $createdDetail[$i]->bed_count;
+                }
+
+                $data = (object)[
+                    'message' => 'done',
+                    'room_count' => $createdDetail->count(),
+                    'bed_count' => $bedCount,
+                    'data' => $createdDetail,
+                ];
+
+                return response()->json($data, 200);
+            } else {
+                return response()->json([
+                    'message' => 'data not found',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $data,
+            ], 500);
+        }
     }
 
     public function villa_update_guest(Request $request)
