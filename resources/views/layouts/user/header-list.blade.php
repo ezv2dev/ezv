@@ -209,8 +209,8 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-            
-                <button type="button" class="btn-filter-header" 
+
+                <button type="button" class="btn-filter-header"
                     @if($condition_villa)
                         onclick="filterMain();"
                     @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
@@ -221,8 +221,8 @@
                     >
                     <img src="{{ asset('assets/icon/menu/filter.svg') }}" style="width: 20px; height: auto;">
                 </button>
-            
-            
+
+
                 <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
                     style="cursor: pointer; width: 50px; border: none; margin: 0px;">
                     <p>
@@ -2434,7 +2434,7 @@
                                     </div>
                                     <div class="button" style="padding-left: 0px;">
                                         <button id="searchBtn" class="d-block ms-auto me-1"
-                                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ request()->get('fSubCategory') ?? 'null' }})"
+                                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ request()->get('fSubCategory') ?? 'null' }}, false)"
                                             style="z-index: 1; border: 2px solid #ff7400; background: black; padding: 10px; border-radius: 10px;">
                                             <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                 style="width: 15px; height: auto;">
