@@ -163,3 +163,166 @@ function editNameRoom(id_room) {
         });
     }
 }
+//Change short description
+let shortDescBackup = $("#short-description-form-input").val();
+$('#short-description-form-input').keyup(function() {
+    $("#short-description-form-input").css("border", "");
+    $("#err-shrt-desc").hide();
+});
+function editShortDesc() {
+    let error = 0;
+    if (!$("textarea#short-description-form-input").val()) {
+        $("#short-description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-shrt-desc").show();
+        error = 1;
+    } else {
+        $("#short-description-form-input").css("border", "");
+        $("#err-shrt-desc").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let btn = document.getElementById("btnSaveShortDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/hotel/room/update/short-description",
+            data: {
+                id_hotel_room: $('#id_hotel_room').val(),
+                short_description: $("#short-description-form-input").val(),
+            },
+            success: function (response) {
+                $("#short-description-content").html(response.data);
+                $("#short-description-form-input").val(response.data);
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                shortDescBackup = response.data;
+
+                editShortDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editShortDescriptionCancel();
+
+                $("#short-description-form-input").val(shortDescBackup);
+            },
+        });
+    }
+}
+
+//Change full description
+$("#description-form-input").keyup(function() {
+    $("#description-form-input").css("border", "");
+    $("#err-desc").hide();
+});
+let desc_backup = $("#description-form-input").val();
+
+function editDescription() {
+    let error = 0;
+    if (!$("textarea#description-form-input").val()) {
+        $("#description-form-input").css("border", "solid #e04f1a 1px");
+        $("#err-desc").show();
+        error = 1;
+    } else {
+        $("#description-form-input").css("border", "");
+        $("#err-desc").hide();
+    }
+    if (error == 1) {
+        return false;
+    } else {
+        let btn = document.getElementById("btnSaveDesc");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/hotel/room/update/description",
+            data: {
+                id_hotel_room: $('#id_hotel_room').val(),
+                description: $("#description-form-input").val(),
+            },
+            success: function (response) {
+                $("#description-content").html(response.data.substring(0, 600));
+
+                console.log(response.data.length);
+
+                $("#description-form-input").val(response.data);
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+
+                if (response.data.length > 600) {
+                    $("#buttonShowMoreDescription").html("");
+                    $("#buttonShowMoreDescription").append(
+                        '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                    );
+                    $("#modalDescriptionVilla").html(response.data);
+                } else {
+                    $("#buttonShowMoreDescription").html("");
+                    $("#btnShowMoreDescription").remove();
+                }
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                desc_backup = response.data;
+
+                editDescriptionCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+
+                editDescriptionCancel();
+            },
+        });
+    }
+}

@@ -34,7 +34,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4X1HT890PC"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'G-4X1HT890PC');
@@ -47,112 +50,119 @@
     <div class="expand-navbar-mobile" aria-expanded="false">
         <div class="px-3 pt-2">
             @auth
-            <div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-fill d-flex align-items-center me-3">
-                        @if (Auth::user()->avatar)
-                            <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2"
-                                alt=""
-                                style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
-                        @else
-                            <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                data-src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                alt="" style="border-radius: 50%">
-                        @endif
-                        <div class="user-details ms-2">
-                            <div class="user-details-name">
-                                {{ Auth::user()->first_name }}
-                                {{ Auth::user()->last_name }}</div>
-                            <div class="user-details-email">
-                                <p class="mb-0">{{ Auth::user()->email }}</p>
+                <div>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-fill d-flex align-items-center me-3">
+                            @if (Auth::user()->avatar)
+                                <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
+                                    style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
+                            @else
+                                <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ asset('assets/icon/menu/user_default.svg') }}" alt=""
+                                    style="border-radius: 50%">
+                            @endif
+                            <div class="user-details ms-2">
+                                <div class="user-details-name">
+                                    {{ Auth::user()->first_name }}
+                                    {{ Auth::user()->last_name }}</div>
+                                <div class="user-details-email">
+                                    <p class="mb-0">{{ Auth::user()->email }}</p>
+                                </div>
                             </div>
                         </div>
+                        <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
+                            style="background: transparent; border: 0;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
-                    <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close" style="background: transparent; border: 0;">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                    <hr>
+                    @php
+                        $role = Auth::user()->role_id;
+                    @endphp
+                    @if ($role == 1 || $role == 2 || $role == 3)
+                        <a class="d-block mb-2" href="{{ route('partner_dashboard') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.Dashboard') }}
+                        </a>
+                    @endif
+                    @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
+                        <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_list') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.Collab Portal') }}
+                        </a>
+                    @endif
+                    <a class="d-block mb-2" href="{{ route('profile_index') }}"
+                        style="width: fit-content; color:#585656;">
+                        {{ __('user_page.My Profile') }}
+                    </a>
+                    <a class="d-block mb-2" href="{{ route('change_password') }}"
+                        style="width: fit-content; color:#585656;">
+                        {{ __('user_page.Change Password') }}
+                    </a>
+                    <a class="d-block mb-2" href="#!"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                        style="width: fit-content; color:#585656;">
+                        <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                        {{ __('user_page.Sign Out') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    </form>
+
+                    <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2"
+                        style="color:#585656; width: fit-content;">
+                        {{ __('user_page.Switch to hosting') }}
+                    </a>
+                    <hr>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
+                            @if (session()->has('locale'))
+                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                            @else
+                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                            @endif
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                        </a>
+                    </div>
+
+                    <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
+                                aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <hr>
-                @php
-                    $role = Auth::user()->role_id;
-                @endphp
-                @if ($role == 1 || $role == 2 || $role == 3)
-                    <a class="d-block mb-2" href="{{ route('partner_dashboard') }}" style="width: fit-content; color:#585656;">
-                        {{ __('user_page.Dashboard') }}
-                    </a>
-                @endif
-                @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
-                    <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_list') }}" style="width: fit-content; color:#585656;">
-                        {{ __('user_page.Collab Portal') }}
-                    </a>
-                @endif
-                <a class="d-block mb-2" href="{{ route('profile_index') }}" style="width: fit-content; color:#585656;">
-                    {{ __('user_page.My Profile') }}
-                </a>
-                <a class="d-block mb-2" href="{{ route('change_password') }}" style="width: fit-content; color:#585656;">
-                    {{ __('user_page.Change Password') }}
-                </a>
-                <a class="d-block mb-2" href="#!"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()" style="width: fit-content; color:#585656;">
-                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                    {{ __('user_page.Sign Out') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="post"
-                    style="display: none">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </form>
-
-                <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2" style="color:#585656; width: fit-content;">
-                    {{ __('user_page.Switch to hosting') }}
-                </a>
-                <hr>
-                <div class="d-flex align-items-center mb-2">
-                    <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
-                        style="color: white;">
-                        @if (session()->has('locale'))
-                            <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                        @else
-                            <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                        @endif
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
-                    </a>
-                </div>
-
-                <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
-                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
-                            aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
             @else
                 <div class="d-flex align-items-center">
                     <div class="flex-fill d-flex align-items-center">
-                        <a type="button" onclick="view_LoginModal();" href="#" class="btn btn-fill border-0 d-flex align-items-center btn-login"
+                        <a type="button" onclick="view_LoginModal();" href="#"
+                            class="btn btn-fill border-0 d-flex align-items-center btn-login"
                             style="color: #ddd; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                             id="login">
                             <i class="fa-solid fa-user"></i>
                             <p class="mb-0 ms-2" style="color:#585656">Login</p>
                         </a>
                     </div>
-                    <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close" style="background: transparent; border: 0;">
+                    <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
+                        style="background: transparent; border: 0;">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
                 <hr>
-                <a class="navbar-gap collab-expand mb-3" style="color: #585656; width: fit-content;"
-                    target="_blank" href="{{ route('collaborator_list') }}">
+                <a class="navbar-gap collab-expand mb-3" style="color: #585656; width: fit-content;" target="_blank"
+                    href="{{ route('collaborator_list') }}">
                     {{ __('user_page.Collab Portal') }}
                 </a>
-                <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3" style="color: #585656; width: fit-content;"
-                    target="_blank">
+                <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
+                    style="color: #585656; width: fit-content;" target="_blank">
                     {{ __('user_page.Become a host') }}
                 </a>
                 <div class="d-flex align-items-center">
@@ -174,7 +184,8 @@
     </div>
     {{-- navbar --}}
     <section class="h-100 w-100" style="box-sizing: border-box; background-color: #000000;">
-        <div class="header-4-4 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+        <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
+            style="font-family: 'Poppins', sans-serif">
             <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
                 <div class="collapse navbar-collapse navbar-dekstop" id="navbarTogglerDemo">
                     <div id="navbar-first-dekstop" class="col-lg-4 d-flex align-items-center">
@@ -202,16 +213,20 @@
                                 <div class="nav-link-form" id="villa-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
-                                            target="_blank" href="{{ route('list') }}"><img src="{{ asset('assets/icon/menu/homes.svg') }}" style="width: 31px; height: auto;"></a>
+                                            target="_blank" href="{{ route('list') }}"><img
+                                                src="{{ asset('assets/icon/menu/homes.svg') }}"
+                                                style="width: 31px; height: auto;"></a>
                                     </li>
                                     <p>
-                                         {{ __('user_page.Homes') }}
+                                        {{ __('user_page.Homes') }}
                                     </p>
                                 </div>
                                 <div class="nav-link-form" id="hotel-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="hotel-button"
-                                            target="_blank" href="{{ route('restaurant_list') }}"><img src="{{ asset('assets/icon/menu/food.svg') }}" style="width: 20px; height: auto;"></a>
+                                            target="_blank" href="{{ route('restaurant_list') }}"><img
+                                                src="{{ asset('assets/icon/menu/food.svg') }}"
+                                                style="width: 20px; height: auto;"></a>
                                     </li>
                                     <p>
                                         {{ __('user_page.Food') }}
@@ -220,14 +235,18 @@
                                 <div class="nav-link-form" id="restaurant-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="restaurant-button"
-                                            target="_blank" href="{{ route('hotel_list') }}"><img src="{{ asset('assets/icon/menu/hotel.svg') }}" style="width: 29px; height: auto;"></a>
+                                            target="_blank" href="{{ route('hotel_list') }}"><img
+                                                src="{{ asset('assets/icon/menu/hotel.svg') }}"
+                                                style="width: 29px; height: auto;"></a>
                                     </li>
                                     <p>{{ __('user_page.Hotels') }}</p>
                                 </div>
                                 <div class="nav-link-form" id="activity-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="activity-button"
-                                            target="_blank" href="{{ route('activity_list') }}"><img src="{{ asset('assets/icon/menu/wow.svg') }}" style="width: 29px; height: auto;"></a>
+                                            target="_blank" href="{{ route('activity_list') }}"><img
+                                                src="{{ asset('assets/icon/menu/wow.svg') }}"
+                                                style="width: 29px; height: auto;"></a>
                                     </li>
                                     {{-- <p>{{ __('user_page.Things to do') }}</p> --}}
                                     <p>WoW</p>
@@ -235,7 +254,9 @@
                                 <div class="nav-link-form" id="collaborator-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
-                                            target="_blank" href="{{ route('collaborator_list') }}"><img src="{{ asset('assets/icon/menu/collab1.svg') }}" style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
+                                            target="_blank" href="{{ route('collaborator_list') }}"><img
+                                                src="{{ asset('assets/icon/menu/collab1.svg') }}"
+                                                style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
                                     <p>{{ __('user_page.Collab Portal') }}</p>
                                 </div>
@@ -250,28 +271,30 @@
                                         <div id="bar" class="bar">
                                             <div class="location">
                                                 <p>{{ __('user_page.Location') }}</p>
-                                                <input type="text"
-                                                {{-- onfocus="this.value=''" --}}
-                                                    class="form-control input-transparant input-location" style="margin-top: -2px;"
-                                                    id="loc_sugest" name="sLocation"
+                                                <input type="text" {{-- onfocus="this.value=''" --}}
+                                                    class="form-control input-transparant input-location"
+                                                    style="margin-top: -2px;" id="loc_sugest" name="sLocation"
                                                     placeholder="{{ __('user_page.Where are you going?') }}">
 
                                                 <div id="sugest" class="location-popup display-none">
                                                     <div class="location-popup-container h-100">
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                        style="display: none;">
-                                                            <div onclick="checkGeo();" class="location-popup-map sugest-list-map">
+                                                            style="display: none;">
+                                                            <div onclick="checkGeo();"
+                                                                class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
                                                                     src="{{ LazyLoad::show() }}"
                                                                     data-src="https://icon-library.com/images/current-location-icon/current-location-icon-23.jpg">
                                                             </div>
-                                                            <div onclick="checkGeo();" class="location-popup-text sugest-list-text">
-                                                                <a id="current_location" type="button" class="location_op"
-                                                                    data-value="">Current Location</a>
+                                                            <div onclick="checkGeo();"
+                                                                class="location-popup-text sugest-list-text">
+                                                                <a id="current_location" type="button"
+                                                                    class="location_op" data-value="">Current
+                                                                    Location</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                        style="display: none ">
+                                                            style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
                                                                     src="{{ LazyLoad::show() }}"
@@ -407,8 +430,8 @@
                                             </div>
                                             <div class="check-in">
                                                 <a type="button"
-                                                style="position : absolute; z-index:1; width:367px; height: 60px; margin-left: -90px; margin-top: -8px"
-                                                class="collapsible_check_search"></a>
+                                                    style="position : absolute; z-index:1; width:367px; height: 60px; margin-left: -90px; margin-top: -8px"
+                                                    class="collapsible_check_search"></a>
                                                 <p>{{ __('user_page.Check in') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
@@ -600,11 +623,13 @@
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
-                                            <div style="display: table; background-color: white;
+                                            <div
+                                                style="display: table; background-color: white;
                                                 border-radius: 15px;">
-                                                <div class="col-lg-12" style="padding-left: 15px; padding-right: 30px; padding-top: 15px; text-align: right; text-align: center;">
+                                                <div class="col-lg-12"
+                                                    style="padding-left: 15px; padding-right: 30px; padding-top: 15px; text-align: right; text-align: center;">
                                                     <a type="button" id="clear_date_header"
-                                                            style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
+                                                        style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     <p style="margin: 0px; font-size: 13px;"></p>
                                                 </div>
                                                 <div class="flatpickr" id="inline_reserve_search"
@@ -620,7 +645,8 @@
                         {{-- End Header Search --}}
                     </div>
 
-                    <div id="nav-end-dekstop" class="col-lg-4 ms-auto" style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div id="nav-end-dekstop" class="col-lg-4 ms-auto"
+                        style="display: flex; align-items: center; justify-content: flex-end;">
                         @auth
                             <div class="d-flex" style="display: inline-block; align-items: center;">
                                 <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
@@ -649,7 +675,8 @@
                                         @else
                                             <img class="lozad" src="{{ LazyLoad::show() }}"
                                                 data-src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                                class="user-photo" alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+                                                class="user-photo" alt=""
+                                                style="border-radius: 50%; width: 50px; height: 50px;">
                                         @endif
 
                                         <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
@@ -714,14 +741,16 @@
                             <a type="button" onclick="language()" class="navbar-gap"
                                 style="color: white; margin-right: 9px; width:27px;" id="language">
                                 @if (session()->has('locale'))
-                                    <img style="border-radius: 3px; height: 23px;" class="lozad" src="{{ LazyLoad::show() }}"
+                                    <img style="border-radius: 3px; height: 23px;" class="lozad"
+                                        src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                                 @else
                                     <img style="border-radius: 3px;" class="lozad" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
-                            <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}" class="btn btn-fill border-0 navbar-gap"
+                            <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
+                                class="btn btn-fill border-0 navbar-gap"
                                 style="color: #ffffff; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -783,11 +812,13 @@
                                 </p>
 
                                 <p style="text-align: center;">
-                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                    <a href="https://www.apple.com/id/app-store/" target="_blank"
+                                        class="btn-donwload-mobile-app" id="btn-to-app-store">
                                         <img style="width:18%;"
                                             src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                     </a>
-                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                    <a href="https://play.google.com/" target="_blank"
+                                        class="btn-donwload-mobile-app" id="btn-to-play-store">
                                         <img style="width:21%;"
                                             src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
                                     </a>
@@ -825,35 +856,18 @@
                             </div>
                             <div class="mb-3">
                                 <div class="row-grid-img">
-                                    @if ($restaurant->count() > 9)
-                                        @for ($i = 0; $i < 9; $i++)
-                                            <div>
-                                                <a href="{{ route('restaurant', $restaurant[$i]->id_restaurant) }}"
-                                                    class="grid-img-container">
-                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                        data-src="{{ URL::asset('/foto/restaurant/' . $restaurant[$i]->uid . '/' . $restaurant[$i]->image) }}">
-                                                    <div class="grid-text">
-                                                        {{ $restaurant[$i]->name }}
-                                                    </div>
-                                                </a>
+                                    @foreach ($restaurantSubCategory->sortBy('order')->take(9) as $item)
+                                        <div>
+                                            <div onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})"
+                                                class="grid-img-container">
+                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
+                                                <div class="grid-text">
+                                                    {{ $item->name }}
+                                                </div>
                                             </div>
-                                        @endfor
-                                    @else
-                                        @forelse ($restaurant as $item)
-                                            <div>
-                                                <a href="{{ route('restaurant', $item->id_restaurant) }}"
-                                                    class="grid-img-container">
-                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                        data-src="{{ URL::asset('/foto/restaurant/' . $item->uid . '/' . $item->image) }}">
-                                                    <div class="grid-text">
-                                                        {{ $item->name }}
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @empty
-                                            {{ __('user_page.there is no content yet') }}
-                                        @endforelse
-                                    @endif
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -869,35 +883,18 @@
                         <div class="row-grid" id="discover-experiences-things-todo">
                             <div class="mb-3">
                                 <div class="row-grid-img">
-                                    @if ($activity->count() > 9)
-                                        @for ($i = 0; $i < 9; $i++)
-                                            <div>
-                                                <a href="{{ route('activity', $activity[$i]->id_activity) }}"
-                                                    class="grid-img-container">
-                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                        data-src="{{ URL::asset('/foto/activity/' . $activity[$i]->uid . '/' . $activity[$i]->image) }}">
-                                                    <div class="grid-text">
-                                                        {{ $activity[$i]->name }}
-                                                    </div>
-                                                </a>
+                                    @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
+                                        <div>
+                                            <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
+                                                class="grid-img-container">
+                                                <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
+                                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
+                                                <div class="grid-text">
+                                                    {{ $item->name }}
+                                                </div>
                                             </div>
-                                        @endfor
-                                    @else
-                                        @forelse ($activity as $item)
-                                            <div>
-                                                <a href="{{ route('activity', $item->id_activity) }}"
-                                                    class="grid-img-container">
-                                                    <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
-                                                        data-src="{{ URL::asset('/foto/activity/' . $item->uid . '/' . $item->image) }}">
-                                                    <div class="grid-text">
-                                                        {{ $item->name }}
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @empty
-                                            {{ __('user_page.there is no content yet') }}
-                                        @endforelse
-                                    @endif
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -932,9 +929,12 @@
                             <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                                 data-src='{{ URL::asset('assets/media/photos/desktop/villa.webp') }}'>
                                 <div class="p-0 h-100 card-overlay">
-                                    <div style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); padding: 3rem 6rem" class="container-xxl mx-auto h-100" id="qa-card">
-                                        <div class="col-12 d-flex flex-column justify-content-between text-white h-100 align-items-center align-items-sm-start">
-                                            <h1 class="card-title flex-sm-fill" style="font-size: 28px;font-weight: 400;display: block;word-wrap: break-word;max-width: 300px;line-height: 1.5;">
+                                    <div style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); padding: 3rem 6rem"
+                                        class="container-xxl mx-auto h-100" id="qa-card">
+                                        <div
+                                            class="col-12 d-flex flex-column justify-content-between text-white h-100 align-items-center align-items-sm-start">
+                                            <h1 class="card-title flex-sm-fill"
+                                                style="font-size: 28px;font-weight: 400;display: block;word-wrap: break-word;max-width: 300px;line-height: 1.5;">
                                                 {{-- __('user_page.Learn about listing your home, hotel, restaurant, or activity') --}}
                                                 {{ __('user_page.Learn about listing your home, hotel, food, or business') }}
                                             </h1>
@@ -970,7 +970,7 @@
 
         <script src="{{ asset('assets/js/home.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
         </script>
         {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> --}}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -984,7 +984,9 @@
             let location_current_user;
 
             function handlePermission() {
-                navigator.permissions.query({name:'geolocation'}).then(function(result) {
+                navigator.permissions.query({
+                    name: 'geolocation'
+                }).then(function(result) {
                     if (result.state == 'granted') {
                         report(result.state);
                     } else if (result.state == 'prompt') {
@@ -993,7 +995,7 @@
                     } else if (result.state == 'denied') {
                         report(result.state);
                     }
-                        result.onchange = function() {
+                    result.onchange = function() {
                         report(result.state);
                     }
                 });
@@ -1006,16 +1008,13 @@
 
             function checkGeo() {
                 handlePermission();
-                if (result == "prompt")
-                {
+                if (result == "prompt") {
                     alert("Allow your location");
                 }
-                if (result == "denied")
-                {
+                if (result == "denied") {
                     alert("Allow your location");
                 }
-                if (result == "granted")
-                {
+                if (result == "granted") {
                     location.reload();
                 }
             }
@@ -1040,7 +1039,8 @@
                         _token: "{{ csrf_token() }}",
                     },
                     success: function(filtered_data) {
-                        location_current_user = document.getElementById("current_location").setAttribute('data-value', `${filtered_data}`);
+                        location_current_user = document.getElementById("current_location").setAttribute(
+                            'data-value', `${filtered_data}`);
                     },
                 });
             }
@@ -1156,13 +1156,19 @@
         <script>
             $(document).ready(() => {
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
-                    $("body").css({"height": "auto", "overflow": "auto"})
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
                 })
                 $("#expand-mobile-btn").on("click", function() {
-                    $("body").css({"height": "100%", "overflow": "hidden"})
+                    $("body").css({
+                        "height": "100%",
+                        "overflow": "hidden"
+                    })
                     $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "true");
@@ -1242,12 +1248,12 @@
                     } else {
                         content_flatpickr.style.display = "block";
                         document.addEventListener('mouseup', function(e) {
-                        let container = content_flatpickr;
-                        if (!container.contains(e.target)) {
-                            container.style.display = 'none';
-                        }
-                    });
-                }
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             }
         </script>
@@ -1274,7 +1280,7 @@
                     showMonths: months,
                     // disable: data,
                     defaultDate: [check_in_val, check_out_val],
-                    onChange: function (selectedDates, dateStr, instance) {
+                    onChange: function(selectedDates, dateStr, instance) {
                         $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
                         $("#check_out2").val(
                             instance.formatDate(selectedDates[1], "Y-m-d")
@@ -1471,13 +1477,13 @@
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
                         calendar_search(1);
-                        $("#clear_date_header").click(function () {
+                        $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
                             calendar_search(1);
                         });
-                    }else {
-                        $("#clear_date_header").click(function () {
+                    } else {
+                        $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
                             calendar_search(2);
@@ -1491,7 +1497,7 @@
                         $("#bar .check-out").addClass("col-6 mb-2");
                         $("#bar .guests").addClass("col-10");
                         $("#bar .button").addClass("col-2 p-0 px-2");
-                    }else {
+                    } else {
                         $("#search_bar #bar").removeClass("row");
                         $("#bar .location").removeClass("col-12 mb-2");
                         $("#bar .check-in").removeClass("col-6 mb-2");
@@ -1657,6 +1663,126 @@
         <script>
             function view_LoginModal() {
                 $('#LoginModal').modal('show');
+            }
+        </script>
+
+        <script>
+            function wowRefreshFilter(suburl) {
+                window.location.href = `{{ env('APP_URL') }}/wow/search?${suburl}`;
+            }
+
+            function wowFilter(valueCategory, valueSub, clearSub) {
+                var sLocationFormInput = '';
+                var sKeywordFormInput = '';
+                var sStart = '';
+                var sEnd = '';
+
+                if (url2.searchParams.get('fCategory') == valueCategory) {
+                    valueCategory = '';
+                }
+
+                var filterFormInput = [];
+                $("input[name='subCategory[]']:checked").each(function() {
+                    filterFormInput.push(parseInt($(this).val()));
+                });
+
+                if (filterFormInput.includes(valueSub) == true) {
+                    var filterCheck = filterFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueSub;
+                    }
+
+                    var filteredArray = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    filterFormInput.push(valueSub);
+
+                    var filteredArray = filterFormInput.filter(function(item, pos) {
+                        return filterFormInput.indexOf(item) == pos;
+                    });
+                }
+                console.log(`satttt${valueSub}`);
+
+                if (clearSub == 1) {
+                    var subUrl =
+                        `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&sStart=${sStart}&sEnd=${sEnd}&fCategory=${valueCategory}&fSubCategory=`;
+                } else if (valueCategory == null) {
+                    var subUrl =
+                        `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&sStart=${sStart}&sEnd=${sEnd}&fCategory=&fSubCategory=${valueSub}`;
+                } else {
+                    var subUrl =
+                        `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&sStart=${sStart}&sEnd=${sEnd}&fCategory=${valueCategory}&fSubCategory=${filteredArray}`;
+                }
+
+                wowRefreshFilter(subUrl);
+            }
+
+            function restaurantRefreshFilter(suburl) {
+                window.location.href = `{{ env('APP_URL') }}/food/search?${suburl}`;
+            }
+
+            function foodFilter(valueCuisine, valueSub) {
+                var sLocationFormInput = '';
+
+                function setCookie2(name, value, days) {
+                    var expires = "";
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        expires = "; expires=" + date.toUTCString();
+                    }
+                    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                }
+
+                var url_food = window.location.href;
+                var url2 = new URL(url_food);
+
+                if (url2.searchParams.get('fCuisine') == valueCuisine) {
+                    valueCuisine = '';
+                }
+
+                setCookie2("sLocation", sLocationFormInput, 1);
+
+                var sCuisineFormInput = [];
+                $("input[name='sKeywords[]']:checked").each(function() {
+                    sCuisineFormInput.push(parseInt($(this).val()));
+                });
+
+                var sKeywordFormInput = '';
+
+                var filterFormInput = [];
+                $("input[name='subCategory[]']:checked").each(function() {
+                    filterFormInput.push(parseInt($(this).val()));
+                });
+
+                if (filterFormInput.includes(valueSub) == true) {
+                    var filterCheck = filterFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueSub;
+                    }
+
+                    var filteredArray = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    filterFormInput.push(valueSub);
+
+                    var filteredArray = filterFormInput.filter(function(item, pos) {
+                        return filterFormInput.indexOf(item) == pos;
+                    });
+                }
+
+                if (valueCuisine == null) {
+                    var subUrl =
+                        `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
+                } else {
+                    var subUrl =
+                        `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&fCuisine=${valueCuisine}&fSubCategory=${filteredArray}`;
+                }
+                restaurantRefreshFilter(subUrl);
             }
         </script>
 
