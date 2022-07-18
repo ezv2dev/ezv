@@ -591,7 +591,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div id="map-desc" class="mt-3">
                                     <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
@@ -1081,6 +1081,31 @@
         await fetchActivitysLocation(data);
     }
 
+    function mapMobile(){
+         //mobile map
+         map.addListener("click", ()=>{
+             // enable loading
+            setMapLoading();
+            // disable action google map
+            resetMapAction();
+            // disable event google map
+            resetMapEvent();
+            document.getElementById("map-desc").classList.add('mobile-map');
+            document.getElementById("modal-map-content").classList.add('mobile-map-desc');
+            // enable event google map
+            setMapEvent();
+            // enable action google map
+            setMapAction();
+            // disable loading
+            resetMapLoading();
+            
+            // disabled action google map
+            resetMapAction();
+            // hide primary control
+            hidePrimaryMarkerControlFromMap();
+        });
+    }
+
     // function to set map event
     function setMapEvent() {
         // refetch markers when idle
@@ -1528,6 +1553,24 @@
         mapLoadingContainer.appendChild(mapLoading);
         mapLoadingContainer.setAttribute("style", "display: flex; justify-content: center; width: 100vw;");
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(mapLoadingContainer);
+
+        $(window).on('resize', () => {
+            if ($(window).width() < 768) {
+                mapMobile();
+            }
+            if ($(window).width() >= 768) {
+                console.log('desktop')
+            }
+        });
+        $(document).ready(() => {
+            if ($(window).width() < 768) {
+                mapMobile();
+            }
+            if ($(window).width() >= 768) {
+                console.log('desktop')
+            }
+        });
+
     };
     // view map
     async function view_maps(id) {
@@ -1626,8 +1669,11 @@
 </script>
 
 {{-- MAP CONTENT --}}
-<div style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%); height: 500px; ">
+<div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
     <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+    <div onclick="close_map_mobile()" style="position: fixed; top: 0px; width: 30%; left: auto; right: auto; background: #ff7400;">
+        Hide map
+    </div>
 </div>
 <div id="modal-map-content" class="overflow-hidden"></div>
 {{-- END MAP CONTENT --}}

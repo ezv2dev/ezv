@@ -1029,6 +1029,10 @@ function showMoreInsurance() {
     $("#modal-show_insurance").modal("show");
 }
 
+function close_map_mobile() {
+    document.getElementById("map-desc").classList.remove('mobile-map'); 
+}
+
 function showMoreCancelationPolicy() {
     $("#modal-show_cancelationpolicy").modal("show");
 }
