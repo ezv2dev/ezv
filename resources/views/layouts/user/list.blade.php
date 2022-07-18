@@ -1154,6 +1154,23 @@ if (isset($_COOKIE['tema'])) {
     <script src='https://kenwheeler.github.io/slick/slick/slick.js'></script>
 
     <script>
+        function moreCategory() {
+            $('#categoryModal').modal('show');
+        }
+
+        function moreSubCategory() {
+            $('#modalSubCategory').modal('show');
+        }
+
+        function filterMain() {
+            $('#modalFiltersHome').modal('show');
+        }
+
+        function filterCollab() {
+            $('#modalFiltersCollab').modal('show');
+        }
+    </script>
+    <script>
         $("input[name='fViews[]']").on('click', function() {
             var $box = $(this);
             if ($box.is(":checked")) {

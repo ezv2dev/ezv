@@ -169,6 +169,14 @@
         .guests {
             min-width: 241px;
         }
+
+        .btn-filter-header{
+            outline:none;
+            background:#ff7400;
+            border-radius:40px;
+            margin-right:5px;
+            padding: 0 12px;
+        }
     </style>
 
     @php
@@ -201,6 +209,20 @@
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
+            
+                <button type="button" class="btn-filter-header" 
+                    @if($condition_villa)
+                        onclick="filterMain();"
+                    @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
+                        onclick="moreSubCategory();"
+                    @elseif($condition_collaborator)
+                        onclick="filterCollab();"
+                    @endif
+                    >
+                    <img src="{{ asset('assets/icon/menu/filter.svg') }}" style="width: 20px; height: auto;">
+                </button>
+            
+            
                 <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();"
                     style="cursor: pointer; width: 50px; border: none; margin: 0px;">
                     <p>
