@@ -365,11 +365,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasPool = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 1)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="pool" id="pool_1" value="no" />
                                         <label for="pool_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="pool" id="pool_2" value="1" />
+                                        <input type="radio" name="pool" id="pool_2" value="1" {{ $villaHasPool == 1 ? 'checked' : ''}}/>
                                         <label for="pool_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -390,11 +397,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasLake = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 2)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="lake" id="lake_1" value="no" />
                                         <label for="lake_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="lake" id="lake_2" value="2" />
+                                        <input type="radio" name="lake" id="lake_2" value="2" {{ $villaHasPool == 2 ? 'checked' : ''}}/>
                                         <label for="lake_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -411,11 +425,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasClimb = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 3)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="climb" id="climb_1" value="no" />
                                         <label for="climb_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="climb" id="climb_2" value="3" />
+                                        <input type="radio" name="climb" id="climb_2" value="3" {{ $villaHasClimb == 3 ? 'checked' : '' }}/>
                                         <label for="climb_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -435,11 +456,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasHeight = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 4)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="height" id="height_1" value="no" />
                                         <label for="height_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="height" id="height_2" value="4" />
+                                        <input type="radio" name="height" id="height_2" value="4" {{ $villaHasHeight == 4 ? 'checked' : '' }}/>
                                         <label for="height_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -459,11 +487,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasAnimal = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 5)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="animal" id="animal_1" value="no" />
                                         <label for="animal_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="animal" id="animal_2" value="5" />
+                                        <input type="radio" name="animal" id="animal_2" value="5" {{ $villaHasAnimal == 5 ? 'checked' : ''}}/>
                                         <label for="animal_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -491,11 +526,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasCamera = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 6)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="camera" id="camera_1" value="no" />
                                         <label for="camera_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="camera" id="camera_2" value="6" />
+                                        <input type="radio" name="camera" id="camera_2" value="6" {{ $villaHasCamera == 6 ? 'checked' : ''}}/>
                                         <label for="camera_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -512,11 +554,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasMonoxide = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 7)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="monoxide" id="monoxide_1" value="no" />
                                         <label for="monoxide_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" />
+                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" {{ $villaHasMonoxide == 7 ? 'checked' : ''}}/>
                                         <label for="monoxide_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -533,11 +582,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasAlarm = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 8)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="alarm" id="alarm_1" value="no" />
                                         <label for="alarm_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="alarm" id="alarm_2" value="8" />
+                                        <input type="radio" name="alarm" id="alarm_2" value="8" {{ $villaHasAlarm == 8 ? 'checked' : ''}}/>
                                         <label for="alarm_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -558,11 +614,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasMust = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 9)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="must" id="must_1" value="no" />
                                         <label for="must_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="must" id="must_2" value="9" />
+                                        <input type="radio" name="must" id="must_2" value="9" {{ $villaHasMust == 9 ? 'checked' : ''}}/>
                                         <label for="must_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -580,11 +643,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasPotential = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 10)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="potential" id="potential_1" value="no" />
                                         <label for="potential_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="potential" id="potential_2" value="10" />
+                                        <input type="radio" name="potential" id="potential_2" value="10" {{ $villaHasPotential == 10 ? 'checked' : ''}}/>
                                         <label for="potential_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -601,11 +671,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasCome = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 11)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="come" id="come_1" value="no" />
                                         <label for="come_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="come" id="come_2" value="11" />
+                                        <input type="radio" name="come" id="come_2" value="11" {{ $villaHasCome == 11 ? 'checked' : ''}}/>
                                         <label for="come_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -621,11 +698,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasParking = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 12)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="parking" id="parking_1" value="no" />
                                         <label for="parking_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="parking" id="parking_2" value="12" />
+                                        <input type="radio" name="parking" id="parking_2" value="12" {{ $villaHasParking == 12 ? 'checked' : ''}}/>
                                         <label for="parking_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -642,11 +726,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasShared = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 13)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="shared" id="shared_1" value="no" />
                                         <label for="shared_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="shared" id="shared_2" value="13" />
+                                        <input type="radio" name="shared" id="shared_2" value="13" {{ $villaHasShared == 13 ? 'checked' : ''}}/>
                                         <label for="shared_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -663,11 +754,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasAmenity = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 14)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="amenity" id="amenity_1" value="no" />
                                         <label for="amenity_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="amenity" id="amenity_2" value="14" />
+                                        <input type="radio" name="amenity" id="amenity_2" value="14" {{ $villaHasAmenity == 14 ? 'checked' : ''}}/>
                                         <label for="amenity_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -684,11 +782,18 @@
                                         </span>
                                     </p>
                                 </div>
+
+                                @php
+                                    $villaHasWeapon = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
+                                    ->where('id_guest_safety', 15)
+                                    ->count();
+                                @endphp
+
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="weapon" id="weapon_1" value="no" />
                                         <label for="weapon_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="weapon" id="weapon_2" value="15" />
+                                        <input type="radio" name="weapon" id="weapon_2" value="15" {{ $villaHasWeapon == 15 ? 'checked' : ''}}/>
                                         <label for="weapon_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
