@@ -781,7 +781,7 @@
                                 <p class="text-white text-center" style="margin-top: -20px;">
                                     {{ __('user_page.Unlock all the features today') }}
                                 </p>
-    
+
                                 <p style="text-align: center;">
                                     <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                         <img style="width:18%;"
@@ -800,7 +800,7 @@
             </section>
             {{-- end hero --}}
             {{-- experience --}}
-    
+
             {{-- Restaurant --}}
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
@@ -860,7 +860,7 @@
                     </div>
                 </div>
             </section>
-    
+
             {{-- Things To Do --}}
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
@@ -922,7 +922,7 @@
                 </div>
             </section>
             {{-- end experience --}}
-    
+
             {{-- QA desktop --}}
             <section class="h-100 w-100" style="box-sizing: border-box;">
                 <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
@@ -940,7 +940,7 @@
                                             </h1>
                                             <div>
                                                 <a href="{{ route('ahost') }}" class="btn btn-company text-white"
-                                                    target="_blank">{{ __('user_page.Ask a Super Host') }}</a>
+                                                    target="_blank">{{ __('user_page.Learn More') }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -951,7 +951,7 @@
                 </div>
             </section>
         </div>
-        
+
 
         {{-- modal laguage and currency --}}
         @include('user.modal.filter.filter_language')

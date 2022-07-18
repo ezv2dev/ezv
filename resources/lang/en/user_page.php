@@ -236,6 +236,7 @@ return [
     'there is no content yet' => 'there is no content yet',
     "Learn about listing your home, hotel, food, or wow" => "Learn about listing your home, hotel, food, or wow",
     'Ask a Super Host' => 'Ask a Super Host',
+    'Learn More' => 'Learn More',
 
     'Map' => 'Map',
     'this content is active, edit grade restaurant' => 'this content is active, edit grade restaurant',
