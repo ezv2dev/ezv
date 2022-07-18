@@ -453,6 +453,7 @@ Route::post('/villa/update/category', [ViewController::class, 'villa_update_cate
 // Route::get('/villa/get/category/{id}', [ViewController::class, 'villa_get_category'])->name('villa_get_category');
 Route::post('/villa/update/story', [ViewController::class, 'villa_update_story'])->name('villa_update_story');
 Route::post('/villa/update/photo', [ViewController::class, 'villa_update_photo'])->name('villa_update_photo');
+Route::post('/villa/quick-enquiry', [ViewController::class, 'villa_quick_enquiry'])->name('villa_quick_enquiry');
 Route::post('/villa/update/image', [ViewController::class, 'villa_update_image'])->name('villa_update_image');
 Route::post('/villa/update/property-type', [ViewController::class, 'villa_update_property_type'])->name('villa_update_property_type');
 Route::get('/villa/{id}/delete/story/{id_story}', [ViewController::class, 'villa_delete_story'])->name('villa_delete_story');

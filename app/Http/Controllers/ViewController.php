@@ -25,6 +25,7 @@ use App\Models\VillaCategory;
 use App\Models\VillaFilter;
 use App\Models\VillaHasFilter;
 use App\Models\VillaHasCategory;
+use App\Models\VillaQuickEnquiry;
 
 use App\Models\Government;
 
@@ -1372,6 +1373,23 @@ class ViewController extends Controller
                 'message' => 'Update Gallery Homes',
             ], 500);
         }
+    }
+
+    public function villa_quick_enquiry(Request $request)
+    {
+        $quick = new VillaQuickEnquiry;
+        $quick->check_in = $request->check_in;
+        $quick->check_out = $request->check_out;
+        $quick->adult = $request->adult;
+        $quick->child = $request->child;
+        $quick->first_name = $request->first_name;
+        $quick->last_name = $request->last_name;
+        $quick->email_sender = $request->email;
+        $quick->phone = $request->phone;
+        $quick->additional_information = $request->additional_information;
+
+        $quick->save();
+        return back();
     }
 
     public function villa_delete_photo_video(Request $request)

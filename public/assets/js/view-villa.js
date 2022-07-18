@@ -31,8 +31,7 @@ function checkCheckInOutDate() {
     let child = getCookie2("sChild");
     let id_villa = $("#id_villa").val();
 
-    if (checkIn == null && checkOut == null) {
-    } else {
+    if (checkIn == null && checkOut == null) {} else {
         $.ajax({
             type: "GET",
             url: "/villa/calendar/check",
@@ -42,11 +41,10 @@ function checkCheckInOutDate() {
                 id: id_villa,
                 _token: "{{ csrf_token() }}",
             },
-            success: function (response) {
+            success: function(response) {
                 // console.log(response.status);
                 console.log(response.data.length);
-                if (response.data.length > 0) {
-                } else {
+                if (response.data.length > 0) {} else {
                     runningCookiesDate(checkIn, checkOut, adult, child);
                 }
             },
@@ -93,7 +91,7 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
             end: checkOut,
             _token: "{{ csrf_token() }}",
         },
-        success: function (data) {
+        success: function(data) {
             var total = data;
 
             // console.log(total);
@@ -165,7 +163,7 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
 
 checkCheckInOutDate();
 
-$(document).ready(function () {
+$(document).ready(function() {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
@@ -175,7 +173,7 @@ $(document).ready(function () {
     }
 });
 
-$(window).on("resize", function () {
+$(window).on("resize", function() {
     if ($(this).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
@@ -190,7 +188,7 @@ function calendar_availability(months) {
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function (data) {
+        success: function(data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -211,7 +209,7 @@ function calendar_availability(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function (selectedDates, dateStr, instance) {
+                onClose: function(selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -232,7 +230,7 @@ function calendar_availability(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function (data) {
+                        success: function(data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -268,6 +266,19 @@ function calendar_availability(months) {
                                     )
                                 );
 
+                                $("#check_in5").val(
+                                    instance.formatDate(
+                                        selectedDates[0],
+                                        "Y-m-d"
+                                    )
+                                );
+                                $("#check_out5").val(
+                                    instance.formatDate(
+                                        selectedDates[1],
+                                        "Y-m-d"
+                                    )
+                                );
+
                                 $("#check_in_date").val($("#check_in3").val());
                                 $("#check_out_date").val($("#check_out3").val());
 
@@ -293,8 +304,7 @@ function calendar_availability(months) {
                                 $("#tax3").text(total["tax"]);
                                 $("#total_all3").text(total["total_all"]);
 
-                                if (
-                                    !total["total_all"] ||
+                                if (!total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -338,6 +348,7 @@ function calendar_availability(months) {
 
                                 calendar_reserve(2);
                                 calendar_reserve2(2);
+                                calendar_reserve3(2);
                             }
                         },
                     });
@@ -347,7 +358,7 @@ function calendar_availability(months) {
     });
 }
 
-$("#clear1").click(function () {
+$("#clear1").click(function() {
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -355,9 +366,11 @@ $("#clear1").click(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
+        calendar_reserve3(1);
     } else {
         calendar_availability(2);
         calendar_reserve2(2);
+        calendar_reserve3(2);
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -374,7 +387,7 @@ $("#clear1").click(function () {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date").click(function () {
+$("#clear_date").click(function() {
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -382,9 +395,11 @@ $("#clear_date").click(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1)
+        calendar_reserve3(1)
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
+        calendar_reserve3(2)
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -402,7 +417,7 @@ $("#clear_date").click(function () {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date2").click(function () {
+$("#clear_date2").click(function() {
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -410,9 +425,11 @@ $("#clear_date2").click(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1)
+        calendar_reserve3(1)
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
+        calendar_reserve3(2)
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -433,7 +450,40 @@ $("#clear_date2").click(function () {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date_header").click(function () {
+$("#clear_date3").click(function() {
+    $("#check_in").val("");
+    $("#check_in3").val("");
+    $("#check_out").val("");
+    $("#check_out3").val("");
+    if ($(window).width() <= 991) {
+        calendar_availability(1);
+        calendar_reserve2(1)
+        calendar_reserve3(1)
+    } else {
+        calendar_availability(2);
+        calendar_reserve2(2)
+        calendar_reserve3(2)
+    }
+    calendar_reserve(2);
+    $("#counting_part").css("display", "none");
+    $("#popup_check2").css("display", "none");
+    $("#details_button").css("display", "none");
+    $("#details_mobile_button").css({ display: "none" });
+    $("#details_mobile_reserve_button").css({ display: "inline" });
+    // $("#modal-details-reserve").removeClass("show");
+    // $(".modal-backdrop").removeClass("show");
+    $("#modal-details-reserve").modal("hide");
+    $("#sum_night").val("0");
+    $("#total3").text("0");
+    $("#tax3").text("0");
+    $("#total_all3").text("0");
+    $("#total").text("0");
+    $("#tax").text("0");
+    $("#total_all").text("0");
+    $("#total_all2_div").css({ display: "none" });
+});
+
+$("#clear_date_header").click(function() {
     $("#check_in4").val("");
     $("#check_out4").val("");
     calendar_header(2);
@@ -444,7 +494,7 @@ function calendar_reserve(months) {
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function (data) {
+        success: function(data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -466,7 +516,7 @@ function calendar_reserve(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function (selectedDates, dateStr, instance) {
+                onClose: function(selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -488,7 +538,7 @@ function calendar_reserve(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function (data) {
+                        success: function(data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -524,6 +574,19 @@ function calendar_reserve(months) {
                                     )
                                 );
 
+                                $("#check_in5").val(
+                                    instance.formatDate(
+                                        selectedDates[0],
+                                        "Y-m-d"
+                                    )
+                                );
+                                $("#check_out5").val(
+                                    instance.formatDate(
+                                        selectedDates[1],
+                                        "Y-m-d"
+                                    )
+                                );
+
                                 $("#check_in_date").val($("#check_in3").val());
                                 $("#check_out_date").val($("#check_out3").val());
 
@@ -532,8 +595,7 @@ function calendar_reserve(months) {
                                 $("#sum_night2").val($('#sum_night3').val());
                                 $("#total").text(total["total"]);
 
-                                if (
-                                    !total["total_all"] ||
+                                if (!total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -566,8 +628,7 @@ function calendar_reserve(months) {
                                 $("#tax3").text(total["tax"]);
                                 $("#total_all3").text(total["total_all"]);
 
-                                if (
-                                    !total["total_all"] ||
+                                if (!total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -609,9 +670,11 @@ function calendar_reserve(months) {
                                 if ($(window).width() <= 991) {
                                     calendar_availability(1);
                                     calendar_reserve2(1)
+                                    calendar_reserve3(1)
                                 } else {
                                     calendar_availability(2);
                                     calendar_reserve2(2)
+                                    calendar_reserve3(2)
                                 }
                             }
                         },
@@ -629,7 +692,7 @@ function calendar_reserve2(months) {
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function (data) {
+        success: function(data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -650,7 +713,7 @@ function calendar_reserve2(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function (selectedDates, dateStr, instance) {
+                onClose: function(selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -671,7 +734,7 @@ function calendar_reserve2(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function (data) {
+                        success: function(data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -720,8 +783,7 @@ function calendar_reserve2(months) {
 
                                 // $("#price_total").val(total["price"]);
                                 // $("#price_total2").val(total["price"]);
-                                if (
-                                    !total["total_all"] ||
+                                if (!total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -806,7 +868,7 @@ function calendar_header(months) {
         showMonths: months,
         // disable: data,
         defaultDate: [check_in_val, check_out_val],
-        onChange: function (selectedDates, dateStr, instance) {
+        onChange: function(selectedDates, dateStr, instance) {
             $("#check_in4").val(instance.formatDate(selectedDates[0], "Y-m-d"));
             $("#check_out4").val(
                 instance.formatDate(selectedDates[1], "Y-m-d")
@@ -850,7 +912,7 @@ function view_story(id) {
         type: "GET",
         url: "/story/" + id,
         dataType: "JSON",
-        success: function (data) {
+        success: function(data) {
             $('[name="id_story"]').val(data.id_story);
             let villa = document.getElementById("villa").value;
             // let video = document.getElementById('video');
@@ -867,18 +929,18 @@ function view_story(id) {
     });
 }
 
-$(function () {
+$(function() {
     $("#storymodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function () {
+        .on("hidden.bs.modal", function() {
             $(this).find("video")[0].pause();
         });
 });
 
 // Sticky Menu
-window.onscroll = function () {
+window.onscroll = function() {
     myFunction();
     if ((document.getElementById("popup_check").style.display = "block")) {
         document.getElementById("popup_check").style.display = "none";
@@ -1059,7 +1121,7 @@ function view(id) {
         type: "GET",
         url: "/villa/video/open/" + id,
         dataType: "JSON",
-        success: function (data) {
+        success: function(data) {
             var video = document.getElementById("video1");
             var public = "/foto/gallery/";
             var slash = "/";
@@ -1073,12 +1135,12 @@ function view(id) {
         },
     });
 }
-$(function () {
+$(function() {
     $("#videomodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function () {
+        .on("hidden.bs.modal", function() {
             $(this).find("video")[0].pause();
         });
 });
@@ -1093,3 +1155,4 @@ calendar_header(2);
 calendar_availability(2);
 calendar_reserve(2);
 calendar_reserve2(2);
+calendar_reserve3(2);
