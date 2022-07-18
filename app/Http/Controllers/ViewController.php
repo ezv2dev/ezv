@@ -1388,6 +1388,21 @@ class ViewController extends Controller
         $quick->phone = $request->phone;
         $quick->additional_information = $request->additional_information;
 
+        $details = [
+            'check_in' => $request->check_in,
+            'check_out' => $request->check_out,
+            'adult' => $request->adult,
+            'child' => $request->child,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email_sender' => $request->email_sender,
+            'phone' => $request->phone,
+            'additional_information' => $request->additional_information,
+            'villa_name' => $request->villa_name,
+        ];
+
+        \Mail::to($request->email_receiver)->send(new \App\Mail\QuickEnquiryMail($details));
+
         $quick->save();
         return back();
     }
