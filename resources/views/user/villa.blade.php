@@ -2169,7 +2169,7 @@
                                     @endif
                                 @endauth
                             </div>
-                            <p style="margin-bottom: 0px !important">
+                            <p style="margin-bottom: 0px !important" id="guestSafetyContent">
                                 @forelse ($villa[0]->guestSafety->take(4) as $item)
                                     <i class="fas fa-{{ $item->icon }}"></i>
                                     <span class="translate-text-single">{{ $item->guest_safety }}</span><br>
@@ -2181,7 +2181,7 @@
                                 $countGuest = count($villa[0]->guestSafety);
                             @endphp
                             @if ($countGuest > 5)
-                                <p style="margin-bottom: 0px !important">
+                                <p style="margin-bottom: 0px !important" id="btnShowMoreGuestSafety">
                                     <a href="javascript:void(0)" onclick="showMoreGuestSafety()">
                                         {{ __('user_page.Show more') }}
                                         <i class="fas fa-chevron-right"></i>

@@ -1057,6 +1057,7 @@ $("#updateStoryForm").submit(function (e) {
     // console.log(readerStoryRestaurant);
 });
 
+//save house rules
 $("#houseRuleForm").submit(function (e) {
     e.preventDefault();
 
@@ -1137,6 +1138,93 @@ $("#houseRuleForm").submit(function (e) {
             $("#houseRuleContent").html(content);
 
             $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});
+
+$("#guestSafetyForm").submit(function (e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveGuestSafety");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/guessafety/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+            let contentModal = "";
+
+            for (let i = 0; i < 4; i++) {
+                content +=
+                    '<i class="fas fa-' +
+                    response.data[i].icon +
+                    '"></i> <span class="translate-text-single">' +
+                    response.data[i].guest_safety +
+                    "</span><br>";
+            }
+
+            $("#btnShowMoreGuestSafety").html("");
+
+            content +=
+                '<p style="margin-bottom: 0px !important"> <a href="javascript:void(0)" onclick="showMoreGuestSafety()">Show more <i class="fas fa-chevron-right"></i> </a> </p>';
+
+            $("#guestSafetyContent").html(content);
+
+            for (let j = 0; j < response.data.length; j++) {
+                contentModal +=
+                    '<p> <i class="fas fa-' +
+                    response.data[j].icon +
+                    '"></i> <span class="translate-text-group-items">' +
+                    response.data[j].guest_safety +
+                    '</span> </p> <p style="font-size: 12px; margin-top: -20px;"> <span class="translate-text-group-items">' +
+                    response.data[j].description +
+                    "</span> </p>";
+            }
+
+            $("#guestSafetyContentModal").html(contentModal);
+
+            $("#modal-edit-guest-safety").modal("hide");
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
