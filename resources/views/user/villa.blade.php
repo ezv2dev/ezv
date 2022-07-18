@@ -2099,7 +2099,7 @@
                                     @endif
                                 @endauth
                             </div>
-                            <p style="margin-bottom: 0px !important">
+                            <p style="margin-bottom: 0px !important" id="houseRuleContent">
                                 @if (!isset($house_rules))
                                     {{ __('user_page.No data found') }}
                                 @endif

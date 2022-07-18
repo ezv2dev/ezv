@@ -350,7 +350,7 @@
             <div class="modal-body modal-body3">
                 <div class="tabbable column-wrapper translate-text-group">
                     <hr style="margin-top: -20px;">
-                    <form method="POST" action="{{ route('villa_update_house_rules') }}">
+                    <form method="POST" action="javascript:void(0);" id="houseRuleForm">
                         @csrf
                         <input type="hidden" id="villa" name="id_villa" value="{{ $villa[0]->id_villa }}">
 
@@ -369,9 +369,9 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="children" id="children_1" value="no" />
+                                        <input type="radio" name="children" id="children_1" value="no" {{ isset($house_rules->children) == 'no' ? 'checked' : '' }} />
                                         <label for="children_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="children" id="children_2" value="yes" required />
+                                        <input type="radio" name="children" id="children_2" value="yes" {{ isset($house_rules->children) == 'yes' ? 'checked' : '' }}  />
                                         <label for="children_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -391,10 +391,10 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="infants" id="infant_1" value="no" />
+                                        <input type="radio" name="infants" id="infant_1" value="no" {{ isset($house_rules->infants) == 'no' ? 'checked' : '' }}  />
                                         <label for="infant_1"><i class="fa fa-times"></i></label>
 
-                                        <input type="radio" name="infants" id="infant_2" value="yes" required />
+                                        <input type="radio" name="infants" id="infant_2" value="yes" {{ isset($house_rules->infants) == 'yes' ? 'checked' : '' }}  />
                                         <label for="infant_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -414,9 +414,9 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="pets" id="pet_1" value="no" />
+                                        <input type="radio" name="pets" id="pet_1" value="no" {{ isset($house_rules->pets) == 'no' ? 'checked' : '' }}  />
                                         <label for="pet_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="pets" id="pet_2" value="yes" required />
+                                        <input type="radio" name="pets" id="pet_2" value="yes" {{ isset($house_rules->pets) == 'yes' ? 'checked' : '' }}  />
                                         <label for="pet_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -428,9 +428,9 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="smoking" id="smoke_1" value="no" />
+                                        <input type="radio" name="smoking" id="smoke_1" value="no" {{ isset($house_rules->smoking) == 'no' ? 'checked' : '' }}  />
                                         <label for="smoke_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="smoking" id="smoke_2" value="yes" required />
+                                        <input type="radio" name="smoking" id="smoke_2" value="yes" {{ isset($house_rules->smoking) == 'yes' ? 'checked' : '' }}  />
                                         <label for="smoke_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -442,9 +442,9 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="events" id="event_1" value="no" />
+                                        <input type="radio" name="events" id="event_1" value="no" {{ isset($house_rules->events) == 'no' ? 'checked' : '' }}  />
                                         <label for="event_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="events" id="event_2" value="yes" required />
+                                        <input type="radio" name="events" id="event_2" value="yes" {{ isset($house_rules->events) == 'yes' ? 'checked' : '' }}  />
                                         <label for="event_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -457,7 +457,7 @@
                 <p style="color: red; font-size: 12px; margin-left: 20px; margin-top: 20px;"><sup>*</sup>Please make
                     sure
                     you select all the list</p>
-                <button type="submit"
+                <button type="submit" id="btnSaveHouseRules" form="houseRuleForm"
                     style="width:150px; border-radius: 9px; padding : 8px; margin-right: 20px;box-sizing: border-box; background-color: #FF7400; border: none; margin-right: 20px"
                     class="btn btn-primary btn-lg btn-block">
                     Save

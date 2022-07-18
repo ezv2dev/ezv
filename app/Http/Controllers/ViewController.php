@@ -2477,9 +2477,31 @@ class ViewController extends Controller
 
     public function villa_update_house_rules(Request $request)
     {
-        // dd($request->all());
-        // dd($request->id_villa);
+        $validator = Validator::make($request->all(), [
+            'children' => 'required',
+            'infants' => 'required',
+            'pets' => 'required',
+            'smoking' => 'required',
+            'events' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
         $checkID = HouseRules::where('id_villa', '=', $request->id_villa)->first();
+
+        $data = [
+            'id_villa' => $request->id_villa,
+            'children' => $request->children,
+            'infants' => $request->infants,
+            'pets' => $request->pets,
+            'smoking' => $request->smoking,
+            'events' => $request->events,
+        ];
 
         if ($checkID == null) {
             // ID villa doesn't exist
@@ -2491,7 +2513,11 @@ class ViewController extends Controller
                 'smoking' => $request->smoking,
                 'events' => $request->events,
             ));
-            return back();
+
+            return response()->json([
+                'data' => $data,
+                'message' => 'Updated House Rules Homes',
+            ], 200);
         } else {
             $checkID->update(array(
                 'id_villa' => $request->id_villa,
@@ -2501,7 +2527,11 @@ class ViewController extends Controller
                 'smoking' => $request->smoking,
                 'events' => $request->events,
             ));
-            return back();
+
+            return response()->json([
+                'data' => $data,
+                'message' => 'Updated House Rules Homes',
+            ], 200);
         }
     }
 
