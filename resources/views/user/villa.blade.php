@@ -296,7 +296,7 @@
                             <span id="name-content2">{{ $villa[0]->name }}</span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;<a type="button" onclick="editNameForm()"
+                                    &nbsp;<a type="button" onclick="editNameForm()"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 @endif
                             @endauth
@@ -309,8 +309,7 @@
                                     <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
-                                        style="background-color: #ff7400"
-                                        onclick="editNameVilla()">
+                                        style="background-color: #ff7400" onclick="editNameVilla()">
                                         <i class="fa fa-check"></i> {{ __('user_page.Done') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
@@ -331,8 +330,7 @@
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
                                     |</a>
                                 &nbsp;
-                                <a type="button" onclick="editNameForm()"
-                                    class="edit-profile-name-btn-mobile d-md-none"
+                                <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                                 {{-- @if ($villa[0]->image)
                                     <a class="delete-profile" href="javascript:void(0);"
@@ -398,8 +396,7 @@
                                 id="short-description-content2">{{ $villa[0]->short_description ?? __('user_page.There is no description yet') }}</span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button"
-                                        onclick="editShortDescriptionForm()"
+                                    &nbsp;<a type="button" onclick="editShortDescriptionForm()"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Description') }}</a>
                                 @endif
                             @endauth
@@ -3450,7 +3447,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                    <button onclick="share_function()">Copy link</button> -->
+                                            <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3705,10 +3702,13 @@
         }
     </script>
 
-    @include('user.modal.villa.details_reserve')
-    @auth
-        @include('user.modal.villa.quick_enquiry')
-    @endauth
+    @if ($villa[0]->instant_book == 'yes')
+        @include('user.modal.villa.details_reserve')
+    @else
+        @auth
+            @include('user.modal.villa.quick_enquiry')
+        @endauth
+    @endif
 
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
@@ -4836,7 +4836,45 @@
         })
     </script>
 
-
+    {{-- <script>
+        $('#check_in5').flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            mode: "range",
+            showMonths: 2,
+            onChange: function(selectedDates, dateStr, instance) {
+                var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+                var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
+                var min_stay = $('#min_stay').val();
+                var total = $('#price').val() * sum_night;
+                // console.log(sum_night);
+                if (sum_night < min_stay) {
+                    alert("minimum stay is " + min_stay + " days");
+                } else {
+                    $('#sum_night5').val(sum_night);
+                    $("#total5").text(total.toString().replace(
+                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                        "."));
+                    $("#total_all5").text(total.toString().replace(
+                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                        "."));
+                }
+                $('#check_in5').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+                $('#check_out5').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+                $('#check_in').val($('#check_in5').val());
+                $('#check_out').val($('#check_out5').val());
+                $('#sum_night').val($('#sum_night5').val());
+                $('#total').text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+                $('#total_all').text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+            }
+        });
+    </script> --}}
 
     @include('components.lazy-load.lazy-load')
     @include('components.promotion.mobile-app')
