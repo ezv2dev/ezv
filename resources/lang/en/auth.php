@@ -53,4 +53,6 @@ return [
     'total_cap' => 'The total capaciti field is required',
     'room_size' => 'The rooms size field is required',
     'name_room' => 'The room name field is required',
+
+    'empty_phone' => 'The phone number field is required',
 ];
