@@ -1056,3 +1056,107 @@ $("#updateStoryForm").submit(function (e) {
     }
     // console.log(readerStoryRestaurant);
 });
+
+$("#houseRuleForm").submit(function (e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveHouseRules");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/houserules/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+
+            if (response.data.children == "yes") {
+                content += '<i class="fas fa-child"></i> Childrens are allowed';
+                content += "<br>";
+            }
+            if (response.data.children == "no") {
+                content += '<i class="fas fa-ban"></i> No children';
+                content += "<br>";
+            }
+
+            if (response.data.infants == "yes") {
+                content += '<i class="fas fa-child"></i> Infants are allowed';
+                content += "<br>";
+            }
+            if (response.data.infants == "no") {
+                content += '<i class="fas fa-ban"></i> No infants';
+                content += "<br>";
+            }
+
+            if (response.data.pets == "yes") {
+                content += '<i class="fas fa-paw"></i> Pets are allowed';
+                content += "<br>";
+            }
+            if (response.data.pets == "no") {
+                content += '<i class="fas fa-ban"></i> No pets';
+                content += "<br>";
+            }
+
+            if (response.data.smoking == "yes") {
+                content += '<i class="fas fa-smoking"></i> Smoking is allowed';
+                content += "<br>";
+            }
+            if (response.data.smoking == "no") {
+                content += '<i class="fas fa-ban"></i> No smoking';
+                content += "<br>";
+            }
+
+            if (response.data.events == "yes") {
+                content += '<i class="fas fa-calendar"></i> Events are allowed';
+                content += "<br>";
+            }
+            if (response.data.events == "no") {
+                content += '<i class="fas fa-ban"></i> No events';
+                content += "<br>";
+            }
+
+            $("#houseRuleContent").html(content);
+
+            $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});
