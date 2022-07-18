@@ -81,10 +81,10 @@
                 <div class="tabbable column-wrapper">
                     <!-- Only required for left/right tabs -->
 
-                    
+
                     <div class="tab-content tab-content-language column rigth" id="tabs">
                         <div class="tab-pane active" id="editprice">
-                            <form action="{{ route('room_update_price') }}" method="POST" id="basic-form"
+                            <form action="{{ route('room_update_price') }}" method="POST" id="edit-price"
                                 class="js-validation" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_hotel_room" id="id_hotel_room" value="{{ $hotelRoom->id_hotel_room }}">
@@ -94,8 +94,10 @@
                                                 title="Required"
                                                 style="font-size: 12pt; color: #EB5353;">*</span></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="price" name="price"
+                                        <input type="number" class="form-control" id="room-price" name="price"
                                             placeholder="{{ __('user_page.Price') }}" value="{{ $hotelRoom->price }}">
+                                        <small id="err-prc" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                                     </div>
                                 </div>
 
@@ -134,17 +136,21 @@
                                         <label>{{ __('user_page.Price') }}</label>
                                         <input type="number" class="form-control" id="special_price"
                                             name="special_price" placeholder="{{ __('user_page.Price') }}">
+                                        <small id="err-spcl-prc" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>{{ __('user_page.Discount') }}</label>
                                         <input type="number" class="form-control" id="disc" name="disc"
                                             placeholder="{{ __('user_page.Discount') }}">
+                                        <small id="err-disc" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
                                     </div>
                                 </div>
                                 <!-- Submit -->
                                 <div class="row items-push">
                                     <div class="col-lg-7">
-                                        <button type="submit" class="btn btn-sm btn-primary">
+                                        <button type="submit" class="btn btn-sm btn-primary" id="submitPrice">
                                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                         </button>
                                     </div>
@@ -291,6 +297,53 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+<script>
+    $(function() {
+        $("#room-price").keyup(function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            $('#room-price').removeClass('is-invalid');
+            $('#err-prc').hide();
+        });
+        $("#special_price").keyup(function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            $('#special_price').removeClass('is-invalid');
+            $('#err-spcl-prc').hide();
+        });
+        $("#disc").keyup(function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            $('#disc').removeClass('is-invalid');
+            $('#err-disc').hide();
+        });
+        $("#edit-price").submit(function(e) {
+            let error = 0;
+            if (!parseInt($('#room-price').val())) {
+                $('#room-price').addClass('is-invalid');
+                $('#err-prc').show();
+                error = 1;
+            }
+            if ($('#start').val() && $('#end').val()) {
+                if (!$('#special_price').val()) {
+                    $('#special_price').addClass('is-invalid');
+                    $('#err-spcl-prc').show();
+                    error = 1;
+                }
+                if (!$('#disc').val()) {
+                    $('#disc').addClass('is-invalid');
+                    $('#err-disc').show();
+                    error = 1;
+                }
+            }
+            if (error == 1) {
+                e.preventDefault();
+            } else {
+                let btn = document.getElementById("submitPrice");
+                btn.textContent = "Saving...";
+                btn.classList.add("disabled");
+            }
+        });
+    });
+</script>
 
 <script>
     id_hotel_room_fullcalendar = $('#id_hotel_room').val();
