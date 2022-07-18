@@ -1242,18 +1242,145 @@ class ViewController extends Controller
         }
     }
 
+    // original
+
+    // public function villa_update_photo(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id_villa' => ['required', 'integer'],
+    //         'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'message' => $validator->errors()->all(),
+    //         ], 500);
+    //     }
+
+    //     // restaurant data
+    //     $villa = Villa::find($request->id_villa);
+
+    //     // check if restaurant does not exist, abort 404
+    //     if (!$villa) {
+    //         return response()->json([
+    //             'message' => 'Homes Not Found'
+    //         ], 404);
+    //     }
+
+    //     // check if the editor does not have authorization
+    //     $this->authorize('listvilla_update');
+    //     if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+    //         return response()->json([
+    //             'message' => 'This action is unauthorized'
+    //         ], 403);
+    //     }
+
+    //     // store process
+    //     // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+    //     $folder = strtolower($villa->uid);
+    //     $path = env("VILLA_FILE_PATH") . $folder;
+
+    //     if (!File::isDirectory($path)) {
+
+    //         File::makeDirectory($path, 0777, true, true);
+    //     }
+
+    //     $ext = strtolower($request->file->getClientOriginalExtension());
+
+    //     $photo = [];
+
+    //     if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+    //         $validator2 = Validator::make($request->all(), [
+    //             'id_villa' => ['required', 'integer'],
+    //             'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+    //         ]);
+
+    //         if ($validator2->fails()) {
+    //             return response()->json([
+    //                 'message' => $validator2->errors()->all(),
+    //             ], 500);
+    //         }
+
+    //         $original_name = $request->file->getClientOriginalName();
+
+    //         $name_file = time() . "_" . $original_name;
+
+    //         $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+    //         // check last order
+    //         $lastOrder = VillaPhoto::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+    //         if ($lastOrder) {
+    //             $lastOrder = $lastOrder->order + 1;
+    //         } else {
+    //             $lastOrder = 1;
+    //             $lastOrder;
+    //         }
+
+    //         //insert into database
+    //         $createdVilla = VillaPhoto::create([
+    //             'id_villa' => $request->id_villa,
+    //             'name' => $name_file,
+    //             'order' => $lastOrder,
+    //             'created_by' => auth()->user()->id,
+    //             'updated_by' => auth()->user()->id
+    //         ]);
+
+    //         // $photo['id_photo'] = $createdRestaurant->id_photo;
+    //         array_push($photo, $createdVilla->id_photo);
+    //     }
+
+    //     $video = [];
+
+    //     if ($ext == 'mp4' || $ext == 'mov') {
+    //         $original_name = $request->file->getClientOriginalName();
+    //         // dd($original_name);
+    //         $name_file = time() . "_" . $original_name;
+    //         // isi dengan nama folder tempat kemana file diupload
+    //         $request->file->move($path, $name_file);
+
+    //         // check last order
+    //         $lastOrder = VillaVideo::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+    //         if ($lastOrder) {
+    //             $lastOrder = $lastOrder->order + 1;
+    //         } else {
+    //             $lastOrder = 1;
+    //             $lastOrder;
+    //         }
+
+    //         //insert into database
+    //         $createdVilla = VillaVideo::create([
+    //             'id_villa' => $request->id_villa,
+    //             'name' => $name_file,
+    //             'order' => $lastOrder,
+    //             'created_by' => auth()->user()->id,
+    //             'updated_by' => auth()->user()->id
+    //         ]);
+
+    //         array_push($video, $createdVilla->id_video);
+    //     }
+
+    //     $villaReturn = [
+    //         'photo' => VillaPhoto::whereIn('id_photo', $photo)->get(),
+    //         'video' => VillaVideo::whereIn('id_video', $video)->get(),
+    //         'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
+    //     ];
+
+    //     if ($createdVilla) {
+    //         return response()->json([
+    //             'message' => 'Update Gallery Homes',
+    //             'data' => $villaReturn,
+    //         ], 200);
+    //     } else {
+    //         return response()->json([
+    //             'message' => 'Update Gallery Homes',
+    //         ], 500);
+    //     }
+    // }
+
+
+    // modifikasi
     public function villa_update_photo(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'id_villa' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors()->all(),
-            ], 500);
-        }
 
         // restaurant data
         $villa = Villa::find($request->id_villa);
@@ -1290,7 +1417,7 @@ class ViewController extends Controller
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $validator2 = Validator::make($request->all(), [
                 'id_villa' => ['required', 'integer'],
-                'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+                'file' => ['required','dimensions:min_width=960']
             ]);
 
             if ($validator2->fails()) {
@@ -1363,15 +1490,24 @@ class ViewController extends Controller
             'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
         ];
 
-        if ($createdVilla) {
+
+        if (isset($createdVilla) == true) {
             return response()->json([
                 'message' => 'Update Gallery Homes',
                 'data' => $villaReturn,
             ], 200);
-        } else {
-            return response()->json([
-                'message' => 'Update Gallery Homes',
-            ], 500);
+        } else if (isset($createdVilla) == false) {
+            $validator = Validator::make($request->all(), [
+                'id_villa' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
+
         }
     }
 
