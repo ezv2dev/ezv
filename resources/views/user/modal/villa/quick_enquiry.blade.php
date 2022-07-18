@@ -89,6 +89,8 @@ use Illuminate\Support\Facades\Crypt;
             </div>
             <form action="{{ route('villa_quick_enquiry') }}" method="POST">
                 @csrf
+                <input type="hidden" name="email_receiver" value="{{ $villa[0]->userCreate->email }}">
+                <input type="hidden" name="villa_name" value="{{ $villa[0]->name }}">
                 <div id="totalprice" class="modal-body p-4"
                     style="overflow-y: scroll; height: 500px; overflow-x: hidden;">
                     <div class="row">

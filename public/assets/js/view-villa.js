@@ -348,7 +348,6 @@ function calendar_availability(months) {
 
                                 calendar_reserve(2);
                                 calendar_reserve2(2);
-                                calendar_reserve3(2);
                             }
                         },
                     });
@@ -366,11 +365,9 @@ $("#clear1").click(function() {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
-        calendar_reserve3(1);
     } else {
         calendar_availability(2);
         calendar_reserve2(2);
-        calendar_reserve3(2);
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -395,11 +392,9 @@ $("#clear_date").click(function() {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1)
-        calendar_reserve3(1)
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
-        calendar_reserve3(2)
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -425,11 +420,9 @@ $("#clear_date2").click(function() {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1)
-        calendar_reserve3(1)
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
-        calendar_reserve3(2)
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -458,11 +451,9 @@ $("#clear_date3").click(function() {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1)
-        calendar_reserve3(1)
     } else {
         calendar_availability(2);
         calendar_reserve2(2)
-        calendar_reserve3(2)
     }
     calendar_reserve(2);
     $("#counting_part").css("display", "none");
@@ -670,11 +661,9 @@ function calendar_reserve(months) {
                                 if ($(window).width() <= 991) {
                                     calendar_availability(1);
                                     calendar_reserve2(1)
-                                    calendar_reserve3(1)
                                 } else {
                                     calendar_availability(2);
                                     calendar_reserve2(2)
-                                    calendar_reserve3(2)
                                 }
                             }
                         },
@@ -1155,4 +1144,3 @@ calendar_header(2);
 calendar_availability(2);
 calendar_reserve(2);
 calendar_reserve2(2);
-calendar_reserve3(2);
