@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\ActivitySubcategory;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Models\PopularDestinations;
 use App\Services\DeviceCheckService;
 use App\Models\Location;
+use App\Models\RestaurantSubCategory;
 use App\Models\Villa;
 
 class HomeController extends Controller
@@ -15,8 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         // abort(500);
-        $restaurant = Restaurant::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
-        $activity = Activity::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
+        // $restaurant = Restaurant::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
+        // $activity = Activity::where('status', 1)->limit(9)->get()->shuffle()->sortBy('grade');
 
         // fetch restaurant
         // $restaurant_aa = Restaurant::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
@@ -88,7 +90,7 @@ class HomeController extends Controller
         //     }
         // }
 
-        $villa = Villa::where('status', 1)->get()->shuffle()->sortBy('grade');
+        // $villa = Villa::where('status', 1)->get()->shuffle()->sortBy('grade');
         // $villa_aa = Villa::where('status', 1)->where('grade','AA')->inRandomOrder()->limit(9)->get();
         // $villa = collect();
         // $villa->merge($villa_aa);
@@ -123,7 +125,10 @@ class HomeController extends Controller
         //     }
         // }
 
-        return view('user.index')->with(compact('restaurant', 'activity'));
+        $restaurantSubCategory = RestaurantSubCategory::select('id_subcategory', 'name', 'order')->get();
+        $activitySubCategory = ActivitySubcategory::select('id_category', 'id_subcategory', 'name', 'order')->get();
+
+        return view('user.index')->with(compact('restaurantSubCategory', 'activitySubCategory'));
     }
 
     public function get_lat_long(Request $request)

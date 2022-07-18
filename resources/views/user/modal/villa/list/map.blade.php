@@ -2094,6 +2094,14 @@
         mapLoadingContainer.appendChild(mapLoading);
         mapLoadingContainer.setAttribute("style", "display: flex; justify-content: center; width: 100vw;");
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(mapLoadingContainer);
+
+        map.addListener("click", () => {
+            // 3 seconds after the center of the map has changed, pan back to the
+            // marker.
+            window.setTimeout(() => {
+            map.panTo(marker.getPosition() as google.maps.LatLng);
+            }, 3000);
+        });
     };
     // view map
     async function view_maps(id) {

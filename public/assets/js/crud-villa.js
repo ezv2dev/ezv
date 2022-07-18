@@ -276,37 +276,86 @@ function editBedroomVilla(id_villa) {
     });
 }
 
-function saveBedroomDetail(id_villa) {
+async function saveBedroomDetail(id_villa) {
     console.log("hit saveBedroomDetail");
-    let content = $(".bedroomDetailFormContent").eq(0);
-    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
-    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
-    let bedroomIds = [];
-    let bathroomIds = [];
-    for (let index = 0; index < bedroomRawContent.length; index++) {
-        bedroomIds.push(bedroomRawContent.eq(index).val());
-    }
-    for (let index = 0; index < bathroomRawContent.length; index++) {
-        bathroomIds.push(bathroomRawContent.eq(index).val());
-    }
+    console.log($(".bedroomDetailFormContent").length);
+    let formData = [];
+    for (let i = 0; i < $(".bedroomDetailFormContent").length; i++) {
+        const content = $(".bedroomDetailFormContent").eq(i);
 
-    let bedRawContent = content.find(".bedroomDetailFormContentBed");
-    let bed = [];
-    for (let index = 0; index < bedRawContent.length; index++) {
-        bed.push({
-            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
-            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+        let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+        let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+        let bedroomIds = [];
+        let bathroomIds = [];
+        for (let index = 0; index < bedroomRawContent.length; index++) {
+            bedroomIds.push(bedroomRawContent.eq(index).val());
+        }
+        for (let index = 0; index < bathroomRawContent.length; index++) {
+            bathroomIds.push(bathroomRawContent.eq(index).val());
+        }
+
+        let bedRawContent = content.find(".bedroomDetailFormContentBed");
+        let bed = [];
+        for (let index = 0; index < bedRawContent.length; index++) {
+            bed.push({
+                id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+                qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+            });
+        }
+
+        formData.push({
+            bathroom_ids: bathroomIds,
+            bedroom_ids: bedroomIds,
+            bed: bed,
         });
     }
+    await $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/bedroom/detail",
+        data: {
+            id_villa: id_villa,
+            data: formData
+        },
+        cache: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function (response) {
+            if (response.room_count) {
+                $("#bedroomID").html(response.room_count);
+            }
+            if (response.bed_count) {
+                $("#bedsID").html(response.bed_count);
+            }
 
-    let formData = {
-        id_villa: id_villa,
-        bathroom_ids: bathroomIds,
-        bedroom_ids: bedroomIds,
-        bed: bed,
-    };
+            console.log(response);
 
-    console.log(formData);
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+        },
+        error: function (jqXHR, exception) {
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+        },
+    });
 }
 
 function editCategoryV() {
@@ -1057,6 +1106,7 @@ $("#updateStoryForm").submit(function (e) {
     // console.log(readerStoryRestaurant);
 });
 
+//save house rules
 $("#houseRuleForm").submit(function (e) {
     e.preventDefault();
 
@@ -1137,6 +1187,93 @@ $("#houseRuleForm").submit(function (e) {
             $("#houseRuleContent").html(content);
 
             $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit-house-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});
+
+$("#guestSafetyForm").submit(function (e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveGuestSafety");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/guessafety/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+            let contentModal = "";
+
+            for (let i = 0; i < 4; i++) {
+                content +=
+                    '<i class="fas fa-' +
+                    response.data[i].icon +
+                    '"></i> <span class="translate-text-single">' +
+                    response.data[i].guest_safety +
+                    "</span><br>";
+            }
+
+            $("#btnShowMoreGuestSafety").html("");
+
+            content +=
+                '<p style="margin-bottom: 0px !important"> <a href="javascript:void(0)" onclick="showMoreGuestSafety()">Show more <i class="fas fa-chevron-right"></i> </a> </p>';
+
+            $("#guestSafetyContent").html(content);
+
+            for (let j = 0; j < response.data.length; j++) {
+                contentModal +=
+                    '<p> <i class="fas fa-' +
+                    response.data[j].icon +
+                    '"></i> <span class="translate-text-group-items">' +
+                    response.data[j].guest_safety +
+                    '</span> </p> <p style="font-size: 12px; margin-top: -20px;"> <span class="translate-text-group-items">' +
+                    response.data[j].description +
+                    "</span> </p>";
+            }
+
+            $("#guestSafetyContentModal").html(contentModal);
+
+            $("#modal-edit-guest-safety").modal("hide");
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");

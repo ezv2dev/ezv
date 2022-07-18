@@ -2,84 +2,87 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use File;
+use DataTables;
+use Carbon\Carbon;
+use App\Models\Bed;
+use App\Models\Hotel;
 use App\Models\Villa;
-use App\Models\VillaDetailPrice;
-use App\Models\Location;
 use App\Models\Review;
-use App\Models\DetailReview;
-use App\Models\Calendar;
-use Illuminate\Support\Facades\DB;
-use App\Models\VillaPhoto;
-use App\Models\VillaVideo;
-use App\Models\VillaStory;
-use App\Models\VillaAmenities;
-use App\Models\VillaBathroom;
-use App\Models\VillaBedroom;
-use App\Models\VillaKitchen;
-use App\Models\VillaSafety;
-use App\Models\VillaService;
-use App\Models\VillaAvailability;
-use App\Models\VillaCategory;
-use App\Models\VillaFilter;
-use App\Models\VillaHasFilter;
-use App\Models\VillaHasCategory;
-use App\Models\VillaQuickEnquiry;
-
-use App\Models\Government;
-
-use App\Models\Amenities;
-use App\Models\BathRoom;
+use App\Models\Safety;
 use App\Models\BedRoom;
 use App\Models\Kitchen;
 use App\Models\Service;
-use App\Models\Safety;
-use App\Models\FamilyAmenities;
-use App\Models\OutdoorAmenities;
-
-use App\Models\Restaurant;
-use App\Models\RestaurantPhoto;
-use App\Models\RestaurantVideo;
-use App\Models\RestaurantDetailReview;
-use App\Models\RestaurantMenu;
-use App\Models\RestaurantStory;
-
-use Carbon\Carbon;
-
 use App\Models\Activity;
+use App\Models\BathRoom;
+use App\Models\Calendar;
+use App\Models\Location;
+use App\Models\Amenities;
+use App\Models\VillaSave;
+use App\Models\VillaView;
+use App\Models\Government;
+use App\Models\HouseRules;
+use App\Models\Restaurant;
+use App\Models\TaxSetting;
+use App\Models\VillaPhoto;
+use App\Models\VillaStory;
+
+use App\Models\VillaVideo;
+
+use App\Models\GuestSafety;
+use App\Models\VillaFamily;
+use App\Models\VillaFilter;
+use App\Models\VillaSafety;
+use App\Models\DetailReview;
+use App\Models\HostLanguage;
+use App\Models\VillaBedroom;
+use App\Models\VillaKitchen;
+
+use App\Models\VillaOutdoor;
+use App\Models\VillaService;
+use Illuminate\Http\Request;
 use App\Models\ActivityPhoto;
-use App\Models\ActivityVideo;
-use App\Models\ActivityDetailReview;
 use App\Models\ActivityPrice;
 use App\Models\ActivityStory;
-use App\Models\VillaHasGuestSafety;
 
-use App\Models\CancellationPolicy;
+use App\Models\ActivityVideo;
 
-use App\Models\HostLanguage;
-use App\Models\Hotel;
-use App\Models\HouseRules;
-use App\Models\PropertyTypeVilla;
-use App\Services\FileCompressionService as FileCompression;
-use App\Models\VillaAccessibilitiyFeaturesDetail;
-use App\Models\VillaAccessibilityFeatures;
-use App\Models\VillaView;
-use App\Models\TaxSetting;
-use File;
-use Illuminate\Support\Facades\Validator;
-use App\Services\DeviceCheckService;
-use App\Models\VillaExtraGuest;
+use App\Models\VillaBathroom;
+use App\Models\VillaCategory;
 use App\Models\VillaExtraBed;
 use App\Models\VillaExtraPet;
-use App\Models\VillaFamily;
-use App\Models\VillaOutdoor;
-use App\Models\VillaSave;
-use App\Models\Bed;
+use App\Models\RestaurantMenu;
+use App\Models\VillaAmenities;
+use App\Models\VillaHasFilter;
+
+use App\Models\FamilyAmenities;
+
+use App\Models\RestaurantPhoto;
+use App\Models\RestaurantStory;
+use App\Models\RestaurantVideo;
+use App\Models\VillaExtraGuest;
+use App\Models\OutdoorAmenities;
+use App\Models\VillaDetailPrice;
+use App\Models\VillaHasCategory;
 use App\Models\NotificationOwner;
-use App\Services\DestinationNearbyVillaService as Nearby;
+use App\Models\PropertyTypeVilla;
+use App\Models\VillaAvailability;
+use App\Models\VillaQuickEnquiry;
+use App\Models\CancellationPolicy;
+use Illuminate\Support\Facades\DB;
+use App\Models\VillaHasGuestSafety;
+use App\Models\ActivityDetailReview;
+use App\Services\DeviceCheckService;
+use Illuminate\Support\Facades\Auth;
+use App\Models\RestaurantDetailReview;
+use Illuminate\Support\Facades\Validator;
+use App\Models\VillaAccessibilityFeatures;
+use App\Models\VillaAccessibilitiyFeaturesDetail;
+use App\Models\VillaBedroomDetail;
+use App\Models\VillaBedroomDetailBed;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
-use DataTables;
+use App\Services\DestinationNearbyVillaService as Nearby;
+use App\Services\FileCompressionService as FileCompression;
 
 
 class ViewController extends Controller
@@ -835,6 +838,114 @@ class ViewController extends Controller
         return response()->json(['success' => true, 'message' => 'Succesfully Updated',  'data' => $request->all()]);
     }
 
+    public function villa_update_bedroom_detail(Request $request)
+    {
+        // check if editor not authenticated
+        if(!auth()->check()){
+            return response()->json([
+                'message' => 'authenticated',
+            ], 401);
+        }
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_villa' => ['integer', 'required'],
+            'data' => ['array', 'nullable'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // villa data
+        $villa = Villa::find($request->id_villa);
+
+        // check if villa does not exist, abort 404
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('activity_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        try {
+            // remove old bedroom detail
+            $removedDetail = VillaBedroomDetail::where('id_villa', $request->id_villa)->delete();
+
+            collect($request->data)->each(function($item, $key) use ($request){
+                // save bedroom detail
+                if($request->id_villa){
+                    $createdDetail = VillaBedroomDetail::create([
+                        'id_villa' => $request->id_villa,
+                        'created_by' => auth()->user()->id,
+                        'updated_by' => auth()->user()->id,
+                    ]);
+                }
+
+                // save bedroom detail bed
+                collect($item['bed'])->each(function($item, $key) use ($createdDetail) {
+                    if($item['qty'] != 0){
+                        VillaBedroomDetailBed::create([
+                            'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,
+                            'id_bed' => $item['id_bed'],
+                            'qty' => $item['qty'],
+                            'created_by' => auth()->user()->id,
+                            'updated_by' => auth()->user()->id,
+                        ]);
+                    }
+                });
+
+                // save bedroom bedroom amenities
+                if(collect($item['bedroom_ids'])->count() > 0){
+                    $createdDetail->villaBedroomDetailBedroomAmenities()->sync($item['bedroom_ids']);
+                }
+                // save bedroom bathroom amenities
+                if(collect($item['bathroom_ids'])->count() > 0){
+                    $createdDetail->villaBedroomDetailBathroomAmenities()->sync($item['bathroom_ids']);
+                }
+            });
+
+            // get created bedroom detail
+            $createdDetail = VillaBedroomDetail::with([
+                'villaBedroomDetailBed',
+                'villaBedroomDetailBedroomAmenities',
+                'villaBedroomDetailBathroomAmenities'
+            ])->where('id_villa', $request->id_villa)->get();
+
+            if($createdDetail){
+                $bedCount = 0;
+                for ($i=0; $i < $createdDetail->count(); $i++) {
+                    $bedCount = $bedCount + $createdDetail[$i]->bed_count;
+                }
+
+                $data = (object)[
+                    'message' => 'done',
+                    'room_count' => $createdDetail->count(),
+                    'bed_count' => $bedCount,
+                    'data' => $createdDetail,
+                ];
+
+                return response()->json($data, 200);
+            } else {
+                return response()->json([
+                    'message' => 'data not found',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $data,
+            ], 500);
+        }
+    }
+
     public function villa_update_guest(Request $request)
     {
         $this->authorize('listvilla_update');
@@ -1242,18 +1353,145 @@ class ViewController extends Controller
         }
     }
 
+    // original
+
+    // public function villa_update_photo(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id_villa' => ['required', 'integer'],
+    //         'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'message' => $validator->errors()->all(),
+    //         ], 500);
+    //     }
+
+    //     // restaurant data
+    //     $villa = Villa::find($request->id_villa);
+
+    //     // check if restaurant does not exist, abort 404
+    //     if (!$villa) {
+    //         return response()->json([
+    //             'message' => 'Homes Not Found'
+    //         ], 404);
+    //     }
+
+    //     // check if the editor does not have authorization
+    //     $this->authorize('listvilla_update');
+    //     if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+    //         return response()->json([
+    //             'message' => 'This action is unauthorized'
+    //         ], 403);
+    //     }
+
+    //     // store process
+    //     // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+    //     $folder = strtolower($villa->uid);
+    //     $path = env("VILLA_FILE_PATH") . $folder;
+
+    //     if (!File::isDirectory($path)) {
+
+    //         File::makeDirectory($path, 0777, true, true);
+    //     }
+
+    //     $ext = strtolower($request->file->getClientOriginalExtension());
+
+    //     $photo = [];
+
+    //     if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+    //         $validator2 = Validator::make($request->all(), [
+    //             'id_villa' => ['required', 'integer'],
+    //             'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+    //         ]);
+
+    //         if ($validator2->fails()) {
+    //             return response()->json([
+    //                 'message' => $validator2->errors()->all(),
+    //             ], 500);
+    //         }
+
+    //         $original_name = $request->file->getClientOriginalName();
+
+    //         $name_file = time() . "_" . $original_name;
+
+    //         $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+    //         // check last order
+    //         $lastOrder = VillaPhoto::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+    //         if ($lastOrder) {
+    //             $lastOrder = $lastOrder->order + 1;
+    //         } else {
+    //             $lastOrder = 1;
+    //             $lastOrder;
+    //         }
+
+    //         //insert into database
+    //         $createdVilla = VillaPhoto::create([
+    //             'id_villa' => $request->id_villa,
+    //             'name' => $name_file,
+    //             'order' => $lastOrder,
+    //             'created_by' => auth()->user()->id,
+    //             'updated_by' => auth()->user()->id
+    //         ]);
+
+    //         // $photo['id_photo'] = $createdRestaurant->id_photo;
+    //         array_push($photo, $createdVilla->id_photo);
+    //     }
+
+    //     $video = [];
+
+    //     if ($ext == 'mp4' || $ext == 'mov') {
+    //         $original_name = $request->file->getClientOriginalName();
+    //         // dd($original_name);
+    //         $name_file = time() . "_" . $original_name;
+    //         // isi dengan nama folder tempat kemana file diupload
+    //         $request->file->move($path, $name_file);
+
+    //         // check last order
+    //         $lastOrder = VillaVideo::where('id_villa', $request->id_villa)->orderBy('order', 'desc')->select('order')->first();
+    //         if ($lastOrder) {
+    //             $lastOrder = $lastOrder->order + 1;
+    //         } else {
+    //             $lastOrder = 1;
+    //             $lastOrder;
+    //         }
+
+    //         //insert into database
+    //         $createdVilla = VillaVideo::create([
+    //             'id_villa' => $request->id_villa,
+    //             'name' => $name_file,
+    //             'order' => $lastOrder,
+    //             'created_by' => auth()->user()->id,
+    //             'updated_by' => auth()->user()->id
+    //         ]);
+
+    //         array_push($video, $createdVilla->id_video);
+    //     }
+
+    //     $villaReturn = [
+    //         'photo' => VillaPhoto::whereIn('id_photo', $photo)->get(),
+    //         'video' => VillaVideo::whereIn('id_video', $video)->get(),
+    //         'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
+    //     ];
+
+    //     if ($createdVilla) {
+    //         return response()->json([
+    //             'message' => 'Update Gallery Homes',
+    //             'data' => $villaReturn,
+    //         ], 200);
+    //     } else {
+    //         return response()->json([
+    //             'message' => 'Update Gallery Homes',
+    //         ], 500);
+    //     }
+    // }
+
+
+    // modifikasi
     public function villa_update_photo(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'id_villa' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors()->all(),
-            ], 500);
-        }
 
         // restaurant data
         $villa = Villa::find($request->id_villa);
@@ -1290,7 +1528,7 @@ class ViewController extends Controller
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $validator2 = Validator::make($request->all(), [
                 'id_villa' => ['required', 'integer'],
-                'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+                'file' => ['required','dimensions:min_width=960']
             ]);
 
             if ($validator2->fails()) {
@@ -1363,15 +1601,24 @@ class ViewController extends Controller
             'uid' => Villa::where('id_villa', $request->id_villa)->select('uid')->first(),
         ];
 
-        if ($createdVilla) {
+
+        if (isset($createdVilla) == true) {
             return response()->json([
                 'message' => 'Update Gallery Homes',
                 'data' => $villaReturn,
             ], 200);
-        } else {
-            return response()->json([
-                'message' => 'Update Gallery Homes',
-            ], 500);
+        } else if (isset($createdVilla) == false) {
+            $validator = Validator::make($request->all(), [
+                'id_villa' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
+
         }
     }
 
@@ -2553,7 +2800,35 @@ class ViewController extends Controller
 
     public function villa_update_guest_safety(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'pool' => 'required',
+            'lake' => 'required',
+            'climb' => 'required',
+            'height' => 'required',
+            'animal' => 'required',
+            'camera' => 'required',
+            'monoxide' => 'required',
+            'alarm' => 'required',
+            'must' => 'required',
+            'potential' => 'required',
+            'come' => 'required',
+            'shared' => 'required',
+            'amenity' => 'required',
+            'parking' => 'required',
+            'weapon' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
         $deleteID = VillaHasGuestSafety::where('id_villa', '=', $request->id_villa)->delete();
+
+        $data = [];
+        $i = 0;
 
         if ($request->pool == 1) {
             // dd('oke');
@@ -2563,6 +2838,10 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->pool)
+                            ->select('icon', 'guest_safety', 'description')->first();
+            $i++;
         }
         if ($request->lake == 2) {
             // dd('sip');
@@ -2572,6 +2851,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->lake)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->climb == 3) {
             VillaHasGuestSafety::create(array(
@@ -2580,6 +2864,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->climb)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->height == 4) {
             VillaHasGuestSafety::create(array(
@@ -2588,6 +2877,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->height)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->animal == 5) {
             VillaHasGuestSafety::create(array(
@@ -2596,6 +2890,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->animal)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->camera == 6) {
             VillaHasGuestSafety::create(array(
@@ -2604,6 +2903,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->camera)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->monoxide == 7) {
             VillaHasGuestSafety::create(array(
@@ -2612,6 +2916,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->monoxide)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->alarm == 8) {
             VillaHasGuestSafety::create(array(
@@ -2620,6 +2929,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->alarm)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->must == 9) {
             VillaHasGuestSafety::create(array(
@@ -2628,6 +2942,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->must)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->potential == 10) {
             VillaHasGuestSafety::create(array(
@@ -2636,6 +2955,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->potential)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->come == 11) {
             VillaHasGuestSafety::create(array(
@@ -2644,6 +2968,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->come)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->parking == 12) {
             VillaHasGuestSafety::create(array(
@@ -2652,6 +2981,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->parking)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->shared == 13) {
             VillaHasGuestSafety::create(array(
@@ -2660,6 +2994,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->shared)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->amenity == 14) {
             VillaHasGuestSafety::create(array(
@@ -2668,6 +3007,11 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->amenity)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
         if ($request->weapon == 15) {
             VillaHasGuestSafety::create(array(
@@ -2676,9 +3020,18 @@ class ViewController extends Controller
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ));
+
+            $data[$i] = GuestSafety::where('id_guest_safety', $request->weapon)
+                            ->select('icon', 'guest_safety', 'description')->first();
+
+            $i++;
         }
 
-        return back();
+        return response()->json([
+            'data' => $data,
+            'id_villa' => $request->id_villa,
+            'message' => 'Update Health & Safety Homes',
+        ], 200);
     }
 
     public function villa_update_cancellation_policy(Request $request)

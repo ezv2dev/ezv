@@ -346,7 +346,7 @@
             </div>
             <div class="modal-body modal-body3">
                 <div class="tabbable column-wrapper translate-text-group">
-                    <form method="POST" action="{{ route('villa_update_guest_safety') }}">
+                    <form method="POST" action="javascript:void(0);" id="guestSafetyForm">
                         @csrf
                         <input type="hidden" id="villa" name="id_villa" value="{{ $villa[0]->id_villa }}">
 
@@ -369,7 +369,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="pool" id="pool_1" value="no" />
                                         <label for="pool_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="pool" id="pool_2" value="1" required />
+                                        <input type="radio" name="pool" id="pool_2" value="1" />
                                         <label for="pool_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -394,7 +394,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="lake" id="lake_1" value="no" />
                                         <label for="lake_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="lake" id="lake_2" value="2" required />
+                                        <input type="radio" name="lake" id="lake_2" value="2" />
                                         <label for="lake_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -415,7 +415,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="climb" id="climb_1" value="no" />
                                         <label for="climb_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="climb" id="climb_2" value="3" required />
+                                        <input type="radio" name="climb" id="climb_2" value="3" />
                                         <label for="climb_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -439,7 +439,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="height" id="height_1" value="no" />
                                         <label for="height_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="height" id="height_2" value="4" required />
+                                        <input type="radio" name="height" id="height_2" value="4" />
                                         <label for="height_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -463,7 +463,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="animal" id="animal_1" value="no" />
                                         <label for="animal_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="animal" id="animal_2" value="5" required />
+                                        <input type="radio" name="animal" id="animal_2" value="5" />
                                         <label for="animal_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -495,7 +495,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="camera" id="camera_1" value="no" />
                                         <label for="camera_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="camera" id="camera_2" value="6" required />
+                                        <input type="radio" name="camera" id="camera_2" value="6" />
                                         <label for="camera_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -516,7 +516,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="monoxide" id="monoxide_1" value="no" />
                                         <label for="monoxide_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" required />
+                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" />
                                         <label for="monoxide_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -537,7 +537,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="alarm" id="alarm_1" value="no" />
                                         <label for="alarm_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="alarm" id="alarm_2" value="8" required />
+                                        <input type="radio" name="alarm" id="alarm_2" value="8" />
                                         <label for="alarm_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -562,7 +562,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="must" id="must_1" value="no" />
                                         <label for="must_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="must" id="must_2" value="9" required />
+                                        <input type="radio" name="must" id="must_2" value="9" />
                                         <label for="must_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -584,7 +584,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="potential" id="potential_1" value="no" />
                                         <label for="potential_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="potential" id="potential_2" value="10" required />
+                                        <input type="radio" name="potential" id="potential_2" value="10" />
                                         <label for="potential_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -605,7 +605,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="come" id="come_1" value="no" />
                                         <label for="come_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="come" id="come_2" value="11" required />
+                                        <input type="radio" name="come" id="come_2" value="11" />
                                         <label for="come_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -625,7 +625,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="parking" id="parking_1" value="no" />
                                         <label for="parking_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="parking" id="parking_2" value="12" required />
+                                        <input type="radio" name="parking" id="parking_2" value="12" />
                                         <label for="parking_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -646,7 +646,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="shared" id="shared_1" value="no" />
                                         <label for="shared_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="shared" id="shared_2" value="13" required />
+                                        <input type="radio" name="shared" id="shared_2" value="13" />
                                         <label for="shared_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -667,7 +667,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="amenity" id="amenity_1" value="no" />
                                         <label for="amenity_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="amenity" id="amenity_2" value="14" required />
+                                        <input type="radio" name="amenity" id="amenity_2" value="14" />
                                         <label for="amenity_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -688,7 +688,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="weapon" id="weapon_1" value="no" />
                                         <label for="weapon_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="weapon" id="weapon_2" value="15" required />
+                                        <input type="radio" name="weapon" id="weapon_2" value="15" />
                                         <label for="weapon_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -702,7 +702,7 @@
                 <p style="color: red; font-size: 12px; margin-left: 20px; margin-top: 20px;"><sup>*</sup>Please make
                     sure
                     you select all the list</p>
-                <button type="submit"
+                <button type="submit" form="guestSafetyForm" id="btnSaveGuestSafety"
                     style="width:150px; border-radius: 9px; padding : 8px; margin-right: 20px;box-sizing: border-box; background-color: #FF7400; border: none; margin-right: 20px"
                     class="btn btn-primary btn-lg btn-block">
                     Save
