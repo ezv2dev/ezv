@@ -787,17 +787,6 @@ class RestaurantListController extends Controller
 
     public function restaurant_update_image(Request $request)
     {
-        // validation
-        $validator = Validator::make($request->all(), [
-            'id_restaurant' => ['required', 'integer'],
-            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors(),
-            ], 500);
-        }
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
@@ -837,6 +826,18 @@ class RestaurantListController extends Controller
         $ext = strtolower($request->image->getClientOriginalExtension());
 
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+
+            $validator2 = Validator::make($request->all(), [
+                'id_restaurant' => ['required', 'integer'],
+                'image' => ['required', 'dimensions:min_width=960'],
+            ]);
+
+            if ($validator2->fails()) {
+                return response()->json([
+                    'message' => $validator2->errors(),
+                ], 500);
+            }
+
             $original_name = $request->image->getClientOriginalName();
 
             $name_file = time() . "_" . $original_name;
@@ -852,15 +853,22 @@ class RestaurantListController extends Controller
         $restaurantData = Restaurant::where('id_restaurant', $request->id_restaurant)->select('image')->first();
 
         // check if update is success or not
-        if ($updatedRestaurant) {
+        if (isset($updatedRestaurant) == true) {
             return response()->json([
                 'message' => 'Updated Restaurant Profile',
                 'data' => $restaurantData
             ], 200);
         } else {
-            return response()->json([
-                'message' => 'Updated Restaurant Short Description',
-            ], 500);
+            $validator = Validator::make($request->all(), [
+                'id_restaurant' => ['required', 'integer'],
+                'image' => ['required', 'mimes:jpeg,png,jpg,webp'] 
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors(),
+                ], 500);
+            }
         }
     }
 
