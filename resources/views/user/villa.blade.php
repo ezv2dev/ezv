@@ -4082,6 +4082,14 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0)
+                {
+                    $('.gallery').html("");
+                }
+
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
@@ -4520,6 +4528,16 @@
                         success: async function(response) {
                             await Swal.fire('Deleted', response.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             $gallery.refresh();
                         }
                     });
