@@ -76,49 +76,44 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                <form action="{{ route('hotel_update_category') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-
-                    <div class="form-group pt-2 px-4">
-                        <div class="row">
-                            <label class="form-label"><b>Category</b></label>
-                            <div class="translate-text-group"
-                                style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                                @foreach ($hotelCategory as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                        <div class="row" style="font-size: 13px;">
-                                            @php
-                                                $isChecked = '';
-                                                foreach ($hotelHasCategory as $item) {
-                                                    if ($data->id_hotel_category == $item->id_hotel_category) {
-                                                        $isChecked = 'checked';
-                                                    }
+                <div class="form-group pt-2 px-4">
+                    <div class="row">
+                        <label class="form-label"><b>Category</b></label>
+                        <div id="check_cat" class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                            @foreach ($hotelCategory as $data)
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            foreach ($hotelHasCategory as $item) {
+                                                if ($data->id_hotel_category == $item->id_hotel_category) {
+                                                    $isChecked = 'checked';
                                                 }
-                                            @endphp
-                                            <label class="container-checkbox2">
-                                                <span class="translate-text-group-items">{{ $data->name }}</span>
-                                                <input type="checkbox" value="{{ $data->id_hotel_category }}"
-                                                    id="{{ $data->id_hotel_category }}" name="hotelCategory[]"
-                                                    {{ $isChecked }}>
-                                                <span class="checkmark2"></span>
-                                            </label>
-                                        </div>
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">{{ $data->name }}</span>
+                                            <input class="check-cat" type="checkbox" value="{{ $data->id_hotel_category }}"
+                                                id="{{ $data->id_hotel_category }}" name="hotelCategory[]"
+                                                {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
+                        <small id="err-slc-cat" style="display: none;" class="invalid-feedback">Select one of category</small><br>
                     </div>
+                </div>
             </div>
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <button type="submit" class="btn btn-primary btn-sm w-100" id="btnSaveCategoryH" onclick="editCategoryH({{ $hotel[0]->id_hotel }})">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </div>
     </div>

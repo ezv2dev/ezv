@@ -58,105 +58,233 @@ class HotelController extends Controller
 
     public function store_gallery(Request $request)
     {
-        $this->authorize('listvilla_create');
+        // $this->authorize('listvilla_create');
 
-        // validation
-        $validator = Validator::make($request->all(), [
-            'id_hotel' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
-        ]);
-        if ($validator->fails()) {
-            abort(500);
+        // // validation
+        // $validator = Validator::make($request->all(), [
+        //     'id_hotel' => ['required', 'integer'],
+        //     'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
+        // ]);
+        // if ($validator->fails()) {
+        //     abort(500);
+        // }
+
+        // $status = 500;
+
+        // try {
+        //     $berkas = $request->file;
+        //     if (empty($berkas)) {
+        //         //
+        //     } else {
+        //         //cek the directori first
+        //         $hotel = Hotel::where('id_hotel', $request->id_hotel)->first();
+        //         // $folder = strtolower($find[0]->name);
+        //         // $path = public_path() . '/foto/gallery/' . $folder;
+        //         $folder = strtolower($hotel->uid);
+        //         $path = env("HOTEL_FILE_PATH") . $folder;
+
+        //         if (!File::isDirectory($path)) {
+        //             File::makeDirectory($path, 0777, true, true);
+        //         }
+
+        //         $ext = strtolower($berkas->getClientOriginalExtension());
+
+        //         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+        //             request()->validate([
+        //                 'id_hotel' => ['required', 'integer'],
+        //                 'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+        //             ]);
+
+        //             $original_name = $berkas->getClientOriginalName();
+
+        //             $name_file = time() . "_" . $original_name;
+        //             $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+        //             // check last order
+        //             $lastOrder = HotelPhoto::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
+        //             if ($lastOrder) {
+        //                 $lastOrder = $lastOrder->order + 1;
+        //             } else {
+        //                 $lastOrder = 1;
+        //                 $lastOrder;
+        //             }
+
+        //             //insert into database
+        //             $data = HotelPhoto::create([
+        //                 'name' => $name_file,
+        //                 'id_hotel' => $request->id_hotel,
+        //                 'order' => $lastOrder,
+        //                 'created_by' => Auth::user()->id,
+        //                 'updated_by' => Auth::user()->id
+        //             ]);
+        //         } elseif ($ext == 'mp4') {
+        //             $original_name = $berkas->getClientOriginalName();
+
+        //             $name_file = time() . "_" . $original_name;
+
+        //             // isi dengan nama folder tempat kemana file diupload
+        //             $berkas->move($path, $name_file);
+
+        //             $lastOrder = HotelVideo::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
+        //             if ($lastOrder) {
+        //                 $lastOrder = $lastOrder->order + 1;
+        //             } else {
+        //                 $lastOrder = 1;
+        //                 $lastOrder;
+        //             }
+
+        //             //insert into database
+        //             $data = HotelVideo::create([
+        //                 'name' => $name_file,
+        //                 'id_hotel' => $request->id_hotel,
+        //                 'order' => $lastOrder,
+        //                 'created_by' => Auth::user()->id,
+        //                 'updated_by' => Auth::user()->id
+        //             ]);
+        //         }
+        //     }
+
+        //     if ($data) {
+        //         $status = 200;
+        //     }
+        // } catch (\Illuminate\Database\QueryException $e) {
+        //     $status = 500;
+        // }
+
+        // if ($status == 200) {
+        //     return back()
+        //         ->with('success', 'Your data has been created');
+        // } else {
+        //     return back()
+        //         ->with('error', 'Please check the form below for errors');
+        // }
+
+        //Test baru
+        $hotel = Hotel::find($request->id_hotel);
+
+        // check if restaurant does not exist, abort 404
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'Hotel Not Found'
+            ], 404);
         }
 
-        $status = 500;
+        // check if the editor does not have authorization
+        $this->authorize('listvilla_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $hotel->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized'
+            ], 403);
+        }
 
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                //
+        // store process
+        // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+        $folder = strtolower($hotel->uid);
+        $path = env("HOTEL_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        $photo = [];
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $validator2 = Validator::make($request->all(), [
+                'id_hotel' => ['required', 'integer'],
+                'file' => ['required','dimensions:min_width=960']
+            ]);
+
+            if ($validator2->fails()) {
+                return response()->json([
+                    'message' => $validator2->errors()->all(),
+                ], 500);
+            }
+
+            $original_name = $request->file->getClientOriginalName();
+
+            $name_file = time() . "_" . $original_name;
+
+            $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+            // check last order
+            $lastOrder = HotelPhoto::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
             } else {
-                //cek the directori first
-                $hotel = Hotel::where('id_hotel', $request->id_hotel)->first();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = strtolower($hotel->uid);
-                $path = env("HOTEL_FILE_PATH") . $folder;
-
-                if (!File::isDirectory($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                }
-
-                $ext = strtolower($berkas->getClientOriginalExtension());
-
-                if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                    request()->validate([
-                        'id_hotel' => ['required', 'integer'],
-                        'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
-                    ]);
-
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-                    $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
-
-                    // check last order
-                    $lastOrder = HotelPhoto::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
-                    if ($lastOrder) {
-                        $lastOrder = $lastOrder->order + 1;
-                    } else {
-                        $lastOrder = 1;
-                        $lastOrder;
-                    }
-
-                    //insert into database
-                    $data = HotelPhoto::create([
-                        'name' => $name_file,
-                        'id_hotel' => $request->id_hotel,
-                        'order' => $lastOrder,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-                } elseif ($ext == 'mp4') {
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    $lastOrder = HotelVideo::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
-                    if ($lastOrder) {
-                        $lastOrder = $lastOrder->order + 1;
-                    } else {
-                        $lastOrder = 1;
-                        $lastOrder;
-                    }
-
-                    //insert into database
-                    $data = HotelVideo::create([
-                        'name' => $name_file,
-                        'id_hotel' => $request->id_hotel,
-                        'order' => $lastOrder,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-                }
+                $lastOrder = 1;
+                $lastOrder;
             }
 
-            if ($data) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+            //insert into database
+            $createdVilla = HotelPhoto::create([
+                'id_hotel' => $request->id_hotel,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            // $photo['id_photo'] = $createdRestaurant->id_photo;
+            array_push($photo, $createdVilla->id_photo);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been created');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+        $video = [];
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // check last order
+            $lastOrder = HotelVideo::where('id_hotel', $request->id_hotel)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
+            } else {
+                $lastOrder = 1;
+                $lastOrder;
+            }
+
+            //insert into database
+            $createdVilla = HotelVideo::create([
+                'id_hotel' => $request->id_hotel,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            array_push($video, $createdVilla->id_video);
+        }
+
+        $hotelReturn = [
+            'photo' => HotelPhoto::whereIn('id_photo', $photo)->get(),
+            'video' => HotelVideo::whereIn('id_video', $video)->get(),
+            'uid' => Hotel::where('id_hotel', $request->id_hotel)->select('uid')->first(),
+        ];
+
+
+        if (isset($createdVilla) == true) {
+            return response()->json([
+                'message' => 'Update Gallery Hotel',
+                'data' => $hotelReturn,
+            ], 200);
+        } else if (isset($createdVilla) == false) {
+            $validator = Validator::make($request->all(), [
+                'id_hotel' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
+
         }
     }
 
@@ -175,7 +303,7 @@ class HotelController extends Controller
         abort_if($condition, 403);
 
         // delete photo
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $hotel->name;
         $folder = strtolower($hotel->uid);
         $path = env("HOTEL_FILE_PATH") . $folder;
 
@@ -216,7 +344,7 @@ class HotelController extends Controller
         abort_if($condition, 403);
 
         // delete video
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $hotel->name;
         $folder = strtolower($hotel->uid);
         $path = env("HOTEL_FILE_PATH") . $folder;
 

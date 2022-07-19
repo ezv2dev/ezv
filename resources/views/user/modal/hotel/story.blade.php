@@ -8,9 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                {{-- <form action="{{ route('hotel_update_story') }}" method="POST" enctype="multipart/form-data"
-                    id="updateStoryForm" onsubmit="showingLoading()"> --}}
-                <form action="{{ route('hotel_update_story') }}" method="POST" enctype="multipart/form-data"
+                <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
                     id="updateStoryForm">
                     @csrf
                     <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
@@ -36,13 +34,13 @@
                     </div>
                     <small id="err-stry-vid" style="display: none;" class="invalid-feedback">{{ __('auth.empty_video') }}</small>
                     <div class="form-group story-title-gap">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="{{ __('user_page.Title...') }}">
+                        <input type="text" class="form-control" name="title" id="title" maxlength="15" placeholder="{{ __('user_page.Title...') }}">
                     </div>
                     <small id="err-stry-ttl" style="display: none;" class="invalid-feedback">{{ __('auth.empty_title') }}</small>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button class="btn btn-sm btn-primary" id="updateStoryForm">
+                            <button class="btn btn-sm btn-primary" id="btnSaveStory" form="updateStoryForm">
                                 <i class="fa fa-check"></i> {{ __('user_page.Upload') }}
                             </button>
                         </div>
@@ -66,7 +64,7 @@
             $('#title').css("border", "");
             $('#err-stry-ttl').hide();
     });
-    $("form#updateStoryForm").submit(function(e) {
+    $("#updateStoryForm").submit(function(e) {
         let error = 0;
         if(document.getElementById("storyVideo").files.length == 0){
             $('.story-video-form').css("border", "solid #e04f1a 1px");
