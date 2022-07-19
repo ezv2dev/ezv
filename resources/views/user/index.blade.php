@@ -189,6 +189,10 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
+                            <div class="searchbox display-block" onclick="popUp();" 
+                                style="cursor: pointer; border: none; margin:0;">
+                                <span class="top-search"><i class="fa fa-search"></i></span>
+                            </div>
                             <button class="navbar-toggler" type="button" id="expand-mobile-btn">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -1438,27 +1442,29 @@
 
         <script>
             function popUp() {
-                document.getElementById("ul").classList.remove("ul-display-none");
-                document.getElementById("ul").classList.add("ul-display-block");
-                document.getElementById("bar").classList.remove("display-none");
-                document.getElementById("searchbox").classList.add("display-none");
-                document.getElementById("searchbox").classList.remove("display-block");
-                document.getElementById("nav").classList.add("search-height");
+                if (window.scrollY != 0 || window.innerWidth > 991) { 
+                    document.getElementById("ul").classList.remove("ul-display-none");
+                    document.getElementById("ul").classList.add("ul-display-block");
+                    document.getElementById("bar").classList.remove("display-none");
+                    document.getElementById("searchbox").classList.add("display-none");
+                    document.getElementById("searchbox").classList.remove("display-block");
+                    document.getElementById("nav").classList.add("search-height");
 
-                function removeClass(elements, className) {
-                    for (var i = 0; i < elements.length; i++) {
-                        var element = elements[i];
-                        if (element.classList) {
-                            element.classList.remove(className);
-                        } else {
-                            element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ')
-                                .join('|') + '(\\b|$)', 'gi'), ' ');
+                    function removeClass(elements, className) {
+                        for (var i = 0; i < elements.length; i++) {
+                            var element = elements[i];
+                            if (element.classList) {
+                                element.classList.remove(className);
+                            } else {
+                                element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ')
+                                    .join('|') + '(\\b|$)', 'gi'), ' ');
+                            }
                         }
                     }
-                }
 
-                var els = document.getElementsByClassName("flatpickr-calendar");
-                removeClass(els, 'display-none');
+                    var els = document.getElementsByClassName("flatpickr-calendar");
+                    removeClass(els, 'display-none');
+                }
             }
         </script>
 
@@ -1493,6 +1499,7 @@
                         $("#bar .check-out").addClass("col-6 mb-2");
                         $("#bar .guests").addClass("col-10");
                         $("#bar .button").addClass("col-2 p-0 px-2");
+                        $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "");
                     } else {
                         $("#search_bar #bar").removeClass("row");
                         $("#bar .location").removeClass("col-12 mb-2");
@@ -1500,6 +1507,7 @@
                         $("#bar .check-out").removeClass("col-6 mb-2");
                         $("#bar .guests").removeClass("col-10");
                         $("#bar .button").removeClass("col-2 p-0 px-2");
+                        $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "90px");
                     }
                 }
                 var windowWidth = $(window).width();

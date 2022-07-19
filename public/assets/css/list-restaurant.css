@@ -393,8 +393,8 @@
         grid-template-rows: repeat(1, auto) !important;
         gap: 15px;
         display: grid;
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 102px;
+        padding-right: 102px;
         /* margin-top: 318.391px; */
         /* transition: all 0.3s ease; */
     }
@@ -581,8 +581,8 @@
         grid-template-rows: repeat(1, auto) !important;
         gap: 15px;
         display: grid;
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 102px;
+        padding-right: 102px;
         /* margin-top: 305px; */
         /* transition: all 0.3s ease; */
     }
@@ -977,7 +977,7 @@
         max-height: 0 !important;
     }
 }
-
+/* 
 @media only screen and (min-width: 1360px) { 
     .grid-container-43,
     .container-grid,
@@ -987,5 +987,5 @@
         margin-left: auto !important;
         margin-right: auto !important;
     }
-}
+} */
 

@@ -1090,19 +1090,19 @@
             resetMapAction();
             // disable event google map
             resetMapEvent();
+            // full screen map for mobile
             document.getElementById("map-desc").classList.add('mobile-map');
-            document.getElementById("modal-map-content").classList.remove('d-none');
-            document.getElementById("modal-map-content").classList.add('d-block');
-            document.getElementById("modal-map-content").classList.add('mobile-map-desc');
+            // show right content on the map
+            $('#modal-map-content').removeClass('d-none');
+            $('#modal-map-content').addClass('d-block mobile-map-desc');
+            // show button close full screen for mobile
             document.getElementById("mobile-map-close").classList.remove('d-none');
             document.getElementById("mobile-map-close").classList.add('d-block');
-            // enable event google map
-            setMapEvent();
-            // enable action google map
-            setMapAction();
-            // disable loading
-            resetMapLoading();
-            
+
+            setTimeout(async () => {
+                await view_maps('{{ $villa[0]->id_villa }}');
+            }, 200);
+
             // disabled action google map
             resetMapAction();
             // hide primary control
@@ -1111,12 +1111,12 @@
     }
 
     function close_map_mobile() {
-        document.getElementById("map-desc").classList.remove('mobile-map'); 
-        document.getElementById("mobile-map-close").classList.remove('d-block'); 
-        document.getElementById("mobile-map-close").classList.add('d-none'); 
-        document.getElementById("modal-map-content").classList.remove('d-block'); 
-        document.getElementById("modal-map-content").classList.add('d-none'); 
-        document.getElementById("modal-map-content").classList.remove('mobile-map-desc'); 
+        document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("mobile-map-close").classList.remove('d-block');
+        document.getElementById("mobile-map-close").classList.add('d-none');
+        document.getElementById("modal-map-content").classList.remove('d-block');
+        document.getElementById("modal-map-content").classList.add('d-none');
+        document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
     }
 
     // function to set map event
@@ -1577,7 +1577,7 @@
         });
         $(document).ready(() => {
             if ($(window).width() < 768) {
-                mapMobile(); 
+                mapMobile();
             }
             if ($(window).width() >= 768) {
                 console.log('desktop')

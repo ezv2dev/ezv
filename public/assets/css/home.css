@@ -2092,6 +2092,11 @@ span.flatpickr-weekday {
         font-size: 12px !important;
     }
 }
+@media only screen and (max-width: 345px) {
+    #sugest {
+        width: 98vw !important;
+    }
+}
 @media only screen and (max-width: 425px) {
     .user-avatar {
         width: 40px !important;
@@ -2241,6 +2246,9 @@ span.flatpickr-weekday {
     }
     .search-height {
         height: 430px;
+    }
+    #nav .navbar-collapse .col-lg-4 #searchbox {
+        display: none !important;
     }
     .navbar {
         display: block !important;

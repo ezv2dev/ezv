@@ -3896,6 +3896,29 @@
                         $("#filter-subcat-bg-color").css("padding-right", gap + "px");
                         $(".page-header-fixed").css("padding-left", navGap + "px");
                         $(".page-header-fixed").css("padding-right", navGap + "px");
+                        $(".grid-container-43").css("padding-left", gap + "px");
+                        $(".grid-container-43").css("padding-right", gap + "px");
+                        $(".container-grid").css("padding-left", gap + "px");
+                        $(".container-grid").css("padding-right", gap + "px");
+                        $(".container-grid-activity").css("padding-left", gap + "px");
+                        $(".container-grid-activity").css("padding-right", gap + "px");
+                        $(".container-grid-hotel").css("padding-left", gap + "px");
+                        $(".container-grid-hotel").css("padding-right", gap + "px");
+                    } else {
+                        $("#filter-cat-bg-color").css("padding-left", "");
+                        $("#filter-cat-bg-color").css("padding-right", "");
+                        $("#filter-subcat-bg-color").css("padding-left", "");
+                        $("#filter-subcat-bg-color").css("padding-right", "");
+                        $(".page-header-fixed").css("padding-left", "");
+                        $(".page-header-fixed").css("padding-right", "");
+                        $(".grid-container-43").removeAttr("style");
+                        $(".grid-container-43").removeAttr("style");
+                        $(".container-grid").removeAttr("style");
+                        $(".container-grid").removeAttr("style");
+                        $(".container-grid-activity").removeAttr("style");
+                        $(".container-grid-activity").removeAttr("style");
+                        $(".container-grid-hotel").removeAttr("style");
+                        $(".container-grid-hotel").removeAttr("style");
                     }
                 }
                 var windowWidth = $(window).width();

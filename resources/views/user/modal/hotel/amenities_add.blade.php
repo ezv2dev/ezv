@@ -72,10 +72,10 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="{{ route('hotel_update_amenities') }}" method="POST" id="basic-form" class="js-validation"
+            {{-- <form action="{{ route('hotel_update_amenities') }}" method="POST" id="basic-form" class="js-validation"
                     enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
+                    <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}"> --}}
             <div class="modal-header" style="padding-left: 2.3rem !important;">
                 <h5 class="modal-title">{{ __('user_page.Edit Amenities') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -249,11 +249,11 @@
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <button type="submit" class="btn btn-primary btn-sm w-100" onclick="editAmenitiesHotel({{ $hotel[0]->id_hotel }})">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
-            </form>
+            {{-- </form> --}}
             </div>
         </div>
     </div>
