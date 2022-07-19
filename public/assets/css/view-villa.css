@@ -1,7 +1,7 @@
 body,
 html {
     background-color: #fafafa;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 h1,
@@ -68,9 +68,9 @@ label.error.fail-alert {
     color: green;
 } */
 
-.navigationItem span:hover {
+.navigationItem:hover * {
     color: #ff7400;
-    }
+}
 
 .villa-tag-button {
     border-color: #ff7400;
@@ -3064,9 +3064,9 @@ video {
     cursor: pointer;
 }
 
-.col-4.review-container {
+/* .col-4.review-container {
     padding-top: 28px;
-}
+} */
 
 .rightbar-advert-container {
     box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);

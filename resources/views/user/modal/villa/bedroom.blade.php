@@ -9,95 +9,6 @@
             </div>
             <div class="modal-body pb-1" style="height: 450px; overflow-x: hidden; overflow-y: auto; border-radius: 0px;">
 
-                {{--
-                <div class="row mb-12 margin-bottom-12px">
-                    <label class="col-sm-4 col-form-label" for="price">Beds</label>
-                    <div class="col-sm-8">
-                        <div class="editnumberoption_container">
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="1" id="p1" name="beds"
-                                    @if ($villa[0]->beds == 1) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p1">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">1</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="2" id="p2" name="beds"
-                                    @if ($villa[0]->beds == 2) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p2">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">2</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="3" id="p3" name="beds"
-                                    @if ($villa[0]->beds == 3) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p3">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">3</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="4" id="p4" name="beds"
-                                    @if ($villa[0]->beds == 4) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p4">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">4</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="5" id="p5" name="beds"
-                                    @if ($villa[0]->beds == 5) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p5">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">5</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="6" id="p6" name="beds"
-                                    @if ($villa[0]->beds == 6) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="p6">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">6</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container" class="" onclick="showBeds()"
-                                id="moreBeds">
-                                <label class="editnumberoption-checkbox-alias">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">more</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container display-none" onclick="hideBeds()"
-                                id="hideBeds">
-                                <label class="editnumberoption-checkbox-alias">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">hide</p>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                --}}
-
                 <div class="row mb-12 margin-bottom-12px display-none" id="bedsForm">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
@@ -295,6 +206,15 @@
                     <label class="col-sm-4 col-form-label" for="children">{{ __('user_page.Children') }}</label>
                     <div class="col-sm-8">
                         <div class="editnumberoption_container">
+                            <div class="roomnumber-filter-container">
+                                <input type="radio" value="0" id="y0" name="children"
+                                    @if ($villa[0]->children == 0) checked @endif>
+                                <label class="editnumberoption-checkbox-alias" for="y0">
+                                    <div class="">
+                                        <p style="font-size: 13px; margin: 0px;">0</p>
+                                    </div>
+                                </label>
+                            </div>
 
                             <div class="roomnumber-filter-container">
                                 <input type="radio" value="1" id="y1" name="children"
@@ -342,16 +262,6 @@
                                 <label class="editnumberoption-checkbox-alias" for="y5">
                                     <div class="">
                                         <p style="font-size: 13px; margin: 0px;">5</p>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="roomnumber-filter-container">
-                                <input type="radio" value="6" id="y6" name="children"
-                                    @if ($villa[0]->children == 6) checked @endif>
-                                <label class="editnumberoption-checkbox-alias" for="y6">
-                                    <div class="">
-                                        <p style="font-size: 13px; margin: 0px;">6</p>
                                     </div>
                                 </label>
                             </div>
@@ -1055,7 +965,7 @@
             .getElementById("y5")
             .checked = false;
         document
-            .getElementById("y6")
+            .getElementById("y0")
             .checked = false;
         document
             .getElementById("y1")
@@ -1073,7 +983,7 @@
             .getElementById("y5")
             .disabled = true;
         document
-            .getElementById("y6")
+            .getElementById("y0")
             .disabled = true;
     }
 
@@ -1103,7 +1013,7 @@
             .getElementById("y5")
             .checked = false;
         document
-            .getElementById("y6")
+            .getElementById("y0")
             .checked = false;
         document
             .getElementById("y1")
@@ -1121,7 +1031,7 @@
             .getElementById("y5")
             .disabled = false;
         document
-            .getElementById("y6")
+            .getElementById("y0")
             .disabled = false;
     }
 

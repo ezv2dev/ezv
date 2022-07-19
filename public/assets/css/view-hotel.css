@@ -67,7 +67,7 @@ input[type="number"] {
     display: flex;
 }
 
-.navigationItem span:hover {
+.navigationItem:hover * {
     color: #ff7400;
 }
 
