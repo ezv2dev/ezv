@@ -105,6 +105,7 @@
     z-index: 333;
     background: #fff;
     padding-bottom: 25px;
+    border-top: 1px solid #ddd;
 }
 
 .container-grid-cat .grid-text span:hover{
@@ -127,10 +128,6 @@
 
 .container__list{
     margin-top:102px; /*tinggi header*/
-}
-
-.container__grid{
-    margin-top:0;
 }
 
 .container-grid{
@@ -451,10 +448,6 @@
         border-top: 0.4px solid #bababa!important;
     }
 
-    .container__grid {
-        margin-top:20px;
-    }
-
     .container-grid-sub-cat > div:nth-child(8){
         display: none;
     }
@@ -596,6 +589,9 @@
 }
 
 @media (min-width: 991px) {
+    .container-grid-cat{
+        border-top: 0px;
+    }
     .container-grid-sub-cat{
         display: grid;
     }

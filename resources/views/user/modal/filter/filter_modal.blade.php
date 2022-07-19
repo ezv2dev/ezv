@@ -69,13 +69,14 @@
 
     .roomnumberoption-container{
         overflow-x: scroll;
+        width: 100%;
     }
 
     .filter-modal-body{
         overflow-x: hidden;
     }
 
-    @media (max-width: 575px) { 
+    /* @media (max-width: 575px) { 
         .roomnumberoption-container{
             width: 49%;
         }
@@ -107,7 +108,7 @@
         .roomnumberoption-container{
             width: 100%;
         }
-    }
+    } */
 
 </style>
 
