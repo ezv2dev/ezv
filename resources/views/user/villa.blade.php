@@ -373,7 +373,7 @@
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}
                         @php
                             $bedCount = 0;
-                            for ($i=0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
+                            for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
                                 $bedCount = $bedCount + $villa[0]->villaBedroomDetail[$i]->bed_count;
                             }
                         @endphp
@@ -1050,86 +1050,66 @@
                         @if ($villa_amenities->count() > 0)
                             <div class="row-grid-amenities">
                                 <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                    @if ($villa_amenities->count() >= 6)
-                                        @foreach ($villa_amenities->take(6) as $item1)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item1->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                    @foreach ($villa_amenities->take(2) as $item1)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item1->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item1->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-
-                                    @if ($villa_amenities->count() < 6)
-                                        @foreach ($villa_amenities->take(3) as $item1)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item1->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item1->name }}</span>
-                                                </div>
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item1->name }}</span>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bathroom->take(1) as $item2)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item2->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item2->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                        </div>
+                                    @endforeach
+                                    @foreach ($bathroom->take(2) as $item2)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item2->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bedroom->take(1) as $item3)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item3->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item3->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item2->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($service->take(1) as $item3)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item3->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item3->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($safety->take(1) as $item4)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item4->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item4->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item3->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($safety->take(1) as $item4)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item4->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item4->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item4->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                     <div class="list-amenities">
                                         <button class="amenities-button" type="button" onclick="view_amenities()">
                                             <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
@@ -2391,26 +2371,27 @@
                                             {{-- <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
                                                 method="post">
                                                 @csrf --}}
-                                                <div style="margin-left: 10px;">
-                                                    <select class="custom-select grade-success" name="grade" id="gradeVilla">
-                                                        <option value="AA"
-                                                            {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                        </option>
-                                                        <option value="A"
-                                                            {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                        </option>
-                                                        <option value="B"
-                                                            {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                        </option>
-                                                        <option value="C"
-                                                            {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                        </option>
-                                                        <option value="D"
-                                                            {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                        </option>
-                                                    </select>
-                                                    {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
-                                                </div>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA"
+                                                        {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                    </option>
+                                                    <option value="A"
+                                                        {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                    </option>
+                                                    <option value="B"
+                                                        {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                    </option>
+                                                    <option value="C"
+                                                        {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                    </option>
+                                                    <option value="D"
+                                                        {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                    </option>
+                                                </select>
+                                                {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
+                                            </div>
                                             {{-- </form> --}}
 
                                         </div>
@@ -3382,9 +3363,10 @@
                     @endfor --}}
                     <div id="bedroom-detail-content">
                         @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
-                            <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                            <div
+                                class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                                 <div class="col-md-12">
-                                    <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i+1 }}</h5>
+                                    <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h5>
                                 </div>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
@@ -3492,7 +3474,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                            <button onclick="share_function()">Copy link</button> -->
+                                                    <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>

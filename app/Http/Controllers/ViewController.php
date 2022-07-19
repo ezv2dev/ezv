@@ -841,7 +841,7 @@ class ViewController extends Controller
     public function villa_update_bedroom_detail(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'authenticated',
             ], 401);
@@ -880,9 +880,9 @@ class ViewController extends Controller
             // remove old bedroom detail
             $removedDetail = VillaBedroomDetail::where('id_villa', $request->id_villa)->delete();
 
-            collect($request->data)->each(function($item, $key) use ($request){
+            collect($request->data)->each(function ($item, $key) use ($request) {
                 // save bedroom detail
-                if($request->id_villa){
+                if ($request->id_villa) {
                     $createdDetail = VillaBedroomDetail::create([
                         'id_villa' => $request->id_villa,
                         'created_by' => auth()->user()->id,
@@ -891,8 +891,8 @@ class ViewController extends Controller
                 }
 
                 // save bedroom detail bed
-                collect($item['bed'])->each(function($item, $key) use ($createdDetail) {
-                    if($item['qty'] != 0){
+                collect($item['bed'])->each(function ($item, $key) use ($createdDetail) {
+                    if ($item['qty'] != 0) {
                         VillaBedroomDetailBed::create([
                             'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,
                             'id_bed' => $item['id_bed'],
@@ -904,11 +904,11 @@ class ViewController extends Controller
                 });
 
                 // save bedroom bedroom amenities
-                if(isset($item['bedroom_ids'])){
+                if (isset($item['bedroom_ids'])) {
                     $createdDetail->villaBedroomDetailBedroomAmenities()->sync($item['bedroom_ids']);
                 }
                 // save bedroom bathroom amenities
-                if(isset($item['bathroom_ids'])){
+                if (isset($item['bathroom_ids'])) {
                     $createdDetail->villaBedroomDetailBathroomAmenities()->sync($item['bathroom_ids']);
                 }
             });
@@ -921,9 +921,9 @@ class ViewController extends Controller
                 'villaBedroomDetailBed.bed'
             ])->where('id_villa', $request->id_villa)->get();
 
-            if($createdDetail){
+            if ($createdDetail) {
                 $bedCount = 0;
-                for ($i=0; $i < $createdDetail->count(); $i++) {
+                for ($i = 0; $i < $createdDetail->count(); $i++) {
                     $bedCount = $bedCount + $createdDetail[$i]->bed_count;
                 }
 
@@ -1199,19 +1199,19 @@ class ViewController extends Controller
             }
         }
 
-        VillaBedroom::where('id_villa', $request->id_villa)->delete();
-        if (!empty($request->bedroom)) {
-            foreach ($request->bedroom as $row) {
-                VillaBedroom::insert(array(
-                    'id_villa' => $request->id_villa,
-                    'id_bedroom' => $row,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-        }
+        // VillaBedroom::where('id_villa', $request->id_villa)->delete();
+        // if (!empty($request->bedroom)) {
+        //     foreach ($request->bedroom as $row) {
+        //         VillaBedroom::insert(array(
+        //             'id_villa' => $request->id_villa,
+        //             'id_bedroom' => $row,
+        //             'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+        //             'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+        //             'created_by' => Auth::user()->id,
+        //             'updated_by' => Auth::user()->id,
+        //         ));
+        //     }
+        // }
 
         VillaKitchen::where('id_villa', $request->id_villa)->delete();
         if (!empty($request->kitchen)) {
@@ -1257,20 +1257,26 @@ class ViewController extends Controller
 
         $getAmenities = VillaAmenities::with('amenities')->where('id_villa', $request->id_villa)->get();
         $getBathroom = VillaBathroom::with('bathroom')->where('id_villa', $request->id_villa)->get();
-        $getBedroom = VillaBedroom::with('bedroom')->where('id_villa', $request->id_villa)->get();
         $getKitchen = VillaKitchen::with('kitchen')->where('id_villa', $request->id_villa)->get();
         $getSafety = VillaSafety::with('safety')->where('id_villa', $request->id_villa)->get();
         $getService = VillaService::with('service')->where('id_villa', $request->id_villa)->get();
+
+        $data = [];
+        array_push($data, $getAmenities);
+        array_push($data, $getBathroom);
+        array_push($data, $getKitchen);
+        array_push($data, $getSafety);
+        array_push($data, $getService);
 
         return response()->json([
             'success' => true,
             'message' => 'Succesfully Updated',
             'getAmenities' => $getAmenities,
             'getBathroom' => $getBathroom,
-            'getBedroom' => $getBedroom,
             'getKitchen' => $getKitchen,
             'getSafety' => $getSafety,
             'getService' => $getService,
+            'data' => $data
         ]);
     }
 
@@ -1529,7 +1535,7 @@ class ViewController extends Controller
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $validator2 = Validator::make($request->all(), [
                 'id_villa' => ['required', 'integer'],
-                'file' => ['required','dimensions:min_width=960']
+                'file' => ['required', 'dimensions:min_width=960']
             ]);
 
             if ($validator2->fails()) {
@@ -1619,7 +1625,6 @@ class ViewController extends Controller
                     'message' => $validator->errors()->all(),
                 ], 500);
             }
-
         }
     }
 
@@ -2749,8 +2754,7 @@ class ViewController extends Controller
             'events' => 'required',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()->all(),
             ], 500);
@@ -2819,8 +2823,7 @@ class ViewController extends Controller
             'weapon' => 'required',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()->all(),
             ], 500);
@@ -2841,7 +2844,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->pool)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
             $i++;
         }
         if ($request->lake == 2) {
@@ -2854,7 +2857,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->lake)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2867,7 +2870,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->climb)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2880,7 +2883,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->height)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2893,7 +2896,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->animal)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2906,7 +2909,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->camera)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2919,7 +2922,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->monoxide)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2932,7 +2935,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->alarm)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2945,7 +2948,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->must)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2958,7 +2961,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->potential)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2971,7 +2974,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->come)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2984,7 +2987,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->parking)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -2997,7 +3000,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->shared)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -3010,7 +3013,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->amenity)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
@@ -3023,7 +3026,7 @@ class ViewController extends Controller
             ));
 
             $data[$i] = GuestSafety::where('id_guest_safety', $request->weapon)
-                            ->select('icon', 'guest_safety', 'description')->first();
+                ->select('icon', 'guest_safety', 'description')->first();
 
             $i++;
         }
