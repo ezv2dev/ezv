@@ -1357,9 +1357,9 @@
                                 @endauth
                             </h2>
                         </div>
-                        <div class="col-12 row gallery2">
+                        <div class="col-12 row gallery2" id="contentMenu">
                             @forelse ($restaurant->menu as $menu)
-                                <div class="col-4 grid-photo">
+                                <div class="col-4 grid-photo" id="displayMenu{{ $menu->id_menu }}">
                                     {{-- Popup modal --}}
                                     {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
                                     style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
@@ -1378,8 +1378,8 @@
                                                     title="{{ __('user_page.Add Photo Caption') }}"
                                                     onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"><i
                                                         class="fa fa-pencil"></i></button> --}}
-                                                <button style="height:40px" href="javascript:void(0);"
-                                                    onclick="delete_menu({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"
+                                                <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="{{ $menu->id_menu }}"
+                                                    onclick="delete_menu(this)"
                                                     data-bs-toggle="popover" data-bs-animation="true"
                                                     data-bs-placement="bottom"
                                                     title="{{ __('user_page.Delete Menu') }}"><i
@@ -4875,7 +4875,9 @@
     {{-- Sweetalert Function Delete Photo --}}
     <script>
         function delete_menu(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let menu = ids.getAttribute("data-menu");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: 'You will not be able to recover this content!',
@@ -4890,7 +4892,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/menu/${ids.id_menu}`,
+                        url: `/restaurant/${id}/delete/menu/${menu}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4899,8 +4901,7 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $("#displayMenu"+menu).remove();
                         }
                     });
                 } else {
