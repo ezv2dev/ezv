@@ -145,7 +145,7 @@ return [
     'Bath' => 'Mandi',
     'Parking' => 'Parkir',
     'New' => 'Baru',
-    'there is no reviews yet' => 'belum ada ulasan',
+    'Reviews' => 'Ulasan',
     'More Details' => 'Lebih Detail',
 
     // tombol

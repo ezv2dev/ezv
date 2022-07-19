@@ -904,7 +904,7 @@
                                     @endif
                                 @endauth
                             </h2>
-                            <div class="d-flex justify-content-left">
+                            {{-- <div class="d-flex justify-content-left">
                                 <div id="displayTags">
                                     @forelse ($villaTags->take(5) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
@@ -926,7 +926,7 @@
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
-                            </div>
+                            </div> --}}
                             <p id="description-content">
                                 {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
                                     __('user_page.There is no description yet') !!}
@@ -1671,7 +1671,7 @@
                                 </div>
                             </div>
                         @else
-                            <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
+                            <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
                             <div class="col-12 mt-3 d-flex review-container">
                                 <div class="col-12 col-md-6 d-flex">
                                     <div class="col-1 icon-review-container">
@@ -1685,12 +1685,11 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                            This host has 720 reviews for other places to stay.
-                                            <span><a href="#">Show other reviews</a></span>
+                                            There is no reviews yet
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 d-flex">
+                                {{-- <div class="col-12 col-md-6 d-flex">
                                     <div class="col-1 icon-review-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                             aria-hidden="true" role="presentation" focusable="false"
@@ -1706,7 +1705,7 @@
                                             <span><a href="#">EZV's Guest Refund Policy.</a></span>
                                         </p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         @endif
                         <hr>

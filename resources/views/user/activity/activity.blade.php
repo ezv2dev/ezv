@@ -1781,7 +1781,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="col-12 d-flex mt-3 review-container">
+                                    <div class="col-12 mt-3 d-flex review-container">
                                         <div class="col-12 col-md-6 d-flex">
                                             <div class="col-1 icon-review-container">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
@@ -1794,12 +1794,11 @@
                                             </div>
                                             <div class="col-8">
                                                 <p class="review-txt">
-                                                    This host has 720 reviews for other places to stay.
-                                                    <span><a href="#">Show other reviews</a></span>
+                                                    There is no reviews yet
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6 d-flex">
+                                        {{-- <div class="col-12 col-md-6 d-flex">
                                             <div class="col-1 icon-review-container">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                     aria-hidden="true" role="presentation" focusable="false"
@@ -1811,12 +1810,11 @@
                                             </div>
                                             <div class="col-8">
                                                 <p class="review-txt">
-                                                    We’re here to help your trip go smoothly. Every reservation is
-                                                    covered by
+                                                    We’re here to help your trip go smoothly. Every reservation is covered by
                                                     <span><a href="#">EZV's Guest Refund Policy.</a></span>
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 @endif
                             </div>
