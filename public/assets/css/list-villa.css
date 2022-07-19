@@ -2518,7 +2518,7 @@ li.button-dropdown {
 .filter-modal-row {
     padding-top: 2rem;
     padding-bottom: 2rem;
-    display: table;
+    /* display: table; */
     width: 100%;
     border-bottom: 0.8px solid rgb(192, 192, 192);
 }

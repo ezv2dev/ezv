@@ -373,7 +373,7 @@
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}
                         @php
                             $bedCount = 0;
-                            for ($i=0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
+                            for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
                                 $bedCount = $bedCount + $villa[0]->villaBedroomDetail[$i]->bed_count;
                             }
                         @endphp
@@ -1050,86 +1050,66 @@
                         @if ($villa_amenities->count() > 0)
                             <div class="row-grid-amenities">
                                 <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                    @if ($villa_amenities->count() >= 6)
-                                        @foreach ($villa_amenities->take(6) as $item1)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item1->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                    @foreach ($villa_amenities->take(2) as $item1)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item1->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item1->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-
-                                    @if ($villa_amenities->count() < 6)
-                                        @foreach ($villa_amenities->take(3) as $item1)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item1->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item1->name }}</span>
-                                                </div>
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item1->name }}</span>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bathroom->take(1) as $item2)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item2->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item2->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                        </div>
+                                    @endforeach
+                                    @foreach ($bathroom->take(2) as $item2)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item2->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($bedroom->take(1) as $item3)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item3->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item3->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item2->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($service->take(1) as $item3)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item3->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item3->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                        @foreach ($safety->take(1) as $item4)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item4->icon }}"></i>
-                                                    <div class="mb-0 max-line">
-                                                        <span
-                                                            class="translate-text-group-items">{{ $item4->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-0 list-more">
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item3->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($safety->take(1) as $item4)
+                                        <div class="list-amenities ">
+                                            <div class="text-align-center">
+                                                <i class="f-40 fa fa-{{ $item4->icon }}"></i>
+                                                <div class="mb-0 max-line">
                                                     <span
                                                         class="translate-text-group-items">{{ $item4->name }}</span>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
+                                            <div class="mb-0 list-more">
+                                                <span
+                                                    class="translate-text-group-items">{{ $item4->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                     <div class="list-amenities">
                                         <button class="amenities-button" type="button" onclick="view_amenities()">
                                             <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
@@ -2391,26 +2371,27 @@
                                             {{-- <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
                                                 method="post">
                                                 @csrf --}}
-                                                <div style="margin-left: 10px;">
-                                                    <select class="custom-select grade-success" name="grade" id="gradeVilla">
-                                                        <option value="AA"
-                                                            {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                        </option>
-                                                        <option value="A"
-                                                            {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                        </option>
-                                                        <option value="B"
-                                                            {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                        </option>
-                                                        <option value="C"
-                                                            {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                        </option>
-                                                        <option value="D"
-                                                            {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                        </option>
-                                                    </select>
-                                                    {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
-                                                </div>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA"
+                                                        {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                    </option>
+                                                    <option value="A"
+                                                        {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                    </option>
+                                                    <option value="B"
+                                                        {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                    </option>
+                                                    <option value="C"
+                                                        {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                    </option>
+                                                    <option value="D"
+                                                        {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                    </option>
+                                                </select>
+                                                {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
+                                            </div>
                                             {{-- </form> --}}
 
                                         </div>
@@ -3382,9 +3363,10 @@
                     @endfor --}}
                     <div id="bedroom-detail-content">
                         @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
-                            <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
+                            <div
+                                class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                                 <div class="col-md-12">
-                                    <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i+1 }}</h5>
+                                    <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h5>
                                 </div>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
@@ -3492,7 +3474,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                            <button onclick="share_function()">Copy link</button> -->
+                                                    <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3649,7 +3631,7 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}" id="positionPhotoGallery{{$id}}">
                                 <img class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
                                     title="{{ $name }}">
@@ -3661,8 +3643,8 @@
                 </div>
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
-                        <input type='button' class="btn-edit-position-photos" value='Submit'
-                            onclick="save_reorder_photo()">
+                        <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
+                            onclick="save_reorder_photo()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -3877,7 +3859,11 @@
         }
         // Save order
         function save_reorder_photo() {
-            showingLoading();
+
+            let btn = document.getElementById("saveBtnReorderPhoto");
+            btn.textContent = "Submiting...";
+            btn.classList.add("disabled");
+
             var imageids_arr = [];
             // get image ids order
             $('#sortable-photo li').each(function() {
@@ -3894,7 +3880,71 @@
                     id: '{{ $villa[0]->id_villa }}'
                 },
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/gallery/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content;
+                    let contentPositionModal;
+
+                    // let galleryDiv = $('.gallery');
+                    // let galleryLength = galleryDiv.find('a').length;
+
+                    // if (galleryLength == 0)
+                    // {
+                    //     $('.gallery').html("");
+                    // }
+
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '"> <a href="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' +
+                            response.data.photo[i].caption +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPositionModal += '<li class="ui-state-default" data-id="'+response.data.photo[i].id_photo+'" id="positionPhotoGallery'+response.data.photo[i].id_photo+'"> <img src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="'+response.data.photo[i].name+'"> </li>';
+                    }
+
+                    for (let v = 0; v < response.data.video.length; v++) {
+                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
+                        '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                        path + lowerCaseUid + slash + response.data.video[v].name +
+                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                        response.data.video[v].id_video +
+                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                    }
+
+                    btn.textContent = "Submit";
+                    btn.classList.remove("disabled");
+
+                    
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-photo').html("");
+                    $('#sortable-photo').append(contentPositionModal);
+                    
+                    $("#edit_position_photo").modal("hide");
+                    
+                    $gallery.refresh();
+                    
                 }
             });
         }
@@ -4081,6 +4131,7 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
+                let contentPositionModal;
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4103,7 +4154,12 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="'+message.data.photo[0].id_photo+'" id="positionPhotoGallery'+message.data.photo[0].id_photo+'"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="'+message.data.photo[0].name+'"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
@@ -4528,6 +4584,7 @@
                         success: async function(response) {
                             await Swal.fire('Deleted', response.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+                            $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
