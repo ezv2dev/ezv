@@ -624,61 +624,99 @@ class HotelDetailController extends Controller
     public function hotel_update_image(Request $request)
     {
         // dd($request->all());
-        $this->authorize('listvilla_update');
-        // validation
-        request()->validate([
-            'id_hotel' => ['required', 'integer'],
-            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
-        ]);
-        $status = 500;
+        // $this->authorize('listvilla_update');
+        // // validation
+        // request()->validate([
+        //     'id_hotel' => ['required', 'integer'],
+        //     'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960'],
+        // ]);
+        // $status = 500;
 
-        try {
-            $hotel = Hotel::where('id_hotel', $request->id_hotel)->first();
-            $folder = strtolower($hotel->uid);
+        // try {
+        //     $hotel = Hotel::where('id_hotel', $request->id_hotel)->first();
+        //     $folder = strtolower($hotel->uid);
 
-            // $path = public_path() . '/foto/gallery/' . $folder;
-            // $folder = $villa->uid;
-            $path = env("HOTEL_FILE_PATH") . $folder;
+        //     // $path = public_path() . '/foto/gallery/' . $folder;
+        //     // $folder = $hotel->uid;
+        //     $path = env("HOTEL_FILE_PATH") . $folder;
 
-            if (!File::isDirectory($path)) {
+        //     if (!File::isDirectory($path)) {
 
-                File::makeDirectory($path, 0777, true, true);
-            }
+        //         File::makeDirectory($path, 0777, true, true);
+        //     }
 
-            $ext = strtolower($request->image->getClientOriginalExtension());
-            // dd($ext);
+        //     $ext = strtolower($request->image->getClientOriginalExtension());
+        //     // dd($ext);
 
-            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                $original_name = $request->image->getClientOriginalName();
-                // dd($original_name);
-                $find = Hotel::where('id_hotel', $request->id_hotel)->first();
+        //     if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+        //         $original_name = $request->image->getClientOriginalName();
+        //         // dd($original_name);
+        //         $find = Hotel::where('id_hotel', $request->id_hotel)->first();
 
-                $name_file = time() . "_" . $original_name;
+        //         $name_file = time() . "_" . $original_name;
 
-                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+        //         $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
 
-                $find->update(array(
-                    'image' => $name_file,
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
+        //         $find->update(array(
+        //             'image' => $name_file,
+        //             'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+        //             'updated_by' => Auth::user()->id,
+        //         ));
+        //     }
 
-            if ($find) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+        //     if ($find) {
+        //         $status = 200;
+        //     }
+        // } catch (\Illuminate\Database\QueryException $e) {
+        //     $status = 500;
+        // }
+
+        // if ($status == 200) {
+        //     // return back()
+        //     //     ->with('success', 'Your data has been updated');
+        //     return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Profile',  'data' => $request->name]);
+        // } else {
+        //     // return back()
+        //     //     ->with('error', 'Please check the form below for errors');
+        //     return response()->json(['errors' => true, 'message' => 'Fail Updated Hotel Profile',  'data' => $request->name]);
+        // }
+
+        //test baru
+        $hotel = Hotel::where('id_hotel', $request->id_hotel)->first('uid');
+        $folder = $hotel->uid;
+        $path = env("HOTEL_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
         }
 
-        if ($status == 200) {
-            // return back()
-            //     ->with('success', 'Your data has been updated');
-            return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Profile',  'data' => $request->name]);
+        $ext = strtolower($request->image->getClientOriginalExtension());
+
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $original_name = $request->image->getClientOriginalName();
+            $find = Hotel::where('id_hotel', $request->id_hotel)->first();
+            $name_file = time() . "_" . $original_name;
+            $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+            $updatedHotel = $find->update(array(
+                'image' => $name_file,
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_by' => Auth::user()->id,
+            ));
+        }
+
+        $hotelData = Hotel::where('id_hotel', $request->id_hotel)->select('image')->first();
+
+        if ($updatedHotel) {
+            return response()->json([
+                'message' => 'Successfuly Updated Hotel Profile',
+                'status' => 200,
+                'data' => $hotelData
+            ]);
         } else {
-            // return back()
-            //     ->with('error', 'Please check the form below for errors');
-            return response()->json(['errors' => true, 'message' => 'Fail Updated Hotel Profile',  'data' => $request->name]);
+            return response()->json([
+                'message' => 'Error Updated Hotel Profile',
+                'status' => 500,
+            ]);
         }
     }
 
@@ -695,7 +733,7 @@ class HotelDetailController extends Controller
         abort_if($condition, 403);
 
         // delete video
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $hotel->name;
         $folder = strtolower($hotel->uid);
         $path = env("HOTEL_FILE_PATH") . $folder;
 
@@ -856,6 +894,100 @@ class HotelDetailController extends Controller
             return back()
                 ->with('error', 'Please check the form below for errors');
         }
+
+        // test
+        $validator = Validator::make($request->all(), [
+            'id_hotel' => ['required', 'integer'],
+            'title' => ['required', 'string', 'max:100'],
+            'file' => ['required', 'mimes:mp4,mov']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+            ], 500);
+        }
+
+        // restaurant data
+        $hotel = Hotel::find($request->id_hotel);
+
+        // check if restaurant does not exist, abort 404
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'Homes Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('listvilla_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $hotel->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // store process
+        // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+        $folder = strtolower($hotel->uid);
+        // dd($folder);
+        $path = env("HOTEL_FILE_PATH") . $folder;
+        // dd($path);
+
+        if (!File::isDirectory($path)) {
+
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // dd($name_file);
+
+            //insert into database
+            $createdStory = HotelStory::create([
+                'id_hotel' => $request->id_hotel,
+                'name' => $name_file,
+                'title' => $request->title,
+                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'created_by' => Auth::user()->id,
+                'updated_by' => Auth::user()->id,
+            ]);
+        }
+
+        $getStory = HotelStory::where('id_hotel', $request->id_hotel)->select('name', 'id_story')->latest()->get();
+        $getUID = Hotel::where('id_hotel', $request->id_hotel)->select('uid')->first();
+
+        $data = [];
+
+        $i = 0;
+
+        foreach ($getStory as $item) {
+            $data[$i]['id_story'] = $item->id_story;
+            $data[$i]['name'] = $item->name;
+            $i++;
+        }
+
+        // return $data;
+
+        // check if update is success or not
+        if ($createdStory) {
+            return response()->json([
+                'message' => 'Updated Hotel Story',
+                'data' => $data,
+                'uid' => $getUID->uid,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Updated Hotel Story',
+            ], 500);
+        }
     }
 
     public function story($id)
@@ -901,7 +1033,7 @@ class HotelDetailController extends Controller
         abort_if($condition, 403);
 
         // delete video
-        // $path = public_path() . '/foto/gallery/' . $villa->name;
+        // $path = public_path() . '/foto/gallery/' . $hotel->name;
         $folder = strtolower($hotel->uid);
         $path = env("HOTEL_FILE_PATH") . $folder;
 
@@ -1336,7 +1468,7 @@ class HotelDetailController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
         }
-
-        return back();
+        $data = HotelHasCategory::with('hotelCategory')->where('id_hotel', $request->id_hotel)->get();
+        return response()->json(['success' => true, 'data' => $data, 'message' => 'Updated Property Type']);
     }
 }

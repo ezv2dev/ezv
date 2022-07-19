@@ -645,7 +645,7 @@ class RestaurantListController extends Controller
         ];
 
         // check if update is success or not
-        if ($createdRestaurant == true) {
+        if (isset($createdRestaurant) == true) {
             return response()->json([
                 'data' => $data,
                 'message' => 'Created Food Menu',
@@ -726,7 +726,7 @@ class RestaurantListController extends Controller
         ];
 
         // check if update is success or not
-        if ($createdRestaurant == true) {
+        if (isset($createdRestaurant) == true) {
             return response()->json([
                 'data' => $data,
                 'message' => 'Uploading Menu Food',
@@ -1016,7 +1016,7 @@ class RestaurantListController extends Controller
         ];
 
         // check if update is success or not
-        if ($createdRestaurant == true) {
+        if (isset($createdRestaurant) == true) {
             return response()->json([
                 'message' => 'Update Gallery Restaurant',
                 'data' => $data,

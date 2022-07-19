@@ -10,16 +10,7 @@
             <div class="modal-body pb-1">
                 <form action="javascript:void();" method="POST" id="updateImageForm" class="js-validation"
                     enctype="multipart/form-data">
-                {{-- <form action="{{ route('hotel_update_image') }}" method="POST" id="basic-form" class="js-validation"
-                    enctype="multipart/form-data" onsubmit="showingLoading()"> --}}
-                    @csrf
                     <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-                    {{-- <div class="row mb-12">
-                        <label class="col-sm-4 col-form-label" for="price"><b>Image Profile</b></label>
-                        <div class="col-sm-8">
-                            <input type="file" name="image" id="editUpload">
-                        </div>
-                    </div> --}}
                     <div class="form-group">
                         <div class="file-upload" id="file-upload1">
                             <div class="image-box dropzone">

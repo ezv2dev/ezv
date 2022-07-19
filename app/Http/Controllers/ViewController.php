@@ -1072,7 +1072,7 @@ class ViewController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Error Updated Villa Short Description',
+                'message' => 'Error Updated Updated Villa Profile',
                 'status' => 500,
             ]);
         }
