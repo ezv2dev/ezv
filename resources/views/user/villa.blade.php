@@ -98,7 +98,7 @@
         {{-- END HEADER --}}
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
-        <div class="sticky-bottom-mobile d-xs-block d-md-none">
+        <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <input class="price-button" onclick="details_reserve()"
                 style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                 value="{{ __('user_page.VIEW DETAILS') }}" readonly>
