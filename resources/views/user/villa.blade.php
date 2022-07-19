@@ -3892,8 +3892,8 @@
                     let slash = "/";
                     let uid = response.data.uid.uid;
                     let lowerCaseUid = uid.toLowerCase();
-                    let content = "";
-                    let contentPositionModal = "";
+                    let content;
+                    let contentPositionModal;
 
                     // let galleryDiv = $('.gallery');
                     // let galleryLength = galleryDiv.find('a').length;
@@ -3922,8 +3922,6 @@
                             '" title="'+response.data.photo[i].name+'"> </li>';
                     }
 
-                    $gallery.refresh();
-
                     for (let v = 0; v < response.data.video.length; v++) {
                         content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
                         '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
@@ -3937,13 +3935,15 @@
                     btn.textContent = "Submit";
                     btn.classList.remove("disabled");
 
+                    
                     $('.gallery').html("");
                     $('.gallery').append(content);
                     $('#sortable-photo').html("");
                     $('#sortable-photo').append(contentPositionModal);
-
+                    
                     $("#edit_position_photo").modal("hide");
-
+                    
+                    $gallery.refresh();
                     
                 }
             });
