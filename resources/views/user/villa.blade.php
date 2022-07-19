@@ -3959,7 +3959,7 @@
                     let slash = "/";
                     let uid = response.data.uid.uid;
                     let lowerCaseUid = uid.toLowerCase();
-                    let content;
+                    let content = "";
                     let contentPositionModal;
 
                     // let galleryDiv = $('.gallery');
@@ -4197,7 +4197,7 @@
                 let slash = "/";
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
-                let content;
+                let content = "";
                 let contentPositionModal;
 
                 let galleryDiv = $('.gallery');
