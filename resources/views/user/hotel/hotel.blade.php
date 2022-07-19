@@ -403,12 +403,14 @@
                                         @endif
                                     @endauth
                                 </p>
+                                <div id="displayCategory">
                                 @foreach ($hotelHasCategory->take(3) as $item)
                                     <span class="badge rounded-pill fw-normal translate-text-group-items"
                                         style="background-color: #FF7400; margin-right: 5px;">
                                         {{ $item->hotelCategory->name }}
                                     </span>
                                 @endforeach
+                                </div>
                                 @if ($hotelHasCategory->count() > 3)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
@@ -1126,12 +1128,14 @@
                                 @endauth
                             </h2>
                             <div class="d-flex justify-content-left">
+                                <div id="displayTags">
                                 @forelse ($hotelTags->take(5) as $item)
                                     <span class="badge rounded-pill fw-normal translate-text-group-items"
                                         style="background-color: #FF7400; margin-right: 5px;">{{ $item->hotelFilter->name }}</span>
                                 @empty
                                     <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
                                 @endforelse
+                                </div>
                                 @if ($hotelTags->count() > 5)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
                                         onclick="view_tags_hotel()">{{ __('user_page.More') }}</button>
@@ -1340,7 +1344,7 @@
                                     @forelse ($hotelTypeDetail as $item)
                                         <div class="col-12 col-md-4 text-center tab-body">
                                             <div class="content list-image-content">
-                                                <input type="hidden" value="" id="id_villa" name="id_villa">
+                                                <input type="hidden" value="" id="id_hotel" name="id_hotel">
                                                 <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                                                     data-dots="false" data-arrows="true">
                                                     @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
@@ -4535,8 +4539,12 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                    // $('#loading-content').show();
+                    // location.reload();
+                });
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4567,7 +4575,72 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file);
+
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
+            success: function(file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/gallery/";
+                let slash = "/";
+                let uid = message.data.uid.uid;
+                let lowerCaseUid = uid.toLowerCase();
+                let content;
+
+                if (message.data.photo.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
+                        message.data.photo[0].id_photo +
+                        '"> <a href="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' +
+                        message.data.photo[0].caption +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
+                        message.data.photo[0].id_photo +
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+                if (message.data.video.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
+                        '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
+                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+
+                $gallery.refresh();
+
+                this.removeFile(file);
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
         }
     </script>
     {{-- END DROPZONE JS --}}
