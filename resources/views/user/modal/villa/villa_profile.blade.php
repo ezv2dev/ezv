@@ -13,20 +13,24 @@
                     <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
                     <div class="form-group">
                         <div class="file-upload" id="file-upload1">
-                            <div class="image-box dropzone">
-                                <p>{{ __('user_page.Upload Image') }}</p>
+                            <div class="image-box dropzone"
+                                style="background-image: url({{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $villa[0]->image) }}); background-size: 500px;">
                                 <img style="width: 100%" src="" alt="">
                             </div>
                             <div class="controls" style="display: none;">
                                 <input id="imageVilla" type="file" name="image" accept=".jpg,.png,.jpeg,.webp" />
                             </div>
                         </div>
-                        <small id="err-img" style="display: none;" class="invalid-feedback">{{ __('auth.empty_img') }}</small>
+                        <small id="err-img" style="display: none;"
+                            class="invalid-feedback">{{ __('auth.empty_img') }}</small>
                     </div>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center;">
+                            <p class="text-danger" style="margin-top: -20px; margin-bottom: 0px;">Click the Image to
+                                Upload
+                            </p>
                             <button type="submit" class="btn btn-sm btn-primary" id="btnupdateImageForm">
                                 {{ __('user_page.Save Image') }}
                             </button>

@@ -1208,12 +1208,34 @@ class HotelDetailController extends Controller
             $status = 500;
         }
 
+        // $getAmenities = HotelAmenities::with('amenities')->where('id_hotel', $request->id_hotel)->get();
+        // $getBathroom = HotelBathroom::with('bathroom')->where('id_hotel', $request->id_hotel)->get();
+        // $getBedroom = HotelBedroom::with('bedroom')->where('id_hotel', $request->id_hotel)->get();
+        // $getKitchen = HotelKitchen::with('kitchen')->where('id_hotel', $request->id_hotel)->get();
+        // $getSafety = HotelSafety::with('safety')->where('id_hotel', $request->id_hotel)->get();
+        // $getService = HotelService::with('service')->where('id_hotel', $request->id_hotel)->get();
+
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json([
+                'success' => true,
+                'message' => 'Succesfully Updated',
+                // 'getAmenities' => $getAmenities,
+                // 'getBathroom' => $getBathroom,
+                // 'getBedroom' => $getBedroom,
+                // 'getKitchen' => $getKitchen,
+                // 'getSafety' => $getSafety,
+                // 'getService' => $getService
+            ]);
+
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'success' => false,
+                'message' => 'Fail Updated'
+            ]);
         }
     }
 

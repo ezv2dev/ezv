@@ -666,3 +666,284 @@ $("#add-room-hotel").submit(function (e) {
         });
     }
 });
+
+// ! Edit Amenities
+function editAmenitiesHotel(id_hotel) {
+    let amenities = [];
+    let bathroom = [];
+    let bedroom = [];
+    let kitchen = [];
+    let safety = [];
+    let service = [];
+
+    $("input[name='amenities[]']:checked").each(function() {
+        amenities.push(parseInt($(this).val()));
+    });
+    $("input[name='bathroom[]']:checked").each(function() {
+        bathroom.push(parseInt($(this).val()));
+    });
+    $("input[name='bedroom[]']:checked").each(function() {
+        bedroom.push(parseInt($(this).val()));
+    });
+    $("input[name='kitchen[]']:checked").each(function() {
+        kitchen.push(parseInt($(this).val()));
+    });
+    $("input[name='safety[]']:checked").each(function() {
+        safety.push(parseInt($(this).val()));
+    });
+    $("input[name='service[]']:checked").each(function() {
+        service.push(parseInt($(this).val()));
+    });
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/hotel/update/amenities",
+        data: {
+            id_hotel: id_hotel,
+            amenities: amenities,
+            bathroom: bathroom,
+            bedroom: bedroom,
+            kitchen: kitchen,
+            safety: safety,
+            service: service,
+        },
+        success: function(response) {
+            var lengthAmenities = response.getAmenities.length;
+            var lengthBathroom = response.getBathroom.length;
+            var lengthBedroom = response.getBedroom.length;
+            var lengthKitchen = response.getKitchen.length;
+            var lengthSafety = response.getSafety.length;
+            var lengthService = response.getService.length;
+
+            $("#modal-edit_amenities").modal("hide");
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            $("#listAmenities").html('');
+
+            for (i = 0; i < lengthAmenities; i++) {
+                if (i === 2) { break; }
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                    </div>
+                </div>
+                `)
+            }
+
+            for (j = 0; j < lengthBathroom; j++) {
+                if (j === 2) { break; }
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getBathroom[j].bathroom.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                    </div>
+                </div>
+                `);
+            }
+
+            for (j = 0; j < lengthBedroom; j++) {
+                if (j === 2) { break; }
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getBedroom[j].bedroom.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getBedroom[j].bedroom.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getBedroom[j].bedroom.name}</span>
+                    </div>
+                </div>
+                `);
+            }
+
+            for (k = 0; k < lengthKitchen; k++) {
+                if (k === 1) { break; }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getKitchen[k].kitchen.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                        </div>
+                    </div>
+                `);
+            }
+
+            for (l = 0; l < lengthService; l++) {
+                if (l === 1) { break; }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getService[l].service.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getService[l].service.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getService[l].service.name}</span>
+                        </div>
+                    </div>
+                `);
+            }
+
+            $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <button class="amenities-button" type="button" onclick="view_amenities()">
+                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                        <div style="font-size: 15px;" class="translate-text-group-items">
+                            More</div>
+                    </button>
+                </div>
+            `);
+
+            $("#moreAmenities").html(`
+                <div class="col-md-6 mb-2">
+                    <span class='translate-text-group-items'>
+                        ${response.getAmenities[0].amenities.name}
+                    </span>
+                </div>
+            `);
+
+            for (i = 1; i < lengthAmenities; i++) {
+                $("#moreAmenities").append(`
+                    <div class="col-md-6 mb-2">
+                        <span class='translate-text-group-items'>
+                            ${response.getAmenities[i].amenities.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreBathroomz").html(`
+                <div class="col-md-6">
+                    <span class="translate-text-group-items">
+                        ${response.getBathroom[0].bathroom.name}
+                    </span>
+                </div>
+            `);
+
+            for (j = 1; j < lengthBathroom; j++) {
+                $("#moreBathroomz").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getBathroom[j].bathroom.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreBedroomz").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getBedroom[0].bedroom.name}
+                    </span>
+                </div>
+            `);
+
+            for (k = 1; k < lengthBedroom; k++) {
+                $("#moreBedroomz").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getBedroom[k].bedroom.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            console.log(response.getBedroom[0].bedroom.name);
+            console.log(response.getBathroom[0].bathroom.name);
+
+            $("#moreKitchen").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getKitchen[0].kitchen.name}
+                    </span>
+                </div>
+            `);
+
+            for (l = 1; l < lengthKitchen; l++) {
+                $("#moreKitchen").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getKitchen[l].kitchen.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreSafety").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getSafety[0].safety.name}
+                    </span>
+                </div>
+            `);
+
+            for (m = 1; m < lengthSafety; m++) {
+                $("#moreSafety").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getSafety[m].safety.name}
+                        </span>
+                    </div>
+                `);
+            }
+
+            $("#moreService").html(`
+                <div class="col-md-6">
+                    <span class='translate-text-group-items'>
+                        ${response.getService[0].service.name}
+                    </span>
+                </div>
+            `);
+
+            for (n = 1; n < lengthService; n++) {
+                $("#moreService").append(`
+                    <div class="col-md-6">
+                        <span class='translate-text-group-items'>
+                            ${response.getService[n].service.name}
+                        </span>
+                    </div>
+                `);
+            }
+        },
+    });
+}
+// ! End Edit Amenities
