@@ -832,7 +832,6 @@ function editAmenitiesVilla(id_villa) {
             var lengthKitchen = response.getKitchen.length;
             var lengthSafety = response.getSafety.length;
             var lengthService = response.getService.length;
-            var lengthTotal = response.data.length;
 
             $("#modal-edit_amenities").modal("hide");
 
@@ -842,38 +841,82 @@ function editAmenitiesVilla(id_villa) {
                 position: "topRight",
             });
 
-            $("#listAmenities").html(`
-                <div class="list-amenities">
-                    <div class="text-align-center">
-                        <i class="f-40 fa fa-${response.getAmenities[0].amenities.icon}"></i>
-                        <div class="mb-0 max-line">
-                            <span
-                                class="translate-text-group-items">${response.getAmenities[0].amenities.name}</span>
-                        </div>
-                    </div>
-                    <div class="mb-0 list-more">
-                        <span
-                            class="translate-text-group-items">${response.getAmenities[0].amenities.name}</span>
-                    </div>
-                </div>
-            `);
+            $("#listAmenities").html('');
 
-            for (i = 1; i < 6; i++) {
+            for (i = 0; i < lengthAmenities; i++) {
+                if (i === 2) { break; }
                 $("#listAmenities").append(`
                 <div class="list-amenities">
                     <div class="text-align-center">
-                        <i class="f-40 fa fa-${response.data[i].amenities.icon}"></i>
+                        <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
                         <div class="mb-0 max-line">
                             <span
-                                class="translate-text-group-items">${response.data[i].amenities.name}</span>
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                         </div>
                     </div>
                     <div class="mb-0 list-more">
                         <span
-                            class="translate-text-group-items">${response.data[i].amenities.name}</span>
+                            class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                     </div>
                 </div>
-            `);
+                `)
+            }
+
+            for (j = 0; j < lengthBathroom; j++) {
+                if (j === 2) { break; }
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <div class="text-align-center">
+                        <i class="f-40 fa fa-${response.getBathroom[j].bathroom.icon}"></i>
+                        <div class="mb-0 max-line">
+                            <span
+                                class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                        </div>
+                    </div>
+                    <div class="mb-0 list-more">
+                        <span
+                            class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                    </div>
+                </div>
+                `);
+            }
+
+            for (k = 0; k < lengthKitchen; k++) {
+                if (k === 1) { break; }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getKitchen[k].kitchen.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                        </div>
+                    </div>
+                `);
+            }
+
+            for (l = 0; l < lengthService; l++) {
+                if (l === 1) { break; }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getService[l].service.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getService[l].service.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getService[l].service.name}</span>
+                        </div>
+                    </div>
+                `);
             }
 
             $("#listAmenities").append(`

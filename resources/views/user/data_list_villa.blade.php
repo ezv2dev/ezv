@@ -101,7 +101,7 @@ if (isset($_COOKIE['tema'])) {
                         @php
                             $gallery = App\Http\Controllers\ViewController::gallery($data->id_villa);
                         @endphp
-                        @forelse ($gallery as $item)
+                        @forelse ($gallery->sortBy('order') as $item)
                             <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                 class="col-lg-6 list-image-container">
                                 <img class="img-fluid grid-image" style="display: block;" loading="lazy"
@@ -131,7 +131,8 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Left Section -->
         <!-- Right Section -->
-        <div class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-desc-container height-list-villa" >
+        <div
+            class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-desc-container height-list-villa">
             <div class="w-100 ml-responsive" style="position:relative;">
                 <!-- Villa Description -->
                 <div class="row mt-4 mt-lg-0 " style="height:100%;">
@@ -180,7 +181,8 @@ if (isset($_COOKIE['tema'])) {
 
                         <div class="col-12 villa-info-contanier" style="position:relative;">
                             <div class="villa-list-title pb-3">
-                                <div class=" skeleton skeleton skeleton-lg-h-1 skeleton-lg-w-50" style="margin-right: 4px;">
+                                <div class=" skeleton skeleton skeleton-lg-h-1 skeleton-lg-w-50"
+                                    style="margin-right: 4px;">
                                     <span class="list-description {{ $textColor }}">
                                         • {{ $data->adult . ' ' . __('user_page.Guests') }}
                                     </span>
@@ -211,7 +213,8 @@ if (isset($_COOKIE['tema'])) {
                                 @endif
                             </div>
                             <div class="villa-list-description-container skeleton skeleton-h-4 skeleton-w-100">
-                                <p class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">
+                                <p
+                                    class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">
                                     {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                                 </p>
                             </div>
