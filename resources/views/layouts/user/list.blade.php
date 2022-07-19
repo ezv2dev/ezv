@@ -1145,48 +1145,7 @@ if (isset($_COOKIE['tema'])) {
                 variableWidth: true,
                 pauseOnHover: false,
                 easing: "linear",
-                arrows: true,
-                dots: true
-            });
-            var lastSlickIndex = 0;
-            var moveX = 0;
-            var maxVisibleDots = 4;
-            $('.js-slider-2').on("beforeChange", function(e) {
-                lastSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
-            });
-            // disable dots button
-            $(".slick-dots li button").on("click", function(e) {
-                e.stopPropagation();
-            });
-            $(".slick-dots").css("margin-left", (($(window).width() - 150) / 2) - 10);
-            $(window).on("resize", function() {
-                $(".slick-dots").css("margin-left", (($(this).width() - 150) / 2) - 10);
-            })
-            $('.js-slider-2').on("swipe", function(e) {
-                var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
-                var maxSlickIndex = parseInt($(this).find(".slick-slide").last().attr("data-slick-index")) - 1;
-                var dots = $(this).find(".slick-dots li");
-                if (maxSlickIndex > 5) {
-                    if (currSlickIndex > lastSlickIndex && currSlickIndex <= maxVisibleDots && currSlickIndex > 2 && currSlickIndex <= maxSlickIndex - 2) {
-                        moveX -= 30;
-                        maxVisibleDots += 1;
-                    } else if (currSlickIndex < lastSlickIndex && lastSlickIndex != maxSlickIndex) {
-                        if (currSlickIndex >= 2 && currSlickIndex < maxSlickIndex - 2) {
-                            moveX += 30;
-                        }
-                        if (maxVisibleDots > 3) {
-                            maxVisibleDots -= 1;
-                        }
-                    } else if (currSlickIndex == maxSlickIndex) {
-                        moveX = -(30 * (maxSlickIndex - 4));
-                        maxVisibleDots = maxSlickIndex;
-                    } else if (currSlickIndex == 0 && lastSlickIndex == maxSlickIndex) {
-                        moveX = 0;
-                        maxSlickIndex = 4;
-                        maxVisibleDots = 4;
-                    }
-                    dots.css("transform", "translate(" + moveX + "px, 0px)");
-                }
+                arrows: true
             });
         })
     </script>

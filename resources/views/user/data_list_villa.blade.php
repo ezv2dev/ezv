@@ -95,6 +95,7 @@ if (isset($_COOKIE['tema'])) {
                 </div>
                 <input type="hidden" value="{{ $data->id_villa }}" id="id_villa" name="id_villa">
                 <div class="skeleton skeleton-h-lg skeleton-md-h-100 skeleton-w-100">
+                    <div class="dots-container d-flex justify-content-center"></div>
                     <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                         data-dots="false" data-arrows="true">
                         @php

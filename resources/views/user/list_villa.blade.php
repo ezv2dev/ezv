@@ -211,6 +211,62 @@
     {{-- Search --}}
     <script>
         $(document).ready(function() {
+            $(".js-slider-2").each(function(i, el) {
+                var sliderLength = 0;
+                $(this).find(".slick-slide").each(function(i, el) {
+                    if(!$(this).hasClass("slick-cloned")) {
+                        sliderLength = parseInt($(this).attr("data-slick-index"));
+                        maxSlickIndex = sliderLength; 
+                    }
+                })
+                var dotsContainer = $(this).parent().find(".dots-container");
+                if (sliderLength >= 4) {
+                    for (var j = 0; j <= 4; j++) {
+                        if (j == 0) {
+                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
+                        }else {
+                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                        }
+                    }
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                    for (var j = 0; j <= sliderLength; j++) {
+                        if (j == 0) {
+                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
+                        }else {
+                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                        }
+                    }
+                }
+            });
+            $('.js-slider-2').on("afterChange", function(e) {
+                var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
+                var maxSlickIndex = 0;
+                $(this).find(".slick-slide").each(function(i, el) {
+                    if(!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    }
+                })
+                var allDots = $(this).parent().find(".dots-container").find(".circle");
+                var dots = $(this).parent().find(".dots-container").find(".circle");
+                if (maxSlickIndex > 5) {
+                    if (currSlickIndex > 1 && currSlickIndex <= maxSlickIndex - 2) {
+                        allDots.removeClass("activeIndicator");
+                        dots[2].classList.add("activeIndicator");
+                    } else if (currSlickIndex <= 1) {
+                        allDots.removeClass("activeIndicator");
+                        dots[currSlickIndex].classList.add("activeIndicator");
+                    } else if (currSlickIndex == maxSlickIndex - 1) {
+                        allDots.removeClass("activeIndicator");
+                        dots[3].classList.add("activeIndicator");
+                    } else if (currSlickIndex == maxSlickIndex) {
+                        allDots.removeClass("activeIndicator");
+                        dots[4].classList.add("activeIndicator");
+                    }
+                } else {
+                    allDots.removeClass("activeIndicator");
+                    dots[currSlickIndex].classList.add("activeIndicator");
+                }
+            });
             $('.js-slider-2 .slick-next').css('display', 'none');
             $('.js-slider-2 .slick-prev').css('display', 'none');
             $('.js-slider-2').mouseenter(function(e) {
