@@ -577,25 +577,37 @@ class RestaurantListController extends Controller
 
     public function restaurant_store_menu(Request $request)
     {
-        // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
-
         // validation
-        request()->validate([
+        $validator = Validator::make($request->all(), [
             'id_restaurant' => ['required', 'integer'],
+            'description' => ['required','string'],
+            'name' => 'required',
+            'price' => ['required', 'numeric'],
             'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
 
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        abort_if(!$restaurant, 404);
+        if(!$restaurant) {
+            return response()->json([
+                'message' => 'Food Not Found'
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // store process
@@ -627,13 +639,21 @@ class RestaurantListController extends Controller
             ]);
         }
 
+        $data = [
+            'menu' => RestaurantMenu::where('id_menu', $createdRestaurant->id_menu)->first(),
+            'uid' => Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first(),
+        ];
+
         // check if update is success or not
-        if ($createdRestaurant) {
-            return back()
-                ->with('success', 'Your data has been created');
+        if ($createdRestaurant == true) {
+            return response()->json([
+                'data' => $data,
+                'message' => 'Created Food Menu',
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Created Food Menu',
+            ], 500);
         }
     }
 
