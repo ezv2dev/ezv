@@ -394,8 +394,9 @@ if (request()->fCategory) {
                                     @if ($fCategory == $item->id_collab_category) style="border: 5px solid #ff7400;" @endif
                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}"
                                     src="{{ LazyLoad::show() }}">
-                                <div class="grid-text">
-                                    <span class="translate-text-group-items text-white">{{ $item->name }}</span>
+                                <div class="grid-text translate-text-group-items">
+                                    <!-- <span class="translate-text-group-items text-white">{{ $item->name }}</span> -->
+                                    {{ $item->name }}
                                 </div>
                             </a>
                         </div>
