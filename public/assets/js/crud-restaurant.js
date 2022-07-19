@@ -1218,14 +1218,14 @@ $("#addMenuForm").submit(function (e) {
                 path +
                 lowerCaseUid +
                 slash +
-                menu +
+                menuPath +
                 slash +
                 response.data.menu.foto +
                 '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                 path +
                 lowerCaseUid +
                 slash +
-                menu +
+                menuPath +
                 slash +
                 response.data.menu.foto +
                 '" title="' +

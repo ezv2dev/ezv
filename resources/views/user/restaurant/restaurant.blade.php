@@ -4349,9 +4349,10 @@
 
     <script>
         var $gallery;
+        var $gallery2;
         $(document).ready(function() {
             $gallery = new SimpleLightbox('.gallery a', {});
-            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
+            $gallery2 = new SimpleLightbox('.gallery2 a', {});
         });
     </script>
 
@@ -4433,11 +4434,13 @@
             error: function(file, message, xhr) {
                 this.removeFile(file);// perhaps not remove on xhr errors
 
-                iziToast.error({
-                    title: "Error",
-                    message: message.message.file[0],
-                    position: "topRight",
-                });
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
 
                 $("#button").html('Upload');
                 $("#button").removeClass('disabled');
@@ -4505,10 +4508,6 @@
             thumbnailWidth: 960,
             url: '/restaurant/menu/store_multi',
             parallelUploads: 50,
-            "error": function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-                alert(errorToString(message));
-            },
             init: function() {
 
                 var myDropzone = this;
@@ -4524,7 +4523,7 @@
                         $('#err-dz-mn').hide();
                         myDropzone.processQueue();
 
-                        $("#button_menu").html('Uploading Gallery...');
+                        $("#button_menu").html('Uploading Menu...');
                         $("#button_menu").addClass('disabled');
                     }
                 });
@@ -4540,8 +4539,10 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                });
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4571,7 +4572,72 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file);// perhaps not remove on xhr errors
+
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
+
+                $("#button_menu").html('Upload');
+                $("#button_menu").removeClass('disabled');
+            },
+            success: function (file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/restaurant/";
+                let slash = "/";
+                let menuPath = "menu";
+                let uid = message.data.uid.uid;
+                var lowerCaseUid = uid.toLowerCase();
+                let content = "";
+
+                for (let i = 0; i < message.data.menu.length; i++) {
+                    content += '<div class="col-4 grid-photo" id="displayMenu' +
+                        message.data.menu[i].id_menu +
+                        '"> <a class="itemsMenu" href="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        menuPath +
+                        slash +
+                        message.data.menu[i].foto +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        menuPath +
+                        slash +
+                        message.data.menu[i].foto +
+                        '" title="' +
+                        message.data.menu[i].name +
+                        '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                        message.data.menu[i].id_menu +
+                        '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+                }
+
+                $(".gallery2").append(content);
+
+                $gallery2.refresh();
+
+                this.removeFile(file);
+
+                $("#button_menu").html('Upload');
+                $("#button_menu").removeClass('disabled');
+            },
         }
     </script>
 
@@ -4902,6 +4968,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayMenu"+menu).remove();
+                            $gallery2.refresh();
                         }
                     });
                 } else {

@@ -659,25 +659,22 @@ class RestaurantListController extends Controller
 
     public function restaurant_store_menu_multi(Request $request)
     {
-        // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
-
-        // validation
-        request()->validate([
-            'id_restaurant' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
-        ]);
-
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        abort_if(!$restaurant, 404);
+        if(!$restaurant) {
+            return response()->json([
+                'message' => 'Food Not Found'
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // store process
@@ -691,7 +688,22 @@ class RestaurantListController extends Controller
 
         $ext = strtolower($request->file->getClientOriginalExtension());
 
+        $menu = [];
+
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            // validation
+            $validator2 = Validator::make($request->all(), [
+                'id_restaurant' => ['required', 'integer'],
+                'file' => ['required', 'dimensions:min_width=960']
+            ]);
+
+            if ($validator2->fails())
+            {
+                return response()->json([
+                    'message' => $validator2->errors()->all(),
+                ], 500);
+            }
+
             $original_name = $request->file->getClientOriginalName();
             // dd($original_name);
             $name_file = time() . "_" . $original_name;
@@ -704,15 +716,33 @@ class RestaurantListController extends Controller
                 'created_by' => auth()->user()->id,
                 'updated_by' => auth()->user()->id
             ]);
+
+            array_push($menu, $createdRestaurant->id_menu);
         }
 
+        $data = [
+            'menu' => RestaurantMenu::whereIn("id_menu", $menu)->get(),
+            'uid' => Restaurant::where("id_restaurant", $request->id_restaurant)->select('uid')->first(),
+        ];
+
         // check if update is success or not
-        if ($createdRestaurant) {
-            return back()
-                ->with('success', 'Your data has been created');
+        if ($createdRestaurant == true) {
+            return response()->json([
+                'data' => $data,
+                'message' => 'Uploading Menu Food',
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            $validator = Validator::make($request->all(), [
+                'id_restaurant' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp']
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
         }
     }
 
@@ -877,18 +907,6 @@ class RestaurantListController extends Controller
 
     public function restaurant_store_photo(Request $request)
     {
-        // validation
-        $validator = Validator::make($request->all(), [
-            'id_restaurant' => ['required', 'integer'],
-            'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors(),
-            ], 500);
-        }
-
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
@@ -924,12 +942,12 @@ class RestaurantListController extends Controller
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $validator2 = Validator::make($request->all(), [
                 'id_restaurant' => ['required', 'integer'],
-                'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+                'file' => ['required', 'dimensions:min_width=960']
             ]);
 
             if ($validator2->fails()) {
                 return response()->json([
-                    'message' => $validator2->errors(),
+                    'message' => $validator2->errors()->all(),
                 ], 500);
             }
 
@@ -998,15 +1016,22 @@ class RestaurantListController extends Controller
         ];
 
         // check if update is success or not
-        if ($createdRestaurant) {
+        if ($createdRestaurant == true) {
             return response()->json([
                 'message' => 'Update Gallery Restaurant',
                 'data' => $data,
             ], 200);
         } else {
-            return response()->json([
-                'message' => 'Update Gallery Restaurant',
-            ], 500);
+            $validator = Validator::make($request->all(), [
+                'id_restaurant' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
         }
     }
 
