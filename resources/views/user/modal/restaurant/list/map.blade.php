@@ -2112,6 +2112,11 @@
         mapLoadingContainer.appendChild(mapLoading);
         mapLoadingContainer.setAttribute("style", "display: flex; justify-content: center; width: 100vw;");
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(mapLoadingContainer);
+
+        $("#modal-map-right-content").on('swipe', function() {
+            console.log('swipe right');
+        });
+        console.log('init map');
     };
     // view map
     async function view_maps(id) {

@@ -3388,7 +3388,7 @@
                                 <div class="col-md-12">
                                     <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i+1 }}</h5>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
                                             <div class="col-md-12">
