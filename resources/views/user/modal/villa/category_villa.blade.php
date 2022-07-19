@@ -100,7 +100,7 @@
                                             <input class="check-cat" type="checkbox" value="{{ $data->id_villa_category }}"
                                                 id="{{ $data->id_villa_category }}" name="villaCategory[]"
                                                 {{ $isChecked }}>
-                                            <span class="checkmark2"></span>
+                                            <span class="checkmark2 checklst-cat"></span>
                                         </label>
                                     </div>
                                 </div>

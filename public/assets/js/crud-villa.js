@@ -437,7 +437,7 @@ function contentBedroomDetail(count, data) {
 $(".check-cat").change(function() {
     $('#check_cat').each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length > 0) {
-            $('.checkmark2').css("border", "");
+            $('.checklst-cat').css("border", "");
             $('#err-slc-cat').hide();
         }
     });
@@ -448,7 +448,7 @@ function editCategoryV(id_villa) {
 
     $('#check_cat').each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length == 0) {
-            $('.checkmark2').css("border", "solid #e04f1a 1px");
+            $('.checklst-cat').css("border", "solid #e04f1a 1px");
             $('#err-slc-cat').show();
             error = 1;
         } else {
