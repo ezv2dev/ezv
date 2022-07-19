@@ -1,7 +1,7 @@
 body,
 html {
     background-color: #fafafa;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 
 h1,
@@ -3851,7 +3851,7 @@ span.flatpickr-weekday {
     .mobile-map{
         position: fixed;
         width: 100%;
-        height: 90% !important;
+        height: 100% !important;
         left: 0;
         z-index: 99;
         top: 0px;
@@ -3871,9 +3871,9 @@ span.flatpickr-weekday {
     .modal-map{
         height: 220px;
     }
-    #modal-map-content{
+    /* #modal-map-content{
         display: none;
-    }
+    } */
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -3894,9 +3894,9 @@ span.flatpickr-weekday {
     .row-modal-amenities{
         flex-direction: column;
     }
-    #modal-map-content{
+    /* #modal-map-content{
         display: none;
-    }
+    } */
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -3919,9 +3919,9 @@ span.flatpickr-weekday {
         width: 100%;
     }
 
-    #modal-map-content{
+    /* #modal-map-content{
         display: block;
-    }
+    } */
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -3939,9 +3939,9 @@ span.flatpickr-weekday {
         height: 515px;
     }
 
-    #modal-map-content{
+    /* #modal-map-content{
         display: block;
-    }
+    } */
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -3959,9 +3959,9 @@ span.flatpickr-weekday {
         width: 80%;
     }
 
-    #modal-map-content{
+    /* #modal-map-content{
         display: block;
-    }
+    } */
 }
 
 .date-form {
@@ -4035,4 +4035,20 @@ span.flatpickr-weekday {
     border: solid 1px #c0c0c0;
     border-radius: 10px;
     padding: 10px;
+}
+
+.close-button{
+    position: fixed; 
+    top: 0px; 
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    margin-left: 2%;
+    margin-top: 2%; 
+    left: auto; 
+    right: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d8d8d8;
 }

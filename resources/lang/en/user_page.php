@@ -223,6 +223,7 @@ return [
     'My Profile' => 'My Profile',
     'Collaborator' => 'Collaborator',
     'Collab Portal' => 'Collab Portal',
+    'Collabs' => 'Collabs',
     'Dashboard' => 'Dashboard',
 
     'The Best Way To Find Home, Hotel, Food, And Wow' => 'The Best Way To Find Home, Hotel, Food, And Wow',

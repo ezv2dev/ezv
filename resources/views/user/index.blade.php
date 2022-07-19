@@ -89,7 +89,7 @@
                     @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
                         <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_list') }}"
                             style="width: fit-content; color:#585656;">
-                            {{ __('user_page.Collab Portal') }}
+                            {{ __('user_page.Collabs') }}
                         </a>
                     @endif
                     <a class="d-block mb-2" href="{{ route('profile_index') }}"
@@ -157,10 +157,6 @@
                     </button>
                 </div>
                 <hr>
-                <a class="navbar-gap collab-expand mb-3" style="color: #585656; width: fit-content;" target="_blank"
-                    href="{{ route('collaborator_list') }}">
-                    {{ __('user_page.Collab Portal') }}
-                </a>
                 <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
                     style="color: #585656; width: fit-content;" target="_blank">
                     {{ __('user_page.Become a host') }}
@@ -258,7 +254,7 @@
                                                 src="{{ asset('assets/icon/menu/collab1.svg') }}"
                                                 style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
-                                    <p>{{ __('user_page.Collab Portal') }}</p>
+                                    <p>{{ __('user_page.Collabs') }}</p>
                                 </div>
                             </ul>
                             <!--End of serach option 1 -->
@@ -710,7 +706,7 @@
                                             @endif
                                             @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
                                                 <a class="dropdown-item" href="{{ route('collaborator_list') }}">
-                                                    {{ __('user_page.Collab Portal') }}
+                                                    {{ __('user_page.Collabs') }}
                                                 </a>
                                             @endif
                                             <a class="dropdown-item" href="{{ route('profile_index') }}">

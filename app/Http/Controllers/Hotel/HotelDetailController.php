@@ -1288,13 +1288,22 @@ class HotelDetailController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 500;
         }
-
+        $data = HotelTypeDetail::where('id_hotel_room', $roomStore->id_hotel_room)->first();
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Success create room',
+                'status' => 200,
+                'data' => route('room_hotel', ['id' => $data['id_hotel_room']])
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json([
+            'message' => 'Fail create room',
+            'status' => 500,
+        ], 200);
         }
     }
 

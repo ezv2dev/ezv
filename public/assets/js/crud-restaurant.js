@@ -825,7 +825,13 @@ function saveFacilities() {
 
             let content;
 
-            if (response.data.length > 5) {
+            if (response.data.length == 0) {
+                content = "";
+                content +=
+                    '<div class=""> <span>there is no facilities yet</span> </div>';
+            }
+
+            else if (response.data.length > 5) {
                 for (let i = 0; i < 6; i++) {
                     if (i == 0) {
                         content =

@@ -234,146 +234,6 @@
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
 
-                {{-- ALERT CONTENT STATUS --}}
-                @auth
-                    @if (auth()->user()->id == $restaurant->created_by)
-                        @if ($restaurant->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                <span>{{ __('user_page.this content is deactive,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request activation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
-                        @if ($restaurant->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                {{ __('user_page.this content is deactive') }}
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
-
-                                <form action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade-success" name="grade"
-                                            onchange='this.form.submit()'>
-                                            <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                        <noscript><input type="submit" value="Submit"></noscript>
-                                    </div>
-                                </form>
-
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }} </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                    method="get" class="d-flex">
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade" name="grade">
-                                            <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <span style="margin-left: 10px;">{{ __('user_page.and') }}</span>
-                                    <button class="btn" type="submit"
-                                        style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                </form>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                    method="get">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                @endauth
-                {{-- END ALERT CONTENT STATUS --}}
                 <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -2368,6 +2228,146 @@
                                 </div>
                             </div>
 
+                            {{-- ALERT CONTENT STATUS --}}
+                @auth
+                @if (auth()->user()->id == $restaurant->created_by)
+                    @if ($restaurant->status == '0')
+                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                            <span>{{ __('user_page.this content is deactive,') }} </span>
+                            <form
+                                action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.request activation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '1')
+                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                            <span>{{ __('user_page.this content is active,') }} </span>
+                            <form
+                                action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '2')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.you have been request activation for this content,') }} </span>
+                            <form
+                                action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel activation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '3')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
+                            <form
+                                action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                @endif
+                @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                    @if ($restaurant->status == '0')
+                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                            {{ __('user_page.this content is deactive') }}
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '1')
+                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                            <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
+
+                            <form action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                <div style="margin-left: 10px;">
+                                    <select class="custom-select grade-success" name="grade"
+                                        onchange='this.form.submit()'>
+                                        <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                        </option>
+                                        <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                        </option>
+                                        <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                        </option>
+                                        <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                        </option>
+                                        <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                        </option>
+                                    </select>
+                                    <noscript><input type="submit" value="Submit"></noscript>
+                                </div>
+                            </form>
+
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '2')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }} </span>
+                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                method="get" class="d-flex">
+                                <div style="margin-left: 10px;">
+                                    <select class="custom-select grade" name="grade">
+                                        <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                        </option>
+                                        <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                        </option>
+                                        <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                        </option>
+                                        <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                        </option>
+                                        <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                        </option>
+                                    </select>
+                                </div>
+                                <span style="margin-left: 10px;">{{ __('user_page.and') }}</span>
+                                <button class="btn" type="submit"
+                                    style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
+                            </form>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '3')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.the owner request deactivation,') }} </span>
+                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                method="get">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.deactivate this content') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                @endif
+            @endauth
+            {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
                                 <hr>
@@ -4477,6 +4477,14 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0)
+                {
+                    $('.gallery').html("");
+                }
+
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
@@ -4619,6 +4627,15 @@
                 let uid = message.data.uid.uid;
                 var lowerCaseUid = uid.toLowerCase();
                 let content = "";
+
+                let menuDiv = $('.gallery2');
+                let menuLength = menuDiv.find('a').length;
+
+                if (menuLength == 0)
+                {
+                    $('.gallery2').html("");
+                    // $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                }
 
                 for (let i = 0; i < message.data.menu.length; i++) {
                     content += '<div class="col-4 grid-photo" id="displayMenu' +
@@ -4900,6 +4917,15 @@
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
 
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             $gallery.refresh();
                             displayBlack.style.display = "none";
                         }
@@ -4983,6 +5009,14 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayMenu" + menu).remove();
+                            let menuDiv = $('.gallery2');
+                            let menuLength = menuDiv.find('a').length;
+
+                            if (menuLength == 0)
+                            {
+                                $('.gallery2').html("");
+                                $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                            }
                             $gallery2.refresh();
                         }
                     });
