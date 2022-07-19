@@ -3631,7 +3631,7 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}" id="positionPhotoGallery{{$id}}">
                                 <img class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
                                     title="{{ $name }}">
@@ -4063,6 +4063,7 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
+                let contentPositionModal;
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4085,7 +4086,12 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="'+message.data.photo[0].id_photo+'" id="positionPhotoGallery'+message.data.photo[0].id_photo+'"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="'+message.data.photo[0].name+'"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
@@ -4510,6 +4516,7 @@
                         success: async function(response) {
                             await Swal.fire('Deleted', response.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+                            $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
