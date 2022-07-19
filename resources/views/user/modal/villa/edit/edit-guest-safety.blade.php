@@ -399,16 +399,18 @@
                                 </div>
 
                                 @php
-                                    $villaHasLake = App\Models\VillaHasGuestSafety::where('id_villa', $villa[0]->id_villa)
-                                    ->where('id_guest_safety', 2)
-                                    ->count();
+                                    $villaHasLake = \DB::table('villa_has_guest_safety')->where([
+                                        ['id_villa', '=', $villa[0]->id_villa],
+                                        ['id_guest_safety', '=', '2'],
+                                    ])
+                                    ->count();                                    
                                 @endphp
 
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="lake" id="lake_1" value="no" />
                                         <label for="lake_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="lake" id="lake_2" value="2" {{ $villaHasPool == 2 ? 'checked' : ''}}/>
+                                        <input type="radio" name="lake" id="lake_2" value="2" {{ $villaHasLake == 1 ? 'checked' : ''}}/>
                                         <label for="lake_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -436,7 +438,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="climb" id="climb_1" value="no" />
                                         <label for="climb_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="climb" id="climb_2" value="3" {{ $villaHasClimb == 3 ? 'checked' : '' }}/>
+                                        <input type="radio" name="climb" id="climb_2" value="3" {{ $villaHasClimb == 1 ? 'checked' : '' }}/>
                                         <label for="climb_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -467,7 +469,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="height" id="height_1" value="no" />
                                         <label for="height_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="height" id="height_2" value="4" {{ $villaHasHeight == 4 ? 'checked' : '' }}/>
+                                        <input type="radio" name="height" id="height_2" value="4" {{ $villaHasHeight == 1 ? 'checked' : '' }}/>
                                         <label for="height_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -498,7 +500,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="animal" id="animal_1" value="no" />
                                         <label for="animal_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="animal" id="animal_2" value="5" {{ $villaHasAnimal == 5 ? 'checked' : ''}}/>
+                                        <input type="radio" name="animal" id="animal_2" value="5" {{ $villaHasAnimal == 1 ? 'checked' : ''}}/>
                                         <label for="animal_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -537,7 +539,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="camera" id="camera_1" value="no" />
                                         <label for="camera_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="camera" id="camera_2" value="6" {{ $villaHasCamera == 6 ? 'checked' : ''}}/>
+                                        <input type="radio" name="camera" id="camera_2" value="6" {{ $villaHasCamera == 1 ? 'checked' : ''}}/>
                                         <label for="camera_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -565,7 +567,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="monoxide" id="monoxide_1" value="no" />
                                         <label for="monoxide_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" {{ $villaHasMonoxide == 7 ? 'checked' : ''}}/>
+                                        <input type="radio" name="monoxide" id="monoxide_2" value="7" {{ $villaHasMonoxide == 1 ? 'checked' : ''}}/>
                                         <label for="monoxide_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -593,7 +595,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="alarm" id="alarm_1" value="no" />
                                         <label for="alarm_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="alarm" id="alarm_2" value="8" {{ $villaHasAlarm == 8 ? 'checked' : ''}}/>
+                                        <input type="radio" name="alarm" id="alarm_2" value="8" {{ $villaHasAlarm == 1 ? 'checked' : ''}}/>
                                         <label for="alarm_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -625,7 +627,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="must" id="must_1" value="no" />
                                         <label for="must_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="must" id="must_2" value="9" {{ $villaHasMust == 9 ? 'checked' : ''}}/>
+                                        <input type="radio" name="must" id="must_2" value="9" {{ $villaHasMust == 1 ? 'checked' : ''}}/>
                                         <label for="must_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -654,7 +656,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="potential" id="potential_1" value="no" />
                                         <label for="potential_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="potential" id="potential_2" value="10" {{ $villaHasPotential == 10 ? 'checked' : ''}}/>
+                                        <input type="radio" name="potential" id="potential_2" value="10" {{ $villaHasPotential == 1 ? 'checked' : ''}}/>
                                         <label for="potential_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -682,7 +684,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="come" id="come_1" value="no" />
                                         <label for="come_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="come" id="come_2" value="11" {{ $villaHasCome == 11 ? 'checked' : ''}}/>
+                                        <input type="radio" name="come" id="come_2" value="11" {{ $villaHasCome == 1 ? 'checked' : ''}}/>
                                         <label for="come_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -709,7 +711,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="parking" id="parking_1" value="no" />
                                         <label for="parking_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="parking" id="parking_2" value="12" {{ $villaHasParking == 12 ? 'checked' : ''}}/>
+                                        <input type="radio" name="parking" id="parking_2" value="12" {{ $villaHasParking == 1 ? 'checked' : ''}}/>
                                         <label for="parking_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -737,7 +739,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="shared" id="shared_1" value="no" />
                                         <label for="shared_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="shared" id="shared_2" value="13" {{ $villaHasShared == 13 ? 'checked' : ''}}/>
+                                        <input type="radio" name="shared" id="shared_2" value="13" {{ $villaHasShared == 1 ? 'checked' : ''}}/>
                                         <label for="shared_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -765,7 +767,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="amenity" id="amenity_1" value="no" />
                                         <label for="amenity_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="amenity" id="amenity_2" value="14" {{ $villaHasAmenity == 14 ? 'checked' : ''}}/>
+                                        <input type="radio" name="amenity" id="amenity_2" value="14" {{ $villaHasAmenity == 1 ? 'checked' : ''}}/>
                                         <label for="amenity_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -793,7 +795,7 @@
                                     <div class="d-flex justify-content-end">
                                         <input type="radio" name="weapon" id="weapon_1" value="no" />
                                         <label for="weapon_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="weapon" id="weapon_2" value="15" {{ $villaHasWeapon == 15 ? 'checked' : ''}}/>
+                                        <input type="radio" name="weapon" id="weapon_2" value="15" {{ $villaHasWeapon == 1 ? 'checked' : ''}}/>
                                         <label for="weapon_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
