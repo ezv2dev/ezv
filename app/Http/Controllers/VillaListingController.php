@@ -104,14 +104,11 @@ class VillaListingController extends Controller
             ));
         }
 
-        return redirect()->route('admin_villa')->with('success', 'Your data has been update');
+        return back();
     }
 
     public function grade(Request $request, $id)
     {
-        // dd($request->all());
-        $status = 500;
-
         $find = Villa::where('id_villa', $id)->first();
 
         $find->update(array(
@@ -120,7 +117,7 @@ class VillaListingController extends Controller
             'updated_by' => Auth::user()->id,
         ));
 
-        return redirect()->back()->with('success', 'Your data has been update');
+        return response()->json(['success' => true, 'message' => 'Succesfully Update Grade Villa to ' . $request->grade,  'data' => $request->grade]);
     }
 
     public function softDestroy($id)
