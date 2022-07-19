@@ -1835,6 +1835,10 @@ li.button-dropdown {
     display: flex;
 }
 
+.height-list-villa{
+    height: auto !important;
+}
+
 .list-image-container {
     padding-right: 0px;
 }
@@ -1891,6 +1895,10 @@ li.button-dropdown {
     font-size: 14px;
     font-family: "poppins", sans-serif;
     line-height: 1.3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap:12px;
 }
 
 .float-left a {
@@ -2037,21 +2045,29 @@ li.button-dropdown {
     margin-left: 10px;
 } */
 
-.limit-text-6{
+.limit-text-list-villa,
+.limit-text-6,
+.limit-text
+{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 }
 
-.limit-text{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+.limit-text-6{
+    -webkit-line-clamp: 6;
 }
+
+.limit-text-list-villa{
+    -webkit-line-clamp: 1;
+}
+
+.limit-text{
+    -webkit-line-clamp: 2;
+
+}
+
 @media only screen and (max-width: 320px) {
     .limit-text-6{
         font-size: 12px;
@@ -2971,6 +2987,8 @@ input::-webkit-inner-spin-button {
 .slick-slider.slick-dotted.slick-dotted-white .slick-dots li button::before {
     color: black !important;
 }
+
+
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
     .searchbox {
         width: 60% !important;
@@ -2984,8 +3002,8 @@ input::-webkit-inner-spin-button {
         font-size: 16px !important;
     }
     .villa-list-video-container {
-        width: 45px !important;
-        height: 45px !important;
+        width: 60px !important;
+        height: 60px !important;
     }
     .villa-list-video {
         width: 39px !important;
@@ -3095,7 +3113,23 @@ input::-webkit-inner-spin-button {
     #filter-cat-bg-color.nav-up {
         transform: translate(0px, -250px);
     }
+
 }
+
+@media only screen and (min-width: 991px) {
+    .villa-list-title{
+        flex-direction: column;
+        column-gap: 0px;
+    }
+    .limit-text-list-villa{
+        -webkit-line-clamp: 6;
+    }
+
+    .height-list-villa{
+        height: 350px !important;
+    }
+}
+
 @media only screen and (max-width: 300px) {
     .search-box p {
         font-size: 11px !important;

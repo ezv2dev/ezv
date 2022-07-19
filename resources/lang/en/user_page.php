@@ -149,7 +149,7 @@ return [
     'Bath' => 'Bath',
     'Parking' => 'Parking',
     'New' => 'New',
-    'there is no reviews yet' => 'there is no reviews yet',
+    'Reviews' => 'Reviews',
     'More Details' => 'More Details',
 
     // buttons
