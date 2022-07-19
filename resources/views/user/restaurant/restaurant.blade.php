@@ -4620,6 +4620,15 @@
                 var lowerCaseUid = uid.toLowerCase();
                 let content = "";
 
+                let menuDiv = $('.gallery2');
+                let menuLength = menuDiv.find('a').length;
+
+                if (menuLength == 0)
+                {
+                    $('.gallery2').html("");
+                    // $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                }
+
                 for (let i = 0; i < message.data.menu.length; i++) {
                     content += '<div class="col-4 grid-photo" id="displayMenu' +
                         message.data.menu[i].id_menu +
@@ -4983,6 +4992,14 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayMenu" + menu).remove();
+                            let menuDiv = $('.gallery2');
+                            let menuLength = menuDiv.find('a').length;
+
+                            if (menuLength == 0)
+                            {
+                                $('.gallery2').html("");
+                                $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                            }
                             $gallery2.refresh();
                         }
                     });
