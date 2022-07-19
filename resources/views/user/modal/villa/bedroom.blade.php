@@ -305,10 +305,22 @@
 
                     </div>
                 </div>
-                <div class="row mb-12 margin-bottom-12px" onchange="showAddBedroomDetailForm(this, 'radio')">
+                <div class="row mb-12 margin-bottom-12px" id="bedroomFormSelect" onchange="showAddBedroomDetailForm(this, 'radio')">
                     <label class="col-sm-4 col-form-label" for="price">{{ __('user_page.Bedrooms') }}</label>
                     <div class="col-sm-8">
-                        <div class="editnumberoption_container">
+                        {{-- check if bedroomDetail exist --}}
+                        @php
+                            $isSelectNumber = '';
+                            $isAdd = 'd-none';
+                            if($villa[0]->villaBedroomDetail){
+                                $isSelectNumber = 'd-none';
+                                $isAdd = '';
+                            } else {
+                                $isSelectNumber = '';
+                                $isAdd = 'd-none';
+                            }
+                        @endphp
+                        <div class="editnumberoption_container {{ $isSelectNumber }}" id="btnSelectBedroomNumber">
                             <div class="roomnumber-filter-container">
                                 <input type="radio" value="1" id="o1" name="bedroom"
                                     @if ($villa[0]->bedroom == 1) checked @endif>
@@ -387,7 +399,11 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div>
+                            <button id="btnAddBedroom" class="btn btn-primary {{ $isAdd }}"
+                                data-index="{{ $villa[0]->villaBedroomDetail->count() ?? 0 }}"
+                                onclick="addAddBedroomDetailForm()">Add Bedroom</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-12 margin-bottom-12px display-none" id="bedroomForm" onkeyup="showAddBedroomDetailForm(this, 'input')">
@@ -399,143 +415,88 @@
                     </div>
                 </div>
                 <hr class="hr-hide" style="display: none;">
-                    {{--
-                    <div class="row">
-                        <label class="form-label"><b>{{ __('user_page.Bedroom') }}</b></label>
-                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                            @foreach ($bedroom_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                    <div class="row" style="font-size: 13px;">
-                                        @php
-                                            $isChecked = '';
-                                            foreach ($bedroom as $item) {
-                                                if ($data->name == $item->name) {
-                                                    $isChecked = 'checked';
+                <div id="bedroomDetailForm">
+                    @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
+                        <div class="row mb-5 bedroomDetailFormContent" id="bedroomDetailFormContent{{ $i }}">
+                            <label class="form-label">
+                                <b>{{ __('user_page.Bedroom') }} {{ $i+1 }}</b>
+                                <a href="javascript:void(0);" onclick="deleteAddBedroomDetailForm({{ $i }})">
+                                    <i class="fa fa-trash" style="color:red; margin-left: 25px;" title="{{ __('user_page.Delete') }}"></i>
+                                </a>
+                            </label>
+                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                                @foreach ($bedroom_m as $data)
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                        <div class="row" style="font-size: 13px;">
+                                            @php
+                                                $isChecked = '';
+                                                foreach ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $bedroomAmenities) {
+                                                    if ($bedroomAmenities->name == $data->name) {
+                                                        $isChecked = 'checked';
+                                                    }
                                                 }
-                                            }
-                                        @endphp
-                                        <label class="container-checkbox2">
-                                            <span class="translate-text-group-items">{{ $data->name }}</span>
-                                            <input type="checkbox" value="{{ $data->id_bed }}"
-                                                id="{{ $data->id_bed }}" name="bedroom[]" {{ $isChecked }}>
-                                            <span class="checkmark2"></span>
-                                        </label>
+                                            @endphp
+                                            <label class="container-checkbox2">
+                                                <span class="translate-text-group-items">{{ $data->name }}</span>
+                                                <input type="checkbox" value="{{ $data->id_bed }}" id="{{ $data->id_bed }}" name="bedroom[]" {{ $isChecked }}>
+                                                <span class="checkmark2"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                @foreach ($bathroom_m as $data)
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                        <div class="row" style="font-size: 13px;">
+                                            @php
+                                                $isChecked = '';
+                                                foreach ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $bathroomAmenities) {
+                                                    if ($bathroomAmenities->name == $data->name) {
+                                                        $isChecked = 'checked';
+                                                    }
+                                                }
+                                            @endphp
+                                            <label class="container-checkbox2">
+                                                <span class="translate-text-group-items">{{ $data->name }}</span>
+                                                <input type="checkbox" value="{{ $data->id_bathroom }}" id="{{ $data->id_bathroom }}" name="bathroom[]" {{ $isChecked }}>
+                                                {{-- <input type="checkbox" value="{{ $data->id_bathroom }}" id="{{ $data->id_bathroom }}" name="bathroom[]"> --}}
+                                                <span class="checkmark2"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @foreach ($bed as $data)
+                                <div class="col-4 bedroomDetailFormContentBed">
+                                    <div class="reserve-input-row">
+                                        <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
+                                            {{ $data->name }}
+                                        </div>
+                                        <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                            <a type="button" onclick="decrement_qty_bed('bed{{ $i }}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                                <i class="fa fa-circle-minus fa-lg" aria-hidden="true"></i>
+                                            </a>
+                                            @php
+                                                $count = 0;
+                                                foreach ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item) {
+                                                    if ($item->id_bed == $data->id_bed) {
+                                                        $count = $item->qty;
+                                                    }
+                                                }
+                                            @endphp
+                                            <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                <input type="hidden" name="id_bed" value="{{ $data->id_bed }}" readonly="">
+                                                <p><input type="number" id="bed{{ $i }}{{ $data->name }}" name="qty" value="{{ $count }}" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                            </div>
+                                            <a type="button" onclick="increment_qty_bed('bed{{ $i }}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                                <i class="fa fa-circle-plus fa-lg" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                King
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="kingbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="kingbed" name="king" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="kingbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                Double
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="doublebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="doublebed" name="double" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="doublebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                Queen
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="queenbed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="queenbed" name="queen" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="queenbed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                Single
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="singlebed_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="singlebed" name="single" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="singlebed_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                Working table
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="workingtable_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="workingtable" name="workingtable" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="workingtable_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="reserve-input-row">
-                            <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
-                                Couch
-                            </div>
-                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="couch_decrement()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                </a>
-                                <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                    <p><input type="number" id="couch" name="couch" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
-                                </div>
-                                <a type="button" onclick="couch_increment()" style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                     --}}
-                     <div id="bedroomDetailForm"></div>
-                     {{-- <hr class="hr-hide" style="display: none;"> --}}
+                    @endfor
+                </div>
             </div>
             <div class="modal-footer" style="background-color: white;">
                  <!-- Submit -->
@@ -1044,6 +1005,7 @@
 </script>
 
 <script>
+    console.log('hit showAddBedroomDetailForm');
     function showAddBedroomDetailForm(trigger, triggerType) {
         if(triggerType == 'input'){
             let count = $(trigger).find(`input[name='bedroom1']`).val();
@@ -1051,10 +1013,11 @@
 
             let content = '';
             for (let i = 0; i < count; i++) {
-                content += contentBedroomDetailForm(i+1, null);
+                content += contentBedroomDetailForm(i, null);
             }
             $('.hr-hide').show();
             $('#bedroomDetailForm').html(content);
+            $('#btnAddBedroom').attr('data-index', count);
         }
 
         if(triggerType == 'radio'){
@@ -1063,17 +1026,31 @@
 
             let content = '';
             for (let i = 0; i < count; i++) {
-                content += contentBedroomDetailForm(i+1, null);
+                content += contentBedroomDetailForm(i, null);
             }
             $('.hr-hide').show();
             $('#bedroomDetailForm').html(content);
+            $('#btnAddBedroom').attr('data-index', count);
+        }
+
+        //disabled/enabled button select/button add bedroom
+        if ($(`.bedroomDetailFormContent`).length > 0){
+            $('#btnSelectBedroomNumber').addClass('d-none');
+            $('#btnAddBedroom').removeClass('d-none');
+        } else {
+            $('#btnSelectBedroomNumber').removeClass('d-none');
+            $('#btnAddBedroom').addClass('d-none');
         }
     }
-
-    function contentBedroomDetailForm(count, data) {
+    function contentBedroomDetailForm(index, data) {
         let content = `
-            <div class="row mb-5 bedroomDetailFormContent">
-                <label class="form-label"><b>{{ __('user_page.Bedroom') }} ${count}</b></label>
+            <div class="row mb-5 bedroomDetailFormContent" id="bedroomDetailFormContent${index}">
+                <label class="form-label">
+                    <b>{{ __('user_page.Bedroom') }} ${index+1}</b>
+                    <a href="javascript:void(0);" onclick="deleteAddBedroomDetailForm(${index})">
+                        <i class="fa fa-trash" style="color:red; margin-left: 25px;" title="{{ __('user_page.Delete') }}"></i>
+                    </a>
+                </label>
                 <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                     @foreach ($bedroom_m as $data)
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
@@ -1127,15 +1104,15 @@
                                 {{ $data->name }}
                             </div>
                             <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
-                                <a type="button" onclick="decrement_qty_bed('bed${count}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                <a type="button" onclick="decrement_qty_bed('bed${index+1}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
                                     <!-- <i class="fa-solid fa-minus" style="padding:30%"></i> -->
                                     <i class="fa fa-circle-minus fa-lg" aria-hidden="true"></i>
                                 </a>
                                 <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
                                     <input type="hidden" name="id_bed" value="{{ $data->id_bed }}" readonly="">
-                                    <p><input type="number" id="bed${count}{{ $data->name }}" name="qty" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                    <p><input type="number" id="bed${index+1}{{ $data->name }}" name="qty" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
                                 </div>
-                                <a type="button" onclick="increment_qty_bed('bed${count}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
+                                <a type="button" onclick="increment_qty_bed('bed${index+1}{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
                                     <!-- <i class="fa-solid fa-plus" style="padding:30%"></i> -->
                                     <i class="fa fa-circle-plus fa-lg" aria-hidden="true"></i>
                                 </a>
@@ -1147,5 +1124,36 @@
         `;
 
         return content;
+    }
+    function deleteAddBedroomDetailForm(index) {
+        // remove tag
+        $(`#bedroomDetailFormContent${index}`).remove();
+
+        //disabled/enabled button select/button add bedroom
+        if ($(`.bedroomDetailFormContent`).length > 0){
+            $('#btnSelectBedroomNumber').addClass('d-none');
+            $('#btnAddBedroom').removeClass('d-none');
+        } else {
+            $('#btnSelectBedroomNumber').removeClass('d-none');
+            $('#btnAddBedroom').addClass('d-none');
+        }
+
+        // select/input value
+        if($(`.bedroomDetailFormContent`).length <= 6){
+            value = $(`.bedroomDetailFormContent`).length;
+            $('#bedroomFormSelect').find(`input[name=bedroom][value='${value}']`).prop("checked",true);
+            $('#bedroomForm').find(`input[name='bedroom1']`).val();
+        } else {
+            value = $(`.bedroomDetailFormContent`).length;
+            $('#bedroomFormSelect').find(`input[name=bedroom]`).prop("checked",false);
+            $('#bedroomForm').find(`input[name='bedroom1']`).val(value);
+        }
+    }
+    function addAddBedroomDetailForm() {
+        console.log('hit addAddBedroomDetailForm');
+        let index = parseInt($('#btnAddBedroom').attr('data-index'));
+        let content = contentBedroomDetailForm(index, null);
+        $('#bedroomDetailForm').append(content);
+        $('#btnAddBedroom').attr('data-index', index+1);
     }
 </script>

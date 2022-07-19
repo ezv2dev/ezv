@@ -329,12 +329,12 @@ async function saveBedroomDetail(id_villa) {
                 $("#bedsID").html(response.bed_count);
             }
 
+            // add latest content to modal amenities
             let content = ``;
             for (let index = 0; index < response.data.length; index++) {
                 const data = response.data[index];
                 content += contentBedroomDetail(index, data);
             }
-
             $('#bedroom-detail-content').html(content);
 
             // iziToast.success({
@@ -342,6 +342,15 @@ async function saveBedroomDetail(id_villa) {
             //     message: response.message,
             //     position: "topRight",
             // });
+
+            // disabled/enabled button select/button add bedroom
+            if(response.length > 0){
+                $('#btnSelectBedroomNumber').addClass('d-none');
+                $('#btnAddBedroom').removeClass('d-none');
+            } else {
+                $('#btnSelectBedroomNumber').removeClass('d-none');
+                $('#btnAddBedroom').addClass('d-none');
+            }
         },
         error: function(jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
