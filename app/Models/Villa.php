@@ -399,9 +399,13 @@ class Villa extends Model
             // })
             ->addColumn('instantBook', function ($data) {
                 $co = "";
-                // $co .= "<center>";
-                $co .= "On";
-                // $co .= "</center>";
+                $co .= "<center>";
+                if ($data->instant_book == 'yes') {
+                    $co .= "<span class='text-white badge badge-pill' style='background-color:#28A745;'>Yes</span>";
+                } else {
+                    $co .= "<span class='text-white badge badge-pill bg-danger'>No</span>";
+                }
+                $co .= "</center>";
 
                 return $co;
             })
@@ -415,7 +419,7 @@ class Villa extends Model
                 if ($data->status == 0)
                     $co .= "<span class='text-white badge badge-pill bg-danger'>Non Active</span>";
                 elseif ($data->status == 1) {
-                    $co .= "<span class='text-white badge badge-pill bg-success'>Active</span>";
+                    $co .= "<span class='text-white badge badge-pill' style='background-color:#28A745;'>Active</span>";
                 }
                 $co .= "</center";
 
@@ -571,7 +575,8 @@ class Villa extends Model
         return $this->hasMany(VillaView::class, 'id_villa', 'id_villa');
     }
 
-    public function villaBedroomDetail() {
+    public function villaBedroomDetail()
+    {
         return $this->hasMany(VillaBedroomDetail::class, 'id_villa', 'id_villa');
     }
 
