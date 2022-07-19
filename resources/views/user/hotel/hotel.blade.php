@@ -2176,7 +2176,7 @@
                                                     value="{{ $hotel[0]->id_hotel }}" readonly required>
                                                 <div class="row">
                                                     <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Cleanliness') }}
                                                             </div>
@@ -2220,7 +2220,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Service') }}
                                                             </div>
@@ -2264,7 +2264,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Check in') }}
                                                             </div>
@@ -2308,7 +2308,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Location') }}
                                                             </div>
