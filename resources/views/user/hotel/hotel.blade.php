@@ -1340,7 +1340,7 @@
                                         {{ __('user_page.Price') }}
                                     </div>
                                 </div>
-                                <div class="row table-body translate-text-group">
+                                <div class="row table-body room-content translate-text-group">
                                     @forelse ($hotelTypeDetail as $item)
                                         <div class="col-12 col-md-4 text-center tab-body">
                                             <div class="content list-image-content">
