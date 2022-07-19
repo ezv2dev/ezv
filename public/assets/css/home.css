@@ -2092,11 +2092,6 @@ span.flatpickr-weekday {
         font-size: 12px !important;
     }
 }
-@media only screen and (max-width: 345px) {
-    #sugest {
-        width: 98vw !important;
-    }
-}
 @media only screen and (max-width: 425px) {
     .user-avatar {
         width: 40px !important;
@@ -2106,6 +2101,9 @@ span.flatpickr-weekday {
     }
     #ul .navbar-nav .nav-link-form {
         width: 20% !important;
+    }
+    #sugest {
+        width: 100% !important;
     }
 }
 
@@ -2268,9 +2266,6 @@ span.flatpickr-weekday {
     }
     #text-download-app {
         font-size: 42px !important;
-    }
-    #sugest {
-        left: -10px !important;
     }
     .nav .input-guest {
         width: 100% !important;
