@@ -130,13 +130,13 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Left Section -->
         <!-- Right Section -->
-        <div class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-desc-container">
+        <div class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-desc-container height-list-villa" >
             <div class="w-100 ml-responsive" style="position:relative;">
                 <!-- Villa Description -->
-                <div class="row mt-5 mt-sm-4 mt-lg-0 " style="height:100%;">
+                <div class="row mt-4 mt-lg-0 " style="height:100%;">
                     <div class="col-12 row">
                         <div class="col-9">
-                            <div class="skeleton skeleton-h-3 skeleton-w-100">
+                            <div class="skeleton skeleton-h-2 skeleton-lg-h-3 skeleton-w-100 mt-0">
                                 <p class="villa-list-name max-line " style="color: #ff7400; position:relative;">
                                     {{-- {{ $data->name ?? __('user_page.There is no name yet') }} --}}
                                     {{ $data->name ?? __('user_page.There is no name yet') }}
@@ -179,30 +179,30 @@ if (isset($_COOKIE['tema'])) {
 
                         <div class="col-12 villa-info-contanier" style="position:relative;">
                             <div class="villa-list-title pb-3">
-                                <div class=" skeleton skeleton skeleton-h-1 skeleton-w-50" style="margin-right: 4px;">
+                                <div class=" skeleton skeleton skeleton-lg-h-1 skeleton-lg-w-50" style="margin-right: 4px;">
                                     <span class="list-description {{ $textColor }}">
                                         • {{ $data->adult . ' ' . __('user_page.Guests') }}
                                     </span>
                                 </div>
-                                <div class="skeleton skeleton-h-1 skeleton-w-50">
+                                <div class="skeleton skeleton-lg-h-1 skeleton-lg-w-50">
                                     <span class="list-description {{ $textColor }} ">
                                         • {{ $data->bedroom . ' ' . __('user_page.Bedroom') }}
                                     </span>
                                 </div>
-                                <div class=" skeleton skeleton-h-1 skeleton-w-50">
+                                <div class=" skeleton skeleton-lg-h-1 skeleton-lg-w-50">
                                     <span class="list-description {{ $textColor }}">
                                         • {{ $data->bathroom . ' ' . __('user_page.Bath') }}
                                     </span>
                                 </div>
                                 @if ($data->parking != null || $data->parking > 0)
-                                    <div class="skeleton skeleton-h-1 skeleton-w-50">
+                                    <div class="skeleton skeleton-lg-h-1 skeleton-lg-w-50">
                                         <span class="list-description {{ $textColor }} ">
                                             • {{ $data->parking . ' ' . __('user_page.Parking') }}
                                         </span>
                                     </div>
                                 @endif
                                 @if ($data->size != null || $data->size > 0)
-                                    <div class=" skeleton skeleton-h-1 skeleton-w-50">
+                                    <div class=" skeleton skeleton-lg-h-1 skeleton-lg-w-50">
                                         <span class="list-description {{ $textColor }}">
                                             • {{ number_format($data->size) }} m<sup>2</sup>
                                         </span>
@@ -210,7 +210,7 @@ if (isset($_COOKIE['tema'])) {
                                 @endif
                             </div>
                             <div class="villa-list-description-container skeleton skeleton-h-4 skeleton-w-100">
-                                <p class="villa-list-title {{ $textColor }} list-description limit-text-6">
+                                <p class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">
                                     {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                                 </p>
                             </div>
