@@ -875,8 +875,11 @@
 
     .container-grid-cat .grid-img-container .grid-text {
         font-size: 0.8rem !important;
-        color: inherit;
         top: 60px;
+    }
+
+    .bg-body-light a .grid-text {
+        color: #000 !important;
     }
 
     .list-slider .slick-list {
@@ -922,6 +925,9 @@
     } 
 }
 @media only screen and (min-width: 426px) and (max-width: 949px) {
+    .bg-body-light a .grid-text {
+        color: #000 !important;
+    }
     .grid-img-filter {
         height: 80px;
         width: 80px;
@@ -933,7 +939,6 @@
     .container-grid-cat .grid-img-container .grid-text {
         font-size: 0.9rem !important;
         margin-top: 140px;
-        color: inherit;
     }
 
     .container-grid-cat {
