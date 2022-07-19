@@ -95,7 +95,7 @@
 }
 
 .container-grid-cat{
-    grid-template-columns: repeat( 5, minmax(0, 1fr) );
+    grid-template-columns: repeat( 4, minmax(0, 1fr) );
     grid-template-rows: repeat(1, auto) !important;
     gap: 10px;
     display: grid;
@@ -243,7 +243,7 @@
     }
 
     .container-grid-cat > div:nth-child(4){
-        display: block;
+        display: none;
     }
 
     .container-grid-cat > div:nth-child(3){
@@ -308,7 +308,7 @@
     }
 
     .container-grid-cat {
-        grid-template-columns: repeat( 7, minmax(0, 1fr) );
+        grid-template-columns: repeat( 6, minmax(0, 1fr) );
         grid-template-rows: repeat(1, auto) !important;
         gap: 10px;
         display: grid;
@@ -321,7 +321,7 @@
     }
 
     .container-grid-cat > div:nth-child(6){
-        display: block;
+        display: none;
     }
 
     .container-grid-cat > div:nth-child(5){
@@ -842,7 +842,7 @@
         width: 50px !important;
         border-radius: 50%;
         aspect-ratio: 1/1;
-        box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
+        box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
     }
 }
 
@@ -852,7 +852,7 @@
         width: 60px !important;
         border-radius: 50%;
         aspect-ratio: 1/1;
-        box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
+        box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
     }
 }
 
@@ -874,10 +874,9 @@
     } */
 
     .container-grid-cat .grid-img-container .grid-text {
-        font-size: 0.7rem !important;
-        color: #bababa;
+        font-size: 0.8rem !important;
+        color: inherit;
         top: 60px;
-        font-weight: 400;
     }
 
     .list-slider .slick-list {
@@ -928,14 +927,13 @@
         width: 80px;
         aspect-ratio: 1/1;
         border-radius: 50%;
-        box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
+        box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
     }
 
     .container-grid-cat .grid-img-container .grid-text {
-        font-size: 0.8rem !important;
+        font-size: 0.9rem !important;
         margin-top: 140px;
-        font-weight: 400;
-        color: #bababa;
+        color: inherit;
     }
 
     .container-grid-cat {
