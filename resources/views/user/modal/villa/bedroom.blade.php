@@ -311,8 +311,8 @@
                         {{-- check if bedroomDetail exist --}}
                         @php
                             $isSelectNumber = '';
-                            $isAdd = 'd-none';
-                            if($villa[0]->villaBedroomDetail){
+                            $isAdd = '';
+                            if($villa[0]->villaBedroomDetail->count() > 0){
                                 $isSelectNumber = 'd-none';
                                 $isAdd = '';
                             } else {

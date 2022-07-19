@@ -1276,13 +1276,6 @@ class ViewController extends Controller
         $getSafety = VillaSafety::with('safety')->where('id_villa', $request->id_villa)->get();
         $getService = VillaService::with('service')->where('id_villa', $request->id_villa)->get();
 
-        $data = [];
-        array_push($data, $getAmenities);
-        array_push($data, $getBathroom);
-        array_push($data, $getKitchen);
-        array_push($data, $getSafety);
-        array_push($data, $getService);
-
         return response()->json([
             'success' => true,
             'message' => 'Succesfully Updated',
@@ -1290,8 +1283,7 @@ class ViewController extends Controller
             'getBathroom' => $getBathroom,
             'getKitchen' => $getKitchen,
             'getSafety' => $getSafety,
-            'getService' => $getService,
-            'data' => $data
+            'getService' => $getService
         ]);
     }
 
