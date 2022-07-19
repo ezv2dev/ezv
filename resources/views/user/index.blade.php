@@ -1442,7 +1442,7 @@
 
         <script>
             function popUp() {
-                if (window.scrollY == 0 || window.innerWidth > 991) { 
+                if (window.scrollY != 0 || window.innerWidth > 991) { 
                     document.getElementById("ul").classList.remove("ul-display-none");
                     document.getElementById("ul").classList.add("ul-display-block");
                     document.getElementById("bar").classList.remove("display-none");
