@@ -2389,12 +2389,11 @@
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
 
-                                            <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
+                                            {{-- <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
                                                 method="post">
-                                                @csrf
+                                                @csrf --}}
                                                 <div style="margin-left: 10px;">
-                                                    <select class="custom-select grade-success" name="grade"
-                                                        onchange='this.form.submit()'>
+                                                    <select class="custom-select grade-success" name="grade" id="gradeVilla">
                                                         <option value="AA"
                                                             {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
                                                         </option>
@@ -2411,9 +2410,9 @@
                                                             {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
                                                         </option>
                                                     </select>
-                                                    <noscript><input type="submit" value="Submit"></noscript>
+                                                    {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
                                                 </div>
-                                            </form>
+                                            {{-- </form> --}}
 
                                         </div>
                                     @endif
