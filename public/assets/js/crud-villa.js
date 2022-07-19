@@ -344,13 +344,13 @@ async function saveBedroomDetail(id_villa) {
             // });
 
             // disabled/enabled button select/button add bedroom
-            if(response.length > 0){
-                $('#btnSelectBedroomNumber').addClass('d-none');
-                $('#btnAddBedroom').removeClass('d-none');
-            } else {
-                $('#btnSelectBedroomNumber').removeClass('d-none');
-                $('#btnAddBedroom').addClass('d-none');
-            }
+            // if(response.length > 0){
+            //     $('#btnSelectBedroomNumber').addClass('d-none');
+            //     $('#btnAddBedroom').removeClass('d-none');
+            // } else {
+            //     $('#btnSelectBedroomNumber').removeClass('d-none');
+            //     $('#btnAddBedroom').addClass('d-none');
+            // }
         },
         error: function(jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
