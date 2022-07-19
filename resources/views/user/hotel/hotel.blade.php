@@ -403,12 +403,14 @@
                                         @endif
                                     @endauth
                                 </p>
+                                <div id="displayCategory">
                                 @foreach ($hotelHasCategory->take(3) as $item)
                                     <span class="badge rounded-pill fw-normal translate-text-group-items"
                                         style="background-color: #FF7400; margin-right: 5px;">
                                         {{ $item->hotelCategory->name }}
                                     </span>
                                 @endforeach
+                                </div>
                                 @if ($hotelHasCategory->count() > 3)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
@@ -1126,12 +1128,14 @@
                                 @endauth
                             </h2>
                             <div class="d-flex justify-content-left">
+                                <div id="displayTags">
                                 @forelse ($hotelTags->take(5) as $item)
                                     <span class="badge rounded-pill fw-normal translate-text-group-items"
                                         style="background-color: #FF7400; margin-right: 5px;">{{ $item->hotelFilter->name }}</span>
                                 @empty
                                     <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
                                 @endforelse
+                                </div>
                                 @if ($hotelTags->count() > 5)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
                                         onclick="view_tags_hotel()">{{ __('user_page.More') }}</button>
@@ -1340,7 +1344,7 @@
                                     @forelse ($hotelTypeDetail as $item)
                                         <div class="col-12 col-md-4 text-center tab-body">
                                             <div class="content list-image-content">
-                                                <input type="hidden" value="" id="id_villa" name="id_villa">
+                                                <input type="hidden" value="" id="id_hotel" name="id_hotel">
                                                 <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                                                     data-dots="false" data-arrows="true">
                                                     @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
@@ -2031,45 +2035,44 @@
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
-                        <div class="col-12 d-flex mt-3">
-                            <div class="col-6 d-flex">
-                                <div class="col-1">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                        </path>
-                                    </svg>
+                        @else
+                            <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
+                            <div class="col-12 mt-3 d-flex review-container">
+                                <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                            aria-hidden="true" role="presentation" focusable="false"
+                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                            <path
+                                                d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="review-txt">
+                                            There is no reviews yet
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-8">
-                                    <p>
-                                        This host has 720 reviews for other places to stay.
-                                        <span><a href="#">Show other reviews</a></span>
-                                    </p>
-                                </div>
+                                {{-- <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+                                            aria-hidden="true" role="presentation" focusable="false"
+                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                            <path
+                                                d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="review-txt">
+                                            We’re here to help your trip go smoothly. Every reservation is covered by
+                                            <span><a href="#">EZV's Guest Refund Policy.</a></span>
+                                        </p>
+                                    </div>
+                                </div> --}}
                             </div>
-                            <div class="col-6 d-flex">
-                                <div class="col-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="col-8">
-                                    <p>
-                                        We’re here to help your trip go smoothly. Every reservation is covered by
-                                        <span><a href="#">EZV's Guest Refund Policy.</a></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                        @endif
                 </div>
                 <hr>
                 @auth
@@ -2176,7 +2179,7 @@
                                                     value="{{ $hotel[0]->id_hotel }}" readonly required>
                                                 <div class="row">
                                                     <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Cleanliness') }}
                                                             </div>
@@ -2220,7 +2223,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Service') }}
                                                             </div>
@@ -2264,7 +2267,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Check in') }}
                                                             </div>
@@ -2308,7 +2311,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex mb-4">
                                                             <div class="col-4 review-container">
                                                                 {{ __('user_page.Location') }}
                                                             </div>
@@ -4535,8 +4538,12 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                    // $('#loading-content').show();
+                    // location.reload();
+                });
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4567,7 +4574,72 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file);
+
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
+            success: function(file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/gallery/";
+                let slash = "/";
+                let uid = message.data.uid.uid;
+                let lowerCaseUid = uid.toLowerCase();
+                let content;
+
+                if (message.data.photo.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
+                        message.data.photo[0].id_photo +
+                        '"> <a href="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' +
+                        message.data.photo[0].caption +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
+                        message.data.photo[0].id_photo +
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+                if (message.data.video.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
+                        '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
+                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    $('.gallery').append(content);
+                }
+
+                $gallery.refresh();
+
+                this.removeFile(file);
+
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            },
         }
     </script>
     {{-- END DROPZONE JS --}}

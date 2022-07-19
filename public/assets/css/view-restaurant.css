@@ -2,10 +2,10 @@
     margin-top: 0px !important;
     }
 
-    .review-container{
+    /* .review-container{
     padding-top: 10px;
     padding-bottom: 10px;
-    }
+    } */
 
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -220,7 +220,17 @@
     padding: 0 4px;
     cursor: pointer;
     -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
+    width: 30px;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #222222;
+    color: white;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
 .cm-star-rating label:hover,
@@ -574,7 +584,7 @@ video {
     margin-top: 30px;
 }
 
-.d-flex label {
+/* .cm-star-rating label {
     width: 40px;
     display: flex;
     height: 40px;
@@ -585,7 +595,7 @@ video {
     color: white;
     border-radius: 50%;
     margin-left: 10px;
-}
+} */
 
 @media (min-width: 768px) and (max-width: 818px) {
     .SlickCarousel3 .slick-dots {

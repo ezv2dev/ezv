@@ -1092,6 +1092,8 @@
             resetMapEvent();
             document.getElementById("map-desc").classList.add('mobile-map');
             document.getElementById("modal-map-content").classList.add('mobile-map-desc');
+            document.getElementById("mobile-map-close").classList.remove('d-none');
+            document.getElementById("mobile-map-close").classList.add('d-block');
             // enable event google map
             setMapEvent();
             // enable action google map
@@ -1104,6 +1106,12 @@
             // hide primary control
             hidePrimaryMarkerControlFromMap();
         });
+    }
+
+    function close_map_mobile() {
+        document.getElementById("map-desc").classList.remove('mobile-map'); 
+        document.getElementById("mobile-map-close").classList.remove('d-block'); 
+        document.getElementById("mobile-map-close").classList.add('d-none'); 
     }
 
     // function to set map event
@@ -1671,8 +1679,10 @@
 {{-- MAP CONTENT --}}
 <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
     <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
-    <div onclick="close_map_mobile()" style="position: fixed; top: 0px; width: 30%; left: auto; right: auto; background: #ff7400;">
-        Hide map
+    <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
+        <div class="close-button">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
     </div>
 </div>
 <div id="modal-map-content" class="overflow-hidden"></div>

@@ -95,9 +95,8 @@
                     <div class="row mb-4" style="padding-left: 10px">
                         <label for="" class="col-md-4">{{ __('user_page.Price') }} (IDR)</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control modal-input" id="frm-price" name="price"
-                                placeholder="{{ __('user_page.Price per Night') }}.."
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <input type="number" class="form-control modal-input" id="frm-price"
+                                placeholder="{{ __('user_page.Price per Night') }}..">
                             <small id="err-prc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                         </div>
                     </div>
@@ -182,14 +181,14 @@ $("#add-room-hotel").submit(function (e) {
             url: "/hotel/add-room",
             data: {
                 id_hotel: $('#id_hotel').val(),
-                name_room: $('#name_room').val(),
                 id_hotel_type: $('#id_hotel_type').val(),
+                name_room: $('#name_room').val(),
                 id_bed: $('#id_bed').val(),
                 room_size: $('#room_size').val(),
-                name_room: $('#number_of_room').val(),
+                number_of_room: $('#number_of_room').val(),
                 capacity: $('#capacity').val(),
                 status: $('#status').val(),
-                price: $('#price').val(),
+                price: $('#frm-price').val(),
             },
             success: function (response) {
                 $("#name-content").html(response.data);

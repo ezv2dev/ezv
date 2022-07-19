@@ -66,13 +66,15 @@
 
 <body style="background-color:white">
 
-    <div id="untukDelete" style="
+    <div id="untukDelete"
+        style="
     background: #00000040;
     width: 100%;
     position: fixed;
     height: 100%;
     z-index: 999;
-    display: none;"></div>
+    display: none;">
+    </div>
 
     @php
         $condition_villa = Route::is('villa');
@@ -232,146 +234,6 @@
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
 
-                {{-- ALERT CONTENT STATUS --}}
-                @auth
-                    @if (auth()->user()->id == $restaurant->created_by)
-                        @if ($restaurant->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                <span>{{ __('user_page.this content is deactive,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request activation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
-                        @if ($restaurant->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                {{ __('user_page.this content is deactive') }}
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
-
-                                <form action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade-success" name="grade"
-                                            onchange='this.form.submit()'>
-                                            <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                        <noscript><input type="submit" value="Submit"></noscript>
-                                    </div>
-                                </form>
-
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }} </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                    method="get" class="d-flex">
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade" name="grade">
-                                            <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <span style="margin-left: 10px;">{{ __('user_page.and') }}</span>
-                                    <button class="btn" type="submit"
-                                        style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                </form>
-                            </div>
-                        @endif
-                        @if ($restaurant->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                    method="get">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                @endauth
-                {{-- END ALERT CONTENT STATUS --}}
                 <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -603,8 +465,8 @@
                                 <div id="name-form" style="display:none;">
                                     <input type="hidden" name="id_restaurant"
                                         value="{{ $restaurant->id_restaurant }}" required>
-                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="55"
-                                        placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
+                                        rows="3" maxlength="55" placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
                                     <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant"
@@ -659,7 +521,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                        @method('PATCH') -->
+                                                                @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -933,7 +795,9 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $restaurant->id_restaurant }}"
+                                                                                data-video="{{ $item->id_video }}"
                                                                                 onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -1043,7 +907,9 @@
                                                                         </video>
                                                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $restaurant->id_restaurant }}"
+                                                                                data-video="{{ $item->id_video }}"
                                                                                 onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('restaurant_delete_story', ['id' => $restaurant->id_restaurant, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -1251,7 +1117,9 @@
                                                 <span class="edit-icon">
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" type="button"
-                                                        title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="{{ $item->id_photo }}"
+                                                        title="{{ __('user_page.Add Photo Tag') }}"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-photo="{{ $item->id_photo }}"
                                                         onclick="add_photo_tag(this)"><i
                                                             class="fa fa-pencil"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
@@ -1262,7 +1130,9 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="{{ $item->id_photo }}"
+                                                        href="javascript:void(0);"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-photo="{{ $item->id_photo }}"
                                                         onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
@@ -1273,7 +1143,7 @@
                             @endif
                             @if ($restaurant->video->count() > 0)
                                 @foreach ($restaurant->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{$item->id_video}}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
                                         @auth
                                             @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
                                                 <a class="pointer-normal"
@@ -1298,10 +1168,11 @@
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
-                                                    <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
+                                                    <button href="javascript:void(0);"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                        data-bs-animation="true" data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
                                                     <button type="button" onclick="position_video()"
@@ -1333,7 +1204,8 @@
                                     <input type="hidden" value="{{ $restaurant->id_restaurant }}" id="id_restaurant"
                                         name="id_restaurant">
                                 </form>
-                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
+                                <small id="err-dz" style="display: none;"
+                                    class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -1357,9 +1229,9 @@
                                 @endauth
                             </h2>
                         </div>
-                        <div class="col-12 row gallery2">
+                        <div class="col-12 row gallery2" id="contentMenu">
                             @forelse ($restaurant->menu as $menu)
-                                <div class="col-4 grid-photo">
+                                <div class="col-4 grid-photo" id="displayMenu{{ $menu->id_menu }}">
                                     {{-- Popup modal --}}
                                     {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
                                     style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
@@ -1379,7 +1251,8 @@
                                                     onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"><i
                                                         class="fa fa-pencil"></i></button> --}}
                                                 <button style="height:40px" href="javascript:void(0);"
-                                                    onclick="delete_menu({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"
+                                                    data-id="{{ $restaurant->id_restaurant }}"
+                                                    data-menu="{{ $menu->id_menu }}" onclick="delete_menu(this)"
                                                     data-bs-toggle="popover" data-bs-animation="true"
                                                     data-bs-placement="bottom"
                                                     title="{{ __('user_page.Delete Menu') }}"><i
@@ -1421,7 +1294,8 @@
                                         <input type="hidden" value="{{ $restaurant->id_restaurant }}"
                                             id="id_restaurant" name="id_restaurant">
                                     </form>
-                                    <small id="err-dz-mn" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
+                                    <small id="err-dz-mn" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                     <button type="submit" id="button_menu"
                                         class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                                 </section>
@@ -1469,7 +1343,7 @@
                                                 <textarea name="description" id="description-form-input" class="w-100 form-control" rows="5"
                                                     placeholder="{{ __('user_page.Make your short description here') }}">{{ $restaurant->description }}</textarea>
                                                 <small id="err-desc" style="display: none;"
-                                                class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
+                                                    class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
@@ -1551,8 +1425,10 @@
                                 @endif
                                 @if ($restaurant->facilities->count() > 6)
                                     <div class="list-amenities">
-                                        <button class="amenities-button" type="button" onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                                        <button class="amenities-button" type="button"
+                                            onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange"
+                                                style="font-size: 40px;"></i>
                                             <div style="font-size: 15px;">{{ __('user_page.More') }}</div>
                                         </button>
                                     </div>
@@ -1911,7 +1787,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="col-12 d-flex mt-3 review-container">
+                                    <div class="col-12 mt-3 d-flex review-container">
                                         <div class="col-12 col-md-6 d-flex">
                                             <div class="col-1 icon-review-container">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
@@ -1924,12 +1800,11 @@
                                             </div>
                                             <div class="col-8">
                                                 <p class="review-txt">
-                                                    This host has 720 reviews for other places to stay.
-                                                    <span><a href="#">Show other reviews</a></span>
+                                                    There is no reviews yet
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6 d-flex">
+                                        {{-- <div class="col-12 col-md-6 d-flex">
                                             <div class="col-1 icon-review-container">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                     aria-hidden="true" role="presentation" focusable="false"
@@ -1941,12 +1816,11 @@
                                             </div>
                                             <div class="col-8">
                                                 <p class="review-txt">
-                                                    We’re here to help your trip go smoothly. Every reservation is
-                                                    covered by
+                                                    We’re here to help your trip go smoothly. Every reservation is covered by
                                                     <span><a href="#">EZV's Guest Refund Policy.</a></span>
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 @endif
                             </div>
@@ -2354,11 +2228,151 @@
                                 </div>
                             </div>
 
+                            {{-- ALERT CONTENT STATUS --}}
+                @auth
+                @if (auth()->user()->id == $restaurant->created_by)
+                    @if ($restaurant->status == '0')
+                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                            <span>{{ __('user_page.this content is deactive,') }} </span>
+                            <form
+                                action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.request activation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '1')
+                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                            <span>{{ __('user_page.this content is active,') }} </span>
+                            <form
+                                action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '2')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.you have been request activation for this content,') }} </span>
+                            <form
+                                action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel activation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '3')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
+                            <form
+                                action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="id_restaurant"
+                                    value="{{ $restaurant->id_restaurant }}">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                @endif
+                @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                    @if ($restaurant->status == '0')
+                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                            {{ __('user_page.this content is deactive') }}
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '1')
+                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                            <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
+
+                            <form action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
+                                method="post">
+                                @csrf
+                                <div style="margin-left: 10px;">
+                                    <select class="custom-select grade-success" name="grade"
+                                        onchange='this.form.submit()'>
+                                        <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                        </option>
+                                        <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                        </option>
+                                        <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                        </option>
+                                        <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                        </option>
+                                        <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                        </option>
+                                    </select>
+                                    <noscript><input type="submit" value="Submit"></noscript>
+                                </div>
+                            </form>
+
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '2')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }} </span>
+                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                method="get" class="d-flex">
+                                <div style="margin-left: 10px;">
+                                    <select class="custom-select grade" name="grade">
+                                        <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                        </option>
+                                        <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                        </option>
+                                        <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                        </option>
+                                        <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                        </option>
+                                        <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                        </option>
+                                    </select>
+                                </div>
+                                <span style="margin-left: 10px;">{{ __('user_page.and') }}</span>
+                                <button class="btn" type="submit"
+                                    style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
+                            </form>
+                        </div>
+                    @endif
+                    @if ($restaurant->status == '3')
+                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                            <span>{{ __('user_page.the owner request deactivation,') }} </span>
+                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                method="get">
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.deactivate this content') }}</button>
+                            </form>
+                            <span> ?</span>
+                        </div>
+                    @endif
+                @endif
+            @endauth
+            {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
                                 <hr>
                                 <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
-                                                </h4> -->
+                                                        </h4> -->
                                 {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                 {{-- <div class="container-xxl mx-auto p-0">
@@ -2674,8 +2688,8 @@
                                 @if (Auth::user()->role_id != 3)
                                     <hr>
                                     <!-- <h4 style="margin-bottom: -10px;">
-                                                        {{ __('user_page.Nearby Villas & Things To Do') }}
-                                                    </h4> -->
+                                                                {{ __('user_page.Nearby Villas & Things To Do') }}
+                                                            </h4> -->
                                     {{-- EDIT TO SWIPE CAROUSEL --}}
 
                                     {{-- <div class="container-xxl mx-auto p-0">
@@ -3004,7 +3018,8 @@
     {{-- OTHER MODAL --}}
     @include('user.modal.restaurant.restaurant-guest-safety')
     @auth
-        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $restaurant->created_by)
+        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
+            auth()->user()->id == $restaurant->created_by)
             @include('user.modal.restaurant.restaurant-guest-safety')
             @include('user.modal.restaurant.edit.edit-restaurant-guest-safety')
             @include('user.modal.restaurant.edit.edit-restaurant-rules')
@@ -4349,9 +4364,10 @@
 
     <script>
         var $gallery;
+        var $gallery2;
         $(document).ready(function() {
             $gallery = new SimpleLightbox('.gallery a', {});
-            var $gallery2 = new SimpleLightbox('.gallery2 a', {});
+            $gallery2 = new SimpleLightbox('.gallery2 a', {});
         });
     </script>
 
@@ -4369,7 +4385,7 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    if(!myDropzone.files.length) {
+                    if (!myDropzone.files.length) {
                         $(".dz-image-add").css("border", "solid #e04f1a 1px");
                         $('#err-dz').show();
                     } else {
@@ -4431,18 +4447,20 @@
                 });
             },
             error: function(file, message, xhr) {
-                this.removeFile(file);// perhaps not remove on xhr errors
+                this.removeFile(file); // perhaps not remove on xhr errors
 
-                iziToast.error({
-                    title: "Error",
-                    message: message.message.file[0],
-                    position: "topRight",
-                });
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
 
                 $("#button").html('Upload');
                 $("#button").removeClass('disabled');
             },
-            success: function (file, message, response) {
+            success: function(file, message, response) {
                 console.log(file);
                 // console.log(response);
                 console.log(message);
@@ -4459,31 +4477,40 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
-                if (message.data.photo.length > 0)
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0)
                 {
-                    content = '<div class="col-4 grid-photo" id="displayPhoto'+
-                        message.data.photo[0].id_photo+
-                        '"> <a href="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
-                        path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '" title="'+
-                        message.data.photo[0].caption+
-                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
-                        message.data.photo[0].id_photo+
-                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="'+
-                        message.data.photo[0].id_photo+
+                    $('.gallery').html("");
+                }
+
+                if (message.data.photo.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
+                        message.data.photo[0].id_photo +
+                        '"> <a href="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' +
+                        message.data.photo[0].caption +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                        message.data.photo[0].id_photo +
+                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                        message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     $('.gallery').append(content);
                 }
-                if (message.data.video.length > 0)
-                {
-                    content = '<div class="col-4 grid-photo" id="displayVideo'+message.data.video[0].id_video+'"> <a class="pointer-normal" onclick="view_video_restaurant('+
-                        message.data.video[0].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
-                        path+lowerCaseUid+slash+message.data.video[0].name+
-                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="'+
-                        message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                if (message.data.video.length > 0) {
+                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
+                        '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
+                        message.data.video[0].id_video +
+                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     $('.gallery').append(content);
                 }
@@ -4505,10 +4532,6 @@
             thumbnailWidth: 960,
             url: '/restaurant/menu/store_multi',
             parallelUploads: 50,
-            "error": function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-                alert(errorToString(message));
-            },
             init: function() {
 
                 var myDropzone = this;
@@ -4516,7 +4539,7 @@
                 // Update selector to match your button
                 $("#button_menu").click(function(e) {
                     e.preventDefault();
-                    if(!myDropzone.files.length) {
+                    if (!myDropzone.files.length) {
                         $(".dz-mn").css("border", "solid #e04f1a 1px");
                         $('#err-dz-mn').show();
                     } else {
@@ -4524,7 +4547,7 @@
                         $('#err-dz-mn').hide();
                         myDropzone.processQueue();
 
-                        $("#button_menu").html('Uploading Gallery...');
+                        $("#button_menu").html('Uploading Menu...');
                         $("#button_menu").addClass('disabled');
                     }
                 });
@@ -4539,9 +4562,10 @@
                     formData.append('id_restaurant', value);
                 });
 
-                this.on('queuecomplete', function() {
-                    $('#loading-content').show();
-                    location.reload();
+                this.on('queuecomplete', function() {});
+
+                this.on("complete", function(file, response, message) {
+                    this.removeFile(file);
                 });
 
                 this.on("addedfile", function(file) {
@@ -4571,7 +4595,81 @@
                     // Add the button to the file preview element.
                     file.previewElement.appendChild(removeButton);
                 });
-            }
+            },
+            error: function(file, message, xhr) {
+                this.removeFile(file); // perhaps not remove on xhr errors
+
+                for (let i = 0; i < message.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: message.message[i],
+                        position: "topRight",
+                    });
+                }
+
+                $("#button_menu").html('Upload');
+                $("#button_menu").removeClass('disabled');
+            },
+            success: function(file, message, response) {
+                console.log(file);
+                // console.log(response);
+                console.log(message);
+
+                iziToast.success({
+                    title: "Success",
+                    message: message.message,
+                    position: "topRight",
+                });
+
+                let path = "/foto/restaurant/";
+                let slash = "/";
+                let menuPath = "menu";
+                let uid = message.data.uid.uid;
+                var lowerCaseUid = uid.toLowerCase();
+                let content = "";
+
+                let menuDiv = $('.gallery2');
+                let menuLength = menuDiv.find('a').length;
+
+                if (menuLength == 0)
+                {
+                    $('.gallery2').html("");
+                    // $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                }
+
+                for (let i = 0; i < message.data.menu.length; i++) {
+                    content += '<div class="col-4 grid-photo" id="displayMenu' +
+                        message.data.menu[i].id_menu +
+                        '"> <a class="itemsMenu" href="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        menuPath +
+                        slash +
+                        message.data.menu[i].foto +
+                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        menuPath +
+                        slash +
+                        message.data.menu[i].foto +
+                        '" title="' +
+                        message.data.menu[i].name +
+                        '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                        message.data.menu[i].id_menu +
+                        '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+                }
+
+                $(".gallery2").append(content);
+
+                $gallery2.refresh();
+
+                this.removeFile(file);
+
+                $("#button_menu").html('Upload');
+                $("#button_menu").removeClass('disabled');
+            },
         }
     </script>
 
@@ -4819,6 +4917,15 @@
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
 
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             $gallery.refresh();
                             displayBlack.style.display = "none";
                         }
@@ -4861,7 +4968,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             // showingLoading();
-                            $('#displayVideo'+video).remove();
+                            $('#displayVideo' + video).remove();
                             // location.reload();
                         }
                     });
@@ -4875,7 +4982,9 @@
     {{-- Sweetalert Function Delete Photo --}}
     <script>
         function delete_menu(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let menu = ids.getAttribute("data-menu");
+
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: 'You will not be able to recover this content!',
@@ -4890,7 +4999,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/menu/${ids.id_menu}`,
+                        url: `/restaurant/${id}/delete/menu/${menu}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -4899,8 +5008,16 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
+                            $("#displayMenu" + menu).remove();
+                            let menuDiv = $('.gallery2');
+                            let menuLength = menuDiv.find('a').length;
+
+                            if (menuLength == 0)
+                            {
+                                $('.gallery2').html("");
+                                $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+                            }
+                            $gallery2.refresh();
                         }
                     });
                 } else {

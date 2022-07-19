@@ -83,7 +83,7 @@
                 <div class="form-group pt-2 px-4">
                     <div class="row">
                         <label class="form-label"><b>Category</b></label>
-                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                        <div id="check_cat" class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($villaCategory as $data)
                                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                                     <div class="row" style="font-size: 13px;">
@@ -97,7 +97,7 @@
                                         @endphp
                                         <label class="container-checkbox2">
                                             <span class="translate-text-group-items">{{ $data->name }}</span>
-                                            <input type="checkbox" value="{{ $data->id_villa_category }}"
+                                            <input class="check-cat" type="checkbox" value="{{ $data->id_villa_category }}"
                                                 id="{{ $data->id_villa_category }}" name="villaCategory[]"
                                                 {{ $isChecked }}>
                                             <span class="checkmark2"></span>
@@ -106,6 +106,7 @@
                                 </div>
                             @endforeach
                         </div>
+                        <small id="err-slc-cat" style="display: none;" class="invalid-feedback">Select one of category</small><br>
                     </div>
                 </div>
             </div>
@@ -113,7 +114,7 @@
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
                 <div class="col-4" style="text-align: center;">
                     <button type="submit" class="btn btn-primary btn-sm w-100" id="btnSaveCategoryV"
-                        onclick="editCategoryV()">
+                        onclick="editCategoryV({{ $villa[0]->id_villa }})">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>

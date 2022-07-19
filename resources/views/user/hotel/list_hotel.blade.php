@@ -57,66 +57,67 @@
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <!-- <div class="col-lg-12"> -->
-                <div id="filter-cat-bg-color" style="width: 100%;"
-                    class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
-                    @foreach ($hotelCategory->take(6) as $item)
-                        <div>
-                            <a class="grid-img-container" onclick="hotelFilter({{ $item->id_hotel_category }}, null)">
-                                <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
-                                    @if ($fCategory == $item->id_hotel_category) style="border: 5px solid #ff7400;" @endif
-                                    data-src="https://source.unsplash.com/random/?{{ $item->name }}">
-                                <div class="grid-text translate-text-group-items">
-                                    {{ $item->name }}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-
+            <div id="filter-cat-bg-color" style="width: 100%;"
+                class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                @foreach ($hotelCategory->take(6) as $item)
                     <div>
-                        <a class="grid-img-container" onclick="moreCategory()">
+                        <a class="grid-img-container" onclick="hotelFilter({{ $item->id_hotel_category }}, null, true)">
                             <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
-                                data-src="https://source.unsplash.com/random/?bali">
-                            <div class="grid-text">
-                                {{ __('user_page.More') }}
+                                @if ($fCategory == $item->id_hotel_category) style="border: 5px solid #ff7400;" @endif
+                                data-src="https://source.unsplash.com/random/?{{ $item->name }}">
+                            <div class="grid-text translate-text-group-items">
+                                {{ $item->name }}
                             </div>
                         </a>
                     </div>
-                </div>
+                @endforeach
 
-                <div class="stickySubCategory">
-                    <div id="filter-subcat-bg-color" style="width: 100%;"
-                        class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
-    
-                        @foreach ($hotelFilter->take(8) as $item)
-                            <div class="grid-sub-cat-content-container text-13 "
-                                onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }})">
-                                <div>
-                                    <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                        @php
-                                            $isChecked = '';
-                                            $filterIds = explode(',', request()->get('filter'));
-                                        @endphp @if (in_array($item->id_hotel_filter, $filterIds))
-                                        style="color: #ff7400 !important;"@endif>
-                                    </i>
-                                </div>
-                                <div class="list-description {{ $textColor }} translate-text-group-items">
-                                    {{ $item->name }}
-                                </div>
-                            </div>
-                        @endforeach
-    
-                        <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                            onclick="moreSubCategory()">
-                            <div>
-                                <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                            </div>
-                            <div class="list-description {{ $textColor }}">
-                                {{ __('user_page.More') }}
-                            </div>
+                <div>
+                    <a class="grid-img-container" onclick="moreCategory()">
+                        <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
+                            data-src="https://source.unsplash.com/random/?bali">
+                        <div class="grid-text">
+                            {{ __('user_page.More') }}
                         </div>
-                    </div>
+                    </a>
                 </div>
-            <!-- </div> -->
+            </div>
+
+            <div class="stickySubCategory">
+                <div id="filter-subcat-bg-color" style="width: 100%;"
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+
+                    @foreach ($hotelFilter->take(8) as $item)
+                        <div class="grid-sub-cat-content-container text-13 "
+                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
+                            <div>
+                                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                                    @php
+                                        $isChecked = '';
+                                        $filterIds = explode(',', request()->get('filter'));
+                                    @endphp @if (in_array($item->id_hotel_filter, $filterIds))
+                                    style="color: #ff7400 !important;"
+                    @endif>
+                    </i>
+                </div>
+                <div class="list-description {{ $textColor }} translate-text-group-items">
+                    {{ $item->name }}
+                </div>
+            </div>
+            @endforeach
+
+            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
+                onclick="moreSubCategory()">
+                <div>
+                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">
+                    {{ __('user_page.More') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
     <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
@@ -242,13 +243,13 @@
                         </span>
                     </div>
                     <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                                        @if ($data->detailReview)
+                                                                                                                                                                                                                @if ($data->detailReview)
     {{ $data->detailReview->average }}
 @else
     {{ __('user_page.New') }}
     @endif
-                                                                                                                                                                                                        <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
+                                                                                                                                                                                                            </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
@@ -801,7 +802,7 @@
     </script> --}}
 
     <script>
-        function hotelFilter(valueCategory, valueClick) {
+        function hotelFilter(valueCategory, valueClick, unCheckCategory) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
             var sCheck_outFormInput = $("input[name='sCheck_out']").val();
@@ -822,11 +823,13 @@
             setCookie2("sCheck_in", sCheck_inFormInput, 1);
             setCookie2("sCheck_out", sCheck_outFormInput, 1);
 
-            var url_hotel = window.location.href;
-            var url2 = new URL(url_hotel);
+            if (unCheckCategory == true) {
+                var url_hotel = window.location.href;
+                var url2 = new URL(url_hotel);
 
-            if (url2.searchParams.get('fCategory') == valueCategory) {
-                valueCategory = '';
+                if (url2.searchParams.get('fCategory') == valueCategory) {
+                    valueCategory = '';
+                }
             }
 
             var filterFormInput = [];

@@ -149,7 +149,7 @@ return [
     'Bath' => 'Bath',
     'Parking' => 'Parking',
     'New' => 'New',
-    'there is no reviews yet' => 'there is no reviews yet',
+    'Reviews' => 'Reviews',
     'More Details' => 'More Details',
 
     // buttons
@@ -223,6 +223,7 @@ return [
     'My Profile' => 'My Profile',
     'Collaborator' => 'Collaborator',
     'Collab Portal' => 'Collab Portal',
+    'Collabs' => 'Collabs',
     'Dashboard' => 'Dashboard',
 
     'The Best Way To Find Home, Hotel, Food, And Wow' => 'The Best Way To Find Home, Hotel, Food, And Wow',

@@ -98,7 +98,7 @@
         {{-- END HEADER --}}
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
-        <div class="sticky-bottom-mobile d-xs-block d-md-none">
+        <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <input class="price-button" onclick="details_reserve()"
                 style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                 value="{{ __('user_page.VIEW DETAILS') }}" readonly>
@@ -904,7 +904,7 @@
                                     @endif
                                 @endauth
                             </h2>
-                            <div class="d-flex justify-content-left">
+                            {{-- <div class="d-flex justify-content-left">
                                 <div id="displayTags">
                                     @forelse ($villaTags->take(5) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
@@ -926,7 +926,7 @@
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
-                            </div>
+                            </div> --}}
                             <p id="description-content">
                                 {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
                                     __('user_page.There is no description yet') !!}
@@ -1671,7 +1671,7 @@
                                 </div>
                             </div>
                         @else
-                            <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
+                            <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
                             <div class="col-12 mt-3 d-flex review-container">
                                 <div class="col-12 col-md-6 d-flex">
                                     <div class="col-1 icon-review-container">
@@ -1685,12 +1685,11 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                            This host has 720 reviews for other places to stay.
-                                            <span><a href="#">Show other reviews</a></span>
+                                            There is no reviews yet
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 d-flex">
+                                {{-- <div class="col-12 col-md-6 d-flex">
                                     <div class="col-1 icon-review-container">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                             aria-hidden="true" role="presentation" focusable="false"
@@ -1706,7 +1705,7 @@
                                             <span><a href="#">EZV's Guest Refund Policy.</a></span>
                                         </p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         @endif
                         <hr>
@@ -2389,12 +2388,11 @@
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
 
-                                            <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
+                                            {{-- <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
                                                 method="post">
-                                                @csrf
+                                                @csrf --}}
                                                 <div style="margin-left: 10px;">
-                                                    <select class="custom-select grade-success" name="grade"
-                                                        onchange='this.form.submit()'>
+                                                    <select class="custom-select grade-success" name="grade" id="gradeVilla">
                                                         <option value="AA"
                                                             {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
                                                         </option>
@@ -2411,9 +2409,9 @@
                                                             {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
                                                         </option>
                                                     </select>
-                                                    <noscript><input type="submit" value="Submit"></noscript>
+                                                    {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
                                                 </div>
-                                            </form>
+                                            {{-- </form> --}}
 
                                         </div>
                                     @endif
@@ -3388,7 +3386,7 @@
                                 <div class="col-md-12">
                                     <h5 class="mb-3">{{ __('user_page.Bedroom') }} {{ $i+1 }}</h5>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
                                             <div class="col-md-12">
@@ -4084,6 +4082,14 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0)
+                {
+                    $('.gallery').html("");
+                }
+
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
@@ -4522,6 +4528,16 @@
                         success: async function(response) {
                             await Swal.fire('Deleted', response.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             $gallery.refresh();
                         }
                     });

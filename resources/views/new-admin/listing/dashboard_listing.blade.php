@@ -3,44 +3,46 @@
 @section('title', 'Listing Dashboard - EZV2')
 
 @section('content_admin')
-<style>
-    .overflow-x-scroll{
-        overflow-x:scroll;
-    }
-    .layout-header-footer{
-        display:flex;
-        flex-direction:column;
-        text-align:center;
-        align-items:center;
-        row-gap:12px;
-    }
-
-    @media (min-width: 768px) { 
-        .layout-header-footer{
-            flex-direction:row;
-            text-align:left;
-            justify-content:space-between;
-            row-gap:0px;
+    <style>
+        .overflow-x-scroll {
+            overflow-x: scroll;
         }
-    }
-</style>
+
+        .layout-header-footer {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            row-gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .layout-header-footer {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-between;
+                row-gap: 0px;
+            }
+        }
+    </style>
     <!-- Hero -->
     <div class="container px-4">
         <div class="bg-body-light">
             <div class="content content-full">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center my-3 ">
-                <h1 class="flex-grow-1 fs-3 fw-semibold ">{{$data}} Listing</h1>
-                <!-- <nav class="flex-shrink-0" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary " href="{{ route('admin_add_listing') }}">
-                            <i class="fa fa-plus-circle mr-2"></i> Create Listing
-                        </a>
-                    </ol>
-                </nav> -->
-                <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary btn-light py-3 px-4" href="{{ route('admin_add_listing') }}">
-                    <i class="fa fa-plus-circle mr-2"></i> Create Listing
-                </a>
-            </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center my-3 ">
+                    <h1 class="flex-grow-1 fs-3 fw-semibold ">{{ $data }} Listing</h1>
+                    <!-- <nav class="flex-shrink-0" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary " href="{{ route('admin_add_listing') }}">
+                                        <i class="fa fa-plus-circle mr-2"></i> Create Listing
+                                    </a>
+                                </ol>
+                            </nav> -->
+                    <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary btn-light py-3 px-4"
+                        href="{{ route('admin_add_listing') }}">
+                        <i class="fa fa-plus-circle mr-2"></i> Create Listing
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -48,7 +50,7 @@
     {{-- CONTENT --}}
     <div class="container px-4">
         <!-- Example DataTable for Dashboard Demo-->
-        <div class="" style="margin-bottom: 50px; " >
+        <div class="" style="margin-bottom: 50px; ">
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -112,8 +114,8 @@
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             dom: "<'layout-header-footer'<l><f>>" +
-            "<'overflow-x-scroll'<tr>>" +
-            "<'layout-header-footer'<i><p>>",
+                "<'overflow-x-scroll'<tr>>" +
+                "<'layout-header-footer'<i><p>>",
             pagingType: "full_numbers",
             pageLength: 10,
             lengthChange: false,
@@ -125,8 +127,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('admin_listing_datatable') }}",
-            columns: [
-                {
+            columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
                     class: 'text-center font-size-sm'
@@ -187,6 +188,5 @@
             ],
             responsive: true
         });
-
     </script>
 @endsection

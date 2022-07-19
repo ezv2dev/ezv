@@ -170,11 +170,11 @@
             min-width: 241px;
         }
 
-        .btn-filter-header{
-            outline:none;
-            background:#ff7400;
-            border-radius:40px;
-            margin-right:5px;
+        .btn-filter-header {
+            outline: none;
+            background: #ff7400;
+            border-radius: 40px;
+            margin-right: 5px;
             padding: 0 12px;
         }
     </style>
@@ -211,14 +211,11 @@
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
 
                 <button type="button" class="btn-filter-header"
-                    @if($condition_villa)
-                        onclick="filterMain();"
+                    @if ($condition_villa) onclick="filterMain();"
                     @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
                         onclick="moreSubCategory();"
                     @elseif($condition_collaborator)
-                        onclick="filterCollab();"
-                    @endif
-                    >
+                        onclick="filterCollab();" @endif>
                     <img src="{{ asset('assets/icon/menu/filter.svg') }}" style="width: 20px; height: auto;">
                 </button>
 
@@ -1627,7 +1624,7 @@
                                     <div class="button">
                                         <button type="submit" class="d-block ms-auto me-1"
                                             style="z-index: 1; border: none; background: transparent;"
-                                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})">
+                                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false)">
                                             <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                     style="width: 20px; height: auto;">
@@ -3317,7 +3314,7 @@
                                         @endif
 
                                         <p class="{{ $textColor }} list-description">
-                                            {{ __('user_page.Collaborator') }}
+                                            {{ __('user_page.Collabs') }}
                                         </p>
                                     </a>
                                 </ul>

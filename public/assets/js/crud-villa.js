@@ -425,79 +425,101 @@ function contentBedroomDetail(count, data) {
 
     return content;
 }
-
-function editCategoryV() {
-    var villaCategory = [];
-    $("input[name='villaCategory[]']:checked").each(function () {
-        villaCategory.push(parseInt($(this).val()));
+$(".check-cat").change(function() {
+    $('#check_cat').each(function() {
+        if ($(this).find('input[type="checkbox"]:checked').length > 0) {
+            $('.checkmark2').css("border", "");
+            $('#err-slc-cat').hide();
+        }
     });
+});
+function editCategoryV(id_villa) {
+    let error = 0;
 
-    let btn = document.getElementById("btnSaveCategoryV");
-    btn.textContent = "Saving Category...";
-    btn.classList.add("disabled");
+    $('#check_cat').each(function() {
+        if ($(this).find('input[type="checkbox"]:checked').length == 0) {
+            $('.checkmark2').css("border", "solid #e04f1a 1px");
+            $('#err-slc-cat').show();
+            error = 1;
+        } else {
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/villa/update/category",
-        data: {
-            id_villa: id_villa,
-            villaCategory: villaCategory,
-        },
-        success: function (response) {
-            $("#ModalCategoryVilla").modal("hide");
+        }
+    });
+    if (error == 1) {
+        return false;
+    } else {
+        var villaCategory = [];
+        $("input[name='villaCategory[]']:checked").each(function () {
+            villaCategory.push(parseInt($(this).val()));
+        });
 
-            btn.innerHTML = '<i class="fa fa-check"></i> Save';
-            btn.classList.remove("disabled");
+        let btn = document.getElementById("btnSaveCategoryV");
+        btn.textContent = "Saving Category...";
+        btn.classList.add("disabled");
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/update/category",
+            data: {
+                id_villa: id_villa,
+                villaCategory: villaCategory,
+            },
+            success: function (response) {
+                $("#ModalCategoryVilla").modal("hide");
 
-            var length = response.data.length;
+                btn.innerHTML = '<i class="fa fa-check"></i> Save';
+                btn.classList.remove("disabled");
 
-            let content;
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            for (let j = 0; j < length; j++) {
-                if (j == 0) {
-                    content = `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
-                } else if (j < 3) {
-                    content =
-                        content +
-                        `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
-                } else if (j > 2) {
-                } else {
+                var length = response.data.length;
+
+                let content;
+
+                for (let j = 0; j < length; j++) {
+                    if (j == 0) {
+                        content = `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                    } else if (j < 3) {
+                        content =
+                            content +
+                            `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                    } else if (j > 2) {
+                    } else {
+                    }
                 }
-            }
 
-            $("#displayCategory").html(content);
+                $("#displayCategory").html(content);
 
-            if (length > 3) {
-                $("#moreCategory").removeClass("d-none");
-                $("#moreCategory").addClass("d-block");
-                $("#moreCategory").html(`
-                        <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
-                        onclick="view_subcategory()">More</button>
+                if (length > 3) {
+                    $("#moreCategory").removeClass("d-none");
+                    $("#moreCategory").addClass("d-block");
+                    $("#moreCategory").html(`
+                            <button class="btn btn-outline-dark btn-sm rounded villa-tag-button"
+                            onclick="view_subcategory()">More</button>
+                        `);
+                } else {
+                    $("#moreCategory").removeClass("d-block");
+                    $("#moreCategory").addClass("d-none");
+                }
+
+                $("#moreSubCategory").html(`
+                        <div class='col-md-6'>${response.data[0]["villa_category"]["name"]}</div>
                     `);
-            } else {
-                $("#moreCategory").removeClass("d-block");
-                $("#moreCategory").addClass("d-none");
-            }
-
-            $("#moreSubCategory").html(`
-                    <div class='col-md-6'>${response.data[0]["villa_category"]["name"]}</div>
-                `);
-            for (let i = 1; i < length; i++) {
-                $("#moreSubCategory").append(`
-                        <div class='col-md-6'>${response.data[i]["villa_category"]["name"]}</div>
-                    `);
-            }
-        },
-    });
+                for (let i = 1; i < length; i++) {
+                    $("#moreSubCategory").append(`
+                            <div class='col-md-6'>${response.data[i]["villa_category"]["name"]}</div>
+                        `);
+                }
+            },
+        });
+    }
 }
 
 function editVillaTag(id_villa) {
@@ -1041,10 +1063,10 @@ $("#updateStoryForm").submit(function (e) {
         storyVilla.type.includes("video/mp4") ||
         storyVilla.type.includes("video/mov")
     ) {
-        let validate = validateStory();
+        //let validate = validateStory();
 
-        if (validate > 0) {
-        } else {
+        //if (validate > 0) {
+        //} else {
             var formData = new FormData(this);
             console.log(formData);
 
@@ -1146,7 +1168,7 @@ $("#updateStoryForm").submit(function (e) {
 
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.message.file[0],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
 
@@ -1158,7 +1180,7 @@ $("#updateStoryForm").submit(function (e) {
                     btn.classList.remove("disabled");
                 },
             });
-        }
+        //}
     } else {
         $(storyVideoInput).children("input").val("");
         $(storyVideoPreview).hide();
@@ -1365,3 +1387,27 @@ $("#guestSafetyForm").submit(function (e) {
         },
     });
 });
+
+// ! GradeVilla
+$('#gradeVilla').change(function() {
+    var grade = $(this).val();
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: `/villa/grade/${id_villa}`,
+        data: {
+            grade: grade
+        },
+        success: function(response) {
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+        }
+    });
+});
+// ! End GradeVilla

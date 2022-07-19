@@ -3,8 +3,8 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form class="form-edit-menu-container" action="{{ route('restaurant_store_menu') }}" method="POST"
-                enctype="multipart/form-data" id="addMenuForm" onsubmit="showingLoading()" style="gap: 0px !important;">
+            <form class="form-edit-menu-container" action="javascript:void(0);" method="POST"
+                enctype="multipart/form-data" id="addMenuForm" style="gap: 0px !important;">
                 @csrf
                 <input type="hidden" name="id_restaurant" id="id_restaurant"
                     value="{{ $restaurant->id_restaurant }}">
@@ -46,7 +46,7 @@
                 <div class="modal-filter-footer d-flex justify-content-center"
                     style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                     <div class="col-4" style="text-align: center;">
-                        <button type="submit" class="btn btn-sm btn-primary w-100" form="addMenuForm">
+                        <button type="submit" id="btnSaveMenuForm" class="btn btn-sm btn-primary w-100" form="addMenuForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>

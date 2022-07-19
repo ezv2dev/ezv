@@ -825,7 +825,13 @@ function saveFacilities() {
 
             let content;
 
-            if (response.data.length > 5) {
+            if (response.data.length == 0) {
+                content = "";
+                content +=
+                    '<div class=""> <span>there is no facilities yet</span> </div>';
+            }
+
+            else if (response.data.length > 5) {
                 for (let i = 0; i < 6; i++) {
                     if (i == 0) {
                         content =
@@ -926,8 +932,8 @@ $("#updateContactForm").submit(function (e) {
         $("#err-phone").show();
         error = 1;
     } else {
-            $("#phoneResto").removeClass("is-invalid");
-            $("#err-phone").hide();
+        $("#phoneResto").removeClass("is-invalid");
+        $("#err-phone").hide();
     }
     if (!$("#emailResto").val()) {
         $("#emailResto").addClass("is-invalid");
@@ -978,7 +984,10 @@ $("#updateContactForm").submit(function (e) {
                 $("#modal-edit_contact").modal("hide");
 
                 //change email in icon
-                $("#btnEmailResto").attr("href", "mailto:" + response.data.email);
+                $("#btnEmailResto").attr(
+                    "href",
+                    "mailto:" + response.data.email
+                );
 
                 //update di modal contact resto
                 $("#restoPhoneInContact").html(response.data.phone);
@@ -1168,4 +1177,106 @@ $("#storeStoryForm").submit(function (e) {
         });
     }
     // console.log(readerStoryRestaurant);
+});
+
+$("#addMenuForm").submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    var btn = document.getElementById("btnSaveMenuForm");
+    btn.textContent = "Saving Menu...";
+    btn.classList.add("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/restaurant/menu/store",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let path = "/foto/restaurant/";
+            let slash = "/";
+            let menuPath = "menu";
+            let uid = response.data.uid.uid;
+            var lowerCaseUid = uid.toLowerCase();
+            let content = "";
+
+            content +=
+                '<div class="col-4 grid-photo" id="displayMenu' +
+                response.data.menu.id_menu +
+                '"> <a class="itemsMenu" href="' +
+                path +
+                lowerCaseUid +
+                slash +
+                menuPath +
+                slash +
+                response.data.menu.foto +
+                '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                path +
+                lowerCaseUid +
+                slash +
+                menuPath +
+                slash +
+                response.data.menu.foto +
+                '" title="' +
+                response.data.menu.name +
+                '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                response.data.menu.id_menu +
+                '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+
+            // console.log(content);
+
+            $("#imgRes").val("");
+            $("#addMenuForm").children("#name").val("");
+            $("#addMenuForm").children("#price").val("");
+            $("#addMenuForm").children("#description").val("");
+
+            // $("#storyContent").html("");
+            $("#contentMenu").append(content);
+
+            $("#modal-edit_menu").modal("hide");
+
+            // if (response.data.length > 4) {
+            //     sliderRestaurant();
+            // }
+
+            // $("#profileDropzone").attr("src", "");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // console.log(exception);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            // $("#modal-edit_menu").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
 });

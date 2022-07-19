@@ -228,7 +228,8 @@
                                 <img id="imageProfileHotelRoom"
                                     src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotelRoom->image) }}">
                             @else
-                                <img id="imageProfileHotelRoom" src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                <img id="imageProfileHotelRoom"
+                                    src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
                             @auth
@@ -322,8 +323,9 @@
                                     {{-- <form action="{{ route('room_update_name') }}" method="post">
                                         @csrf --}}
                                     <input type="hidden" id="name-hotel" value="{{ $hotel[0]->name }}">
-                                    <textarea class="form-control" style="width: 100%; overflow: hidden;" name="name" id="name-form-input" cols="30"
-                                        rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}" required>{{ $hotelRoom->name }}</textarea>
+                                    <textarea class="form-control" style="width: 100%; overflow: hidden;" name="name" id="name-form-input"
+                                        cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}"
+                                        required>{{ $hotelRoom->name }}</textarea>
                                     <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
@@ -367,19 +369,21 @@
                                 <div id="short-description-form" style="display:none;">
                                     {{-- <form action="{{ route('room_update_short_description') }}" method="post">
                                         @csrf --}}
-                                        <input type="hidden" name="id_hotel_room"
-                                            value="{{ $hotelRoom->id_hotel_room }}" required>
-                                        <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
-                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255">{{ $hotelRoom->short_description }}</textarea>
-                                        <small id="err-shrt-desc" style="display: none;"
+                                    <input type="hidden" name="id_hotel_room"
+                                        value="{{ $hotelRoom->id_hotel_room }}" required>
+                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
+                                        cols="30" placeholder="{{ __('user_page.Make your short description here') }}" rows="3"
+                                        maxlength="255">{{ $hotelRoom->short_description }}</textarea>
+                                    <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc()">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                        onclick="editShortDesc()">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editShortDescriptionCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                     {{-- </form> --}}
                                 </div>
                             @endif
@@ -390,19 +394,20 @@
                                 <div id="short-description-form" style="display:none;">
                                     {{-- <form action="{{ route('room_update_short_description') }}" method="post">
                                         @csrf --}}
-                                        <input type="hidden" name="id_hotel" value="{{ $hotelRoom->id_hotel_room }}"
-                                            required>
-                                        <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
-                                            placeholder="{{ __('user_page.Make your short description here') }}">{{ $hotelRoom->short_description }}</textarea>
-                                        <small id="err-shrt-desc" style="display: none;"
+                                    <input type="hidden" name="id_hotel" value="{{ $hotelRoom->id_hotel_room }}"
+                                        required>
+                                    <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30"
+                                        rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}">{{ $hotelRoom->short_description }}</textarea>
+                                    <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc()">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                        onclick="editShortDesc()">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editShortDescriptionCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                     {{-- </form> --}}
                                 </div>
                             @endif
@@ -425,7 +430,10 @@
                             @endif
 
                             @auth
-                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                                @if (Auth::user()->id == $hotel[0]->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($stories->count() == 0)
                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
                                             <li class="story">
@@ -814,7 +822,8 @@
                                     <input type="hidden" value="{{ $hotelRoom->id_hotel_room }}" id="id_hotel_room"
                                         name="id_hotel_room">
                                 </form>
-                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
+                                <small id="err-dz" style="display: none;"
+                                    class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button" class="btn btn-primary">Upload</button>
                             </section>
                         @endif
@@ -848,22 +857,23 @@
                                     <div id="description-form" style="display:none;">
                                         {{-- <form action="{{ route('room_update_description') }}" method="post">
                                             @csrf --}}
-                                            <input type="hidden" name="id_hotel_room"
-                                                value="{{ $hotelRoom->id_hotel_room }}" required>
-                                            <div class="form-group">
-                                                <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5">{{ $hotelRoom->room_description }}</textarea>
-                                                <small id="err-desc" style="display: none;"
+                                        <input type="hidden" name="id_hotel_room"
+                                            value="{{ $hotelRoom->id_hotel_room }}" required>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5">{{ $hotelRoom->room_description }}</textarea>
+                                            <small id="err-desc" style="display: none;"
                                                 class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc" onclick="editDescription()">
-                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                                </button>
-                                                <button type="reset" class="btn btn-sm btn-secondary"
-                                                    onclick="editDescriptionCancel()">
-                                                    <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                                </button>
-                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
+                                                onclick="editDescription()">
+                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                            </button>
+                                            <button type="reset" class="btn btn-sm btn-secondary"
+                                                onclick="editDescriptionCancel()">
+                                                <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                            </button>
+                                        </div>
                                         {{-- </form> --}}
                                     </div>
                                 @endif
@@ -1585,10 +1595,10 @@
                             </div>
                         </div>
                     @else
-                        <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
-                        <div class="col-12 d-flex mt-3">
-                            <div class="col-6 d-flex">
-                                <div class="col-1">
+                        <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
+                        <div class="col-12 mt-3 d-flex review-container">
+                            <div class="col-12 col-md-6 d-flex">
+                                <div class="col-1 icon-review-container">
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                         role="presentation" focusable="false"
                                         style="display: block; height: 24px; width: 24px; fill: currentcolor;">
@@ -1598,29 +1608,28 @@
                                     </svg>
                                 </div>
                                 <div class="col-8">
-                                    <p>
-                                        This host has 720 reviews for other places to stay.
-                                        <span><a href="#">Show other reviews</a></span>
+                                    <p class="review-txt">
+                                        There is no reviews yet
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-6 d-flex">
-                                <div class="col-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="col-8">
-                                    <p>
-                                        We’re here to help your trip go smoothly. Every reservation is covered by
-                                        <span><a href="#">EZV's Guest Refund Policy.</a></span>
-                                    </p>
-                                </div>
-                            </div>
+                            {{-- <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+                                            aria-hidden="true" role="presentation" focusable="false"
+                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                            <path
+                                                d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="review-txt">
+                                            We’re here to help your trip go smoothly. Every reservation is covered by
+                                            <span><a href="#">EZV's Guest Refund Policy.</a></span>
+                                        </p>
+                                    </div>
+                                </div> --}}
                         </div>
                     @endif
                 </div>
@@ -3167,7 +3176,7 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    if(!myDropzone.files.length) {
+                    if (!myDropzone.files.length) {
                         $(".dz-image-add").css("border", "solid #e04f1a 1px");
                         $('#err-dz').show();
                     } else {
