@@ -218,6 +218,7 @@ return [
     'My Profile' => 'Profil Saya',
     'Collaborator' => 'Kolaborator',
     'Collab Portal' => 'Daftar Kolaborator',
+    'Collabs' => 'Kolaborasi',
     'Dashboard' => 'Dashboard',
 
     'The Best Way To Find Home, Hotel, Food, And Wow' => 'Cara Terbaik Untuk Menemukan Rumah, Hotel, Kuliner, Dan Wow',

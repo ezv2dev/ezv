@@ -3314,7 +3314,7 @@
                                         @endif
 
                                         <p class="{{ $textColor }} list-description">
-                                            {{ __('user_page.Collaborator') }}
+                                            {{ __('user_page.Collabs') }}
                                         </p>
                                     </a>
                                 </ul>
