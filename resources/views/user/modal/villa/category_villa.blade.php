@@ -124,3 +124,12 @@
     </div>
 </div>
 <!-- END Fade In Default Modal -->
+
+<script>
+    var limit = 3;
+    $('input.check-cat').on('change', function(evt) {
+        if($('input.check-cat:checked').length > limit) {
+            this.checked = false;
+        }
+    });
+</script>
