@@ -450,10 +450,12 @@
                     contentIsExist = true;
 
                     // show content when on screen mobile size
-                    if ($(window).width() < 768) {
-                        // show right content on the map
-                        $('#modal-map-content').removeClass('d-none');
-                        $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                        }
                     }
 
                     // show right content
@@ -661,10 +663,12 @@
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
                     // show content when on screen mobile size
-                    if ($(window).width() < 768) {
-                        // show right content on the map
-                        $('#modal-map-content').removeClass('d-none');
-                        $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                        }
                     }
 
                     // mapMobileIsOpen = true;
@@ -853,10 +857,12 @@
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
                     // show content when on screen mobile size
-                    if ($(window).width() < 768) {
-                        // show right content on the map
-                        $('#modal-map-content').removeClass('d-none');
-                        $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                        }
                     }
 
                     // mapMobileIsOpen = true;
@@ -1071,10 +1077,12 @@
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
                     // show content when on screen mobile size
-                    if ($(window).width() < 768) {
-                        // show right content on the map
-                        $('#modal-map-content').removeClass('d-none');
-                        $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                        }
                     }
 
                     // mapMobileIsOpen = true;
