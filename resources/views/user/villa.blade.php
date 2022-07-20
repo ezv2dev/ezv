@@ -4002,16 +4002,16 @@
                     btn.textContent = "Submit";
                     btn.classList.remove("disabled");
 
-                    
+
                     $('.gallery').html("");
                     $('.gallery').append(content);
                     $('#sortable-photo').html("");
                     $('#sortable-photo').append(contentPositionModal);
-                    
+
                     $("#edit_position_photo").modal("hide");
-                    
+
                     $gallery.refresh();
-                    
+
                 }
             });
         }
@@ -4868,7 +4868,7 @@
             method: "POST",
             data: {
                 '_token': $('input[name=_token]').val(),
-                'children': children
+                'children': children,
                 id: '{{ $villa[0]->id_villa }}'
             },
             success: function(data) {
