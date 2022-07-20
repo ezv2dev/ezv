@@ -1247,7 +1247,7 @@ if (isset($_COOKIE['tema'])) {
                 socialFloat.style.bottom = '0px';
             if (document.body.scrollTop + window.innerHeight < (getRectTop(footer) + document.body.scrollTop))
                 socialFloat.style.position = 'fixed', // restore when you scroll up
-                socialFloat.style.bottom = '74px';
+                socialFloat.style.bottom = '54px';
 
             // socialFloat.innerHTML = document.body.scrollTop + window.innerHeight;
         }
