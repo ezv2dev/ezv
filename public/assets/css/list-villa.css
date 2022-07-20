@@ -1967,15 +1967,12 @@ li.button-dropdown {
 }
 
 .villa-list-description-container {
-    /* float: left !important; */
-    /* display: flex;
-    flex-direction: column;
-    justify-content: start; */
     text-align: justify;
-    /* margin-bottom: -8px; */
 }
 
-
+.villa-list-name::first-letter, .villa-list-description-container::first-letter {
+    text-transform: uppercase;
+}
 
 .villa-list-video {
     width: 59px;
@@ -3039,6 +3036,9 @@ input::-webkit-inner-spin-button {
     .dayContainer {
         width: 100% !important;
         min-width: 100% !important;
+    }
+    .villa-list-description-container {
+        text-align: left;
     }
 }
 @media only screen and (min-width: 649px) and (max-width: 991px) {
