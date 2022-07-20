@@ -407,7 +407,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <table class="table table-bordered table-hover"
-                                                        style="color: #383838" id="dataTable" width="100%"
+                                                        style="color: #383838" id="dataTableAvailability" width="100%"
                                                         cellspacing="0">
                                                         <thead style="color: #383838;"
                                                             class="thead-dark table-borderless">
@@ -733,9 +733,9 @@
     });
 
     let multiEvent = [];
-    var eventData = [];
+    // var eventData = [];
     let d;
-    let e;
+    // let e;
 
     let calendar2 = $('#calendar2').fullCalendar({
         defaultView: 'month',
@@ -776,17 +776,17 @@
             }
 
             multiEvent.push([start, end]);
-            eventData.push({
-                'start': start,
-                'end': endtemp,
-                'title': title
-            });
-            e = uniqBy(eventData, JSON.stringify);
+            // eventData.push({
+            //     'start': start,
+            //     'end': endtemp,
+            //     'title': title
+            // });
+            // e = uniqBy(eventData, JSON.stringify);
 
             d = uniqBy(multiEvent, JSON.stringify);
             console.log(d);
             // multiEvent.push(end);
-            calendar2.fullCalendar('renderEvent', tempEvent, true);
+            // calendar2.fullCalendar('renderEvent', tempEvent, true);
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
         }
@@ -800,6 +800,60 @@
         });
     }
 
+</script>
+
+<!-- Datatables CSS -->
+<link rel="stylesheet" href="{{ url('assets/js/plugins/oneui/datatables/dataTables.bootstrap4.css') }}">
+<link rel="stylesheet" href="{{ url('assets/js/plugins/oneui/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
+
+<!-- Datatables Plugins -->
+<script src="{{ url('assets/js/plugins/oneui/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.print.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.html5.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.flash.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.colVis.min.js') }}"></script>
+
+<script>
+    // load_tabel_first();
+    let id_villa = $('#id_villa').val();
+
+    let tableAvailability = $('#dataTableAvailability').DataTable({
+        processing: true,
+        serverSide: true,
+        autowidth: true,
+        ajax: "/villa/availability/" + id_villa + "/datatable",
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                class: 'text-center font-size-sm'
+            },
+            {
+                data: 'start',
+                name: 'start',
+                class: 'font-w600 font-size-sm'
+            },
+            {
+                data: 'end',
+                name: 'end',
+                class: 'font-w600 font-size-sm'
+            },
+            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
+            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
+            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
+            {
+                data: 'aksi',
+                name: 'aksi',
+                orderable: false,
+                searchable: false
+            }
+        ],
+        responsive: true
+    });
+</script>
+
+<script>
     //add data availability to db
     $(".btn-submit-availability").click(function() {
 
@@ -814,12 +868,55 @@
                 id: id_villa_fullcalendar
             },
             success: function(data) {
-                alert(data.message);
-                location.reload();
+                iziToast.success({
+                    title: "Success",
+                    message: data.message,
+                    position: "topRight",
+                });
+                // location.reload();
+                calendar2.fullCalendar("refetchEvents");
+                tableAvailability.draw();
+                multiEvent = [];
             }
         });
 
     });
+
+    function delete_date_availability(ids) {
+        let id = ids.getAttribute("data-id");
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/villa/availability/delete/${id}`,
+                    success: function(response) {
+                        Swal.fire('Deleted', response.message, 'success');
+                        tableAvailability.draw();
+                        calendar2.fullCalendar('removeEvents', id);
+                        calendar2.fullCalendar("refetchEvents");
+                    },
+                    error: function(jqXHR, response) {
+                        console.log(jqXHR);
+                        Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    }
+
 </script>
 
 <script type="text/javascript">
@@ -898,57 +995,5 @@
             dad.addClass('switch-checked');
         else
             dad.removeClass('switch-checked');
-    });
-</script>
-
-<!-- Page JS Plugins -->
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-        crossorigin="anonymous" />
-
-<script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
-
-<script>
-    // load_tabel_first();
-    let id_villa = $('#id_villa').val();
-
-    var table = $('#dataTable').dataTable({
-        processing: true,
-        serverSide: true,
-        autowidth: true,
-        ajax: "/villa/availability/" + id_villa + "/datatable",
-        columns: [{
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex',
-                class: 'text-center font-size-sm'
-            },
-            {
-                data: 'start',
-                name: 'start',
-                class: 'font-w600 font-size-sm'
-            },
-            {
-                data: 'end',
-                name: 'end',
-                class: 'font-w600 font-size-sm'
-            },
-            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
-            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
-            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
-            {
-                data: 'aksi',
-                name: 'aksi',
-                orderable: false,
-                searchable: false
-            }
-        ],
-        responsive: true
     });
 </script>

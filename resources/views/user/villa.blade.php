@@ -4002,16 +4002,16 @@
                     btn.textContent = "Submit";
                     btn.classList.remove("disabled");
 
-                    
+
                     $('.gallery').html("");
                     $('.gallery').append(content);
                     $('#sortable-photo').html("");
                     $('#sortable-photo').append(contentPositionModal);
-                    
+
                     $("#edit_position_photo").modal("hide");
-                    
+
                     $gallery.refresh();
-                    
+
                 }
             });
         }

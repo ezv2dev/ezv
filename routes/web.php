@@ -768,6 +768,7 @@ Route::get('/villa/availabality/{id}', [ViewController::class, 'availabality'])-
 Route::post('/villa/confirm/store', [VillabookingController::class, 'user_store'])->name('villa_booking_user_store');
 
 Route::get('/villa/availability/{id}/datatable', [ViewController::class, 'datatable_availability'])->name('villa_availability_datatable');
+Route::get('/villa/availability/delete/{id}', [ViewController::class, 'delete_availability'])->name('delete_availability');
 
 Route::get('/villa/favorit/{id}', [VillasaveController::class, 'favorit'])->name('villa_favorit');
 
