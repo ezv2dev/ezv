@@ -23,7 +23,6 @@
     <link rel="stylesheet"
         href="{{ asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/dashmix.min.css') }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -56,7 +55,7 @@
                             @if (Auth::user()->avatar)
                                 <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
                                     data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
-                                    style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
+                                    style="border-radius: 50%; width: 50px; height: 50px; border: solid 2px #ff7400;">
                             @else
                                 <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('assets/icon/menu/user_default.svg') }}" alt=""
@@ -671,7 +670,7 @@
                                             <img class="lozad" src="{{ LazyLoad::show() }}"
                                                 data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2"
                                                 alt=""
-                                                style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
+                                                style="border-radius: 50%; width: 50px; height: 50px; border: solid 2px #ff7400;">
                                         @else
                                             <img class="lozad" src="{{ LazyLoad::show() }}"
                                                 data-src="{{ asset('assets/icon/menu/user_default.svg') }}"

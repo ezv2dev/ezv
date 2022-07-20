@@ -1989,6 +1989,7 @@ input::-webkit-inner-spin-button {
 
 .user-avatar {
     width: 40px !important;
+    height: 40px !important;
 }
 
 .nav-link-style-detail-active {
@@ -2093,9 +2094,9 @@ span.flatpickr-weekday {
     }
 }
 @media only screen and (max-width: 425px) {
-    .user-avatar {
+    /* .user-avatar {
         width: 40px !important;
-    }
+    } */
     .row .check-in a {
         width: 90vw !important;
     }
