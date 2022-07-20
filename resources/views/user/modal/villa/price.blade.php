@@ -393,8 +393,8 @@
                                         <div class="row items-push">
                                             <center>
                                                 <div class="col-6">
-                                                    <button type="submit"
-                                                        class="btn btn-sm btn-danger mt-2 btn-submit-availability"
+                                                    <button type="submit" id="btn-submit-availability"
+                                                        class="btn btn-sm btn-danger mt-2"
                                                         name="action" value="not_available" style="width: 200px;">
                                                         <i class="fa fa-floppy-disk"></i>
                                                         {{ __('user_page.Save Date') }}
@@ -820,6 +820,9 @@
             }
         },
 
+        eventOverlap: false, //disable overlap event
+        selectOverlap: false, //disable overlap event
+
         selectable: true,
         selectHelper: true,
 
@@ -850,7 +853,7 @@
             d = uniqBy(multiEvent, JSON.stringify);
             console.log(d);
             // multiEvent.push(end);
-            // calendar2.fullCalendar('renderEvent', tempEvent, true);
+            calendar2.fullCalendar('renderEvent', tempEvent, true);
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
         }
@@ -919,7 +922,10 @@
 
 <script>
     //add data availability to db
-    $(".btn-submit-availability").click(function() {
+    $("#btn-submit-availability").click(function() {
+        let btn = document.getElementById("btn-submit-availability");
+        btn.textContent = "Saving Date...";
+        btn.classList.add("disabled");
 
         $.ajax({
             type: 'POST',
@@ -938,9 +944,24 @@
                     position: "topRight",
                 });
                 // location.reload();
+                calendar2.fullCalendar("removeEvents");
                 calendar2.fullCalendar("refetchEvents");
                 tableAvailability.draw();
-                multiEvent = [];
+                multiEvent = null;
+                d = null;
+
+                btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
+                btn.classList.remove("disabled");
+            },
+            error: function (jqXHR, response) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+
+                btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
+                btn.classList.remove("disabled");
             }
         });
 

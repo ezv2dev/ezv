@@ -736,6 +736,13 @@ class ViewController extends Controller
         $status = 500;
 
         $data = $request->multiEvent;
+
+        if (!$data) {
+            return response()->json([
+                'message' => 'Error No Date Selected'
+            ], 500);
+        }
+
         // $i = 0;
         foreach ($data as $item) {
             $data2 = VillaAvailability::insert(array(
