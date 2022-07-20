@@ -2124,299 +2124,38 @@
                                             <div class="location-popup-container h-100">
                                                 <div class="row location-popup-desc-container sugest-list-first"
                                                     style="display: none;">
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                    @php
+                                                        $restaurantSubCategory = App\Http\Controllers\Restaurant\RestaurantController::restaurant_subcategory();
+                                                    @endphp
+
+                                                    @foreach ($restaurantSubCategory as $item)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex"
+                                                            style="padding-left: 0px !important;">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    style="background: #222222;"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op2"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Pizza">Pizza</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Pizza">Pizza</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Pizza">Pizza</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Pizza">Pizza</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Seafood">Seafood</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Seafood">Seafood</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Seafood">Seafood</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Seafood">Seafood</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Barbeque">Barbeque</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Barbeque">Barbeque</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Barbeque">Barbeque</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Barbeque">Barbeque</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Fast Food">Fast
-                                                                Food</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Fast Food">Fast
-                                                                Food</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Fast Food">Fast
-                                                                Food</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Fast Food">Fast
-                                                                Food</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Grill">Grill</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Grill">Grill</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Grill">Grill</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                        style="padding-left: 0px !important;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image lozad"
-                                                                style="background: #222222;"
-                                                                src="{{ LazyLoad::show() }}"
-                                                                data-src="{{ asset('assets/icon/map/restaurant.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2"
-                                                                data-value="Grill">Grill</a>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
-                                                @php
-                                                    $restaurantCuisine = App\Http\Controllers\Restaurant\RestaurantController::get_cuisine();
-                                                    $restaurantMenu = App\Http\Controllers\Restaurant\RestaurantController::get_menu();
-                                                @endphp
-                                                @foreach ($restaurantCuisine as $item3)
+
+                                                @foreach ($restaurantSubCategory as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none; cursor: pointer;">
                                                         <div class="location-popup-map sugest-list-map">
                                                             <img class="location-popup-map-image"
                                                                 style="background: #222222;"
-                                                                src="{{ asset('assets/icon/map/activity.png') }}">
+                                                                src="{{ asset('assets/icon/map/restaurant.png') }}">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a type="button" class="location_op2" target="_blank"
-                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                @foreach ($restaurantMenu as $item3)
-                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
-                                                        style="display: none; cursor: pointer;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image"
-                                                                src="{{ asset('assets/icon/map/activity.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2" target="_blank"
-                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach

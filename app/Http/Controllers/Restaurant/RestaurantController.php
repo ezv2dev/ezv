@@ -61,6 +61,12 @@ class RestaurantController extends Controller
         return $restaurant_menu;
     }
 
+    public static function restaurant_subcategory()
+    {
+        $restaurant_subcategory = RestaurantSubCategory::select('id_subcategory', 'icon', 'name')->get();
+        return $restaurant_subcategory;
+    }
+
     /**
      * Handle the incoming request.
      *

@@ -339,11 +339,11 @@
     <!-- End Grid 43 -->
     </div>
     @if (count($restaurants) != 0)
-    <div class="col-12" id="view-map-button-float">
-        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-            <button onclick="view_main_map()" style="height:inherit;">
-                <!-- partial:index.partial.html -->
-                {{-- <svg aria-hidden="true" style="width: 0; height: 0; overflow: hidden;" version="1.1"
+        <div class="col-12" id="view-map-button-float">
+            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                <button onclick="view_main_map()" style="height:inherit;">
+                    <!-- partial:index.partial.html -->
+                    {{-- <svg aria-hidden="true" style="width: 0; height: 0; overflow: hidden;" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs>
                         <symbol id="icon-world" viewBox="0 0 216 100">
@@ -363,20 +363,20 @@
                     </defs>
                 </svg> --}}
 
-                <div class="notice">
-                    <span class="world">
-                        <span class="images" style="color: #52EB35;">
-                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
-                            {{-- <svg>
+                    <div class="notice">
+                        <span class="world">
+                            <span class="images" style="color: #52EB35;">
+                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                                {{-- <svg>
                                 <use href="#icon-repeated-world"></use>
                             </svg> --}}
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- partial -->
-            </button>
+                    </div>
+                    <!-- partial -->
+                </button>
+            </div>
         </div>
-    </div>
     @endif
 
     <!-- End Refresh Page -->
@@ -556,7 +556,23 @@
                 sCuisineFormInput.push(parseInt($(this).val()));
             });
 
-            var sKeywordFormInput = $("input[name='sKeyword']").val();
+            var sKeywordFormInput = function() {
+                var tmp = null;
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    global: false,
+                    dataType: 'json',
+                    url: "/food/subcategory",
+                    data: {
+                        name: $("input[name='sKeyword']").val()
+                    },
+                    success: function(response) {
+                        tmp = response.data;
+                    }
+                });
+                return tmp;
+            }();
 
             var filterFormInput = [];
             $("input[name='subCategory[]']:checked").each(function() {
@@ -580,13 +596,14 @@
                     return filterFormInput.indexOf(item) == pos;
                 });
             }
+            filteredArray.push(sKeywordFormInput);
 
             if (valueCuisine == null) {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
             } else {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&fCuisine=${valueCuisine}&fSubCategory=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=${valueCuisine}&fSubCategory=${filteredArray}`;
             }
             restaurantRefreshFilter(subUrl);
         }

@@ -995,6 +995,7 @@ Route::post('/hotel/review/delete', [Hotel\HotelReviewController::class, 'destro
 Route::get('/food-list', [Restaurant\RestaurantListController::class, 'restaurant_list'])->name('restaurant_list');
 // Route::get('/restaurant/s', 'Restaurant\RestaurantSearchController@index')->name('search_restaurant');
 Route::get('/food/search', [Restaurant\FoodSearchController::class, 'index'])->name('search_food');
+Route::get('/food/subcategory', [Restaurant\FoodSearchController::class, 'get_food_sub_id'])->name('get_food_sub_id');
 
 //RESTAURANT DETAIL
 // Route::get('/restaurant/{id}', 'ViewController@restaurant')->name('restaurant');
