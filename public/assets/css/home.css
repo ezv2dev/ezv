@@ -2168,11 +2168,14 @@ span.flatpickr-weekday {
     .btn-donwload-mobile-app {
         display: block !important;
     }
-    #btn-to-app-store img {
+    /* #btn-to-app-store img {
         width: 150px !important;
-    }
-    #btn-to-play-store img {
+    } */
+    /* #btn-to-play-store img {
         width: 170px !important;
+    } */
+    .btn-donwload-mobile-app img {
+        width: 55% !important;
     }
     .user-details-email {
         word-break: break-all;
@@ -2213,11 +2216,14 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    #btn-to-app-store img {
+    /* #btn-to-app-store img {
         width: 20% !important;
-    }
-    #btn-to-play-store img {
+    } */
+    /* #btn-to-play-store img {
         width: 26% !important;
+    } */
+    .btn-donwload-mobile-app img {
+        width: 25% !important;
     }
 }
 
@@ -2394,4 +2400,11 @@ span.flatpickr-weekday {
 .navbar-dark .navbar-toggler {
     color: rgba(255, 255, 255, 0) !important;
     border-color: rgba(255, 255, 255, 0) !important;
+}
+
+.btn-donwload-mobile-app img {
+    width: 15%;
+    border: solid 1px #fff;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }

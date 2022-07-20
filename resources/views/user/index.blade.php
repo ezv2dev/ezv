@@ -814,13 +814,11 @@
                                 <p style="text-align: center;">
                                     <a href="https://www.apple.com/id/app-store/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                        <img style="width:18%;"
-                                            src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                        <img src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                     </a>
                                     <a href="https://play.google.com/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                        <img style="width:21%;"
-                                            src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                        <img src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                     </a>
                                 </p>
                             </div>
