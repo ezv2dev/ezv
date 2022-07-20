@@ -180,7 +180,7 @@
     {{-- Pagination --}}
     <div class="mt-5 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+            {{ $villa->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -214,26 +214,28 @@
             $(".js-slider-2").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
+                    if (!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
                 if (sliderLength >= 4) {
                     for (var j = 0; j <= 4; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
-                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0) {
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
                 }
@@ -242,8 +244,8 @@
                 var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    if (!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");

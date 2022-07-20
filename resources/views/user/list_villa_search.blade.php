@@ -158,7 +158,7 @@
     {{-- Pagination --}}
     <div class="d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $villa->onEachSide(1)->appends(Request::all())->links() }}
+            {{ $villa->onEachSide(0)->appends(Request::all())->links() }}
         </div>
     </div>
     {{-- End Pagination --}}

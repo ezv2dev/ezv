@@ -243,13 +243,13 @@
                         </span>
                     </div>
                     <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                                                @if ($data->detailReview)
+                                                                                                                                                                                                                    @if ($data->detailReview)
     {{ $data->detailReview->average }}
 @else
     {{ __('user_page.New') }}
     @endif
-                                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                    <i class="fa-solid fa-star text-13 text-orange"></i>
+                                                                                                                                                                                                                </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
@@ -306,7 +306,7 @@
     {{-- Pagination --}}
     <div class="mt-5 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $hotel->onEachSide(1)->appends(Request::all())->links() }}
+            {{ $hotel->onEachSide(0)->appends(Request::all())->links() }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -615,26 +615,28 @@
             $(".js-slider").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
+                    if (!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
                 if (sliderLength >= 4) {
                     for (var j = 0; j <= 4; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
-                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0) {
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
                 }
@@ -643,8 +645,8 @@
                 var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    if (!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");
