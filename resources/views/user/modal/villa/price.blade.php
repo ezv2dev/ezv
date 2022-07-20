@@ -947,8 +947,8 @@
                 calendar2.fullCalendar("removeEvents");
                 calendar2.fullCalendar("refetchEvents");
                 tableAvailability.draw();
-                multiEvent = null;
-                d = null;
+                multiEvent = [];
+                d = "";
 
                 btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
                 btn.classList.remove("disabled");
