@@ -48,9 +48,9 @@ if (isset($_COOKIE['tema'])) {
 @endif
 
 @foreach ($villas as $data)
-    <div class="row list-row-gap">
+    <div class="row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0">
         <!-- Left Sedtion -->
-        <div class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-image-container">
+        <div class="col-lg-6 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
             <div class="content list-image-content list-image-content-villa">
                 @guest
                     <div class="list-like-button-container"
@@ -302,7 +302,7 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Right Section -->
     </div>
-    <hr class="list-row row-line-grey" style="margin-top: 29px;">
+    <hr class="list-row row-line-grey mt-29p mb-xxs-2p mb-xs-4p mb-min-sm-16p mb-xlg-16p mb-lg-19p">
 @endforeach
 
 @include('user.modal.villa.list.share')

@@ -308,7 +308,7 @@
     }
 
     .container-grid-cat {
-        grid-template-columns: repeat( 6, minmax(0, 1fr) );
+        grid-template-columns: repeat( 5, minmax(0, 1fr) );
         grid-template-rows: repeat(1, auto) !important;
         gap: 10px;
         display: grid;
@@ -325,7 +325,7 @@
     }
 
     .container-grid-cat > div:nth-child(5){
-        display: block;
+        display: none;
     }
 
     .container-grid-cat > div:nth-child(4){
@@ -588,7 +588,7 @@
     }
 }
 
-@media (min-width: 991px) {
+@media (min-width: 992px) {
     .container-grid-cat{
         border-top: 0px;
     }

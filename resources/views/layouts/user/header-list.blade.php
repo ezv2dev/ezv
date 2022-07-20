@@ -205,7 +205,7 @@
 
     <div class="row nav-row">
         <div id="navbar-first-dekstop"
-            class="col-lg-2 logo mb-3 mb-lg-0 villa-list-header-logo d-flex align-items-center">
+            class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
