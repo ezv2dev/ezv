@@ -446,8 +446,7 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
-                    // mapMobileIsOpen = true;
-                    contentIsExist = true;
+
 
                     // show content when on screen mobile size
                     if(mapMobileIsOpen){
@@ -455,6 +454,9 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
                         }
                     }
 
@@ -668,11 +670,11 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
                         }
                     }
-
-                    // mapMobileIsOpen = true;
-                    contentIsExist = true;
 
                     // show right content
                     setTimeout(() => {
@@ -862,11 +864,11 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
                         }
                     }
-
-                    // mapMobileIsOpen = true;
-                    contentIsExist = true;
 
                     // show right content
                     setTimeout(() => {
@@ -1082,11 +1084,11 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
                         }
                     }
-
-                    // mapMobileIsOpen = true;
-                    contentIsExist = true;
 
                     // show right content
                     setTimeout(() => {
