@@ -139,6 +139,22 @@
 
     </div>
     <!-- Refresh Page -->
+    @if (count($activitys) == 0)
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                        <img class="img-fluid p-4"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                            alt="" />
+                        <p class="lead">WoW data not available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     <div class="col-lg-12 container-grid-activity container__grid">
         @foreach ($activitys as $data)
             <div class="grid-list-container">
@@ -299,21 +315,23 @@
     <!-- End Grid 43 -->
     </div>
 
-    <div class="col-12" id="view-map-button-float">
-        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
-            <button onclick="view_main_map()" style="height:inherit;">
+    @if (count($activitys) != 0)
+        <div class="col-12" id="view-map-button-float">
+            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
+                <button onclick="view_main_map()" style="height:inherit;">
 
-                <div class="notice">
-                    <span class="world">
-                        <span class="images" style="color: #52EB35;">
-                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                    <div class="notice">
+                        <span class="world">
+                            <span class="images" style="color: #52EB35;">
+                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- partial -->
-            </button>
+                    </div>
+                    <!-- partial -->
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
