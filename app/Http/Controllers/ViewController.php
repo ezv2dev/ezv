@@ -1664,19 +1664,19 @@ class ViewController extends Controller
 
         \Mail::to($request->email_receiver)->send(new \App\Mail\QuickEnquiryMail($details));
 
-        $quick->save();
-        return back();
-        // if ($quick->save()) {
-        //     return response()->json([
-        //         'message' => 'Data sent Successfuly',
-        //         'status' => 200,
-        //     ], 200);
-        // } else {
-        //     return response()->json([
-        //         'message' => 'Failed send of Data',
-        //         'status' => 500,
-        //     ], 500);
-        // }
+        // $quick->save();
+        // return back();
+        if ($quick->save()) {
+            return response()->json([
+                'message' => 'Data sent Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed send of Data',
+                'status' => 500,
+            ], 500);
+        }
 
     }
 
@@ -3211,11 +3211,19 @@ class ViewController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            // return back()
+            //     ->with('success', 'Your data has been updated');
+            return response()->json([
+                'success' => true,
+                'message' => 'Your data has been updated',
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            // return back()
+            //     ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'success' => false,
+                'message' => 'Please check the form below for errors',
+            ], 500);
         }
     }
 

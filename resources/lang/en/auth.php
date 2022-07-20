@@ -55,4 +55,5 @@ return [
     'name_room' => 'The room name field is required',
 
     'empty_phone' => 'The phone number field is required',
+    'empty_default' => 'This form is required',
 ];

@@ -466,6 +466,7 @@
                                         <input type="number" class="form-control" id="max_guest" name="max_guest"
                                             placeholder="{{ __('user_page.Input Max Guest') }}"
                                             value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
+                                        <small id="err-mxguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -473,6 +474,7 @@
                                             name="price_extra_guest"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
+                                        <small id="err-exguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -487,6 +489,7 @@
                                         <input type="number" class="form-control" id="max_bed" name="max_bed"
                                             placeholder="{{ __('user_page.Input Max Bed') }}"
                                             value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
+                                        <small id="err-maxbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -494,6 +497,7 @@
                                             name="price_extra_bed"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
+                                        <small id="err-exbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -520,6 +524,7 @@
                                         <input type="number" class="form-control" id="max_pet" name="max_pet"
                                             placeholder="{{ __('user_page.Input Max Pet') }}"
                                             value="{{ !empty($villaExtraPet->max) ? $villaExtraPet->max : '' }}">
+                                        <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12 d-none" id="depositPrice">
                                         <label>{{ __('user_page.Deposit Price') }}</label>
@@ -532,7 +537,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-6 mt-5">
                                         <center>
-                                            <button type="submit" class="btn btn-primary btn-sm"
+                                            <button type="submit" class="btn btn-primary btn-sm" id="sbmt-extra"
                                                 style="width: 200px;">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
@@ -637,7 +642,66 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script>
 
+    $(function() {
+        $('#max_guest').keyup(function(e) {
+            $('#max_guest').removeClass('is-invalid');
+            $('#err-mxguest').hide();
+        });
+        $('#price_extra_guest').keyup(function(e) {
+            $('#price_extra_guest').removeClass('is-invalid');
+            $('#err-exguest').hide();
+        });
+        $('#max_bed').keyup(function(e) {
+            $('#max_bed').removeClass('is-invalid');
+            $('#err-maxbed').hide();
+        });
+        $('#price_extra_bed').keyup(function(e) {
+            $('#price_extra_bed').removeClass('is-invalid');
+            $('#err-exbed').hide();
+        });
+        $('#max_pet').keyup(function(e) {
+            $('#max_pet').removeClass('is-invalid');
+            $('#err-maxpet').hide();
+        });
+        $('#edit-extra').submit(function(e) {
+            let error = 0;
+            if(!$('#max_guest').val()) {
+                $('#max_guest').addClass('is-invalid');
+                $('#err-mxguest').show();
+                error = 1;
+            }
+            if(!$('#price_extra_guest').val()) {
+                $('#price_extra_guest').addClass('is-invalid');
+                $('#err-exguest').show();
+                error = 1;
+            }
+            if(!$('#max_bed').val()) {
+                $('#max_bed').addClass('is-invalid');
+                $('#err-maxbed').show();
+                error = 1;
+            }
+            if(!$('#price_extra_bed').val()) {
+                $('#price_extra_bed').addClass('is-invalid');
+                $('#err-exbed').show();
+                error = 1;
+            }
+            if(!$('#max_pet').val()) {
+                $('#max_pet').addClass('is-invalid');
+                $('#err-maxpet').show();
+                error = 1;
+            }
+            if(error == 1) {
+                e.preventDefault();
+            } else {
+                let btn = document.getElementById("sbmt-extra");
+                btn.textContent = "Saving...";
+                btn.classList.add("disabled");
+            }
+        });
+    });
+    </script>
 <script>
     $(function() {
         $("#villa-price").keyup(function() {
