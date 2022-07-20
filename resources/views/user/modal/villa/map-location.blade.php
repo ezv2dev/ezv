@@ -239,6 +239,8 @@
     var viewedMarkers = [];
     var primaryMarker, secondaryMarker;
     var primaryContent, secondaryContent;
+    var contentIsExist = false;
+    var mapMobileIsOpen = false;
 
     var restaurantLocations;
     var markerRestaurant = [];
@@ -444,6 +446,20 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+
+
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -648,6 +664,18 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -829,6 +857,18 @@
 
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
+
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
 
                     // show right content
                     setTimeout(() => {
@@ -1038,6 +1078,18 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -1057,6 +1109,15 @@
                 };
             })(markerActivity[i], i));
         }
+    }
+
+    // function to clear & hide right content
+    function resetRightContent() {
+        $('#modal-map-content').html('');
+        // show right content on the map
+        $('#modal-map-content').addClass('d-none');
+        $('#modal-map-content').removeClass('d-block mobile-map-desc');
+        contentIsExist = false;
     }
 
     // function to refetch data marker
@@ -1084,33 +1145,51 @@
     function mapMobile(){
          //mobile map
          map.addListener("click", ()=>{
-             // enable loading
-            setMapLoading();
-            // disable action google map
-            resetMapAction();
-            // disable event google map
-            resetMapEvent();
-            // full screen map for mobile
-            document.getElementById("map-desc").classList.add('mobile-map');
-            // show right content on the map
-            $('#modal-map-content').removeClass('d-none');
-            $('#modal-map-content').addClass('d-block mobile-map-desc');
-            // show button close full screen for mobile
-            document.getElementById("mobile-map-close").classList.remove('d-none');
-            document.getElementById("mobile-map-close").classList.add('d-block');
+            console.log('hit mapMobile');
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            if(contentIsExist && mapMobileIsOpen){
+                console.log('ketika full screen dan content masih terbuka');
+                resetRightContent();
+            }
+            if(!contentIsExist && !mapMobileIsOpen) {
+                console.log('ketika tidak full  screen dan content tidak terbuka');
+                mapMobileIsOpen = true;
+                contentIsExist = true;
+                // enable loading
+                setMapLoading();
+                // disable action google map
+                resetMapAction();
+                // disable event google map
+                resetMapEvent();
+                // full screen map for mobile
+                document.getElementById("map-desc").classList.add('mobile-map');
 
-            setTimeout(async () => {
-                await view_maps('{{ $villa[0]->id_villa }}');
-            }, 200);
+                // reset right content
+                $('#modal-map-content').html('');
 
-            // disabled action google map
-            resetMapAction();
-            // hide primary control
-            hidePrimaryMarkerControlFromMap();
+                setTimeout(async () => {
+                    // show right content on the map
+                    $('#modal-map-content').removeClass('d-none');
+                    $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    // show button close full screen for mobile
+                    document.getElementById("mobile-map-close").classList.remove('d-none');
+                    document.getElementById("mobile-map-close").classList.add('d-block');
+                    // refetch target villa
+                    await view_maps('{{ $villa[0]->id_villa }}');
+                }, 200);
+
+                // disabled action google map
+                resetMapAction();
+                // hide primary control
+                hidePrimaryMarkerControlFromMap();
+            }
         });
     }
 
     function close_map_mobile() {
+        mapMobileIsOpen = false;
+        contentIsExist = false;
         document.getElementById("map-desc").classList.remove('mobile-map');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
@@ -1566,24 +1645,6 @@
         mapLoadingContainer.appendChild(mapLoading);
         mapLoadingContainer.setAttribute("style", "display: flex; justify-content: center; width: 100vw;");
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(mapLoadingContainer);
-
-        $(window).on('resize', () => {
-            if ($(window).width() < 768) {
-                mapMobile();
-            }
-            if ($(window).width() >= 768) {
-                console.log('desktop')
-            }
-        });
-        $(document).ready(() => {
-            if ($(window).width() < 768) {
-                mapMobile();
-            }
-            if ($(window).width() >= 768) {
-                console.log('desktop')
-            }
-        });
-
     };
     // view map
     async function view_maps(id) {
@@ -1678,6 +1739,25 @@
         setTimeout(() => {
             view_maps('{{ $villa[0]->id_villa }}');
         }, 200);
+
+        $(document).ready(() => {
+            if ($(window).width() < 768) {
+                contentIsExist = false;
+                mapMobile();
+            }
+            if ($(window).width() >= 768) {
+                console.log('desktop')
+            }
+        });
+    });
+    $(window).on('resize', () => {
+        if ($(window).width() < 768) {
+            contentIsExist = false;
+            mapMobile();
+        }
+        if ($(window).width() >= 768) {
+            console.log('desktop')
+        }
     });
 </script>
 

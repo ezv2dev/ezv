@@ -72,21 +72,23 @@
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12" style="position: relative; min-height: 100px;">
-                <div class="w-100" id="view-map-button-float">
-                    <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-                        <button onclick="view_main_map()" style="height:inherit;">
-                            <!-- partial:index.partial.html -->
-                            <div class="notice">
-                                <span class="world">
-                                    <span class="images" style="color: #52EB35;">
-                                        <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                @if (count($villas) != 0)
+                    <div class="w-100" id="view-map-button-float">
+                        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                            <button onclick="view_main_map()" style="height:inherit;">
+                                <!-- partial:index.partial.html -->
+                                <div class="notice">
+                                    <span class="world">
+                                        <span class="images" style="color: #52EB35;">
+                                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                                        </span>
                                     </span>
-                                </span>
-                            </div>
-                            <!-- partial -->
-                        </button>
+                                </div>
+                                <!-- partial -->
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }} top-min-10p pb-10p" style="width: 100%;"
                     data-isshow="true">
@@ -180,7 +182,7 @@
     {{-- Pagination --}}
     <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+            {{ $villa->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -256,26 +258,28 @@
             $(".js-slider-2").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
+                    if (!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
                 if (sliderLength >= 4) {
                     for (var j = 0; j <= 4; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
-                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0) {
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
                 }
@@ -284,8 +288,8 @@
                 var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    if (!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");

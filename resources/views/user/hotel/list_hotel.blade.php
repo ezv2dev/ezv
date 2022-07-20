@@ -118,6 +118,20 @@
         </div>
     </div>
     <!-- </div> -->
+    @if (count($hotel) == 0)
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                        <img class="img-fluid p-4"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                            alt="" />
+                        <p class="lead">Hotel data not available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
@@ -226,10 +240,8 @@
                                     </a>
                                 @endif
                             @endforelse
-
                         </div>
                     </div>
-
                 </div>
 
                 <div class="desc-container-grid ">
@@ -242,14 +254,6 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
-                    <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                                                @if ($data->detailReview)
-    {{ $data->detailReview->average }}
-@else
-    {{ __('user_page.New') }}
-    @endif
-                                                                                                                                                                                                                <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                                            </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
@@ -285,28 +289,29 @@
             </div>
         @endforeach
     </div>
-    <div class="col-12" id="view-map-button-float">
-        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-            <button onclick="view_main_map()" style="height:inherit;">
-
-                <div class="notice">
-                    <span class="world">
-                        <span class="images" style="color: #52EB35;">
-                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+    @if (count($hotel) != 0)
+        <div class="col-12" id="view-map-button-float">
+            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                <button onclick="view_main_map()" style="height:inherit;">
+                    <div class="notice">
+                        <span class="world">
+                            <span class="images" style="color: #52EB35;">
+                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- partial -->
-            </button>
+                    </div>
+                    <!-- partial -->
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
     <div class="mt-5 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $hotel->onEachSide(1)->appends(Request::all())->links() }}
+            {{ $hotel->onEachSide(0)->appends(Request::all())->links() }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -615,26 +620,28 @@
             $(".js-slider").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
+                    if (!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
                 if (sliderLength >= 4) {
                     for (var j = 0; j <= 4; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
-                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0) {
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
                 }
@@ -643,8 +650,8 @@
                 var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    if (!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");

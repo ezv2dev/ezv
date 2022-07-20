@@ -530,7 +530,7 @@
                                     <img style="width:18%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                 </a>
                                 <a href="https://play.google.com/" target="_blank">
-                                    <img style="width:21%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                    <img style="width:21%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                 </a>
                             </p>
                         </div>

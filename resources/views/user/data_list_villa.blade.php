@@ -32,6 +32,21 @@ if (isset($_COOKIE['tema'])) {
         }
     }
 </style>
+@if (count($villas) == 0)
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center mt-4">
+                    <img class="img-fluid p-4"
+                        src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                        alt="" />
+                    <p class="lead">Homes data not available</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
 @foreach ($villas as $data)
     <div class="row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0">
         <!-- Left Sedtion -->
@@ -42,8 +57,8 @@ if (isset($_COOKIE['tema'])) {
                         style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                         <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                             onclick="loginForm(1)">
-                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                focusable="false" class="favorite-button favorite-button-28">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                role="presentation" focusable="false" class="favorite-button favorite-button-28">
                                 <path
                                     d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
                                 </path>

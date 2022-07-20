@@ -407,7 +407,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <table class="table table-bordered table-hover"
-                                                        style="color: #383838" id="dataTable" width="100%"
+                                                        style="color: #383838" id="dataTableAvailability" width="100%"
                                                         cellspacing="0">
                                                         <thead style="color: #383838;"
                                                             class="thead-dark table-borderless">
@@ -466,6 +466,7 @@
                                         <input type="number" class="form-control" id="max_guest" name="max_guest"
                                             placeholder="{{ __('user_page.Input Max Guest') }}"
                                             value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
+                                        <small id="err-mxguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -473,6 +474,7 @@
                                             name="price_extra_guest"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
+                                        <small id="err-exguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -487,6 +489,7 @@
                                         <input type="number" class="form-control" id="max_bed" name="max_bed"
                                             placeholder="{{ __('user_page.Input Max Bed') }}"
                                             value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
+                                        <small id="err-maxbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -494,6 +497,7 @@
                                             name="price_extra_bed"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
+                                        <small id="err-exbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -520,6 +524,7 @@
                                         <input type="number" class="form-control" id="max_pet" name="max_pet"
                                             placeholder="{{ __('user_page.Input Max Pet') }}"
                                             value="{{ !empty($villaExtraPet->max) ? $villaExtraPet->max : '' }}">
+                                        <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
                                     </div>
                                     <div class="col-12 d-none" id="depositPrice">
                                         <label>{{ __('user_page.Deposit Price') }}</label>
@@ -532,7 +537,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-6 mt-5">
                                         <center>
-                                            <button type="submit" class="btn btn-primary btn-sm"
+                                            <button type="submit" class="btn btn-primary btn-sm" id="sbmt-extra"
                                                 style="width: 200px;">
                                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
@@ -637,7 +642,66 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script>
 
+    $(function() {
+        $('#max_guest').keyup(function(e) {
+            $('#max_guest').removeClass('is-invalid');
+            $('#err-mxguest').hide();
+        });
+        $('#price_extra_guest').keyup(function(e) {
+            $('#price_extra_guest').removeClass('is-invalid');
+            $('#err-exguest').hide();
+        });
+        $('#max_bed').keyup(function(e) {
+            $('#max_bed').removeClass('is-invalid');
+            $('#err-maxbed').hide();
+        });
+        $('#price_extra_bed').keyup(function(e) {
+            $('#price_extra_bed').removeClass('is-invalid');
+            $('#err-exbed').hide();
+        });
+        $('#max_pet').keyup(function(e) {
+            $('#max_pet').removeClass('is-invalid');
+            $('#err-maxpet').hide();
+        });
+        $('#edit-extra').submit(function(e) {
+            let error = 0;
+            if(!$('#max_guest').val()) {
+                $('#max_guest').addClass('is-invalid');
+                $('#err-mxguest').show();
+                error = 1;
+            }
+            if(!$('#price_extra_guest').val()) {
+                $('#price_extra_guest').addClass('is-invalid');
+                $('#err-exguest').show();
+                error = 1;
+            }
+            if(!$('#max_bed').val()) {
+                $('#max_bed').addClass('is-invalid');
+                $('#err-maxbed').show();
+                error = 1;
+            }
+            if(!$('#price_extra_bed').val()) {
+                $('#price_extra_bed').addClass('is-invalid');
+                $('#err-exbed').show();
+                error = 1;
+            }
+            if(!$('#max_pet').val()) {
+                $('#max_pet').addClass('is-invalid');
+                $('#err-maxpet').show();
+                error = 1;
+            }
+            if(error == 1) {
+                e.preventDefault();
+            } else {
+                let btn = document.getElementById("sbmt-extra");
+                btn.textContent = "Saving...";
+                btn.classList.add("disabled");
+            }
+        });
+    });
+    </script>
 <script>
     $(function() {
         $("#villa-price").keyup(function() {
@@ -733,9 +797,9 @@
     });
 
     let multiEvent = [];
-    var eventData = [];
+    // var eventData = [];
     let d;
-    let e;
+    // let e;
 
     let calendar2 = $('#calendar2').fullCalendar({
         defaultView: 'month',
@@ -776,17 +840,17 @@
             }
 
             multiEvent.push([start, end]);
-            eventData.push({
-                'start': start,
-                'end': endtemp,
-                'title': title
-            });
-            e = uniqBy(eventData, JSON.stringify);
+            // eventData.push({
+            //     'start': start,
+            //     'end': endtemp,
+            //     'title': title
+            // });
+            // e = uniqBy(eventData, JSON.stringify);
 
             d = uniqBy(multiEvent, JSON.stringify);
             console.log(d);
             // multiEvent.push(end);
-            calendar2.fullCalendar('renderEvent', tempEvent, true);
+            // calendar2.fullCalendar('renderEvent', tempEvent, true);
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
         }
@@ -800,6 +864,60 @@
         });
     }
 
+</script>
+
+<!-- Datatables CSS -->
+<link rel="stylesheet" href="{{ url('assets/js/plugins/oneui/datatables/dataTables.bootstrap4.css') }}">
+<link rel="stylesheet" href="{{ url('assets/js/plugins/oneui/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
+
+<!-- Datatables Plugins -->
+<script src="{{ url('assets/js/plugins/oneui/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.print.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.html5.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.flash.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.colVis.min.js') }}"></script>
+
+<script>
+    // load_tabel_first();
+    let id_villa = $('#id_villa').val();
+
+    let tableAvailability = $('#dataTableAvailability').DataTable({
+        processing: true,
+        serverSide: true,
+        autowidth: true,
+        ajax: "/villa/availability/" + id_villa + "/datatable",
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                class: 'text-center font-size-sm'
+            },
+            {
+                data: 'start',
+                name: 'start',
+                class: 'font-w600 font-size-sm'
+            },
+            {
+                data: 'end',
+                name: 'end',
+                class: 'font-w600 font-size-sm'
+            },
+            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
+            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
+            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
+            {
+                data: 'aksi',
+                name: 'aksi',
+                orderable: false,
+                searchable: false
+            }
+        ],
+        responsive: true
+    });
+</script>
+
+<script>
     //add data availability to db
     $(".btn-submit-availability").click(function() {
 
@@ -814,12 +932,55 @@
                 id: id_villa_fullcalendar
             },
             success: function(data) {
-                alert(data.message);
-                location.reload();
+                iziToast.success({
+                    title: "Success",
+                    message: data.message,
+                    position: "topRight",
+                });
+                // location.reload();
+                calendar2.fullCalendar("refetchEvents");
+                tableAvailability.draw();
+                multiEvent = [];
             }
         });
 
     });
+
+    function delete_date_availability(ids) {
+        let id = ids.getAttribute("data-id");
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/villa/availability/delete/${id}`,
+                    success: function(response) {
+                        Swal.fire('Deleted', response.message, 'success');
+                        tableAvailability.draw();
+                        calendar2.fullCalendar('removeEvents', id);
+                        calendar2.fullCalendar("refetchEvents");
+                    },
+                    error: function(jqXHR, response) {
+                        console.log(jqXHR);
+                        Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    }
+
 </script>
 
 <script type="text/javascript">
@@ -898,57 +1059,5 @@
             dad.addClass('switch-checked');
         else
             dad.removeClass('switch-checked');
-    });
-</script>
-
-<!-- Page JS Plugins -->
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-        crossorigin="anonymous" />
-
-<script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
-
-<script>
-    // load_tabel_first();
-    let id_villa = $('#id_villa').val();
-
-    var table = $('#dataTable').dataTable({
-        processing: true,
-        serverSide: true,
-        autowidth: true,
-        ajax: "/villa/availability/" + id_villa + "/datatable",
-        columns: [{
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex',
-                class: 'text-center font-size-sm'
-            },
-            {
-                data: 'start',
-                name: 'start',
-                class: 'font-w600 font-size-sm'
-            },
-            {
-                data: 'end',
-                name: 'end',
-                class: 'font-w600 font-size-sm'
-            },
-            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
-            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
-            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
-            {
-                data: 'aksi',
-                name: 'aksi',
-                orderable: false,
-                searchable: false
-            }
-        ],
-        responsive: true
     });
 </script>

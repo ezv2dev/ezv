@@ -139,6 +139,22 @@
 
     </div>
     <!-- Refresh Page -->
+    @if (count($activitys) == 0)
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                        <img class="img-fluid p-4"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                            alt="" />
+                        <p class="lead">WoW data not available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     <div class="col-lg-12 container-grid-activity container__grid">
         @foreach ($activitys as $data)
             <div class="grid-list-container">
@@ -299,28 +315,30 @@
     <!-- End Grid 43 -->
     </div>
 
-    <div class="col-12" id="view-map-button-float">
-        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
-            <button onclick="view_main_map()" style="height:inherit;">
+    @if (count($activitys) != 0)
+        <div class="col-12" id="view-map-button-float">
+            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
+                <button onclick="view_main_map()" style="height:inherit;">
 
-                <div class="notice">
-                    <span class="world">
-                        <span class="images" style="color: #52EB35;">
-                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                    <div class="notice">
+                        <span class="world">
+                            <span class="images" style="color: #52EB35;">
+                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- partial -->
-            </button>
+                    </div>
+                    <!-- partial -->
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
     <div class="mt-5 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $activity->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+            {{ $activity->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -347,26 +365,28 @@
             $(".js-slider").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
+                    if (!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
                 if (sliderLength >= 4) {
                     for (var j = 0; j <= 4; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
-                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
+                } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0) {
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
-                        }else {
-                            dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
+                            dotsContainer.append('<div class="circle activeIndicator" data-index=' + j +
+                                '></div>');
+                        } else {
+                            dotsContainer.append('<div class="circle" data-index=' + j + '></div>');
                         }
                     }
                 }
@@ -375,8 +395,8 @@
                 var currSlickIndex = parseInt($(this).find(".slick-current").attr("data-slick-index"));
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
-                    if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                    if (!$(this).hasClass("slick-cloned")) {
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");
