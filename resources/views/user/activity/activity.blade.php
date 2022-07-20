@@ -4350,21 +4350,21 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $amenitiesTop = $("#amenities").offset().top;
-            var $sidebarHeight = $sidebar.height();
-            var $result = $amenitiesTop - $sidebarHeight;
+            // var $amenitiesTop = $("#amenities").offset().top;
+            // var $sidebarHeight = $sidebar.height();
+            var $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;//$amenitiesTop - $sidebarHeight;
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $amenitiesTop = $("#amenities").offset().top;
-                $sidebarHeight = $sidebar.height();
-                $result = $amenitiesTop - $sidebarHeight;
+                // $amenitiesTop = $("#amenities").offset().top;
+                // $sidebarHeight = $sidebar.height();
+                $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;
             });
 
             $window.scroll(function() {
-                $amenitiesTop = $("#amenities").offset().top;
-                $sidebarHeight = $sidebar.height();
-                $result = $amenitiesTop - $sidebarHeight;
+                // $amenitiesTop = $("#amenities").offset().top;
+                // $sidebarHeight = $sidebar.height();
+                $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {
                     $sidebar.addClass("fixed");
                     $sidebar.css({

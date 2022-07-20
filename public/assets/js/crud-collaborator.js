@@ -22,56 +22,56 @@ function editLangCollab(id_collab) {
     if (error == 1) {
         return false;
     } else {
-        // let btn = document.getElementById("btnSaveLang");
-        // btn.textContent = "Saving...";
-        // btn.classList.add("disabled");
-        // $.ajax({
-        //     type: "POST",
-        //     headers: {
-        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //     },
-        //     url: "/collab/update/language",
-        //     data: {
-        //         id: id_collab,
-        //         name: $("#name-form-input").val(),
-        //     },
-        //     success: function (response) {
-        //         $("#name-content").html(response.data);
-        //         $("#name-content-mobile").html(response.data);
-        //         $("#collabTitle").html(response.data + " - EZV2");
+        let btn = document.getElementById("btnSaveLang");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/collab/update/language",
+            data: {
+                id: id_collab,
+                name: $("#name-form-input").val(),
+            },
+            success: function (response) {
+                $("#name-content").html(response.data);
+                $("#name-content-mobile").html(response.data);
+                $("#collabTitle").html(response.data + " - EZV2");
 
-        //         iziToast.success({
-        //             title: "Success",
-        //             message: response.message,
-        //             position: "topRight",
-        //         });
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Done";
-        //         btn.classList.remove("disabled");
-        //         editNameCancel();
-        //     },
-        //     error: function (jqXHR, exception) {
-        //         if (jqXHR.responseJSON.errors) {
-        //             for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-        //                 iziToast.error({
-        //                     title: "Error",
-        //                     message: jqXHR.responseJSON.errors[i],
-        //                     position: "topRight",
-        //                 });
-        //             }
-        //         } else {
-        //             iziToast.error({
-        //                 title: "Error",
-        //                 message: jqXHR.responseJSON.message,
-        //                 position: "topRight",
-        //             });
-        //         }
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+                editNameCancel();
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
 
-        //         btn.innerHTML = "<i class='fa fa-check'></i> Done";
-        //         btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
 
-        //         editNameCancel();
-        //     },
-        // });
+                editNameCancel();
+            },
+        });
     }
 }
 //Change name
