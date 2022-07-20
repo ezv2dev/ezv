@@ -250,6 +250,52 @@
     input::-ms-reveal, input::-ms-clear {
         display: none;
     }
+
+    /* Loading Animation */
+    .container-loading-animation{
+        position:absolute;
+        top:50%;
+        left:50%;
+        right:auto;
+        bottom:auto;
+        transform:translate(-50%, -50%);
+        z-index: 1;
+    }
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border: 8px solid #ddd;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #ddd transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 
 <div id="LoginModal" class="modal modal-login fade bs-example-modal-lg">
@@ -275,6 +321,9 @@
                 </div>
             </div>
             <div class="modal-body modal-body-login">
+                <div class="container-loading-animation d-none">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>
                 <div class="tabbable column-wrapper col-12">
                     <!-- Only required for left/right tabs -->
                     <div class="tab-content tab-content-language column rigth" id="tabs">
@@ -613,9 +662,52 @@
                     error = 1;
                 }
             }
-            if (error == 1) {
+
+            // if(error == 1){
+            //     e.preventDefault();
+            // }
+
+            if(typeof event.cancelable !== 'boolean' || event.cancelable){
                 e.preventDefault();
+                if(error == 0){
+                    $('.container-loading-animation').removeClass('d-none')
+                    $.ajax({
+                        type: "POST",
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function( data ){
+                            $('.container-loading-animation').addClass('d-none')
+                            location.reload();
+                        },
+                        error: function( response ){
+                            $('.container-loading-animation').addClass('d-none')
+                            $('.invalid-feedback').hide()
+                            $('.invalid-feedback').text('')
+                            $('.form-control').removeClass('is-invalid')
+    
+                            if(response.status == 200){
+                                location.reload();
+                            }else{
+                                var errors = response.responseJSON;
+                                $.each(errors.errors,function (el, val) {
+                                    let idErrorMessage = el == 'email' ? '#err-eml-lgn' : '#err-pas-lgn'
+        
+                                    $('#frmLgn input[name='+el+']').addClass('is-invalid')
+                                    $(idErrorMessage).show()
+                                    $.each(val, function(index, errMessage){
+                                        $(idErrorMessage).text(errMessage)
+                                    })
+        
+                                });
+                            }
+    
+                        }
+                    });
+                }
             }
+            
+
         });
 
         //register
@@ -781,9 +873,47 @@
                     }
                 }
             }
-            if (error == 1) {
+
+            // if(error == 1){
+            //     e.preventDefault();
+            // }
+            
+            if(typeof event.cancelable !== 'boolean' || event.cancelable){
                 e.preventDefault();
+                if(error == 0){
+                    $('.container-loading-animation').removeClass('d-none')
+
+                    $.ajax({
+                        type: "POST",
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function( data ){
+                            $('.container-loading-animation').addClass('d-none')
+                            location.reload();
+                        },
+                        error: function( response ){
+                            $('.container-loading-animation').addClass('d-none')
+                            $('.invalid-feedback').hide()
+                            $('.invalid-feedback').text('')
+                            $('.form-control').removeClass('is-invalid')
+        
+                            var errors = response.responseJSON;
+                            $.each(errors.errors,function (el, val) {
+                                let idErrorMessage = el == 'email' ? '#err-eml-rgs' : '#err-pas-rgs'
+        
+                                $('#frmRgs input[name='+el+']').addClass('is-invalid')
+                                $(idErrorMessage).show()
+                                $.each(val, function(index, errMessage){
+                                    $(idErrorMessage).text(errMessage)
+                                })
+        
+                            });
+                        }
+                    });
+                }
             }
+            
         });
     });
 </script>
