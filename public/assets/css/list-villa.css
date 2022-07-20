@@ -2994,14 +2994,17 @@ input::-webkit-inner-spin-button {
     z-index: 1;
 }
 .dots-container .circle.activeIndicator {
-    border: solid 2px white;
+    /* border: solid 2px white; */
+    width: 8px;
+    height: 8px;
+    margin-top: 1px;
 }
 .dots-container .circle {
     width: 10px;
     height: 10px;
     margin-left: 2px;
     margin-right: 2px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(106 106 106 / 50%);
     border-radius: 50%;
 }
 
