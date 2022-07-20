@@ -2815,7 +2815,7 @@ div#view-map-button-float {
     height: 40px;
     border-radius: 50px;
     position: fixed;
-    bottom: 74px;
+    bottom: 34px;
     z-index: 210;
     display: flex;
     justify-content: center;
@@ -3008,6 +3008,27 @@ input::-webkit-inner-spin-button {
     border-radius: 50%;
 }
 
+/* untuk class container-grid-cat */
+.top-min-10p {
+    top: -10px !important;
+}
+.pb-10p {
+    padding-bottom: 10px !important;
+}
+/* END untuk class container-grid-cat */
+
+/* untuk class container-grid-sub-cat */
+.pt-15p {
+    padding-top: 15px !important;
+}
+.pb-15p {
+    padding-bottom: 15px !important;
+}
+/* END untuk class container-grid-sub-cat */
+
+.mt-29p {
+    margin-top: 29px !important;
+}
 
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
     .searchbox {
@@ -3064,6 +3085,38 @@ input::-webkit-inner-spin-button {
 @media only screen and (max-width: 320px) {
     .pagination .page-item {
         width: 9.09% !important;
+    }
+}
+@media only screen and (max-width: 359px) {
+    .pt-xxs-20p {
+        padding-top: 20px !important;
+    }
+    .mb-xxs-2p {
+        margin-bottom: 2px !important;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 425px) {
+    .pt-xs-15p {
+        padding-top: 15px !important;
+    }
+    .mb-xs-4p {
+        margin-bottom: 4px !important;
+    }
+}
+@media only screen and (min-width: 426px) and (max-width: 949px) {
+    .pt-sm-35p {
+        padding-top: 35px !important;
+    }
+    .mb-min-sm-16p {
+        margin-bottom: -16px !important;
+    }
+}
+@media only screen and (min-width: 950px) and (max-width: 991px) {
+    .pt-xlg-0p {
+        padding-top: 0px !important;
+    }
+    .mb-xlg-16p {
+        margin-bottom: 16px !important;
     }
 }
 @media only screen and (min-width: 321px) and (max-width: 768px) { 
@@ -3133,7 +3186,10 @@ input::-webkit-inner-spin-button {
     #filter-cat-bg-color.nav-up {
         transform: translate(0px, -250px);
     }
-
+    #navbar-first-dekstop {
+        padding-top: 0.7rem !important;
+        padding-bottom: 0.5rem !important;
+    }
 }
 
 @media only screen and (min-width: 991px) {
@@ -3211,6 +3267,12 @@ input::-webkit-inner-spin-button {
     .location-restaurant,
     .location-things-to-do {
         width: 30%;
+    }
+    .pt-lg-10p {
+        padding-top: 10px !important;
+    }
+    .mb-lg-19p {
+        margin-bottom: 19px !important;
     }
 }
 @media only screen and (min-width: 992px) and (max-width: 1050px)  {

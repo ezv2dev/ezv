@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }}" style="width: 100%;"
+                <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }} top-min-10p pb-10p" style="width: 100%;"
                     data-isshow="true">
                     @foreach ($villaCategory->take(6) as $item)
                         <div>
@@ -113,7 +113,7 @@
                     </a>
                 </div>
 
-                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory"
+                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory pt-15p pb-15p"
                     style="width: 100%;" data-isshow="true">
                     <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
                         <div>
@@ -178,7 +178,7 @@
         </div>
     </div>
     {{-- Pagination --}}
-    <div class="mt-5 d-flex justify-content-center" id="footer">
+    <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
             {{ $villa->onEachSide(1)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
@@ -211,6 +211,48 @@
     {{-- Search --}}
     <script>
         $(document).ready(function() {
+            $(window).on("resize", function(e) {
+                var windowWidth = $(this).width();
+                if (windowWidth >= 800 && windowWidth <= 949) {
+                    var gap = ((windowWidth - 768) / 2) + 20;
+                    var navGap = ((windowWidth - 768) / 2) + 30;
+                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                    $("#filter-cat-bg-color").css("padding-left", gap + "px");
+                    $("#filter-cat-bg-color").css("padding-right", gap + "px");
+                } else if (windowWidth >= 950 && windowWidth <= 991) {
+                    var gap = ((windowWidth - 768) / 2) + 40;
+                    var navGap = ((windowWidth - 768) / 2) + 40;
+                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                    $("#filter-cat-bg-color").css("padding-left", gap + "px");
+                    $("#filter-cat-bg-color").css("padding-right", gap + "px");
+                }
+                else if (windowWidth <= 1360){
+                    $(".page-header-fixed .nav-row").attr("style", "");
+                    $("#filter-cat-bg-color").css("padding-left", "");
+                    $("#filter-cat-bg-color").css("padding-right", "");
+                }
+            })
+            var windowWidth = $(window).width();
+            if (windowWidth >= 800 && windowWidth <= 949) {
+                var gap = ((windowWidth - 768) / 2) + 20;
+                var navGap = ((windowWidth - 768) / 2) + 30;
+                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                $("#filter-cat-bg-color").css("padding-left", gap + "px");
+                $("#filter-cat-bg-color").css("padding-right", gap + "px");
+            } else if (windowWidth >= 950 && windowWidth <= 991) {
+                var gap = ((windowWidth - 768) / 2) + 40;
+                var navGap = ((windowWidth - 768) / 2) + 40;
+                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                $("#filter-cat-bg-color").css("padding-left", gap + "px");
+                $("#filter-cat-bg-color").css("padding-right", gap + "px");
+            }
+            else if (windowWidth <= 1360){
+                $(".page-header-fixed .nav-row").attr("style", "");
+                $(".page-header-fixed .nav-row").css("padding-right", navGap + "px");
+                $("#filter-cat-bg-color").css("padding-left", "");
+                $("#filter-cat-bg-color").css("padding-right", "");
+            }
+                
             $(".js-slider-2").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
