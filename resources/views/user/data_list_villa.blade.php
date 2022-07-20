@@ -302,7 +302,7 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Right Section -->
     </div>
-    <hr class="list-row row-line-grey mt-29p mb-xxs-2p mb-xs-4p mb-min-sm-16p mb-xlg-16p mb-lg-19p">
+    <hr class="list-row row-line-grey mt-29p mb-xxs-2p mb-xs-4p mb-min-sm-16p mb-xlg-16p mb-lg-14p">
 @endforeach
 
 @include('user.modal.villa.list.share')

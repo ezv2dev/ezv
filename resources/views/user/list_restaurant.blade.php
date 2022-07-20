@@ -57,7 +57,7 @@
             @endphp
 
             <div id="filter-cat-bg-color" style="width:100%;"
-                class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                class="container-grid-cat translate-text-group {{ $bgColor }} top-min-10p pb-10p" style="">
                 @foreach ($categories->take(6) as $item)
                     <div>
                         <a href="#" class="grid-img-container"
@@ -87,7 +87,7 @@
 
             <div class="stickySubCategory">
                 <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} pt-15p pb-15p" style="">
                     @foreach ($subcategories->take(8) as $item)
                         <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                             onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }}, false)">
