@@ -72,21 +72,23 @@
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12" style="position: relative; min-height: 100px;">
-                <div class="w-100" id="view-map-button-float">
-                    <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-                        <button onclick="view_main_map()" style="height:inherit;">
-                            <!-- partial:index.partial.html -->
-                            <div class="notice">
-                                <span class="world">
-                                    <span class="images" style="color: #52EB35;">
-                                        <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                @if (count($villas) != 0)
+                    <div class="w-100" id="view-map-button-float">
+                        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                            <button onclick="view_main_map()" style="height:inherit;">
+                                <!-- partial:index.partial.html -->
+                                <div class="notice">
+                                    <span class="world">
+                                        <span class="images" style="color: #52EB35;">
+                                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                                        </span>
                                     </span>
-                                </span>
-                            </div>
-                            <!-- partial -->
-                        </button>
+                                </div>
+                                <!-- partial -->
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }}" style="width: 100%;"
                     data-isshow="true">

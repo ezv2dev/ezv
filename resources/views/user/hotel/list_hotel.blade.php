@@ -118,6 +118,20 @@
         </div>
     </div>
     <!-- </div> -->
+    @if (count($hotel) == 0)
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mt-4">
+                        <img class="img-fluid p-4"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                            alt="" />
+                        <p class="lead">Hotel data not available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="col-lg-12 container-grid-hotel container__grid">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
@@ -226,10 +240,8 @@
                                     </a>
                                 @endif
                             @endforelse
-
                         </div>
                     </div>
-
                 </div>
 
                 <div class="desc-container-grid ">
@@ -242,14 +254,6 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
-                    <!-- <div class="fw-500 text-align-right text-14 font-light list-description">
-                                                                                                                                                                                                                    @if ($data->detailReview)
-    {{ $data->detailReview->average }}
-@else
-    {{ __('user_page.New') }}
-    @endif
-                                                                                                                                                                                                                    <i class="fa-solid fa-star text-13 text-orange"></i>
-                                                                                                                                                                                                                </div> -->
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
                             {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
@@ -285,21 +289,22 @@
             </div>
         @endforeach
     </div>
-    <div class="col-12" id="view-map-button-float">
-        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-            <button onclick="view_main_map()" style="height:inherit;">
-
-                <div class="notice">
-                    <span class="world">
-                        <span class="images" style="color: #52EB35;">
-                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+    @if (count($hotel) != 0)
+        <div class="col-12" id="view-map-button-float">
+            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                <button onclick="view_main_map()" style="height:inherit;">
+                    <div class="notice">
+                        <span class="world">
+                            <span class="images" style="color: #52EB35;">
+                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- partial -->
-            </button>
+                    </div>
+                    <!-- partial -->
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
