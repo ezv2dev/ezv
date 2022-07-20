@@ -87,7 +87,8 @@ use Illuminate\Support\Facades\Crypt;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     style="margin-top: -2rem;"></button>
             </div>
-            <form action="{{ route('villa_quick_enquiry') }}" method="POST">
+            {{-- <form action="{{ route('villa_quick_enquiry') }}" method="POST" id="VillaQuickEnquiry"> --}}
+            <form action="javascript:void(0);" method="POST" id="VillaQuickEnquiry" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="email_receiver" value="{{ $villa[0]->userCreate->email }}">
                 <input type="hidden" name="villa_name" value="{{ $villa[0]->name }}">
@@ -374,6 +375,7 @@ use Illuminate\Support\Facades\Crypt;
                                 <input type="text" class="form-control" id="first_name"
                                     value="{{ Auth::user()->first_name }}" placeholder="First Name"
                                     name="first_name">
+                                <small id="err-fname" style="display: none;" class="invalid-feedback">{{ __('auth.empty_fname') }}</small>
                             </div>
                         </div>
 
@@ -383,6 +385,7 @@ use Illuminate\Support\Facades\Crypt;
                                 <input type="text" class="form-control" id="last_name"
                                     value="{{ Auth::user()->last_name }}" placeholder="Last Name"
                                     name="last_name">
+                                <small id="err-lname" style="display: none;" class="invalid-feedback">{{ __('auth.empty_lname') }}</small>
                             </div>
                         </div>
                     </div>
@@ -399,6 +402,7 @@ use Illuminate\Support\Facades\Crypt;
                             <label for="phone">Phone Number</label>
                             <input type="number" class="form-control" id="phone"
                                 value="{{ Auth::user()->phone }}" placeholder="Phone Number" name="phone">
+                            <small id="err-phone" style="display: none;" class="invalid-feedback">{{ __('auth.empty_phone') }}</small>
                         </div>
                     </div>
                     <div class="row">
@@ -408,7 +412,7 @@ use Illuminate\Support\Facades\Crypt;
                         </div>
                     </div>
 
-                    <div class="col-12 text-center mt-2"><input class="price-button" type="submit"
+                    <div class="col-12 text-center mt-2"><input class="price-button" id="enq-button" type="submit"
                             value="{{ Translate::translate('QUICK ENQUIRY') }}">
                     </div>
                 </div>
@@ -418,3 +422,93 @@ use Illuminate\Support\Facades\Crypt;
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $('#first_name').keyup(function (e) {
+            $('#first_name').removeClass('is-invalid');
+            $('#err-fname').hide();
+        });
+        $('#last_name').keyup(function (e) {
+            $('#last_name').removeClass('is-invalid');
+            $('#err-lname').hide();
+        });
+        $('#phone').keyup(function (e) {
+            $('#phone').removeClass('is-invalid');
+            $('#err-phone').hide();
+        });
+        $('#VillaQuickEnquiry').submit(function(e) {
+            let error = 0;
+            // let emlrcv = $('#email_receiver').val();
+            // let check_out = $('#check_out3').val();
+            // let check_in = $('#check_in3').val();
+            // let adult = $('#adult4').val();
+            // let child = $('#child4').val();
+            // let vname = $('#villa_name').val();
+            let fname = $('#first_name').val();
+            let lname = $('#last_name').val();
+            // let email = $('#email').val();
+            let phone = $('#phone').val();
+            // let adinf = $('#additional_information').val();
+
+            if(!fname) {
+                $('#first_name').addClass('is-invalid');
+                $('#err-fname').show();
+                error = 1;
+            }
+            if(!lname) {
+                $('#last_name').addClass('is-invalid');
+                $('#err-lname').show();
+                error = 1;
+            }
+            if(!phone) {
+                $('#phone').addClass('is-invalid');
+                $('#err-phone').show();
+                error = 1;
+            }
+            if(error == 1) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                var formData = new FormData(this);
+                var btn = $("#enq-button");
+                $(btn).val("Saving...");
+                $(btn).attr("disabled", true);
+
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        Accept: "application/json",
+                    },
+                    url: "/villa/quick-enquiry",
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    enctype: "multipart/form-data",
+                    dataType: "json",
+                    success: function (response) {
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                        $('#modal-quick-enquiry').modal("hide");
+                        btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                        btn.classList.remove("disabled");
+                    },
+                    error: function (jqXHR, exception) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                        $(btn).val('{{ Translate::translate('QUICK ENQUIRY') }}');
+                        $(btn).attr("disabled", false);
+                    },
+                });
+            }
+        });
+    });
+    </script>

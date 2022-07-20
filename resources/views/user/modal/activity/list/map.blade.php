@@ -501,7 +501,7 @@
                                                 </a>
 
                                                 <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                 </a>
                                             </p>
                                     </div>
@@ -735,7 +735,7 @@
                                                 </a>
 
                                                 <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                 </a>
                                             </p>
                                     </div>
@@ -941,7 +941,7 @@
                                                 </a>
 
                                                 <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                 </a>
                                             </p>
                                     </div>
@@ -1180,7 +1180,7 @@
                                             </a>
 
                                             <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                                <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                             </a>
                                         </p>
                                     </div>

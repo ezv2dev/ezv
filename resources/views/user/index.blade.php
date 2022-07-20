@@ -814,13 +814,11 @@
                                 <p style="text-align: center;">
                                     <a href="https://www.apple.com/id/app-store/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                        <img style="width:18%;"
-                                            src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                        <img src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                     </a>
                                     <a href="https://play.google.com/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                        <img style="width:21%;"
-                                            src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.png') }}">
+                                        <img src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                     </a>
                                 </p>
                             </div>
@@ -1155,6 +1153,9 @@
         {{-- Search Location --}}
         <script>
             $(document).ready(() => {
+                if (window.scrollY == 0 && window.innerWidth <= 991) {
+                    document.getElementById("ul").style.display = "none";
+                }
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").css({
                         "height": "auto",
@@ -1373,7 +1374,7 @@
             window.addEventListener('scroll', function() {
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
-                if (window.scrollY == 0) {
+                if (window.scrollY == 0 && window.innerWidth > 991) {
                     document.getElementById("ul").classList.remove("ul-display-none");
                     document.getElementById("ul").classList.add("ul-display-block");
                     document.getElementById("bar").classList.remove("display-none");
@@ -1398,8 +1399,9 @@
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     removeClass(els, 'display-none');
                 } else {
-                    if (!isFocused || window.innerWidth > 768) {
+                    if (!isFocused || window.innerWidth > 991) {
                         console.log("oke");
+                        document.getElementById("ul").style.display = "";
                         document.getElementById("ul").classList.add("ul-display-none");
                         document.getElementById("ul").classList.remove("ul-display-block");
                         document.getElementById("bar").classList.add("display-none");
@@ -1442,29 +1444,28 @@
 
         <script>
             function popUp() {
-                if (window.scrollY != 0 || window.innerWidth > 991) { 
-                    document.getElementById("ul").classList.remove("ul-display-none");
-                    document.getElementById("ul").classList.add("ul-display-block");
-                    document.getElementById("bar").classList.remove("display-none");
-                    document.getElementById("searchbox").classList.add("display-none");
-                    document.getElementById("searchbox").classList.remove("display-block");
-                    document.getElementById("nav").classList.add("search-height");
+                document.getElementById("ul").style.display = "";
+                document.getElementById("ul").classList.remove("ul-display-none");
+                document.getElementById("ul").classList.add("ul-display-block");
+                document.getElementById("bar").classList.remove("display-none");
+                document.getElementById("searchbox").classList.add("display-none");
+                document.getElementById("searchbox").classList.remove("display-block");
+                document.getElementById("nav").classList.add("search-height");
 
-                    function removeClass(elements, className) {
-                        for (var i = 0; i < elements.length; i++) {
-                            var element = elements[i];
-                            if (element.classList) {
-                                element.classList.remove(className);
-                            } else {
-                                element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ')
-                                    .join('|') + '(\\b|$)', 'gi'), ' ');
-                            }
+                function removeClass(elements, className) {
+                    for (var i = 0; i < elements.length; i++) {
+                        var element = elements[i];
+                        if (element.classList) {
+                            element.classList.remove(className);
+                        } else {
+                            element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ')
+                                .join('|') + '(\\b|$)', 'gi'), ' ');
                         }
                     }
-
-                    var els = document.getElementsByClassName("flatpickr-calendar");
-                    removeClass(els, 'display-none');
                 }
+
+                var els = document.getElementsByClassName("flatpickr-calendar");
+                removeClass(els, 'display-none');
             }
         </script>
 
@@ -1500,6 +1501,9 @@
                         $("#bar .guests").addClass("col-10");
                         $("#bar .button").addClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "");
+                        if (window.scrollY == 0) {
+                            $("#ul").css("display","none");
+                        }
                     } else {
                         $("#search_bar #bar").removeClass("row");
                         $("#bar .location").removeClass("col-12 mb-2");
@@ -1508,6 +1512,7 @@
                         $("#bar .guests").removeClass("col-10");
                         $("#bar .button").removeClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "90px");
+                        $("#ul").css("display","");
                     }
                 }
                 var windowWidth = $(window).width();

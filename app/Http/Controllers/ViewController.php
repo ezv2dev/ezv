@@ -1666,6 +1666,18 @@ class ViewController extends Controller
 
         $quick->save();
         return back();
+        // if ($quick->save()) {
+        //     return response()->json([
+        //         'message' => 'Data sent Successfuly',
+        //         'status' => 200,
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'message' => 'Failed send of Data',
+        //         'status' => 500,
+        //     ], 500);
+        // }
+
     }
 
     public function villa_delete_photo_video(Request $request)

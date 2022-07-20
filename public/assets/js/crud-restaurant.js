@@ -1178,105 +1178,159 @@ $("#storeStoryForm").submit(function (e) {
     }
     // console.log(readerStoryRestaurant);
 });
-
+$("#imgRes").on("change", function() {
+    if (document.getElementById("imgRes").files.length != 0) {
+        $(".image-add-res").css("border", "");
+        $(".err-img").hide();
+    }
+});
+$(".frm-name").on("keyup", function() {
+    $('.frm-name').removeClass('is-invalid');
+    $(".err-name").hide();
+});
+$(".frm-price").on("keyup", function() {
+    $('.frm-price').removeClass('is-invalid');
+    $("#err-prc").hide();
+});
+$(".frm-desc").on("keyup", function() {
+    $('.frm-desc').removeClass('is-invalid');
+    $(".err-desc").hide();
+});
 $("#addMenuForm").submit(function (e) {
-    e.preventDefault();
+    let error = 0;
+    if(!$('.frm-name').val()) {
+        $('.frm-name').addClass('is-invalid');
+        $(".err-name").show();
+        error = 1;
+    } else {
+        $('.frm-name').removeClass('is-invalid');
+        $(".frm-name").hide();
+    }
+    if(!$('.frm-price').val()) {
+        $('.frm-price').addClass('is-invalid');
+        $(".err-prc").show();
+        error = 1;
+    } else {
+        $('#price').removeClass('is-invalid');
+        $("#err-prc").hide();
+    }
+    if(!$('.frm-desc').val()) {
+        $('.frm-desc').addClass('is-invalid');
+        $(".err-desc").show();
+        error = 1;
+    } else {
+        $('.frm-desc').removeClass('is-invalid');
+        $(".err-desc").hide();
+    }
+    if (document.getElementById("imgRes").files.length == 0) {
+        $(".image-add-res").css("border", "solid #e04f1a 1px");
+        $(".err-img").show();
+        error = 1;
+    } else {
+        $(".image-add-res").css("border", "");
+        $(".err-img").hide();
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
 
-    var formData = new FormData(this);
+        var formData = new FormData(this);
 
-    var btn = document.getElementById("btnSaveMenuForm");
-    btn.textContent = "Saving Menu...";
-    btn.classList.add("disabled");
+        var btn = document.getElementById("btnSaveMenuForm");
+        btn.textContent = "Saving Menu...";
+        btn.classList.add("disabled");
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            Accept: "application/json",
-        },
-        url: "/restaurant/menu/store",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        enctype: "multipart/form-data",
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                Accept: "application/json",
+            },
+            url: "/restaurant/menu/store",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-
-            let path = "/foto/restaurant/";
-            let slash = "/";
-            let menuPath = "menu";
-            let uid = response.data.uid.uid;
-            var lowerCaseUid = uid.toLowerCase();
-            let content = "";
-
-            content +=
-                '<div class="col-4 grid-photo" id="displayMenu' +
-                response.data.menu.id_menu +
-                '"> <a class="itemsMenu" href="' +
-                path +
-                lowerCaseUid +
-                slash +
-                menuPath +
-                slash +
-                response.data.menu.foto +
-                '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                path +
-                lowerCaseUid +
-                slash +
-                menuPath +
-                slash +
-                response.data.menu.foto +
-                '" title="' +
-                response.data.menu.name +
-                '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
-                response.data.menu.id_menu +
-                '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
-
-            // console.log(content);
-
-            $("#imgRes").val("");
-            $("#addMenuForm").children("#name").val("");
-            $("#addMenuForm").children("#price").val("");
-            $("#addMenuForm").children("#description").val("");
-
-            // $("#storyContent").html("");
-            $("#contentMenu").append(content);
-
-            $("#modal-edit_menu").modal("hide");
-
-            // if (response.data.length > 4) {
-            //     sliderRestaurant();
-            // }
-
-            // $("#profileDropzone").attr("src", "");
-
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-        },
-        error: function (jqXHR, exception) {
-            console.log(jqXHR);
-            // console.log(exception);
-
-            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.errors[i],
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
                     position: "topRight",
                 });
-            }
 
-            // $("#modal-edit_menu").modal("hide");
+                let path = "/foto/restaurant/";
+                let slash = "/";
+                let menuPath = "menu";
+                let uid = response.data.uid.uid;
+                var lowerCaseUid = uid.toLowerCase();
+                let content = "";
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-        },
-    });
+                content +=
+                    '<div class="col-4 grid-photo" id="displayMenu' +
+                    response.data.menu.id_menu +
+                    '"> <a class="itemsMenu" href="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    menuPath +
+                    slash +
+                    response.data.menu.foto +
+                    '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    menuPath +
+                    slash +
+                    response.data.menu.foto +
+                    '" title="' +
+                    response.data.menu.name +
+                    '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                    response.data.menu.id_menu +
+                    '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                // console.log(content);
+
+                $("#imgRes").val("");
+                $("#addMenuForm").children("#name").val("");
+                $("#addMenuForm").children("#price").val("");
+                $("#addMenuForm").children("#description").val("");
+
+                // $("#storyContent").html("");
+                $("#contentMenu").append(content);
+
+                $("#modal-edit_menu").modal("hide");
+
+                // if (response.data.length > 4) {
+                //     sliderRestaurant();
+                // }
+
+                // $("#profileDropzone").attr("src", "");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+            error: function (jqXHR, exception) {
+                console.log(jqXHR);
+                // console.log(exception);
+
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+
+                // $("#modal-edit_menu").modal("hide");
+
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+        });
+    }
 });
