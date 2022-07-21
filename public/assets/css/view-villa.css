@@ -3480,7 +3480,7 @@ span.flatpickr-weekday {
     }
     .modal-map-image-container,
     #modal-map-content .img-fluid {
-        height: 300px !important;
+        height: 23vh !important;
     }
     .payment-warning {
         width: 80% !important;
@@ -3873,6 +3873,9 @@ span.flatpickr-weekday {
         width: 94%;
         border-radius: 12px;
         background-color: white;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
     }
 /* end map mobile */
 

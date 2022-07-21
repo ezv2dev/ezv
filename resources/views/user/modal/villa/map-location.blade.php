@@ -626,22 +626,27 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <div id="map-desc" class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
-                                        <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
-                                        <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                        <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
-                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
-                                    </a>
-                                </div>
 
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
-                                    <div class="d-flex justify-content-end col-6">
-                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
-                                        <div class="me-2"></div>
-                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                    <div id="map-desc" class="mt-3">
+                                            <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                            <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
+
+                                            <div class="col-6">
+                                                <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                                    <div class="d-flex justify-content-end col-6">
+                                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                        <div class="me-2"></div>
+                                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>`;
 
         return customContent;
@@ -697,6 +702,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
@@ -903,6 +910,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
 
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
@@ -1136,6 +1145,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
 
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
