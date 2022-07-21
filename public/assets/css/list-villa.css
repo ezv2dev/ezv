@@ -3154,6 +3154,11 @@ input::-webkit-inner-spin-button {
         display: none !important;
     }
 }
+@media only screen and (max-width: 949px) {
+    #villa-data .list-row-gap:first-of-type {
+        padding-top: 0px !important;
+    }
+}
 @media only screen and (max-width: 991px) {
     .pagination {
         width: 100vw !important;
@@ -3201,6 +3206,9 @@ input::-webkit-inner-spin-button {
     #navbar-first-dekstop {
         padding-top: 0.7rem !important;
         padding-bottom: 0.5rem !important;
+    }
+    #villa-data hr:last-of-type {
+        margin-bottom: 19px !important;
     }
 }
 

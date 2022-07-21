@@ -85,7 +85,12 @@
                             {{ __('user_page.Dashboard') }}
                         </a>
                     @endif
-                    @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
+                    @if ($role == 4)
+                        <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_intro') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.Collabs') }}
+                        </a>
+                    @else
                         <a class="d-block mb-2 collab-expand" href="{{ route('collaborator_list') }}"
                             style="width: fit-content; color:#585656;">
                             {{ __('user_page.Collabs') }}
@@ -253,7 +258,7 @@
                                 <div class="nav-link-form" id="collaborator-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
-                                            target="_blank" href="{{ route('collaborator_list') }}"><img
+                                            target="_blank" href="{{ route('collaborator_intro') }}"><img
                                                 src="{{ asset('assets/icon/menu/collab1.svg') }}"
                                                 style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>

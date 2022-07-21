@@ -132,7 +132,7 @@
             </div>
         </div>
     @endif
-    <div class="col-lg-12 container-grid-hotel container__grid mt-xxs-20p mt-xs-15p mt-sm-35p mt-xlg-0p mt-lg-10p">
+    <div class="col-lg-12 container-grid-hotel container__grid mt-0 mt-lg-10p">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">

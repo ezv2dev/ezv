@@ -322,10 +322,15 @@
         $("#frmRgs").submit(function(e) {
             let error = 0;
             let CPass = $('#password-register').val();
+
+            // reset input style
+            $('.invalid-feedback').hide()
+            $('.invalid-feedback').text('')
             $('.form-control').removeClass('is-invalid')
             $('.flaticon').show()
             $('.form-control').css("border-bottom-color", "#e7e7e7");
 
+            // validasi
             if(!$('#email-register').val()) {
                 $('#fvicn-eml').css("top", "35%");
                 $('#fvicn-eml').hide();
@@ -413,16 +418,10 @@
                             $('.container-loading-animation').addClass('d-none')
                             location.reload();
                         },
-                        error: function( response ){
-                            $('.container-loading-animation').addClass('d-none')
-                            $('.invalid-feedback').hide()
-                            $('.invalid-feedback').text('')
-                            $('.form-control').removeClass('is-invalid')
-                            $('.flaticon').show()
-                            $('.form-control').css("border-bottom-color", "#e7e7e7");
-                            
+                        error: function( response ){                            
                             var errors = response.responseJSON;
                             $.each(errors.errors,function (el, val) {
+                                $('.container-loading-animation').addClass('d-none')
                                 let idErrorMessage = el == 'email' ? '#err-eml-rgs' : '#err-pas-rgs'
                                 let idIconInput = el == 'email' ? '#fvicn-eml' : '#fvicn-pas'
                                 
