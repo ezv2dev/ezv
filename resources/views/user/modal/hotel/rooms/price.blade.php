@@ -11,7 +11,7 @@
     }
 
     .modal-body-editprice {
-        padding: 0rem 2rem 2rem 2rem !important;
+        padding: 1rem 2rem 2rem 2rem !important;
         height: 490px !important;
         overflow-y: auto !important;
     }
