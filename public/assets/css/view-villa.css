@@ -3957,7 +3957,7 @@ span.flatpickr-weekday {
         bottom: 15%;
         z-index: 999;
         width: 94%;
-        border-radius: 12px;
+        border-radius: 0px !important;
         background-color: white;
         bottom: 0px;
         left: 0;
