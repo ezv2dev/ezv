@@ -1049,8 +1049,8 @@
                         </div>
                         <div class="row-grid-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                            @if(!empty($villa_amenities->count()))
-                            @if($villa_amenities->count() > 6)
+                                @if (!empty($villa_amenities->count()))
+                                    @if ($villa_amenities->count() > 6)
                                         @foreach ($villa_amenities->take(6) as $item1)
                                             <div class="list-amenities ">
                                                 <div class="text-align-center">
@@ -1067,14 +1067,16 @@
                                             </div>
                                         @endforeach
                                         <div class="list-amenities">
-                                            <button class="amenities-button" type="button" onclick="view_amenities()">
-                                                <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                                            <button class="amenities-button" type="button"
+                                                onclick="view_amenities()">
+                                                <i class="fa-solid fa-ellipsis text-orange"
+                                                    style="font-size: 40px;"></i>
                                                 <div style="font-size: 15px;" class="translate-text-group-items">
                                                     {{ __('user_page.More') }}</div>
                                             </button>
                                         </div>
-                            @endif
-                            @if ($villa_amenities->count() < 6)
+                                    @endif
+                                    @if ($villa_amenities->count() < 6)
                                         @php
                                             $i = 6 - $villa_amenities->count();
                                         @endphp
@@ -1093,7 +1095,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        @if($i > 0)
+                                        @if ($i > 0)
                                             @php
                                                 $i = $i - $kitchen->count();
                                             @endphp
@@ -1113,7 +1115,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if($i > 0)
+                                        @if ($i > 0)
                                             @php
                                                 $i = $i - $safety->count();
                                             @endphp
@@ -1133,7 +1135,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if($i > 0)
+                                        @if ($i > 0)
                                             @php
                                                 $i = $i - $service->count();
                                             @endphp
@@ -1153,7 +1155,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if($i > 0)
+                                        @if ($i > 0)
                                             @php
                                                 $i = $i - $bathroom->count();
                                             @endphp
@@ -1173,21 +1175,24 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if($i > 6)
-                                        <div class="list-amenities">
-                                            <button class="amenities-button" type="button" onclick="view_amenities()">
-                                                <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                                <div style="font-size: 15px;" class="translate-text-group-items">
-                                                    {{ __('user_page.More') }}</div>
-                                            </button>
-                                        </div>
+                                        @if ($i > 6)
+                                            <div class="list-amenities">
+                                                <button class="amenities-button" type="button"
+                                                    onclick="view_amenities()">
+                                                    <i class="fa-solid fa-ellipsis text-orange"
+                                                        style="font-size: 40px;"></i>
+                                                    <div style="font-size: 15px;" class="translate-text-group-items">
+                                                        {{ __('user_page.More') }}</div>
+                                                </button>
+                                            </div>
                                         @endif
-                            @endif
-                            @else
-                            <div class='list-amenities'>
-                                <p style="text-align: center;">{{ __('user_page.There is no amenities') }}</p>
-                            </div>
-                            @endif
+                                    @endif
+                                @else
+                                    <div class='list-amenities'>
+                                        <p style="text-align: center;">{{ __('user_page.There is no amenities') }}
+                                        </p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </section>
@@ -2356,121 +2361,100 @@
                             @auth
                                 @if (auth()->user()->id == $villa[0]->created_by)
                                     @if ($villa[0]->status == '0')
-                                        <div class="alert alert-danger d-flex flex-row align-items-center"
-                                            role="alert">
-                                            <span>{{ __('user_page.this content is deactive,') }} </span>
-                                            <form
-                                                action="{{ route('villa_request_update_status', $villa[0]->id_villa) }}"
-                                                method="post">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input type="hidden" name="id_villa"
-                                                    value="{{ $villa[0]->id_villa }}">
-                                                <button class="btn"
+                                        <div id="activation0">
+                                            <div class="alert alert-danger d-flex flex-row align-items-center"
+                                                role="alert">
+                                                <span>{{ __('user_page.this content is deactive,') }} </span>
+                                                <button class="btn" onclick="requestActivation()"
                                                     type="submit">{{ __('user_page.request activation') }}</button>
-                                            </form>
-                                            <span> ?</span>
+                                                <span> ?</span>
+                                            </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '1')
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active,') }} </span>
-                                            {{-- <form action="{{ route('villa_request_update_status', $villa[0]->id_villa) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
-                                            <button class="btn"
-                                                type="submit">{{ __('user_page.request deactivation') }}</button>
-                                        </form>
-                                        <span> ?</span> --}}
+                                        <div class="activation1">
+                                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                                role="success">
+                                                <span>{{ __('user_page.this content is active,') }} </span>
+                                            </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="alert alert-warning d-flex flex-row align-items-center"
-                                            role="warning">
-                                            <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
-                                            </span>
-                                            {{-- <form action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
-                                            <button class="btn"
-                                                type="submit">{{ __('user_page.cancel activation') }}</button>
-                                        </form>
-                                        <span> ?</span> --}}
+                                        <div class="activation2">
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                                </span>
+                                            </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '3')
-                                        <div class="alert alert-warning d-flex flex-row align-items-center"
-                                            role="warning">
-                                            <span>{{ __('user_page.you have been request deactivation for this content,') }}
-                                            </span>
-                                            <form
-                                                action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
-                                                method="post">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input type="hidden" name="id_villa"
-                                                    value="{{ $villa[0]->id_villa }}">
-                                                <button class="btn"
-                                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                            </form>
-                                            <span> ?</span>
+                                        <div class="activation3">
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                                </span>
+                                                <form
+                                                    action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="id_villa"
+                                                        value="{{ $villa[0]->id_villa }}">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
                                         </div>
                                     @endif
                                 @endif
                                 @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
                                     @if ($villa[0]->status == '0')
-                                        <div class="alert alert-danger d-flex flex-row align-items-center"
-                                            role="alert">
-                                            <span>{{ __('user_page.this content is deactive') }}</span>
+                                        <div id="adminVilla0">
+                                            <div class="alert alert-danger d-flex flex-row align-items-center"
+                                                role="alert">
+                                                <span>{{ __('user_page.this content is deactive') }}</span>
+                                            </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '1')
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                        <div id="adminVilla1">
+                                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                                role="success">
+                                                <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                                <div style="margin-left: 10px;">
+                                                    <select class="custom-select grade-success" name="grade"
+                                                        id="gradeVilla">
+                                                        <option value="AA"
+                                                            {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                        </option>
+                                                        <option value="A"
+                                                            {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                        </option>
+                                                        <option value="B"
+                                                            {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                        </option>
+                                                        <option value="C"
+                                                            {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                        </option>
+                                                        <option value="D"
+                                                            {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                        </option>
+                                                    </select>
+                                                </div>
 
-                                            {{-- <form action="{{ route('villa_update_grade', $villa[0]->id_villa) }}"
-                                                method="post">
-                                                @csrf --}}
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
-                                                    <option value="AA"
-                                                        {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                    </option>
-                                                    <option value="A"
-                                                        {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                    </option>
-                                                    <option value="B"
-                                                        {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                    </option>
-                                                    <option value="C"
-                                                        {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                    </option>
-                                                    <option value="D"
-                                                        {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                    </option>
-                                                </select>
-                                                {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
                                             </div>
-                                            {{-- </form> --}}
-
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="alert alert-warning d-flex justify-content-start" role="warning">
-                                            <span>{{ __('user_page.the owner request activation, choose grade Villa') }}
-                                            </span>
-                                            <form
-                                                action="{{ route('admin_villa_update_status', $villa[0]->id_villa) }}"
-                                                method="get" class="d-flex">
+                                        <div id="adminVilla2">
+                                            <div class="alert alert-warning d-flex justify-content-start"
+                                                role="warning">
+                                                <span>{{ __('user_page.the owner request activation, choose grade Villa') }}
+                                                </span>
                                                 <div style="margin-left: 10px;">
-                                                    <select class="custom-select grade" name="grade">
+                                                    <select class="custom-select grade" name="grade" id="grade2">
                                                         <option value="AA"
                                                             {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
                                                         </option>
@@ -2489,22 +2473,24 @@
                                                     </select>
                                                 </div>
                                                 <span style="margin-left: 10px;">and</span>
-                                                <button class="btn" type="submit"
-                                                    style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                            </form>
+                                                <button class="btn" type="submit" style="margin-top: -7px;"
+                                                    onclick="ActivationContent()">{{ __('user_page.activate this content') }}</button>
+                                            </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '3')
-                                        <div class="alert alert-warning d-flex flex-row align-items-center"
-                                            role="warning">
-                                            <span>{{ __('user_page.the owner request deactivation,') }}' </span>
-                                            <form
-                                                action="{{ route('admin_villa_update_status', $villa[0]->id_villa) }}"
-                                                method="get">
-                                                <button class="btn"
-                                                    type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                            </form>
-                                            <span> ?</span>
+                                        <div id="adminVilla3">
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.the owner request deactivation,') }}' </span>
+                                                <form
+                                                    action="{{ route('admin_villa_update_status', $villa[0]->id_villa) }}"
+                                                    method="get">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
                                         </div>
                                     @endif
                                 @endif
@@ -3540,7 +3526,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                    <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3697,7 +3683,8 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}" id="positionPhotoGallery{{$id}}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                                id="positionPhotoGallery{{ $id }}">
                                 <img class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
                                     title="{{ $name }}">
@@ -3983,19 +3970,22 @@
                             response.data.photo[i].id_photo +
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
-                        contentPositionModal += '<li class="ui-state-default" data-id="'+response.data.photo[i].id_photo+'" id="positionPhotoGallery'+response.data.photo[i].id_photo+'"> <img src="' +
+                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[
+                                i].id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
+                            '"> <img src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="'+response.data.photo[i].name+'"> </li>';
+                            '" title="' + response.data.photo[i].name + '"> </li>';
                     }
 
                     for (let v = 0; v < response.data.video.length; v++) {
-                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
-                        '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
-                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                        path + lowerCaseUid + slash + response.data.video[v].name +
-                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
-                        response.data.video[v].id_video +
-                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                            .id_video +
+                            '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                            ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                            path + lowerCaseUid + slash + response.data.video[v].name +
+                            '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                            response.data.video[v].id_video +
+                            '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
                     }
 
                     btn.textContent = "Submit";
@@ -4202,8 +4192,7 @@
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
 
-                if (galleryLength == 0)
-                {
+                if (galleryLength == 0) {
                     $('.gallery').html("");
                 }
 
@@ -4220,9 +4209,11 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
-                    contentPositionModal = '<li class="ui-state-default" data-id="'+message.data.photo[0].id_photo+'" id="positionPhotoGallery'+message.data.photo[0].id_photo+'"> <img src="' +
+                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                        '"> <img src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="'+message.data.photo[0].name+'"> </li>';
+                        '" title="' + message.data.photo[0].name + '"> </li>';
 
                     $('.gallery').append(content);
                     $('#sortable-photo').append(contentPositionModal);
@@ -4255,12 +4246,16 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top")));
+            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
+                "top")));
 
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top")));//$("#availability").offset().top;
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                    '#sidebar_fix .reserve-block').height() + parseInt($(
+                    '#sidebar_fix .reserve-block').css("top"))); //$("#availability").offset().top;
             });
 
             $window.scroll(function() {
@@ -5023,46 +5018,6 @@
         })
     </script>
 
-    {{-- <script>
-        $('#check_in5').flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            mode: "range",
-            showMonths: 2,
-            onChange: function(selectedDates, dateStr, instance) {
-                var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $('#min_stay').val();
-                var total = $('#price').val() * sum_night;
-                // console.log(sum_night);
-                if (sum_night < min_stay) {
-                    alert("minimum stay is " + min_stay + " days");
-                } else {
-                    $('#sum_night5').val(sum_night);
-                    $("#total5").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                    $("#total_all5").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                }
-                $('#check_in5').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                $('#check_out5').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                $('#check_in').val($('#check_in5').val());
-                $('#check_out').val($('#check_out5').val());
-                $('#sum_night').val($('#sum_night5').val());
-                $('#total').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
-                $('#total_all').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
-            }
-        });
-    </script> --}}
-
     @include('components.lazy-load.lazy-load')
     @include('components.promotion.mobile-app')
     <script src="{{ asset('assets/js/translate.js') }}"></script>
@@ -5077,6 +5032,102 @@
             });
         }
     </script>
+
+    {{-- Request Activation --}}
+    <script>
+        function requestActivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 2) {
+                        $("#activation0").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                </span>
+                            </div>
+                        `)
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            });
+        }
+
+        function ActivationContent() {
+            var grade = $("#grade2 option:selected").val();
+            Swal.fire({
+                title: `{{ __('user_page.Are you sure?') }}`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `Yes, Activate it`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "get",
+                        url: `/admin/villa/update-status/${id_villa}`,
+                        data: {
+                            grade: grade
+                        },
+                        success: function(response) {
+                            if (response.data == 1) {
+                                $("#adminVilla2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeVilla">
+                                                <option value="AA"
+                                                    {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                </option>
+                                                <option value="A"
+                                                    {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                </option>
+                                                <option value="B"
+                                                    {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                </option>
+                                                <option value="C"
+                                                    {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                </option>
+                                                <option value="D"
+                                                    {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                `)
+                                iziToast.success({
+                                    title: "Success",
+                                    message: response.message,
+                                    position: "topRight",
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    Swal.fire(`{{ __('user_page.Cancel') }}`,
+                        `Canceled Activate Data`,
+                        'error')
+                }
+            });
+        }
+    </script>
+    {{-- End Activation --}}
 </body>
 
 </html>

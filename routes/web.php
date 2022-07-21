@@ -475,7 +475,7 @@ Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra']
 // );
 
 // ! End Verified
-Route::patch('/villa/{id}/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
+Route::post('/villa/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
 Route::patch('/restaurant/{id}/update/request-update-status', [Restaurant\RestaurantController::class, 'request_update_status'])->name('restaurant_request_update_status');
 Route::patch('/things-to-do/{id}/update/request-update-status', [Activity\ActivityController::class, 'request_update_status'])->name('activity_request_update_status');
 Route::patch('/hotel/{id}/update/request-update-status', [Hotel\HotelDetailController::class, 'request_update_status'])->name('hotel_request_update_status');
