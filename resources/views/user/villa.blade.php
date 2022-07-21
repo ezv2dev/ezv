@@ -2250,17 +2250,15 @@
                             </div>
                             <p style="margin-bottom: 0px !important">
                                 {{ __('user_page.Add your trip dates to get the cancellation details for this stay') }}<br>
-                                <button type="button" class="btn btn-outline-dark ml-2 rounded-circle"
-                                    style="width: 35px; height: 35px;" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom"
-                                    title="{{ __('user_page.Cancellation and prepayment policies vary according to accommodation type. Please enter the dates of your stay and check the conditions of your required room') }}">
-                                    ?
-                                </button>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
+                                <a onclick="addDatesFunction()" style="text-decoration: underline; color: #ff7400;"
+                                    class="d-none" id="addDates">Add Dates
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                                 <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
-                                    style="text-decoration: underline; color: #ff7400;"
-                                    href="#">{{ __('user_page.Show more') }}
+                                    style="text-decoration: underline; color: #ff7400;" class="d-none"
+                                    id="showCancel">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </p>
@@ -3520,7 +3518,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                            <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5122,6 +5120,22 @@
         }
     </script>
     {{-- End Activation --}}
+
+    <script>
+        if (document.getElementById("check_in").value.length == 0) {
+            document.getElementById("addDates").classList.remove("d-none");
+        }
+
+        function addDatesFunction() {
+            document.getElementById('availability').scrollIntoView();
+
+            iziToast.warning({
+                title: "Caution",
+                message: "Please add Check In and Check Out Date",
+                position: "topRight",
+            });
+        }
+    </script>
 </body>
 
 </html>
