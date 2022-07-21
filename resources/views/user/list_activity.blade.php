@@ -44,7 +44,7 @@
             @endphp
 
             <div id="filter-cat-bg-color" style="width:100%;"
-                class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                class="container-grid-cat translate-text-group {{ $bgColor }} top-min-10p pb-10p" style="">
                 @foreach ($categories->take(6) as $item)
                     <div>
                         <a href="#" class="grid-img-container"
@@ -71,7 +71,7 @@
             </div>
             <div class="stickySubCategory">
                 <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark" style="">
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark pt-15p pb-15p" style="">
                     @if (request()->get('fCategory') == null)
                         @foreach ($subCategoryAll->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
@@ -155,7 +155,7 @@
     @endif
 
 
-    <div class="col-lg-12 container-grid-activity container__grid">
+    <div class="col-lg-12 container-grid-activity container__grid mt-0 mt-lg-10p">
         @foreach ($activitys as $data)
             <div class="grid-list-container">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
@@ -336,7 +336,7 @@
     </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
-    <div class="mt-5 d-flex justify-content-center" id="footer">
+    <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
             {{ $activity->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>

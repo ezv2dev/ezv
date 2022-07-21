@@ -385,7 +385,7 @@ if (request()->fCategory) {
 
             <div class="col-12">
                 <div id="filter-cat-bg-color" style="width:100%;"
-                    class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                    class="container-grid-cat translate-text-group {{ $bgColor }} top-min-10p pb-10p" style="">
                     @foreach ($collabCategory->take(6) as $item)
                         <div>
                             <a href="#" class="grid-img-container"
@@ -415,7 +415,7 @@ if (request()->fCategory) {
             </div>
 
         </div>
-        <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory" style="width: 100%;"
+        <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory pt-15p pb-15p" style="width: 100%;"
             data-isshow="true">
             {{-- <div class="button-dropdown skeleton skeleton-h-3 skeleton-w-100">
                 <a href="javascript:void(0)" id="price" style="cursor:pointer;"
@@ -565,7 +565,7 @@ if (request()->fCategory) {
             </div>
         </div>
 
-        <div class="col-lg-12 container-grid container__grid">
+        <div class="col-lg-12 container-grid container__grid mt-0 mt-lg-10p">
             @foreach ($collab as $data)
                 <div class="grid-list-container">
 
