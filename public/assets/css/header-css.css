@@ -522,6 +522,11 @@ input:checked + .switch-background:active::before {
     content: url(../../assets/icon/menu/sun.svg);
 }
 
+#changeThemeMobile .checkmark-mode::before{
+    height: 12px;
+    width: 12px;
+}
+
 /* When the checkbox is checked, add a red background */
 .container-mode input:checked ~ .checkmark-mode {
     background-color: transparent;
@@ -819,6 +824,13 @@ input:checked + .switch-background:active::before {
     padding: 5px;
     /* top: -40px;
     right: -150px; */
+}
+
+
+#changeThemeMobile .logged-user-menu {
+    width: 27px;
+    height: 20.5px;
+    border-radius: 3px;
 }
 
 .logged-user-menu-detail {

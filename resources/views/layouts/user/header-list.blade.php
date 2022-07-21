@@ -205,7 +205,7 @@
 
     <div class="row nav-row">
         <div id="navbar-first-dekstop" class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
-            <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
+            <a href="{{ route('index') }}" target="_blank"><img style="width: auto; height: 40px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
 
@@ -227,13 +227,6 @@
                             <!-- <i class="fa fa-search"></i> -->
                         </span>
                     </p>
-                </div>
-                <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
-                    <label class="container-mode">
-                        <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
-                            {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                        <span class="checkmark-mode"></span>
-                    </label>
                 </div>
                 <button class="navbar-toggler" type="button" id="expand-mobile-btn">
                     <i class="fa-solid fa-bars list-description {{ $textColor }}"></i>
