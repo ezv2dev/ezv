@@ -1405,7 +1405,7 @@ a.active {
 
 .location-font-size {
     font-size: 17px;
-    margin-top: 40px;
+    margin: 10px 0px;
 }
 
 .guests {
@@ -3317,6 +3317,23 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (max-width: 767px) {
+    /* make short-desc max lines 2 */
+    .top-profile .short-desc {
+        min-height: 50px !important;
+        height: 50px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        text-overflow: ellipsis !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+    }
+    .top-profile {
+        margin-top: 15px !important;
+    }
+    .top-profile p {
+        margin-top: 10px !important;
+    }
     .edit-profile-image-btn-dekstop {
         display: none !important;
     }
@@ -3357,7 +3374,6 @@ span.flatpickr-weekday {
         margin-bottom: 10px !important;
     }
     #page-container .property-type,
-    #page-container .distance,
     .navigationItemText,
     .profile-info #name-content,
     .profile-info #name-hotel {
@@ -3845,6 +3861,34 @@ span.flatpickr-weekday {
 
 .row-modal-amenities{
     flex-direction: column;
+}
+
+.button-prev {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-next {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-close-map-content{
+    width: 34px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    background-color: #d8d8d8;
+    border-radius: 50px;
+    z-index: 99;
+    top: 10px;
+    left: 10px;
 }
 
 /* map mobile */

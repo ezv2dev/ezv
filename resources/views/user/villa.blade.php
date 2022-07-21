@@ -278,12 +278,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="distance">
-                                <p class="location-font-size text-orange">
-                                    {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
-                                    Rai Airport
-                                </p>
-                            </div>
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $villa[0]->name }}</h2>
@@ -362,12 +356,6 @@
                                         {{ $item->villaCategory->name }}
                                     </span>
                                 @endforeach
-                            </div>
-                            <div>
-                                <p class="location-font-size text-orange">
-                                    | {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
-                                    Rai Airport
-                                </p>
                             </div>
                         </div>
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}
@@ -1475,7 +1463,7 @@
                 <div class="row-grid-amenities">
                     <hr class="pendek">
                     <div class="section-title">
-                        <h2>
+                        <h2 class="mb-0">
                             {{ __("user_page.What's nearby ?") }}
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1486,6 +1474,12 @@
                             @endauth
                         </h2>
                     </div>
+                </div>
+                <div class="distance">
+                    <p class="location-font-size text-orange">
+                        {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
+                        Rai Airport
+                    </p>
                 </div>
                 <div class="row-grid-location">
                     @include('user.modal.villa.map-location')

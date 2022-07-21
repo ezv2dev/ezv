@@ -1884,6 +1884,13 @@ li.button-dropdown {
     color: white;
 }
 
+.villa-location-description{
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+    align-items: center;
+}
+
 .villa-location-description:hover {
     color: #ff7400;
 }
@@ -1927,6 +1934,7 @@ li.button-dropdown {
     margin: 0px;
     font-size: 14px;
     font-weight: 500;
+    display: none;
 }
 
 .villa-list-location i {
@@ -2991,7 +2999,7 @@ input::-webkit-inner-spin-button {
     z-index: 1;
 }
 .dots-container .circle.activeIndicator {
-    /* border: solid 2px white; */
+    border: solid 1px white;
     width: 8px;
     height: 8px;
     margin-top: 1px;
@@ -3001,7 +3009,7 @@ input::-webkit-inner-spin-button {
     height: 10px;
     margin-left: 2px;
     margin-right: 2px;
-    background-color: rgb(106 106 106 / 50%);
+    background-color: rgba(0,0,0, 0.6);
     border-radius: 50%;
 }
 
@@ -3223,6 +3231,19 @@ input::-webkit-inner-spin-button {
 
     .height-list-villa{
         height: 350px !important;
+    }
+
+    .villa-list-location-mobile{
+        display: none;
+    }
+
+    .villa-list-location{
+        display: block;
+    }
+
+    .villa-location-description,
+    .villa-list-title{
+        margin-top: 10px;
     }
 }
 
