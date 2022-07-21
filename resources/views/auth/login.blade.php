@@ -275,7 +275,6 @@
                         data: $(this).serialize(),
                         dataType: 'json',
                         success: function( data ){
-                            $('.container-loading-animation').addClass('d-none')
                             location.reload();
                         },
                         error: function( response ){

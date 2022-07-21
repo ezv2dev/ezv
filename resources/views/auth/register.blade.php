@@ -211,7 +211,9 @@
             var email = $('#email-register').val();
             if(!email) {
                 $('#fvicn-eml').css("top", "35%");
+                $('#fvicn-eml').hide();
                 $('#email-register').css("border-bottom-color", "#ff0000");
+                $('#email-register').addClass('is-invalid');
                 $('#err-bcknd').hide();
                 $('#err-eml-rgs').text('{{ __('auth.empty_mail') }}');
                 $('#err-eml-rgs').show();
@@ -219,6 +221,7 @@
                 if (!regex.test(email)) {
                     $('#fvicn-eml').css("top", "35%");
                     $('#email-register').css("border-bottom-color", "#ff0000");
+                    $('#email-register').addClass('is-invalid');
                     $('#err-bcknd').hide();
                     $('#err-eml-rgs').text('{{ __('auth.invalid_mail') }}');
                     $('#err-eml-rgs').show();
@@ -415,7 +418,6 @@
                         data: $(this).serialize(),
                         dataType: 'json',
                         success: function( data ){
-                            $('.container-loading-animation').addClass('d-none')
                             location.reload();
                         },
                         error: function( response ){                            
