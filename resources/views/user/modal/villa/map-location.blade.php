@@ -467,7 +467,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
@@ -696,7 +697,6 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
@@ -1168,6 +1168,9 @@
         // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
+        $('#map-desc').removeClass('mobile-map-close');
+        $('#map-desc').removeClass('mobile-map');
+        $('#map-desc').addClass('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         contentIsExist = true;
     }
@@ -1196,10 +1199,12 @@
 
     function reverseMap(){
         document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("bottom-mobile").classList.remove('d-none');
+        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
         google.maps.event.clearListeners(map, 'click');
 
     }
@@ -1223,7 +1228,9 @@
                 // disable event google map
                 resetMapEvent();
                 // full screen map for mobile
+                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                 document.getElementById("map-desc").classList.add('mobile-map');
+                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
                 // reset right content
@@ -1254,12 +1261,14 @@
         mapMobileIsOpen = false;
         contentIsExist = false;
         document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('d-block');
         document.getElementById("modal-map-content").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
         document.getElementById("bottom-mobile").classList.remove('d-none');
+        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 
     // function to set map event
@@ -2195,7 +2204,7 @@
         mapLoading = document.createElement("div");
         var loadingImg = document.createElement("img");
         loadingImg.setAttribute("src", "https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif");
-        loadingImg.setAttribute("style", "height: 12px;");
+        loadingImg.setAttribute("style", "height: 12px; width: auto;");
         mapLoading.appendChild(loadingImg);
         mapLoading.setAttribute("id", "location-map-loading");
         mapLoading.setAttribute("class", "p-2 mt-3 bg-white");
@@ -2330,13 +2339,15 @@
 </script>
 
 {{-- MAP CONTENT --}}
-<div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
-    <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
-    <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
-        <div class="close-button">
-            <i class="fa-solid fa-xmark"></i>
+
+    <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
+        <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+        <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
+            <div class="close-button">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
         </div>
     </div>
-</div>
-<div id="modal-map-content" class="overflow-hidden"></div>
+
+    <div id="modal-map-content" class="overflow-hidden"></div>
 {{-- END MAP CONTENT --}}
