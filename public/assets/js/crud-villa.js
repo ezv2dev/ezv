@@ -1139,7 +1139,7 @@ function editAmenitiesVilla(id_villa) {
                 });
             }
 
-            $("#modal-add_facilities").modal("hide");
+            $("#modal-edit_amenities").modal("hide");
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
