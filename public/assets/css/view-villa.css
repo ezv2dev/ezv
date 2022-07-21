@@ -1405,7 +1405,7 @@ a.active {
 
 .location-font-size {
     font-size: 17px;
-    margin-top: 40px;
+    margin: 10px 0px;
 }
 
 .guests {
@@ -3303,9 +3303,12 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (max-width: 449px) {
+    .list-amenities {
+        border-radius: 5px !important;
+    }
     .list-amenities .f-40,
     .list-amenities .fa-ellipsis {
-        font-size: 22px !important;
+        font-size: 95% !important;
     }
 }
 
@@ -3317,8 +3320,65 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (max-width: 767px) {
+    /* make short-desc max lines 2 */
+    .top-profile .short-desc {
+        min-height: 50px !important;
+        height: 50px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        text-overflow: ellipsis !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+    }
+    .top-profile {
+        margin-top: 15px !important;
+    }
+    .top-profile p {
+        margin-top: 5px !important;
+    }
+    .hr-about,
     .edit-profile-image-btn-dekstop {
         display: none !important;
+    }
+    .about-place {
+        padding-top: 20px !important;
+    }
+    #location-map {
+        margin-bottom: 10px !important;
+    }
+    #review .review-bottom {
+        margin-top: 0px !important;
+    }
+    #review .review-bottom .review-container {
+        margin-bottom: 22px !important;
+    }
+    #availability #heightCalendar {
+        margin-bottom: 15px !important;
+    }
+    #amenities {
+        margin-bottom: 0px !important;
+    }
+    #amenities .row-grid-list-amenities {
+        margin-bottom: 5px !important;
+    }
+    #location-map .pendek {
+        width: 100% !important;
+    }
+    header .head-inner-wrap {
+        padding-top: 0px !important;
+        padding-bottom: 5px !important;
+    }
+    .menu-liner {
+        width: 100% !important;
+        margin-left: 0px !important;
+    }
+    .stories .cards3 {
+        height: 75px !important;
+        margin-bottom: 0px !important;
+    }
+    .stories .cards3 .card3 {
+        margin: 0px 7.5px !important;
     }
 
     #type-content-mobile{
@@ -3354,10 +3414,8 @@ span.flatpickr-weekday {
     #page-container .profile-image {
         display: flex !important;
         align-items: center;
-        margin-bottom: 10px !important;
     }
     #page-container .property-type,
-    #page-container .distance,
     .navigationItemText,
     .profile-info #name-content,
     .profile-info #name-hotel {
@@ -3498,7 +3556,7 @@ span.flatpickr-weekday {
     }
     .sticky-bottom-mobile {
         position: fixed;
-        bottom: -5px;
+        bottom: 0px;
         width: 100%;
         background-color: #ffff;
         padding: 10px;
@@ -3845,6 +3903,34 @@ span.flatpickr-weekday {
 
 .row-modal-amenities{
     flex-direction: column;
+}
+
+.button-prev {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-next {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-close-map-content{
+    width: 34px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    background-color: #d8d8d8;
+    border-radius: 50px;
+    z-index: 99;
+    top: 10px;
+    left: 10px;
 }
 
 /* map mobile */

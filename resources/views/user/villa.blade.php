@@ -278,12 +278,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="distance">
-                                <p class="location-font-size text-orange">
-                                    {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
-                                    Rai Airport
-                                </p>
-                            </div>
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $villa[0]->name }}</h2>
@@ -345,7 +339,7 @@
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
 
                         {{-- TYPE AND DISTANCE FOR MOBILE --}}
-                        <div id="type-distance-mobile" class="d-flex d-md-none">
+                        <div id="type-distance-mobile" class="d-md-none">
                             <div>
                                 <p id="property-type-content">
                                     @auth
@@ -362,12 +356,6 @@
                                         {{ $item->villaCategory->name }}
                                     </span>
                                 @endforeach
-                            </div>
-                            <div>
-                                <p class="location-font-size text-orange">
-                                    | {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
-                                    Rai Airport
-                                </p>
                             </div>
                         </div>
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}
@@ -893,7 +881,7 @@
                     <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place">
-                            <hr>
+                            <hr class="hr-about">
                             <h2>
                                 {{ __('user_page.About this place') }}
                                 @auth
@@ -1475,7 +1463,7 @@
                 <div class="row-grid-amenities">
                     <hr class="pendek">
                     <div class="section-title">
-                        <h2>
+                        <h2 class="mb-0">
                             {{ __("user_page.What's nearby ?") }}
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1486,6 +1474,12 @@
                             @endauth
                         </h2>
                     </div>
+                </div>
+                <div class="row-grid-amenities distance">
+                    <p class="location-font-size text-orange">
+                        {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
+                        Rai Airport
+                    </p>
                 </div>
                 <div class="row-grid-location">
                     @include('user.modal.villa.map-location')
@@ -2146,7 +2140,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.House Rules') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.House Rules') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editHouseRules()"
@@ -2216,7 +2210,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.Health & Safety') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.Health & Safety') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editGuestSafety()"
@@ -2244,9 +2238,9 @@
                                 </p>
                             @endif
                         </div>
-                        <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                        <div class="col-lg-4 col-md-4 col-xs-12 mb-1 mb-md-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.Cancellation Policy') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.Cancellation Policy') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editCancelationPolicy()"
@@ -2256,17 +2250,15 @@
                             </div>
                             <p style="margin-bottom: 0px !important">
                                 {{ __('user_page.Add your trip dates to get the cancellation details for this stay') }}<br>
-                                <button type="button" class="btn btn-outline-dark ml-2 rounded-circle"
-                                    style="width: 35px; height: 35px;" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom"
-                                    title="{{ __('user_page.Cancellation and prepayment policies vary according to accommodation type. Please enter the dates of your stay and check the conditions of your required room') }}">
-                                    ?
-                                </button>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
+                                <a onclick="addDatesFunction()" style="text-decoration: underline; color: #ff7400;"
+                                    class="d-none" id="addDates">Add Dates
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                                 <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
-                                    style="text-decoration: underline; color: #ff7400;"
-                                    href="#">{{ __('user_page.Show more') }}
+                                    style="text-decoration: underline; color: #ff7400;" class="d-none"
+                                    id="showCancel">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </p>
@@ -3526,7 +3518,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                            <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3977,16 +3969,16 @@
                             '" title="' + response.data.photo[i].name + '"> </li>';
                     }
 
-                    for (let v = 0; v < response.data.video.length; v++) {
-                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
-                            .id_video +
-                            '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
-                            ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                            path + lowerCaseUid + slash + response.data.video[v].name +
-                            '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
-                            response.data.video[v].id_video +
-                            '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                    }
+                    // for (let v = 0; v < response.data.video.length; v++) {
+                    //     content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                    //         .id_video +
+                    //         '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                    //         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                    //         path + lowerCaseUid + slash + response.data.video[v].name +
+                    //         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                    //         response.data.video[v].id_video +
+                    //         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                    // }
 
                     btn.textContent = "Submit";
                     btn.classList.remove("disabled");
@@ -5128,6 +5120,22 @@
         }
     </script>
     {{-- End Activation --}}
+
+    <script>
+        if (document.getElementById("check_in").value.length == 0) {
+            document.getElementById("addDates").classList.remove("d-none");
+        }
+
+        function addDatesFunction() {
+            document.getElementById('availability').scrollIntoView();
+
+            iziToast.warning({
+                title: "Caution",
+                message: "Please add Check In and Check Out Date",
+                position: "topRight",
+            });
+        }
+    </script>
 </body>
 
 </html>
