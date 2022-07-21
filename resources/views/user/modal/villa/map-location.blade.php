@@ -387,6 +387,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -634,6 +639,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -868,6 +878,11 @@
                                                     </path>
                                                 </svg>
                                             </a>
+                                        </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
                                         </div>
                                     @endguest
                                     @auth
@@ -1123,6 +1138,11 @@
                                                     </path>
                                                 </svg>
                                             </a>
+                                        </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
                                         </div>
                                     @endguest
                                     @auth
