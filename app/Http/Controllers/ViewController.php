@@ -3259,10 +3259,10 @@ class ViewController extends Controller
 
             return DataTables::of($data)
                 ->editColumn('start', function($data){
-                    return Carbon::createFromFormat('Y-m-d', $data->start)->format('d M Y');
+                    return Carbon::createFromFormat('Y-m-d', $data->start)->format('d F Y');
                 })
                 ->editColumn('end', function($data){
-                    return Carbon::createFromFormat('Y-m-d', $data->end)->format('d M Y');
+                    return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
                 })
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($data) {
@@ -3275,11 +3275,10 @@ class ViewController extends Controller
 
     public function delete_availability($id)
     {
-        $this->authorize('listvilla_delete');
-
         $data = VillaAvailability::where('id_villa_availability', $id)->first();
         $villa = Villa::where('id_villa', $data->id_villa)->first();
 
+        $this->authorize('listvilla_delete');
         $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
         if($condition) {
             return response()->json([
