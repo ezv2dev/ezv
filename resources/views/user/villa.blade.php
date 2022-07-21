@@ -339,7 +339,7 @@
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
 
                         {{-- TYPE AND DISTANCE FOR MOBILE --}}
-                        <div id="type-distance-mobile" class="d-flex d-md-none">
+                        <div id="type-distance-mobile" class="d-md-none">
                             <div>
                                 <p id="property-type-content">
                                     @auth
@@ -881,7 +881,7 @@
                     <section id="description" class="section-2">
                         {{-- Description --}}
                         <div class="about-place">
-                            <hr>
+                            <hr class="hr-about">
                             <h2>
                                 {{ __('user_page.About this place') }}
                                 @auth
@@ -1475,7 +1475,7 @@
                         </h2>
                     </div>
                 </div>
-                <div class="distance">
+                <div class="row-grid-amenities distance">
                     <p class="location-font-size text-orange">
                         {{ number_format($airportDistance, 1) }} {{ __('user_page.km to') }} Ngurah
                         Rai Airport
@@ -2140,7 +2140,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.House Rules') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.House Rules') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editHouseRules()"
@@ -2210,7 +2210,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.Health & Safety') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.Health & Safety') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editGuestSafety()"
@@ -2238,9 +2238,9 @@
                                 </p>
                             @endif
                         </div>
-                        <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                        <div class="col-lg-4 col-md-4 col-xs-12 mb-1 mb-md-3">
                             <div class="d-flex">
-                                <h6>{{ __('user_page.Cancellation Policy') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.Cancellation Policy') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editCancelationPolicy()"

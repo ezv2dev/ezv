@@ -3303,9 +3303,12 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (max-width: 449px) {
+    .list-amenities {
+        border-radius: 5px !important;
+    }
     .list-amenities .f-40,
     .list-amenities .fa-ellipsis {
-        font-size: 22px !important;
+        font-size: 95% !important;
     }
 }
 
@@ -3332,10 +3335,50 @@ span.flatpickr-weekday {
         margin-top: 15px !important;
     }
     .top-profile p {
-        margin-top: 10px !important;
+        margin-top: 5px !important;
     }
+    .hr-about,
     .edit-profile-image-btn-dekstop {
         display: none !important;
+    }
+    .about-place {
+        padding-top: 20px !important;
+    }
+    #location-map {
+        margin-bottom: 10px !important;
+    }
+    #review .review-bottom {
+        margin-top: 0px !important;
+    }
+    #review .review-bottom .review-container {
+        margin-bottom: 22px !important;
+    }
+    #availability #heightCalendar {
+        margin-bottom: 15px !important;
+    }
+    #amenities {
+        margin-bottom: 0px !important;
+    }
+    #amenities .row-grid-list-amenities {
+        margin-bottom: 5px !important;
+    }
+    #location-map .pendek {
+        width: 100% !important;
+    }
+    header .head-inner-wrap {
+        padding-top: 0px !important;
+        padding-bottom: 5px !important;
+    }
+    .menu-liner {
+        width: 100% !important;
+        margin-left: 0px !important;
+    }
+    .stories .cards3 {
+        height: 75px !important;
+        margin-bottom: 0px !important;
+    }
+    .stories .cards3 .card3 {
+        margin: 0px 7.5px !important;
     }
 
     #type-content-mobile{
@@ -3371,7 +3414,6 @@ span.flatpickr-weekday {
     #page-container .profile-image {
         display: flex !important;
         align-items: center;
-        margin-bottom: 10px !important;
     }
     #page-container .property-type,
     .navigationItemText,
@@ -3514,7 +3556,7 @@ span.flatpickr-weekday {
     }
     .sticky-bottom-mobile {
         position: fixed;
-        bottom: -5px;
+        bottom: 0px;
         width: 100%;
         background-color: #ffff;
         padding: 10px;
