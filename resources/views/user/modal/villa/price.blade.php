@@ -912,6 +912,7 @@
             {
                 data: 'aksi',
                 name: 'aksi',
+                class: 'text-center',
                 orderable: false,
                 searchable: false
             }

@@ -706,62 +706,6 @@ class ViewController extends Controller
         return response()->json($event, 200);
     }
 
-    public function fullcalendarNotAvailable($id)
-    {
-        $event = VillaAvailability::select(
-            'start',
-            'end',
-            'text as title',
-            'color',
-        )->where('id_villa', '=', $id)->get();
-
-        $result = array(['start' => 0, 'end' => 0, 'title' => 0, 'color' => 0]);
-
-        $i = 0;
-
-        foreach ($event as $data) {
-            $result[$i]['start'] = $data->start;
-            $result[$i]['end'] = date('Y-m-d', strtotime($data->end . " +1 days"));
-            $result[$i]['title'] = $data->title;
-            $result[$i]['color'] = $data->color;
-            $i++;
-        }
-
-        return response()->json($result, 200);
-    }
-
-    public function villa_not_available(Request $request)
-    {
-        $this->authorize('listvilla_update');
-        $status = 500;
-
-        $data = $request->multiEvent;
-
-        if (!$data) {
-            return response()->json([
-                'message' => 'Error No Date Selected'
-            ], 500);
-        }
-
-        // $i = 0;
-        foreach ($data as $item) {
-            $data2 = VillaAvailability::insert(array(
-                'id_villa' => $request->id,
-                'start' => $item[0],
-                'end' => $item[1],
-                'created_by' => Auth::user()->id,
-                'updated_by' => Auth::user()->id,
-            ));
-            // VillaAvailability::insert($data);
-        }
-        // return $data2;
-
-        return response()->json([
-            'message' => 'Successfuly added date in Villa Availability',
-            'status' => 200,
-        ]);
-    }
-
     public function villa_update_price(Request $request)
     {
         $this->authorize('listvilla_update');
@@ -3259,10 +3203,10 @@ class ViewController extends Controller
 
             return DataTables::of($data)
                 ->editColumn('start', function($data){
-                    return Carbon::createFromFormat('Y-m-d', $data->start)->format('d M Y');
+                    return Carbon::createFromFormat('Y-m-d', $data->start)->format('d F Y');
                 })
                 ->editColumn('end', function($data){
-                    return Carbon::createFromFormat('Y-m-d', $data->end)->format('d M Y');
+                    return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
                 })
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($data) {
@@ -3275,11 +3219,10 @@ class ViewController extends Controller
 
     public function delete_availability($id)
     {
-        $this->authorize('listvilla_delete');
-
         $data = VillaAvailability::where('id_villa_availability', $id)->first();
         $villa = Villa::where('id_villa', $data->id_villa)->first();
 
+        $this->authorize('listvilla_delete');
         $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
         if($condition) {
             return response()->json([
@@ -3299,5 +3242,61 @@ class ViewController extends Controller
                 'message' => 'Failed Delete Data',
             ], 500);
         }
+    }
+
+    public function fullcalendarNotAvailable($id)
+    {
+        $event = VillaAvailability::select(
+            'start',
+            'end',
+            'text as title',
+            'color',
+        )->where('id_villa', '=', $id)->get();
+
+        $result = array(['start' => 0, 'end' => 0, 'title' => 0, 'color' => 0]);
+
+        $i = 0;
+
+        foreach ($event as $data) {
+            $result[$i]['start'] = $data->start;
+            $result[$i]['end'] = date('Y-m-d', strtotime($data->end . " +1 days"));
+            $result[$i]['title'] = $data->title;
+            $result[$i]['color'] = $data->color;
+            $i++;
+        }
+
+        return response()->json($result, 200);
+    }
+
+    public function villa_not_available(Request $request)
+    {
+        $this->authorize('listvilla_update');
+        $status = 500;
+
+        $data = $request->multiEvent;
+
+        if (!$data) {
+            return response()->json([
+                'message' => 'No Date Selected'
+            ], 500);
+        }
+
+        // $i = 0;
+        foreach ($data as $item) {
+            $data2 = VillaAvailability::insert(array(
+                'id_villa' => $request->id,
+                'start' => $item[0],
+                'end' => $item[1],
+                'created_by' => Auth::user()->id,
+                'updated_by' => Auth::user()->id,
+            ));
+            // VillaAvailability::insert($data);
+        }
+        // return $data2;
+
+        return response()->json([
+            'message' => 'Added Date Villa Availability',
+            'status' => 200,
+        ]);
     }
 }
