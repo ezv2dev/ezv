@@ -1418,9 +1418,7 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class="">
-                                            <span>{{ __('user_page.there is no facilities yet') }}</span>
-                                        </div>
+                                        <div class="list-amenities"> <p style="text-align: center;">{{ __('user_page.there is no facilities yet') }}</p> </div>
                                     @endforelse
                                 @endif
                                 @if ($restaurant->facilities->count() > 6)

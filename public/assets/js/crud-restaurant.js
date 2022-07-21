@@ -828,7 +828,7 @@ function saveFacilities() {
             if (response.data.length == 0) {
                 content = "";
                 content +=
-                    '<div class=""> <span>there is no facilities yet</span> </div>';
+                    '<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>';
             }
 
             else if (response.data.length > 5) {
@@ -908,6 +908,30 @@ function saveFacilities() {
 
                 $("#contentModalFacilities").html(contentFacilities);
             }
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            $("#modal-add_facilities").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
         },
     });
 }
