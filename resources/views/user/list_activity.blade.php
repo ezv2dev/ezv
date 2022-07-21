@@ -145,7 +145,7 @@
                 <div class="col-lg-6">
                     <div class="text-center mt-4">
                         <img class="img-fluid p-4"
-                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-wow.svg') }}"
                             alt="" />
                         <p class="lead">WoW data not available</p>
                     </div>
