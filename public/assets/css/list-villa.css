@@ -2991,7 +2991,7 @@ input::-webkit-inner-spin-button {
     z-index: 1;
 }
 .dots-container .circle.activeIndicator {
-    /* border: solid 2px white; */
+    border: solid 1px white;
     width: 8px;
     height: 8px;
     margin-top: 1px;
@@ -3001,7 +3001,7 @@ input::-webkit-inner-spin-button {
     height: 10px;
     margin-left: 2px;
     margin-right: 2px;
-    background-color: rgb(106 106 106 / 50%);
+    background-color: rgba(0,0,0, 0.6);
     border-radius: 50%;
 }
 
