@@ -132,7 +132,21 @@
                             <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
                         </a>
                     </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
 
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
+                    </div>
                     <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -193,7 +207,7 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                            <div class="searchbox display-block" onclick="popUp();" 
+                            <div class="searchbox display-block" onclick="popUp();"
                                 style="cursor: pointer; border: none; margin:0;">
                                 <span class="top-search"><i class="fa fa-search"></i></span>
                             </div>
@@ -837,8 +851,8 @@
             {{-- Restaurant --}}
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
-                    <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
-                        <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
+                    <div style="padding: 0rem 6rem 2rem 6rem;" class="discover-experiences-container">
+                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">{{ __('user_page.Discover Experiences') }}</h1>
                         <div class="row-grid" id="discover-experiences-food">
                             <div class="mb-3">
                                 <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
@@ -880,8 +894,8 @@
             {{-- Things To Do --}}
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
-                    <div style="padding: 0rem 6rem 3rem 6rem;" class="discover-experiences-container">
-                        <h1 class="mb-5">{{ __('user_page.Discover Experiences') }}</h1>
+                    <div style="padding: 0rem 6rem 0rem 6rem;" class="discover-experiences-container">
+                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">{{ __('user_page.Discover Experiences') }}</h1>
                         <div class="row-grid" id="discover-experiences-things-todo">
                             <div class="mb-3">
                                 <div class="row-grid-img">
@@ -926,7 +940,7 @@
             <section class="h-100 w-100" style="box-sizing: border-box;">
                 <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
                     style="font-family: 'Poppins', sans-serif">
-                    <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
+                    <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container" style="padding: 0rem 1rem 5rem !important;">
                         <div class="col-12">
                             <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                                 data-src='{{ URL::asset('assets/media/photos/desktop/villa.webp') }}'>
@@ -1480,6 +1494,17 @@
         <script>
             function language() {
                 $('#LegalModal').modal('show');
+                $('#trigger-tab-language').addClass('active');
+                $('#content-tab-language').addClass('active');
+                $('#trigger-tab-currency').removeClass('active');
+                $('#content-tab-currency').removeClass('active');
+            }
+            function currency() {
+                $('#LegalModal').modal('show');
+                $('#trigger-tab-language').removeClass('active');
+                $('#content-tab-language').removeClass('active');
+                $('#trigger-tab-currency').addClass('active');
+                $('#content-tab-currency').addClass('active');
             }
         </script>
 
