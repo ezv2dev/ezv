@@ -162,40 +162,27 @@ if (isset($_COOKIE['tema'])) {
                                         style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                                 </p>
                             </div>
-                            <div class="mt-2 cursor-pointer villa-location-description skeleton skeleton-h-2 skeleton-w-100 "
-                                onclick="view_maps('{{ $data->id_villa }}')">
-                                <i class="fa-solid  fa-location-dot text-orange"></i>
-                                <span class="text-orange">
-                                    {{ $data->location->name ?? __('user_page.Location not found') }}
-                                </span>
-
-                            </div>
-                        </div>
-
-                        <!-- Video Button -->
-                        <div class="col-3 skeleton">
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank">
-                                <div class="villa-list-video-container video-show-buttons">
-                                    <i class="fas fa-2x fa-play video-button"></i>
-                                    @if ($data->video->count() > 0)
-                                        <video class="villa-list-video" loading="lazy"
-                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
-                                    @elseif ($data->photo->count() > 0)
-                                        <img class="villa-list-video" loading="lazy"
-                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
-                                    @elseif ($data->image != null)
-                                        <img class="villa-list-video" loading="lazy"
-                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
-                                    @else
-                                        <img class="villa-list-video" loading="lazy"
-                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                    @endif
+                            <div class="cursor-pointer skeleton skeleton-h-2 skeleton-w-100" onclick="view_maps('{{ $data->id_villa }}')">
+                                <div class="villa-location-description">
+                                    <span class="text-orange">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        {{ $data->location->name ?? __('user_page.Location not found') }}
+                                        <span class="villa-list-location-mobile text-orange">
+                                            -
+                                            @if (isset($data->km))
+                                                {{ number_format($data->km, 1) }}
+                                                {{ __('user_page.km to') }}
+                                                {{ $data->airport }}
+                                            @elseif(isset($data->km2))
+                                                {{ number_format($data->km2, 1) }}
+                                                {{ __('user_page.km to') }}
+                                                {{ $data->beach }}
+                                            @endif
+                                        </span>
+                                    </span>
                                 </div>
-                            </a>
-                        </div>
-
-                        <div class="col-12 villa-info-contanier" style="position:relative;">
-                            <div class="villa-list-title pb-3">
+                            </div>
+                            <div class="villa-list-title">
                                 <div class=" skeleton skeleton skeleton-lg-h-1 skeleton-lg-w-50"
                                     style="margin-right: 4px;">
                                     <span class="list-description {{ $textColor }}">
@@ -227,6 +214,31 @@ if (isset($_COOKIE['tema'])) {
                                     </div>
                                 @endif
                             </div>
+                        </div>
+
+                        <!-- Video Button -->
+                        <div class="col-3 skeleton">
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank">
+                                <div class="villa-list-video-container video-show-buttons">
+                                    <i class="fas fa-2x fa-play video-button"></i>
+                                    @if ($data->video->count() > 0)
+                                        <video class="villa-list-video" loading="lazy"
+                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                    @elseif ($data->photo->count() > 0)
+                                        <img class="villa-list-video" loading="lazy"
+                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                                    @elseif ($data->image != null)
+                                        <img class="villa-list-video" loading="lazy"
+                                            src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                                    @else
+                                        <img class="villa-list-video" loading="lazy"
+                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                    @endif
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 villa-info-contanier" style="position:relative;">
                             <div class="villa-list-description-container skeleton skeleton-h-4 skeleton-w-100">
                                 <p
                                     class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">
@@ -234,8 +246,7 @@ if (isset($_COOKIE['tema'])) {
                                 </p>
                             </div>
 
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
-                                style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank" style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                         </div>
                     </div>
 
