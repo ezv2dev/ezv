@@ -82,8 +82,8 @@
 <body>
 <div id="page-container" class="page-container">
     <section class="header">
-                <!-- Header -->
-                <div class="expand-navbar-mobile" aria-expanded="false">
+        <!-- Header -->
+        <div class="expand-navbar-mobile" aria-expanded="false">
             <div class="px-3 pt-2">
                 @auth
                     <div>
@@ -214,6 +214,7 @@
             </div>
 
         </div>
+    </section>
      {{-- navbar --}}
         <section class="h-100 w-100" style="box-sizing: border-box; background-color: #000000;">
             <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
@@ -237,15 +238,15 @@
 
                         <div class="col-lg-4" style="height: 90px !important;">
 
-                            <div id="searchbox" class="searchbox display-none" onclick="popUp();"
+                            <!-- <div id="searchbox" class="searchbox display-none" onclick="popUp();"
                                 style="cursor: pointer;">
                                 <p>{{ __('user_page.Search here') }} <span class="top-search"><i
                                             class="fa fa-search"></i></p>
-                            </div>
+                            </div> -->
                             <!--Start of serach option 1 -->
 
                             <div id="ul" class="ul-display-block">
-                                <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
+                                <!-- <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
                                     <div class="nav-link-form" id="villa-form">
                                         <li class="nav-item">
                                             <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
@@ -296,11 +297,11 @@
                                         </li>
                                         <p>{{ __('user_page.Collabs') }}</p>
                                     </div> --}}
-                                </ul>
+                                </ul> -->
                                 <!--End of serach option 1 -->
 
                                 {{-- Header Search --}}
-                                <div class="search-box">
+                                <!-- <div class="search-box">
                                     <div id="search_bar">
                                         <form action="{{ route('search_home_combine') }}" method="GET"
                                             id="basic-form" autocomplete="off">
@@ -676,7 +677,7 @@
                                         </div>
                                     </div>
                                     {{-- calendar --}}
-                                </div>
+                                </div> -->
                             </div>
                             {{-- End Header Search --}}
                         </div>
@@ -799,8 +800,7 @@
             </div>
         </section>
         <!-- END Header Content -->
-    </section>
-    <div class="bg-black"></div>
+    <!-- <div class="bg-black"></div> -->
     <section class="collab-body">
         <div class="row">
             <div clas="col-12">
