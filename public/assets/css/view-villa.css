@@ -3863,6 +3863,20 @@ span.flatpickr-weekday {
     flex-direction: column;
 }
 
+.button-prev {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-next {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
 /* map mobile */
     .mobile-map{
         position: fixed;
