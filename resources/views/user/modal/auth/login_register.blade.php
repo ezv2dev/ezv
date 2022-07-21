@@ -677,7 +677,6 @@
                         data: $(this).serialize(),
                         dataType: 'json',
                         success: function( data ){
-                            $('.container-loading-animation').addClass('d-none')
                             location.reload();
                         },
                         error: function( response ){
@@ -820,6 +819,13 @@
         $("#frmRgs").submit(function(e) {
             let error = 0;
             let CPass = $('#password-register').val();
+
+            // reset input style
+            $('.invalid-feedback').hide()
+            $('.invalid-feedback').text('')
+            $('.form-control').removeClass('is-invalid')
+
+            // validasi
             if (!$('#email-register').val()) {
                 $('#email-register').addClass('is-invalid');
                 $('#err-bcknd').hide();
@@ -889,15 +895,11 @@
                         data: $(this).serialize(),
                         dataType: 'json',
                         success: function( data ){
-                            $('.container-loading-animation').addClass('d-none')
                             location.reload();
                         },
                         error: function( response ){
                             $('.container-loading-animation').addClass('d-none')
-                            $('.invalid-feedback').hide()
-                            $('.invalid-feedback').text('')
-                            $('.form-control').removeClass('is-invalid')
-        
+
                             var errors = response.responseJSON;
                             $.each(errors.errors,function (el, val) {
                                 let idErrorMessage = el == 'email' ? '#err-eml-rgs' : '#err-pas-rgs'
