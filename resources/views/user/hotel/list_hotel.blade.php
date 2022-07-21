@@ -58,7 +58,7 @@
             <!-- Refresh Page -->
             <!-- <div class="col-lg-12"> -->
             <div id="filter-cat-bg-color" style="width: 100%;"
-                class="container-grid-cat translate-text-group {{ $bgColor }}" style="">
+                class="container-grid-cat translate-text-group {{ $bgColor }} top-min-10p pb-10p" style="">
                 @foreach ($hotelCategory->take(6) as $item)
                     <div>
                         <a class="grid-img-container" onclick="hotelFilter({{ $item->id_hotel_category }}, null, true)">
@@ -85,7 +85,7 @@
 
             <div class="stickySubCategory">
                 <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }}" style="">
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} pt-15p pb-15p" style="">
 
                     @foreach ($hotelFilter->take(8) as $item)
                         <div class="grid-sub-cat-content-container text-13 "
@@ -132,7 +132,7 @@
             </div>
         </div>
     @endif
-    <div class="col-lg-12 container-grid-hotel container__grid">
+    <div class="col-lg-12 container-grid-hotel container__grid mt-xxs-20p mt-xs-15p mt-sm-35p mt-xlg-0p mt-lg-10p">
         @foreach ($hotel as $data)
             <div class="grid-list-container lozad">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
@@ -309,7 +309,7 @@
     </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
-    <div class="mt-5 d-flex justify-content-center" id="footer">
+    <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
             {{ $hotel->onEachSide(0)->appends(Request::all())->links() }}
         </div>

@@ -136,7 +136,7 @@
         </div>
     @endif
 
-    <div class="col-lg-12 container-grid container__grid translate-text-group">
+    <div class="col-lg-12 container-grid container__grid translate-text-group mt-xxs-20p mt-xs-15p mt-sm-35p mt-xlg-0p mt-lg-10p">
         @php
             $local = '<script>
                 document.write(localStorage.getItem(mode))
@@ -384,7 +384,7 @@
     <!-- End Page Content -->
 
     {{-- Pagination --}}
-    <div class="mt-5 d-flex justify-content-center" id="footer">
+    <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
             {{ $restaurant->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>

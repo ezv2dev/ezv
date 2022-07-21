@@ -1152,8 +1152,14 @@
         {{-- Search Location --}}
         <script>
             $(document).ready(() => {
-                if (window.scrollY == 0 && window.innerWidth <= 991) {
-                    document.getElementById("ul").style.display = "none";
+                if (window.innerWidth <= 991) {
+                    document.getElementById("ul").classList.add("ul-display-none");
+                    document.getElementById("ul").classList.remove("ul-display-block");
+                    document.getElementById("bar").classList.add("display-none");
+                    document.querySelector("#searchbox").classList.remove("display-none");
+                    document.querySelector("#searchbox").classList.add("display-block");
+                    document.getElementById("nav").classList.add("position-fixed");
+                    document.getElementById("nav").classList.add("padding-top-0");
                 }
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").css({
@@ -1400,7 +1406,6 @@
                 } else {
                     if (!isFocused || window.innerWidth > 991) {
                         console.log("oke");
-                        document.getElementById("ul").style.display = "";
                         document.getElementById("ul").classList.add("ul-display-none");
                         document.getElementById("ul").classList.remove("ul-display-block");
                         document.getElementById("bar").classList.add("display-none");
@@ -1443,7 +1448,6 @@
 
         <script>
             function popUp() {
-                document.getElementById("ul").style.display = "";
                 document.getElementById("ul").classList.remove("ul-display-none");
                 document.getElementById("ul").classList.add("ul-display-block");
                 document.getElementById("bar").classList.remove("display-none");
@@ -1500,9 +1504,6 @@
                         $("#bar .guests").addClass("col-10");
                         $("#bar .button").addClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "");
-                        if (window.scrollY == 0) {
-                            $("#ul").css("display","none");
-                        }
                     } else {
                         $("#search_bar #bar").removeClass("row");
                         $("#bar .location").removeClass("col-12 mb-2");
@@ -1511,7 +1512,6 @@
                         $("#bar .guests").removeClass("col-10");
                         $("#bar .button").removeClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "90px");
-                        $("#ul").css("display","");
                     }
                 }
                 var windowWidth = $(window).width();
@@ -1520,6 +1520,19 @@
                     if ($(this).width() !== windowWidth) {
                         windowWidth = $(this).width();
                         handleResponsive(windowWidth);
+                        if (windowWidth <= 991) {
+                            if (window.scrollY == 0) {
+                                document.getElementById("nav").classList.add("position-fixed");
+                                document.getElementById("nav").classList.add("padding-top-0");
+                                document.getElementById("nav").classList.add("search-height");
+                            }
+                        }else {
+                            if (window.scrollY == 0) {
+                                document.getElementById("nav").classList.remove("position-fixed");
+                                document.getElementById("nav").classList.remove("padding-top-0");
+                                document.getElementById("nav").classList.remove("search-height");
+                            }
+                        }
                     }
                 })
                 $(".SlickCarousel").slick({
