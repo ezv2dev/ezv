@@ -204,8 +204,7 @@
     @endphp
 
     <div class="row nav-row">
-        <div id="navbar-first-dekstop"
-            class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
+        <div id="navbar-first-dekstop" class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
             <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
@@ -2170,7 +2169,7 @@
                                     </div>
                                     <div class="button" style="padding-left: 0px;">
                                         <button id="searchBtn" class="d-block ms-auto me-1"
-                                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ request()->get('fSubCategory') ?? 'null' }}, false)"
+                                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ request()->get('fSubCategory') ?? 'null' }}, false, true)"
                                             style="z-index: 1; border: 2px solid #ff7400; background: black; padding: 10px; border-radius: 10px;">
                                             <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                 style="width: 15px; height: auto;">
