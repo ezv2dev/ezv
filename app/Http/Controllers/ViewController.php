@@ -568,7 +568,7 @@ class ViewController extends Controller
 
         $villa = Villa::find($request->id);
 
-        if(!$villa){
+        if (!$villa) {
             return response()->json([
                 'message' => 'Homes Not Found',
             ], 404);
@@ -597,8 +597,8 @@ class ViewController extends Controller
             }
 
             $data = [
-                'photo' => VillaPhoto::where('id_villa', $request->id)->orderBy('order','asc')->get(),
-                'video' => VillaVideo::where('id_villa', $request->id)->orderBy('order','asc')->get(),
+                'photo' => VillaPhoto::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => VillaVideo::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
                 'uid' => Villa::where('id_villa', $request->id)->select('uid')->first(),
             ];
 
@@ -1654,7 +1654,6 @@ class ViewController extends Controller
                 'status' => 500,
             ], 500);
         }
-
     }
 
     public function villa_delete_photo_video(Request $request)
@@ -2034,17 +2033,9 @@ class ViewController extends Controller
 
     public function request_update_status(Request $request)
     {
-        $id = $request->id;
-        abort_if(!auth()->check(), 401);
-        abort_if(!$id, 500);
+        dd($request->all());
+        $id = $request->id_villa;
         $find = Villa::where('id_villa', $id)->first();
-        abort_if(!$find, 404);
-        $this->authorize('listvilla_update');
-        abort_if(auth()->user()->id != $find->created_by, 403);
-
-        $find = Villa::where('id_villa', $id)->first();
-
-        $status = false;
 
         if ($find->status == 0) {
             $find->update(array(
@@ -2052,7 +2043,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
+            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 2]);
         }
 
         if ($find->status == 1) {
@@ -2061,15 +2052,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
-        }
-
-        if ($status) {
-            return back()
-                ->with('success', 'request has been sended');
-        } else {
-            return back()
-                ->with('error', 'request fail to sended due internal server error');
+            return response()->json(['message' => 'Successfuly request for deactivation', 'data' => 3]);
         }
     }
 
@@ -3224,19 +3207,19 @@ class ViewController extends Controller
             $data = DB::table('villa_availability')
                 ->select('id_villa_availability', 'id_villa', 'start', 'end')
                 ->where("id_villa", $id)
-                ->orderBy('start','asc')
+                ->orderBy('start', 'asc')
                 ->get();
 
             return DataTables::of($data)
-                ->editColumn('start', function($data){
+                ->editColumn('start', function ($data) {
                     return Carbon::createFromFormat('Y-m-d', $data->start)->format('d F Y');
                 })
-                ->editColumn('end', function($data){
+                ->editColumn('end', function ($data) {
                     return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
                 })
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($data) {
-                    $aksi = ' <a href="javascript:void(0);" onclick="delete_date_availability(this);" data-id="'.$data->id_villa_availability.'" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
+                    $aksi = ' <a href="javascript:void(0);" onclick="delete_date_availability(this);" data-id="' . $data->id_villa_availability . '" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
                     return $aksi;
                 })
                 ->rawColumns(['aksi'])->make(true);
@@ -3250,7 +3233,7 @@ class ViewController extends Controller
 
         $this->authorize('listvilla_delete');
         $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
-        if($condition) {
+        if ($condition) {
             return response()->json([
                 'message' => 'This action is unauthorized',
             ], 403);
