@@ -185,10 +185,10 @@ if (isset($_COOKIE['tema'])) {
                         <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
                             @if (session()->has('locale'))
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                             @else
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
                             <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
@@ -205,13 +205,17 @@ if (isset($_COOKIE['tema'])) {
                             </div>
                         </a>
                     </div>
-                    <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
-                        <label class="container-mode">
-                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
-                                {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                            <span class="checkmark-mode"></span>
-                        </label>
+                    <div class="d-flex align-items" id="changeThemeMobile">
+                        <div class="logged-user-menu" style="margin-right: 9px;">
+                            <label class="container-mode">
+                                <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                    {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
+                                <span class="checkmark-mode"></span>
+                            </label>
+                        </div>
+                        <p class="mb-0 ms-2" style="color: #585656">Day / Night </p>
                     </div>
+
                 </div>
             @else
                 <div class="d-flex align-items-center">
