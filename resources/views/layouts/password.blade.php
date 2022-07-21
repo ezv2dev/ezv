@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Forgot Password - SB Admin Pro</title>
+    <title>Forgot Password - EZV</title>
     <link href="{{ asset('assets/partner/css/styles.css') }}" rel="stylesheet" />
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
 
@@ -21,11 +21,34 @@
             background-color: #222222 !important;
             color: white !important;
         }
+        @media only screen and (max-width: 425px) {
+            .card {
+                max-width: 90%;
+                margin: 0 auto;
+                padding: 10px;
+            }
+            .forget-header {
+            padding: 0 1rem !important;
+            }
+        }
+        .forget-header {
+            width: 100%;
+            height: 70px;
+            background: #000;
+            padding: 0 7rem;
+        }
     </style>
 </head>
 
 <body class="bg-transparent">
-
+    <section class="forget-header">
+        <div class="row">
+            <div class="col-4">
+            <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; margin-top: 15px;"
+                    src="{{ asset('assets/logo.png') }}" alt="oke"></a>
+            </div>
+        </div>
+    </section>
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
