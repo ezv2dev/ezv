@@ -2252,7 +2252,8 @@
                                 {{ __('user_page.Add your trip dates to get the cancellation details for this stay') }}<br>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
-                                <a onclick="addDatesFunction()" style="text-decoration: underline; color: #ff7400;"
+                                <a onclick="addDatesFunction()"
+                                    style="text-decoration: underline; color: #ff7400; cursor: pointer;"
                                     class="d-none" id="addDates">Add Dates
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
@@ -3518,7 +3519,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                            <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                                <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
