@@ -706,20 +706,16 @@ class ViewController extends Controller
         return response()->json($event, 200);
     }
 
-    public function villa_update_price(Request $request)
+    public function villa_update_special_price(Request $request)
     {
         $this->authorize('listvilla_update');
         $status = 500;
 
         try {
-            $find = villa::where('id_villa', $request->id_villa)->first();
-
-            $find->update(array(
-                'price' => $request->price,
-                'commission' => $request->commission,
-                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'updated_by' => Auth::user()->id,
-            ));
+            $find = Villa::where('id_villa', $request->id_villa)->first();
+            if (!$find) {
+                $status = 500;
+            }
 
             if ($request->disc == '') {
                 $disc = 0;
@@ -727,16 +723,7 @@ class ViewController extends Controller
                 $disc = $request->disc;
             }
 
-            if ($request->instant_book) {
-                $instant_book = 'yes';
-            } else {
-                $instant_book = 'no';
-            }
-
-            $villaInstant = Villa::where('id_villa', $request->id_villa);
-            $villaInstant->update(array('instant_book' => $instant_book));
-
-            $data = VillaDetailPrice::insertGetId(array(
+            $data = VillaDetailPrice::create([
                 'id_villa' => $request->id_villa,
                 'start' => $request->start,
                 'end' => $request->end,
@@ -746,7 +733,47 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
+            ]);
+
+            if ($data) {
+                $status = 200;
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
+
+    public function villa_update_price(Request $request)
+    {
+        $this->authorize('listvilla_update');
+        $status = 500;
+
+        try {
+            $find = Villa::where('id_villa', $request->id_villa)->first();
+
+            $find->update(array(
+                'price' => $request->price,
+                'commission' => $request->commission,
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_by' => Auth::user()->id,
             ));
+
+            if ($request->instant_book) {
+                $instant_book = 'yes';
+            } else {
+                $instant_book = 'no';
+            }
+
+            $villaInstant = Villa::where('id_villa', $request->id_villa);
+            $villaInstant->update(array('instant_book' => $instant_book));
 
             if ($find) {
                 $status = 200;
