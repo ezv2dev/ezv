@@ -5076,33 +5076,98 @@
                         },
                         success: function(response) {
                             if (response.data == 1) {
-                                $("#adminVilla2").html(`
-                                    <div class="alert alert-success d-flex flex-row align-items-center"
-                                        role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
-                                        <div style="margin-left: 10px;">
-                                            <select class="custom-select grade-success" name="grade"
-                                                id="gradeVilla">
-                                                <option value="AA"
-                                                    {{ $villa[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                </option>
-                                                <option value="A"
-                                                    {{ $villa[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                </option>
-                                                <option value="B"
-                                                    {{ $villa[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                </option>
-                                                <option value="C"
-                                                    {{ $villa[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                </option>
-                                                <option value="D"
-                                                    {{ $villa[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                </option>
-                                            </select>
+                                if(response.grade == "AA")
+                                {
+                                    $("#adminVilla2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA" selected>AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
                                         </div>
+                                    `)
+                                }else if(response.grade == "A")
+                                {
+                                    $("#adminVilla2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A" selected>A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+                                }else if(response.grade == "B")
+                                {
+                                    $("#adminVilla2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B" selected>B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+                                }else if(response.grade == "C")
+                                {
+                                    $("#adminVilla2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C" selected>C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+                                }else if(response.grade == "D")
+                                {
+                                    $("#adminVilla2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeVilla">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D" selected>D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+                                }
 
-                                    </div>
-                                `)
                                 iziToast.success({
                                     title: "Success",
                                     message: response.message,

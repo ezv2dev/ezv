@@ -1494,7 +1494,7 @@ $("#guestSafetyForm").submit(function(e) {
 // ! GradeVilla
 $('#gradeVilla').change(function() {
     var grade = $(this).val();
-
+    console.log("awe");
     $.ajax({
         type: "POST",
         headers: {
