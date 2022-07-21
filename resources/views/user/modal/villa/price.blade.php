@@ -1111,6 +1111,11 @@
                     calendar.fullCalendar("refetchEvents");
                     tableSpecialPrice.draw();
 
+                    // update All Calendar Detail
+                    calendar_availability(2);
+                    calendar_reserve(2);
+                    calendar_reserve2(2);
+
                     $("#start").val("");
                     $("#end").val("");
                     $("#special_price").val("");
@@ -1153,8 +1158,15 @@
                     success: function(response) {
                         Swal.fire('Deleted', response.message, 'success');
                         tableSpecialPrice.draw();
+
+                        // render Event FullCalendar
                         calendar.fullCalendar('removeEvents', id);
                         calendar.fullCalendar("refetchEvents");
+
+                        // update All Calendar Detail
+                        calendar_availability(2);
+                        calendar_reserve(2);
+                        calendar_reserve2(2);
                     },
                     error: function(jqXHR, response) {
                         console.log(jqXHR);
@@ -1192,7 +1204,8 @@
                     message: data.message,
                     position: "topRight",
                 });
-                // location.reload();
+
+                // render Event FullCalendar
                 calendar2.fullCalendar("removeEvents");
                 calendar2.fullCalendar("refetchEvents");
                 tableAvailability.draw();
@@ -1201,6 +1214,11 @@
 
                 btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
                 btn.classList.remove("disabled");
+
+                // update All Calendar Detail
+                calendar_availability(2);
+                calendar_reserve(2);
+                calendar_reserve2(2);
             },
             error: function (jqXHR, response) {
                 iziToast.error({
@@ -1236,8 +1254,15 @@
                     success: function(response) {
                         Swal.fire('Deleted', response.message, 'success');
                         tableAvailability.draw();
+
+                        // render Event FullCalendar
                         calendar2.fullCalendar('removeEvents', id);
                         calendar2.fullCalendar("refetchEvents");
+
+                        // update All Calendar Detail
+                        calendar_availability(2);
+                        calendar_reserve(2);
+                        calendar_reserve2(2);
                     },
                     error: function(jqXHR, response) {
                         console.log(jqXHR);
