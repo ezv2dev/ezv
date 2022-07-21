@@ -940,7 +940,7 @@
             <section class="h-100 w-100" style="box-sizing: border-box;">
                 <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
                     style="font-family: 'Poppins', sans-serif">
-                    <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container" style="padding: 0rem 1rem 5rem !important;">
+                    <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
                         <div class="col-12">
                             <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                                 data-src='{{ URL::asset('assets/media/photos/desktop/villa.webp') }}'>

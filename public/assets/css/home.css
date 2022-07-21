@@ -2282,6 +2282,9 @@ span.flatpickr-weekday {
     .discover-experiences-container {
         padding: 0rem 1rem 1.5rem 1rem !important;
     }
+    #qa-container {
+        padding: 3rem 1rem 8rem !important;
+    }
     .header-4-4 .hero {
         padding: 3rem 1rem 3rem !important;
     }
