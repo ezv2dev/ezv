@@ -4261,7 +4261,7 @@
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $availabilityTop = $("#availability").offset().top;
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top")));//$("#availability").offset().top;
             });
 
             $window.scroll(function() {

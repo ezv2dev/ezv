@@ -239,10 +239,10 @@
     color: #f2b600
 }
 
-@media (max-width: 992px) { 
+@media (max-width: 992px) {
     .rating-star{
-        width: auto !important;  
-        padding: 2px 6px !important; 
+        width: auto !important;
+        padding: 2px 6px !important;
     }
 }
 
@@ -599,6 +599,9 @@ video {
 
 @media (min-width: 768px) and (max-width: 818px) {
     .SlickCarousel3 .slick-dots {
-        bottom: -4rem !important;
+        bottom: -2rem !important;
+    }
+    .slick-dots li {
+        width: 17px !important;
     }
 }
