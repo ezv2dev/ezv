@@ -3326,4 +3326,56 @@ class ViewController extends Controller
             'status' => 200,
         ]);
     }
+
+    public function datatable_special_price(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('villa_detail_price')
+                ->select('id_detail', 'id_villa', 'start', 'end', 'price', 'disc')
+                ->where("id_villa", $id)
+                ->orderBy('start','asc')
+                ->get();
+
+            return DataTables::of($data)
+                ->editColumn('start', function($data){
+                    return Carbon::createFromFormat('Y-m-d', $data->start)->format('d F Y');
+                })
+                ->editColumn('end', function($data){
+                    return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
+                })
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($data) {
+                    $aksi = ' <a href="javascript:void(0);" onclick="delete_date_special_price(this);" data-id="'.$data->id_detail.'" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])->make(true);
+        }
+    }
+
+    public function delete_special_price($id)
+    {
+        $data = VillaDetailPrice::where('id_detail', $id)->first();
+        $villa = Villa::where('id_villa', $data->id_villa)->first();
+
+        $this->authorize('listvilla_delete');
+        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
+        if($condition) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        $delete = $data->delete();
+
+        // check if delete is success or not
+        if (isset($delete) == true) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+            ], 500);
+        }
+    }
 }

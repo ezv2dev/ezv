@@ -434,6 +434,9 @@ Route::get('villa/calendar/{id}', [ViewController::class, 'fullcalendar'])->name
 Route::get('villa/calendar/not_available/{id}', [ViewController::class, 'fullcalendarNotAvailable'])->name('villa.fullcalendarNotAvailable');
 Route::post('villa/calendar/import/{id}', [VillabookingController::class, 'importCalendar'])->name('villa_import_calendar');
 
+Route::get('/villa/special-price/{id}/datatable', [ViewController::class, 'datatable_special_price'])->name('villa_special_price_datatable');
+Route::get('/villa/special-price/{id}/delete', [ViewController::class, 'delete_special_price']);
+
 //edit from frontend
 Route::post('/villa/update/photo/position', [ViewController::class, 'update_position_photo'])->name('villaphoto_edit_position');
 Route::post('/villa/update/video/position', [ViewController::class, 'update_position_video'])->name('villavideo_edit_position');
