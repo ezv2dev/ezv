@@ -198,7 +198,7 @@
                                                 </a>
                                             </li>
                                             <li class="modal-price-title" style="margin-left: 55px;">
-                                                <a class="filter-language-option-text" href="#addRegularPrice"
+                                                <a class="filter-language-option-text" href="#addSpecialPrice"
                                                     data-toggle="tab"
                                                     style="font-size: 12pt;
                                                     font-weight: 600; margin-left: -50px;">
@@ -317,8 +317,8 @@
                                             <br>
                                         </form>
                                     </div>
-                                    <div class="tab-pane" id="addRegularPrice">
-                                        <form action="{{ route('villa_update_special_price') }}" method="POST" id="edit-special-price"
+                                    <div class="tab-pane" id="addSpecialPrice">
+                                        <form action="javascript:void(0);" method="POST" id="edit-special-price"
                                             class="js-validation" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="id_villa" id="id_villa"
@@ -846,28 +846,6 @@
             // }
             if (error == 1) {
                 e.preventDefault();
-            } else {
-                let btn = document.getElementById("submitPrice");
-                btn.textContent = "Saving...";
-                btn.classList.add("disabled");
-            }
-        });
-
-        $("#edit-special-price").submit(function (e) {
-            let error = 0;
-            if ($('#start').val() && $('#end').val()) {
-                if (!$('#special_price').val()) {
-                    $('#special_price').addClass('is-invalid');
-                    $('#err-spcl-prc').show();
-                    error = 1;
-                }
-            }
-            if (error == 1) {
-                e.preventDefault();
-            } else {
-                let btn = document.getElementById("submitSpecialPrice");
-                btn.textContent = "Saving...";
-                btn.classList.add("disabled");
             }
         });
     });
@@ -1090,6 +1068,71 @@
 </script>
 
 <script>
+    $("#edit-special-price").submit(function (e) {
+        let error = 0;
+        if ($('#start').val() && $('#end').val()) {
+            if (!$('#special_price').val()) {
+                $('#special_price').addClass('is-invalid');
+                $('#err-spcl-prc').show();
+                error = 1;
+            }
+        }
+        if (error == 1) {
+            e.preventDefault();
+        }
+        else {
+            let btn = document.getElementById("submitSpecialPrice");
+            btn.textContent = "Saving Date...";
+            btn.classList.add("disabled");
+
+            var formData = new FormData(this);
+            console.log(formData);
+
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/villa/update/special-price",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                success: function(data) {
+                    iziToast.success({
+                        title: "Success",
+                        message: data.message,
+                        position: "topRight",
+                    });
+                    // location.reload();
+                    calendar.fullCalendar("removeEvents");
+                    calendar.fullCalendar("refetchEvents");
+                    tableSpecialPrice.draw();
+
+                    $("#start").val("");
+                    $("#end").val("");
+                    $("#special_price").val("");
+                    $("#disc").val("");
+
+                    btn.innerHTML = '<i class="fa fa-check"></i> {{ __('user_page.Save') }}';
+                    btn.classList.remove("disabled");
+                },
+                error: function (jqXHR, response) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+
+                    btn.innerHTML = '<i class="fa fa-check"></i> {{ __('user_page.Save') }}';
+                    btn.classList.remove("disabled");
+                }
+            });
+        }
+    });
+
     function delete_date_special_price(ids) {
         let id = ids.getAttribute("data-id");
         Swal.fire({
@@ -1110,8 +1153,8 @@
                     success: function(response) {
                         Swal.fire('Deleted', response.message, 'success');
                         tableSpecialPrice.draw();
-                        // calendar2.fullCalendar('removeEvents', id);
-                        // calendar2.fullCalendar("refetchEvents");
+                        calendar.fullCalendar('removeEvents', id);
+                        calendar.fullCalendar("refetchEvents");
                     },
                     error: function(jqXHR, response) {
                         console.log(jqXHR);

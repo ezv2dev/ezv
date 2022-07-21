@@ -64,26 +64,28 @@ use App\Models\VillaExtraGuest;
 use App\Models\OutdoorAmenities;
 use App\Models\VillaDetailPrice;
 use App\Models\VillaHasCategory;
+
 use App\Models\NotificationOwner;
 use App\Models\PropertyTypeVilla;
 use App\Models\VillaAvailability;
 use App\Models\VillaQuickEnquiry;
 use App\Models\CancellationPolicy;
+use App\Models\VillaBedroomDetail;
 use Illuminate\Support\Facades\DB;
 use App\Models\VillaHasGuestSafety;
 use App\Models\ActivityDetailReview;
 use App\Services\DeviceCheckService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\VillaBedroomDetailBed;
 use App\Models\RestaurantDetailReview;
 use Illuminate\Support\Facades\Validator;
 use App\Models\VillaAccessibilityFeatures;
 use App\Models\VillaAccessibilitiyFeaturesDetail;
-use App\Models\VillaBedroomDetail;
-use App\Models\VillaBedroomDetailBed;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
 use App\Services\DestinationNearbyVillaService as Nearby;
 use App\Services\FileCompressionService as FileCompression;
 
+use App\Services\CurrencyConversionService as CurrencyConversion;
 
 class ViewController extends Controller
 {
@@ -697,7 +699,7 @@ class ViewController extends Controller
             $event[$i]['start'] = $item->start;
             $event[$i]['end'] = date('Y-m-d', strtotime($item->end . " +1 days"));
             $event[$i]['disc'] = $item->disc;
-            $event[$i]['title'] = 'IDR ' . $item->title;
+            $event[$i]['title'] = CurrencyConversion::exchangeWithUnit($item->title);
             $event[$i]['name'] = $item->name;
             $event[$i]['regular_price'] = $item->regular_price;
             $i++;
@@ -712,11 +714,6 @@ class ViewController extends Controller
         $status = 500;
 
         try {
-            $find = Villa::where('id_villa', $request->id_villa)->first();
-            if (!$find) {
-                $status = 500;
-            }
-
             if ($request->disc == '') {
                 $disc = 0;
             } else {
@@ -743,11 +740,13 @@ class ViewController extends Controller
         }
 
         if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Added Special Price'
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Added Special Price'
+            ], 500);
         }
     }
 
@@ -3342,6 +3341,12 @@ class ViewController extends Controller
                 })
                 ->editColumn('end', function($data){
                     return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
+                })
+                ->editColumn('price', function($data){
+                    return CurrencyConversion::exchangeWithUnit($data->price);
+                })
+                ->editColumn('disc', function($data){
+                    return CurrencyConversion::exchangeWithUnit($data->disc);
                 })
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($data) {
