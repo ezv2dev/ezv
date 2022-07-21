@@ -459,32 +459,16 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+
+
                     // show content when on screen mobile size
                     if(mapMobileIsOpen){
                         if ($(window).width() < 768) {
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
+
                             // mapMobileIsOpen = true;
-                            contentIsExist = true;
-                        }
-                    } else {
-                        if ($(window).width() < 768) {
-                            // full screen map for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
-                            document.getElementById("bottom-mobile").classList.add('d-none');
-                            // show right content on the map
-                            $('#modal-map-content').removeClass('d-none');
-                            $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("mobile-map-close").classList.remove('d-none');
-                            document.getElementById("mobile-map-close").classList.add('d-block');
-                            mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
                     }
@@ -502,8 +486,6 @@
 
                         // disabled action google map
                         resetMapAction();
-                        // activate scroll action
-                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -643,27 +625,22 @@
                                         ${image}
                                     </div>
                                 </div>
+                                <div id="map-desc" class="mt-3">
+                                    <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                        <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
+                                        <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                        <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
+                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                    </a>
+                                </div>
 
-                                <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
-                                    <div id="map-desc" class="mt-3">
-                                            <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                            <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
-
-                                            <div class="col-6">
-                                                <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="d-flex mt-4 align-items-center modal-view-detail">
-                                                    <div class="d-flex justify-content-end col-6">
-                                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                        <div class="me-2"></div>
-                                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                    <div class="d-flex justify-content-end col-6">
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
-                                </a>
+                                </div>
                             </div>`;
 
         return customContent;
@@ -719,26 +696,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
+
                             // mapMobileIsOpen = true;
-                            contentIsExist = true;
-                        }
-                    } else {
-                        if ($(window).width() < 768) {
-                            // full screen map for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
-                            document.getElementById("bottom-mobile").classList.add('d-none');
-                            // show right content on the map
-                            $('#modal-map-content').removeClass('d-none');
-                            $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("mobile-map-close").classList.remove('d-none');
-                            document.getElementById("mobile-map-close").classList.add('d-block');
-                            mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
                     }
@@ -756,8 +715,6 @@
 
                         // disabled action google map
                         resetMapAction();
-                        // activate scroll action
-                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -946,26 +903,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
+
                             // mapMobileIsOpen = true;
-                            contentIsExist = true;
-                        }
-                    } else {
-                        if ($(window).width() < 768) {
-                            // full screen map for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
-                            document.getElementById("bottom-mobile").classList.add('d-none');
-                            // show right content on the map
-                            $('#modal-map-content').removeClass('d-none');
-                            $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("mobile-map-close").classList.remove('d-none');
-                            document.getElementById("mobile-map-close").classList.add('d-block');
-                            mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
                     }
@@ -983,8 +922,6 @@
 
                         // disabled action google map
                         resetMapAction();
-                        // activate scroll action
-                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -1199,26 +1136,8 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
+
                             // mapMobileIsOpen = true;
-                            contentIsExist = true;
-                        }
-                    } else {
-                        if ($(window).width() < 768) {
-                            // full screen map for mobile
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
-                            document.getElementById("bottom-mobile").classList.add('d-none');
-                            // show right content on the map
-                            $('#modal-map-content').removeClass('d-none');
-                            $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            // show button close full screen for mobile
-                            document.getElementById("mobile-map-close").classList.remove('d-none');
-                            document.getElementById("mobile-map-close").classList.add('d-block');
-                            mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
                     }
@@ -1236,8 +1155,6 @@
 
                         // disabled action google map
                         resetMapAction();
-                        // activate scroll action
-                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -1251,9 +1168,6 @@
         // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
-        $('#map-desc').removeClass('mobile-map-close');
-        $('#map-desc').removeClass('mobile-map');
-        $('#map-desc').addClass('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         contentIsExist = true;
     }
@@ -1282,12 +1196,10 @@
 
     function reverseMap(){
         document.getElementById("map-desc").classList.remove('mobile-map');
-        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("bottom-mobile").classList.remove('d-none');
-        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
         google.maps.event.clearListeners(map, 'click');
 
     }
@@ -1299,8 +1211,6 @@
             if(contentIsExist && mapMobileIsOpen){
                 console.log('ketika full screen dan content masih terbuka');
                 resetRightContent();
-                resetPrimaryMarker();
-                resetSecondaryMarker();
             }
             if(!contentIsExist && !mapMobileIsOpen) {
                 console.log('ketika tidak full  screen dan content tidak terbuka');
@@ -1313,9 +1223,7 @@
                 // disable event google map
                 resetMapEvent();
                 // full screen map for mobile
-                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                 document.getElementById("map-desc").classList.add('mobile-map');
-                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
                 // reset right content
@@ -1334,8 +1242,6 @@
 
                 // disabled action google map
                 resetMapAction();
-                // activate scroll action
-                map.setOptions({zoomControl: true});
                 // hide primary control
                 hidePrimaryMarkerControlFromMap();
             }
@@ -1348,14 +1254,12 @@
         mapMobileIsOpen = false;
         contentIsExist = false;
         document.getElementById("map-desc").classList.remove('mobile-map');
-        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('d-block');
         document.getElementById("modal-map-content").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
         document.getElementById("bottom-mobile").classList.remove('d-none');
-        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 
     // function to set map event
@@ -1382,8 +1286,6 @@
 
             // disabled action google map
             resetMapAction();
-            // activate scroll action
-            map.setOptions({zoomControl: true});
             // hide primary control
             hidePrimaryMarkerControlFromMap();
         });
@@ -2229,7 +2131,7 @@
             scaleControl: false,
             zoomControl: true,
             zoomControlOptions: {
-                position: google.maps.ControlPosition.TOP_RIGHT,
+                position: google.maps.ControlPosition.RIGHT_BOTTOM,
             },
             streetViewControl: true,
             streetViewControlOptions: {
@@ -2293,7 +2195,7 @@
         mapLoading = document.createElement("div");
         var loadingImg = document.createElement("img");
         loadingImg.setAttribute("src", "https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif");
-        loadingImg.setAttribute("style", "height: 12px; width: auto;");
+        loadingImg.setAttribute("style", "height: 12px;");
         mapLoading.appendChild(loadingImg);
         mapLoading.setAttribute("id", "location-map-loading");
         mapLoading.setAttribute("class", "p-2 mt-3 bg-white");
@@ -2345,8 +2247,6 @@
 
                     // disabled action google map
                     resetMapAction();
-                    // activate scroll action
-                    map.setOptions({zoomControl: true});
                     // hide primary control
                     hidePrimaryMarkerControlFromMap();
                 }, 200);
@@ -2354,40 +2254,40 @@
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        // var selectedMode = "WALKING";
-        // directionsService.route({
-        //   origin: {lat: lat_primary, lng: log_primary},
-        //   destination: secondaryMarker.getPosition(),
-        //   travelMode: google.maps.TravelMode[selectedMode]
-        // }, function(response, status) {
-        //   if (status == 'OK') {
-        //     directionsDisplay.setDirections(response);
-        //     travelTime = response.routes[0].legs[0].duration.text; // contains correct value
-        //     distance = response.routes[0].legs[0].distance.text; // contains correct value
-        //     $('#travelTime').html(travelTime);
-        //     $('#travelDistance').html(distance);
-        //   } else {
-        //     window.alert('Directions request failed due to ' + status);
-        //   }
-        // });
+        var selectedMode = "WALKING";
+        directionsService.route({
+          origin: {lat: lat_primary, lng: log_primary},
+          destination: secondaryMarker.getPosition(),
+          travelMode: google.maps.TravelMode[selectedMode]
+        }, function(response, status) {
+          if (status == 'OK') {
+            directionsDisplay.setDirections(response);
+            travelTime = response.routes[0].legs[0].duration.text; // contains correct value
+            distance = response.routes[0].legs[0].distance.text; // contains correct value
+            $('#travelTime').html(travelTime);
+            $('#travelDistance').html(distance);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
     }
 
     function calculateAndDisplayRoute2(directionsService, directionsDisplay) {
-        // var selectedMode = "DRIVING";
-        // directionsService.route({
-        //   origin: {lat: lat_primary, lng: log_primary},
-        //   destination: secondaryMarker.getPosition(),
-        //   travelMode: google.maps.TravelMode[selectedMode]
-        // }, function(response, status) {
-        //   if (status == 'OK') {
-        //     directionsDisplay.setDirections(response);
-        //     travelTime = response.routes[0].legs[0].duration.text; // contains correct value
-        //     // distance = response.routes[0].legs[0].distance.text; // contains correct value
-        //     $('#travelTimecar').html(travelTime);
-        //   } else {
-        //     window.alert('Directions request failed due to ' + status);
-        //   }
-        // });
+        var selectedMode = "DRIVING";
+        directionsService.route({
+          origin: {lat: lat_primary, lng: log_primary},
+          destination: secondaryMarker.getPosition(),
+          travelMode: google.maps.TravelMode[selectedMode]
+        }, function(response, status) {
+          if (status == 'OK') {
+            directionsDisplay.setDirections(response);
+            travelTime = response.routes[0].legs[0].duration.text; // contains correct value
+            // distance = response.routes[0].legs[0].distance.text; // contains correct value
+            $('#travelTimecar').html(travelTime);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
     }
 </script>
 <script>
@@ -2430,15 +2330,13 @@
 </script>
 
 {{-- MAP CONTENT --}}
-
-    <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
-        <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
-        <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
-            <div class="close-button">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
+<div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
+    <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+    <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
+        <div class="close-button">
+            <i class="fa-solid fa-xmark"></i>
         </div>
     </div>
-
-    <div id="modal-map-content" class="overflow-hidden"></div>
+</div>
+<div id="modal-map-content" class="overflow-hidden"></div>
 {{-- END MAP CONTENT --}}

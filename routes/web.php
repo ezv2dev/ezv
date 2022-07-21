@@ -434,6 +434,9 @@ Route::get('villa/calendar/{id}', [ViewController::class, 'fullcalendar'])->name
 Route::get('villa/calendar/not_available/{id}', [ViewController::class, 'fullcalendarNotAvailable'])->name('villa.fullcalendarNotAvailable');
 Route::post('villa/calendar/import/{id}', [VillabookingController::class, 'importCalendar'])->name('villa_import_calendar');
 
+Route::get('/villa/special-price/{id}/datatable', [ViewController::class, 'datatable_special_price'])->name('villa_special_price_datatable');
+Route::get('/villa/special-price/{id}/delete', [ViewController::class, 'delete_special_price']);
+
 //edit from frontend
 Route::post('/villa/update/photo/position', [ViewController::class, 'update_position_photo'])->name('villaphoto_edit_position');
 Route::post('/villa/update/video/position', [ViewController::class, 'update_position_video'])->name('villavideo_edit_position');
@@ -472,7 +475,7 @@ Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra']
 // );
 
 // ! End Verified
-Route::patch('/villa/{id}/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
+Route::post('/villa/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
 Route::patch('/restaurant/{id}/update/request-update-status', [Restaurant\RestaurantController::class, 'request_update_status'])->name('restaurant_request_update_status');
 Route::patch('/things-to-do/{id}/update/request-update-status', [Activity\ActivityController::class, 'request_update_status'])->name('activity_request_update_status');
 Route::patch('/hotel/{id}/update/request-update-status', [Hotel\HotelDetailController::class, 'request_update_status'])->name('hotel_request_update_status');
@@ -1320,6 +1323,7 @@ Route::post('/hotel/room/update/video/position', [Hotel\RoomDetailController::cl
 
 
 //COLABORATOR
+Route::get('/collaborator/intro', [Collaborator\CollaboratorController::class, 'index'])->name('collaborator_intro');
 Route::get('/collaborator/search', [Collaborator\SearchCollaboratorController::class, 'index'])->name('search_collaborator');
 Route::get('/collaborator-list', [Collaborator\CollaboratorController::class, 'collaborator_list'])->name('collaborator_list');
 Route::get('/collaborator/{id}', [Collaborator\CollaboratorController::class, 'collaborator'])->name('collaborator');

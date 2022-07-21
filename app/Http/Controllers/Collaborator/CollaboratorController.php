@@ -26,6 +26,11 @@ use App\Services\FileCompressionService as FileCompression;
 
 class CollaboratorController extends Controller
 {
+    public function index()
+    {
+        return view('collaborator.collaborator_intro');
+    }
+
     public function collaborator_list()
     {
         if (empty($request)) {

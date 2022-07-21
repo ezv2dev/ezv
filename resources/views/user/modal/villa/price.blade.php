@@ -198,7 +198,7 @@
                                                 </a>
                                             </li>
                                             <li class="modal-price-title" style="margin-left: 55px;">
-                                                <a class="filter-language-option-text" href="#addRegularPrice"
+                                                <a class="filter-language-option-text" href="#addSpecialPrice"
                                                     data-toggle="tab"
                                                     style="font-size: 12pt;
                                                     font-weight: 600; margin-left: -50px;">
@@ -317,22 +317,12 @@
                                             <br>
                                         </form>
                                     </div>
-                                    <div class="tab-pane" id="addRegularPrice">
-                                        <form action="{{ route('villa_update_special_price') }}" method="POST" id="edit-special-price"
+                                    <div class="tab-pane" id="addSpecialPrice">
+                                        <form action="javascript:void(0);" method="POST" id="edit-special-price"
                                             class="js-validation" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="id_villa" id="id_villa"
                                                 value="{{ $villa[0]->id_villa }}">
-                                            <div class="row"
-                                                style="margin-bottom: 15px; background: #DAE5D0; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
-                                                <div class="col-12">
-                                                    <span style="color: #383838; margin-left: 8px;">
-                                                        <strong>
-                                                            {{ __('user_page.Add Special Price') }}
-                                                        </strong>
-                                                    </span>
-                                                </div>
-                                            </div>
 
                                             <div class="row">
                                                 <div class="col-12">
@@ -385,6 +375,49 @@
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="dataSpecialPrice">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table class="table table-bordered table-hover"
+                                                        style="color: #383838" id="dataTableSpecialPrice" width="100%"
+                                                        cellspacing="0">
+                                                        <thead style="color: #383838;"
+                                                            class="thead-dark table-borderless">
+                                                            <tr>
+                                                                <th class="text-center">No</th>
+                                                                <th class="text-center">Start</th>
+                                                                <th class="text-center">End</th>
+                                                                <th class="text-center">Price</th>
+                                                                <th class="text-center">Disc</th>
+                                                                <th class="text-center">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {{-- <tr>
+                                                                <td class="text-center">1</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">Delete</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center">2</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">2022-02-02</th>
+                                                                <td class="text-center">Delete</th>
+                                                            </tr> --}}
+                                                        </tbody>
+                                                        <tfoot style="color: #383838">
+                                                            <tr>
+                                                                <th class="text-center">No</th>
+                                                                <th class="text-center">Start Date</th>
+                                                                <th class="text-center">End Date</th>
+                                                                <th class="text-center">Price</th>
+                                                                <th class="text-center">Disc</th>
+                                                                <th class="text-center">Action</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -813,28 +846,6 @@
             // }
             if (error == 1) {
                 e.preventDefault();
-            } else {
-                let btn = document.getElementById("submitPrice");
-                btn.textContent = "Saving...";
-                btn.classList.add("disabled");
-            }
-        });
-
-        $("#edit-special-price").submit(function (e) {
-            let error = 0;
-            if ($('#start').val() && $('#end').val()) {
-                if (!$('#special_price').val()) {
-                    $('#special_price').addClass('is-invalid');
-                    $('#err-spcl-prc').show();
-                    error = 1;
-                }
-            }
-            if (error == 1) {
-                e.preventDefault();
-            } else {
-                let btn = document.getElementById("submitSpecialPrice");
-                btn.textContent = "Saving...";
-                btn.classList.add("disabled");
             }
         });
     });
@@ -853,6 +864,7 @@
 </script>
 
 <script>
+    let id_villa = $('#id_villa').val();
     id_villa_fullcalendar = $('#id_villa').val();
 
     let calendar = $('#calendar').fullCalendar({
@@ -976,8 +988,49 @@
 <script src="{{ url('assets/js/plugins/oneui/datatables/buttons/buttons.colVis.min.js') }}"></script>
 
 <script>
-    // load_tabel_first();
-    let id_villa = $('#id_villa').val();
+    let tableSpecialPrice = $('#dataTableSpecialPrice').DataTable({
+        processing: true,
+        serverSide: true,
+        autowidth: true,
+        ajax: "/villa/special-price/" + id_villa + "/datatable",
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                class: 'text-center font-size-sm'
+            },
+            {
+                data: 'start',
+                name: 'start',
+                class: 'font-w600 font-size-sm'
+            },
+            {
+                data: 'end',
+                name: 'end',
+                class: 'font-w600 font-size-sm'
+            },
+            {
+                data: 'price',
+                name: 'price',
+                class: 'font-w600 font-size-sm'
+            },
+            {
+                data: 'disc',
+                name: 'disc',
+                class: 'font-w600 font-size-sm'
+            },
+            // { data: 'in_out', name: 'in_out', class:'font-w600 font-size-sm' },
+            // { data: 'total_price', name: 'total_price', class:'font-w600 font-size-sm' },
+            // { data: 'status', name: 'status', class:'font-w600 font-size-sm' },
+            {
+                data: 'aksi',
+                name: 'aksi',
+                class: 'text-center',
+                orderable: false,
+                searchable: false
+            }
+        ],
+        responsive: true
+    });
 
     let tableAvailability = $('#dataTableAvailability').DataTable({
         processing: true,
@@ -1015,6 +1068,120 @@
 </script>
 
 <script>
+    $("#edit-special-price").submit(function (e) {
+        let error = 0;
+        if ($('#start').val() && $('#end').val()) {
+            if (!$('#special_price').val()) {
+                $('#special_price').addClass('is-invalid');
+                $('#err-spcl-prc').show();
+                error = 1;
+            }
+        }
+        if (error == 1) {
+            e.preventDefault();
+        }
+        else {
+            let btn = document.getElementById("submitSpecialPrice");
+            btn.textContent = "Saving Date...";
+            btn.classList.add("disabled");
+
+            var formData = new FormData(this);
+            console.log(formData);
+
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/villa/update/special-price",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                success: function(data) {
+                    iziToast.success({
+                        title: "Success",
+                        message: data.message,
+                        position: "topRight",
+                    });
+                    // location.reload();
+                    calendar.fullCalendar("removeEvents");
+                    calendar.fullCalendar("refetchEvents");
+                    tableSpecialPrice.draw();
+
+                    // update All Calendar Detail
+                    calendar_availability(2);
+                    calendar_reserve(2);
+                    calendar_reserve2(2);
+
+                    $("#start").val("");
+                    $("#end").val("");
+                    $("#special_price").val("");
+                    $("#disc").val("");
+
+                    btn.innerHTML = '<i class="fa fa-check"></i> {{ __('user_page.Save') }}';
+                    btn.classList.remove("disabled");
+                },
+                error: function (jqXHR, response) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+
+                    btn.innerHTML = '<i class="fa fa-check"></i> {{ __('user_page.Save') }}';
+                    btn.classList.remove("disabled");
+                }
+            });
+        }
+    });
+
+    function delete_date_special_price(ids) {
+        let id = ids.getAttribute("data-id");
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/villa/special-price/${id}/delete/`,
+                    success: function(response) {
+                        Swal.fire('Deleted', response.message, 'success');
+                        tableSpecialPrice.draw();
+
+                        // render Event FullCalendar
+                        calendar.fullCalendar('removeEvents', id);
+                        calendar.fullCalendar("refetchEvents");
+
+                        // update All Calendar Detail
+                        calendar_availability(2);
+                        calendar_reserve(2);
+                        calendar_reserve2(2);
+                    },
+                    error: function(jqXHR, response) {
+                        console.log(jqXHR);
+                        Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    }
+</script>
+
+<script>
     //add data availability to db
     $("#btn-submit-availability").click(function() {
         let btn = document.getElementById("btn-submit-availability");
@@ -1037,7 +1204,8 @@
                     message: data.message,
                     position: "topRight",
                 });
-                // location.reload();
+
+                // render Event FullCalendar
                 calendar2.fullCalendar("removeEvents");
                 calendar2.fullCalendar("refetchEvents");
                 tableAvailability.draw();
@@ -1046,6 +1214,11 @@
 
                 btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
                 btn.classList.remove("disabled");
+
+                // update All Calendar Detail
+                calendar_availability(2);
+                calendar_reserve(2);
+                calendar_reserve2(2);
             },
             error: function (jqXHR, response) {
                 iziToast.error({
@@ -1081,8 +1254,15 @@
                     success: function(response) {
                         Swal.fire('Deleted', response.message, 'success');
                         tableAvailability.draw();
+
+                        // render Event FullCalendar
                         calendar2.fullCalendar('removeEvents', id);
                         calendar2.fullCalendar("refetchEvents");
+
+                        // update All Calendar Detail
+                        calendar_availability(2);
+                        calendar_reserve(2);
+                        calendar_reserve2(2);
                     },
                     error: function(jqXHR, response) {
                         console.log(jqXHR);
