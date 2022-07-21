@@ -3689,7 +3689,7 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}" id="positionPhotoGallery{{ $id }}">
                                 <img class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
                                     title="{{ $name }}">
@@ -3701,8 +3701,8 @@
                 </div>
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
-                        <input type='button' class="btn-edit-position-photos" value='Submit'
-                            onclick="save_reorder_photo()">
+                        <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
+                            onclick="save_reorder_photo()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -3945,7 +3945,11 @@
         }
         // Save order
         function save_reorder_photo() {
-            showingLoading();
+
+            let btn = document.getElementById("saveBtnReorderPhoto");
+            btn.textContent = "Submiting...";
+            btn.classList.add("disabled");
+
             var imageids_arr = [];
             // get image ids order
             $('#sortable-photo li').each(function() {
@@ -3962,7 +3966,70 @@
                     id: '{{ $restaurant->id_restaurant }}'
                 },
                 success: function(response) {
-                    location.reload();
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/restaurant/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content = "";
+                    let contentPositionModal;
+
+                    let galleryDiv = $('.gallery');
+                    let galleryLength = galleryDiv.find('a').length;
+
+                    if (galleryLength == 0)
+                    {
+                        $('.gallery').html("");
+                    }
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '"> <a href="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' +
+                            response.data.photo[i].caption +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[i]
+                            .id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
+                            '"> <img src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </li>';
+                    }
+                    // for (let v = 0; v < response.data.video.length; v++) {
+                    //     content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
+                    //         '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
+                    //         response.data.video[v].id_video +
+                    //         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                    //         path + lowerCaseUid + slash + response.data.video[v].name +
+                    //         '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
+                    //         response.data.video[v].id_video +
+                    //         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                    // }
+
+                    btn.textContent = "Submit";
+                    btn.classList.remove("disabled");
+
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-photo').html("");
+                    $('#sortable-photo').append(contentPositionModal);
+
+                    $("#edit_position_photo").modal("hide");
+
+                    $gallery.refresh();
                 }
             });
         }
@@ -4474,6 +4541,7 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
+                let contentPositionModal;
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4498,7 +4566,14 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                        '"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
@@ -4914,6 +4989,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $(`#displayPhoto${photo}`).remove();
+                            $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;

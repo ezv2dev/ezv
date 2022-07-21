@@ -38,7 +38,7 @@ if (isset($_COOKIE['tema'])) {
             <div class="col-lg-6">
                 <div class="text-center mt-4">
                     <img class="img-fluid p-4"
-                        src="{{ asset('assets/partner/template/assets/img/freepik/404-error-pana.svg') }}"
+                        src="{{ asset('assets/partner/template/assets/img/freepik/404-error-homes.svg') }}"
                         alt="" />
                     <p class="lead">Homes data not available</p>
                 </div>

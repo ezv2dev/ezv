@@ -3905,6 +3905,34 @@ span.flatpickr-weekday {
     flex-direction: column;
 }
 
+.button-prev {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-next {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.button-close-map-content{
+    width: 34px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    background-color: #d8d8d8;
+    border-radius: 50px;
+    z-index: 99;
+    top: 10px;
+    left: 10px;
+}
+
 /* map mobile */
     .mobile-map{
         position: fixed;

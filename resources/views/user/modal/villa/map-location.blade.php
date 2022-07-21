@@ -387,6 +387,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -399,22 +404,25 @@
                                         ${image}
                                     </div>
                                 </div>
+                                <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
                                 <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
                                         <p class="card-text text-20 text-orange fw-600 mt-1">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
                                         <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
-                                    </a>
                                 </div>
+                                </a>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
+                                    </div>
 
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
                                     <div class="d-flex justify-content-end col-6">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
+                                  
                                 </div>
                             </div>`;
 
@@ -631,6 +639,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -649,21 +662,18 @@
                                             <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                             <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
-
-                                            <div class="col-6">
-                                                <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="d-flex mt-4 align-items-center modal-view-detail">
-                                                    <div class="d-flex justify-content-end col-6">
-                                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                        <div class="me-2"></div>
-                                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
                                     </div>
                                 </a>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6">
+                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">  
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
                             </div>`;
 
         return customContent;
@@ -869,6 +879,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -881,15 +896,17 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
+                                <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
+                                    <div class="mt-3">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
-                                    </a>
-                                </div>
-
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                    </div>
+                                </a>
+                                
+                                <div class="col-12 d-flex">
+                                    <div class="col-6">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
+                                    </div>
                                     <div class="d-flex justify-content-end col-6">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
@@ -1122,6 +1139,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -1134,23 +1156,26 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                    <div class="mt-3">   
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
 
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                <div class="col-12 d-flex">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
+                                    </div>
                                     <div class="d-flex justify-content-end col-6">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
                                 </div>
+                                
                             </div>`;
 
         return customContent;

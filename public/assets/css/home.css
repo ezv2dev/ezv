@@ -202,7 +202,7 @@ body {
 
     .header-4-4 .navbar {
         padding: 1rem 2rem;
-        padding-top: 18px !important;
+        /* padding-top: 18px !important; */
     }
 
     .header-4-4 .hero {
@@ -218,7 +218,7 @@ body {
 @media (min-width: 768px) {
     .header-4-4 .navbar {
         padding: 1rem 4rem;
-        padding-top: 18px !important;
+        /* padding-top: 18px !important; */
     }
 
     .header-4-4 .hero {
@@ -238,8 +238,8 @@ body {
     }
 
     .header-4-4 .navbar {
-        padding: 1rem 3rem;
-        padding-top: 18px !important;
+        padding: 1rem 6rem;
+        /* padding-top: 18px !important; */
     }
 
     .header-4-4 .hero {
@@ -2064,6 +2064,18 @@ span.flatpickr-weekday {
     margin-left: 22px;
 }
 
+/* .pr-110p {
+    padding-right: 110px !important;
+}
+.pl-110p {
+    padding-left: 110px !important;
+}
+.pt-0p {
+    padding-top: 0px !important;
+}
+.pt-5p {
+    padding-top: 5px !important;
+} */
 @media only screen and (max-width: 500px) {
     .grid-text{
         font-size: 75%;
@@ -2350,7 +2362,7 @@ span.flatpickr-weekday {
     #search_bar {
         left: 0;
     }
-    
+
 }
 
 @media only screen and (min-width: 992px) {
@@ -2364,11 +2376,13 @@ span.flatpickr-weekday {
         width: 350px !important;
     }
     #nav .navbar-dekstop {
-        max-width: 1360px !important;
+        /* max-width: 1360px !important; */
+        max-width: 1125px !important;
         margin: 0 auto !important;
     }
     .footer-block {
-        max-width: 1360px !important;
+        /* max-width: 1360px !important; */
+        max-width: 1125px !important;
     }
 }
 
