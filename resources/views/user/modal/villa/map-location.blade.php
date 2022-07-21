@@ -276,7 +276,7 @@
         if(restaurantLocations.photo && restaurantLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < restaurantLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.photo[j].name}')}}"
                         alt="">
@@ -284,13 +284,13 @@
             }
         } else {
             if(restaurantLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -499,7 +499,7 @@
         if(villaLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < villaLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.photo[j].name}')}}"
                         alt="">
@@ -507,13 +507,13 @@
             }
         } else {
             if(villaLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -909,7 +909,7 @@
         if(activityLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
                         alt="">
@@ -917,13 +917,13 @@
             }
         } else {
             if(activityLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -1113,11 +1113,11 @@
 
     // function to clear & hide right content
     function resetRightContent() {
-        $('#modal-map-content').html('');
+        // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
-        contentIsExist = false;
+        contentIsExist = true;
     }
 
     // function to refetch data marker
@@ -1142,20 +1142,28 @@
         await fetchActivitysLocation(data);
     }
 
+    function reverseMap(){
+        document.getElementById("map-desc").classList.remove('mobile-map');
+        $('#modal-map-content').removeClass('d-block mobile-map-desc');
+        document.getElementById("mobile-map-close").classList.remove('d-block');
+        document.getElementById("mobile-map-close").classList.add('d-none');
+        document.getElementById("bottom-mobile").classList.remove('d-none');
+        google.maps.event.clearListeners(map, 'click');
+     
+    }
+
     function mapMobile(){
          //mobile map
          map.addListener("click", ()=>{
             console.log('hit mapMobile');
-            console.log('contentIsExist: '+contentIsExist);
-            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             if(contentIsExist && mapMobileIsOpen){
                 console.log('ketika full screen dan content masih terbuka');
                 resetRightContent();
             }
             if(!contentIsExist && !mapMobileIsOpen) {
                 console.log('ketika tidak full  screen dan content tidak terbuka');
-                mapMobileIsOpen = true;
                 contentIsExist = true;
+                mapMobileIsOpen = true;
                 // enable loading
                 setMapLoading();
                 // disable action google map
@@ -1164,6 +1172,7 @@
                 resetMapEvent();
                 // full screen map for mobile
                 document.getElementById("map-desc").classList.add('mobile-map');
+                document.getElementById("bottom-mobile").classList.add('d-none');
 
                 // reset right content
                 $('#modal-map-content').html('');
@@ -1184,6 +1193,8 @@
                 // hide primary control
                 hidePrimaryMarkerControlFromMap();
             }
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
         });
     }
 
@@ -1196,6 +1207,7 @@
         document.getElementById("modal-map-content").classList.remove('d-block');
         document.getElementById("modal-map-content").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
+        document.getElementById("bottom-mobile").classList.remove('d-none');
     }
 
     // function to set map event
@@ -1743,20 +1755,30 @@
         $(document).ready(() => {
             if ($(window).width() < 768) {
                 contentIsExist = false;
+                mapMobileIsOpen = false;
                 mapMobile();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             }
             if ($(window).width() >= 768) {
-                console.log('desktop')
+                reverseMap();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             }
         });
     });
     $(window).on('resize', () => {
         if ($(window).width() < 768) {
             contentIsExist = false;
+            mapMobileIsOpen = false;
             mapMobile();
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
         }
         if ($(window).width() >= 768) {
-            console.log('desktop')
+            reverseMap();
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
         }
     });
 </script>
