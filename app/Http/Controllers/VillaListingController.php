@@ -84,10 +84,6 @@ class VillaListingController extends Controller
 
     public function status(Request $request, $id)
     {
-        // dd($request->all());
-        $this->authorize('listvilla_delete');
-        $status = 500;
-
         $find = Villa::where('id_villa', $id)->first();
         if ($find->status == 2) {
             $find->update(array(
@@ -96,15 +92,17 @@ class VillaListingController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
+
+            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 1]);
         } else {
             $find->update(array(
                 'status' =>  0,
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-        }
 
-        return back();
+            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 0]);
+        }
     }
 
     public function grade(Request $request, $id)
