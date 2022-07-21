@@ -366,11 +366,6 @@
             `;
         }
 
-        let indicator = `{
-            target_type: 'restaurant',
-            id: ${restaurantLocations.id_restaurant}
-        }`;
-
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
@@ -411,9 +406,9 @@
 
                                 <div class="d-flex mt-4 align-items-center modal-view-detail">
                                     <div class="d-flex justify-content-end col-6">
-                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
-                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
                                 </div>
                             </div>`;
@@ -467,8 +462,7 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
-                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                            document.getElementById("map-desc").classList.add('mobile-map');
+
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
@@ -593,10 +587,10 @@
             `;
         }
 
-        let indicator = `{
+        let indicator = {
             target_type: 'villa',
-            id: ${villaLocations.id_villa}
-        }`;
+            id: villaLocations.id_villa
+        };
 
         var customContent = `
                             <div class="col-12" style="position: relative">
@@ -637,7 +631,7 @@
 
                                 <div class="d-flex mt-4 align-items-center modal-view-detail">
                                     <div class="d-flex justify-content-end col-6">
-                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
@@ -697,6 +691,7 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+
                             // mapMobileIsOpen = true;
                             contentIsExist = true;
                         }
@@ -805,11 +800,6 @@
             `;
         }
 
-        let indicator = `{
-            target_type: 'hotel',
-            id: ${hotelLocations.id_hotel}
-        }`;
-
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
@@ -848,9 +838,9 @@
 
                                 <div class="d-flex mt-4 align-items-center modal-view-detail">
                                     <div class="d-flex justify-content-end col-6">
-                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
-                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
                                 </div>
                             </div>`;
@@ -1038,11 +1028,6 @@
             `;
         }
 
-        let indicator = `{
-            target_type: 'activity',
-            id: ${activityLocations.id_activity}
-        }`;
-
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
@@ -1083,9 +1068,9 @@
 
                                 <div class="d-flex mt-4 align-items-center modal-view-detail">
                                     <div class="d-flex justify-content-end col-6">
-                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
-                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
                                 </div>
                             </div>`;
@@ -1168,9 +1153,6 @@
         // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
-        $('#map-desc').removeClass('mobile-map-close');
-        $('#map-desc').removeClass('mobile-map');
-        $('#map-desc').addClass('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         contentIsExist = true;
     }
@@ -1199,12 +1181,10 @@
 
     function reverseMap(){
         document.getElementById("map-desc").classList.remove('mobile-map');
-        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("bottom-mobile").classList.remove('d-none');
-        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
         google.maps.event.clearListeners(map, 'click');
 
     }
@@ -1228,9 +1208,7 @@
                 // disable event google map
                 resetMapEvent();
                 // full screen map for mobile
-                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                 document.getElementById("map-desc").classList.add('mobile-map');
-                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
                 // reset right content
@@ -1261,14 +1239,12 @@
         mapMobileIsOpen = false;
         contentIsExist = false;
         document.getElementById("map-desc").classList.remove('mobile-map');
-        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('d-block');
         document.getElementById("modal-map-content").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
         document.getElementById("bottom-mobile").classList.remove('d-none');
-        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 
     // function to set map event
@@ -1605,260 +1581,133 @@
             $(this).children('.slick-next').css('display', 'none');
         })
     }
-    // next on all marker
+
     function next_on_all_marker(indicator) {
-        console.log('target type: '+indicator.target_type);
-        console.log('id: '+indicator.id);
+        console.log('indicator'+indicator);
+        return;
         // initialization all data marker/location into an array
-        var allLocation = [];
-        if(villaLocations.length > 0 && villaLocations){
-            for (let i = 0; i < villaLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'villa',
-                    id: villaLocations[i].id_villa
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(restaurantLocations.length > 0 && restaurantLocations){
-            for (let i = 0; i < restaurantLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'restaurant',
-                    id: restaurantLocations[i].id_restaurant
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(hotelLocations.length > 0 && hotelLocations){
-            for (let i = 0; i < hotelLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'hotel',
-                    id: hotelLocations[i].id_hotel
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(activityLocations.length > 0 && activityLocations){
-            for (let i = 0; i < activityLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'activity',
-                    id: activityLocations[i].id_activity
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        console.log(allLocation);
+        // var allLocation = [];
+        // if(villaLocations.length > 0 && villaLocations){
+        //     for (let i = 0; i < villaLocations.length; i++) {
+        //         const dataLocations = {
+        //             target_type: 'villa',
+        //             id: villaLocations[i].id_villa
+        //         };
+        //         allLocation.push(dataLocations);
+        //     }
+        // }
+        // if(restaurantLocations.length > 0 && restaurantLocations){
+        //     for (let i = 0; i < restaurantLocations.length; i++) {
+        //         const dataLocations = {
+        //             target_type: 'restaurant',
+        //             id: restaurantLocations[i].id_restaurant
+        //         };
+        //         allLocation.push(dataLocations);
+        //     }
+        // }
+        // if(hotelLocations.length > 0 && hotelLocations){
+        //     for (let i = 0; i < hotelLocations.length; i++) {
+        //         const dataLocations = {
+        //             target_type: 'hotel',
+        //             id: hotelLocations[i].id_hotel
+        //         };
+        //         allLocation.push(dataLocations);
+        //     }
+        // }
+        // if(activityLocations.length > 0 && activityLocations){
+        //     for (let i = 0; i < activityLocations.length; i++) {
+        //         const dataLocations = {
+        //             target_type: 'activity',
+        //             id: activityLocations[i].id_activity
+        //         };
+        //         allLocation.push(dataLocations);
+        //     }
+        // }
+        // console.log(allLocation);
 
-        let isFound = false;
-        let index;
-        let nextMarker;
-        for (let i = 0; i < allLocation.length; i++) {
-            const hasBeenFound = allLocation[i].id == indicator.id && allLocation[i].target_type == indicator.target_type;
-            if(hasBeenFound){
-                isFound = true;
-                index = i;
-                break;
-            }
-        }
-        console.log('next marker: '+isFound);
+        // let isFound = false;
+        // let index;
+        // let nextMarker;
+        // for (let i = 0; i < allLocation.length; i++) {
+        //     const hasBeenFound = allLocation[i].id == indicator.id && allLocation[i].target_type == indicator.target_type;
+        //     if(hasBeenFound){
+        //         isFound = true;
+        //         index = i;
+        //         break;
+        //     }
+        // }
 
-        if (index != null) {
-            if(index == (allLocation.length-1)) {
-                nextMarker = allLocation[0];
-            } else {
-                nextMarker = allLocation[index+1];
-            }
-        } else {
-            console.log('index not found');
-        }
-        console.log('next marker: '+nextMarker);
-        if(nextMarker){
-            console.log('next marker type: '+nextMarker.target_type);
-            console.log('next marker id: '+nextMarker.id);
-        }
+        // if (index != null) {
+        //     if(index == (allLocation.length-1)) {
+        //         nextMarker = allLocation[0];
+        //     } else {
+        //         nextMarker = allLocation[index+1];
+        //     }
+        // } else {
+        //     console.log('index not found');
+        // }
 
-        if(isFound && nextMarker){
-            if(nextMarker.target_type == 'villa') {
-                if(villaLocations.length > 0 && villaLocations){
-                    // find index on the list
-                    for (let i = 0; i < villaLocations.length; i++) {
-                        const data = villaLocations[i];
-                        if(data.id_villa == nextMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerVilla[i], 'click');
-                            break;
-                        }
-                    }
-                }
-            } else if( nextMarker.target_type == 'restaurant'){
-                if(restaurantLocations.length > 0 && restaurantLocations){
-                    // find index on the list
-                    for (let i = 0; i < restaurantLocations.length; i++) {
-                        const data = restaurantLocations[i];
-                        if(data.id_restaurant == nextMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerRestaurant[i], 'click');
-                            break;
-                        }
-                    }
-
-                }
-            } else if( nextMarker.target_type == 'hotel'){
-                if(hotelLocations.length > 0 && hotelLocations){
-                    // find index on the list
-                    for (let i = 0; i < hotelLocations.length; i++) {
-                        const data = hotelLocations[i];
-                        if(data.id_hotel == nextMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerHotel[i], 'click');
-                            break;
-                        }
-                    }
-
-                }
-            } else if( nextMarker.target_type == 'activity'){
-                if(activityLocations.length > 0 && activityLocations){
-                    // find index on the list
-                    for (let i = 0; i < activityLocations.length; i++) {
-                        const data = activityLocations[i];
-                        if(data.id_activity == nextMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerActivity[i], 'click');
-                            break;
-                        }
-                    }
-                }
-            };
-        } else {
-            console.log('next data not found');
-        }
-    }
-    function prev_on_all_marker(indicator) {
-        console.log('target type: '+indicator.target_type);
-        console.log('id: '+indicator.id);
-        // initialization all data marker/location into an array
-        var allLocation = [];
-        if(villaLocations.length > 0 && villaLocations){
-            for (let i = 0; i < villaLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'villa',
-                    id: villaLocations[i].id_villa
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(restaurantLocations.length > 0 && restaurantLocations){
-            for (let i = 0; i < restaurantLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'restaurant',
-                    id: restaurantLocations[i].id_restaurant
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(hotelLocations.length > 0 && hotelLocations){
-            for (let i = 0; i < hotelLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'hotel',
-                    id: hotelLocations[i].id_hotel
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        if(activityLocations.length > 0 && activityLocations){
-            for (let i = 0; i < activityLocations.length; i++) {
-                const dataLocations = {
-                    target_type: 'activity',
-                    id: activityLocations[i].id_activity
-                };
-                allLocation.push(dataLocations);
-            }
-        }
-        console.log(allLocation);
-
-        let isFound = false;
-        let index;
-        let prevMarker;
-        for (let i = 0; i < allLocation.length; i++) {
-            const hasBeenFound = allLocation[i].id == indicator.id && allLocation[i].target_type == indicator.target_type;
-            if(hasBeenFound){
-                isFound = true;
-                index = i;
-                break;
-            }
-        }
-        console.log('prev marker: '+isFound);
-
-        if (index != null) {
-            if(index == 0) {
-                prevMarker = allLocation[allLocation.length-1];
-            } else {
-                prevMarker = allLocation[index-1];
-            }
-        } else {
-            console.log('index not found');
-        }
-        console.log('prev marker: '+prevMarker);
-        if(prevMarker){
-            console.log('prev marker type: '+prevMarker.target_type);
-            console.log('prev marker id: '+prevMarker.id);
-        }
-
-        if(isFound && prevMarker){
-            if(prevMarker.target_type == 'villa') {
-                if(villaLocations.length > 0 && villaLocations){
-                    // find index on the list
-                    for (let i = 0; i < villaLocations.length; i++) {
-                        const data = villaLocations[i];
-                        if(data.id_villa == prevMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerVilla[i], 'click');
-                            break;
-                        }
-                    }
-                }
-            } else if( prevMarker.target_type == 'restaurant'){
-                if(restaurantLocations.length > 0 && restaurantLocations){
-                    // find index on the list
-                    for (let i = 0; i < restaurantLocations.length; i++) {
-                        const data = restaurantLocations[i];
-                        if(data.id_restaurant == prevMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerRestaurant[i], 'click');
-                            break;
-                        }
-                    }
-
-                }
-            } else if( prevMarker.target_type == 'hotel'){
-                if(hotelLocations.length > 0 && hotelLocations){
-                    // find index on the list
-                    for (let i = 0; i < hotelLocations.length; i++) {
-                        const data = hotelLocations[i];
-                        if(data.id_hotel == prevMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerHotel[i], 'click');
-                            break;
-                        }
-                    }
-
-                }
-            } else if( prevMarker.target_type == 'activity'){
-                if(activityLocations.length > 0 && activityLocations){
-                    // find index on the list
-                    for (let i = 0; i < activityLocations.length; i++) {
-                        const data = activityLocations[i];
-                        if(data.id_activity == prevMarker.id) {
-                            // activate the marker
-                            google.maps.event.trigger(markerActivity[i], 'click');
-                            break;
-                        }
-                    }
-                }
-            };
-        } else {
-            console.log('prev data not found');
-        }
+        // if(isFound && nextMarker){
+        //     if(nextMarker.target_type == 'villa') {
+        //         if(villaLocations.length > 0 && villaLocations){
+        //             // find index on the list
+        //             var index = null;
+        //             for (let i = 0; i < villaLocations.length; i++) {
+        //                 const data = villaLocations[i];
+        //                 if(data.id_villa == nextMarker.id) {
+        //                     index = i;
+        //                     break;
+        //                 }
+        //             }
+        //             // activate the marker
+        //             google.maps.event.trigger(markerVilla[index], 'click');
+        //         }
+        //     } else if( nextMarker.target_type == 'restaurant'){
+        //         if(restaurantLocations.length > 0 && restaurantLocations){
+        //             // find index on the list
+        //             var index = null;
+        //             for (let i = 0; i < restaurantLocations.length; i++) {
+        //                 const data = restaurantLocations[i];
+        //                 if(data.id_restaurant == nextMarker.id) {
+        //                     index = i;
+        //                     break;
+        //                 }
+        //             }
+        //             // activate the marker
+        //             google.maps.event.trigger(markerRestaurant[index], 'click');
+        //         }
+        //     } else if( nextMarker.target_type == 'hotel'){
+        //         if(hotelLocations.length > 0 && hotelLocations){
+        //             // find index on the list
+        //             var index = null;
+        //             for (let i = 0; i < hotelLocations.length; i++) {
+        //                 const data = hotelLocations[i];
+        //                 if(data.id_hotel == nextMarker.id) {
+        //                     index = i;
+        //                     break;
+        //                 }
+        //             }
+        //             // activate the marker
+        //             google.maps.event.trigger(markerHotel[index], 'click');
+        //         }
+        //     } else if( nextMarker.target_type == 'activity'){
+        //         if(activityLocations.length > 0 && activityLocations){
+        //             // find index on the list
+        //             var index = null;
+        //             for (let i = 0; i < activityLocations.length; i++) {
+        //                 const data = activityLocations[i];
+        //                 if(data.id_activity == nextMarker.id) {
+        //                     index = i;
+        //                     break;
+        //                 }
+        //             }
+        //             // activate the marker
+        //             google.maps.event.trigger(markerActivity[index], 'click');
+        //         }
+        //     };
+        // } else {
+        //     console.log('next data not found');
+        // }
     }
     // next marker
     function next_marker(target_type, id) {
@@ -2204,7 +2053,7 @@
         mapLoading = document.createElement("div");
         var loadingImg = document.createElement("img");
         loadingImg.setAttribute("src", "https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif");
-        loadingImg.setAttribute("style", "height: 12px; width: auto;");
+        loadingImg.setAttribute("style", "height: 12px;");
         mapLoading.appendChild(loadingImg);
         mapLoading.setAttribute("id", "location-map-loading");
         mapLoading.setAttribute("class", "p-2 mt-3 bg-white");
@@ -2339,15 +2188,13 @@
 </script>
 
 {{-- MAP CONTENT --}}
-
-    <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
-        <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
-        <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
-            <div class="close-button">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
+<div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
+    <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+    <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
+        <div class="close-button">
+            <i class="fa-solid fa-xmark"></i>
         </div>
     </div>
-
-    <div id="modal-map-content" class="overflow-hidden"></div>
+</div>
+<div id="modal-map-content" class="overflow-hidden"></div>
 {{-- END MAP CONTENT --}}

@@ -61,7 +61,7 @@
                 @foreach ($categories->take(6) as $item)
                     <div>
                         <a href="#" class="grid-img-container"
-                            onclick="foodFilter({{ $item->id_cuisine }}, null, true)">
+                            onclick="foodFilter({{ $item->id_cuisine }}, null, true, false)">
                             <img @if ($fCuisine == $item->id_cuisine) style="border: 5px solid #ff7400;" @endif
                                 class="grid-img-filter lozad"
                                 data-src="https://source.unsplash.com/random/?{{ $item->name }}"
@@ -527,7 +527,7 @@
             window.location.href = `{{ env('APP_URL') }}/food/search?${suburl}`;
         }
 
-        function foodFilter(valueCuisine, valueSub, unCheckCategory) {
+        function foodFilter(valueCuisine, valueSub, unCheckCategory, whatToEat) {
             var sLocationFormInput = $("input[name='sLocation']").val();
 
             function setCookie2(name, value, days) {
@@ -556,30 +556,39 @@
                 sCuisineFormInput.push(parseInt($(this).val()));
             });
 
-            var sKeywordFormInput = function() {
-                var tmp = null;
-                $.ajax({
-                    async: false,
-                    type: "GET",
-                    global: false,
-                    dataType: 'json',
-                    url: "/food/subcategory",
-                    data: {
-                        name: $("input[name='sKeyword']").val()
-                    },
-                    success: function(response) {
-                        tmp = response.data;
-                    }
-                });
-                return tmp;
-            }();
+            if (whatToEat == true) {
+                var sKeywordFormInput = function() {
+                    var tmp = null;
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        global: false,
+                        dataType: 'json',
+                        url: "/food/subcategory",
+                        data: {
+                            name: $("input[name='sKeyword']").val()
+                        },
+                        success: function(response) {
+                            tmp = response.data;
+                        }
+                    });
+                    return tmp;
+                }();
+            }
 
             var filterFormInput = [];
+
             $("input[name='subCategory[]']:checked").each(function() {
                 filterFormInput.push(parseInt($(this).val()));
             });
 
-            if (filterFormInput.includes(valueSub) == true) {
+            if (whatToEat == true) {
+                filterFormInput.push(sKeywordFormInput);
+                var filteredArray = filterFormInput
+            } else if (filterFormInput.includes(valueSub) == true) {
+                if (whatToEat == true) {
+                    filterFormInput.push(sKeywordFormInput);
+                }
                 var filterCheck = filterFormInput.filter(unCheck);
 
                 function unCheck(dataCheck) {
@@ -591,30 +600,36 @@
                 });
             } else {
                 filterFormInput.push(valueSub);
-
+                if (whatToEat == true) {
+                    filterFormInput.push(sKeywordFormInput);
+                }
                 var filteredArray = filterFormInput.filter(function(item, pos) {
                     return filterFormInput.indexOf(item) == pos;
                 });
             }
-            filteredArray.push(sKeywordFormInput);
 
             if (valueCuisine == null) {
+                subArray = [];
+                filteredArray.forEach(element => {
+                    if (element !== null) {
+                        subArray.push(element);
+                    }
+                });
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${subArray}`;
             } else {
+                subArray = [];
+                filteredArray.forEach(element => {
+                    if (element !== null) {
+                        subArray.push(element);
+                    }
+                });
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&fCuisine=${valueCuisine}&fSubCategory=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=${valueCuisine}&fSubCategory=${subArray}`;
             }
+
             restaurantRefreshFilter(subUrl);
         }
-
-        // function moreCategory() {
-        //     $('#categoryModal').modal('show');
-        // }
-
-        // function moreSubCategory() {
-        //     $('#modalSubCategory').modal('show');
-        // }
     </script>
 
     {{-- <script>

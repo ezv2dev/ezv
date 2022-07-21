@@ -11,7 +11,7 @@
     }
 
     .modal-body-editprice {
-        padding: 0rem 2rem 2rem 2rem !important;
+        padding: 1rem 2rem 2rem 2rem !important;
         height: 490px !important;
         overflow-y: auto !important;
     }
@@ -181,140 +181,218 @@
                 <div class="tabbable column-wrapper">
                     <div class="tab-content tab-content-language column rigth" id="tabs">
                         <div class="tab-pane active" id="editprice">
-                            <form action="{{ route('villa_update_price') }}" method="POST" id="edit-price"
-                                class="js-validation" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="id_villa" id="id_villa"
-                                    value="{{ $villa[0]->id_villa }}">
-
-                                <div class="row mb-12">
-                                    <label class="col-sm-4 col-form-label" for="price">
-                                        <strong>
-                                            {{ __('user_page.Instant Book') }}
-                                            <span title="Required" style="font-size: 12pt; color: #EB5353;">
-                                                *
-                                            </span>
-                                        </strong>
-                                    </label>
-                                    <div class="col-sm-8">
-                                        @if ($villa[0]->instant_book == 'no')
-                                            <label class="switch">
-                                                <input type="checkbox" name="instant_book" />
-                                                <div></div>
-                                            </label>
-                                        @else
-                                            <label class="switch switch-checked">
-                                                <input type="checkbox" checked name="instant_book" />
-                                                <div></div>
-                                            </label>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row mb-12 mt-3">
-                                    <label class="col-sm-4 col-form-label" for="price">
-                                        <strong>
-                                            {{ __('user_page.Regular Price') }}
-                                            <span title="Required" style="font-size: 12pt; color: #EB5353;">
-                                                *
-                                            </span>
-                                        </strong>
-                                    </label>
-                                    <div class="col-sm-8">
-                                        <input type="number" min="0" class="form-control" id="villa-price"
-                                            name="price" placeholder="Price.." value="{{ $villa[0]->price }}">
-                                        <small id="err-prc" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_price') }}</small>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-12 mt-3">
-                                    <label class="col-sm-4 col-form-label" for="price">
-                                        <strong>{{ __('user_page.Commission') }}
-                                            <span title="Required" style="font-size: 12pt; color: #EB5353;">*</span>
-                                        </strong>
-                                    </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select" name="commission">
-                                            {{-- <option value="1" selected>English</option> --}}
-                                            <option value="18"
-                                                {{ $villa[0]->commission == 18 ? 'selected' : '' }}>
-                                                18 %</option>
-                                            <option value="15"
-                                                {{ $villa[0]->commission == 15 ? 'selected' : '' }}>
-                                                15 %</option>
-                                            <option value="13"
-                                                {{ $villa[0]->commission == 13 ? 'selected' : '' }}>
-                                                13 %</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row"
-                                    style="margin-bottom: 15px; background: #DAE5D0; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
-                                    <div class="col-12">
-                                        <span style="color: #383838; margin-left: 8px;">
-                                            <strong>
-                                                {{ __('user_page.Add Special Price') }}
-                                            </strong>
-                                        </span>
-                                    </div>
-                                </div>
-
+                            <!-- Sub Header Tab Edit Price -->
+                            <div class="modal-header-editprice" style="
+                            margin-top: -25px;
+                            margin-bottom: -20px;">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div id="calendar"></div>
+                                    <div class="col-11">
+                                        <ul class="nav filter-language-option-container nav-tabs sideTab column"
+                                            style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important; margin-left: -30px;">
+                                            <li class="active modal-price-title">
+                                                <a class="tab1 filter-language-option-text" href="#regularPrice"
+                                                    data-toggle="tab"
+                                                    style="font-size: 12pt;
+                                                    font-weight: 600;">
+                                                    Regular Price
+                                                </a>
+                                            </li>
+                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                                <a class="filter-language-option-text" href="#addRegularPrice"
+                                                    data-toggle="tab"
+                                                    style="font-size: 12pt;
+                                                    font-weight: 600; margin-left: -50px;">
+                                                    Add Special Price
+                                                </a>
+                                            </li>
+                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                                <a class="filter-language-option-text" href="#dataSpecialPrice"
+                                                    data-toggle="tab"
+                                                    style="font-size: 12pt;
+                                                    font-weight: 600; margin-left: -50px;">
+                                                    Data Special Price
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <!-- Sub Header Tab Edit Price -->
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="">{{ __('user_page.Start date') }}</label>
-                                        <input type="text" class="form-control" id="start" name="start"
-                                            placeholder="{{ __('user_page.Start date') }}.." readonly>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="">{{ __('user_page.End date') }}</label>
-                                        <input type="text" class="form-control" id="end" name="end"
-                                            placeholder="{{ __('user_page.End date') }}.." readonly>
-                                    </div>
-                                </div>
+                            <div class="tabbable column-wrapper">
+                                <div class="tab-content tab-content-language column rigth" id="tabs">
+                                    <div class="tab-pane active" id="regularPrice">
+                                        <form action="{{ route('villa_update_price') }}" method="POST" id="edit-price"
+                                            class="js-validation" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="id_villa" id="id_villa"
+                                                value="{{ $villa[0]->id_villa }}">
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label>{{ __('user_page.Price') }}</label>
-                                        <input type="number" class="form-control" id="special_price"
-                                            name="special_price" placeholder="{{ __('user_page.Price') }}..">
-                                        <small id="err-spcl-prc" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
+                                            <div class="row"
+                                                style="margin-bottom: 15px; background: #DAE5D0; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
+                                                <div class="col-12">
+                                                    <span style="color: #383838; margin-left: 8px;">
+                                                        <strong>
+                                                            Edit {{ __('user_page.Regular Price') }}
+                                                        </strong>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-12 mt-3">
+                                                <label class="col-sm-4 col-form-label" for="price">
+                                                    <strong>
+                                                        {{ __('user_page.Regular Price') }}
+                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">
+                                                            *
+                                                        </span>
+                                                    </strong>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" min="0" class="form-control" id="villa-price"
+                                                        name="price" placeholder="Price.." value="{{ $villa[0]->price }}">
+                                                    <small id="err-prc" style="display: none;"
+                                                        class="invalid-feedback">{{ __('auth.empty_price') }}</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-12 mt-3">
+                                                <label class="col-sm-4 col-form-label" for="price">
+                                                    <strong>{{ __('user_page.Commission') }}
+                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">*</span>
+                                                    </strong>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-select" name="commission">
+                                                        {{-- <option value="1" selected>English</option> --}}
+                                                        <option value="18"
+                                                            {{ $villa[0]->commission == 18 ? 'selected' : '' }}>
+                                                            18 %</option>
+                                                        <option value="15"
+                                                            {{ $villa[0]->commission == 15 ? 'selected' : '' }}>
+                                                            15 %</option>
+                                                        <option value="13"
+                                                            {{ $villa[0]->commission == 13 ? 'selected' : '' }}>
+                                                            13 %</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-12 mt-3">
+                                                <label class="col-sm-4 col-form-label" for="price">
+                                                    <strong>
+                                                        {{ __('user_page.Instant Book') }}
+                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">
+                                                            *
+                                                        </span>
+                                                    </strong>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @if ($villa[0]->instant_book == 'no')
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="instant_book" />
+                                                            <div></div>
+                                                        </label>
+                                                    @else
+                                                        <label class="switch switch-checked">
+                                                            <input type="checkbox" checked name="instant_book" />
+                                                            <div></div>
+                                                        </label>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit -->
+                                            <div class="row items-push">
+                                                <center>
+                                                    <div class="col-6">
+                                                        <button type="submit" class="btn btn-sm btn-primary mt-3"
+                                                            id="submitPrice" style="width: 200px;">
+                                                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                                                        </button>
+                                                    </div>
+                                                </center>
+                                            </div>
+                                            <!-- END Submit -->
+                                            <br>
+                                        </form>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label>{{ __('user_page.Discount') }}</label>
-                                        <input type="number" class="form-control" id="disc" name="disc"
-                                            placeholder="{{ __('user_page.Discount') }}..">
-                                        <small id="err-disc" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
+                                    <div class="tab-pane" id="addRegularPrice">
+                                        <form action="{{ route('villa_update_special_price') }}" method="POST" id="edit-special-price"
+                                            class="js-validation" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="id_villa" id="id_villa"
+                                                value="{{ $villa[0]->id_villa }}">
+                                            <div class="row"
+                                                style="margin-bottom: 15px; background: #DAE5D0; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
+                                                <div class="col-12">
+                                                    <span style="color: #383838; margin-left: 8px;">
+                                                        <strong>
+                                                            {{ __('user_page.Add Special Price') }}
+                                                        </strong>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div id="calendar"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label for="">{{ __('user_page.Start date') }}</label>
+                                                    <input type="text" class="form-control" id="start" name="start"
+                                                        placeholder="{{ __('user_page.Start date') }}.." readonly>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label for="">{{ __('user_page.End date') }}</label>
+                                                    <input type="text" class="form-control" id="end" name="end"
+                                                        placeholder="{{ __('user_page.End date') }}.." readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label>{{ __('user_page.Price') }}</label>
+                                                    <input type="number" class="form-control" id="special_price"
+                                                        name="special_price" placeholder="{{ __('user_page.Price') }}..">
+                                                    <small id="err-spcl-prc" style="display: none;"
+                                                        class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>{{ __('user_page.Discount') }}</label>
+                                                    <input type="number" class="form-control" id="disc" name="disc"
+                                                        placeholder="{{ __('user_page.Discount') }}..">
+                                                    <small id="err-disc" style="display: none;"
+                                                        class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
+                                                </div>
+                                            </div>
+                                            <!-- Submit -->
+                                            <div class="row items-push">
+                                                <center>
+                                                    <div class="col-6">
+                                                        <button type="submit" class="btn btn-sm btn-primary mt-3"
+                                                            id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
+                                                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                                                        </button>
+                                                    </div>
+                                                </center>
+                                            </div>
+                                            <!-- END Submit -->
+                                            <br>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="dataSpecialPrice">
                                     </div>
                                 </div>
-                                <!-- Submit -->
-                                <div class="row items-push">
-                                    <center>
-                                        <div class="col-6">
-                                            <button type="submit" class="btn btn-sm btn-primary mt-3"
-                                                id="submitPrice" style="width: 200px;">
-                                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                                            </button>
-                                        </div>
-                                    </center>
-                                </div>
-                                <!-- END Submit -->
-                                <br>
-                            </form>
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="availablity">
                             <div class="modal-header-editprice" style="
-                            margin-top: -10px;
+                            margin-top: -25px;
                             margin-bottom: -20px;">
                                 <div class="row">
                                     <div class="col-11">
@@ -719,6 +797,7 @@
             $('#disc').removeClass('is-invalid');
             $('#err-disc').hide();
         });
+
         $("#edit-price").submit(function(e) {
             let error = 0;
             if (!parseInt($('#villa-price').val())) {
@@ -726,22 +805,34 @@
                 $('#err-prc').show();
                 error = 1;
             }
+                // if (!$('#disc').val()) {
+                //     $('#disc').addClass('is-invalid');
+                //     $('#err-disc').show();
+                //     error = 1;
+                // }
+            // }
+            if (error == 1) {
+                e.preventDefault();
+            } else {
+                let btn = document.getElementById("submitPrice");
+                btn.textContent = "Saving...";
+                btn.classList.add("disabled");
+            }
+        });
+
+        $("#edit-special-price").submit(function (e) {
+            let error = 0;
             if ($('#start').val() && $('#end').val()) {
                 if (!$('#special_price').val()) {
                     $('#special_price').addClass('is-invalid');
                     $('#err-spcl-prc').show();
                     error = 1;
                 }
-                if (!$('#disc').val()) {
-                    $('#disc').addClass('is-invalid');
-                    $('#err-disc').show();
-                    error = 1;
-                }
             }
             if (error == 1) {
                 e.preventDefault();
             } else {
-                let btn = document.getElementById("submitPrice");
+                let btn = document.getElementById("submitSpecialPrice");
                 btn.textContent = "Saving...";
                 btn.classList.add("disabled");
             }
@@ -783,6 +874,8 @@
             }
         },
 
+        eventOverlap: false, //disable overlap event
+        selectOverlap: false, //disable overlap event
         selectable: true,
         selectHelper: true,
 
@@ -912,6 +1005,7 @@
             {
                 data: 'aksi',
                 name: 'aksi',
+                class: 'text-center',
                 orderable: false,
                 searchable: false
             }

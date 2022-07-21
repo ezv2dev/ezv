@@ -438,6 +438,7 @@ Route::post('villa/calendar/import/{id}', [VillabookingController::class, 'impor
 Route::post('/villa/update/photo/position', [ViewController::class, 'update_position_photo'])->name('villaphoto_edit_position');
 Route::post('/villa/update/video/position', [ViewController::class, 'update_position_video'])->name('villavideo_edit_position');
 Route::post('/villa/update/price', [ViewController::class, 'villa_update_price'])->name('villa_update_price');
+Route::post('/villa/update/special-price', [ViewController::class, 'villa_update_special_price'])->name('villa_update_special_price');
 Route::post('/villa/update/not_available', [ViewController::class, 'villa_not_available'])->name('villa_not_available');
 Route::post('/villa/update/bedroom', [ViewController::class, 'villa_update_bedroom'])->name('villa_update_bedroom');
 Route::post('/villa/update/bedroom/detail', [ViewController::class, 'villa_update_bedroom_detail'])->name('villa_update_bedroom_detail');
