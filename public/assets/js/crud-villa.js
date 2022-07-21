@@ -812,6 +812,10 @@ function editAmenitiesVilla(id_villa) {
         service.push(parseInt($(this).val()));
     });
 
+    btn = document.getElementById("btnSaveAmenities");
+    btn.textContent = "Saving Amenities...";
+    btn.classList.add("disabled");
+
     $.ajax({
         type: "POST",
         headers: {
@@ -835,6 +839,9 @@ function editAmenitiesVilla(id_villa) {
 
             $("#modal-edit_amenities").modal("hide");
 
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -842,6 +849,10 @@ function editAmenitiesVilla(id_villa) {
             });
 
             $("#listAmenities").html('');
+
+            if (lengthAmenities == 0) {
+                $("#listAmenities").append(`<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`);
+            }
 
             if(lengthAmenities > 5)
             {
@@ -1108,6 +1119,30 @@ function editAmenitiesVilla(id_villa) {
                     </div>
                 `);
             }
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if(jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            $("#modal-add_facilities").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
         },
     });
 }

@@ -1386,7 +1386,7 @@
                                         </div>
                                     @empty
                                         <div class='list-amenities'>
-                                            <p>{{ __('user_page.there is no facilities yet') }}</p>
+                                            <p style="text-align: center;">{{ __('user_page.there is no facilities yet') }}</p>
                                         </div>
                                     @endforelse
                                 @endif

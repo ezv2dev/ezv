@@ -1047,150 +1047,149 @@
                             </div>
 
                         </div>
-                        @if($villa_amenities->count() > 5)
-                            <div class="row-grid-amenities">
-                                <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                    @foreach ($villa_amenities->take(6) as $item1)
-                                        <div class="list-amenities ">
-                                            <div class="text-align-center">
-                                                <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                <div class="mb-0 max-line">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item1->name }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="mb-0 list-more">
-                                                <span
-                                                    class="translate-text-group-items">{{ $item1->name }}</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    <div class="list-amenities">
-                                        <button class="amenities-button" type="button" onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                            <div style="font-size: 15px;" class="translate-text-group-items">
-                                                {{ __('user_page.More') }}</div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        @elseif ($villa_amenities->count() < 6)
-                            <div class="row-grid-amenities">
-                                <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                    @php
-                                        $i = 6 - $villa_amenities->count();
-                                    @endphp
-                                    @foreach ($villa_amenities->take($villa_amenities->count()) as $item1)
-                                        <div class="list-amenities ">
-                                            <div class="text-align-center">
-                                                <i class="f-40 fa fa-{{ $item1->icon }}"></i>
-                                                <div class="mb-0 max-line">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item1->name }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="mb-0 list-more">
-                                                <span
-                                                    class="translate-text-group-items">{{ $item1->name }}</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @if($i > 0)
-                                        @php
-                                            $i = $i - $kitchen->count();
-                                        @endphp
-                                        @foreach ($kitchen->take($kitchen->count()) as $item2)
+                        <div class="row-grid-amenities">
+                            <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
+                            @if(!empty($villa_amenities->count()))
+                            @if($villa_amenities->count() > 6)
+                                        @foreach ($villa_amenities->take(6) as $item1)
                                             <div class="list-amenities ">
                                                 <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
                                                     <div class="mb-0 max-line">
                                                         <span
-                                                            class="translate-text-group-items">{{ $item2->name }}</span>
+                                                            class="translate-text-group-items">{{ $item1->name }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-0 list-more">
                                                     <span
-                                                        class="translate-text-group-items">{{ $item2->name }}</span>
+                                                        class="translate-text-group-items">{{ $item1->name }}</span>
                                                 </div>
                                             </div>
                                         @endforeach
-                                    @endif
-                                    @if($i > 0)
+                                        <div class="list-amenities">
+                                            <button class="amenities-button" type="button" onclick="view_amenities()">
+                                                <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                                                <div style="font-size: 15px;" class="translate-text-group-items">
+                                                    {{ __('user_page.More') }}</div>
+                                            </button>
+                                        </div>
+                            @endif
+                            @if ($villa_amenities->count() < 6)
                                         @php
-                                            $i = $i - $safety->count();
+                                            $i = 6 - $villa_amenities->count();
                                         @endphp
-                                        @foreach ($safety->take($safety->count()) as $item4)
+                                        @foreach ($villa_amenities->take($villa_amenities->count()) as $item1)
                                             <div class="list-amenities ">
                                                 <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item4->icon }}"></i>
+                                                    <i class="f-40 fa fa-{{ $item1->icon }}"></i>
                                                     <div class="mb-0 max-line">
+                                                        <span
+                                                            class="translate-text-group-items">{{ $item1->name }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-0 list-more">
+                                                    <span
+                                                        class="translate-text-group-items">{{ $item1->name }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if($i > 0)
+                                            @php
+                                                $i = $i - $kitchen->count();
+                                            @endphp
+                                            @foreach ($kitchen->take($kitchen->count()) as $item2)
+                                                <div class="list-amenities ">
+                                                    <div class="text-align-center">
+                                                        <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                        <div class="mb-0 max-line">
+                                                            <span
+                                                                class="translate-text-group-items">{{ $item2->name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-0 list-more">
+                                                        <span
+                                                            class="translate-text-group-items">{{ $item2->name }}</span>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                        @if($i > 0)
+                                            @php
+                                                $i = $i - $safety->count();
+                                            @endphp
+                                            @foreach ($safety->take($safety->count()) as $item4)
+                                                <div class="list-amenities ">
+                                                    <div class="text-align-center">
+                                                        <i class="f-40 fa fa-{{ $item4->icon }}"></i>
+                                                        <div class="mb-0 max-line">
+                                                            <span
+                                                                class="translate-text-group-items">{{ $item4->name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-0 list-more">
                                                         <span
                                                             class="translate-text-group-items">{{ $item4->name }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="mb-0 list-more">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item4->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                    @if($i > 0)
-                                        @php
-                                            $i = $i - $service->count();
-                                        @endphp
-                                        @foreach ($service->take($service->count()) as $item3)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item3->icon }}"></i>
-                                                    <div class="mb-0 max-line">
+                                            @endforeach
+                                        @endif
+                                        @if($i > 0)
+                                            @php
+                                                $i = $i - $service->count();
+                                            @endphp
+                                            @foreach ($service->take($service->count()) as $item3)
+                                                <div class="list-amenities ">
+                                                    <div class="text-align-center">
+                                                        <i class="f-40 fa fa-{{ $item3->icon }}"></i>
+                                                        <div class="mb-0 max-line">
+                                                            <span
+                                                                class="translate-text-group-items">{{ $item3->name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-0 list-more">
                                                         <span
                                                             class="translate-text-group-items">{{ $item3->name }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="mb-0 list-more">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item3->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                    @if($i > 0)
-                                        @php
-                                            $i = $i - $bathroom->count();
-                                        @endphp
-                                        @foreach ($bathroom->take($bathroom->count()) as $item2)
-                                            <div class="list-amenities ">
-                                                <div class="text-align-center">
-                                                    <i class="f-40 fa fa-{{ $item2->icon }}"></i>
-                                                    <div class="mb-0 max-line">
+                                            @endforeach
+                                        @endif
+                                        @if($i > 0)
+                                            @php
+                                                $i = $i - $bathroom->count();
+                                            @endphp
+                                            @foreach ($bathroom->take($bathroom->count()) as $item2)
+                                                <div class="list-amenities ">
+                                                    <div class="text-align-center">
+                                                        <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                        <div class="mb-0 max-line">
+                                                            <span
+                                                                class="translate-text-group-items">{{ $item2->name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-0 list-more">
                                                         <span
                                                             class="translate-text-group-items">{{ $item2->name }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="mb-0 list-more">
-                                                    <span
-                                                        class="translate-text-group-items">{{ $item2->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                    @if($i > 6)
-                                    <div class="list-amenities">
-                                        <button class="amenities-button" type="button" onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                            <div style="font-size: 15px;" class="translate-text-group-items">
-                                                {{ __('user_page.More') }}</div>
-                                        </button>
-                                    </div>
-                                    @endif
-                                </div>
+                                            @endforeach
+                                        @endif
+                                        @if($i > 6)
+                                        <div class="list-amenities">
+                                            <button class="amenities-button" type="button" onclick="view_amenities()">
+                                                <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                                                <div style="font-size: 15px;" class="translate-text-group-items">
+                                                    {{ __('user_page.More') }}</div>
+                                            </button>
+                                        </div>
+                                        @endif
+                            @endif
+                            @else
+                            <div class='list-amenities'>
+                                <p style="text-align: center;">{{ __('user_page.There is no amenities') }}</p>
                             </div>
-                        @else
-                            <div class="row-grid-amenities">
-                                <p>{{ __('user_page.There is no amenities') }}</p>
+                            @endif
                             </div>
-                        @endif
+                        </div>
                     </section>
                 </div>
                 {{-- END PAGE CONTENT --}}

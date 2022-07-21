@@ -778,6 +778,12 @@ function saveFacilities() {
 
             let content;
 
+            if (response.data.length == 0) {
+                content = "";
+                content +=
+                    '<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>';
+            }
+
             if (response.data.length > 5) {
                 for (let i = 0; i < 6; i++) {
                     if (i == 0) {
