@@ -3957,7 +3957,7 @@ span.flatpickr-weekday {
         bottom: 15%;
         z-index: 999;
         width: 94%;
-        border-radius: 12px;
+        border-radius: 0px !important;
         background-color: white;
         bottom: 0px;
         left: 0;
@@ -4013,6 +4013,10 @@ span.flatpickr-weekday {
         height: 500px;
     }
 
+    .button-close-map-content{
+        display: none;
+    }
+
 
     .modal-content-promotion{
         width: 100%;
@@ -4028,6 +4032,10 @@ span.flatpickr-weekday {
     .modal-content-amenities{
         width: 80%;
         border-radius: 9px !important;
+    }
+
+    .button-close-map-content{
+        display: none;
     }
 
     .row-modal-amenities{
@@ -4052,6 +4060,10 @@ span.flatpickr-weekday {
 
     .row-modal-amenities{
         flex-direction: unset;
+    }
+
+    .button-close-map-content{
+        display: none;
     }
 
     .modal-content-promotion{

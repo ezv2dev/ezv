@@ -1889,6 +1889,7 @@ li.button-dropdown {
     flex-wrap: nowrap;
     column-gap: 10px;
     align-items: center;
+    font-size:16px;
 }
 
 .villa-location-description:hover {
@@ -3045,7 +3046,7 @@ input::-webkit-inner-spin-button {
 }
 @media only screen and (max-width: 649px) {
     .villa-list-name {
-        font-size: 16px !important;
+        font-size: 18px !important;
     }
     .villa-list-video-container {
         width: 60px !important;
@@ -3239,6 +3240,10 @@ input::-webkit-inner-spin-button {
 
     .villa-list-location{
         display: block;
+    }
+
+    .villa-location-description{
+        font-size:16px;
     }
 
     .villa-location-description,

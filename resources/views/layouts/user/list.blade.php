@@ -95,7 +95,7 @@ if (isset($_COOKIE['tema'])) {
         $condition_things_to_do = Route::is('activity_list') || Route::is('search_activity') || Route::is('search_wow') || Route::is('search_wow_sub');
         $condition_collaborator = Route::is('collaborator_list') || Route::is('search_collaborator');
         $scenic_views = App\Models\ScenicViews::all();
-
+        $tema = isset($_COOKIE['tema']) ? $_COOKIE['tema'] : null;
         $bedroomCheck = app('request')->input('fBedroom');
         $bathroomCheck = app('request')->input('fBathroom');
         $bedsCheck = app('request')->input('fBeds');
@@ -185,10 +185,10 @@ if (isset($_COOKIE['tema'])) {
                         <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
                             @if (session()->has('locale'))
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                             @else
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
                             <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
@@ -205,6 +205,17 @@ if (isset($_COOKIE['tema'])) {
                             </div>
                         </a>
                     </div>
+                    <div class="d-flex align-items" id="changeThemeMobile">
+                        <div class="logged-user-menu" style="margin-right: 9px;">
+                            <label class="container-mode">
+                                <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                    {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
+                                <span class="checkmark-mode"></span>
+                            </label>
+                        </div>
+                        <p class="mb-0 ms-2" style="color: #585656">Day / Night </p>
+                    </div>
+
                 </div>
             @else
                 <div class="d-flex align-items-center">
@@ -226,7 +237,7 @@ if (isset($_COOKIE['tema'])) {
                     style="color: #585656; width: fit-content;" target="_blank">
                     {{ __('user_page.Become a host') }}
                 </a>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center mb-2">
                     <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
                         style="color: white; margin-right: 9px;" id="language">
                         @if (session()->has('locale'))
@@ -236,9 +247,20 @@ if (isset($_COOKIE['tema'])) {
                             <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
                     </a>
+                    <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
                 </div>
+                <div class="d-flex align-items-center" id="changeThemeMobile">
+                    <div class="logged-user-menu" style="margin-right: 9px;">
+                        <label class="container-mode">
+                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
+                            <span class="checkmark-mode"></span>
+                        </label>
+                    </div>
+                    <p class="mb-0 ms-2" style="color: #585656">Day / Night </p>
+                </div>
+
             @endauth
         </div>
 

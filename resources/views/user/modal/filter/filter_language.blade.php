@@ -394,7 +394,7 @@
 
                     <ul class="nav filter-language-option-container nav-tabs sideTab column"
                         style="display: flex; flex-wrap: nowrap;">
-                        <li id="trigger-tab-language" onclick="switchTabLanguage('language')" class="active"><a class="tab1 filter-language-option-text">{{ __('user_page.Language') }}</a></li>
+                        <li id="trigger-tab-language" onclick="switchTabLanguage('language')"><a class="tab1 filter-language-option-text">{{ __('user_page.Language') }}</a></li>
                         <li id="trigger-tab-currency" onclick="switchTabLanguage('currency')"><a class="filter-language-option-text">{{ __('user_page.Currency') }}</a></li>
                     </ul>
                     <div class="tab-content tab-content-language column rigth" id="tabs">

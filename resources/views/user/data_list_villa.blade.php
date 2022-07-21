@@ -150,7 +150,7 @@ if (isset($_COOKIE['tema'])) {
             class="col-lg-6 py-2 col-xs-12 list-image-container grid-desc-container list-desc-container height-list-villa">
             <div class="w-100 ml-responsive" style="position:relative;">
                 <!-- Villa Description -->
-                <div class="row mt-4 mt-lg-0 " style="height:100%;">
+                <div class="row mt-3 mt-lg-0 " style="height:100%;">
                     <div class="col-12 row">
                         <div class="col-9">
                             <div class="skeleton skeleton-h-2 skeleton-lg-h-3 skeleton-w-100 mt-0">

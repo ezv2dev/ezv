@@ -93,7 +93,7 @@ class VillaListingController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 1]);
+            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 1, 'grade' => $request->grade]);
         } else {
             $find->update(array(
                 'status' =>  0,

@@ -205,7 +205,7 @@
 
     <div class="row nav-row">
         <div id="navbar-first-dekstop" class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
-            <a href="{{ route('index') }}" target="_blank"><img style="width: 90px; height: 45px;"
+            <a href="{{ route('index') }}" target="_blank"><img style="width: auto; height: 40px;"
                     src="{{ asset('assets/logo.png') }}" alt="oke"></a>
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
 
@@ -228,13 +228,6 @@
                         </span>
                     </p>
                 </div>
-                <div class="logged-user-menu d-flex align-items-center" style="height: 30px; width: 45px;">
-                    <label class="container-mode">
-                        <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
-                            {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                        <span class="checkmark-mode"></span>
-                    </label>
-                </div>
                 <button class="navbar-toggler" type="button" id="expand-mobile-btn">
                     <i class="fa-solid fa-bars list-description {{ $textColor }}"></i>
                 </button>
@@ -248,35 +241,35 @@
                 $get_child = app('request')->input('sChild');
                 $get_infant = app('request')->input('sInfant');
                 $get_pet = app('request')->input('sPet');
-
+                
                 if ($get_loc == null) {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] != '') {
                     $get_loc = $_COOKIE['sLocation'];
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] == '') {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sCheck_in'])) {
                     $get_check_in = $_COOKIE['sCheck_in'];
                 }
-
+                
                 if (isset($_COOKIE['sCheck_out'])) {
                     $get_check_out = $_COOKIE['sCheck_out'];
                 }
-
+                
                 if (request()->sCheck_in) {
                     $get_check_in = request()->sCheck_in;
                 }
-
+                
                 if (request()->sCheck_out) {
                     $get_check_out = request()->sCheck_out;
                 }
-
+                
                 function dateDiffe($get_check_in, $get_check_out)
                 {
                     $date1_ts = strtotime($get_check_in);
@@ -284,7 +277,7 @@
                     $diff = $date2_ts - $date1_ts;
                     return round($diff / 86400);
                 }
-
+                
                 if ($get_check_in == null) {
                     $get_dates = __('user_page.Add Date');
                 } else {
@@ -295,29 +288,29 @@
                     }
                     $get_dates = $dateDiffe . ' ' . trans_choice('user_page.x days', $dateDiffe);
                 }
-
+                
                 if ($get_adult == 0) {
                     $get_adult = 1;
                 }
-
+                
                 if ($get_child == 0) {
                     $get_child = 0;
                 }
-
+                
                 if ($get_infant == 0) {
                     $get_infant = 0;
                 }
-
+                
                 if ($get_pet == 0) {
                     $get_pet = 0;
                 }
-
+                
                 $get_guest = $get_adult + $get_child;
-
+                
                 if (request()->sLocation) {
                     $get_loc = request()->sLocation;
                 }
-
+                
             @endphp
             <div class="col-lg-8 search-box" style="height: 50px;">
                 <div class="row">
@@ -571,8 +564,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form" class="nav-link-form-detail"
-                                        target="_blank" style="margin-left: 60px;">
+                                    <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                        class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -962,35 +955,35 @@
                 $get_child = app('request')->input('sChild');
                 $get_infant = app('request')->input('sInfant');
                 $get_pet = app('request')->input('sPet');
-
+                
                 if ($get_loc == null) {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] != '') {
                     $get_loc = $_COOKIE['sLocation'];
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] == '') {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sCheck_in'])) {
                     $get_check_in = $_COOKIE['sCheck_in'];
                 }
-
+                
                 if (isset($_COOKIE['sCheck_out'])) {
                     $get_check_out = $_COOKIE['sCheck_out'];
                 }
-
+                
                 if (request()->sCheck_in) {
                     $get_check_in = request()->sCheck_in;
                 }
-
+                
                 if (request()->sCheck_out) {
                     $get_check_out = request()->sCheck_out;
                 }
-
+                
                 if ($get_check_in == null) {
                     $get_dates = __('user_page.Add Date');
                 } else {
@@ -1004,29 +997,29 @@
                     }
                     $get_dates = $days . ' ' . trans_choice('user_page.x days', $days);
                 }
-
+                
                 if ($get_adult == 0) {
                     $get_adult = 1;
                 }
-
+                
                 if ($get_child == 0) {
                     $get_child = 0;
                 }
-
+                
                 if ($get_infant == 0) {
                     $get_infant = 0;
                 }
-
+                
                 if ($get_pet == 0) {
                     $get_pet = 0;
                 }
-
+                
                 $get_guest = $get_adult + $get_child;
-
+                
                 if (request()->sLocation) {
                     $get_loc = request()->sLocation;
                 }
-
+                
             @endphp
             <div class="col-lg-8 search-box" style="height: 50px;">
                 <div class="row">
@@ -1282,7 +1275,7 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
+                                    <a href="{{ route('admin_add_listing') }}" id="activity-form" target="_blank"
                                         class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
@@ -1668,31 +1661,31 @@
                 $get_loc = app('request')->input('sLocation');
                 $get_keyword = app('request')->input('sKeyword');
                 $get_cuisine = app('request')->input('sCuisine');
-
+                
                 $cuisiness = App\Models\RestaurantCuisine::where('id_cuisine', $get_cuisine)
                     ->select('name')
                     ->first();
-
+                
                 if ($get_loc == null) {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] != '') {
                     $get_loc = $_COOKIE['sLocation'];
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] == '') {
                     $get_loc = '';
                 }
-
+                
                 if (request()->sLocation) {
                     $get_loc = request()->sLocation;
                 }
-
+                
                 if ($get_keyword == null) {
                     $get_keyword = __('user_page.Type of Food');
                 }
-
+                
             @endphp
             <div class="col-lg-8 search-box" style="height: 50px;">
                 <div class="row">
@@ -1947,8 +1940,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
-                                        class="nav-link-form-detail" style="margin-left: 60px;">
+                                    <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                        target="_blank" class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -2191,43 +2184,43 @@
                 $get_search = app('request')->input('sKeyword');
                 $get_start = null;
                 $get_end = null;
-
+                
                 if ($get_loc == null) {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] != '') {
                     $get_loc = $_COOKIE['sLocation'];
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] == '') {
                     $get_loc = '';
                 }
-
+                
                 if (request()->sLocation) {
                     $get_loc = request()->sLocation;
                 }
-
+                
                 if ($get_search == null) {
                     $get_search = __('user_page.Search');
                 }
-
+                
                 if (isset($_COOKIE['sCheck_in'])) {
                     $get_start = $_COOKIE['sCheck_in'];
                 }
-
+                
                 if (isset($_COOKIE['sCheck_out'])) {
                     $get_end = $_COOKIE['sCheck_out'];
                 }
-
+                
                 if (request()->sStart) {
                     $get_start = request()->sStart;
                 }
-
+                
                 if (request()->sEnd) {
                     $get_end = request()->sEnd;
                 }
-
+                
                 function dateDiffe($get_start, $get_end)
                 {
                     $date1_ts = strtotime($get_start);
@@ -2235,7 +2228,7 @@
                     $diff = $date2_ts - $date1_ts;
                     return round($diff / 86400);
                 }
-
+                
                 if ($get_start == null) {
                     $get_date = __('user_page.Add Date');
                 } else {
@@ -2246,11 +2239,11 @@
                     }
                     $get_date = $dateDiffe . ' ' . trans_choice('user_page.x days', $dateDiffe);
                 }
-
+                
                 if ($get_date == null) {
                     $get_date = __('user_page.Add Date');
                 }
-
+                
             @endphp
 
             <div class="col-lg-8 search-box" style="height: 50px;">
@@ -2507,8 +2500,9 @@
                                                 </p>
                                             </a>
                                         @endif
-                                        <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
-                                            class="nav-link-form-detail" style="margin-left: 64px;">
+                                        <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                            target="_blank" class="nav-link-form-detail"
+                                            style="margin-left: 64px;">
                                             <div
                                                 class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                                 <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -2860,43 +2854,43 @@
                 $get_search = app('request')->input('sKeyword');
                 $get_start = null;
                 $get_end = null;
-
+                
                 if ($get_loc == null) {
                     $get_loc = '';
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] != '') {
                     $get_loc = $_COOKIE['sLocation'];
                 }
-
+                
                 if (isset($_COOKIE['sLocation']) && $_COOKIE['sLocation'] == '') {
                     $get_loc = '';
                 }
-
+                
                 if (request()->sLocation) {
                     $get_loc = request()->sLocation;
                 }
-
+                
                 if ($get_search == null) {
                     $get_search = __('user_page.Search');
                 }
-
+                
                 if (isset($_COOKIE['sCheck_in'])) {
                     $get_start = $_COOKIE['sCheck_in'];
                 }
-
+                
                 if (isset($_COOKIE['sCheck_out'])) {
                     $get_end = $_COOKIE['sCheck_out'];
                 }
-
+                
                 if (request()->sStart) {
                     $get_start = request()->sStart;
                 }
-
+                
                 if (request()->sEnd) {
                     $get_end = request()->sEnd;
                 }
-
+                
                 function dateDiffe($get_start, $get_end)
                 {
                     $date1_ts = strtotime($get_start);
@@ -2904,7 +2898,7 @@
                     $diff = $date2_ts - $date1_ts;
                     return round($diff / 86400);
                 }
-
+                
                 if ($get_start == null) {
                     $get_date = __('user_page.Add Date');
                 } else {
@@ -2915,7 +2909,7 @@
                     }
                     $get_date = $dateDiffe . ' ' . trans_choice('user_page.x days', $dateDiffe);
                 }
-
+                
                 if ($get_date == null) {
                     $get_date = __('user_page.Add Date');
                 }

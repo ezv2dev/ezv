@@ -243,11 +243,11 @@ body {
     }
 
     .header-4-4 .hero {
-        padding: 0rem 6rem 0rem;
+        padding: 0rem 6rem 0.3rem;
     }
 
     .not-header-4-4 .hero {
-        padding: 0rem 5.7rem 0rem;
+        padding: 0rem 5.7rem 1rem;
     }
 
     .header-4-4 .left-column {
@@ -2280,10 +2280,13 @@ span.flatpickr-weekday {
         width: 100% !important;
     }
     .discover-experiences-container {
-        padding: 0rem 1rem 3rem 1rem !important;
+        padding: 0rem 1rem 1.5rem 1rem !important;
+    }
+    #qa-container {
+        padding: 3rem 1rem 8rem !important;
     }
     .header-4-4 .hero {
-        padding: 3rem 1rem !important;
+        padding: 3rem 1rem 3rem !important;
     }
     #ul .navbar-nav {
         flex-direction: row !important;
