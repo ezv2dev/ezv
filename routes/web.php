@@ -1320,6 +1320,7 @@ Route::post('/hotel/room/update/video/position', [Hotel\RoomDetailController::cl
 
 
 //COLABORATOR
+Route::get('/collaborator/intro', [Collaborator\CollaboratorController::class, 'index'])->name('collaborator_intro');
 Route::get('/collaborator/search', [Collaborator\SearchCollaboratorController::class, 'index'])->name('search_collaborator');
 Route::get('/collaborator-list', [Collaborator\CollaboratorController::class, 'collaborator_list'])->name('collaborator_list');
 Route::get('/collaborator/{id}', [Collaborator\CollaboratorController::class, 'collaborator'])->name('collaborator');

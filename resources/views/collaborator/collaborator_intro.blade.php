@@ -1,12 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <title>EZV2</title>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborator Program in Brief - EZV</title>
     <meta name="description" content="EZV2 created by pixelcave and published on Themeforest">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -54,49 +52,38 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
-        .home-content {
-            padding-top: 50px !important;
-            padding-bottom: 90px !important; 
-            text-align: center;"
+        .collab-body {
+            background: #fff;
+            width: 100%;
+            padding: 50px 40px;
         }
         .bg-black {
             display: block;
             height: 87px;
             background: #000;
         }
-        .body-form {
-            border: solid 0.5px grey; 
-            width: 40%; 
-            margin-left: auto; 
-            margin-right: auto; 
-            border-radius: 7px; 
-            padding: 30px; 
-            box-sizing: border-box; 
+        .collab-button {
+            padding: 12px 20px;
+            border: solid 1px #ff7400;
+            border-radius: 12px;
+            background: #000;
+            color: #fff;
         }
-        .label {
-            margin-bottom: 10px;
+        .right-image img {
+            object-fit: cover;
+            max-width: 100%;
+            aspect-ratio: 16/11;
         }
-        @media only screen and (min-width: 426px) and (max-width: 768px) {
-            .body-form {
-            width: 60%; 
-            }
-        }
-
-        @media only screen and (max-width: 426px) {
-            .body-form {
-            width: 80%; 
-            }
+        .mb-20 {
+            margin-bottom: 20px;
         }
     </style>
 </head>
-
 <body>
-    @component('components.loading.loading-type2')
-    @endcomponent
-
-    <div id="page-container" class="page-container">
-        <!-- Header -->
-        <div class="expand-navbar-mobile" aria-expanded="false">
+<div id="page-container" class="page-container">
+    <section class="header">
+                <!-- Header -->
+                <div class="expand-navbar-mobile" aria-expanded="false">
             <div class="px-3 pt-2">
                 @auth
                     <div>
@@ -812,64 +799,34 @@
             </div>
         </section>
         <!-- END Header Content -->
-        <div class="bg-black"></div>
-        <div id="homes">
-            <div class="col-lg-12 home-content">
-                @if (session('success'))
-                <div class="col-12">
-                    <div style="background-color: #CCEEE1 !important; color: #005937 !important; " class="alert alert-danger alert-dismissible" role="alert">
-                        {{ session('success') }}
-                    </div>
+    </section>
+    <div class="bg-black"></div>
+    <section class="collab-body">
+        <div class="row">
+            <div clas="col-12">
+                <h1>Collaboration Portal</h1>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mb-20">
+                <h4>What's Colaboration Portal?</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h4>Why Colaboration Portal?</h4>
+                <ul>
+                    <li>Thousand of benefits</li>
+                    <li>Door Prize</li>
+                    <li>Passive Income</li>
+                    <li>No need experiences</li>
+                    <li>and Much More</li>
+                </ul>
+                <input class="collab-button" type="button" value="Register Now">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-20">
+                <div class="right-image">
+                    <img src="https://source.unsplash.com/random/?people,collaboration">
                 </div>
-                @endif
-                @if (session('error'))
-                <div class="col-12">
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        {{ session('error') }}
-                    </div>
-                </div>
-                @endif
-                <form action="{{ route('password_update') }}" method="POST" class="body-form">
-                    @csrf
-                    @method('PATCH')
-
-                    <h5>Change Password</h5>
-                    <label class="label" for="old_password">Current Password</label>
-                    <input type="password" name="old_password" id="old_password"
-                        class="form-control adminlisting-font mb-2" size="50" placeholder="Old Password">
-
-                    @error('old_password')
-                    <div style="color: red; margin-top: 10px;">
-                        {{ $message }}
-                    </div>
-                    @enderror
-
-                    <label class="label" for="password">New Password</label>
-                    <input type="password" name="password" id="password" class="form-control adminlisting-font mb-2"
-                        size="50" placeholder="New Password">
-
-                    @error('password')
-                    <div class="text-danger mt-2">
-                        {{ $message }}
-                    </div>
-                    @enderror
-
-                    <label class="label" for="password_confirmation">Confirm Password</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation"
-                        class="form-control adminlisting-font mb-2" size="50" placeholder="Confirm Password">
-
-                    @error('password_confirmation')
-                    <div class="text-danger mt-2">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                    <button type="submit"
-                        style="border-radius: 5px; color: white; font-size: 12px; padding: 9px; box-sizing: border-box; margin-top: 9px; background-color: #FF7400;">Update
-                        password</button>
-                </form>
             </div>
         </div>
-        {{-- modal laguage and currency --}}
+    </section>
+    {{-- modal laguage and currency --}}
         @include('user.modal.filter.filter_language')
         {{-- modal laguage and currency --}}
 
@@ -1205,14 +1162,8 @@
         {{-- Search Location --}}
         <script>
             $(document).ready(() => {
-                if (window.innerWidth <= 991) {
-                    document.getElementById("ul").classList.add("ul-display-none");
-                    document.getElementById("ul").classList.remove("ul-display-block");
-                    document.getElementById("bar").classList.add("display-none");
-                    document.querySelector("#searchbox").classList.remove("display-none");
-                    document.querySelector("#searchbox").classList.add("display-block");
-                    document.getElementById("nav").classList.add("position-fixed");
-                    document.getElementById("nav").classList.add("padding-top-0");
+                if (window.scrollY == 0 && window.innerWidth <= 991) {
+                    document.getElementById("ul").style.display = "none";
                 }
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").css({
@@ -1459,6 +1410,7 @@
                 } else {
                     if (!isFocused || window.innerWidth > 991) {
                         console.log("oke");
+                        document.getElementById("ul").style.display = "";
                         document.getElementById("ul").classList.add("ul-display-none");
                         document.getElementById("ul").classList.remove("ul-display-block");
                         document.getElementById("bar").classList.add("display-none");
@@ -1501,6 +1453,7 @@
 
         <script>
             function popUp() {
+                document.getElementById("ul").style.display = "";
                 document.getElementById("ul").classList.remove("ul-display-none");
                 document.getElementById("ul").classList.add("ul-display-block");
                 document.getElementById("bar").classList.remove("display-none");
@@ -1557,6 +1510,9 @@
                         $("#bar .guests").addClass("col-10");
                         $("#bar .button").addClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "");
+                        if (window.scrollY == 0) {
+                            $("#ul").css("display","none");
+                        }
                     } else {
                         $("#search_bar #bar").removeClass("row");
                         $("#bar .location").removeClass("col-12 mb-2");
@@ -1565,6 +1521,7 @@
                         $("#bar .guests").removeClass("col-10");
                         $("#bar .button").removeClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "90px");
+                        $("#ul").css("display","");
                     }
                 }
                 var windowWidth = $(window).width();
@@ -1573,19 +1530,6 @@
                     if ($(this).width() !== windowWidth) {
                         windowWidth = $(this).width();
                         handleResponsive(windowWidth);
-                        if (windowWidth <= 991) {
-                            if (window.scrollY == 0) {
-                                document.getElementById("nav").classList.add("position-fixed");
-                                document.getElementById("nav").classList.add("padding-top-0");
-                                document.getElementById("nav").classList.add("search-height");
-                            }
-                        }else {
-                            if (window.scrollY == 0) {
-                                document.getElementById("nav").classList.remove("position-fixed");
-                                document.getElementById("nav").classList.remove("padding-top-0");
-                                document.getElementById("nav").classList.remove("search-height");
-                            }
-                        }
                     }
                 })
             })
