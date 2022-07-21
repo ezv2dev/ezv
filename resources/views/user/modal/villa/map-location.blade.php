@@ -502,6 +502,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -754,6 +756,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -979,6 +983,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -1230,6 +1236,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -1326,6 +1334,8 @@
 
                 // disabled action google map
                 resetMapAction();
+                // activate scroll action
+                map.setOptions({zoomControl: true});
                 // hide primary control
                 hidePrimaryMarkerControlFromMap();
             }
@@ -1372,6 +1382,8 @@
 
             // disabled action google map
             resetMapAction();
+            // activate scroll action
+            map.setOptions({zoomControl: true});
             // hide primary control
             hidePrimaryMarkerControlFromMap();
         });
@@ -2217,7 +2229,7 @@
             scaleControl: false,
             zoomControl: true,
             zoomControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_BOTTOM,
+                position: google.maps.ControlPosition.TOP_RIGHT,
             },
             streetViewControl: true,
             streetViewControlOptions: {
@@ -2333,6 +2345,8 @@
 
                     // disabled action google map
                     resetMapAction();
+                    // activate scroll action
+                    map.setOptions({zoomControl: true});
                     // hide primary control
                     hidePrimaryMarkerControlFromMap();
                 }, 200);
