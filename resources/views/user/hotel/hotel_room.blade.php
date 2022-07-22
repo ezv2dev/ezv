@@ -2582,7 +2582,7 @@
 
                     <div style="clear: both; margin-top: 20px;">
                         <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Submit') }}" onclick="save_reorder_photo()">
+                            value="{{ __('user_page.Save') }}" onclick="save_reorder_photo()">
                     </div>
 
                 </div>

@@ -205,7 +205,7 @@ if (isset($_COOKIE['tema'])) {
                             </div>
                         </a>
                     </div>
-                    <div class="d-flex align-items" id="changeThemeMobile">
+                    <div class="d-flex align-items mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu" style="margin-right: 9px;">
                             <label class="container-mode">
                                 <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
@@ -214,6 +214,21 @@ if (isset($_COOKIE['tema'])) {
                             </label>
                         </div>
                         <p class="mb-0 ms-2" style="color: #585656">Day / Night </p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
                     </div>
 
                 </div>

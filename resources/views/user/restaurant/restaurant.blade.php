@@ -3702,7 +3702,7 @@
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
-                            onclick="save_reorder_photo()">Submit</button>
+                            onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
                 </div>
             </div>
@@ -3947,7 +3947,7 @@
         function save_reorder_photo() {
 
             let btn = document.getElementById("saveBtnReorderPhoto");
-            btn.textContent = "Submiting...";
+            btn.textContent = "Saving...";
             btn.classList.add("disabled");
 
             var imageids_arr = [];
@@ -4019,7 +4019,7 @@
                     //         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
                     // }
 
-                    btn.textContent = "Submit";
+                    btn.textContent = "{{ __('user_page.Save') }}";
                     btn.classList.remove("disabled");
 
                     $('.gallery').html("");
