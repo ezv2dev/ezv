@@ -258,7 +258,7 @@
                 <div class="collapse navbar-collapse navbar-dekstop" id="navbarTogglerDemo">
                     <div id="navbar-first-dekstop" class="col-lg-4 d-flex align-items-center">
                         <a href="{{ route('index') }}">
-                            <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
+                            <img class="w-logo" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
                             <button class="navbar-toggler" type="button" id="expand-mobile-btn">
