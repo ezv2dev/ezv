@@ -1422,12 +1422,12 @@
         $('#location-map-loading').removeClass('d-block');
         $('#location-map-loading').addClass('d-none');
         showPrimaryMarkerControlFromMap();
+        // disabled prev next button
+        enabledPrevNextButton();
         // check if primary marker is active
         if(primaryMarker) {
             // hide recenter button
             showPrimaryMarkerControlFromMap();
-            // disabled prev next button
-            enabledPrevNextButton();
         }
     }
 
