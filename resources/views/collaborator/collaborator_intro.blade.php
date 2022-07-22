@@ -89,6 +89,7 @@
         .header {
             box-sizing: border-box; 
             background-color: #000000;
+            z-index: 999;
         }
         @media only screen and (min-width: 426px) and (max-width: 768px) {
             .w-logo {
