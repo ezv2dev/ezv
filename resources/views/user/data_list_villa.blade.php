@@ -1,5 +1,5 @@
 @php
-$villas = $villa->shuffle()->sortBy('grade');
+$villas = $villa;
 $list = [];
 foreach ($villas as $item) {
     array_push($list, $item->id_villa);
@@ -216,7 +216,8 @@ if (isset($_COOKIE['tema'])) {
                                         style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                                 </p>
                             </div>
-                            <div class="cursor-pointer skeleton skeleton-h-2 skeleton-w-100" onclick="view_maps('{{ $data->id_villa }}')">
+                            <div class="cursor-pointer skeleton skeleton-h-2 skeleton-w-100"
+                                onclick="view_maps('{{ $data->id_villa }}')">
                                 <div class="villa-location-description">
                                     <span class="text-orange">
                                         <i class="fa-solid fa-location-dot"></i>
@@ -300,7 +301,8 @@ if (isset($_COOKIE['tema'])) {
                                 </p>
                             </div>
 
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank" style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
+                                style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                         </div>
                     </div>
 

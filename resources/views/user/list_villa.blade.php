@@ -90,8 +90,8 @@
                     </div>
                 @endif
 
-                <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }} top-min-10p pb-10p" style="width: 100%;"
-                    data-isshow="true">
+                <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }} top-min-10p pb-10p"
+                    style="width: 100%;" data-isshow="true">
                     @foreach ($villaCategory->take(6) as $item)
                         <div>
                             <a href="#" class="grid-img-container"
@@ -115,8 +115,37 @@
                     </a>
                 </div>
 
-                <div id="filter-subcat-bg-color" class="container-grid-sub-cat {{ $bgColor }} stickySubCategory pt-15p pb-15p"
-                    style="width: 100%;" data-isshow="true">
+                <div id="filter-subcat-bg-color"
+                    class="container-grid-sub-cat {{ $bgColor }} stickySubCategory pt-15p pb-15p" style="width: 100%;"
+                    data-isshow="true">
+                    <div class="button-dropdown grid-sub-cat-content-container text-13">
+                        <a href="javascript:void(0)" id="sortBy" style="cursor:pointer;" class="dropdown-toggle">
+                            <div>
+                                <i class="fa fa-solid fa-sliders text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Sort by</div>
+                        </a>
+                        <div class="sort-popup dropdown-menu text-center">
+                            <h5 style="margin-bottom: 0;">Sort by</h5>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest Price
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest Price
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Recommended
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
                     <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
                         <div>
                             <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
@@ -129,7 +158,7 @@
                         </div>
                         <div class="list-description {{ $textColor }}">Bedrooms</div>
                     </div>
-                    @foreach ($amenities->sortBy('order')->take(5) as $item)
+                    @foreach ($amenities->sortBy('order')->take(4) as $item)
                         <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                             onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_amenities }})">
                             <i class="fas fa-{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
@@ -218,17 +247,18 @@
                 if (windowWidth >= 800 && windowWidth <= 949) {
                     var gap = ((windowWidth - 768) / 2) + 20;
                     var navGap = ((windowWidth - 768) / 2) + 30;
-                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap +
+                        "px !important;" + "padding-right: " + navGap + "px !important");
                     $("#filter-cat-bg-color").css("padding-left", gap + "px");
                     $("#filter-cat-bg-color").css("padding-right", gap + "px");
                 } else if (windowWidth >= 950 && windowWidth <= 991) {
                     var gap = ((windowWidth - 768) / 2) + 40;
                     var navGap = ((windowWidth - 768) / 2) + 40;
-                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                    $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap +
+                        "px !important;" + "padding-right: " + navGap + "px !important");
                     $("#filter-cat-bg-color").css("padding-left", gap + "px");
                     $("#filter-cat-bg-color").css("padding-right", gap + "px");
-                }
-                else if (windowWidth <= 1360){
+                } else if (windowWidth <= 1360) {
                     $(".page-header-fixed .nav-row").attr("style", "");
                     $("#filter-cat-bg-color").css("padding-left", "");
                     $("#filter-cat-bg-color").css("padding-right", "");
@@ -238,23 +268,24 @@
             if (windowWidth >= 800 && windowWidth <= 949) {
                 var gap = ((windowWidth - 768) / 2) + 20;
                 var navGap = ((windowWidth - 768) / 2) + 30;
-                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" +
+                    "padding-right: " + navGap + "px !important");
                 $("#filter-cat-bg-color").css("padding-left", gap + "px");
                 $("#filter-cat-bg-color").css("padding-right", gap + "px");
             } else if (windowWidth >= 950 && windowWidth <= 991) {
                 var gap = ((windowWidth - 768) / 2) + 40;
                 var navGap = ((windowWidth - 768) / 2) + 40;
-                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" + "padding-right: " + navGap + "px !important");
+                $(".page-header-fixed .nav-row").attr("style", "padding-left: " + navGap + "px !important;" +
+                    "padding-right: " + navGap + "px !important");
                 $("#filter-cat-bg-color").css("padding-left", gap + "px");
                 $("#filter-cat-bg-color").css("padding-right", gap + "px");
-            }
-            else if (windowWidth <= 1360){
+            } else if (windowWidth <= 1360) {
                 $(".page-header-fixed .nav-row").attr("style", "");
                 $(".page-header-fixed .nav-row").css("padding-right", navGap + "px");
                 $("#filter-cat-bg-color").css("padding-left", "");
                 $("#filter-cat-bg-color").css("padding-right", "");
             }
-                
+
             $(".js-slider-2").each(function(i, el) {
                 var sliderLength = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
@@ -446,6 +477,17 @@
     </script> --}}
 
     <script>
+        $("input[name='fSort[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         function homesFilter(valueCategory, valueClick) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
@@ -481,7 +523,6 @@
             var fBedsFormInput = $("input[name='fBeds']:checked").val();
             var fAmenitiesFormInput = [];
             var fCategoryFormInput = [];
-
 
             if (valueCategory != null) {
                 $("input[name='fCategory[]']").prop("checked", false);
@@ -547,7 +588,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${filteredCategory}&fAmenities=${filteredArray}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${filteredCategory}&fAmenities=${filteredArray}&sortBy=${fSort}`;
 
             villaRefreshFilter(subUrl);
         }
