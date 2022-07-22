@@ -372,7 +372,7 @@
         }`;
 
         var customContent = `
-                            <div class="col-12" style="position: relative;">
+                            <div class="col-12 mobile-map-desc-container" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
                                     @guest
                                         <div
@@ -484,7 +484,7 @@
                             // full screen map for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
@@ -624,7 +624,7 @@
         }`;
 
         var customContent = `
-                            <div class="col-12" style="position: relative">
+                            <div class="col-12 mobile-map-desc-container" style="position: relative">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
                                     @guest
                                         <div
@@ -658,7 +658,7 @@
                                 </div>
 
                                 <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
-                                    <div id="map-desc" class="mt-3">
+                                    <div class="mt-3">
                                             <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                             <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -740,7 +740,7 @@
                             // full screen map for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
@@ -864,7 +864,7 @@
         }`;
 
         var customContent = `
-                            <div class="col-12" style="position: relative;">
+                            <div class="col-12 mobile-map-desc-container" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
                                     @guest
                                         <div
@@ -974,7 +974,7 @@
                             // full screen map for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
@@ -1124,7 +1124,7 @@
         }`;
 
         var customContent = `
-                            <div class="col-12" style="position: relative;">
+                            <div class="col-12 mobile-map-desc-container" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
                                     @guest
                                         <div
@@ -1235,7 +1235,7 @@
                             // full screen map for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
-                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
@@ -1307,6 +1307,7 @@
 
     function reverseMap(){
         document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("map-mobile-overlay").classList.remove('map-mobile-overlay');
         document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         document.getElementById("mobile-map-close").classList.remove('d-block');
@@ -1339,8 +1340,9 @@
                 resetMapEvent();
                 // full screen map for mobile
                 document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
                 document.getElementById("map-desc").classList.add('mobile-map');
-                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 0px; position: relative; overflow: hidden;');
+                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
                 // reset right content
@@ -1380,6 +1382,7 @@
         document.getElementById("modal-map-content").classList.add('d-none');
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
         document.getElementById("bottom-mobile").classList.remove('d-none');
+        document.getElementById("map-mobile-overlay").classList.remove('map-mobile-overlay');
         $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 
@@ -2455,7 +2458,7 @@
 </script>
 
 {{-- MAP CONTENT --}}
-
+    <div id="map-mobile-overlay">
     <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
         <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
         <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
@@ -2463,6 +2466,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </div>
         </div>
+    </div>
     </div>
 
     <div id="modal-map-content" class="overflow-hidden"></div>
