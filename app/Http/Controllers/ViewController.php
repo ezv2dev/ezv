@@ -598,7 +598,7 @@ class ViewController extends Controller
 
             $data = [
                 'photo' => VillaPhoto::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
-                // 'video' => VillaVideo::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => VillaVideo::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
                 'uid' => Villa::where('id_villa', $request->id)->select('uid')->first(),
             ];
 

@@ -3728,11 +3728,12 @@
                         @endforelse
                     </ul>
 
-                    <div style="clear: both; margin-top: 20px;">
-                        <input type='button' class="btn-edit-position-photos" value='Submit'
-                            onclick="save_reorder_video()">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                        <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
+                            onclick="save_reorder_video()">Submit</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -3939,7 +3940,7 @@
                     let uid = response.data.uid.uid;
                     let lowerCaseUid = uid.toLowerCase();
                     let content = "";
-                    let contentPositionModal;
+                    let contentPositionModal = "";
 
                     // let galleryDiv = $('.gallery');
                     // let galleryLength = galleryDiv.find('a').length;
@@ -3970,16 +3971,19 @@
                             '" title="' + response.data.photo[i].name + '"> </li>';
                     }
 
-                    // for (let v = 0; v < response.data.video.length; v++) {
-                    //     content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
-                    //         .id_video +
-                    //         '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
-                    //         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                    //         path + lowerCaseUid + slash + response.data.video[v].name +
-                    //         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
-                    //         response.data.video[v].id_video +
-                    //         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                    // }
+                    if (response.data.video.length > 0)
+                    {
+                        for (let v = 0; v < response.data.video.length; v++) {
+                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                                .id_video +
+                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                                response.data.video[v].id_video +
+                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                        }
+                    }
 
                     btn.textContent = "Submit";
                     btn.classList.remove("disabled");
@@ -4211,6 +4215,7 @@
                     $('.gallery').append(content);
                     $('#sortable-photo').append(contentPositionModal);
                 }
+
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
                         '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
