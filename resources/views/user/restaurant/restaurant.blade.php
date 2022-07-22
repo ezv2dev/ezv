@@ -99,7 +99,7 @@
         {{-- END HEADER --}}
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
-        <div class="sticky-bottom-mobile d-xs-block d-md-none">
+        <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <a onclick="contact_restaurant()" type="button" class="rsv-btn-button">
                 {{ __('user_page.CONTACT') }}
             </a>
