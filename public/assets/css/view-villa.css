@@ -3318,7 +3318,18 @@ span.flatpickr-weekday {
         font-size: 28px !important;
     }
 }
-
+@media only screen and (max-width: 575px) {
+    .head-inner-wrap {
+        padding-left: 20px !important;
+        padding-right: 12px !important;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .head-inner-wrap {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
 @media only screen and (max-width: 767px) {
     /* make short-desc max lines 2 */
     .top-profile .short-desc {
@@ -3464,10 +3475,10 @@ span.flatpickr-weekday {
     .rsv {
         height: 47px;
     }
-
     .about-place,
     .row-grid-amenities {
-        padding-right: 12px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
     #heightCalendar {
         padding: 0px !important;
@@ -3475,6 +3486,8 @@ span.flatpickr-weekday {
     #availability .pd-tlr-10 {
         padding-left: 0px !important;
         padding-right: 0px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
     #availability,
     #description,
@@ -3483,8 +3496,8 @@ span.flatpickr-weekday {
     #location-map .row-grid-amenities,
     #location-map .row-grid-location,
     .bottom-content {
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
     #availability .pd-tlr-10 {
         margin-right: 12px !important;
@@ -3543,10 +3556,6 @@ span.flatpickr-weekday {
     .payment-warning {
         width: 80% !important;
         margin-left: 0px !important;
-    }
-    .head-inner-wrap {
-        padding-left: 20px !important;
-        padding-right: 12px !important;
     }
     .search-box,
     .logged-user-menu-detail,
@@ -3656,7 +3665,8 @@ span.flatpickr-weekday {
     }
     .head-inner-wrap .right-bar {
         width: 30% !important;
-        margin-right: 10px !important;
+        margin-right: 0px !important;
+        padding-right: 12px !important;
     }
     .head-inner-wrap .social-share-container .text-center div {
         font-size: 10px !important;
@@ -3665,8 +3675,13 @@ span.flatpickr-weekday {
         width: 32% !important;
         right: -30px !important;
     }
-    .page-content {
+    #navbarright .right-bar {
+        padding-right: 0px !important;
+    }
+    .page-content,
+    .bottom-content {
         padding-left: 12px !important;
+        padding-right: 12px !important;
     }
     .top-profile #name-content {
         font-size: 30px !important;
@@ -3708,9 +3723,23 @@ span.flatpickr-weekday {
         margin-left: -12px !important;
     }
     #rsv-block-btn .rsv {
-        padding-top: 15px !important;
-        padding-right: 6px !important;
+        padding-top: 20px !important;
+        padding-right: 10px !important;
         font-size: 10px !important;
+    }
+    .sidebar {
+        width: 22% !important;
+        right: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1259px) {
+    .sidebar {
+        width: 25% !important;
+        right: 2px !important;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        margin-right: 0px !important;
     }
 }
 
@@ -3722,10 +3751,6 @@ span.flatpickr-weekday {
     }
     .page-content .sticky {
         width: 72.5% !important;
-    }
-    .sidebar {
-        width: 22% !important;
-        right: 20px !important;
     }
     #sidebar_fix .reserve-block {
         width: 100% !important;
@@ -4186,4 +4211,27 @@ span.flatpickr-weekday {
     justify-content: center;
     align-items: center;
     background: #d8d8d8;
+}
+
+@media only screen and (max-width: 575px) {
+    .px-xs-12p {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+    .px-xs-20p {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .px-sm-24p {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .px-max-md-12p {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
 }

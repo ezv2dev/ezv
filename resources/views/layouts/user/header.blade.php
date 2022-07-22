@@ -2908,11 +2908,11 @@
                         $(".bottom-content").css("padding-right", gap + "px");
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
                     } else {
-                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", "auto");
-                        $(".page-content").css("padding-left", "40px");
-                        $(".page-content").css("padding-right", "40px");
-                        $(".bottom-content").css("padding-left", "40px");
-                        $(".bottom-content").css("padding-right", "40px");
+                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", "");
+                        $(".page-content").css("padding-left", "");
+                        $(".page-content").css("padding-right", "");
+                        $(".bottom-content").css("padding-left", "");
+                        $(".bottom-content").css("padding-right", "");
                     }
                     if (windowWidth > 1359) {
                         var gap = (windowWidth - 1360) / 2;
