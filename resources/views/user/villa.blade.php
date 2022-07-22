@@ -3690,7 +3690,7 @@
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
-                            onclick="save_reorder_photo()">Submit</button>
+                            onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
                 </div>
             </div>
