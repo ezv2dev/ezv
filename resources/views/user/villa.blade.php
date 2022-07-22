@@ -234,7 +234,7 @@
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
 
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($villa[0]->image)
@@ -878,7 +878,7 @@
                     @endauth
                     {{-- END ADD GALLERY --}}
 
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p">
                         {{-- Description --}}
                         <div class="about-place">
                             <hr class="hr-about">
@@ -985,7 +985,7 @@
                         </div>
                     </section> --}}
 
-                    <section id="availability" class="section-2">
+                    <section id="availability" class="section-2 px-xs-12p px-sm-24p">
                         <div id="scrollStop"></div>
                         <div class="pd-tlr-10">
                             <hr>
@@ -1017,7 +1017,7 @@
                             </div>
                     </section>
 
-                    <section id="amenities" class="section-2 div-amenities">
+                    <section id="amenities" class="section-2 div-amenities px-xs-12p px-sm-24p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1459,7 +1459,7 @@
                 </div>
             </div>
             {{-- END RIGHT CONTENT --}}
-            <section id="location-map" class="section-2">
+            <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
                 <div class="row-grid-amenities">
                     <hr class="pendek">
                     <div class="section-title">
@@ -1666,7 +1666,7 @@
         </div>
 
         {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12 bottom-content">
+        <div class="col-lg-12 bottom-content px-max-md-12p">
             <div class="col-12">
                 <section id="review" class="section-2">
                     <hr>
