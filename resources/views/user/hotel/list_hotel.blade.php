@@ -87,7 +87,48 @@
                 <div id="filter-subcat-bg-color" style="width: 100%;"
                     class="container-grid-sub-cat translate-text-group {{ $bgColor }} pt-15p pb-15p" style="">
 
-                    @foreach ($hotelFilter->take(8) as $item)
+                    <div class="button-dropdown grid-sub-cat-content-container text-13">
+                        <a href="javascript:void(0)" id="sortBy" style="cursor:pointer;" class="dropdown-toggle">
+                            <div>
+                                <i class="fa fa-solid fa-sliders text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Sort by</div>
+                        </a>
+                        <div class="sort-popup dropdown-menu text-center">
+                            <h5 style="margin-bottom: 0;">Sort by</h5>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest Price
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest Price
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Recommended
+                                <input type="checkbox" name="fSort[]" value="highest">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Price</div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                        <div>
+                            <i class="fas fa-bed text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Bedrooms</div>
+                    </div>
+
+                    @foreach ($hotelFilter->take(4) as $item)
                         <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
                             <div>
@@ -106,6 +147,15 @@
             </div>
             @endforeach
 
+            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
+                onclick="moreSubCategory()">
+                <div>
+                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">
+                    {{ __('user_page.More') }}
+                </div>
+            </div>
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
                 onclick="moreSubCategory()">
                 <div>
@@ -862,6 +912,17 @@
     </script> --}}
 
     <script>
+        $("input[name='fSort[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         function hotelFilter(valueCategory, valueClick, unCheckCategory) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
