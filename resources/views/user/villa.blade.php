@@ -4072,7 +4072,7 @@
                         }
                     }
 
-                    btn.textContent = "Save";
+                    btn.textContent = "{{ __('user_page.Save') }}";
                     btn.classList.remove("disabled");
 
 
