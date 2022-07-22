@@ -14,7 +14,8 @@
                     <input type="hidden" name="id_restaurant" id="id_restaurant" value="{{ $restaurant->id_restaurant }}">
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Phone') }}</label>
-                        <input type="number" class="form-control" id="phoneResto" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="13" value="{{ $restaurant->phone ?? '' }}">
+                        <input type="number"
+                        onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" class="form-control" id="phoneResto" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="13" value="{{ $restaurant->phone ?? '' }}">
                         <small id="err-phone" style="display: none;" class="invalid-feedback">{{ __('auth.empty_phone') }}</small>
                     </div>
                     <div class="form-group">
