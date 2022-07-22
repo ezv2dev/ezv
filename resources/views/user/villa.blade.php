@@ -2373,7 +2373,7 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="activation2">
+                                        <div class="activation2" id="pleaseWait">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
@@ -3519,7 +3519,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                                <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5077,15 +5077,14 @@
                         },
                         success: function(response) {
                             if (response.data == 1) {
-                                if(response.grade == "AA")
-                                {
+                                if (response.grade == "AA") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
                                             <div style="margin-left: 10px;">
                                                 <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
+                                                    id="gradeVillaAA">
                                                     <option value="AA" selected>AA</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -5094,16 +5093,18 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    `)
-                                }else if(response.grade == "A")
-                                {
+                                    `);
+
+                                    gradeAA();
+                                    $("#pleaseWait").addClass('d-none');
+                                } else if (response.grade == "A") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
                                             <div style="margin-left: 10px;">
                                                 <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
+                                                    id="gradeVillaA">
                                                     <option value="AA">AA</option>
                                                     <option value="A" selected>A</option>
                                                     <option value="B">B</option>
@@ -5113,15 +5114,17 @@
                                             </div>
                                         </div>
                                     `)
-                                }else if(response.grade == "B")
-                                {
+
+                                    gradeA();
+                                    $("#pleaseWait").addClass('d-none');
+                                } else if (response.grade == "B") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
                                             <div style="margin-left: 10px;">
                                                 <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
+                                                    id="gradeVillaB">
                                                     <option value="AA">AA</option>
                                                     <option value="A">A</option>
                                                     <option value="B" selected>B</option>
@@ -5131,15 +5134,17 @@
                                             </div>
                                         </div>
                                     `)
-                                }else if(response.grade == "C")
-                                {
+
+                                    gradeB();
+                                    $("#pleaseWait").addClass('d-none');
+                                } else if (response.grade == "C") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
                                             <div style="margin-left: 10px;">
                                                 <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
+                                                    id="gradeVillaC">
                                                     <option value="AA">AA</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -5149,15 +5154,17 @@
                                             </div>
                                         </div>
                                     `)
-                                }else if(response.grade == "D")
-                                {
+
+                                    gradeC();
+                                    $("#pleaseWait").addClass('d-none');
+                                } else if (response.grade == "D") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
                                             role="success">
                                             <span>{{ __('user_page.this content is active, edit grade villa') }}</span>
                                             <div style="margin-left: 10px;">
                                                 <select class="custom-select grade-success" name="grade"
-                                                    id="gradeVilla">
+                                                    id="gradeVillaD">
                                                     <option value="AA">AA</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -5167,6 +5174,9 @@
                                             </div>
                                         </div>
                                     `)
+
+                                    gradeD();
+                                    $("#pleaseWait").addClass('d-none');
                                 }
 
                                 iziToast.success({
