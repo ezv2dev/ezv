@@ -463,7 +463,7 @@ class RestaurantController extends Controller
 
             $data = [
                 'photo' => RestaurantPhoto::where('id_restaurant', $request->id)->orderBy('order', 'asc')->get(),
-                // 'video' => RestaurantVideo::where('id_restaurant', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => RestaurantVideo::where('id_restaurant', $request->id)->orderBy('order', 'asc')->get(),
                 'uid' => Restaurant::where('id_restaurant', $request->id)->select('uid')->first(),
             ];
 
@@ -480,25 +480,33 @@ class RestaurantController extends Controller
 
     public function restaurant_update_position_video(Request $request)
     {
-        abort_if(!auth()->check(), 401);
         $validator = Validator::make($request->all(), [
             'videoids' => ['required', 'array'],
             'id' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $videoids_arr = $request->videoids;
 
         $restaurant = Restaurant::find($request->id);
-        abort_if(!$restaurant, 404);
+
+        if (!$restaurant) {
+            return response()->json([
+                'message' => 'Food Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         if (count($videoids_arr) > 0) {
@@ -515,8 +523,15 @@ class RestaurantController extends Controller
                 $position++;
             }
 
+            $data = [
+                'photo' => RestaurantPhoto::where('id_restaurant', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => RestaurantVideo::where('id_restaurant', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Restaurant::where('id_restaurant', $request->id)->select('uid')->first(),
+            ];
+
             return response()->json([
-                'message' => 'data has been updated'
+                'data' => $data,
+                'message' => 'Updated Position Video'
             ], 200);
         } else {
             return response()->json([
