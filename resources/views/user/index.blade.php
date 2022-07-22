@@ -207,7 +207,7 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                            <div class="searchbox display-block" onclick="popUp();"
+                            <div id="searchbox-mob" class="searchbox display-block" onclick="popUp();"
                                 style="cursor: pointer; border: none; margin:0;">
                                 <span class="top-search"><i class="fa fa-search"></i></span>
                             </div>
