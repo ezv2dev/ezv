@@ -16,8 +16,17 @@
         overflow-y: auto !important;
     }
 
-    .modal-content-editprice {
-        width: 90% !important;
+    #modal-edit_price .modal-dialog{
+    position: absolute !important;
+    top: 0px !important;
+    left: 0px !important;
+    right: 0px !important;
+    bottom: 0px !important;
+    }
+
+    #modal-edit_price .modal-dialog .modal-content{
+        height: 100% !important;
+        margin: 0px !important;
     }
 
     .modal-horizontal-centered {
@@ -139,8 +148,8 @@
 <!-- Extra large modal -->
 <div class="modal fade modal-availability" id="modal-edit_price" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-fadein" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content modal-content-editprice" style="border-radius:15px;">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content" style="border-radius:15px;">
             <div class="modal-header-editprice"
             style="border-bottom: 0.1rem solid #2C3333 !important;">
                 <div class="row">
@@ -325,52 +334,63 @@
                                                 value="{{ $villa[0]->id_villa }}">
 
                                             <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-8" style="height: 60vh; overflow-y: scroll;">
                                                     <div id="calendar"></div>
                                                 </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label for="">{{ __('user_page.Start date') }}</label>
-                                                    <input type="text" class="form-control" id="start" name="start"
-                                                        placeholder="{{ __('user_page.Start date') }}.." readonly>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label for="">{{ __('user_page.End date') }}</label>
-                                                    <input type="text" class="form-control" id="end" name="end"
-                                                        placeholder="{{ __('user_page.End date') }}.." readonly>
-                                                </div>
-                                            </div>
+                                                <div class="col-4">
 
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label>{{ __('user_page.Price') }}</label>
-                                                    <input type="number" class="form-control" id="special_price"
-                                                        name="special_price" placeholder="{{ __('user_page.Price') }}..">
-                                                    <small id="err-spcl-prc" style="display: none;"
-                                                        class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label>{{ __('user_page.Discount') }}</label>
-                                                    <input type="number" class="form-control" id="disc" name="disc"
-                                                        placeholder="{{ __('user_page.Discount') }}..">
-                                                    <small id="err-disc" style="display: none;"
-                                                        class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
-                                                </div>
-                                            </div>
-                                            <!-- Submit -->
-                                            <div class="row items-push">
-                                                <center>
-                                                    <div class="col-6">
-                                                        <button type="submit" class="btn btn-sm btn-primary mt-3"
-                                                            id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
-                                                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                                                        </button>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label for="">{{ __('user_page.Start date') }}</label>
+                                                            <input type="text" class="form-control" id="start" name="start"
+                                                                placeholder="{{ __('user_page.Start date') }}.." readonly>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label for="">{{ __('user_page.End date') }}</label>
+                                                            <input type="text" class="form-control" id="end" name="end"
+                                                                placeholder="{{ __('user_page.End date') }}.." readonly>
+                                                        </div>
                                                     </div>
-                                                </center>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>{{ __('user_page.Price') }}</label>
+                                                            <input type="number" class="form-control" id="special_price"
+                                                                name="special_price" placeholder="{{ __('user_page.Price') }}..">
+                                                            <small id="err-spcl-prc" style="display: none;"
+                                                                class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>{{ __('user_page.Discount') }}</label>
+                                                            <input type="number" class="form-control" id="disc" name="disc"
+                                                                placeholder="{{ __('user_page.Discount') }}..">
+                                                            <small id="err-disc" style="display: none;"
+                                                                class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
+                                                        </div>
+                                                    </div>
+
+                                                        <!-- Submit -->
+                                                        <div class="row items-push">
+                                                         
+                                                                <div class="col-6">
+                                                                    <button type="submit" class="btn btn-sm btn-primary mt-3"
+                                                                        id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
+                                                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                                                                    </button>
+                                                                </div>
+                                                          
+                                                        </div>
+                                                        <!-- END Submit -->
+                                                </div>
                                             </div>
-                                            <!-- END Submit -->
+
+                                           
+
+                                          
+
+                                           
+                                          
                                             <br>
                                         </form>
                                     </div>
