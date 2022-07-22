@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 col-form-label">{{ __('user_page.Phone') }}</label>
                         <input type="number"
-                        onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" class="form-control" id="phoneWow" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="13" value="{{ $activity->phone ?? '' }}">
+                        onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight', 'Tab'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'" class="form-control" id="phoneWow" name="phone" placeholder="{{ __('user_page.phone') }}" maxlength="13" value="{{ $activity->phone ?? '' }}">
                         <small id="err-phone" style="display: none;" class="invalid-feedback">{{ __('auth.empty_phone') }}</small>
                     </div>
                     <div class="form-group">

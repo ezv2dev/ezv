@@ -4474,9 +4474,8 @@
                 });
 
                 this.on('queuecomplete', function(file, response, message) {
-                    // console.log(file);
-                    // console.log(response);
-                    // console.log(message);
+                    $("#button").html('Upload');
+                    $("#button").removeClass('disabled');
                 });
 
                 this.on("complete", function(file, response, message) {
@@ -4591,9 +4590,6 @@
                 $gallery.refresh();
 
                 this.removeFile(file);
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
         }
     </script>
