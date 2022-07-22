@@ -67,7 +67,7 @@ function saveShortDescription() {
             error: function (jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -136,7 +136,9 @@ function saveDescription() {
                 console.log(response);
                 console.log(response.data.description.length);
 
-                let desc_input = document.getElementById("description-form-input");
+                let desc_input = document.getElementById(
+                    "description-form-input"
+                );
 
                 $("#description-content").html(
                     response.data.description.substring(0, 600)
@@ -155,7 +157,9 @@ function saveDescription() {
                     $("#buttonShowMoreDescription").append(
                         '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
                     );
-                    $("#modalDescriptionContent").html(response.data.description);
+                    $("#modalDescriptionContent").html(
+                        response.data.description
+                    );
                 } else {
                     $("#buttonShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
@@ -169,7 +173,7 @@ function saveDescription() {
             error: function (jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -249,7 +253,7 @@ function saveNameActivity() {
                 editNameCancel();
             },
             error: function (jqXHR, exception) {
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -282,9 +286,9 @@ let imageProfileActivity;
 let readerImageActivity;
 
 $("#imageActivity").on("change", function (ev) {
-    if(document.getElementById("imageActivity").files.length != 0){
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
+    if (document.getElementById("imageActivity").files.length != 0) {
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
     }
     imageProfileActivity = this.files[0];
 
@@ -293,15 +297,15 @@ $("#imageActivity").on("change", function (ev) {
 
 $("#updateImageForm").submit(function (e) {
     let error = 0;
-    if(document.getElementById("imageActivity").files.length == 0){
-        $('.image-box').css("border", "solid #e04f1a 1px");
-        $('#err-img').show();
+    if (document.getElementById("imageActivity").files.length == 0) {
+        $(".image-box").css("border", "solid #e04f1a 1px");
+        $("#err-img").show();
         error = 1;
     } else {
-        $('.image-box').css("border", "");
-        $('#err-img').hide();
+        $(".image-box").css("border", "");
+        $("#err-img").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
@@ -350,7 +354,7 @@ $("#updateImageForm").submit(function (e) {
             error: function (jqXHR, exception) {
                 // console.log(jqXHR.responseJSON);
                 // console.log(exception);
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
@@ -425,7 +429,7 @@ function saveSubcategoryActivity() {
                 }
                 content =
                     content +
-                    '<button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_subcategory">More</button>';
+                    '<button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_subcategory()">More</button>';
             } else {
                 for (let i = 0; i < response.data.length; i++) {
                     content =
@@ -470,7 +474,7 @@ function saveSubcategoryActivity() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -495,7 +499,7 @@ function saveSubcategoryActivity() {
 }
 
 function saveTimeActivity() {
-    console.log('hit saveTimeActivity');
+    console.log("hit saveTimeActivity");
 
     let open_time = $("#open-time-input").val();
     let closed_time = $("#close-time-input").val();
@@ -528,9 +532,7 @@ function saveTimeActivity() {
             let newOpenTime = tConvert(response.data.open_time);
             let newClosedTime = tConvert(response.data.closed_time);
 
-            $(".timeActivityContent").html(
-                newOpenTime + " - " + newClosedTime
-            );
+            $(".timeActivityContent").html(newOpenTime + " - " + newClosedTime);
 
             $("#open-time-input").val(response.data.open_time);
             $("#close-time-input").val(response.data.closed_time);
@@ -544,7 +546,7 @@ function saveTimeActivity() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -570,7 +572,7 @@ function saveTimeActivity() {
 }
 
 function saveTimeActivityMobile() {
-    console.log('hit saveTimeActivityMobile');
+    console.log("hit saveTimeActivityMobile");
 
     let open_time = $("#open-time-input-mobile").val();
     let closed_time = $("#close-time-input-mobile").val();
@@ -603,9 +605,7 @@ function saveTimeActivityMobile() {
             let newOpenTime = tConvert(response.data.open_time);
             let newClosedTime = tConvert(response.data.closed_time);
 
-            $(".timeActivityContent").html(
-                newOpenTime + " - " + newClosedTime
-            );
+            $(".timeActivityContent").html(newOpenTime + " - " + newClosedTime);
 
             $("#open-time-input-mobile").val(response.data.open_time);
             $("#close-time-input-mobile").val(response.data.closed_time);
@@ -619,7 +619,7 @@ function saveTimeActivityMobile() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -664,20 +664,29 @@ let priceImageActivity;
 // $("#modal-add_price").find("input[name='image']").on("change", function (ev) {
 //     priceImageActivity = this.files[0];
 // });
-$("#modal-add_price").find("input[name='image']").eq(0).on("change", function (ev) {
-    priceImageActivity = this.files[0];
-    console.log('hit data');
-});
+$("#modal-add_price")
+    .find("input[name='image']")
+    .eq(0)
+    .on("change", function (ev) {
+        priceImageActivity = this.files[0];
+        console.log("hit data");
+    });
 
 function savePriceActivity() {
-    let id_activity = $("#modal-add_price").find("input[name='id_activity']").val();
+    let id_activity = $("#modal-add_price")
+        .find("input[name='id_activity']")
+        .val();
     let name = $("#modal-add_price").find("input[name='name']").val();
     let price = $("#modal-add_price").find("input[name='price']").val();
-    let start_date = $("#modal-add_price").find("input[name='start_date']").val();
+    let start_date = $("#modal-add_price")
+        .find("input[name='start_date']")
+        .val();
     let end_date = $("#modal-add_price").find("input[name='end_date']").val();
-    let description = $("#modal-add_price").find("input[name='description']").val();
+    let description = $("#modal-add_price")
+        .find("input[name='description']")
+        .val();
 
-    var formData = new FormData($('#addPriceForm'));
+    var formData = new FormData($("#addPriceForm"));
     console.log(formData);
 
     let btn = document.getElementById("btnSavePrice");
@@ -707,13 +716,13 @@ function savePriceActivity() {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $("#modal-add_price").find("input[name='id_activity']").val('');
-            $("#modal-add_price").find("input[name='name']").val('');
-            $("#modal-add_price").find("input[name='price']").val('');
-            $("#modal-add_price").find("input[name='start_date']").val('');
-            $("#modal-add_price").find("input[name='end_date']").val('');
-            $("#modal-add_price").find("input[name='description']").val('');
-            $("#modal-add_price").find("input[name='image']").val('');
+            $("#modal-add_price").find("input[name='id_activity']").val("");
+            $("#modal-add_price").find("input[name='name']").val("");
+            $("#modal-add_price").find("input[name='price']").val("");
+            $("#modal-add_price").find("input[name='start_date']").val("");
+            $("#modal-add_price").find("input[name='end_date']").val("");
+            $("#modal-add_price").find("input[name='description']").val("");
+            $("#modal-add_price").find("input[name='image']").val("");
 
             iziToast.success({
                 title: "Success",
@@ -722,7 +731,7 @@ function savePriceActivity() {
             });
         },
         error: function (jqXHR, exception) {
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -865,7 +874,7 @@ function saveFacilities() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -904,8 +913,8 @@ function saveContactActivity() {
         $("#err-phone").show();
         error = 1;
     } else {
-            $("#phoneWow").removeClass("is-invalid");
-            $("#err-phone").hide();
+        $("#phoneWow").removeClass("is-invalid");
+        $("#err-phone").hide();
     }
     if (!$("#emailWow").val()) {
         $("#emailWow").addClass("is-invalid");
@@ -925,77 +934,85 @@ function saveContactActivity() {
     if (error == 1) {
         return false;
     } else {
-    let phone = $('#modal-edit_contact').find("input[name='phone']").val();
-    let email = $('#modal-edit_contact').find("input[name='email']").val();
+        let phone = $("#modal-edit_contact").find("input[name='phone']").val();
+        let email = $("#modal-edit_contact").find("input[name='email']").val();
 
-    var btn = document.getElementById("btnSaveContact");
-    btn.textContent = "Saving...";
-    btn.classList.add("disabled");
+        var btn = document.getElementById("btnSaveContact");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/update/contact",
-        data: {
-            id_activity: id_activity,
-            phone: phone,
-            email: email,
-        },
-        success: function (response) {
-            console.log(response);
-            $('#modal-edit_contact').find("input[name='phone']").val(response.data.phone);
-            $('#modal-edit_contact').find("input[name='email']").val(response.data.email);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/update/contact",
+            data: {
+                id_activity: id_activity,
+                phone: phone,
+                email: email,
+            },
+            success: function (response) {
+                console.log(response);
+                $("#modal-edit_contact")
+                    .find("input[name='phone']")
+                    .val(response.data.phone);
+                $("#modal-edit_contact")
+                    .find("input[name='email']")
+                    .val(response.data.email);
 
-            $('#modal-contact_activity').find(".modal-content-phone").text(response.data.phone);
-            $('#modal-contact_activity').find(".modal-content-email").text(response.data.email);
+                $("#modal-contact_activity")
+                    .find(".modal-content-phone")
+                    .text(response.data.phone);
+                $("#modal-contact_activity")
+                    .find(".modal-content-email")
+                    .text(response.data.email);
 
-            let mailTo = '';
-            if(response.data.email){
-                mailTo = `mailto:${response.data.email}`;
-                $('.mailto-email-activity').removeAttr('href');
-                $('.mailto-email-activity').attr('href', mailTo);
-            } else {
-                $('.mailto-email-activity').removeAttr('href');
-            }
+                let mailTo = "";
+                if (response.data.email) {
+                    mailTo = `mailto:${response.data.email}`;
+                    $(".mailto-email-activity").removeAttr("href");
+                    $(".mailto-email-activity").attr("href", mailTo);
+                } else {
+                    $(".mailto-email-activity").removeAttr("href");
+                }
 
-            $('#modal-edit_contact').modal('hide');
+                $("#modal-edit_contact").modal("hide");
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-        },
-        error: function (jqXHR, exception) {
-            // console.log(jqXHR);
-            // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+            error: function (jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
 
-            $('#modal-edit_contact').modal('hide');
+                $("#modal-edit_contact").modal("hide");
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
-            btn.classList.remove("disabled");
-        },
-    });
+                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.classList.remove("disabled");
+            },
+        });
     }
 }
 
@@ -1115,7 +1132,7 @@ $("#storeStoryForm").submit(function (e) {
                 // console.log(jqXHR);
                 // console.log(exception);
 
-                if(jqXHR.responseJSON.errors) {
+                if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
                             title: "Error",
