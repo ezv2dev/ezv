@@ -113,7 +113,7 @@
         {{-- END HEADER --}}
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
-        <div class="sticky-bottom-mobile d-xs-block d-md-none">
+        <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <a onclick="contact_activity()" type="button" class="rsv-btn-button">
                 {{ __('user_page.CONTACT') }}
             </a>
@@ -463,9 +463,9 @@
                                             <i class="fa-solid fa-phone"></i>
                                         </a>
                                     </div>
-                                    <div style="padding: 0px 6px;">
+                                    <div style="padding: 0px 6px;" id="contentEmailActivity">
                                         @if ($activity->email)
-                                            <a target="_blank" type="button"
+                                            <a id="btnEmailActivity" target="_blank" type="button"
                                                 href="mailto:{{ $activity->email }}"
                                                 class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope"></i>
@@ -4239,7 +4239,8 @@
                 });
 
                 this.on('queuecomplete', function() {
-
+                    $("#button").html('Upload');
+                    $("#button").removeClass('disabled');
                 });
 
                 this.on("complete", function(file, response, message) {
@@ -4306,6 +4307,13 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
 
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0) {
+                    $('.gallery').html("");
+                }
+
                 if (message.data.photo.length > 0)
                 {
                     content = '<div class="col-4 grid-photo" id="displayPhoto'+
@@ -4314,8 +4322,6 @@
                         path+lowerCaseUid+slash+message.data.photo[0].name+
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
                         path+lowerCaseUid+slash+message.data.photo[0].name+
-                        '" title="'+
-                        message.data.photo[0].caption+
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $activity->id_activity }}" data-photo="'+
                         message.data.photo[0].id_photo+
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-photo="'+
@@ -4338,9 +4344,6 @@
                 $gallery.refresh();
 
                 this.removeFile(file);
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
         }
     </script>
@@ -4579,7 +4582,7 @@
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Submit') }}" onclick="save_reorder_photo()">
+                            value="{{ __('user_page.Save') }}" onclick="save_reorder_photo()">
                     </div>
 
                 </div>
@@ -4803,6 +4806,16 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayPhoto"+photo).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             $gallery.refresh();
                         }
                     });

@@ -283,7 +283,9 @@ async function saveBedroomDetail(id_villa) {
         const content = $(".bedroomDetailFormContent").eq(i);
 
         let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
-        let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+        let bathroomRawContent = content.find(
+            "input[name='bathroom[]']:checked"
+        );
         let bedroomIds = [];
         let bathroomIds = [];
         for (let index = 0; index < bedroomRawContent.length; index++) {
@@ -297,7 +299,10 @@ async function saveBedroomDetail(id_villa) {
         let bed = [];
         for (let index = 0; index < bedRawContent.length; index++) {
             bed.push({
-                id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+                id_bed: bedRawContent
+                    .eq(index)
+                    .find(`input[name='id_bed']`)
+                    .val(),
                 qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
             });
         }
@@ -316,7 +321,7 @@ async function saveBedroomDetail(id_villa) {
         url: "/villa/update/bedroom/detail",
         data: {
             id_villa: id_villa,
-            data: formData
+            data: formData,
         },
         cache: false,
         enctype: "multipart/form-data",
@@ -335,7 +340,7 @@ async function saveBedroomDetail(id_villa) {
                 const data = response.data[index];
                 content += contentBedroomDetail(index, data);
             }
-            $('#bedroom-detail-content').html(content);
+            $("#bedroom-detail-content").html(content);
 
             // iziToast.success({
             //     title: "Success",
@@ -375,7 +380,9 @@ async function saveBedroomDetail(id_villa) {
 function contentBedroomDetail(count, data) {
     let bedroomAmenities = ``;
     if (data.villa_bedroom_detail_bedroom_amenities) {
-        for (let index = 0; index < data.villa_bedroom_detail_bedroom_amenities.length; index++) {
+        for (
+            let index = 0; index < data.villa_bedroom_detail_bedroom_amenities.length; index++
+        ) {
             const item = data.villa_bedroom_detail_bedroom_amenities[index];
             bedroomAmenities += `
                 <div class="col-md-12">
@@ -388,7 +395,9 @@ function contentBedroomDetail(count, data) {
     }
     let bathroomAmenities = ``;
     if (data.villa_bedroom_detail_bathroom_amenities) {
-        for (let index = 0; index < data.villa_bedroom_detail_bathroom_amenities.length; index++) {
+        for (
+            let index = 0; index < data.villa_bedroom_detail_bathroom_amenities.length; index++
+        ) {
             const item = data.villa_bedroom_detail_bathroom_amenities[index];
             bathroomAmenities += `
                 <div class="col-md-12">
@@ -401,7 +410,9 @@ function contentBedroomDetail(count, data) {
     }
     let bed = ``;
     if (data.villa_bedroom_detail_bed) {
-        for (let index = 0; index < data.villa_bedroom_detail_bed.length; index++) {
+        for (
+            let index = 0; index < data.villa_bedroom_detail_bed.length; index++
+        ) {
             const item = data.villa_bedroom_detail_bed[index];
             bed += `
                 <div class="col-md-12">
@@ -418,7 +429,7 @@ function contentBedroomDetail(count, data) {
     let content = `
         <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
             <div class="col-md-12">
-                <h5 class="mb-3">Bedroom ${count+1}</h5>
+                <h5 class="mb-3">Bedroom ${count + 1}</h5>
             </div>
             <div class="col-md-12 row">
                 <div class="col-md-6">
@@ -435,10 +446,10 @@ function contentBedroomDetail(count, data) {
     return content;
 }
 $(".check-cat").change(function() {
-    $('#check_cat').each(function() {
+    $("#check_cat").each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length > 0) {
-            $('.checklst-cat').css("border", "");
-            $('#err-slc-cat').hide();
+            $(".checklst-cat").css("border", "");
+            $("#err-slc-cat").hide();
         }
     });
 });
@@ -446,14 +457,12 @@ $(".check-cat").change(function() {
 function editCategoryV(id_villa) {
     let error = 0;
 
-    $('#check_cat').each(function() {
+    $("#check_cat").each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length == 0) {
-            $('.checklst-cat').css("border", "solid #e04f1a 1px");
-            $('#err-slc-cat').show();
+            $(".checklst-cat").css("border", "solid #e04f1a 1px");
+            $("#err-slc-cat").show();
             error = 1;
-        } else {
-
-        }
+        } else {}
     });
     if (error == 1) {
         return false;
@@ -495,11 +504,11 @@ function editCategoryV(id_villa) {
 
                 for (let j = 0; j < length; j++) {
                     if (j == 0) {
-                        content = `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                        content = `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">${response.data[j]["villa_category"]["name"]} </span>`;
                     } else if (j < 3) {
                         content =
                             content +
-                            `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["villa_category"]["name"]} </span>`;
+                            `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">${response.data[j]["villa_category"]["name"]} </span>`;
                     } else if (j > 2) {} else {}
                 }
 
@@ -848,16 +857,19 @@ function editAmenitiesVilla(id_villa) {
                 position: "topRight",
             });
 
-            $("#listAmenities").html('');
+            $("#listAmenities").html("");
 
             if (lengthAmenities == 0) {
-                $("#listAmenities").append(`<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`);
+                $("#listAmenities").append(
+                    `<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`
+                );
             }
 
-            if(lengthAmenities > 5)
-            {
+            if (lengthAmenities > 5) {
                 for (i = 0; i < lengthAmenities; i++) {
-                    if (i === 6) { break; }
+                    if (i === 6) {
+                        break;
+                    }
                     $("#listAmenities").append(`
                     <div class="list-amenities">
                         <div class="text-align-center">
@@ -872,12 +884,11 @@ function editAmenitiesVilla(id_villa) {
                                 class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                         </div>
                     </div>
-                    `)
+                    `);
                 }
-            }else{
+            } else {
                 var count = 6 - lengthAmenities;
-                if(count > 0)
-                {
+                if (count > 0) {
                     for (i = 0; i < lengthAmenities; i++) {
                         // if (i === 2) { break; }
                         $("#listAmenities").append(`
@@ -894,13 +905,12 @@ function editAmenitiesVilla(id_villa) {
                                     class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                             </div>
                         </div>
-                        `)
+                        `);
                     }
                 }
 
                 count = count - lengthKitchen;
-                if(count > 0)
-                {
+                if (count > 0) {
                     for (k = 0; k < lengthKitchen; k++) {
                         // if (k === 1) { break; }
                         $("#listAmenities").append(`
@@ -922,8 +932,7 @@ function editAmenitiesVilla(id_villa) {
                 }
 
                 count = count - lengthSafety;
-                if(count > 0)
-                {
+                if (count > 0) {
                     for (k = 0; k < lengthSafety; k++) {
                         // if (k === 1) { break; }
                         $("#listAmenities").append(`
@@ -945,10 +954,11 @@ function editAmenitiesVilla(id_villa) {
                 }
 
                 count = count - lengthService;
-                if(count > 0)
-                {
+                if (count > 0) {
                     for (l = 0; l < lengthService; l++) {
-                        if (l === 1) { break; }
+                        if (l === 1) {
+                            break;
+                        }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -967,10 +977,8 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-
                 count = count - lengthBathroom;
-                if(count > 0)
-                {
+                if (count > 0) {
                     for (j = 0; j < lengthBathroom; j++) {
                         // if (j === 2) { break; }
                         $("#listAmenities").append(`
@@ -990,13 +998,16 @@ function editAmenitiesVilla(id_villa) {
                         `);
                     }
                 }
-
             }
 
-            var total = lengthAmenities + lengthBathroom + lengthKitchen + lengthSafety + lengthService;
+            var total =
+                lengthAmenities +
+                lengthBathroom +
+                lengthKitchen +
+                lengthSafety +
+                lengthService;
             console.log(total);
-            if(total > 7)
-            {
+            if (total > 7) {
                 $("#listAmenities").append(`
                     <div class="list-amenities">
                         <button class="amenities-button" type="button" onclick="view_amenities()">
@@ -1007,7 +1018,6 @@ function editAmenitiesVilla(id_villa) {
                     </div>
                 `);
             }
-
 
             $("#moreAmenities").html(`
                 <div class="col-md-6 mb-2">
@@ -1120,10 +1130,10 @@ function editAmenitiesVilla(id_villa) {
                 `);
             }
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -1180,9 +1190,7 @@ $("#updateStoryForm").submit(function(e) {
         $.ajax({
             type: "POST",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                    "content"
-                ),
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 Accept: "application/json",
             },
             url: "/villa/update/story",
@@ -1492,9 +1500,8 @@ $("#guestSafetyForm").submit(function(e) {
 });
 
 // ! GradeVilla
-$('#gradeVilla').change(function() {
+$("#gradeVilla").change(function() {
     var grade = $(this).val();
-    console.log("awe");
     $.ajax({
         type: "POST",
         headers: {
@@ -1502,7 +1509,7 @@ $('#gradeVilla').change(function() {
         },
         url: `/villa/grade/${id_villa}`,
         data: {
-            grade: grade
+            grade: grade,
         },
         success: function(response) {
             iziToast.success({
@@ -1510,7 +1517,122 @@ $('#gradeVilla').change(function() {
                 message: response.message,
                 position: "topRight",
             });
-        }
+        },
     });
 });
+
+function gradeAA() {
+    $("#gradeVillaAA").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/villa/grade/${id_villa}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+}
+
+function gradeA() {
+    $("#gradeVillaA").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/villa/grade/${id_villa}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+}
+
+function gradeB() {
+    $("#gradeVillaB").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/villa/grade/${id_villa}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+}
+
+function gradeC() {
+    $("#gradeVillaC").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/villa/grade/${id_villa}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+}
+
+function gradeD() {
+    $("#gradeVillaD").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/villa/grade/${id_villa}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+}
 // ! End GradeVilla

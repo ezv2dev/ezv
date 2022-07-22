@@ -231,6 +231,9 @@ body {
 }
 
 @media (min-width: 992px) {
+    #searchbox-mob {
+        display: none !important;
+    }
     .header-4-4 .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 11px;
         padding-left: 11px;
@@ -2064,18 +2067,6 @@ span.flatpickr-weekday {
     margin-left: 22px;
 }
 
-/* .pr-110p {
-    padding-right: 110px !important;
-}
-.pl-110p {
-    padding-left: 110px !important;
-}
-.pt-0p {
-    padding-top: 0px !important;
-}
-.pt-5p {
-    padding-top: 5px !important;
-} */
 @media only screen and (max-width: 500px) {
     .grid-text{
         font-size: 75%;
@@ -2368,7 +2359,14 @@ span.flatpickr-weekday {
 
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1320px) and (max-width: 1399px) {
+    #nav .navbar-dekstop {
+        max-width: 1207px !important;
+        margin: 0 auto !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
     #navbar-collapse-button {
         display: none !important;
     }
