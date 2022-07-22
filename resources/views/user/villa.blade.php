@@ -255,7 +255,7 @@
                             @endauth
                             <div class="property-type">
                                 <p id="property-type-content">
-                                    {{ __('user_page.Property Type :') }}
+                                    Tags :
                                     @auth
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryVilla()"
@@ -2365,15 +2365,18 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '1')
-                                        <div class="activation1">
+                                        <div id="activation1">
                                             <div class="alert alert-success d-flex flex-row align-items-center"
                                                 role="success">
-                                                <span>{{ __('user_page.this content is active,') }} </span>
+                                                <span>{{ __('user_page.this content is active') }},</span>
+                                                <button class="btn" onclick="requestDeactivation()"
+                                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                                                <span> ?</span>
                                             </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="activation2" id="pleaseWait">
+                                        <div id="activation2">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
@@ -2382,21 +2385,13 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '3')
-                                        <div class="activation3">
+                                        <div id="activation3">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request deactivation for this content,') }}
                                                 </span>
-                                                <form
-                                                    action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_villa"
-                                                        value="{{ $villa[0]->id_villa }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                                </form>
+                                                <button class="btn" type="submit"
+                                                    onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
                                                 <span> ?</span>
                                             </div>
                                         </div>
@@ -3519,7 +3514,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5091,7 +5086,7 @@
         }
     </script>
 
-    {{-- Request Activation --}}
+    {{-- Request Active Deactive --}}
     <script>
         function requestActivation() {
             $.ajax({
@@ -5161,7 +5156,7 @@
                                     `);
 
                                     gradeAA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "A") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5181,7 +5176,7 @@
                                     `)
 
                                     gradeA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "B") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5201,7 +5196,7 @@
                                     `)
 
                                     gradeB();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "C") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5221,7 +5216,7 @@
                                     `)
 
                                     gradeC();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "D") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5241,7 +5236,7 @@
                                     `)
 
                                     gradeD();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 }
 
                                 iziToast.success({
@@ -5259,8 +5254,68 @@
                 }
             });
         }
+
+        function requestDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 3) {
+                        $("#activation1").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                </span>
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                <span> ?</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
+
+        function cancelDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/cancel-request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 1) {
+                        $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
     </script>
-    {{-- End Activation --}}
+    {{-- End Active Deactive --}}
 
     <script>
         if (document.getElementById("check_in").value.length == 0) {

@@ -169,7 +169,7 @@ return [
     'you have been request activation for this content,' => 'you have been request activation for this content,',
     'you have been request activation for this content' => 'you have been request activation for this content',
     'this content is deactive,' => 'this content is deactive,',
-    'this content is active,' => 'this content is active,',
+    'this content is active' => 'this content is active',
     'you have been request deactivation for this content,' => 'you have been request deactivation for this content,',
     'you have been request activation for this content, Please wait until the process is complete.' => 'you have been request activation for this content, Please wait until the process is complete.',
     'request activation' => 'request activation',
