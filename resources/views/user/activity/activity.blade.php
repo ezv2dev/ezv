@@ -463,9 +463,9 @@
                                             <i class="fa-solid fa-phone"></i>
                                         </a>
                                     </div>
-                                    <div style="padding: 0px 6px;">
+                                    <div style="padding: 0px 6px;" id="contentEmailActivity">
                                         @if ($activity->email)
-                                            <a target="_blank" type="button"
+                                            <a id="btnEmailActivity" target="_blank" type="button"
                                                 href="mailto:{{ $activity->email }}"
                                                 class="mailto-email-activity">
                                                 <i class="fa-solid fa-envelope"></i>

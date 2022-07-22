@@ -968,13 +968,17 @@ function saveContactActivity() {
                     .find(".modal-content-email")
                     .text(response.data.email);
 
-                let mailTo = "";
-                if (response.data.email) {
-                    mailTo = `mailto:${response.data.email}`;
-                    $(".mailto-email-activity").removeAttr("href");
-                    $(".mailto-email-activity").attr("href", mailTo);
+                //change email in icon
+                if (response.data.email == null) {
+                    $("#contentEmailActivity").html(
+                        '<a type="button" href="javascript:void(0);"> <i class="fa-solid fa-envelope text-secondary"></i> </a>'
+                    );
                 } else {
-                    $(".mailto-email-activity").removeAttr("href");
+                    $("#contentEmailActivity").html(
+                        '<a id="btnEmailActivity" target="_blank" type="button" href="mailto:' +
+                            response.data.email +
+                            '"> <i class="fa-solid fa-envelope"></i> </a>'
+                    );
                 }
 
                 $("#modal-edit_contact").modal("hide");
