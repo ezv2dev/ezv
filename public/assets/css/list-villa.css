@@ -3074,6 +3074,30 @@ input::-webkit-inner-spin-button {
     border-radius:10px;
 }
 
+.max-lines-2 {
+    min-height: 2.3rem;
+}
+.container-grid-hotel .grid-list-container {
+    border: solid 1px #bbb;
+    padding: 8px;
+    border-radius: 20px;
+    height: fit-content;
+}
+@media only screen and (max-width: 366px) {
+    .max-lines-2 {
+        min-height: 4rem;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 728px) {
+    .max-lines-2 {
+        min-height: 3.5rem;
+    }
+}
+@media only screen and (min-width: 1128px) and (max-width: 1213px) {
+    .max-lines-2 {
+        min-height: 3rem;
+    }
+}
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
     .searchbox {
         width: 60% !important;
