@@ -3908,7 +3908,7 @@
         function save_reorder_photo() {
 
             let btn = document.getElementById("saveBtnReorderPhoto");
-            btn.textContent = "Submiting...";
+            btn.textContent = "Saving...";
             btn.classList.add("disabled");
 
             var imageids_arr = [];
@@ -3985,7 +3985,7 @@
                         }
                     }
 
-                    btn.textContent = "Submit";
+                    btn.textContent = "{{ __('user_page.Save') }}";
                     btn.classList.remove("disabled");
 
 
