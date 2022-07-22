@@ -1064,7 +1064,7 @@
                                             </button>
                                         </div>
                                     @endif
-                                    @if ($villa_amenities->count() < 6)
+                                    @if ($villa_amenities->count() <= 6)
                                         @php
                                             $i = 6 - $villa_amenities->count();
                                         @endphp
