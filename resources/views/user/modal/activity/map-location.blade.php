@@ -239,6 +239,8 @@
     var viewedMarkers = [];
     var primaryMarker, secondaryMarker;
     var primaryContent, secondaryContent;
+    var contentIsExist = false;
+    var mapMobileIsOpen = false;
 
     var restaurantLocations;
     var markerRestaurant = [];
@@ -364,6 +366,11 @@
             `;
         }
 
+        let indicator = `{
+            target_type: 'restaurant',
+            id: ${restaurantLocations.id_restaurant}
+        }`;
+
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;">
@@ -400,6 +407,16 @@
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
                                         <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
+                                </div>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
+                                    </div>
+                                    <div class="d-flex justify-content-end col-6">
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
                                 </div>
                             </div>`;
 
@@ -444,6 +461,36 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    } else {
+                        if ($(window).width() < 768) {
+                            // full screen map for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
+                            document.getElementById("bottom-mobile").classList.add('d-none');
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("mobile-map-close").classList.remove('d-none');
+                            document.getElementById("mobile-map-close").classList.add('d-block');
+                            mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -457,6 +504,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -563,6 +612,11 @@
             `;
         }
 
+        let indicator = `{
+            target_type: 'villa',
+            id: ${villaLocations.id_villa}
+        }`;
+
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;">
@@ -600,6 +654,16 @@
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
                                         <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
+                                </div>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6">
+                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
                                 </div>
                             </div>`;
 
@@ -643,6 +707,36 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    } else {
+                        if ($(window).width() < 768) {
+                            // full screen map for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
+                            document.getElementById("bottom-mobile").classList.add('d-none');
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("mobile-map-close").classList.remove('d-none');
+                            document.getElementById("mobile-map-close").classList.add('d-block');
+                            mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -656,6 +750,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -745,6 +841,11 @@
             `;
         }
 
+        let indicator = `{
+            target_type: 'hotel',
+            id: ${hotelLocations.id_hotel}
+        }`;
+
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;">
@@ -779,6 +880,16 @@
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
                                         <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
+                                </div>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
+                                    </div>
+                                    <div class="d-flex justify-content-end col-6">
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
                                 </div>
                             </div>`;
 
@@ -822,6 +933,36 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
 
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    } else {
+                        if ($(window).width() < 768) {
+                            // full screen map for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
+                            document.getElementById("bottom-mobile").classList.add('d-none');
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("mobile-map-close").classList.remove('d-none');
+                            document.getElementById("mobile-map-close").classList.add('d-block');
+                            mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
+
                     // show right content
                     setTimeout(() => {
                         // load slick slider
@@ -835,6 +976,8 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
@@ -951,6 +1094,11 @@
             `;
         }
 
+        let indicator = `{
+            target_type: 'activity',
+            id: ${activityLocations.id_activity}
+        }`;
+
         var customContent = `
                             <div class="col-12" style="position: relative;">
                                 <div style="overflow: hidden; height: 260px; border-radius: 15px;">
@@ -987,6 +1135,16 @@
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
                                         <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
+                                </div>
+                                <div class="col-12 d-flex">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
+                                    </div>
+                                    <div class="d-flex justify-content-end col-6">
+                                        <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <div class="me-2"></div>
+                                        <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
                                 </div>
                             </div>`;
 
@@ -1026,13 +1184,43 @@
                     // reset secondary marker
                     resetSecondaryMarker();
                     // reset primary marker
-                    // resetPrimaryMarker();
+                    resetPrimaryMarker();
                     // set primary marker
-                    // setPrimaryMarker(activityLocations[i]);
-                    setSecondaryMarker(activityLocations[i], 'activity');
+                    setPrimaryMarker(activityLocations[i]);
+                    // setSecondaryMarker(activityLocations[i], 'activity');
 
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                     calculateAndDisplayRoute2(directionsService, directionsDisplay);
+
+                    // show content when on screen mobile size
+                    if(mapMobileIsOpen){
+                        if ($(window).width() < 768) {
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            // mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    } else {
+                        if ($(window).width() < 768) {
+                            // full screen map for mobile
+                            document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                            document.getElementById("map-desc").classList.add('mobile-map');
+                            $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
+                            document.getElementById("bottom-mobile").classList.add('d-none');
+                            // show right content on the map
+                            $('#modal-map-content').removeClass('d-none');
+                            $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            // show button close full screen for mobile
+                            document.getElementById("mobile-map-close").classList.remove('d-none');
+                            document.getElementById("mobile-map-close").classList.add('d-block');
+                            mapMobileIsOpen = true;
+                            contentIsExist = true;
+                        }
+                    }
 
                     // show right content
                     setTimeout(() => {
@@ -1047,12 +1235,26 @@
 
                         // disabled action google map
                         resetMapAction();
+                        // activate scroll action
+                        map.setOptions({zoomControl: true});
                         // hide primary control
                         hidePrimaryMarkerControlFromMap();
                     }, 200);
                 };
             })(markerActivity[i], i));
         }
+    }
+
+    // function to clear & hide right content
+    function resetRightContent() {
+        // $('#modal-map-content').html('');
+        // show right content on the map
+        $('#modal-map-content').addClass('d-none');
+        $('#map-desc').removeClass('mobile-map-close');
+        $('#map-desc').removeClass('mobile-map');
+        $('#map-desc').addClass('mobile-map-desc-close');
+        $('#modal-map-content').removeClass('d-block mobile-map-desc');
+        contentIsExist = true;
     }
 
     // function to refetch data marker
@@ -1074,6 +1276,88 @@
         await fetchVillasLocation(data);
         await fetchHotelsLocation(data);
         await fetchActivitysLocation(data);
+    }
+
+
+    function reverseMap(){
+        document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("map-mobile-overlay").classList.remove('map-mobile-overlay');
+        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+        $('#modal-map-content').removeClass('d-block mobile-map-desc');
+        document.getElementById("mobile-map-close").classList.remove('d-block');
+        document.getElementById("mobile-map-close").classList.add('d-none');
+        document.getElementById("bottom-mobile").classList.remove('d-none');
+        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
+        google.maps.event.clearListeners(map, 'click');
+
+    }
+
+    function mapMobile(){
+         //mobile map
+         map.addListener("click", ()=>{
+            console.log('hit mapMobile');
+            if(contentIsExist && mapMobileIsOpen){
+                console.log('ketika full screen dan content masih terbuka');
+                resetRightContent();
+                resetPrimaryMarker();
+                resetSecondaryMarker();
+            }
+            if(!contentIsExist && !mapMobileIsOpen) {
+                console.log('ketika tidak full  screen dan content tidak terbuka');
+                contentIsExist = true;
+                mapMobileIsOpen = true;
+                // enable loading
+                setMapLoading();
+                // disable action google map
+                resetMapAction();
+                // disable event google map
+                resetMapEvent();
+                // full screen map for mobile
+                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
+                document.getElementById("map-desc").classList.add('mobile-map');
+                $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
+                document.getElementById("bottom-mobile").classList.add('d-none');
+
+                // reset right content
+                $('#modal-map-content').html('');
+
+                setTimeout(async () => {
+                    // show right content on the map
+                    $('#modal-map-content').removeClass('d-none');
+                    $('#modal-map-content').addClass('d-block mobile-map-desc');
+                    // show button close full screen for mobile
+                    document.getElementById("mobile-map-close").classList.remove('d-none');
+                    document.getElementById("mobile-map-close").classList.add('d-block');
+                    // refetch target activity
+                    await view_maps('{{ $activity->id_activity }}');
+                }, 200);
+
+                // disabled action google map
+                resetMapAction();
+                // activate scroll action
+                map.setOptions({zoomControl: true});
+                // hide primary control
+                hidePrimaryMarkerControlFromMap();
+            }
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+        });
+    }
+
+    function close_map_mobile() {
+        mapMobileIsOpen = false;
+        contentIsExist = false;
+        document.getElementById("map-desc").classList.remove('mobile-map');
+        document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+        document.getElementById("mobile-map-close").classList.remove('d-block');
+        document.getElementById("mobile-map-close").classList.add('d-none');
+        document.getElementById("modal-map-content").classList.remove('d-block');
+        document.getElementById("modal-map-content").classList.add('d-none');
+        document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
+        document.getElementById("bottom-mobile").classList.remove('d-none');
+        document.getElementById("map-mobile-overlay").classList.remove('map-mobile-overlay');
+        $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 
     // function to set map event
@@ -1100,6 +1384,8 @@
 
             // disabled action google map
             resetMapAction();
+            // activate scroll action
+            map.setOptions({zoomControl: true});
             // hide primary control
             hidePrimaryMarkerControlFromMap();
         });
@@ -1127,6 +1413,8 @@
         $('#location-map-loading').removeClass('d-none');
         // hide recenter button
         hidePrimaryMarkerControlFromMap();
+        // disabled prev next button
+        disabledPrevNextButton();
     }
     // function to reset map loading
     function resetMapLoading() {
@@ -1134,6 +1422,13 @@
         $('#location-map-loading').removeClass('d-block');
         $('#location-map-loading').addClass('d-none');
         showPrimaryMarkerControlFromMap();
+        // disabled prev next button
+        enabledPrevNextButton();
+        // check if primary marker is active
+        if(primaryMarker) {
+            // hide recenter button
+            showPrimaryMarkerControlFromMap();
+        }
     }
 
     // function to set primary marker
@@ -1400,6 +1695,279 @@
             $(this).children('.slick-next').css('display', 'none');
         })
     }
+    // next on all marker
+    function next_on_all_marker(indicator) {
+        console.log('target type: '+indicator.target_type);
+        console.log('id: '+indicator.id);
+        // initialization all data marker/location into an array
+        var allLocation = [];
+        if(villaLocations.length > 0 && villaLocations){
+            for (let i = 0; i < villaLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'villa',
+                    id: villaLocations[i].id_villa
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(restaurantLocations.length > 0 && restaurantLocations){
+            for (let i = 0; i < restaurantLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'restaurant',
+                    id: restaurantLocations[i].id_restaurant
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(hotelLocations.length > 0 && hotelLocations){
+            for (let i = 0; i < hotelLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'hotel',
+                    id: hotelLocations[i].id_hotel
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(activityLocations.length > 0 && activityLocations){
+            for (let i = 0; i < activityLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'activity',
+                    id: activityLocations[i].id_activity
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        console.log(allLocation);
+
+        let isFound = false;
+        let index;
+        let nextMarker;
+        for (let i = 0; i < allLocation.length; i++) {
+            const hasBeenFound = allLocation[i].id == indicator.id && allLocation[i].target_type == indicator.target_type;
+            if(hasBeenFound){
+                isFound = true;
+                index = i;
+                break;
+            }
+        }
+        console.log('next marker: '+isFound);
+
+        if (index != null) {
+            if(index == (allLocation.length-1)) {
+                nextMarker = allLocation[0];
+            } else {
+                nextMarker = allLocation[index+1];
+            }
+        } else {
+            console.log('index not found');
+        }
+        console.log('next marker: '+nextMarker);
+        if(nextMarker){
+            console.log('next marker type: '+nextMarker.target_type);
+            console.log('next marker id: '+nextMarker.id);
+        }
+
+        if(isFound && nextMarker){
+            if(nextMarker.target_type == 'villa') {
+                if(villaLocations.length > 0 && villaLocations){
+                    // find index on the list
+                    for (let i = 0; i < villaLocations.length; i++) {
+                        const data = villaLocations[i];
+                        if(data.id_villa == nextMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerVilla[i], 'click');
+                            break;
+                        }
+                    }
+                }
+            } else if( nextMarker.target_type == 'restaurant'){
+                if(restaurantLocations.length > 0 && restaurantLocations){
+                    // find index on the list
+                    for (let i = 0; i < restaurantLocations.length; i++) {
+                        const data = restaurantLocations[i];
+                        if(data.id_restaurant == nextMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerRestaurant[i], 'click');
+                            break;
+                        }
+                    }
+
+                }
+            } else if( nextMarker.target_type == 'hotel'){
+                if(hotelLocations.length > 0 && hotelLocations){
+                    // find index on the list
+                    for (let i = 0; i < hotelLocations.length; i++) {
+                        const data = hotelLocations[i];
+                        if(data.id_hotel == nextMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerHotel[i], 'click');
+                            break;
+                        }
+                    }
+
+                }
+            } else if( nextMarker.target_type == 'activity'){
+                if(activityLocations.length > 0 && activityLocations){
+                    // find index on the list
+                    for (let i = 0; i < activityLocations.length; i++) {
+                        const data = activityLocations[i];
+                        if(data.id_activity == nextMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerActivity[i], 'click');
+                            break;
+                        }
+                    }
+                }
+            };
+        } else {
+            console.log('next data not found');
+        }
+    }
+    function prev_on_all_marker(indicator) {
+        console.log('target type: '+indicator.target_type);
+        console.log('id: '+indicator.id);
+        // initialization all data marker/location into an array
+        var allLocation = [];
+        if(villaLocations.length > 0 && villaLocations){
+            for (let i = 0; i < villaLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'villa',
+                    id: villaLocations[i].id_villa
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(restaurantLocations.length > 0 && restaurantLocations){
+            for (let i = 0; i < restaurantLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'restaurant',
+                    id: restaurantLocations[i].id_restaurant
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(hotelLocations.length > 0 && hotelLocations){
+            for (let i = 0; i < hotelLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'hotel',
+                    id: hotelLocations[i].id_hotel
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        if(activityLocations.length > 0 && activityLocations){
+            for (let i = 0; i < activityLocations.length; i++) {
+                const dataLocations = {
+                    target_type: 'activity',
+                    id: activityLocations[i].id_activity
+                };
+                allLocation.push(dataLocations);
+            }
+        }
+        console.log(allLocation);
+
+        let isFound = false;
+        let index;
+        let prevMarker;
+        for (let i = 0; i < allLocation.length; i++) {
+            const hasBeenFound = allLocation[i].id == indicator.id && allLocation[i].target_type == indicator.target_type;
+            if(hasBeenFound){
+                isFound = true;
+                index = i;
+                break;
+            }
+        }
+        console.log('prev marker: '+isFound);
+
+        if (index != null) {
+            if(index == 0) {
+                prevMarker = allLocation[allLocation.length-1];
+            } else {
+                prevMarker = allLocation[index-1];
+            }
+        } else {
+            console.log('index not found');
+        }
+        console.log('prev marker: '+prevMarker);
+        if(prevMarker){
+            console.log('prev marker type: '+prevMarker.target_type);
+            console.log('prev marker id: '+prevMarker.id);
+        }
+
+        if(isFound && prevMarker){
+            if(prevMarker.target_type == 'villa') {
+                if(villaLocations.length > 0 && villaLocations){
+                    // find index on the list
+                    for (let i = 0; i < villaLocations.length; i++) {
+                        const data = villaLocations[i];
+                        if(data.id_villa == prevMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerVilla[i], 'click');
+                            break;
+                        }
+                    }
+                }
+            } else if( prevMarker.target_type == 'restaurant'){
+                if(restaurantLocations.length > 0 && restaurantLocations){
+                    // find index on the list
+                    for (let i = 0; i < restaurantLocations.length; i++) {
+                        const data = restaurantLocations[i];
+                        if(data.id_restaurant == prevMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerRestaurant[i], 'click');
+                            break;
+                        }
+                    }
+
+                }
+            } else if( prevMarker.target_type == 'hotel'){
+                if(hotelLocations.length > 0 && hotelLocations){
+                    // find index on the list
+                    for (let i = 0; i < hotelLocations.length; i++) {
+                        const data = hotelLocations[i];
+                        if(data.id_hotel == prevMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerHotel[i], 'click');
+                            break;
+                        }
+                    }
+
+                }
+            } else if( prevMarker.target_type == 'activity'){
+                if(activityLocations.length > 0 && activityLocations){
+                    // find index on the list
+                    for (let i = 0; i < activityLocations.length; i++) {
+                        const data = activityLocations[i];
+                        if(data.id_activity == prevMarker.id) {
+                            // activate the marker
+                            google.maps.event.trigger(markerActivity[i], 'click');
+                            break;
+                        }
+                    }
+                }
+            };
+        } else {
+            console.log('prev data not found');
+        }
+    }
+    // function to disabled prev next button on right content
+    function disabledPrevNextButton() {
+        if($('#modal-map-right-prev' == 0)){
+            $('#modal-map-right-prev').prop('disabled', true);
+        }
+        if($('#modal-map-right-next' == 0)){
+            $('#modal-map-right-next').prop('disabled', true);
+        }
+    }
+    // function to enabled prev next button on right content
+    function enabledPrevNextButton() {
+        if($('#modal-map-right-prev' == 0)){
+            $('#modal-map-right-prev').prop('disabled', false);
+        }
+        if($('#modal-map-right-next' == 0)){
+            $('#modal-map-right-next').prop('disabled', false);
+        }
+    }
 </script>
 {{-- fetch function --}}
 <script>
@@ -1449,7 +2017,7 @@
             scaleControl: false,
             zoomControl: true,
             zoomControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_BOTTOM,
+                position: google.maps.ControlPosition.TOP_RIGHT,
             },
             streetViewControl: true,
             streetViewControlOptions: {
@@ -1567,6 +2135,8 @@
 
                     // disabled action google map
                     resetMapAction();
+                    // activate scroll action
+                    map.setOptions({zoomControl: true});
                     // hide primary control
                     hidePrimaryMarkerControlFromMap();
                 }, 200);
@@ -1574,40 +2144,40 @@
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var selectedMode = "WALKING";
-        directionsService.route({
-          origin: {lat: lat_primary, lng: log_primary},
-          destination: secondaryMarker.getPosition(),
-          travelMode: google.maps.TravelMode[selectedMode]
-        }, function(response, status) {
-          if (status == 'OK') {
-            directionsDisplay.setDirections(response);
-            travelTime = response.routes[0].legs[0].duration.text; // contains correct value
-            distance = response.routes[0].legs[0].distance.text; // contains correct value
-            $('#travelTime').html(travelTime);
-            $('#travelDistance').html(distance);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
+        // var selectedMode = "WALKING";
+        // directionsService.route({
+        //   origin: {lat: lat_primary, lng: log_primary},
+        //   destination: secondaryMarker.getPosition(),
+        //   travelMode: google.maps.TravelMode[selectedMode]
+        // }, function(response, status) {
+        //   if (status == 'OK') {
+        //     directionsDisplay.setDirections(response);
+        //     travelTime = response.routes[0].legs[0].duration.text; // contains correct value
+        //     distance = response.routes[0].legs[0].distance.text; // contains correct value
+        //     $('#travelTime').html(travelTime);
+        //     $('#travelDistance').html(distance);
+        //   } else {
+        //     window.alert('Directions request failed due to ' + status);
+        //   }
+        // });
     }
 
     function calculateAndDisplayRoute2(directionsService, directionsDisplay) {
-        var selectedMode = "DRIVING";
-        directionsService.route({
-          origin: {lat: lat_primary, lng: log_primary},
-          destination: secondaryMarker.getPosition(),
-          travelMode: google.maps.TravelMode[selectedMode]
-        }, function(response, status) {
-          if (status == 'OK') {
-            directionsDisplay.setDirections(response);
-            travelTime = response.routes[0].legs[0].duration.text; // contains correct value
-            // distance = response.routes[0].legs[0].distance.text; // contains correct value
-            $('#travelTimecar').html(travelTime);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
+        // var selectedMode = "DRIVING";
+        // directionsService.route({
+        //   origin: {lat: lat_primary, lng: log_primary},
+        //   destination: secondaryMarker.getPosition(),
+        //   travelMode: google.maps.TravelMode[selectedMode]
+        // }, function(response, status) {
+        //   if (status == 'OK') {
+        //     directionsDisplay.setDirections(response);
+        //     travelTime = response.routes[0].legs[0].duration.text; // contains correct value
+        //     // distance = response.routes[0].legs[0].distance.text; // contains correct value
+        //     $('#travelTimecar').html(travelTime);
+        //   } else {
+        //     window.alert('Directions request failed due to ' + status);
+        //   }
+        // });
     }
 </script>
 <script>
@@ -1617,12 +2187,53 @@
         setTimeout(() => {
             view_maps('{{ $activity->id_activity }}');
         }, 200);
+
+        $(document).ready(() => {
+            if ($(window).width() < 768) {
+                contentIsExist = false;
+                mapMobileIsOpen = false;
+                mapMobile();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+            if ($(window).width() >= 768) {
+                reverseMap();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+        });
+    });
+    $(window).on('resize', () => {
+        if ($(window).width() < 768) {
+            contentIsExist = false;
+            mapMobileIsOpen = false;
+            mapMobile();
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+        }
+        if ($(window).width() >= 768) {
+            reverseMap();
+            console.log('contentIsExist: '+contentIsExist);
+            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+        }
     });
 </script>
 
 {{-- MAP CONTENT --}}
-<div style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%); height: 500px; ">
-    <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
-</div>
-<div id="modal-map-content" class="overflow-hidden"></div>
+    {{-- <div style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%); height: 500px; ">
+        <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+    </div>
+    <div id="modal-map-content" class="overflow-hidden"></div> --}}
+    <div id="map-mobile-overlay">
+        <div id="map-desc" class="modal-map" style="border: 0.5px solid #bebebe; border-radius: 12px; box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);">
+            <div style="width:100%;height:100%; border-radius: 12px;" id="map12"></div>
+            <div onclick="close_map_mobile()" id="mobile-map-close" class="d-none">
+                <div class="close-button">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-map-content" class="overflow-hidden"></div>
 {{-- END MAP CONTENT --}}

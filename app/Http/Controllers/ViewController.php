@@ -615,25 +615,33 @@ class ViewController extends Controller
 
     public function update_position_video(Request $request)
     {
-        abort_if(!auth()->check(), 401);
         $validator = Validator::make($request->all(), [
             'videoids' => ['required', 'array'],
             'id' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $videoids_arr = $request->videoids;
 
         $villa = Villa::find($request->id);
-        abort_if(!$villa, 404);
+
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Homes Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('listvilla_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         if (count($videoids_arr) > 0) {
@@ -650,8 +658,15 @@ class ViewController extends Controller
                 $position++;
             }
 
+            $data = [
+                'photo' => VillaPhoto::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => VillaVideo::where('id_villa', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Villa::where('id_villa', $request->id)->select('uid')->first(),
+            ];
+
             return response()->json([
-                'message' => 'data has been updated'
+                'data' => $data,
+                'message' => 'Updated Position Video'
             ], 200);
         } else {
             return response()->json([

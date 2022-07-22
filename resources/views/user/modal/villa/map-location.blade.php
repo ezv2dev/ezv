@@ -422,7 +422,7 @@
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
-                                  
+
                                 </div>
                             </div>`;
 
@@ -668,7 +668,7 @@
                                     <div class="col-6">
                                         <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-end">  
+                                    <div class="col-6 d-flex justify-content-end">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -902,7 +902,7 @@
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
                                     </div>
                                 </a>
-                                
+
                                 <div class="col-12 d-flex">
                                     <div class="col-6">
                                         <p class="text-grey-1 mt-1 mb-0 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span> </p>
@@ -1157,7 +1157,7 @@
                                     </div>
                                 </div>
                                 <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
-                                    <div class="mt-3">   
+                                    <div class="mt-3">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -1175,7 +1175,7 @@
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
                                     </div>
                                 </div>
-                                
+
                             </div>`;
 
         return customContent;
@@ -1448,12 +1448,12 @@
         $('#location-map-loading').removeClass('d-block');
         $('#location-map-loading').addClass('d-none');
         showPrimaryMarkerControlFromMap();
+        // disabled prev next button
+        enabledPrevNextButton();
         // check if primary marker is active
         if(primaryMarker) {
             // hide recenter button
             showPrimaryMarkerControlFromMap();
-            // disabled prev next button
-            enabledPrevNextButton();
         }
     }
 
