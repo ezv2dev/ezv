@@ -4050,6 +4050,9 @@
                 var bodyList = document.getElementById("bodyList");
 
                 if (tipe == 'light') {
+                    if(screen.width > 949) {
+                        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(0 0 0 / 75%)")
+                    }
                     text.classList.remove('bg-body-black');
                     text.classList.add('bg-body-light');
                     nav.classList.remove('bg-body-black');
@@ -4084,6 +4087,9 @@
                     bodyList.classList.remove('bg-body-black');
                     bodyList.classList.add('bg-body-light');
                 } else {
+                    if(screen.width < 950) {
+                        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(255 255 255 / 75%)")
+                    }
                     text.classList.remove('bg-body-light');
                     text.classList.add('bg-body-black');
                     nav.classList.remove('bg-body-light');

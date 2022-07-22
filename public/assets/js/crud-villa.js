@@ -887,32 +887,43 @@ function editAmenitiesVilla(id_villa) {
                     `);
                 }
             } else {
-                var count = 6 - lengthAmenities;
-                if (count > 0) {
-                    for (i = 0; i < lengthAmenities; i++) {
-                        // if (i === 2) { break; }
-                        $("#listAmenities").append(`
-                        <div class="list-amenities">
-                            <div class="text-align-center">
-                                <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
-                                <div class="mb-0 max-line">
-                                    <span
-                                        class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
-                                </div>
-                            </div>
-                            <div class="mb-0 list-more">
+                var count;
+                var total_last;
+                var total;
+                var stop;
+                for (i = 0; i < lengthAmenities; i++) {
+                    // if (i === 2) { break; }
+                    $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                            <div class="mb-0 max-line">
                                 <span
                                     class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                             </div>
                         </div>
-                        `);
-                    }
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    `);
                 }
 
-                count = count - lengthKitchen;
+                count = 6 - lengthAmenities;
                 if (count > 0) {
+                    total_last = 6 - lengthAmenities;
+                    total = lengthAmenities + lengthKitchen;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthKitchen;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (k = 0; k < lengthKitchen; k++) {
-                        // if (k === 1) { break; }
+                        if (k === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -931,10 +942,20 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthSafety;
+                count = count - lengthKitchen;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthSafety;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthSafety;
+                    }else{
+                        stop = total_last;
+                    }
                     for (k = 0; k < lengthSafety; k++) {
-                        // if (k === 1) { break; }
+                        if (k === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -953,12 +974,23 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthService;
+
+
+                count = count - lengthSafety;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthService;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthService;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (l = 0; l < lengthService; l++) {
-                        if (l === 1) {
-                            break;
-                        }
+                        if (l === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -977,10 +1009,23 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthBathroom;
+
+
+                count = count - lengthService;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthBathroom;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthBathroom;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (j = 0; j < lengthBathroom; j++) {
-                        // if (j === 2) { break; }
+                        if (j === stop) { break; }
                         $("#listAmenities").append(`
                         <div class="list-amenities">
                             <div class="text-align-center">
@@ -998,16 +1043,11 @@ function editAmenitiesVilla(id_villa) {
                         `);
                     }
                 }
+
+                count = count - lengthBathroom;
             }
 
-            var total =
-                lengthAmenities +
-                lengthBathroom +
-                lengthKitchen +
-                lengthSafety +
-                lengthService;
-            console.log(total);
-            if (total > 7) {
+            if (total > 5) {
                 $("#listAmenities").append(`
                     <div class="list-amenities">
                         <button class="amenities-button" type="button" onclick="view_amenities()">

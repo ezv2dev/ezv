@@ -2027,6 +2027,13 @@ li.button-dropdown {
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.268);
 }
 
+#villa-list-video-mobile {
+    display: none !important;
+}
+#villa-list-video-desktop {
+    display: block;
+}
+
 /*END NEW GRID SYSTEM STYLE*/
 
 .villa-list-title span:nth-child(n + 2)::before {
@@ -3086,10 +3093,6 @@ input::-webkit-inner-spin-button {
     .villa-list-name {
         font-size: 18px !important;
     }
-    .villa-list-video-container {
-        width: 60px !important;
-        height: 60px !important;
-    }
     .villa-list-video {
         width: 56px !important;
         height: 56px !important;
@@ -3127,7 +3130,7 @@ input::-webkit-inner-spin-button {
     .slick-slide {
         width: 768px;
     }
-    
+
 }
 @media only screen and (max-width: 320px) {
     .pagination .page-item {
@@ -3178,7 +3181,7 @@ input::-webkit-inner-spin-button {
         margin-bottom: 16px !important;
     }
 }
-@media only screen and (min-width: 321px) and (max-width: 768px) { 
+@media only screen and (min-width: 321px) and (max-width: 768px) {
     .pagination .page-item {
         width: 30px !important;
     }
@@ -3188,7 +3191,7 @@ input::-webkit-inner-spin-button {
         width: 100vw !important;
     }
 }
-@media only screen and (max-width: 575px) { 
+@media only screen and (max-width: 575px) {
     #villa-data .list-row-gap {
         padding-right: 2px !important;
     }
@@ -3196,7 +3199,7 @@ input::-webkit-inner-spin-button {
         display: none !important;
     }
 }
-@media only screen and (min-width: 576px) { 
+@media only screen and (min-width: 576px) {
     .dots-container {
         display: none !important;
     }
@@ -3243,6 +3246,12 @@ input::-webkit-inner-spin-button {
     }
 }
 @media only screen and (max-width: 991px) {
+    #villa-list-video-desktop {
+        display: none !important;
+    }
+    #villa-list-video-mobile {
+        display: block !important;
+    }
     .pagination {
         width: 100vw !important;
         padding-left: 0.5rem !important;

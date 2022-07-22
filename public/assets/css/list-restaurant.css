@@ -951,7 +951,7 @@
     .container-grid-cat {
         /* top: 132px !important; */
         padding-top: 1rem !important;
-    } 
+    }
 }
 @media only screen and (min-width: 426px) and (max-width: 949px) {
     .bg-body-light a .grid-text {
@@ -962,7 +962,7 @@
         width: 80px;
         aspect-ratio: 1/1;
         border-radius: 50%;
-        box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
+        box-shadow: 1px 1px 8px rgb(0 0 0 / 73%);
     }
 
     .container-grid-cat .grid-img-container .grid-text {
@@ -1022,8 +1022,8 @@
         max-height: 0 !important;
     }
 }
-/* 
-@media only screen and (min-width: 1360px) { 
+/*
+@media only screen and (min-width: 1360px) {
     .grid-container-43,
     .container-grid,
     .container-grid-activity,

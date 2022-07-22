@@ -1086,8 +1086,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $kitchen->count();
+                                                $total_last = 6 - $villa_amenities->count();
+                                                $total = $villa_amenities->count() + $kitchen->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $kitchen->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($kitchen->take($kitchen->count()) as $item2)
+                                            @foreach ($kitchen->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1106,8 +1114,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $safety->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $safety->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $safety->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($safety->take($safety->count()) as $item4)
+                                            @foreach ($safety->take($stop) as $item4)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item4->icon }}"></i>
@@ -1126,8 +1142,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $service->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $service->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $service->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($service->take($service->count()) as $item3)
+                                            @foreach ($service->take($stop) as $item3)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item3->icon }}"></i>
@@ -1146,8 +1170,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $bathroom->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $bathroom->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $bathroom->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($bathroom->take($bathroom->count()) as $item2)
+                                            @foreach ($bathroom->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1163,7 +1195,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if ($i > 6)
+                                        @if ($i <= 0)
                                             <div class="list-amenities">
                                                 <button class="amenities-button" type="button"
                                                     onclick="view_amenities()">
