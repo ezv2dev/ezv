@@ -54,7 +54,7 @@ if (isset($_COOKIE['tema'])) {
             <div class="content list-image-content list-image-content-villa">
                 @guest
                     <div class="list-like-button-container"
-                        style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                        style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                         <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                             onclick="loginForm(1)">
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -65,6 +65,24 @@ if (isset($_COOKIE['tema'])) {
                             </svg>
                         </a>
                     </div>
+                    <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right"  id="villa-list-video-mobile">
+                        <div class="villa-list-video-container video-show-buttons">
+                            <i class="fas fa-2x fa-play video-button"></i>
+                            @if ($data->video->count() > 0)
+                                <video class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                            @elseif ($data->photo->count() > 0)
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                            @elseif ($data->image != null)
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                            @else
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                            @endif
+                        </div>
+                    </a>
                 @endguest
 
                 @auth
@@ -76,7 +94,7 @@ if (isset($_COOKIE['tema'])) {
 
                     @if ($cekVilla == null)
                         <div class="list-like-button-container"
-                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                            style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                                 onclick="likeFavorit({{ $data->id_villa }}, 'villa')">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -88,9 +106,27 @@ if (isset($_COOKIE['tema'])) {
                                 </svg>
                             </a>
                         </div>
+                        <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right" id="villa-list-video-mobile">
+                            <div class="villa-list-video-container video-show-buttons">
+                                <i class="fas fa-2x fa-play video-button"></i>
+                                @if ($data->video->count() > 0)
+                                    <video class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                @elseif ($data->photo->count() > 0)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                                @elseif ($data->image != null)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                                @else
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                        </a>
                     @else
                         <div class="list-like-button-container"
-                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                            style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                                 onclick="likeFavorit({{ $data->id_villa }}, 'villa')">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -102,6 +138,24 @@ if (isset($_COOKIE['tema'])) {
                                 </svg>
                             </a>
                         </div>
+                        <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right" id="villa-list-video-mobile">
+                            <div class="villa-list-video-container video-show-buttons">
+                                <i class="fas fa-2x fa-play video-button"></i>
+                                @if ($data->video->count() > 0)
+                                    <video class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                @elseif ($data->photo->count() > 0)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                                @elseif ($data->image != null)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                                @else
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                        </a>
                     @endif
                 @endauth
 
@@ -218,7 +272,7 @@ if (isset($_COOKIE['tema'])) {
 
                         <!-- Video Button -->
                         <div class="col-3 skeleton">
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank">
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank" id="villa-list-video-desktop">
                                 <div class="villa-list-video-container video-show-buttons">
                                     <i class="fas fa-2x fa-play video-button"></i>
                                     @if ($data->video->count() > 0)
@@ -324,4 +378,31 @@ if (isset($_COOKIE['tema'])) {
 </script>
 <script>
     add(@json($villas->pluck('id_villa')));
+</script>
+<script>
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+$(window).on("resize", function() {
+    if(getCookie("tema") == "black") {
+        if(screen.width < 950) {
+            $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(255 255 255 / 75%)")
+        }
+    } else {
+        if(screen.width > 949) {
+            $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(0 0 0 / 75%)")
+        }
+    }
+});
+if(getCookie("tema") == "black") {
+    if(screen.width < 950) {
+        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(255 255 255 / 75%)")
+    }
+} else {
+    if(screen.width > 949) {
+        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(0 0 0 / 75%)")
+    }
+}
 </script>
