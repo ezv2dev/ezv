@@ -2048,7 +2048,6 @@ class ViewController extends Controller
 
     public function request_update_status(Request $request)
     {
-        dd($request->all());
         $id = $request->id_villa;
         $find = Villa::where('id_villa', $id)->first();
 
@@ -2073,17 +2072,8 @@ class ViewController extends Controller
 
     public function cancel_request_update_status(Request $request)
     {
-        $id = $request->id;
-        abort_if(!auth()->check(), 401);
-        abort_if(!$id, 500);
+        $id = $request->id_villa;
         $find = Villa::where('id_villa', $id)->first();
-        abort_if(!$find, 404);
-        $this->authorize('listvilla_update');
-        abort_if(auth()->user()->id != $find->created_by, 403);
-
-        $find = Villa::where('id_villa', $id)->first();
-
-        $status = false;
 
         if ($find->status == 2) {
             $find->update(array(
@@ -2091,7 +2081,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
+            return response()->json(['message' => 'Successfuly cancel request activiation', 'data' => 0]);
         }
 
         if ($find->status == 3) {
@@ -2100,15 +2090,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
-        }
-
-        if ($status) {
-            return back()
-                ->with('success', 'request has been sended');
-        } else {
-            return back()
-                ->with('error', 'request fail to sended due internal server error');
+            return response()->json(['message' => 'Successfuly cancel request deactiviation', 'data' => 1]);
         }
     }
 
@@ -3330,25 +3312,25 @@ class ViewController extends Controller
             $data = DB::table('villa_detail_price')
                 ->select('id_detail', 'id_villa', 'start', 'end', 'price', 'disc')
                 ->where("id_villa", $id)
-                ->orderBy('start','asc')
+                ->orderBy('start', 'asc')
                 ->get();
 
             return DataTables::of($data)
-                ->editColumn('start', function($data){
+                ->editColumn('start', function ($data) {
                     return Carbon::createFromFormat('Y-m-d', $data->start)->format('d F Y');
                 })
-                ->editColumn('end', function($data){
+                ->editColumn('end', function ($data) {
                     return Carbon::createFromFormat('Y-m-d', $data->end)->format('d F Y');
                 })
-                ->editColumn('price', function($data){
+                ->editColumn('price', function ($data) {
                     return CurrencyConversion::exchangeWithUnit($data->price);
                 })
-                ->editColumn('disc', function($data){
+                ->editColumn('disc', function ($data) {
                     return CurrencyConversion::exchangeWithUnit($data->disc);
                 })
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($data) {
-                    $aksi = ' <a href="javascript:void(0);" onclick="delete_date_special_price(this);" data-id="'.$data->id_detail.'" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
+                    $aksi = ' <a href="javascript:void(0);" onclick="delete_date_special_price(this);" data-id="' . $data->id_detail . '" class="deletedata btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Delete</a>';
                     return $aksi;
                 })
                 ->rawColumns(['aksi'])->make(true);
@@ -3362,7 +3344,7 @@ class ViewController extends Controller
 
         $this->authorize('listvilla_delete');
         $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
-        if($condition) {
+        if ($condition) {
             return response()->json([
                 'message' => 'This action is unauthorized',
             ], 403);

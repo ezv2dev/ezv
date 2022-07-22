@@ -255,7 +255,7 @@
                             @endauth
                             <div class="property-type">
                                 <p id="property-type-content">
-                                    {{ __('user_page.Property Type :') }}
+                                    Tags :
                                     @auth
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryVilla()"
@@ -1086,8 +1086,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $kitchen->count();
+                                                $total_last = 6 - $villa_amenities->count();
+                                                $total = $villa_amenities->count() + $kitchen->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $kitchen->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($kitchen->take($kitchen->count()) as $item2)
+                                            @foreach ($kitchen->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1106,8 +1114,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $safety->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $safety->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $safety->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($safety->take($safety->count()) as $item4)
+                                            @foreach ($safety->take($stop) as $item4)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item4->icon }}"></i>
@@ -1126,8 +1142,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $service->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $service->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $service->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($service->take($service->count()) as $item3)
+                                            @foreach ($service->take($stop) as $item3)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item3->icon }}"></i>
@@ -1146,8 +1170,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $bathroom->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $bathroom->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $bathroom->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($bathroom->take($bathroom->count()) as $item2)
+                                            @foreach ($bathroom->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1163,7 +1195,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if ($i > 6)
+                                        @if ($i <= 0)
                                             <div class="list-amenities">
                                                 <button class="amenities-button" type="button"
                                                     onclick="view_amenities()">
@@ -2365,15 +2397,18 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '1')
-                                        <div class="activation1">
+                                        <div id="activation1">
                                             <div class="alert alert-success d-flex flex-row align-items-center"
                                                 role="success">
-                                                <span>{{ __('user_page.this content is active,') }} </span>
+                                                <span>{{ __('user_page.this content is active') }},</span>
+                                                <button class="btn" onclick="requestDeactivation()"
+                                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                                                <span> ?</span>
                                             </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="activation2" id="pleaseWait">
+                                        <div id="activation2">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
@@ -2382,21 +2417,13 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '3')
-                                        <div class="activation3">
+                                        <div id="activation3">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request deactivation for this content,') }}
                                                 </span>
-                                                <form
-                                                    action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_villa"
-                                                        value="{{ $villa[0]->id_villa }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                                </form>
+                                                <button class="btn" type="submit"
+                                                    onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
                                                 <span> ?</span>
                                             </div>
                                         </div>
@@ -3519,7 +3546,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -4224,9 +4251,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function(file, message, response) {
                 console.log(file);
@@ -4246,6 +4270,19 @@
                 let content = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0)
+                {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0)
+                {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -5091,7 +5128,7 @@
         }
     </script>
 
-    {{-- Request Activation --}}
+    {{-- Request Active Deactive --}}
     <script>
         function requestActivation() {
             $.ajax({
@@ -5161,7 +5198,7 @@
                                     `);
 
                                     gradeAA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "A") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5181,7 +5218,7 @@
                                     `)
 
                                     gradeA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "B") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5201,7 +5238,7 @@
                                     `)
 
                                     gradeB();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "C") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5221,7 +5258,7 @@
                                     `)
 
                                     gradeC();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "D") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5241,7 +5278,7 @@
                                     `)
 
                                     gradeD();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 }
 
                                 iziToast.success({
@@ -5259,8 +5296,68 @@
                 }
             });
         }
+
+        function requestDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 3) {
+                        $("#activation1").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                </span>
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                <span> ?</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
+
+        function cancelDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/cancel-request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 1) {
+                        $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
     </script>
-    {{-- End Activation --}}
+    {{-- End Active Deactive --}}
 
     <script>
         if (document.getElementById("check_in").value.length == 0) {

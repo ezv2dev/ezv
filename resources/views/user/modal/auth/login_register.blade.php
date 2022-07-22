@@ -25,7 +25,7 @@
 
     .modal-content-login {
         background-color: white;
-        width: 55% !important;
+        width: 100% !important;
         box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);
     }
 
@@ -44,6 +44,7 @@
         font-size: 32px;
         margin-bottom: 1rem;
         font-weight: 600;
+        margin-top: 1rem;
     }
 
     .filter-language-option-text {

@@ -1787,6 +1787,11 @@
             };
         } else {
             console.log('next data not found');
+            iziToast.error({
+                title: "Error",
+                message: 'your data is not on the list yet',
+                position: "topRight",
+            });
         }
     }
     function prev_on_all_marker(indicator) {
@@ -1914,6 +1919,11 @@
             };
         } else {
             console.log('prev data not found');
+            iziToast.error({
+                title: "Error",
+                message: 'your data is not on the list yet',
+                position: "topRight",
+            });
         }
     }
     // function to disabled prev next button on right content
