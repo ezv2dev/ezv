@@ -4244,19 +4244,15 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
-                '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
-                "top")));
 
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
-                    '#sidebar_fix .reserve-block').height() + parseInt($(
-                    '#sidebar_fix .reserve-block').css("top"))); //$("#availability").offset().top;
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - parseInt($('.div-amenities').css( "margin-bottom")) - 15);
             });
 
             $window.scroll(function() {
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - parseInt($('.div-amenities').css( "margin-bottom")) - 15);
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $availabilityTop) {
                     $sidebar.addClass("fixed");
                     $sidebar.css({
