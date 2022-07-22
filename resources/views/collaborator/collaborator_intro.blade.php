@@ -201,8 +201,7 @@
                                 @if (session()->has('locale'))
                                     <img style="width: 27px;" src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                                 @else
-                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                    <img style="width: 27px;" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                                 <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
                             </a>
