@@ -72,7 +72,7 @@ input[type="number"] {
 }
 
 .host-profile img {
-    margin-left: 4px;
+    margin-left: 0 !important;
 }
 
 /* .mob-e-call {
@@ -177,7 +177,7 @@ svg {
 }    
 
 .section-2 {
-    margin: 0 0 0 11px;
+    margin: 0 0 0 8px;
 }
 
 /* .section-liner {
@@ -187,12 +187,6 @@ svg {
 
 .reserve-block {
     width: 292px;
-}
-
-@media (min-width: 1360px) {
-    .reserve-block {
-        right: -9px;
-    }
 }
 
 @media (min-width: 1260px) and (max-width: 1359px) {
@@ -327,7 +321,22 @@ video {
 }
 
 .gallery {
-    margin-left: 11px;
+    margin-left: 6px;
+    padding-right: 2px;
+}
+
+.about-place {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.table-body, .table-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.row-grid-amenities {
+    margin-left: 0 !important;
 }
 
 .menu-liner {
@@ -335,13 +344,23 @@ video {
     margin: 0 10px;
 }
 
+.room {
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.room h2 {
+    padding-left: 0;
+}
+
 .reserve-block {
     width: 276px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .row-grid-location {
-    padding: 0 0 0 10px;
+    padding: 0;
 }
 
 .location-liner {
