@@ -98,7 +98,7 @@
     }
 
     @media only screen and (max-width: 767px) {
-        .modal-body .w-70 {
+        /* .modal-body .w-70 {
             width: 100% !important;
         }
         .modal-body .map-content {
@@ -110,18 +110,18 @@
         }
         .modal-body .map-content #modal-map-right-content .card {
             padding: 0.5rem !important;
-        }
+        } */
     }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
-        .modal-body .w-70 {
+        /* .modal-body .w-70 {
             width: 50% !important;
         }
         .modal-body .map-content {
             width: 50% !important;
-        }
+        } */
     }
     @media only screen and (max-width: 991px) {
-        .modal-body .map-content .modal-view-detail {
+        /* .modal-body .map-content .modal-view-detail {
             margin-top: 1rem !important;
         }
         .modal-body .map-content .mt-3 a .card-text:nth-child(1) {
@@ -129,15 +129,15 @@
         }
         .modal-body .map-content .mt-3 a .card-text:nth-child(2) {
             min-height: 28px !important;
-        }
+        } */
     }
     @media only screen and (min-width: 992px) and (max-width: 1099px) {
-        .modal-body .w-70 {
+        /* .modal-body .w-70 {
             width: 60% !important;
         }
         .modal-body .map-content {
             width: 40% !important;
-        }
+        } */
     }
 </style>
 
@@ -2465,33 +2465,40 @@
                     <div class="col-3"><h5 class="modal-title">{{ __('user_page.Map') }}</h5></div>
                     <div class="col-6">
                         <div class="d-flex justify-content-center">
-                            <a class="mx-2 icon-filter-map" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
+                            <a class="icon-filter-map" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
                                 <img
                                     src="{{asset('assets/icon/map/villa.png')}}"
                                     data-src-active="{{asset('assets/icon/map/villa_active.png')}}"
                                     data-src="{{asset('assets/icon/map/villa.png')}}"
                                     alt="villa-icon">
                             </a>
-                            <a class="mx-2 icon-filter-map" id="map-filter-restaurant" data-indicator="true" onclick="filter_map('restaurant')">
+                            <a class="icon-filter-map" id="map-filter-restaurant" data-indicator="true" onclick="filter_map('restaurant')">
                                 <img
                                     src="{{asset('assets/icon/map/restaurant_active.png')}}"
                                     data-src-active="{{asset('assets/icon/map/restaurant_active.png')}}"
                                     data-src="{{asset('assets/icon/map/restaurant.png')}}"
                                     alt="restaurant-icon">
                             </a>
-                            <a class="mx-2 icon-filter-map" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
+                            <a class="icon-filter-map" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
                                 <img
                                     src="{{asset('assets/icon/map/hotel.png')}}"
                                     data-src-active="{{asset('assets/icon/map/hotel_active.png')}}"
                                     data-src="{{asset('assets/icon/map/hotel.png')}}"
                                     alt="hotel-icon">
                             </a>
-                            <a class="mx-2 icon-filter-map" id="map-filter-activity" data-indicator="false" onclick="filter_map('activity')">
+                            <a class="icon-filter-map" id="map-filter-activity" data-indicator="false" onclick="filter_map('activity')">
                                 <img
                                     src="{{asset('assets/icon/map/activity.png')}}"
                                     data-src-active="{{asset('assets/icon/map/activity_active.png')}}"
                                     data-src="{{asset('assets/icon/map/activity.png')}}"
                                     alt="activity-icon">
+                            </a>
+                            <a class="icon-filter-map" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
+                                <img
+                                    src="{{asset('assets/icon/menu/search.svg')}}"
+                                    data-src-active="{{asset('assets/icon/menu/search.svg')}}"
+                                    data-src="{{asset('assets/icon/menu/search.svg')}}"
+                                    alt="search-icon">
                             </a>
                         </div>
                     </div>
@@ -2499,16 +2506,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
-                <div class="row col-12 d-flex justify-content-center">
+                <div class="row col-12 justify-content-center" id="searchMapDekstop">
                     <div class="col-12 col-lg-3 close-modal modal-search" onclick="popUp();">
                         Search here ...
                     </div>
                 </div>
             </div>
             <div class="modal-body modal-body-map">
-                <div class="d-flex justify-content-between align-items-start" style="position: relative;">
-                    <div class="col-12" style="height: 74vh; border-radius: 10px;" id="map12"></div>
-                    <div class="w-30 map-content" style="display: none; padding-left: 1.5rem;" id="modal-map-right">
+                <div class="map-modal-container">
+                    <div class="map-container"id="map12"></div>
+                    <div class="map-content" id="modal-map-right">
                         <div id="modal-map-right-content"></div>
                     </div>
                 </div>

@@ -960,10 +960,6 @@ nav.menu {
     display: block;
 }
 
-.modal-body-map {
-    padding: 1.5rem !important;
-}
-
 /* START NEW PRICE RANGE CSS */
 /* ========================================================= */
 
@@ -2074,6 +2070,23 @@ li.button-dropdown {
 
 }
 
+#searchMapMobile{
+    display: block !important;
+    background-color: #ff7400;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#searchMapMobile img{
+    width: 50%;
+    height: auto;
+}
+
+#searchMapDekstop{
+    display: none !important;
+}
+
+
 @media only screen and (max-width: 320px) {
     .limit-text-6{
         font-size: 12px;
@@ -2903,6 +2916,8 @@ div.notice {
     margin-top: 2px;
 }
 
+
+
 .world {
     fill: #52eb35;
     width: 1.1em;
@@ -3036,6 +3051,29 @@ input::-webkit-inner-spin-button {
     margin-top: 29px !important;
 }
 
+.modal-body-map {
+    padding: 0 .5rem 1rem .5rem;
+    overflow-y: auto;
+    height: 89vh;
+}
+
+.map-modal-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    column-gap: 0;
+}
+
+.map-modal-container .map-container,
+.map-modal-container .map-content{
+    width: 100%;
+}
+
+.map-modal-container .map-container{
+    height: 55vh;
+    border-radius:10px;
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1290px) {
     .searchbox {
         width: 60% !important;
@@ -3163,6 +3201,42 @@ input::-webkit-inner-spin-button {
         display: none !important;
     }
 }
+
+@media only screen and (min-width: 769px) {
+    #searchMapMobile{
+        display: none !important;
+    }
+    #searchMapDekstop{
+        display: flex !important;
+    }
+
+    .modal-body-map {
+        padding: 1.5rem !important;
+        height: 80vh;
+    }
+
+    .icon-filter-map{
+        margin: 0 4px;
+    }
+
+    .map-modal-container{
+        flex-direction: row;
+        row-gap: 0;
+        column-gap: 1rem;
+    }
+
+    .map-modal-container .map-container{
+        width: 60%;
+    }
+    .map-modal-container .map-content{
+        width: 40%;
+    }
+
+    .map-modal-container .map-container{
+        height: 74vh;
+    }
+}
+
 @media only screen and (max-width: 949px) {
     #villa-data .list-row-gap:first-of-type {
         padding-top: 0px !important;
@@ -3249,6 +3323,13 @@ input::-webkit-inner-spin-button {
     .villa-location-description,
     .villa-list-title{
         margin-top: 10px;
+    }
+
+    .map-modal-container .map-container{
+        width: 70%;
+    }
+    .map-modal-container .map-content{
+        width: 30%;
     }
 }
 
