@@ -281,7 +281,7 @@
                                 onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
                         </div>
                     </div>
-                    <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-2">
+                    <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-5">
                         <div class="row">
                             <div class="col-6 pe-0">
                                 <div class="d-flex flex-column h-100">
