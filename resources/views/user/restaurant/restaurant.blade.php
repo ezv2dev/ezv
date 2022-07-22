@@ -319,7 +319,7 @@
                                             <i class="fa-solid fa-phone"></i>
                                         </a>
                                     </div>
-                                    <div style="padding: 0px 6px;">
+                                    <div style="padding: 0px 6px;" id="contentEmailResto">
                                         @if ($restaurant->email)
                                             <a id="btnEmailResto" target="_blank" type="button"
                                                 href="mailto:{{ $restaurant->email }}">

@@ -829,9 +829,7 @@ function saveFacilities() {
                 content = "";
                 content +=
                     '<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>';
-            }
-
-            else if (response.data.length > 5) {
+            } else if (response.data.length > 5) {
                 for (let i = 0; i < 6; i++) {
                     if (i == 0) {
                         content =
@@ -912,7 +910,7 @@ function saveFacilities() {
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
-            if(jqXHR.responseJSON.errors) {
+            if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -948,7 +946,7 @@ $("#emailResto").keyup(function (e) {
     $("#emailResto").removeClass("is-invalid");
     $("#err-email").hide();
 });
-$("#updateContactForm").submit(function (e) {
+$("#btnSaveContactResto").click(function (e) {
     let error = 0;
     let regexMail = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
     if (!$("#phoneResto").val()) {
@@ -979,8 +977,6 @@ $("#updateContactForm").submit(function (e) {
     } else {
         e.preventDefault();
 
-        var formData = new FormData(this);
-
         var btn = document.getElementById("btnSaveContactResto");
         btn.textContent = "Saving...";
         btn.classList.add("disabled");
@@ -991,10 +987,11 @@ $("#updateContactForm").submit(function (e) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             url: "/restaurant/update/contact",
-            data: formData,
-            cache: false,
-            processData: false,
-            contentType: false,
+            data: {
+                id_restaurant: id_restaurant,
+                phone: phoneResto,
+                email: emailResto,
+            },
             dataType: "json",
             success: function (response) {
                 console.log(response);
@@ -1008,10 +1005,17 @@ $("#updateContactForm").submit(function (e) {
                 $("#modal-edit_contact").modal("hide");
 
                 //change email in icon
-                $("#btnEmailResto").attr(
-                    "href",
-                    "mailto:" + response.data.email
-                );
+                if (response.data.email == null) {
+                    $("#contentEmailResto").html(
+                        '<a type="button" href="javascript:void(0);"> <i class="fa-solid fa-envelope text-secondary"></i> </a>'
+                    );
+                } else {
+                    $("#contentEmailResto").html(
+                        '<a id="btnEmailResto" target="_blank" type="button" href="mailto:' +
+                            response.data.email +
+                            '"> <i class="fa-solid fa-envelope"></i> </a>'
+                    );
+                }
 
                 //update di modal contact resto
                 $("#restoPhoneInContact").html(response.data.phone);
@@ -1202,48 +1206,48 @@ $("#storeStoryForm").submit(function (e) {
     }
     // console.log(readerStoryRestaurant);
 });
-$("#imgRes").on("change", function() {
+$("#imgRes").on("change", function () {
     if (document.getElementById("imgRes").files.length != 0) {
         $(".image-add-res").css("border", "");
         $(".err-img").hide();
     }
 });
-$(".frm-name").on("keyup", function() {
-    $('.frm-name').removeClass('is-invalid');
+$(".frm-name").on("keyup", function () {
+    $(".frm-name").removeClass("is-invalid");
     $(".err-name").hide();
 });
-$(".frm-price").on("keyup", function() {
-    $('.frm-price').removeClass('is-invalid');
+$(".frm-price").on("keyup", function () {
+    $(".frm-price").removeClass("is-invalid");
     $("#err-prc").hide();
 });
-$(".frm-desc").on("keyup", function() {
-    $('.frm-desc').removeClass('is-invalid');
+$(".frm-desc").on("keyup", function () {
+    $(".frm-desc").removeClass("is-invalid");
     $(".err-desc").hide();
 });
 $("#addMenuForm").submit(function (e) {
     let error = 0;
-    if(!$('.frm-name').val()) {
-        $('.frm-name').addClass('is-invalid');
+    if (!$(".frm-name").val()) {
+        $(".frm-name").addClass("is-invalid");
         $(".err-name").show();
         error = 1;
     } else {
-        $('.frm-name').removeClass('is-invalid');
+        $(".frm-name").removeClass("is-invalid");
         $(".frm-name").hide();
     }
-    if(!$('.frm-price').val()) {
-        $('.frm-price').addClass('is-invalid');
+    if (!$(".frm-price").val()) {
+        $(".frm-price").addClass("is-invalid");
         $(".err-prc").show();
         error = 1;
     } else {
-        $('#price').removeClass('is-invalid');
+        $("#price").removeClass("is-invalid");
         $("#err-prc").hide();
     }
-    if(!$('.frm-desc').val()) {
-        $('.frm-desc').addClass('is-invalid');
+    if (!$(".frm-desc").val()) {
+        $(".frm-desc").addClass("is-invalid");
         $(".err-desc").show();
         error = 1;
     } else {
-        $('.frm-desc').removeClass('is-invalid');
+        $(".frm-desc").removeClass("is-invalid");
         $(".err-desc").hide();
     }
     if (document.getElementById("imgRes").files.length == 0) {
@@ -1254,7 +1258,7 @@ $("#addMenuForm").submit(function (e) {
         $(".image-add-res").css("border", "");
         $(".err-img").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
