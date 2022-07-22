@@ -254,35 +254,88 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
+                    <div class="grid-one-line max-lines skeleton skeleton-w-100 skeleton-h-1">
+                        <div class="d-block d-md-flex">
+                            <div class="flex-fill">
+                                <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!"
+                                    onclick="view_maps('{{ $data->id_hotel }}')"><i
+                                        class="fa-solid text-orange fa-location-dot"></i>
+                                    {{ $data->location_name ?? __('user_page.Location not found') }}
+                                </a>
+                                <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                    - 4.2km from Ngurah Rai Airport
+                                </a>
+                            </div>
+                            <div class="text-13 text-md-end">
+                                <span>4 Stars</span>
+                                <i class="fa-solid fa-star" style="color: #febb02"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
-                        <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
-                            {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
-                        </span>
-                    </div>
-                    <div class="skeleton">
-                        <a class="text-14 fw-400 grid-one-line text-orange mt-1 " href="#!"
-                            onclick="view_maps('{{ $data->id_hotel }}')"><i
-                                class="fa-solid text-orange fa-location-dot"></i>
-                            {{ $data->location_name ?? __('user_page.Location not found') }}
-                        </a>
-                    </div>
-                    <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        @if ($data->price)
-                            <span class=" fw-600 {{ $textColor }} list-description ">
-                                {{ CurrencyConversion::exchangeWithUnit($data->price) }}
+                        <div class="d-flex">
+                            <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
+                                {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                             </span>
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                /{{ __('user_page.night') }}
-                            </span>
-                        @else
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                {{ __('user_page.Price is unknown') }}
-                            </span>
-                        @endif
-                    </div>
-                    <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-2 skeleton">
-                        <span><a class="orange-hover"
+                            <span class="text-12 fw-400"><a class="orange-hover"
                                 onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                        </div>
+                    </div>
+                    <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-2">
+                        <div class="row">
+                            <div class="col-6 pe-0">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="flex-fill">
+                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                            Fully Furlindable
+                                        </p> 
+                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                            Reserve now pay later
+                                        </p> 
+                                    </div>
+                                    <div>
+                                        <p class="text-14 fw-600 grid-one-line max-lines mb-0">
+                                            8.1/10
+                                        </p>
+                                        <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            Review
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-0">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="flex-fill max-lines-2"></div>
+                                    <div class="text-end">
+                                        <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                1 {{ __('user_page.night') }}
+                                            </span>
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                , 2 adults
+                                            </span>
+                                        </div>
+                                        <div class="text-18 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            @if ($data->price)
+                                                <span class=" fw-600 {{ $textColor }} list-description ">
+                                                    {{ CurrencyConversion::exchangeWithUnit($data->price) }}
+                                                </span>
+                                            @else
+                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                    {{ __('user_page.Price is unknown') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="text-12 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                Included taxes and changes
+                                            </span>
+                                        </div>        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                     </a>
                 </div>
