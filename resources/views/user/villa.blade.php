@@ -4219,9 +4219,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function(file, message, response) {
                 console.log(file);
@@ -4241,6 +4238,19 @@
                 let content = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0)
+                {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0)
+                {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;

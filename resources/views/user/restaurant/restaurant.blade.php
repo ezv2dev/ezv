@@ -3977,7 +3977,7 @@
                     let uid = response.data.uid.uid;
                     let lowerCaseUid = uid.toLowerCase();
                     let content = "";
-                    let contentPositionModal;
+                    let contentPositionModal = "";
 
                     let galleryDiv = $('.gallery');
                     let galleryLength = galleryDiv.find('a').length;
@@ -4104,6 +4104,7 @@
                                 '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
                                 response.data.video[v].id_video +
                                 '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                            
                             contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
                                 .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
                                 '"> <video loading="lazy" src="' +
@@ -4586,9 +4587,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function(file, message, response) {
                 console.log(file);
@@ -4611,6 +4609,18 @@
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0)
+                {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0)
+                {
+                    $('#sortable-video').html("");
+                }
 
                 if (galleryLength == 0)
                 {
