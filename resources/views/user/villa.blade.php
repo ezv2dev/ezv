@@ -3719,7 +3719,7 @@
                                 $id = $item->id_video;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}" id="positionVideoGallery{{$id}}">
                                 <video loading="lazy"
                                     src="{{ asset('foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -3908,7 +3908,7 @@
         function save_reorder_photo() {
 
             let btn = document.getElementById("saveBtnReorderPhoto");
-            btn.textContent = "Submiting...";
+            btn.textContent = "Saving...";
             btn.classList.add("disabled");
 
             var imageids_arr = [];
@@ -3958,8 +3958,6 @@
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' +
-                            response.data.photo[i].caption +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -3985,7 +3983,7 @@
                         }
                     }
 
-                    btn.textContent = "Submit";
+                    btn.textContent = "Save";
                     btn.classList.remove("disabled");
 
 
@@ -4007,7 +4005,11 @@
         }
 
         function save_reorder_video() {
-            showingLoading();
+
+            let btn = document.getElementById("saveBtnReorderVideo");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+
             var videoids_arr = [];
             // get video ids order
             $('#sortable-video li').each(function() {
@@ -4024,7 +4026,65 @@
                     id: '{{ $villa[0]->id_villa }}'
                 },
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/gallery/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content = "";
+                    let contentPositionModal = "";
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '"> <a href="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                    }
+
+                    if (response.data.video.length > 0)
+                    {
+                        for (let v = 0; v < response.data.video.length; v++) {
+                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                                .id_video +
+                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                                response.data.video[v].id_video +
+                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
+                                .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
+                                '"> <video loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=1.0"> </li>';
+                        }
+                    }
+
+                    btn.textContent = "Save";
+                    btn.classList.remove("disabled");
+
+
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-video').html("");
+                    $('#sortable-video').append(contentPositionModal);
+
+                    $("#edit_position_video").modal("hide");
+
+                    $gallery.refresh();
                 }
             });
         }
@@ -4185,6 +4245,7 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content = "";
                 let contentPositionModal;
+                let contentPositionModalVideo;
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4200,8 +4261,6 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' +
-                        message.data.photo[0].caption +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4225,7 +4284,14 @@
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
+                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
+                        '"> <video loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=1.0"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-video').append(contentPositionModalVideo);
                 }
 
                 $gallery.refresh();
@@ -4697,6 +4763,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo" + video).remove();
+                            $("#positionVideoGallery"+video).remove();
                         }
                     });
                 } else {
