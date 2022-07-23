@@ -177,6 +177,21 @@
                                 <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
                         </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                            @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            @endif
+
+                        </a>
+                        </div>
 
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -224,11 +239,26 @@
                             <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
+                    </div>
                 @endauth
             </div>
 
         </div>
-
+        <div id="overlay"></div>
         {{-- PROFILE --}}
         <div class="row page-content">
             {{-- LEFT CONTENT --}}
