@@ -184,22 +184,21 @@ hr.pendek {
 }
 
 @media (min-width: 1360px) {
-    .reserve-block {
-        right: -15px;
-    }
-
     .sticky {
         width: 75.1% !important;
     }
 }
-
 @media (min-width: 1260px) and (max-width: 1359px) {
     .sidebar {
         width: 25% !important;
+        padding-left: 23px !important;
+        padding-right: 30px !important;
+        margin: 0px !important;
+        right: 0px !important;
     }
     .reserve-block {
-        width: 246px !important;
-        right: -44.5px !important;
+        width: 100% !important;
+        right: 0px !important;
     }
 
     .menu-liner {
@@ -3645,7 +3644,21 @@ span.flatpickr-weekday {
         min-width: 220px;
     }
 }
-
+@media only screen and (min-width: 768px) and (max-width: 800px) {
+    .sidebar {
+        right: 0px !important;
+    }
+}
+@media only screen and (min-width: 801px) and (max-width: 900px) {
+    .sidebar {
+        right: 3px !important;
+    }
+}
+@media only screen and (min-width: 901px) and (max-width: 1024px) {
+    .sidebar {
+        right: 5px !important;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .navigationItemText {
         font-size: 12px !important;
@@ -3728,7 +3741,6 @@ span.flatpickr-weekday {
     }
     .sidebar {
         width: 22% !important;
-        right: 0px !important;
     }
 }
 
@@ -3736,9 +3748,15 @@ span.flatpickr-weekday {
     .sidebar {
         width: 25% !important;
         right: 2px !important;
-        padding-left: 30px !important;
+        padding-left: 23px !important;
         padding-right: 30px !important;
         margin-right: 0px !important;
+    }
+    .navright.active .right-bar {
+        padding-right: 0px !important;
+    }
+    .navright.active {
+        padding-right: 30px !important;
     }
 }
 
@@ -3884,8 +3902,32 @@ span.flatpickr-weekday {
     #rsv-block-btn .rsv {
         min-width: 400px !important;
     }
+    .reserve-block {
+        width: 100% !important;
+    }
+    #sidebar_fix {
+        padding-left: 30px !important;
+    }
 }
-
+@media only screen and (min-width: 1025px) and (max-width: 1460px){
+    header .head-inner-wrap {
+        margin: 0px !important;
+        max-width: none !important;
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+    header .right-bar {
+        padding-right: 14px !important;
+    }
+}
+@media only screen and (min-width: 1360px) and (max-width: 1460px){
+    #sidebar_fix {
+        width: 25% !important;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        margin: 0px !important;
+    }
+}
 @media only screen and (min-width: 1461px) {
     .villa-list-header-logo {
         margin-left: -70px !important;
