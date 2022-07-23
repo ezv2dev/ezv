@@ -504,12 +504,12 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Food Description',
+                'message' => 'Successfuly Updated Food Location',
                 'data' => $foodData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Food Description',
+                'message' => 'Error Updated Food Location',
             ], 500);
         }
     }

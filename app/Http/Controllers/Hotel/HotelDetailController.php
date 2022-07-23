@@ -1295,12 +1295,12 @@ class HotelDetailController extends Controller
         // check if update is success or not
         if ($updatedHotel) {
             return response()->json([
-                'message' => 'Successfuly Updated Hotel Description',
+                'message' => 'Successfuly Updated Hotel Location',
                 'data' => $homeData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Hotel Description',
+                'message' => 'Error Updated Hotel Location',
             ], 500);
         }
     }

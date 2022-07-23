@@ -319,12 +319,12 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Description',
+                'message' => 'Successfuly Updated WoW Location',
                 'data' => $activityData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated WoW Description',
+                'message' => 'Error Updated WoW Location',
             ], 500);
         }
     }
