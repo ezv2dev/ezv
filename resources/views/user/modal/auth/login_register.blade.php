@@ -25,7 +25,7 @@
 
     .modal-content-login {
         background-color: white;
-        width: 100% !important;
+        width: 55% !important;
         box-shadow: 1px 1px 15px rgb(0 0 0 / 16%);
     }
 
