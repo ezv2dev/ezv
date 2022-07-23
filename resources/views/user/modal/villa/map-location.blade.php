@@ -373,7 +373,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
+                                <div style="z-index: 43;" class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; z-index: 43; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -625,7 +625,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative">
-                                <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
+                                <div class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px;  display: flex; font-size: 24px; border-radius: 9px;">
@@ -865,7 +865,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
+                                <div style="z-index: 43;" class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -1125,7 +1125,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
+                                <div class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -1273,6 +1273,7 @@
 
     // function to clear & hide right content
     function resetRightContent() {
+        console.log('hit reset right content indra');
         // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
@@ -1321,13 +1322,7 @@
     function mapMobile(){
          //mobile map
          map.addListener("click", ()=>{
-            console.log('hit mapMobile');
-            if(contentIsExist && mapMobileIsOpen){
-                console.log('ketika full screen dan content masih terbuka');
-                resetRightContent();
-                resetPrimaryMarker();
-                resetSecondaryMarker();
-            }
+            console.log('hit mapMobile'); 
             if(!contentIsExist && !mapMobileIsOpen) {
                 console.log('ketika tidak full  screen dan content tidak terbuka');
                 contentIsExist = true;
@@ -1339,9 +1334,14 @@
                 // disable event google map
                 resetMapEvent();
                 // full screen map for mobile
-                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
-                document.getElementById("map-desc").classList.add('mobile-map');
+                // document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
+                // document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                // document.getElementById("map-desc").classList.add('mobile-map');
+
+                $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                $("#map-desc").removeClass('mobile-map-desc-close');
+                $("#map-desc").addClass('mobile-map');
+                console.log('test indra');
                 $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
@@ -1365,6 +1365,11 @@
                 map.setOptions({zoomControl: true});
                 // hide primary control
                 hidePrimaryMarkerControlFromMap();
+            } else if(contentIsExist && mapMobileIsOpen){
+                console.log('ketika full screen dan content masih terbuka');
+                resetRightContent();
+                resetPrimaryMarker();
+                resetSecondaryMarker();
             }
             console.log('contentIsExist: '+contentIsExist);
             console.log('mapMobileIsOpen: '+mapMobileIsOpen);
@@ -2450,21 +2455,23 @@
                 console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             }
         });
+        
+        $(window).on('resize', () => {
+            if ($(window).width() < 768) {
+                contentIsExist = false;
+                mapMobileIsOpen = false;
+                mapMobile();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+            if ($(window).width() >= 768) {
+                reverseMap();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+        });
     });
-    $(window).on('resize', () => {
-        if ($(window).width() < 768) {
-            contentIsExist = false;
-            mapMobileIsOpen = false;
-            mapMobile();
-            console.log('contentIsExist: '+contentIsExist);
-            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
-        }
-        if ($(window).width() >= 768) {
-            reverseMap();
-            console.log('contentIsExist: '+contentIsExist);
-            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
-        }
-    });
+   
 </script>
 
 {{-- MAP CONTENT --}}
