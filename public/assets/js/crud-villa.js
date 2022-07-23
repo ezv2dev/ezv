@@ -34,7 +34,7 @@ function editNameVilla() {
                 id_villa: id_villa,
                 villa_name: $("#name-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#name-content2").html(response.data);
                 $("#name-content-mobile").html(response.data);
                 $("#villaTitle").html(response.data + " - EZV2");
@@ -52,7 +52,7 @@ function editNameVilla() {
                 btn.classList.remove("disabled");
                 editNameCancel();
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -132,7 +132,7 @@ function editShortDesc() {
                 id_villa: id_villa,
                 short_desc: $("#short-description-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#short-description-content2").html(response.data);
                 $("#short-description-form-input").val(response.data);
                 iziToast.success({
@@ -147,7 +147,7 @@ function editShortDesc() {
 
                 editShortDescriptionCancel();
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -235,7 +235,7 @@ function editBedroomVilla(id_villa) {
             children1: children1,
             size: size,
         },
-        success: function(response) {
+        success: function (response) {
             if (response.data.bedroom1 == null) {
                 $("#bedroomID").html(response.data.bedroom);
             } else {
@@ -326,7 +326,7 @@ async function saveBedroomDetail(id_villa) {
         cache: false,
         enctype: "multipart/form-data",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             if (response.room_count) {
                 $("#bedroomID").html(response.room_count);
             }
@@ -357,7 +357,7 @@ async function saveBedroomDetail(id_villa) {
             //     $('#btnAddBedroom').addClass('d-none');
             // }
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
@@ -381,7 +381,9 @@ function contentBedroomDetail(count, data) {
     let bedroomAmenities = ``;
     if (data.villa_bedroom_detail_bedroom_amenities) {
         for (
-            let index = 0; index < data.villa_bedroom_detail_bedroom_amenities.length; index++
+            let index = 0;
+            index < data.villa_bedroom_detail_bedroom_amenities.length;
+            index++
         ) {
             const item = data.villa_bedroom_detail_bedroom_amenities[index];
             bedroomAmenities += `
@@ -396,7 +398,9 @@ function contentBedroomDetail(count, data) {
     let bathroomAmenities = ``;
     if (data.villa_bedroom_detail_bathroom_amenities) {
         for (
-            let index = 0; index < data.villa_bedroom_detail_bathroom_amenities.length; index++
+            let index = 0;
+            index < data.villa_bedroom_detail_bathroom_amenities.length;
+            index++
         ) {
             const item = data.villa_bedroom_detail_bathroom_amenities[index];
             bathroomAmenities += `
@@ -411,7 +415,9 @@ function contentBedroomDetail(count, data) {
     let bed = ``;
     if (data.villa_bedroom_detail_bed) {
         for (
-            let index = 0; index < data.villa_bedroom_detail_bed.length; index++
+            let index = 0;
+            index < data.villa_bedroom_detail_bed.length;
+            index++
         ) {
             const item = data.villa_bedroom_detail_bed[index];
             bed += `
@@ -445,8 +451,8 @@ function contentBedroomDetail(count, data) {
 
     return content;
 }
-$(".check-cat").change(function() {
-    $("#check_cat").each(function() {
+$(".check-cat").change(function () {
+    $("#check_cat").each(function () {
         if ($(this).find('input[type="checkbox"]:checked').length > 0) {
             $(".checklst-cat").css("border", "");
             $("#err-slc-cat").hide();
@@ -457,18 +463,19 @@ $(".check-cat").change(function() {
 function editCategoryV(id_villa) {
     let error = 0;
 
-    $("#check_cat").each(function() {
+    $("#check_cat").each(function () {
         if ($(this).find('input[type="checkbox"]:checked').length == 0) {
             $(".checklst-cat").css("border", "solid #e04f1a 1px");
             $("#err-slc-cat").show();
             error = 1;
-        } else {}
+        } else {
+        }
     });
     if (error == 1) {
         return false;
     } else {
         var villaCategory = [];
-        $("input[name='villaCategory[]']:checked").each(function() {
+        $("input[name='villaCategory[]']:checked").each(function () {
             villaCategory.push(parseInt($(this).val()));
         });
 
@@ -486,7 +493,7 @@ function editCategoryV(id_villa) {
                 id_villa: id_villa,
                 villaCategory: villaCategory,
             },
-            success: function(response) {
+            success: function (response) {
                 $("#ModalCategoryVilla").modal("hide");
 
                 btn.innerHTML = '<i class="fa fa-check"></i> Save';
@@ -509,7 +516,9 @@ function editCategoryV(id_villa) {
                         content =
                             content +
                             `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400; margin-right: 3px;">${response.data[j]["villa_category"]["name"]} </span>`;
-                    } else if (j > 2) {} else {}
+                    } else if (j > 2) {
+                    } else {
+                    }
                 }
 
                 $("#displayCategory").html(content);
@@ -541,7 +550,7 @@ function editCategoryV(id_villa) {
 
 function editVillaTag(id_villa) {
     var villaFilter = [];
-    $("input[name='villaFilter[]']:checked").each(function() {
+    $("input[name='villaFilter[]']:checked").each(function () {
         villaFilter.push(parseInt($(this).val()));
     });
 
@@ -555,7 +564,7 @@ function editVillaTag(id_villa) {
             id_villa: id_villa,
             villaFilter: villaFilter,
         },
-        success: function(response) {
+        success: function (response) {
             var length = response.data.length;
 
             $("#ModalTagsVilla").modal("hide");
@@ -628,7 +637,7 @@ function editDescriptionVilla(id_villa) {
                 id_villa: id_villa,
                 villa_description: $("#description-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 $("#description-content").html(response.data.substring(0, 600));
 
                 console.log(response.data.length);
@@ -658,7 +667,7 @@ function editDescriptionVilla(id_villa) {
 
                 editDescriptionCancel();
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -707,7 +716,7 @@ function editDescriptionCancel() {
 }
 
 // ! Change Profile Villa
-$("#imageVilla").on("change", function(ev) {
+$("#imageVilla").on("change", function (ev) {
     if (document.getElementById("imageVilla").files.length != 0) {
         $(".image-box").css("border", "");
         $("#err-img").hide();
@@ -718,7 +727,7 @@ $("#imageVilla").on("change", function(ev) {
     readerImageVilla = new FileReader();
 });
 
-$("#updateImageForm").submit(function(e) {
+$("#updateImageForm").submit(function (e) {
     let error = 0;
     if (document.getElementById("imageVilla").files.length == 0) {
         $(".image-box").css("border", "solid #e04f1a 1px");
@@ -751,14 +760,14 @@ $("#updateImageForm").submit(function(e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function() {
+                readerImageVilla.addEventListener("load", function () {
                     $("#imageProfileVilla").attr(
                         "src",
                         readerImageVilla.result
@@ -770,7 +779,7 @@ $("#updateImageForm").submit(function(e) {
                 btn.classList.remove("disabled");
                 $("#modal-edit_villa_profile").modal("hide");
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -805,19 +814,19 @@ function editAmenitiesVilla(id_villa) {
     let safety = [];
     let service = [];
 
-    $("input[name='amenities[]']:checked").each(function() {
+    $("input[name='amenities[]']:checked").each(function () {
         amenities.push(parseInt($(this).val()));
     });
-    $("input[name='bathroom[]']:checked").each(function() {
+    $("input[name='bathroom[]']:checked").each(function () {
         bathroom.push(parseInt($(this).val()));
     });
-    $("input[name='kitchen[]']:checked").each(function() {
+    $("input[name='kitchen[]']:checked").each(function () {
         kitchen.push(parseInt($(this).val()));
     });
-    $("input[name='safety[]']:checked").each(function() {
+    $("input[name='safety[]']:checked").each(function () {
         safety.push(parseInt($(this).val()));
     });
-    $("input[name='service[]']:checked").each(function() {
+    $("input[name='service[]']:checked").each(function () {
         service.push(parseInt($(this).val()));
     });
 
@@ -839,7 +848,7 @@ function editAmenitiesVilla(id_villa) {
             safety: safety,
             service: service,
         },
-        success: function(response) {
+        success: function (response) {
             var lengthAmenities = response.getAmenities.length;
             var lengthBathroom = response.getBathroom.length;
             var lengthKitchen = response.getKitchen.length;
@@ -916,15 +925,16 @@ function editAmenitiesVilla(id_villa) {
                     total_last = 6 - lengthAmenities;
                     total = lengthAmenities + lengthKitchen;
 
-                    if(total <= 6)
-                    {
+                    if (total <= 6) {
                         stop = lengthKitchen;
-                    }else{
+                    } else {
                         stop = total_last;
                     }
 
                     for (k = 0; k < lengthKitchen; k++) {
-                        if (k === stop) { break; }
+                        if (k === stop) {
+                            break;
+                        }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -945,18 +955,18 @@ function editAmenitiesVilla(id_villa) {
 
                 count = count - lengthKitchen;
                 if (count > 0) {
-
                     total_last = 6 - total;
                     total = total + lengthSafety;
 
-                    if(total <= 6)
-                    {
+                    if (total <= 6) {
                         stop = lengthSafety;
-                    }else{
+                    } else {
                         stop = total_last;
                     }
                     for (k = 0; k < lengthSafety; k++) {
-                        if (k === stop) { break; }
+                        if (k === stop) {
+                            break;
+                        }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -975,23 +985,21 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-
-
                 count = count - lengthSafety;
                 if (count > 0) {
-
                     total_last = 6 - total;
                     total = total + lengthService;
 
-                    if(total <= 6)
-                    {
+                    if (total <= 6) {
                         stop = lengthService;
-                    }else{
+                    } else {
                         stop = total_last;
                     }
 
                     for (l = 0; l < lengthService; l++) {
-                        if (l === stop) { break; }
+                        if (l === stop) {
+                            break;
+                        }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -1010,23 +1018,21 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-
-
                 count = count - lengthService;
                 if (count > 0) {
-
                     total_last = 6 - total;
                     total = total + lengthBathroom;
 
-                    if(total <= 6)
-                    {
+                    if (total <= 6) {
                         stop = lengthBathroom;
-                    }else{
+                    } else {
                         stop = total_last;
                     }
 
                     for (j = 0; j < lengthBathroom; j++) {
-                        if (j === stop) { break; }
+                        if (j === stop) {
+                            break;
+                        }
                         $("#listAmenities").append(`
                         <div class="list-amenities">
                             <div class="text-align-center">
@@ -1171,7 +1177,7 @@ function editAmenitiesVilla(id_villa) {
                 `);
             }
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -1205,11 +1211,11 @@ var storyVideoForm = $(".story-upload").children(".story-video-form");
 var storyVideoInput = $(".story-upload").children(".story-video-input");
 var storyVideoPreview = $(".story-upload").children(".story-video-preview");
 
-$("#storyVideo").on("change", function(value) {
+$("#storyVideo").on("change", function (value) {
     storyVilla = this.files[0];
 });
 
-$("#updateStoryForm").submit(function(e) {
+$("#updateStoryForm").submit(function (e) {
     e.preventDefault();
 
     //validasi
@@ -1241,7 +1247,7 @@ $("#updateStoryForm").submit(function(e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
 
                 iziToast.success({
@@ -1293,6 +1299,26 @@ $("#updateStoryForm").submit(function(e) {
                     }
                 }
 
+                if (response.video.length > 0) {
+                    for (let v = 0; v < response.video.length; v++) {
+                        content +=
+                            '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                            response.video[v].id_video +
+                            '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view(' +
+                            response.video[v].id_video +
+                            ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                            path +
+                            lowerCaseUid +
+                            slash +
+                            response.video[v].name +
+                            '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                            id_villa +
+                            '" data-video="' +
+                            response.video[v].id_video +
+                            '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                    }
+                }
+
                 // console.log(content);
 
                 $(storyVideoInput).children("input").val("");
@@ -1305,7 +1331,9 @@ $("#updateStoryForm").submit(function(e) {
 
                 $("#modal-edit_story").modal("hide");
 
-                if (response.data.length > 4) {
+                let sumStory = response.data.length + response.video.length;
+
+                if (sumStory > 4) {
                     sliderRestaurant();
                 }
 
@@ -1314,7 +1342,7 @@ $("#updateStoryForm").submit(function(e) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 console.log(jqXHR);
                 // console.log(exception);
 
@@ -1349,7 +1377,7 @@ $("#updateStoryForm").submit(function(e) {
 });
 
 //save house rules
-$("#houseRuleForm").submit(function(e) {
+$("#houseRuleForm").submit(function (e) {
     e.preventDefault();
 
     let btn = document.getElementById("btnSaveHouseRules");
@@ -1370,7 +1398,7 @@ $("#houseRuleForm").submit(function(e) {
         cache: false,
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             iziToast.success({
@@ -1433,7 +1461,7 @@ $("#houseRuleForm").submit(function(e) {
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             console.log(jqXHR);
             // console.log(exception);
 
@@ -1453,7 +1481,7 @@ $("#houseRuleForm").submit(function(e) {
     });
 });
 
-$("#guestSafetyForm").submit(function(e) {
+$("#guestSafetyForm").submit(function (e) {
     e.preventDefault();
 
     let btn = document.getElementById("btnSaveGuestSafety");
@@ -1474,7 +1502,7 @@ $("#guestSafetyForm").submit(function(e) {
         cache: false,
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             iziToast.success({
@@ -1520,7 +1548,7 @@ $("#guestSafetyForm").submit(function(e) {
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             console.log(jqXHR);
             // console.log(exception);
 
@@ -1541,7 +1569,7 @@ $("#guestSafetyForm").submit(function(e) {
 });
 
 // ! GradeVilla
-$("#gradeVilla").change(function() {
+$("#gradeVilla").change(function () {
     var grade = $(this).val();
     $.ajax({
         type: "POST",
@@ -1552,7 +1580,7 @@ $("#gradeVilla").change(function() {
         data: {
             grade: grade,
         },
-        success: function(response) {
+        success: function (response) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -1563,7 +1591,7 @@ $("#gradeVilla").change(function() {
 });
 
 function gradeAA() {
-    $("#gradeVillaAA").change(function() {
+    $("#gradeVillaAA").change(function () {
         var grade = $(this).val();
         $.ajax({
             type: "POST",
@@ -1574,7 +1602,7 @@ function gradeAA() {
             data: {
                 grade: grade,
             },
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -1586,7 +1614,7 @@ function gradeAA() {
 }
 
 function gradeA() {
-    $("#gradeVillaA").change(function() {
+    $("#gradeVillaA").change(function () {
         var grade = $(this).val();
         $.ajax({
             type: "POST",
@@ -1597,7 +1625,7 @@ function gradeA() {
             data: {
                 grade: grade,
             },
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -1609,7 +1637,7 @@ function gradeA() {
 }
 
 function gradeB() {
-    $("#gradeVillaB").change(function() {
+    $("#gradeVillaB").change(function () {
         var grade = $(this).val();
         $.ajax({
             type: "POST",
@@ -1620,7 +1648,7 @@ function gradeB() {
             data: {
                 grade: grade,
             },
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -1632,7 +1660,7 @@ function gradeB() {
 }
 
 function gradeC() {
-    $("#gradeVillaC").change(function() {
+    $("#gradeVillaC").change(function () {
         var grade = $(this).val();
         $.ajax({
             type: "POST",
@@ -1643,7 +1671,7 @@ function gradeC() {
             data: {
                 grade: grade,
             },
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -1655,7 +1683,7 @@ function gradeC() {
 }
 
 function gradeD() {
-    $("#gradeVillaD").change(function() {
+    $("#gradeVillaD").change(function () {
         var grade = $(this).val();
         $.ajax({
             type: "POST",
@@ -1666,7 +1694,7 @@ function gradeD() {
             data: {
                 grade: grade,
             },
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,

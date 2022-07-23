@@ -484,7 +484,7 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                            <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $villa[0]->created_by)
@@ -590,7 +590,7 @@
                                                         @endforeach
                                                         @if ($video->count() < 100)
                                                             @foreach ($video as $item)
-                                                                <div class="card4 col-lg-3 radius-5">
+                                                                <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
                                                                     <div class="img-wrap">
                                                                         <div class="video-position">
                                                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $villa[0]->created_by)
@@ -664,9 +664,9 @@
                                                                 @endif
                                                             @endauth
                                                             @guest
-                                                                <a type="button" onclick="showPromotionMobile()"
-                                                                    style="height: 70px; width: 70px;">
-                                                                @endguest
+                                                            <a type="button" onclick="showPromotionMobile()"
+                                                                style="height: 70px; width: 70px;">
+                                                            @endguest
 
                                                                 <div class="story-video-player"><i
                                                                         class="fa fa-play"></i>
@@ -4308,6 +4308,7 @@
                 let content = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
+                let contentStory;
 
                 let modalPhotoLength = $('#sortable-photo').find('li').length;
                 let modalVideoLength = $('#sortable-video').find('li').length;
@@ -4365,8 +4366,26 @@
                         path + lowerCaseUid + slash + message.data.video[0].name +
                         '#t=1.0"> </li>';
 
+                    contentStory =
+                        '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                        message.data.video[0].id_video +
+                        '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view(' +
+                        message.data.video[0].id_video +
+                        ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        message.data.video[0].name +
+                        '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                        id_villa +
+                        '" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+
                     $('.gallery').append(content);
                     $('#sortable-video').append(contentPositionModalVideo);
+                    $("#storyContent").append(contentStory);
+                    sliderRestaurant();
                 }
 
                 $gallery.refresh();
@@ -4832,6 +4851,8 @@
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo" + video).remove();
                             $("#positionVideoGallery"+video).remove();
+                            $("#displayStoryVideo"+video).remove();
+                            sliderRestaurant();
                         }
                     });
                 } else {

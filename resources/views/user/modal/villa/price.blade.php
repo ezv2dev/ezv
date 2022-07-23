@@ -372,25 +372,25 @@
 
                                                         <!-- Submit -->
                                                         <div class="row items-push">
-                                                         
+
                                                                 <div class="col-6">
                                                                     <button type="submit" class="btn btn-sm btn-primary mt-3"
                                                                         id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
                                                                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                                     </button>
                                                                 </div>
-                                                          
+
                                                         </div>
                                                         <!-- END Submit -->
                                                 </div>
                                             </div>
 
-                                           
 
-                                          
 
-                                           
-                                          
+
+
+
+
                                             <br>
                                         </form>
                                     </div>
@@ -919,6 +919,13 @@
             $('#end').val(end);
             // $('#addSpecialModal').modal('show');
         },
+
+        // eventClick: function (event) {
+        //     var start = moment(event.start).format('YYYY-MM-DD');
+        //     var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
+        //     $('#start').val(start);
+        //     $('#end').val(end);
+        // }
     });
 
     let multiEvent = [];
