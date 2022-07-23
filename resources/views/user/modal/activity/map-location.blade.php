@@ -276,7 +276,7 @@
         if(restaurantLocations.photo && restaurantLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < restaurantLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.photo[j].name}')}}"
                         alt="">
@@ -284,13 +284,13 @@
             }
         } else {
             if(restaurantLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -387,6 +387,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -400,7 +405,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
+                                    <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank">
                                         <p class="card-text text-20 text-orange fw-600 mt-1">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
                                         <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -531,7 +536,7 @@
         if(villaLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < villaLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.photo[j].name}')}}"
                         alt="">
@@ -539,13 +544,13 @@
             }
         } else {
             if(villaLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -632,6 +637,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -645,20 +655,19 @@
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                    <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
                                         <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
                                 </div>
                                 <div class="col-12 d-flex">
-                                    <div class="col-6">
-                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                    <div class="col-9">
+                                        <p class="text-grey-1 mb-0 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-end">
+                                    <div class="col-3 d-flex justify-content-end">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -861,6 +870,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -1002,7 +1016,7 @@
         if(activityLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
                         alt="">
@@ -1010,13 +1024,13 @@
             }
         } else {
             if(activityLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -1113,6 +1127,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -1126,7 +1145,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                    <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -1255,7 +1274,7 @@
     }
 
     // function to refetch data marker
-    async function refetchMarkers() {
+    async function refetchMarkers(additionalOption) {
         console.log('hit refetchMarkers', map.getBounds().getSouthWest());
         console.log(map.getZoom(), map.getCenter());
 
@@ -1273,6 +1292,41 @@
         await fetchVillasLocation(data);
         await fetchHotelsLocation(data);
         await fetchActivitysLocation(data);
+
+        if(additionalOption){
+            if(additionalOption.withAdditionalArray){
+                if (additionalOption.additionalArrayType == 'villa') {
+                    if(additionalOption.additionalArrayData){
+                        villaLocations = [...villaLocations, ...additionalOption.additionalArrayData];
+                        removeVillaMarkerFromMap();
+                        declareMarkerVilla();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'restaurant') {
+                    if(additionalOption.additionalArrayData){
+                        restaurantLocations = [...restaurantLocations, ...additionalOption.additionalArrayData];
+                        removeRestaurantMarkerFromMap();
+                        declareMarkerRestaurant();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'hotel') {
+                    if(additionalOption.additionalArrayData){
+                        hotelLocations.concat(additionalOption.additionalArrayData);
+                        removeHotelMarkerFromMap();
+                        declareMarkerHotel();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'activity') {
+                    if(additionalOption.additionalArrayData){
+                        activityLocations.concat(additionalOption.additionalArrayData);
+                        removeActivityMarkerFromMap();
+                        declareMarkerActivity();
+                    }
+                }
+            }
+        }
+
+        markedViewedMarker();
     }
 
 
@@ -2128,7 +2182,11 @@
                     // load slick slider
                     runSlickSlider();
                     // refetch data
-                    await refetchMarkers();
+                    await refetchMarkers({
+                        withAdditionalArray: true,
+                        additionalArrayType: 'activity',
+                        additionalArrayData: [data]
+                    });
                     // add viewed marker activity
                     addViewedMarker(data.id_activity);
                     // marked viewed marker activity

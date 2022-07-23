@@ -2909,6 +2909,7 @@
                         $(".bottom-content").css("padding-right", gap + "px");
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
                         $("#sidebar_fix").css("right", gap + "px");
+                        $("#navbarright").css("right", navGap + "px");
                     } else {
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", "");
                         $(".page-content").css("padding-left", "");
@@ -2916,15 +2917,14 @@
                         $(".bottom-content").css("padding-left", "");
                         $(".bottom-content").css("padding-right", "");
                         $("#sidebar_fix").css("right", "");
+                        $("#navbarright").css("right", "0");
                     }
                     if (windowWidth > 1359) {
                         var gap = (windowWidth - 1360) / 2;
                         var navGap = gap - 20;
                         $("#rsv-block-btn .rsv").css("right", navGap + "px");
-                        $("#navbarright").css("right", navGap + "px");
                     } else {
                         $("#rsv-block-btn .rsv").css("right", "0px");
-                        $("#navbarright").css("right", "0");
                     }
                 }
                 var windowWidth = $(window).width();

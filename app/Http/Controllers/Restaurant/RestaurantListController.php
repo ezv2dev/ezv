@@ -1287,6 +1287,7 @@ class RestaurantListController extends Controller
 
         $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name','id_story')->latest()->get();
         $getUID = Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first();
+        $restaurantVideo = RestaurantVideo::where('id_restaurant', $request->id_restaurant)->select('id_video','name')->orderBy('order','asc')->get();
 
         $data = [];
 
@@ -1307,6 +1308,7 @@ class RestaurantListController extends Controller
                 'message' => 'Updated Restaurant Story',
                 'data' => $data,
                 'uid' => $getUID->uid,
+                'video' => $restaurantVideo,
             ], 200);
         } else {
             return response()->json([

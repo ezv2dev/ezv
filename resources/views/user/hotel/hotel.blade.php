@@ -1730,7 +1730,7 @@
                                         <p class="desc-hotel"><span
                                                 class="translate-text-single">{{ $item->short_description }}</span>
                                         </p>
-    
+
                                         <div class="d-flex" style="font-size: 14px;">
                                             <svg class="bk-icon -streamline-room_size" height="24px"
                                                 width="24px" viewBox="0 0 24 24" role="presentation"
@@ -1830,16 +1830,14 @@
                                 </div>
                                 <div class="col-6 col-md-2 text-center tab-body price-room"
                                     style="cursor: pointer;"
-                                    onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                    onclick="view_room()">
                                     <div class="price-tag">
                                         <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
                                         <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}</h6>
                                     </div>
                                     <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
                                     <br>
-                                    <a class="btn btn-outline-dark table-room-button href="
-                                        {{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                        target="_blank">Select Room</a>
+                                    <a class="btn btn-outline-dark table-room-button" onclick="view_room()">Select Room</a>
                                     {{-- @php
                                         $countBooking = "";
                                         $sisaRoom = "";
@@ -3409,6 +3407,7 @@
             </center>
         </div>
     </div>
+
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
@@ -5435,6 +5434,7 @@
             }
         </script>
     @endif
+    @include('user.modal.hotel.detail_room')
 </body>
 
 </html>
