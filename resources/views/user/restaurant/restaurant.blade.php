@@ -261,9 +261,9 @@
         <div class="row page-content">
 
             {{-- LEFT CONTENT --}}
-            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
+            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
 
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($restaurant->image)
@@ -1567,7 +1567,7 @@
             </div>
             {{-- END RIGHT CONTENT --}}
 
-            <section id="location-map" class="section-2">
+            <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
                 <hr calss="pendek">
                 <h2>
                     {{ __("user_page.What's nearby ?") }}

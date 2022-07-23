@@ -3084,6 +3084,12 @@ video {
     stroke-width: 2px;
 }
 
+.modal-map-image-container{
+    overflow: hidden; 
+    height: 260px; 
+    border-radius: 15px;
+}
+
 .copier::before {
     content: "\f0c5";
     font-family: "Font Awesome 5 Free";
@@ -3550,6 +3556,7 @@ span.flatpickr-weekday {
     .modal-map-image-container,
     #modal-map-content .img-fluid {
         height: 23vh !important;
+        border-radius: 15px;
     }
     .payment-warning {
         width: 80% !important;
