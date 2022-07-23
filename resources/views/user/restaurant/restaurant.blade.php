@@ -802,7 +802,7 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
-                                                            <div class="card4 col-lg-3" style="border-radius: 5px;">
+                                                            <div class="card4 col-lg-3" id="displayStoryVideo{{ $item->id_video }}" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
@@ -914,7 +914,7 @@
                                                             </div>
                                                         @endforeach
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
-                                                            <div class="card4 col-lg-3" style="border-radius: 5px;">
+                                                            <div class="card4 col-lg-3" id="displayStoryVideo{{ $item->id_video }}" style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
@@ -4644,6 +4644,7 @@
                 let content;
                 let contentPositionModal;
                 let contentPositionModalVideo;
+                let contentStory;
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4705,8 +4706,26 @@
                         path + lowerCaseUid + slash + message.data.video[0].name +
                         '#t=1.0"> </li>';
 
+                    contentStory =
+                        '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                        message.data.video[0].id_video +
+                        '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video_restaurant(' +
+                        message.data.video[0].id_video +
+                        ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        message.data.video[0].name +
+                        '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                        id_restaurant +
+                        '" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+
                     $('.gallery').append(content);
                     $('#sortable-video').append(contentPositionModalVideo);
+                    $("#storyContent").append(contentStory);
+                    sliderRestaurant();
                 }
 
                 $gallery.refresh();
@@ -5162,6 +5181,8 @@
                             // showingLoading();
                             $('#displayVideo' + video).remove();
                             $("#positionVideoGallery"+video).remove();
+                            $("#displayStoryVideo"+video).remove();
+                            sliderRestaurant();
                         }
                     });
                 } else {
