@@ -28,7 +28,7 @@
 .collab-body {
     background: #fff;
     width: 100%;
-    padding: 110px 110px;
+    padding: 50px 110px;
 }
 .collab-button {
     padding: 12px 20px;
@@ -121,4 +121,8 @@
     .body-form {
     width: 80%; 
     }
+}
+
+.text-justify {
+    text-align: justify;
 }
