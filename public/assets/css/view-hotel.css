@@ -420,13 +420,40 @@ video {
     fill: #e31c5f;
     margin-left: 16px;
 }
+#room .table-body .tab-body {
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-right: none;
+    border-top: none;
+    position: relative;
+}
+#room .table-body .tab-body:nth-child(6n+0) {
+    border-right: solid 1px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+}
+#room .table-body .tab-body:last-child {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+}
+#room .table-body .tab-body .total-container {
+    display: none;
+}
+#room .table-body .tab-body:nth-child(6) .total-container {
+    display: block;
+}
+.price-discount {
+    color: #c00;
+    text-decoration: line-through;
+    font-size: 12px;
+}
+.choice-item {
+    font-size: 12px;
+}
 
 @media only screen and (min-width: 425px) and (max-width: 767px) { 
-    #room .table-body .type-room,
+    #room .table-body .capacity-room,
     #room .table-body .price-room {
         display: flex !important;
     }
-    #room .table-body .type-room {
+    #room .table-body .capacity-room {
         justify-content: space-evenly !important;
     }
     #room .table-body .price-room {

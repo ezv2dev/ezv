@@ -1635,18 +1635,25 @@
                     </h2>
                     <div class="col-12">
                         <div class="row table-header">
-                            <div class="col-4 text-center tab-header">
+                            {{-- <div class="col-4 text-center tab-header">
                                 {{ __('user_page.Image') }}
-                            </div>
+                            </div> --}}
                             <div class="col-4 text-center tab-header">
                                 {{ __('user_page.Room Type') }}
                             </div>
-                            <div class="col-2 text-center tab-header">
+                            <div class="col-1 px-0 text-center tab-header">
                                 {{ __('user_page.Capacity') }}
                             </div>
                             <div class="col-2 text-center tab-header">
                                 {{ __('user_page.Price') }}
                             </div>
+                            <div class="col-2 text-center tab-header">
+                                Your Choice
+                            </div>
+                            <div class="col-1 px-0 text-center tab-header">
+                                Select amount
+                            </div>
+                            <div class="col-2 px-0 text-center tab-header"></div>
                         </div>
                         <div class="row table-body room-content translate-text-group">
                             @forelse ($hotelTypeDetail as $item)
@@ -1684,8 +1691,42 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="text-justify" style="cursor: pointer;"
+                                        onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                        <h4>
+                                            <p><a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
+                                                    target="_blank">{{ $item->name }}</a></p>
+                                        </h4>
+                                        <p class="desc-hotel"><span
+                                                class="translate-text-single">{{ $item->short_description }}</span>
+                                        </p>
+    
+                                        <div class="d-flex" style="font-size: 14px;">
+                                            <svg class="bk-icon -streamline-room_size" height="24px"
+                                                width="24px" viewBox="0 0 24 24" role="presentation"
+                                                aria-hidden="true" focusable="false">
+                                                <path
+                                                    d="M3.75 23.25V7.5a.75.75 0 0 0-1.5 0v15.75a.75.75 0 0 0 1.5 0zM.22 21.53l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 1 0-1.06-1.06l-2.25 2.25h1.06l-2.25-2.25a.75.75 0 0 0-1.06 1.06zM5.78 9.22L3.53 6.97a.75.75 0 0 0-1.06 0L.22 9.22a.75.75 0 1 0 1.06 1.06l2.25-2.25H2.47l2.25 2.25a.75.75 0 1 0 1.06-1.06zM7.5 3.75h15.75a.75.75 0 0 0 0-1.5H7.5a.75.75 0 0 0 0 1.5zM9.22.22L6.97 2.47a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.03 2.47v1.06l2.25-2.25A.75.75 0 1 0 9.22.22zm12.31 5.56l2.25-2.25a.75.75 0 0 0 0-1.06L21.53.22a.75.75 0 1 0-1.06 1.06l2.25 2.25V2.47l-2.25 2.25a.75.75 0 0 0 1.06 1.06zM10.5 13.05v7.2a2.25 2.25 0 0 0 2.25 2.25h6A2.25 2.25 0 0 0 21 20.25v-7.2a.75.75 0 0 0-1.5 0v7.2a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1-.75-.75v-7.2a.75.75 0 0 0-1.5 0zm13.252 2.143l-6.497-5.85a2.25 2.25 0 0 0-3.01 0l-6.497 5.85a.75.75 0 0 0 1.004 1.114l6.497-5.85a.75.75 0 0 1 1.002 0l6.497 5.85a.75.75 0 0 0 1.004-1.114z">
+                                                </path>
+                                            </svg>
+                                            <p style="margin-left: 10px; margin-top: 5px; font-size: 12px;"
+                                                class="mb-0">
+                                                {{ $item->room_size }}
+                                                m<sup>2</sup> </p>
+                                            @forelse ($item->typeAmenities->take(3) as $item2)
+                                                <div class="amenities-detail-view">
+                                                    <i class="fa fa-{{ $item2->icon }}"
+                                                        style="font-size: 20px !important; margin-left: 10px; margin-top: 5px;"></i>
+                                                    <p style="margin-left: 10px; margin-top: 5px; font-size: 12px;"
+                                                        class="mb-0">
+                                                        {{ $item2->name }}</p>
+                                                </div>
+                                            @empty
+                                            @endforelse
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-4 text-justify tab-body" style="cursor: pointer;"
+                                {{-- <div class="col-12 col-md-2 text-justify tab-body" style="cursor: pointer;"
                                     onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
 
                                     <h4>
@@ -1719,8 +1760,8 @@
                                         @empty
                                         @endforelse
                                     </div>
-                                </div>
-                                <div class="col-6 col-md-2 text-center tab-body type-room"
+                                </div> --}}
+                                <div class="col-6 col-md-1 text-center tab-body capacity-room"
                                     style="cursor: pointer;"
                                     onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
                                     @for ($i = 0; $i < $item->capacity; $i++)
@@ -1760,7 +1801,11 @@
                                 <div class="col-6 col-md-2 text-center tab-body price-room"
                                     style="cursor: pointer;"
                                     onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
-                                    IDR {{ number_format($item->price) }}
+                                    <div class="price-tag">
+                                        <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
+                                        <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}</h6>
+                                    </div>
+                                    <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
                                     <br>
                                     <a class="btn btn-outline-dark table-room-button href="
                                         {{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
@@ -1778,6 +1823,27 @@
                                         }
                                     @endphp
                                 <span class="d-block text-danger" style="font-size: 12px; margin-top: 10px; font-weight: 600;">{{$sisaRoom}} {{ $sisaRoom == null ? "" : "Rooms Available" }}</span> --}}
+                                </div>
+                                <div class="col-6 col-md-2 text-center tab-body">
+                                    <div class="choice-item">
+                                        <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                        <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-1 text-center tab-body">
+                                    <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                                        <option value="0">0</option>
+                                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR {{ number_format($item->price) }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-md-2 text-center tab-body">
+                                    <div class="total-container">
+                                        <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
+                                        <button class="price-button"
+                                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;">
+                                            Reserve Now
+                                        </button>
+                                    </div>
                                 </div>
                             @empty
                                 <div class="col-12">{{ __('user_page.No data found') }}</div>
@@ -4647,14 +4713,27 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $amenitiesTop = $("#amenities").offset().top - 110;
+            var $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
+            var $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
+            var $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
+            var $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
+            var $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve;
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $amenitiesTop = $("#amenities").offset().top;
+                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
+                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
+                $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
+                $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
+                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve.outerHeight();
             });
 
             $window.scroll(function() {
+                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
+                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
+                $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
+                $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
+                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve.outerHeight();
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $amenitiesTop) {
                     $sidebar.addClass("fixed");
                     $sidebar.css({
@@ -4666,6 +4745,24 @@
                         "position": "absolute"
                     });
                     $sidebar.removeClass("fixed");
+                }
+
+                if ($window.scrollTop() >= 0 && $window.scrollTop() >= $roomTableHeaderTop && $window.scrollTop() < $roomTableHeight - $roomReserve.outerHeight()) {
+                    $roomReserve.css({
+                        position: "fixed",
+                        top: "120px",
+                        width: $roomReserveContainerWidth,
+                    })
+                } else if ($window.scrollTop() > $roomTableHeight - 15) {
+                    $roomReserve.css({
+                        position: "absolute",
+                        top: $("#room .table-body").outerHeight() - $("#room .table-body .tab-body:nth-child(6) .total-container").outerHeight() - 15
+                    })
+                } else if ($window.scrollTop() < $roomTableHeaderTop) {
+                    $roomReserve.css({
+                        position: "",
+                        top: ""
+                    })
                 }
             });
         });
