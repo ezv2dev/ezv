@@ -8,8 +8,9 @@
             </div>
             <div class="modal-body pb-1">
                 {{-- <form action="{{ route('restaurant_update_location') }}" method="POST" id="basic-form" class="js-validation" enctype="multipart/form-data" > --}}
-                <div id="editLocationForm">
+                <form action="#" method="POST" id="basic-form" class="js-validation" enctype="multipart/form-data">
                     <input type="hidden" name="id_restaurant" id="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+
                     <label class="col-sm-3 col-form-label" for="bed" style="font-size: 20px;">{{ __('user_page.Location') }}</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
@@ -35,17 +36,21 @@
                         <input type="hidden" class="form-control" id="longitudeRestaurant" name="longitude"
                             placeholder="Enter a longitude.." value="{{ $restaurant->longitude }}">
                     </div>
+
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation" class="btn btn-sm btn-primary">
+                            <button type="submit" onclick="saveLocation()" class="btn btn-sm btn-primary">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
                     <!-- END Submit -->
                     <br>
+                </form>
+                <div>
+                    <input type="hidden" name="id_restaurant" id="id_restaurant" value="{{ $restaurant->id_restaurant }}">
                 </div>
             </div>
         </div>
@@ -54,20 +59,17 @@
 
 {{-- Restaurant Map --}}
 <script>
-    // variabel global edit marker
-    var markerEditLocation;
+    // variabel global marker
+    var marker;
 
     function taruhMarkerRestaurant(map, posisiTitik) {
-        console.log('taruhMarkerRestaurant');
-        console.log('map: '+map);
-        console.log('posisiTitik: '+posisiTitik);
-        console.log('markerEditLocation: '+markerEditLocation);
-        if (markerEditLocation) {
-            // pindahkan markerEditLocation
-            markerEditLocation.setPosition(posisiTitik);
+
+        if (marker) {
+            // pindahkan marker
+            marker.setPosition(posisiTitik);
         } else {
-            // buat markerEditLocation baru
-            markerEditLocation = new google.maps.Marker({
+            // buat marker baru
+            marker = new google.maps.Marker({
                 position: posisiTitik,
                 map: map,
                 icon: {
@@ -79,17 +81,21 @@
                 }
             });
         }
+
         // isi nilai koordinat ke form
         document.getElementById("latitudeRestaurant").value = posisiTitik.lat();
         document.getElementById("longitudeRestaurant").value = posisiTitik.lng();
+
     }
 
     // fungsi initialize untuk mempersiapkan peta
-    function initEditLocationRestaurant(latitudeOld, longitudeOld) {
+    function initializeRestaurant() {
+        var latitudeOld = parseFloat('{{ $restaurant->latitude }}');
+        var longitudeOld = parseFloat('{{ $restaurant->longitude }}');
         var map = new google.maps.Map(document.getElementById('mapRestaurant'), {
             center: {
-                lat: parseFloat(latitudeOld),
-                lng: parseFloat(longitudeOld)
+                lat: latitudeOld,
+                lng: longitudeOld
             },
             styles: [{
                     "featureType": "poi",
@@ -196,11 +202,8 @@
         });
     }
 
-    var latitudeOld = parseFloat('{{ $restaurant->latitude }}');
-    var longitudeOld = parseFloat('{{ $restaurant->longitude }}');
-
     // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initEditLocationRestaurant(latitudeOld, longitudeOld));
+    google.maps.event.addDomListener(window, 'load', initializeRestaurant);
 </script>
 <!-- END Fade In Default Modal -->
 
