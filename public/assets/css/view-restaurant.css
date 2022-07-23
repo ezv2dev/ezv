@@ -402,11 +402,6 @@ color: #FEFBE7;
     background-position: 0% 50%;
     }
 }
-@media only screen and (max-width: 1259px) {
-    .sidebar-mf {
-        margin-left: -25px !important;
-    }
-}
 
 @media (min-width: 1260px) and (max-width: 1359px) {
     .menu-gallery {

@@ -3773,11 +3773,6 @@ span.flatpickr-weekday {
         width: 100% !important;
         margin-left: 3px;
     }
-    .sidebar-restaurant,
-    .sidebar-activity {
-        right: -10px !important;
-        top: 0px;
-    }
     .headline-list-property {
         font-size: 1.1rem !important;
     }
@@ -3894,6 +3889,7 @@ span.flatpickr-weekday {
     .navright.active {
         width: fit-content !important;
         min-width: 390px !important;
+        padding-right: 14px !important;
     }
     .rsv-block .sticky {
         width: 72% !important;
