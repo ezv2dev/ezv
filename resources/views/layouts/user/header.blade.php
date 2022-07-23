@@ -2901,27 +2901,28 @@
                     }
                     if (windowWidth > 1460) {
                         var gap = (windowWidth - 1360) / 2;
+                        var navGap = gap - 20;
                         var headerWidth = windowWidth - (gap * 2);
                         $(".page-content").css("padding-left", gap + "px");
                         $(".page-content").css("padding-right", gap + "px");
                         $(".bottom-content").css("padding-left", gap + "px");
                         $(".bottom-content").css("padding-right", gap + "px");
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
+                        $("#sidebar_fix").css("right", gap + "px");
                     } else {
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", "");
                         $(".page-content").css("padding-left", "");
                         $(".page-content").css("padding-right", "");
                         $(".bottom-content").css("padding-left", "");
                         $(".bottom-content").css("padding-right", "");
+                        $("#sidebar_fix").css("right", "");
                     }
                     if (windowWidth > 1359) {
                         var gap = (windowWidth - 1360) / 2;
                         var navGap = gap - 20;
-                        $("#sidebar_fix").css("right", gap + "px");
                         $("#rsv-block-btn .rsv").css("right", navGap + "px");
                         $("#navbarright").css("right", navGap + "px");
                     } else {
-                        $("#sidebar_fix").css("right", "10px");
                         $("#rsv-block-btn .rsv").css("right", "0px");
                         $("#navbarright").css("right", "0");
                     }
