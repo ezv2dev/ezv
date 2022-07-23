@@ -129,7 +129,7 @@
                                 <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
@@ -179,7 +179,7 @@
                     style="color: #585656; width: fit-content;" target="_blank">
                     {{ __('user_page.Become a host') }}
                 </a>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center mb-2">
                     <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
                         style="color: white; margin-right: 9px;" id="language">
                         @if (session()->has('locale'))
@@ -189,13 +189,29 @@
                             <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                        <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                     </a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                    @if (session()->has('currency'))
+                    <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                    @else
+                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                    @endif
+
+                </a>
                 </div>
             @endauth
         </div>
 
     </div>
+    <div id="overlay"></div>
     {{-- navbar --}}
     <section class="h-100 w-100" style="box-sizing: border-box; background-color: #000000;">
         <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
@@ -1188,6 +1204,7 @@
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#expand-mobile-btn").on("click", function() {
                     $("body").css({
@@ -1197,6 +1214,17 @@
                     $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "true");
+                    $("#overlay").css("display", "block");
+                })
+                $('#overlay').click(function() {
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
+                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");

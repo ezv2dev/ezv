@@ -173,10 +173,24 @@
                                     <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                                <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
                         </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
 
+                            @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            @endif
+
+                        </a>
+                        </div>
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -208,7 +222,7 @@
                         style="color: #585656; width: fit-content;" target="_blank">
                         {{ __('user_page.Become a host') }}
                     </a>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
                             style="color: white; margin-right: 9px;" id="language">
                             @if (session()->has('locale'))
@@ -220,14 +234,29 @@
                                     src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
                     </div>
                 @endauth
             </div>
 
         </div>
-
+        <div id="overlay"></div>
         {{-- PROFILE --}}
         <div class="row page-content">
 
@@ -4104,7 +4133,7 @@
                                 '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
                                 response.data.video[v].id_video +
                                 '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                            
+
                             contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
                                 .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
                                 '"> <video loading="lazy" src="' +
