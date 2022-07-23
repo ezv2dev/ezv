@@ -847,6 +847,7 @@ function editAmenitiesVilla(id_villa) {
             var lengthService = response.getService.length;
 
             $("#modal-edit_amenities").modal("hide");
+            $("#default-amen-null").hide();
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
@@ -860,8 +861,8 @@ function editAmenitiesVilla(id_villa) {
             $("#listAmenities").html("");
 
             if (lengthAmenities == 0) {
-                $("#listAmenities").append(
-                    `<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`
+                $("#row-amenities").append(
+                    `<p id="default-amen-null">There is no amenities</p>`
                 );
             }
 

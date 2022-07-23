@@ -1065,7 +1065,7 @@
                             </div>
 
                         </div>
-                        <div class="row-grid-amenities">
+                        <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
                                 @if (!empty($villa_amenities->count()))
                                     @if ($villa_amenities->count() > 6)
@@ -1237,13 +1237,11 @@
                                             </div>
                                         @endif
                                     @endif
-                                @else
-                                    <div class='list-amenities'>
-                                        <p style="text-align: center;">{{ __('user_page.There is no amenities') }}
-                                        </p>
-                                    </div>
                                 @endif
                             </div>
+                            @empty($villa_amenities->count())
+                                <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
+                            @endempty
                         </div>
                     </section>
                 </div>

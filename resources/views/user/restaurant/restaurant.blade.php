@@ -1409,7 +1409,7 @@
                             <div class="stopper"></div>
                         </div>
 
-                        <div class="row-grid-amenities">
+                        <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="contentFacilities">
                                 @if ($restaurant->facilities->count() > 6)
                                     @for ($i = 0; $i < 6; $i++)
@@ -1447,7 +1447,7 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class="list-amenities"> <p style="text-align: center;">{{ __('user_page.there is no facilities yet') }}</p> </div>
+                                        {{-- <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p> --}}
                                     @endforelse
                                 @endif
                                 @if ($restaurant->facilities->count() > 6)
@@ -1460,6 +1460,9 @@
                                         </button>
                                     </div>
                                 @endif
+                                @empty($restaurant->facilities->count())
+                                    <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
+                                @endempty
                             </div>
                     </section>
 
