@@ -3396,6 +3396,44 @@
 
         {{-- Search Location --}}
         <script>
+            $(function() {
+                var mode = localStorage.getItem("mode");
+
+                $(window).on("resize", function() {
+                    if(mode != null) {
+                        if(mode == "dark") {
+                            if(window.innerWidth < 950) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                            }
+                        } else {
+                            if(window.innerWidth > 949) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                            }
+                        }
+                    } else {
+                        if(window.innerWidth > 949) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                        }
+                    }
+                });
+                if(mode != null) {
+                    if(mode == "dark") {
+                        if(window.innerWidth < 950) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                        }
+                    } else {
+                        if(window.innerWidth > 949) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                        }
+                    }
+                } else {
+                    if(window.innerWidth > 949) {
+                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                    }
+                }
+            });
+        </script>
+        <script>
             var coll = document.getElementsByClassName("collapsible_check_search");
             var i;
 
@@ -3490,6 +3528,7 @@
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#expand-mobile-btn").on("click", function() {
                     $("body").css({
@@ -3499,6 +3538,17 @@
                     $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "true");
+                    $("#overlay").css("display", "block");
+                })
+                $('#overlay').click(function() {
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
+                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
@@ -3957,8 +4007,15 @@
                 $('#content-tab-currency').addClass('active');
             }
         </script>
-
         <script>
+            $(function () {
+                $('#switcher').click(function () {
+                    $('#background-color-switch').trigger("click");
+                });
+            });
+        </script>
+        <script>
+
             function initChangeBackgroundTrigger() {
                 // check if mode has been set
                 var checkBox = document.getElementById("background-color-switch");
@@ -4032,6 +4089,14 @@
                 localStorage.removeItem("mode");
                 localStorage.setItem("mode", tipe == 'black' ? "dark" : 'light');
 
+                $('.grid-img-filter').css("box-shadow", "");
+                if(screen.width > 949) {
+                    if(tipe == 'black') {
+                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px");
+                    } else {
+                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px");
+                    }
+                }
                 // var checkBox = document.getElementById("background-color-switch");
                 var text = document.getElementById("body-color");
                 var nav = document.getElementById("new-bar-black");

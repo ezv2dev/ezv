@@ -72,7 +72,7 @@ class Villa extends Model
             ->addIndexColumn()
             ->addColumn('listing', function ($data) {
                 $url = asset('foto/gallery/' . $data->uid . '/' . $data->image);
-                return '<img src="' . $url . '" border="0" width="60" class="img-rounded" align="center" /> <a href="/villa/' . $data->id_villa . '"><span><b>' . $data->name . '</b></span></a>';
+                return '<img src="' . $url . '" border="0" width="60" class="img-rounded" align="center" /> <a href="/homes/' . $data->id_villa . '"><span><b>' . $data->name . '</b></span></a>';
             })
 
             ->addColumn('last_modified', function ($data) {
@@ -368,7 +368,7 @@ class Villa extends Model
             ->addIndexColumn()
             ->addColumn('listing', function ($data) {
                 $url = asset('foto/gallery/' . $data->uid . '/' . $data->image);
-                return '<img src="' . $url . '" border="0" width="60" class="img-rounded" align="center" /> <a href="/villa/' . $data->id_villa . '"><span><b>' . $data->name . '</b></span></a>';
+                return '<img src="' . $url . '" border="0" width="60" class="img-rounded" align="center" /> <a href="/homes/' . $data->id_villa . '" target="_blank"><span><b>' . $data->name . '</b></span></a>';
             })
 
             ->addColumn('last_modified', function ($data) {

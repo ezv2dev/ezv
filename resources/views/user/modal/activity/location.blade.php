@@ -7,11 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('activity_update_location') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
+                <div id="editLocationForm">
                     <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
-
                     <label class="col-sm-3 col-form-label" for="bed" style="font-size: 20px;">{{ __('user_page.Location') }}</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
@@ -30,11 +27,11 @@
                         </select>
                     </div>
                     <div class="col-sm-12">
-                        <input id="searchTextFieldRestaurant" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
-                        <div id="mapRestaurant" style="width:100%;height:280px;"></div>
-                        <input type="hidden" class="form-control" id="latitudeRestaurant" name="latitude"
+                        <input id="searchTextFieldActivity" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
+                        <div id="mapActivity" style="width:100%;height:280px;"></div>
+                        <input type="hidden" class="form-control" id="latitudeActivity" name="latitude"
                             placeholder="Enter a latitude.." value="{{ $activity->latitude }}">
-                        <input type="hidden" class="form-control" id="longitudeRestaurant" name="longitude"
+                        <input type="hidden" class="form-control" id="longitudeActivity" name="longitude"
                             placeholder="Enter a longitude.." value="{{ $activity->longitude }}">
                     </div>
 
@@ -42,53 +39,58 @@
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" onclick="saveLocation()" class="btn btn-sm btn-primary">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
                     <!-- END Submit -->
                     <br>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{{-- Restaurant Map --}}
+{{-- Activity Map --}}
 <script>
-    // variabel global marker
-    var marker;
+    // variabel global edit marker
+    var markerEditLocation;
 
-    function taruhMarkerRestaurant(map, posisiTitik) {
-
-        if (marker) {
-            // pindahkan marker
-            marker.setPosition(posisiTitik);
+    function taruhMarkerActivity(map, posisiTitik) {
+        console.log('taruhMarkerActivity');
+        console.log('map: '+map);
+        console.log('posisiTitik: '+posisiTitik);
+        console.log('markerEditLocation: '+markerEditLocation);
+        if (markerEditLocation) {
+            // pindahkan markerEditLocation
+            markerEditLocation.setPosition(posisiTitik);
         } else {
-            // buat marker baru
-            marker = new google.maps.Marker({
+            // buat markerEditLocation baru
+            markerEditLocation = new google.maps.Marker({
                 position: posisiTitik,
-                map: map
+                map: map,
+                icon: {
+                    url: 'http://maps.google.com/mapfiles/kml/paddle/orange-stars.png',
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }
             });
         }
-
         // isi nilai koordinat ke form
-        document.getElementById("latitudeRestaurant").value = posisiTitik.lat();
-        document.getElementById("longitudeRestaurant").value = posisiTitik.lng();
-
+        document.getElementById("latitudeActivity").value = posisiTitik.lat();
+        document.getElementById("longitudeActivity").value = posisiTitik.lng();
     }
 
     // fungsi initialize untuk mempersiapkan peta
-    function initializeRestaurant() {
-        var latitudeOld = parseFloat('{{ $activity->latitude }}');
-        var longitudeOld = parseFloat('{{ $activity->longitude }}');
-        var map = new google.maps.Map(document.getElementById('mapRestaurant'), {
-            scrollwheel: true,
-            draggable: true,
-            gestureHandling: "greedy",
-            center: new google.maps.LatLng(-8.62, 115.09),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+    function initEditLocationActivity(latitudeOld, longitudeOld) {
+        var map = new google.maps.Map(document.getElementById('mapActivity'), {
+            center: {
+                lat: parseFloat(latitudeOld),
+                lng: parseFloat(longitudeOld)
+            },
             styles: [{
                     "featureType": "poi",
                     "elementType": "all",
@@ -111,14 +113,30 @@
                     }]
                 }
             ],
-            center: {
-                lat: latitudeOld,
-                lng: longitudeOld
-            },
+            scrollwheel: true,
+            draggable: true,
+            gestureHandling: "greedy",
             zoom: 17
         });
 
-        var input = document.getElementById('searchTextFieldRestaurant');
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            position: {
+                lat: parseFloat(latitudeOld),
+                lng: parseFloat(longitudeOld)
+            },
+            icon: {
+                url: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png',
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            }
+            // anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        var input = document.getElementById('searchTextFieldActivity');
 
         // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -127,7 +145,6 @@
 
         autocomplete.bindTo('bounds', map);
 
-        var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
             map: map,
             anchorPoint: new google.maps.Point(0, -29)
@@ -168,19 +185,22 @@
                 ].join(' ');
             }
 
-            document.getElementById('latitudeRestaurant').value = place.geometry.location.lat();
-            document.getElementById('longitudeRestaurant').value = place.geometry.location.lng();
+            document.getElementById('latitudeActivity').value = place.geometry.location.lat();
+            document.getElementById('longitudeActivity').value = place.geometry.location.lng();
         });
 
 
         // even listner ketika peta diklik
         google.maps.event.addListener(map, 'click', function(event) {
-            taruhMarkerRestaurant(this, event.latLng);
+            taruhMarkerActivity(this, event.latLng);
         });
     }
 
+    var latitudeOld = parseFloat('{{ $activity->latitude }}');
+    var longitudeOld = parseFloat('{{ $activity->longitude }}');
+
     // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initializeRestaurant);
+    google.maps.event.addDomListener(window, 'load', initEditLocationActivity(latitudeOld, longitudeOld));
 </script>
 
 {{-- disable enter button --}}

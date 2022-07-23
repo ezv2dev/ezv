@@ -1,5 +1,5 @@
 @php
-$villas = $villa->shuffle()->sortBy('grade');
+$villas = $villa;
 $list = [];
 foreach ($villas as $item) {
     array_push($list, $item->id_villa);
@@ -54,7 +54,7 @@ if (isset($_COOKIE['tema'])) {
             <div class="content list-image-content list-image-content-villa">
                 @guest
                     <div class="list-like-button-container"
-                        style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                        style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                         <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                             onclick="loginForm(1)">
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -65,6 +65,24 @@ if (isset($_COOKIE['tema'])) {
                             </svg>
                         </a>
                     </div>
+                    <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right"  id="villa-list-video-mobile">
+                        <div class="villa-list-video-container video-show-buttons">
+                            <i class="fas fa-2x fa-play video-button"></i>
+                            @if ($data->video->count() > 0)
+                                <video class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                            @elseif ($data->photo->count() > 0)
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                            @elseif ($data->image != null)
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                            @else
+                                <img class="villa-list-video" loading="lazy"
+                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                            @endif
+                        </div>
+                    </a>
                 @endguest
 
                 @auth
@@ -76,7 +94,7 @@ if (isset($_COOKIE['tema'])) {
 
                     @if ($cekVilla == null)
                         <div class="list-like-button-container"
-                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                            style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                                 onclick="likeFavorit({{ $data->id_villa }}, 'villa')">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -88,9 +106,27 @@ if (isset($_COOKIE['tema'])) {
                                 </svg>
                             </a>
                         </div>
+                        <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right" id="villa-list-video-mobile">
+                            <div class="villa-list-video-container video-show-buttons">
+                                <i class="fas fa-2x fa-play video-button"></i>
+                                @if ($data->video->count() > 0)
+                                    <video class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                @elseif ($data->photo->count() > 0)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                                @elseif ($data->image != null)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                                @else
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                        </a>
                     @else
                         <div class="list-like-button-container"
-                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                            style="position: absolute; left: 57px; top: 0px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
                             <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
                                 onclick="likeFavorit({{ $data->id_villa }}, 'villa')">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -102,6 +138,24 @@ if (isset($_COOKIE['tema'])) {
                                 </svg>
                             </a>
                         </div>
+                        <a href="{{ route('villa', $data->id_villa) }}" target="_blank" class="absolute-right" id="villa-list-video-mobile">
+                            <div class="villa-list-video-container video-show-buttons">
+                                <i class="fas fa-2x fa-play video-button"></i>
+                                @if ($data->video->count() > 0)
+                                    <video class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->video->last()->name) }}#t=1.0"></video>
+                                @elseif ($data->photo->count() > 0)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->photo->last()->name) }}">
+                                @elseif ($data->image != null)
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}">
+                                @else
+                                    <img class="villa-list-video" loading="lazy"
+                                        src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                        </a>
                     @endif
                 @endauth
 
@@ -162,7 +216,8 @@ if (isset($_COOKIE['tema'])) {
                                         style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                                 </p>
                             </div>
-                            <div class="cursor-pointer skeleton skeleton-h-2 skeleton-w-100" onclick="view_maps('{{ $data->id_villa }}')">
+                            <div class="cursor-pointer skeleton skeleton-h-2 skeleton-w-100"
+                                onclick="view_maps('{{ $data->id_villa }}')">
                                 <div class="villa-location-description">
                                     <span class="text-orange">
                                         <i class="fa-solid fa-location-dot"></i>
@@ -218,7 +273,7 @@ if (isset($_COOKIE['tema'])) {
 
                         <!-- Video Button -->
                         <div class="col-3 skeleton">
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank">
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank" id="villa-list-video-desktop">
                                 <div class="villa-list-video-container video-show-buttons">
                                     <i class="fas fa-2x fa-play video-button"></i>
                                     @if ($data->video->count() > 0)
@@ -246,7 +301,8 @@ if (isset($_COOKIE['tema'])) {
                                 </p>
                             </div>
 
-                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank" style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
+                            <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
+                                style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
                         </div>
                     </div>
 

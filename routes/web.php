@@ -462,7 +462,7 @@ Route::post('/villa/quick-enquiry', [ViewController::class, 'villa_quick_enquiry
 Route::post('/villa/update/image', [ViewController::class, 'villa_update_image'])->name('villa_update_image');
 Route::post('/villa/update/property-type', [ViewController::class, 'villa_update_property_type'])->name('villa_update_property_type');
 Route::get('/villa/{id}/delete/story/{id_story}', [ViewController::class, 'villa_delete_story'])->name('villa_delete_story');
-Route::patch('/villa/{id}/update/cancel-request-update-status', [ViewController::class, 'cancel_request_update_status'])->name('villa_cancel_request_update_status');
+Route::post('/villa/update/cancel-request-update-status', [ViewController::class, 'cancel_request_update_status'])->name('villa_cancel_request_update_status');
 Route::get('/villa/{id}/delete/image', [ViewController::class, 'villa_delete_image'])->name('villa_delete_image');
 Route::get('/villa/{id}/delete/photo/video/{id_video}', [ViewController::class, 'villa_delete_photo_video'])->name('villa_delete_photo_video');
 Route::get('/villa/{id}/delete/photo/photo/{id_photo}', [ViewController::class, 'villa_delete_photo_photo'])->name('villa_delete_photo_photo');

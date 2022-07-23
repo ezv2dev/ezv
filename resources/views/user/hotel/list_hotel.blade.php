@@ -77,7 +77,7 @@
                         <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                             data-src="https://source.unsplash.com/random/?bali">
                         <div class="grid-text">
-                            {{ __('user_page.More') }}
+                            {{ __('user_page.Filters') }}
                         </div>
                     </a>
                 </div>
@@ -87,7 +87,50 @@
                 <div id="filter-subcat-bg-color" style="width: 100%;"
                     class="container-grid-sub-cat translate-text-group {{ $bgColor }} pt-15p pb-15p" style="">
 
-                    @foreach ($hotelFilter->take(8) as $item)
+                    <div class="button-dropdown grid-sub-cat-content-container text-13">
+                        <a href="javascript:void(0)" id="sortBy" style="cursor:pointer;" class="dropdown-toggle">
+                            <div>
+                                <i class="fa fa-solid fa-sliders text-18 list-description  {{ $textColor }} sub-icon">
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }}">Sort by</div>
+                        </a>
+                        <div class="sort-popup dropdown-menu text-center">
+                            <h5 style="margin-bottom: 0;">Sort by</h5>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="highest"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'highest') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest to Highest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'lowest') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
+                                <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'popularity') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Best Reviewed
+                                <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="modalFiltersHotel()">
+                        <div>
+                            <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">Price</div>
+                    </div>
+                    @foreach ($hotelFilter->take(5)->sortBy('order') as $item)
                         <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
                             <div>
@@ -107,12 +150,21 @@
             @endforeach
 
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
+                onclick="modalFiltersHotel()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                 </div>
                 <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
+                    {{ __('user_page.Filters') }}
+                </div>
+            </div>
+            <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
+                onclick="modalFiltersHotel()">
+                <div>
+                    <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+                </div>
+                <div class="list-description {{ $textColor }}">
+                    {{ __('user_page.Filters') }}
                 </div>
             </div>
         </div>
@@ -254,37 +306,89 @@
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
+                    <div class="grid-one-line max-lines skeleton skeleton-w-100 skeleton-h-1">
+                        <div class="d-block d-md-flex">
+                            <div class="flex-fill">
+                                <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!"
+                                    onclick="view_maps('{{ $data->id_hotel }}')"><i
+                                        class="fa-solid text-orange fa-location-dot"></i>
+                                    {{ $data->location_name ?? __('user_page.Location not found') }}
+                                </a>
+                                <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                    - 4.2km from Ngurah Rai Airport
+                                </a>
+                            </div>
+                            <div class="text-13 text-md-end">
+                                <span>4 Stars</span>
+                                <i class="fa-solid fa-star" style="color: #febb02"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
-                        <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
-                            {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
-                        </span>
-                    </div>
-                    <div class="skeleton">
-                        <a class="text-14 fw-400 grid-one-line text-orange mt-1 " href="#!"
-                            onclick="view_maps('{{ $data->id_hotel }}')"><i
-                                class="fa-solid text-orange fa-location-dot"></i>
-                            {{ $data->location_name ?? __('user_page.Location not found') }}
-                        </a>
-                    </div>
-                    <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        @if ($data->price)
-                            <span class=" fw-600 {{ $textColor }} list-description ">
-                                {{ CurrencyConversion::exchangeWithUnit($data->price) }}
+                        <div class="d-flex">
+                            <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
+                                {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                             </span>
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                /{{ __('user_page.night') }}
-                            </span>
-                        @else
-                            <span class="fw-400 {{ $textColor }} list-description">
-                                {{ __('user_page.Price is unknown') }}
-                            </span>
-                        @endif
+                            <span class="text-12 fw-400"><a class="orange-hover"
+                                    onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                        </div>
                     </div>
-                    <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-2 skeleton">
-                        <span><a class="orange-hover"
-                                onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                    <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-5">
+                        <div class="row">
+                            <div class="col-6 pe-0">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="flex-fill">
+                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                            Fully Furlindable
+                                        </p>
+                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                            Reserve now pay later
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-14 fw-600 grid-one-line max-lines mb-0">
+                                            8.1/10
+                                        </p>
+                                        <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            Review
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-0">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="flex-fill max-lines-2"></div>
+                                    <div class="text-end">
+                                        <div class="text-14 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                1 {{ __('user_page.night') }}
+                                            </span>
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                , 2 adults
+                                            </span>
+                                        </div>
+                                        <div class="text-18 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            @if ($data->price)
+                                                <span class=" fw-600 {{ $textColor }} list-description ">
+                                                    {{ CurrencyConversion::exchangeWithUnit($data->price) }}
+                                                </span>
+                                            @else
+                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                    {{ __('user_page.Price is unknown') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="text-12 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
+                                            <span class="fw-400 {{ $textColor }} list-description">
+                                                Included taxes and changes
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    </a>
                 </div>
             </div>
         @endforeach
@@ -319,6 +423,7 @@
     @include('user.modal.filter.filter_language')
     @include('user.modal.auth.login_register')
     @include('user.modal.hotel.category')
+    @include('user.modal.filter.filter_modal_hotel')
     @include('user.modal.hotel.filter')
     {{-- modal laguage and currency --}}
     </div>
@@ -809,12 +914,28 @@
     </script> --}}
 
     <script>
+        $("input[name='fSort[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         function hotelFilter(valueCategory, valueClick, unCheckCategory) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
             var sCheck_outFormInput = $("input[name='sCheck_out']").val();
             var sAdultFormInput = $("input[name='sAdult']").val();
             var sChildFormInput = $("input[name='sChild']").val();
+            var fSortFormInput = $('.fSort:checked').val();
+            if (fSortFormInput == undefined) {
+                var fSortFormInput = '';
+            }
+
 
             function setCookie2(name, value, days) {
                 var expires = "";
@@ -864,10 +985,10 @@
 
             if (valueCategory == null) {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}&fSort=${fSortFormInput}`;
             } else {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
             }
 
             hotelRefreshFilter(subUrl);

@@ -72,16 +72,12 @@ input[type="number"] {
 }
 
 .host-profile img {
-    margin-left: 4px;
+    margin-left: 0 !important;
 }
 
 /* .mob-e-call {
     display: none;
     } */
-
-.member-profile {
-    margin-left: -95px;
-}
 
 .mobile-price .price-box a {
     color: #000;
@@ -177,7 +173,7 @@ svg {
 }    
 
 .section-2 {
-    margin: 0 0 0 11px;
+    margin: 0 0 0 8px;
 }
 
 /* .section-liner {
@@ -187,12 +183,6 @@ svg {
 
 .reserve-block {
     width: 292px;
-}
-
-@media (min-width: 1360px) {
-    .reserve-block {
-        right: -9px;
-    }
 }
 
 @media (min-width: 1260px) and (max-width: 1359px) {
@@ -243,7 +233,7 @@ svg {
 }
 
 .member-profile-desc {
-    margin-left: 4px;
+    margin-left: -10px !important;
     margin-right: -10px;
 }
 
@@ -327,7 +317,22 @@ video {
 }
 
 .gallery {
-    margin-left: 11px;
+    margin-left: 6px;
+    padding-right: 2px;
+}
+
+.about-place {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.table-body, .table-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.row-grid-amenities {
+    margin-left: 0 !important;
 }
 
 .menu-liner {
@@ -335,13 +340,23 @@ video {
     margin: 0 10px;
 }
 
+.room {
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.room h2 {
+    padding-left: 0;
+}
+
 .reserve-block {
     width: 276px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .row-grid-location {
-    padding: 0 0 0 10px;
+    padding: 0;
 }
 
 .location-liner {
@@ -401,13 +416,40 @@ video {
     fill: #e31c5f;
     margin-left: 16px;
 }
+#room .table-body .tab-body {
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-right: none;
+    border-top: none;
+    position: relative;
+}
+#room .table-body .tab-body:nth-child(6n+0) {
+    border-right: solid 1px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+}
+#room .table-body .tab-body:last-child {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+}
+#room .table-body .tab-body .total-container {
+    display: none;
+}
+#room .table-body .tab-body:nth-child(6) .total-container {
+    display: block;
+}
+.price-discount {
+    color: #c00;
+    text-decoration: line-through;
+    font-size: 12px;
+}
+.choice-item {
+    font-size: 12px;
+}
 
 @media only screen and (min-width: 425px) and (max-width: 767px) { 
-    #room .table-body .type-room,
+    #room .table-body .capacity-room,
     #room .table-body .price-room {
         display: flex !important;
     }
-    #room .table-body .type-room {
+    #room .table-body .capacity-room {
         justify-content: space-evenly !important;
     }
     #room .table-body .price-room {

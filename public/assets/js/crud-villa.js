@@ -847,6 +847,7 @@ function editAmenitiesVilla(id_villa) {
             var lengthService = response.getService.length;
 
             $("#modal-edit_amenities").modal("hide");
+            $("#default-amen-null").hide();
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
@@ -860,8 +861,8 @@ function editAmenitiesVilla(id_villa) {
             $("#listAmenities").html("");
 
             if (lengthAmenities == 0) {
-                $("#listAmenities").append(
-                    `<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`
+                $("#row-amenities").append(
+                    `<p id="default-amen-null">There is no amenities</p>`
                 );
             }
 
@@ -887,32 +888,43 @@ function editAmenitiesVilla(id_villa) {
                     `);
                 }
             } else {
-                var count = 6 - lengthAmenities;
-                if (count > 0) {
-                    for (i = 0; i < lengthAmenities; i++) {
-                        // if (i === 2) { break; }
-                        $("#listAmenities").append(`
-                        <div class="list-amenities">
-                            <div class="text-align-center">
-                                <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
-                                <div class="mb-0 max-line">
-                                    <span
-                                        class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
-                                </div>
-                            </div>
-                            <div class="mb-0 list-more">
+                var count;
+                var total_last;
+                var total;
+                var stop;
+                for (i = 0; i < lengthAmenities; i++) {
+                    // if (i === 2) { break; }
+                    $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                            <div class="mb-0 max-line">
                                 <span
                                     class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
                             </div>
                         </div>
-                        `);
-                    }
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    `);
                 }
 
-                count = count - lengthKitchen;
+                count = 6 - lengthAmenities;
                 if (count > 0) {
+                    total_last = 6 - lengthAmenities;
+                    total = lengthAmenities + lengthKitchen;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthKitchen;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (k = 0; k < lengthKitchen; k++) {
-                        // if (k === 1) { break; }
+                        if (k === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -931,10 +943,20 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthSafety;
+                count = count - lengthKitchen;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthSafety;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthSafety;
+                    }else{
+                        stop = total_last;
+                    }
                     for (k = 0; k < lengthSafety; k++) {
-                        // if (k === 1) { break; }
+                        if (k === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -953,12 +975,23 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthService;
+
+
+                count = count - lengthSafety;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthService;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthService;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (l = 0; l < lengthService; l++) {
-                        if (l === 1) {
-                            break;
-                        }
+                        if (l === stop) { break; }
                         $("#listAmenities").append(`
                             <div class="list-amenities">
                                 <div class="text-align-center">
@@ -977,10 +1010,23 @@ function editAmenitiesVilla(id_villa) {
                     }
                 }
 
-                count = count - lengthBathroom;
+
+
+                count = count - lengthService;
                 if (count > 0) {
+
+                    total_last = 6 - total;
+                    total = total + lengthBathroom;
+
+                    if(total <= 6)
+                    {
+                        stop = lengthBathroom;
+                    }else{
+                        stop = total_last;
+                    }
+
                     for (j = 0; j < lengthBathroom; j++) {
-                        // if (j === 2) { break; }
+                        if (j === stop) { break; }
                         $("#listAmenities").append(`
                         <div class="list-amenities">
                             <div class="text-align-center">
@@ -998,16 +1044,11 @@ function editAmenitiesVilla(id_villa) {
                         `);
                     }
                 }
+
+                count = count - lengthBathroom;
             }
 
-            var total =
-                lengthAmenities +
-                lengthBathroom +
-                lengthKitchen +
-                lengthSafety +
-                lengthService;
-            console.log(total);
-            if (total > 7) {
+            if (total > 5) {
                 $("#listAmenities").append(`
                     <div class="list-amenities">
                         <button class="amenities-button" type="button" onclick="view_amenities()">
@@ -1636,3 +1677,79 @@ function gradeD() {
     });
 }
 // ! End GradeVilla
+
+function saveLocation() {
+    console.log('hit saveLocation');
+    let form = $('#editLocationForm');
+
+    const formData = {
+        id_villa: parseInt(form.find(`input[name='id_villa']`).val()),
+        id_location: parseInt(form.find(`select[name=id_location] option`).filter(':selected').val()),
+        longitude: form.find(`input[name='longitude']`).val(),
+        latitude: form.find(`input[name='latitude']`).val()
+    };
+
+    console.log(formData);
+
+    let btn = form.find('#btnSaveLocation');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    // save data
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/location",
+        data: formData,
+        // response data
+        success: function (response) {
+            let latitudeOld = parseFloat(response.data.latitude);
+            let longitudeOld = parseFloat(response.data.longitude);
+            // variabel global edit marker
+            markerEditLocation = null;
+            // pin marker to map on edit map
+            initEditLocationVilla(latitudeOld, longitudeOld);
+            // refresh detail map
+            view_maps(parseInt(form.find(`input[name='id_villa']`).val()));
+            // alert success
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+            // enabled button
+            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-edit_location').modal('hide');
+        },
+        // response error
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            // alert error
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+            // enabled button
+            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-edit_location').modal('hide');
+        },
+    });
+}

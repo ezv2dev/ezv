@@ -2908,11 +2908,11 @@
                         $(".bottom-content").css("padding-right", gap + "px");
                         $(".head-inner-wrap .inside-header-inner-wrap").css("width", headerWidth + "px");
                     } else {
-                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", "auto");
-                        $(".page-content").css("padding-left", "40px");
-                        $(".page-content").css("padding-right", "40px");
-                        $(".bottom-content").css("padding-left", "40px");
-                        $(".bottom-content").css("padding-right", "40px");
+                        $(".head-inner-wrap .inside-header-inner-wrap").css("width", "");
+                        $(".page-content").css("padding-left", "");
+                        $(".page-content").css("padding-right", "");
+                        $(".bottom-content").css("padding-left", "");
+                        $(".bottom-content").css("padding-right", "");
                     }
                     if (windowWidth > 1359) {
                         var gap = (windowWidth - 1360) / 2;
@@ -2942,6 +2942,7 @@
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#expand-mobile-btn").on("click", function() {
                     $("body").css({
@@ -2951,6 +2952,17 @@
                     $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "true");
+                    $("#overlay").css("display", "block");
+                })
+                $('#overlay').click(function() {
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
+                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");

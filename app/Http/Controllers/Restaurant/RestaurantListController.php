@@ -450,9 +450,13 @@ class RestaurantListController extends Controller
 
     public function restaurant_update_location(Request $request)
     {
-        // dd($request->all());
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -462,19 +466,28 @@ class RestaurantListController extends Controller
             'longitude' => ['required'],
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
         // restaurant data
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        abort_if(!$restaurant, 404);
+        if (!$restaurant) {
+            return response()->json([
+                'message' => 'Food Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('restaurant_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $restaurant->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // update
@@ -485,13 +498,19 @@ class RestaurantListController extends Controller
             'latitude' => $request->latitude,
             'updated_by' => auth()->user()->id,
         ]);
+
+        $foodData = Restaurant::where('id_restaurant', $request->id_restaurant)->select('latitude', 'longitude')->first();
+
         // check if update is success or not
         if ($updatedRestaurant) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated Food Description',
+                'data' => $foodData
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Food Description',
+            ], 500);
         }
     }
 
@@ -861,7 +880,7 @@ class RestaurantListController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'id_restaurant' => ['required', 'integer'],
-                'image' => ['required', 'mimes:jpeg,png,jpg,webp'] 
+                'image' => ['required', 'mimes:jpeg,png,jpg,webp']
             ]);
 
             if ($validator->fails()) {
@@ -1034,7 +1053,7 @@ class RestaurantListController extends Controller
                 'id_restaurant' => ['required', 'integer'],
                 'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
             ]);
-    
+
             if ($validator->fails()) {
                 return response()->json([
                     'message' => $validator->errors()->all(),

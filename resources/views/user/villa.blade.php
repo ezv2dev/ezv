@@ -177,6 +177,21 @@
                                 <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
                         </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                            @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            @endif
+
+                        </a>
+                        </div>
 
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -224,17 +239,32 @@
                             <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
+                    </div>
                 @endauth
             </div>
 
         </div>
-
+        <div id="overlay"></div>
         {{-- PROFILE --}}
         <div class="row page-content">
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
 
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($villa[0]->image)
@@ -255,7 +285,7 @@
                             @endauth
                             <div class="property-type">
                                 <p id="property-type-content">
-                                    {{ __('user_page.Property Type :') }}
+                                    Tags :
                                     @auth
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryVilla()"
@@ -878,7 +908,7 @@
                     @endauth
                     {{-- END ADD GALLERY --}}
 
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p">
                         {{-- Description --}}
                         <div class="about-place">
                             <hr class="hr-about">
@@ -985,7 +1015,7 @@
                         </div>
                     </section> --}}
 
-                    <section id="availability" class="section-2">
+                    <section id="availability" class="section-2 px-xs-12p px-sm-24p">
                         <div id="scrollStop"></div>
                         <div class="pd-tlr-10">
                             <hr>
@@ -1017,7 +1047,7 @@
                             </div>
                     </section>
 
-                    <section id="amenities" class="section-2 div-amenities">
+                    <section id="amenities" class="section-2 div-amenities px-xs-12p px-sm-24p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1035,7 +1065,7 @@
                             </div>
 
                         </div>
-                        <div class="row-grid-amenities">
+                        <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
                                 @if (!empty($villa_amenities->count()))
                                     @if ($villa_amenities->count() > 6)
@@ -1086,8 +1116,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $kitchen->count();
+                                                $total_last = 6 - $villa_amenities->count();
+                                                $total = $villa_amenities->count() + $kitchen->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $kitchen->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($kitchen->take($kitchen->count()) as $item2)
+                                            @foreach ($kitchen->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1106,8 +1144,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $safety->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $safety->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $safety->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($safety->take($safety->count()) as $item4)
+                                            @foreach ($safety->take($stop) as $item4)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item4->icon }}"></i>
@@ -1126,8 +1172,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $service->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $service->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $service->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($service->take($service->count()) as $item3)
+                                            @foreach ($service->take($stop) as $item3)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item3->icon }}"></i>
@@ -1146,8 +1200,16 @@
                                         @if ($i > 0)
                                             @php
                                                 $i = $i - $bathroom->count();
+                                                $total_last = 6 - $total;
+                                                $total = $total + $bathroom->count();
+                                                if($total <= 6)
+                                                {
+                                                    $stop = $bathroom->count();
+                                                }else{
+                                                    $stop = $total_last;
+                                                }
                                             @endphp
-                                            @foreach ($bathroom->take($bathroom->count()) as $item2)
+                                            @foreach ($bathroom->take($stop) as $item2)
                                                 <div class="list-amenities ">
                                                     <div class="text-align-center">
                                                         <i class="f-40 fa fa-{{ $item2->icon }}"></i>
@@ -1163,7 +1225,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if ($i > 6)
+                                        @if ($i <= 0)
                                             <div class="list-amenities">
                                                 <button class="amenities-button" type="button"
                                                     onclick="view_amenities()">
@@ -1175,13 +1237,11 @@
                                             </div>
                                         @endif
                                     @endif
-                                @else
-                                    <div class='list-amenities'>
-                                        <p style="text-align: center;">{{ __('user_page.There is no amenities') }}
-                                        </p>
-                                    </div>
                                 @endif
                             </div>
+                            @empty($villa_amenities->count())
+                                <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
+                            @endempty
                         </div>
                     </section>
                 </div>
@@ -1459,7 +1519,7 @@
                 </div>
             </div>
             {{-- END RIGHT CONTENT --}}
-            <section id="location-map" class="section-2">
+            <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
                 <div class="row-grid-amenities">
                     <hr class="pendek">
                     <div class="section-title">
@@ -1666,7 +1726,7 @@
         </div>
 
         {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12 bottom-content">
+        <div class="col-lg-12 bottom-content px-max-md-12p">
             <div class="col-12">
                 <section id="review" class="section-2">
                     <hr>
@@ -2289,8 +2349,8 @@
                 </section>
                 <div class="section">
                     <div>
-                        <div class="row">
-                            <div class="col-2 col-md-1 host-profile">
+                        <div class="row owner-block">
+                            <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
                                     <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
                                         target="_blank">
@@ -2305,7 +2365,7 @@
                                     </a>
                                 @endif
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-5">
                                 <div class="member-profile">
                                     @if (isset($villa[0]->userCreate->first_name))
                                         <h4>{{ __('user_page.Hosted by') }}
@@ -2324,6 +2384,15 @@
                                         </p>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="col-12 col-md-6 owner-profile">
+                                <h4>Host Profile</h4>
+                                <p>
+                                About
+                                    <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                Location
+                                    <span>{{ $infoOwner->location ?? '-' }}</span>
+                                </p>
                             </div>
                         </div>
                         <div class="member-profile-desc">
@@ -2365,15 +2434,18 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '1')
-                                        <div class="activation1">
+                                        <div id="activation1">
                                             <div class="alert alert-success d-flex flex-row align-items-center"
                                                 role="success">
-                                                <span>{{ __('user_page.this content is active,') }} </span>
+                                                <span>{{ __('user_page.this content is active') }},</span>
+                                                <button class="btn" onclick="requestDeactivation()"
+                                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                                                <span> ?</span>
                                             </div>
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '2')
-                                        <div class="activation2" id="pleaseWait">
+                                        <div id="activation2">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
@@ -2382,21 +2454,13 @@
                                         </div>
                                     @endif
                                     @if ($villa[0]->status == '3')
-                                        <div class="activation3">
+                                        <div id="activation3">
                                             <div class="alert alert-warning d-flex flex-row align-items-center"
                                                 role="warning">
                                                 <span>{{ __('user_page.you have been request deactivation for this content,') }}
                                                 </span>
-                                                <form
-                                                    action="{{ route('villa_cancel_request_update_status', $villa[0]->id_villa) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_villa"
-                                                        value="{{ $villa[0]->id_villa }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                                </form>
+                                                <button class="btn" type="submit"
+                                                    onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
                                                 <span> ?</span>
                                             </div>
                                         </div>
@@ -2491,6 +2555,7 @@
                             {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
+                            <hr>
 
                                 {{-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> --}}
 
@@ -3519,7 +3584,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
+                                                                                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3732,7 +3797,7 @@
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
-                            onclick="save_reorder_video()">Submit</button>
+                            onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
                 </div>
             </div>
@@ -4224,9 +4289,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function(file, message, response) {
                 console.log(file);
@@ -4246,6 +4308,19 @@
                 let content = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0)
+                {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0)
+                {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -5091,7 +5166,7 @@
         }
     </script>
 
-    {{-- Request Activation --}}
+    {{-- Request Active Deactive --}}
     <script>
         function requestActivation() {
             $.ajax({
@@ -5161,7 +5236,7 @@
                                     `);
 
                                     gradeAA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "A") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5181,7 +5256,7 @@
                                     `)
 
                                     gradeA();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "B") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5201,7 +5276,7 @@
                                     `)
 
                                     gradeB();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "C") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5221,7 +5296,7 @@
                                     `)
 
                                     gradeC();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 } else if (response.grade == "D") {
                                     $("#adminVilla2").html(`
                                         <div class="alert alert-success d-flex flex-row align-items-center"
@@ -5241,7 +5316,7 @@
                                     `)
 
                                     gradeD();
-                                    $("#pleaseWait").addClass('d-none');
+                                    $("#activation2").addClass('d-none');
                                 }
 
                                 iziToast.success({
@@ -5259,8 +5334,68 @@
                 }
             });
         }
+
+        function requestDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 3) {
+                        $("#activation1").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                </span>
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                <span> ?</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
+
+        function cancelDeactivation() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/villa/update/cancel-request-update-status`,
+                data: {
+                    id_villa: id_villa
+                },
+                success: function(response) {
+                    if (response.data == 1) {
+                        $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                    }
+                }
+            })
+        }
     </script>
-    {{-- End Activation --}}
+    {{-- End Active Deactive --}}
 
     <script>
         if (document.getElementById("check_in").value.length == 0) {
