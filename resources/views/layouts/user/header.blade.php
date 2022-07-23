@@ -2921,6 +2921,7 @@
                     }
                     if (windowWidth > 1359) {
                         var gap = (windowWidth - 1360) / 2;
+                        var navGap = gap - 20;
                         $("#rsv-block-btn .rsv").css("right", navGap + "px");
                     } else {
                         $("#rsv-block-btn .rsv").css("right", "0px");
