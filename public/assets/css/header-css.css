@@ -1037,11 +1037,25 @@ input:checked + .switch-background:active::before {
     width: 80%;
     height: 100%;
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     background: #eee;
     top: 0;
     bottom: 0;
     right: -80%;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    cursor: pointer;
 }
 
 .expanding-navbar-mobile {
@@ -1231,7 +1245,7 @@ input:checked + .switch-background:active::before {
         left: 28% !important;
     }
     .bar-activity .guests .header-date-input-container,
-    .bar-collaborator .guests .header-date-input-container { 
+    .bar-collaborator .guests .header-date-input-container {
         width: 60vw !important;
         margin-left: 18% !important;
     }
@@ -1257,7 +1271,7 @@ input:checked + .switch-background:active::before {
         left: 28% !important;
     }
     .bar-activity .guests .header-date-input-container,
-    .bar-collaborator .guests .header-date-input-container { 
+    .bar-collaborator .guests .header-date-input-container {
         width: 40vw !important;
         margin-left: 26% !important;
     }
@@ -1404,18 +1418,18 @@ input:checked + .switch-background:active::before {
         height: 68px !important;
     }
     .bar-activity .guests input,
-    .bar-collaborator .guests input { 
+    .bar-collaborator .guests input {
         margin-top: 22px !important;
     }
     .bar-activity .guests #start_date,
     .bar-collaborator .guests #start_date,
-    .bar-activity-detail .guests .input-date #start_date { 
+    .bar-activity-detail .guests .input-date #start_date {
         text-align: end !important;
         margin-right: 10px !important;
     }
     .bar-activity .guests #end_date,
     .bar-collaborator .guests #end_date,
-    .bar-activity-detail .guests .input-date #end_date { 
+    .bar-activity-detail .guests .input-date #end_date {
         text-align: start !important;
     }
     .bar-activity .guests a,

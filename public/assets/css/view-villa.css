@@ -413,8 +413,7 @@ a:hover {
 }
 
 .bottom-content {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 0 40px;
 }
 
 .video-container {
@@ -927,7 +926,7 @@ a.active {
 }
 
 .member-profile-desc {
-    margin-left: 16px;
+    margin-left: 0;
 }
 
 .member-profile-photo {
@@ -4234,4 +4233,48 @@ span.flatpickr-weekday {
         padding-left: 12px !important;
         padding-right: 12px !important;
     }
+}
+
+@media only screen and (max-width: 425px) {
+    .owner-block {
+        padding-right: 0 !important;
+    }
+
+    .owner-profile h4 {
+        font-size: 14px !important;
+    }
+
+    .owner-profile p {
+        font-size: 12px !important;
+    }
+
+    .owner-profile span {
+        font-size: 12px !important;
+    }
+}
+
+.owner-block {
+    padding-right: 10px;
+}
+
+.owner-profile p {
+    line-height: 14px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #565656;
+}
+
+.owner-profile {
+    margin-top: 0;
+    border: solid 1px #ff7400;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.owner-profile span {
+    display: block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #565656;
 }

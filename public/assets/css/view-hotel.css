@@ -79,10 +79,6 @@ input[type="number"] {
     display: none;
     } */
 
-.member-profile {
-    margin-left: -95px;
-}
-
 .mobile-price .price-box a {
     color: #000;
     text-decoration: underline;
@@ -237,7 +233,7 @@ svg {
 }
 
 .member-profile-desc {
-    margin-left: 4px;
+    margin-left: -10px !important;
     margin-right: -10px;
 }
 
