@@ -3,15 +3,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Location</h5>
+                <h5 class="modal-title">{{ __('user_page.Edit Location') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('collab_update_location') }}" method="POST" id="basic-form" class="js-validation"
-                    enctype="multipart/form-data">
-                    @csrf
+                <div id="editLocationForm">
                     <input type="hidden" name="id_collab" id="id_collab" value="{{ $profile->id_collab }}">
-
                     <label class="col-sm-3 col-form-label" for="bed" style="font-size: 20px;">Location</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
@@ -29,24 +26,22 @@
                         </select>
                     </div>
                     <div class="col-sm-12">
-                        <input id="searchTextFieldVilla" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
-                        <div id="mapVilla" style="width:100%;height:280px;"></div>
+                        <input id="searchTextFieldCollab" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
+                        <div id="mapCollab" style="width:100%;height:280px;"></div>
                         <input type="hidden" class="form-control" id="latitudeCollab" name="latitude" placeholder="Enter a latitude.." value="{{ $profile->latitude }}">
                         <input type="hidden" class="form-control" id="longitudeCollab" name="longitude" placeholder="Enter a longitude.." value="{{ $profile->longitude }}">
                     </div>
-
-                    <br>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                <i class="fa fa-check"></i> Save
+                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation" class="btn btn-sm btn-primary">
+                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
                     <!-- END Submit -->
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -54,19 +49,18 @@
 
 <!-- GOOGLE MAPS API -->
 
-{{-- Villa Map --}}
+{{-- Collab Map --}}
 <script>
-    // variabel global marker
-    var marker;
+    // variabel global edit marker
+    var markerEditLocation;
 
-    function taruhMarkerVilla(map, posisiTitik){
-
-        if( marker ){
-            // pindahkan marker
-            marker.setPosition(posisiTitik);
+    function taruhMarkerCollab(map, posisiTitik){
+        if( markerEditLocation ){
+            // pindahkan markerEditLocation
+            markerEditLocation.setPosition(posisiTitik);
         } else {
-            // buat marker baru
-            marker = new google.maps.Marker({
+            // buat markerEditLocation baru
+            markerEditLocation = new google.maps.Marker({
                 position: posisiTitik,
                 map: map,
                 icon: {
@@ -78,24 +72,19 @@
                 }
             });
         }
-
          // isi nilai koordinat ke form
         document.getElementById("latitudeCollab").value = posisiTitik.lat();
         document.getElementById("longitudeCollab").value = posisiTitik.lng();
-
     }
 
     // fungsi initialize untuk mempersiapkan peta
-    function initializeVilla() {
-        var latitudeOld = parseFloat('{{ $profile->latitude }}');
-        var longitudeOld = parseFloat('{{ $profile->longitude }}');
-        var map = new google.maps.Map(document.getElementById('mapVilla'), {
-            center: {lat: latitudeOld, lng: longitudeOld},
-            zoom: 17,
-            scrollwheel: true,
-            draggable: true,
-            gestureHandling: "greedy",
-             styles: [{
+    function initEditLocationCollab(latitudeOld, longitudeOld) {
+        var map = new google.maps.Map(document.getElementById('mapCollab'), {
+            center: {
+                lat: parseFloat(latitudeOld),
+                lng: parseFloat(longitudeOld)
+            },
+            styles: [{
                     "featureType": "poi",
                     "elementType": "all",
                     "stylers": [{
@@ -116,7 +105,11 @@
                         "visibility": "off"
                     }]
                 }
-            ]
+            ],
+            scrollwheel: true,
+            draggable: true,
+            gestureHandling: "greedy",
+            zoom: 17
         });
 
         var infowindow = new google.maps.InfoWindow();
@@ -136,7 +129,7 @@
             // anchorPoint: new google.maps.Point(0, -29)
         });
 
-        var input = document.getElementById('searchTextFieldVilla');
+        var input = document.getElementById('searchTextFieldCollab');
 
         // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -185,12 +178,15 @@
 
         // even listner ketika peta diklik
         google.maps.event.addListener(map, 'click', function(event) {
-            taruhMarkerVilla(this, event.latLng);
+            taruhMarkerCollab(this, event.latLng);
         });
     }
 
+    var latitudeOld = parseFloat('{{ $villa[0]->latitude }}');
+    var longitudeOld = parseFloat('{{ $villa[0]->longitude }}');
+
     // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initializeVilla);
+    google.maps.event.addDomListener(window, 'load', initEditLocationCollab(latitudeOld, longitudeOld));
 </script>
 
 {{-- disable enter button --}}
@@ -201,5 +197,4 @@
         }
     };
 </script>
-
 <!-- END Fade In Default Modal -->

@@ -1041,12 +1041,12 @@ class ViewController extends Controller
         // check if update is success or not
         if ($updatedVilla) {
             return response()->json([
-                'message' => 'Successfuly Updated Home Description',
+                'message' => 'Successfuly Updated Home Location',
                 'data' => $homeData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Error Updated Home Description',
+                'message' => 'Error Updated Home Location',
             ], 500);
         }
     }

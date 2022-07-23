@@ -95,7 +95,7 @@
                     @foreach ($villaCategory->take(6) as $item)
                         <div>
                             <a href="#" class="grid-img-container"
-                                onclick="homesFilter({{ $item->id_villa_category }}, null)">
+                                onclick="homesFilter({{ $item->id_villa_category }}, null, true)">
                                 <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                                     @if ($fCategory == $item->id_villa_category) style="border: 5px solid #ff7400;" @endif
                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}">
@@ -154,13 +154,15 @@
                             </label>
                         </div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="modalFiltersHomes()">
                         <div>
                             <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
                         </div>
                         <div class="list-description {{ $textColor }}">Price</div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="modalFiltersHomes()">
                         <div>
                             <i class="fas fa-bed text-18 list-description {{ $textColor }} sub-icon"></i>
                         </div>
@@ -417,7 +419,7 @@
             }
         });
 
-        function homesFilter(valueCategory, valueClick) {
+        function homesFilter(valueCategory, valueClick, unCheckCategory) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
             var sCheck_outFormInput = $("input[name='sCheck_out']").val();
@@ -451,6 +453,15 @@
             var fBedsFormInput = $("input[name='fBeds']:checked").val();
             var fAmenitiesFormInput = [];
             var fCategoryFormInput = [];
+
+            if (unCheckCategory == true) {
+                var url_homes = window.location.href;
+                var url2 = new URL(url_homes);
+
+                if (url2.searchParams.get('fCategory') == valueCategory) {
+                    valueCategory = '';
+                }
+            }
 
             if (valueCategory != null) {
                 $("input[name='fCategory[]']").prop("checked", false);

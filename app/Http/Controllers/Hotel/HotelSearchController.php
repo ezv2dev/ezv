@@ -13,6 +13,7 @@ use App\Models\HostLanguage;
 use App\Models\Hotel;
 use App\Models\Activity;
 use App\Models\HotelCategory;
+use App\Models\HotelDetailReview;
 use App\Models\HotelFilter;
 use App\Models\HotelScenicViews;
 use Illuminate\Support\Facades\DB;
@@ -50,8 +51,32 @@ class HotelSearchController extends Controller
         }
 
         $hotelIds = $hotel->modelKeys();
-        $hotel = Hotel::whereIn('id_hotel', $hotelIds)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
-        $hotel->appends(request()->query());
+        $fSort = $request->fSort;
+        if (!$fSort) {
+            $hotel = Hotel::whereIn('id_hotel', $hotelIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_hotel'));
+        } else {
+            $hotel = Hotel::whereIn('id_hotel', $hotelIds)->get();
+        }
+
+        if ($fSort) {
+            if ($fSort == 'highest') {
+                $hotelIds = $hotel->modelKeys();
+                $hotel = Hotel::orderBy('price', 'DESC')->whereIn('id_hotel', $hotelIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+            } else if ($fSort == 'lowest') {
+                $hotelIds = $hotel->modelKeys();
+                $hotel = Hotel::orderBy('price', 'ASC')->whereIn('id_hotel', $hotelIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+            } else if ($fSort == 'popularity') {
+                $hotelIds = $hotel->modelKeys();
+                $countPerson = HotelDetailReview::orderBy('count_person', 'DESC')->get();
+                $personIds = $countPerson->pluck('id_hotel');
+                $hotel = Hotel::whereIn('id_hotel', $personIds)->whereIn('id_hotel', $hotelIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+            } else if ($fSort == 'best_reviewed') {
+                $hotelIds = $hotel->modelKeys();
+                $countHighest = HotelDetailReview::orderBy('average', 'DESC')->get();
+                $highestIds = $countHighest->pluck('id_hotel');
+                $hotel = Hotel::whereIn('id_hotel', $highestIds)->whereIn('id_hotel', $hotelIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+            }
+        }
 
         $i = 0;
         $j = 0;
@@ -117,7 +142,6 @@ class HotelSearchController extends Controller
             if ($sLocation == 'Add Location') {
                 $sLocation = null;
             }
-
 
             // ! start
             $location = $sLocation;
