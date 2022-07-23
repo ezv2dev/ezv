@@ -78,7 +78,6 @@ class SearchHomeController extends Controller
         } else {
             $villa = Villa::whereIn('id_villa', $ids)->get();
         }
-        // dd($villa);
 
         if ($fSort) {
             if ($fSort == 'highest') {
@@ -99,13 +98,8 @@ class SearchHomeController extends Controller
                 $villa = Villa::whereIn('id_villa', $highestIds)->whereIn('id_villa', $villaIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
             }
         }
-        // dd($villa);
-        // $ids = $villa->pluck('id_villa');
-        // $villa = Villa::where('id_villa', $ids)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
-        // $villa->appends(request()->query());
 
-        // $villa = Villa::whereIn('id_villa', $villaIds)->orderBy('grade')->paginate(5);
-        // //* order by grade
+        //* order by grade
         //     $villaIds = $villa->modelKeys();
         //     $villas = Villa::with('villaHasCategory')
         //         ->whereIn('id_villa', $villaIds)
@@ -120,7 +114,6 @@ class SearchHomeController extends Controller
         //         ->inRandomOrder()
         //         ->get();
 
-        //     // dd($villaIds);
         //     if ($request->itemIds) {
         //         $villas = Villa::with('villaHasCategory')
         //             ->whereIn('id_villa', $villaIds)
@@ -177,8 +170,7 @@ class SearchHomeController extends Controller
         //             $page
         //         );
         //     }
-        //     // dd($villa->pluck('grade', 'id_villa'));
-        // //* end order by grade
+        //* end order by grade
 
         //* find nearby function
         $i = 0;
@@ -461,32 +453,6 @@ class SearchHomeController extends Controller
                     $query->where('id_amenities', $fAmenities);
                 })
                 ->inRandomOrder()->get();
-        }
-
-        return $villa;
-    }
-
-    public function processSort($villas, $request)
-    {
-        $villa = $villas;
-        $fSort = $request->fSort;
-
-        if ($fSort) {
-            if ($fSort == 'highest') {
-                $villaIds = $villa->modelKeys();
-                $villa = Villa::orderBy('price', 'DESC')->whereIn('id_villa', $villaIds)->where('status', 1)->get();
-            } else if ($fSort == 'lowest') {
-                $villaIds = $villa->modelKeys();
-                $villa = Villa::orderBy('price', 'ASC')->whereIn('id_villa', $villaIds)->where('status', 1)->take(5)->get();
-            } else if ($fSort == 'popularity') {
-                $villaIds = $villa->modelKeys();
-                $countPerson = DetailReview::orderBy('count_person', 'DESC')->get();
-                $villa = Villa::where('id_villa', $countPerson->id_villa)->whereIn('id_villa', $villaIds)->where('status', 1)->get();
-            } else if ($fSort == 'best_reviewed') {
-                $villaIds = $villa->modelKeys();
-                $countHighest = DetailReview::orderBy('average', 'DESC')->get();
-                $villa = Villa::where('id_villa', $countHighest->id_villa)->whereIn('id_villa', $villaIds)->where('status', 1)->get();
-            }
         }
 
         return $villa;
