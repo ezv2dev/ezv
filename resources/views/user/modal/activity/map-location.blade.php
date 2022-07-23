@@ -387,6 +387,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -632,6 +637,11 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     @endguest
                                     @auth
                                         ${favorite}
@@ -651,14 +661,13 @@
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
                                         <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </a>
                                 </div>
                                 <div class="col-12 d-flex">
-                                    <div class="col-6">
-                                        <p class="card-text text-orange text-17 fw-500 mt-1">${price}</p>
+                                    <div class="col-9">
+                                        <p class="text-grey-1 mb-0 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-end">
+                                    <div class="col-3 d-flex justify-content-end">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
                                         <div class="me-2"></div>
                                         <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -860,6 +869,11 @@
                                                     </path>
                                                 </svg>
                                             </a>
+                                        </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
                                         </div>
                                     @endguest
                                     @auth
@@ -1112,6 +1126,11 @@
                                                     </path>
                                                 </svg>
                                             </a>
+                                        </div>
+                                        <div>
+                                            <div class="button-close-map-content" onclick="resetRightContent()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
                                         </div>
                                     @endguest
                                     @auth
