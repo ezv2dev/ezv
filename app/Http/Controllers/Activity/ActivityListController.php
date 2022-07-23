@@ -265,9 +265,13 @@ class ActivityListController extends Controller
 
     public function activity_update_location(Request $request)
     {
-        // dd($request->all());
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
@@ -277,19 +281,28 @@ class ActivityListController extends Controller
             'longitude' => ['required'],
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
         // activity data
         $activity = Activity::find($request->id_activity);
 
         // check if activity does not exist, abort 404
-        abort_if(!$activity, 404);
+        if (!$activity) {
+            return response()->json([
+                'message' => 'WoW Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // update
@@ -300,13 +313,19 @@ class ActivityListController extends Controller
             'latitude' => $request->latitude,
             'updated_by' => auth()->user()->id,
         ]);
+
+        $activityData = Activity::where('id_activity', $request->id_activity)->select('latitude', 'longitude')->first();
+
         // check if update is success or not
         if ($updatedActivity) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'message' => 'Successfuly Updated WoW Description',
+                'data' => $activityData
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated WoW Description',
+            ], 500);
         }
     }
 
@@ -868,7 +887,7 @@ class ActivityListController extends Controller
         $imageids_arr = $request->imageids;
 
         $activity = Activity::find($request->id);
-        
+
         if (!$activity) {
             return response()->json([
                 'message' => 'Wow Not Found',
@@ -930,7 +949,7 @@ class ActivityListController extends Controller
         $videoids_arr = $request->videoids;
 
         $activity = Activity::find($request->id);
-        
+
         if (!$activity) {
             return response()->json([
                 'message' => 'Wow Not Found',

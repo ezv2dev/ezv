@@ -1580,11 +1580,6 @@ li.button-dropdown {
     color: #6c75a5;
 }
 
-.button-dropdown {
-    font-size: 150%;
-    margin-top: 4px;
-}
-
 .button {
     background-color: white !important;
     border-radius: 0px 10px 10px 0px !important;
@@ -2252,7 +2247,7 @@ li.button-dropdown {
 
 .sort-popup {
     position: absolute;
-    width: 220;
+    width: 260px !important;
     background-color: white;
     left: 0;
     top: 59px;
@@ -3069,16 +3064,22 @@ input::-webkit-inner-spin-button {
 }
 
 .modal-body-map {
+<<<<<<< HEAD
+    padding: 0;
+    overflow-y: hidden;
+=======
     padding: 0 0.5rem 1rem 0.5rem;
     overflow-y: auto;
+>>>>>>> 08992512d1767d682e637c206062b847d4a368ad
     height: 89vh;
 }
 
 .map-modal-container {
     display: flex;
     flex-direction: column;
-    row-gap: 1.5rem;
+    row-gap: .5rem;
     column-gap: 0;
+    height: 100%;
 }
 
 .map-modal-container .map-container,
@@ -3086,9 +3087,63 @@ input::-webkit-inner-spin-button {
     width: 100%;
 }
 
+<<<<<<< HEAD
+.map-modal-container .map-container{
+    height: 50%;
+}
+.map-modal-container .map-content{
+    padding:.5rem 1rem 1rem 1rem;
+    height: 100%;
+}
+
+.image-in-map,
+.image-in-map-container,
+#location-map-content-right-image-loading{
+    height: 150px;
+    border-radius: 15px;
+}
+
+.image-in-map{
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-in-map-container{
+    overflow: hidden;
+    position: relative;
+}
+
+#location-map-content-right-image-loading{
+    background-color: #e8e8e8; 
+    width: 100%; 
+    position: absolute; 
+    z-index: 99; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-view-detail{
+    /* margin-top:.5rem; */
+}
+
+.map-title-description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.map__deskription-container{
+    display: flex;
+    flex-direction: column;
+=======
 .map-modal-container .map-container {
     height: 55vh;
     border-radius: 10px;
+>>>>>>> 08992512d1767d682e637c206062b847d4a368ad
 }
 
 .max-lines-2 {
@@ -3263,13 +3318,30 @@ input::-webkit-inner-spin-button {
 
     .map-modal-container .map-container {
         width: 60%;
+        border-radius: 15px;
     }
+<<<<<<< HEAD
+    
+    .map-modal-container .map-content{
+=======
     .map-modal-container .map-content {
+>>>>>>> 08992512d1767d682e637c206062b847d4a368ad
         width: 40%;
+        padding: 0 1rem;
     }
 
     .map-modal-container .map-container {
         height: 74vh;
+    }
+
+    .image-in-map,
+    .image-in-map-container,
+    #location-map-content-right-image-loading{
+        height: 220px;
+    }
+
+    .map-title-description{
+        -webkit-line-clamp: initial;
     }
 }
 

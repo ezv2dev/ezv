@@ -856,6 +856,7 @@ function editAmenitiesVilla(id_villa) {
             var lengthService = response.getService.length;
 
             $("#modal-edit_amenities").modal("hide");
+            $("#default-amen-null").hide();
 
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
@@ -869,8 +870,8 @@ function editAmenitiesVilla(id_villa) {
             $("#listAmenities").html("");
 
             if (lengthAmenities == 0) {
-                $("#listAmenities").append(
-                    `<div class="list-amenities"> <p style="text-align: center;">there is no facilities yet</p></div>`
+                $("#row-amenities").append(
+                    `<p id="default-amen-null">There is no amenities</p>`
                 );
             }
 
@@ -1704,3 +1705,79 @@ function gradeD() {
     });
 }
 // ! End GradeVilla
+
+function saveLocation() {
+    console.log('hit saveLocation');
+    let form = $('#editLocationForm');
+
+    const formData = {
+        id_villa: parseInt(form.find(`input[name='id_villa']`).val()),
+        id_location: parseInt(form.find(`select[name=id_location] option`).filter(':selected').val()),
+        longitude: form.find(`input[name='longitude']`).val(),
+        latitude: form.find(`input[name='latitude']`).val()
+    };
+
+    console.log(formData);
+
+    let btn = form.find('#btnSaveLocation');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    // save data
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/update/location",
+        data: formData,
+        // response data
+        success: function (response) {
+            let latitudeOld = parseFloat(response.data.latitude);
+            let longitudeOld = parseFloat(response.data.longitude);
+            // variabel global edit marker
+            markerEditLocation = null;
+            // pin marker to map on edit map
+            initEditLocationVilla(latitudeOld, longitudeOld);
+            // refresh detail map
+            view_maps(parseInt(form.find(`input[name='id_villa']`).val()));
+            // alert success
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+            // enabled button
+            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-edit_location').modal('hide');
+        },
+        // response error
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            // alert error
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+            // enabled button
+            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-edit_location').modal('hide');
+        },
+    });
+}

@@ -77,7 +77,7 @@
                         <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                             data-src="https://source.unsplash.com/random/?bali">
                         <div class="grid-text">
-                            {{ __('user_page.More') }}
+                            {{ __('user_page.Filters') }}
                         </div>
                     </a>
                 </div>
@@ -97,38 +97,40 @@
                         </a>
                         <div class="sort-popup dropdown-menu text-center">
                             <h5 style="margin-bottom: 0;">Sort by</h5>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest Price
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="highest"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'highest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest Price
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest to Highest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'lowest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
-                                <input type="checkbox" name="fSort[]" value="highest">
+                                <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'popularity') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Recommended
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Best Reviewed
+                                <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'best_reviewed') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="modalFiltersHotel()">
                         <div>
                             <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
                         </div>
                         <div class="list-description {{ $textColor }}">Price</div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
-                        <div>
-                            <i class="fas fa-bed text-18 list-description {{ $textColor }} sub-icon"></i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Bedrooms</div>
-                    </div>
-
-                    @foreach ($hotelFilter->take(4) as $item)
+                    @foreach ($hotelFilter->take(5)->sortBy('order') as $item)
                         <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
                             <div>
@@ -148,21 +150,21 @@
             @endforeach
 
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
+                onclick="modalFiltersHotel()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                 </div>
                 <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
+                    {{ __('user_page.Filters') }}
                 </div>
             </div>
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
+                onclick="modalFiltersHotel()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                 </div>
                 <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
+                    {{ __('user_page.Filters') }}
                 </div>
             </div>
         </div>
@@ -328,7 +330,7 @@
                                 {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
                             </span>
                             <span class="text-12 fw-400"><a class="orange-hover"
-                                onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                                    onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
                         </div>
                     </div>
                     <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-5">
@@ -338,10 +340,10 @@
                                     <div class="flex-fill">
                                         <p class="text-14 fw-400 grid-one-line mb-0">
                                             Fully Furlindable
-                                        </p> 
+                                        </p>
                                         <p class="text-14 fw-400 grid-one-line mb-0">
                                             Reserve now pay later
-                                        </p> 
+                                        </p>
                                     </div>
                                     <div>
                                         <p class="text-14 fw-600 grid-one-line max-lines mb-0">
@@ -380,14 +382,13 @@
                                             <span class="fw-400 {{ $textColor }} list-description">
                                                 Included taxes and changes
                                             </span>
-                                        </div>        
+                                        </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    </a>
                 </div>
             </div>
         @endforeach
@@ -422,6 +423,7 @@
     @include('user.modal.filter.filter_language')
     @include('user.modal.auth.login_register')
     @include('user.modal.hotel.category')
+    @include('user.modal.filter.filter_modal_hotel')
     @include('user.modal.hotel.filter')
     {{-- modal laguage and currency --}}
     </div>
@@ -929,6 +931,11 @@
             var sCheck_outFormInput = $("input[name='sCheck_out']").val();
             var sAdultFormInput = $("input[name='sAdult']").val();
             var sChildFormInput = $("input[name='sChild']").val();
+            var fSortFormInput = $('.fSort:checked').val();
+            if (fSortFormInput == undefined) {
+                var fSortFormInput = '';
+            }
+
 
             function setCookie2(name, value, days) {
                 var expires = "";
@@ -978,10 +985,10 @@
 
             if (valueCategory == null) {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}&fSort=${fSortFormInput}`;
             } else {
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
             }
 
             hotelRefreshFilter(subUrl);

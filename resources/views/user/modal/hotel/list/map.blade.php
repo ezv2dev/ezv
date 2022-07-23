@@ -375,7 +375,7 @@
             image = '';
             for (let j = 0; j < restaurantLocations.photo.length; j++) {
                 image += `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.photo[j].name}')}}"
                         alt="">
                 </a>`;
@@ -383,13 +383,13 @@
         } else {
             if(restaurantLocations.image != null) {
                 image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
                 image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height:270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
@@ -460,61 +460,63 @@
         }
 
         var customContent = `
-                            <div class="card col-12">
-                                <div style="overflow: hidden; height: 270px; border-radius: 15px;">
-                                    @guest
-                                        <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
-                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                    focusable="false" class="favorite-button favorite-button-28">
-                                                    <path
-                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                            <div class="card col-12 d-flex justify-content-between h-100">
+                                <div>
+                                    <div class="image-in-map-container">
+                                        @guest
+                                            <div
+                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                    onclick="loginForm(1)">
+                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                        focusable="false" class="favorite-button favorite-button-28">
+                                                        <path
+                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        @endguest
+                                        @auth
+                                            ${favorite}
+                                        @endauth
+                                        <div class="like-sign like-sign-restaurant-${restaurantLocations.id_restaurant}">
+                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                         </div>
-                                    @endguest
-                                    @auth
-                                        ${favorite}
-                                    @endauth
-                                    <div class="like-sign like-sign-restaurant-${restaurantLocations.id_restaurant}">
-                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                                        <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
+                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                        </div>
+                                        <div class="js-slider js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                        data-arrows="true">
+                                            ${image}
+                                        </div>
                                     </div>
-                                    <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
-                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    <div class="mt-3">
+                                        <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
+                                            {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
+                                            <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
+                                            <p style="min-height: 40px;" class="card-text text-grey-2 limit-text text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                        </a>
                                     </div>
-                                    <div class="js-slider js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                    data-arrows="true">
-                                        ${image}
+
+                                    <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
+                                        <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                <p class="text-align-center mb-0">
+                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                    </a>
+
+                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                    </a>
+                                                </p>
+                                        </div>
+                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
-                                        {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
-                                        <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
-                                        <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
-                                        <p style="min-height: 40px;" class="card-text text-grey-2 limit-text text-14 fw-500 text-align-justify mt-1">${short_description}</p>
-                                    </a>
-                                </div>
 
-                                <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
-                                    <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
-                                            <p class="text-align-center mb-0">
-                                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                    <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                </a>
-
-                                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                </a>
-                                            </p>
-                                    </div>
-                                    <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                                </div>
-
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                <div class="d-flex align-items-end modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -570,8 +572,8 @@
                     markedViewedMarkerNew();
 
                     // show right content
-                    $('#map12').addClass('w-70');
-                    $('#map12').removeClass('col-12');
+                    // $('#map12').addClass('w-70');
+                    $('#map12').removeClass('w-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -618,7 +620,7 @@
             image = '';
             for (let j = 0; j < villaLocations.photo.length; j++) {
                 image += `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.photo[j].name}')}}"
                         alt="">
                 </a>`;
@@ -626,13 +628,13 @@
         } else {
             if(villaLocations.image != null) {
                 image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
                 image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height:270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
@@ -694,61 +696,62 @@
         }
 
         var customContent = `
-                            <div class="card col-12">
-                                <div style="overflow: hidden; height: 270px; border-radius: 15px;">
-                                    @guest
-                                        <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
-                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                    focusable="false" class="favorite-button favorite-button-28">
-                                                    <path
-                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                            <div class="card col-12 d-flex justify-content-between h-100">
+                                <div>
+                                    <div class="image-in-map-container">
+                                        @guest
+                                            <div
+                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                    onclick="loginForm(1)">
+                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                        focusable="false" class="favorite-button favorite-button-28">
+                                                        <path
+                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        @endguest
+                                        @auth
+                                            ${favorite}
+                                        @endauth
+                                        <div class="like-sign like-sign-villa-${villaLocations.id_villa}">
+                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                         </div>
-                                    @endguest
-                                    @auth
-                                        ${favorite}
-                                    @endauth
-                                    <div class="like-sign like-sign-villa-${villaLocations.id_villa}">
-                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                                        <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center; border-radius: 15px;">
+                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                        </div>
+                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                        data-arrows="true">
+                                            ${image}
+                                        </div>
                                     </div>
-                                    <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center; border-radius: 15px;">
-                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    <div class="mt-3">
+                                        <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
+                                            <p style="min-height: 38px;" class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                            <p style="min-height: 43px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                            <p class="card-text text-orange text-17 fw-500">${price}/Night</p>
+                                        </a>
                                     </div>
-                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                    data-arrows="true">
-                                        ${image}
-                                    </div>
+
+                                    {{-- <div class="d-flex mt-1" style="height: 110px; width: 100%; border-radius: 12px; overflow: hidden;">
+                                        <div style="position: absolute; height: 110px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                <p class="text-align-center mb-0">
+                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                    </a>
+
+                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                    </a>
+                                                </p>
+                                        </div>
+                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+                                    </div> --}}
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
-                                        <p class="card-text text-orange mb-0 text-20 fw-600">${villaLocations.name}</p>
-                                        <p style="min-height: 38px;" class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                        <p style="min-height: 43px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
-                                        <p class="card-text text-orange text-17 fw-500">${price}/Night</p>
-                                    </a>
-                                </div>
-
-                               {{-- <div class="d-flex mt-1" style="height: 110px; width: 100%; border-radius: 12px; overflow: hidden;">
-                                    <div style="position: absolute; height: 110px;" class="col-12 d-flex justify-content-center align-items-center">
-                                            <p class="text-align-center mb-0">
-                                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                    <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                </a>
-
-                                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                </a>
-                                            </p>
-                                    </div>
-                                    <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                                </div> --}}
-
-                                <div style="margin-top: 3.2rem;" class="d-flex align-items-center modal-view-detail">
+                                <div class="d-flex align-items-end modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -803,8 +806,8 @@
                     markedViewedMarkerNew();
 
                     // show right content
-                    $('#map12').addClass('w-70');
-                    $('#map12').removeClass('col-12');
+                    // $('#map12').addClass('w-70');
+                    $('#map12').removeClass('w-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -845,7 +848,7 @@
             image = '';
             for (let j = 0; j < hotelLocations.photo.length; j++) {
                 image += `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.photo[j].name}')}}"
                         alt="">
                 </a>`;
@@ -853,13 +856,13 @@
         } else {
             if(hotelLocations.image != null) {
                 image = `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
                 image = `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height:270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
@@ -903,58 +906,60 @@
         }
 
         var customContent = `
-                            <div class="card col-12">
-                                <div style="overflow: hidden; height: 270px; border-radius: 15px;">
-                                    @guest
-                                        <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
-                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                    focusable="false" class="favorite-button favorite-button-28">
-                                                    <path
-                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                            <div class="card col-12 d-flex justify-content-between h-100">
+                                <div>
+                                    <div class="image-in-map-container">
+                                        @guest
+                                            <div
+                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                    onclick="loginForm(1)">
+                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                        focusable="false" class="favorite-button favorite-button-28">
+                                                        <path
+                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        @endguest
+                                        @auth
+                                            ${favorite}
+                                        @endauth
+                                        <div class="like-sign like-sign-hotel-${hotelLocations.id_hotel}">
+                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                         </div>
-                                    @endguest
-                                    @auth
-                                        ${favorite}
-                                    @endauth
-                                    <div class="like-sign like-sign-hotel-${hotelLocations.id_hotel}">
-                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                                        <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; border-radius: 15px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center;">
+                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                        </div>
+                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                        data-arrows="true">
+                                            ${image}
+                                        </div>
                                     </div>
-                                    <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; border-radius: 15px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center;">
-                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    <div class="mt-3">
+                                        <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
+                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${hotelLocations.name}</p>
+                                        </a>
                                     </div>
-                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                    data-arrows="true">
-                                        ${image}
+
+                                    <div class="d-none d-md-flex" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden;">
+                                        <div style="position: absolute; height: 140px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                <p class="text-align-center mb-0">
+                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                    </a>
+
+                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                    </a>
+                                                </p>
+                                        </div>
+                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
-                                        <p class="card-text text-orange mb-0 text-20 fw-600">${hotelLocations.name}</p>
-                                    </a>
-                                </div>
 
-                                <div class="d-none d-md-flex" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden;">
-                                    <div style="position: absolute; height: 140px;" class="col-12 d-flex justify-content-center align-items-center">
-                                            <p class="text-align-center mb-0">
-                                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                    <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                </a>
-
-                                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                </a>
-                                            </p>
-                                    </div>
-                                    <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                                </div>
-
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                <div class="d-flex align-items-end modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -1007,8 +1012,8 @@
                     markedViewedMarkerNew();
 
                     // show right content
-                    $('#map12').addClass('w-70');
-                    $('#map12').removeClass('col-12');
+                    // $('#map12').addClass('w-70');
+                    $('#map12').removeClass('w-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1049,7 +1054,7 @@
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
                 image += `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
                         alt="">
                 </a>`;
@@ -1057,13 +1062,13 @@
         } else {
             if(activityLocations.image != null) {
                 image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
                 image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
-                    <img class="img-fluid grid-image" loading="lazy" style="display: block; height:270px;"
+                    <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
@@ -1139,61 +1144,63 @@
         }
 
         var customContent = `
-                            <div class="card col-12">
-                                <div style="overflow: hidden; height: 270px; border-radius: 15px;">
-                                    @guest
-                                        <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
-                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                    focusable="false" class="favorite-button favorite-button-28">
-                                                    <path
-                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                            <div class="card col-12 d-flex justify-content-between">
+                                <div>
+                                    <div class="image-in-map-container">
+                                        @guest
+                                            <div
+                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                    onclick="loginForm(1)">
+                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                        focusable="false" class="favorite-button favorite-button-28">
+                                                        <path
+                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        @endguest
+                                        @auth
+                                            ${favorite}
+                                        @endauth
+                                        <div class="like-sign like-sign-activity-${activityLocations.id_activity}">
+                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                         </div>
-                                    @endguest
-                                    @auth
-                                        ${favorite}
-                                    @endauth
-                                    <div class="like-sign like-sign-activity-${activityLocations.id_activity}">
-                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                                        <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center; border-radius: 15px;">
+                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                        </div>
+                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                        data-arrows="true">
+                                            ${image}
+                                        </div>
                                     </div>
-                                    <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 270px; width: 100%; position: absolute; z-index: 99; display: flex; justify-content: center; align-items: center; border-radius: 15px;">
-                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    <div class="mt-3">
+                                        <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
+                                            <p style="min-height: 40px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                            {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
+                                        </a>
                                     </div>
-                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                    data-arrows="true">
-                                        ${image}
+
+                                    <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden;">
+                                        <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
+                                            <p class="text-align-center mb-0">
+                                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                    <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                </a>
+
+                                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
-                                        <p class="card-text text-orange mb-0 text-20 fw-600">${activityLocations.name}</p>
-                                        <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
-                                        <p style="min-height: 40px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
-                                        {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
-                                    </a>
-                                </div>
 
-                                <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden;">
-                                    <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
-                                        <p class="text-align-center mb-0">
-                                            <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                            </a>
-
-                                            <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                            </a>
-                                        </p>
-                                    </div>
-                                    <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                                </div>
-
-                                <div class="d-flex mt-4 align-items-center modal-view-detail">
+                                <div class="d-flex align-items-end modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -1246,8 +1253,8 @@
                     markedViewedMarkerNew();
 
                     // show right content
-                    $('#map12').addClass('w-70');
-                    $('#map12').removeClass('col-12');
+                    // $('#map12').addClass('w-70');
+                    $('#map12').removeClass('w-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1969,8 +1976,8 @@
         // show only filtered marker
         showOnlyFilteredMarker();
         // reset right content
-        $('#map12').removeClass('w-70');
-        $('#map12').addClass('col-12');
+        // $('#map12').removeClass('w-70');
+        $('#map12').addClass('w-100');
         $('#modal-map-right-content').html('');
         $('#modal-map-right').hide();
         // hide primary marker control
@@ -2144,8 +2151,8 @@
                 $("#modal-map").modal('show');
 
                 // show right content
-                $('#map12').addClass('w-70');
-                $('#map12').removeClass('col-12');
+                // $('#map12').addClass('w-70');
+                $('#map12').removeClass('w-100');
                 setTimeout(async () => {
                     $('#modal-map-right').show();
                     // load slick slider
@@ -2184,8 +2191,8 @@
         resetMapEvent();
 
         // reset right content
-        $('#map12').removeClass('w-70');
-        $('#map12').addClass('col-12');
+        // $('#map12').removeClass('w-70');
+        $('#map12').addClass('w-100');
         $('#modal-map-right').hide();
 
         // reset primary marker
@@ -2516,7 +2523,7 @@
                 <div class="map-modal-container">
                     <div class="map-container" id="map12"></div>
                     <div class="map-content" id="modal-map-right">
-                        <div id="modal-map-right-content"></div>
+                        <div id="modal-map-right-content" class="h-100"></div>
                     </div>
                 </div>
             </div>

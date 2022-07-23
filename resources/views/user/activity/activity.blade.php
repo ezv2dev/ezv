@@ -1377,7 +1377,7 @@
                             <div class="stopper"></div>
                         </div>
 
-                        <div class="row-grid-amenities">
+                        <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="contentFacilities">
                                 @if ($activity->facilities->count() > 6)
                                     @for ($i = 0; $i < 6; $i++)
@@ -1415,9 +1415,7 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class='list-amenities'>
-                                            <p style="text-align: center;">{{ __('user_page.there is no facilities yet') }}</p>
-                                        </div>
+                                        {{-- <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p> --}}
                                     @endforelse
                                 @endif
 
@@ -1433,6 +1431,9 @@
                                 @endif
 
                             </div>
+                            @empty($activity->facilities->count())
+                                <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
+                            @endempty
                         </div>
                         <div class="footer"></div>
                     </section>
@@ -4847,7 +4848,7 @@
                                 path+lowerCaseUid+slash+response.data.video[v].name+
                                 '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="'+
                                 response.data.video[v].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                        
+
                             contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
                                 .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
                                 '"> <video loading="lazy" src="' +
@@ -4855,7 +4856,7 @@
                                 '#t=1.0"> </li>';
                         }
                     }
-                        
+
                     btn.textContent = "{{ __('user_page.Save') }}";
                     btn.classList.remove("disabled");
 

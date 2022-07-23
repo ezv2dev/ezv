@@ -3396,79 +3396,42 @@
 
         {{-- Search Location --}}
         <script>
-            function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-            var tema = getCookie("tema");
-            var mode = getCookie("mode");
+            $(function() {
+                var mode = localStorage.getItem("mode");
 
-            $(window).on("resize", function() {
+                $(window).on("resize", function() {
+                    if(mode != null) {
+                        if(mode == "dark") {
+                            if(window.innerWidth < 950) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                            }
+                        } else {
+                            if(window.innerWidth > 949) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                            }
+                        }
+                    } else {
+                        if(window.innerWidth > 949) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                        }
+                    }
+                });
                 if(mode != null) {
-                    if(getCookie("mode") == "black") {
-                        if(screen.width < 950) {
-                            $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(255 255 255 / 73%)")
+                    if(mode == "dark") {
+                        if(window.innerWidth < 950) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
                         }
                     } else {
-                        if(screen.width > 949) {
-                            $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
+                        if(window.innerWidth > 949) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         }
                     }
                 } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
+                    if(window.innerWidth > 949) {
+                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                     }
                 }
             });
-            if(mode != null) {
-                if(getCookie("mode") == "black") {
-                    if(screen.width < 950) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(255 255 255 / 73%)")
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                    }
-                }
-            } else {
-                if(screen.width > 949) {
-                    $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                }
-            }
-
-            $(window).on("resize", function() {
-                if(tema != null) {
-                    if(getCookie("tema") == "black") {
-                        if(screen.width < 950) {
-                            $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(255 255 255 / 73%)")
-                        }
-                    } else {
-                        if(screen.width > 949) {
-                            $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                        }
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                    }
-                }
-            });
-            if(tema != null) {
-                if(getCookie("tema") == "black") {
-                    if(screen.width < 950) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(255 255 255 / 73%)")
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                    }
-                }
-            } else {
-                if(screen.width > 949) {
-                    $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)")
-                }
-            }
         </script>
         <script>
             var coll = document.getElementsByClassName("collapsible_check_search");
@@ -4044,8 +4007,15 @@
                 $('#content-tab-currency').addClass('active');
             }
         </script>
-
         <script>
+            $(function () {
+                $('#switcher').click(function () {
+                    $('#background-color-switch').trigger("click");
+                });
+            });
+        </script>
+        <script>
+
             function initChangeBackgroundTrigger() {
                 // check if mode has been set
                 var checkBox = document.getElementById("background-color-switch");
@@ -4119,6 +4089,14 @@
                 localStorage.removeItem("mode");
                 localStorage.setItem("mode", tipe == 'black' ? "dark" : 'light');
 
+                $('.grid-img-filter').css("box-shadow", "");
+                if(screen.width > 949) {
+                    if(tipe == 'black') {
+                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px");
+                    } else {
+                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px");
+                    }
+                }
                 // var checkBox = document.getElementById("background-color-switch");
                 var text = document.getElementById("body-color");
                 var nav = document.getElementById("new-bar-black");
@@ -4137,10 +4115,6 @@
                 var bodyList = document.getElementById("bodyList");
 
                 if (tipe == 'light') {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "");
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(0 0 0 / 73%)");
-                    }
                     text.classList.remove('bg-body-black');
                     text.classList.add('bg-body-light');
                     nav.classList.remove('bg-body-black');
@@ -4175,10 +4149,6 @@
                     bodyList.classList.remove('bg-body-black');
                     bodyList.classList.add('bg-body-light');
                 } else {
-                    if(screen.width < 950) {
-                        $('.grid-img-filter').css("box-shadow", "");
-                        $('.grid-img-filter').css("box-shadow", "1px 1px 8px rgb(255 255 255 / 73%)");
-                    }
                     text.classList.remove('bg-body-light');
                     text.classList.add('bg-body-black');
                     nav.classList.remove('bg-body-light');
