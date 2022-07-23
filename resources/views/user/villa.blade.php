@@ -2349,8 +2349,8 @@
                 </section>
                 <div class="section">
                     <div>
-                        <div class="row">
-                            <div class="col-2 col-md-1 host-profile">
+                        <div class="row owner-block">
+                            <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
                                     <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
                                         target="_blank">
@@ -2365,7 +2365,7 @@
                                     </a>
                                 @endif
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-5">
                                 <div class="member-profile">
                                     @if (isset($villa[0]->userCreate->first_name))
                                         <h4>{{ __('user_page.Hosted by') }}
@@ -2384,6 +2384,15 @@
                                         </p>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="col-12 col-md-6 owner-profile">
+                                <h4>Host Profile</h4>
+                                <p>
+                                About
+                                    <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                Location
+                                    <span>{{ $infoOwner->location ?? '-' }}</span>
+                                </p>
                             </div>
                         </div>
                         <div class="member-profile-desc">
@@ -2546,6 +2555,7 @@
                             {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
+                            <hr>
 
                                 {{-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> --}}
 
