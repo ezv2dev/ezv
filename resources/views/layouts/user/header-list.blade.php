@@ -3404,15 +3404,21 @@
                         if(mode == "dark") {
                             if(window.innerWidth < 950) {
                                 $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                            } else {
+                                $('.grid-img-filter').css("box-shadow", "")
                             }
                         } else {
                             if(window.innerWidth < 950) {
                                 $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                            } else {
+                                $('.grid-img-filter').css("box-shadow", "")
                             }
                         }
                     } else {
                         if(window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                        } else {
+                            $('.grid-img-filter').css("box-shadow", "")
                         }
                     }
                 });
