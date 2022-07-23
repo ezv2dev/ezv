@@ -3759,7 +3759,7 @@
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
                         <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
-                            onclick="save_reorder_video()">Submit</button>
+                            onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
                 </div>
             </div>
