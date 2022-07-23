@@ -3406,12 +3406,12 @@
                                 $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
                             }
                         } else {
-                            if(window.innerWidth > 949) {
+                            if(window.innerWidth < 950) {
                                 $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                             }
                         }
                     } else {
-                        if(window.innerWidth > 949) {
+                        if(window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         }
                     }
@@ -3422,12 +3422,12 @@
                             $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
                         }
                     } else {
-                        if(window.innerWidth > 949) {
+                        if(window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         }
                     }
                 } else {
-                    if(window.innerWidth > 949) {
+                    if(window.innerWidth < 950) {
                         $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                     }
                 }
@@ -4090,7 +4090,7 @@
                 localStorage.setItem("mode", tipe == 'black' ? "dark" : 'light');
 
                 $('.grid-img-filter').css("box-shadow", "");
-                if(screen.width > 949) {
+                if(screen.width < 950) {
                     if(tipe == 'black') {
                         $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px");
                     } else {
