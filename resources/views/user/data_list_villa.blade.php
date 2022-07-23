@@ -381,30 +381,3 @@ if (isset($_COOKIE['tema'])) {
 <script>
     add(@json($villas->pluck('id_villa')));
 </script>
-<script>
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-$(window).on("resize", function() {
-    if(getCookie("tema") == "black") {
-        if(screen.width < 950) {
-            $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(255 255 255 / 75%)")
-        }
-    } else {
-        if(screen.width > 949) {
-            $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(0 0 0 / 75%)")
-        }
-    }
-});
-if(getCookie("tema") == "black") {
-    if(screen.width < 950) {
-        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(255 255 255 / 75%)")
-    }
-} else {
-    if(screen.width > 949) {
-        $('.grid-img-filter').css("box-shadow", "0px 0px 8px rgb(0 0 0 / 75%)")
-    }
-}
-</script>

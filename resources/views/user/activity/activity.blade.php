@@ -187,8 +187,23 @@
                                     <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                                <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                             </a>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                            @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            @endif
+
+                        </a>
                         </div>
 
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
@@ -234,14 +249,29 @@
                                     src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+
+                        @if (session()->has('currency'))
+                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                    </a>
                     </div>
                 @endauth
             </div>
 
         </div>
-
+        <div id="overlay"></div>
         {{-- PROFILE --}}
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
@@ -1113,17 +1143,17 @@
                                         @auth
                                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
+                                                    <button type="button" onclick="position_video()"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Swap Video Position') }}"><i
+                                                            class="fa fa-arrows"></i></button>
                                                     <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="{{ $item->id_video }}"
                                                         onclick="delete_photo_video(this)"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
                                                 </span>
                                             @endif
                                         @endauth
@@ -4286,9 +4316,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function (file, message, response) {
                 console.log(file);
@@ -4306,6 +4333,21 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
+                let contentPositionModal;
+                let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0)
+                {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0)
+                {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4328,7 +4370,14 @@
                         message.data.photo[0].id_photo+
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                        '"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0)
                 {
@@ -4338,7 +4387,14 @@
                         '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="'+
                         message.data.video[0].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
+                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
+                        '"> <video loading="lazy" src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=1.0"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-video').append(contentPositionModalVideo);
                 }
 
                 $gallery.refresh();
@@ -4568,7 +4624,8 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionPhotoGallery{{ $id }}">
                                 <img class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}"
                                     title="{{ $name }}">
@@ -4581,8 +4638,8 @@
                     </div>
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
-                        <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Save') }}" onclick="save_reorder_photo()">
+                        <button type='submit' id="saveBtnReorderPhoto"
+                        class="btn-edit-position-photos" onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
 
                 </div>
@@ -4612,7 +4669,8 @@
                                 $id = $item->id_video;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionVideoGallery{{ $id }}">
                                 <video class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ asset('foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -4620,13 +4678,14 @@
                             {{ __('user_page.there is no video yet') }}
                         @endforelse
                     </ul>
-
-                    <div style="clear: both; margin-top: 20px;">
-                        <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Submit') }}" onclick="save_reorder_video()">
-                    </div>
-
                 </div>
+                <div class="modal-footer">
+                    <div style="clear: both; margin-top: 20px;">
+                        <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
+                            onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -4644,6 +4703,11 @@
         }
         // Save order
         function save_reorder_photo() {
+
+            let btn = document.getElementById("saveBtnReorderPhoto");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+
             var imageids_arr = [];
             // get image ids order
             $('#sortable-photo li').each(function() {
@@ -4660,7 +4724,63 @@
                     id: `{{ $activity->id_activity }}`
                 },
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/activity/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content = "";
+                    let contentPositionModal = "";
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto'+
+                            response.data.photo[i].id_photo+
+                            '"> <a href="'+
+                            path+lowerCaseUid+slash+response.data.photo[i].name+
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="'+
+                            path+lowerCaseUid+slash+response.data.photo[i].name+
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $activity->id_activity }}" data-photo="'+
+                            response.data.photo[i].id_photo+
+                            '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-photo="'+
+                            response.data.photo[i].id_photo+
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[i]
+                            .id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
+                            '"> <img src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </li>';
+
+                    }
+                    if (response.data.video.length > 0)
+                    {
+                        for (let v = 0; v < response.data.video.length; v++) {
+                            content += '<div class="col-4 grid-photo" id="displayVideo'+response.data.video[v].id_video+'"> <a class="pointer-normal" onclick="view_video_activity('+
+                                response.data.video[v].id_video+')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="'+
+                                path+lowerCaseUid+slash+response.data.video[v].name+
+                                '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $activity->id_activity }}" data-video="'+
+                                response.data.video[v].id_video+'" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                        }
+                    }
+
+                    btn.textContent = "{{ __('user_page.Save') }}";
+                    btn.classList.remove("disabled");
+
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-photo').html("");
+                    $('#sortable-photo').append(contentPositionModal);
+
+                    $("#edit_position_photo").modal("hide");
+
+                    $gallery.refresh();
                 }
             });
         }
@@ -4806,6 +4926,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayPhoto"+photo).remove();
+                            $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
@@ -4857,6 +4978,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo"+video).remove();
+                            $("#positionVideoGallery"+video).remove();
                             // location.reload();
                         }
                     });
