@@ -128,20 +128,28 @@
                         </a>
                         <div class="sort-popup dropdown-menu text-center">
                             <h5 style="margin-bottom: 0;">Sort by</h5>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest Price
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="highest"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'highest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest Price
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest to Highest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'lowest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
-                                <input type="checkbox" name="fSort[]" value="highest">
+                                <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'popularity') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkdesign checkdesign-modal-filter mt-1">Recommended
-                                <input type="checkbox" name="fSort[]" value="highest">
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Best Reviewed
+                                <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'best_reviewed') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -511,15 +519,14 @@
             setCookie2("sAdult", sAdultFormInput, 1);
             setCookie2("sChild", sChildFormInput, 1);
 
-            // var filterFormInput = [];
-            // $("input[name='filter[]']:checked").each(function() {
-            //     filterFormInput.push(parseInt($(this).val()));
-            // });
-
             var fMaxPriceFormInput = $("input[name='fMaxPrice']").val();
             var fMinPriceFormInput = $("input[name='fMinPrice']").val();
             var fBedroomFormInput = $("input[name='fBedroom']:checked").val();
             var fBathroomFormInput = $("input[name='fBathroom']:checked").val();
+            var fSortFormInput = $('.fSort:checked').val();
+            if (fSortFormInput == undefined) {
+                var fSortFormInput = '';
+            }
             var fBedsFormInput = $("input[name='fBeds']:checked").val();
             var fAmenitiesFormInput = [];
             var fCategoryFormInput = [];
@@ -588,7 +595,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${filteredCategory}&fAmenities=${filteredArray}&sortBy=${fSort}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fCategory=${filteredCategory}&fAmenities=${filteredArray}&fSort=${fSortFormInput}`;
 
             villaRefreshFilter(subUrl);
         }

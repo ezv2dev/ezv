@@ -1580,11 +1580,6 @@ li.button-dropdown {
     color: #6c75a5;
 }
 
-.button-dropdown {
-    font-size: 150%;
-    margin-top: 4px;
-}
-
 .button {
     background-color: white !important;
     border-radius: 0px 10px 10px 0px !important;
@@ -2252,7 +2247,7 @@ li.button-dropdown {
 
 .sort-popup {
     position: absolute;
-    width: 220;
+    width: 260px !important;
     background-color: white;
     left: 0;
     top: 59px;
