@@ -916,25 +916,33 @@ class ActivityListController extends Controller
 
     public function activity_update_position_video(Request $request)
     {
-        abort_if(!auth()->check(), 401);
         $validator = Validator::make($request->all(), [
             'videoids' => ['required', 'array'],
             'id' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $videoids_arr = $request->videoids;
 
         $activity = Activity::find($request->id);
-        abort_if(!$activity, 404);
+        
+        if (!$activity) {
+            return response()->json([
+                'message' => 'Wow Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('activity_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $activity->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         if (count($videoids_arr) > 0) {
@@ -951,8 +959,15 @@ class ActivityListController extends Controller
                 $position++;
             }
 
+            $data = [
+                'photo' => ActivityPhoto::where('id_activity', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => ActivityVideo::where('id_activity', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Activity::where('id_activity', $request->id)->select('uid')->first(),
+            ];
+
             return response()->json([
-                'message' => 'data has been updated'
+                'data' => $data,
+                'message' => 'Updated Position Video'
             ], 200);
         } else {
             return response()->json([
