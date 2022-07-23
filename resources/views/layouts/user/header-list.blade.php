@@ -3396,79 +3396,42 @@
 
         {{-- Search Location --}}
         <script>
-            function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-            var tema = getCookie("tema");
-            var mode = getCookie("mode");
+            $(function() {
+                var mode = localStorage.getItem("mode");
 
-            $(window).on("resize", function() {
+                $(window).on("resize", function() {
+                    if(mode != null) {
+                        if(mode == "dark") {
+                            if(window.innerWidth < 950) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                            }
+                        } else {
+                            if(window.innerWidth > 949) {
+                                $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                            }
+                        }
+                    } else {
+                        if(window.innerWidth > 949) {
+                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
+                        }
+                    }
+                });
                 if(mode != null) {
-                    if(getCookie("mode") == "black") {
-                        if(screen.width < 950) {
+                    if(mode == "dark") {
+                        if(window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
                         }
                     } else {
-                        if(screen.width > 949) {
+                        if(window.innerWidth > 949) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         }
                     }
                 } else {
-                    if(screen.width > 949) {
+                    if(window.innerWidth > 949) {
                         $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                     }
                 }
             });
-            if(mode != null) {
-                if(getCookie("mode") == "black") {
-                    if(screen.width < 950) {
-                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                    }
-                }
-            } else {
-                if(screen.width > 949) {
-                    $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                }
-            }
-
-            $(window).on("resize", function() {
-                if(tema != null) {
-                    if(getCookie("tema") == "black") {
-                        if(screen.width < 950) {
-                            $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
-                        }
-                    } else {
-                        if(screen.width > 949) {
-                            $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                        }
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                    }
-                }
-            });
-            if(tema != null) {
-                if(getCookie("tema") == "black") {
-                    if(screen.width < 950) {
-                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
-                    }
-                } else {
-                    if(screen.width > 949) {
-                        $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                    }
-                }
-            } else {
-                if(screen.width > 949) {
-                    $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
-                }
-            }
         </script>
         <script>
             var coll = document.getElementsByClassName("collapsible_check_search");
