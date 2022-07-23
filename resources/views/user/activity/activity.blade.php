@@ -275,7 +275,7 @@
         {{-- PROFILE --}}
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
-            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
+            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
                 {{-- ALERT CONTENT STATUS --}}
                 @auth
                     @if (auth()->user()->id == $activity->created_by)
@@ -412,7 +412,7 @@
                     @endif
                 @endauth
                 {{-- END ALERT CONTENT STATUS --}}
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12" style="padding: 0px;">
                         <div class="profile-image">
                             @if ($activity->image)
@@ -1557,7 +1557,7 @@
             </div>
             {{-- END RIGHT CONTENT --}}
 
-            <section id="location-map" class="section-2">
+            <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
                 <div class="row-grid-amenities">
                     <hr>
                     <div>
@@ -1760,7 +1760,7 @@
             </div>
         </div>
         {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12 bottom-content">
+        <div class="col-lg-12 bottom-content px-max-md-12p">
             <div class="col-12">
                 <section id="review" class="section-2">
                     <hr>

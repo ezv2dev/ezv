@@ -239,6 +239,7 @@
     var viewedMarkers = [];
     var primaryMarker, secondaryMarker;
     var primaryContent, secondaryContent;
+    var primaryData;
     var contentIsExist = false;
     var mapMobileIsOpen = false;
 
@@ -373,7 +374,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
+                                <div style="z-index: 43;" class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; z-index: 43; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -404,7 +405,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
+                                <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank">
                                 <div class="mt-3">
                                         <p class="card-text text-20 text-orange fw-600 mt-1">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
@@ -625,7 +626,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative">
-                                <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
+                                <div class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px;  display: flex; font-size: 24px; border-radius: 9px;">
@@ -657,7 +658,7 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank">
                                     <div class="mt-3">
                                             <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
@@ -865,7 +866,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; z-index: 43; border-radius: 15px;" class="modal-map-image-container">
+                                <div style="z-index: 43;" class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -1125,7 +1126,7 @@
 
         var customContent = `
                             <div class="col-12 mobile-map-desc-container" style="position: relative;">
-                                <div style="overflow: hidden; height: 260px; border-radius: 15px;" class="modal-map-image-container">
+                                <div class="modal-map-image-container">
                                     @guest
                                         <div
                                             style="position: absolute; right: 10px; top: 10px; display: flex; font-size: 24px; border-radius: 9px;">
@@ -1156,7 +1157,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
                                     <div class="mt-3">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
@@ -1273,6 +1274,7 @@
 
     // function to clear & hide right content
     function resetRightContent() {
+        console.log('hit reset right content indra');
         // $('#modal-map-content').html('');
         // show right content on the map
         $('#modal-map-content').addClass('d-none');
@@ -1284,7 +1286,7 @@
     }
 
     // function to refetch data marker
-    async function refetchMarkers() {
+    async function refetchMarkers(additionalOption) {
         // console.log('hit refetchMarkers', map.getBounds());
         // console.log(map.getZoom(), map.getCenter());
 
@@ -1303,6 +1305,41 @@
         await fetchVillasLocation(data);
         await fetchHotelsLocation(data);
         await fetchActivitysLocation(data);
+
+        if(additionalOption){
+            if(additionalOption.withAdditionalArray){
+                if (additionalOption.additionalArrayType == 'villa') {
+                    if(additionalOption.additionalArrayData){
+                        villaLocations = [...villaLocations, ...additionalOption.additionalArrayData];
+                        removeVillaMarkerFromMap();
+                        declareMarkerVilla();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'restaurant') {
+                    if(additionalOption.additionalArrayData){
+                        restaurantLocations = [...restaurantLocations, ...additionalOption.additionalArrayData];
+                        removeRestaurantMarkerFromMap();
+                        declareMarkerRestaurant();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'hotel') {
+                    if(additionalOption.additionalArrayData){
+                        hotelLocations.concat(additionalOption.additionalArrayData);
+                        removeHotelMarkerFromMap();
+                        declareMarkerHotel();
+                    }
+                }
+                if (additionalOption.additionalArrayType == 'activity') {
+                    if(additionalOption.additionalArrayData){
+                        activityLocations.concat(additionalOption.additionalArrayData);
+                        removeActivityMarkerFromMap();
+                        declareMarkerActivity();
+                    }
+                }
+            }
+        }
+
+        markedViewedMarker();
     }
 
     function reverseMap(){
@@ -1321,13 +1358,7 @@
     function mapMobile(){
          //mobile map
          map.addListener("click", ()=>{
-            console.log('hit mapMobile');
-            if(contentIsExist && mapMobileIsOpen){
-                console.log('ketika full screen dan content masih terbuka');
-                resetRightContent();
-                resetPrimaryMarker();
-                resetSecondaryMarker();
-            }
+            console.log('hit mapMobile'); 
             if(!contentIsExist && !mapMobileIsOpen) {
                 console.log('ketika tidak full  screen dan content tidak terbuka');
                 contentIsExist = true;
@@ -1339,9 +1370,14 @@
                 // disable event google map
                 resetMapEvent();
                 // full screen map for mobile
-                document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
-                document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
-                document.getElementById("map-desc").classList.add('mobile-map');
+                // document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
+                // document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
+                // document.getElementById("map-desc").classList.add('mobile-map');
+
+                $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                $("#map-desc").removeClass('mobile-map-desc-close');
+                $("#map-desc").addClass('mobile-map');
+                console.log('test indra');
                 $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                 document.getElementById("bottom-mobile").classList.add('d-none');
 
@@ -1365,6 +1401,11 @@
                 map.setOptions({zoomControl: true});
                 // hide primary control
                 hidePrimaryMarkerControlFromMap();
+            } else if(contentIsExist && mapMobileIsOpen){
+                console.log('ketika full screen dan content masih terbuka');
+                resetRightContent();
+                resetPrimaryMarker();
+                resetSecondaryMarker();
             }
             console.log('contentIsExist: '+contentIsExist);
             console.log('mapMobileIsOpen: '+mapMobileIsOpen);
@@ -1469,6 +1510,7 @@
             zIndex: 9999999
         });
         primaryContent = addCustomContentVilla(data);
+        primaryData = data;
         $('#modal-map-content').html('');
         $('#modal-map-content').append(primaryContent);
         // show primary marker
@@ -1762,6 +1804,16 @@
                     id: activityLocations[i].id_activity
                 };
                 allLocation.push(dataLocations);
+            }
+        }
+
+        // check if data detail exist on allLocation
+        let isExistOnList = false;
+        for (let index = 0; index < allLocation.length; index++) {
+            const element = allLocation[index];
+            if(allLocation.id == primaryData.id_villa){
+                isExistOnList = true;
+                break;
             }
         }
         console.log(allLocation);
@@ -2369,7 +2421,11 @@
                     // load slick slider
                     runSlickSlider();
                     // refetch data
-                    await refetchMarkers();
+                    await refetchMarkers({
+                        withAdditionalArray: true,
+                        additionalArrayType: 'villa',
+                        additionalArrayData: [data]
+                    });
                     // add viewed marker villa
                     addViewedMarker(data.id_villa);
                     // marked viewed marker villa
@@ -2450,21 +2506,23 @@
                 console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             }
         });
+        
+        $(window).on('resize', () => {
+            if ($(window).width() < 768) {
+                contentIsExist = false;
+                mapMobileIsOpen = false;
+                mapMobile();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+            if ($(window).width() >= 768) {
+                reverseMap();
+                console.log('contentIsExist: '+contentIsExist);
+                console.log('mapMobileIsOpen: '+mapMobileIsOpen);
+            }
+        });
     });
-    $(window).on('resize', () => {
-        if ($(window).width() < 768) {
-            contentIsExist = false;
-            mapMobileIsOpen = false;
-            mapMobile();
-            console.log('contentIsExist: '+contentIsExist);
-            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
-        }
-        if ($(window).width() >= 768) {
-            reverseMap();
-            console.log('contentIsExist: '+contentIsExist);
-            console.log('mapMobileIsOpen: '+mapMobileIsOpen);
-        }
-    });
+   
 </script>
 
 {{-- MAP CONTENT --}}
