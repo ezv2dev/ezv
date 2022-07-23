@@ -313,33 +313,67 @@ class CollaboratorController extends Controller
     // update location
     public function collab_update_location(Request $request)
     {
-        $this->authorize('collaborator_update');
-        $status = 500;
-
-        try {
-            $find = Collaborator::where('id_collab', $request->id_collab)->first();
-
-            $find->update(array(
-                'id_location' => $request->id_location,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'updated_by' => Auth::user()->id,
-            ));
-
-            if ($find) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['required', 'integer'],
+            'id_location' => ['required', 'integer'],
+            'latitude' => ['required'],
+            'longitude' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
+
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // update
+        $updatedCollab = $collab->update([
+            'id_collab' => $request->id_collab,
+            'id_location' => $request->id_location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'updated_by' => auth()->user()->id,
+        ]);
+
+        $homeData = Collaborator::where('id_collab', $request->id_collab)->select('latitude', 'longitude')->first();
+
+        // check if update is success or not
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Location',
+                'data' => $homeData
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Location',
+            ], 500);
         }
     }
     // update location
