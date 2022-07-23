@@ -7,11 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('hotel_update_location') }}" method="POST" id="basic-form" class="js-validation"
-                    enctype="multipart/form-data">
-                    @csrf
+                <div id="editLocationForm">
                     <input type="hidden" name="id_hotel" id="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-
                     <label class="col-sm-3 col-form-label" style="font-size: 20px;">{{ __('user_page.Location') }}</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
@@ -36,19 +33,17 @@
                         <input type="hidden" class="form-control" id="longitudeHotel" name="longitude"
                         placeholder="Enter a longitude.." value="{{ $hotel[0]->longitude }}">
                     </div>
-
-                    <br>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation" class="btn btn-sm btn-primary">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
                     <!-- END Submit -->
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -58,17 +53,17 @@
 
 {{-- Villa Map --}}
 <script>
-    // variabel global marker
-    var marker;
+    // variabel global edit marker
+    var markerEditLocation;
 
-    function taruhMarkerVilla(map, posisiTitik){
+    function taruhMarkerHotel(map, posisiTitik){
 
-        if( marker ){
-            // pindahkan marker
-            marker.setPosition(posisiTitik);
+        if( markerEditLocation ){
+            // pindahkan markerEditLocation
+            markerEditLocation.setPosition(posisiTitik);
         } else {
-            // buat marker baru
-            marker = new google.maps.Marker({
+            // buat markerEditLocation baru
+            markerEditLocation = new google.maps.Marker({
                 position: posisiTitik,
                 map: map,
                 icon: {
@@ -88,15 +83,12 @@
     }
 
     // fungsi initialize untuk mempersiapkan peta
-    function initializeHotel() {
-        var latitudeOld = parseFloat('{{ $hotel[0]->latitude }}');
-        var longitudeOld = parseFloat('{{ $hotel[0]->longitude }}');
+    function initEditLocationHotel(latitudeOld, longitudeOld) {
         var map = new google.maps.Map(document.getElementById('mapHotel'), {
-            center: {lat: latitudeOld, lng: longitudeOld},
-            zoom: 17,
-            scrollwheel: true,
-            draggable: true,
-            gestureHandling: "greedy",
+            center: {
+                lat: parseFloat(latitudeOld),
+                lng: parseFloat(longitudeOld)
+            },
              styles: [{
                     "featureType": "poi",
                     "elementType": "all",
@@ -118,7 +110,11 @@
                         "visibility": "off"
                     }]
                 }
-            ]
+            ],
+            scrollwheel: true,
+            draggable: true,
+            gestureHandling: "greedy",
+            zoom: 17
         });
 
         var infowindow = new google.maps.InfoWindow();
@@ -187,12 +183,15 @@
 
         // even listner ketika peta diklik
         google.maps.event.addListener(map, 'click', function(event) {
-            taruhMarkerVilla(this, event.latLng);
+            taruhMarkerHotel(this, event.latLng);
         });
     }
 
+    var latitudeOld = parseFloat('{{ $hotel[0]->latitude }}');
+    var longitudeOld = parseFloat('{{ $hotel[0]->longitude }}');
+
     // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initializeHotel);
+    google.maps.event.addDomListener(window, 'load', initEditLocationHotel(latitudeOld, longitudeOld));
 </script>
 
 {{-- disable enter button --}}
