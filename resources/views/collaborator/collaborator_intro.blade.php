@@ -44,6 +44,7 @@
 
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/dashmix.min.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/home.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/header_minimaliste.css') }}">
 
     <!-- Fonts and Dashmix framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -51,77 +52,6 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        .collab-body {
-            background: #fff;
-            width: 100%;
-            padding: 50px 110px;
-        }
-        .bg-black {
-            display: block;
-            height: 87px;
-            background: #000;
-        }
-        .collab-button {
-            padding: 12px 20px;
-            border: solid 1px #ff7400;
-            border-radius: 12px;
-            background: #000;
-            color: #fff;
-        }
-        .right-image img {
-            object-fit: cover;
-            max-width: 100%;
-            aspect-ratio: 16/11;
-        }
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-        .fix-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            transition: all 1s ease 0s;
-        }
-        .w-logo {
-            width: 90px;
-        }
-        .header {
-            box-sizing: border-box; 
-            background-color: #000000;
-            z-index: 999;
-        }
-        @media only screen and (min-width: 426px) and (max-width: 768px) {
-            .w-logo {
-            width: 80px;
-            }
-            .collab-body {
-                padding: 30px 20px;
-            } 
-        }
-        @media only screen and (max-width: 320px) {
-            .w-logo {
-            width: 50px;
-            } 
-        }
-        @media only screen and (max-width: 425px) {
-            .collab-body {
-                padding: 30px 15px;
-            }
-        }
-        @media only screen and (min-width: 321px) and (max-width: 425px) {
-            .w-logo {
-            width: 60px;
-            } 
-        }
-
-        @media only screen and (min-width: 1367px) {
-            .collab-body {
-                max-width: 1367px;
-                margin: 0 auto;
-            }
-        }
-    </style>
 </head>
 <body>
 <div id="page-container">

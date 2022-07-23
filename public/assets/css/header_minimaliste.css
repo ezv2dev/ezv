@@ -1,0 +1,124 @@
+.header-4-4 .navbar-dark .navbar-toggler-icon {
+    filter: invert(100%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+}
+
+.card-header{
+    background-color: #222222 !important;
+    color: white !important;
+}
+.card-body {
+    background-color: #fff;
+}
+@media only screen and (max-width: 425px) {
+    .card {
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    .forget-header {
+    padding: 0 1rem !important;
+    }
+}
+.forget-header {
+    width: 100%;
+    height: 70px;
+    background: #000;
+    padding: 0 7rem;
+}
+.collab-body {
+    background: #fff;
+    width: 100%;
+    padding: 110px 110px;
+}
+.collab-button {
+    padding: 12px 20px;
+    border: solid 1px #ff7400;
+    border-radius: 12px;
+    background: #000;
+    color: #fff;
+}
+.right-image img {
+    object-fit: cover;
+    max-width: 100%;
+    aspect-ratio: 16/11;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.fix-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: all 1s ease 0s;
+}
+.w-logo {
+    width: 90px;
+}
+.header {
+    box-sizing: border-box; 
+    background-color: #fff;
+    z-index: 999;
+    border-bottom: solid 1px #dedede
+}
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+    .w-logo {
+    width: 80px;
+    }
+    .collab-body {
+        padding: 30px 20px;
+    } 
+}
+@media only screen and (max-width: 320px) {
+    .w-logo {
+    width: 50px;
+    } 
+}
+@media only screen and (max-width: 425px) {
+    .collab-body {
+        padding: 30px 15px;
+    }
+}
+@media only screen and (min-width: 321px) and (max-width: 425px) {
+    .w-logo {
+    width: 60px;
+    } 
+}
+
+@media only screen and (min-width: 1367px) {
+    .collab-body {
+        max-width: 1367px;
+        margin: 0 auto;
+    }
+}
+.btn-primary {
+    margin-top: 10px;
+}
+ 
+.home-content {
+    padding-top: 50px !important;
+    padding-bottom: 90px !important; 
+    text-align: center;
+}
+.body-form {
+    border: solid 0.5px grey; 
+    width: 40%; 
+    margin-left: auto; 
+    margin-right: auto; 
+    border-radius: 7px; 
+    padding: 30px; 
+    box-sizing: border-box; 
+}
+.label {
+    margin-bottom: 10px;
+}
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+    .body-form {
+    width: 60%; 
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .body-form {
+    width: 80%; 
+    }
+}
