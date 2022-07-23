@@ -7,11 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('villa_update_location') }}" method="POST" id="basic-form" class="js-validation"
-                    enctype="multipart/form-data">
-                    @csrf
+                <div id="editLocationForm">
                     <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
-
                     <label class="col-sm-3 col-form-label" for="bed" style="font-size: 20px;">{{ __('user_page.Location') }}</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
@@ -34,19 +31,18 @@
                         <input type="hidden" class="form-control" id="latitudeVilla" name="latitude" placeholder="Enter a latitude.." value="{{ $villa[0]->latitude }}">
                         <input type="hidden" class="form-control" id="longitudeVilla" name="longitude" placeholder="Enter a longitude.." value="{{ $villa[0]->longitude }}">
                     </div>
-
-                    <br>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation" class="btn btn-sm btn-primary">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
                     <!-- END Submit -->
-                </form>
+                    <br>
+                </div>
             </div>
         </div>
     </div>
@@ -56,17 +52,16 @@
 
 {{-- Villa Map --}}
 <script>
-    // variabel global marker
-    var marker;
+    // variabel global edit marker
+    var markerEditLocation;
 
     function taruhMarkerVilla(map, posisiTitik){
-
-        if( marker ){
-            // pindahkan marker
-            marker.setPosition(posisiTitik);
+        if( markerEditLocation ){
+            // pindahkan markerEditLocation
+            markerEditLocation.setPosition(posisiTitik);
         } else {
-            // buat marker baru
-            marker = new google.maps.Marker({
+            // buat markerEditLocation baru
+            markerEditLocation = new google.maps.Marker({
                 position: posisiTitik,
                 map: map,
                 icon: {
@@ -78,21 +73,19 @@
                 }
             });
         }
-
          // isi nilai koordinat ke form
         document.getElementById("latitudeVilla").value = posisiTitik.lat();
         document.getElementById("longitudeVilla").value = posisiTitik.lng();
-
     }
 
     // fungsi initialize untuk mempersiapkan peta
-    function initializeVilla() {
-        var latitudeOld = parseFloat('{{ $villa[0]->latitude }}');
-        var longitudeOld = parseFloat('{{ $villa[0]->longitude }}');
+    function initEditLocationVilla(latitudeOld, longitudeOld) {
         var map = new google.maps.Map(document.getElementById('mapVilla'), {
-            center: {lat: latitudeOld, lng: longitudeOld},
-            zoom: 17,
-             styles: [{
+            center: {
+                lat: parseFloat(latitudeOld),
+                lng: parseFloat(longitudeOld)
+            },
+            styles: [{
                     "featureType": "poi",
                     "elementType": "all",
                     "stylers": [{
@@ -113,7 +106,11 @@
                         "visibility": "off"
                     }]
                 }
-            ]
+            ],
+            scrollwheel: true,
+            draggable: true,
+            gestureHandling: "greedy",
+            zoom: 17
         });
 
         var infowindow = new google.maps.InfoWindow();
@@ -186,8 +183,11 @@
         });
     }
 
+    var latitudeOld = parseFloat('{{ $villa[0]->latitude }}');
+    var longitudeOld = parseFloat('{{ $villa[0]->longitude }}');
+
     // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initializeVilla);
+    google.maps.event.addDomListener(window, 'load', initEditLocationVilla(latitudeOld, longitudeOld));
 </script>
 
 {{-- disable enter button --}}
