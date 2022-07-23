@@ -77,7 +77,7 @@
                         <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                             data-src="https://source.unsplash.com/random/?bali">
                         <div class="grid-text">
-                            {{ __('user_page.Filters') }}
+                            {{ __('user_page.More') }}
                         </div>
                     </a>
                 </div>
@@ -99,25 +99,25 @@
                             <h5 style="margin-bottom: 0;">Sort by</h5>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
                                 <input type="checkbox" class="fSort" name="fSort[]" value="highest"
-                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'highest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Lowest to Highest Price
                                 <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
-                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'lowest') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
                                 <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
-                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'popularity') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Best Reviewed
                                 <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
-                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'best_reviewed') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
@@ -415,7 +415,7 @@
     {{-- Pagination --}}
     <div class="mt-3 d-flex justify-content-center" id="footer">
         <div class="mt-3">
-            {{ $hotel->onEachSide(0)->appends(Request::all())->links() }}
+            {{ $hotel->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     {{-- End Pagination --}}
@@ -936,6 +936,11 @@
                 var fSortFormInput = '';
             }
 
+            var filterFormInput = [];
+            var fCategoryFormInput = [];
+
+            var fMaxPriceFormInput = $("input[name='fMaxPrice']").val();
+            var fMinPriceFormInput = $("input[name='fMinPrice']").val();
 
             function setCookie2(name, value, days) {
                 var expires = "";
@@ -960,36 +965,71 @@
                 }
             }
 
-            var filterFormInput = [];
-            $("input[name='filter[]']:checked").each(function() {
-                filterFormInput.push(parseInt($(this).val()));
-            });
-
-            if (filterFormInput.includes(valueClick) == true) {
-                var filterCheck = filterFormInput.filter(unCheck);
-
-                function unCheck(dataCheck) {
-                    return dataCheck != valueClick;
-                }
-
-                var filteredArray = filterCheck.filter(function(item, pos) {
-                    return filterCheck.indexOf(item) == pos;
+            if (valueCategory != null) {
+                $("input[name='fCategory[]']").prop("checked", false);
+                $("input[name='fCategory[]']:checked").each(function() {
+                    fCategoryFormInput.push(parseInt($(this).val()));
                 });
+                if (fCategoryFormInput.includes(valueCategory) == true) {
+                    var filterCheck = fCategoryFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueCategory;
+                    }
+
+                    var filteredCategory = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    fCategoryFormInput.push(valueCategory);
+
+                    var filteredCategory = fCategoryFormInput.filter(function(item, pos) {
+                        return fCategoryFormInput.indexOf(item) == pos;
+                    });
+                }
             } else {
-                filterFormInput.push(valueClick);
+                $("input[name='fCategory[]']:checked").each(function() {
+                    fCategoryFormInput.push(parseInt($(this).val()));
+                });
+
+                var filteredCategory = fCategoryFormInput.filter(function(item, pos) {
+                    return fCategoryFormInput.indexOf(item) == pos;
+                });
+            }
+
+            if (valueClick != null) {
+                $("input[name='filter[]']:checked").each(function() {
+                    filterFormInput.push(parseInt($(this).val()));
+                });
+                if (filterFormInput.includes(valueClick) == true) {
+                    var filterCheck = filterFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueClick;
+                    }
+
+                    var filteredArray = filterCheck.filter(function(item, pos) {
+                        return filterCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    filterFormInput.push(valueClick);
+
+                    var filteredArray = filterFormInput.filter(function(item, pos) {
+                        return filterFormInput.indexOf(item) == pos;
+                    });
+                }
+            } else {
+                $("input[name='filter[]']:checked").each(function() {
+                    filterFormInput.push(parseInt($(this).val()));
+                });
 
                 var filteredArray = filterFormInput.filter(function(item, pos) {
                     return filterFormInput.indexOf(item) == pos;
                 });
             }
 
-            if (valueCategory == null) {
-                var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=&filter=${filteredArray}&fSort=${fSortFormInput}`;
-            } else {
-                var subUrl =
-                    `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fCategory=${valueCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
-            }
+            var subUrl =
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
 
             hotelRefreshFilter(subUrl);
         }

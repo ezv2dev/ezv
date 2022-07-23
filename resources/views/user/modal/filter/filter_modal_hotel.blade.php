@@ -317,7 +317,7 @@ $get_category = request()->get('fCategory');
             <div class="modal-filter-footer">
                 <button type="submit"
                     style="width:150px; border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
-                    class="btn btn-primary btn-lg btn-block" onclick="homesFilter()">
+                    class="btn btn-primary btn-lg btn-block" onclick="hotelFilter()">
                     {{ Translate::translate('Save') }}
                 </button>
             </div>
