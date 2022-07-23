@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Amenities;
+use App\Models\DetailReview;
 use App\Models\HostLanguage;
 use App\Models\Location;
 use App\Models\PropertyTypeVilla;
@@ -36,8 +37,7 @@ class SearchHomeController extends Controller
 
     public function index(Request $request)
     {
-        // dd($request->all());
-        $villa = Villa::with('villaHasCategory')->where('status', 1)->inRandomOrder()->get();
+        $villa = Villa::with('villaHasCategory')->where('status', 1)->get();
         $amenities = Amenities::all();
         $villaCategory = VillaCategory::all();
 
@@ -72,9 +72,37 @@ class SearchHomeController extends Controller
         //* end search action
 
         $ids = $villa->pluck('id_villa');
-        // $villa = Villa::whereIn('id_villa', $ids)->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
-        $villa = Villa::whereIn('id_villa', $ids)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
-        $villa->appends(request()->query());
+        $fSort = $request->fSort;
+        if (!$fSort) {
+            $villa = Villa::whereIn('id_villa', $ids)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+        } else {
+            $villa = Villa::whereIn('id_villa', $ids)->get();
+        }
+        // dd($villa);
+
+        if ($fSort) {
+            if ($fSort == 'highest') {
+                $villaIds = $villa->modelKeys();
+                $villa = Villa::orderBy('price', 'DESC')->whereIn('id_villa', $villaIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+            } else if ($fSort == 'lowest') {
+                $villaIds = $villa->modelKeys();
+                $villa = Villa::orderBy('price', 'ASC')->whereIn('id_villa', $villaIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+            } else if ($fSort == 'popularity') {
+                $villaIds = $villa->modelKeys();
+                $countPerson = DetailReview::orderBy('count_person', 'DESC')->get();
+                $personIds = $countPerson->pluck('id_villa');
+                $villa = Villa::whereIn('id_villa', $personIds)->whereIn('id_villa', $villaIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+            } else if ($fSort == 'best_reviewed') {
+                $villaIds = $villa->modelKeys();
+                $countHighest = DetailReview::orderBy('average', 'DESC')->get();
+                $highestIds = $countHighest->pluck('id_villa');
+                $villa = Villa::whereIn('id_villa', $highestIds)->whereIn('id_villa', $villaIds)->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+            }
+        }
+        // dd($villa);
+        // $ids = $villa->pluck('id_villa');
+        // $villa = Villa::where('id_villa', $ids)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
+        // $villa->appends(request()->query());
 
         // $villa = Villa::whereIn('id_villa', $villaIds)->orderBy('grade')->paginate(5);
         // //* order by grade
@@ -347,7 +375,6 @@ class SearchHomeController extends Controller
             $villa = $villa->merge($villaOther);
         }
 
-
         if ($sCheck_in || $sCheck_out) {
 
             $villaIds = $villa->modelKeys();
@@ -434,6 +461,32 @@ class SearchHomeController extends Controller
                     $query->where('id_amenities', $fAmenities);
                 })
                 ->inRandomOrder()->get();
+        }
+
+        return $villa;
+    }
+
+    public function processSort($villas, $request)
+    {
+        $villa = $villas;
+        $fSort = $request->fSort;
+
+        if ($fSort) {
+            if ($fSort == 'highest') {
+                $villaIds = $villa->modelKeys();
+                $villa = Villa::orderBy('price', 'DESC')->whereIn('id_villa', $villaIds)->where('status', 1)->get();
+            } else if ($fSort == 'lowest') {
+                $villaIds = $villa->modelKeys();
+                $villa = Villa::orderBy('price', 'ASC')->whereIn('id_villa', $villaIds)->where('status', 1)->take(5)->get();
+            } else if ($fSort == 'popularity') {
+                $villaIds = $villa->modelKeys();
+                $countPerson = DetailReview::orderBy('count_person', 'DESC')->get();
+                $villa = Villa::where('id_villa', $countPerson->id_villa)->whereIn('id_villa', $villaIds)->where('status', 1)->get();
+            } else if ($fSort == 'best_reviewed') {
+                $villaIds = $villa->modelKeys();
+                $countHighest = DetailReview::orderBy('average', 'DESC')->get();
+                $villa = Villa::where('id_villa', $countHighest->id_villa)->whereIn('id_villa', $villaIds)->where('status', 1)->get();
+            }
         }
 
         return $villa;
