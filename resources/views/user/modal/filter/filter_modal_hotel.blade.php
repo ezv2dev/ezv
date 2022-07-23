@@ -63,39 +63,86 @@
         color: #FF7400;
     }
 
+    .roomnumberoption-container::-webkit-scrollbar {
+        visibility: hidden;
+    }
+
+    .roomnumberoption-container {
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+    .filter-modal-body {
+        overflow-x: hidden;
+    }
+
+    /* @media (max-width: 575px) {
+        .roomnumberoption-container{
+            width: 49%;
+        }
+    }
+    @media (min-width: 576px) {
+        .roomnumberoption-container{
+            width: 71%;
+        }
+    }
+    @media (min-width: 768px) {
+        .roomnumberoption-container{
+            width: 67%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .roomnumberoption-container{
+            width: 100%;
+        }
+    } */
 </style>
 
 @php
-$amenities2 = App\Models\Amenities::all();
-$amenities_length = count($amenities2);
+$hotel_filter2 = App\Models\HotelFilter::orderBy('order')->get();
+$hotel_filter_length = count($hotel_filter2);
 
-$amenities3 = [];
-for ($i = 6; $i < $amenities_length; $i++) {
-    array_push($amenities3, $amenities2[$i]);
+$hotel_filter3 = [];
+for ($i = 6; $i < $hotel_filter_length; $i++) {
+    array_push($hotel_filter3, $hotel_filter2[$i]);
 }
-$host_language2 = App\Models\HostLanguage::all();
-$host_language_length = count($host_language2);
-$host_language3 = [];
-for ($i = 4; $i < $host_language_length; $i++) {
-    array_push($host_language3, $host_language2[$i]);
+
+$category2 = App\Models\HotelCategory::orderBy('order')->get();
+$category_length = count($category2);
+
+$category3 = [];
+for ($i = 6; $i < $category_length; $i++) {
+    array_push($category3, $category2[$i]);
 }
-$accessibility_features2 = App\Models\VillaAccessibilityFeatures::all();
-$accessibility_features_detail2 = App\Models\VillaAccessibilitiyFeaturesDetail::all();
-$accessibility_features3 = App\Models\VillaAccessibilityFeatures::whereIn('id_accessibility_features', [2, 3, 4])->get();
-$accessibility_features_detail3 = App\Models\VillaAccessibilitiyFeaturesDetail::whereIn('id_detail_accessibility_features', [5, 6, 7, 8, 9, 10, 11, 12, 13])->get();
 
 //get from link
-$get_min = app('request')->input('fMinPrice');
+$get_min = request()->get('fMinPrice');
 if (!$get_min) {
     $get_min = 0;
 }
-$get_max = app('request')->input('fMaxPrice');
-if (!$get_min) {
-    $get_max = 100000000;
+
+$get_max = request()->get('fMaxPrice');
+if (!$get_max) {
+    $get_max = 200000000;
 }
+
+$get_category = request()->get('fCategory');
 @endphp
 
-<div class="modal fade" id="modal-filters-hotel" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+<div class="modal fade" id="modalFiltersHotel" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
         <div class="modal-content" style="background: #fff;">
@@ -104,168 +151,193 @@ if (!$get_min) {
                         class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="filter-modal-body" style=" height: 450px; overflow-y: auto;">
-                <form action="{{ route('filters-hotel') }}" method="GET" id="basic-form" class="js-validation col-12"
-                    enctype="multipart/form-data" style="display: table">
-                    <div class="filter-modal-row">
-                        <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">{{ Translate::translate('Price Range') }}</h5>
-                        <div class="col-12" style="display: flex; justify-content: center;">
+                <div class="filter-modal-row">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Price Range') }}</h5>
+                    <div class="col-12" style="display: flex; justify-content: center;">
 
-                            <div class="double-slider-modal">
-                                <div class="extra-controls form-inline">
-                                    <div class="form-group col-lg-12" style="display: flex;">
+                        <div class="double-slider-modal">
+                            <div class="extra-controls form-inline">
+                                <div class="form-group col-lg-12" style="display: flex;">
 
-                                        <div class=""
-                                            style="display: table; width: 50%; float: left; padding-right: 10px;">
-                                            <div class="col-lg-12"
-                                                style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
-                                                <label for="min_price" style="font-size: 12px;">Min</label>
-                                                <input name="min_price" style="font-size: 12px;" type="text"
-                                                    class="js-input-from form-control" value="0" />
-                                                <input type="hidden" id="min_filter_price" value="{{ $get_min }}">
-                                            </div>
+                                    <div class=""
+                                        style="display: table; width: 50%; float: left; padding-right: 10px;">
+                                        <div class="col-lg-12"
+                                            style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
+                                            <label for="fMinPrice" style="font-size: 12px;">Min</label>
+                                            <input name="fMinPrice" style="font-size: 12px; border: none;"
+                                                type="text" class="js-input-from form-control"
+                                                value="{{ $get_min }}" />
+                                            <input type="hidden" id="min_filter_price" value="{{ $get_min }}">
                                         </div>
-                                        <div class=""
-                                            style="display: flex; align-items: center; justify-content: center;">
-                                            <div style="background-color: black; width: 15px; height: 2px;">
-                                            </div>
-                                        </div>
-
-                                        <div class=""
-                                            style="display: table; width: 50%; float: left; padding-left: 10px;">
-                                            <div class="col-lg-12"
-                                                style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
-                                                <label for="max_price" style="font-size: 12px;">Max</label>
-                                                <input name="max_price" style="font-size: 12px;" type="text"
-                                                    class="js-input-to form-control" value="0" />
-                                                <input type="hidden" id="max_filter_price" value="{{ $get_max }}">
-                                            </div>
-                                        </div>
-
                                     </div>
-                                    <input type="text" class="js-range-slider" value="" />
+                                    <div class=""
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <div style="background-color: black; width: 15px; height: 2px;">
+                                        </div>
+                                    </div>
+
+                                    <div class=""
+                                        style="display: table; width: 50%; float: left; padding-left: 10px;">
+                                        <div class="col-lg-12"
+                                            style="border: 1px solid #ff7400; border-radius: 10px; padding-left: 8px; padding-bottom: 8px;">
+                                            <label for="fMaxPrice" style="font-size: 12px;">Max</label>
+                                            <input name="fMaxPrice" style="font-size: 12px; border: none;"
+                                                type="text" class="js-input-to form-control"
+                                                value="{{ $get_max }}" />
+                                            <input type="hidden" id="max_filter_price" value="{{ $get_max }}">
+                                        </div>
+                                    </div>
+
                                 </div>
+                                <input type="text" class="js-range-slider" value="" />
                             </div>
                         </div>
                     </div>
-                    <div class="filter-modal-row">
-                        <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">{{ Translate::translate('Amenities') }}</h5>
-                        <div id="modal-amenities-default" class="col-12">
-                            <div class="row modal-checkbox-row">
-                                <input type="hidden" name="filterAmenities[]" value="null" />
-                                @foreach ($amenities2->take(6) as $item)
-                                    @php
-                                        $checked = [];
-                                        if (isset($_GET['filterAmenities'])) {
-                                            $checked = $_GET['filterAmenities'];
-                                        }
+                </div>
 
-                                        $amenities_filter = explode(',', app('request')->input('fFacilities'));
-                                    @endphp
-                                    <div class="col-4 checkdesign-gap">
-                                        <label class="checkdesign checkdesign-modal-filter">{{ Translate::translate($item->name) }}
-                                            <input type="checkbox" name="filterAmenities[]"
-                                                value="{{ $item->id_amenities }}"
-                                                @if (in_array($item->id_amenities, $checked) || in_array($item->id_amenities, $amenities_filter)) checked @endif>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                @endforeach
+                <div class="filter-modal-row">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Category') }}</h5>
+                    <div id="modal-category-default" class="col-12">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($category2->take(6) as $item)
+                                @php
+                                    $isChecked = '';
+                                    $categoryIds = explode(',', request()->get('fCategory'));
+                                    if (in_array($item->id_hotel_category, $categoryIds)) {
+                                        $isChecked = 'checked';
+                                    }
+                                @endphp
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="fCategory[]" value="{{ $item->id_hotel_category }}"
+                                            {{ $isChecked }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
 
-                            </div>
-                            <h6 id="show-more-amenities2" class="filter-modal-row-title-secondary"
-                                onclick="showmoreamenities2();"
-                                style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
-                                {{ Translate::translate('Show more') }}
-                            </h6>
                         </div>
-
-                        <div id="modal-amenities-all2" class="col-12 mt-1rem display-none">
-                            <div class="row modal-checkbox-row">
-                                @foreach ($amenities3 as $item)
-                                    @php
-                                        $checked = [];
-                                        if (isset($_GET['filterAmenities'])) {
-                                            $checked = $_GET['filterAmenities'];
-                                        }
-                                    @endphp
-                                    <div class="col-4 checkdesign-gap">
-                                        <label class="checkdesign checkdesign-modal-filter">{{ Translate::translate($item->name) }}
-                                            <input type="checkbox" name="filterAmenities[]"
-                                                value="{{ $item->id_amenities }}"
-                                                @if (in_array($item->id_amenities, $checked)) checked @endif>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                            <h6 id="show-less-amenities" class="filter-modal-row-title-secondary"
-                                onclick="closemoreamenities2();"
-                                style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
-                                Show less
-                            </h6>
-                        </div>
+                        <h6 id="show-more-category" class="filter-modal-row-title-secondary"
+                            onclick="showMoreCategory();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show more') }}
+                        </h6>
                     </div>
 
-                    <div class="filter-modal-row" style="border-bottom: 0px;">
-                        <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">{{ Translate::translate('Host Languange') }}</h5>
-                        <div id="modal-language-default" class="col-12">
-                            <div class="row modal-checkbox-row">
-                                @foreach ($host_language2->take(4) as $item)
-                                    <div class="col-6 checkdesign-gap">
-                                        <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
-                                            <input type="checkbox" name="filterHostLanguage[]"
-                                                value="{{ $item->id_host_language }}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                @endforeach
+                    <div id="modal-category-all" class="col-12 mt-1rem display-none">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($category3 as $item)
+                                @php
+                                    $isChecked = '';
+                                    $categoryIds = explode(',', request()->get('fCategory'));
+                                    if (in_array($item->id_hotel_category, $categoryIds)) {
+                                        $isChecked = 'checked';
+                                    }
+                                @endphp
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="fCategory[]"
+                                            value="{{ $item->id_hotel_category }}" {{ $isChecked }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
 
-                            </div>
-                            <h6 id="show-more-language2" class="filter-modal-row-title-secondary"
-                                onclick="showmorelanguage2();"
-                                style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
-                                {{ Translate::translate('Show more') }}
-                            </h6>
                         </div>
-
-                        <div id="modal-language-all2" class="col-12 mt-1rem display-none">
-                            <div class="row modal-checkbox-row">
-                                @foreach ($host_language3 as $item)
-                                    <div class="col-6 checkdesign-gap">
-                                        <label class="checkdesign checkdesign-modal-filter">{{ Translate::translate($item->name) }}
-                                            <input type="checkbox" name="filterHostLanguage[]"
-                                                value="{{ $item->id_host_language }}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                            <h6 id="show-less-language" class="filter-modal-row-title-secondary"
-                                onclick="closemorelanguage2();"
-                                style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
-                                {{ Translate::translate('Show less') }}
-                            </h6>
-                        </div>
+                        <h6 id="show-less-category" class="filter-modal-row-title-secondary"
+                            onclick="closeMoreCategory();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show less') }}
+                        </h6>
                     </div>
+                </div>
+
+                <div class="filter-modal-row">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Filter') }}</h5>
+                    <div id="modal-amenities-default" class="col-12">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($hotel_filter2->take(6) as $item)
+                                @php
+                                    $isChecked = '';
+                                    $hotel_filterIds = explode(',', request()->get('filter'));
+                                    if (in_array($item->id_hotel_filter, $hotel_filterIds)) {
+                                        $isChecked = 'checked';
+                                    }
+                                @endphp
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="filter[]" value="{{ $item->id_hotel_filter }}"
+                                            {{ $isChecked }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <h6 id="show-more-amenities" class="filter-modal-row-title-secondary"
+                            onclick="showMoreFilter();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show more') }}
+                        </h6>
+                    </div>
+
+                    <div id="modal-amenities-all" class="col-12 mt-1rem display-none">
+                        <div class="row modal-checkbox-row">
+                            @foreach ($hotel_filter3 as $item)
+                                @php
+                                    $isChecked = '';
+                                    $hotel_filterIds = explode(',', request()->get('filter'));
+                                    if (in_array($item->id_hotel_filter, $hotel_filterIds)) {
+                                        $isChecked = 'checked';
+                                    }
+                                @endphp
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                    <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
+                                        <input type="checkbox" name="filter[]" value="{{ $item->id_hotel_filter }}"
+                                            {{ $isChecked }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <h6 id="show-less-amenities" class="filter-modal-row-title-secondary"
+                            onclick="closeMoreFilter();"
+                            style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
+                            {{ Translate::translate('Show less') }}
+                        </h6>
+                    </div>
+                </div>
 
             </div>
             <!-- Submit -->
             <div class="modal-filter-footer">
                 <button type="submit"
                     style="width:150px; border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
-                    class="btn btn-primary btn-lg btn-block">
-                    Save
+                    class="btn btn-primary btn-lg btn-block" onclick="homesFilter()">
+                    {{ Translate::translate('Save') }}
                 </button>
             </div>
             <!-- END Submit -->
-            </form>
         </div>
     </div>
 </div>
 
 <script>
+    $("input[name='fCategory[]']").on('click', function() {
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    });
+
     function bedroom_increment_modal() {
         document.getElementById('bedroom_number2').stepUp();
     }
@@ -290,40 +362,28 @@ if (!$get_min) {
         document.getElementById('bed_number2').stepDown();
     }
 
-    function showmoreaccessibility() {
-        document.getElementById("modal-accessibility-all").classList.remove("display-none");
-        document.getElementById("modal-accessibility-all").classList.add("display-block");
-        document.getElementById("show-more-accessibility").classList.add("display-none");
+    function showMoreFilter() {
+        document.getElementById("modal-amenities-all").classList.remove("display-none");
+        document.getElementById("modal-amenities-all").classList.add("display-block");
+        document.getElementById("show-more-amenities").classList.add("display-none");
     }
 
-    function closemoreaccessibility() {
-        document.getElementById("modal-accessibility-all").classList.remove("display-block");
-        document.getElementById("modal-accessibility-all").classList.add("display-none");
-        document.getElementById("show-more-accessibility").classList.remove("display-none");
+    function closeMoreFilter() {
+        document.getElementById("modal-amenities-all").classList.remove("display-block");
+        document.getElementById("modal-amenities-all").classList.add("display-none");
+        document.getElementById("show-more-amenities").classList.remove("display-none");
     }
 
-    function showmoreamenities2() {
-        document.getElementById("modal-amenities-all2").classList.remove("display-none");
-        document.getElementById("modal-amenities-all2").classList.add("display-block");
-        document.getElementById("show-more-amenities2").classList.add("display-none");
+    function showMoreCategory() {
+        document.getElementById("modal-category-all").classList.remove("display-none");
+        document.getElementById("modal-category-all").classList.add("display-block");
+        document.getElementById("show-more-category").classList.add("display-none");
     }
 
-    function closemoreamenities2() {
-        document.getElementById("modal-amenities-all2").classList.remove("display-block");
-        document.getElementById("modal-amenities-all2").classList.add("display-none");
-        document.getElementById("show-more-amenities2").classList.remove("display-none");
-    }
-
-    function showmorelanguage2() {
-        document.getElementById("modal-language-all2").classList.remove("display-none");
-        document.getElementById("modal-language-all2").classList.add("display-block");
-        document.getElementById("show-more-language2").classList.add("display-none");
-    }
-
-    function closemorelanguage2() {
-        document.getElementById("modal-language-all2").classList.remove("display-block");
-        document.getElementById("modal-language-all2").classList.add("display-none");
-        document.getElementById("show-more-language2").classList.remove("display-none");
+    function closeMoreCategory() {
+        document.getElementById("modal-category-all").classList.remove("display-block");
+        document.getElementById("modal-category-all").classList.add("display-none");
+        document.getElementById("show-more-category").classList.remove("display-none");
     }
 </script>
 <!-- END Fade In Default Modal -->

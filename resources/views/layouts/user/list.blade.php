@@ -207,7 +207,8 @@ if (isset($_COOKIE['tema'])) {
                     <div class="d-flex align-items mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu" style="margin-right: 9px;">
                             <label class="container-mode">
-                                <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                <input type="checkbox" id="background-color-switch"
+                                    onclick="changeBackgroundTrigger(this)"
                                     {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
                                 <span class="checkmark-mode"></span>
                             </label>
@@ -215,19 +216,21 @@ if (isset($_COOKIE['tema'])) {
                         <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
 
-                        @if (session()->has('currency'))
-                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                            @endif
 
-                    </a>
+                        </a>
                     </div>
 
                 </div>
@@ -275,19 +278,20 @@ if (isset($_COOKIE['tema'])) {
                     <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
                 </div>
                 <div class="d-flex align-items-center mb-2">
-                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                        style="color: white;">
 
-                    @if (session()->has('currency'))
-                    <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                        @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                    @else
-                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                        @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                    @endif
+                        @endif
 
-                </a>
+                    </a>
                 </div>
 
             @endauth
@@ -1213,8 +1217,12 @@ if (isset($_COOKIE['tema'])) {
             $('#modalSubCategory').modal('show');
         }
 
-        function filterMain() {
+        function modalFiltersHomes() {
             $('#modalFiltersHome').modal('show');
+        }
+
+        function modalFiltersHotel() {
+            $('#modalFiltersHotel').modal('show');
         }
 
         function filterCollab() {

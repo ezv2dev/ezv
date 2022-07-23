@@ -77,7 +77,7 @@
                         <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
                             data-src="https://source.unsplash.com/random/?bali">
                         <div class="grid-text">
-                            {{ __('user_page.More') }}
+                            {{ __('user_page.Filters') }}
                         </div>
                     </a>
                 </div>
@@ -123,20 +123,14 @@
                             </label>
                         </div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="modalFiltersHotel()">
                         <div>
                             <i class="fas fa-dollar-sign text-18 list-description {{ $textColor }} sub-icon"></i>
                         </div>
                         <div class="list-description {{ $textColor }}">Price</div>
                     </div>
-                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="filterMain()">
-                        <div>
-                            <i class="fas fa-bed text-18 list-description {{ $textColor }} sub-icon"></i>
-                        </div>
-                        <div class="list-description {{ $textColor }}">Bedrooms</div>
-                    </div>
-
-                    @foreach ($hotelFilter->take(4) as $item)
+                    @foreach ($hotelFilter->take(5)->sortBy('order') as $item)
                         <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
                             <div>
@@ -156,21 +150,21 @@
             @endforeach
 
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
+                onclick="modalFiltersHotel()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                 </div>
                 <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
+                    {{ __('user_page.Filters') }}
                 </div>
             </div>
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
-                onclick="moreSubCategory()">
+                onclick="modalFiltersHotel()">
                 <div>
                     <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                 </div>
                 <div class="list-description {{ $textColor }}">
-                    {{ __('user_page.More') }}
+                    {{ __('user_page.Filters') }}
                 </div>
             </div>
         </div>
@@ -429,6 +423,7 @@
     @include('user.modal.filter.filter_language')
     @include('user.modal.auth.login_register')
     @include('user.modal.hotel.category')
+    @include('user.modal.filter.filter_modal_hotel')
     @include('user.modal.hotel.filter')
     {{-- modal laguage and currency --}}
     </div>
