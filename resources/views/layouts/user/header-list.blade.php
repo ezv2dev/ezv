@@ -3403,7 +3403,7 @@
                     if(mode != null) {
                         if(mode == "dark") {
                             if(window.innerWidth < 950) {
-                                $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                                $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px")
                             } else {
                                 $('.grid-img-filter').css("box-shadow", "")
                             }
@@ -3425,7 +3425,7 @@
                 if(mode != null) {
                     if(mode == "dark") {
                         if(window.innerWidth < 950) {
-                            $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px")
+                            $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px")
                         }
                     } else {
                         if(window.innerWidth < 950) {
@@ -4098,7 +4098,7 @@
                 $('.grid-img-filter').css("box-shadow", "");
                 if(screen.width < 950) {
                     if(tipe == 'black') {
-                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 8px");
+                        $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px");
                     } else {
                         $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px");
                     }
