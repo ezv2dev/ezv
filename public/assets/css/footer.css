@@ -31,7 +31,7 @@ color: #ff7400;
 
 .footer-block ul {
 text-indent: -30px;
-/* add */
+list-style: none;
 margin-bottom: 2rem;
 }
 
