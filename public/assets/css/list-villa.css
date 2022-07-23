@@ -3064,13 +3064,8 @@ input::-webkit-inner-spin-button {
 }
 
 .modal-body-map {
-<<<<<<< HEAD
-    padding: 0;
-    overflow-y: hidden;
-=======
     padding: 0 0.5rem 1rem 0.5rem;
     overflow-y: auto;
->>>>>>> 08992512d1767d682e637c206062b847d4a368ad
     height: 89vh;
 }
 
@@ -3087,7 +3082,6 @@ input::-webkit-inner-spin-button {
     width: 100%;
 }
 
-<<<<<<< HEAD
 .map-modal-container .map-container{
     height: 50%;
 }
@@ -3139,11 +3133,6 @@ input::-webkit-inner-spin-button {
 .map__deskription-container{
     display: flex;
     flex-direction: column;
-=======
-.map-modal-container .map-container {
-    height: 55vh;
-    border-radius: 10px;
->>>>>>> 08992512d1767d682e637c206062b847d4a368ad
 }
 
 .max-lines-2 {
@@ -3320,12 +3309,7 @@ input::-webkit-inner-spin-button {
         width: 60%;
         border-radius: 15px;
     }
-<<<<<<< HEAD
-    
-    .map-modal-container .map-content{
-=======
     .map-modal-container .map-content {
->>>>>>> 08992512d1767d682e637c206062b847d4a368ad
         width: 40%;
         padding: 0 1rem;
     }
