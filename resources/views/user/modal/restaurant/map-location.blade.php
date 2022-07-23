@@ -660,7 +660,7 @@
                                 </div>
                                 <div class="col-12 d-flex">
                                     <div class="col-9">
-                                        <p class="text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
+                                        <p class="text-grey-1 mb-0 mt-1 text-13"><i class="fa-solid text-orange fa-car"></i> <span class="text-grey-1" id="travelTimecar"></span> | <i class="fa-solid text-orange fa-person-walking"></i> <span class="text-grey-1" id="travelTime"></span></p>
                                     </div>
                                     <div class="col-3 d-flex justify-content-end">
                                         <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_on_all_marker(${indicator})"><i class="fa-solid fa-chevron-left"></i></button>
