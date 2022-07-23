@@ -1819,6 +1819,7 @@ class ViewController extends Controller
 
         $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story')->latest()->get();
         $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
+        $villaVideo = VillaVideo::where('id_villa', $request->id_villa)->select('id_video','name')->orderBy('order','asc')->get();
 
         $data = [];
 
@@ -1838,6 +1839,7 @@ class ViewController extends Controller
                 'message' => 'Updated Homes Story',
                 'data' => $data,
                 'uid' => $getUID->uid,
+                'video' => $villaVideo,
             ], 200);
         } else {
             return response()->json([
