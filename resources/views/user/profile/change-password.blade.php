@@ -44,6 +44,7 @@
 
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/dashmix.min.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/home.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/header_minimaliste.css') }}">
 
     <!-- Fonts and Dashmix framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -51,99 +52,6 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-                .right-image img {
-            object-fit: cover;
-            max-width: 100%;
-            aspect-ratio: 16/11;
-        }
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-        .fix-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-        .w-logo {
-            width: 90px;
-        }
-        @media only screen and (min-width: 426px) and (max-width: 768px) {
-            .w-logo {
-            width: 80px;
-            }
-        }
-        @media only screen and (max-width: 320px) {
-            .w-logo {
-            width: 50px;
-            } 
-        }
-        @media only screen and (min-width: 321px) and (max-width: 425px) {
-            .w-logo {
-            width: 60px;
-            } 
-        }
-        .home-content {
-            padding-top: 50px !important;
-            padding-bottom: 90px !important; 
-            text-align: center;"
-        }
-        .body-form {
-            border: solid 0.5px grey; 
-            width: 40%; 
-            margin-left: auto; 
-            margin-right: auto; 
-            border-radius: 7px; 
-            padding: 30px; 
-            box-sizing: border-box; 
-        }
-        .label {
-            margin-bottom: 10px;
-        }
-        @media only screen and (min-width: 426px) and (max-width: 768px) {
-            .body-form {
-            width: 60%; 
-            }
-        }
-
-        @media only screen and (max-width: 426px) {
-            .body-form {
-            width: 80%; 
-            }
-        }
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-        .fix-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            transition: all 1s ease 0s;
-        }
-        .w-logo {
-            width: 90px;
-        }
-        .header {
-            box-sizing: border-box; 
-            background-color: #000000;
-            z-index: 999;
-        }
-        @media only screen and (min-width: 426px) and (max-width: 768px) {
-            .w-logo {
-            width: 80px;
-            }
-        }
-        @media only screen and (max-width: 320px) {
-            .w-logo {
-            width: 50px;
-            } 
-        }
-        @media only screen and (min-width: 321px) and (max-width: 425px) {
-            .w-logo {
-            width: 60px;
-            } 
-        }
-    </style>
 </head>
 <body>
 <div id="page-container">
