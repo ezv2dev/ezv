@@ -2122,7 +2122,7 @@
 
                                                     @foreach ($restaurantSubCategory as $item)
                                                         <div class="col-12 col-md-6 col-lg-4 d-flex"
-                                                            style="padding-left: 0px !important;">
+                                                            style="padding-left: 0px !important; align-items: center;">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
                                                                     style="background: #222222;"
