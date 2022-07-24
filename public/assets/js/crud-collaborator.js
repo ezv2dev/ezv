@@ -343,6 +343,8 @@ function saveDescription(id_collab) {
 }
 
 function updateGender(id_collab) {
+    console.log('hit updateGender');
+
     var genderArray = [];
     $("input[name='gender[]']:checked").each(function() {
         genderArray.push($(this).val());
@@ -568,4 +570,64 @@ function saveSocialMedia() {
 
 function saveGender() {
     console.log('hit saveGender');
+
+    const form = $('#saveGenderForm');
+    console.log(form.find("input[name='gender[]']:checked").val());
+
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        gender: form.find("input[name='gender[]']:checked").val(),
+    };
+
+    let btn = form.find('#btnSaveGender');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/update/gender",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-add_gender').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#modal-add_gender').modal('hide');
+        },
+    });
 }

@@ -427,18 +427,34 @@ class CollaboratorController extends Controller
         }
 
         // update
-        $updatedCollab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first()->update([
-            'id_collab' => $request->id_collab,
-            'instagram_link' => $request->instagram_link,
-            'instagram_follower' => $request->instagram_follower,
-            'facebook_link' => $request->facebook_link,
-            'facebook_follower' => $request->facebook_follower,
-            'twitter_link' => $request->twitter_link,
-            'twitter_follower' => $request->twitter_follower,
-            'tiktok_link' => $request->tiktok_link,
-            'tiktok_follower' => $request->tiktok_follower,
-            'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
-        ]);
+        $findCollabSocialMedia = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
+        if($findCollabSocialMedia){
+            $updatedCollab = $findCollabSocialMedia->update([
+                'id_collab' => $request->id_collab,
+                'instagram_link' => $request->instagram_link,
+                'instagram_follower' => $request->instagram_follower,
+                'facebook_link' => $request->facebook_link,
+                'facebook_follower' => $request->facebook_follower,
+                'twitter_link' => $request->twitter_link,
+                'twitter_follower' => $request->twitter_follower,
+                'tiktok_link' => $request->tiktok_link,
+                'tiktok_follower' => $request->tiktok_follower,
+                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+            ]);
+        } else {
+            $updatedCollab = CollaboratorSocialMedia::create([
+                'id_collab' => $request->id_collab,
+                'instagram_link' => $request->instagram_link,
+                'instagram_follower' => $request->instagram_follower,
+                'facebook_link' => $request->facebook_link,
+                'facebook_follower' => $request->facebook_follower,
+                'twitter_link' => $request->twitter_link,
+                'twitter_follower' => $request->twitter_follower,
+                'tiktok_link' => $request->tiktok_link,
+                'tiktok_follower' => $request->tiktok_follower,
+                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+            ]);
+        }
 
         $collab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
 
