@@ -3282,6 +3282,7 @@ class ViewController extends Controller
     public function fullcalendarNotAvailable($id)
     {
         $event = VillaAvailability::select(
+            'id_villa_availability',
             'start',
             'end',
             'text as title',
@@ -3293,6 +3294,7 @@ class ViewController extends Controller
         $i = 0;
 
         foreach ($event as $data) {
+            $result[$i]['id_availability'] = $data->id_villa_availability;
             $result[$i]['start'] = $data->start;
             $result[$i]['end'] = date('Y-m-d', strtotime($data->end . " +1 days"));
             $result[$i]['title'] = $data->title;

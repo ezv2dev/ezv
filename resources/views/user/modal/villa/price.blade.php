@@ -214,14 +214,14 @@
                                                     Add Special Price
                                                 </a>
                                             </li>
-                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                            {{-- <li class="modal-price-title" style="margin-left: 55px;">
                                                 <a class="filter-language-option-text" href="#dataSpecialPrice"
                                                     data-toggle="tab"
                                                     style="font-size: 12pt;
                                                     font-weight: 600; margin-left: -50px;">
                                                     Data Special Price
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -385,16 +385,10 @@
                                                 </div>
                                             </div>
 
-
-
-
-
-
-
                                             <br>
                                         </form>
                                     </div>
-                                    <div class="tab-pane" id="dataSpecialPrice">
+                                    {{-- <div class="tab-pane" id="dataSpecialPrice">
                                         <div class="row">
                                             <div class="col-12">
                                                 <table class="table table-bordered table-hover"
@@ -412,18 +406,6 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {{-- <tr>
-                                                                <td class="text-center">1</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">Delete</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center">2</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">Delete</th>
-                                                            </tr> --}}
                                                         </tbody>
                                                         <tfoot style="color: #383838">
                                                             <tr>
@@ -438,7 +420,7 @@
                                                     </table>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -467,14 +449,14 @@
                                                     Add Availability
                                                 </a>
                                             </li>
-                                            <li class="modal-price-title" style="margin-left: 55px;">
+                                            {{-- <li class="modal-price-title" style="margin-left: 55px;">
                                                 <a class="filter-language-option-text" href="#dataAvailability"
                                                     data-toggle="tab"
                                                     style="font-size: 12pt;
                                                     font-weight: 600; margin-left: -50px;">
                                                     Data Availability
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -517,24 +499,26 @@
                                     <div class="tab-pane" id="addAvailability">
                                         {{-- <hr class="mt-3"> --}}
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-8" style="height: 60vh; overflow-y: scroll;">
                                                 <div id="calendar2"></div>
                                             </div>
-                                        </div>
-                                        <div class="row items-push">
-                                            <center>
-                                                <div class="col-6">
-                                                    <button type="submit" id="btn-submit-availability"
-                                                        class="btn btn-sm btn-danger mt-2"
-                                                        name="action" value="not_available" style="width: 200px;">
-                                                        <i class="fa fa-floppy-disk"></i>
-                                                        {{ __('user_page.Save Date') }}
-                                                    </button>
+                                            <div class="col-4">
+                                                <div class="row items-push">
+                                                    <center>
+                                                        <div class="col-6">
+                                                            <button type="submit" id="btn-submit-availability"
+                                                                class="btn btn-sm btn-danger mt-2"
+                                                                name="action" value="not_available" style="width: 200px;">
+                                                                <i class="fa fa-floppy-disk"></i>
+                                                                {{ __('user_page.Save Date') }}
+                                                            </button>
+                                                        </div>
+                                                    </center>
                                                 </div>
-                                            </center>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="dataAvailability">
+                                    {{-- <div class="tab-pane" id="dataAvailability">
                                         <div class="row">
                                             <div class="col-12">
                                                 <table class="table table-bordered table-hover"
@@ -549,20 +533,6 @@
                                                                 <th class="text-center">Action</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            {{-- <tr>
-                                                                <td class="text-center">1</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">Delete</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center">2</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">2022-02-02</th>
-                                                                <td class="text-center">Delete</th>
-                                                            </tr> --}}
-                                                        </tbody>
                                                         <tfoot style="color: #383838">
                                                             <tr>
                                                                 <th class="text-center">No</th>
@@ -574,7 +544,7 @@
                                                     </table>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -766,6 +736,16 @@
     .fc-title {
         color: #fff;
     }
+
+    #calendar .fc-content {
+        cursor: pointer;
+        height: 6.3vh;
+    }
+
+    #calendar2 .fc-content {
+        cursor: pointer;
+        height: 6.3vh;
+    }
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
@@ -920,12 +900,51 @@
             // $('#addSpecialModal').modal('show');
         },
 
-        // eventClick: function (event) {
-        //     var start = moment(event.start).format('YYYY-MM-DD');
-        //     var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
-        //     $('#start').val(start);
-        //     $('#end').val(end);
-        // }
+        eventClick: function (event) {
+            // var start = moment(event.start).format('YYYY-MM-DD');
+            // var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
+            // $('#start').val(start);
+            // $('#end').val(end);
+            let id = event.id_detail;
+            Swal.fire({
+                title: `{{ __('user_page.Delete Special Price?') }}`,
+                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "get",
+                        dataType: 'json',
+                        url: `/villa/special-price/${id}/delete/`,
+                        success: function(response) {
+                            Swal.fire('Deleted', response.message, 'success');
+                            // tableSpecialPrice.draw();
+
+                            // render Event FullCalendar
+                            calendar.fullCalendar('removeEvents', id);
+                            calendar.fullCalendar("refetchEvents");
+
+                            // update All Calendar Detail
+                            calendar_availability(2);
+                            calendar_reserve(2);
+                            calendar_reserve2(2);
+                        },
+                        error: function(jqXHR, response) {
+                            console.log(jqXHR);
+                            Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                        }
+                    });
+                } else {
+                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                        'error')
+                }
+            });
+        }
     });
 
     let multiEvent = [];
@@ -965,7 +984,7 @@
             var endtemp = moment(end).add(1, "days").format('YYYY-MM-DD');
             $('#startNotAvailable').val(start);
             $('#endNotAvailable').val(end);
-            var title = "Not Available";
+            var title = "Date Unsaved";
 
             var tempEvent;
             tempEvent = {
@@ -988,6 +1007,47 @@
             calendar2.fullCalendar('renderEvent', tempEvent, true);
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
+        },
+        eventClick: function (event) {
+            let id = event.id_availability;
+            Swal.fire({
+                title: `{{ __('user_page.Delete Date Availability?') }}`,
+                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "get",
+                        dataType: 'json',
+                        url: `/villa/availability/delete/${id}`,
+                        success: function(response) {
+                            Swal.fire('Deleted', response.message, 'success');
+                            // tableAvailability.draw();
+
+                            // render Event FullCalendar
+                            calendar2.fullCalendar('removeEvents', id);
+                            calendar2.fullCalendar("refetchEvents");
+
+                            // update All Calendar Detail
+                            calendar_availability(2);
+                            calendar_reserve(2);
+                            calendar_reserve2(2);
+                        },
+                        error: function(jqXHR, response) {
+                            console.log(jqXHR);
+                            Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                        }
+                    });
+                } else {
+                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                        'error')
+                }
+            });
         }
     });
 
@@ -1136,7 +1196,7 @@
                     // location.reload();
                     calendar.fullCalendar("removeEvents");
                     calendar.fullCalendar("refetchEvents");
-                    tableSpecialPrice.draw();
+                    // tableSpecialPrice.draw();
 
                     // update All Calendar Detail
                     calendar_availability(2);
@@ -1165,47 +1225,47 @@
         }
     });
 
-    function delete_date_special_price(ids) {
-        let id = ids.getAttribute("data-id");
-        Swal.fire({
-            title: `{{ __('user_page.Are you sure?') }}`,
-            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ff7400',
-            cancelButtonColor: '#000',
-            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-            cancelButtonText: `{{ __('user_page.Cancel') }}`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: `/villa/special-price/${id}/delete/`,
-                    success: function(response) {
-                        Swal.fire('Deleted', response.message, 'success');
-                        tableSpecialPrice.draw();
+    // function delete_date_special_price(ids) {
+    //     let id = ids.getAttribute("data-id");
+    //     Swal.fire({
+    //         title: `{{ __('user_page.Are you sure?') }}`,
+    //         text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#ff7400',
+    //         cancelButtonColor: '#000',
+    //         confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+    //         cancelButtonText: `{{ __('user_page.Cancel') }}`
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             $.ajax({
+    //                 type: "get",
+    //                 dataType: 'json',
+    //                 url: `/villa/special-price/${id}/delete/`,
+    //                 success: function(response) {
+    //                     Swal.fire('Deleted', response.message, 'success');
+    //                     tableSpecialPrice.draw();
 
-                        // render Event FullCalendar
-                        calendar.fullCalendar('removeEvents', id);
-                        calendar.fullCalendar("refetchEvents");
+    //                     // render Event FullCalendar
+    //                     calendar.fullCalendar('removeEvents', id);
+    //                     calendar.fullCalendar("refetchEvents");
 
-                        // update All Calendar Detail
-                        calendar_availability(2);
-                        calendar_reserve(2);
-                        calendar_reserve2(2);
-                    },
-                    error: function(jqXHR, response) {
-                        console.log(jqXHR);
-                        Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
-                    }
-                });
-            } else {
-                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
-                    'error')
-            }
-        });
-    }
+    //                     // update All Calendar Detail
+    //                     calendar_availability(2);
+    //                     calendar_reserve(2);
+    //                     calendar_reserve2(2);
+    //                 },
+    //                 error: function(jqXHR, response) {
+    //                     console.log(jqXHR);
+    //                     Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+    //                 }
+    //             });
+    //         } else {
+    //             Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+    //                 'error')
+    //         }
+    //     });
+    // }
 </script>
 
 <script>
@@ -1235,7 +1295,7 @@
                 // render Event FullCalendar
                 calendar2.fullCalendar("removeEvents");
                 calendar2.fullCalendar("refetchEvents");
-                tableAvailability.draw();
+                // tableAvailability.draw();
                 multiEvent = [];
                 d = "";
 
@@ -1261,47 +1321,47 @@
 
     });
 
-    function delete_date_availability(ids) {
-        let id = ids.getAttribute("data-id");
-        Swal.fire({
-            title: `{{ __('user_page.Are you sure?') }}`,
-            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ff7400',
-            cancelButtonColor: '#000',
-            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-            cancelButtonText: `{{ __('user_page.Cancel') }}`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: `/villa/availability/delete/${id}`,
-                    success: function(response) {
-                        Swal.fire('Deleted', response.message, 'success');
-                        tableAvailability.draw();
+    // function delete_date_availability(ids) {
+    //     let id = ids.getAttribute("data-id");
+    //     Swal.fire({
+    //         title: `{{ __('user_page.Are you sure?') }}`,
+    //         text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#ff7400',
+    //         cancelButtonColor: '#000',
+    //         confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+    //         cancelButtonText: `{{ __('user_page.Cancel') }}`
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             $.ajax({
+    //                 type: "get",
+    //                 dataType: 'json',
+    //                 url: `/villa/availability/delete/${id}`,
+    //                 success: function(response) {
+    //                     Swal.fire('Deleted', response.message, 'success');
+    //                     tableAvailability.draw();
 
-                        // render Event FullCalendar
-                        calendar2.fullCalendar('removeEvents', id);
-                        calendar2.fullCalendar("refetchEvents");
+    //                     // render Event FullCalendar
+    //                     calendar2.fullCalendar('removeEvents', id);
+    //                     calendar2.fullCalendar("refetchEvents");
 
-                        // update All Calendar Detail
-                        calendar_availability(2);
-                        calendar_reserve(2);
-                        calendar_reserve2(2);
-                    },
-                    error: function(jqXHR, response) {
-                        console.log(jqXHR);
-                        Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
-                    }
-                });
-            } else {
-                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
-                    'error')
-            }
-        });
-    }
+    //                     // update All Calendar Detail
+    //                     calendar_availability(2);
+    //                     calendar_reserve(2);
+    //                     calendar_reserve2(2);
+    //                 },
+    //                 error: function(jqXHR, response) {
+    //                     console.log(jqXHR);
+    //                     Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+    //                 }
+    //             });
+    //         } else {
+    //             Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+    //                 'error')
+    //         }
+    //     });
+    // }
 
 </script>
 
