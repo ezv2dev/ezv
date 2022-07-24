@@ -210,7 +210,7 @@
             <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
 
                 <button type="button" class="btn-filter-header"
-                    @if ($condition_villa) onclick="filterMain();"
+                    @if ($condition_villa) onclick="modalFiltersHomes();"
                     @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
                         onclick="moreSubCategory();"
                     @elseif($condition_collaborator)

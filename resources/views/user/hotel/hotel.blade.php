@@ -3721,6 +3721,13 @@
         </div>
     </div>
 
+    <script>
+        // Modal Share
+        function share() {
+            $("#modal-share").modal("show");
+        }
+    </script>
+
     {{-- MODAL RESERVE II --}}
     <div class="modal fade" id="modal-reserve2" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
