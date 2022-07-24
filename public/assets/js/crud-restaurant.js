@@ -61,7 +61,7 @@ function saveShortDescription() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 short_desc_backup = response.data.short_description;
@@ -77,7 +77,7 @@ function saveShortDescription() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editShortDescriptionCancel();
@@ -158,7 +158,7 @@ function saveDescription() {
                     $("#btnShowMoreDescription").remove();
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editDescriptionCancel();
@@ -220,7 +220,7 @@ function saveNameRestaurant() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 name_resto_backup = response.data.name;
@@ -234,7 +234,7 @@ function saveNameRestaurant() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editNameCancel();
@@ -582,7 +582,7 @@ function saveTimeRestaurant() {
 
             editTimeFormCancel();
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
             btn2.classList.remove("disabled");
         },
@@ -695,7 +695,7 @@ function saveRestaurantPrice() {
             $("#type_price_content_mobile").append(contentPrice);
             editTypeFormCancel();
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
             btn2.classList.remove("disabled");
         },
@@ -1074,34 +1074,34 @@ $(storyVideoInput)
     .children("input")
     .on("change", function (value) {
         storyRestaurant = this.files[0];
-        if(document.getElementById("storyVideo").files.length != 0){
-            $('.story-video-form').css("border", "");
-            $('#err-stry-vid').hide();
+        if (document.getElementById("storyVideo").files.length != 0) {
+            $(".story-video-form").css("border", "");
+            $("#err-stry-vid").hide();
         }
     });
 $(document).on("keyup", "#title", function () {
-        $('#title').css("border", "");
-        $('#err-stry-ttl').hide();
+    $("#title").css("border", "");
+    $("#err-stry-ttl").hide();
 });
 $("#storeStoryForm").submit(function (e) {
     let error = 0;
-    if(document.getElementById("storyVideo").files.length == 0){
-        $('.story-video-form').css("border", "solid #e04f1a 1px");
-        $('#err-stry-vid').show();
+    if (document.getElementById("storyVideo").files.length == 0) {
+        $(".story-video-form").css("border", "solid #e04f1a 1px");
+        $("#err-stry-vid").show();
         error = 1;
     } else {
-        $('.story-video-form').css("border", "");
-        $('#err-stry-vid').hide();
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
     }
-    if(!$('#title').val()) {
-        $('#title').css("border", "solid #e04f1a 1px");
-        $('#err-stry-ttl').show();
+    if (!$("#title").val()) {
+        $("#title").css("border", "solid #e04f1a 1px");
+        $("#err-stry-ttl").show();
         error = 1;
     } else {
-        $('#title').css("border", "");
-        $('#err-stry-ttl').hide();
+        $("#title").css("border", "");
+        $("#err-stry-ttl").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
@@ -1120,7 +1120,9 @@ $("#storeStoryForm").submit(function (e) {
             $.ajax({
                 type: "POST",
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                     Accept: "application/json",
                 },
                 url: "/restaurant/story/store",
@@ -1462,7 +1464,7 @@ function saveLocation() {
                 position: "topRight",
             });
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
             $("#modal-edit_location").modal("hide");
@@ -1488,7 +1490,7 @@ function saveLocation() {
                 });
             }
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
             $("#modal-edit_location").modal("hide");

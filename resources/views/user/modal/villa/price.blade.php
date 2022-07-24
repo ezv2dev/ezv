@@ -372,14 +372,14 @@
 
                                                         <!-- Submit -->
                                                         <div class="row items-push">
-
+                                                            <center>
                                                                 <div class="col-6">
                                                                     <button type="submit" class="btn btn-sm btn-primary mt-3"
                                                                         id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
                                                                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                                     </button>
                                                                 </div>
-
+                                                            </center>
                                                         </div>
                                                         <!-- END Submit -->
                                                 </div>
@@ -508,7 +508,7 @@
                                                         <div class="col-6">
                                                             <button type="submit" id="btn-submit-availability"
                                                                 class="btn btn-sm btn-danger mt-2"
-                                                                name="action" value="not_available" style="width: 200px;">
+                                                                name="action" style="width: 200px;">
                                                                 <i class="fa fa-floppy-disk"></i>
                                                                 {{ __('user_page.Save Date') }}
                                                             </button>
