@@ -98,6 +98,26 @@ Route::get('/privacy-policy', function () {
     return view('user.privacy_policy');
 })->name('privacy_policy');
 
+Route::get('/getting-started', function () {
+    return view('user.getting_started');
+})->name('getting_started');
+
+Route::get('/help-center', function () {
+    return view('user.help_center');
+})->name('help_center');
+
+Route::get('/contact-us', function () {
+    return view('user.contact_us');
+})->name('contact_us');
+
+Route::get('/blog', function () {
+    return view('user.blog');
+})->name('blog');
+
+Route::get('/culture', function () {
+    return view('user.culture');
+})->name('culture');
+
 Route::get('/terms', function () {
     return view('user.terms');
 })->name('terms');
