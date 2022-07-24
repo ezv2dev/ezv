@@ -397,6 +397,7 @@
     @include('user.modal.auth.login_register')
     @include('user.modal.restaurant.category')
     @include('user.modal.restaurant.sub_category')
+    @include('user.modal.restaurant.intro')
     {{-- modal laguage and currency --}}
 @endsection
 
@@ -711,6 +712,14 @@
             restaurantRefreshFilter(subUrl);
         }
     </script> --}}
+
+    <script>
+        //First time visit modal popup
+        $(document). ready(function()
+            if (document. cookie. indexOf("FooBar=true") == -1)
+            document. cookie = "FooBar=true; max-age=86400"; // 86400: seconds in a day.
+        $('#introModal'). modal('show');
+    </script>
 
     {{-- Like Favorit --}}
     @auth
