@@ -489,11 +489,11 @@
                                             {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
                                             <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
-                                            <p style="min-height: 40px;" class="card-text text-grey-2 limit-text text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                            <p class="card-text text-grey-2 limit-text text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
                                         </a>
                                     </div>
 
-                                    <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
+                                    <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
                                         <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
                                                 <p class="text-align-center mb-0">
                                                     <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
@@ -724,8 +724,8 @@
                                     <div class="mt-3">
                                         <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
-                                            <p style="min-height: 38px;" class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                            <p style="min-height: 43px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description mb-2">${short_description}</p>
                                             <p class="card-text text-orange text-17 fw-500">${price}/Night</p>
                                         </a>
                                     </div>
@@ -922,7 +922,7 @@
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${hotelLocations.name}</p>
                                         </a>
                                     </div>
-                                    <div class="d-none d-md-flex" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden;">
+                                    <div class="d-none d-md-flex mt-2" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden;">
                                         <div style="position: absolute; height: 140px;" class="col-12 d-flex justify-content-center align-items-center">
                                                 <p class="text-align-center mb-0">
                                                     <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
@@ -1160,11 +1160,11 @@
                                         <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
-                                            <p style="min-height: 40px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
+                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
                                             {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
                                         </a>
                                     </div>
-                                    <div class="d-none d-md-flex" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden;">
+                                    <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden;">
                                         <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
                                             <p class="text-align-center mb-0">
                                                 <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
