@@ -1601,6 +1601,11 @@ li.button-dropdown {
     border-left: 2px solid #ff7400;
     background-color: white;
 }
+.guests .nav .button-dropdown {
+    margin-top: 4px;
+    font-size: 14px;
+    min-width: 150px;
+}
 
 .form-control {
     font-family: "Poppins";
@@ -3501,6 +3506,9 @@ input::-webkit-inner-spin-button {
     .check-out,
     .guests {
         width: 22%;
+    }
+    .guests {
+        min-width: auto !important;
     }
     .location,
     .location-restaurant,
