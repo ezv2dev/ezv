@@ -393,7 +393,7 @@ function saveLocation() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "/villa/update/location",
+        url: "/colaborator/update/location",
         data: formData,
         // response data
         success: function (response) {
