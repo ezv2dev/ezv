@@ -348,6 +348,7 @@
     @include('user.modal.auth.login_register')
     @include('user.modal.activity.category')
     @include('user.modal.activity.sub_category')
+    @include('user.modal.activity.intro')
     {{-- modal laguage and currency --}}
 @endsection
 
@@ -569,6 +570,17 @@
         //     $('#modalSubCategory').modal('show');
         // }
     </script>
+    <script>
+        // Show modal pop up on first time visit
+        var thisshow = localStorage.getItem('thisshow');
+        if (thisshow== null) {
+        localStorage.setItem('thisshow', 1);
+        // Show popup here
+        setTimeout(function(){
+            jQuery('#introModal').modal('show');
+            },5000);
+        }
+    </SCRIPT>
 
     {{-- VIEW MAP --}}
     @include('user.modal.activity.list.map')
