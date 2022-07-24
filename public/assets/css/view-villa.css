@@ -3268,33 +3268,16 @@ span.flatpickr-weekday {
         right: 4px !important;
     }
 }
-@media only screen and (max-width: 374px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 100% !important;
-    }
-}
-@media only screen and (min-width: 375px) and (max-width: 499px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 50% !important;
-    }
-}
-@media only screen and (min-width: 500px) and (max-width: 991px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 33.33% !important;
-    }
-}
 @media only screen and (max-width: 991px) {
-    #edit_position_photo .modal-body {
-        padding-left: 3rem !important;
-        padding-right: 3rem !important;
-    }
-
     .roomnumber-filter-container, .editnumberoption-checkbox-alias {
         padding: 0 !important;
     }
 
     .editnumberoption_container {
         gap: 2px;
+    }
+    #edit_position_photo .modal-body #sortable-photo li {
+        width: 33.33% !important;
     }
 }
 @media only screen and (min-width: 346px) and (max-width: 767px) {
@@ -3336,6 +3319,9 @@ span.flatpickr-weekday {
     }
 }
 @media only screen and (max-width: 767px) {
+    #sortable-photo li img {
+        border-radius: 0px !important;
+    }
     /* make short-desc max lines 2 */
     .top-profile .short-desc {
         min-height: 50px !important;
