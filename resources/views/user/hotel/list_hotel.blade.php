@@ -372,7 +372,13 @@
                                                 1 {{ __('user_page.night') }}
                                             </span>
                                             <span class="fw-400 {{ $textColor }} list-description">
-                                                , 2 adults
+                                                ,
+                                                {{ $data->adult }}
+                                                @if (in_array($data->adult, [0, 1]))
+                                                    adult
+                                                @else
+                                                    adults
+                                                @endif
                                             </span>
                                         </div>
                                         <div class="text-18 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
