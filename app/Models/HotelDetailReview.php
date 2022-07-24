@@ -17,4 +17,11 @@ class HotelDetailReview extends Model
 
     protected $table = 'hotel_detail_review';
     protected $primaryKey = 'id_detail';
+
+    // * Relationship
+
+    public function hotelReview()
+    {
+        return $this->belongsTo(Hotel::class, 'id_hotel', 'id_hotel');
+    }
 }

@@ -2138,10 +2138,6 @@ class ViewController extends Controller
             ->join('location', 'villa.id_location', '=', 'location.id_location', 'left')
             ->where('villa.status', 1)
             ->inRandomOrder()->get();
-
-        dd($villa);
-
-        //return view('user.list_villa', compact('villa', 'req'));
         return view('user.m-list_villa', compact('villa', 'req'));
     }
 
@@ -2212,9 +2208,9 @@ class ViewController extends Controller
         // }
         // TODO end
 
-        $villa->each(function ($item, $key) {
-            $item->setAppends(['restaurant_nearby', 'activity_nearby', 'hotel_nearby']);
-        });
+        // $villa->each(function ($item, $key) {
+        //     $item->setAppends(['restaurant_nearby', 'activity_nearby', 'hotel_nearby']);
+        // });
 
         $i = 0;
         $j = 0;

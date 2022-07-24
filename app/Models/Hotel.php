@@ -76,11 +76,6 @@ class Hotel extends Model
     }
 
     // relationship
-    public function propertyType()
-    {
-        return $this->belongsTo(PropertyTypeVilla::class, 'id_property_type', 'id_property_type');
-    }
-
     public function userReview()
     {
         if (auth()->check()) {

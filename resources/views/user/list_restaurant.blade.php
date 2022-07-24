@@ -43,7 +43,6 @@
             -webkit-box-orient: vertical;
         }
     </style>
-
     <div id="body-color" class="{{ $bgColor }}" style="position: relative; min-height: 100px;">
         <!-- Page Content -->
         <div id="div-to-refresh" class="container__list">
@@ -712,14 +711,17 @@
             restaurantRefreshFilter(subUrl);
         }
     </script> --}}
-
     <script>
-        //First time visit modal popup
-        $(document). ready(function()
-            if (document. cookie. indexOf("FooBar=true") == -1)
-            document. cookie = "FooBar=true; max-age=86400"; // 86400: seconds in a day.
-        $('#introModal'). modal('show');
-    </script>
+        // Show modal pop up on first time visit
+        var isshow = localStorage.getItem('isshow');
+        if (isshow== null) {
+        localStorage.setItem('isshow', 1);
+        // Show popup here
+        setTimeout(function(){
+            jQuery('#introModal').modal('show');
+            },5000);
+        }
+    </SCRIPT>
 
     {{-- Like Favorit --}}
     @auth

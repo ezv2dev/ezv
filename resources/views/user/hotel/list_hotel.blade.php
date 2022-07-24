@@ -315,7 +315,9 @@
                                     {{ $data->location_name ?? __('user_page.Location not found') }}
                                 </a>
                                 <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
-                                    - 4.2km from Ngurah Rai Airport
+                                    - {{ number_format($data->km, 1) }}
+                                    {{ __('user_page.km to') }}
+                                    {{ $data->airport }}
                                 </a>
                             </div>
                             <div class="text-13 text-md-end">
@@ -346,12 +348,18 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <p class="text-14 fw-600 grid-one-line max-lines mb-0">
-                                            8.1/10
-                                        </p>
-                                        <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
-                                            Review
-                                        </a>
+                                        @if ($data->detailReview)
+                                            <p class="text-14 fw-600 grid-one-line max-lines mb-0">
+                                                {{ $data->detailReview->average }}/5
+                                            </p>
+                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                                Review
+                                            </a>
+                                        @else
+                                            <p class="text-14 fw-400 grid-one-line max-lines mb-0">
+                                                No reviews yet
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -834,86 +842,6 @@
         function hotelRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/hotel/search?${suburl}`;
         }
-    </script>
-
-    {{-- <script>
-        function hotelFilter() {
-            var fMaxPriceFormInput = [];
-            $("input[name='fMaxPrice[]']").each(function() {
-                fMaxPriceFormInput.push(parseInt($(this).val()));
-            });
-
-            var fMinPriceFormInput = [];
-            $("input[name='fMinPrice[]']").each(function() {
-                fMinPriceFormInput.push(parseInt($(this).val()));
-            });
-
-            var fPropertyFormInput = [];
-            $("input[name='fProperty[]']:checked").each(function() {
-                fPropertyFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBedroomFormInput = [];
-            $("input[name='fBedroom[]']").each(function() {
-                fBedroomFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBathroomFormInput = [];
-            $("input[name='fBathroom[]']").each(function() {
-                fBathroomFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBedsFormInput = [];
-            $("input[name='fBeds[]']").each(function() {
-                fBedsFormInput.push(parseInt($(this).val()));
-            });
-
-            var fFacilitiesFormInput = [];
-            $("input[name='fFacilities[]']:checked").each(function() {
-                fFacilitiesFormInput.push(parseInt($(this).val()));
-            });
-
-            var fSuitableFormInput = [];
-            $("input[name='fSuitable[]']:checked").each(function() {
-                fSuitableFormInput.push(parseInt($(this).val()));
-            });
-
-            var fViewsFormInput = [];
-            $("input[name='fViews[]']:checked").each(function() {
-                fViewsFormInput.push(parseInt($(this).val()));
-            });
-
-            var sLocationFormInput = $("input[name='sLocation']").val();
-
-            var sCheck_inFormInput = $("input[name='sCheck_in']").val();
-
-            var sCheck_outFormInput = $("input[name='sCheck_out']").val();
-
-            var sAdultFormInput = $("input[name='sAdult']").val();
-
-            var sChildFormInput = $("input[name='sChild']").val();
-
-            function setCookie2(name, value, days) {
-                var expires = "";
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
-                }
-                document.cookie = name + "=" + (value || "") + expires + "; path=/";
-            }
-
-            setCookie2("sLocation", sLocationFormInput, 1);
-            setCookie2("sCheck_in", sCheck_inFormInput, 1);
-            setCookie2("sCheck_out", sCheck_outFormInput, 1);
-
-            var subUrl =
-                `fViews=${fViewsFormInput}&sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}`;
-            hotelRefreshFilter(subUrl);
-        }
-    </script> --}}
-
-    <script>
         $("input[name='fSort[]']").on('click', function() {
             var $box = $(this);
             if ($box.is(":checked")) {

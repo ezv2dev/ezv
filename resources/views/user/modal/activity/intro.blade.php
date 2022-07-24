@@ -4,11 +4,11 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Introduction to Food Page</h5>
+                <h5 class="modal-title">Introduction to WoW Page</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <p>This content will be appear when the visitor visit the restaurant list page only for the fisrt time. Mean while revisit visitor to this page will not open this modal anymore.</p>
+                <p>This content will be appear when the visitor visit the WoW list page only for the fisrt time. Mean while revisit visitor to this page will not open this modal anymore.</p>
                 <p><strong>! IMPORTANT</strong> Please replace this dummy text with the right text.</p>
             </div>
         </div>
