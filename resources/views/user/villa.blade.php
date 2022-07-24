@@ -3584,8 +3584,8 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                                                                                                                                                                                        <button onclick="share_function()">Copy link</button> -->
-                                    <button type="button" class="d-flex p-0 copier" onclick="copyURI(event)">
+                                        <button onclick="share_function()">Copy link</button> -->
+                                    <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
                                 </div>
@@ -3624,7 +3624,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a type="button" class="d-flex p-0 copier"
-                                        href="{{ route('villa', $villa[0]->id_villa) }}" onclick="copyURI(event)">
+                                        href="{{ route('villa', $villa[0]->id_villa) }}" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </a>
                                 </div>
@@ -4989,9 +4989,20 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
-        function language() {
-            $('#LegalModal').modal('show');
-        }
+            function language() {
+                $('#LegalModal').modal('show');
+                $('#trigger-tab-language').addClass('active');
+                $('#content-tab-language').addClass('active');
+                $('#trigger-tab-currency').removeClass('active');
+                $('#content-tab-currency').removeClass('active');
+            }
+            function currency() {
+                $('#LegalModal').modal('show');
+                $('#trigger-tab-language').removeClass('active');
+                $('#content-tab-language').removeClass('active');
+                $('#trigger-tab-currency').addClass('active');
+                $('#content-tab-currency').addClass('active');
+            }
 
         function displayTags() {
             $('#ModalTagsVilla').modal('show');
@@ -5178,7 +5189,7 @@
 
     {{-- Copy current URL to clipboard --}}
     <script>
-        function copyURI(evt) {
+        function copyURI() {
             navigator.clipboard.writeText(location.origin + location.pathname).then(() => {
                 alert("Link copied");
             }, () => {

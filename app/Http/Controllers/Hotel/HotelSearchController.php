@@ -26,10 +26,9 @@ class HotelSearchController extends Controller
     public function index(Request $request)
     {
         $hotel = Hotel::where('status', 1)->inRandomOrder()->get();
-
+        $hotelCategory = HotelCategory::all();
+        $hotelFilter = HotelFilter::all();
         $amenities = Amenities::all();
-        $host_language = HostLanguage::all();
-        $property_type = HotelType::all();
 
         $sLocation = $request->sLocation;
         $sCheck_in = $request->sCheck_in;
@@ -44,8 +43,10 @@ class HotelSearchController extends Controller
 
         $fCategory = $request->fCategory;
         $filter = $request->filter;
+        $fMinPrice = $request->fMinPrice;
+        $fMaxPrice = $request->fMaxPrice;
 
-        $conditionFilter = $fCategory || $filter;
+        $conditionFilter = $fCategory || $filter || $fMinPrice || $fMaxPrice;
         if ($conditionFilter) {
             $hotel = $this->processFilter($hotel, $request);
         }
@@ -78,54 +79,53 @@ class HotelSearchController extends Controller
             }
         }
 
-        $i = 0;
-        $j = 0;
-        $near = array();
-        foreach ($hotel as $item) {
-            $things_loc = Activity::where('id_location', $item->id_location)->select('name', 'latitude', 'longitude', 'id_location')->get();
-            $things_loc = Activity::where('id_location', $item->id_location)->select('name', 'latitude', 'longitude', 'id_location')->get();
-            if (count($things_loc) == 0) {
-                $things_loc = Activity::where('id_activity', 3)->select('name', 'latitude', 'longitude', 'id_location')->get();
-            }
+        // ! Near Beach don't delete
+        // $i = 0;
+        // $j = 0;
+        // $near = array();
+        // foreach ($hotel as $item) {
+        //     $things_loc = Activity::where('id_location', $item->id_location)->select('name', 'latitude', 'longitude', 'id_location')->get();
+        //     $things_loc = Activity::where('id_location', $item->id_location)->select('name', 'latitude', 'longitude', 'id_location')->get();
+        //     if (count($things_loc) == 0) {
+        //         $things_loc = Activity::where('id_activity', 3)->select('name', 'latitude', 'longitude', 'id_location')->get();
+        //     }
 
-            $point1 = array('lat' => $item->latitude, 'long' => $item->longitude, 'name' => $item->name);
+        //     $point1 = array('lat' => $item->latitude, 'long' => $item->longitude, 'name' => $item->name);
 
-            foreach ($things_loc as $item2) {
-                $lat1 = $point1['lat'];
-                $lon1 = $point1['long'];
-                $lat2 = $item2->latitude;
-                $lon2 = $item2->longitude;
-                $name = $item2->name;
-                $theta = $lon1 - $lon2;
+        //     foreach ($things_loc as $item2) {
+        //         $lat1 = $point1['lat'];
+        //         $lon1 = $point1['long'];
+        //         $lat2 = $item2->latitude;
+        //         $lon2 = $item2->longitude;
+        //         $name = $item2->name;
+        //         $theta = $lon1 - $lon2;
 
-                $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-                $miles = acos($miles);
-                $miles = rad2deg($miles);
-                $miles = $miles * 60 * 1.1515;
-                $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
-                $kilometers[$i][] = $name;
+        //         $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+        //         $miles = acos($miles);
+        //         $miles = rad2deg($miles);
+        //         $miles = $miles * 60 * 1.1515;
+        //         $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
+        //         $kilometers[$i][] = $name;
 
-                if ($near == null) {
-                    $near[0] = $kilometers[$i];
-                } else {
-                    if ($kilometers[$i][0] <= $near[0][0]) {
-                        $near[0] = $kilometers[$i];
-                    }
-                }
-                $i++;
-            }
+        //         if ($near == null) {
+        //             $near[0] = $kilometers[$i];
+        //         } else {
+        //             if ($kilometers[$i][0] <= $near[0][0]) {
+        //                 $near[0] = $kilometers[$i];
+        //             }
+        //         }
+        //         $i++;
+        //     }
 
-            $hotel[$j]['time'] = $near[0][0];
-            $hotel[$j]['activity'] = $near[0][1];
+        //     $hotel[$j]['time'] = $near[0][0];
+        //     $hotel[$j]['activity'] = $near[0][1];
 
-            $j++;
-            $near = [];
-        }
+        //     $j++;
+        //     $near = [];
+        // }
+        // ! End Near Beach
 
-        $hotelCategory = HotelCategory::all();
-        $hotelFilter = HotelFilter::all();
-
-        return view('user.hotel.list_hotel', compact('hotel', 'amenities', 'host_language', 'property_type', 'hotelCategory', 'hotelFilter'));
+        return view('user.hotel.list_hotel', compact('hotel', 'amenities', 'hotelCategory', 'hotelFilter'));
     }
 
     public function processSearch($hotels, $request)
@@ -254,6 +254,8 @@ class HotelSearchController extends Controller
         $hotel = $hotels;
         $fCategory = $request->fCategory;
         $filter = $request->filter;
+        $fMinPrice = $request->fMinPrice;
+        $fMaxPrice = $request->fMaxPrice;
 
         if ($fCategory) {
             $category = $fCategory;
@@ -277,37 +279,15 @@ class HotelSearchController extends Controller
                 ->inRandomOrder()->get();
         }
 
-        return $hotel;
-    }
+        if ($fMaxPrice || $fMinPrice) {
 
-    // ! Filter Modal
-    public function search(Request $request)
-    {
-        // dd($request->all());
-        $min_price = $request->min_price;
-        $max_price = $request->max_price;
-
-        $checked = $_GET['filterAmenities'];
-        $size1 = sizeof($checked);
-
-        $property_type = [];
-
-        if ($size1 > 1) {
+            $hotelIds = $hotel->modelKeys();
             $hotel = Hotel::where('status', 1)
-                ->join('hotel_amenities', 'hotel.id_hotel', '=', 'hotel_amenities.id_hotel', 'left')
-                ->whereBetween('price', [$min_price, $max_price])
-                ->whereIn('hotel_amenities.id_amenities', $checked)
-                ->inRandomOrder()->get();
-        } else {
-            $hotel = Hotel::where('status', 1)
-                ->whereBetween('price', [$min_price, $max_price])
+                ->whereIn('id_hotel', $hotelIds)
+                ->whereBetween('price', [$fMinPrice, $fMaxPrice])
                 ->inRandomOrder()->get();
         }
 
-        $hotelIds = $hotel->modelKeys();
-        $hotel = Hotel::whereIn('id_hotel', $hotelIds)->inRandomOrder()->paginate(15);
-        $hotel->appends(request()->query());
-
-        return view('user.hotel.list_hotel', compact('hotel', 'property_type'));
+        return $hotel;
     }
 }

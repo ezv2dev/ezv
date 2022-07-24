@@ -144,10 +144,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center mt-4">
-                        <img class="img-fluid p-4"
-                            src="{{ asset('assets/partner/template/assets/img/freepik/404-error-wow.svg') }}"
+                        <img style="height: 53vh;" class="img-fluid p-4"
+                            src="{{ asset('assets/partner/template/assets/img/freepik/filter_data_unavailable.svg') }}"
                             alt="" />
-                        <p class="lead">WoW data not available</p>
+                        <p class="lead">WoW data not available </p>
                     </div>
                 </div>
             </div>

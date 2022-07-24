@@ -1287,6 +1287,7 @@ class ActivityListController extends Controller
 
         $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name', 'id_story')->latest()->get();
         $getUID = Activity::where('id_activity', $request->id_activity)->select('uid')->first();
+        $activityVideo = ActivityVideo::where('id_activity', $request->id_activity)->select('id_video','name')->orderBy('order','asc')->get();
 
         $data = [];
 
@@ -1304,6 +1305,7 @@ class ActivityListController extends Controller
                 'message' => 'Updated WoW Story',
                 'data' => $data,
                 'uid' => $getUID->uid,
+                'video' => $activityVideo,
             ], 200);
         } else {
             return response()->json([

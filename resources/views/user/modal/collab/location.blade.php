@@ -182,8 +182,8 @@
         });
     }
 
-    var latitudeOld = parseFloat('{{ $villa[0]->latitude }}');
-    var longitudeOld = parseFloat('{{ $villa[0]->longitude }}');
+    var latitudeOld = parseFloat('{{ $profile->latitude }}');
+    var longitudeOld = parseFloat('{{ $profile->longitude }}');
 
     // event jendela di-load
     google.maps.event.addDomListener(window, 'load', initEditLocationCollab(latitudeOld, longitudeOld));
