@@ -399,8 +399,7 @@
                                 <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
                             @else
-                                <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+
                             @endif
 
                             @auth
@@ -1830,14 +1829,14 @@
                                 </div>
                                 <div class="col-6 col-md-2 text-center tab-body price-room"
                                     style="cursor: pointer;"
-                                    onclick="view_room()">
+                                    onclick="view_room({{ $item->id_hotel_room }})">
                                     <div class="price-tag">
                                         <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
                                         <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}</h6>
                                     </div>
                                     <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
                                     <br>
-                                    <a class="btn btn-outline-dark table-room-button" onclick="view_room()">Select Room</a>
+                                    <a class="btn btn-outline-dark table-room-button" onclick="view_room({{ $item->id_hotel_room }})">Select Room</a>
                                     {{-- @php
                                         $countBooking = "";
                                         $sisaRoom = "";
