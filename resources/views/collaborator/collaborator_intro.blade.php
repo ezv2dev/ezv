@@ -163,6 +163,7 @@
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#expand-mobile-btn").on("click", function() {
                     $("body").css({
@@ -172,6 +173,17 @@
                     $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "true");
+                    $("#overlay").css("display", "block");
+                })
+                $('#overlay').click(function() {
+                    $("body").css({
+                        "height": "auto",
+                        "overflow": "auto"
+                    })
+                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                    $("#overlay").css("display", "none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
