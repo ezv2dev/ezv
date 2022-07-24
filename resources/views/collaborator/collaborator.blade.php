@@ -936,16 +936,19 @@
                         @endauth
 
                         {{-- Follower --}}
+
                         <div class="social-media">
-                            <div class="social-links">
-                                <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
-                                    id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
-                                <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
-                                    id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
-                                <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
-                                        class="fab fa-twitter" target="_blank"></i></a>
-                                <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
-                                        class="fab fa-tiktok" target="_blank"></i></a>
+                            <div id="saveSocialMediaContent">
+                                <div class="social-links">
+                                    <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
+                                        id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
+                                    <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
+                                        id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
+                                    <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
+                                            class="fab fa-twitter" target="_blank"></i></a>
+                                    <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
+                                            class="fab fa-tiktok" target="_blank"></i></a>
+                                </div>
                             </div>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)

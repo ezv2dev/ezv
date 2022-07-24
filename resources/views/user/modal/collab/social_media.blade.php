@@ -8,9 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <form action="{{ route('collab_update_social_media') }}" method="POST" id="basic-form"
-                    enctype="multipart/form-data">
-                    @csrf
+                <div id="saveSocialMediaForm">
                     <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}">
                     <div class="row mb-12 margin-bottom-12px">
                         <label class="col-sm-4 col-form-label" for="instagram_link">Instagram <i
@@ -88,13 +86,12 @@
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-12" style="text-align: center;">
-                            <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;">
+                            <button type="submit" id="btnSaveSocialMedia" onclick="saveSocialMedia()" class="btn btn-sm btn-primary" style="width: 200px;">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
                     </div>
-                </form>
-                <!-- END Submit -->
+                </div>
                 <br>
             </div>
         </div>

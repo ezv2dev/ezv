@@ -402,9 +402,9 @@ function saveLocation() {
             // variabel global edit marker
             markerEditLocation = null;
             // pin marker to map on edit map
-            initEditLocationVilla(latitudeOld, longitudeOld);
+            initEditLocationCollab(latitudeOld, longitudeOld);
             // refresh detail map
-            view_maps(parseInt(form.find(`input[name='id_collab']`).val()));
+            initialize(latitudeOld,longitudeOld);
             // alert success
             iziToast.success({
                 title: "Success",
@@ -444,4 +444,128 @@ function saveLocation() {
             $('#modal-edit_location').modal('hide');
         },
     });
+}
+
+function saveSocialMedia() {
+    console.log('hit saveSocialMedia');
+    const form = $('#saveSocialMediaForm');
+
+    let btn = form.find('#btnSaveSocialMedia');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        instagram_link: form.find(`input[name='instagram_link']`).val(),
+        instagram_follower: form.find(`input[name='instagram_follower']`).val(),
+        facebook_link: form.find(`input[name='facebook_link']`).val(),
+        facebook_follower: form.find(`input[name='facebook_follower']`).val(),
+        twitter_link: form.find(`input[name='twitter_link']`).val(),
+        twitter_follower: form.find(`input[name='twitter_follower']`).val(),
+        tiktok_link: form.find(`input[name='tiktok_link']`).val(),
+        tiktok_follower: form.find(`input[name='tiktok_follower']`).val(),
+    };
+
+    console.log(formData);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/update/social-media",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+            // append new content
+            let instagramContent = ``;
+            if(response.data.instagram_link){
+                instagramContent = `
+                    <a href="${response.data.instagram_link}" id="instagramID">
+                        <i class="fab fa-instagram" target="_blank"></i>
+                    </a>
+                `;
+            }
+            let facebookContent = ``;
+            if(response.data.facebook_link){
+                facebookContent = `
+                    <a href="${response.data.facebook_link}" id="facebookID">
+                        <i class="fab fa-facebook-f" target="_blank"></i>
+                    </a>
+                `;
+            }
+            let twitterContent = ``;
+            if(response.data.twitter_link){
+                twitterContent = `
+                    <a href="${response.data.twitter_link}" id="twitterID">
+                        <i class="fab fa-twitter" target="_blank"></i>
+                    </a>
+                `;
+            }
+            let tiktokContent = ``;
+            if(response.data.tiktok_link){
+                tiktokContent = `
+                    <a href="${response.data.tiktok_link}" id="tiktokID">
+                        <i class="fab fa-tiktok" target="_blank"></i>
+                    </a>
+                `;
+            }
+            let content = `
+                <div class="social-links">
+                    ${instagramContent}
+                    ${facebookContent}
+                    ${twitterContent}
+                    ${tiktokContent}
+                </div>
+            `;
+            const isExist = response.data.instagram_link
+                || response.data.facebook_link
+                || response.data.twitter_link
+                || response.data.tiktok_link;
+
+            $('#saveSocialMediaContent').html('');
+            if(isExist){
+                $('#saveSocialMediaContent').html(content);
+            }
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $("#modalSocialMedia").modal("hide");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $("#modalSocialMedia").modal("hide");
+        },
+    });
+}
+
+function saveGender() {
+    console.log('hit saveGender');
 }
