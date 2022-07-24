@@ -320,10 +320,17 @@
                                     {{ $data->airport }}
                                 </a>
                             </div>
-                            <div class="text-13 text-md-end">
-                                <span>4 Stars</span>
-                                <i class="fa-solid fa-star" style="color: #febb02"></i>
-                            </div>
+                            @if ($data->star)
+                                <div class="text-13 text-md-end">
+                                    <span>{{ $data->star }} Stars</span>
+                                    <i class="fa-solid fa-star" style="color: #febb02"></i>
+                                </div>
+                                @else
+                                <div class="text-13 text-md-end">
+                                    <span>No stars yet</span>
+                                    <i class="fa-solid fa-star" style="color: #febb02"></i>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">

@@ -422,17 +422,6 @@
                                     <a type="button" onclick="edit_hotel_profile()"
                                         class="edit-profile-image-btn-dekstop"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                    @if ($hotel[0]->image)
-                                        <a class="delete-profile edit-profile-image-btn-dekstop"
-                                            href="javascript:void(0);"
-                                            onclick="delete_profile_image({'id': '{{ $hotel[0]->id_hotel }}'})">
-                                            <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                                data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a>
-                                        {{-- <a href="{{ route('villa_delete_image', $hotel[0]->id_hotel) }}"><i class="fa fa-trash"
-                                style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true"
-                                data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a> --}}
-                                    @endif
                                 @endif
                             @endauth
                             <div class="property-type">
