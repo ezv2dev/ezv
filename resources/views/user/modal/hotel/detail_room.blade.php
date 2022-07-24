@@ -1,31 +1,31 @@
 <style>
-    .reset-padding
-    {
-        padding : 0 !important;
+    .reset-padding {
+        padding: 0 !important;
 
     }
-    .reset-margin
-    {
+
+    .reset-margin {
         margin: 0 !important;
     }
-    .modal-full
-    {
+
+    .modal-full {
         width: 100%;
         height: 100%;
     }
 </style>
 
 {{-- MODAL AMENITIES --}}
-<div class="modal fade reset-padding" id="modal-room" tabindex="-1" role="dialog"
-    aria-labelledby="modal-default-fadein" aria-hidden="true">
+<div class="modal fade reset-padding" id="modal-room" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-amenities" role="document" style="overflow-y: initial !important">
-        <div class="modal-content modal-content-amenities reset-margin modal-full" style="background: white; border-radius:15px">
+        <div class="modal-content modal-content-amenities reset-margin modal-full"
+            style="background: white; border-radius:15px">
             <div class="modal-header modal-header-amenities">
                 <h5 class="modal-title">Detail Room</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body modal-body-amenities pb-1 translate-text-group" style=" height: 500px; overflow-y: auto;">
+            <div class="modal-body modal-body-amenities pb-1 translate-text-group"
+                style=" height: 500px; overflow-y: auto;">
                 {{-- PROFILE --}}
                 <div class="row page-content">
                     {{-- LEFT CONTENT --}}
@@ -34,7 +34,7 @@
                             <div class="col-lg-4- col-md-4 col-xs-12 pd-0">
                                 <div class="profile-image">
                                     <img id="imageProfileHotelRoom"
-                                            src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                        src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
 
                                     {{-- @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -53,7 +53,7 @@
                                     @endauth --}}
                                     <div>
                                         <p id="property-type-content">
-                                            {{ $hotel[0]->propertyType->name }}
+                                            {{-- {{ $hotel[0]->propertyType->name }} --}}
                                             @auth
                                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                     &nbsp;<a type="button" onclick="editPropertyTypeForm()"
@@ -100,16 +100,15 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <p class="location-font-size"><a onclick=""
-                                                href="javascript:void(0);"><i class="fa fa-map-marker-alt"></i>
+                                        <p class="location-font-size"><a onclick="" href="javascript:void(0);"><i
+                                                    class="fa fa-map-marker-alt"></i>
                                                 TEST</a>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6- col-md-6 col-xs-12 profile-info">
-                                <h2 id="name-content">Hotel Test - <a
-                                        href=""></a>
+                                <h2 id="name-content">Hotel Test - <a href=""></a>
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editNameForm()"
@@ -420,7 +419,8 @@
                                                                             <a type="button"
                                                                                 onclick="view_story({{ $item->id_story }});"style="height: 70px; width: 70px;">
                                                                             @else
-                                                                                <a type="button" onclick="showPromotionMobile()"
+                                                                                <a type="button"
+                                                                                    onclick="showPromotionMobile()"
                                                                                     style="height: 70px; width: 70px;">
                                                                         @endif
                                                                     @endauth
@@ -431,7 +431,8 @@
                                                                         <div class="story-video-player"><i
                                                                                 class="fa fa-play"></i>
                                                                         </div>
-                                                                        <video preload href="" class="story-video-grid"
+                                                                        <video preload href=""
+                                                                            class="story-video-grid"
                                                                             style="object-fit: cover;"
                                                                             src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}#t=1.0">
                                                                         </video>
@@ -451,7 +452,8 @@
                                                                         <div class="story-video-player"><i
                                                                                 class="fa fa-play"></i>
                                                                         </div>
-                                                                        <video preload href="" class="story-video-grid"
+                                                                        <video preload href=""
+                                                                            class="story-video-grid"
                                                                             style="object-fit: cover;"
                                                                             src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}#t=1.0">
                                                                         </video>
@@ -514,8 +516,9 @@
                                 <li class="navigationItem">
                                     <a id="availability-sticky" class="hoover font-13 navigationItem__Button"
                                         onClick="document.getElementById('availability').scrollIntoView();">
-                                        <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
-                                            fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                        <i aria-label="Posts"
+                                            class="far fa-calendar-alt navigationItem__Icon svg-icon" fill="#262626"
+                                            viewBox="0 0 20 20"></i><span>&nbsp
                                             {{ __('user_page.AVAILABILITY') }}</span>
                                     </a>
                                 </li>
@@ -601,7 +604,7 @@
                                         @endforeach
                                     @endif --}}
                                     {{-- @if ($photo->count() <= 0 && $video->count() <= 0) --}}
-                                        {{ __('user_page.there is no gallery yet') }}
+                                    {{ __('user_page.there is no gallery yet') }}
                                     {{-- @endif --}}
                                 </div>
                             </section>
@@ -640,7 +643,7 @@
                                     </h2>
                                     <p id="description-content">
                                         {{-- {!! Str::limit(Translate::translate($hotelRoom->room_description), 600, ' ...') ?? --}}
-                                            __('user_page.There is no description yet') !!}
+                                        __('user_page.There is no description yet') !!}
                                     </p>
                                     {{-- @if (Str::length($hotelRoom->room_description) > 600)
                                         <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
@@ -806,7 +809,8 @@
                                         @endauth --}}
                                     </h2>
                                     <div class="desk-e-call">
-                                        <div class="flatpickr-container" style="display: flex; justify-content: center;">
+                                        <div class="flatpickr-container"
+                                            style="display: flex; justify-content: center;">
                                             <div
                                                 style="display: table; background-color: white; padding: 70px 80px 80px 80px; border-radius: 15px; box-shadow: 1px 1px 10px #a4a4a4; margin-bottom: 25px;">
                                                 <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
@@ -852,10 +856,10 @@
         $.ajax({
             type: "GET",
             url: '/hotel/room/' + id,
-            success: function (response) {
+            success: function(response) {
                 $('#modal-room').modal('show');
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
