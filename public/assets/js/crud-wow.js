@@ -1113,6 +1113,26 @@ $("#storeStoryForm").submit(function (e) {
                     }
                 }
 
+                if (response.video.length > 0) {
+                    for (let v = 0; v < response.video.length; v++) {
+                        content +=
+                            '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                            response.video[v].id_video +
+                            '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video_activity(' +
+                            response.video[v].id_video +
+                            ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                            path +
+                            lowerCaseUid +
+                            slash +
+                            response.video[v].name +
+                            '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                            id_activity +
+                            '" data-video="' +
+                            response.video[v].id_video +
+                            '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                    }
+                }
+
                 // console.log(content);
 
                 $(storyVideoInput).children("input").val("");
@@ -1125,7 +1145,9 @@ $("#storeStoryForm").submit(function (e) {
 
                 $("#modal-edit_story").modal("hide");
 
-                if (response.data.length > 4) {
+                let sumStory = response.data.length + response.video.length;
+
+                if (sumStory > 4) {
                     sliderRestaurant();
                 }
 
@@ -1178,19 +1200,24 @@ $("#storeStoryForm").submit(function (e) {
 });
 
 function saveLocation() {
-    console.log('hit saveLocation');
-    let form = $('#editLocationForm');
+    console.log("hit saveLocation");
+    let form = $("#editLocationForm");
 
     const formData = {
         id_activity: parseInt(form.find(`input[name='id_activity']`).val()),
-        id_location: parseInt(form.find(`select[name=id_location] option`).filter(':selected').val()),
+        id_location: parseInt(
+            form
+                .find(`select[name=id_location] option`)
+                .filter(":selected")
+                .val()
+        ),
         longitude: form.find(`input[name='longitude']`).val(),
-        latitude: form.find(`input[name='latitude']`).val()
+        latitude: form.find(`input[name='latitude']`).val(),
     };
 
     console.log(formData);
 
-    let btn = form.find('#btnSaveLocation');
+    let btn = form.find("#btnSaveLocation");
     btn.text("Saving...");
     btn.addClass("disabled");
 
@@ -1222,7 +1249,7 @@ function saveLocation() {
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
         // response error
         error: function (jqXHR, exception) {
@@ -1248,7 +1275,7 @@ function saveLocation() {
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
     });
 }
