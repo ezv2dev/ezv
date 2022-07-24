@@ -2372,6 +2372,11 @@ span.flatpickr-weekday {
     }
 
 }
+@media only screen and (min-width: 992px) {
+    .dayContainer {
+        width: 350px !important;
+    }
+}
 
 @media only screen and (min-width: 1320px) and (max-width: 1399px) {
     #nav .navbar-dekstop {
@@ -2386,9 +2391,6 @@ span.flatpickr-weekday {
     }
     .grid-text{
         font-size: 15px;
-    }
-    .dayContainer {
-        width: 350px !important;
     }
     #nav .navbar-dekstop {
         /* max-width: 1360px !important; */

@@ -273,6 +273,7 @@ i.fa-solid.fa-bars {
     display: flex;
     align-items: center;
     padding-left: 5px !important;
+    padding-right: 0px !important;
 }
 
 .location-popup-text .location_op,

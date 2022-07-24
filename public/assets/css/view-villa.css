@@ -199,6 +199,7 @@ hr.pendek {
     .reserve-block {
         width: 100% !important;
         right: 0px !important;
+        margin: 0px !important;
     }
 
     .menu-liner {
@@ -3907,6 +3908,7 @@ span.flatpickr-weekday {
     }
     .reserve-block {
         width: 100% !important;
+        margin: 0px !important;
     }
     #sidebar_fix {
         padding-left: 30px !important;
