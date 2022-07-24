@@ -1081,11 +1081,6 @@ input:checked + .switch-background:active::before {
     #ul .navbar-nav .nav-link-form{
         width: 60px !important;
     }
-    .guest-popup {
-        left: -6px !important;
-        top: -160px !important;
-        width: 98vw !important;
-    }
     .row .button .search-button {
         width: 32px !important;
         height: 32px !important;
@@ -1093,11 +1088,6 @@ input:checked + .switch-background:active::before {
     .user-details-email p,
     .user-details-name {
         font-size: 12px !important;
-    }
-}
-@media only screen and (max-width: 381px) {
-    .bar-restaurant .guests input {
-        top: 14px !important;
     }
 }
 @media only screen and (max-width: 425px) {
@@ -1114,7 +1104,6 @@ input:checked + .switch-background:active::before {
     #sugest2 {
         width: 95vw !important;
     }
-    #search_bar .nav-link-form-detail {}
 
 }
 
@@ -1127,11 +1116,6 @@ input:checked + .switch-background:active::before {
     #ul .navbar-nav .nav-link-form{
         width: 60px !important;
     }
-    .guest-popup {
-        left: -6px !important;
-        top: -160px !important;
-        width: 98vw !important;
-    }
     .row .button .search-button {
         width: 32px !important;
         height: 32px !important;
@@ -1141,17 +1125,17 @@ input:checked + .switch-background:active::before {
         font-size: 12px !important;
     }
 }
-@media only screen and (max-width: 381px) {
-    .bar-restaurant .guests input {
-        top: 14px !important;
-    }
-}
 @media only screen and (min-width: 426px) and (max-width: 767px) {
     .user-avatar {
         width: 40px !important;
     }
 }
 @media only screen and (max-width: 425px) {
+    .guest-popup {
+        left: -6px !important;
+        top: -160px !important;
+        width: 98vw !important;
+    }
     .user-avatar {
         width: 40px !important;
     }
@@ -1190,11 +1174,10 @@ input:checked + .switch-background:active::before {
     }
 }
 
-@media only screen and (min-width: 346px) and (max-width: 500px) {
+@media only screen and (min-width: 426px) and (max-width: 500px) {
     .guest-popup {
-        left: -6px !important;
         top: -160px !important;
-        width: 98vw !important;
+        width: 92vw !important;
     }
 }
 
@@ -1243,13 +1226,15 @@ input:checked + .switch-background:active::before {
     .bar-activity .guests p,
     .bar-collaborator .guests p {
         position: absolute !important;
-        width: 50vw !important;
-        left: 28% !important;
+        width: 83.33% !important;
+        left: 16.66% !important;
     }
+    .bar-villa .guests p,
+    .bar-villa .guests .nav,
     .bar-activity .guests .header-date-input-container,
     .bar-collaborator .guests .header-date-input-container {
-        width: 60vw !important;
-        margin-left: 18% !important;
+        width: 83.33% !important;
+        margin-left: 16.66% !important;
     }
     .page-header-fixed {
         padding-left: 0px !important;
@@ -1269,13 +1254,15 @@ input:checked + .switch-background:active::before {
     .bar-activity .guests p,
     .bar-collaborator .guests p {
         position: absolute !important;
-        width: 40vw !important;
-        left: 28% !important;
+        width: 83.33% !important;
+        left: 16.66% !important;
     }
+    .bar-villa .guests p,
+    .bar-villa .guests .nav,
     .bar-activity .guests .header-date-input-container,
     .bar-collaborator .guests .header-date-input-container {
-        width: 40vw !important;
-        margin-left: 26% !important;
+        width: 83.33% !important;
+        margin-left: 16.66% !important;
     }
     /* .page-header-fixed {
         padding-left: 4.5rem !important;
@@ -1298,11 +1285,13 @@ input:checked + .switch-background:active::before {
     }
 
     .add-date-wow {
-        left: 156px !important;
+        width: 83.33% !important;
+        left: 16.66% !important;
     }
 
     .p-wow {
-        margin-left: 70px !important;
+        width: 83.33% !important;
+        margin-left: 16.66% !important;
     }
 }
 
@@ -1445,13 +1434,14 @@ input:checked + .switch-background:active::before {
     }
     .bar-collaborator-detail .guests p {
         position: absolute !important;
-        width: 25vw !important;
-        left: 28% !important;
+        width: 83.33% !important;
+        left: 16.66% !important;
     }
     .bar-restaurant-detail .guests p,
     .bar-activity-detail .guests .input-date,
     .bar-collaborator-detail .guests .input-date {
-        margin-left: 60px !important;
+        width: 83.33% !important;
+        margin-left: 16.66% !important;
     }
     .bar-restaurant-detail .guests input {
         margin-left: 30px !important;

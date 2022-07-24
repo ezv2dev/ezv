@@ -21,7 +21,7 @@
         <div class="modal-content modal-content-amenities reset-margin modal-full"
             style="background: white; border-radius:15px">
             <div class="modal-header modal-header-amenities">
-                <h5 class="modal-title">Detail Room</h5>
+                <h5 class="modal-title">Room Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-body-amenities pb-1 translate-text-group"
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6- col-md-6 col-xs-12 profile-info">
-                                <h2 id="name-content">Hotel Test - <a href=""></a>
+                                <h2 id="name-content-room">Hotel Test - <a href=""></a>
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editNameForm()"
@@ -139,11 +139,11 @@
                                     @endif
                                 @endauth --}}
 
-                                <p>10 m<sup>2</sup> | 10
+                                <p><span id="detail-room-size"></span> m<sup>2</sup> | <span id="detail-room-capacity"></span>
                                     {{ __('user_page.People') }} |
-                                    Twin {{ __('user_page.Beds') }} |
+                                    <span id="detail-room-bed"></span> {{ __('user_page.Beds') }} |
                                     <strong>{{ __('user_page.Total') }}</strong>
-                                    10 {{ __('user_page.Rooms') }}
+                                    <span id="detail-room-total"></span> {{ __('user_page.Rooms') }}
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="edit_room_size()"
@@ -154,7 +154,7 @@
 
                                 {{-- SHORT DESCRIPTION --}}
                                 <p class="short-desc" id="short-description-content">
-                                    short description
+                                    <span id="detail-room-short-desc"></span>
                                     {{-- @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -642,8 +642,8 @@
                                         @endauth
                                     </h2>
                                     <p id="description-content">
-                                        {{-- {!! Str::limit(Translate::translate($hotelRoom->room_description), 600, ' ...') ?? --}}
-                                        __('user_page.There is no description yet') !!}
+                                        {{-- {!! Str::limit(Translate::translate($hotelRoom->room_description), 600, ' ...') ??__('user_page.There is no description yet') !!} --}}
+                                        <span id="detail-room-description"></span>
                                     </p>
                                     {{-- @if (Str::length($hotelRoom->room_description) > 600)
                                         <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
@@ -856,7 +856,14 @@
         $.ajax({
             type: "GET",
             url: '/hotel/room/' + id,
-            success: function(response) {
+            success: function(data) {
+                $('#name-content-room').text(data.type_room);
+                $('#detail-room-size').text(data.room_size);
+                $('#detail-room-capacity').text(data.capacity);
+                $('#detail-room-bed').text(data.bed_type);
+                $('#detail-room-total').text(data.number_of_room);
+                $('#detail-room-short-desc').text(data.short_description);
+                $('#detail-room-description').text(data.room_description);
                 $('#modal-room').modal('show');
             },
             error: function(jqXHR, exception) {
