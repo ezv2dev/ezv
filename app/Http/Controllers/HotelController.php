@@ -38,12 +38,46 @@ class HotelController extends Controller
     public function hotel_list()
     {
         $hotel = Hotel::with([
-            'propertyType', 'favorit', 'location', 'photo', 'video', 'detailReview',
+            'location', 'photo', 'video', 'detailReview'
         ])->where('status', 1)->inRandomOrder()->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
 
         $amenities = Amenities::all();
         $hotelCategory = HotelCategory::all();
         $hotelFilter = HotelFilter::all();
+
+        $i = 0;
+        $j = 0;
+        $near = array();
+        foreach ($hotel as $item) {
+            $point1 = array('lat' => $item->latitude, 'long' => $item->longitude, 'name' => $item->name);
+            $airportPoint = array('lat2' => -8.7433916, 'long2' => 115.1644194);
+
+            $lat1 = $point1['lat'];
+            $lon1 = $point1['long'];
+            $lat2 = $airportPoint['lat2'];
+            $lon2 = $airportPoint['long2'];
+            $name = 'Ngurah Rai Airport';
+            $theta = $lon1 - $lon2;
+
+            $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+            $miles = acos($miles);
+            $miles = rad2deg($miles);
+            $miles = $miles * 60 * 1.1515;
+            $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
+            $kilometers[$i][] = $name;
+
+            if ($near == null) {
+                $near[0] = $kilometers[$i];
+            } else {
+                if ($kilometers[$i][0] <= $near[0][0]) {
+                    $near[0] = $kilometers[$i];
+                }
+            }
+            $hotel[$i]['km'] = $near[0][0];
+            $hotel[$i]['airport'] = $near[0][1];
+
+            $i++;
+        }
 
         return view('user.hotel.list_hotel', compact('hotel', 'hotelCategory', 'hotelFilter'));
     }
