@@ -5160,9 +5160,20 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
-        function language() {
-            $('#LegalModal').modal('show');
-        }
+            function language() {
+                $('#LegalModal').modal('show');
+                $('#trigger-tab-language').addClass('active');
+                $('#content-tab-language').addClass('active');
+                $('#trigger-tab-currency').removeClass('active');
+                $('#content-tab-currency').removeClass('active');
+            }
+            function currency() {
+                $('#LegalModal').modal('show');
+                $('#trigger-tab-language').removeClass('active');
+                $('#content-tab-language').removeClass('active');
+                $('#trigger-tab-currency').addClass('active');
+                $('#content-tab-currency').addClass('active');
+            }
     </script>
 
     <script>
