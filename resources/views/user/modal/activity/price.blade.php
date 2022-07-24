@@ -4,8 +4,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="form-edit-menu-container" action="javascript:void(0)" method="POST"
-                enctype="multipart/form-data" id="addPriceForm" style="gap: 0px !important;" onsubmit="savePriceActivity()">
-                @csrf
+                enctype="multipart/form-data" id="addPriceForm" style="gap: 0px !important;">
+                {{-- @csrf --}}
                 <input type="hidden" name="id_activity" id="id_activity" value="{{ $activity->id_activity }}">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('user_page.Add Price') }}</h5>
@@ -57,7 +57,7 @@
                 <div class="modal-filter-footer d-flex justify-content-center"
                     style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                     <div class="col-4" style="text-align: center;">
-                        <button type="submit" id="btnSavePrice" class="btn btn-sm btn-primary w-100" form="addMenuForm">
+                        <button type="submit" id="btnSavePrice" class="btn btn-sm btn-primary w-100" form="addPriceForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>

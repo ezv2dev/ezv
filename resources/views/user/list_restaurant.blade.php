@@ -128,7 +128,7 @@
                         <img style="height: 53vh;" class="img-fluid p-4"
                             src="{{ asset('assets/partner/template/assets/img/freepik/filter_data_unavailable.svg') }}"
                             alt="" />
-                        <p class="lead">Restaurant data not available</p>
+                        <p class="lead" style="font-weight: 700; color: #ff7400;">Restaurant data not available</p>
                     </div>
                 </div>
             </div>

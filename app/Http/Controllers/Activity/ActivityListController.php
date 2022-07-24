@@ -607,8 +607,6 @@ class ActivityListController extends Controller
         }
 
         // validation
-        request()->validate();
-        // validation
         $validator = Validator::make($request->all(), [
             'id_activity' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:100'],
