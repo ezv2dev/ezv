@@ -3413,7 +3413,7 @@ input::-webkit-inner-spin-button {
         column-gap: 0px;
     }
     .limit-text-list-villa {
-        -webkit-line-clamp: 6;
+        -webkit-line-clamp: 4;
     }
 
     .height-list-villa {

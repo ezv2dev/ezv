@@ -163,7 +163,7 @@ if (isset($_COOKIE['tema'])) {
                     <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                 </div>
                 <input type="hidden" value="{{ $data->id_villa }}" id="id_villa" name="id_villa">
-                <div class="skeleton skeleton-h-lg skeleton-md-h-100 skeleton-w-100">
+                <div class="skeleton skeleton-h-100 skeleton-w-100">
                     <div class="dots-container d-flex justify-content-center"></div>
                     <div class="js-slider-2 list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                         data-dots="false" data-arrows="true">
@@ -206,7 +206,7 @@ if (isset($_COOKIE['tema'])) {
                 <!-- Villa Description -->
                 <div class="row mt-3 mt-lg-0 " style="height:100%;">
                     <div class="col-12 row">
-                        <div class="col-9">
+                        <div class="col-lg-9">
                             <div class="skeleton skeleton-h-2 skeleton-lg-h-3 skeleton-w-100 mt-0">
                                 <p class="villa-list-name max-line " style="color: #ff7400; position:relative;">
                                     {{-- {{ $data->name ?? __('user_page.There is no name yet') }} --}}
@@ -272,7 +272,7 @@ if (isset($_COOKIE['tema'])) {
                         </div>
 
                         <!-- Video Button -->
-                        <div class="col-3 skeleton">
+                        <div class="col-lg-3 skeleton">
                             <a href="{{ route('villa', $data->id_villa) }}" target="_blank" id="villa-list-video-desktop">
                                 <div class="villa-list-video-container video-show-buttons">
                                     <i class="fas fa-2x fa-play video-button"></i>
