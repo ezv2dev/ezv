@@ -2781,6 +2781,17 @@
     <script>
         function language() {
             $('#LegalModal').modal('show');
+            $('#trigger-tab-language').addClass('active');
+            $('#content-tab-language').addClass('active');
+            $('#trigger-tab-currency').removeClass('active');
+            $('#content-tab-currency').removeClass('active');
+        }
+        function currency() {
+            $('#LegalModal').modal('show');
+            $('#trigger-tab-language').removeClass('active');
+            $('#content-tab-language').removeClass('active');
+            $('#trigger-tab-currency').addClass('active');
+            $('#content-tab-currency').addClass('active');
         }
     </script>
 
@@ -2807,12 +2818,12 @@ if(el_autohide){
             el_autohide.classList.add('scrolled-down');
         }
         last_scroll_top = scroll_top;
-  }); 
+  });
   // window.addEventListener
 }
 // if
 
-}); 
+});
 // DOMContentLoaded  end
 </script>
 
@@ -2839,12 +2850,12 @@ if(el_autohide2){
             el_autohide2.classList.add('scroll-down');
         }
         last_scroll_top = scroll_top;
-  }); 
+  });
   // window.addEventListener
 }
 // if
 
-}); 
+});
 </script>
 </body>
 </html>
