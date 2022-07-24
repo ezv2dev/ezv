@@ -86,6 +86,10 @@
             color: #bbb;
             margin-left: 0 !important;
         }
+
+        .star-active {
+            color: #f2b600;
+        }
     </style>
 </head>
 
@@ -454,7 +458,20 @@
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
                             </div>
-                            <div class="cm-star-rating stars">
+                            <div class="showStar">
+                                @for ($i = 0; $i < $hotel[0]->star; $i++)
+                                    <i class="star-active fa fa-star" aria-hidden="true"></i>
+                                @endfor
+                                @php
+                                    $j = 5 - $hotel[0]->star;
+                                @endphp
+                                @if ($j > 0)
+                                    @for ($i = 0; $i < $j; $i++)
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    @endfor
+                                @endif
+                            </div>
+                            <div class="cm-star-rating stars d-none" id="editStar">
                                 <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
                                 <label for="hotel-star-5"
                                     title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
@@ -481,6 +498,13 @@
                                     <i class="active fa fa-star" aria-hidden="true"></i>
                                 </label>
                             </div>
+                            @auth
+                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    &nbsp;<a type="button" onclick="editStar()"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
+                                        Star</a>
+                                @endif
+                            @endauth
                             <div class="distance">
                                 <p class="location-font-size"><a onclick="view_map('{{ $hotel[0]->id_hotel }}')"
                                         href="javascript:void(0);"><i class="fa fa-map-marker-alt"></i>
@@ -3437,7 +3461,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3449,7 +3473,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedroom') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3461,7 +3485,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3473,7 +3497,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3485,7 +3509,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
@@ -5282,6 +5306,10 @@
 
         function editCategoryHotel() {
             $('#ModalCategoryHotel').modal('show');
+        }
+
+        function editStar() {
+
         }
     </script>
     <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
