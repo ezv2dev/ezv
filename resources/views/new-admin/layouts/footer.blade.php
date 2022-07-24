@@ -51,6 +51,12 @@
             padding: 0 1rem 3rem;
         }
 
+        .footer-bottom-space, .footer-space {
+            display: block;
+            height: 50px;
+            background: transparent;
+        }
+
         @media (min-width: 576px) {
             .footer-2-4 .list-footer {
                 padding: 5rem 2rem 3rem 2rem;
@@ -107,13 +113,13 @@
                     <h2 class="footer-text-title text-white">{{ __('user_page.Company') }}</h2>
                     <nav class="list-unstyled">
                         <li class="list-space">
-                            <a href="" class="list-menu">{{ __('user_page.Contact Us') }}</a>
+                            <a href="{{ route('contact_us') }}" class="list-menu">{{ __('user_page.Contact Us') }}</a>
                         </li>
                         <li class="list-space">
-                            <a href="" class="list-menu">{{ __('user_page.Blog') }}</a>
+                            <a href="{{ route('blog') }}" class="list-menu">{{ __('user_page.Blog') }}</a>
                         </li>
                         <li class="list-space">
-                            <a href="" class="list-menu">{{ __('user_page.Culture') }}</a>
+                            <a href="{{ route('culture') }}" class="list-menu">{{ __('user_page.Culture') }}</a>
                         </li>
                     </nav>
                 </div>
@@ -121,10 +127,10 @@
                     <h2 class="footer-text-title text-white">{{ __('user_page.Support') }}</h2>
                     <nav class="list-unstyled">
                         <li class="list-space">
-                            <a href="" class="list-menu">{{ __('user_page.Getting Started') }}</a>
+                            <a href="{{ route('getting_started') }}" class="list-menu">{{ __('user_page.Getting Started') }}</a>
                         </li>
                         <li class="list-space">
-                            <a href="" class="list-menu">{{ __('user_page.Help Center') }}</a>
+                            <a href="{{ route('help_center') }}" class="list-menu">{{ __('user_page.Help Center') }}</a>
                         </li>
                     </nav>
                 </div>
@@ -143,6 +149,19 @@
                     </nav>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-social text-center">
+                        <a href="https://www.facebook.com/" target=_blank"><i class="fa fa-facebook"></i></a> <a href="https://www.instagram.com/" target=_blank"><i class="fa fa-instagram"></i></a> <a href="mailto:info@ezv2.com" target=_blank"><i class="fa fa-envelope"></i></a> <a href="call:+63361123456" target=_blank"><i class="fa fa-phone"></i></a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-copyrights text-center">
+                        <p>&copy;{{ date('Y') }} EZV2</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="footer-bottom-space"></div>
     </div>
 </section>

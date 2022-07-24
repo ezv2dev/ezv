@@ -138,6 +138,8 @@ return [
     'Service' => 'Service',
     'Edit Bedroom, Bathroom, Adult, & Children' => 'Edit Bedroom, Bathroom, Adult, & Children',
     'Are you sure?' => 'Are you sure?',
+    'Delete Special Price?' => 'Delete Special Price?',
+    'Delete Date Availability?' => 'Delete Date Availability',
     'You will not be able to recover this imaginary file!' => 'You will not be able to recover this imaginary file!',
     'Do you want request a video to the Owner?' => 'Do you want request a video to the Owner?',
     'Requesting a video!' => 'Requesting a video!',
