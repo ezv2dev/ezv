@@ -334,7 +334,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         style="background-color: #ff7400" onclick="editNameVilla()">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
@@ -434,7 +434,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="editShortDesc()">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary"
                                         onclick="editShortDescriptionCancel()">
@@ -969,7 +969,7 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
                                                 onclick="editDescriptionVilla({{ $villa[0]->id_villa }})">
-                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
                                             <button type="reset" class="btn btn-sm btn-secondary"
                                                 onclick="editDescriptionCancel()">
@@ -2179,7 +2179,7 @@
                                                                 <center>
                                                                     <button type="submit"
                                                                         class="btn btn-block btn-sm btn-primary"
-                                                                        style="width: 200px">{{ __('user_page.Done') }}</button>
+                                                                        style="width: 200px">{{ __('user_page.Save') }}</button>
                                                                 </center>
                                                             </div>
                                                         </div>
