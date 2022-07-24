@@ -574,6 +574,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
+                    $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -731,7 +732,7 @@
                                         <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
                                             <p style="min-height: 38px;" class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                            <p style="min-height: 43px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                            <p style="min-height: 43px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
                                             <p class="card-text text-orange text-17 fw-500">${price}/Night</p>
                                         </a>
                                     </div>
@@ -808,6 +809,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
+                    $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1014,6 +1016,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
+                    $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1179,7 +1182,7 @@
                                         <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
-                                            <p style="min-height: 40px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
+                                            <p style="min-height: 40px;" class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
                                             {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
                                         </a>
                                     </div>
@@ -1255,6 +1258,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
+                    $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1978,6 +1982,7 @@
         // reset right content
         // $('#map12').removeClass('w-70');
         $('#map12').addClass('w-100');
+        $('#map12').addClass('h-mobile-100');
         $('#modal-map-right-content').html('');
         $('#modal-map-right').hide();
         // hide primary marker control
@@ -2153,6 +2158,7 @@
                 // show right content
                 // $('#map12').addClass('w-70');
                 $('#map12').removeClass('w-100');
+                $('#map12').removeClass('h-mobile-100');
                 setTimeout(async () => {
                     $('#modal-map-right').show();
                     // load slick slider
@@ -2193,6 +2199,7 @@
         // reset right content
         // $('#map12').removeClass('w-70');
         $('#map12').addClass('w-100');
+        $('#map12').addClass('h-mobile-100');
         $('#modal-map-right').hide();
 
         // reset primary marker
