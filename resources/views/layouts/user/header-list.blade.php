@@ -4096,7 +4096,7 @@
                 localStorage.setItem("mode", tipe == 'black' ? "dark" : 'light');
 
                 $('.grid-img-filter').css("box-shadow", "");
-                if(screen.width < 950) {
+                if(window.innerWidth < 950) {
                     if(tipe == 'black') {
                         $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px");
                     } else {
