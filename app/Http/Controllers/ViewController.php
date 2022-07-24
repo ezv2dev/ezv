@@ -988,8 +988,7 @@ class ViewController extends Controller
     public function villa_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1853,7 +1852,7 @@ class ViewController extends Controller
 
         $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story')->latest()->get();
         $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
-        $villaVideo = VillaVideo::where('id_villa', $request->id_villa)->select('id_video','name')->orderBy('order','asc')->get();
+        $villaVideo = VillaVideo::where('id_villa', $request->id_villa)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
         $data = [];
 
@@ -2153,9 +2152,7 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
-        // $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
-        $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
-        // dd($villa->sortBy('grade')->pluck('grade', 'id_villa'));
+        $villa = Villa::where('status', 1)->inRandomOrder()->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
         $villa->appends(request()->query());
 
         // TODO uncomment when lazy load, start
