@@ -463,15 +463,15 @@ $(function () {
         });
 });
 
+var latitude = document.getElementById("latitude").value;
+var longitude = document.getElementById("longitude").value;
 // Google Map
-function initialize() {
-    var latitude = document.getElementById("latitude").value;
-    var longitude = document.getElementById("longitude").value;
-    const myLatLng = {
+function initialize(latitude, longitude) {
+    let myLatLng = {
         lat: parseFloat(latitude),
         lng: parseFloat(longitude),
     };
-    const map = new google.maps.Map(document.getElementById("map"), {
+    let map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
         center: myLatLng,
         scrollwheel: true,
@@ -514,4 +514,4 @@ function initialize() {
     });
 }
 
-google.maps.event.addDomListener(window, "load", initialize);
+google.maps.event.addDomListener(window, "load", initialize(latitude,longitude));
