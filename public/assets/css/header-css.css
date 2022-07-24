@@ -1491,6 +1491,9 @@ input:checked + .switch-background:active::before {
     .searchbar-list-display-block {
         transform-origin: 50% 30% !important;
     }
+    .bar-villa .guests .guests-input-row .col-6 {
+        padding-left: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 992px) {

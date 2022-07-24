@@ -2341,6 +2341,11 @@ span.flatpickr-weekday {
     .row .button {
         width: 20% !important;
     }
+    .row .guests p,
+    .row .guests .nav {
+        width: 83.33% !important;
+        margin-left: 16.66% !important;
+    }
     .row .guests .nav {
         display: flex !important;
         justify-content: center !important;
