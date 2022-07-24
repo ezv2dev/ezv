@@ -1032,165 +1032,226 @@ $(storyVideoInput)
     .children("input")
     .on("change", function (value) {
         storyActivity = this.files[0];
+        if (document.getElementById("storyVideo").files.length != 0) {
+            $(".story-video-form").css("border", "");
+            $("#err-stry-vid").hide();
+        }
     });
-
+$(document).on("keyup", "#title", function () {
+    $("#title").css("border", "");
+    $("#err-stry-ttl").hide();
+});
 $("#storeStoryForm").submit(function (e) {
-    e.preventDefault();
+    let error = 0;
+    if (document.getElementById("storyVideo").files.length == 0) {
+        $(".story-video-form").css("border", "solid #e04f1a 1px");
+        $("#err-stry-vid").show();
+        error = 1;
+    } else {
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
+    }
+    if (!$("#title").val()) {
+        $("#title").css("border", "solid #e04f1a 1px");
+        $("#err-stry-ttl").show();
+        error = 1;
+    } else {
+        $("#title").css("border", "");
+        $("#err-stry-ttl").hide();
+    }
+    if (error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
 
-    //validasi
-    if (
-        storyActivity.type.includes("video/mp4") ||
-        storyActivity.type.includes("video/mov")
-    ) {
-        var formData = new FormData(this);
+        //validasi
+        if (
+            storyActivity.type.includes("video/mp4") ||
+            storyActivity.type.includes("video/mov")
+        ) {
+            var formData = new FormData(this);
 
-        var btn = document.getElementById("btnSaveStory");
-        btn.textContent = "Saving Story...";
-        btn.classList.add("disabled");
+            var btn = document.getElementById("btnSaveStory");
+            btn.textContent = "Saving Story...";
+            btn.classList.add("disabled");
 
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                Accept: "application/json",
-            },
-            url: "/things-to-do/story/store",
-            data: formData,
-            cache: false,
-            processData: false,
-            contentType: false,
-            enctype: "multipart/form-data",
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                    Accept: "application/json",
+                },
+                url: "/things-to-do/story/store",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
 
-                iziToast.success({
-                    title: "Success",
-                    message: response.message,
-                    position: "topRight",
-                });
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
 
-                let path = "/foto/activity/";
-                let slash = "/";
-                let uid = response.uid;
-                var lowerCaseUid = uid.toLowerCase();
-                let content;
+                    let path = "/foto/activity/";
+                    let slash = "/";
+                    let uid = response.uid;
+                    var lowerCaseUid = uid.toLowerCase();
+                    let content;
 
-                for (let i = 0; i < response.data.length; i++) {
-                    if (i == 0) {
-                        content =
-                            '<div class="card4 col-lg-3" id="story' +
-                            response.data[i].id_story +
-                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
-                            response.data[i].id_story +
-                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
-                            path +
-                            lowerCaseUid +
-                            slash +
-                            response.data[i].name +
-                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
-                            id_activity +
-                            '" data-story="' +
-                            response.data[i].id_story +
-                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
-                    } else {
-                        content =
-                            content +
-                            '<div class="card4 col-lg-3" id="story' +
-                            response.data[i].id_story +
-                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
-                            response.data[i].id_story +
-                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
-                            path +
-                            lowerCaseUid +
-                            slash +
-                            response.data[i].name +
-                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
-                            id_activity +
-                            '" data-story="' +
-                            response.data[i].id_story +
-                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (i == 0) {
+                            content =
+                                '<div class="card4 col-lg-3" id="story' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
+                                id_activity +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        } else {
+                            content =
+                                content +
+                                '<div class="card4 col-lg-3" id="story' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story_activity(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-activity="' +
+                                id_activity +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        }
                     }
-                }
 
-                // console.log(content);
+                    if (response.video.length > 0) {
+                        for (let v = 0; v < response.video.length; v++) {
+                            content +=
+                                '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                                response.video[v].id_video +
+                                '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video_activity(' +
+                                response.video[v].id_video +
+                                ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.video[v].name +
+                                '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                                id_activity +
+                                '" data-video="' +
+                                response.video[v].id_video +
+                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        }
+                    }
 
-                $(storyVideoInput).children("input").val("");
-                $(storyVideoPreview).hide();
-                $(storyVideoForm).show();
+                    // console.log(content);
 
-                $("#storyContent").html("");
-                $("#storyContent").append(content);
-                $("#title").val("");
+                    $(storyVideoInput).children("input").val("");
+                    $(storyVideoPreview).hide();
+                    $(storyVideoForm).show();
 
-                $("#modal-edit_story").modal("hide");
+                    $("#storyContent").html("");
+                    $("#storyContent").append(content);
+                    $("#title").val("");
 
-                if (response.data.length > 4) {
-                    sliderRestaurant();
-                }
+                    $("#modal-edit_story").modal("hide");
 
-                // $("#profileDropzone").attr("src", "");
+                    let sumStory = response.data.length + response.video.length;
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Save";
-                btn.classList.remove("disabled");
-            },
-            error: function (jqXHR, exception) {
-                // console.log(jqXHR);
-                // console.log(exception);
+                    if (sumStory > 4) {
+                        sliderRestaurant();
+                    }
 
-                if (jqXHR.responseJSON.errors) {
-                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    // $("#profileDropzone").attr("src", "");
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+                error: function (jqXHR, exception) {
+                    // console.log(jqXHR);
+                    // console.log(exception);
+
+                    if (jqXHR.responseJSON.errors) {
+                        for (
+                            let i = 0;
+                            i < jqXHR.responseJSON.errors.length;
+                            i++
+                        ) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
                         iziToast.error({
                             title: "Error",
-                            message: jqXHR.responseJSON.errors[i],
+                            message: jqXHR.responseJSON.message,
                             position: "topRight",
                         });
                     }
-                } else {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.message,
-                        position: "topRight",
-                    });
-                }
 
-                $("#modal-edit_story").modal("hide");
+                    $("#modal-edit_story").modal("hide");
 
-                // $("#profileDropzone").attr("src", "");
+                    // $("#profileDropzone").attr("src", "");
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Save";
-                btn.classList.remove("disabled");
-            },
-        });
-    } else {
-        $(storyVideoInput).children("input").val("");
-        $(storyVideoPreview).hide();
-        $(storyVideoForm).show();
-        $("#title").val("");
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+            });
+        } else {
+            $(storyVideoInput).children("input").val("");
+            $(storyVideoPreview).hide();
+            $(storyVideoForm).show();
+            $("#title").val("");
 
-        iziToast.error({
-            title: "Error",
-            message: "The file must be a file of type: <b>mp4 / mov</b>",
-            position: "topRight",
-        });
+            iziToast.error({
+                title: "Error",
+                message: "The file must be a file of type: <b>mp4 / mov</b>",
+                position: "topRight",
+            });
+        }
+        // console.log(readerStoryActivity);
     }
-    // console.log(readerStoryActivity);
 });
 
 function saveLocation() {
-    console.log('hit saveLocation');
-    let form = $('#editLocationForm');
+    console.log("hit saveLocation");
+    let form = $("#editLocationForm");
 
     const formData = {
         id_activity: parseInt(form.find(`input[name='id_activity']`).val()),
-        id_location: parseInt(form.find(`select[name=id_location] option`).filter(':selected').val()),
+        id_location: parseInt(
+            form
+                .find(`select[name=id_location] option`)
+                .filter(":selected")
+                .val()
+        ),
         longitude: form.find(`input[name='longitude']`).val(),
-        latitude: form.find(`input[name='latitude']`).val()
+        latitude: form.find(`input[name='latitude']`).val(),
     };
 
     console.log(formData);
 
-    let btn = form.find('#btnSaveLocation');
+    let btn = form.find("#btnSaveLocation");
     btn.text("Saving...");
     btn.addClass("disabled");
 
@@ -1222,7 +1283,7 @@ function saveLocation() {
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
         // response error
         error: function (jqXHR, exception) {
@@ -1248,7 +1309,7 @@ function saveLocation() {
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
     });
 }
