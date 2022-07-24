@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lisence - EZV</title>
+    <title>Blog - EZV</title>
     <meta name="description" content="EZV2 created by pixelcave and published on Themeforest">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -64,22 +64,21 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Lisence</a></li>
+            <li class="breadcrumb-item"><a href="#">Blog</a></li>
         </ol>
     </nav>
     <br>
 
     <small class="text-muted">Legal Terms</small>
 
-    <div class="privacy-title mb-4"><h2>License</h2>
+    <div class="privacy-title mb-4"><h2>Blog</h2>
     </div>
     <div class="privacy-description">
         {{-- <p class="mb-3 text-dark text-justify" style="font-size: 16pt"><b>Terms of Service for Non-European Users</b></p> --}}
         {{-- <p class="lead">Last Updated: February 10, 2022</p> --}}
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">The EZV Platform offers an online venue that enables users (“Members”) to publish, offer, search for, and book services. Members who publish and offer services are “Hosts” and Members who search for, book, or use services are “Guests.” Hosts offer accommodations (“Accommodations”), activities, excursions, and events (“Experiences”), and a variety of travel and other services (collectively, “Host Services,” and each Host Service offering, a “Listing”). You must register an account to access and use many features of the EZV Platform, and must keep your account information accurate. As the provider of the EZV Platform, EZV does not own, control, offer or manage any Listings or Host Services. EZV is not a party to the contracts entered into directly between Hosts and Guests, nor is EZV a real estate broker, travel agency, or insurer. EZV is not acting as an agent in any capacity for any Member, except as specified in the Payments Terms of Service (“Payment Terms”). To learn more about EZV’s role see Section 16.</p>
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">The EZV Platform offers an online venue that enables users (“Members”) to publish, offer, search for, and book services. Members who publish and offer services are “Hosts” and Members who search for, book, or use services are “Guests.” Hosts offer accommodations (“Accommodations”), activities, excursions, and events (“Experiences”), and a variety of travel and other services (collectively, “Host Services,” and each Host Service offering, a “Listing”). You must register an account to access and use many features of the EZV Platform, and must keep your account information accurate. As the provider of the EZV Platform, EZV does not own, control, offer or manage any Listings or Host Services. EZV is not a party to the contracts entered into directly between Hosts and Guests, nor is EZV a real estate broker, travel agency, or insurer. EZV is not acting as an agent in any capacity for any Member, except as specified in the Payments Terms of Service (“Payment Terms”). To learn more about EZV’s role see Section 16.</p>
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">We maintain other terms and policies that supplement these Terms like our Privacy Policy, which describes our collection and use of personal data, and our Payments Terms, which govern any payment services provided to Members by the EZV payment entities (collectively "EZV Payments").</p>
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">If you are a Host, you are responsible for understanding and complying with all laws, rules, regulations and contracts with third parties that apply to your Host Services.</p>
+        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
     </div>
     </section>
     {{-- modal laguage and currency --}}

@@ -3086,8 +3086,8 @@ video {
 }
 
 .modal-map-image-container{
-    overflow: hidden; 
-    height: 260px; 
+    overflow: hidden;
+    height: 260px;
     border-radius: 15px;
 }
 
@@ -3257,6 +3257,12 @@ span.flatpickr-weekday {
     overflow-x: hidden !important;
 }
 
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
+    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon {
+        right: 20px !important;
+    }
+}
 @media only screen and (max-width: 345px) {
     .name-content-mobile #name-content-mobile {
         font-size: 20px !important;
@@ -3268,33 +3274,16 @@ span.flatpickr-weekday {
         right: 4px !important;
     }
 }
-@media only screen and (max-width: 374px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 100% !important;
-    }
-}
-@media only screen and (min-width: 375px) and (max-width: 499px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 50% !important;
-    }
-}
-@media only screen and (min-width: 500px) and (max-width: 991px) {
-    #edit_position_photo .modal-body #sortable-photo li {
-        width: 33.33% !important;
-    }
-}
 @media only screen and (max-width: 991px) {
-    #edit_position_photo .modal-body {
-        padding-left: 3rem !important;
-        padding-right: 3rem !important;
-    }
-
     .roomnumber-filter-container, .editnumberoption-checkbox-alias {
         padding: 0 !important;
     }
 
     .editnumberoption_container {
         gap: 2px;
+    }
+    #edit_position_photo .modal-body #sortable-photo li {
+        width: 33.33% !important;
     }
 }
 @media only screen and (min-width: 346px) and (max-width: 767px) {
@@ -3336,6 +3325,9 @@ span.flatpickr-weekday {
     }
 }
 @media only screen and (max-width: 767px) {
+    #sortable-photo li img {
+        border-radius: 0px !important;
+    }
     /* make short-desc max lines 2 */
     .top-profile .short-desc {
         min-height: 50px !important;
@@ -3617,7 +3609,7 @@ span.flatpickr-weekday {
     .navigationItem span:hover {
         color: #000;
         }
-    
+
 }
 
 @media only screen and (max-width: 575px) {
@@ -4204,7 +4196,7 @@ span.flatpickr-weekday {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
     z-index: 10;
 }
 
@@ -4244,15 +4236,15 @@ span.flatpickr-weekday {
 }
 
 .close-button{
-    position: fixed; 
+    position: fixed;
     top: 9px;
     width: 35px;
     height: 35px;
     border-radius: 50px;
     margin-left: 2%;
-    margin-top: 2%; 
-    left: auto; 
-    right: auto; 
+    margin-top: 2%;
+    left: auto;
+    right: auto;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -80,6 +80,12 @@
         .brd-radius {
             border-radius: 10px;
         }
+
+        .stars label {
+            background-color: #ffffff;
+            color: #bbb;
+            margin-left: 0 !important;
+        }
     </style>
 </head>
 
@@ -177,19 +183,22 @@
                             </a>
                         </div>
                         <div class="d-flex align-items-center mb-2">
-                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
 
-                            @if (session()->has('currency'))
-                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @if (session()->has('currency'))
+                                    <p class="mb-0 ms-2" style="color: #585656">Change Currency
+                                        ({{ session('currency') }})
+                                    </p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                            @else
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @else
+                                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                            @endif
+                                @endif
 
-                        </a>
+                            </a>
                         </div>
 
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
@@ -239,19 +248,21 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
 
-                        @if (session()->has('currency'))
-                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                            @endif
 
-                    </a>
+                        </a>
                     </div>
                 @endauth
             </div>
@@ -399,8 +410,6 @@
                                 <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
                             @else
-                                <img id="imageProfileHotel" class="lozad" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                             @endif
 
                             @auth
@@ -415,8 +424,7 @@
                                             onclick="delete_profile_image({'id': '{{ $hotel[0]->id_hotel }}'})">
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom"
-                                                title="{{ __('user_page.Delete') }}"></i></a>
+                                                data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a>
                                         {{-- <a href="{{ route('villa_delete_image', $hotel[0]->id_hotel) }}"><i class="fa fa-trash"
                                 style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true"
                                 data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a> --}}
@@ -425,7 +433,7 @@
                             @endauth
                             <div class="property-type">
                                 <p id="property-type-content">
-                                    {{ __('user_page.Property Type :') }}
+                                    Tags
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;<a type="button" onclick="editCategoryHotel()"
@@ -434,54 +442,44 @@
                                     @endauth
                                 </p>
                                 <div id="displayCategory">
-                                @foreach ($hotelHasCategory->take(3) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">
-                                        {{ $item->hotelCategory->name }}
-                                    </span>
-                                @endforeach
+                                    @foreach ($hotelHasCategory->take(3) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">
+                                            {{ $item->hotelCategory->name }}
+                                        </span>
+                                    @endforeach
                                 </div>
                                 @if ($hotelHasCategory->count() > 3)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
-                                {{-- <p>
-                                    @auth
-                                        @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            <div id="property-type-form" style="display:none;">
-                                                <form action="{{ route('villa_update_property_type') }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}" required>
-                                                    <select name="id_property_type" id="property-type-form-input"
-                                                        required>
-                                                        <option value="">select property type</option>
-                                                        @forelse ($propertyType as $type)
-                                                            @php
-                                                                $isSelected = '';
-                                                                if ($type->id_property_type == $hotel[0]->id_property_type) {
-                                                                    $isSelected = 'selected';
-                                                                }
-                                                            @endphp
-                                                            <option value="{{ $type->id_property_type }}"
-                                                                {{ $isSelected }}>
-                                                                {{ $type->name }}</option>
-                                                        @empty
-                                                        @endforelse
-                                                    </select>
-                                                    <button type="submit" class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                                    </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                                        onclick="editPropertyTypeCancel()">
-                                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        @endif
-                                    @endauth
-                                </p> --}}
+                            </div>
+                            <div class="cm-star-rating stars">
+                                <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
+                                <label for="hotel-star-5"
+                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-4" type="radio" name="starHotel" value="4" required />
+                                <label for="hotel-star-4"
+                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-3" type="radio" name="starHotel" value="3" required />
+                                <label for="hotel-star-3"
+                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-2" type="radio" name="starHotel" value="2" required />
+                                <label for="hotel-star-2"
+                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-1" type="radio" name="starHotel" value="1" required />
+                                <label for="hotel-star-1"
+                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
                             </div>
                             <div class="distance">
                                 <p class="location-font-size"><a onclick="view_map('{{ $hotel[0]->id_hotel }}')"
@@ -520,18 +518,18 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required> --}}
-                                        <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30" rows="3" maxlength="255"
-                                            placeholder="{{ __('user_page.Hotel Name Here') }}" required>{{ $hotel[0]->name }}</textarea>
-                                        <small id="err-name" style="display: none;"
+                                    <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
+                                        rows="3" maxlength="255" placeholder="{{ __('user_page.Hotel Name Here') }}" required>{{ $hotel[0]->name }}</textarea>
+                                    <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName" onclick="editNameHotel({{ $hotel[0]->id_hotel }})"
-                                            style="background-color: #ff7400">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editNameCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
+                                        onclick="editNameHotel({{ $hotel[0]->id_hotel }})"
+                                        style="background-color: #ff7400">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                     {{-- </form> --}}
                                 </div>
                             @endif
@@ -653,17 +651,19 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required> --}}
-                                        <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
-                                            placeholder="{{ __('user_page.Make your short description here') }}" rows="3" maxlength="255">{{ $hotel[0]->short_description }}</textarea>
-                                        <small id="err-shrt-desc" style="display: none;"
+                                    <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
+                                        cols="30" placeholder="{{ __('user_page.Make your short description here') }}" rows="3"
+                                        maxlength="255">{{ $hotel[0]->short_description }}</textarea>
+                                    <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                        onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editShortDescriptionCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                     {{-- </form> --}}
                                 </div>
                             @endif
@@ -676,17 +676,18 @@
                                         @csrf
                                         <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                             required> --}}
-                                        <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30" rows="3" maxlength="255"
-                                            placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
-                                        <small id="err-shrt-desc" style="display: none;"
+                                    <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30"
+                                        rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
+                                    <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc" onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
-                                            <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
+                                        onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
+                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-sm btn-secondary"
+                                        onclick="editShortDescriptionCancel()">
+                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                    </button>
                                     {{-- </form> --}}
                                 </div>
                             @endif
@@ -934,8 +935,7 @@
                                                     <div class="img-wrap" style="width: 70px; height: 70px;">
                                                         <div class="video-position"
                                                             style="width: 70px; height: 70px;">
-                                                            <a type="button"
-                                                                onclick="view({{ $item->id_video }});"
+                                                            <a type="button" onclick="view({{ $item->id_video }});"
                                                                 style="height: 70px; width: 70px;">
                                                                 <div class="story-video-player"><i
                                                                         class="fa fa-play"></i>
@@ -1063,9 +1063,8 @@
                                                             class="fa fa-pencil"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        type="button" onclick="position_photo()"><i
-                                                            class="fa fa-arrows"></i></button>
+                                                        title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
@@ -1138,7 +1137,8 @@
                                     <input type="hidden" value="{{ $hotel[0]->id_hotel }}" id="id_hotel"
                                         name="id_hotel">
                                 </form>
-                                <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
+                                <small id="err-dz" style="display: none;"
+                                    class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
                                 <button type="submit" id="button"
                                     class="btn btn-primary">{{ __('user_page.Upload') }}</button>
                             </section>
@@ -1159,12 +1159,12 @@
                             </h2>
                             <div class="d-flex justify-content-left">
                                 <div id="displayTags">
-                                @forelse ($hotelTags->take(5) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">{{ $item->hotelFilter->name }}</span>
-                                @empty
-                                    <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
-                                @endforelse
+                                    @forelse ($hotelTags->take(5) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">{{ $item->hotelFilter->name }}</span>
+                                    @empty
+                                        <p class="text-secondary">{{ __('user_page.there is no tag yet') }}</p>
+                                    @endforelse
                                 </div>
                                 @if ($hotelTags->count() > 5)
                                     <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
@@ -1196,22 +1196,22 @@
                                             @csrf
                                             <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
                                                 required> --}}
-                                            <div class="form-group">
-                                                <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5"
-                                                    placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->description }}</textarea>
-                                                <small id="err-desc" style="display: none;"
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="description" id="description-form-input" class="w-100" rows="5"
+                                                placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->description }}</textarea>
+                                            <small id="err-desc" style="display: none;"
                                                 class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
                                                 onclick="editDescriptionHotel({{ $hotel[0]->id_hotel }})">
-                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                                </button>
-                                                <button type="reset" class="btn btn-sm btn-secondary"
-                                                    onclick="editDescriptionCancel()">
-                                                    <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                                </button>
-                                            </div>
+                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                            </button>
+                                            <button type="reset" class="btn btn-sm btn-secondary"
+                                                onclick="editDescriptionCancel()">
+                                                <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
+                                            </button>
+                                        </div>
                                         {{-- </form> --}}
                                     </div>
                                 @endif
@@ -1652,7 +1652,7 @@
 
             <section id="room" class="section">
                 <div class="row room">
-                <hr>
+                    <hr>
                     <h2>{{ __('user_page.Rooms') }}
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1803,8 +1803,7 @@
                                         </p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px"
                                             viewBox="0 0 40 28" style="fill: #222222;">
-                                            <g id="Group_2" data-name="Group 2"
-                                                transform="translate(-66 524)">
+                                            <g id="Group_2" data-name="Group 2" transform="translate(-66 524)">
                                                 <path id="bed_FILL1_wght400_GRAD0_opsz48"
                                                     d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z"
                                                     transform="translate(62 -534)" />
@@ -1816,8 +1815,7 @@
                                         </p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px"
                                             viewBox="0 0 82 28.001" style="fill: #222222;">
-                                            <g id="Group_4" data-name="Group 4"
-                                                transform="translate(-61 525)">
+                                            <g id="Group_4" data-name="Group 4" transform="translate(-61 525)">
                                                 <path id="Subtraction_1" data-name="Subtraction 1"
                                                     d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z"
                                                     transform="translate(61 -525)" />
@@ -1828,21 +1826,16 @@
                                         </svg>
                                     @endif
                                 </div>
-                                <div class="col-6 col-md-2 text-center tab-body price-room"
-                                    style="cursor: pointer;"
-                                    onclick="view_room()">
+                                <div class="col-6 col-md-2 text-center tab-body price-room" style="cursor: pointer;"
+                                    onclick="view_room({{ $item->id_hotel_room }})">
                                     <div class="price-tag">
                                         <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
                                         <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}</h6>
                                     </div>
                                     <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
-                                    <br>
-                                    <a class="btn btn-outline-dark table-room-button" onclick="view_room()">Select Room</a>
+                                    <br><a class="btn btn-outline-dark table-room-button"
+                                        onclick="view_room({{ $item->id_hotel_room }})">Select Room</a>
                                     {{-- @php
-                                        $countBooking = "";
-                                        $sisaRoom = "";
-                                        foreach ($hotelRoomBooking as $booking)
-                                        {
                                             if($booking->id_hotel_room == $item->id_hotel_room)
                                             {
                                                 $countBooking = count(array($booking->id_hotel_room));
@@ -1861,7 +1854,8 @@
                                 <div class="col-6 col-md-1 text-center tab-body">
                                     <select name="room-amount" id="room-amount" style="width: 3.5rem;">
                                         <option value="0">0</option>
-                                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR {{ number_format($item->price) }}</option>
+                                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                            {{ number_format($item->price) }}</option>
                                     </select>
                                 </div>
                                 <div class="col-6 col-md-2 text-center tab-body">
@@ -2128,26 +2122,26 @@
                                     </div>
                                 </div>
                             </div>
-                            @else
-                                <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
-                                <div class="col-12 mt-3 d-flex review-container">
-                                    <div class="col-12 col-md-6 d-flex">
-                                        <div class="col-1 icon-review-container">
-                                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                                                aria-hidden="true" role="presentation" focusable="false"
-                                                style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                                <path
-                                                    d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <div class="col-8">
-                                            <p class="review-txt">
-                                                There is no reviews yet
-                                            </p>
-                                        </div>
+                        @else
+                            <h3 style="margin: 0px;">{{ __('user_page.Reviews') }}</h3>
+                            <div class="col-12 mt-3 d-flex review-container">
+                                <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                            aria-hidden="true" role="presentation" focusable="false"
+                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                            <path
+                                                d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    {{-- <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-8">
+                                        <p class="review-txt">
+                                            There is no reviews yet
+                                        </p>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-12 col-md-6 d-flex">
                                         <div class="col-1 icon-review-container">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                 aria-hidden="true" role="presentation" focusable="false"
@@ -2164,8 +2158,8 @@
                                             </p>
                                         </div>
                                     </div> --}}
-                                </div>
-                            @endif
+                            </div>
+                        @endif
                     </div>
                     <hr>
                     @auth
@@ -2279,35 +2273,40 @@
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
                                                                         <input id="food-star-5" type="radio"
-                                                                            name="cleanliness" value="5" required />
+                                                                            name="cleanliness" value="5"
+                                                                            required />
                                                                         <label for="food-star-5"
                                                                             title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="food-star-4" type="radio"
-                                                                            name="cleanliness" value="4" required />
+                                                                            name="cleanliness" value="4"
+                                                                            required />
                                                                         <label for="food-star-4"
                                                                             title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="food-star-3" type="radio"
-                                                                            name="cleanliness" value="3" required />
+                                                                            name="cleanliness" value="3"
+                                                                            required />
                                                                         <label for="food-star-3"
                                                                             title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="food-star-2" type="radio"
-                                                                            name="cleanliness" value="2" required />
+                                                                            name="cleanliness" value="2"
+                                                                            required />
                                                                         <label for="food-star-2"
                                                                             title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="food-star-1" type="radio"
-                                                                            name="cleanliness" value="1" required />
+                                                                            name="cleanliness" value="1"
+                                                                            required />
                                                                         <label for="food-star-1"
                                                                             title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                             <i class="active fa fa-star"
@@ -2521,85 +2520,86 @@
                     @endauth
                 </section>
                 <section id="endSticky" class="section-2">
-                <h3>{{ __('user_page.Things to know') }}</h3>
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-xs-12">
-                        <h6>House Rules</h6>
-                        <p><i class="fas fa-clock"></i> Check-in: After 3:00 PM<br>
-                            <i class="fas fa-smoking-ban"></i> No smoking<br>
-                            <i class="fas fa-ban"></i> No parties or events
-                        </p>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-xs-12">
-                        <h6>Health & Safety</h6>
-                        <p><i class="fas fa-hands-wash"></i> EZ Villas Bali's social-distancing and
-                            other COVID-19-related guidelines apply<br>
-                            <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
-                            <span><a href="#">Show More</a></span><br>
-                            <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a href="#">Show
-                                    More</a></span>
-                        </p>
-                        <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-xs-12">
-                        <h6>Cancellation Policy</h6>
-                        <p>Add your trip dates to get the cancellation details for this stay.</p>
-                        <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
-                    </div>
-                </div>
-                </secion>
-                <hr>
-                <div class="section">
-                    <div>
-                        <div class="row owner-block">
-                            <div class="col-1 host-profile">
-                                @if ($hotel[0]->image)
-                                    <img
-                                        src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
-                                @else
-                                    <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                @endif
-                            </div>
-                            <div class="col-5">
-                                <div class="member-profile">
-                                    <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
-                                    <p>{{ __('user_page.Joined in') }} November 2020</p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 owner-profile">
-                                <h4>Host Profile</h4>
-                                <p>
-                                About
-                                    <span>{{ $infoOwner->about ?? '-' }}</span><br>
-                                Location
-                                    <span>{{ $infoOwner->location ?? '-' }}</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="member-profile-desc">
-                            <p class="host-review"><i class="fa fa-heart" style="color: red;"></i> 141
-                                {{ __('user_page.Reviews') }} | <i class="fa fa-check"
-                                    style="color: green;"></i>
-                                {{ __('user_page.Identity verified') }}
+                    <h3>{{ __('user_page.Things to know') }}</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <h6>House Rules</h6>
+                            <p><i class="fas fa-clock"></i> Check-in: After 3:00 PM<br>
+                                <i class="fas fa-smoking-ban"></i> No smoking<br>
+                                <i class="fas fa-ban"></i> No parties or events
                             </p>
-                            <button type="button" onclick="contactHostForm()"
-                                class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
-                            <div class="row mt-20">
-                                <div class="col-1 payment-warning-icon">
-                                    <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <h6>Health & Safety</h6>
+                            <p><i class="fas fa-hands-wash"></i> EZ Villas Bali's social-distancing and
+                                other COVID-19-related guidelines apply<br>
+                                <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
+                                <span><a href="#">Show More</a></span><br>
+                                <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a
+                                        href="#">Show
+                                        More</a></span>
+                            </p>
+                            <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <h6>Cancellation Policy</h6>
+                            <p>Add your trip dates to get the cancellation details for this stay.</p>
+                            <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
+                        </div>
+                    </div>
+                    </secion>
+                    <hr>
+                    <div class="section">
+                        <div>
+                            <div class="row owner-block">
+                                <div class="col-1 host-profile">
+                                    @if ($hotel[0]->image)
+                                        <img
+                                            src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
+                                    @else
+                                        <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                    @endif
                                 </div>
-                                <div class="col-11 payment-warning">
-                                    {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
+                                <div class="col-5">
+                                    <div class="member-profile">
+                                        <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
+                                        <p>{{ __('user_page.Joined in') }} November 2020</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 owner-profile">
+                                    <h4>Host Profile</h4>
+                                    <p>
+                                        About
+                                        <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                        Location
+                                        <span>{{ $infoOwner->location ?? '-' }}</span>
+                                    </p>
                                 </div>
                             </div>
-                            @guest
-                                <hr>
-                                <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
+                            <div class="member-profile-desc">
+                                <p class="host-review"><i class="fa fa-heart" style="color: red;"></i> 141
+                                    {{ __('user_page.Reviews') }} | <i class="fa fa-check"
+                                        style="color: green;"></i>
+                                    {{ __('user_page.Identity verified') }}
+                                </p>
+                                <button type="button" onclick="contactHostForm()"
+                                    class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
+                                <div class="row mt-20">
+                                    <div class="col-1 payment-warning-icon">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="col-11 payment-warning">
+                                        {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
+                                    </div>
+                                </div>
+                                @guest
+                                    <hr>
+                                    <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
 
-                                {{-- EDIT TO SWIPE CAROUSEL --}}
+                                    {{-- EDIT TO SWIPE CAROUSEL --}}
 
 
-                                {{-- <div class="container-xxl mx-auto p-0">
+                                    {{-- <div class="container-xxl mx-auto p-0">
                                 <div class="slick-pop-slider">
                                     <div class="Container1">
                                         <!-- <div class="row col-12 Arrows1"></div> -->
@@ -2790,7 +2790,7 @@
                             </div> --}}
 
 
-                                {{-- <div class="container-xxl mx-auto p-0">
+                                    {{-- <div class="container-xxl mx-auto p-0">
                                 <div class="slick-pop-slider">
                                     <div class="Container2">
                                         <!-- <div class="row col-12 Arrows2"></div> -->
@@ -2932,14 +2932,14 @@
                                 </div>
                             </div> --}}
 
-                            @endguest
-                            @auth
-                                @if (Auth::user()->role_id != 3)
-                                    <hr>
-                                    <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
+                                @endguest
+                                @auth
+                                    @if (Auth::user()->role_id != 3)
+                                        <hr>
+                                        <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
 
-                                    {{-- EDIT TO SWIPE CAROUSEL --}}
-                                    {{-- <div class="container-xxl mx-auto p-0">
+                                        {{-- EDIT TO SWIPE CAROUSEL --}}
+                                        {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container1">
                                             <!-- <div class="row col-12 Arrows1"></div> -->
@@ -3130,7 +3130,7 @@
                                     </div>
                                 </div> --}}
 
-                                    {{-- <div class="container-xxl mx-auto p-0">
+                                        {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container2">
                                             <!-- <div class="row col-12 Arrows2"></div> -->
@@ -3273,11 +3273,11 @@
                                         </div>
                                     </div>
                                 </div> --}}
-                                @endif
-                            @endauth
+                                    @endif
+                                @endauth
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         {{-- END FULL WIDTH ABOVE FOOTER --}}
@@ -3437,7 +3437,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3449,7 +3449,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedroom') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3461,7 +3461,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3473,7 +3473,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3485,7 +3485,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
@@ -4568,27 +4568,6 @@
             formInput.value = '{{ $hotel[0]->description }}';
         }
     </script>
-    <script>
-        function editPropertyTypeForm() {
-            var form = document.getElementById("property-type-form");
-            var content = document.getElementById("property-type-content");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-        }
-
-        function editPropertyTypeCancel() {
-            var form = document.getElementById("property-type-form");
-            var formInput = document.getElementById("property-type-form-input");
-            var content = document.getElementById("property-type-content");
-            form.classList.remove("d-block");
-            content.classList.remove("d-none");
-            $('#property-type-form-input').each(() => {
-                if ($(this).val() == '{{ $hotel[0]->propertyType->id }}') {
-                    $(this).attr("selected", "selected");
-                }
-            });
-        }
-    </script>
     {{-- END UPDATE FORM --}}
     {{-- CONTACT HOST --}}
     <script>
@@ -4625,7 +4604,7 @@
                 // Update selector to match your button
                 $("#button").click(function(e) {
                     e.preventDefault();
-                    if(!myDropzone.files.length) {
+                    if (!myDropzone.files.length) {
                         $(".dz-image-add").css("border", "solid #e04f1a 1px");
                         $('#err-dz').show();
                     } else {
@@ -4761,25 +4740,36 @@
             var $sidebar = $("#sidebar_fix");
             var $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
             var $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
-            var $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
+            var $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
+                "top")) - 15);
             var $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
-            var $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve;
+            var $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $(
+                "#room .table-body").outerHeight() - $roomReserve;
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
-                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
+                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                    '#sidebar_fix .reserve-block').height() + parseInt($(
+                    '#sidebar_fix .reserve-block').css("top")) - 15);
+                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() -
+                    20;
                 $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
                 $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
-                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve.outerHeight();
+                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $(
+                    "#room .table-body").outerHeight() - $roomReserve.outerHeight();
             });
 
             $window.scroll(function() {
-                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - 15);
-                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() - 20;
+                $amenitiesTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                    '#sidebar_fix .reserve-block').height() + parseInt($(
+                    '#sidebar_fix .reserve-block').css("top")) - 15);
+                $roomReserveContainerWidth = $("#room .table-body .tab-body:nth-child(6)").outerWidth() -
+                    20;
                 $roomReserve = $("#room .table-body .tab-body:nth-child(6) .total-container");
                 $roomTableHeaderTop = $("#room").offset().top + $("#room .table-header").outerHeight();
-                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $("#room .table-body").outerHeight() - $roomReserve.outerHeight();
+                $roomTableHeight = $('#room').offset().top + $("#room .table-header").outerHeight() + $(
+                    "#room .table-body").outerHeight() - $roomReserve.outerHeight();
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $amenitiesTop) {
                     $sidebar.addClass("fixed");
                     $sidebar.css({
@@ -4793,7 +4783,8 @@
                     $sidebar.removeClass("fixed");
                 }
 
-                if ($window.scrollTop() >= 0 && $window.scrollTop() >= $roomTableHeaderTop && $window.scrollTop() < $roomTableHeight - $roomReserve.outerHeight()) {
+                if ($window.scrollTop() >= 0 && $window.scrollTop() >= $roomTableHeaderTop && $window
+                    .scrollTop() < $roomTableHeight - $roomReserve.outerHeight()) {
                     $roomReserve.css({
                         position: "fixed",
                         top: "120px",
@@ -4802,7 +4793,9 @@
                 } else if ($window.scrollTop() > $roomTableHeight - 15) {
                     $roomReserve.css({
                         position: "absolute",
-                        top: $("#room .table-body").outerHeight() - $("#room .table-body .tab-body:nth-child(6) .total-container").outerHeight() - 15
+                        top: $("#room .table-body").outerHeight() - $(
+                                "#room .table-body .tab-body:nth-child(6) .total-container")
+                            .outerHeight() - 15
                     })
                 } else if ($window.scrollTop() < $roomTableHeaderTop) {
                     $roomReserve.css({
@@ -5274,6 +5267,7 @@
             $('#trigger-tab-currency').removeClass('active');
             $('#content-tab-currency').removeClass('active');
         }
+
         function currency() {
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').removeClass('active');
