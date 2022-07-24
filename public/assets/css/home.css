@@ -358,7 +358,9 @@ body {
 .footer-2-4 .info-footer {
     padding: 0 1rem 3rem;
 }
-
+#sidebar-host:hover {
+    color: #585656 !important;
+}
 #overlay {
     position: fixed;
     display: none;

@@ -175,7 +175,7 @@
                     </button>
                 </div>
                 <hr>
-                <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
+                <a id="sidebar-host" href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
                     style="color: #585656; width: fit-content;" target="_blank">
                     {{ __('user_page.Become a host') }}
                 </a>
