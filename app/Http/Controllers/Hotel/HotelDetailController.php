@@ -322,7 +322,7 @@ class HotelDetailController extends Controller
     public function hotel($id)
     {
         $hotel = Hotel::with('hotel_room', 'location')->where('id_hotel', $id)->where('status', 1)->get();
-
+        // dd($hotel);
         // check if the editor does not have authorization
         if (auth()->check()) {
             $find = Hotel::find($id);
@@ -1228,7 +1228,6 @@ class HotelDetailController extends Controller
                 // 'getSafety' => $getSafety,
                 // 'getService' => $getService
             ]);
-
         } else {
             // return back()
             //     ->with('error', 'Please check the form below for errors');
@@ -1242,8 +1241,7 @@ class HotelDetailController extends Controller
     public function hotel_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1357,9 +1355,9 @@ class HotelDetailController extends Controller
             // return back()
             //     ->with('error', 'Please check the form below for errors');
             return response()->json([
-            'message' => 'Fail create room',
-            'status' => 500,
-        ], 200);
+                'message' => 'Fail create room',
+                'status' => 500,
+            ], 200);
         }
     }
 

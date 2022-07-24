@@ -59,7 +59,7 @@ function saveShortDescription() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editShortDescriptionCancel();
@@ -83,7 +83,7 @@ function saveShortDescription() {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editShortDescriptionCancel();
@@ -165,7 +165,7 @@ function saveDescription() {
                     $("#btnShowMoreDescription").remove();
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editDescriptionCancel();
@@ -191,7 +191,7 @@ function saveDescription() {
 
                 editDescriptionCancel();
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
         });
@@ -247,7 +247,7 @@ function saveNameActivity() {
                     position: "topRight",
                 });
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editNameCancel();
@@ -269,7 +269,7 @@ function saveNameActivity() {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editNameCancel();
@@ -540,7 +540,7 @@ function saveTimeActivity() {
             editTimeFormCancel();
             editTimeFormMobileCancel();
 
-            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
         error: function (jqXHR, exception) {
@@ -565,7 +565,7 @@ function saveTimeActivity() {
             editTimeFormCancel();
             editTimeFormMobileCancel();
 
-            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
     });
@@ -613,7 +613,7 @@ function saveTimeActivityMobile() {
             editTimeFormCancel();
             editTimeFormMobileCancel();
 
-            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
         error: function (jqXHR, exception) {
@@ -638,7 +638,7 @@ function saveTimeActivityMobile() {
             editTimeFormCancel();
             editTimeFormMobileCancel();
 
-            $(btn).html("<i class='fa fa-check'></i> Done");
+            $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
     });
@@ -747,7 +747,7 @@ function savePriceActivity() {
                 });
             }
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Done";
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
     });
@@ -1015,7 +1015,7 @@ function saveContactActivity() {
 
                 $("#modal-edit_contact").modal("hide");
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
         });
@@ -1280,7 +1280,7 @@ function saveLocation() {
                 position: "topRight",
             });
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
             $("#modal-edit_location").modal("hide");
@@ -1306,7 +1306,7 @@ function saveLocation() {
                 });
             }
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
             $("#modal-edit_location").modal("hide");

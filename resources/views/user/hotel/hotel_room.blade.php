@@ -242,62 +242,13 @@
                                             onclick="delete_profile_image({'id': '{{ $hotelRoom->id_hotel_room }}'})">
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                                 data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom"
-                                                title="{{ __('user_page.Delete') }}"></i></a>
+                                                data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a>
                                         {{-- <a href="{{ route('villa_delete_image', $hotel[0]->id_hotel) }}"><i class="fa fa-trash"
                                 style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true"
                                 data-bs-placement="bottom" title="{{ __('user_page.Delete') }}"></i></a> --}}
                                     @endif
                                 @endif
                             @endauth
-                            <div>
-                                <p id="property-type-content">
-                                    {{ $hotel[0]->propertyType->name }}
-                                    @auth
-                                        @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            &nbsp;<a type="button" onclick="editPropertyTypeForm()"
-                                                style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
-                                        @endif
-                                    @endauth
-                                </p>
-                                <p>
-                                    @auth
-                                        @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            <div id="property-type-form" style="display:none;">
-                                                <form action="{{ route('villa_update_property_type') }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}" required>
-                                                    <select name="id_property_type" id="property-type-form-input"
-                                                        required>
-                                                        <option value="">select property type</option>
-                                                        @forelse ($propertyType as $type)
-                                                            @php
-                                                                $isSelected = '';
-                                                                if ($type->id_property_type == $hotel[0]->id_property_type) {
-                                                                    $isSelected = 'selected';
-                                                                }
-                                                            @endphp
-                                                            <option value="{{ $type->id_property_type }}"
-                                                                {{ $isSelected }}>
-                                                                {{ $type->name }}</option>
-                                                        @empty
-                                                        @endforelse
-                                                    </select>
-                                                    <button type="submit" class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                                    </button>
-                                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                                        onclick="editPropertyTypeCancel()">
-                                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        @endif
-                                    @endauth
-                                </p>
-                            </div>
                             <div>
                                 <p class="location-font-size"><a onclick="view_map('{{ $hotel[0]->id_hotel }}')"
                                         href="javascript:void(0);"><i class="fa fa-map-marker-alt"></i>
@@ -324,8 +275,7 @@
                                         @csrf --}}
                                     <input type="hidden" id="name-hotel" value="{{ $hotel[0]->name }}">
                                     <textarea class="form-control" style="width: 100%; overflow: hidden;" name="name" id="name-form-input"
-                                        cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}"
-                                        required>{{ $hotelRoom->name }}</textarea>
+                                        cols="30" rows="3" maxlength="55" placeholder="{{ __('user_page.Hotel Room Name Here') }}" required>{{ $hotelRoom->name }}</textarea>
                                     <small id="err-name" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
@@ -369,8 +319,8 @@
                                 <div id="short-description-form" style="display:none;">
                                     {{-- <form action="{{ route('room_update_short_description') }}" method="post">
                                         @csrf --}}
-                                    <input type="hidden" name="id_hotel_room"
-                                        value="{{ $hotelRoom->id_hotel_room }}" required>
+                                    <input type="hidden" name="id_hotel_room" value="{{ $hotelRoom->id_hotel_room }}"
+                                        required>
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" placeholder="{{ __('user_page.Make your short description here') }}" rows="3"
                                         maxlength="255">{{ $hotelRoom->short_description }}</textarea>
@@ -648,8 +598,7 @@
                                                     <div class="img-wrap" style="width: 70px; height: 70px;">
                                                         <div class="video-position"
                                                             style="width: 70px; height: 70px;">
-                                                            <a type="button"
-                                                                onclick="view({{ $item->id_video }});"
+                                                            <a type="button" onclick="view({{ $item->id_video }});"
                                                                 style="height: 70px; width: 70px;">
                                                                 <div class="story-video-player"><i
                                                                         class="fa fa-play"></i>
@@ -758,9 +707,8 @@
                                                             class="fa fa-pencil"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        type="button" onclick="position_photo()"><i
-                                                            class="fa fa-arrows"></i></button>
+                                                        title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
@@ -1375,8 +1323,7 @@
             {{-- RESERVE BUTTON TOP RIGHT --}}
             <div class="rsv">
                 {{ CurrencyConversion::exchangeWithUnit($hotelRoom->price) }}/{{ __('user_page.night') }}
-                <a onclick="reserve2()" type="button"
-                    class="rsv-btn-button">{{ __('user_page.RESERVE NOW') }}</a>
+                <a onclick="reserve2()" type="button" class="rsv-btn-button">{{ __('user_page.RESERVE NOW') }}</a>
             </div>
             {{-- END RESERVE BUTTON TOP RIGHT --}}
         </div>
@@ -1452,8 +1399,7 @@
                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             @if (Auth::user()->avatar)
-                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
-                                    alt="">
+                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail" alt="">
                             @else
                                 <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
                                     class="logged-user-photo-detail" alt="">
@@ -2716,11 +2662,6 @@
                 fMinPriceFormInput.push(parseInt($(this).val()));
             });
 
-            var fPropertyFormInput = [];
-            $("input[name='fProperty[]']:checked").each(function() {
-                fPropertyFormInput.push(parseInt($(this).val()));
-            });
-
             var fBedroomFormInput = [];
             $("input[name='fBedroom[]']").each(function() {
                 fBedroomFormInput.push(parseInt($(this).val()));
@@ -2757,7 +2698,7 @@
             var sChildFormInput = $("input[name='sChild']").val();
 
             var subUrl =
-                `fMaxPrice=${fMaxPriceFormInput}&fMinPrice=${fMinPriceFormInput}&fProperty=${fPropertyFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fFacilities=${fFacilitiesFormInput}&fSuitable=${fSuitableFormInput}&sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}`;
+                `fMaxPrice=${fMaxPriceFormInput}&fMinPrice=${fMinPriceFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fFacilities=${fFacilitiesFormInput}&fSuitable=${fSuitableFormInput}&sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}`;
             villaRefreshFilter(subUrl);
         }
     </script>
@@ -3124,27 +3065,6 @@
             content.classList.remove("d-none");
             btn.classList.remove("d-none");
             formInput.value = '{{ $hotelRoom->description }}';
-        }
-    </script>
-    <script>
-        function editPropertyTypeForm() {
-            var form = document.getElementById("property-type-form");
-            var content = document.getElementById("property-type-content");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-        }
-
-        function editPropertyTypeCancel() {
-            var form = document.getElementById("property-type-form");
-            var formInput = document.getElementById("property-type-form-input");
-            var content = document.getElementById("property-type-content");
-            form.classList.remove("d-block");
-            content.classList.remove("d-none");
-            $('#property-type-form-input').each(() => {
-                if ($(this).val() == '{{ $hotel[0]->propertyType->id }}') {
-                    $(this).attr("selected", "selected");
-                }
-            });
         }
     </script>
     {{-- END UPDATE FORM --}}
@@ -3752,20 +3672,21 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
-            function language() {
-                $('#LegalModal').modal('show');
-                $('#trigger-tab-language').addClass('active');
-                $('#content-tab-language').addClass('active');
-                $('#trigger-tab-currency').removeClass('active');
-                $('#content-tab-currency').removeClass('active');
-            }
-            function currency() {
-                $('#LegalModal').modal('show');
-                $('#trigger-tab-language').removeClass('active');
-                $('#content-tab-language').removeClass('active');
-                $('#trigger-tab-currency').addClass('active');
-                $('#content-tab-currency').addClass('active');
-            }
+        function language() {
+            $('#LegalModal').modal('show');
+            $('#trigger-tab-language').addClass('active');
+            $('#content-tab-language').addClass('active');
+            $('#trigger-tab-currency').removeClass('active');
+            $('#content-tab-currency').removeClass('active');
+        }
+
+        function currency() {
+            $('#LegalModal').modal('show');
+            $('#trigger-tab-language').removeClass('active');
+            $('#content-tab-language').removeClass('active');
+            $('#trigger-tab-currency').addClass('active');
+            $('#content-tab-currency').addClass('active');
+        }
     </script>
 
 

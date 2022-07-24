@@ -381,23 +381,78 @@ class CollaboratorController extends Controller
     // update social media
     public function collab_update_social_media(Request $request)
     {
-        CollaboratorSocialMedia::where('id_collab', $request->id_collab)->delete();
-        CollaboratorSocialMedia::create(
-            [
-                'id_collab' => $request->id_collab,
-                'instagram_link' => $request->instagram_link,
-                'instagram_follower' => $request->instagram_follower,
-                'facebook_link' => $request->facebook_link,
-                'facebook_follower' => $request->facebook_follower,
-                'twitter_link' => $request->twitter_link,
-                'twitter_follower' => $request->twitter_follower,
-                'tiktok_link' => $request->tiktok_link,
-                'tiktok_follower' => $request->tiktok_follower,
-                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
-            ]
-        );
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
 
-        return back()->with('success', 'Your data has been updated');
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['nullable', 'integer'],
+            'instagram_link' => ['nullable', 'string'],
+            'instagram_follower' => ['nullable', 'integer'],
+            'facebook_link' => ['nullable', 'string'],
+            'facebook_follower' => ['nullable', 'integer'],
+            'twitter_link' => ['nullable', 'string'],
+            'twitter_follower' => ['nullable', 'integer'],
+            'tiktok_link' => ['nullable', 'string'],
+            'tiktok_follower' => ['nullable', 'integer'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // collab data
+        $collab = Collaborator::where('id_collab', $request->id_collab)->first();
+
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        // $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // update
+        $updatedCollab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first()->update([
+            'id_collab' => $request->id_collab,
+            'instagram_link' => $request->instagram_link,
+            'instagram_follower' => $request->instagram_follower,
+            'facebook_link' => $request->facebook_link,
+            'facebook_follower' => $request->facebook_follower,
+            'twitter_link' => $request->twitter_link,
+            'twitter_follower' => $request->twitter_follower,
+            'tiktok_link' => $request->tiktok_link,
+            'tiktok_follower' => $request->tiktok_follower,
+            'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+        ]);
+
+        $collab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
+
+        // check if update is success or not
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Social Media',
+                'data' => $collab
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Error Updated Social Media',
+            ], 500);
+        }
     }
     // end update social media
 

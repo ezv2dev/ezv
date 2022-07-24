@@ -178,7 +178,7 @@
                         <img style="height: 53vh;" class="img-fluid p-4"
                             src="{{ asset('assets/partner/template/assets/img/freepik/filter_data_unavailable.svg') }}"
                             alt="" />
-                        <p class="lead">Hotel data not available</p>
+                        <p class="lead" style="font-weight: 700; color: #ff7400;">Hotel data not available</p>
                     </div>
                 </div>
             </div>
@@ -320,10 +320,17 @@
                                     {{ $data->airport }}
                                 </a>
                             </div>
-                            <div class="text-13 text-md-end">
-                                <span>4 Stars</span>
-                                <i class="fa-solid fa-star" style="color: #febb02"></i>
-                            </div>
+                            @if ($data->star)
+                                <div class="text-13 text-md-end">
+                                    <span>{{ $data->star }} Stars</span>
+                                    <i class="fa-solid fa-star" style="color: #febb02"></i>
+                                </div>
+                                @else
+                                <div class="text-13 text-md-end">
+                                    <span>No stars yet</span>
+                                    <i class="fa-solid fa-star" style="color: #febb02"></i>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
@@ -372,7 +379,13 @@
                                                 1 {{ __('user_page.night') }}
                                             </span>
                                             <span class="fw-400 {{ $textColor }} list-description">
-                                                , 2 adults
+                                                ,
+                                                {{ $data->adult }}
+                                                @if (in_array($data->adult, [0, 1]))
+                                                    adult
+                                                @else
+                                                    adults
+                                                @endif
                                             </span>
                                         </div>
                                         <div class="text-18 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">

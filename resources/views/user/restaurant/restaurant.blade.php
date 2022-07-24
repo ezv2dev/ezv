@@ -328,7 +328,7 @@
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-sm btn-primary"
                                                         id="btnSaveTimeResto" onclick="saveTimeRestaurant();">
-                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
                                                         id="btnCancelTimeResto" onclick="editTimeFormCancel()">
@@ -451,7 +451,7 @@
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-sm btn-primary"
                                                         id="btnSaveRestoTime" onclick="saveRestaurantPrice();">
-                                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                     </button>
                                                     <button type="reset" class="btn btn-sm btn-secondary"
                                                         id="btnCancelRestoTime" onclick="editTypeFormCancel()">
@@ -500,7 +500,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveRestaurant"
                                         onclick="saveNameRestaurant();" style="background-color: #ff7400">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
@@ -569,7 +569,7 @@
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
                                                     onclick="saveTimeRestaurant();">
-                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                    <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
                                                     onclick="editTimeFormMobileCancel()">
@@ -634,7 +634,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="saveShortDescription();">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary"
                                         onclick="editShortDescriptionCancel()">
@@ -752,7 +752,7 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary"
                                                 onclick="saveRestaurantPriceMobile();">
-                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
                                             <button type="reset" class="btn btn-sm btn-secondary"
                                                 onclick="editTypeFormMobileCancel()">
@@ -1377,7 +1377,7 @@
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary"
                                                     id="btnSaveDescription" onclick="saveDescription();">
-                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                    <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
                                                     onclick="editDescriptionCancel()">
@@ -2141,7 +2141,7 @@
                                                         </div>
                                                         <center>
                                                             <button type="submit" class="btn btn-block btn-sm btn-primary"
-                                                                style="width: 200px">{{ __('user_page.Done') }}</button>
+                                                                style="width: 200px">{{ __('user_page.Save') }}</button>
                                                         </center>
                                                     </div>
                                                 </div>

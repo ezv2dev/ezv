@@ -94,7 +94,7 @@ class RoomDetailController extends Controller
         return $service;
     }
 
-    public function room_hotel($id)
+    public function room_hotel_original($id)
     {
         // check if hotel exist
         $get_id_hotel = HotelTypeDetail::where('id_hotel_room', $id)->select('id_hotel')->first();
@@ -239,7 +239,67 @@ class RoomDetailController extends Controller
         // if (DeviceCheckService::isDesktop()) {
         //     return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
         // }
-        return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
+        // return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
+    }
+
+    public function room_hotel($id)
+    {
+        // check if hotel exist
+        $detail_room = HotelTypeDetail::where('id_hotel_room', $id)->select('hotel_type_detail.*', 'hotel_type.name as type_room', 'bed.name as bed_type')
+                        ->join('hotel_type', 'hotel_type_detail.id_hotel_type', '=', 'hotel_type.id_hotel_type', 'left')
+                        ->join('bed', 'hotel_type_detail.id_bed', '=', 'bed.id_bed', 'left')
+                        ->first();
+        // dd($detail_room);
+
+        return $detail_room;
+
+        // $id_hotel = $detail_room->id_hotel;
+
+        // $hotel = Hotel::find($id_hotel);
+
+        // abort_if(!$hotel, 404);
+
+        // $hotel = Hotel::select('hotel.*', 'location.name as location')
+        //     ->join('location', 'hotel.id_location', '=', 'location.id_location', 'left')->where('id_hotel', $id_hotel)->get();
+
+        // $photo = HotelRoomPhoto::where('id_hotel_room', $id)->orderBy('order', 'asc')->get();
+        // $video = HotelRoomVideo::where('id_hotel_room', $id)->orderBy('order', 'asc')->get();
+        // $amenities = HotelAmenities::select('hotel_amenities.id_hotel', 'amenities.icon as icon', 'amenities.name as name')
+        //     ->join('amenities', 'hotel_amenities.id_amenities', '=', 'amenities.id_amenities', 'left')
+        //     ->where('hotel_amenities.id_hotel', $id_hotel)->limit(5)->get();
+        // $ratting = HotelDetailReview::where('id_hotel', $id_hotel)->get();
+        // $stories = HotelRoomStory::where('id_hotel_room', $id)->orderBy('created_at', 'desc')->get();
+        // $location = Location::get();
+        // $propertyType = PropertyTypeVilla::all();
+        // $amenities_m = Amenities::get();
+        // $bathroom_m = BathRoom::get();
+        // $bedroom_m = BedRoom::get();
+        // $kitchen_m = Kitchen::get();
+        // $safety_m = Safety::get();
+        // $service_m = Service::get();
+        // $hotel_amenities = HotelTypeDetailAmenities::with('amenities')->where('id_hotel_room', $id)->get();
+        // $beds = Bed::get();
+        // $bathroom = HotelRoomBathroom::with('bathroom')->where('id_hotel_room', $id)->get();
+        // $bedroom = HotelRoomBedroom::with('bedroom')->where('id_hotel_room', $id)->get();
+        // $kitchen = HotelRoomKitchen::with('kitchen')->where('id_hotel_room', $id)->get();
+        // $safety = HotelRoomSafety::with('safety')->where('id_hotel_room', $id)->get();
+        // $service = HotelRoomService::with('service')->where('id_hotel_room', $id)->get();
+        // $detail = HotelDetailReview::where('id_hotel', $id_hotel)->get();
+        // $createdby = Hotel::where('id_hotel', $id_hotel)
+        //     ->join('users', 'hotel.created_by', '=', 'users.id')
+        //     ->select('users.first_name')
+        //     ->get();
+        // $hotel_location = Location::join('hotel', 'location.id_location', '=', 'hotel.id_location')
+        //     ->where('hotel.id_hotel', $id_hotel)
+        //     ->select('location.id_location')
+        //     ->get();
+        // $hotels = HotelTypeDetail::where('id_hotel_room', $id)->first();
+        // $get_hotel = Hotel::where('id_hotel', $hotels->id_hotel)->first();
+        // $point = array('lat' => $get_hotel->latitude, 'long' => $get_hotel->longitude, 'id_location' => $get_hotel->id_location);
+
+        // $hotelRoom = HotelTypeDetail::with('bed', 'hotel', 'hotelType', 'typeAmenities')->where('id_hotel_room', $id)->first();
+
+        // return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
     }
 
     public function room_update_image(Request $request)

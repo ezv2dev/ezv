@@ -134,6 +134,8 @@ return [
     'Service' => 'Layanan',
     'Edit Bedroom, Bathroom, Adult, & Children' => 'Ubah Kamar Tidur, Kamar Mandi, Dewasa, & Anak',
     'Are you sure?' => 'Apakah Anda yakin?',
+    'Delete Special Price?' => 'Hapus Spesial Harga?',
+    'Delete Date Availability?' => 'Hapus Tanggal Ketersediaan',
     'You will not be able to recover this imaginary file!' => 'Anda tidak akan dapat memulihkan file imajiner ini!',
     'Do you want request a video to the Owner?' => 'Apakah Anda ingin meminta video ke Pemilik?',
     'Requesting a video!' => 'Meminta video!',

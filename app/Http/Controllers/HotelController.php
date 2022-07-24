@@ -45,6 +45,7 @@ class HotelController extends Controller
         $hotelCategory = HotelCategory::all();
         $hotelFilter = HotelFilter::all();
 
+        // ! Airport
         $i = 0;
         $j = 0;
         $near = array();
@@ -78,6 +79,7 @@ class HotelController extends Controller
 
             $i++;
         }
+        // ! End Airport
 
         return view('user.hotel.list_hotel', compact('hotel', 'hotelCategory', 'hotelFilter'));
     }

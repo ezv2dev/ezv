@@ -48,7 +48,7 @@ function editNameVilla() {
                     message: response.message,
                     position: "topRight",
                 });
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
                 editNameCancel();
             },
@@ -69,7 +69,7 @@ function editNameVilla() {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editNameCancel();
@@ -140,7 +140,7 @@ function editShortDesc() {
                     message: response.message,
                     position: "topRight",
                 });
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 shortDescBackup = response.data;
@@ -164,7 +164,7 @@ function editShortDesc() {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editShortDescriptionCancel();
@@ -660,7 +660,7 @@ function editDescriptionVilla(id_villa) {
                     $("#buttonShowMoreDescription").html("");
                     $("#btnShowMoreDescription").remove();
                 }
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 desc_backup = response.data;
@@ -684,7 +684,7 @@ function editDescriptionVilla(id_villa) {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
 
                 editDescriptionCancel();
@@ -775,7 +775,7 @@ $("#updateImageForm").submit(function (e) {
                 });
 
                 readerImageVilla.readAsDataURL(imageProfileVilla);
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
                 $("#modal-edit_villa_profile").modal("hide");
             },
@@ -796,7 +796,7 @@ $("#updateImageForm").submit(function (e) {
                     });
                 }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
                 $("#modal-edit_villa_profile").modal("hide");
             },
@@ -1213,34 +1213,34 @@ var storyVideoPreview = $(".story-upload").children(".story-video-preview");
 
 $("#storyVideo").on("change", function (value) {
     storyVilla = this.files[0];
-    if(document.getElementById("storyVideo").files.length != 0){
-        $('.story-video-form').css("border", "");
-        $('#err-stry-vid').hide();
+    if (document.getElementById("storyVideo").files.length != 0) {
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
     }
 });
 $(document).on("keyup", "#title", function () {
-    $('#title').css("border", "");
-    $('#err-stry-ttl').hide();
+    $("#title").css("border", "");
+    $("#err-stry-ttl").hide();
 });
 $("#updateStoryForm").submit(function (e) {
     let error = 0;
-    if(document.getElementById("storyVideo").files.length == 0){
-        $('.story-video-form').css("border", "solid #e04f1a 1px");
-        $('#err-stry-vid').show();
+    if (document.getElementById("storyVideo").files.length == 0) {
+        $(".story-video-form").css("border", "solid #e04f1a 1px");
+        $("#err-stry-vid").show();
         error = 1;
     } else {
-        $('.story-video-form').css("border", "");
-        $('#err-stry-vid').hide();
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
     }
-    if(!$('#title').val()) {
-        $('#title').css("border", "solid #e04f1a 1px");
-        $('#err-stry-ttl').show();
+    if (!$("#title").val()) {
+        $("#title").css("border", "solid #e04f1a 1px");
+        $("#err-stry-ttl").show();
         error = 1;
     } else {
-        $('#title').css("border", "");
-        $('#err-stry-ttl').hide();
+        $("#title").css("border", "");
+        $("#err-stry-ttl").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
@@ -1263,7 +1263,9 @@ $("#updateStoryForm").submit(function (e) {
             $.ajax({
                 type: "POST",
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                     Accept: "application/json",
                 },
                 url: "/villa/update/story",
@@ -1734,19 +1736,24 @@ function gradeD() {
 // ! End GradeVilla
 
 function saveLocation() {
-    console.log('hit saveLocation');
-    let form = $('#editLocationForm');
+    console.log("hit saveLocation");
+    let form = $("#editLocationForm");
 
     const formData = {
         id_villa: parseInt(form.find(`input[name='id_villa']`).val()),
-        id_location: parseInt(form.find(`select[name=id_location] option`).filter(':selected').val()),
+        id_location: parseInt(
+            form
+                .find(`select[name=id_location] option`)
+                .filter(":selected")
+                .val()
+        ),
         longitude: form.find(`input[name='longitude']`).val(),
-        latitude: form.find(`input[name='latitude']`).val()
+        latitude: form.find(`input[name='latitude']`).val(),
     };
 
     console.log(formData);
 
-    let btn = form.find('#btnSaveLocation');
+    let btn = form.find("#btnSaveLocation");
     btn.text("Saving...");
     btn.addClass("disabled");
 
@@ -1775,10 +1782,10 @@ function saveLocation() {
                 position: "topRight",
             });
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
         // response error
         error: function (jqXHR, exception) {
@@ -1801,10 +1808,10 @@ function saveLocation() {
                 });
             }
             // enabled button
-            btn.html(`<i class='fa fa-check'></i> Done`);
+            btn.html(`<i class='fa fa-check'></i> Save`);
             btn.removeClass("disabled");
             // close modal
-            $('#modal-edit_location').modal('hide');
+            $("#modal-edit_location").modal("hide");
         },
     });
 }

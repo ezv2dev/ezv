@@ -3086,8 +3086,8 @@ video {
 }
 
 .modal-map-image-container{
-    overflow: hidden; 
-    height: 260px; 
+    overflow: hidden;
+    height: 260px;
     border-radius: 15px;
 }
 
@@ -3257,6 +3257,12 @@ span.flatpickr-weekday {
     overflow-x: hidden !important;
 }
 
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
+    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon {
+        right: 20px !important;
+    }
+}
 @media only screen and (max-width: 345px) {
     .name-content-mobile #name-content-mobile {
         font-size: 20px !important;
@@ -3603,7 +3609,7 @@ span.flatpickr-weekday {
     .navigationItem span:hover {
         color: #000;
         }
-    
+
 }
 
 @media only screen and (max-width: 575px) {
@@ -4190,7 +4196,7 @@ span.flatpickr-weekday {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
     z-index: 10;
 }
 
@@ -4230,15 +4236,15 @@ span.flatpickr-weekday {
 }
 
 .close-button{
-    position: fixed; 
+    position: fixed;
     top: 9px;
     width: 35px;
     height: 35px;
     border-radius: 50px;
     margin-left: 2%;
-    margin-top: 2%; 
-    left: auto; 
-    right: auto; 
+    margin-top: 2%;
+    left: auto;
+    right: auto;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -52,17 +52,17 @@
             </p>
                 <ul>
                     <li>
-                        <a class="footer-link footer-link-dark" href="">
+                        <a class="footer-link footer-link-dark" href="{{ route('contact_us') }}">
                             {{ __('user_page.Contact Us') }}
                         </a>
                     </li>
                     <li>
-                        <a class="footer-link footer-link-dark" href="">
+                        <a class="footer-link footer-link-dark" href="{{ route('blog') }}">
                             {{ __('user_page.Blog') }}
                         </a>
                     </li>
                     <li>
-                        <a class="footer-link footer-link-dark" href="">
+                        <a class="footer-link footer-link-dark" href="{{ route('culture') }}">
                             {{ __('user_page.Culture') }}
                         </a>
                     </li>
@@ -74,12 +74,12 @@
             </p>
                 <ul>
                     <li>
-                        <a class="footer-link footer-link-dark" href="">
+                        <a class="footer-link footer-link-dark" href="{{ route('getting_started') }}">
                             {{ __('user_page.Getting Started') }}
                         </a>
                     </li>
                     <li>
-                        <a class="footer-link footer-link-dark" href="">
+                        <a class="footer-link footer-link-dark" href="{{ route('help_center') }}">
                             {{ __('user_page.Help Center') }}
                         </a>
                     </li>
