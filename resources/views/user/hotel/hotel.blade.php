@@ -90,6 +90,10 @@
         .star-active {
             color: #f2b600;
         }
+
+        .star-not-active {
+            color: #bbb;
+        }
     </style>
 </head>
 
@@ -296,7 +300,7 @@
                         @endif
                         @if ($hotel[0]->status == '1')
                             <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active,') }} </span>
+                                <span>{{ __('user_page.this content is active') }}, </span>
                                 <form action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
                                     method="post">
                                     @csrf
@@ -456,7 +460,7 @@
                                 @endphp
                                 @if ($j > 0)
                                     @for ($i = 0; $i < $j; $i++)
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="star-not-active fa fa-star" aria-hidden="true"></i>
                                     @endfor
                                 @endif
                             </div>
@@ -5298,6 +5302,37 @@
         }
 
         function editStar() {
+            iziToast.question({
+                timeout: 20000,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                title: 'Hey',
+                message: 'Select the stars',
+                position: 'center',
+                buttons: [
+                    ['<select><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>',
+                        function(instance, toast) {
+                            // console.log('sattttt');
+                        },
+                        true
+                    ],
+                    ['<button><b>SUBMIT</b></button>', function(instance, toast) {
+
+                        instance.hide({
+                            transitionOut: 'fadeOut'
+                        }, toast, 'button');
+
+                    }],
+                ],
+                onClosing: function(instance, toast, closedBy) {
+                    console.info('Closing | closedBy: ' + closedBy);
+                },
+                onClosed: function(instance, toast, closedBy) {
+                    console.info('Closed | closedBy: ' + closedBy);
+                }
+            });
 
         }
     </script>
