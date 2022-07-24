@@ -672,35 +672,13 @@ $("#modal-add_price")
         console.log("hit data");
     });
 
-function savePriceActivity() {
-    let id_activity = $("#modal-add_price")
-        .find("input[name='id_activity']")
-        .val();
-    let name = $("#modal-add_price").find("input[name='name']").val();
-    let price = $("#modal-add_price").find("input[name='price']").val();
-    let start_date = $("#modal-add_price")
-        .find("input[name='start_date']")
-        .val();
-    let end_date = $("#modal-add_price").find("input[name='end_date']").val();
-    let description = $("#modal-add_price")
-        .find("input[name='description']")
-        .val();
-
-    var formData = new FormData($("#addPriceForm"));
-    console.log(formData);
-
+$("#addPriceForm").submit(function (e) {
+    e.preventDefault();
     let btn = document.getElementById("btnSavePrice");
     btn.textContent = "Saving Price...";
     btn.classList.add("disabled");
 
     var formData = new FormData(this);
-    formData.append("id_activity", id_activity);
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("start_date", start_date);
-    formData.append("end_date", end_date);
-    formData.append("description", description);
-    formData.append("image", priceImageActivity);
 
     $.ajax({
         type: "POST",
@@ -751,7 +729,7 @@ function savePriceActivity() {
             btn.classList.remove("disabled");
         },
     });
-}
+});
 
 function saveFacilities() {
     let facilities = [];

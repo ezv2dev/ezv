@@ -90,6 +90,10 @@
         .star-active {
             color: #f2b600;
         }
+
+        .star-not-active {
+            color: #bbb;
+        }
     </style>
 </head>
 
@@ -296,7 +300,7 @@
                         @endif
                         @if ($hotel[0]->status == '1')
                             <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active,') }} </span>
+                                <span>{{ __('user_page.this content is active') }}, </span>
                                 <form action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
                                     method="post">
                                     @csrf
@@ -456,7 +460,7 @@
                                 @endphp
                                 @if ($j > 0)
                                     @for ($i = 0; $i < $j; $i++)
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="star-not-active fa fa-star" aria-hidden="true"></i>
                                     @endfor
                                 @endif
                             </div>
@@ -1707,8 +1711,7 @@
                                             data-dots="false" data-arrows="true">
                                             @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
                                                 @foreach ($hotelRoomPhoto->where('id_hotel', $item->id_hotel) as $galleryHotelRoom)
-                                                    <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                        target="_blank" class="grid-image-container">
+                                                    <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
                                                         <img class="brd-radius img-fluid grid-image"
                                                             style="height: 200px; display: block;"
                                                             src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $galleryHotelRoom->name) }}"
@@ -1716,16 +1719,14 @@
                                                     </a>
                                                 @endforeach
                                             @elseIf (!empty($item->image))
-                                                <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                    target="_blank" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->image) }}"
                                                         alt="">
                                                 </a>
                                             @else
-                                                <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                    target="_blank" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="https://images.unsplash.com/photo-1609611606051-f22b47a16689?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -1735,7 +1736,7 @@
                                         </div>
                                     </div>
                                     <div class="text-justify" style="cursor: pointer;"
-                                        onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                    onclick="view_room({{ $item->id_hotel_room }})">
                                         <h4>
                                             <p><a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
                                                     target="_blank">{{ $item->name }}</a></p>
@@ -1806,7 +1807,7 @@
                                 </div> --}}
                                 <div class="col-6 col-md-1 text-center tab-body capacity-room"
                                     style="cursor: pointer;"
-                                    onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                    onclick="view_room({{ $item->id_hotel_room }})">
                                     @for ($i = 0; $i < $item->capacity; $i++)
                                         <i class="fas fa-user"></i>
                                     @endfor
@@ -5298,6 +5299,37 @@
         }
 
         function editStar() {
+            iziToast.question({
+                timeout: 20000,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                title: 'Hey',
+                message: 'Select the stars',
+                position: 'center',
+                buttons: [
+                    ['<select><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>',
+                        function(instance, toast) {
+                            // console.log('sattttt');
+                        },
+                        true
+                    ],
+                    ['<button><b>SUBMIT</b></button>', function(instance, toast) {
+
+                        instance.hide({
+                            transitionOut: 'fadeOut'
+                        }, toast, 'button');
+
+                    }],
+                ],
+                onClosing: function(instance, toast, closedBy) {
+                    console.info('Closing | closedBy: ' + closedBy);
+                },
+                onClosed: function(instance, toast, closedBy) {
+                    console.info('Closed | closedBy: ' + closedBy);
+                }
+            });
 
         }
     </script>
