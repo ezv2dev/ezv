@@ -37,23 +37,15 @@ class HotelController extends Controller
 
     public function hotel_list()
     {
-        if (empty($request)) {
-            $req = 0;
-        } else {
-            $req = $request->all();
-        }
-
         $hotel = Hotel::with([
             'propertyType', 'favorit', 'location', 'photo', 'video', 'detailReview',
-        ])->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+        ])->where('status', 1)->inRandomOrder()->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
 
         $amenities = Amenities::all();
-
-        $property_type = HotelType::all();
         $hotelCategory = HotelCategory::all();
         $hotelFilter = HotelFilter::all();
 
-        return view('user.hotel.list_hotel', compact('hotel', 'req', 'amenities', 'property_type', 'hotelCategory', 'hotelFilter'));
+        return view('user.hotel.list_hotel', compact('hotel', 'hotelCategory', 'hotelFilter'));
     }
 
     public function store_gallery(Request $request)
@@ -194,7 +186,7 @@ class HotelController extends Controller
         if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
             $validator2 = Validator::make($request->all(), [
                 'id_hotel' => ['required', 'integer'],
-                'file' => ['required','dimensions:min_width=960']
+                'file' => ['required', 'dimensions:min_width=960']
             ]);
 
             if ($validator2->fails()) {
@@ -284,7 +276,6 @@ class HotelController extends Controller
                     'message' => $validator->errors()->all(),
                 ], 500);
             }
-
         }
     }
 
