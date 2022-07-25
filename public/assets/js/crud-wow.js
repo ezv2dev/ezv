@@ -702,6 +702,95 @@ $("#addPriceForm").submit(function (e) {
             $("#modal-add_price").find("input[name='description']").val("");
             $("#modal-add_price").find("input[name='image']").val("");
 
+            const path = "/foto/activity/";
+            const uid = response.uid.uid;
+            const slash = "/";
+            const lowerCaseUid = uid.toLowerCase();
+
+            let content = "";
+
+            content += '<div class="col-12 col-md-4 text-center tab-body">';
+            content += '<div class="content list-image-content">';
+            content +=
+                '<div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"';
+            content += 'data-dots="false" data-arrows="true">';
+
+            if (response.data.foto) {
+                content +=
+                    '<a href="/wow/price/' +
+                    response.data.id_price +
+                    '/details"';
+                content += 'target="_blank" class="grid-image-container">';
+                content += '<img class="brd-radius img-fluid grid-image lozad"';
+                content += 'style="height: 200px; display: block;"';
+                content +=
+                    'src="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    response.data.foto +
+                    '" alt="">';
+                content += "</a>";
+            } else {
+                content +=
+                    '<a href="/wow/price/' +
+                    response.data.id_price +
+                    '/details"';
+                content += 'target="_blank" class="grid-image-container">';
+                content += '<img class="brd-radius img-fluid grid-image lozad"';
+                content += 'style="height: 200px; display: block;"';
+                content += 'src="/foto/default/no-image.jpeg" alt="">';
+                content += "</a>";
+            }
+
+            content += "</div> </div> </div>";
+            content +=
+                '<div class="col-12 col-md-4 text-justify tab-body" style="cursor: pointer;"';
+            content +=
+                'onclick="window.location=/wow/price/' +
+                response.data.id_price +
+                '/details">';
+            content += "<h4>";
+            content += "<p>";
+            content +=
+                '<a href="/wow/price/' + response.data.id_price + '/details">';
+            content +=
+                '<span class="translate-text-group-items">' +
+                response.data.name +
+                "</span> </a> </p> </h4>";
+
+            content += '<p class="desc-hotel">';
+            content += limit(response.data.description, 200);
+            content += "</p> </div>";
+
+            content +=
+                '<div class="col-12 col-md-4 text-center tab-body" style="cursor: pointer;"';
+            content +=
+                'onclick="window.location=/wow/price/' +
+                response.data.id_price +
+                '/details">';
+            content += "IDR " + response.data.price;
+            content += "<br>";
+            content +=
+                '<a href="/wow/price/' + response.data.id_price + '/details"';
+            content +=
+                'target="_blank" style="display: inline-block; width: 50%;"';
+            content +=
+                'class="btn btn-outline-dark table-room-button">Select</a>';
+            content += "</div>";
+
+            let lengthContent = $(".price-content").find(
+                ".list-image-content"
+            ).length;
+
+            if (lengthContent == 0) {
+                $(".price-content").html("");
+            }
+
+            $(".price-content").append(content);
+
+            $("#modal-add_price").modal("hide");
+
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -730,6 +819,10 @@ $("#addPriceForm").submit(function (e) {
         },
     });
 });
+
+function limit(string = "", limit = 0) {
+    return string.substring(0, limit);
+}
 
 function saveFacilities() {
     let facilities = [];

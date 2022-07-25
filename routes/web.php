@@ -1295,6 +1295,7 @@ Route::post('/hotel/update/tags', [Hotel\HotelDetailController::class, 'hotel_up
 Route::post('/hotel/update/category', [Hotel\HotelDetailController::class, 'hotel_update_category'])->name('hotel_update_category');
 Route::post('/hotel/update/location', [Hotel\HotelDetailController::class, 'hotel_update_location'])->name('hotel_update_location');
 Route::post('/hotel/update/name', [Hotel\HotelDetailController::class, 'hotel_update_name'])->name('hotel_update_name');
+Route::post('/hotel/update/star', [Hotel\HotelDetailController::class, 'hotel_update_star'])->name('hotel_update_star');
 Route::post('/hotel/photo/caption/update', [Hotel\HotelDetailController::class, 'hotel_update_caption_photo'])->name('hotel_update_caption_photo');
 
 

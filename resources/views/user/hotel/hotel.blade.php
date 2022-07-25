@@ -85,6 +85,8 @@
             background-color: #ffffff;
             color: #bbb;
             margin-left: 0 !important;
+            width: 25px;
+            font-size: 16px;
         }
 
         .star-active {
@@ -451,7 +453,7 @@
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
                             </div>
-                            <div class="showStar">
+                            <div class="showStar" id="showStar">
                                 @for ($i = 0; $i < $hotel[0]->star; $i++)
                                     <i class="star-active fa fa-star" aria-hidden="true"></i>
                                 @endfor
@@ -493,8 +495,12 @@
                             </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editStar()"
+                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStar"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
+                                        Star</a>
+                                    &nbsp;<a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
+                                        id="buttonSaveStar" class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
                                         Star</a>
                                 @endif
                             @endauth
@@ -1711,7 +1717,8 @@
                                             data-dots="false" data-arrows="true">
                                             @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
                                                 @foreach ($hotelRoomPhoto->where('id_hotel', $item->id_hotel) as $galleryHotelRoom)
-                                                    <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
+                                                    <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                        class="grid-image-container">
                                                         <img class="brd-radius img-fluid grid-image"
                                                             style="height: 200px; display: block;"
                                                             src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $galleryHotelRoom->name) }}"
@@ -1719,14 +1726,16 @@
                                                     </a>
                                                 @endforeach
                                             @elseIf (!empty($item->image))
-                                                <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                    class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->image) }}"
                                                         alt="">
                                                 </a>
                                             @else
-                                                <a onclick="view_room({{ $item->id_hotel_room }})" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                    class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="https://images.unsplash.com/photo-1609611606051-f22b47a16689?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -1736,7 +1745,7 @@
                                         </div>
                                     </div>
                                     <div class="text-justify" style="cursor: pointer;"
-                                    onclick="view_room({{ $item->id_hotel_room }})">
+                                        onclick="view_room({{ $item->id_hotel_room }})">
                                         <h4>
                                             <p><a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
                                                     target="_blank">{{ $item->name }}</a></p>
@@ -1806,8 +1815,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-6 col-md-1 text-center tab-body capacity-room"
-                                    style="cursor: pointer;"
-                                    onclick="view_room({{ $item->id_hotel_room }})">
+                                    style="cursor: pointer;" onclick="view_room({{ $item->id_hotel_room }})">
                                     @for ($i = 0; $i < $item->capacity; $i++)
                                         <i class="fas fa-user"></i>
                                     @endfor
@@ -5299,38 +5307,55 @@
         }
 
         function editStar() {
-            iziToast.question({
-                timeout: 20000,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
+            iziToast.info({
                 title: 'Hey',
-                message: 'Select the stars',
-                position: 'center',
-                buttons: [
-                    ['<select><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>',
-                        function(instance, toast) {
-                            // console.log('sattttt');
-                        },
-                        true
-                    ],
-                    ['<button><b>SUBMIT</b></button>', function(instance, toast) {
-
-                        instance.hide({
-                            transitionOut: 'fadeOut'
-                        }, toast, 'button');
-
-                    }],
-                ],
-                onClosing: function(instance, toast, closedBy) {
-                    console.info('Closing | closedBy: ' + closedBy);
-                },
-                onClosed: function(instance, toast, closedBy) {
-                    console.info('Closed | closedBy: ' + closedBy);
-                }
+                message: 'Insert the star!',
+                position: 'topLeft'
             });
+            $("#buttonEditStar").addClass('d-none');
+            $("#editStar").removeClass('d-none');
+            $("#buttonSaveStar").removeClass('d-none');
+        }
 
+        function saveStar(id_hotel) {
+            var starVal = document.querySelector('input[name="starHotel"]:checked').value;
+
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/hotel/update/star",
+                data: {
+                    id_hotel: id_hotel,
+                    star: starVal
+                },
+                success: function(response) {
+                    $("#showStar").html(``);
+                    for (let i = 0; i < response.data; i++) {
+                        $("#showStar").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
+                    }
+
+                    let j = 5 - response.data;
+
+                    if (j > 0) {
+                        for (let k = 0; k < j; k++) {
+                            $("#showStar").append(
+                                `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
+                        }
+                    }
+
+                    $("#buttonEditStar").removeClass('d-none');
+                    $("#editStar").addClass('d-none');
+                    $("#buttonSaveStar").addClass('d-none');
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
         }
     </script>
     <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>

@@ -676,15 +676,16 @@ class ActivityListController extends Controller
             ]);
         }
 
-        $activityPrice = ActivityPrice::where('id_activity', $request->id_activity)->get();
+        $activityPrice = ActivityPrice::where('id_price', $createdActivity->id_price)->first();
+        $uid = Activity::where('id_activity', $request->id_activity)->first('uid');
 
         // check if update is success or not
-        if ($createdActivity) {
+        if (isset($createdActivity) == true) {
             return response()->json([
                 'message' => 'Successfuly Updated WoW Contact',
-                'status' => 200,
                 'data' => $activityPrice,
-            ]);
+                'uid' => $uid,
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Error Updated WoW Contact',

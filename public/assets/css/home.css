@@ -149,6 +149,10 @@ body {
     margin-bottom: 2rem;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .header-4-4 .btn-try {
     font: 600 1rem/1.5rem Poppins, sans-serif;
     color: #000000;

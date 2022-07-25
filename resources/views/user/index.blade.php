@@ -889,7 +889,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($restaurantSubCategory->sortBy('order')->take(9) as $item)
-                                        <div>
+                                        <div class="pointer">
                                             <div onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -916,7 +916,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
-                                        <div>
+                                        <div class="pointer">
                                             <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"

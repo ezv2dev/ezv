@@ -296,17 +296,15 @@
                     </div>
                 </div>
 
-                <div class="desc-container-grid ">
+                <div class="desc-container-grid " style="z-index:0;">
                     <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
-                        style="height: 50px;"></a>
-                    <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
-                        style="top: 70px; height: 38px;"></a>
+                        style="height: 100%;z-index:0;"></a>
                     <div class=" skeleton skeleton-w-100 skeleton-h-2">
                         <span class="text-14 fw-500 {{ $textColor }} list-description">
                             {{ $data->name ?? __('user_page.There is no name yet') }}
                         </span>
                     </div>
-                    <div class="grid-one-line max-lines skeleton skeleton-w-100 skeleton-h-1">
+                    <div class="grid-one-line max-lines skeleton skeleton-w-100 skeleton-h-1" style="z-index:1">
                         <div class="d-block d-md-flex">
                             <div class="flex-fill">
                                 <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!"
@@ -431,6 +429,8 @@
         </div>
     @endif
     <!-- End Refresh Page -->
+    </div>
+    <!-- End Grid 43 -->
     </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
@@ -976,15 +976,15 @@
         }
     </script>
 
-    <script>
-        // function moreCategory() {
-        //     $('#categoryModal').modal('show');
-        // }
+    {{-- <script>
+        function moreCategory() {
+            $('#categoryModal').modal('show');
+        }
 
-        // function moreSubCategory() {
-        //     $('#modalSubCategory').modal('show');
-        // }
-    </script>
+        function moreSubCategory() {
+            $('#modalSubCategory').modal('show');
+        }
+    </script> --}}
     {{-- END SEARCH FUNCTION --}}
 
     {{-- MAP --}}

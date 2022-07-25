@@ -621,6 +621,19 @@ class HotelDetailController extends Controller
         }
     }
 
+    public function hotel_update_star(Request $request)
+    {
+        $find = Hotel::where('id_hotel', $request->id_hotel)->first();
+
+        $find->update(array(
+            'star' => $request->star,
+            'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            'updated_by' => Auth::user()->id,
+        ));
+
+        return response()->json(['success' => true, 'message' => 'Succesfully Updated Hotel Star',  'data' => $request->star]);
+    }
+
     public function hotel_update_image(Request $request)
     {
         // dd($request->all());
