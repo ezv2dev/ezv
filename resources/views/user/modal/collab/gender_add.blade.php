@@ -82,18 +82,30 @@
                             <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 <div class="col-6">
                                     <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            if($profile->gender == 'male'){
+                                                $isChecked = 'checked';
+                                            }
+                                        @endphp
                                         <label class="container-checkbox2">
                                             <span class="translate-text-group-items">Male</span>
-                                            <input type="checkbox" value="male" id="male" name="gender[]">
+                                            <input type="checkbox" value="male" id="male" name="gender[]" {{ $isChecked }}>
                                             <span class="checkmark2"></span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            if($profile->gender == 'female'){
+                                                $isChecked = 'checked';
+                                            }
+                                        @endphp
                                         <label class="container-checkbox2">
                                             <span class="translate-text-group-items">Female</span>
-                                            <input type="checkbox" value="female" id="female" name="gender[]">
+                                            <input type="checkbox" value="female" id="female" name="gender[]" {{ $isChecked }}>
                                             <span class="checkmark2"></span>
                                         </label>
                                     </div>
