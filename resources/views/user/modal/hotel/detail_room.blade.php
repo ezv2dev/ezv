@@ -26,6 +26,12 @@
         padding-left: 100px;
         padding-right: 100px;
     }
+
+    .image-content
+    {
+        border-radius: 25px;
+        height: 400px;
+    }
 </style>
 
 {{-- MODAL AMENITIES --}}
@@ -97,7 +103,35 @@
 
                     {{-- RIGHT CONTENT --}}
                     <div class="col-lg-8 col-md-8 col-xs-12 rsv-block alert-detail">
-                        jasndkasndkjasdn
+                        <img class="image-content" id="imageProfileHotelRoom" src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                        <h2>Room Option</h2>
+                        <div class="col-12 m-0 ps-2 pe-2 row ">
+                            <div class="col-2 border border-secondary border-end-0">
+                            @for ($i = 0; $i < 2; $i++)
+                                <i class="fas fa-user"></i>
+                            @endfor
+                            </div>
+                            <div class="col-4 border border-secondary border-end-0">
+                                <div class="price-tag">
+                                    <p class="price-discount mb-2">IDR {{ number_format(500000) }}</p>
+                                    <h6 class="price-current mb-0">IDR {{ number_format(500000) }}</h6>
+                                </div>
+                                <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
+                            </div>
+                            <div class="col-4 border border-secondary border-end-0">
+                                <div class="choice-item">
+                                    <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                    <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                </div>
+                            </div>
+                            <div class="col-2 border border-secondary">
+                                <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                                    <option value="0">0</option>
+                                    <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                        {{ number_format(500000) }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     {{-- END RIGHT CONTENT --}}
                 </div>
