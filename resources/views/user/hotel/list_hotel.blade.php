@@ -856,6 +856,18 @@
         function hotelRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/hotel/search?${suburl}`;
         }
+
+        $("input[name='fCategory[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         $("input[name='fSort[]']").on('click', function() {
             var $box = $(this);
             if ($box.is(":checked")) {
@@ -877,6 +889,11 @@
             if (fSortFormInput == undefined) {
                 var fSortFormInput = '';
             }
+
+            var fStarFormInput = [];
+            $("input[name='fStar[]']:checked").each(function() {
+                fStarFormInput.push(parseInt($(this).val()));
+            });
 
             var filterFormInput = [];
             var fCategoryFormInput = [];
@@ -971,7 +988,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&fStar=${fStarFormInput}&filter=${filteredArray}&fSort=${fSortFormInput}`;
 
             hotelRefreshFilter(subUrl);
         }

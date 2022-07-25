@@ -45,8 +45,9 @@ class HotelSearchController extends Controller
         $filter = $request->filter;
         $fMinPrice = $request->fMinPrice;
         $fMaxPrice = $request->fMaxPrice;
+        $fStar = $request->fStar;
 
-        $conditionFilter = $fCategory || $filter || $fMinPrice || $fMaxPrice;
+        $conditionFilter = $fCategory || $filter || $fMinPrice || $fMaxPrice || $fStar;
         if ($conditionFilter) {
             $hotel = $this->processFilter($hotel, $request);
         }
@@ -292,6 +293,7 @@ class HotelSearchController extends Controller
         $filter = $request->filter;
         $fMinPrice = $request->fMinPrice;
         $fMaxPrice = $request->fMaxPrice;
+        $fStar = $request->fStar;
 
         if ($fCategory) {
             $category = $fCategory;
@@ -316,12 +318,17 @@ class HotelSearchController extends Controller
         }
 
         if ($fMaxPrice || $fMinPrice) {
-
             $hotelIds = $hotel->modelKeys();
             $hotel = Hotel::where('status', 1)
                 ->whereIn('id_hotel', $hotelIds)
                 ->whereBetween('price', [$fMinPrice, $fMaxPrice])
                 ->inRandomOrder()->get();
+        }
+
+        if ($fStar) {
+            $fStar = explode(',', $request->fStar);
+            $hotelIds = $hotel->modelKeys();
+            $hotel = Hotel::where('status', 1)->whereIn('id_hotel', $hotelIds)->whereIn('star', $fStar)->inRandomOrder()->get();
         }
 
         return $hotel;
