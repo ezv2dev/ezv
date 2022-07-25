@@ -3752,7 +3752,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                    <div style="clear: both; width: 100%;">
                         <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
                             onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
@@ -3769,8 +3769,7 @@
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Video') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"
-                        style="margin-left: 1086px; position: absolute;"><i style="font-size: 22px;"
+                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
                             class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body pb-1">
@@ -3794,7 +3793,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                    <div style="clear: both; width: 100%;">
                         <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
                             onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
@@ -3963,6 +3962,78 @@
             // Initialize sortable
             $("#sortable-video").sortable();
             $("#sortable-photo").sortable();
+
+            if ($(window).width() < 992) {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", true);
+                $("#sortable-photo").sortable("option", "disabled", true);
+            }else {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", false);
+                $("#sortable-photo").sortable("option", "disabled", false);
+            }
+
+            //handle resize
+            $(window).on("resize", function() {
+                if ($(this).width() < 992) {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", true);
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                } else {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", false);
+                    $("#sortable-photo").sortable("option", "disabled", false);
+                }
+            })
+
+            //initialize timeout variable
+            var timeOut = 0;
+
+            //clear time out to prevent memory leak
+            $("#edit_position_photo").on("click", function(e) {
+                if (e.target.id == "edit_position_photo") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_video").on("click", function(e) {
+                if (e.target.id == "edit_position_video") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            
+            //event for mobile
+            $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-photo .ui-state-default img").addClass("shake-anim");
+                        $("#sortable-photo").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                }
+            })
+            $("#sortable-video .ui-state-default video").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-video .ui-state-default video").addClass("shake-anim");
+                        $("#sortable-video").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-video .ui-state-default video").removeClass("shake-anim");
+                    $("#sortable-video").sortable("option", "disabled", true);
+                }
+            })
         });
 
         function position_photo() {
