@@ -185,10 +185,10 @@ if (isset($_COOKIE['tema'])) {
                         <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
                             @if (session()->has('locale'))
-                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                             @else
-                                <img class="lozad" style="width: 27px;margin-right: 9px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
                             <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
@@ -205,7 +205,7 @@ if (isset($_COOKIE['tema'])) {
                         </a>
                     </div>
                     <div class="d-flex align-items mb-2" id="changeThemeMobile">
-                        <div class="logged-user-menu" style="margin-right: 9px;">
+                        <div class="logged-user-menu">
                             <label class="container-mode">
                                 <input type="checkbox" id="background-color-switch"
                                     onclick="changeBackgroundTrigger(this)"
@@ -256,7 +256,7 @@ if (isset($_COOKIE['tema'])) {
                 </a>
                 <div class="d-flex align-items-center mb-2">
                     <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
-                        style="color: white; margin-right: 9px;" id="language">
+                        style="color: white; " id="language">
                         @if (session()->has('locale'))
                             <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
@@ -268,7 +268,7 @@ if (isset($_COOKIE['tema'])) {
                     </a>
                 </div>
                 <div class="d-flex align-items-center mb-2" id="changeThemeMobile">
-                    <div class="logged-user-menu" style="margin-right: 9px;">
+                    <div class="logged-user-menu" style="">
                         <label class="container-mode">
                             <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
                                 {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
@@ -1402,6 +1402,13 @@ if (isset($_COOKIE['tema'])) {
                 $('.page-link').addClass('font-black')
             }
         });
+
+        // close sidebar menu in dekstop size 
+        $(window).resize(function(){
+            if($(document).width() > 991){ 
+                $('.btn-close-expand-navbar-mobile').click()
+            }
+        })
     </script>
 
     {{-- LAZY LOAD --}}
