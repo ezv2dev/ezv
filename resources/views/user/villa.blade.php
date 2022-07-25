@@ -2389,9 +2389,9 @@
                                 <h4>Host Profile</h4>
                                 <p>
                                 About
-                                    <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                <span>{{ $createdby[0]->about_owner ?? '-' }}</span><br>
                                 Location
-                                    <span>{{ $infoOwner->location ?? '-' }}</span>
+                                <span>{{ $createdby[0]->location_owner ?? '-' }}</span>
                                 </p>
                             </div>
                         </div>
@@ -2403,7 +2403,7 @@
                                 @else
                                 @endif
                             </p>
-                            <p>{{ $createdby[0]->about_owner }}</p>
+                            {{-- <p>{{ $createdby[0]->about_owner }}</p> --}}
                             @auth
                                 @if (Auth::user()->role_id == 4)
                                     <button type="button" onclick="contactHostForm()"
