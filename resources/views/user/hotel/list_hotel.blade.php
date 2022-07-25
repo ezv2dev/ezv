@@ -430,6 +430,8 @@
     @endif
     <!-- End Refresh Page -->
     </div>
+    <!-- End Grid 43 -->
+    </div>
     <!-- End Page Content -->
     {{-- Pagination --}}
     <div class="mt-3 d-flex justify-content-center" id="footer">
@@ -974,15 +976,15 @@
         }
     </script>
 
-    <script>
-        // function moreCategory() {
-        //     $('#categoryModal').modal('show');
-        // }
+    {{-- <script>
+        function moreCategory() {
+            $('#categoryModal').modal('show');
+        }
 
-        // function moreSubCategory() {
-        //     $('#modalSubCategory').modal('show');
-        // }
-    </script>
+        function moreSubCategory() {
+            $('#modalSubCategory').modal('show');
+        }
+    </script> --}}
     {{-- END SEARCH FUNCTION --}}
 
     {{-- MAP --}}
