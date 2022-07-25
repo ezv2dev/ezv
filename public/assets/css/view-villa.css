@@ -2241,6 +2241,10 @@ input[type="number"] {
     padding-left: 40px;
 }
 
+.modal-body{
+    background-color: white;
+}
+
 .right-0 {
     padding-right: 0px;
 }
