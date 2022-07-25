@@ -983,13 +983,24 @@
 
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
-                            @forelse ($tags->take(3) as $item)
-                                <span class="badge rounded-pill fw-normal"
-                                    style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
-                            @empty
-                                <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
-                                    onclick="view_tag()">More</button>
-                            @endforelse
+                            <span id="saveTagsContent">
+                                @if ($tags->count() > 3)
+                                    @forelse ($tags->take(3) as $item)
+                                        <span class="badge rounded-pill fw-normal"
+                                            style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
+                                    @empty
+                                    @endforelse
+                                    <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
+                                        onclick="view_tag()">More</button>
+                                @else
+                                    @forelse ($tags as $item)
+                                        <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                            {{ $item->collaboratorCategory->name }}
+                                        </span>
+                                    @empty
+                                    @endforelse
+                                @endif
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_tag()"
@@ -2524,6 +2535,44 @@
             </div>
         </div>
     </div>
+
+    {{-- MODAL TAGS --}}
+    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background: white; border-radius:25px">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('user_page.All Tags') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_tag()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-1" style="height: 500px; overflow-y: auto;">
+                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                        <h5 class="mb-3">{{ __('user_page.Cuisine') }}</h5>
+                        <div id="saveTagsContentModal">
+                            @foreach ($profile->category as $item)
+                                <div class='col-md-6'>
+                                    <span class="translate-text-group-items">{{ $item->name }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-filter-footer" style="height: 20px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function view_tag() {
+            $('#modal-tag').modal('show');
+        }
+
+        function close_tag() {
+            $('#modal-tag').modal('hide');
+        }
+    </script>
 
     @include('layouts.user.footer')
     </div>

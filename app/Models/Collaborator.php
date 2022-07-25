@@ -37,6 +37,11 @@ class Collaborator extends Model
         return $this->hasMany(CollaboratorHasCategory::class, 'id_collab', 'id_collab');
     }
 
+    public function category()
+    {
+        return $this->belongsToMany(CollaboratorCategory::class, 'collaborator_has_category', 'id_collab', 'id_collab_category', 'id_collab', 'id_collab_category');
+    }
+
     public function collaboratorHasFilter()
     {
         return $this->hasMany(CollaboratorHasFilter::class, 'id_collab', 'id_collab');

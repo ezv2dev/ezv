@@ -256,6 +256,54 @@ $get_category = request()->get('fCategory');
 
                 <div class="filter-modal-row">
                     <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
+                        {{ Translate::translate('Stars') }}</h5>
+                    <div id="modal-category-default" class="col-12">
+                        <div class="row modal-checkbox-row">
+                            @php
+                                $starIds = explode(',', request()->get('fStar'));
+                            @endphp
+
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter"> 5 Stars
+                                    <input type="checkbox" name="fStar[]" value="5"
+                                        @if (in_array(5, $starIds)) checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter"> 4 Stars
+                                    <input type="checkbox" name="fStar[]" value="4"
+                                        @if (in_array(4, $starIds)) checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter"> 3 Stars
+                                    <input type="checkbox" name="fStar[]" value="3"
+                                        @if (in_array(3, $starIds)) checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter"> 2 Stars
+                                    <input type="checkbox" name="fStar[]" value="2"
+                                        @if (in_array(2, $starIds)) checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter"> 1 Star
+                                    <input type="checkbox" name="fStar[]" value="1"
+                                        @if (in_array(1, $starIds)) checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-modal-row">
+                    <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
                         {{ Translate::translate('Filter') }}</h5>
                     <div id="modal-amenities-default" class="col-12">
                         <div class="row modal-checkbox-row">
@@ -327,17 +375,6 @@ $get_category = request()->get('fCategory');
 </div>
 
 <script>
-    $("input[name='fCategory[]']").on('click', function() {
-        var $box = $(this);
-        if ($box.is(":checked")) {
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            $(group).prop("checked", false);
-            $box.prop("checked", true);
-        } else {
-            $box.prop("checked", false);
-        }
-    });
-
     function bedroom_increment_modal() {
         document.getElementById('bedroom_number2').stepUp();
     }

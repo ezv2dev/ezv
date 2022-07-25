@@ -357,7 +357,8 @@
                                             <p class="text-14 fw-600 grid-one-line max-lines mb-0">
                                                 {{ $data->detailReview->average }}/5
                                             </p>
-                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1" href="#"
+                                                onclick="view_details_hotel({{ $hotel[0]->id_hotel }})">
                                                 Review
                                             </a>
                                         @else
@@ -855,6 +856,18 @@
         function hotelRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/hotel/search?${suburl}`;
         }
+
+        $("input[name='fCategory[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         $("input[name='fSort[]']").on('click', function() {
             var $box = $(this);
             if ($box.is(":checked")) {
@@ -876,6 +889,11 @@
             if (fSortFormInput == undefined) {
                 var fSortFormInput = '';
             }
+
+            var fStarFormInput = [];
+            $("input[name='fStar[]']:checked").each(function() {
+                fStarFormInput.push(parseInt($(this).val()));
+            });
 
             var filterFormInput = [];
             var fCategoryFormInput = [];
@@ -970,7 +988,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&fStar=${fStarFormInput}&filter=${filteredArray}&fSort=${fSortFormInput}`;
 
             hotelRefreshFilter(subUrl);
         }
@@ -986,6 +1004,25 @@
     @include('user.modal.hotel.list.details_hotel')
 
     <script>
+        function renderRating(rating) {
+            switch(Math.floor(rating)) {
+                case 1:
+                    return "bar-1"
+                    break;
+                case 2:
+                    return "bar-2"
+                    break;
+                case 3:
+                    return "bar-3"
+                    break;
+                case 4:
+                    return "bar-4"
+                    break;
+                case 5:
+                    return "bar-5"
+                    break;
+            }
+        }
         function view_details_hotel(id) {
             $.ajax({
                 type: "GET",
@@ -1007,17 +1044,24 @@
                         </div>`);
                     }
 
-                    $('#average_show').append(`${data.detail_review.average}/5`);
-                    $('#average_clean_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_clean}`);
-                    $('#average_service_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_service}`);
-                    $('#average_check_in_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_check_in}`);
-                    $('#average_location_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_location}`);
-                    $('#average_value_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_value}`);
+                    $('#average_show').empty();
+                    $('#average_clean_show').empty();
+                    $('#average_service_show').empty();
+                    $('#average_check_in_show').empty();
+                    $('#average_value_show').empty();
+                    $('#average_location_show').empty();
+
+                    $('#average_show').html(`${data.detail_review.average}/5`);
+                    $('#average_clean_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_clean}`);
+                    $('#average_service_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_service}`);
+                    $('#average_check_in_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_check_in}`);
+                    $('#average_location_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_location}`);
+                    $('#average_value_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_value}`);
 
                 }
             });
