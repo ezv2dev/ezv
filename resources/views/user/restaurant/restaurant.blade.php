@@ -3217,8 +3217,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('user_page.All Facilities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
@@ -3235,6 +3235,7 @@
                         </div>
                     @endforelse
                 </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>

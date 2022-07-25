@@ -3382,8 +3382,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-amenities" role="document" style="overflow-y: initial !important">
-            <div class="modal-content modal-content-amenities" style="background: white; border-radius:15px">
+        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document" style="overflow-y: initial !important">
+            <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -3517,7 +3517,7 @@
                         @endfor
                     </div>
                 </div>
-                <div class="modal-filter-footer" style="height: 20px;"></div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
