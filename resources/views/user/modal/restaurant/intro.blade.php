@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Introduction to Food Page</h5>
