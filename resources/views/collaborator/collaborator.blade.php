@@ -936,7 +936,6 @@
                         @endauth
 
                         {{-- Follower --}}
-
                         <div class="social-media">
                             <div id="saveSocialMediaContent">
                                 <div class="social-links">
@@ -972,7 +971,7 @@
 
                         {{-- Gender --}}
                         <p class="text-secondary" style="margin-bottom: 5px;">
-                            <span class="badge rounded-pill fw-normal" id="genderID" style="background-color: #FF7400;">{{ $profile->gender }}</span>
+                            <span class="badge rounded-pill fw-normal" id="saveGenderContent" style="background-color: #FF7400;">{{ $profile->gender }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_gender()"
@@ -1002,7 +1001,7 @@
 
                         {{-- location --}}
                         <p style="margin-bottom:10px"><i class="fa fa-map-marker-alt" style="color: #ff7400"></i>
-                            {{ $profile->name_location }}
+                            <span id="saveLocationContent">{{ $profile->name_location }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="edit_location()"

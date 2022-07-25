@@ -71,6 +71,7 @@ use App\Http\Controllers\StaffRewardBalanceController;
 use App\Http\Controllers\TransactionHistoryController;
 use App\Http\Controllers\Auth\RegisterCollabController;
 use App\Http\Controllers\Auth\RegisterPartnerController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,9 +111,7 @@ Route::get('/contact-us', function () {
     return view('user.contact_us');
 })->name('contact_us');
 
-Route::get('/blog', function () {
-    return view('user.blog');
-})->name('blog');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/culture', function () {
     return view('user.culture');
