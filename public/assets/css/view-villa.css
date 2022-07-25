@@ -3249,7 +3249,10 @@ span.flatpickr-weekday {
     overflow-y: auto !important;
     overflow-x: hidden !important;
 }
-
+.shake-anim {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon,
@@ -4305,4 +4308,17 @@ span.flatpickr-weekday {
     margin-left: 10px;
     font-size: 14px;
     color: #565656;
+}
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-1deg); }
+    20% { transform: rotate(1deg); }
+    30% { transform: rotate(0deg); }
+    40% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+    60% { transform: rotate(0deg); }
+    70% { transform: rotate(-1deg); }
+    80% { transform: rotate(1deg); }
+    90% { transform: rotate(0deg); }
+    100% { transform: rotate(-1deg); }
 }
