@@ -2644,7 +2644,7 @@
                                     @endif
                                 @endauth
                                 {{-- END ALERT CONTENT STATUS --}}
-                                {{-- @guest
+                                {{-- @guestx`
                                     <hr>
                                     <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
                                     <div class="container-xxl mx-auto p-0">
