@@ -986,6 +986,25 @@
     @include('user.modal.hotel.list.details_hotel')
 
     <script>
+        function renderRating(rating) {
+            switch(Math.floor(rating)) {
+                case 1:
+                    return "bar-1"
+                    break;
+                case 2:
+                    return "bar-2"
+                    break;
+                case 3:
+                    return "bar-3"
+                    break;
+                case 4:
+                    return "bar-4"
+                    break;
+                case 5:
+                    return "bar-5"
+                    break;
+            }
+        }
         function view_details_hotel(id) {
             $.ajax({
                 type: "GET",
@@ -1007,17 +1026,24 @@
                         </div>`);
                     }
 
+                    $('#average_show').empty();
+                    $('#average_clean_show').empty();
+                    $('#average_service_show').empty();
+                    $('#average_check_in_show').empty();
+                    $('#average_value_show').empty();
+                    $('#average_location_show').empty();
+
                     $('#average_show').append(`${data.detail_review.average}/5`);
                     $('#average_clean_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_clean}`);
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_clean}`);
                     $('#average_service_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_service}`);
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_service}`);
                     $('#average_check_in_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_check_in}`);
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_check_in}`);
                     $('#average_location_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_location}`);
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_location}`);
                     $('#average_value_show').append(
-                        `<div class="liner"></div>${data.detail_review.average_value}`);
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_value}`);
 
                 }
             });
