@@ -67,18 +67,16 @@
     }
 </style>
 
-<div class="modal fade" id="modal-add_tag" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="height: 550px;">
-            <div class="modal-header" style="padding-left: 2.3rem !important;">
-                <h5 class="modal-title">Edit Category</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                <form action="{{ route('collab_store_category') }}" method="POST" id="basic-form"
-                    class="js-validation" enctype="multipart/form-data">
-                    @csrf
+<div id="saveTagsForm">
+    <div class="modal fade" id="modal-add_tag" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="height: 550px;">
+                <div class="modal-header" style="padding-left: 2.3rem !important;">
+                    <h5 class="modal-title">Edit Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
                     <input type="hidden" name="id_collab" id="id_collab" value="{{ $profile->id_collab }}">
                     <div class="form-group pt-2 px-4">
                         <div class="row">
@@ -108,15 +106,15 @@
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="modal-filter-footer d-flex justify-content-center"
-                style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
-                <div class="col-4" style="text-align: center;">
-                    <button id="btnsaveCategoryRestaurant" type="submit" class="btn btn-primary btn-sm w-100">
-                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                    </button>
                 </div>
-                </form>
+                <div class="modal-filter-footer d-flex justify-content-center"
+                    style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
+                    <div class="col-4" style="text-align: center;">
+                        <button id="btnSaveTags" onclick="saveTags()" type="submit" class="btn btn-primary btn-sm w-100">
+                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

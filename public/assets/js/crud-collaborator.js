@@ -623,3 +623,86 @@ function saveLanguage() {
         },
     });
 }
+
+function saveTags() {
+    console.log('hit saveTag');
+
+    const form = $('#saveTagsForm');
+    const categoryInputs = form.find(`input[name='category[]']:checked`);
+    let categoryIds = [];
+    for (let i = 0; i < categoryInputs.length; i++) {
+        const categoryInput = categoryInputs.eq(i);
+        categoryIds.push(categoryInput.val());
+    }
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        category: categoryIds
+    };
+
+    let btn = form.find('#btnSaveTags');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/store/category",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated langugae content
+            let tagsContent = '';
+            if (response.data) {
+                for (let i = 0; i < response.data.length; i++) {
+                    const name = response.data[i].name;
+                    tagsContent += `
+                        <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                            ${name}
+                        </span>
+                    `;
+                }
+            }
+            $('#saveTagsContent').html(tagsContent);
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-add_tag').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#modal-add_tag').modal('hide');
+        },
+    });
+}
