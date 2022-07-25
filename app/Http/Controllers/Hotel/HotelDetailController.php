@@ -322,7 +322,7 @@ class HotelDetailController extends Controller
     public function hotel($id)
     {
         $hotel = Hotel::with('hotel_room', 'location')->where('id_hotel', $id)->where('status', 1)->get();
-        // dd($hotel);
+
         // check if the editor does not have authorization
         if (auth()->check()) {
             $find = Hotel::find($id);
@@ -336,14 +336,12 @@ class HotelDetailController extends Controller
 
         // increase views
         $hotelAddViews = Hotel::find($id)->increment('views');
-        // abort_if(!$hotelAddViews, 404);
 
         // appends additional data to hotel list
-        $hotel->each(function ($item, $key) {
-            $item->setAppends(['villa_nearby', 'activity_nearby', 'restaurant_nearby']);
-        });
+        // $hotel->each(function ($item, $key) {
+        //     $item->setAppends(['villa_nearby', 'activity_nearby', 'restaurant_nearby']);
+        // });
 
-        // dd($hotel);
         $hotelRoomPhoto = HotelRoomPhoto::where('id_hotel', $id)->get();
 
         $photo = HotelPhoto::where('id_hotel', $id)->orderBy('order', 'asc')->get();
@@ -379,135 +377,122 @@ class HotelDetailController extends Controller
             ->select('users.first_name')
             ->get();
 
-        $get_hotel = Hotel::where('id_hotel', $id)->first();
-        $point = array('lat' => $get_hotel->latitude, 'long' => $get_hotel->longitude, 'id_location' => $get_hotel->id_location);
-        // ? Start Activity Slider
-        $compare_activity = Activity::all();
+        // $get_hotel = Hotel::where('id_hotel', $id)->first();
+        // $point = array('lat' => $get_hotel->latitude, 'long' => $get_hotel->longitude, 'id_location' => $get_hotel->id_location);
+        // // ? Start Activity Slider
+        // $compare_activity = Activity::all();
 
-        $kilometers = array();
-        $i = 0;
-        foreach ($compare_activity as $item) {
-            $lat1 = $point['lat'];
-            $lon1 = $point['long'];
-            $lat2 = $item->latitude;
-            $lon2 = $item->longitude;
-            $id_activity = $item->id_activity;
-            $name = $item->name;
-            $theta = $lon1 - $lon2;
+        // $kilometers = array();
+        // $i = 0;
+        // foreach ($compare_activity as $item) {
+        //     $lat1 = $point['lat'];
+        //     $lon1 = $point['long'];
+        //     $lat2 = $item->latitude;
+        //     $lon2 = $item->longitude;
+        //     $id_activity = $item->id_activity;
+        //     $name = $item->name;
+        //     $theta = $lon1 - $lon2;
 
-            $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-            $miles = acos($miles);
-            $miles = rad2deg($miles);
-            $miles = $miles * 60 * 1.1515;
-            $kilometers[$i][] = number_format((float)$miles * 1.609344, 1, '.', '');
-            $kilometers[$i][] = $id_activity;
-            $kilometers[$i][] = $name;
-            $i++;
-        }
+        //     $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+        //     $miles = acos($miles);
+        //     $miles = rad2deg($miles);
+        //     $miles = $miles * 60 * 1.1515;
+        //     $kilometers[$i][] = number_format((float)$miles * 1.609344, 1, '.', '');
+        //     $kilometers[$i][] = $id_activity;
+        //     $kilometers[$i][] = $name;
+        //     $i++;
+        // }
 
-        $unsorted_data = collect($kilometers);
-        $sorted_data1 = $unsorted_data->sortBy('0');
-        $last = $sorted_data1;
+        // $unsorted_data = collect($kilometers);
+        // $sorted_data1 = $unsorted_data->sortBy('0');
+        // $last = $sorted_data1;
 
-        $locArray = array();
-        foreach ($last as $item1) {
-            array_push($locArray, $item1[1]);
-        }
-        // ? End Activity Slider
+        // $locArray = array();
+        // foreach ($last as $item1) {
+        //     array_push($locArray, $item1[1]);
+        // }
+        // // ? End Activity Slider
 
-        // ? Start Restaurant Slider
-        $compare_restaurant = Restaurant::all();
+        // // ? Start Restaurant Slider
+        // $compare_restaurant = Restaurant::all();
 
-        $kilometers2 = array();
-        $j = 0;
-        foreach ($compare_restaurant as $item) {
-            $lat3 = $point['lat'];
-            $lon3 = $point['long'];
-            $lat4 = $item->latitude;
-            $lon4 = $item->longitude;
-            $id_restaurant = $item->id_restaurant;
-            $name2 = $item->name;
-            $theta2 = $lon3 - $lon4;
+        // $kilometers2 = array();
+        // $j = 0;
+        // foreach ($compare_restaurant as $item) {
+        //     $lat3 = $point['lat'];
+        //     $lon3 = $point['long'];
+        //     $lat4 = $item->latitude;
+        //     $lon4 = $item->longitude;
+        //     $id_restaurant = $item->id_restaurant;
+        //     $name2 = $item->name;
+        //     $theta2 = $lon3 - $lon4;
 
-            $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta2)));
-            $miles2 = acos($miles2);
-            $miles2 = rad2deg($miles2);
-            $miles2 = $miles2 * 60 * 1.1515;
-            $kilometers2[$j][] = number_format((float)$miles2 * 1.609344, 1, '.', '');
-            $kilometers2[$j][] = $id_restaurant;
-            $kilometers2[$j][] = $name2;
-            $j++;
-        }
+        //     $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta2)));
+        //     $miles2 = acos($miles2);
+        //     $miles2 = rad2deg($miles2);
+        //     $miles2 = $miles2 * 60 * 1.1515;
+        //     $kilometers2[$j][] = number_format((float)$miles2 * 1.609344, 1, '.', '');
+        //     $kilometers2[$j][] = $id_restaurant;
+        //     $kilometers2[$j][] = $name2;
+        //     $j++;
+        // }
 
-        $unsorted_data2 = collect($kilometers2);
-        $sorted_data2 = $unsorted_data2->sortBy('0');
-        $last2 = $sorted_data2;
+        // $unsorted_data2 = collect($kilometers2);
+        // $sorted_data2 = $unsorted_data2->sortBy('0');
+        // $last2 = $sorted_data2;
 
-        $locArray2 = array();
-        foreach ($last2 as $item2) {
-            array_push($locArray2, $item2[1]);
-        }
-        // ? End Restaurant Slider
+        // $locArray2 = array();
+        // foreach ($last2 as $item2) {
+        //     array_push($locArray2, $item2[1]);
+        // }
+        // // ? End Restaurant Slider
 
-        $ids_ordered = implode(',', $locArray);
-        $ids_ordered2 = implode(',', $locArray2);
+        // $ids_ordered = implode(',', $locArray);
+        // $ids_ordered2 = implode(',', $locArray2);
+        // $nearby_activities = Nearby::activity($id);
+        // $nearby_activities = collect($nearby_activities)->slice(0, 10);
+        // $nearby_restaurant = Nearby::restaurant($id);
+        // $nearby_restaurant = collect($nearby_restaurant)->slice(0, 10);
 
-        // $nearby_activities = Activity::with('photo')->whereIn('id_activity', $locArray)
-        //     ->where('status', '1')
-        //     ->orderByRaw("FIELD(id_activity, $ids_ordered)")
-        //     ->get()->take(2);
+        // $latitudeHotel = $hotel[0]->latitude;
+        // $longitudeHotel = $hotel[0]->longitude;
+        // $googleApi = 'AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk';
 
-        // $nearby_restaurant = Restaurant::with('photo')->whereIn('id_restaurant', $locArray2)
-        //     ->where('status', '1')
-        //     ->orderByRaw("FIELD(id_restaurant, $ids_ordered2)")
-        //     ->get()->take(2);
-        $nearby_activities = Nearby::activity($id);
-        // $nearby_activities = collect($nearby_activities);
-        $nearby_activities = collect($nearby_activities)->slice(0, 10);
+        // $k = 0;
 
-        $nearby_restaurant = Nearby::restaurant($id);
-        // $nearby_restaurant = collect($nearby_restaurant);
-        $nearby_restaurant = collect($nearby_restaurant)->slice(0, 10);
+        // foreach ($nearby_activities as $item) {
+        //     $point1 = array('lat' => $latitudeHotel, 'long' => $longitudeHotel);
+        //     $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
 
-        $latitudeHotel = $hotel[0]->latitude;
-        $longitudeHotel = $hotel[0]->longitude;
-        $googleApi = 'AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk';
+        //     $urlDriving =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
+        //     $urlWalking =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
 
-        $k = 0;
+        //     $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
+        //     $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
+        //     $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
 
-        foreach ($nearby_activities as $item) {
-            $point1 = array('lat' => $latitudeHotel, 'long' => $longitudeHotel);
-            $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
+        //     $k++;
+        // }
 
-            $urlDriving =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
-            $urlWalking =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
+        // $h = 0;
 
-            $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
-            $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
-            $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
+        // foreach ($nearby_restaurant as $item) {
+        //     $point1 = array('lat' => $latitudeHotel, 'long' => $longitudeHotel);
+        //     $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
 
-            $k++;
-        }
+        //     $urlDriving =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
+        //     $urlWalking =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
 
-        $h = 0;
+        //     $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
+        //     $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
+        //     $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
 
-        foreach ($nearby_restaurant as $item) {
-            $point1 = array('lat' => $latitudeHotel, 'long' => $longitudeHotel);
-            $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
-
-            $urlDriving =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
-            $urlWalking =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
-
-            $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
-            $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
-            $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
-
-            $h++;
-        }
+        //     $h++;
+        // }
 
         $hotelType = HotelType::get();
 
@@ -519,7 +504,7 @@ class HotelDetailController extends Controller
         $hotelCategory = HotelCategory::all();
         $hotelHasCategory = HotelHasCategory::where('id_hotel', $id)->get();
 
-        return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelTags', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'createdby', 'nearby_restaurant', 'nearby_activities', 'last', 'propertyType', 'hotelTypeDetail'));
+        return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelTags', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'createdby', 'propertyType', 'hotelTypeDetail'));
     }
 
     public function grade(Request $request, $id)
