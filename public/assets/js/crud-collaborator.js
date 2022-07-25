@@ -660,19 +660,47 @@ function saveTags() {
                 position: "topRight",
             });
 
-            // append updated langugae content
+            // append updated tag content
             let tagsContent = '';
+            // append updated tag content modal
+            let tagsContentModal = '';
             if (response.data) {
+                if(response.data.length > 7){
+                    for (let i = 0; i < 7; i++) {
+                        const name = response.data[i].name;
+                        tagsContent += `
+                            <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                ${name}
+                            </span>
+                        `;
+                    }
+                    tagsContent += `
+                        <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">
+                            More
+                        </button>
+                    `;
+                } else {
+                    for (let i = 0; i < response.data.length; i++) {
+                        const name = response.data[i].name;
+                        tagsContent += `
+                            <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                ${name}
+                            </span>
+                        `;
+                    }
+                }
+
                 for (let i = 0; i < response.data.length; i++) {
                     const name = response.data[i].name;
-                    tagsContent += `
-                        <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
-                            ${name}
-                        </span>
+                    tagsContentModal += `
+                        <div class='col-md-6'>
+                            <span class="translate-text-group-items">${name}</span>
+                        </div>
                     `;
                 }
             }
             $('#saveTagsContent').html(tagsContent);
+            $('#saveTagsContentModal').html(tagsContentModal);
 
             // enabled button
             btn.html("<i class='fa fa-check'></i> Save");
