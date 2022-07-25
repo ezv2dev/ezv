@@ -298,7 +298,7 @@
 
                 <div class="desc-container-grid " style="z-index:0;">
                     <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
-                        style="height: 100%;z-index:0;"></a>
+                        style="height: 25%;z-index:0;"></a>
                     <div class=" skeleton skeleton-w-100 skeleton-h-2">
                         <span class="text-14 fw-500 {{ $textColor }} list-description">
                             {{ $data->name ?? __('user_page.There is no name yet') }}
@@ -323,7 +323,7 @@
                                     <span>{{ $data->star }} Stars</span>
                                     <i class="fa-solid fa-star" style="color: #febb02"></i>
                                 </div>
-                                @else
+                            @else
                                 <div class="text-13 text-md-end">
                                     <span>No stars yet</span>
                                     <i class="fa-solid fa-star" style="color: #febb02"></i>
@@ -334,10 +334,10 @@
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <div class="d-flex">
                             <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
-                                {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
+                                {{ Translate::translate($data->description) ?? __('user_page.There is no description yet') }}
                             </span>
                             <span class="text-12 fw-400"><a class="orange-hover"
-                                    onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                                    onclick='view_details_hotel({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
                         </div>
                     </div>
                     <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-5">
@@ -976,22 +976,56 @@
         }
     </script>
 
-    {{-- <script>
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
-
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
-    </script> --}}
     {{-- END SEARCH FUNCTION --}}
 
     {{-- MAP --}}
     @include('user.modal.hotel.list.map')
     {{-- END MAP --}}
     {{-- DETAILS --}}
-    @include('user.modal.hotel.list.details')
+    {{-- @include('user.modal.hotel.list.details') --}}
+    @include('user.modal.hotel.list.details_hotel')
+
+    <script>
+        function view_details_hotel(id) {
+            $.ajax({
+                type: "GET",
+                url: `/hotel/details/${id}`,
+                success: (data) => {
+                    console.log(data);
+                    console.log(data.detail_review.average);
+                    $('.name-hotel').html(data.name);
+                    $('#descHotel').html(data.description);
+
+                    var lengthAmenities = data.amenities.length;
+                    $('#amenitiesList').html('');
+                    for (i = 0; i < lengthAmenities; i++) {
+                        $('#amenitiesList').append(`
+                        <div class = "col-md-6 mb-2" >
+                            <span class = 'translate-text-group-items'>
+                                ${data.amenities[i].name}
+                            </span>
+                        </div>`);
+                    }
+
+                    $('#average_show').append(`${data.detail_review.average}/5`);
+                    $('#average_clean_show').append(
+                        `<div class="liner"></div>${data.detail_review.average_clean}`);
+                    $('#average_service_show').append(
+                        `<div class="liner"></div>${data.detail_review.average_service}`);
+                    $('#average_check_in_show').append(
+                        `<div class="liner"></div>${data.detail_review.average_check_in}`);
+                    $('#average_location_show').append(
+                        `<div class="liner"></div>${data.detail_review.average_location}`);
+                    $('#average_value_show').append(
+                        `<div class="liner"></div>${data.detail_review.average_value}`);
+
+                }
+            });
+
+            $('#modal-details').modal('show');
+        }
+    </script>
     {{-- END DETAILS --}}
     <script src="{{ asset('assets/js/translate.js') }}"></script>
+    <script src="{{ asset('assets/js/price-range.js') }}"></script>
 @endsection
