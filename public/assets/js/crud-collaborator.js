@@ -342,36 +342,6 @@ function saveDescription(id_collab) {
     }
 }
 
-function updateGender(id_collab) {
-    console.log('hit updateGender');
-
-    var genderArray = [];
-    $("input[name='gender[]']:checked").each(function() {
-        genderArray.push($(this).val());
-    });
-
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/colaborator/update/gender",
-        data: {
-            id: id_collab,
-            gender: genderArray,
-        },
-        success: function(response) {
-            $("#genderID").html(response.data);
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-            $('#modal-add_gender').modal('hide');
-        }
-    });
-}
-
 function saveLocation() {
     console.log('hit saveLocation');
     let form = $('#editLocationForm');
@@ -399,6 +369,7 @@ function saveLocation() {
         data: formData,
         // response data
         success: function (response) {
+            console.log(response);
             let latitudeOld = parseFloat(response.data.latitude);
             let longitudeOld = parseFloat(response.data.longitude);
             // variabel global edit marker
@@ -413,6 +384,8 @@ function saveLocation() {
                 message: response.message,
                 position: "topRight",
             });
+            // updated new location name
+            $('#saveLocationContent').text(response.data.location.name);
             // enabled button
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
@@ -598,6 +571,79 @@ function saveGender() {
                 message: response.message,
                 position: "topRight",
             });
+
+            // append updated gender
+            $('#saveGenderContent').text(response.data.gender);
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-add_gender').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#modal-add_gender').modal('hide');
+        },
+    });
+}
+
+function saveLanguage() {
+    console.log('hit saveLanguage');
+    const form = $('#saveLanguageForm');
+    const languageInputs = form.find(`input[name='language[]']:checked`);
+    let languageIds = [];
+    for (let i = 0; i < languageInputs.length; i++) {
+        const languageInput = languageInputs.eq(i);
+        languageIds.push(languageInput.val());
+    }
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        language: languageIds
+    };
+
+    console.log(formData);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/collab/update/language",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+            return;
+
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated gender
+            $('#saveGenderContent').text(response.data.gender);
 
             // enabled button
             btn.html("<i class='fa fa-check'></i> Save");

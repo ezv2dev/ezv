@@ -145,7 +145,7 @@ $get_category = request()->get('fCategory');
 
 <div class="modal fade" id="modalFiltersHome" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal">
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i

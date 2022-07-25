@@ -20,9 +20,16 @@ class Collaborator extends Model
     protected $table = 'collaborator';
     protected $primaryKey = 'id_collab';
 
+    const GENDER = ['male', 'female'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'id_location', 'id_location');
     }
 
     public function collaboratorHasCategory()

@@ -18,12 +18,13 @@
         overflow-y: auto !important;
     }
 
+    @media (min-width: 768px) {
 
-    .modal-content-language{
-        background-color: white;
-        width: 90% !important;
+        .modal-content-language{
+            background-color: white;
+            width: 90% !important;
+        }
     }
-
     .modal-horizontal-centered {
         display: flex;
         justify-content: center;
@@ -381,9 +382,9 @@
 --}}
 
 <div id="LegalModal" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered"
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-centered modal-horizontal-centered"
         style="overflow-y: initial !important;">
-        <div class="modal-content modal-content-language" style="border-radius:15px;">
+        <div class="modal-content modal-content-language">
             <div class="modal-header-language filter-modal">
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>

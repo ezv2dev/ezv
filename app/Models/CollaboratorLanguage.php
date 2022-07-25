@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CollaboratorLanguage extends Model
 {
     protected $fillable = [
-        'id_collab', 'id_language'
+        'id_collab', 'id_language', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
     protected $table = 'collaborator_language';

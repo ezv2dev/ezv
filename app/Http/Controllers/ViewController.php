@@ -190,7 +190,7 @@ class ViewController extends Controller
         $detail = DetailReview::where('id_villa', $id)->get();
         $bed = Bed::all();
 
-        $createdby = Villa::select('users.first_name', 'users.last_name', 'users.id', 'owner_profile.about as about_owner')
+        $createdby = Villa::select('users.first_name', 'users.last_name', 'users.id', 'owner_profile.about as about_owner', 'owner_profile.location as location_owner')
             ->where('id_villa', $id)
             ->join('users', 'villa.created_by', '=', 'users.id')
             ->join('owner_profile', 'users.id', '=', 'owner_profile.user_id', 'left')
