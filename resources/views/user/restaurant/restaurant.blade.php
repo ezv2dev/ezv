@@ -2243,7 +2243,31 @@
                         <div>
                             <div class="row owner-block">
                                 <div class="col-1 host-profile">
+                                @if ($restaurant->image)
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
                                     <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}">
+                                        </a>
+                                @else
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    </a>
+                                @endif
                                 </div>
                                 <div class="col-5">
                                     <div class="member-profile">
@@ -2259,9 +2283,9 @@
                                     <h4>Host Profile</h4>
                                     <p>
                                     About
-                                        <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                        <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
                                     Location
-                                        <span>{{ $infoOwner->location ?? '-' }}</span>
+                                        <span>{{ $restaurant->owner->location ?? '-' }}</span>
                                     </p>
                                 </div>
                             </div>

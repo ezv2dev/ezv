@@ -77,7 +77,7 @@ class RestaurantController extends Controller
     {
         // dd($id);
         $restaurant = Restaurant::with([
-            'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'createdByDetails', 'facilities'
+            'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'createdByDetails', 'facilities', 'owner'
         ])
             ->where([
                 ['id_restaurant', $request->id],
@@ -101,7 +101,7 @@ class RestaurantController extends Controller
             abort_if(!$find, 404);
             if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $find->created_by) {
                 $restaurant = Restaurant::with([
-                    'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'createdByDetails', 'facilities'
+                    'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'createdByDetails', 'facilities', 'owner'
                 ])
                     ->where([
                         ['id_restaurant', $request->id],

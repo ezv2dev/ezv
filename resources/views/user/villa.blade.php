@@ -2352,16 +2352,29 @@
                         <div class="row owner-block">
                             <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ $createdby[0]->avatar }}">
-                                    </a>
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ $createdby[0]->avatar }}">
+                                        </a>
                                 @else
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
