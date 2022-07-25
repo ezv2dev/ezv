@@ -581,7 +581,6 @@
     @include('components.notification.notification')
     @component('components.loading.loading-type1')
     @endcomponent
-
     <div id="page-container">
         {{-- HEADER --}}
         <header id="add_class_popup" class="">
