@@ -251,16 +251,30 @@ function editBedroomVilla(id_villa) {
             } else {
                 $("#bathroomID").html(response.data.bathroom1);
             }
+
+            let adultCount = 0;
+            let childrenCount = 0;
+
             if (response.data.adult1 == null) {
-                $("#adultID").html(response.data.adult);
+                adultCount = response.data.adult;
             } else {
-                $("#adultID").html(response.data.adult1);
+                adultCount = response.data.adult1;
             }
             if (response.data.children1 == null) {
-                $("#childrenID").html(response.data.children);
+                childrenCount = response.data.children;
             } else {
-                $("#childrenID").html(response.data.children1);
+                childrenCount = response.data.children1;
             }
+
+            // console.log(adultCount);
+            // console.log(childrenCount);
+
+            let countGuest = parseInt(adultCount) + parseInt(childrenCount);
+
+            console.log(countGuest);
+
+            $("#guestID").html(countGuest);
+
             $("#sizeID").html(response.data.size);
 
             $("#modal-edit_bedroom").modal("hide");
@@ -269,6 +283,9 @@ function editBedroomVilla(id_villa) {
                 message: response.message,
                 position: "topRight",
             });
+        },
+        error: function (jqXHR) {
+            console.log(jqXHR);
         },
     });
 
