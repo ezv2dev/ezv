@@ -1013,10 +1013,12 @@
 
                         {{-- language --}}
                         <p style="margin-bottom:10px">Language :
-                            @foreach ($owner_language as $collab_language)
-                                <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
-                                    style="width: 27px; border:0.1px solid grey;">&nbsp;
-                            @endforeach
+                            <span id='saveLanguageContent'>
+                                @foreach ($owner_language as $collab_language)
+                                    <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
+                                        style="width: 27px; border:0.1px solid grey;">&nbsp;
+                                @endforeach
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="edit_collab_language()"

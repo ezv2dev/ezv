@@ -33,7 +33,7 @@
                     </div>
                     @endforeach
                     <small id="err-slc-lang" style="display: none;" class="invalid-feedback">Select one language</small><br>
-                    <button type="submit" class="btn btn-primary float-right" id="btnSaveLang" onclick="saveLanguage()">Save</button>
+                    <button type="submit" class="btn btn-primary float-right" id="btnSaveLanguage" onclick="saveLanguage()">Save</button>
                 {{-- </form> --}}
 
             </div>
