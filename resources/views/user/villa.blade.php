@@ -2352,16 +2352,29 @@
                         <div class="row owner-block">
                             <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ $createdby[0]->avatar }}">
-                                    </a>
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ $createdby[0]->avatar }}">
+                                        </a>
                                 @else
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
@@ -2385,14 +2398,16 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 owner-profile">
-                                <h4>Host Profile</h4>
-                                <p>
-                                About
-                                    <span>{{ $infoOwner->about ?? '-' }}</span><br>
-                                Location
-                                    <span>{{ $infoOwner->location ?? '-' }}</span>
-                                </p>
+                            <div class="col-12 col-md-6">
+                                <div class="owner-profile">
+                                    <h4>Host Profile</h4>
+                                    <p>
+                                        About
+                                        <span>{{ $createdby[0]->about_owner ?? '-' }}</span><br>
+                                        Location
+                                        <span>{{ $createdby[0]->location_owner ?? '-' }}</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="member-profile-desc">
@@ -2403,7 +2418,7 @@
                                 @else
                                 @endif
                             </p>
-                            <p>{{ $createdby[0]->about_owner }}</p>
+                            {{-- <p>{{ $createdby[0]->about_owner }}</p> --}}
                             @auth
                                 @if (Auth::user()->role_id == 4)
                                     <button type="button" onclick="contactHostForm()"
@@ -3380,8 +3395,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-amenities" role="document" style="overflow-y: initial !important">
-            <div class="modal-content modal-content-amenities" style="background: white; border-radius:15px">
+        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document" style="overflow-y: initial !important">
+            <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -3515,7 +3530,7 @@
                         @endfor
                     </div>
                 </div>
-                <div class="modal-filter-footer" style="height: 20px;"></div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>

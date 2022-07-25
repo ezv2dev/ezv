@@ -23,6 +23,7 @@ use App\Models\HostLanguage;
 use App\Models\ProfileLanguage;
 
 use App\Services\FileCompressionService as FileCompression;
+use Illuminate\Validation\Rule;
 
 class CollaboratorController extends Controller
 {
@@ -240,16 +241,64 @@ class CollaboratorController extends Controller
 
     public function collab_update_gender(Request $request)
     {
-        $collab = Collaborator::where('id_collab', $request->id)->first();
-        if ($collab) {
-            $collab->update(array(
-                'gender' => $request->gender[0],
-                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'updated_by' => Auth::user()->id,
-            ));
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
         }
 
-        return response()->json(['success' => true, 'message' => 'Succesfully Updated Collaborator Gender',  'data' => $request->gender]);
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['required', 'integer'],
+            'gender' => ['nullable', Rule::in(Collaborator::GENDER)],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
+
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // update
+        $updatedCollab = $collab->update([
+            'gender' => $request->gender,
+            'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            'updated_by' => Auth::user()->id,
+        ]);
+
+        $collabData = Collaborator::where('id_collab', $request->id_collab)->select('gender')->first();
+
+        // check if update is success or not
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Gender',
+                'data' => $collabData
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Error Updated Gender',
+            ], 500);
+        }
     }
 
     // update category
@@ -341,7 +390,7 @@ class CollaboratorController extends Controller
         // check if collab does not exist, abort 404
         if (!$collab) {
             return response()->json([
-                'message' => 'Home Not Found',
+                'message' => 'Data Not Found',
             ], 404);
         }
 
@@ -362,13 +411,19 @@ class CollaboratorController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
-        $homeData = Collaborator::where('id_collab', $request->id_collab)->select('latitude', 'longitude')->first();
+        $collabData = Collaborator::where('id_collab', $request->id_collab)->with('location')->first();
 
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
                 'message' => 'Successfuly Updated Location',
-                'data' => $homeData
+                'data' => (object)[
+                    'latitude' => $collabData->latitude,
+                    'longitude' => $collabData->longitude,
+                    'location' => (object)[
+                        'name' => $collabData->location->name,
+                    ],
+                ]
             ], 200);
         } else {
             return response()->json([
@@ -427,18 +482,34 @@ class CollaboratorController extends Controller
         }
 
         // update
-        $updatedCollab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first()->update([
-            'id_collab' => $request->id_collab,
-            'instagram_link' => $request->instagram_link,
-            'instagram_follower' => $request->instagram_follower,
-            'facebook_link' => $request->facebook_link,
-            'facebook_follower' => $request->facebook_follower,
-            'twitter_link' => $request->twitter_link,
-            'twitter_follower' => $request->twitter_follower,
-            'tiktok_link' => $request->tiktok_link,
-            'tiktok_follower' => $request->tiktok_follower,
-            'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
-        ]);
+        $findCollabSocialMedia = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
+        if($findCollabSocialMedia){
+            $updatedCollab = $findCollabSocialMedia->update([
+                'id_collab' => $request->id_collab,
+                'instagram_link' => $request->instagram_link,
+                'instagram_follower' => $request->instagram_follower,
+                'facebook_link' => $request->facebook_link,
+                'facebook_follower' => $request->facebook_follower,
+                'twitter_link' => $request->twitter_link,
+                'twitter_follower' => $request->twitter_follower,
+                'tiktok_link' => $request->tiktok_link,
+                'tiktok_follower' => $request->tiktok_follower,
+                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+            ]);
+        } else {
+            $updatedCollab = CollaboratorSocialMedia::create([
+                'id_collab' => $request->id_collab,
+                'instagram_link' => $request->instagram_link,
+                'instagram_follower' => $request->instagram_follower,
+                'facebook_link' => $request->facebook_link,
+                'facebook_follower' => $request->facebook_follower,
+                'twitter_link' => $request->twitter_link,
+                'twitter_follower' => $request->twitter_follower,
+                'tiktok_link' => $request->tiktok_link,
+                'tiktok_follower' => $request->tiktok_follower,
+                'follower_amount' => $request->instagram_follower + $request->facebook_follower + $request->twitter_follower + $request->tiktok_follower
+            ]);
+        }
 
         $collab = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
 
@@ -728,45 +799,74 @@ class CollaboratorController extends Controller
 
     public function update_language(Request $request)
     {
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['required', 'integer'],
+            'language' => ['nullable', 'array'],
+            'language.*' => ['nullable', Rule::in(HostLanguage::get()->modelKeys())],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
+
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
         $this->authorize('collaborator_update');
-        $status = 500;
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
 
-        try {
-            $find = CollaboratorLanguage::where('id_collab', $request->id_collab)->get();
-
-            // dd($find);
-
-            foreach ($find as $item) {
-                CollaboratorLanguage::where('id_language', $item->id_language)->delete();
-            }
-
-            $language = $request->language;
-            // dd($language);
-
-            foreach ($language as $key => $value) {
+        CollaboratorLanguage::where('id_collab', $request->id_collab)->delete();
+        if($request->language){
+            foreach ($request->language as $item) {
                 $data[] = [
                     'id_collab' => $request->id_collab,
-                    'id_language' => $value,
+                    'id_language' => $item,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                     'created_by' => Auth::user()->id,
                     'updated_by' => Auth::user()->id,
                 ];
             }
-
-            $store = CollaboratorLanguage::insert($data);
-
-            if ($store) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+            $updatedCollab = CollaboratorLanguage::insert($data);
+        } else {
+            $updatedCollab = true;
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        $collab = CollaboratorLanguage::where('id_collab', $request->id_collab)->with('language')->get();
+
+        // check if update is success or not
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Language',
+                'data' => $collab
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Language',
+            ], 500);
         }
     }
 

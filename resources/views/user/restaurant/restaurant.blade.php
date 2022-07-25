@@ -1460,10 +1460,11 @@
                                         </button>
                                     </div>
                                 @endif
-                                @empty($restaurant->facilities->count())
-                                    <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
-                                @endempty
                             </div>
+                            @empty($restaurant->facilities->count())
+                                <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
+                            @endempty
+                        </div>
                     </section>
 
                     <!--<section id="location-map" class="section-2">
@@ -2242,7 +2243,31 @@
                         <div>
                             <div class="row owner-block">
                                 <div class="col-1 host-profile">
+                                @if ($restaurant->image)
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
                                     <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}">
+                                        </a>
+                                @else
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    </a>
+                                @endif
                                 </div>
                                 <div class="col-5">
                                     <div class="member-profile">
@@ -2258,9 +2283,9 @@
                                     <h4>Host Profile</h4>
                                     <p>
                                     About
-                                        <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                        <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
                                     Location
-                                        <span>{{ $infoOwner->location ?? '-' }}</span>
+                                        <span>{{ $restaurant->owner->location ?? '-' }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -3214,8 +3239,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('user_page.All Facilities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
@@ -3232,6 +3257,7 @@
                         </div>
                     @endforelse
                 </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -4104,8 +4130,6 @@
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' +
-                            response.data.photo[i].caption +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
@@ -4745,8 +4769,6 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' +
-                        message.data.photo[0].caption +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +

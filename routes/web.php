@@ -71,6 +71,7 @@ use App\Http\Controllers\StaffRewardBalanceController;
 use App\Http\Controllers\TransactionHistoryController;
 use App\Http\Controllers\Auth\RegisterCollabController;
 use App\Http\Controllers\Auth\RegisterPartnerController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,9 +111,7 @@ Route::get('/contact-us', function () {
     return view('user.contact_us');
 })->name('contact_us');
 
-Route::get('/blog', function () {
-    return view('user.blog');
-})->name('blog');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/culture', function () {
     return view('user.culture');
@@ -1295,6 +1294,7 @@ Route::post('/hotel/update/tags', [Hotel\HotelDetailController::class, 'hotel_up
 Route::post('/hotel/update/category', [Hotel\HotelDetailController::class, 'hotel_update_category'])->name('hotel_update_category');
 Route::post('/hotel/update/location', [Hotel\HotelDetailController::class, 'hotel_update_location'])->name('hotel_update_location');
 Route::post('/hotel/update/name', [Hotel\HotelDetailController::class, 'hotel_update_name'])->name('hotel_update_name');
+Route::post('/hotel/update/star', [Hotel\HotelDetailController::class, 'hotel_update_star'])->name('hotel_update_star');
 Route::post('/hotel/photo/caption/update', [Hotel\HotelDetailController::class, 'hotel_update_caption_photo'])->name('hotel_update_caption_photo');
 
 

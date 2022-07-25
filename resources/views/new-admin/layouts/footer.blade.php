@@ -152,7 +152,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="footer-social text-center">
-                        <a href="https://www.facebook.com/" target=_blank"><i class="fa fa-facebook"></i></a> <a href="https://www.instagram.com/" target=_blank"><i class="fa fa-instagram"></i></a> <a href="mailto:info@ezv2.com" target=_blank"><i class="fa fa-envelope"></i></a> <a href="call:+63361123456" target=_blank"><i class="fa fa-phone"></i></a>
+                        <a href="https://www.facebook.com/ezvillasbali/" target=_blank"><i class="fa fa-facebook"></i></a> <a href="https://www.instagram.com/ezv/" target=_blank"><i class="fa fa-instagram"></i></a> <a href="mailto:info@ezv2.com" target=_blank"><i class="fa fa-envelope"></i></a> <a href="call:+6285792260929" target=_blank"><i class="fa fa-phone"></i></a>
                     </div>
                 </div>
                 <div class="col-12">

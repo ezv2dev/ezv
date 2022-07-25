@@ -85,10 +85,16 @@
             background-color: #ffffff;
             color: #bbb;
             margin-left: 0 !important;
+            width: 25px;
+            font-size: 16px;
         }
 
         .star-active {
             color: #f2b600;
+        }
+
+        .star-not-active {
+            color: #bbb;
         }
     </style>
 </head>
@@ -277,136 +283,6 @@
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
-                {{-- ALERT CONTENT STATUS --}}
-                @auth
-                    @if (auth()->user()->id == $hotel[0]->created_by)
-                        @if ($hotel[0]->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                <span>{{ __('user_page.this content is deactive,') }} </span>
-                                <form action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                <span>{{ __('user_page.this content is active,') }} </span>
-                                <form action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request activation for this content,') }} </span>
-                                <form action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
-                                <form action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
-                        @if ($hotel[0]->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                {{ __('user_page.this content is deactive') }}
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '1')
-                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                {{ __('user_page.this content is active, edit grade hotel') }}
-                                <form action="{{ route('hotel_update_grade', $hotel[0]->id_hotel) }}" method="post">
-                                    @csrf
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade-success" name="grade"
-                                            onchange='this.form.submit()'>
-                                            <option value="AA" {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                        <noscript><input type="submit" value="Submit"></noscript>
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request activation, choose grade Hotel') }}</span>
-                                <form action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
-                                    method="get" class="d-flex">
-                                    <div style="margin-left: 10px;">
-                                        <select class="custom-select grade" name="grade">
-                                            <option value="AA" {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                            </option>
-                                            <option value="A" {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
-                                            </option>
-                                            <option value="B" {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
-                                            </option>
-                                            <option value="C" {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
-                                            </option>
-                                            <option value="D" {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <span style="margin-left: 10px;">and</span>
-                                    <button class="btn" type="submit"
-                                        style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                </form>
-                            </div>
-                        @endif
-                        @if ($hotel[0]->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                <form action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
-                                    method="get">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
-                        @endif
-                    @endif
-                @endauth
-                {{-- END ALERT CONTENT STATUS --}}
-
                 <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -447,7 +323,7 @@
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
                             </div>
-                            <div class="showStar">
+                            <div class="showStar" id="showStar">
                                 @for ($i = 0; $i < $hotel[0]->star; $i++)
                                     <i class="star-active fa fa-star" aria-hidden="true"></i>
                                 @endfor
@@ -456,7 +332,7 @@
                                 @endphp
                                 @if ($j > 0)
                                     @for ($i = 0; $i < $j; $i++)
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="star-not-active fa fa-star" aria-hidden="true"></i>
                                     @endfor
                                 @endif
                             </div>
@@ -489,8 +365,12 @@
                             </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editStar()"
+                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStar"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
+                                        Star</a>
+                                    &nbsp;<a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
+                                        id="buttonSaveStar" class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
                                         Star</a>
                                 @endif
                             @endauth
@@ -1707,8 +1587,8 @@
                                             data-dots="false" data-arrows="true">
                                             @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
                                                 @foreach ($hotelRoomPhoto->where('id_hotel', $item->id_hotel) as $galleryHotelRoom)
-                                                    <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                        target="_blank" class="grid-image-container">
+                                                    <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                        class="grid-image-container">
                                                         <img class="brd-radius img-fluid grid-image"
                                                             style="height: 200px; display: block;"
                                                             src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $galleryHotelRoom->name) }}"
@@ -1716,16 +1596,16 @@
                                                     </a>
                                                 @endforeach
                                             @elseIf (!empty($item->image))
-                                                <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                    target="_blank" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                    class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="{{ asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->image) }}"
                                                         alt="">
                                                 </a>
                                             @else
-                                                <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
-                                                    target="_blank" class="grid-image-container">
+                                                <a onclick="view_room({{ $item->id_hotel_room }})"
+                                                    class="grid-image-container">
                                                     <img class="brd-radius img-fluid grid-image"
                                                         style="height: 200px; display: block;"
                                                         src="https://images.unsplash.com/photo-1609611606051-f22b47a16689?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -1735,7 +1615,7 @@
                                         </div>
                                     </div>
                                     <div class="text-justify" style="cursor: pointer;"
-                                        onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                        onclick="view_room({{ $item->id_hotel_room }})">
                                         <h4>
                                             <p><a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
                                                     target="_blank">{{ $item->name }}</a></p>
@@ -1805,8 +1685,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-6 col-md-1 text-center tab-body capacity-room"
-                                    style="cursor: pointer;"
-                                    onclick="window.open('{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}', '_blank');">
+                                    style="cursor: pointer;" onclick="view_room({{ $item->id_hotel_room }})">
                                     @for ($i = 0; $i < $item->capacity; $i++)
                                         <i class="fas fa-user"></i>
                                     @endfor
@@ -2579,14 +2458,16 @@
                                         <p>{{ __('user_page.Joined in') }} November 2020</p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 owner-profile">
-                                    <h4>Host Profile</h4>
-                                    <p>
-                                        About
-                                        <span>{{ $infoOwner->about ?? '-' }}</span><br>
-                                        Location
-                                        <span>{{ $infoOwner->location ?? '-' }}</span>
-                                    </p>
+                                <div class="col-12 col-md-6">
+                                    <div class="owner-profile">
+                                        <h4>Host Profile</h4>
+                                        <p>
+                                            About
+                                            <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                            Location
+                                            <span>{{ $infoOwner->location ?? '-' }}</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="member-profile-desc">
@@ -2605,479 +2486,465 @@
                                         {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
                                     </div>
                                 </div>
-                                @guest
-                                    <hr>
-                                    <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
-
-                                    {{-- EDIT TO SWIPE CAROUSEL --}}
-
-
-                                    {{-- <div class="container-xxl mx-auto p-0">
-                                <div class="slick-pop-slider">
-                                    <div class="Container1">
-                                        <!-- <div class="row col-12 Arrows1"></div> -->
-                                        <div class="Head">
-                                            <h6><i class="fas fa-utensils"></i></span>
-                                                {{ __('user_page.Restaurants') }} <span class="Arrows1"></span></h6>
-                                        </div>
-                                        <!-- Carousel Container -->
-                                        <div class="SlickCarousel1 translate-text-group">
-                                            @forelse ($nearby_restaurant as $item)
-                                                <!-- Item -->
-                                                <div class="ProductBlock">
-                                                    @guest
-                                                        <div style="position: absolute; z-index: 99;">
-                                                            <a style="cursor: pointer;" onclick="loginForm()">
-                                                                <svg viewBox="0 0 32 32"
-                                                                    class="favorite-button favorite-button-22 white-stroke"
-                                                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                                                    role="presentation" focusable="false"
-                                                                    class="list-like-button "
-                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                    <path
-                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    @endguest
-                                                    @auth
-                                                        @php
-                                                            $cekRestaurant = App\RestaurantSave::where('id_restaurant', $item->detail->id_restaurant)
-                                                                ->where('id_user', Auth::user()->id)
-                                                                ->first();
-                                                        @endphp
-
-                                                        @if ($cekRestaurant == null)
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a style="cursor: pointer;"
-                                                                    onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button favorite-button-22 white-stroke likeButtonrestaurant{{ $item->detail->id_restaurant }}"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false"
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @else
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a style="cursor: pointer;"
-                                                                    onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button-active favorite-button-22 white-stroke unlikeButtonrestaurant{{ $item->detail->id_restaurant }}"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false"
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @endif
-                                                    @endauth
-                                                    <div class="Content">
-                                                        <!-- loop setiap gambar disini -->
-                                                        @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
-                                                            <div class="img-fill">
-                                                                <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
-                                                                    target="_blank">
-                                                                    <img src="{{ URL::asset('/foto/restaurant/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
-                                                                        alt="{{ __('user_page.Restaurants') }}"
-                                                                        loading="lazy">
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-                                                        <!-- akhir loop setiap gambar -->
-                                                    </div>
-                                                    <div class="bottom-fill grid-one-line max-lines">
-                                                        <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
-                                                            target="_blank">{{ $item->detail->name }}</a>
-                                                    </div>
-                                                    <div class="desc-container-grid mb-2">
-                                                        <div
-                                                            class="text-14 fw-400 text-grey-2 grid-one-line max-lines col-lg-10">
-                                                            @if ($item->detail->short_description)
-                                                                <span
-                                                                    class="translate-text-single">{{ $item->detail->short_description }}</span>
-                                                            @else
-                                                                {{ __('user_page.There is no description yet') }}
-                                                            @endif
-                                                        </div>
-                                                        @php
-                                                            $i = 0;
-                                                        @endphp
-                                                        <div style="min-height: 21px;"
-                                                            class="col-12 d-flex justify-content-left text-14 fw-400 text-grey-2">
-                                                            @if ($item->detail->cuisine->count() > 0)
-                                                                @foreach ($item->detail->cuisine->take(3) as $cuisine)
-                                                                    @php
-                                                                        $i += 1;
-                                                                    @endphp
-                                                                    <span>
-                                                                        @php
-                                                                            if ($i <= 3 && $i > 1) {
-                                                                                echo ' • ';
-                                                                            }
-                                                                        @endphp
-                                                                        <span
-                                                                            class="translate-text-group-items">{{ $cuisine->name }}</span>
-                                                                        &nbsp;
-                                                                    </span>
-                                                                @endforeach
-                                                            @else
-                                                                {{ __('user_page.there is no cuisine yet') }}
-                                                            @endif
-                                                        </div>
-                                                        <div
-                                                            class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
-                                                            <!-- change to real distance -->
-                                                            <div class="text-grey-1 mt-1 text-13"><i
-                                                                    class="fa-solid text-orange fa-location-dot"></i>
-                                                                <span class="text-grey-1"><span class="text-grey-1"
-                                                                        id="travelDistance"></span>{{ $item->kilometer }}
-                                                                    {{ __('user_page.km from this hotel') }}</span>
-                                                            </div>
-                                                            <div
-                                                                class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                @if ($item->detail->price->name == 'Cheap Prices')
-                                                                    <span style="color: #FF7400"
-                                                                        data-bs-toggle="popover"
-                                                                        data-bs-animation="true"
-                                                                        data-bs-placement="bottom"
-                                                                        title="{{ Translate::translate($item->detail->price->name) }}">$</span>
-                                                                @elseif ($item->detail->price->name == 'Middle Range')
-                                                                    <span style="color: #FF7400"
-                                                                        data-bs-toggle="popover"
-                                                                        data-bs-animation="true"
-                                                                        data-bs-placement="bottom"
-                                                                        title="{{ Translate::translate($item->detail->price->name) }}">$$</span>
-                                                                @elseif ($item->detail->price->name == 'Fine Dining')
-                                                                    <span style="color: #FF7400"
-                                                                        data-bs-toggle="popover"
-                                                                        data-bs-animation="true"
-                                                                        data-bs-placement="bottom"
-                                                                        title="{{ Translate::translate($item->detail->price->name) }}">$$$</span>
-                                                                @else
-                                                                    {{ __('user_page.Price is unknown') }}
-                                                                @endIf
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-grey-1 mt-1 text-13">
-                                                                @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
-                                                                    <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
-                                                                    <i class="fa-solid text-orange fas fa-ship"></i>
-                                                                @else
-                                                                    <i class="fa-solid text-orange fa-car"></i> <span
-                                                                        class="text-grey-1"
-                                                                        id="">{{ $item->detail->eta_driving }}</span>
-                                                                    | <i
-                                                                        class="fa-solid text-orange fa-person-walking"></i>
-                                                                    <span class="text-grey-1"
-                                                                        id="">{{ $item->detail->eta_walking }}</span>
-                                                                @endIf
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <div class="col-12">
-                                                    <center>
-                                                        <p class="no-data">
-                                                            <span>{{ __('user_page.no restaurant found') }}</span></a>
-                                                        </p>
-                                                    </center>
-                                                </div>
-                                            @endforelse
-                                        </div>
-                                        <!-- Carousel Container -->
-                                    </div>
-                                </div>
-                            </div> --}}
-
-
-                                    {{-- <div class="container-xxl mx-auto p-0">
-                                <div class="slick-pop-slider">
-                                    <div class="Container2">
-                                        <!-- <div class="row col-12 Arrows2"></div> -->
-                                        <div class="Head">
-                                            <h6><i class="fa fa-walking"></i></span>
-                                                {{ __('user_page.Things To Do') }} <span class="Arrows2"></span></h6>
-                                        </div>
-                                        <!-- Carousel Container -->
-                                        <div class="SlickCarousel2">
-                                            @forelse ($nearby_activities as $item)
-                                                <!-- Item -->
-                                                <div class="ProductBlock">
-                                                    @guest
-                                                        <div style="position: absolute; z-index: 99;">
-                                                            <a onclick="loginForm()" style="cursor: pointer;">
-                                                                <svg viewBox="0 0 32 32"
-                                                                    class="favorite-button favorite-button-22 white-stroke"
-                                                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                                                    role="presentation" focusable="false"
-                                                                    class="list-like-button "
-                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                    <path
-                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    @endguest
-                                                    @auth
-                                                        @php
-                                                            $cekActivity = App\ActivitySave::where('id_activity', $item->detail->id_activity)
-                                                                ->where('id_user', Auth::user()->id)
-                                                                ->first();
-                                                        @endphp
-                                                        @if ($cekActivity == null)
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
-                                                                    style="cursor: pointer;">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button favorite-button-22 white-stroke likeButtonactivity{{ $item->detail->id_activity }}"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false"
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @else
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
-                                                                    style="cursor: pointer;">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button-active favorite-button-22 white-stroke unlikeButtonactivity{{ $item->detail->id_activity }}"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false"
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @endif
-                                                    @endauth
-                                                    <div class="Content">
-                                                        <!-- loop setiap gambar disini -->
-                                                        @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
-                                                            <div class="img-fill">
-                                                                <a href="{{ route('activity', $item->detail->id_activity) }}"
-                                                                    target="_blank">
-                                                                    <img src="{{ URL::asset('/foto/activity/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
-                                                                        alt="{{ __('user_page.Things To Do') }}"
-                                                                        loading="lazy">
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-                                                        <!-- akhir loop setiap gambar -->
-                                                    </div>
-                                                    <div class="bottom-fill grid-one-line max-lines">
-                                                        <a href="{{ route('activity', $item->detail->id_activity) }}"
-                                                            target="_blank">{{ $item->detail->name }}</a>
-                                                    </div>
-                                                    <div class="desc-container-grid mb-2">
-                                                        @if ($item->detail->price->count() <= 0 || !$item->detail->price->sortBy('price')->first()->price)
-                                                            <div
-                                                                class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                {{ __('user_page.Price is unknown') }}
-                                                            </div>
-                                                        @else
-                                                            <div
-                                                                class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                {{ __('user_page.Start from') }}
-                                                                <span
-                                                                    class="fw-600 ml-1 text-14 font-black list-description">
-                                                                    {{ CurrencyConversion::exchangeWithUnit($item->detail->price->sortBy('price')->first()->price) }}
-                                                                </span>
-                                                            </div>
-                                                        @endif
-                                                        <!-- change to real distance -->
-                                                        <div class="text-grey-1 mt-1 text-13"><i
-                                                                class="fa-solid text-orange fa-location-dot"></i> <span
-                                                                class="text-grey-1"><span class="text-grey-1"
-                                                                    id="travelDistance"></span>{{ $item->kilometer }}
-                                                                {{ __('user_page.km from this hotel') }}</span></div>
-                                                        <div>
-                                                            <p class="text-grey-1 mt-1 text-13">
-                                                                @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
-                                                                    <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
-                                                                    <i class="fa-solid text-orange fas fa-ship"></i>
-                                                                @else
-                                                                    <i class="fa-solid text-orange fa-car"></i> <span
-                                                                        class="text-grey-1"
-                                                                        id="">{{ $item->detail->eta_driving }}</span>
-                                                                    | <i
-                                                                        class="fa-solid text-orange fa-person-walking"></i>
-                                                                    <span class="text-grey-1"
-                                                                        id="">{{ $item->detail->eta_walking }}</span>
-                                                                @endIf
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <div class="col-12">
-                                                    <center>
-                                                        <p class="no-data">
-                                                            <span>{{ __('user_page.No things to do found') }}</span></a>
-                                                        </p>
-                                                    </center>
-                                                </div>
-                                            @endforelse
-                                        </div>
-                                        <!-- Carousel Container -->
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                                @endguest
+                                {{-- ALERT CONTENT STATUS --}}
                                 @auth
-                                    @if (Auth::user()->role_id != 3)
-                                        <hr>
-                                        <!-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> -->
-
-                                        {{-- EDIT TO SWIPE CAROUSEL --}}
-                                        {{-- <div class="container-xxl mx-auto p-0">
-                                    <div class="slick-pop-slider">
-                                        <div class="Container1">
-                                            <!-- <div class="row col-12 Arrows1"></div> -->
-                                            <div class="Head">
-                                                <h6><i class="fas fa-utensils"></i></span>
-                                                    {{ __('user_page.Restaurants') }} <span class="Arrows1"></span>
-                                                </h6>
+                                    @if (auth()->user()->id == $hotel[0]->created_by)
+                                        @if ($hotel[0]->status == '0')
+                                            <div class="alert alert-danger d-flex flex-row align-items-center"
+                                                role="alert">
+                                                <span>{{ __('user_page.this content is deactive,') }} </span>
+                                                <form
+                                                    action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="id_hotel"
+                                                        value="{{ $hotel[0]->id_hotel }}">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.request activation') }}</button>
+                                                </form>
+                                                <span> ?</span>
                                             </div>
-                                            <!-- Carousel Container -->
-                                            <div class="SlickCarousel1 translate-text-group">
-                                                @forelse ($nearby_restaurant as $item)
-                                                    <!-- Item -->
-                                                    <div class="ProductBlock">
-                                                        @guest
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a style="cursor: pointer;" onclick="loginForm()">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button favorite-button-22 white-stroke"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false" class="list-like-button "
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @endguest
-                                                        @auth
-                                                            @php
-                                                                $cekRestaurant = App\RestaurantSave::where('id_restaurant', $item->detail->id_restaurant)
-                                                                    ->where('id_user', Auth::user()->id)
-                                                                    ->first();
-                                                            @endphp
+                                        @endif
+                                        @if ($hotel[0]->status == '1')
+                                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                                role="success">
+                                                <span>{{ __('user_page.this content is active') }}, </span>
+                                                <form
+                                                    action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="id_hotel"
+                                                        value="{{ $hotel[0]->id_hotel }}">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.request deactivation') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
+                                        @endif
+                                        @if ($hotel[0]->status == '2')
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.you have been request activation for this content,') }}
+                                                </span>
+                                                <form
+                                                    action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="id_hotel"
+                                                        value="{{ $hotel[0]->id_hotel }}">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.cancel activation') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
+                                        @endif
+                                        @if ($hotel[0]->status == '3')
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                                </span>
+                                                <form
+                                                    action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="id_hotel"
+                                                        value="{{ $hotel[0]->id_hotel }}">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                                        @if ($hotel[0]->status == '0')
+                                            <div class="alert alert-danger d-flex flex-row align-items-center"
+                                                role="alert">
+                                                {{ __('user_page.this content is deactive') }}
+                                            </div>
+                                        @endif
+                                        @if ($hotel[0]->status == '1')
+                                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                                role="success">
+                                                {{ __('user_page.this content is active, edit grade hotel') }}
+                                                <form action="{{ route('hotel_update_grade', $hotel[0]->id_hotel) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <div style="margin-left: 10px;">
+                                                        <select class="custom-select grade-success" name="grade"
+                                                            onchange='this.form.submit()'>
+                                                            <option value="AA"
+                                                                {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                            </option>
+                                                            <option value="A"
+                                                                {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                            </option>
+                                                            <option value="B"
+                                                                {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                            </option>
+                                                            <option value="C"
+                                                                {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                            </option>
+                                                            <option value="D"
+                                                                {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                            </option>
+                                                        </select>
+                                                        <noscript><input type="submit" value="Submit"></noscript>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @endif
+                                        @if ($hotel[0]->status == '2')
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.the owner request activation, choose grade Hotel') }}</span>
+                                                <form
+                                                    action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="get" class="d-flex">
+                                                    <div style="margin-left: 10px;">
+                                                        <select class="custom-select grade" name="grade">
+                                                            <option value="AA"
+                                                                {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                            </option>
+                                                            <option value="A"
+                                                                {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                            </option>
+                                                            <option value="B"
+                                                                {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                            </option>
+                                                            <option value="C"
+                                                                {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                            </option>
+                                                            <option value="D"
+                                                                {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <span style="margin-left: 10px;">and</span>
+                                                    <button class="btn" type="submit"
+                                                        style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                        @if ($hotel[0]->status == '3')
+                                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                                role="warning">
+                                                <span>{{ __('user_page.the owner request deactivation,') }} </span>
+                                                <form
+                                                    action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
+                                                    method="get">
+                                                    <button class="btn"
+                                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
+                                                </form>
+                                                <span> ?</span>
+                                            </div>
+                                        @endif
+                                    @endif
+                                @endauth
+                                {{-- END ALERT CONTENT STATUS --}}
+                                {{-- @guestx`
+                                    <hr>
+                                    <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
+                                    <div class="container-xxl mx-auto p-0">
+                                        <div class="slick-pop-slider">
+                                            <div class="Container1">
+                                                <!-- <div class="row col-12 Arrows1"></div> -->
+                                                <div class="Head">
+                                                    <h6><i class="fas fa-utensils"></i></span>
+                                                        {{ __('user_page.Restaurants') }} <span class="Arrows1"></span>
+                                                    </h6>
+                                                </div>
+                                                <!-- Carousel Container -->
+                                                <div class="SlickCarousel1 translate-text-group">
+                                                    @forelse ($nearby_restaurant as $item)
+                                                        <!-- Item -->
+                                                        <div class="ProductBlock">
+                                                            @guest
+                                                                <div style="position: absolute; z-index: 99;">
+                                                                    <a style="cursor: pointer;" onclick="loginForm()">
+                                                                        <svg viewBox="0 0 32 32"
+                                                                            class="favorite-button favorite-button-22 white-stroke"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            aria-hidden="true" role="presentation"
+                                                                            focusable="false" class="list-like-button "
+                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                            <path
+                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            @endguest
+                                                            @auth
+                                                                @php
+                                                                    $cekRestaurant = App\RestaurantSave::where('id_restaurant', $item->detail->id_restaurant)
+                                                                        ->where('id_user', Auth::user()->id)
+                                                                        ->first();
+                                                                @endphp
 
-                                                            @if ($cekRestaurant == null)
-                                                                <div style="position: absolute; z-index: 99;">
-                                                                    <a style="cursor: pointer;"
-                                                                        onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
-                                                                        <svg viewBox="0 0 32 32"
-                                                                            class="favorite-button favorite-button-22 white-stroke likeButtonrestaurant{{ $item->detail->id_restaurant }}"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            aria-hidden="true" role="presentation"
-                                                                            focusable="false"
-                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                            <path
-                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            @else
-                                                                <div style="position: absolute; z-index: 99;">
-                                                                    <a style="cursor: pointer;"
-                                                                        onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
-                                                                        <svg viewBox="0 0 32 32"
-                                                                            class="favorite-button-active favorite-button-22 white-stroke unlikeButtonrestaurant{{ $item->detail->id_restaurant }}"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            aria-hidden="true" role="presentation"
-                                                                            focusable="false"
-                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                            <path
-                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                        @endauth
-                                                        <div class="Content">
-                                                            <!-- loop setiap gambar disini -->
-                                                            @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
-                                                                <div class="img-fill">
-                                                                    <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
-                                                                        target="_blank">
-                                                                        <img src="{{ URL::asset('/foto/restaurant/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
-                                                                            alt="{{ __('user_page.Restaurants') }}"
-                                                                            loading="lazy">
-                                                                    </a>
-                                                                </div>
-                                                            @endforeach
-                                                            <!-- akhir loop setiap gambar -->
-                                                        </div>
-                                                        <div class="bottom-fill grid-one-line max-lines">
-                                                            <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
-                                                                target="_blank">{{ $item->detail->name }}</a>
-                                                        </div>
-                                                        <div class="desc-container-grid mb-2">
-                                                            <div
-                                                                class="text-14 fw-400 text-grey-2 grid-one-line max-lines col-lg-10">
-                                                                @if ($item->detail->short_description)
-                                                                    <span
-                                                                        class="translate-text-single">{{ $item->detail->short_description }}</span>
+                                                                @if ($cekRestaurant == null)
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a style="cursor: pointer;"
+                                                                            onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button favorite-button-22 white-stroke likeButtonrestaurant{{ $item->detail->id_restaurant }}"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false"
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
                                                                 @else
-                                                                    {{ __('user_page.There is no description yet') }}
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a style="cursor: pointer;"
+                                                                            onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button-active favorite-button-22 white-stroke unlikeButtonrestaurant{{ $item->detail->id_restaurant }}"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false"
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
                                                                 @endif
+                                                            @endauth
+                                                            <div class="Content">
+                                                                <!-- loop setiap gambar disini -->
+                                                                @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
+                                                                    <div class="img-fill">
+                                                                        <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
+                                                                            target="_blank">
+                                                                            <img src="{{ URL::asset('/foto/restaurant/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
+                                                                                alt="{{ __('user_page.Restaurants') }}"
+                                                                                loading="lazy">
+                                                                        </a>
+                                                                    </div>
+                                                                @endforeach
+                                                                <!-- akhir loop setiap gambar -->
                                                             </div>
-                                                            @php
-                                                                $i = 0;
-                                                            @endphp
-                                                            <div style="min-height: 21px;"
-                                                                class="col-12 d-flex justify-content-left text-14 fw-400 text-grey-2">
-                                                                @if ($item->detail->cuisine->count() > 0)
-                                                                    @foreach ($item->detail->cuisine->take(3) as $cuisine)
-                                                                        @php
-                                                                            $i += 1;
-                                                                        @endphp
-                                                                        <span>
+                                                            <div class="bottom-fill grid-one-line max-lines">
+                                                                <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
+                                                                    target="_blank">{{ $item->detail->name }}</a>
+                                                            </div>
+                                                            <div class="desc-container-grid mb-2">
+                                                                <div
+                                                                    class="text-14 fw-400 text-grey-2 grid-one-line max-lines col-lg-10">
+                                                                    @if ($item->detail->short_description)
+                                                                        <span
+                                                                            class="translate-text-single">{{ $item->detail->short_description }}</span>
+                                                                    @else
+                                                                        {{ __('user_page.There is no description yet') }}
+                                                                    @endif
+                                                                </div>
+                                                                @php
+                                                                    $i = 0;
+                                                                @endphp
+                                                                <div style="min-height: 21px;"
+                                                                    class="col-12 d-flex justify-content-left text-14 fw-400 text-grey-2">
+                                                                    @if ($item->detail->cuisine->count() > 0)
+                                                                        @foreach ($item->detail->cuisine->take(3) as $cuisine)
                                                                             @php
-                                                                                if ($i <= 3 && $i > 1) {
-                                                                                    echo ' • ';
-                                                                                }
+                                                                                $i += 1;
                                                                             @endphp
-                                                                            <span
-                                                                                class="translate-text-group-items">{{ $cuisine->name }}</span>
-                                                                            &nbsp;
-                                                                        </span>
-                                                                    @endforeach
-                                                                @else
-                                                                    {{ __('user_page.there is no cuisine yet') }}
-                                                                @endif
+                                                                            <span>
+                                                                                @php
+                                                                                    if ($i <= 3 && $i > 1) {
+                                                                                        echo ' • ';
+                                                                                    }
+                                                                                @endphp
+                                                                                <span
+                                                                                    class="translate-text-group-items">{{ $cuisine->name }}</span>
+                                                                                &nbsp;
+                                                                            </span>
+                                                                        @endforeach
+                                                                    @else
+                                                                        {{ __('user_page.there is no cuisine yet') }}
+                                                                    @endif
+                                                                </div>
+                                                                <div
+                                                                    class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
+                                                                    <!-- change to real distance -->
+                                                                    <div class="text-grey-1 mt-1 text-13"><i
+                                                                            class="fa-solid text-orange fa-location-dot"></i>
+                                                                        <span class="text-grey-1"><span
+                                                                                class="text-grey-1"
+                                                                                id="travelDistance"></span>{{ $item->kilometer }}
+                                                                            {{ __('user_page.km from this hotel') }}</span>
+                                                                    </div>
+                                                                    <div
+                                                                        class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                        @if ($item->detail->price->name == 'Cheap Prices')
+                                                                            <span style="color: #FF7400"
+                                                                                data-bs-toggle="popover"
+                                                                                data-bs-animation="true"
+                                                                                data-bs-placement="bottom"
+                                                                                title="{{ Translate::translate($item->detail->price->name) }}">$</span>
+                                                                        @elseif ($item->detail->price->name == 'Middle Range')
+                                                                            <span style="color: #FF7400"
+                                                                                data-bs-toggle="popover"
+                                                                                data-bs-animation="true"
+                                                                                data-bs-placement="bottom"
+                                                                                title="{{ Translate::translate($item->detail->price->name) }}">$$</span>
+                                                                        @elseif ($item->detail->price->name == 'Fine Dining')
+                                                                            <span style="color: #FF7400"
+                                                                                data-bs-toggle="popover"
+                                                                                data-bs-animation="true"
+                                                                                data-bs-placement="bottom"
+                                                                                title="{{ Translate::translate($item->detail->price->name) }}">$$$</span>
+                                                                        @else
+                                                                            {{ __('user_page.Price is unknown') }}
+                                                                        @endIf
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <p class="text-grey-1 mt-1 text-13">
+                                                                        @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
+                                                                            <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
+                                                                            <i
+                                                                                class="fa-solid text-orange fas fa-ship"></i>
+                                                                        @else
+                                                                            <i class="fa-solid text-orange fa-car"></i>
+                                                                            <span class="text-grey-1"
+                                                                                id="">{{ $item->detail->eta_driving }}</span>
+                                                                            | <i
+                                                                                class="fa-solid text-orange fa-person-walking"></i>
+                                                                            <span class="text-grey-1"
+                                                                                id="">{{ $item->detail->eta_walking }}</span>
+                                                                        @endIf
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div
-                                                                class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
+                                                        </div>
+                                                    @empty
+                                                        <div class="col-12">
+                                                            <center>
+                                                                <p class="no-data">
+                                                                    <span>{{ __('user_page.no restaurant found') }}</span></a>
+                                                                </p>
+                                                            </center>
+                                                        </div>
+                                                    @endforelse
+                                                </div>
+                                                <!-- Carousel Container -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-xxl mx-auto p-0">
+                                        <div class="slick-pop-slider">
+                                            <div class="Container2">
+                                                <!-- <div class="row col-12 Arrows2"></div> -->
+                                                <div class="Head">
+                                                    <h6><i class="fa fa-walking"></i></span>
+                                                        {{ __('user_page.Things To Do') }} <span class="Arrows2"></span>
+                                                    </h6>
+                                                </div>
+                                                <!-- Carousel Container -->
+                                                <div class="SlickCarousel2">
+                                                    @forelse ($nearby_activities as $item)
+                                                        <!-- Item -->
+                                                        <div class="ProductBlock">
+                                                            @guest
+                                                                <div style="position: absolute; z-index: 99;">
+                                                                    <a onclick="loginForm()" style="cursor: pointer;">
+                                                                        <svg viewBox="0 0 32 32"
+                                                                            class="favorite-button favorite-button-22 white-stroke"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            aria-hidden="true" role="presentation"
+                                                                            focusable="false" class="list-like-button "
+                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                            <path
+                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            @endguest
+                                                            @auth
+                                                                @php
+                                                                    $cekActivity = App\ActivitySave::where('id_activity', $item->detail->id_activity)
+                                                                        ->where('id_user', Auth::user()->id)
+                                                                        ->first();
+                                                                @endphp
+                                                                @if ($cekActivity == null)
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
+                                                                            style="cursor: pointer;">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button favorite-button-22 white-stroke likeButtonactivity{{ $item->detail->id_activity }}"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false"
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                @else
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
+                                                                            style="cursor: pointer;">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button-active favorite-button-22 white-stroke unlikeButtonactivity{{ $item->detail->id_activity }}"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false"
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                @endif
+                                                            @endauth
+                                                            <div class="Content">
+                                                                <!-- loop setiap gambar disini -->
+                                                                @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
+                                                                    <div class="img-fill">
+                                                                        <a href="{{ route('activity', $item->detail->id_activity) }}"
+                                                                            target="_blank">
+                                                                            <img src="{{ URL::asset('/foto/activity/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
+                                                                                alt="{{ __('user_page.Things To Do') }}"
+                                                                                loading="lazy">
+                                                                        </a>
+                                                                    </div>
+                                                                @endforeach
+                                                                <!-- akhir loop setiap gambar -->
+                                                            </div>
+                                                            <div class="bottom-fill grid-one-line max-lines">
+                                                                <a href="{{ route('activity', $item->detail->id_activity) }}"
+                                                                    target="_blank">{{ $item->detail->name }}</a>
+                                                            </div>
+                                                            <div class="desc-container-grid mb-2">
+                                                                @if ($item->detail->price->count() <= 0 || !$item->detail->price->sortBy('price')->first()->price)
+                                                                    <div
+                                                                        class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                        {{ __('user_page.Price is unknown') }}
+                                                                    </div>
+                                                                @else
+                                                                    <div
+                                                                        class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                        {{ __('user_page.Start from') }}
+                                                                        <span
+                                                                            class="fw-600 ml-1 text-14 font-black list-description">
+                                                                            {{ CurrencyConversion::exchangeWithUnit($item->detail->price->sortBy('price')->first()->price) }}
+                                                                        </span>
+                                                                    </div>
+                                                                @endif
                                                                 <!-- change to real distance -->
                                                                 <div class="text-grey-1 mt-1 text-13"><i
                                                                         class="fa-solid text-orange fa-location-dot"></i>
@@ -3085,209 +2952,388 @@
                                                                             id="travelDistance"></span>{{ $item->kilometer }}
                                                                         {{ __('user_page.km from this hotel') }}</span>
                                                                 </div>
-                                                                <div
-                                                                    class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                    @if ($item->detail->price->name == 'Cheap Prices')
-                                                                        <span style="color: #FF7400"
-                                                                            data-bs-toggle="popover"
-                                                                            data-bs-animation="true"
-                                                                            data-bs-placement="bottom"
-                                                                            title="{{ Translate::translate($item->detail->price->name) }}">$</span>
-                                                                    @elseif ($item->detail->price->name == 'Middle Range')
-                                                                        <span style="color: #FF7400"
-                                                                            data-bs-toggle="popover"
-                                                                            data-bs-animation="true"
-                                                                            data-bs-placement="bottom"
-                                                                            title="{{ Translate::translate($item->detail->price->name) }}">$$</span>
-                                                                    @elseif ($item->detail->price->name == 'Fine Dining')
-                                                                        <span style="color: #FF7400"
-                                                                            data-bs-toggle="popover"
-                                                                            data-bs-animation="true"
-                                                                            data-bs-placement="bottom"
-                                                                            title="{{ Translate::translate($item->detail->price->name) }}">$$$</span>
-                                                                    @else
-                                                                        {{ __('user_page.Price is unknown') }}
-                                                                    @endIf
+                                                                <div>
+                                                                    <p class="text-grey-1 mt-1 text-13">
+                                                                        @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
+                                                                            <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
+                                                                            <i
+                                                                                class="fa-solid text-orange fas fa-ship"></i>
+                                                                        @else
+                                                                            <i class="fa-solid text-orange fa-car"></i>
+                                                                            <span class="text-grey-1"
+                                                                                id="">{{ $item->detail->eta_driving }}</span>
+                                                                            | <i
+                                                                                class="fa-solid text-orange fa-person-walking"></i>
+                                                                            <span class="text-grey-1"
+                                                                                id="">{{ $item->detail->eta_walking }}</span>
+                                                                        @endIf
+                                                                    </p>
                                                                 </div>
                                                             </div>
-                                                            <div>
-                                                                <p class="text-grey-1 mt-1 text-13">
-                                                                    @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
-                                                                        <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
-                                                                        <i class="fa-solid text-orange fas fa-ship"></i>
-                                                                    @else
-                                                                        <i class="fa-solid text-orange fa-car"></i> <span
-                                                                            class="text-grey-1"
-                                                                            id="">{{ $item->detail->eta_driving }}</span>
-                                                                        | <i
-                                                                            class="fa-solid text-orange fa-person-walking"></i>
-                                                                        <span class="text-grey-1"
-                                                                            id="">{{ $item->detail->eta_walking }}</span>
-                                                                    @endIf
-                                                                </p>
-                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @empty
-                                                    <div class="col-12">
-                                                        <center>
-                                                            <p class="no-data">
-                                                                <span>{{ __('user_page.no restaurant found') }}</span></a>
-                                                            </p>
-                                                        </center>
-                                                    </div>
-                                                @endforelse
+                                                    @empty
+                                                        <div class="col-12">
+                                                            <center>
+                                                                <p class="no-data">
+                                                                    <span>{{ __('user_page.No things to do found') }}</span></a>
+                                                                </p>
+                                                            </center>
+                                                        </div>
+                                                    @endforelse
+                                                </div>
+                                                <!-- Carousel Container -->
                                             </div>
-                                            <!-- Carousel Container -->
                                         </div>
                                     </div>
-                                </div> --}}
+                                @endguest
+                                @auth
+                                    @if (Auth::user()->role_id != 3)
+                                        <hr>
+                                        <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
+                                        <div class="container-xxl mx-auto p-0">
+                                            <div class="slick-pop-slider">
+                                                <div class="Container1">
+                                                    <!-- <div class="row col-12 Arrows1"></div> -->
+                                                    <div class="Head">
+                                                        <h6><i class="fas fa-utensils"></i></span>
+                                                            {{ __('user_page.Restaurants') }} <span
+                                                                class="Arrows1"></span>
+                                                        </h6>
+                                                    </div>
+                                                    <!-- Carousel Container -->
+                                                    <div class="SlickCarousel1 translate-text-group">
+                                                        @forelse ($nearby_restaurant as $item)
+                                                            <!-- Item -->
+                                                            <div class="ProductBlock">
+                                                                @guest
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a style="cursor: pointer;" onclick="loginForm()">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button favorite-button-22 white-stroke"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false" class="list-like-button "
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                @endguest
+                                                                @auth
+                                                                    @php
+                                                                        $cekRestaurant = App\RestaurantSave::where('id_restaurant', $item->detail->id_restaurant)
+                                                                            ->where('id_user', Auth::user()->id)
+                                                                            ->first();
+                                                                    @endphp
 
-                                        {{-- <div class="container-xxl mx-auto p-0">
-                                    <div class="slick-pop-slider">
-                                        <div class="Container2">
-                                            <!-- <div class="row col-12 Arrows2"></div> -->
-                                            <div class="Head">
-                                                <h6><i class="fa fa-walking"></i></span>
-                                                    {{ __('user_page.Things To Do') }} <span class="Arrows2"></span>
-                                                </h6>
-                                            </div>
-                                            <!-- Carousel Container -->
-                                            <div class="SlickCarousel2">
-                                                @forelse ($nearby_activities as $item)
-                                                    <!-- Item -->
-                                                    <div class="ProductBlock">
-                                                        @guest
-                                                            <div style="position: absolute; z-index: 99;">
-                                                                <a onclick="loginForm()" style="cursor: pointer;">
-                                                                    <svg viewBox="0 0 32 32"
-                                                                        class="favorite-button favorite-button-22 white-stroke"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        aria-hidden="true" role="presentation"
-                                                                        focusable="false" class="list-like-button "
-                                                                        style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                        <path
-                                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        @endguest
-                                                        @auth
-                                                            @php
-                                                                $cekActivity = App\ActivitySave::where('id_activity', $item->detail->id_activity)
-                                                                    ->where('id_user', Auth::user()->id)
-                                                                    ->first();
-                                                            @endphp
-                                                            @if ($cekActivity == null)
-                                                                <div style="position: absolute; z-index: 99;">
-                                                                    <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
-                                                                        style="cursor: pointer;">
-                                                                        <svg viewBox="0 0 32 32"
-                                                                            class="favorite-button favorite-button-22 white-stroke likeButtonactivity{{ $item->detail->id_activity }}"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            aria-hidden="true" role="presentation"
-                                                                            focusable="false"
-                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                            <path
-                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            @else
-                                                                <div style="position: absolute; z-index: 99;">
-                                                                    <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
-                                                                        style="cursor: pointer;">
-                                                                        <svg viewBox="0 0 32 32"
-                                                                            class="favorite-button-active favorite-button-22 white-stroke unlikeButtonactivity{{ $item->detail->id_activity }}"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            aria-hidden="true" role="presentation"
-                                                                            focusable="false"
-                                                                            style="margin-left: 7px !important; margin-top: 7px !important;">
-                                                                            <path
-                                                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                        @endauth
-                                                        <div class="Content">
-                                                            <!-- loop setiap gambar disini -->
-                                                            @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
-                                                                <div class="img-fill">
-                                                                    <a href="{{ route('activity', $item->detail->id_activity) }}"
-                                                                        target="_blank">
-                                                                        <img src="{{ URL::asset('/foto/activity/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
-                                                                            alt="{{ __('user_page.Things To Do') }}"
-                                                                            loading="lazy">
-                                                                    </a>
-                                                                </div>
-                                                            @endforeach
-                                                            <!-- akhir loop setiap gambar -->
-                                                        </div>
-                                                        <div class="bottom-fill grid-one-line max-lines">
-                                                            <a href="{{ route('activity', $item->detail->id_activity) }}"
-                                                                target="_blank">{{ $item->detail->name }}</a>
-                                                        </div>
-                                                        <div class="desc-container-grid mb-2">
-                                                            @if ($item->detail->price->count() <= 0 || !$item->detail->price->sortBy('price')->first()->price)
-                                                                <div
-                                                                    class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                    {{ __('user_page.Price is unknown') }}
-                                                                </div>
-                                                            @else
-                                                                <div
-                                                                    class="text-14 fw-400 grid-one-line font-black list-description">
-                                                                    {{ __('user_page.Start from') }}
-                                                                    <span
-                                                                        class="fw-600 ml-1 text-14 font-black list-description">
-                                                                        {{ CurrencyConversion::exchangeWithUnit($item->detail->price->sortBy('price')->first()->price) }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                            <!-- change to real distance -->
-                                                            <div class="text-grey-1 mt-1 text-13"><i
-                                                                    class="fa-solid text-orange fa-location-dot"></i>
-                                                                <span class="text-grey-1"><span class="text-grey-1"
-                                                                        id="travelDistance"></span>{{ $item->kilometer }}
-                                                                    {{ __('user_page.km from this hotel') }}</span>
-                                                            </div>
-                                                            <div>
-                                                                <p class="text-grey-1 mt-1 text-13">
-                                                                    @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
-                                                                        <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
-                                                                        <i class="fa-solid text-orange fas fa-ship"></i>
+                                                                    @if ($cekRestaurant == null)
+                                                                        <div style="position: absolute; z-index: 99;">
+                                                                            <a style="cursor: pointer;"
+                                                                                onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
+                                                                                <svg viewBox="0 0 32 32"
+                                                                                    class="favorite-button favorite-button-22 white-stroke likeButtonrestaurant{{ $item->detail->id_restaurant }}"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="presentation"
+                                                                                    focusable="false"
+                                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                    <path
+                                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </div>
                                                                     @else
-                                                                        <i class="fa-solid text-orange fa-car"></i> <span
-                                                                            class="text-grey-1"
-                                                                            id="">{{ $item->detail->eta_driving }}</span>
-                                                                        | <i
-                                                                            class="fa-solid text-orange fa-person-walking"></i>
-                                                                        <span class="text-grey-1"
-                                                                            id="">{{ $item->detail->eta_walking }}</span>
-                                                                    @endIf
-                                                                </p>
+                                                                        <div style="position: absolute; z-index: 99;">
+                                                                            <a style="cursor: pointer;"
+                                                                                onclick="likeFavorit({{ $item->detail->id_restaurant }}, 'restaurant')">
+                                                                                <svg viewBox="0 0 32 32"
+                                                                                    class="favorite-button-active favorite-button-22 white-stroke unlikeButtonrestaurant{{ $item->detail->id_restaurant }}"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="presentation"
+                                                                                    focusable="false"
+                                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                    <path
+                                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endif
+                                                                @endauth
+                                                                <div class="Content">
+                                                                    <!-- loop setiap gambar disini -->
+                                                                    @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
+                                                                        <div class="img-fill">
+                                                                            <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
+                                                                                target="_blank">
+                                                                                <img src="{{ URL::asset('/foto/restaurant/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
+                                                                                    alt="{{ __('user_page.Restaurants') }}"
+                                                                                    loading="lazy">
+                                                                            </a>
+                                                                        </div>
+                                                                    @endforeach
+                                                                    <!-- akhir loop setiap gambar -->
+                                                                </div>
+                                                                <div class="bottom-fill grid-one-line max-lines">
+                                                                    <a href="{{ route('restaurant', $item->detail->id_restaurant) }}"
+                                                                        target="_blank">{{ $item->detail->name }}</a>
+                                                                </div>
+                                                                <div class="desc-container-grid mb-2">
+                                                                    <div
+                                                                        class="text-14 fw-400 text-grey-2 grid-one-line max-lines col-lg-10">
+                                                                        @if ($item->detail->short_description)
+                                                                            <span
+                                                                                class="translate-text-single">{{ $item->detail->short_description }}</span>
+                                                                        @else
+                                                                            {{ __('user_page.There is no description yet') }}
+                                                                        @endif
+                                                                    </div>
+                                                                    @php
+                                                                        $i = 0;
+                                                                    @endphp
+                                                                    <div style="min-height: 21px;"
+                                                                        class="col-12 d-flex justify-content-left text-14 fw-400 text-grey-2">
+                                                                        @if ($item->detail->cuisine->count() > 0)
+                                                                            @foreach ($item->detail->cuisine->take(3) as $cuisine)
+                                                                                @php
+                                                                                    $i += 1;
+                                                                                @endphp
+                                                                                <span>
+                                                                                    @php
+                                                                                        if ($i <= 3 && $i > 1) {
+                                                                                            echo ' • ';
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <span
+                                                                                        class="translate-text-group-items">{{ $cuisine->name }}</span>
+                                                                                    &nbsp;
+                                                                                </span>
+                                                                            @endforeach
+                                                                        @else
+                                                                            {{ __('user_page.there is no cuisine yet') }}
+                                                                        @endif
+                                                                    </div>
+                                                                    <div
+                                                                        class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
+                                                                        <!-- change to real distance -->
+                                                                        <div class="text-grey-1 mt-1 text-13"><i
+                                                                                class="fa-solid text-orange fa-location-dot"></i>
+                                                                            <span class="text-grey-1"><span
+                                                                                    class="text-grey-1"
+                                                                                    id="travelDistance"></span>{{ $item->kilometer }}
+                                                                                {{ __('user_page.km from this hotel') }}</span>
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                            @if ($item->detail->price->name == 'Cheap Prices')
+                                                                                <span style="color: #FF7400"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ Translate::translate($item->detail->price->name) }}">$</span>
+                                                                            @elseif ($item->detail->price->name == 'Middle Range')
+                                                                                <span style="color: #FF7400"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ Translate::translate($item->detail->price->name) }}">$$</span>
+                                                                            @elseif ($item->detail->price->name == 'Fine Dining')
+                                                                                <span style="color: #FF7400"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ Translate::translate($item->detail->price->name) }}">$$$</span>
+                                                                            @else
+                                                                                {{ __('user_page.Price is unknown') }}
+                                                                            @endIf
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="text-grey-1 mt-1 text-13">
+                                                                            @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
+                                                                                <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
+                                                                                <i
+                                                                                    class="fa-solid text-orange fas fa-ship"></i>
+                                                                            @else
+                                                                                <i
+                                                                                    class="fa-solid text-orange fa-car"></i>
+                                                                                <span class="text-grey-1"
+                                                                                    id="">{{ $item->detail->eta_driving }}</span>
+                                                                                | <i
+                                                                                    class="fa-solid text-orange fa-person-walking"></i>
+                                                                                <span class="text-grey-1"
+                                                                                    id="">{{ $item->detail->eta_walking }}</span>
+                                                                            @endIf
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @empty
+                                                            <div class="col-12">
+                                                                <center>
+                                                                    <p class="no-data">
+                                                                        <span>{{ __('user_page.no restaurant found') }}</span></a>
+                                                                    </p>
+                                                                </center>
+                                                            </div>
+                                                        @endforelse
                                                     </div>
-                                                @empty
-                                                    <div class="col-12">
-                                                        <center>
-                                                            <p class="no-data">
-                                                                <span>{{ __('user_page.No things to do found') }}</span></a>
-                                                            </p>
-                                                        </center>
-                                                    </div>
-                                                @endforelse
+                                                    <!-- Carousel Container -->
+                                                </div>
                                             </div>
-                                            <!-- Carousel Container -->
                                         </div>
-                                    </div>
-                                </div> --}}
+
+                                        <div class="container-xxl mx-auto p-0">
+                                            <div class="slick-pop-slider">
+                                                <div class="Container2">
+                                                    <!-- <div class="row col-12 Arrows2"></div> -->
+                                                    <div class="Head">
+                                                        <h6><i class="fa fa-walking"></i></span>
+                                                            {{ __('user_page.Things To Do') }} <span
+                                                                class="Arrows2"></span>
+                                                        </h6>
+                                                    </div>
+                                                    <!-- Carousel Container -->
+                                                    <div class="SlickCarousel2">
+                                                        @forelse ($nearby_activities as $item)
+                                                            <!-- Item -->
+                                                            <div class="ProductBlock">
+                                                                @guest
+                                                                    <div style="position: absolute; z-index: 99;">
+                                                                        <a onclick="loginForm()" style="cursor: pointer;">
+                                                                            <svg viewBox="0 0 32 32"
+                                                                                class="favorite-button favorite-button-22 white-stroke"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                aria-hidden="true" role="presentation"
+                                                                                focusable="false" class="list-like-button "
+                                                                                style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                <path
+                                                                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                @endguest
+                                                                @auth
+                                                                    @php
+                                                                        $cekActivity = App\ActivitySave::where('id_activity', $item->detail->id_activity)
+                                                                            ->where('id_user', Auth::user()->id)
+                                                                            ->first();
+                                                                    @endphp
+                                                                    @if ($cekActivity == null)
+                                                                        <div style="position: absolute; z-index: 99;">
+                                                                            <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
+                                                                                style="cursor: pointer;">
+                                                                                <svg viewBox="0 0 32 32"
+                                                                                    class="favorite-button favorite-button-22 white-stroke likeButtonactivity{{ $item->detail->id_activity }}"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="presentation"
+                                                                                    focusable="false"
+                                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                    <path
+                                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </div>
+                                                                    @else
+                                                                        <div style="position: absolute; z-index: 99;">
+                                                                            <a onclick="likeFavorit({{ $item->detail->id_activity }}, 'activity')"
+                                                                                style="cursor: pointer;">
+                                                                                <svg viewBox="0 0 32 32"
+                                                                                    class="favorite-button-active favorite-button-22 white-stroke unlikeButtonactivity{{ $item->detail->id_activity }}"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="presentation"
+                                                                                    focusable="false"
+                                                                                    style="margin-left: 7px !important; margin-top: 7px !important;">
+                                                                                    <path
+                                                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endif
+                                                                @endauth
+                                                                <div class="Content">
+                                                                    <!-- loop setiap gambar disini -->
+                                                                    @foreach ($item->detail->photo->sortBy('order') as $itemPhoto)
+                                                                        <div class="img-fill">
+                                                                            <a href="{{ route('activity', $item->detail->id_activity) }}"
+                                                                                target="_blank">
+                                                                                <img src="{{ URL::asset('/foto/activity/' . strtolower($item->detail->uid) . '/' . $itemPhoto->name) }}"
+                                                                                    alt="{{ __('user_page.Things To Do') }}"
+                                                                                    loading="lazy">
+                                                                            </a>
+                                                                        </div>
+                                                                    @endforeach
+                                                                    <!-- akhir loop setiap gambar -->
+                                                                </div>
+                                                                <div class="bottom-fill grid-one-line max-lines">
+                                                                    <a href="{{ route('activity', $item->detail->id_activity) }}"
+                                                                        target="_blank">{{ $item->detail->name }}</a>
+                                                                </div>
+                                                                <div class="desc-container-grid mb-2">
+                                                                    @if ($item->detail->price->count() <= 0 || !$item->detail->price->sortBy('price')->first()->price)
+                                                                        <div
+                                                                            class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                            {{ __('user_page.Price is unknown') }}
+                                                                        </div>
+                                                                    @else
+                                                                        <div
+                                                                            class="text-14 fw-400 grid-one-line font-black list-description">
+                                                                            {{ __('user_page.Start from') }}
+                                                                            <span
+                                                                                class="fw-600 ml-1 text-14 font-black list-description">
+                                                                                {{ CurrencyConversion::exchangeWithUnit($item->detail->price->sortBy('price')->first()->price) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                    <!-- change to real distance -->
+                                                                    <div class="text-grey-1 mt-1 text-13"><i
+                                                                            class="fa-solid text-orange fa-location-dot"></i>
+                                                                        <span class="text-grey-1"><span
+                                                                                class="text-grey-1"
+                                                                                id="travelDistance"></span>{{ $item->kilometer }}
+                                                                            {{ __('user_page.km from this hotel') }}</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="text-grey-1 mt-1 text-13">
+                                                                            @if (($item->detail->eta_driving == null) & ($item->detail->eta_walking == null))
+                                                                                <!-- <i class="fa-solid text-orange fas fa-plane"></i> | -->
+                                                                                <i
+                                                                                    class="fa-solid text-orange fas fa-ship"></i>
+                                                                            @else
+                                                                                <i
+                                                                                    class="fa-solid text-orange fa-car"></i>
+                                                                                <span class="text-grey-1"
+                                                                                    id="">{{ $item->detail->eta_driving }}</span>
+                                                                                | <i
+                                                                                    class="fa-solid text-orange fa-person-walking"></i>
+                                                                                <span class="text-grey-1"
+                                                                                    id="">{{ $item->detail->eta_walking }}</span>
+                                                                            @endIf
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @empty
+                                                            <div class="col-12">
+                                                                <center>
+                                                                    <p class="no-data">
+                                                                        <span>{{ __('user_page.No things to do found') }}</span></a>
+                                                                    </p>
+                                                                </center>
+                                                            </div>
+                                                        @endforelse
+                                                    </div>
+                                                    <!-- Carousel Container -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
-                                @endauth
+                                @endauth --}}
                             </div>
                         </div>
                     </div>
@@ -3297,16 +3343,12 @@
     </div>
     {{-- MODAL --}}
     @auth
-        {{-- @include('user.modal.villa.price') --}}
         @include('user.modal.hotel.bedroom')
         @include('user.modal.hotel.add_room')
-        {{-- @include('user.modal.villa.guest') --}}
         @include('user.modal.hotel.location')
         @include('user.modal.hotel.amenities_add')
-        {{-- @include('user.modal.villa.description') --}}
         @include('user.modal.hotel.short_description')
         @include('user.modal.hotel.story')
-        {{-- @include('user.modal.villa.photo') --}}
         @include('user.modal.hotel.hotel_profile')
         @include('user.modal.hotel.tags_hotel')
         @include('user.modal.hotel.category_hotel')
@@ -5370,7 +5412,55 @@
         }
 
         function editStar() {
+            iziToast.info({
+                title: 'Hey',
+                message: 'Insert the star!',
+                position: 'topLeft'
+            });
+            $("#buttonEditStar").addClass('d-none');
+            $("#editStar").removeClass('d-none');
+            $("#buttonSaveStar").removeClass('d-none');
+        }
 
+        function saveStar(id_hotel) {
+            var starVal = document.querySelector('input[name="starHotel"]:checked').value;
+
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/hotel/update/star",
+                data: {
+                    id_hotel: id_hotel,
+                    star: starVal
+                },
+                success: function(response) {
+                    $("#showStar").html(``);
+                    for (let i = 0; i < response.data; i++) {
+                        $("#showStar").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
+                    }
+
+                    let j = 5 - response.data;
+
+                    if (j > 0) {
+                        for (let k = 0; k < j; k++) {
+                            $("#showStar").append(
+                                `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
+                        }
+                    }
+
+                    $("#buttonEditStar").removeClass('d-none');
+                    $("#editStar").addClass('d-none');
+                    $("#buttonSaveStar").addClass('d-none');
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
         }
     </script>
     <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>

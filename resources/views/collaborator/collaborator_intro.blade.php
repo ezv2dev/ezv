@@ -76,7 +76,7 @@
                     <li>No need experiences</li>
                     <li>and Much More</li>
                 </ul>
-                <input class="collab-button" type="button" value="Register Now">
+                <input class="collab-button" type="button" value="Register Now" onclick="location.href='{{ route('register.collab') }}';">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-20">
                 <div class="right-image">
@@ -102,7 +102,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-
     <script>
         //Sticky Bar
         $(function(){

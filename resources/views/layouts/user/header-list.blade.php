@@ -747,14 +747,14 @@
                                     <div class="guests">
                                         <p>{{ __('user_page.Guests') }}</p>
                                         <ul class="nav">
-                                            <li class="button-dropdown">
+                                            <li class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px; border: 0; margin-right: 0; text-align: right;"
+                                                    style="width: 30px; border: 0;margin-right:5px; text-align: right;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
                                                 </a>
-                                                <a class="dropdown-toggle-icon" style="margin-left: 20px;">
+                                                <a class="dropdown-toggle-icon d-flex align-items-center" style="margin-left: 10px;">
                                                     {{ __('user_page.Add') }}
                                                 </a>
                                                 <div class="guest-popup dropdown-menu">
@@ -1459,14 +1459,14 @@
                                     <div class="guests">
                                         <p>{{ __('user_page.Guests') }}</p>
                                         <ul class="nav">
-                                            <li class="button-dropdown">
+                                            <li class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px; border: 0; margin-right: 0; text-align: right;"
+                                                    style="width: 30px;margin-right:5px; border: 0; text-align: right;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
                                                 </a>
-                                                <a class="dropdown-toggle-icon" style="margin-left: 20px;">
+                                                <a class="dropdown-toggle-icon d-flex align-items-center" style="margin-left:10px;">
                                                     {{ __('user_page.Add') }}
                                                 </a>
                                                 <div class="guest-popup dropdown-menu">

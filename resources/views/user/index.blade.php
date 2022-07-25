@@ -249,7 +249,7 @@
                                         <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
                                             target="_blank" href="{{ route('list') }}"><img
                                                 src="{{ asset('assets/icon/menu/homes.svg') }}"
-                                                style="width: 31px; height: auto;"></a>
+                                                style="width: 33px; height: auto;"></a>
                                     </li>
                                     <p>
                                         {{ __('user_page.Homes') }}
@@ -260,7 +260,7 @@
                                         <a class="nav-link nav-link-style nav-link-margin" id="hotel-button"
                                             target="_blank" href="{{ route('restaurant_list') }}"><img
                                                 src="{{ asset('assets/icon/menu/food.svg') }}"
-                                                style="width: 20px; height: auto;"></a>
+                                                style="width: 21px; height: auto;"></a>
                                     </li>
                                     <p>
                                         {{ __('user_page.Food') }}
@@ -271,7 +271,7 @@
                                         <a class="nav-link nav-link-style nav-link-margin" id="restaurant-button"
                                             target="_blank" href="{{ route('hotel_list') }}"><img
                                                 src="{{ asset('assets/icon/menu/hotel.svg') }}"
-                                                style="width: 29px; height: auto;"></a>
+                                                style="width: 28px; height: auto;"></a>
                                     </li>
                                     <p>{{ __('user_page.Hotels') }}</p>
                                 </div>
@@ -280,7 +280,7 @@
                                         <a class="nav-link nav-link-style nav-link-margin" id="activity-button"
                                             target="_blank" href="{{ route('activity_list') }}"><img
                                                 src="{{ asset('assets/icon/menu/wow.svg') }}"
-                                                style="width: 29px; height: auto;"></a>
+                                                style="width: 27px; height: auto;"></a>
                                     </li>
                                     {{-- <p>{{ __('user_page.Things to do') }}</p> --}}
                                     <p>WoW</p>
@@ -290,7 +290,7 @@
                                         <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
                                             target="_blank" href="{{ route('collaborator_intro') }}"><img
                                                 src="{{ asset('assets/icon/menu/collab1.svg') }}"
-                                                style="width: 29px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
+                                                style="width: 34px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
                                     <p>{{ __('user_page.Collabs') }}</p>
                                 </div>
@@ -889,7 +889,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($restaurantSubCategory->sortBy('order')->take(9) as $item)
-                                        <div>
+                                        <div class="pointer">
                                             <div onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -916,7 +916,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
-                                        <div>
+                                        <div class="pointer">
                                             <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"

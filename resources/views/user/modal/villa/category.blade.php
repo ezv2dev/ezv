@@ -248,8 +248,8 @@
 </style>
 
 <div id="categoryModal" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered">
-        <div class="modal-content modal-content-category" style="border-radius:15px;">
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-centered modal-horizontal-centered">
+        <div class="modal-content modal-content-category">
             <div class="modal-header">
                 <div class="col-11">
                     <h4 class="mb-0"><span class="translate-text-single">Choose Category</span></h4>

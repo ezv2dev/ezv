@@ -393,6 +393,11 @@ class Restaurant extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(Profile::class, 'created_by', 'user_id');
+    }
+
     public function subCategory()
     {
         return $this->belongsToMany(Restaurant::class, 'restaurant_has_subcategory', 'id_subcategory', 'id_restaurant', 'id_subcategory', 'id_restaurant')->withPivot('created_by', 'updated_by')->withTimestamps();

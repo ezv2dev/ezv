@@ -66,48 +66,62 @@
         transform: rotate(45deg);
     }
 </style>
-
-<div class="modal fade" id="modal-add_gender" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="height: 200px; width: 400px; top: 200px;">
-            <div class="modal-header" style="padding-left: 2.3rem !important;">
-                <h5 class="modal-title">Edit Gender</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="height: 450px; border-radius: 0px;">
-                <div class="form-group pt-2 px-4">
-                    <div class="row">
-                        <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
-                            <div class="col-6">
-                                <div class="row" style="font-size: 13px;">
-                                    <label class="container-checkbox2">
-                                        <span class="translate-text-group-items">Male</span>
-                                        <input type="checkbox" value="male" id="male" name="gender[]">
-                                        <span class="checkmark2"></span>
-                                    </label>
+<div id="saveGenderForm">
+    <div class="modal fade" id="modal-add_gender" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="height: 200px; width: 400px; top: 200px;">
+                <div class="modal-header" style="padding-left: 2.3rem !important;">
+                    <h5 class="modal-title">Edit Gender</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height: 450px; border-radius: 0px;">
+                    <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}">
+                    <div class="form-group pt-2 px-4">
+                        <div class="row">
+                            <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
+                                <div class="col-6">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            if($profile->gender == 'male'){
+                                                $isChecked = 'checked';
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">Male</span>
+                                            <input type="checkbox" value="male" id="male" name="gender[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row" style="font-size: 13px;">
-                                    <label class="container-checkbox2">
-                                        <span class="translate-text-group-items">Female</span>
-                                        <input type="checkbox" value="female" id="female" name="gender[]">
-                                        <span class="checkmark2"></span>
-                                    </label>
+                                <div class="col-6">
+                                    <div class="row" style="font-size: 13px;">
+                                        @php
+                                            $isChecked = '';
+                                            if($profile->gender == 'female'){
+                                                $isChecked = 'checked';
+                                            }
+                                        @endphp
+                                        <label class="container-checkbox2">
+                                            <span class="translate-text-group-items">Female</span>
+                                            <input type="checkbox" value="female" id="female" name="gender[]" {{ $isChecked }}>
+                                            <span class="checkmark2"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-filter-footer d-flex justify-content-center"
-                style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
-                <div class="col-4" style="text-align: center;">
-                    <button id="btnsaveCategoryRestaurant" type="submit" class="btn btn-primary btn-sm w-100 mb-2"
-                        onclick="updateGender({{ $profile->id_collab }})">
-                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                    </button>
+                <div class="modal-filter-footer d-flex justify-content-center"
+                    style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 70px;">
+                    <div class="col-4" style="text-align: center;">
+                        <button id="btnSaveGender" type="submit" class="btn btn-primary btn-sm w-100 mb-2"
+                            onclick="saveGender()">
+                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

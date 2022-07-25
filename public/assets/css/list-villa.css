@@ -2878,19 +2878,6 @@ div#view-map-button-float {
     padding-right: 0px !important;
 }
 
-.modal-content-map {
-    width: 100% !important;
-    border-radius: 15px;
-    height: 97vh !important;
-}
-
-.modal-dialog-map {
-    max-width: none !important;
-    padding: 9px;
-    box-sizing: border-box;
-    margin: 0px;
-}
-
 .input-text-border {
     border: 1px solid #d1d8ea !important;
     font-size: 1rem !important;

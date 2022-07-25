@@ -9,71 +9,6 @@ $(".check-lang").change(function() {
     });
 });
 
-function editLangCollab(id_collab) {
-    let error = 0;
-
-    $('#check_lang').each(function() {
-        if ($(this).find('input[type="checkbox"]:checked').length == 0) {
-            $('.check-lang').css("border", "solid #e04f1a 1px");
-            $('#err-slc-lang').show();
-            error = 1;
-        }
-    });
-    if (error == 1) {
-        return false;
-    } else {
-        let btn = document.getElementById("btnSaveLang");
-        btn.textContent = "Saving...";
-        btn.classList.add("disabled");
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: "/collab/update/language",
-            data: {
-                id: id_collab,
-                name: $("#name-form-input").val(),
-            },
-            success: function (response) {
-                $("#name-content").html(response.data);
-                $("#name-content-mobile").html(response.data);
-                $("#collabTitle").html(response.data + " - EZV2");
-
-                iziToast.success({
-                    title: "Success",
-                    message: response.message,
-                    position: "topRight",
-                });
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
-                btn.classList.remove("disabled");
-                editNameCancel();
-            },
-            error: function (jqXHR, exception) {
-                if (jqXHR.responseJSON.errors) {
-                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-                        iziToast.error({
-                            title: "Error",
-                            message: jqXHR.responseJSON.errors[i],
-                            position: "topRight",
-                        });
-                    }
-                } else {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.message,
-                        position: "topRight",
-                    });
-                }
-
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
-                btn.classList.remove("disabled");
-
-                editNameCancel();
-            },
-        });
-    }
-}
 //Change name
 $(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
@@ -203,14 +138,14 @@ $("#updateImageForm").submit(function(e) {
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function() {
+                readerImageCollab.addEventListener("load", function() {
                     $("#imageProfileCollab").attr(
                         "src",
-                        readerImageVilla.result
+                        readerImageCollab.result
                     );
                 });
 
-                readerImageVilla.readAsDataURL(imageProfileCollab);
+                readerImageCollab.readAsDataURL(imageProfileCollab);
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
                 $("#modal-edit_collab_profile").modal("hide");
@@ -342,34 +277,6 @@ function saveDescription(id_collab) {
     }
 }
 
-function updateGender(id_collab) {
-    var genderArray = [];
-    $("input[name='gender[]']:checked").each(function() {
-        genderArray.push($(this).val());
-    });
-
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/colaborator/update/gender",
-        data: {
-            id: id_collab,
-            gender: genderArray,
-        },
-        success: function(response) {
-            $("#genderID").html(response.data);
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
-            $('#modal-add_gender').modal('hide');
-        }
-    });
-}
-
 function saveLocation() {
     console.log('hit saveLocation');
     let form = $('#editLocationForm');
@@ -397,6 +304,7 @@ function saveLocation() {
         data: formData,
         // response data
         success: function (response) {
+            console.log(response);
             let latitudeOld = parseFloat(response.data.latitude);
             let longitudeOld = parseFloat(response.data.longitude);
             // variabel global edit marker
@@ -411,6 +319,8 @@ function saveLocation() {
                 message: response.message,
                 position: "topRight",
             });
+            // updated new location name
+            $('#saveLocationContent').text(response.data.location.name);
             // enabled button
             btn.html(`<i class='fa fa-check'></i> Done`);
             btn.removeClass("disabled");
@@ -568,4 +478,148 @@ function saveSocialMedia() {
 
 function saveGender() {
     console.log('hit saveGender');
+
+    const form = $('#saveGenderForm');
+    console.log(form.find("input[name='gender[]']:checked").val());
+
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        gender: form.find("input[name='gender[]']:checked").val(),
+    };
+
+    let btn = form.find('#btnSaveGender');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/update/gender",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated gender
+            $('#saveGenderContent').text(response.data.gender);
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-add_gender').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#modal-add_gender').modal('hide');
+        },
+    });
+}
+
+function saveLanguage() {
+    console.log('hit saveLanguage');
+    const form = $('#saveLanguageForm');
+    const languageInputs = form.find(`input[name='language[]']:checked`);
+    let languageIds = [];
+    for (let i = 0; i < languageInputs.length; i++) {
+        const languageInput = languageInputs.eq(i);
+        languageIds.push(languageInput.val());
+    }
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        language: languageIds
+    };
+
+    let btn = form.find('#btnSaveLanguage');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/collab/update/language",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated langugae content
+            let languageContent = '';
+            if (response.data) {
+                for (let i = 0; i < response.data.length; i++) {
+                    const language = response.data[i].language;
+                    languageContent += `
+                        <img src="http://localhost:8000/assets/flags/${language.flag}"
+                            style="width: 27px; border:0.1px solid grey;">&nbsp;
+                    `;
+                }
+            }
+            $('#saveLanguageContent').html(languageContent);
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#collab_language_modal').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#collab_language_modal').modal('hide');
+        },
+    });
 }

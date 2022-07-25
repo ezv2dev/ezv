@@ -936,18 +936,27 @@
                         @endauth
 
                         {{-- Follower --}}
-
                         <div class="social-media">
                             <div id="saveSocialMediaContent">
                                 <div class="social-links">
-                                    <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
-                                        id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
-                                    <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
-                                        id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
-                                    <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
-                                            class="fab fa-twitter" target="_blank"></i></a>
-                                    <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
-                                            class="fab fa-tiktok" target="_blank"></i></a>
+                                    @if ($profile->collaboratorSocial)
+                                        @if ($profile->collaboratorSocial->instagram_link)
+                                            <a href="{{ $profile->collaboratorSocial->instagram_link ?? '' }}"
+                                                id="instagramID"><i class="fab fa-instagram" target="_blank"></i></a>
+                                        @endif
+                                        @if ($profile->collaboratorSocial->facebook_link)
+                                            <a href="{{ $profile->collaboratorSocial->facebook_link ?? '' }}"
+                                                id="facebookID"><i class="fab fa-facebook-f" target="_blank"></i></a>
+                                        @endif
+                                        @if ($profile->collaboratorSocial->twitter_link)
+                                            <a href="{{ $profile->collaboratorSocial->twitter_link ?? '' }}" id="twitterID"><i
+                                                class="fab fa-twitter" target="_blank"></i></a>
+                                        @endif
+                                        @if ($profile->collaboratorSocial->tiktok_link)
+                                            <a href="{{ $profile->collaboratorSocial->tiktok_link ?? '' }}" id="tiktokID"><i
+                                                class="fab fa-tiktok" target="_blank"></i></a>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                             @auth
@@ -962,7 +971,7 @@
 
                         {{-- Gender --}}
                         <p class="text-secondary" style="margin-bottom: 5px;">
-                            <span class="badge rounded-pill fw-normal" id="genderID" style="background-color: #FF7400;">{{ $profile->gender }}</span>
+                            <span class="badge rounded-pill fw-normal" id="saveGenderContent" style="background-color: #FF7400;">{{ $profile->gender }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_gender()"
@@ -992,7 +1001,7 @@
 
                         {{-- location --}}
                         <p style="margin-bottom:10px"><i class="fa fa-map-marker-alt" style="color: #ff7400"></i>
-                            {{ $profile->name_location }}
+                            <span id="saveLocationContent">{{ $profile->name_location }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="edit_location()"
@@ -1004,10 +1013,12 @@
 
                         {{-- language --}}
                         <p style="margin-bottom:10px">Language :
-                            @foreach ($owner_language as $collab_language)
-                                <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
-                                    style="width: 27px; border:0.1px solid grey;">&nbsp;
-                            @endforeach
+                            <span id='saveLanguageContent'>
+                                @foreach ($owner_language as $collab_language)
+                                    <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
+                                        style="width: 27px; border:0.1px solid grey;">&nbsp;
+                                @endforeach
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="edit_collab_language()"

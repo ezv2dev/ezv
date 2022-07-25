@@ -427,11 +427,11 @@ a:hover {
 .modal-content {
     display: flex;
     flex-direction: column;
-    margin-top: 35px;
     margin-left: auto;
     margin-right: auto;
-    background: transparent;
+    background: white;
     border: none;
+    border-radius: 15px;
     /*
     width: 980px;
     */
@@ -1181,12 +1181,6 @@ a.active {
 .modal-header {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-}
-
-.modal-body {
-    background: #fff;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .modal-body span {
@@ -2792,7 +2786,6 @@ input.error {
 
 .modal-content-amenities {
     width: 100%;
-    border-radius: 9px !important;
 }
 
 .row-modal-amenities {
@@ -3262,7 +3255,8 @@ span.flatpickr-weekday {
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
-    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon {
+    #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon,
+    #menu .gallery2 .grid-photo:nth-child(3n+0) .edit-menu-icon {
         right: 20px !important;
     }
 }
@@ -3956,7 +3950,6 @@ span.flatpickr-weekday {
 
 .modal-content-amenities{
     width: 100%;
-    border-radius: 9px !important;
 }
 
 .modal-content-promotion{
@@ -4068,7 +4061,6 @@ span.flatpickr-weekday {
 @media (min-width: 576px) {
     .modal-content-amenities{
         width: 100%;
-        border-radius: 9px !important;
     }
 
     .modal-map{
@@ -4092,7 +4084,6 @@ span.flatpickr-weekday {
 @media (min-width: 768px) {
     .modal-content-amenities{
         width: 80%;
-        border-radius: 9px !important;
     }
 
     .row-modal-amenities{
@@ -4121,7 +4112,6 @@ span.flatpickr-weekday {
 @media (min-width: 992px) {
     .modal-content-amenities{
         width: 80%;
-        border-radius: 9px !important;
     }
 
     .button-close-map-content{
@@ -4145,7 +4135,6 @@ span.flatpickr-weekday {
 @media (min-width: 1200px) {
     .modal-content-amenities{
         width: 70%;
-        border-radius: 9px !important;
     }
 
     .row-modal-amenities{

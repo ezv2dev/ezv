@@ -40,21 +40,25 @@
 .right-image img {
     object-fit: cover;
     max-width: 100%;
-    aspect-ratio: 16/11;
+    aspect-ratio: 7/8;
 }
 .mb-20 {
     margin-bottom: 20px;
 }
 .fix-header {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     width: 100%;
-    transition: all 1s ease 0s;
+    -webkit-animation: sticky .8s ease-in-out;
+    animation: sticky .8s ease-in-out;
+    -webkit-box-shadow: 0 13px 35px -12px rgb(35 35 35 / 15%);
+    box-shadow: 0 13px 35px -12px rgb(35 35 35 / 15%);
 }
 .w-logo {
     width: 90px;
 }
 .header {
+    position: relative;
     box-sizing: border-box; 
     background-color: #fff;
     z-index: 999;

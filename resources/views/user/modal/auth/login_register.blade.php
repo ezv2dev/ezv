@@ -244,7 +244,11 @@
             height: auto !important;
         }
     }
-
+    @media only screen and (min-width: 992px) {
+        .modal-body-login {
+            height: 100% !important;
+        }
+    }
     .nav-tabs>li {
         width: auto !important;
     }
@@ -685,28 +689,28 @@
                             $('.invalid-feedback').hide()
                             $('.invalid-feedback').text('')
                             $('.form-control').removeClass('is-invalid')
-    
+
                             if(response.status == 200){
                                 location.reload();
                             }else{
                                 var errors = response.responseJSON;
                                 $.each(errors.errors,function (el, val) {
                                     let idErrorMessage = el == 'email' ? '#err-eml-lgn' : '#err-pas-lgn'
-        
+
                                     $('#frmLgn input[name='+el+']').addClass('is-invalid')
                                     $(idErrorMessage).show()
                                     $.each(val, function(index, errMessage){
                                         $(idErrorMessage).text(errMessage)
                                     })
-        
+
                                 });
                             }
-    
+
                         }
                     });
                 }
             }
-            
+
 
         });
 
@@ -884,7 +888,7 @@
             // if(error == 1){
             //     e.preventDefault();
             // }
-            
+
             if(typeof event.cancelable !== 'boolean' || event.cancelable){
                 e.preventDefault();
                 if(error == 0){
@@ -904,19 +908,19 @@
                             var errors = response.responseJSON;
                             $.each(errors.errors,function (el, val) {
                                 let idErrorMessage = el == 'email' ? '#err-eml-rgs' : '#err-pas-rgs'
-        
+
                                 $('#frmRgs input[name='+el+']').addClass('is-invalid')
                                 $(idErrorMessage).show()
                                 $.each(val, function(index, errMessage){
                                     $(idErrorMessage).text(errMessage)
                                 })
-        
+
                             });
                         }
                     });
                 }
             }
-            
+
         });
     });
 </script>
