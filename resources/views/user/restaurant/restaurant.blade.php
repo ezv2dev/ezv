@@ -2255,14 +2255,16 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 owner-profile">
-                                    <h4>Host Profile</h4>
-                                    <p>
-                                    About
-                                        <span>{{ $infoOwner->about ?? '-' }}</span><br>
-                                    Location
-                                        <span>{{ $infoOwner->location ?? '-' }}</span>
-                                    </p>
+                                <div class="col-12 col-md-6">
+                                    <div class="owner-profile">
+                                        <h4>Host Profile</h4>
+                                        <p>
+                                        About
+                                            <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                        Location
+                                            <span>{{ $infoOwner->location ?? '-' }}</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
