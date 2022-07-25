@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <p>This content will be appear when the visitor visit the restaurant list page only for the fisrt time. Mean while revisit visitor to this page will not open this modal anymore.</p>
+                <p>This content will be appear when the visitor visit the restaurant list page only for the first time. Mean while revisit visitor to this page will not open this modal anymore.</p>
                 <p><strong>! IMPORTANT</strong> Please replace this dummy text with the right text.</p>
             </div>
         </div>
