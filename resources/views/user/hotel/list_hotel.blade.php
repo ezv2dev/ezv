@@ -357,7 +357,8 @@
                                             <p class="text-14 fw-600 grid-one-line max-lines mb-0">
                                                 {{ $data->detailReview->average }}/5
                                             </p>
-                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1" href="#"
+                                                onclick="view_details_hotel({{ $hotel[0]->id_hotel }})">
                                                 Review
                                             </a>
                                         @else
@@ -1033,16 +1034,16 @@
                     $('#average_value_show').empty();
                     $('#average_location_show').empty();
 
-                    $('#average_show').append(`${data.detail_review.average}/5`);
-                    $('#average_clean_show').append(
+                    $('#average_show').html(`${data.detail_review.average}/5`);
+                    $('#average_clean_show').html(
                         `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_clean}`);
-                    $('#average_service_show').append(
+                    $('#average_service_show').html(
                         `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_service}`);
-                    $('#average_check_in_show').append(
+                    $('#average_check_in_show').html(
                         `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_check_in}`);
-                    $('#average_location_show').append(
+                    $('#average_location_show').html(
                         `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_location}`);
-                    $('#average_value_show').append(
+                    $('#average_value_show').html(
                         `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_value}`);
 
                 }
