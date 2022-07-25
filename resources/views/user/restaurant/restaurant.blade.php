@@ -1460,10 +1460,11 @@
                                         </button>
                                     </div>
                                 @endif
-                                @empty($restaurant->facilities->count())
-                                    <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
-                                @endempty
                             </div>
+                            @empty($restaurant->facilities->count())
+                                <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
+                            @endempty
+                        </div>
                     </section>
 
                     <!--<section id="location-map" class="section-2">
