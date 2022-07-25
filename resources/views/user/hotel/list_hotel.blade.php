@@ -1007,16 +1007,16 @@
                         </div>`);
                     }
 
-                    $('#average_show').append(`${data.detail_review.average}/5`);
-                    $('#average_clean_show').append(
+                    $('#average_show').html(`${data.detail_review.average}/5`);
+                    $('#average_clean_show').html(
                         `<div class="liner"></div>${data.detail_review.average_clean}`);
-                    $('#average_service_show').append(
+                    $('#average_service_show').html(
                         `<div class="liner"></div>${data.detail_review.average_service}`);
-                    $('#average_check_in_show').append(
+                    $('#average_check_in_show').html(
                         `<div class="liner"></div>${data.detail_review.average_check_in}`);
-                    $('#average_location_show').append(
+                    $('#average_location_show').html(
                         `<div class="liner"></div>${data.detail_review.average_location}`);
-                    $('#average_value_show').append(
+                    $('#average_value_show').html(
                         `<div class="liner"></div>${data.detail_review.average_value}`);
 
                 }
