@@ -654,11 +654,6 @@ pre code {
         max-width: 540px;
     }
 }
-@media (min-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
-}
 @media (min-width: 992px) {
     .container {
         max-width: 960px;
@@ -698,7 +693,8 @@ pre code {
     .container-md,
     .container-sm,
     .container {
-        max-width: 720px;
+        /* max-width: 720px; */
+        max-width: 900px;
     }
 }
 @media (min-width: 992px) {
