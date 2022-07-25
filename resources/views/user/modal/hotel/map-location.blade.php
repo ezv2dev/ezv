@@ -762,7 +762,7 @@
             for (let j = 0; j < hotelLocations.photo.length; j++) {
                 image += `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.photo[j].name}')}}"
+                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid}/${hotelLocations.photo[j].name}')}}"
                         alt="">
                 </a>`;
             }
@@ -770,7 +770,7 @@
             if(hotelLocations.image != null) {
                 image = `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.image}')}}"
+                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid}/${hotelLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
