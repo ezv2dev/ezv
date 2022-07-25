@@ -357,7 +357,8 @@
                                             <p class="text-14 fw-600 grid-one-line max-lines mb-0">
                                                 {{ $data->detailReview->average }}/5
                                             </p>
-                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1" href="#"
+                                                onclick="view_details_hotel({{ $hotel[0]->id_hotel }})">
                                                 Review
                                             </a>
                                         @else
