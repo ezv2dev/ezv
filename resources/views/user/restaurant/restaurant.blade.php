@@ -4058,8 +4058,6 @@
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' +
-                            response.data.photo[i].caption +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
@@ -4699,8 +4697,6 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' +
-                        message.data.photo[0].caption +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
