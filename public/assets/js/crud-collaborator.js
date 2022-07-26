@@ -9,71 +9,6 @@ $(".check-lang").change(function() {
     });
 });
 
-function editLangCollab(id_collab) {
-    let error = 0;
-
-    $('#check_lang').each(function() {
-        if ($(this).find('input[type="checkbox"]:checked').length == 0) {
-            $('.check-lang').css("border", "solid #e04f1a 1px");
-            $('#err-slc-lang').show();
-            error = 1;
-        }
-    });
-    if (error == 1) {
-        return false;
-    } else {
-        let btn = document.getElementById("btnSaveLang");
-        btn.textContent = "Saving...";
-        btn.classList.add("disabled");
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: "/collab/update/language",
-            data: {
-                id: id_collab,
-                name: $("#name-form-input").val(),
-            },
-            success: function (response) {
-                $("#name-content").html(response.data);
-                $("#name-content-mobile").html(response.data);
-                $("#collabTitle").html(response.data + " - EZV2");
-
-                iziToast.success({
-                    title: "Success",
-                    message: response.message,
-                    position: "topRight",
-                });
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
-                btn.classList.remove("disabled");
-                editNameCancel();
-            },
-            error: function (jqXHR, exception) {
-                if (jqXHR.responseJSON.errors) {
-                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-                        iziToast.error({
-                            title: "Error",
-                            message: jqXHR.responseJSON.errors[i],
-                            position: "topRight",
-                        });
-                    }
-                } else {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.message,
-                        position: "topRight",
-                    });
-                }
-
-                btn.innerHTML = "<i class='fa fa-check'></i> Done";
-                btn.classList.remove("disabled");
-
-                editNameCancel();
-            },
-        });
-    }
-}
 //Change name
 $(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
@@ -203,14 +138,14 @@ $("#updateImageForm").submit(function(e) {
                     position: "topRight",
                 });
 
-                readerImageVilla.addEventListener("load", function() {
+                readerImageCollab.addEventListener("load", function() {
                     $("#imageProfileCollab").attr(
                         "src",
-                        readerImageVilla.result
+                        readerImageCollab.result
                     );
                 });
 
-                readerImageVilla.readAsDataURL(imageProfileCollab);
+                readerImageCollab.readAsDataURL(imageProfileCollab);
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
                 $("#modal-edit_collab_profile").modal("hide");
@@ -622,7 +557,9 @@ function saveLanguage() {
         language: languageIds
     };
 
-    console.log(formData);
+    let btn = form.find('#btnSaveLanguage');
+    btn.text("Saving...");
+    btn.addClass("disabled");
 
     $.ajax({
         type: "POST",
@@ -633,7 +570,6 @@ function saveLanguage() {
         data: formData,
         success: function (response) {
             console.log(response);
-            return;
 
             // notification
             iziToast.success({
@@ -642,14 +578,24 @@ function saveLanguage() {
                 position: "topRight",
             });
 
-            // append updated gender
-            $('#saveGenderContent').text(response.data.gender);
+            // append updated langugae content
+            let languageContent = '';
+            if (response.data) {
+                for (let i = 0; i < response.data.length; i++) {
+                    const language = response.data[i].language;
+                    languageContent += `
+                        <img src="http://localhost:8000/assets/flags/${language.flag}"
+                            style="width: 27px; border:0.1px solid grey;">&nbsp;
+                    `;
+                }
+            }
+            $('#saveLanguageContent').html(languageContent);
 
             // enabled button
             btn.html("<i class='fa fa-check'></i> Save");
             btn.removeClass("disabled");
             // close modal
-            $('#modal-add_gender').modal('hide');
+            $('#collab_language_modal').modal('hide');
         },
         error: function (jqXHR, exception) {
             // console.log(jqXHR);
@@ -673,7 +619,117 @@ function saveLanguage() {
             btn.html("<i class='fa fa-check'></i> Save");
             btn.removeClass("disabled");
 
-            $('#modal-add_gender').modal('hide');
+            $('#collab_language_modal').modal('hide');
+        },
+    });
+}
+function saveTags() {
+    console.log('hit saveTag');
+
+    const form = $('#saveTagsForm');
+    const categoryInputs = form.find(`input[name='category[]']:checked`);
+    let categoryIds = [];
+    for (let i = 0; i < categoryInputs.length; i++) {
+        const categoryInput = categoryInputs.eq(i);
+        categoryIds.push(categoryInput.val());
+    }
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        category: categoryIds
+    };
+
+    let btn = form.find('#btnSaveTags');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/colaborator/store/category",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated tag content
+            let tagsContent = '';
+            // append updated tag content modal
+            let tagsContentModal = '';
+            if (response.data) {
+                if(response.data.length > 7){
+                    for (let i = 0; i < 7; i++) {
+                        const name = response.data[i].name;
+                        tagsContent += `
+                            <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                ${name}
+                            </span>
+                        `;
+                    }
+                    tagsContent += `
+                        <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">
+                            More
+                        </button>
+                    `;
+                } else {
+                    for (let i = 0; i < response.data.length; i++) {
+                        const name = response.data[i].name;
+                        tagsContent += `
+                            <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                ${name}
+                            </span>
+                        `;
+                    }
+                }
+
+                for (let i = 0; i < response.data.length; i++) {
+                    const name = response.data[i].name;
+                    tagsContentModal += `
+                        <div class='col-md-6'>
+                            <span class="translate-text-group-items">${name}</span>
+                        </div>
+                    `;
+                }
+            }
+            $('#saveTagsContent').html(tagsContent);
+            $('#saveTagsContentModal').html(tagsContentModal);
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+            // close modal
+            $('#modal-add_tag').modal('hide');
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+
+            $('#modal-add_tag').modal('hide');
         },
     });
 }

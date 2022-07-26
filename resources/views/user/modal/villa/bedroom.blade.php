@@ -289,8 +289,13 @@
                 <div class="row mb-12 margin-bottom-12px display-none" id="childrenForm">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control modal-input" id="children1" name="children1"
-                            placeholder="Input Childrens.." min="7"
+                        <input type="number" class="form-control modal-input" id="children1" name="children1"
+                        @if ($villa[0]->children > 5)
+                            value="{{ $villa[0]->children }}"
+                        @else
+                            value=""
+                        @endif
+                            placeholder="Input Childrens.." min="6"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
                 </div>
@@ -949,6 +954,7 @@
     }
 
     function hideChildren() {
+        $("#children1").val("");
         document
             .getElementById("childrenForm")
             .classList.add("display-none");

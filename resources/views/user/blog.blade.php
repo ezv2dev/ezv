@@ -45,6 +45,7 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/dashmix.min.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/home.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/header_minimaliste.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/blog.css') }}">
 
     <!-- Fonts and Dashmix framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -60,25 +61,68 @@
         <!-- Header -->
         @include('layouts.user.header_minimaliste')
     </section>
-    <section class="collab-body">
-    <nav aria-label="breadcrumb">
+    <div class="container-fluid blog-header">
+        <div class="container vert-middle">
+            <div class="privacy-title mb-4"><h2>Blog</h2>
+            </div>
+        </div>
+    <br>
+    </div>
+    <nav aria-label="breadcrumb" class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Blog</a></li>
         </ol>
     </nav>
-    <br>
-
-    <small class="text-muted">Legal Terms</small>
-
-    <div class="privacy-title mb-4"><h2>Blog</h2>
-    </div>
-    <div class="privacy-description">
-        {{-- <p class="mb-3 text-dark text-justify" style="font-size: 16pt"><b>Terms of Service for Non-European Users</b></p> --}}
-        {{-- <p class="lead">Last Updated: February 10, 2022</p> --}}
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-        <p class="mb-3 text-dark text-justify" style="font-size: 11pt">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+    <section class="blog-body">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="row">
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?car">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 1</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?tractor">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 2</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?missile">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 3</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 right-block">
+            <div class="right-content">
+                <h4 class="title">Latest Blogs</h4>
+                <ul>
+                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 1</a></li>
+                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 2</a></li>
+                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     </section>
     {{-- modal laguage and currency --}}

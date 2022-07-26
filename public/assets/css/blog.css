@@ -1,0 +1,96 @@
+.blog-header {
+    height: 200px;
+    background: url('https://source.unsplash.com/random/?nightsky');
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+
+.vert-middle {
+    margin-top: 6%;
+}
+
+.privacy-title {
+    color: #fff !important;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.blog-img {
+    max-width: 100%;
+    aspect-ratio: 6/4;
+    object-fit: cover;
+    border: solid 1px #a5a5a5;
+    border-radius: 12px;
+}
+
+.list-header {
+    font-weight: 600;
+    font-size: larger;
+}
+
+.more {
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #000;
+    float: right;
+}
+
+.more:hover::after {
+    color: #ff7400;
+    left: 10px;
+}
+
+.more:hover {
+    color: #ff7400;
+}
+
+.more::after {
+    content: '\f061';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #000;
+    position: relative;
+    left: 5px;
+}
+
+.pd-lr-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.blog-body {
+    padding: 20px 80px;
+}
+
+.right-block {
+    position: relative;
+}
+
+.right-content {
+    border: solid 1px #ff7400;
+    padding: 20px;
+    border-radius: 12px;
+    margin-left: 15px;
+}
+
+.right-content ul li {
+    list-style: none;
+    text-indent: -31px;
+    font-size: smaller;
+}
+
+.right-content ul li a {
+    color: #585858;
+    line-height: 2.4;
+}
+
+.right-content ul li a:hover {
+    color: #ff7400;
+}
+
+@media (min-width: 992px) {
+    .header-4-4 .navbar {
+        padding: 1rem 2rem;
+    }
+}

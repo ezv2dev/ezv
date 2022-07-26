@@ -394,14 +394,15 @@
                             for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
                                 $bedCount = $bedCount + $villa[0]->villaBedroomDetail[$i]->bed_count;
                             }
+                            $guestCount = $villa[0]->adult + $villa[0]->children;
                         @endphp
                         <p style="font-size: 13px"><span id="bedroomID">{{ $villa[0]->bedroom }}</span>
                             {{ __('user_page.Bedrooms') }}
                             | <span id="bedsID">{{ $bedCount }}</span> Beds | <span
                                 id="bathroomID">{{ $villa[0]->bathroom }}</span>
                             {{ __('user_page.Bathroom') }} |
-                            <span id="adultID">{{ $villa[0]->adult }}</span> {{ __('user_page.Adults') }} |
-                            <span id="childrenID">{{ $villa[0]->children }}</span> {{ __('user_page.Children') }}
+                            <span id="guestID">{{ $guestCount }}</span> {{ __('user_page.Guests') }}
+                            {{-- | <span id="childrenID">{{ $villa[0]->children }}</span> {{ __('user_page.Children') }} --}}
                             @if ($villa[0]->size != null || $villa[0]->size > 0)
                                 | <span id="sizeID">{{ $villa[0]->size }}</span> m<sup>2</sup>
                             @endif
@@ -2352,16 +2353,29 @@
                         <div class="row owner-block">
                             <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ $createdby[0]->avatar }}">
-                                    </a>
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ $createdby[0]->avatar }}">
+                                        </a>
                                 @else
-                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
-                                        target="_blank">
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    @auth
+                                        @if ($createdby[0]->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
@@ -3382,8 +3396,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-amenities" role="document" style="overflow-y: initial !important">
-            <div class="modal-content modal-content-amenities" style="background: white; border-radius:15px">
+        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document" style="overflow-y: initial !important">
+            <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -3517,7 +3531,7 @@
                         @endfor
                     </div>
                 </div>
-                <div class="modal-filter-footer" style="height: 20px;"></div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -3754,7 +3768,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                    <div style="clear: both; width: 100%;">
                         <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
                             onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
@@ -3771,8 +3785,7 @@
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Video') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"
-                        style="margin-left: 1086px; position: absolute;"><i style="font-size: 22px;"
+                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
                             class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body pb-1">
@@ -3796,7 +3809,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                    <div style="clear: both; width: 100%;">
                         <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
                             onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
@@ -3965,6 +3978,78 @@
             // Initialize sortable
             $("#sortable-video").sortable();
             $("#sortable-photo").sortable();
+
+            if ($(window).width() < 992) {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", true);
+                $("#sortable-photo").sortable("option", "disabled", true);
+            }else {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", false);
+                $("#sortable-photo").sortable("option", "disabled", false);
+            }
+
+            //handle resize
+            $(window).on("resize", function() {
+                if ($(this).width() < 992) {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", true);
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                } else {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", false);
+                    $("#sortable-photo").sortable("option", "disabled", false);
+                }
+            })
+
+            //initialize timeout variable
+            var timeOut = 0;
+
+            //clear time out to prevent memory leak
+            $("#edit_position_photo").on("click", function(e) {
+                if (e.target.id == "edit_position_photo") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_video").on("click", function(e) {
+                if (e.target.id == "edit_position_video") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            
+            //event for mobile
+            $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-photo .ui-state-default img").addClass("shake-anim");
+                        $("#sortable-photo").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                }
+            })
+            $("#sortable-video .ui-state-default video").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-video .ui-state-default video").addClass("shake-anim");
+                        $("#sortable-video").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-video .ui-state-default video").removeClass("shake-anim");
+                    $("#sortable-video").sortable("option", "disabled", true);
+                }
+            })
         });
 
         function position_photo() {

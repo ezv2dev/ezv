@@ -2243,7 +2243,31 @@
                         <div>
                             <div class="row owner-block">
                                 <div class="col-1 host-profile">
+                                @if ($restaurant->image)
+                                    @guest
+                                        <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                    @endguest
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
                                     <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}">
+                                        </a>
+                                @else
+                                    @auth
+                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                            <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                        @endIf
+                                    @endauth
+                                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    </a>
+                                @endif
                                 </div>
                                 <div class="col-5">
                                     <div class="member-profile">
@@ -2255,16 +2279,14 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="owner-profile">
-                                        <h4>Host Profile</h4>
-                                        <p>
-                                        About
-                                            <span>{{ $infoOwner->about ?? '-' }}</span><br>
-                                        Location
-                                            <span>{{ $infoOwner->location ?? '-' }}</span>
-                                        </p>
-                                    </div>
+                                <div class="col-12 col-md-6 owner-profile">
+                                    <h4>Host Profile</h4>
+                                    <p>
+                                    About
+                                        <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
+                                    Location
+                                        <span>{{ $restaurant->owner->location ?? '-' }}</span>
+                                    </p>
                                 </div>
                             </div>
 
@@ -3217,8 +3239,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('user_page.All Facilities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
@@ -3235,6 +3257,7 @@
                         </div>
                     @endforelse
                 </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -3741,7 +3764,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px; width: 100%;">
+                    <div style="clear: both; width: 100%;">
                         <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
                             onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
@@ -3782,7 +3805,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <div style="clear: both; margin-top: 20px;">
+                    <div style="clear: both;">
                         <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
                             onclick="save_reorder_video()">Submit</button>
                     </div>
@@ -3979,6 +4002,78 @@
             // Initialize sortable
             $("#sortable-video").sortable();
             $("#sortable-photo").sortable();
+
+            if ($(window).width() < 992) {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", true);
+                $("#sortable-photo").sortable("option", "disabled", true);
+            }else {
+                //Setter
+                $("#sortable-video").sortable("option", "disabled", false);
+                $("#sortable-photo").sortable("option", "disabled", false);
+            }
+
+            //handle resize
+            $(window).on("resize", function() {
+                if ($(this).width() < 992) {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", true);
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                } else {
+                    //Setter
+                    $("#sortable-video").sortable("option", "disabled", false);
+                    $("#sortable-photo").sortable("option", "disabled", false);
+                }
+            })
+
+            //initialize timeout variable
+            var timeOut = 0;
+
+            //clear time out to prevent memory leak
+            $("#edit_position_photo").on("click", function(e) {
+                if (e.target.id == "edit_position_photo") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_video").on("click", function(e) {
+                if (e.target.id == "edit_position_video") {
+                    clearTimeout(timeOut);
+                }
+            })
+            $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
+                clearTimeout(timeOut);
+            })
+            
+            //event for mobile
+            $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-photo .ui-state-default img").addClass("shake-anim");
+                        $("#sortable-photo").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
+                    $("#sortable-photo").sortable("option", "disabled", true);
+                }
+            })
+            $("#sortable-video .ui-state-default video").on("mouseenter", function() {
+                if ($(window).width() < 992) {
+                    timeOut = setTimeout(function() {
+                        $("#sortable-video .ui-state-default video").addClass("shake-anim");
+                        $("#sortable-video").sortable("option", "disabled", false);    
+                    }, 500);
+                }
+            }).on("mouseup mouseleave", function() {
+                if ($(window).width() < 992) {
+                    $("#sortable-video .ui-state-default video").removeClass("shake-anim");
+                    $("#sortable-video").sortable("option", "disabled", true);
+                }
+            })
         });
 
         function position_photo() {
@@ -4035,8 +4130,6 @@
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' +
-                            response.data.photo[i].caption +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
@@ -4676,8 +4769,6 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' +
-                        message.data.photo[0].caption +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +

@@ -297,7 +297,7 @@
 
                 <div class="desc-container-grid " style="z-index:0;">
                     <a href="{{ route('hotel', $data->id_hotel) }}" target="_blank" class="grid-overlay-desc"
-                        style="height: 100%;z-index:0;"></a>
+                        style="height: 25%;z-index:0;"></a>
                     <div class=" skeleton skeleton-w-100 skeleton-h-2">
                         <span class="text-14 fw-500 {{ $textColor }} list-description">
                             {{ $data->name ?? __('user_page.There is no name yet') }}
@@ -322,7 +322,7 @@
                                     <span>{{ $data->star }} Stars</span>
                                     <i class="fa-solid fa-star" style="color: #febb02"></i>
                                 </div>
-                                @else
+                            @else
                                 <div class="text-13 text-md-end">
                                     <span>No stars yet</span>
                                     <i class="fa-solid fa-star" style="color: #febb02"></i>
@@ -333,10 +333,10 @@
                     <div class=" grid-one-line max-lines col-lg-10 skeleton skeleton-w-100 skeleton-h-1">
                         <div class="d-flex">
                             <span class="text-14 fw-400 text-grey-2 grid-one-line max-lines">
-                                {{ Translate::translate($data->short_description) ?? __('user_page.There is no description yet') }}
+                                {{ Translate::translate($data->description) ?? __('user_page.There is no description yet') }}
                             </span>
                             <span class="text-12 fw-400"><a class="orange-hover"
-                                    onclick='view_details({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
+                                    onclick='view_details_hotel({{ $data->id_hotel }})'>{{ __('user_page.More Details') }}</a></span>
                         </div>
                     </div>
                     <div class="mt-2 grid-one-line skeleton skeleton-w-100 skeleton-h-5">
@@ -356,7 +356,8 @@
                                             <p class="text-14 fw-600 grid-one-line max-lines mb-0">
                                                 {{ $data->detailReview->average }}/5
                                             </p>
-                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1 " href="#!">
+                                            <a class="text-12 fw-400 grid-one-line text-orange mt-1" href="#"
+                                                onclick="view_details_hotel({{ $hotel[0]->id_hotel }})">
                                                 Review
                                             </a>
                                         @else
@@ -854,6 +855,18 @@
         function hotelRefreshFilter(suburl) {
             window.location.href = `{{ env('APP_URL') }}/hotel/search?${suburl}`;
         }
+
+        $("input[name='fCategory[]']").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
         $("input[name='fSort[]']").on('click', function() {
             var $box = $(this);
             if ($box.is(":checked")) {
@@ -875,6 +888,11 @@
             if (fSortFormInput == undefined) {
                 var fSortFormInput = '';
             }
+
+            var fStarFormInput = [];
+            $("input[name='fStar[]']:checked").each(function() {
+                fStarFormInput.push(parseInt($(this).val()));
+            });
 
             var filterFormInput = [];
             var fCategoryFormInput = [];
@@ -969,28 +987,88 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&filter=${filteredArray}&fSort=${fSortFormInput}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&fStar=${fStarFormInput}&filter=${filteredArray}&fSort=${fSortFormInput}`;
 
             hotelRefreshFilter(subUrl);
         }
     </script>
 
-    {{-- <script>
-        function moreCategory() {
-            $('#categoryModal').modal('show');
-        }
-
-        function moreSubCategory() {
-            $('#modalSubCategory').modal('show');
-        }
-    </script> --}}
     {{-- END SEARCH FUNCTION --}}
 
     {{-- MAP --}}
     @include('user.modal.hotel.list.map')
     {{-- END MAP --}}
     {{-- DETAILS --}}
-    @include('user.modal.hotel.list.details')
+    {{-- @include('user.modal.hotel.list.details') --}}
+    @include('user.modal.hotel.list.details_hotel')
+
+    <script>
+        function renderRating(rating) {
+            switch(Math.floor(rating)) {
+                case 1:
+                    return "bar-1"
+                    break;
+                case 2:
+                    return "bar-2"
+                    break;
+                case 3:
+                    return "bar-3"
+                    break;
+                case 4:
+                    return "bar-4"
+                    break;
+                case 5:
+                    return "bar-5"
+                    break;
+            }
+        }
+        function view_details_hotel(id) {
+            $.ajax({
+                type: "GET",
+                url: `/hotel/details/${id}`,
+                success: (data) => {
+                    console.log(data);
+                    console.log(data.detail_review.average);
+                    $('.name-hotel').html(data.name);
+                    $('#descHotel').html(data.description);
+
+                    var lengthAmenities = data.amenities.length;
+                    $('#amenitiesList').html('');
+                    for (i = 0; i < lengthAmenities; i++) {
+                        $('#amenitiesList').append(`
+                        <div class = "col-md-6 mb-2" >
+                            <span class = 'translate-text-group-items'>
+                                ${data.amenities[i].name}
+                            </span>
+                        </div>`);
+                    }
+
+                    $('#average_show').empty();
+                    $('#average_clean_show').empty();
+                    $('#average_service_show').empty();
+                    $('#average_check_in_show').empty();
+                    $('#average_value_show').empty();
+                    $('#average_location_show').empty();
+
+                    $('#average_show').html(`${data.detail_review.average}/5`);
+                    $('#average_clean_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_clean}`);
+                    $('#average_service_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_service}`);
+                    $('#average_check_in_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_check_in}`);
+                    $('#average_location_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_location}`);
+                    $('#average_value_show').html(
+                        `<div class="liner ${renderRating(data.detail_review.average_clean)}"></div>${data.detail_review.average_value}`);
+
+                }
+            });
+
+            $('#modal-details').modal('show');
+        }
+    </script>
     {{-- END DETAILS --}}
     <script src="{{ asset('assets/js/translate.js') }}"></script>
+    <script src="{{ asset('assets/js/price-range.js') }}"></script>
 @endsection

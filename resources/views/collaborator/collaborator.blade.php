@@ -581,7 +581,6 @@
     @include('components.notification.notification')
     @component('components.loading.loading-type1')
     @endcomponent
-
     <div id="page-container">
         {{-- HEADER --}}
         <header id="add_class_popup" class="">
@@ -854,7 +853,6 @@
                     @endif
                 @endauth
                 {{-- END ALERT CONTENT STATUS --}}
-
                 <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -983,13 +981,25 @@
 
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
-                            @forelse ($tags->take(3) as $item)
-                                <span class="badge rounded-pill fw-normal"
-                                    style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
-                            @empty
-                                <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
-                                    onclick="view_tag()">More</button>
-                            @endforelse
+                            <span id="saveTagsContent">
+                                @if ($tags->count() > 7)
+                                    @forelse ($tags->take(7) as $item)
+                                        <span class="badge rounded-pill fw-normal"
+                                            style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
+                                    @empty
+                                    @endforelse
+                                    <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">
+                                        More
+                                    </button>
+                                @else
+                                    @forelse ($tags as $item)
+                                        <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
+                                            {{ $item->collaboratorCategory->name }}
+                                        </span>
+                                    @empty
+                                    @endforelse
+                                @endif
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="add_tag()"
@@ -1013,10 +1023,12 @@
 
                         {{-- language --}}
                         <p style="margin-bottom:10px">Language :
-                            @foreach ($owner_language as $collab_language)
-                                <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
-                                    style="width: 27px; border:0.1px solid grey;">&nbsp;
-                            @endforeach
+                            <span id='saveLanguageContent'>
+                                @foreach ($owner_language as $collab_language)
+                                    <img src="{{ URL::asset('assets/flags/' . $collab_language->language->flag) }}"
+                                        style="width: 27px; border:0.1px solid grey;">&nbsp;
+                                @endforeach
+                            </span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="edit_collab_language()"
@@ -1210,7 +1222,6 @@
                     <section id="gallery" class="photosGrid section mb-3">
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
-
                                 @foreach ($photo as $item)
                                     <div class="col-4 grid-photo">
                                         <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
@@ -1239,7 +1250,6 @@
                                         @endauth
                                     </div>
                                 @endforeach
-
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
@@ -2522,6 +2532,41 @@
             </div>
         </div>
     </div>
+
+    {{-- MODAL TAGS --}}
+    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background: white; border-radius:25px">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('user_page.All Tags') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_tag()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-1" style="height: 500px; overflow-y: auto;">
+                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                        <div id="saveTagsContentModal">
+                            @foreach ($profile->category as $item)
+                                <div class='col-md-6'>
+                                    <span class="translate-text-group-items">{{ $item->name }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-filter-footer" style="height: 20px;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function view_tag() {
+            $('#modal-tag').modal('show');
+        }
+
+        function close_tag() {
+            $('#modal-tag').modal('hide');
+        }
+    </script>
 
     @include('layouts.user.footer')
     </div>

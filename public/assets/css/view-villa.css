@@ -427,11 +427,11 @@ a:hover {
 .modal-content {
     display: flex;
     flex-direction: column;
-    margin-top: 35px;
     margin-left: auto;
     margin-right: auto;
-    background: transparent;
+    background: white;
     border: none;
+    border-radius: 15px;
     /*
     width: 980px;
     */
@@ -1181,12 +1181,6 @@ a.active {
 .modal-header {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-}
-
-.modal-body {
-    background: #fff;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .modal-body span {
@@ -2247,6 +2241,10 @@ input[type="number"] {
     padding-left: 40px;
 }
 
+.modal-body{
+    background-color: white;
+}
+
 .right-0 {
     padding-right: 0px;
 }
@@ -2792,7 +2790,6 @@ input.error {
 
 .modal-content-amenities {
     width: 100%;
-    border-radius: 9px !important;
 }
 
 .row-modal-amenities {
@@ -3256,7 +3253,10 @@ span.flatpickr-weekday {
     overflow-y: auto !important;
     overflow-x: hidden !important;
 }
-
+.shake-anim {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon,
@@ -3954,7 +3954,6 @@ span.flatpickr-weekday {
 
 .modal-content-amenities{
     width: 100%;
-    border-radius: 9px !important;
 }
 
 .modal-content-promotion{
@@ -4066,7 +4065,6 @@ span.flatpickr-weekday {
 @media (min-width: 576px) {
     .modal-content-amenities{
         width: 100%;
-        border-radius: 9px !important;
     }
 
     .modal-map{
@@ -4090,7 +4088,6 @@ span.flatpickr-weekday {
 @media (min-width: 768px) {
     .modal-content-amenities{
         width: 80%;
-        border-radius: 9px !important;
     }
 
     .row-modal-amenities{
@@ -4119,7 +4116,6 @@ span.flatpickr-weekday {
 @media (min-width: 992px) {
     .modal-content-amenities{
         width: 80%;
-        border-radius: 9px !important;
     }
 
     .button-close-map-content{
@@ -4143,7 +4139,6 @@ span.flatpickr-weekday {
 @media (min-width: 1200px) {
     .modal-content-amenities{
         width: 70%;
-        border-radius: 9px !important;
     }
 
     .row-modal-amenities{
@@ -4317,4 +4312,17 @@ span.flatpickr-weekday {
     margin-left: 10px;
     font-size: 14px;
     color: #565656;
+}
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-1deg); }
+    20% { transform: rotate(1deg); }
+    30% { transform: rotate(0deg); }
+    40% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+    60% { transform: rotate(0deg); }
+    70% { transform: rotate(-1deg); }
+    80% { transform: rotate(1deg); }
+    90% { transform: rotate(0deg); }
+    100% { transform: rotate(-1deg); }
 }

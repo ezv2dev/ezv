@@ -305,56 +305,75 @@ class CollaboratorController extends Controller
     public function collab_store_category(Request $request)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
 
         // validation
         $validator = Validator::make($request->all(), [
             'id_collab' => ['required', 'integer'],
-            'category' => ['array'],
+            'category' => ['nullable', 'array'],
+            'category.*' => ['nullable', Rule::in(CollaboratorCategory::get()->modelKeys())],
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
-        // profile data
-        $profile = Collaborator::find($request->id_collab);
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
 
-        // check if profile does not exist, abort 404
-        abort_if(!$profile, 404);
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('collaborator_update');
-        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $profile->created_by) {
-            abort(403);
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         CollaboratorHasCategory::where('id_collab', $request->id_collab)->delete();
 
-        try {
-            if ($request->category) {
-                foreach ($request->category as $id_collab_category) {
-                    CollaboratorHasCategory::create([
-                        'id_collab' => $request->id_collab,
-                        'id_collab_category' => $id_collab_category,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => auth()->user()->id,
-                        'updated_by' => auth()->user()->id
-                    ]);
-                }
+        if ($request->category) {
+            foreach ($request->category as $id_collab_category) {
+                $data[] = [
+                    'id_collab' => $request->id_collab,
+                    'id_collab_category' => $id_collab_category,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id
+                ];
             }
 
-            $status = 200;
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+            $updatedCollab = CollaboratorHasCategory::insert($data);
+        } else {
+            $updatedCollab = true;
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        $collabData = Collaborator::where('id_collab', $request->id_collab)->first();
+
+        // check if update is success or not
+        if ($updatedCollab) {
+            return response()->json([
+                'message' => 'Successfuly Updated Tags',
+                'data' => $collabData->category
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Error Updated Tags',
+            ], 500);
         }
     }
     // update category
@@ -811,7 +830,7 @@ class CollaboratorController extends Controller
         $validator = Validator::make($request->all(), [
             'id_collab' => ['required', 'integer'],
             'language' => ['nullable', 'array'],
-            'language.*' => [Rule::in(HostLanguage::get()->modelKeys())],
+            'language.*' => ['nullable', Rule::in(HostLanguage::get()->modelKeys())],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -839,17 +858,21 @@ class CollaboratorController extends Controller
         }
 
         CollaboratorLanguage::where('id_collab', $request->id_collab)->delete();
-        foreach ($request->language as $item) {
-            $data[] = [
-                'id_collab' => $request->id_collab,
-                'id_language' => $item,
-                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'created_by' => Auth::user()->id,
-                'updated_by' => Auth::user()->id,
-            ];
+        if($request->language){
+            foreach ($request->language as $item) {
+                $data[] = [
+                    'id_collab' => $request->id_collab,
+                    'id_language' => $item,
+                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ];
+            }
+            $updatedCollab = CollaboratorLanguage::insert($data);
+        } else {
+            $updatedCollab = true;
         }
-        $updatedCollab = CollaboratorLanguage::insert($data);
 
         $collab = CollaboratorLanguage::where('id_collab', $request->id_collab)->with('language')->get();
 

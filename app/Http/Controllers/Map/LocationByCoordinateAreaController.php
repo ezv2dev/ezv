@@ -172,23 +172,23 @@ class LocationByCoordinateAreaController extends Controller
     public function search_hotel(Request $request)
     {
         $hotel = hotel::with([
-            'photo', 'video', 'detailReview', 'propertyType', 'location'
+            'photo', 'video', 'detailReview', 'location'
         ])->where('id_hotel', $request->id)->first();
 
         if(auth()->check()){
             if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->id == $hotel->created_by)
             {
                 $hotel = hotel::with([
-                    'photo', 'video', 'detailReview', 'propertyType', 'location'
+                    'photo', 'video', 'detailReview', 'location'
                 ])->where('id_hotel', $request->id)->first();
             }else{
                 $hotel = hotel::with([
-                    'photo', 'video', 'detailReview', 'propertyType', 'location'
+                    'photo', 'video', 'detailReview', 'location'
                 ])->where('id_hotel', $request->id)->where('status', 1)->first();
             }
         }else{
             $hotel = hotel::with([
-                'photo', 'video', 'detailReview', 'propertyType', 'location'
+                'photo', 'video', 'detailReview', 'location'
             ])->where('id_hotel', $request->id)->where('status', 1)->first();
         }
 

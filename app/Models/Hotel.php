@@ -89,6 +89,16 @@ class Hotel extends Model
         return $this->hasMany(HotelSave::class, 'id_hotel', 'id_hotel');
     }
 
+    public function hotelAmenities()
+    {
+        return $this->hasMany(HotelAmenities::class, 'id_hotel', 'id_hotel');
+    }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenities::class, 'hotel_amenities', 'id_hotel', 'id_amenities', 'id_hotel', 'id_amenities');
+    }
+
     public function hotelHasCategory()
     {
         return $this->hasMany(HotelHasCategory::class, 'id_hotel', 'id_hotel');
