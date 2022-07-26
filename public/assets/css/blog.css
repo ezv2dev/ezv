@@ -40,16 +40,23 @@
     float: right;
 }
 
-.more:hover::after {
+.read-more {
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #000;
+}
+
+.read-more:hover::after, .more:hover::after {
     color: #ff7400;
     left: 10px;
 }
 
-.more:hover {
+.read-more:hover, .more:hover {
     color: #ff7400;
 }
 
-.more::after {
+.read-more::after, .more::after {
     content: '\f061';
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -65,6 +72,10 @@
 
 .blog-body {
     padding: 20px 80px;
+}
+
+.blog-detail-body {
+    padding: 20px 60px;
 }
 
 .right-block {

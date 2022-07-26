@@ -157,11 +157,11 @@
             <div id="sidebar_fix" class="right-content">
                 <h4 class="title">Latest Blogs</h4>
                 <ul>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 1</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 2</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 4</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 5</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 1 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 2 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 3 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 4 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 5 (12/12-2022)</a></li>
                 </ul>
             </div>
         </div>
