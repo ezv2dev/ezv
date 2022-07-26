@@ -90,6 +90,11 @@ class Hotel extends Model
         return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }
 
+    public function ownerData()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
     public function favorit()
     {
         return $this->hasMany(HotelSave::class, 'id_hotel', 'id_hotel');
