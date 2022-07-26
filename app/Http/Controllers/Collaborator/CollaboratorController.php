@@ -94,6 +94,130 @@ class CollaboratorController extends Controller
     }
     // profile
 
+    public function update_position_photo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'imageids' => ['required', 'array'],
+            'id' => ['required', 'integer']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        $imageids_arr = $request->imageids;
+
+        $collab = Collaborator::find($request->id);
+
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        if (count($imageids_arr) > 0) {
+            // Update sort position of images
+            $position = 1;
+            foreach ($imageids_arr as $id) {
+                $find = CollaboratorPhoto::where('id_photo', $id)->first();
+                abort_if(!$find, 404);
+                $find->update(array(
+                    'order' => $position,
+                    'updated_by' => auth()->user()->id,
+                ));
+
+                $position++;
+            }
+
+            $data = [
+                'photo' => CollaboratorPhoto::where('id_collab', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => CollaboratorVideo::where('id_collab', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Collaborator::where('id_collab', $request->id)->select('uid')->first(),
+            ];
+
+            return response()->json([
+                'data' => $data,
+                'message' => 'Updated Position Photo'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'data not found'
+            ], 404);
+        }
+    }
+    public function update_position_video(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'videoids' => ['required', 'array'],
+            'id' => ['required', 'integer']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        $videoids_arr = $request->videoids;
+
+        $collab = Collaborator::find($request->id);
+
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        if (count($videoids_arr) > 0) {
+            // Update sort position of images
+            $position = 1;
+            foreach ($videoids_arr as $id) {
+                $find = CollaboratorVideo::where('id_video', $id)->first();
+                abort_if(!$find, 404);
+                $find->update(array(
+                    'order' => $position,
+                    'updated_by' => auth()->user()->id,
+                ));
+
+                $position++;
+            }
+
+            $data = [
+                'photo' => CollaboratorPhoto::where('id_collab', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => CollaboratorVideo::where('id_collab', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Collaborator::where('id_collab', $request->id)->select('uid')->first(),
+            ];
+
+            return response()->json([
+                'data' => $data,
+                'message' => 'Updated Position Video'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'data not found'
+            ], 404);
+        }
+    }
+
+
     // update profile
     public function collab_update_image(Request $request)
     {
@@ -583,7 +707,7 @@ class CollaboratorController extends Controller
 
     public function collab_story(Request $request)
     {
-        // $data = VillaStory::where('id_story', $id)->get();
+        // $data = CollabStory::where('id_story', $id)->get();
         $data = CollaboratorStory::with('collab')->where('id_story', $request->id)->first();
 
         if ($data) {
@@ -891,81 +1015,147 @@ class CollaboratorController extends Controller
 
     public function collab_update_photo(Request $request)
     {
-        $this->authorize('collaborator_update');
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
+
         // validation
         $validator = Validator::make($request->all(), [
             'id_collab' => ['required', 'integer'],
             'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4']
         ]);
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
         }
 
-        $status = 500;
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
 
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                //
-            } else {
-                //cek the directori first
-                $find = Collaborator::where('id_collab', $request->id_collab)->get();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = $find[0]->uid;
-                $path = env("COLLAB_FILE_PATH") . $folder;
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
 
-                if (!File::isDirectory($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                }
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
 
-                $ext = strtolower($berkas->getClientOriginalExtension());
+        $folder = strtolower($collab->uid);
+        $path = env("COLLAB_FILE_PATH") . $folder;
 
-                if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                    request()->validate([
-                        'id_collab' => ['required', 'integer'],
-                        'file' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
-                    ]);
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
 
-                    $original_name = $berkas->getClientOriginalName();
+        $ext = strtolower($request->file->getClientOriginalExtension());
 
-                    $name_file = time() . "_" . $original_name;
-                    $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+        $photo = [];
 
-                    //insert into database
-                    $data = CollaboratorPhoto::create([
-                        'name' => $name_file,
-                        'id_collab' => $request->id_collab,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-                } elseif ($ext == 'mp4') {
-                    $original_name = $berkas->getClientOriginalName();
+        if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+            $validator2 = Validator::make($request->all(), [
+                'id_collab' => ['required', 'integer'],
+                'file' => ['required', 'dimensions:min_width=960']
+            ]);
 
-                    $name_file = time() . "_" . $original_name;
-
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    //insert into database
-                    $data = CollaboratorVideo::create([
-                        'name' => $name_file,
-                        'id_collab' => $request->id_collab,
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id
-                    ]);
-                }
+            if ($validator2->fails()) {
+                return response()->json([
+                    'message' => $validator2->errors()->all(),
+                ], 500);
             }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+
+            $original_name = $request->file->getClientOriginalName();
+
+            $name_file = time() . "_" . $original_name;
+
+            $name_file = FileCompression::compressImageToCustomExt($request->file, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+
+            // check last order
+            $lastOrder = CollaboratorPhoto::where('id_collab', $request->id_collab)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
+            } else {
+                $lastOrder = 1;
+                $lastOrder;
+            }
+
+            //insert into database
+            $createdCollab = CollaboratorPhoto::create([
+                'id_collab' => $request->id_collab,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            // $photo['id_photo'] = $createdRestaurant->id_photo;
+            array_push($photo, $createdCollab->id_photo);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+        $video = [];
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // check last order
+            $lastOrder = CollaboratorVideo::where('id_collab', $request->id_collab)->orderBy('order', 'desc')->select('order')->first();
+            if ($lastOrder) {
+                $lastOrder = $lastOrder->order + 1;
+            } else {
+                $lastOrder = 1;
+                $lastOrder;
+            }
+
+            //insert into database
+            $createdCollab = CollaboratorVideo::create([
+                'id_collab' => $request->id_collab,
+                'name' => $name_file,
+                'order' => $lastOrder,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            array_push($video, $createdCollab->id_video);
+        }
+
+        $collabReturn = [
+            'photo' => CollaboratorPhoto::whereIn('id_photo', $photo)->get(),
+            'video' => CollaboratorVideo::whereIn('id_video', $video)->get(),
+            'uid' => Collaborator::where('id_collab', $request->id_collab)->select('uid')->first(),
+        ];
+
+        if (isset($createdCollab) == true) {
+            return response()->json([
+                'message' => 'Update Gallery',
+                'data' => $collabReturn,
+            ], 200);
+        } else if (isset($createdCollab) == false) {
+            $validator = Validator::make($request->all(), [
+                'id_collab' => ['required', 'integer'],
+                'file' => ['required', 'mimes:jpeg,png,jpg,webp,mp4,mov']
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->errors()->all(),
+                ], 500);
+            }
         }
     }
 
@@ -979,7 +1169,7 @@ class CollaboratorController extends Controller
                 'video' => $data->name,
                 'collab' => (object)[
                     'uid' => $data->collab->uid,
-                    // 'uid' => $data->villa->uid
+                    // 'uid' => $data->collab->uid
                 ] ?? null
             ], 200);
         } else {

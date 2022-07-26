@@ -698,9 +698,9 @@
                                                                     <a type="button"
                                                                         onclick="view({{ $item->id_video }})"
                                                                         style="height: 70px; width: 70px;">
-                                                                    @else
-                                                                        <a type="button" onclick="showPromotionMobile()"
-                                                                            style="height: 70px; width: 70px;">
+                                                                @else
+                                                                    <a type="button" onclick="showPromotionMobile()"
+                                                                        style="height: 70px; width: 70px;">
                                                                 @endif
                                                             @endauth
                                                             <div class="story-video-player"><i class="fa fa-play"></i>
@@ -888,7 +888,7 @@
                                 @endforeach
                             @endif
                             @if ($photo->count() <= 0 && $video->count() <= 0)
-                                there is no gallery yet
+                                {{ __('user_page.there is no gallery yet') }}
                             @endif
                         </div>
                     </section>
@@ -4155,7 +4155,6 @@
                     $("#edit_position_photo").modal("hide");
 
                     $gallery.refresh();
-
                 }
             });
         }
