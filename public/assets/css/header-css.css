@@ -506,9 +506,9 @@ input:checked + .switch-background:active::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    bottom:0;
     transform:translate(-50%, -50%); 
-    width: 50%;
+    width: 18px;
+    height: 18px;
     content: url(../../assets/icon/menu/sun.svg);
 }
 
@@ -519,6 +519,7 @@ input:checked + .switch-background:active::before {
 
 #changeThemeMobile .checkmark-mode::before{
     height: 100%;
+    width:50%;
 }
 
 /* When the checkbox is checked, add a red background */

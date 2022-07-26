@@ -495,7 +495,6 @@ class HotelDetailController extends Controller
         $hotelFilter = HotelFilter::all();
         $hotelCategory = HotelCategory::all();
         $hotelHasCategory = HotelHasCategory::where('id_hotel', $id)->get();
-
         return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelTags', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'createdby', 'propertyType', 'hotelTypeDetail'));
     }
 

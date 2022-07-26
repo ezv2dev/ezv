@@ -75,12 +75,11 @@
             <li class="breadcrumb-item"><a href="#">Ramai Ramai Salahkan Jokowi (judul blognya)</a></li>
         </ol>
     </nav>
-    <section class="blog-body">
+    <section class="blog-detail-body">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="row">
-                <!-- ad-foreach disini -->
-	            <div class="blog-content">
+            <!-- ad-foreach disini -->
+            <div class="blog-content">
                 <h1>Ramai Ramai Salahkan Jokowi</h1>
                 <p class="smaller">By EZV on 12/12-2022</p>
                 <img src="https://source.unsplash.com/random/?jokowi">
@@ -93,29 +92,36 @@
                 <p>Atau mungkin warga Jakarta menganggap Jokowi - Ahok adalah superman yang mampu mengubah wajah kota hanya dalam hitungan bulan ? Padahal seorang Jokowi harus menjalani beberapa tahapan dan mekanisme untuk membuat suatu terobosan kebijakan untuk mengurangi atau bahkan menghilangkan bencana tahunan ini. Ada tahap-tahap yang harus dijalani, ada ketentuan-ketentuan yang harus dipatuhi. Masyarakat Jakarta semestinya tahu itu. Kalau mereka menginginkan kota tempat mereka tinggal sekarang seperti Singapore, semestinya masyarakat Jakarta juga mampu meniru disiplin warga Singapore tanpa reserve.</p>
                 <p>Semestinya warga Jakarta menyadari seorang Jokowi hanya bertugas memanage atau mengelola sumber daya yang ada untuk mendukung apa yang dilakukan oleh warganya. Kalau tidak demikian, saya yakin siapapun Jokowi yang memimpin Jakarta, permasalahan banjir tidak akan pernah tuntas.</p>
                 <p>Tak iye ?</p>
-                </div>
-                <h1>Also Read</h1>
-                <!-- ad-foreach disini -->
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+            </div>
+            <hr>
+            <h3>Also Read</h3>
+            <!-- ad-foreach disini -->
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <img class="blog-img" src="https://source.unsplash.com/random/?tractor">
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 2</p>
+                    <p class="list-header">Lorem Ipsum ... Amet 2</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
-                    <button class="more">Read More</button>
+                    <button class="read-more">Read More</button>
+                    <hr>
                 </div>
-                <hr>
                 <!-- /ad-foreach disini -->
                 <!-- ad-foreach disini -->
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <img class="blog-img" src="https://source.unsplash.com/random/?eel">
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 3</p>
+                    <p class="list-header">Lorem Ipsum ... Amet 3</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
-                    <button class="more">Read More</button>
+                    <button class="read-more">Read More</button>
+                    <hr>
                 </div>
-                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?electric">
+                    <p class="list-header">Lorem Ipsum ... Amet 4</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="read-more">Read More</button>
+                    <hr>
+                </div>
                 <!-- /ad-foreach disini -->
             </div>
         </div>
@@ -123,11 +129,11 @@
             <div id="sidebar_fix" class="right-content">
                 <h4 class="title">Latest Blogs</h4>
                 <ul>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 1</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 2</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 4</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 5</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 1 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 2 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 3 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 4 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 5 (12/12-2022)</a></li>
                 </ul>
             </div>
         </div>
@@ -202,14 +208,14 @@
             $(document).ready(() => {
                 var $sidebar = $("#sidebar_fix");
                 var $sidebarHeight = $sidebar.outerHeight();
-                var $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                var $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
                 $(window).on("resize", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
                 })
                 $(window).on("scroll", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
                     if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() < $blogBodyHeight - $sidebarHeight - 15) {
                         $sidebar.addClass("fixed");
                     }else if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() > $blogBodyHeight - $sidebarHeight - 15){

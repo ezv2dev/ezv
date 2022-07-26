@@ -128,9 +128,14 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
-@media (max-width: 533px) {
+@media only screen and (max-width: 533px) {
     .flex-gap .bg-white {
         width: 100%;
+    }
+}
+@media only screen and (min-width: 534px) and (max-width: 782px) {
+    .flex-gap .bg-white {
+        width: 48%;
     }
 }
 .overflow-x-auto::-webkit-scrollbar {
@@ -153,8 +158,8 @@
     @endcomponent --}}
     @component('components.loading.loading-type2')
     @endcomponent
-    <div class="expand-navbar-mobile" aria-expanded="false" style="overflow-y: scroll; overflow-x: hidden;">
-        <div class="px-3 pt-2 h-100" style="overflow-x: hidden; overflow-y: auto;">
+    <div class="expand-navbar-mobile" aria-expanded="false">
+        <div class="px-3 pt-2 h-100">
             @auth
                 <div>
                     <div class="d-flex align-items-center">
@@ -892,7 +897,7 @@
         </div>
     </nav>
 
-    <main>
+    <main style="overflow-y: auto; overflow-x: hidden;">
         <hr style="background-color: transparent; border-color: transparent;">
         @yield('content_admin')
 
