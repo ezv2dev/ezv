@@ -3549,3 +3549,7 @@ input::-webkit-inner-spin-button {
 .guests {
     min-width: 210px;
 }
+
+.list-description.font-black:hover, .list-description.font-light:hover {
+    color: #ff7400;
+}

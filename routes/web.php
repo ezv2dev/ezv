@@ -113,6 +113,10 @@ Route::get('/contact-us', function () {
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
+Route::get('/blog-detail', function () {
+    return view('user.blog_detail');
+})->name('blog_detail');
+
 Route::get('/culture', function () {
     return view('user.culture');
 })->name('culture');
