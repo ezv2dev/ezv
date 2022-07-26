@@ -21,12 +21,6 @@
         background-color: white;
     }
 
-    .padding-content
-    {
-        padding-left: 100px;
-        padding-right: 100px;
-    }
-
     .image-content
     {
         border-radius: 25px;
@@ -37,8 +31,8 @@
 {{-- MODAL AMENITIES --}}
 <div class="modal fade reset-padding" id="modal-room" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-amenities" role="document" style="overflow-y: initial !important">
-        <div class="modal-content modal-content-amenities reset-margin modal-full"
+    <div class="modal-dialog modal-fullscreen" role="document" style="overflow-y: initial !important">
+        <div class="modal-content"
             style="background: white; border-radius:15px">
             <div class="modal-header modal-header-amenities">
                 <h5 class="modal-title">Room Information</h5>
@@ -47,7 +41,7 @@
             <div class="modal-body modal-body-amenities pb-1 translate-text-group"
                 style=" height: 500px; overflow-y: auto;">
                 {{-- PROFILE --}}
-                <div class="row page-content padding-content">
+                <div class="d-flex">
                     {{-- LEFT CONTENT --}}
                     <div class="col-lg-4 col-md-4 col-xs-12 rsv-block alert-detail">
                         <h2 id="detail-room-type"></h2>

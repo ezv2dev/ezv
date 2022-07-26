@@ -581,7 +581,6 @@
     @include('components.notification.notification')
     @component('components.loading.loading-type1')
     @endcomponent
-
     <div id="page-container">
         {{-- HEADER --}}
         <header id="add_class_popup" class="">
@@ -854,7 +853,6 @@
                     @endif
                 @endauth
                 {{-- END ALERT CONTENT STATUS --}}
-
                 <div class="row top-profile" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -984,14 +982,15 @@
                         {{-- category --}}
                         <p class="text-secondary" style="margin-bottom: 10px;">
                             <span id="saveTagsContent">
-                                @if ($tags->count() > 3)
-                                    @forelse ($tags->take(3) as $item)
+                                @if ($tags->count() > 7)
+                                    @forelse ($tags->take(7) as $item)
                                         <span class="badge rounded-pill fw-normal"
                                             style="background-color: #FF7400;">{{ $item->collaboratorCategory->name }}</span>
                                     @empty
                                     @endforelse
-                                    <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button"
-                                        onclick="view_tag()">More</button>
+                                    <button class="btn btn-outline-dark btn-sm rounded restaurant-tag-button" onclick="view_tag()">
+                                        More
+                                    </button>
                                 @else
                                     @forelse ($tags as $item)
                                         <span class="badge rounded-pill fw-normal" style="background-color: #FF7400;">
@@ -1223,7 +1222,6 @@
                     <section id="gallery" class="photosGrid section mb-3">
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
-
                                 @foreach ($photo as $item)
                                     <div class="col-4 grid-photo">
                                         <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
@@ -1252,7 +1250,6 @@
                                         @endauth
                                     </div>
                                 @endforeach
-
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
@@ -2548,7 +2545,6 @@
                 </div>
                 <div class="modal-body pb-1" style="height: 500px; overflow-y: auto;">
                     <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Cuisine') }}</h5>
                         <div id="saveTagsContentModal">
                             @foreach ($profile->category as $item)
                                 <div class='col-md-6'>
@@ -2558,9 +2554,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-filter-footer" style="height: 20px;">
-
-                </div>
+                <div class="modal-filter-footer" style="height: 20px;"></div>
             </div>
         </div>
     </div>
