@@ -3147,22 +3147,6 @@ input::-webkit-inner-spin-button {
     border-radius: 20px;
     height: fit-content;
 }
-/* width for bar rating in hotel list */
-.bar-1 {
-    width: 30px !important;
-}
-.bar-2 {
-    width: 60px !important;
-}
-.bar-3 {
-    width: 90px !important;
-}
-.bar-4 {
-    width: 120px !important;
-}
-.bar-5 {
-    width: 150px !important;
-}
 @media only screen and (max-width: 366px) {
     .max-lines-2 {
         min-height: 4rem;
