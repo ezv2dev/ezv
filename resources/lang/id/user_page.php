@@ -113,6 +113,7 @@ return [
     'RESERVE NOW' => 'PESAN SEKARANG',
     'Become a Host' => 'Menjadi Tuan Rumah',
     'Hosted by' => 'Diselenggarakan oleh',
+    'Edit Profile' => 'Ubah Profil',
     'Joined in' => 'Bergabung',
     'Reviews' => 'Ulasan',
     'Identity verified' => 'Identitas diverifikasi',
