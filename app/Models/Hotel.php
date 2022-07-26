@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Services\DestinationNearbyHotelService as DestinationNearbyHotel;
+use PDO;
 
 class Hotel extends Model
 {
@@ -82,6 +83,11 @@ class Hotel extends Model
             return $this->hasOne(HotelReview::class, 'id_hotel', 'id_hotel')->where('created_by', auth()->user()->id);
         }
         return false;
+    }
+
+    public function ownerHotel()
+    {
+        return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }
 
     public function favorit()

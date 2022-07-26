@@ -110,6 +110,12 @@
         }
     } */
 
+    @media(min-width:991px){
+        #sortByMobile{
+            display:none;
+        }
+    }
+
 </style>
 
 @php
@@ -152,6 +158,42 @@ $get_category = request()->get('fCategory');
                         class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="filter-modal-body" style=" height: 450px; overflow-y: auto;">
+
+                <div class="filter-modal-row" id="sortByMobile">
+                    <h5 class="filter-modal-row-title">Sort By</h5>
+                    <ul class="p-0">
+                        <li>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">
+                                Highest to Lowest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="highest"
+                                    @if (request()->get('fSort') == 'highest') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Lowest to Highest Price
+                                <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
+                                    @if (request()->get('fSort') == 'lowest') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Popularity
+                                <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
+                                    @if (request()->get('fSort') == 'popularity') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Best Reviewed
+                                <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
+                                    @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="filter-modal-row">
                     <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
                         {{ Translate::translate('Price Range') }}</h5>
@@ -675,4 +717,6 @@ $get_category = request()->get('fCategory');
         document.getElementById("show-more-category").classList.remove("display-none");
     }
 </script>
+
+
 <!-- END Fade In Default Modal -->

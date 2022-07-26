@@ -175,11 +175,10 @@
                                 @php
                                     $amenitiesIds = explode(',', request()->get('fAmenities'));
                                 @endphp @if (in_array($item->id_amenities, $amenitiesIds))
-                                style="color: #ff7400;"
-                    @endif></i>
-                    <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
-                </div>
-                @endforeach
+                                style="color: #ff7400;"@endif></i>
+                            <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
+                        </div>
+                    @endforeach
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
                     <div>
                         <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>

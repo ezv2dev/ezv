@@ -312,6 +312,25 @@
         animation-delay: -0.15s;
     }
 
+    .review-item-name {
+        width: 100px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        #modal-details .modal-dialog {
+            display: block !important;
+            margin: 0px !important;
+        }
+        #modal-details .modal-dialog .modal-content {
+            width: 100vw !important;
+            height: 100vh !important;
+            border-radius: 0px !important;
+        }
+        #modal-details .modal-dialog .modal-content .modal-body .tabbable {
+            height: 100% !important;
+        }
+    }
+
     @keyframes lds-ring {
         0% {
             transform: rotate(0deg);
@@ -361,47 +380,47 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="content-tab-reviews">
-                            <div class="row">
-                                <div class="col-10">
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <h3 class="name-hotel"></h3>
                                 </div>
-                                <div class="col-2">
+                                <div>
                                     <h3 id="average_show"></h3>
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-3">
+                                <div class="review-item-name">
                                     Cleanliness
                                 </div>
-                                <div class="col-9" id="average_clean_show">
+                                <div class="flex-fill" id="average_clean_show">
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-3">
+                                <div class="review-item-name">
                                     Service
                                 </div>
-                                <div class="col-9" id="average_service_show">
+                                <div class="flex-fill" id="average_service_show">
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-3">
+                                <div class="review-item-name">
                                     Check In
                                 </div>
-                                <div class="col-9" id="average_check_in_show">
+                                <div class="flex-fill" id="average_check_in_show">
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-3">
+                                <div class="review-item-name">
                                     Location
                                 </div>
-                                <div class="col-9" id="average_location_show">
+                                <div class="flex-fill" id="average_location_show">
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-3">
+                                <div class="review-item-name">
                                     Value
                                 </div>
-                                <div class="col-9" id="average_value_show">
+                                <div class="flex-fill" id="average_value_show">
                                 </div>
                             </div>
                         </div>
