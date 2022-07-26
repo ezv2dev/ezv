@@ -1544,24 +1544,24 @@
 
 
             <section id="room" class="section ss">
-              <div class="row room">
-              <hr>
-                <h2>{{ __('user_page.Rooms') }}
-                    @auth
-                        @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                            &nbsp;<a type="button" onclick="add_room()"><i class="fa fa-plus"
-                                    style="color: #FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                    data-bs-animation="true" data-bs-placement="bottom"
-                                    title="{{ __('user_page.Add Room') }}"></i></a>
-                        @endif
-                    @endauth
-                </h2>
+                <div class="row room">
+                    <hr>
+                    <h2>{{ __('user_page.Rooms') }}
+                        @auth
+                            @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                &nbsp;<a type="button" onclick="add_room()"><i class="fa fa-plus"
+                                        style="color: #FF7400; padding-right:5px;" data-bs-toggle="popover"
+                                        data-bs-animation="true" data-bs-placement="bottom"
+                                        title="{{ __('user_page.Add Room') }}"></i></a>
+                            @endif
+                        @endauth
+                    </h2>
                     @forelse ($hotelTypeDetail as $item)
-                    <div class="col-12 row p-0">
-                        
-                        <div class="col-4" style="border: 1px solid grey; border-radius: 15px; padding: 10px;">
-                            <div class="col-12">
-                               
+                        <div class="col-12 row p-0">
+
+                            <div class="col-4" style="border: 1px solid grey; border-radius: 15px; padding: 10px;">
+                                <div class="col-12">
+
                                     <div class="col-12">
                                         <div class="content list-image-content">
                                             <input type="hidden" value="" id="id_hotel" name="id_hotel">
@@ -1596,11 +1596,12 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        
+
                                         <div>
                                             <h4 class="mb-0">
                                                 <p class="mb-0">
-                                                    <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}" target="_blank">{{ $item->name }}</a>
+                                                    <a href="{{ route('room_hotel', ['id' => $item->id_hotel_room]) }}"
+                                                        target="_blank">{{ $item->name }}</a>
                                                 </p>
                                             </h4>
                                             <p class="mb-0" style="color: red;">Only 2 rooms left on our site</p>
@@ -1609,9 +1610,10 @@
                                                     <span style="margin-bottom: 10px; font-size: 13px;">
                                                         {{ $item->bed->name }}
                                                     </span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px"
-                                                        viewBox="0 0 40 28" style="fill: #222222;">
-                                                        <g id="Group_2" data-name="Group 2" transform="translate(-66 524)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40px"
+                                                        height="30px" viewBox="0 0 40 28" style="fill: #222222;">
+                                                        <g id="Group_2" data-name="Group 2"
+                                                            transform="translate(-66 524)">
                                                             <path id="bed_FILL1_wght400_GRAD0_opsz48"
                                                                 d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z"
                                                                 transform="translate(62 -534)" />
@@ -1621,9 +1623,11 @@
                                                     <span style="margin-bottom: 10px; font-size: 13px;">
                                                         {{ $item->bed->name }}
                                                     </span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px"
-                                                        viewBox="0 0 82 28.001" style="fill: #222222;">
-                                                        <g id="Group_4" data-name="Group 4" transform="translate(-61 525)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="50px"
+                                                        height="50px" viewBox="0 0 82 28.001"
+                                                        style="fill: #222222;">
+                                                        <g id="Group_4" data-name="Group 4"
+                                                            transform="translate(-61 525)">
                                                             <path id="Subtraction_1" data-name="Subtraction 1"
                                                                 d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z"
                                                                 transform="translate(61 -525)" />
@@ -1645,13 +1649,14 @@
                                                 <span style="margin-left: 10px; margin-top: 5px; font-size: 12px;"
                                                     class="mb-0">
                                                     {{ $item->room_size }}
-                                                    m<sup>2</sup> 
+                                                    m<sup>2</sup>
                                                 </span>
                                                 @forelse ($item->typeAmenities->take(3) as $item2)
                                                     <div class="amenities-detail-view">
                                                         <i class="fa fa-{{ $item2->icon }}"
                                                             style="font-size: 20px !important; margin-left: 10px; margin-top: 5px;"></i>
-                                                        <span style="margin-left: 10px; margin-top: 5px; font-size: 12px;"
+                                                        <span
+                                                            style="margin-left: 10px; margin-top: 5px; font-size: 12px;"
                                                             class="mb-0">
                                                             {{ $item2->name }}
                                                         </span>
@@ -1663,7 +1668,8 @@
                                         </div>
                                         <div>
                                             <span>
-                                                <i style="color: green;" class="fa-solid fa-check"></i>Free toiletries
+                                                <i style="color: green;" class="fa-solid fa-check"></i>Free
+                                                toiletries
                                             </span>
                                             <span>
                                                 <i style="color: green;" class="fa-solid fa-check"></i>Save
@@ -1681,45 +1687,46 @@
                                                 <i style="color: green;" class="fa-solid fa-check"></i>Refrigerator
                                             </span>
                                         </div>
-                                    </div> 
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-8 p-0">
-                            <div class="col-12 m-0 ps-2 pe-2 row ">
-                                <div class="col-2 border border-secondary border-end-0">
-                                @for ($i = 0; $i < $item->capacity; $i++)
-                                    <i class="fas fa-user"></i>
-                                @endfor
-                                </div>
-                                <div class="col-4 border border-secondary border-end-0">
-                                    <div class="price-tag">
-                                        <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
-                                        <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}</h6>
+                            <div class="col-8 p-0">
+                                <div class="col-12 m-0 ps-2 pe-2 row ">
+                                    <div class="col-2 border border-secondary border-end-0">
+                                        @for ($i = 0; $i < $item->capacity; $i++)
+                                            <i class="fas fa-user"></i>
+                                        @endfor
                                     </div>
-                                    <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
-                                </div>
-                                <div class="col-4 border border-secondary border-end-0">
-                                    <div class="choice-item">
-                                        <i class="fa-solid fa-mug-saucer regular-icon"></i>
-                                        <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                    <div class="col-4 border border-secondary border-end-0">
+                                        <div class="price-tag">
+                                            <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
+                                            <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}
+                                            </h6>
+                                        </div>
+                                        <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
                                     </div>
-                                </div>
-                                <div class="col-2 border border-secondary">
-                                    <select name="room-amount" id="room-amount" style="width: 3.5rem;">
-                                        <option value="0">0</option>
-                                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                            {{ number_format($item->price) }}</option>
-                                    </select>
+                                    <div class="col-4 border border-secondary border-end-0">
+                                        <div class="choice-item">
+                                            <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                            <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 border border-secondary">
+                                        <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                                            <option value="0">0</option>
+                                            <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                                {{ number_format($item->price) }}</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <hr class="mt-3 mb-3">
                         </div>
-                    <hr class="mt-3 mb-3">
-                    </div>
                     @empty
                         <div class="col-12">{{ __('user_page.No data found') }}</div>
                     @endforelse
-              </div>
+                </div>
             </section>
 
             <section id="location-map" class="section">
@@ -2411,7 +2418,8 @@
                                 <div class="col-5">
                                     <div class="member-profile">
                                         <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
-                                        <p>{{ __('user_page.Joined in') }} November 2020</p>
+                                        <p>{{ __('user_page.Joined in') }}
+                                            {{ date_format($hotel[0]->ownerHotel->created_at, 'M Y') }}</p>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -2419,21 +2427,14 @@
                                         <h4>Host Profile</h4>
                                         <p>
                                             About
-                                            <span>{{ $infoOwner->about ?? '-' }}</span><br>
+                                            <span>{{ $hotel[0]->ownerHotel->about ?? '-' }}</span><br>
                                             Location
-                                            <span>{{ $infoOwner->location ?? '-' }}</span>
+                                            <span>{{ $hotel[0]->ownerHotel->location ?? '-' }}</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="member-profile-desc">
-                                <p class="host-review"><i class="fa fa-heart" style="color: red;"></i> 141
-                                    {{ __('user_page.Reviews') }} | <i class="fa fa-check"
-                                        style="color: green;"></i>
-                                    {{ __('user_page.Identity verified') }}
-                                </p>
-                                <button type="button" onclick="contactHostForm()"
-                                    class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
                                 <div class="row mt-20">
                                     <div class="col-1 payment-warning-icon">
                                         <i class="fa fa-exclamation-triangle"></i>
@@ -4225,7 +4226,7 @@
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", true);
                 $("#sortable-photo").sortable("option", "disabled", true);
-            }else {
+            } else {
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", false);
                 $("#sortable-photo").sortable("option", "disabled", false);
@@ -4264,13 +4265,13 @@
             $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
                 clearTimeout(timeOut);
             })
-            
+
             //event for mobile
             $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
                 if ($(window).width() < 992) {
                     timeOut = setTimeout(function() {
                         $("#sortable-photo .ui-state-default img").addClass("shake-anim");
-                        $("#sortable-photo").sortable("option", "disabled", false);    
+                        $("#sortable-photo").sortable("option", "disabled", false);
                     }, 500);
                 }
             }).on("mouseup mouseleave", function() {
@@ -4283,7 +4284,7 @@
                 if ($(window).width() < 992) {
                     timeOut = setTimeout(function() {
                         $("#sortable-video .ui-state-default video").addClass("shake-anim");
-                        $("#sortable-video").sortable("option", "disabled", false);    
+                        $("#sortable-video").sortable("option", "disabled", false);
                     }, 500);
                 }
             }).on("mouseup mouseleave", function() {
