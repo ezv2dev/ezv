@@ -68,10 +68,10 @@
 }
 
 .right-content {
-    position: absolute;
     border: solid 1px #ff7400;
     padding: 20px;
     border-radius: 12px;
+    margin-left: 15px;
 }
 
 .right-content ul li {
@@ -92,5 +92,18 @@
 @media (min-width: 992px) {
     .header-4-4 .navbar {
         padding: 1rem 2rem;
+    }
+}
+
+.abs {
+    position: absolute;
+}
+.fixed {
+    position: fixed;
+    top: 130px !important;
+}
+@media only screen and (max-width: 767px) {
+    .right-block {
+        display: none;
     }
 }

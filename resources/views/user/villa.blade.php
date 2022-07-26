@@ -394,14 +394,15 @@
                             for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++) {
                                 $bedCount = $bedCount + $villa[0]->villaBedroomDetail[$i]->bed_count;
                             }
+                            $guestCount = $villa[0]->adult + $villa[0]->children;
                         @endphp
                         <p style="font-size: 13px"><span id="bedroomID">{{ $villa[0]->bedroom }}</span>
                             {{ __('user_page.Bedrooms') }}
                             | <span id="bedsID">{{ $bedCount }}</span> Beds | <span
                                 id="bathroomID">{{ $villa[0]->bathroom }}</span>
                             {{ __('user_page.Bathroom') }} |
-                            <span id="adultID">{{ $villa[0]->adult }}</span> {{ __('user_page.Adults') }} |
-                            <span id="childrenID">{{ $villa[0]->children }}</span> {{ __('user_page.Children') }}
+                            <span id="guestID">{{ $guestCount }}</span> {{ __('user_page.Guests') }}
+                            {{-- | <span id="childrenID">{{ $villa[0]->children }}</span> {{ __('user_page.Children') }} --}}
                             @if ($villa[0]->size != null || $villa[0]->size > 0)
                                 | <span id="sizeID">{{ $villa[0]->size }}</span> m<sup>2</sup>
                             @endif
