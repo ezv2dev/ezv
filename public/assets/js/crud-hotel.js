@@ -4,6 +4,8 @@ $(document).on("keyup", "textarea#name-form-input", function () {
     $("#err-name").hide();
 });
 
+var nameHotelBackup = $("#name-form-input").val();
+
 function editNameHotel(id_hotel) {
     let error = 0;
     if (!$("textarea#name-form-input").val()) {
@@ -31,9 +33,10 @@ function editNameHotel(id_hotel) {
                 name: $("#name-form-input").val(),
             },
             success: function (response) {
-                $("#name-content").html(response.data);
+                $("#name-content2").html(response.data);
                 $("#name-content-mobile").html(response.data);
                 $("#hotelTitle").html(response.data + " - EZV2");
+                nameHotelBackup = response.data;
 
                 iziToast.success({
                     title: "Success",

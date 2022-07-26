@@ -68,6 +68,9 @@ label.error.fail-alert {
     color: green;
 } */
 
+.navigationItem:hover{
+    cursor: pointer;
+}
 .navigationItem:hover * {
     color: #ff7400;
 }
