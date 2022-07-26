@@ -249,9 +249,24 @@ class RoomDetailController extends Controller
                         ->join('hotel_type', 'hotel_type_detail.id_hotel_type', '=', 'hotel_type.id_hotel_type', 'left')
                         ->join('bed', 'hotel_type_detail.id_bed', '=', 'bed.id_bed', 'left')
                         ->first();
-        // dd($detail_room);
 
-        return $detail_room;
+        $photo = HotelRoomPhoto::where('id_hotel_room', $id)->orderBy('order', 'asc')->get();
+
+        $bathroom = HotelRoomBathroom::select('hotel_room_bathroom.*', 'bathroom.name')->where('id_hotel_room', $id)
+                    ->join('bathroom', 'hotel_room_bathroom.id_bathroom', '=', 'bathroom.id_bathroom', 'left')->get();
+
+        // $bedroom = HotelRoomBedroom::select('hotel_room_bedroom.*', 'bedroom.name')->where('id_hotel_room', $id)
+        //             ->join('bedroom', 'hotel_room_bedroom.id_bedroom', '=', 'bedroom.id_bedroom', 'left')->get();
+
+
+        $data = [
+            'detail_room' => $detail_room,
+            'photo' => $photo,
+            'bathroom' => $bathroom,
+            // 'bedroom' => $bedroom,
+        ];
+
+        return $data;
 
         // $id_hotel = $detail_room->id_hotel;
 
