@@ -3359,8 +3359,12 @@ span.flatpickr-weekday {
     #sortable-photo li img {
         border-radius: 0px !important;
     }
-    /* make short-desc max lines 2 */
     .top-profile .short-desc {
+        min-height: fit-content !important;
+        height: fit-content !important;
+    }
+    /* make short-desc max lines 2 */
+    .top-profile .short-desc #short_description_contents {
         min-height: 50px !important;
         height: 50px !important;
         overflow: hidden !important;
