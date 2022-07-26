@@ -249,9 +249,35 @@ class RoomDetailController extends Controller
                         ->join('hotel_type', 'hotel_type_detail.id_hotel_type', '=', 'hotel_type.id_hotel_type', 'left')
                         ->join('bed', 'hotel_type_detail.id_bed', '=', 'bed.id_bed', 'left')
                         ->first();
-        // dd($detail_room);
 
-        return $detail_room;
+        $photo = HotelRoomPhoto::where('id_hotel_room', $id)->orderBy('order', 'asc')->get();
+
+        $bathroom = HotelRoomBathroom::select('hotel_room_bathroom.*', 'bathroom.name')->where('id_hotel_room', $id)
+                    ->join('bathroom', 'hotel_room_bathroom.id_bathroom', '=', 'bathroom.id_bathroom', 'left')->get();
+
+        $bedroom = HotelRoomBedroom::select('hotel_room_bedroom.*', 'bedroom.name')->where('id_hotel_room', $id)
+                    ->join('bedroom', 'hotel_room_bedroom.id_bedroom', '=', 'bedroom.id_bed', 'left')->get();
+
+        $kitchen = HotelRoomKitchen::select('hotel_room_kitchen.*', 'kitchen.name')->where('id_hotel_room', $id)
+                    ->join('kitchen', 'hotel_room_kitchen.id_kitchen', '=', 'kitchen.id_kitchen', 'left')->get();
+
+        $safety = HotelRoomSafety::select('hotel_room_safety.*', 'safety.name')->where('id_hotel_room', $id)
+                    ->join('safety', 'hotel_room_safety.id_safety', '=', 'safety.id_safety', 'left')->get();
+
+        $service = HotelRoomService::select('hotel_room_service.*', 'service.name')->where('id_hotel_room', $id)
+                    ->join('service', 'hotel_room_service.id_service', '=', 'service.id_service', 'left')->get();
+
+        $data = [
+            'detail_room' => $detail_room,
+            'photo' => $photo,
+            'bathroom' => $bathroom,
+            'bedroom' => $bedroom,
+            'kitchen' => $kitchen,
+            'safety' => $safety,
+            'service' => $service,
+        ];
+
+        return $data;
 
         // $id_hotel = $detail_room->id_hotel;
 

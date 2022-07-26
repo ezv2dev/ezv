@@ -1,4 +1,4 @@
-<div class="expand-navbar-mobile" aria-expanded="false">
+        <div class="expand-navbar-mobile" aria-expanded="false">
             <div class="px-3 pt-2">
                 @auth
                     <div>
@@ -150,11 +150,8 @@
                     </div>
                 @endauth
             </div>
-
-</div>
-<div id="overlay"></div>
-        <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
-            style="font-family: 'Poppins', sans-serif">
+        </div>
+        <div class="header-4-4 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
             <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
                 <div class="collapse navbar-collapse navbar-dekstop" id="navbarTogglerDemo">
                     <div id="navbar-first-dekstop" class="col-lg-4 d-flex align-items-center">
@@ -177,18 +174,12 @@
                         style="display: flex; align-items: center; justify-content: flex-end;">
                         @auth
                             <div class="d-flex" style="display: inline-block; align-items: center;">
-                                <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
-                                    {{ __('user_page.Switch to hosting') }}
-                                </a>
-
                                 <a type="button" onclick="language()" class="navbar-gap"
                                     style="color: white; width:27px;">
                                     @if (session()->has('locale'))
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                        <img src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                                     @else
-                                        <img class="lozad" src="{{ LazyLoad::show() }}"
-                                            data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                        <img src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                     @endif
                                 </a>
 
@@ -264,12 +255,9 @@
                             <a type="button" onclick="language()" class="navbar-gap"
                                 style="color: white; margin-right: 9px; width:27px;" id="language">
                                 @if (session()->has('locale'))
-                                    <img style="border-radius: 3px; height: 23px;" class="lozad"
-                                        src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                    <img style="border-radius: 3px; height: 23px;" src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                                 @else
-                                    <img style="border-radius: 3px;" class="lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                    <img style="border-radius: 3px;" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
                             <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"

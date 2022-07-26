@@ -117,6 +117,7 @@ return [
     'RESERVE NOW' => 'RESERVE NOW',
     'Become a Host' => 'Become a Host',
     'Hosted by' => 'Hosted by',
+    'Edit Profile' => 'Edit Profile',
     'Joined in' => 'Joined in',
     'Reviews' => 'Reviews',
     'Identity verified' => 'Identity verified',

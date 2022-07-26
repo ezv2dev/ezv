@@ -55,49 +55,43 @@
                         <h2>Room Amenities</h2>
                         <h4><i class="fas fa-shower"></i> Bathroom</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                           <div id="detail-room-bathroom"></div>
                         </ul>
 
                         <h4><i class="fas fa-bed"></i> Bedroom</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-bedroom"></div>
                         </ul>
 
                         <h4><i class="fas fa-utensils"></i> Food and Drink</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-kitchen"></div>
                         </ul>
 
                         <h4><i class="fas fa-shield"></i> Safety</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-safety"></div>
                         </ul>
 
                         <h4><i class="fas fa-hand-sparkles"></i> Service</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-service"></div>
                         </ul>
                     </div>
                     {{-- END LEFT CONTENT --}}
 
                     {{-- RIGHT CONTENT --}}
                     <div class="col-lg-8 col-md-8 col-xs-12 rsv-block alert-detail">
-                        <img class="image-content" id="imageProfileHotelRoom" src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+
+
+                        <div class="content list-image-content">
+                            <div class="wrap-modal-slider">
+                                <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="false" data-arrows="true">
+                                    <div id="slider-photo-room" ></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <h2>Room Option</h2>
                         <div class="col-12 m-0 ps-2 pe-2 row ">
                             <div class="col-2 border border-secondary border-end-0">
@@ -136,17 +130,91 @@
         </div>
     </div>
 </div>
+
+
 <script>
     function view_room(id) {
         $.ajax({
             type: "GET",
             url: '/hotel/room/' + id,
             success: function(data) {
-                $('#detail-room-type').html(data.type_room);
-                $('#detail-room-size').html(data.room_size);
-                $('#detail-room-capacity').html(data.capacity);
-                $('#detail-room-bed').html(data.bed_type);
-                $('#detail-room-total').html(data.number_of_room);
+                // data detail room
+                $('#detail-room-type').html(data["detail_room"].type_room);
+                $('#detail-room-size').html(data["detail_room"].room_size);
+                $('#detail-room-capacity').html(data["detail_room"].capacity);
+                $('#detail-room-bed').html(data["detail_room"].bed_type);
+                $('#detail-room-total').html(data["detail_room"].number_of_room);
+
+                //data slider photo
+                if(data["photo"].length > 0)
+                {
+                    let content = ``;
+
+                    for($i = 0; $i < data["photo"].length; $i++)
+                    {
+                        $('#slider-photo-room').append(`
+                            <a class="grid-image-container">
+                                <img class="brd-radius img-fluid grid-image" style="height: 200px; display: block;" src="{{ env('APP_URL') }}/foto/hotel/12/${data["photo"][$i].name}" alt="">
+                            </a>
+                        `);
+                    }
+                }
+
+                //bathroom
+                if(data["bathroom"].length > 0)
+                {
+                    for($i = 0; $i < data["bathroom"].length; $i++)
+                    {
+                        $('#detail-room-bathroom').append(`
+                           <li>${data["bathroom"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                // bedroom
+                if(data["bedroom"].length > 0)
+                {
+                    for($i = 0; $i < data["bedroom"].length; $i++)
+                    {
+                        $('#detail-room-bedroom').append(`
+                           <li>${data["bedroom"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                //kitchen
+                if(data["kitchen"].length > 0)
+                {
+                    for($i = 0; $i < data["kitchen"].length; $i++)
+                    {
+                        $('#detail-room-kitchen').append(`
+                           <li>${data["kitchen"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                //safety
+                if(data["safety"].length > 0)
+                {
+                    for($i = 0; $i < data["safety"].length; $i++)
+                    {
+                        $('#detail-room-safety').append(`
+                           <li>${data["safety"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                //service
+                if(data["service"].length > 0)
+                {
+                    for($i = 0; $i < data["service"].length; $i++)
+                    {
+                        $('#detail-room-service').append(`
+                           <li>${data["service"][$i].name}</li>
+                        `);
+                    }
+                }
+
                 $('#modal-room').modal('show');
             },
             error: function(jqXHR, exception) {
@@ -170,5 +238,10 @@
                 btn.classList.remove("disabled");
             },
         })
+
+        $('#modal-room').on('shown.bs.modal', function (e) {
+            $('.js-slider-test').slick('setPosition');
+            $('.wrap-modal-slider').addClass('open');
+        });
     }
 </script>

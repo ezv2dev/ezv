@@ -58,10 +58,10 @@ class ActivityController extends Controller
             'video',
             'story',
             'PricePhoto',
-            // 'detailReview',
+            'owner',
             'facilities',
             'price',
-            'createdByDetails'
+            'ownerData'
         ])
             ->where([
                 ['id_activity', $request->id],
@@ -80,7 +80,7 @@ class ActivityController extends Controller
                     'photo',
                     'video',
                     'story',
-                    // 'detailReview',
+                    'owner',
                     'facilities',
                     'price'
                 ])

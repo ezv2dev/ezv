@@ -53,7 +53,6 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/villa-slider.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/view-villa.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/header-css.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/simpleLightbox.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 
@@ -858,10 +857,13 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($profile->image)
-                                <img id="imageProfileCollab" src="{{ URL::asset('/foto/collaborator/' . strtolower($profile->id_collab) . '/' . $profile->image) }}">
+                                <img id="imageProfileCollab" class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/foto/collaborator/' . strtolower($profile->id_collab) . '/' . $profile->image) }}">
                             @else
-                                <img id="imageProfileCollab" src="{{ URL::asset('/template/collabs/template-profile.webp') }}">
+                                <img id="imageProfileCollab" class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/template/collabs/template-profile.webp') }}">
                             @endif
+
                             @auth
                                 @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
@@ -1220,7 +1222,7 @@
                     <section id="gallery" class="photosGrid section mb-3">
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
-                                @foreach ($photo->sortBy('order') as $item)
+                                @foreach ($photo as $item)
                                     <div class="col-4 grid-photo">
                                         <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
                                             class="img-lightbox photosGrid__Photo"
@@ -1250,49 +1252,30 @@
                                 @endforeach
                             @endif
                             @if ($video->count() > 0)
-                                @foreach ($video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
-                                        @auth
-                                            @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $profile->created_by)
-                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                            @else
-                                                <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                    href="javascript:void(0);">
-                                            @endif
-                                        @endauth
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                        @endguest
-                                        <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                            src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=5.0">
-                                        </video>
-                                        <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                @foreach ($video as $item)
+                                    <div class="col-4 grid-photo">
+                                        <a class="video-grid" type="button"
+                                            onclick="view({{ $item->id_video }});">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                            <video preload href="" class="photosGrid__Photo"
+                                                style="object-fit: cover;"
+                                                src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
+                                            </video>
                                         </a>
                                         @auth
-                                            @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $profile->id_collab }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
+                                            @if (Auth::user()->id == $profile->created_by)
+                                                <a class="delete delete-video" href="javascript:void(0);"
+                                                    onclick="delete_photo_video({'id': `{{ $profile->id_collab }}`, 'id_video': `{{ $item->id_video }}`})"><i
+                                                        class="fa fa-trash"></i></a>
+                                                <a type="button" class="delete" style="left: -40px !important; "
+                                                    onclick="position_video()"><i class="fa fa-pencil"></i></a>
                                             @endif
                                         @endauth
                                     </div>
                                 @endforeach
                             @endif
                             @if ($photo->count() <= 0 && $video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
+                                there is no gallery yet
                             @endif
                         </div>
                     </section>
@@ -1311,7 +1294,7 @@
                                         name="id_collab">
                                 </form>
                                 <small id="err-dz" style="display: none;" class="invalid-feedback">{{ __('auth.empty_file') }}</small><br>
-                                <button type="submit" id="btnSaveGallery" class="btn btn-primary">Upload</button>
+                                <button type="submit" id="button" class="btn btn-primary">Upload</button>
                             </section>
                         @endif
                     @endauth
@@ -2176,10 +2159,10 @@
                     <p class="fs-3 fw-bold mb-0">Share this place with your friend and family</p>
                     <div class="d-flex gap-3 align-items-center py-3">
                         @if ($profile->image)
-                            <img src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $profile->image) }}"
+                            <img src="{{ URL::asset('/foto/collaborator/' . strtolower($profile->uid) . '/' . $profile->image) }}"
                                 style="height: 48px; width: 48px;" class="rounded-circle shadow">
                         @else
-                            <img src="{{ URL::asset('/template/collabs/template-profile.webp') }}"
+                            <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
                                 style="height: 48px; width: 48px;" class="rounded-circle shadow">
                         @endif
                         <p class="d-flex align-items-center mb-0">{{ $profile->name }}</p>
@@ -2469,24 +2452,24 @@
 
                     {{-- <input type="hidden" name="id_owner" value="{{ $profile->created_by }}"> --}}
                     {{-- reorder image --}}
-                    <ul id="sortable-photo">
+                    {{-- <ul id="sortable-photo">
                         @forelse ($photo as $item)
-                            @php
-                            $id = $item->id_photo;
-                            $name = $item->name;
-                            @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
-                                <img src="{{ asset('foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
-                                    title="{{ $name }}">
-                            </li>
+                        @php
+                        $id = $item->id_photo;
+                        $name = $item->name;
+                        @endphp
+                        <li class="ui-state-default" data-id="{{ $id }}">
+                            <img src="{{ asset('foto/gallery/' . strtolower($profile->name) . '/' . $item->name) }}"
+                                title="{{ $name }}">
+                        </li>
                         @empty
-                            {{ __('user_page.there is no image yet') }}
+                        there is no image yet
                         @endforelse
-                    </ul>
+                    </ul> --}}
                 </div>
                 <div class="modal-footer">
                     <div style="clear: both; margin-top: 20px; width: 100%;">
-                        <input type='button' id="saveBtnReorderPhoto" class="btn-edit-position-photos" value='{{ __('user_page.Save') }}'
+                        <input type='button' class="btn-edit-position-photos" value='{{ __('user_page.Save') }}'
                             onclick="save_reorder_photo()">
                     </div>
                 </div>
@@ -2509,26 +2492,26 @@
 
                     {{-- <input type="hidden" name="id_owner" value="{{ $profile->created_by }}"> --}}
                     {{-- reorder image --}}
-                    <ul id="sortable-video">
+                    {{-- <ul id="sortable-video">
                         @forelse ($video as $item)
-                            @php
-                            $id = $item->id_video;
-                            $name = $item->name;
-                            @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
-                                <video
-                                    src="{{ asset('foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
-                            </li>
+                        @php
+                        $id = $item->id_video;
+                        $name = $item->name;
+                        @endphp
+                        <li class="ui-state-default" data-id="{{ $id }}">
+                            <video
+                                src="{{ asset('foto/gallery/' . strtolower($profile->name) . '/' . $item->name) }}#t=1.0">
+                        </li>
                         @empty
-                            {{ __('user_page.there is no image yet') }}
+                        there is no image yet
                         @endforelse
-                    </ul>
-                </div>
-                <div class="modal-footer">
+                    </ul> --}}
+
                     <div style="clear: both; margin-top: 20px;">
-                        <input type='button' id="saveBtnReorderVideo" class="btn-edit-position-photos" value='Submit'
+                        <input type='button' class="btn-edit-position-photos" value='Submit'
                             onclick="save_reorder_video()">
                     </div>
+
                 </div>
             </div>
         </div>
@@ -2605,7 +2588,6 @@
     <script src="{{ asset('assets/js/story-slider.js') }}"></script>
     <script src="{{ asset('assets/js/view-collab.js') }}"></script>
     <script src="{{ asset('assets/js/crud-collaborator.js') }}"></script>
-    <script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -2712,95 +2694,15 @@
         }
     </script>
     {{-- EDIT POSITION PHOTO & VIDEO --}}
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             // Initialize sortable
             $("#sortable-video").sortable();
             $("#sortable-photo").sortable();
-
-            if ($(window).width() < 992) {
-                //Setter
-                $("#sortable-video").sortable("option", "disabled", true);
-                $("#sortable-photo").sortable("option", "disabled", true);
-            }else {
-                //Setter
-                $("#sortable-video").sortable("option", "disabled", false);
-                $("#sortable-photo").sortable("option", "disabled", false);
-            }
-
-            //handle resize
-            $(window).on("resize", function() {
-                if ($(this).width() < 992) {
-                    //Setter
-                    $("#sortable-video").sortable("option", "disabled", true);
-                    $("#sortable-photo").sortable("option", "disabled", true);
-                } else {
-                    //Setter
-                    $("#sortable-video").sortable("option", "disabled", false);
-                    $("#sortable-photo").sortable("option", "disabled", false);
-                }
-            })
-
-            //initialize timeout variable
-            var timeOut = 0;
-
-            //clear time out to prevent memory leak
-            $("#edit_position_photo").on("click", function(e) {
-                if (e.target.id == "edit_position_photo") {
-                    clearTimeout(timeOut);
-                }
-            })
-            $("#edit_position_video").on("click", function(e) {
-                if (e.target.id == "edit_position_video") {
-                    clearTimeout(timeOut);
-                }
-            })
-            $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
-                clearTimeout(timeOut);
-            })
-            $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
-                clearTimeout(timeOut);
-            })
-
-            //event for mobile
-            $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
-                if ($(window).width() < 992) {
-                    timeOut = setTimeout(function() {
-                        $("#sortable-photo .ui-state-default img").addClass("shake-anim");
-                        $("#sortable-photo").sortable("option", "disabled", false);
-                    }, 500);
-                }
-            }).on("mouseup mouseleave", function() {
-                if ($(window).width() < 992) {
-                    $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
-                    $("#sortable-photo").sortable("option", "disabled", true);
-                }
-            })
-            $("#sortable-video .ui-state-default video").on("mouseenter", function() {
-                if ($(window).width() < 992) {
-                    timeOut = setTimeout(function() {
-                        $("#sortable-video .ui-state-default video").addClass("shake-anim");
-                        $("#sortable-video").sortable("option", "disabled", false);
-                    }, 500);
-                }
-            }).on("mouseup mouseleave", function() {
-                if ($(window).width() < 992) {
-                    $("#sortable-video .ui-state-default video").removeClass("shake-anim");
-                    $("#sortable-video").sortable("option", "disabled", true);
-                }
-            })
         });
-
-        function position_photo() {
-            $('#edit_position_photo').modal('show');
-        }
 
         // Save order
         function save_reorder_photo() {
-            let btn = document.getElementById("saveBtnReorderPhoto");
-            btn.textContent = "Saving...";
-            btn.classList.add("disabled");
-
             var imageids_arr = [];
             // get image ids order
             $('#sortable-photo li').each(function () {
@@ -2809,7 +2711,7 @@
             });
             // AJAX request
             $.ajax({
-                url: '/collaborator/update/photo/position',
+                url: '/villa/update/photo/position',
                 type: 'post',
                 data: {
                     "_token": "{{ csrf_token() }}",
@@ -2817,63 +2719,7 @@
                     id: `{{ $profile->id_collab }}`
                 },
                 success: function (response) {
-                    console.log(response);
-
-                    iziToast.success({
-                        title: "Success",
-                        message: response.message,
-                        position: "topRight",
-                    });
-
-                    let path = "/foto/collaborator/";
-                    let slash = "/";
-                    let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
-                    let content = "";
-                    let contentPositionModal = "";
-
-                    for (let i = 0; i < response.data.photo.length; i++) {
-                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
-                            response.data.photo[i].id_photo +
-                            '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[
-                                i].id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
-                            '"> <img src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' + response.data.photo[i].name + '"> </li>';
-                    }
-
-                    if (response.data.video.length > 0) {
-                        for (let v = 0; v < response.data.video.length; v++) {
-                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
-                                .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
-                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-video="' +
-                                response.data.video[v].id_video +
-                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                        }
-                    }
-
-                    btn.textContent = "{{ __('user_page.Save') }}";
-                    btn.classList.remove("disabled");
-
-                    $('.gallery').html("");
-                    $('.gallery').append(content);
-                    $('#sortable-photo').html("");
-                    $('#sortable-photo').append(contentPositionModal);
-
-                    $("#edit_position_photo").modal("hide");
-
-                    $gallery.refresh();
+                    location.reload();
                 }
             });
         }
@@ -2883,10 +2729,6 @@
         }
 
         function save_reorder_video() {
-            let btn = document.getElementById("saveBtnReorderVideo");
-            btn.textContent = "Saving...";
-            btn.classList.add("disabled");
-
             var videoids_arr = [];
             // get video ids order
             $('#sortable-video li').each(function () {
@@ -2895,7 +2737,7 @@
             });
             // AJAX request
             $.ajax({
-                url: '/collaborator/update/video/position',
+                url: '/villa/update/video/position',
                 type: 'post',
                 data: {
                     "_token": "{{ csrf_token() }}",
@@ -2903,69 +2745,12 @@
                     id: `{{ $profile->id_collab }}`
                 },
                 success: function (response) {
-                    console.log(response);
-
-                    iziToast.success({
-                        title: "Success",
-                        message: response.message,
-                        position: "topRight",
-                    });
-
-                    let path = "/foto/collaborator/";
-                    let slash = "/";
-                    let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
-                    let content = "";
-                    let contentPositionModal = "";
-
-                    for (let i = 0; i < response.data.photo.length; i++) {
-                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
-                            response.data.photo[i].id_photo +
-                            '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-                    }
-
-                    if (response.data.video.length > 0)
-                    {
-                        for (let v = 0; v < response.data.video.length; v++) {
-                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
-                                .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
-                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-video="' +
-                                response.data.video[v].id_video +
-                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
-                                .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
-                                '"> <video loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=1.0"> </li>';
-                        }
-                    }
-
-                    btn.textContent = "{{ __('user_page.Save') }}";
-                    btn.classList.remove("disabled");
-
-
-                    $('.gallery').html("");
-                    $('.gallery').append(content);
-                    $('#sortable-video').html("");
-                    $('#sortable-video').append(contentPositionModal);
-
-                    $("#edit_position_video").modal("hide");
-
-                    $gallery.refresh();
+                    location.reload();
                 }
             });
         }
-    </script>
+
+    </script> --}}
     {{-- END EDIT POSITION PHOTO & VIDEO --}}
 
     {{-- Guest Count --}}
@@ -3223,13 +3008,6 @@
     </script>
     {{-- END CONTACT HOST --}}
 
-    <script>
-        var $gallery;
-        $(document).ready(function() {
-            $gallery = new SimpleLightbox('.gallery a', {});
-            // var $gallery2 = new SimpleLightbox('.gallery2 a', {});
-        });
-    </script>
     {{-- DROPZONE JS --}}
     <script src="{{ asset('assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
     {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
@@ -3240,143 +3018,16 @@
             autoProcessQueue: false,
             url: '/collaborator/update/photo',
             parallelUploads: 50,
-            error: function(file, message, jqXHR) {
+            "error": function(file, message, xhr) {
                 this.removeFile(file); // perhaps not remove on xhr errors
-
-                console.log(message);
-
-                for (let i = 0; i < message.message.length; i++) {
-                    iziToast.error({
-                        title: "Error",
-                        message: message.message[i],
-                        position: "topRight",
-                    });
-                }
-
-                // if (jqXHR.responseJSON.errors) {
-                //     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
-                //         iziToast.error({
-                //             title: "Error",
-                //             message: jqXHR.responseJSON.errors[i],
-                //             position: "topRight",
-                //         });
-                //     }
-                // } else {
-                //     iziToast.error({
-                //         title: "Error",
-                //         message: jqXHR.responseJSON.message,
-                //         position: "topRight",
-                //     });
-                // }
-            },
-            success: function(file, message, response) {
-                console.log(file);
-                // console.log(response);
-                console.log(message);
-
-                iziToast.success({
-                    title: "Success",
-                    message: message.message,
-                    position: "topRight",
-                });
-
-                let path = "/foto/collaborator/";
-                let slash = "/";
-                let uid = message.data.uid.uid;
-                let lowerCaseUid = uid.toLowerCase();
-                let content = "";
-                let contentPositionModal;
-                let contentPositionModalVideo;
-                let contentStory;
-
-                let modalPhotoLength = $('#sortable-photo').find('li').length;
-                let modalVideoLength = $('#sortable-video').find('li').length;
-
-                if (modalPhotoLength == 0)
-                {
-                    $("#sortable-photo").html("");
-                }
-
-                if (modalVideoLength == 0)
-                {
-                    $('#sortable-video').html("");
-                }
-
-                let galleryDiv = $('.gallery');
-                let galleryLength = galleryDiv.find('a').length;
-
-                if (galleryLength == 0) {
-                    $('.gallery').html("");
-                }
-
-                if (message.data.photo.length > 0) {
-                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
-                        message.data.photo[0].id_photo +
-                        '"> <a href="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-photo="' +
-                        message.data.photo[0].id_photo +
-                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
-                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
-                        '"> <img src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' + message.data.photo[0].name + '"> </li>';
-
-                    $('.gallery').append(content);
-                    $('#sortable-photo').append(contentPositionModal);
-                }
-
-                if (message.data.video.length > 0) {
-                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
-                        '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
-                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
-                        '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $profile->id_collab }}" data-video="' +
-                        message.data.video[0].id_video +
-                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
-                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
-                        '"> <video loading="lazy" src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
-                        '#t=1.0"> </li>';
-
-                    contentStory =
-                        '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
-                        message.data.video[0].id_video +
-                        '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view(' +
-                        message.data.video[0].id_video +
-                        ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
-                        path +
-                        lowerCaseUid +
-                        slash +
-                        message.data.video[0].name +
-                        '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
-                        id_collab +
-                        '" data-video="' +
-                        message.data.video[0].id_video +
-                        '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
-
-                    $('.gallery').append(content);
-                    $('#sortable-video').append(contentPositionModalVideo);
-                    $("#storyContent").append(contentStory);
-                    sliderRestaurant();
-                }
-
-                $gallery.refresh();
-
-                this.removeFile(file);
+                alert(errorToString(message));
             },
             init: function() {
 
                 var myDropzone = this;
 
                 // Update selector to match your button
-                $("#btnSaveGallery").click(function(e) {
+                $("#button").click(function(e) {
                     e.preventDefault();
                     if(!myDropzone.files.length) {
                         $(".dz-image-add").css("border", "solid #e04f1a 1px");
@@ -3385,8 +3036,8 @@
                         $(".dz-image-add").css("border", "");
                         $('#err-dz').hide();
                         myDropzone.processQueue();
-                        $("#btnSaveGallery").html('Uploading Gallery...');
-                        $("#btnSaveGallery").addClass('disabled');
+                        $("#button").html('Uploading Gallery...');
+                        $("#button").addClass('disabled');
                     }
                 });
 
@@ -3401,12 +3052,8 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    $("#btnSaveGallery").html('Upload');
-                    $("#btnSaveGallery").removeClass('disabled');
-                });
-
-                this.on("complete", function(file, response, message) {
-                    this.removeFile(file);
+                    $('#loading-content').show();
+                    location.reload();
                 });
 
                 this.on("addedfile", function(file) {
