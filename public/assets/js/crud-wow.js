@@ -694,13 +694,12 @@ $("#addPriceForm").submit(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $("#modal-add_price").find("input[name='id_activity']").val("");
-            $("#modal-add_price").find("input[name='name']").val("");
-            $("#modal-add_price").find("input[name='price']").val("");
-            $("#modal-add_price").find("input[name='start_date']").val("");
-            $("#modal-add_price").find("input[name='end_date']").val("");
-            $("#modal-add_price").find("input[name='description']").val("");
-            $("#modal-add_price").find("input[name='image']").val("");
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
 
             const path = "/foto/activity/";
             const uid = response.uid.uid;
@@ -789,13 +788,19 @@ $("#addPriceForm").submit(function (e) {
 
             $(".price-content").append(content);
 
-            $("#modal-add_price").modal("hide");
+            $("#modal-add_price").find("input[name='id_activity']").val("");
+            $("#modal-add_price").find("input[name='name']").val("");
+            $("#modal-add_price").find("input[name='price']").val("");
+            $("#modal-add_price").find("input[name='start_date']").val("");
+            $("#modal-add_price").find("input[name='end_date']").val("");
+            $("#modal-add_price").find("input[name='description']").text("");
+            $("#modal-add_price").find("input[name='image']").val("");
+            $("#modal-add_price").find("img").attr("src", "");
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+
+            $("#modal-add_price").modal("hide");
         },
         error: function (jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {

@@ -106,6 +106,9 @@
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
                         <input type="text" class="form-control modal-input" id="bathroom1" name="bathroom1"
+                        @if ($villa[0]->bathroom > 3.5)
+                            value="{{ $villa[0]->bathroom }}"
+                        @endif
                             placeholder="Input Bathrooms.." min="4"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
@@ -197,7 +200,10 @@
                 <div class="row mb-12 margin-bottom-12px display-none" id="adultForm">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control modal-input" id="adult1" name="adult1"
+                        <input type="number" class="form-control modal-input" id="adult1" name="adult1"
+                        @if ($villa[0]->adult > 6)
+                            value="{{ $villa[0]->adult }}"
+                        @endif
                             placeholder="Input Adults.." min="7"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
@@ -292,8 +298,6 @@
                         <input type="number" class="form-control modal-input" id="children1" name="children1"
                         @if ($villa[0]->children > 5)
                             value="{{ $villa[0]->children }}"
-                        @else
-                            value=""
                         @endif
                             placeholder="Input Childrens.." min="6"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
@@ -415,6 +419,9 @@
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
                         <input type="text" class="form-control modal-input" id="bedroom1" name="bedroom1"
+                        @if ($villa[0]->bedroom > 5)
+                            value="{{ $villa[0]->bedroom }}"
+                        @endif
                             placeholder="Input Bedrooms.." min="7"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </div>
@@ -723,21 +730,24 @@
         document
             .getElementById("hideBathroom")
             .classList.remove("display-none");
-        document
-            .getElementById("t1")
-            .checked = false;
-        document
-            .getElementById("t1.5")
-            .checked = false;
-        document
-            .getElementById("t2")
-            .checked = false;
-        document
-            .getElementById("t2.5")
-            .checked = false;
-        document
-            .getElementById("t3")
-            .checked = false;
+
+        $("input[name='bathroom']:checked").val("");
+        $("input[name='bathroom']").removeAttr('checked');
+        // document
+        //     .getElementById("t1")
+        //     .checked = false;
+        // document
+        //     .getElementById("t1.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3")
+        //     .checked = false;
         document
             .getElementById("t3.5")
             .checked = false;
@@ -762,6 +772,7 @@
     }
 
     function hideBathroom() {
+        $("#bathroom1").val("");
         document
             .getElementById("bathroomForm")
             .classList.add("display-none");
@@ -819,24 +830,11 @@
         document
             .getElementById("hideAdult")
             .classList.remove("display-none");
-        document
-            .getElementById("x1")
-            .checked = false;
-        document
-            .getElementById("x2")
-            .checked = false;
-        document
-            .getElementById("x3")
-            .checked = false;
-        document
-            .getElementById("x4")
-            .checked = false;
-        document
-            .getElementById("x5")
-            .checked = false;
-        document
-            .getElementById("x6")
-            .checked = false;
+
+        $("input[name='adult']:checked").val("");
+        $("input[name='adult']").removeAttr('checked');
+        // $("input[name='adult']").val("");
+
         document
             .getElementById("x1")
             .disabled = true;
@@ -858,6 +856,7 @@
     }
 
     function hideAdult() {
+        $("#adult1").val("");
         document
             .getElementById("adultForm")
             .classList.add("display-none");
@@ -915,24 +914,11 @@
         document
             .getElementById("hideChildren")
             .classList.remove("display-none");
-        document
-            .getElementById("y1")
-            .checked = false;
-        document
-            .getElementById("y2")
-            .checked = false;
-        document
-            .getElementById("y3")
-            .checked = false;
-        document
-            .getElementById("y4")
-            .checked = false;
-        document
-            .getElementById("y5")
-            .checked = false;
-        document
-            .getElementById("y0")
-            .checked = false;
+
+        $("input[name='children']:checked").val("");
+        $("input[name='children']").removeAttr('checked');
+        // $("input[name='children']").val('');
+
         document
             .getElementById("y1")
             .disabled = true;

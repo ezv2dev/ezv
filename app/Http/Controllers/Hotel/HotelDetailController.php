@@ -321,7 +321,7 @@ class HotelDetailController extends Controller
 
     public function hotel($id)
     {
-        $hotel = Hotel::with('hotel_room', 'location')->where('id_hotel', $id)->where('status', 1)->get();
+        $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel')->where('id_hotel', $id)->get();
 
         // check if the editor does not have authorization
         if (auth()->check()) {

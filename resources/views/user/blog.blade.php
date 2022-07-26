@@ -111,15 +111,50 @@
                 </div>
                 <hr>
                 <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?motorbike">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 4</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?scorpions">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 5</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?forest">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 6</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 right-block">
-            <div class="right-content">
+            <div id="sidebar_fix" class="right-content">
                 <h4 class="title">Latest Blogs</h4>
                 <ul>
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 1</a></li>
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 2</a></li>
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
+                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 4</a></li>
+                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 5</a></li>
                 </ul>
             </div>
         </div>
@@ -190,6 +225,18 @@
         <script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
         {{-- Search Location --}}
+        <script>
+               $(document).scroll(function() {
+                var scrollPosition = $(document).scrollTop();
+                var scrollReference = 100;
+                if (scrollPosition >= scrollReference) {      
+                    $("#sidebar_fix").addClass('fixed');   
+                } else {
+                    $("#sidebar_fix").removeClass('fixed');
+                    $("#sidebar_fix").addClass('abs');
+                };
+            });
+        </script>
         <script>
             $(document).ready(() => {
                 if (window.scrollY == 0 && window.innerWidth <= 991) {
