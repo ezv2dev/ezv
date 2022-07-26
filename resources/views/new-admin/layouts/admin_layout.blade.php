@@ -128,13 +128,26 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
-@media (max-width: 533px) {
+@media only screen and (max-width: 533px) {
     .flex-gap .bg-white {
         width: 100%;
     }
 }
+@media only screen and (min-width: 534px) and (max-width: 782px) {
+    .flex-gap .bg-white {
+        width: 48%;
+    }
+}
 .overflow-x-auto::-webkit-scrollbar {
     display: none;
+}
+@media only screen and (max-width: 576px) {
+    .expand-navbar-mobile .user-details-name {
+        font-size: 14px !important;
+    }
+    .expand-navbar-mobile .user-details-email p {
+        font-size: 12px !important;
+    }
 }
     </style>
 
@@ -145,8 +158,8 @@
     @endcomponent --}}
     @component('components.loading.loading-type2')
     @endcomponent
-    <div class="expand-navbar-mobile" aria-expanded="false">
-        <div class="px-3 pt-2">
+    <div class="expand-navbar-mobile" aria-expanded="false" style="overflow-y: scroll; overflow-x: hidden;">
+        <div class="px-3 pt-2 h-100" style="overflow-x: hidden; overflow-y: auto;">
             @auth
                 <div>
                     <div class="d-flex align-items-center">
@@ -177,7 +190,7 @@
                     <hr>
                     <div class="dropdown">
                         <a id="nav-user" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropProfile" aria-expanded="false" aria-controls="dropProfile">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropProfile" aria-expanded="false" aria-controls="dropProfile">
                             <i id="f-user" class="f-arrow f-right"></i>Users
                         </a>
                         <div class="collapse" id="dropProfile">
@@ -230,7 +243,7 @@
                             </form>
                         </div>
                         <a id="nav-home" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHomes" aria-expanded="false" aria-controls="dropHomes">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHomes" aria-expanded="false" aria-controls="dropHomes">
                             <i id="f-home" class="f-arrow f-right"></i>{{ __('user_page.Homes') }}
                         </a>
                         <div class="collapse" id="dropHomes">
@@ -241,7 +254,7 @@
                           <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
                         <a id="nav-hotels" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHotels" aria-expanded="false" aria-controls="dropHotels">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHotels" aria-expanded="false" aria-controls="dropHotels">
                             <i id="f-hotels" class="f-arrow f-right"></i>{{ __('user_page.Hotels') }}
                         </a>
                         <div class="collapse" id="dropHotels">
@@ -252,7 +265,7 @@
                           <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
                         <a id="nav-food" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropFood" aria-expanded="false" aria-controls="dropFood">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropFood" aria-expanded="false" aria-controls="dropFood">
                             <i id="f-food" class="f-arrow f-right"></i>{{ __('user_page.Food') }}
                         </a>
                         <div class="collapse" id="dropFood">
@@ -262,7 +275,7 @@
                           <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
                         <a id="nav-wow" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropWow" aria-expanded="false" aria-controls="dropWow">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropWow" aria-expanded="false" aria-controls="dropWow">
                             <i id="f-wow" class="f-arrow f-right"></i>Wow
                         </a>
                         <div class="collapse" id="dropWow">
@@ -272,7 +285,7 @@
                           <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
                         <a id="nav-reward" class="navbar-gap d-block mb-2"
-                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropReward" aria-expanded="false" aria-controls="dropReward">
+                            style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropReward" aria-expanded="false" aria-controls="dropReward">
                             <i id="f-reward" class="f-arrow f-right"></i>Reward
                         </a>
                         <div class="collapse" id="dropReward">
@@ -315,7 +328,7 @@
                         </div>
                         <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
                     </div> --}}
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
 
@@ -885,7 +898,7 @@
     </nav>
 
     <main>
-        <hr>
+        <hr style="background-color: transparent; border-color: transparent;">
         @yield('content_admin')
 
         @include('user.modal.dashboard.modal_language')
@@ -948,23 +961,106 @@
         })
     </script>
     <script>
+        function cleanClass(data) {
+            switch(data) {
+                case 'user':
+                    $("#f-home").removeClass('f-down').addClass('f-right');
+                    $('#dropHomes').removeClass('show');
+                    $("#f-hotels").removeClass('f-down').addClass('f-right');
+                    $('#dropHotels').removeClass('show');
+                    $("#f-food").removeClass('f-down').addClass('f-right');
+                    $('#dropFood').removeClass('show');
+                    $("#f-wow").removeClass('f-down').addClass('f-right');
+                    $('#dropWow').removeClass('show');
+                    $("#f-reward").removeClass('f-down').addClass('f-right');
+                    $('#dropReward').removeClass('show');
+                break;
+                case 'home':
+                    $("#f-user").removeClass('f-down').addClass('f-right');
+                    $('#dropProfile').removeClass('show');
+                    $("#f-hotels").removeClass('f-down').addClass('f-right');
+                    $('#dropHotels').removeClass('show');
+                    $("#f-food").removeClass('f-down').addClass('f-right');
+                    $('#dropFood').removeClass('show');
+                    $("#f-wow").removeClass('f-down').addClass('f-right');
+                    $('#dropWow').removeClass('show');
+                    $("#f-reward").removeClass('f-down').addClass('f-right');
+                    $('#dropReward').removeClass('show');
+                break;
+                case 'hotels':
+                    $("#f-user").removeClass('f-down').addClass('f-right');
+                    $('#dropProfile').removeClass('show');
+                    $("#f-home").removeClass('f-down').addClass('f-right');
+                    $('#dropHomes').removeClass('show');
+                    $("#f-food").removeClass('f-down').addClass('f-right');
+                    $('#dropFood').removeClass('show');
+                    $("#f-wow").removeClass('f-down').addClass('f-right');
+                    $('#dropWow').removeClass('show');
+                    $("#f-reward").removeClass('f-down').addClass('f-right');
+                    $('#dropReward').removeClass('show');
+                break;
+                case 'food':
+                    $("#f-user").removeClass('f-down').addClass('f-right');
+                    $('#dropProfile').removeClass('show');
+                    $("#f-home").removeClass('f-down').addClass('f-right');
+                    $('#dropHomes').removeClass('show');
+                    $("#f-hotels").removeClass('f-down').addClass('f-right');
+                    $('#dropHotels').removeClass('show');
+                    $("#f-wow").removeClass('f-down').addClass('f-right');
+                    $('#dropWow').removeClass('show');
+                    $("#f-reward").removeClass('f-down').addClass('f-right');
+                    $('#dropReward').removeClass('show');
+                break;
+                case 'wow':
+                    $("#f-user").removeClass('f-down').addClass('f-right');
+                    $('#dropProfile').removeClass('show');
+                    $("#f-home").removeClass('f-down').addClass('f-right');
+                    $('#dropHomes').removeClass('show');
+                    $("#f-hotels").removeClass('f-down').addClass('f-right');
+                    $('#dropHotels').removeClass('show');
+                    $("#f-food").removeClass('f-down').addClass('f-right');
+                    $('#dropFood').removeClass('show');
+                    $("#f-reward").removeClass('f-down').addClass('f-right');
+                    $('#dropReward').removeClass('show');
+                break;
+                case 'reward':
+                    $("#f-user").removeClass('f-down').addClass('f-right');
+                    $('#dropProfile').removeClass('show');
+                    $("#f-home").removeClass('f-down').addClass('f-right');
+                    $('#dropHomes').removeClass('show');
+                    $("#f-hotels").removeClass('f-down').addClass('f-right');
+                    $('#dropHotels').removeClass('show');
+                    $("#f-food").removeClass('f-down').addClass('f-right');
+                    $('#dropFood').removeClass('show');
+                    $("#f-wow").removeClass('f-down').addClass('f-right');
+                    $('#dropWow').removeClass('show');
+                break;
+            default:
+            }
+        }
         $(function() {
             $('#nav-user').click(function() {
+                cleanClass("user");
                 $('#f-user').toggleClass('f-right f-down');
             });
             $('#nav-home').click(function() {
+                cleanClass("home");
                 $('#f-home').toggleClass('f-right f-down');
             });
             $('#nav-hotels').click(function() {
+                cleanClass("hotels");
                 $('#f-hotels').toggleClass('f-right f-down');
             });
             $('#nav-food').click(function() {
+                cleanClass("food");
                 $('#f-food').toggleClass('f-right f-down');
             });
             $('#nav-wow').click(function() {
+                cleanClass("wow");
                 $('#f-wow').toggleClass('f-right f-down');
             });
             $('#nav-reward').click(function() {
+                cleanClass("reward");
                 $('#f-reward').toggleClass('f-right f-down');
             });
         })

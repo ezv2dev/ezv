@@ -793,7 +793,7 @@ $("#addPriceForm").submit(function (e) {
             $("#modal-add_price").find("input[name='price']").val("");
             $("#modal-add_price").find("input[name='start_date']").val("");
             $("#modal-add_price").find("input[name='end_date']").val("");
-            $("#modal-add_price").find("input[name='description']").text("");
+            $("#modal-add_price").find("input[name='description']").val("");
             $("#modal-add_price").find("input[name='image']").val("");
             $("#modal-add_price").find("img").attr("src", "");
 
