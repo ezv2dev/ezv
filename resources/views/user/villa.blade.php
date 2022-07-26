@@ -698,9 +698,9 @@
                                                                     <a type="button"
                                                                         onclick="view({{ $item->id_video }})"
                                                                         style="height: 70px; width: 70px;">
-                                                                    @else
-                                                                        <a type="button" onclick="showPromotionMobile()"
-                                                                            style="height: 70px; width: 70px;">
+                                                                @else
+                                                                    <a type="button" onclick="showPromotionMobile()"
+                                                                        style="height: 70px; width: 70px;">
                                                                 @endif
                                                             @endauth
                                                             <div class="story-video-player"><i class="fa fa-play"></i>
@@ -888,7 +888,7 @@
                                 @endforeach
                             @endif
                             @if ($photo->count() <= 0 && $video->count() <= 0)
-                                there is no gallery yet
+                                {{ __('user_page.there is no gallery yet') }}
                             @endif
                         </div>
                     </section>
@@ -3404,8 +3404,7 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document"
-            style="overflow-y: initial !important">
+        <div class="modal-dialog modal-fullscreen-md-down modal-lg" role="document" style="overflow-y: initial !important">
             <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -3582,7 +3581,7 @@
     {{-- MODAL SHARE --}}
     <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('user_page.Share') }}</h5>
@@ -3747,8 +3746,8 @@
     {{-- MODAL Reorder image --}}
     <div class="modal fade" id="edit_position_photo" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-fullscreen modal-xl" role="document">
+            <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Photos') }}</h7>
@@ -4155,7 +4154,6 @@
                     $("#edit_position_photo").modal("hide");
 
                     $gallery.refresh();
-
                 }
             });
         }

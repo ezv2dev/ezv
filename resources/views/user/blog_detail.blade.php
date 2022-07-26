@@ -96,7 +96,7 @@
             <hr>
             <h3>Also Read</h3>
             <!-- ad-foreach disini -->
-            <div class="row">
+            <div class="row read">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <img class="blog-img" src="https://source.unsplash.com/random/?tractor">
                     <p class="list-header">Lorem Ipsum ... Amet 2</p>
@@ -208,23 +208,28 @@
             $(document).ready(() => {
                 var $sidebar = $("#sidebar_fix");
                 var $sidebarHeight = $sidebar.outerHeight();
-                var $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
+                var $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                var $blogBodyHeight = $(".blog-detail-body").offset().top + $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
                 $(window).on("resize", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
+                    $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                    $blogBodyHeight = $(".blog-detail-body").offset().top + $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
                 })
                 $(window).on("scroll", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
-                    if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() < $blogBodyHeight - $sidebarHeight - 15) {
-                        $sidebar.addClass("fixed");
-                    }else if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() > $blogBodyHeight - $sidebarHeight - 15){
+                    $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                    $blogBodyHeight = $(".blog-detail-body").offset().top + $(".blog-detail-body").outerHeight() - parseInt($(".blog-detail-body").css("padding-bottom"));
+                    if ($("#header-container").hasClass("fix-header") 
+                            && $(this).scrollTop() > $(".read").offset().top + 65){
                         $sidebar.removeClass("fixed");
                         $sidebar.addClass('abs');
                         $sidebar.css({
-                            "top": $blogBodyHeight - $sidebarHeight - 15
+                            "top": $blogBodyHeight - $sidebarHeight
                         });
-                    }else {
+                    } else if ($("#header-container").hasClass("fix-header") 
+                            && $(this).scrollTop() < $(".read").offset().top + 65) {
+                        $sidebar.addClass("fixed");
+                    } else {
                         $sidebar.removeClass("fixed");
                         $sidebar.addClass('abs');
                         $sidebar.css({
