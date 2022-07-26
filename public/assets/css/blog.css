@@ -8,6 +8,10 @@
 
 .vert-middle {
     margin-top: 6%;
+    margin-left: 54px;
+}
+.breadcrumb {
+    margin-left: 67px;
 }
 
 .privacy-title {
@@ -64,14 +68,14 @@
 }
 
 .right-block {
-    position: relative;
+    display: block;
 }
 
 .right-content {
     border: solid 1px #ff7400;
     padding: 20px;
     border-radius: 12px;
-    margin-left: 15px;
+    min-width: 300px;
 }
 
 .right-content ul li {
@@ -87,6 +91,11 @@
 
 .right-content ul li a:hover {
     color: #ff7400;
+}
+
+.smaller {
+    font-size: smaller;
+    margin-top: -20px;
 }
 
 @media (min-width: 992px) {
@@ -106,4 +115,19 @@
     .right-block {
         display: none;
     }
+}
+
+.blog-content {
+    padding: 0 !important;
+}
+
+.blog-content p {
+    text-align: justify;
+}
+
+.blog-content img {
+    max-width: 100%;
+    margin-bottom: 20px;
+    aspect-ratio: 2/1;
+    object-fit: cover;
 }
