@@ -65,26 +65,17 @@
 
                         <h4><i class="fas fa-utensils"></i> Food and Drink</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-kitchen"></div>
                         </ul>
 
                         <h4><i class="fas fa-shield"></i> Safety</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-safety"></div>
                         </ul>
 
                         <h4><i class="fas fa-hand-sparkles"></i> Service</h4>
                         <ul style="list-style-type:circle">
-                            <li>Apples</li>
-                            <li>Bananas</li>
-                            <li>Lemons</li>
-                            <li>Oranges</li>
+                            <div id="detail-room-service"></div>
                         </ul>
                     </div>
                     {{-- END LEFT CONTENT --}}
@@ -178,17 +169,49 @@
                     }
                 }
 
-                //bedroom
-                // if(data["bedroom"].length > 0)
-                // {
-                //     for($i = 0; $i < data["bedroom"].length; $i++)
-                //     {
-                //         $('#detail-room-bedroom').append(`
-                //            <li>${data["bedroom"][$i].name}</li>
-                //         `);
-                //     }
-                // }
+                // bedroom
+                if(data["bedroom"].length > 0)
+                {
+                    for($i = 0; $i < data["bedroom"].length; $i++)
+                    {
+                        $('#detail-room-bedroom').append(`
+                           <li>${data["bedroom"][$i].name}</li>
+                        `);
+                    }
+                }
 
+                //kitchen
+                if(data["kitchen"].length > 0)
+                {
+                    for($i = 0; $i < data["kitchen"].length; $i++)
+                    {
+                        $('#detail-room-kitchen').append(`
+                           <li>${data["kitchen"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                //safety
+                if(data["safety"].length > 0)
+                {
+                    for($i = 0; $i < data["safety"].length; $i++)
+                    {
+                        $('#detail-room-safety').append(`
+                           <li>${data["safety"][$i].name}</li>
+                        `);
+                    }
+                }
+
+                //service
+                if(data["service"].length > 0)
+                {
+                    for($i = 0; $i < data["service"].length; $i++)
+                    {
+                        $('#detail-room-service').append(`
+                           <li>${data["service"][$i].name}</li>
+                        `);
+                    }
+                }
 
                 $('#modal-room').modal('show');
 
