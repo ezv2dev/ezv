@@ -65,6 +65,52 @@
             outline:none;
             border:0;
         }
+
+        /* Loading Animation */
+        .container-loading-animation{
+            position:absolute;
+            top:50%;
+            left:50%;
+            right:auto;
+            bottom:auto;
+            transform:translate(-50%, -50%);
+            z-index: 3;
+        }
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border: 8px solid #ddd;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #ddd transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -75,6 +121,9 @@
         @include('layouts.user.header_minimaliste')
     </section>
     <section class="homes">
+        <div class="container-loading-animation d-none">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
         <div class="col-lg-12 home-content">
             @if (session('success'))
             <div class="col-12">
@@ -90,7 +139,7 @@
                 </div>
             </div>
             @endif
-            <form action="{{ route('password_update') }}" method="POST" class="body-form">
+            <form action="{{ route('password_update') }}" id="formChangePassword" method="POST" class="body-form">
                 @csrf
                 @method('PATCH')
 
@@ -229,33 +278,85 @@
                 validate($(this))
             })
 
-            async function validate(input){
+            $('#formChangePassword').submit(function(e){
+                if(typeof e.cancelable !== 'boolean' || e.cancelable){
+                    e.preventDefault();
+                    let input = $('#formChangePassword .form-control');
+                    let error = 0
+                    $.each(input, function(index, value){
+                        const validation = validate($(input[index]))
+                        validation ? error = 0 : error = 1 
+                    })
+
+                    if(error == 0){
+                        $('.container-loading-animation').removeClass('d-none')
+
+                        $.ajax({
+                            type: "POST",
+                            url: $(this).attr('action'),
+                            data: $(this).serialize(),
+                            dataType: 'json',
+                            success: function( data ){
+                                location.reload();                        
+                            },
+                            error: function( response ){    
+                                if(response.status == 200){
+                                    location.reload();                        
+                                }else{
+                                    var errors = response.responseJSON;
+                                    $.each(errors.errors,function (el, val) {
+                                        let input = $('#formChangePassword input[name='+el+']')
+                                        let parentInput = input.parent()
+                                        let messageContainer = parentInput.parent().find('.invalid-feedback')
+                                        let iconInput = parentInput.find('.icon-input-container')
+    
+                                        $('.container-loading-animation').addClass('d-none')
+                                        setErrorStyle(input, messageContainer, iconInput)
+    
+                                        $.each(val, function(index, errMessage){
+                                            $(messageContainer).text(errMessage)
+                                        })
+                
+                                    });
+                                }                       
+                            }
+                        });
+                    }
+                }
+            })
+
+            function validate(input){
+                let status = true;
                 let parentInput = input.parent()
                 let messageContainer = parentInput.parent().find('.invalid-feedback')
                 let iconInput = parentInput.find('.icon-input-container')
+
                 // reset error style
-                // await resetErrorStyle(input, parentInput)
-                console.log(input.val(), !input.val())
+                resetErrorStyle(input, messageContainer, iconInput)
+
                 if(!input.val()){
                     setErrorStyle(input, messageContainer, iconInput)
                     messageContainer.text('{{ __('auth.empty_password') }}')
+                    status = false
                 }else{
                     if(input.val().length < 8){
                         setErrorStyle(input, messageContainer, iconInput)
                         messageContainer.text('{{ __('auth.min_password') }}')
+                        status = false
                     }else if(input.attr('id') == 'password_confirmation'){
                         if(input.val() != $('#password').val()){
                             setErrorStyle(input, messageContainer, iconInput)
                             messageContainer.text('{{ __('auth.invalid_password') }}')
+                            status = false
                         }
-                    }else{
-                        resetErrorStyle(input, messageContainer, iconInput)
-                    } 
+                    }
                 }
+
+                return status
             }
             
             function setErrorStyle(input, messageContainer, iconInput){                
-                input.hasClass('is-invalid') ? '' : input.addClass('is-invalid')
+                input.addClass('is-invalid')
                 iconInput.hide()
                 messageContainer.show()
             }
