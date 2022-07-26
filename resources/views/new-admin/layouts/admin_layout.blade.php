@@ -158,8 +158,8 @@
     @endcomponent --}}
     @component('components.loading.loading-type2')
     @endcomponent
-    <div class="expand-navbar-mobile" aria-expanded="false" style="overflow-y: scroll; overflow-x: hidden;">
-        <div class="px-3 pt-2 h-100" style="overflow-x: hidden; overflow-y: auto;">
+    <div class="expand-navbar-mobile" aria-expanded="false">
+        <div class="px-3 pt-2 h-100">
             @auth
                 <div>
                     <div class="d-flex align-items-center">
@@ -897,7 +897,7 @@
         </div>
     </nav>
 
-    <main>
+    <main style="overflow-y: auto; overflow-x: hidden;">
         <hr style="background-color: transparent; border-color: transparent;">
         @yield('content_admin')
 

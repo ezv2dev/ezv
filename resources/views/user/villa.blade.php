@@ -178,19 +178,21 @@
                             </a>
                         </div>
                         <div class="d-flex align-items-center mb-2">
-                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
 
-                            @if (session()->has('currency'))
-                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @if (session()->has('currency'))
+                                    <p class="mb-0 ms-2" style="color: #585656">Change Currency
+                                        ({{ session('currency') }})</p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                            @else
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @else
+                                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                            @endif
+                                @endif
 
-                        </a>
+                            </a>
                         </div>
 
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
@@ -240,19 +242,21 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
 
-                        @if (session()->has('currency'))
-                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                            @endif
 
-                    </a>
+                        </a>
                     </div>
                 @endauth
             </div>
@@ -485,7 +489,8 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $villa[0]->created_by)
@@ -591,7 +596,8 @@
                                                         @endforeach
                                                         @if ($video->count() < 100)
                                                             @foreach ($video as $item)
-                                                                <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
+                                                                <div class="card4 col-lg-3 radius-5"
+                                                                    id="displayStoryVideo{{ $item->id_video }}">
                                                                     <div class="img-wrap">
                                                                         <div class="video-position">
                                                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $villa[0]->created_by)
@@ -665,9 +671,9 @@
                                                                 @endif
                                                             @endauth
                                                             @guest
-                                                            <a type="button" onclick="showPromotionMobile()"
-                                                                style="height: 70px; width: 70px;">
-                                                            @endguest
+                                                                <a type="button" onclick="showPromotionMobile()"
+                                                                    style="height: 70px; width: 70px;">
+                                                                @endguest
 
                                                                 <div class="story-video-player"><i
                                                                         class="fa fa-play"></i>
@@ -692,9 +698,9 @@
                                                                     <a type="button"
                                                                         onclick="view({{ $item->id_video }})"
                                                                         style="height: 70px; width: 70px;">
-                                                                    @else
-                                                                        <a type="button" onclick="showPromotionMobile()"
-                                                                            style="height: 70px; width: 70px;">
+                                                                @else
+                                                                    <a type="button" onclick="showPromotionMobile()"
+                                                                        style="height: 70px; width: 70px;">
                                                                 @endif
                                                             @endauth
                                                             <div class="story-video-player"><i class="fa fa-play"></i>
@@ -882,7 +888,7 @@
                                 @endforeach
                             @endif
                             @if ($photo->count() <= 0 && $video->count() <= 0)
-                                there is no gallery yet
+                                {{ __('user_page.there is no gallery yet') }}
                             @endif
                         </div>
                     </section>
@@ -1119,10 +1125,9 @@
                                                 $i = $i - $kitchen->count();
                                                 $total_last = 6 - $villa_amenities->count();
                                                 $total = $villa_amenities->count() + $kitchen->count();
-                                                if($total <= 6)
-                                                {
+                                                if ($total <= 6) {
                                                     $stop = $kitchen->count();
-                                                }else{
+                                                } else {
                                                     $stop = $total_last;
                                                 }
                                             @endphp
@@ -1147,10 +1152,9 @@
                                                 $i = $i - $safety->count();
                                                 $total_last = 6 - $total;
                                                 $total = $total + $safety->count();
-                                                if($total <= 6)
-                                                {
+                                                if ($total <= 6) {
                                                     $stop = $safety->count();
-                                                }else{
+                                                } else {
                                                     $stop = $total_last;
                                                 }
                                             @endphp
@@ -1175,10 +1179,9 @@
                                                 $i = $i - $service->count();
                                                 $total_last = 6 - $total;
                                                 $total = $total + $service->count();
-                                                if($total <= 6)
-                                                {
+                                                if ($total <= 6) {
                                                     $stop = $service->count();
-                                                }else{
+                                                } else {
                                                     $stop = $total_last;
                                                 }
                                             @endphp
@@ -1203,10 +1206,9 @@
                                                 $i = $i - $bathroom->count();
                                                 $total_last = 6 - $total;
                                                 $total = $total + $bathroom->count();
-                                                if($total <= 6)
-                                                {
+                                                if ($total <= 6) {
                                                     $stop = $bathroom->count();
-                                                }else{
+                                                } else {
                                                     $stop = $total_last;
                                                 }
                                             @endphp
@@ -2354,49 +2356,55 @@
                             <div class="col-1 host-profile">
                                 @if ($createdby[0]->avatar)
                                     @guest
-                                        <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
-                                    @endguest
-                                    @auth
-                                        @if ($createdby[0]->id == Auth::user()->id)
-                                            <a href="{{ route('profile_user') }}" target="_blank">
-                                        @else
-                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
-                                        @endIf
-                                    @endauth
-                                            <img class="lozad" src="{{ LazyLoad::show() }}"
-                                                data-src="{{ $createdby[0]->avatar }}">
-                                        </a>
+                                        <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
+                                            target="_blank">
+                                        @endguest
+                                        @auth
+                                            @if ($createdby[0]->id == Auth::user()->id)
+                                                <a href="{{ route('profile_user') }}" target="_blank">
+                                                @else
+                                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
+                                                        target="_blank">
+                                            @endIf
+                                        @endauth
+                                        <img class="lozad" src="{{ LazyLoad::show() }}"
+                                            data-src="{{ $createdby[0]->avatar }}">
+                                    </a>
                                 @else
                                     @auth
                                         @if ($createdby[0]->id == Auth::user()->id)
                                             <a href="{{ route('profile_user') }}" target="_blank">
-                                        @else
-                                            <a href="{{ route('owner_profile_show', $createdby[0]->id) }}" target="_blank">
+                                            @else
+                                                <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
+                                                    target="_blank">
                                         @endIf
                                     @endauth
-                                            <img class="lozad" src="{{ LazyLoad::show() }}"
-                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    <img class="lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
                             <div class="col-5">
                                 <div class="member-profile">
-                                    @if (isset($villa[0]->userCreate->first_name))
+                                    <div class="d-flex">
                                         <h4>{{ __('user_page.Hosted by') }}
-                                            {{ $villa[0]->userCreate->first_name }}
-                                            {{ $villa[0]->userCreate->last_name }}
+                                            @if ($villa[0]->userCreate->first_name == null || $villa[0]->userCreate->last_name == null)
+                                                Anonymous
+                                            @else
+                                                {{ $villa[0]->userCreate->first_name }}
+                                                {{ $villa[0]->userCreate->last_name }}
+                                            @endif
                                         </h4>
-                                    @else
-                                        <h4>{{ __('user_page.Hosted by') }}
-                                            Anonymous
-                                        </h4>
-                                    @endif
-                                    @if (isset($villa[0]->userCreate->created_at))
-                                        <p>
-                                            {{ __('user_page.Joined in') }}
-                                            {{ date_format($villa[0]->userCreate->created_at, 'M Y') }}
-                                        </p>
-                                    @endif
+                                        @auth
+                                            @if (Auth::user()->id == $villa[0]->created_by)
+                                                &nbsp;
+                                                <a type="button" href="{{ route('profile_user') }}"
+                                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                    <p>{{ __('user_page.Joined in') }}
+                                        {{ date_format($villa[0]->userCreate->created_at, 'M Y') }}</p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -2571,7 +2579,7 @@
                             {{-- END ALERT CONTENT STATUS --}}
 
                             @guest
-                            <hr>
+                                <hr>
 
                                 {{-- <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4> --}}
 
@@ -3396,7 +3404,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document" style="overflow-y: initial !important">
+        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-amenities" role="document"
+            style="overflow-y: initial !important">
             <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -3600,7 +3609,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                        <button onclick="share_function()">Copy link</button> -->
+                                            <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3743,8 +3752,8 @@
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Photos') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
-                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
+                            style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body pb-1">
 
@@ -3785,8 +3794,8 @@
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Video') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
-                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
+                            style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body pb-1">
 
@@ -3798,7 +3807,8 @@
                                 $id = $item->id_video;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}" id="positionVideoGallery{{$id}}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                                id="positionVideoGallery{{ $id }}">
                                 <video loading="lazy"
                                     src="{{ asset('foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -3983,7 +3993,7 @@
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", true);
                 $("#sortable-photo").sortable("option", "disabled", true);
-            }else {
+            } else {
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", false);
                 $("#sortable-photo").sortable("option", "disabled", false);
@@ -4022,13 +4032,13 @@
             $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
                 clearTimeout(timeOut);
             })
-            
+
             //event for mobile
             $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
                 if ($(window).width() < 992) {
                     timeOut = setTimeout(function() {
                         $("#sortable-photo .ui-state-default img").addClass("shake-anim");
-                        $("#sortable-photo").sortable("option", "disabled", false);    
+                        $("#sortable-photo").sortable("option", "disabled", false);
                     }, 500);
                 }
             }).on("mouseup mouseleave", function() {
@@ -4041,7 +4051,7 @@
                 if ($(window).width() < 992) {
                     timeOut = setTimeout(function() {
                         $("#sortable-video .ui-state-default video").addClass("shake-anim");
-                        $("#sortable-video").sortable("option", "disabled", false);    
+                        $("#sortable-video").sortable("option", "disabled", false);
                     }, 500);
                 }
             }).on("mouseup mouseleave", function() {
@@ -4120,12 +4130,12 @@
                             '" title="' + response.data.photo[i].name + '"> </li>';
                     }
 
-                    if (response.data.video.length > 0)
-                    {
+                    if (response.data.video.length > 0) {
                         for (let v = 0; v < response.data.video.length; v++) {
                             content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
                                 .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
+                                .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                                 path + lowerCaseUid + slash + response.data.video[v].name +
                                 '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
@@ -4145,7 +4155,6 @@
                     $("#edit_position_photo").modal("hide");
 
                     $gallery.refresh();
-
                 }
             });
         }
@@ -4203,19 +4212,20 @@
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
                     }
 
-                    if (response.data.video.length > 0)
-                    {
+                    if (response.data.video.length > 0) {
                         for (let v = 0; v < response.data.video.length; v++) {
                             content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
                                 .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v].id_video +
+                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
+                                .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                                 path + lowerCaseUid + slash + response.data.video[v].name +
                                 '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
                                 response.data.video[v].id_video +
                                 '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
-                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
+                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data
+                                .video[v]
                                 .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
                                 '"> <video loading="lazy" src="' +
                                 path + lowerCaseUid + slash + response.data.video[v].name +
@@ -4399,13 +4409,11 @@
                 let modalPhotoLength = $('#sortable-photo').find('li').length;
                 let modalVideoLength = $('#sortable-video').find('li').length;
 
-                if (modalPhotoLength == 0)
-                {
+                if (modalPhotoLength == 0) {
                     $("#sortable-photo").html("");
                 }
 
-                if (modalVideoLength == 0)
-                {
+                if (modalVideoLength == 0) {
                     $('#sortable-video').html("");
                 }
 
@@ -4487,15 +4495,23 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - parseInt($('.div-amenities').css( "margin-bottom")) - 15);
+            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
+                "top")) - parseInt($('.div-amenities').css("margin-bottom")) - 15);
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - parseInt($('.div-amenities').css( "margin-bottom")) - 15);
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                    '#sidebar_fix .reserve-block').height() + parseInt($(
+                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-amenities').css(
+                    "margin-bottom")) - 15);
             });
 
             $window.scroll(function() {
-                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($( '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css( "top")) - parseInt($('.div-amenities').css( "margin-bottom")) - 15);
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                    '#sidebar_fix .reserve-block').height() + parseInt($(
+                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-amenities').css(
+                    "margin-bottom")) - 15);
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $availabilityTop) {
                     $sidebar.addClass("fixed");
                     $sidebar.css({
@@ -4936,8 +4952,8 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo" + video).remove();
-                            $("#positionVideoGallery"+video).remove();
-                            $("#displayStoryVideo"+video).remove();
+                            $("#positionVideoGallery" + video).remove();
+                            $("#displayStoryVideo" + video).remove();
                             sliderRestaurant();
                         }
                     });
@@ -5075,20 +5091,21 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
-            function language() {
-                $('#LegalModal').modal('show');
-                $('#trigger-tab-language').addClass('active');
-                $('#content-tab-language').addClass('active');
-                $('#trigger-tab-currency').removeClass('active');
-                $('#content-tab-currency').removeClass('active');
-            }
-            function currency() {
-                $('#LegalModal').modal('show');
-                $('#trigger-tab-language').removeClass('active');
-                $('#content-tab-language').removeClass('active');
-                $('#trigger-tab-currency').addClass('active');
-                $('#content-tab-currency').addClass('active');
-            }
+        function language() {
+            $('#LegalModal').modal('show');
+            $('#trigger-tab-language').addClass('active');
+            $('#content-tab-language').addClass('active');
+            $('#trigger-tab-currency').removeClass('active');
+            $('#content-tab-currency').removeClass('active');
+        }
+
+        function currency() {
+            $('#LegalModal').modal('show');
+            $('#trigger-tab-language').removeClass('active');
+            $('#content-tab-language').removeClass('active');
+            $('#trigger-tab-currency').addClass('active');
+            $('#content-tab-currency').addClass('active');
+        }
 
         function displayTags() {
             $('#ModalTagsVilla').modal('show');

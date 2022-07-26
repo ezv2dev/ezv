@@ -130,3 +130,7 @@
 .text-justify {
     text-align: justify;
 }
+
+.modal-open {
+    position: relative !important;
+}

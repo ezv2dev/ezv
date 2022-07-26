@@ -77,7 +77,7 @@
     <section class="blog-body">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="row">
+            <div class="row blog-contents">
                 <!-- ad-foreach disini -->
                 <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
                     <img class="blog-img" src="https://source.unsplash.com/random/?car">
@@ -157,11 +157,11 @@
             <div id="sidebar_fix" class="right-content">
                 <h4 class="title">Latest Blogs</h4>
                 <ul>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 1</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 2</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 4</a></li>
-                    <li><a href="#">Lorem Ipsum Dolor Sit Amet 5</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 1 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 2 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 3 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 4 (12/12-2022)</a></li>
+                    <li><a href="#">Lorem Ipsum ... Amet 5 (12/12-2022)</a></li>
                 </ul>
             </div>
         </div>
@@ -236,23 +236,28 @@
             $(document).ready(() => {
                 var $sidebar = $("#sidebar_fix");
                 var $sidebarHeight = $sidebar.outerHeight();
-                var $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                var $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                var $blogBodyHeight = $(".blog-body").offset().top + $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
                 $(window).on("resize", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                    $blogBodyHeight = $(".blog-body").offset().top + $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
                 })
                 $(window).on("scroll", function() {
                     $sidebarHeight = $sidebar.outerHeight();
-                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
-                    if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() < $blogBodyHeight - $sidebarHeight - 15) {
-                        $sidebar.addClass("fixed");
-                    }else if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() > $blogBodyHeight - $sidebarHeight - 15){
+                    $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
+                    $blogBodyHeight = $(".blog-body").offset().top + $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    if ($("#header-container").hasClass("fix-header") 
+                            && $(this).scrollTop() + 65 > $(".blog-contents div").last().offset().top - 65){
                         $sidebar.removeClass("fixed");
                         $sidebar.addClass('abs');
                         $sidebar.css({
-                            "top": $blogBodyHeight - $sidebarHeight - 15
+                            "top": $blogBodyHeight - $sidebarHeight
                         });
-                    }else {
+                    } else if ($("#header-container").hasClass("fix-header") 
+                            && $(this).scrollTop() + 65 < $(".blog-contents div").last().offset().top - 65) {
+                        $sidebar.addClass("fixed");
+                    } else {
                         $sidebar.removeClass("fixed");
                         $sidebar.addClass('abs');
                         $sidebar.css({

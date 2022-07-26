@@ -529,7 +529,7 @@
 
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single">{{ $hotel[0]->short_description }}</span>
+                            <span class="translate-text-single" id="short-description-content2">{{ $hotel[0]->short_description }}</span>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -624,7 +624,7 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4">
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                            <div class="card4 col-lg-3 radius-5" id="displayVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -648,8 +648,8 @@
                                                                                 onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                 'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': '{{ $hotel[0]->id_hotel }}', 'id_video': '{{ $item->id_video }}'})">
+                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -692,7 +692,7 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4">
                                                         @foreach ($stories as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                            <div class="card4 col-lg-3 radius-5" id="displayStory{{ $item->id_story }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -716,8 +716,8 @@
                                                                                     onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                     'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_story({'id': '{{ $hotel[0]->id_hotel }}', 'id_story': '{{ $item->id_story }}'})">
+                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-story="{{ $item->id_story }}"
+                                                                                onclick="delete_story(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -733,7 +733,7 @@
                                                             </div>
                                                         @endforeach
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                            <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -757,8 +757,8 @@
                                                                                     onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                     'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);"
-                                                                                onclick="delete_photo_video({'id': '{{ $hotel[0]->id_hotel }}', 'id_video': '{{ $item->id_video }}'})">
+                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
                                                                                     style="color:red; margin-left: 25px;"
@@ -939,7 +939,7 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                         <a
                                             href="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -961,8 +961,8 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);"
-                                                        onclick="delete_photo_photo({'id': '{{ $hotel[0]->id_hotel }}', 'id_photo': '{{ $item->id_photo }}'})"><i
+                                                        href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="{{ $item->id_photo }}"
+                                                        onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
                                             @endif
@@ -972,7 +972,7 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
                                         @auth
                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
                                                 <a class="pointer-normal" onclick="view_video({{ $item->id_video }})"
@@ -994,8 +994,8 @@
                                         @auth
                                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
-                                                    <button href="javascript:void(0);"
-                                                        onclick="delete_photo_video({'id': '{{ $hotel[0]->id_hotel }}', 'id_video': '{{ $item->id_video }}'})"
+                                                    <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
@@ -2417,7 +2417,23 @@
                                 </div>
                                 <div class="col-5">
                                     <div class="member-profile">
-                                        <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
+                                        <div class="d-flex">
+                                            <h4>{{ __('user_page.Hosted by') }}
+                                                @if ($hotel[0]->ownerData->first_name == null || $hotel[0]->ownerData->last_name == null)
+                                                    Anonymous
+                                                @else
+                                                    {{ $hotel[0]->ownerData->first_name }}
+                                                    {{ $hotel[0]->ownerData->last_name }}
+                                                @endif
+                                            </h4>
+                                            @auth
+                                                @if (Auth::user()->id == $hotel[0]->created_by)
+                                                    &nbsp;
+                                                    <a type="button" href="{{ route('profile_user') }}"
+                                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
+                                                @endif
+                                            @endauth
+                                        </div>
                                         <p>{{ __('user_page.Joined in') }}
                                             {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}</p>
                                     </div>
@@ -2615,7 +2631,7 @@
                                     @endif
                                 @endauth
                                 {{-- END ALERT CONTENT STATUS --}}
-                                {{-- @guestx`
+                                {{-- @guest
                                     <hr>
                                     <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
                                     <div class="container-xxl mx-auto p-0">
@@ -4129,6 +4145,14 @@
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
+    <script>
+        var $gallery;
+        $(document).ready(function() {
+            $gallery = new SimpleLightbox('.gallery a', {});
+            // var $gallery2 = new SimpleLightbox('.gallery2 a', {});
+        });
+    </script>
+
     {{-- REF --}}
     <script>
         function setCookie(name, value, days) {
@@ -4636,7 +4660,7 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            formInput.value = '{{ $hotel[0]->short_description }}';
+            formInput.value = shortDescBackup;
 
             if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
@@ -4723,8 +4747,8 @@
                 });
 
                 this.on('queuecomplete', function() {
-                    // $('#loading-content').show();
-                    // location.reload();
+                    $("#button").html('Upload');
+                    $("#button").removeClass('disabled');
                 });
 
                 this.on("complete", function(file, response, message) {
@@ -4770,9 +4794,6 @@
                         position: "topRight",
                     });
                 }
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
             success: function(file, message, response) {
                 console.log(file);
@@ -4785,7 +4806,7 @@
                     position: "topRight",
                 });
 
-                let path = "/foto/gallery/";
+                let path = "/foto/hotel/";
                 let slash = "/";
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
@@ -4798,8 +4819,6 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' +
-                        message.data.photo[0].caption +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4821,9 +4840,6 @@
                 $gallery.refresh();
 
                 this.removeFile(file);
-
-                $("#button").html('Upload');
-                $("#button").removeClass('disabled');
             },
         }
     </script>
@@ -5077,7 +5093,8 @@
     {{-- Sweetalert Function Delete Story --}}
     <script>
         function delete_story(ids) {
-            var ids = ids;
+            var id = ids.getAttribute("data-id");
+            var story = ids.getAttribute("data-story");
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -5092,7 +5109,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/hotel/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/hotel/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -5101,7 +5118,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $(`#displayStory${story}`).remove();
+                            sliderRestaurant();
                         }
                     });
                 } else {
@@ -5153,7 +5171,8 @@
     {{-- Sweetalert Function Delete Photo Gallery --}}
     <script>
         function delete_photo_photo(ids) {
-            var ids = ids;
+            var id = ids.getAttribute("data-id");
+            var photo = ids.getAttribute("data-photo");
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -5168,7 +5187,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/hotel/${ids.id}/delete/photo/photo/${ids.id_photo}`,
+                        url: `/hotel/${id}/delete/photo/photo/${photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -5177,7 +5196,18 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $("#displayPhoto"+photo).remove();
+                            
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
+                            $gallery.refresh();
                         }
                     });
                 } else {
@@ -5191,7 +5221,8 @@
     {{-- Sweetalert Function Delete Video Gallery --}}
     <script>
         function delete_photo_video(ids) {
-            var ids = ids;
+            var id = ids.getAttribute("data-id");
+            var video = ids.getAttribute("data-video");
             Swal.fire({
                 title: `{{ __('user_page.Are you sure?') }}`,
                 text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
@@ -5206,7 +5237,7 @@
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/hotel/${ids.id}/delete/photo/video/${ids.id_video}`,
+                        url: `/hotel/${id}/delete/photo/video/${video}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -5215,7 +5246,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $("#displayVideo"+video).remove();
+                            $("#displayStoryVideo"+video).remove();
                         }
                     });
                 } else {
@@ -5558,11 +5590,6 @@
                 $(this).children('.slick-next').css('display', 'none');
             })
         })
-    </script>
-    <script>
-        (function() {
-            var $gallery = new SimpleLightbox('.gallery a', {});
-        })();
     </script>
 
     {{-- Like --}}

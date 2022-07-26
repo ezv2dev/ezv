@@ -959,7 +959,8 @@ a.active {
     font-size: 12px;
     color: #7a7a7a;
     width: 30%;
-    margin-left: -45px;
+    margin-left: -74px;
+    margin-top: 6px;
 }
 
 .payment-warning-icon {
@@ -3278,6 +3279,36 @@ span.flatpickr-weekday {
         right: 4px !important;
     }
 }
+@media only screen and (max-width: 424px) {
+    .stories #storyContent {
+        width: 175px !important;
+    }
+}
+@media only screen and (min-width: 425px) and (max-width: 575px) {
+    .stories #storyContent {
+        width: 265px !important;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 676px) {
+    .stories #storyContent {
+        width: 365px !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 870px) {
+    .stories #storyContent {
+        width: 175px !important;
+    }
+}
+@media only screen and (min-width: 871px) and (max-width: 1190px) {
+    .stories #storyContent {
+        width: 265px !important;
+    }
+}
+@media only screen and (min-width: 1191px) and (max-width: 1360px) {
+    .stories #storyContent {
+        width: 365px !important;
+    }
+}
 @media only screen and (max-width: 991px) {
     .roomnumber-filter-container, .editnumberoption-checkbox-alias {
         padding: 0 !important;
@@ -3332,8 +3363,12 @@ span.flatpickr-weekday {
     #sortable-photo li img {
         border-radius: 0px !important;
     }
-    /* make short-desc max lines 2 */
     .top-profile .short-desc {
+        min-height: fit-content !important;
+        height: fit-content !important;
+    }
+    /* make short-desc max lines 2 */
+    .top-profile .short-desc #short_description_contents {
         min-height: 50px !important;
         height: 50px !important;
         overflow: hidden !important;
