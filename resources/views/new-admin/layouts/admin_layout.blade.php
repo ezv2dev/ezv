@@ -128,9 +128,14 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
-@media (max-width: 533px) {
+@media only screen and (max-width: 533px) {
     .flex-gap .bg-white {
         width: 100%;
+    }
+}
+@media only screen and (min-width: 534px) and (max-width: 782px) {
+    .flex-gap .bg-white {
+        width: 48%;
     }
 }
 .overflow-x-auto::-webkit-scrollbar {
