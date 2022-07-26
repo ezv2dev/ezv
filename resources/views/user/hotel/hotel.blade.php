@@ -529,7 +529,7 @@
 
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single">{{ $hotel[0]->short_description }}</span>
+                            <span class="translate-text-single" id="short-description-content2">{{ $hotel[0]->short_description }}</span>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -4644,7 +4644,7 @@
             var content = document.getElementById("short-description-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            formInput.value = '{{ $hotel[0]->short_description }}';
+            formInput.value = shortDescBackup;
 
             if (formInput.value == 'Make your short description here') {
                 formInput.value = '';
