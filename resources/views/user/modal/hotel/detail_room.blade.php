@@ -85,8 +85,10 @@
 
 
                         <div class="content list-image-content">
-                            <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="false" data-arrows="true">
-                                <div id="slider-photo-room" ></div>
+                            <div class="wrap-modal-slider">
+                                <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="false" data-arrows="true">
+                                    <div id="slider-photo-room" ></div>
+                                </div>
                             </div>
                         </div>
 
@@ -214,11 +216,6 @@
                 }
 
                 $('#modal-room').modal('show');
-
-                setTimeout(() => {
-                    console.log('hit detail room');
-                    $('.js-slider-test').not('.slick-initialized').slick();
-                }, 5000);
             },
             error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
@@ -241,5 +238,10 @@
                 btn.classList.remove("disabled");
             },
         })
+
+        $('#modal-room').on('shown.bs.modal', function (e) {
+            $('.js-slider-test').slick('setPosition');
+            $('.wrap-modal-slider').addClass('open');
+        });
     }
 </script>
