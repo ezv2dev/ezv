@@ -5,28 +5,6 @@
         float: left;
     }
 
-    .modal-header3 {
-        border-bottom: none !important;
-        padding: 2rem 3rem 1rem 3rem;
-        padding-left: 2.8rem !important;
-        padding-bottom: 2rem !important;
-    }
-    .modal-header3 h3 {
-        margin: 0;
-        padding: 20px 0px;
-    }
-
-    .modal-body3 {
-        padding: 0rem 2rem 2rem 2rem !important;
-        height: 490px !important;
-        overflow-y: auto !important;
-    }
-
-    .modal-content3 {
-        width: 60% !important;
-        height: 500px;
-    }
-
     .guest-safety-container {
         padding-bottom: 10px;
     }
@@ -340,14 +318,14 @@
 </style>
 
 <div id="modal-edit-house-rules" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-lg" style="overflow-y: initial !important;">
-        <div class="modal-content modal-content3" style="border-radius:15px; background-color: #fff;">
-            <div class="modal-header modal-header3 filter-modal d-flex justify-content-between">
-                <h3>{{ __('user_page.House Rules') }}</h3>
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg" style="overflow-y: initial !important;">
+        <div class="modal-content" style="background-color: #fff;">
+            <div class="modal-header filter-modal d-flex justify-content-between">
+                <h3 class="mb-0">{{ __('user_page.House Rules') }}</h3>
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body modal-body3">
+            <div class="modal-body">
                 <div class="tabbable column-wrapper translate-text-group">
                     <hr style="margin-top: -20px;">
                     <form method="POST" action="javascript:void(0);" id="houseRuleForm">
@@ -453,16 +431,23 @@
                         </div>
                 </div>
             </div>
-            <div class="modal-filter-footer d-flex justify-content-between" style="padding-bottom: 80px;">
-                <p style="color: red; font-size: 12px; margin-left: 20px; margin-top: 20px;"><sup>*</sup>Please make
-                    sure
-                    you select all the list</p>
-                <button type="submit" id="btnSaveHouseRules" form="houseRuleForm"
-                    style="width:150px; border-radius: 9px; padding : 8px; margin-right: 20px;box-sizing: border-box; background-color: #FF7400; border: none; margin-right: 20px"
-                    class="btn btn-primary btn-lg btn-block">
-                    Save
-                </button>
+            <div class="modal-footer">
+                <div class="col-12 d-flex">
+                    <div class="d-flex align-items-center col-8">
+                        <p class="mb-0" style="color: red; font-size: 12px;"><sup>*</sup>Please make
+                            sure
+                            you select all the list
+                        </p>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <button type="submit" id="btnSaveHouseRules" form="houseRuleForm"
+                            style="border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
+                            class="btn btn-primary btn-lg btn-block">
+                            Save
+                        </button>
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
