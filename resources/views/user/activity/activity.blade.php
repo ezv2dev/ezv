@@ -1051,106 +1051,110 @@
                     {{-- END ADD GALLERY --}}
                     {{-- PRICES --}}
                     <section id="price" class="section-2">
-                        <div class="row pd-tlr-10 prices">
-                        <hr>
-                            <h2>
-                                {{ __('user_page.Prices') }}
-                                @auth
-                                    @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;
-                                        <a type="button" onclick="add_price()">
-                                            <i class="fa fa-plus" style="color:#FF7400; padding-right:5px;"
-                                                data-bs-toggle="popover" data-bs-animation="true"
-                                                data-bs-placement="bottom" title="{{ __('user_page.Add') }}"></i>
-                                        </a>
-                                    @endif
-                                @endauth
-                            </h2>
-                        </div>
-                        @forelse ($activity->price as $item)
-                            <div class="col-12 d-flex p-2" style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
-                                <div class="col-4">
-                                    <div class="content list-image-content">
-                                        <input type="hidden" value="" id="id_price" name="id_price">
-                                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
-                                            data-dots="false" data-arrows="true">
-                                            @if (count($activity->PricePhoto->where('id_price', $item->id_price)) > 0)
-                                                @foreach ($activity->PricePhoto->where('id_price', $item->id_price) as $galleryPrice)
+
+                        <div class="pd-tlr-10">
+                            <div class="d-flex prices">
+                            <hr>
+                                <h2>
+                                    {{ __('user_page.Prices') }}
+                                    @auth
+                                        @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                            &nbsp;
+                                            <a type="button" onclick="add_price()">
+                                                <i class="fa fa-plus" style="color:#FF7400; padding-right:5px;"
+                                                    data-bs-toggle="popover" data-bs-animation="true"
+                                                    data-bs-placement="bottom" title="{{ __('user_page.Add') }}"></i>
+                                            </a>
+                                        @endif
+                                    @endauth
+                                </h2>
+                            </div>
+                            @forelse ($activity->price as $item)
+                                <div class="col-12 d-flex p-3 mb-4" style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
+                                    <div class="col-4">
+                                        <div class="content list-image-content">
+                                            <input type="hidden" value="" id="id_price" name="id_price">
+                                            <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
+                                                data-dots="false" data-arrows="true">
+                                                @if (count($activity->PricePhoto->where('id_price', $item->id_price)) > 0)
+                                                    @foreach ($activity->PricePhoto->where('id_price', $item->id_price) as $galleryPrice)
+                                                        <a href="{{ route('activity_price_index', $item->id_price) }}"
+                                                            target="_blank" class="grid-image-container">
+                                                            <img class="brd-radius img-fluid grid-image lozad"
+                                                                style="height: 200px; display: block;"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $galleryPrice->name) }}"
+                                                                alt="">
+                                                        </a>
+                                                    @endforeach
+                                                @elseif (!empty($item->foto))
                                                     <a href="{{ route('activity_price_index', $item->id_price) }}"
                                                         target="_blank" class="grid-image-container">
                                                         <img class="brd-radius img-fluid grid-image lozad"
                                                             style="height: 200px; display: block;"
                                                             src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $galleryPrice->name) }}"
+                                                            data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->foto) }}"
                                                             alt="">
                                                     </a>
-                                                @endforeach
-                                            @elseif (!empty($item->foto))
-                                                <a href="{{ route('activity_price_index', $item->id_price) }}"
-                                                    target="_blank" class="grid-image-container">
-                                                    <img class="brd-radius img-fluid grid-image lozad"
-                                                        style="height: 200px; display: block;"
+                                                @else
+                                                    <a href="{{ route('activity_price_index', $item->id_price) }}"
+                                                        target="_blank" class="grid-image-container">
+                                                        <img class="brd-radius img-fluid grid-image lozad"
+                                                            style="height: 200px; display: block;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
+                                                            alt="">
+                                                    </a>
+                                                @endif
+
+                                                {{-- <a href="" target="_blank" class="grid-image-container">
+                                                    <img class="brd-radius img-fluid grid-image lozad" style="display: block;"
                                                         src="{{ LazyLoad::show() }}"
                                                         data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->foto) }}"
                                                         alt="">
                                                 </a>
-                                            @else
-                                                <a href="{{ route('activity_price_index', $item->id_price) }}"
-                                                    target="_blank" class="grid-image-container">
-                                                    <img class="brd-radius img-fluid grid-image lozad"
-                                                        style="height: 200px; display: block;"
+                                                <a href="" target="_blank" class="grid-image-container">
+                                                    <img class="brd-radius img-fluid grid-image lozad" style="display: block;"
                                                         src="{{ LazyLoad::show() }}"
-                                                        data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
+                                                        data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->foto) }}"
                                                         alt="">
-                                                </a>
-                                            @endif
-
-                                            {{-- <a href="" target="_blank" class="grid-image-container">
-                                                <img class="brd-radius img-fluid grid-image lozad" style="display: block;"
-                                                    src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->foto) }}"
-                                                    alt="">
-                                            </a>
-                                            <a href="" target="_blank" class="grid-image-container">
-                                                <img class="brd-radius img-fluid grid-image lozad" style="display: block;"
-                                                    src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->foto) }}"
-                                                    alt="">
-                                            </a> --}}
+                                                </a> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 px-3">
+                                        <div class="col-12">
+                                            <h4>
+                                                <p>
+                                                    <a href="{{ route('activity_price_index', $item->id_price) }}">
+                                                        <span
+                                                            clas="translate-text-group-items">{{ $item->name }}</span>
+                                                    </a>
+                                                </p>
+                                            </h4>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="desc-hotel mb-0">
+                                                {{ Str::limit(Translate::translate($item->description), 200, ' ...') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="col-12">
+                                            {{ CurrencyConversion::exchangeWithUnit($item->price) }}
+                                        </div>
+                                        <div class="col-12">
+                                            <a  onclick="open_detail_price()"
+                                            target="_blank" style="display: inline-block; width: 50%;"
+                                            class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-5">
-                                    <div class="col-12">
-                                        <h4>
-                                            <p>
-                                                <a href="{{ route('activity_price_index', $item->id_price) }}">
-                                                    <span
-                                                        clas="translate-text-group-items">{{ $item->name }}</span>
-                                                </a>
-                                            </p>
-                                        </h4>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="desc-hotel mb-0">
-                                            {{ Str::limit(Translate::translate($item->description), 200, ' ...') }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        {{ CurrencyConversion::exchangeWithUnit($item->price) }}
-                                    </div>
-                                    <div class="col-12">
-                                        <a  onclick="open_detail_price()"
-                                        target="_blank" style="display: inline-block; width: 50%;"
-                                        class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                        <div class="col-12">{{ __('user_page.No data found') }}</div>
-                        @endforelse
+                            @empty
+                            <div class="col-12">{{ __('user_page.No data found') }}</div>
+                            @endforelse
+                        </div>
+
                     </section>
                     <section id="description" class="section-2">
                         <hr>
