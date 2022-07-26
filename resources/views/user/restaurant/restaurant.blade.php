@@ -177,19 +177,22 @@
                             </a>
                         </div>
                         <div class="d-flex align-items-center mb-2">
-                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
 
-                            @if (session()->has('currency'))
-                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @if (session()->has('currency'))
+                                    <p class="mb-0 ms-2" style="color: #585656">Change Currency
+                                        ({{ session('currency') }})
+                                    </p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                            @else
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                @else
+                                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                            @endif
+                                @endif
 
-                        </a>
+                            </a>
                         </div>
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -238,19 +241,21 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
 
-                        @if (session()->has('currency'))
-                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                            @endif
 
-                    </a>
+                        </a>
                     </div>
                 @endauth
             </div>
@@ -321,8 +326,8 @@
                                                     <span class="mx-2">-</span>
                                                     <div class="col-auto">
                                                         <input type="time" name="closed_time" class="form-control"
-                                                            id="close-time-input"
-                                                            value="{{ $restaurant->closed_time }}" required>
+                                                            id="close-time-input" value="{{ $restaurant->closed_time }}"
+                                                            required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -424,8 +429,8 @@
                                                                         $isSelected = 'selected';
                                                                     }
                                                                 @endphp
-                                                                <option value="{{ $item->id_type }}"
-                                                                    {{ $isSelected }}>{{ $item->name }}</option>
+                                                                <option value="{{ $item->id_type }}" {{ $isSelected }}>
+                                                                    {{ $item->name }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
@@ -492,8 +497,8 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="name-form" style="display:none;">
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}" required>
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}"
+                                        required>
                                     <textarea class="form-control" style="width: 100%;" name="name" id="name-form-input" cols="30"
                                         rows="3" maxlength="55" placeholder="{{ __('user_page.Food Name Here') }}">{{ $restaurant->name }}</textarea>
                                     <small id="err-name" style="display: none;"
@@ -550,7 +555,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                                @method('PATCH') -->
+                                                                            @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -625,8 +630,8 @@
                         @auth
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <div id="short-description-form" style="display:none;">
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}" required>
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}"
+                                        required>
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" rows="3" maxlength="255"
                                         placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $restaurant->short_description }}</textarea>
@@ -802,7 +807,9 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
-                                                            <div class="card4 col-lg-3" id="displayStoryVideo{{ $item->id_video }}" style="border-radius: 5px;">
+                                                            <div class="card4 col-lg-3"
+                                                                id="displayStoryVideo{{ $item->id_video }}"
+                                                                style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
@@ -871,8 +878,7 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4" id="storyContent">
                                                         @foreach ($restaurant->story as $item)
-                                                            <div class="card4 col-lg-3"
-                                                                id="story{{ $item->id_story }}"
+                                                            <div class="card4 col-lg-3" id="story{{ $item->id_story }}"
                                                                 style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
@@ -914,7 +920,9 @@
                                                             </div>
                                                         @endforeach
                                                         @foreach ($restaurant->video->sortBy('order') as $item)
-                                                            <div class="card4 col-lg-3" id="displayStoryVideo{{ $item->id_video }}" style="border-radius: 5px;">
+                                                            <div class="card4 col-lg-3"
+                                                                id="displayStoryVideo{{ $item->id_video }}"
+                                                                style="border-radius: 5px;">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $restaurant->created_by)
@@ -1153,9 +1161,8 @@
                                                             class="fa fa-pencil"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        type="button" onclick="position_photo()"><i
-                                                            class="fa fa-arrows"></i></button>
+                                                        title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
@@ -1452,24 +1459,22 @@
                                 @endif
                                 @if ($restaurant->facilities->count() > 6)
                                     <div class="list-amenities">
-                                        <button class="amenities-button" type="button"
-                                            onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange"
-                                                style="font-size: 40px;"></i>
+                                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
                                             <div style="font-size: 15px;">{{ __('user_page.More') }}</div>
                                         </button>
                                     </div>
                                 @endif
                             </div>
-                            @empty($restaurant->facilities->count())
-                                <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
-                            @endempty
-                        </div>
-                    </section>
+                        @empty($restaurant->facilities->count())
+                            <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p>
+                        @endempty
+                    </div>
+                </section>
 
-                    <!--<section id="location-map" class="section-2">
-                        <div class="about-place-block">
-                            {{-- <h2>
+                <!--<section id="location-map" class="section-2">
+            <div class="about-place-block">
+                {{-- <h2>
                                 Location
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1485,357 +1490,357 @@
                                 id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
                             </div> --}}
-                        </div>
-                    </section> -->
-                    <!-- <div style="padding-left: 10px; padding-right: 10px;">
-                        <hr>
-                    </div> -->
-
-                </div>
-                {{-- END PAGE CONTENT --}}
-                <!-- <div class="spacer">&nbsp;</div> -->
             </div>
+        </section> -->
+                <!-- <div style="padding-left: 10px; padding-right: 10px;">
+            <hr>
+        </div> -->
 
-            {{-- END LEFT CONTENT --}}
-            {{-- RIGHT CONTENT --}}
-            <div class="col-lg-3 col-md-3 col-12">
-                <div class="sidebar sidebar-idle sidebar-restaurant" id="sidebar_fix">
-                    <div class="reserve-block sidebar-mf">
-                        <div class="gradient-try">
-                            <center>
-                                <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}!
-                                </h4>
-                            </center>
-                        </div>
-                        <!-- Random Villa Slider Start -->
-                        <div class="popular-block-activity">
-                            <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
-                                    <div class="SlickCarousel3">
-                                        <!-- Start Slider Items -->
-                                        @forelse ($villaRandom as $popular)
-                                            <div>
-                                                <div class="popular-card">
-                                                    <div class="popular-card-header"
-                                                        onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
-                                                        style="cursor: pointer;">
-                                                        <img
-                                                            src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
-                                                    </div>
-                                                    <div>
-                                                        <div class="card-content">
-                                                            <div class="popular-card-title"><a
-                                                                    href="{{ route('villa', ['id' => $popular->id_villa]) }}"
-                                                                    target="_blank">{{ $popular->name }}</a></div>
-                                                            <div class="popular-card-text">
-                                                                <p>{{ $popular->bedroom }}
-                                                                    {{ __('user_page.Bedroom') }},
-                                                                    {{ $popular->bathroom }}
-                                                                    {{ __('user_page.Bathroom') }}</p>
-                                                                <p style="color: #000;">
-                                                                    @foreach ($popular->amenities as $item)
-                                                                        <i class="fa fa-{{ $item->icon }}"></i>
-                                                                    @endforeach
-                                                                    {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                                </p>
-                                                                <!-- Description max 100 character -->
-                                                                <p style="text-align: justify;">
-                                                                    @if (!empty($popular->description))
-                                                                        {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
-                                                                    @else
-                                                                        {{ __('user_page.There is no description yet') }}
-                                                                    @endif
+            </div>
+            {{-- END PAGE CONTENT --}}
+            <!-- <div class="spacer">&nbsp;</div> -->
+        </div>
 
+        {{-- END LEFT CONTENT --}}
+        {{-- RIGHT CONTENT --}}
+        <div class="col-lg-3 col-md-3 col-12">
+            <div class="sidebar sidebar-idle sidebar-restaurant" id="sidebar_fix">
+                <div class="reserve-block sidebar-mf">
+                    <div class="gradient-try">
+                        <center>
+                            <h4 class="headline-list-property">{{ __('user_page.List Your Property Now') }}!
+                            </h4>
+                        </center>
+                    </div>
+                    <!-- Random Villa Slider Start -->
+                    <div class="popular-block-activity">
+                        <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
+                                <div class="SlickCarousel3">
+                                    <!-- Start Slider Items -->
+                                    @forelse ($villaRandom as $popular)
+                                        <div>
+                                            <div class="popular-card">
+                                                <div class="popular-card-header"
+                                                    onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
+                                                    style="cursor: pointer;">
+                                                    <img
+                                                        src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
+                                                </div>
+                                                <div>
+                                                    <div class="card-content">
+                                                        <div class="popular-card-title"><a
+                                                                href="{{ route('villa', ['id' => $popular->id_villa]) }}"
+                                                                target="_blank">{{ $popular->name }}</a></div>
+                                                        <div class="popular-card-text">
+                                                            <p>{{ $popular->bedroom }}
+                                                                {{ __('user_page.Bedroom') }},
+                                                                {{ $popular->bathroom }}
+                                                                {{ __('user_page.Bathroom') }}</p>
+                                                            <p style="color: #000;">
+                                                                @foreach ($popular->amenities as $item)
+                                                                    <i class="fa fa-{{ $item->icon }}"></i>
+                                                                @endforeach
+                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
+                                                            </p>
+                                                            <!-- Description max 100 character -->
+                                                            <p style="text-align: justify;">
+                                                                @if (!empty($popular->description))
+                                                                    {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
+                                                                @else
+                                                                    {{ __('user_page.There is no description yet') }}
+                                                                @endif
+
+                                                            </p>
+                                                        </div>
+                                                        <div class="popular-card-price">
+                                                            @if (!empty($popular->price))
+                                                                <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
                                                                 </p>
-                                                            </div>
-                                                            <div class="popular-card-price">
-                                                                @if (!empty($popular->price))
-                                                                    <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/{{ __('user_page.night') }}
-                                                                    </p>
-                                                                @endIf
-                                                            </div>
+                                                            @endIf
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @empty
-                                        @endforelse
-                                        <!-- End Slider Items -->
-                                    </div>
-                        </div>
-                        <!-- End Random Slider -->
+                                        </div>
+                                    @empty
+                                    @endforelse
+                                    <!-- End Slider Items -->
+                                </div>
                     </div>
+                    <!-- End Random Slider -->
                 </div>
             </div>
-            {{-- END RIGHT CONTENT --}}
-
-            <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
-                <hr calss="pendek">
-                <h2>
-                    {{ __("user_page.What's nearby ?") }}
-                    @auth
-                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                            &nbsp;
-                            <a type="button" onclick="edit_location()"
-                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
-                        @endif
-                    @endauth
-                </h2>
-                <div class="row-grid-location">
-                    @include('user.modal.restaurant.map-location')
-                </div>
-            </section>
         </div>
-        <div id="rsv-block-btn">
-            {{-- RESERVE BUTTON TOP RIGHT --}}
-            <div class="rsv">
-                <a onclick="contact_restaurant()" type="button"
-                    class="rsv-btn-button">{{ __('user_page.CONTACT RESTAURANT') }}</a>
-            </div>
-            {{-- END RESERVE BUTTON TOP RIGHT --}}
-        </div>
-        <div id="navbarright" class="navright">
-            <div class="list-villa-user right-bar">
-                @if (Route::is('list') || Route::is('index'))
-                @endif
+        {{-- END RIGHT CONTENT --}}
 
+        <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
+            <hr calss="pendek">
+            <h2>
+                {{ __("user_page.What's nearby ?") }}
                 @auth
+                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                        &nbsp;
+                        <a type="button" onclick="edit_location()"
+                            style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
+                    @endif
+                @endauth
+            </h2>
+            <div class="row-grid-location">
+                @include('user.modal.restaurant.map-location')
+            </div>
+        </section>
+    </div>
+    <div id="rsv-block-btn">
+        {{-- RESERVE BUTTON TOP RIGHT --}}
+        <div class="rsv">
+            <a onclick="contact_restaurant()" type="button"
+                class="rsv-btn-button">{{ __('user_page.CONTACT RESTAURANT') }}</a>
+        </div>
+        {{-- END RESERVE BUTTON TOP RIGHT --}}
+    </div>
+    <div id="navbarright" class="navright">
+        <div class="list-villa-user right-bar">
+            @if (Route::is('list') || Route::is('index'))
+            @endif
 
-                    <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
-                        @if ($condition_restaurant)
-                            @php
-                                $cekRestaurant = App\Models\RestaurantSave::where('id_restaurant', $restaurant->id_restaurant)
-                                    ->where('id_user', Auth::user()->id)
-                                    ->first();
-                            @endphp
+            @auth
 
-                            @if ($cekRestaurant == null)
-                                <div style="width: 48px;" class="text-center">
-                                    <a style="cursor: pointer;"
-                                        onclick="likeFavorit({{ $restaurant->id_restaurant }}, 'restaurant')">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                            role="presentation" focusable="false"
-                                            class="favorite-button favorite-button-22 likeButtonrestaurant{{ $restaurant->id_restaurant }}"
-                                            style="display: unset; margin-left: 0px;">
-                                            <path
-                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                            </path>
-                                        </svg>
-                                        <div style="color: #aaa; font-size: 10px;" id="captFav">
-                                            {{ __('user_page.FAVORITE') }}</div>
-                                    </a>
-                                </div>
-                            @else
-                                <div class="text-center" style="width: 48px;">
-                                    <a style="cursor: pointer;"
-                                        onclick="likeFavorit({{ $restaurant->id_restaurant }}, 'restaurant')">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                            role="presentation" focusable="false"
-                                            class="favorite-button-active favorite-button-22 unlikeButtonrestaurant{{ $restaurant->id_restaurant }}"
-                                            style="display: unset; margin-left: 0px;">
-                                            <path
-                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                            </path>
-                                        </svg>
-                                        <div style="color: #aaa; font-size: 10px;" id="captCan">
-                                            {{ __('user_page.FAVORITE') }}</div>
-                                    </a>
-                                </div>
-                            @endif
+                <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
+                    @if ($condition_restaurant)
+                        @php
+                            $cekRestaurant = App\Models\RestaurantSave::where('id_restaurant', $restaurant->id_restaurant)
+                                ->where('id_user', Auth::user()->id)
+                                ->first();
+                        @endphp
+
+                        @if ($cekRestaurant == null)
+                            <div style="width: 48px;" class="text-center">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $restaurant->id_restaurant }}, 'restaurant')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button favorite-button-22 likeButtonrestaurant{{ $restaurant->id_restaurant }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captFav">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
+                            </div>
+                        @else
+                            <div class="text-center" style="width: 48px;">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $restaurant->id_restaurant }}, 'restaurant')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button-active favorite-button-22 unlikeButtonrestaurant{{ $restaurant->id_restaurant }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captCan">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
+                            </div>
                         @endif
-                        <div class="text-center icon-center">
-                            <div type="button" class="" onclick="share()" style="text-align: center;">
-                                <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                                    <path
-                                        d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
-                                </svg>
-                                <div style="font-size: 10px; color: #aaa;">{{ __('user_page.SHARE') }}
-                                </div>
+                    @endif
+                    <div class="text-center icon-center">
+                        <div type="button" class="" onclick="share()" style="text-align: center;">
+                            <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 512 512">
+                                <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                <path
+                                    d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
+                            </svg>
+                            <div style="font-size: 10px; color: #aaa;">{{ __('user_page.SHARE') }}
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <a type="button" onclick="language()" class="navbar-gap d"
-                        style="color: white; margin-right: 9px; width:27px;">
-                        @if (session()->has('locale'))
-                            <img class="language-flag-icon"
-                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                <a type="button" onclick="language()" class="navbar-gap d"
+                    style="color: white; margin-right: 9px; width:27px;">
+                    @if (session()->has('locale'))
+                        <img class="language-flag-icon"
+                            src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                    @else
+                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                    @endif
+                </a>
+
+                <div class="logged-user-menu-detail" style="">
+                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        @if (Auth::user()->avatar)
+                            <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
+                                alt="">
                         @else
-                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                            <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                class="logged-user-photo-detail" alt="">
                         @endif
+
+                        <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
+                            aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+                            <h6 class="dropdown-header d-flex align-items-center">
+                                @if (Auth::user()->foto_profile != null)
+                                    <img class="dropdown-user-img"
+                                        src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                @elseIf (Auth::user()->avatar != null)
+                                    <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
+                                @else
+                                    <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                        class="logged-user-photo-detail" alt="">
+                                @endif
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
+                                        {{ Auth::user()->last_name }}</div>
+                                    <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                                </div>
+                            </h6>
+                            <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
+                                {{ __('user_page.Dashboard') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('profile_index') }}">
+                                {{ __('user_page.My Profile') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('change_password') }}">
+                                {{ __('user_page.Change Password') }}
+                            </a>
+                            <a class="dropdown-item" href="#!"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                                {{ __('user_page.Sign Out') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                style="display: none">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+                        </div>
+
                     </a>
-
-                    <div class="logged-user-menu-detail" style="">
-                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            @if (Auth::user()->avatar)
-                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
-                                    alt="">
-                            @else
-                                <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    class="logged-user-photo-detail" alt="">
-                            @endif
-
-                            <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
-                                aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
-                                <h6 class="dropdown-header d-flex align-items-center">
-                                    @if (Auth::user()->foto_profile != null)
-                                        <img class="dropdown-user-img"
-                                            src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
-                                    @elseIf (Auth::user()->avatar != null)
-                                        <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
-                                    @else
-                                        <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                            class="logged-user-photo-detail" alt="">
-                                    @endif
-                                    <div class="dropdown-user-details">
-                                        <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
-                                            {{ Auth::user()->last_name }}</div>
-                                        <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
-                                    </div>
-                                </h6>
-                                <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
-                                    {{ __('user_page.Dashboard') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('profile_index') }}">
-                                    {{ __('user_page.My Profile') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('change_password') }}">
-                                    {{ __('user_page.Change Password') }}
-                                </a>
-                                <a class="dropdown-item" href="#!"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                                    {{ __('user_page.Sign Out') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                    style="display: none">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                </form>
-                            </div>
-
+                </div>
+            @else
+                <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
+                    <div style="width: 48px;" class="text-center">
+                        <a onclick="loginForm(1)" style="cursor: pointer;">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                role="presentation" focusable="false" class="favorite-button-22 favorite-button"
+                                style="display: unset; margin-left: 0px;">
+                                <path
+                                    d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                </path>
+                            </svg>
+                            <div style="font-size: 10px; color: #aaa;">{{ __('user_page.FAVORITE') }}</div>
                         </a>
                     </div>
-                @else
-                    <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
-                        <div style="width: 48px;" class="text-center">
-                            <a onclick="loginForm(1)" style="cursor: pointer;">
-                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                    role="presentation" focusable="false" class="favorite-button-22 favorite-button"
-                                    style="display: unset; margin-left: 0px;">
-                                    <path
-                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                    </path>
-                                </svg>
-                                <div style="font-size: 10px; color: #aaa;">{{ __('user_page.FAVORITE') }}</div>
-                            </a>
-                        </div>
-                        <div style="width: 48px;" class="text-center icon-center">
-                            <div type="button" class="" onclick="share()" style="text-align: center;">
-                                <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                                    <path
-                                        d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
-                                </svg>
-                                <div style="font-size: 10px; color: #aaa;">{{ __('user_page.SHARE') }}
-                                </div>
+                    <div style="width: 48px;" class="text-center icon-center">
+                        <div type="button" class="" onclick="share()" style="text-align: center;">
+                            <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 512 512">
+                                <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                <path
+                                    d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
+                            </svg>
+                            <div style="font-size: 10px; color: #aaa;">{{ __('user_page.SHARE') }}
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 
-                    <a type="button" onclick="language()" class="navbar-gap"
-                        style="color: white; margin-right: 9px; width:27px;">
-                        @if (session()->has('locale'))
-                            <img class="language-flag-icon"
-                                src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                        @else
-                            <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                        @endif
-                    </a>
+                <a type="button" onclick="language()" class="navbar-gap"
+                    style="color: white; margin-right: 9px; width:27px;">
+                    @if (session()->has('locale'))
+                        <img class="language-flag-icon"
+                            src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                    @else
+                        <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                    @endif
+                </a>
 
-                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                        style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                @endauth
+                <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            @endauth
 
-            </div>
         </div>
-        {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12 bottom-content px-max-md-12p">
-            <div class="col-12">
-                <section id="review" class="section-2">
-                    <hr>
-                    <div class="review-bottom">
-                        <h2>{{ __('user_page.Review') }}</h2>
-                        <div class="row">
-                            <div class="col-12">
-                                @if ($restaurant->detailReview)
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="d-flex">
-                                                <div class="col-6">
-                                                    {{ __('user_page.Food') }}
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <div class="liner"></div>
-                                                    {{ $restaurant->detailReview->average_food }}
-                                                </div>
+    </div>
+    {{-- FULL WIDTH ABOVE FOOTER --}}
+    <div class="col-lg-12 bottom-content px-max-md-12p">
+        <div class="col-12">
+            <section id="review" class="section-2">
+                <hr>
+                <div class="review-bottom">
+                    <h2>{{ __('user_page.Review') }}</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            @if ($restaurant->detailReview)
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="col-6">
+                                                {{ __('user_page.Food') }}
                                             </div>
-                                            <div class="d-flex">
-                                                <div class="col-6">
-                                                    {{ __('user_page.Service') }}
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="liner"></div>
-                                                    {{ $restaurant->detailReview->average_service }}
-                                                </div>
+                                            <div class="col-6 ">
+                                                <div class="liner"></div>
+                                                {{ $restaurant->detailReview->average_food }}
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="d-flex">
-                                                <div class="col-6">
-                                                    {{ __('user_page.Value') }}
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="liner"></div>
-                                                    {{ $restaurant->detailReview->average_value }}
-                                                </div>
+                                        <div class="d-flex">
+                                            <div class="col-6">
+                                                {{ __('user_page.Service') }}
                                             </div>
-                                            <div class="d-flex">
-                                                <div class="col-6">
-                                                    {{ __('user_page.Atmosphere') }}
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="liner"></div>
-                                                    {{ $restaurant->detailReview->average_atmosphere }}
-                                                </div>
+                                            <div class="col-6">
+                                                <div class="liner"></div>
+                                                {{ $restaurant->detailReview->average_service }}
                                             </div>
                                         </div>
                                     </div>
-                                @else
-                                    <div class="col-12 mt-3 d-flex review-container">
-                                        <div class="col-12 col-md-6 d-flex">
-                                            <div class="col-1 icon-review-container">
-                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                                                    aria-hidden="true" role="presentation" focusable="false"
-                                                    style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                                    <path
-                                                        d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                                    </path>
-                                                </svg>
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="col-6">
+                                                {{ __('user_page.Value') }}
                                             </div>
-                                            <div class="col-8">
-                                                <p class="review-txt">
-                                                    There is no reviews yet
-                                                </p>
+                                            <div class="col-6">
+                                                <div class="liner"></div>
+                                                {{ $restaurant->detailReview->average_value }}
                                             </div>
                                         </div>
-                                        {{-- <div class="col-12 col-md-6 d-flex">
+                                        <div class="d-flex">
+                                            <div class="col-6">
+                                                {{ __('user_page.Atmosphere') }}
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="liner"></div>
+                                                {{ $restaurant->detailReview->average_atmosphere }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-12 mt-3 d-flex review-container">
+                                    <div class="col-12 col-md-6 d-flex">
+                                        <div class="col-1 icon-review-container">
+                                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                                aria-hidden="true" role="presentation" focusable="false"
+                                                style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                                <path
+                                                    d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="review-txt">
+                                                There is no reviews yet
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-12 col-md-6 d-flex">
                                             <div class="col-1 icon-review-container">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                     aria-hidden="true" role="presentation" focusable="false"
@@ -1852,462 +1857,479 @@
                                                 </p>
                                             </div>
                                         </div> --}}
-                                    </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </div>
-                        <hr>
                     </div>
-                </section>
+                    <hr>
+                </div>
+            </section>
 
-                @auth
-                    @if (Auth::user()->role_id != 3)
-                        @can('review_create')
-                            @if ($restaurant->userReview)
-                                <section id="user-review" class="section-2">
-                                    <div class="about-place-block">
+            @auth
+                @if (Auth::user()->role_id != 3)
+                    @can('review_create')
+                        @if ($restaurant->userReview)
+                            <section id="user-review" class="section-2">
+                                <div class="about-place-block">
 
-                                        <div class="d-flex justify-content-left">
-                                            <h2>{{ __('user_page.Your Review') }}</h2>
-                                            <span>
-                                                <form action="{{ route('restaurant_review_delete') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_restaurant"
-                                                        value="{{ $restaurant->id_restaurant }}" required>
-                                                    <input type="hidden" name="id_review"
-                                                        value="{{ $restaurant->userReview->id_review }}" required>
-                                                    <button type="submit" class="btn"><i class="fa fa-trash"
-                                                            style="color:#ff7400; font-size: 20px" data-bs-toggle="popover"
-                                                            data-bs-animation="true" data-bs-placement="bottom"
-                                                            title="{{ __('user_page.Delete') }}"></i></button>
-                                                </form>
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            @if ($restaurant->userReview->comment)
-                                                <div class="col-12">
-                                                    <div class="col-6 d-flex">
-                                                        <div class="col-6">
-                                                            {{ __('user_page.Comment') }}
-                                                        </div>
-                                                        <div class="col-6"
-                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
-                                                            {{ $restaurant->userReview->comment }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div class="col-6">
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Food') }}
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->food }}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Service') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->service }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Value') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->value }}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Atmosphere') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->atmosphere }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </section>
-                            @else
-                                {{-- END STYLE FOR RATING STAR --}}
-                                <section id="add-review" class="section-2">
-                                    <div class="about-place-block">
-                                        <h2>{{ __('user_page.Give review') }}</h2>
-                                        <div class="row">
-                                            <form action="{{ route('restaurant_review_store') }}" method="post">
+                                    <div class="d-flex justify-content-left">
+                                        <h2>{{ __('user_page.Your Review') }}</h2>
+                                        <span>
+                                            <form action="{{ route('restaurant_review_delete') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="id_restaurant"
-                                                    value="{{ $restaurant->id_restaurant }}" readonly required>
-                                                <div class="row">
-                                                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                        <div class="d-flex">
-                                                            <div class="col-4 review-container">
-                                                                {{ __('user_page.Food') }}
-                                                            </div>
-                                                            <div class="col-8 review-container">
-                                                                <div class="cm-star-rating">
-                                                                    <input id="food-star-5" type="radio" name="food"
-                                                                        value="5" required />
-                                                                    <label for="food-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="food-star-4" type="radio" name="food"
-                                                                        value="4" required />
-                                                                    <label for="food-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="food-star-3" type="radio" name="food"
-                                                                        value="3" required />
-                                                                    <label for="food-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="food-star-2" type="radio" name="food"
-                                                                        value="2" required />
-                                                                    <label for="food-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="food-star-1" type="radio" name="food"
-                                                                        value="1" required />
-                                                                    <label for="food-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex">
-                                                            <div class="col-4 review-container">
-                                                                {{ __('user_page.Service') }}
-                                                            </div>
-                                                            <div class="col-8 review-container">
-                                                                <div class="cm-star-rating">
-                                                                    <input id="service-star-5" type="radio"
-                                                                        name="service" value="5" required />
-                                                                    <label for="service-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="service-star-4" type="radio"
-                                                                        name="service" value="4" required />
-                                                                    <label for="service-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="service-star-3" type="radio"
-                                                                        name="service" value="3" required />
-                                                                    <label for="service-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="service-star-2" type="radio"
-                                                                        name="service" value="2" required />
-                                                                    <label for="service-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="service-star-1" type="radio"
-                                                                        name="service" value="1" required />
-                                                                    <label for="service-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex">
-                                                            <div class="col-4 review-container">
-                                                                {{ __('user_page.Value') }}
-                                                            </div>
-                                                            <div class="col-8 review-container">
-                                                                <div class="cm-star-rating">
-                                                                    <input id="value-star-5" type="radio" name="value"
-                                                                        value="5" required />
-                                                                    <label for="value-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="value-star-4" type="radio" name="value"
-                                                                        value="4" required />
-                                                                    <label for="value-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="value-star-3" type="radio" name="value"
-                                                                        value="3" required />
-                                                                    <label for="value-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="value-star-2" type="radio" name="value"
-                                                                        value="2" required />
-                                                                    <label for="value-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="value-star-1" type="radio" name="value"
-                                                                        value="1" required />
-                                                                    <label for="value-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex">
-                                                            <div class="col-4 review-container">
-                                                                {{ __('user_page.Atmosphere') }}
-                                                            </div>
-                                                            <div class="col-8 review-container">
-                                                                <div class="cm-star-rating">
-                                                                    <input id="atmosphere-star-5" type="radio"
-                                                                        name="atmosphere" value="5" required />
-                                                                    <label for="atmosphere-star-5"
-                                                                        title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="atmosphere-star-4" type="radio"
-                                                                        name="atmosphere" value="4" required />
-                                                                    <label for="atmosphere-star-4"
-                                                                        title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="atmosphere-star-3" type="radio"
-                                                                        name="atmosphere" value="3" required />
-                                                                    <label for="atmosphere-star-3"
-                                                                        title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="atmosphere-star-2" type="radio"
-                                                                        name="atmosphere" value="2" required />
-                                                                    <label for="atmosphere-star-2"
-                                                                        title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                    <input id="atmosphere-star-1" type="radio"
-                                                                        name="atmosphere" value="1" required />
-                                                                    <label for="atmosphere-star-1"
-                                                                        title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
-                                                                        class="rating-star">
-                                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    value="{{ $restaurant->id_restaurant }}" required>
+                                                <input type="hidden" name="id_review"
+                                                    value="{{ $restaurant->userReview->id_review }}" required>
+                                                <button type="submit" class="btn"><i class="fa fa-trash"
+                                                        style="color:#ff7400; font-size: 20px" data-bs-toggle="popover"
+                                                        data-bs-animation="true" data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Delete') }}"></i></button>
+                                            </form>
+                                        </span>
+                                    </div>
+
+                                    <div class="row">
+                                        @if ($restaurant->userReview->comment)
+                                            <div class="col-12">
+                                                <div class="col-6 d-flex">
+                                                    <div class="col-6">
+                                                        {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-12 col-lg-6">
-                                                        <div class="col-12">
-                                                            {{ __('user_page.Comment') }}
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <center>
-                                                            <button type="submit" class="btn btn-block btn-sm btn-primary"
-                                                                style="width: 200px">{{ __('user_page.Save') }}</button>
-                                                        </center>
+                                                    <div class="col-6"
+                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        {{ $restaurant->userReview->comment }}
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
+                                        @endif
+                                        <div class="col-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Food') }}
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->food }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Service') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->service }}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <hr>
+                                        <div class="col-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Value') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->value }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Atmosphere') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->atmosphere }}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </section>
+                                    <hr>
+                                </div>
+                            </section>
+                        @else
+                            {{-- END STYLE FOR RATING STAR --}}
+                            <section id="add-review" class="section-2">
+                                <div class="about-place-block">
+                                    <h2>{{ __('user_page.Give review') }}</h2>
+                                    <div class="row">
+                                        <form action="{{ route('restaurant_review_store') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id_restaurant"
+                                                value="{{ $restaurant->id_restaurant }}" readonly required>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Food') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="food-star-5" type="radio" name="food"
+                                                                    value="5" required />
+                                                                <label for="food-star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="food-star-4" type="radio" name="food"
+                                                                    value="4" required />
+                                                                <label for="food-star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="food-star-3" type="radio" name="food"
+                                                                    value="3" required />
+                                                                <label for="food-star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="food-star-2" type="radio" name="food"
+                                                                    value="2" required />
+                                                                <label for="food-star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="food-star-1" type="radio" name="food"
+                                                                    value="1" required />
+                                                                <label for="food-star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Service') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="service-star-5" type="radio"
+                                                                    name="service" value="5" required />
+                                                                <label for="service-star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="service-star-4" type="radio"
+                                                                    name="service" value="4" required />
+                                                                <label for="service-star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="service-star-3" type="radio"
+                                                                    name="service" value="3" required />
+                                                                <label for="service-star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="service-star-2" type="radio"
+                                                                    name="service" value="2" required />
+                                                                <label for="service-star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="service-star-1" type="radio"
+                                                                    name="service" value="1" required />
+                                                                <label for="service-star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Value') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="value-star-5" type="radio" name="value"
+                                                                    value="5" required />
+                                                                <label for="value-star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="value-star-4" type="radio" name="value"
+                                                                    value="4" required />
+                                                                <label for="value-star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="value-star-3" type="radio" name="value"
+                                                                    value="3" required />
+                                                                <label for="value-star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="value-star-2" type="radio" name="value"
+                                                                    value="2" required />
+                                                                <label for="value-star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="value-star-1" type="radio" name="value"
+                                                                    value="1" required />
+                                                                <label for="value-star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Atmosphere') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="atmosphere-star-5" type="radio"
+                                                                    name="atmosphere" value="5" required />
+                                                                <label for="atmosphere-star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="atmosphere-star-4" type="radio"
+                                                                    name="atmosphere" value="4" required />
+                                                                <label for="atmosphere-star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="atmosphere-star-3" type="radio"
+                                                                    name="atmosphere" value="3" required />
+                                                                <label for="atmosphere-star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="atmosphere-star-2" type="radio"
+                                                                    name="atmosphere" value="2" required />
+                                                                <label for="atmosphere-star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="atmosphere-star-1" type="radio"
+                                                                    name="atmosphere" value="1" required />
+                                                                <label for="atmosphere-star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}"
+                                                                    class="rating-star">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="col-12">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <center>
+                                                        <button type="submit" class="btn btn-block btn-sm btn-primary"
+                                                            style="width: 200px">{{ __('user_page.Save') }}</button>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </section>
+                        @endif
+                    @endcan
+                @endif
+            @endauth
+            {{-- <section id="endSticky" class="section-2">
+                <h3>Things to know</h3>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+
+
+                        <p>
+                            @if (!isset($restaurant_rules))
+                                {{ __('user_page.No data found') }}
                             @endif
-                        @endcan
-                    @endif
-                @endauth
-                <section id="endSticky" class="section-2">
-                    <h3>Things to know</h3>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
 
-
-                            <p>
-                                @if (!isset($restaurant_rules))
-                                    {{ __('user_page.No data found') }}
+                            @if (isset($restaurant_rules))
+                                @if ($restaurant_rules->children == 'yes')
+                                    <i class="fas fa-child"></i>
+                                    {{ __('user_page.Childrens are allowed') }}<br>
+                                @endif
+                                @if ($restaurant_rules->infants == 'yes')
+                                    <i class="fas fa-child"></i>
+                                    {{ __('user_page.Infants are allowed') }}<br>
+                                @endif
+                                @if ($restaurant_rules->pets == 'yes')
+                                    <i class="fas fa-paw"></i>
+                                    {{ __('user_page.Pets are allowed') }}<br>
+                                @endif
+                                @if ($restaurant_rules->smoking == 'yes')
+                                    <i class="fas fa-smoking"></i>
+                                    {{ __('user_page.Smoking is allowed') }}<br>
+                                @endif
+                                @if ($restaurant_rules->events == 'yes')
+                                    <i class="fas fa-calendar"></i>
+                                    {{ __('user_page.Events are allowed') }}<br>
                                 @endif
 
-                                @if (isset($restaurant_rules))
-                                    @if ($restaurant_rules->children == 'yes')
-                                        <i class="fas fa-child"></i>
-                                        {{ __('user_page.Childrens are allowed') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->infants == 'yes')
-                                        <i class="fas fa-child"></i>
-                                        {{ __('user_page.Infants are allowed') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->pets == 'yes')
-                                        <i class="fas fa-paw"></i>
-                                        {{ __('user_page.Pets are allowed') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->smoking == 'yes')
-                                        <i class="fas fa-smoking"></i>
-                                        {{ __('user_page.Smoking is allowed') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->events == 'yes')
-                                        <i class="fas fa-calendar"></i>
-                                        {{ __('user_page.Events are allowed') }}<br>
-                                    @endif
-
-                                    @if ($restaurant_rules->children == 'no')
-                                        <i class="fas fa-ban"></i> {{ __('user_page.No children') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->infants == 'no')
-                                        <i class="fas fa-ban"></i> {{ __('user_page.No infants') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->pets == 'no')
-                                        <i class="fas fa-ban"></i> {{ __('user_page.No pets') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->smoking == 'no')
-                                        <i class="fas fa-ban"></i> {{ __('user_page.No smoking') }}<br>
-                                    @endif
-                                    @if ($restaurant_rules->events == 'no')
-                                        <i class="fas fa-ban"></i> {{ __('user_page.No events') }}<br>
-                                    @endif
+                                @if ($restaurant_rules->children == 'no')
+                                    <i class="fas fa-ban"></i> {{ __('user_page.No children') }}<br>
                                 @endif
-                            </p>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <div class="d-flex">
-                                <h6>{{ __('user_page.Health & Safety') }}</h6>
-                                @auth
-                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editRestaurantGuestSafety()"
-                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
-                                    @endif
-                                @endauth
-                            </div>
-
-                            <p>
-                                @forelse ($restaurant->guestSafety->take(5) as $item)
-                                    <i class="fas fa-{{ $item->icon }}"></i>
-                                    {{ $item->guest_safety }}<br>
-                                @empty
-                                    {{ __('user_page.No data found') }}
-                                @endforelse
-                            </p>
-                            @php
-                                $countGuest = count($restaurant->guestSafety);
-                            @endphp
-                            @if ($countGuest > 5)
-                                <p>
-                                    <a href="javascript:void(0)" onclick="showMoreRestaurantGuestSafety()">
-                                        {{ __('user_page.Show more') }}
-                                        <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                </p>
+                                @if ($restaurant_rules->infants == 'no')
+                                    <i class="fas fa-ban"></i> {{ __('user_page.No infants') }}<br>
+                                @endif
+                                @if ($restaurant_rules->pets == 'no')
+                                    <i class="fas fa-ban"></i> {{ __('user_page.No pets') }}<br>
+                                @endif
+                                @if ($restaurant_rules->smoking == 'no')
+                                    <i class="fas fa-ban"></i> {{ __('user_page.No smoking') }}<br>
+                                @endif
+                                @if ($restaurant_rules->events == 'no')
+                                    <i class="fas fa-ban"></i> {{ __('user_page.No events') }}<br>
+                                @endif
                             @endif
-                        </div>
+                        </p>
                     </div>
-                </section>
-                <div class="section">
-                        <div>
-                            <div class="row owner-block">
-                                <div class="col-1 host-profile">
-                                @if ($restaurant->image)
-                                    @guest
-                                        <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <div class="d-flex">
+                            <h6>{{ __('user_page.Health & Safety') }}</h6>
+                            @auth
+                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    &nbsp;<a type="button" onclick="editRestaurantGuestSafety()"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                @endif
+                            @endauth
+                        </div>
+
+                        <p>
+                            @forelse ($restaurant->guestSafety->take(5) as $item)
+                                <i class="fas fa-{{ $item->icon }}"></i>
+                                {{ $item->guest_safety }}<br>
+                            @empty
+                                {{ __('user_page.No data found') }}
+                            @endforelse
+                        </p>
+                        @php
+                            $countGuest = count($restaurant->guestSafety);
+                        @endphp
+                        @if ($countGuest > 5)
+                            <p>
+                                <a href="javascript:void(0)" onclick="showMoreRestaurantGuestSafety()">
+                                    {{ __('user_page.Show more') }}
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </p>
+                        @endif
+                    </div>
+                </div>
+            </section> --}}
+            <div class="section">
+                <div>
+                    <div class="row owner-block">
+                        <div class="col-1 host-profile">
+                            @if ($restaurant->image)
+                                @guest
+                                    <a href="{{ route('owner_profile_show', $restaurant->ownerData->id) }}"
+                                        target="_blank">
                                     @endguest
                                     @auth
-                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
+                                        @if ($restaurant->ownerData->id == Auth::user()->id)
                                             <a href="{{ route('profile_user') }}" target="_blank">
-                                        @else
-                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
+                                            @else
+                                                <a href="{{ route('owner_profile_show', $restaurant->ownerData->id) }}"
+                                                    target="_blank">
                                         @endIf
                                     @endauth
-                                    <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}">
-                                        </a>
-                                @else
+                                    <img
+                                        src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}">
+                                </a>
+                            @else
+                                @auth
+                                    @if ($restaurant->ownerData->id == Auth::user()->id)
+                                        <a href="{{ route('profile_user') }}" target="_blank">
+                                        @else
+                                            <a href="{{ route('owner_profile_show', $restaurant->ownerData->id) }}"
+                                                target="_blank">
+                                    @endIf
+                                @endauth
+                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                </a>
+                            @endif
+                        </div>
+                        <div class="col-5">
+                            <div class="member-profile">
+                                <div class="d-flex">
+                                    <h4>{{ __('user_page.Hosted by') }}
+                                        @if ($restaurant->ownerData->first_name == null || $restaurant->ownerData->last_name == null)
+                                            Anonymous
+                                        @else
+                                            {{ $restaurant->ownerData->first_name }}
+                                            {{ $restaurant->ownerData->last_name }}
+                                        @endif
+                                    </h4>
                                     @auth
-                                        @if ($restaurant->createdByDetails->id == Auth::user()->id)
-                                            <a href="{{ route('profile_user') }}" target="_blank">
-                                        @else
-                                            <a href="{{ route('owner_profile_show', $restaurant->createdByDetails->id) }}" target="_blank">
-                                        @endIf
+                                        @if (Auth::user()->id == $restaurant->created_by)
+                                            &nbsp;
+                                            <a type="button" href="{{ route('profile_user') }}"
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
+                                        @endif
                                     @endauth
-                                            <img class="lozad" src="{{ LazyLoad::show() }}"
-                                                data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
-                                    </a>
-                                @endif
                                 </div>
-                                <div class="col-5">
-                                    <div class="member-profile">
-                                        <h4>{{ __('user_page.Hosted by') }}
-                                            {{ $restaurant->createdByDetails->first_name }}
-                                            {{ $restaurant->createdByDetails->last_name }}</h4>
-                                        <p>{{ __('user_page.Joined in') }}
-                                            {{ date('j F, Y', strtotime($restaurant->createdByDetails->created_at)) }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 owner-profile">
-                                    <h4>Host Profile</h4>
-                                    <p>
-                                    About
-                                        <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
-                                    Location
-                                        <span>{{ $restaurant->owner->location ?? '-' }}</span>
-                                    </p>
-                                </div>
+                                <p>{{ __('user_page.Joined in') }}
+                                    {{ date_format($restaurant->ownerData->created_at, 'M Y') }}</p>
                             </div>
+                        </div>
+                        <div class="col-12 col-md-6 owner-profile">
+                            <h4>Host Profile</h4>
+                            <p>
+                                About
+                                <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
+                                Location
+                                <span>{{ $restaurant->owner->location ?? '-' }}</span>
+                            </p>
+                        </div>
+                    </div>
 
-                            {{-- ALERT CONTENT STATUS --}}
-                            @auth
-                            @if (auth()->user()->id == $restaurant->created_by)
+                    {{-- ALERT CONTENT STATUS --}}
+                    @auth
+                        @if (auth()->user()->id == $restaurant->created_by)
                             @if ($restaurant->status == '0')
-                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                <span>{{ __('user_page.this content is deactive,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.request activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
+                                <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                                    <span>{{ __('user_page.this content is deactive,') }} </span>
+                                    <form
+                                        action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="id_restaurant"
+                                            value="{{ $restaurant->id_restaurant }}">
+                                        <button class="btn"
+                                            type="submit">{{ __('user_page.request activation') }}</button>
+                                    </form>
+                                    <span> ?</span>
+                                </div>
                             @endif
                             @if ($restaurant->status == '1')
                                 <div class="alert alert-success d-flex flex-row align-items-center" role="success">
@@ -2326,39 +2348,41 @@
                                 </div>
                             @endif
                             @if ($restaurant->status == '2')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request activation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel activation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
+                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                    <span>{{ __('user_page.you have been request activation for this content,') }}
+                                    </span>
+                                    <form
+                                        action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="id_restaurant"
+                                            value="{{ $restaurant->id_restaurant }}">
+                                        <button class="btn"
+                                            type="submit">{{ __('user_page.cancel activation') }}</button>
+                                    </form>
+                                    <span> ?</span>
+                                </div>
                             @endif
                             @if ($restaurant->status == '3')
-                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                <span>{{ __('user_page.you have been request deactivation for this content,') }} </span>
-                                <form
-                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="id_restaurant"
-                                        value="{{ $restaurant->id_restaurant }}">
-                                    <button class="btn"
-                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                </form>
-                                <span> ?</span>
-                            </div>
+                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                    <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                    </span>
+                                    <form
+                                        action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="id_restaurant"
+                                            value="{{ $restaurant->id_restaurant }}">
+                                        <button class="btn"
+                                            type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                    </form>
+                                    <span> ?</span>
+                                </div>
                             @endif
-                            @endif
-                            @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                        @endif
+                        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
                             @if ($restaurant->status == '0')
                                 <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
                                     {{ __('user_page.this content is deactive') }}
@@ -2368,21 +2392,27 @@
                                 <div class="alert alert-success d-flex flex-row align-items-center" role="success">
                                     <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
 
-                                    <form action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
+                                    <form
+                                        action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
                                         method="post">
                                         @csrf
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 onchange='this.form.submit()'>
-                                                <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                                <option value="AA"
+                                                    {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
-                                                <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                                <option value="A"
+                                                    {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
                                                 </option>
-                                                <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                                <option value="B"
+                                                    {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
                                                 </option>
-                                                <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                                <option value="C"
+                                                    {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
                                                 </option>
-                                                <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                                <option value="D"
+                                                    {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
                                                 </option>
                                             </select>
                                             <noscript><input type="submit" value="Submit"></noscript>
@@ -2393,20 +2423,27 @@
                             @endif
                             @if ($restaurant->status == '2')
                                 <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }} </span>
-                                    <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                    <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }}
+                                    </span>
+                                    <form
+                                        action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
                                         method="get" class="d-flex">
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade" name="grade">
-                                                <option value="AA" {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
+                                                <option value="AA"
+                                                    {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
-                                                <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
+                                                <option value="A"
+                                                    {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
                                                 </option>
-                                                <option value="B" {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
+                                                <option value="B"
+                                                    {{ $restaurant->grade == 'B' ? 'selected' : '' }}>B
                                                 </option>
-                                                <option value="C" {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
+                                                <option value="C"
+                                                    {{ $restaurant->grade == 'C' ? 'selected' : '' }}>C
                                                 </option>
-                                                <option value="D" {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
+                                                <option value="D"
+                                                    {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
                                                 </option>
                                             </select>
                                         </div>
@@ -2419,7 +2456,8 @@
                             @if ($restaurant->status == '3')
                                 <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                                     <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                    <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                    <form
+                                        action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
                                         method="get">
                                         <button class="btn"
                                             type="submit">{{ __('user_page.deactivate this content') }}</button>
@@ -2427,17 +2465,17 @@
                                     <span> ?</span>
                                 </div>
                             @endif
-                            @endif
-                            @endauth
-                            {{-- END ALERT CONTENT STATUS --}}
+                        @endif
+                    @endauth
+                    {{-- END ALERT CONTENT STATUS --}}
 
-                            @guest
-                            <hr>
-                                <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
+                    @guest
+                        <hr>
+                        <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
                                                         </h4> -->
-                                {{-- EDIT TO SWIPE CAROUSEL --}}
+                        {{-- EDIT TO SWIPE CAROUSEL --}}
 
-                                {{-- <div class="container-xxl mx-auto p-0">
+                        {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container1">
                                             <div class="Head">
@@ -2590,7 +2628,7 @@
                                     </div>
                                 </div> --}}
 
-                                {{-- <div class="container-xxl mx-auto p-0">
+                        {{-- <div class="container-xxl mx-auto p-0">
                                     <div class="slick-pop-slider">
                                         <div class="Container2">
                                             <!-- <div class="row col-12 Arrows2"></div> -->
@@ -2744,17 +2782,17 @@
                                     </div>
                                 </div> --}}
 
-                            @endguest
+                    @endguest
 
-                            @auth
-                                @if (Auth::user()->role_id != 3)
-                                    <hr>
-                                    <!-- <h4 style="margin-bottom: -10px;">
+                    @auth
+                        @if (Auth::user()->role_id != 3)
+                            <hr>
+                            <!-- <h4 style="margin-bottom: -10px;">
                                                                 {{ __('user_page.Nearby Villas & Things To Do') }}
                                                             </h4> -->
-                                    {{-- EDIT TO SWIPE CAROUSEL --}}
+                            {{-- EDIT TO SWIPE CAROUSEL --}}
 
-                                    {{-- <div class="container-xxl mx-auto p-0">
+                            {{-- <div class="container-xxl mx-auto p-0">
                                         <div class="slick-pop-slider">
                                             <div class="Container1">
                                                 <div class="Head">
@@ -2909,7 +2947,7 @@
                                         </div>
                                     </div> --}}
 
-                                    {{-- <div class="container-xxl mx-auto p-0">
+                            {{-- <div class="container-xxl mx-auto p-0">
                                         <div class="slick-pop-slider">
                                             <div class="Container2">
                                                 <!-- <div class="row col-12 Arrows2"></div> -->
@@ -3064,389 +3102,389 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                @endif
-                            @endauth
-                        </div>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    {{-- END FULL WIDTH ABOVE FOOTER --}}
-    </div>
-    {{-- MODAL --}}
+</div>
+</div>
+{{-- END FULL WIDTH ABOVE FOOTER --}}
+</div>
+{{-- MODAL --}}
 
-    {{-- OTHER MODAL --}}
-    @include('user.modal.restaurant.restaurant-guest-safety')
-    @auth
-        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
-            auth()->user()->id == $restaurant->created_by)
-            @include('user.modal.restaurant.restaurant-guest-safety')
-            @include('user.modal.restaurant.edit.edit-restaurant-guest-safety')
-            @include('user.modal.restaurant.edit.edit-restaurant-rules')
-            @include('user.modal.restaurant.facilities_add')
-            @include('user.modal.restaurant.menu')
-            @include('user.modal.restaurant.location')
-            @include('user.modal.restaurant.restaurant_profile')
-            @include('user.modal.restaurant.story')
-            @include('user.modal.restaurant.contact')
-            @include('user.modal.restaurant.tag_add')
-        @endif
-        @include('user.modal.advert-listing')
-    @endauth
-    @include('user.modal.restaurant.description')
-    {{-- END OTHER MODAL --}}
+{{-- OTHER MODAL --}}
+@include('user.modal.restaurant.restaurant-guest-safety')
+@auth
+    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
+        auth()->user()->id == $restaurant->created_by)
+        @include('user.modal.restaurant.restaurant-guest-safety')
+        @include('user.modal.restaurant.edit.edit-restaurant-guest-safety')
+        @include('user.modal.restaurant.edit.edit-restaurant-rules')
+        @include('user.modal.restaurant.facilities_add')
+        @include('user.modal.restaurant.menu')
+        @include('user.modal.restaurant.location')
+        @include('user.modal.restaurant.restaurant_profile')
+        @include('user.modal.restaurant.story')
+        @include('user.modal.restaurant.contact')
+        @include('user.modal.restaurant.tag_add')
+    @endif
+    @include('user.modal.advert-listing')
+@endauth
+@include('user.modal.restaurant.description')
+{{-- END OTHER MODAL --}}
 
-    {{-- MODAL SCRIPT --}}
-    <script>
-        function edit_contact() {
-            $('#modal-edit_contact').modal('show');
-        }
+{{-- MODAL SCRIPT --}}
+<script>
+    function edit_contact() {
+        $('#modal-edit_contact').modal('show');
+    }
 
-        function showMoreDescription() {
-            $("#modal-show_description").modal("show");
-        }
+    function showMoreDescription() {
+        $("#modal-show_description").modal("show");
+    }
 
-        function edit_name() {
-            $('#modal-edit_name').modal('show');
-        }
+    function edit_name() {
+        $('#modal-edit_name').modal('show');
+    }
 
-        function edit_short_description() {
-            $('#modal-edit_short_description').modal('show');
-        }
+    function edit_short_description() {
+        $('#modal-edit_short_description').modal('show');
+    }
 
-        function edit_description() {
-            $('#modal-edit_description').modal('show');
-        }
+    function edit_description() {
+        $('#modal-edit_description').modal('show');
+    }
 
-        function edit_photo() {
-            $('#modal-edit_photo').modal('show');
-        }
+    function edit_photo() {
+        $('#modal-edit_photo').modal('show');
+    }
 
-        function edit_location() {
-            $('#modal-edit_location').modal('show');
-        }
+    function edit_location() {
+        $('#modal-edit_location').modal('show');
+    }
 
-        function edit_story() {
-            $('#modal-edit_story').modal('show');
-        }
+    function edit_story() {
+        $('#modal-edit_story').modal('show');
+    }
 
-        function edit_menu() {
-            $('#modal-edit_menu').modal('show');
-        }
+    function edit_menu() {
+        $('#modal-edit_menu').modal('show');
+    }
 
-        function edit_restaurant_profile() {
-            $('#modal-edit_restaurant_profile').modal('show');
-        }
-    </script>
-    {{-- END MODAL SCRIPT --}}
-    {{-- STORY MODAL --}}
-    <div class="modal fade" id="storymodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
-        style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            <div class="modal-content modal-content-story video-container" style="width:980px;">
-                <center>
-                    <h5 class="video-title" id="story-title"></h5>
-                    <video controls id="story-video" class="video-modal">
-                        <source src="">
-                        {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
-                    </video>
-                </center>
-            </div>
+    function edit_restaurant_profile() {
+        $('#modal-edit_restaurant_profile').modal('show');
+    }
+</script>
+{{-- END MODAL SCRIPT --}}
+{{-- STORY MODAL --}}
+<div class="modal fade" id="storymodalrestaurant" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+    style="border-radius: 10px;">
+    <div class="modal-dialog modal-xl" role="document">
+        <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        <div class="modal-content modal-content-story video-container" style="width:980px;">
+            <center>
+                <h5 class="video-title" id="story-title"></h5>
+                <video controls id="story-video" class="video-modal">
+                    <source src="">
+                    {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
+                </video>
+            </center>
         </div>
     </div>
-    <script>
-        function view_story_restaurant(id) {
-            $.ajax({
-                type: "GET",
-                url: "/restaurant/story/" + id,
-                dataType: "JSON",
-                success: function(data) {
-                    // $('[name="id_story"]').val(data[0].id_story);
-                    // let restaurant = document.getElementById("restaurant").value;
-                    let video = document.getElementById('story-video');
-                    let public = '/foto/restaurant/';
-                    let slash = '/';
-                    let uid = '{{ $restaurant->uid }}';
-                    var lowerCaseUid = uid.toLowerCase();
-                    video.src = public + lowerCaseUid + slash + data[0].name;
-                    video.load();
-                    video.play();
-                    $("#story-title").text(data[0].title);
-                    $('#storymodalrestaurant').modal('show');
-                }
-            });
-        }
-
-        $(function() {
-            $('#storymodalrestaurant').modal({
-                show: false
-            }).on('hidden.bs.modal', function() {
-                $(this).find('video')[0].pause();
-            });
+</div>
+<script>
+    function view_story_restaurant(id) {
+        $.ajax({
+            type: "GET",
+            url: "/restaurant/story/" + id,
+            dataType: "JSON",
+            success: function(data) {
+                // $('[name="id_story"]').val(data[0].id_story);
+                // let restaurant = document.getElementById("restaurant").value;
+                let video = document.getElementById('story-video');
+                let public = '/foto/restaurant/';
+                let slash = '/';
+                let uid = '{{ $restaurant->uid }}';
+                var lowerCaseUid = uid.toLowerCase();
+                video.src = public + lowerCaseUid + slash + data[0].name;
+                video.load();
+                video.play();
+                $("#story-title").text(data[0].title);
+                $('#storymodalrestaurant').modal('show');
+            }
         });
-    </script>
-    {{-- MODAL VIDEO --}}
-    <div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
-        style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            <h5 class="video-title" id="video-title"></h5><br>
-            <div class="modal-content video-container">
-                <center>
-                    <video controls id="video" class="video-modal">
-                        {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
-                    </video>
-                </center>
-            </div>
+    }
+
+    $(function() {
+        $('#storymodalrestaurant').modal({
+            show: false
+        }).on('hidden.bs.modal', function() {
+            $(this).find('video')[0].pause();
+        });
+    });
+</script>
+{{-- MODAL VIDEO --}}
+<div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+    style="border-radius: 10px;">
+    <div class="modal-dialog modal-xl" role="document">
+        <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        <h5 class="video-title" id="video-title"></h5><br>
+        <div class="modal-content video-container">
+            <center>
+                <video controls id="video" class="video-modal">
+                    {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
+                </video>
+            </center>
         </div>
     </div>
-    <script>
-        function view_video_restaurant(id) {
-            console.log(id);
-            $.ajax({
-                type: "GET",
-                url: "/restaurant/video/" + id,
-                dataType: "JSON",
-                success: function(data) {
-                    console.log(data);
-                    var video = document.getElementById('video');
-                    var public = '/foto/restaurant/';
-                    var slash = '/';
-                    var uid = '{{ $restaurant->uid }}';
-                    var lowerCaseUid = uid.toLowerCase();
-                    video.src = public + lowerCaseUid + slash + data.name;
-                    video.load();
-                    video.play();
-                    // $("#video-title").html(data.name);
-                    $('#videomodalrestaurant').modal('show');
-                }
-            });
-        }
-        // $(function() {
-        //     $('#videomodalrestaurant').modal({
-        //         show: false
-        //     }).on('hidden.bs.modal', function() {
-        //         $(this).find('video')[0].pause();
-        //     });
-        // });
-    </script>
-    {{-- MODAL AMENITIES --}}
-    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.All Facilities') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body pb-1 translate-text-group" id="contentModalFacilities">
-                    @forelse ($restaurant->facilities as $item)
-                        <div class='col-6 mb-3'>
-                            <span class="translate-text-group-items">{{ $item->name }}</span>
-                        </div>
-                    @empty
-                        <div class='col-12 mb-3'>
-                            <span>{{ __('user_page.there is no facilities yet') }}</span>
-                        </div>
-                    @endforelse
-                </div>
-                <div class="modal-footer"></div>
+</div>
+<script>
+    function view_video_restaurant(id) {
+        console.log(id);
+        $.ajax({
+            type: "GET",
+            url: "/restaurant/video/" + id,
+            dataType: "JSON",
+            success: function(data) {
+                console.log(data);
+                var video = document.getElementById('video');
+                var public = '/foto/restaurant/';
+                var slash = '/';
+                var uid = '{{ $restaurant->uid }}';
+                var lowerCaseUid = uid.toLowerCase();
+                video.src = public + lowerCaseUid + slash + data.name;
+                video.load();
+                video.play();
+                // $("#video-title").html(data.name);
+                $('#videomodalrestaurant').modal('show');
+            }
+        });
+    }
+    // $(function() {
+    //     $('#videomodalrestaurant').modal({
+    //         show: false
+    //     }).on('hidden.bs.modal', function() {
+    //         $(this).find('video')[0].pause();
+    //     });
+    // });
+</script>
+{{-- MODAL AMENITIES --}}
+<div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.All Facilities') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_amenities()"
+                    aria-label="Close"></button>
             </div>
+            <div class="modal-body pb-1 translate-text-group" id="contentModalFacilities">
+                @forelse ($restaurant->facilities as $item)
+                    <div class='col-6 mb-3'>
+                        <span class="translate-text-group-items">{{ $item->name }}</span>
+                    </div>
+                @empty
+                    <div class='col-12 mb-3'>
+                        <span>{{ __('user_page.there is no facilities yet') }}</span>
+                    </div>
+                @endforelse
+            </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
-    <script>
-        function view_amenities() {
-            $('#modal-amenities').modal('show');
-        }
+</div>
+<script>
+    function view_amenities() {
+        $('#modal-amenities').modal('show');
+    }
 
-        function close_amenities() {
-            $('#modal-amenities').modal('hide');
-        }
-    </script>
+    function close_amenities() {
+        $('#modal-amenities').modal('hide');
+    }
+</script>
 
-    <script>
-        function add_photo_tag(e) {
-            let id_photo = e.getAttribute("data-photo");
-            $('#id_photo').val(id_photo);
+<script>
+    function add_photo_tag(e) {
+        let id_photo = e.getAttribute("data-photo");
+        $('#id_photo').val(id_photo);
 
-            // $('#caption_photo').val(idc.caption);
+        // $('#caption_photo').val(idc.caption);
 
-            $('#modal-add_photo_tag').modal('show');
-        }
-    </script>
+        $('#modal-add_photo_tag').modal('show');
+    }
+</script>
 
-    {{-- MODAL ADD PHOTO Tag --}}
-    <div class="modal fade" id="modal-add_photo_tag" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.Add Photo Tag') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('restaurant_update_tag_photo') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
-                        <input type="hidden" id="id_photo" name="id_photo" value="">
-                        <div class="row">
-                            <div class="col-12">
-                                <label>Choose tag for this photo</label>
-                                <select name="tag">
-                                    {{-- @php
+{{-- MODAL ADD PHOTO Tag --}}
+<div class="modal fade" id="modal-add_photo_tag" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.Add Photo Tag') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('restaurant_update_tag_photo') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                    <input type="hidden" id="id_photo" name="id_photo" value="">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Choose tag for this photo</label>
+                            <select name="tag">
+                                {{-- @php
                                     $id_photo = "<script>document.write($('#id_photo').val());</script>";
                                     @endphp --}}
-                                    @foreach ($photoTag as $tag)
-                                        <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
-                                    @endforeach
-                                </select>
-                                {{-- {{ $id_photo }} --}}
-                            </div>
+                                @foreach ($photoTag as $tag)
+                                    <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                            {{-- {{ $id_photo }} --}}
                         </div>
-                        <button type="submit" class="btn btn-primary">{{ __('user_page.Save') }}</button>
-                    </form>
-                </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('user_page.Save') }}</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
-    {{-- MODAL TAGS --}}
-    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.All Tags') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_tag()"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body pb-1" style="height: 500px; overflow-y: auto;">
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Cuisine') }}</h5>
-                        <div id="cuisineModalContent">
-                            @foreach ($restaurant->cuisine as $item)
-                                <div class='col-md-6'><span
-                                        class="translate-text-group-items">{{ $item->name }}</span></div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Dietary Food') }}</h5>
-                        <div id="dietaryFoodModalContent">
-                            @foreach ($restaurant->dietaryfood as $item)
-                                <div class='col-md-6'><span
-                                        class="translate-text-group-items">{{ $item->name }}</span></div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Dishes') }}</h5>
-                        <div id="dishesModalContent">
-                            @foreach ($restaurant->dishes as $item)
-                                <div class='col-md-6'><span
-                                        class="translate-text-group-items">{{ $item->name }}</span></div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Good For') }}</h5>
-                        <div id="goodForModalContent">
-                            @foreach ($restaurant->goodfor as $item)
-                                <div class='col-md-6'><span
-                                        class="translate-text-group-items">{{ $item->name }}</span></div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
-                        <h5 class="mb-3">{{ __('user_page.Meal') }}</h5>
-                        <div id="mealModalContent">
-                            @foreach ($restaurant->meal as $item)
-                                <div class='col-md-6'><span
-                                        class="translate-text-group-items">{{ $item->name }}</span></div>
-                            @endforeach
-                        </div>
+{{-- MODAL TAGS --}}
+<div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.All Tags') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_tag()"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-1" style="height: 500px; overflow-y: auto;">
+                <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <h5 class="mb-3">{{ __('user_page.Cuisine') }}</h5>
+                    <div id="cuisineModalContent">
+                        @foreach ($restaurant->cuisine as $item)
+                            <div class='col-md-6'><span
+                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                        @endforeach
                     </div>
                 </div>
-                <div class="modal-filter-footer" style="height: 20px;">
+                <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <h5 class="mb-3">{{ __('user_page.Dietary Food') }}</h5>
+                    <div id="dietaryFoodModalContent">
+                        @foreach ($restaurant->dietaryfood as $item)
+                            <div class='col-md-6'><span
+                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <h5 class="mb-3">{{ __('user_page.Dishes') }}</h5>
+                    <div id="dishesModalContent">
+                        @foreach ($restaurant->dishes as $item)
+                            <div class='col-md-6'><span
+                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <h5 class="mb-3">{{ __('user_page.Good For') }}</h5>
+                    <div id="goodForModalContent">
+                        @foreach ($restaurant->goodfor as $item)
+                            <div class='col-md-6'><span
+                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row row-border-bottom padding-top-bottom-18px translate-text-group">
+                    <h5 class="mb-3">{{ __('user_page.Meal') }}</h5>
+                    <div id="mealModalContent">
+                        @foreach ($restaurant->meal as $item)
+                            <div class='col-md-6'><span
+                                    class="translate-text-group-items">{{ $item->name }}</span></div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="modal-filter-footer" style="height: 20px;">
 
-                </div>
             </div>
         </div>
     </div>
-    <script>
-        function view_tag() {
-            $('#modal-tag').modal('show');
-        }
+</div>
+<script>
+    function view_tag() {
+        $('#modal-tag').modal('show');
+    }
 
-        function close_tag() {
-            $('#modal-tag').modal('hide');
-        }
-    </script>
+    function close_tag() {
+        $('#modal-tag').modal('hide');
+    }
+</script>
 
-    <!-- MENU MODAL -->
-    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="modal-menu-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body pb-1">
-                    <img src="" alt="" class="img-fluid" style="border-radius:15px;">
-                    <h5 style="color: #FF7400; margin-top: 10px; margin-bottom: 5px;"></h5>
-                    <p style="height:250px; overflow-x:auto"></p>
-                </div>
+<!-- MENU MODAL -->
+<div class="modal fade" id="modal-menu" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modal-menu-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-1">
+                <img src="" alt="" class="img-fluid" style="border-radius:15px;">
+                <h5 style="color: #FF7400; margin-top: 10px; margin-bottom: 5px;"></h5>
+                <p style="height:250px; overflow-x:auto"></p>
             </div>
         </div>
     </div>
-    <script>
-        async function view_menu(id) {
-            await $.ajax({
-                type: "get",
-                dataType: 'json',
-                url: '/restaurant/menu/${id}',
-                statusCode: {
-                    500: () => {
-                        alert(`{{ __('user_page.internal server error') }}`);
-                    },
-                    404: () => {
-                        alert(`{{ __('user_page.data not found') }}`);
-                    },
+</div>
+<script>
+    async function view_menu(id) {
+        await $.ajax({
+            type: "get",
+            dataType: 'json',
+            url: '/restaurant/menu/${id}',
+            statusCode: {
+                500: () => {
+                    alert(`{{ __('user_page.internal server error') }}`);
                 },
-                success: async function(data) {
-                    var formatter = new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'IDR',
-                    });
-                    var price = formatter.format(data.price).replace(/(\.0+|0+)$/, '');
-                    console.log(data);
-                    $('#modal-menu-content').children('.modal-header').children('.modal-title').text(data
-                        .name);
-                    var src =
-                        '{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . '${data.foto}') }}';
-                    $('#modal-menu-content').children('.modal-body').children('img').attr('src', src);
-                    $('#modal-menu-content').children('.modal-body').children('h5').text(
-                        '${price}');
-                    $('#modal-menu-content').children('.modal-body').children('p').text(data.description);
-                    $('#modal-menu').modal('show');
-                }
-            });
-        }
-    </script>
+                404: () => {
+                    alert(`{{ __('user_page.data not found') }}`);
+                },
+            },
+            success: async function(data) {
+                var formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'IDR',
+                });
+                var price = formatter.format(data.price).replace(/(\.0+|0+)$/, '');
+                console.log(data);
+                $('#modal-menu-content').children('.modal-header').children('.modal-title').text(data
+                    .name);
+                var src =
+                    '{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . '${data.foto}') }}';
+                $('#modal-menu-content').children('.modal-body').children('img').attr('src', src);
+                $('#modal-menu-content').children('.modal-body').children('h5').text(
+                    '${price}');
+                $('#modal-menu-content').children('.modal-body').children('p').text(data.description);
+                $('#modal-menu').modal('show');
+            }
+        });
+    }
+</script>
 
-    {{-- MODAL RESERVE --}}
-    {{-- <div class="modal fade" id="modal-reserve" tabindex="-1" role="dialog"
+{{-- MODAL RESERVE --}}
+{{-- <div class="modal fade" id="modal-reserve" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
         <div class="modal-dialog modal-xl" role="document">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -3551,2098 +3589,2104 @@
         </div>
     </div> --}}
 
-    {{-- MODAL SHARE --}}
-    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.Share') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+{{-- MODAL SHARE --}}
+<div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.Share') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="fs-3 fw-bold mb-0">
+                    {{ __('user_page.Share this place with your friend and family') }}</p>
+                <div class="d-flex gap-3 align-items-center py-3">
+                    @if ($restaurant->image)
+                        <img src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}"
+                            style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
+                    @else
+                        <img src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
+                            style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
+                    @endif
+                    <p class=mb-0">{{ $restaurant->name }}</p>
                 </div>
-                <div class="modal-body p-4">
-                    <p class="fs-3 fw-bold mb-0">
-                        {{ __('user_page.Share this place with your friend and family') }}</p>
-                    <div class="d-flex gap-3 align-items-center py-3">
-                        @if ($restaurant->image)
-                            <img src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $restaurant->image) }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
-                        @else
-                            <img src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
-                                style="height: 48px; width: 48px;" class="rounded-circle shadow lozad">
-                        @endif
-                        <p class=mb-0">{{ $restaurant->name }}</p>
-                    </div>
-                    <div>
-                        @guest
-                            <div class="modal-share-container">
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a type="button" class="d-flex p-0 copier"
-                                        href="{{ route('restaurant', $restaurant->id_restaurant) }}"
-                                        onclick="copyURI(event)">
-                                        {{ __('user_page.Copy Link') }}
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('restaurant', $restaurant->id_restaurant) }}&display=popup"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-facebook"></i> <span
-                                                class="fw-normal">Facebook</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://api.whatsapp.com/send?text={{ route('restaurant', $restaurant->id_restaurant) }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-whatsapp"></i> <span
-                                                class="fw-normal">WhatsApp</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://telegram.me/share/url?url={{ route('restaurant', $restaurant->id_restaurant) }}&text={{ route('restaurant', $restaurant->id_restaurant) }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-telegram"></i> <span
-                                                class="fw-normal">Telegram</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="mailto:?subject=I wanted you to see this site&amp;body={{ route('restaurant', $restaurant->id_restaurant) }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fas fa-envelope"></i> <span
-                                                class="fw-normal">Email</span></div>
-                                    </a>
-                                </div>
+                <div>
+                    @guest
+                        <div class="modal-share-container">
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a type="button" class="d-flex p-0 copier"
+                                    href="{{ route('restaurant', $restaurant->id_restaurant) }}"
+                                    onclick="copyURI(event)">
+                                    {{ __('user_page.Copy Link') }}
+                                </a>
                             </div>
-                        @endguest
-
-                        @auth
-                            <div class="modal-share-container">
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a type="button" class="d-flex p-0 copier"
-                                        href="{{ route('restaurant', $restaurant->id_restaurant) }}"
-                                        onclick="copyURI(event)">
-                                        {{ __('user_page.Copy Link') }}
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}&display=popup"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-facebook"></i> <span
-                                                class="fw-normal">Facebook</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://api.whatsapp.com/send?text={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-whatsapp"></i> <span
-                                                class="fw-normal">WhatsApp</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="https://telegram.me/share/url?url={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}&text={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fab fa-telegram"></i> <span
-                                                class="fw-normal">Telegram</span></div>
-                                    </a>
-                                </div>
-                                <div class="col-lg col-12 p-3 border br-10">
-                                    <a href="mailto:?subject=I wanted you to see this site&amp;body={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
-                                        target="_blank" class="d-flex p-0">
-                                        <div class="pr-5"><i class="fas fa-envelope"></i> <span
-                                                class="fw-normal">Email</span></div>
-                                    </a>
-                                </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('restaurant', $restaurant->id_restaurant) }}&display=popup"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-facebook"></i> <span
+                                            class="fw-normal">Facebook</span></div>
+                                </a>
                             </div>
-                        @endauth
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://api.whatsapp.com/send?text={{ route('restaurant', $restaurant->id_restaurant) }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-whatsapp"></i> <span
+                                            class="fw-normal">WhatsApp</span></div>
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://telegram.me/share/url?url={{ route('restaurant', $restaurant->id_restaurant) }}&text={{ route('restaurant', $restaurant->id_restaurant) }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-telegram"></i> <span
+                                            class="fw-normal">Telegram</span></div>
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="mailto:?subject=I wanted you to see this site&amp;body={{ route('restaurant', $restaurant->id_restaurant) }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fas fa-envelope"></i> <span
+                                            class="fw-normal">Email</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    @endguest
+
+                    @auth
+                        <div class="modal-share-container">
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a type="button" class="d-flex p-0 copier"
+                                    href="{{ route('restaurant', $restaurant->id_restaurant) }}"
+                                    onclick="copyURI(event)">
+                                    {{ __('user_page.Copy Link') }}
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}&display=popup"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-facebook"></i> <span
+                                            class="fw-normal">Facebook</span></div>
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://api.whatsapp.com/send?text={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-whatsapp"></i> <span
+                                            class="fw-normal">WhatsApp</span></div>
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="https://telegram.me/share/url?url={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}&text={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fab fa-telegram"></i> <span
+                                            class="fw-normal">Telegram</span></div>
+                                </a>
+                            </div>
+                            <div class="col-lg col-12 p-3 border br-10">
+                                <a href="mailto:?subject=I wanted you to see this site&amp;body={{ route('restaurant', $restaurant->id_restaurant) }}?ref={{ Auth::user()->user_code }}"
+                                    target="_blank" class="d-flex p-0">
+                                    <div class="pr-5"><i class="fas fa-envelope"></i> <span
+                                            class="fw-normal">Email</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function share() {
+        $("#modal-share").modal("show");
+    }
+</script>
+{{-- MODAL CONTACT RESTAURANT --}}
+<div class="modal fade" id="modal-contact_restaurant" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
+            <div class="modal-header">
+                <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span>
+                    {{ __('user_page.Contact') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="col-11">
+                        <b style="font-size: 15px;" class="price-box">
+                            <span id="restoPhoneInContact">{{ $restaurant->phone }}</span>
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="col-11">
+                        <b style="font-size: 15px;" class="price-box">
+                            <span id="restoEmailInContact">{{ $restaurant->email }}</span>
+                        </b>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        function share() {
-            $("#modal-share").modal("show");
+</div>
+<script>
+    function contact_restaurant() {
+        $('#modal-contact_restaurant').modal('show');
+    }
+</script>
+{{-- MODAL CONTACT HOST --}}
+<div class="modal fade" id="modal-contact-host" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.FAQ') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-1">
+                <form action="{{ route('villa_store_user_message') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}">
+                    <div class="form-group">
+                        <textarea name="message" rows="10" class="form-control w-100" value="{{ old('message') }}" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('user_page.Send') }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- MODAL Reorder image --}}
+<div class="modal fade" id="edit_position_photo" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header" style="padding-left: 18px;">
+                <h7 class="modal-title" style="font-size: 1.875rem;">
+                    {{ __('user_page.Edit Position Photos') }}</h7>
+                <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
+                    <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body pb-1">
+
+                {{-- <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}"> --}}
+                {{-- reorder image --}}
+                <ul id="sortable-photo">
+                    @forelse ($restaurant->photo->sortBy('order') as $item)
+                        @php
+                            $id = $item->id_photo;
+                            $name = $item->name;
+                        @endphp
+                        <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionPhotoGallery{{ $id }}">
+                            <img class="lozad" src="{{ LazyLoad::show() }}"
+                                data-src="{{ asset('foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
+                                title="{{ $name }}">
+                        </li>
+                    @empty
+                        {{ __('user_page.there is no image yet') }}
+                    @endforelse
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <div style="clear: both; width: 100%;">
+                    <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
+                        onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- MODAL Reorder video --}}
+<div class="modal fade" id="edit_position_video" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header" style="padding-left: 18px;">
+                <h7 class="modal-title" style="font-size: 1.875rem;">
+                    {{ __('user_page.Edit Position Video') }}</h7>
+                <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
+                    <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body pb-1">
+
+                {{-- <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}"> --}}
+                {{-- reorder image --}}
+                <ul id="sortable-video">
+                    @forelse ($restaurant->video->sortBy('order') as $item)
+                        @php
+                            $id = $item->id_video;
+                            $name = $item->name;
+                        @endphp
+                        <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionVideoGallery{{ $id }}">
+                            <video loading="lazy"
+                                src="{{ asset('foto/restaurant/' . $restaurant->uid . '/' . $item->name) }}#t=1.0">
+                        </li>
+                    @empty
+                        {{ __('user_page.there is no image yet') }}
+                    @endforelse
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <div style="clear: both;">
+                    <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
+                        onclick="save_reorder_video()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('user.modal.auth.login_register')
+
+@include('layouts.user.footer')
+</div>
+{{-- END MODAL --}}
+
+<script>
+    function loginForm(value) {
+        console.log(value);
+        if (value == 1) {
+            $('#loginAlert').removeClass('d-none');
+            $('#registerAlert').removeClass('d-none');
         }
-    </script>
-    {{-- MODAL CONTACT RESTAURANT --}}
-    <div class="modal fade" id="modal-contact_restaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
-                <div class="modal-header">
-                    <h5 class="modal-title"><span id="nameRestoInContact">{{ $restaurant->name }}</span>
-                        {{ __('user_page.Contact') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="row">
-                        <div class="col-1">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                <span id="restoPhoneInContact">{{ $restaurant->phone }}</span>
-                            </b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="col-11">
-                            <b style="font-size: 15px;" class="price-box">
-                                <span id="restoEmailInContact">{{ $restaurant->email }}</span>
-                            </b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function contact_restaurant() {
-            $('#modal-contact_restaurant').modal('show');
+        if (value == 2) {
+            $('#loginAlert').addClass('d-none');
+            $('#registerAlert').addClass('d-none');
         }
-    </script>
-    {{-- MODAL CONTACT HOST --}}
-    <div class="modal fade" id="modal-contact-host" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('user_page.FAQ') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body pb-1">
-                    <form action="{{ route('villa_store_user_message') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}">
-                        <div class="form-group">
-                            <textarea name="message" rows="10" class="form-control w-100" value="{{ old('message') }}" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">{{ __('user_page.Send') }}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    {{-- MODAL Reorder image --}}
-    <div class="modal fade" id="edit_position_photo" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Photos') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
-                        <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+        $('#LoginModal').modal('show');
+    }
+</script>
 
-                    {{-- <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}"> --}}
-                    {{-- reorder image --}}
-                    <ul id="sortable-photo">
-                        @forelse ($restaurant->photo->sortBy('order') as $item)
-                            @php
-                                $id = $item->id_photo;
-                                $name = $item->name;
-                            @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}" id="positionPhotoGallery{{ $id }}">
-                                <img class="lozad" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ asset('foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
-                                    title="{{ $name }}">
-                            </li>
-                        @empty
-                            {{ __('user_page.there is no image yet') }}
-                        @endforelse
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <div style="clear: both; width: 100%;">
-                        <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
-                            onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    {{-- MODAL Reorder video --}}
-    <div class="modal fade" id="edit_position_video" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
-                <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Video') }}</h7>
-                    <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
-                        <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+<script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
 
-                    {{-- <input type="hidden" name="id_owner" value="{{ $restaurant->created_by }}"> --}}
-                    {{-- reorder image --}}
-                    <ul id="sortable-video">
-                        @forelse ($restaurant->video->sortBy('order') as $item)
-                            @php
-                                $id = $item->id_video;
-                                $name = $item->name;
-                            @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}" id="positionVideoGallery{{$id}}">
-                                <video loading="lazy"
-                                    src="{{ asset('foto/restaurant/' . $restaurant->uid . '/' . $item->name) }}#t=1.0">
-                            </li>
-                        @empty
-                            {{ __('user_page.there is no image yet') }}
-                        @endforelse
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <div style="clear: both;">
-                        <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
-                            onclick="save_reorder_video()">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    @include('user.modal.auth.login_register')
 
-    @include('layouts.user.footer')
-    </div>
-    {{-- END MODAL --}}
+<script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
+{{-- Page JS Plugins --}}
+<script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
 
-    <script>
-        function loginForm(value) {
-            console.log(value);
-            if (value == 1) {
-                $('#loginAlert').removeClass('d-none');
-                $('#registerAlert').removeClass('d-none');
-            }
-            if (value == 2) {
-                $('#loginAlert').addClass('d-none');
-                $('#registerAlert').addClass('d-none');
-            }
+<script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
+<script src="{{ asset('assets/js/story-slider.js') }}"></script>
+<script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
+<script src="{{ asset('assets/js/villa-slider.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/view-villa.js') }}"></script> --}}
+<script src="{{ asset('assets/js/crud-restaurant.js') }}"></script>
+<script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
 
-            $('#LoginModal').modal('show');
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+
+{{-- SweetAlert JS --}}
+<script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<script>
+    window.onscroll = function() {
+        myFunction();
+        if ((document.getElementById("popup_check").style.display = "block")) {
+            document.getElementById("popup_check").style.display = "none";
         }
-    </script>
-
-
-    <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
-
-
-
-    <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
-    {{-- Page JS Plugins --}}
-    <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
-
-    <script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/story-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/thingstodo-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/villa-slider.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/view-villa.js') }}"></script> --}}
-    <script src="{{ asset('assets/js/crud-restaurant.js') }}"></script>
-    <script src="{{ asset('assets/js/simpleLightbox.js') }}"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
-
-    {{-- SweetAlert JS --}}
-    <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-
-    <script>
-        window.onscroll = function() {
-            myFunction();
-            if ((document.getElementById("popup_check").style.display = "block")) {
-                document.getElementById("popup_check").style.display = "none";
-            }
-            if ((document.getElementById("popup_guest").style.display = "block")) {
-                document.getElementById("popup_guest").style.display = "none";
-            }
-        };
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-        // var about_sticky = document.getElementById("about-sticky");
-        // var description = document.getElementById("description");
-        // var descriptiona = description.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky");
-
-                document.getElementById("navbarright").classList.add("active");
-
-                document
-                    .getElementById("add_class_popup")
-                    .classList.remove("header-popup");
-                document
-                    .getElementById("searchbox")
-                    .classList.add("searchbox-display-block");
-                document
-                    .getElementById("searchbox")
-                    .classList.remove("searchbox-display-none");
-                document.getElementById("search_bar").classList.remove("active");
-                document
-                    .getElementById("change_display_block")
-                    .classList.add("display-none");
-                document
-                    .getElementById("change_display_block")
-                    .classList.remove("display-block");
-            } else {
-                navbar.classList.remove("sticky");
-                document.getElementById("navbarright").classList.remove("active");
-                document
-                    .getElementById("add_class_popup")
-                    .classList.remove("header-popup");
-                document
-                    .getElementById("searchbox")
-                    .classList.add("searchbox-display-block");
-                document
-                    .getElementById("searchbox")
-                    .classList.remove("searchbox-display-none");
-                document.getElementById("search_bar").classList.remove("active");
-                document
-                    .getElementById("change_display_block")
-                    .classList.add("display-none");
-                document
-                    .getElementById("change_display_block")
-                    .classList.remove("display-block");
-                document
-                    .getElementById("search_bar")
-                    .classList.remove("searchbar-display-block");
-                document
-                    .getElementById("row_popup")
-                    .classList.remove("row-popup-height");
-            }
+        if ((document.getElementById("popup_guest").style.display = "block")) {
+            document.getElementById("popup_guest").style.display = "none";
         }
-    </script>
+    };
 
-    @guest
-        <script>
-            $(function() {
-                var increment = 3;
-                var startFilter = 0;
-                var endFilter = increment;
-                var $this = $('.gallery2');
-                var elementLength = $this.find('a').length;
-                $('.listLength').text(elementLength);
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+    // var about_sticky = document.getElementById("about-sticky");
+    // var description = document.getElementById("description");
+    // var descriptiona = description.offsetTop;
 
-                if (elementLength > 2) {
-                    $('.buttonToogle').show();
-                }
-                $('.gallery2 .itemsMenu').slice(startFilter, endFilter).addClass('shown');
-                $('.shownLength').text(endFilter);
-                $('.gallery2 .itemsMenu').not('.shown').hide();
-                $('.buttonToogle .showMore').on('click', function() {
-                    if (elementLength > endFilter) {
-                        startFilter += increment;
-                        endFilter += increment;
-                        $('.gallery2 .itemsMenu').slice(startFilter, endFilter).not('.shown').addClass('shown')
-                            .toggle(500);
-                        $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
-                        if (elementLength <= endFilter) {
-                            $(this).remove();
-                        }
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+
+            document.getElementById("navbarright").classList.add("active");
+
+            document
+                .getElementById("add_class_popup")
+                .classList.remove("header-popup");
+            document
+                .getElementById("searchbox")
+                .classList.add("searchbox-display-block");
+            document
+                .getElementById("searchbox")
+                .classList.remove("searchbox-display-none");
+            document.getElementById("search_bar").classList.remove("active");
+            document
+                .getElementById("change_display_block")
+                .classList.add("display-none");
+            document
+                .getElementById("change_display_block")
+                .classList.remove("display-block");
+        } else {
+            navbar.classList.remove("sticky");
+            document.getElementById("navbarright").classList.remove("active");
+            document
+                .getElementById("add_class_popup")
+                .classList.remove("header-popup");
+            document
+                .getElementById("searchbox")
+                .classList.add("searchbox-display-block");
+            document
+                .getElementById("searchbox")
+                .classList.remove("searchbox-display-none");
+            document.getElementById("search_bar").classList.remove("active");
+            document
+                .getElementById("change_display_block")
+                .classList.add("display-none");
+            document
+                .getElementById("change_display_block")
+                .classList.remove("display-block");
+            document
+                .getElementById("search_bar")
+                .classList.remove("searchbar-display-block");
+            document
+                .getElementById("row_popup")
+                .classList.remove("row-popup-height");
+        }
+    }
+</script>
+
+@guest
+    <script>
+        $(function() {
+            var increment = 3;
+            var startFilter = 0;
+            var endFilter = increment;
+            var $this = $('.gallery2');
+            var elementLength = $this.find('a').length;
+            $('.listLength').text(elementLength);
+
+            if (elementLength > 2) {
+                $('.buttonToogle').show();
+            }
+            $('.gallery2 .itemsMenu').slice(startFilter, endFilter).addClass('shown');
+            $('.shownLength').text(endFilter);
+            $('.gallery2 .itemsMenu').not('.shown').hide();
+            $('.buttonToogle .showMore').on('click', function() {
+                if (elementLength > endFilter) {
+                    startFilter += increment;
+                    endFilter += increment;
+                    $('.gallery2 .itemsMenu').slice(startFilter, endFilter).not('.shown').addClass('shown')
+                        .toggle(500);
+                    $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
+                    if (elementLength <= endFilter) {
+                        $(this).remove();
                     }
+                }
 
-                });
             });
-        </script>
-    @endguest
-
-    <script>
-        function setCookie(name, value, days) {
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        var url_string2 = window.location.href
-        var url2 = new URL(url_string2);
-
-        if (url2.searchParams.get('ref')) {
-            setCookie("ref", url2.searchParams.get('ref'), 1095);
-        }
+        });
     </script>
+@endguest
 
-    {{-- EDIT POSITION PHOTO & VIDEO --}}
-    <script>
-        $(document).ready(function() {
-            // Initialize sortable
-            $("#sortable-video").sortable();
-            $("#sortable-photo").sortable();
+<script>
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
 
-            if ($(window).width() < 992) {
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    var url_string2 = window.location.href
+    var url2 = new URL(url_string2);
+
+    if (url2.searchParams.get('ref')) {
+        setCookie("ref", url2.searchParams.get('ref'), 1095);
+    }
+</script>
+
+{{-- EDIT POSITION PHOTO & VIDEO --}}
+<script>
+    $(document).ready(function() {
+        // Initialize sortable
+        $("#sortable-video").sortable();
+        $("#sortable-photo").sortable();
+
+        if ($(window).width() < 992) {
+            //Setter
+            $("#sortable-video").sortable("option", "disabled", true);
+            $("#sortable-photo").sortable("option", "disabled", true);
+        } else {
+            //Setter
+            $("#sortable-video").sortable("option", "disabled", false);
+            $("#sortable-photo").sortable("option", "disabled", false);
+        }
+
+        //handle resize
+        $(window).on("resize", function() {
+            if ($(this).width() < 992) {
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", true);
                 $("#sortable-photo").sortable("option", "disabled", true);
-            }else {
+            } else {
                 //Setter
                 $("#sortable-video").sortable("option", "disabled", false);
                 $("#sortable-photo").sortable("option", "disabled", false);
             }
+        })
 
-            //handle resize
-            $(window).on("resize", function() {
-                if ($(this).width() < 992) {
-                    //Setter
-                    $("#sortable-video").sortable("option", "disabled", true);
-                    $("#sortable-photo").sortable("option", "disabled", true);
-                } else {
-                    //Setter
-                    $("#sortable-video").sortable("option", "disabled", false);
+        //initialize timeout variable
+        var timeOut = 0;
+
+        //clear time out to prevent memory leak
+        $("#edit_position_photo").on("click", function(e) {
+            if (e.target.id == "edit_position_photo") {
+                clearTimeout(timeOut);
+            }
+        })
+        $("#edit_position_video").on("click", function(e) {
+            if (e.target.id == "edit_position_video") {
+                clearTimeout(timeOut);
+            }
+        })
+        $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
+            clearTimeout(timeOut);
+        })
+        $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
+            clearTimeout(timeOut);
+        })
+
+        //event for mobile
+        $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
+            if ($(window).width() < 992) {
+                timeOut = setTimeout(function() {
+                    $("#sortable-photo .ui-state-default img").addClass("shake-anim");
                     $("#sortable-photo").sortable("option", "disabled", false);
-                }
-            })
-
-            //initialize timeout variable
-            var timeOut = 0;
-
-            //clear time out to prevent memory leak
-            $("#edit_position_photo").on("click", function(e) {
-                if (e.target.id == "edit_position_photo") {
-                    clearTimeout(timeOut);
-                }
-            })
-            $("#edit_position_video").on("click", function(e) {
-                if (e.target.id == "edit_position_video") {
-                    clearTimeout(timeOut);
-                }
-            })
-            $("#edit_position_photo .modal-header .btn-close-modal").on("click", function() {
-                clearTimeout(timeOut);
-            })
-            $("#edit_position_video .modal-header .btn-close-modal").on("click", function() {
-                clearTimeout(timeOut);
-            })
-            
-            //event for mobile
-            $("#sortable-photo .ui-state-default img").on("mouseenter", function() {
-                if ($(window).width() < 992) {
-                    timeOut = setTimeout(function() {
-                        $("#sortable-photo .ui-state-default img").addClass("shake-anim");
-                        $("#sortable-photo").sortable("option", "disabled", false);    
-                    }, 500);
-                }
-            }).on("mouseup mouseleave", function() {
-                if ($(window).width() < 992) {
-                    $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
-                    $("#sortable-photo").sortable("option", "disabled", true);
-                }
-            })
-            $("#sortable-video .ui-state-default video").on("mouseenter", function() {
-                if ($(window).width() < 992) {
-                    timeOut = setTimeout(function() {
-                        $("#sortable-video .ui-state-default video").addClass("shake-anim");
-                        $("#sortable-video").sortable("option", "disabled", false);    
-                    }, 500);
-                }
-            }).on("mouseup mouseleave", function() {
-                if ($(window).width() < 992) {
-                    $("#sortable-video .ui-state-default video").removeClass("shake-anim");
-                    $("#sortable-video").sortable("option", "disabled", true);
-                }
-            })
-        });
-
-        function position_photo() {
-            $('#edit_position_photo').modal('show');
-        }
-        // Save order
-        function save_reorder_photo() {
-
-            let btn = document.getElementById("saveBtnReorderPhoto");
-            btn.textContent = "Saving...";
-            btn.classList.add("disabled");
-
-            var imageids_arr = [];
-            // get image ids order
-            $('#sortable-photo li').each(function() {
-                var id = $(this).data('id');
-                imageids_arr.push(id);
-            });
-            // AJAX request
-            $.ajax({
-                url: '/restaurant/update/photo/position',
-                type: 'post',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    imageids: imageids_arr,
-                    id: '{{ $restaurant->id_restaurant }}'
-                },
-                success: function(response) {
-                    iziToast.success({
-                        title: "Success",
-                        message: response.message,
-                        position: "topRight",
-                    });
-
-                    let path = "/foto/restaurant/";
-                    let slash = "/";
-                    let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
-                    let content = "";
-                    let contentPositionModal = "";
-
-                    let galleryDiv = $('.gallery');
-                    let galleryLength = galleryDiv.find('a').length;
-
-                    if (galleryLength == 0)
-                    {
-                        $('.gallery').html("");
-                    }
-
-                    for (let i = 0; i < response.data.photo.length; i++) {
-                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
-                            response.data.photo[i].id_photo +
-                            '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[i]
-                            .id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
-                            '"> <img src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' + response.data.photo[i].name + '"> </li>';
-                    }
-                    if (response.data.video.length > 0)
-                    {
-                        for (let v = 0; v < response.data.video.length; v++) {
-                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
-                                '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
-                                response.data.video[v].id_video +
-                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
-                                response.data.video[v].id_video +
-                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-                        }
-                    }
-
-                    btn.textContent = "{{ __('user_page.Save') }}";
-                    btn.classList.remove("disabled");
-
-                    $('.gallery').html("");
-                    $('.gallery').append(content);
-                    $('#sortable-photo').html("");
-                    $('#sortable-photo').append(contentPositionModal);
-
-                    $("#edit_position_photo").modal("hide");
-
-                    $gallery.refresh();
-                }
-            });
-        }
-
-        function position_video() {
-            $('#edit_position_video').modal('show');
-        }
-
-        function save_reorder_video() {
-
-            let btn = document.getElementById("saveBtnReorderVideo");
-            btn.textContent = "Saving...";
-            btn.classList.add("disabled");
-
-            var videoids_arr = [];
-            // get video ids order
-            $('#sortable-video li').each(function() {
-                var id = $(this).data('id');
-                videoids_arr.push(id);
-            });
-            // AJAX request
-            $.ajax({
-                url: '/restaurant/update/video/position',
-                type: 'post',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    videoids: videoids_arr,
-                    id: '{{ $restaurant->id_restaurant }}'
-                },
-                success: function(response) {
-                    console.log(response);
-
-                    iziToast.success({
-                        title: "Success",
-                        message: response.message,
-                        position: "topRight",
-                    });
-
-                    let path = "/foto/restaurant/";
-                    let slash = "/";
-                    let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
-                    let content = "";
-                    let contentPositionModal = "";
-
-                    for (let i = 0; i < response.data.photo.length; i++) {
-                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
-                            response.data.photo[i].id_photo +
-                            '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
-                            '" title="' +
-                            response.data.photo[i].caption +
-                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                            response.data.photo[i].id_photo +
-                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
-                    }
-                    if (response.data.video.length > 0)
-                    {
-                        for (let v = 0; v < response.data.video.length; v++) {
-                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v].id_video +
-                                '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
-                                response.data.video[v].id_video +
-                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
-                                response.data.video[v].id_video +
-                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.video[v]
-                                .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
-                                '"> <video loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
-                                '#t=1.0"> </li>';
-                        }
-                    }
-
-                    btn.textContent = "{{ __('user_page.Save') }}";
-                    btn.classList.remove("disabled");
-
-                    $('.gallery').html("");
-                    $('.gallery').append(content);
-                    $('#sortable-video').html("");
-                    $('#sortable-video').append(contentPositionModal);
-
-                    $("#edit_position_video").modal("hide");
-
-                    $gallery.refresh();
-                }
-            });
-        }
-    </script>
-    {{-- END EDIT POSITION PHOTO & VIDEO --}}
-
-    {{-- Guest Count --}}
-    <script>
-        $('#adult2').on('change', function() {
-            var total_adult2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_adult2);
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-
-        $('#child2').on('change', function() {
-            var total_child2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
-            $('#total_guest2').val(total_child2);
-            $('#adult4').val($('#adult2').val());
-            $('#child4').val($('#child2').val());
-            $('#total_guest4').val($('#total_guest2').val());
-        });
-    </script>
-
-    <script>
-        $('#adult4').on('change', function() {
-            var total_adult4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_adult4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-        });
-
-        $('#child4').on('change', function() {
-            var total_child4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
-            $('#total_guest4').val(total_child4);
-            $('#adult2').val($('#adult4').val());
-            $('#child2').val($('#child4').val());
-            $('#total_guest2').val($('#total_guest4').val());
-        });
-    </script>
-
-    <script>
-        $('#check_in').flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            mode: "range",
-            showMonths: 2,
-            onChange: function(selectedDates, dateStr, instance) {
-                var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $('#min_stay').val();
-                var total = $('#price').val() * sum_night;
-                // console.log(sum_night);
-                if (sum_night < min_stay) {
-                    alert("minimum stay is " + min_stay + " days");
-                } else {
-                    $('#sum_night').val(sum_night);
-                    $("#total").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                    $("#total_all").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                }
-                $('#check_in').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                $('#check_out').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                $('#check_in3').val($('#check_in').val());
-                $('#check_out3').val($('#check_out').val());
-                $('#sum_night3').val($('#sum_night').val());
-                $('#total3').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
-                $('#total_all3').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
+                }, 500);
             }
-        });
-    </script>
-
-    <script>
-        $('#check_in2').flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            mode: "range",
-            showMonths: 2,
-            onChange: function(selectedDates, dateStr, instance) {
-                $('#check_out2').flatpickr({
-                    enableTime: false,
-                    dateFormat: "Y-m-d",
-                    minDate: new Date(dateStr).fp_incr(1),
-                    onChange: function(selectedDates, dateStr, instance) {
-                        var start = new Date($('#check_in2').val());
-                        var end = new Date($('#check_out2').val());
-                        var min_stay = $('#min_stay').val();
-                        var minimum = new Date($('#check_in2').val()).fp_incr(min_stay);
-                        if (sum_night < min_stay) {
-                            alert("minimum stay is " + min_stay + " days");
-                        }
-                    }
-                });
-
-                $('#check_in2').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                $('#check_out2').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+        }).on("mouseup mouseleave", function() {
+            if ($(window).width() < 992) {
+                $("#sortable-photo .ui-state-default img").removeClass("shake-anim");
+                $("#sortable-photo").sortable("option", "disabled", true);
             }
-        });
-    </script>
-
-    <script>
-        $('#check_in3').flatpickr({
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            mode: "range",
-            showMonths: 2,
-            onChange: function(selectedDates, dateStr, instance) {
-                var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                var min_stay = $('#min_stay').val();
-                var total = $('#price').val() * sum_night;
-                // console.log(sum_night);
-                if (sum_night < min_stay) {
-                    alert("minimum stay is " + min_stay + " days");
-                } else {
-                    $('#sum_night3').val(sum_night);
-                    $("#total3").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                    $("#total_all3").text(total.toString().replace(
-                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                        "."));
-                }
-                $('#check_in3').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                $('#check_out3').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-                $('#check_in').val($('#check_in3').val());
-                $('#check_out').val($('#check_out3').val());
-                $('#sum_night').val($('#sum_night3').val());
-                $('#total').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
-                $('#total_all').text(total.toString().replace(
-                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    "."));
+        })
+        $("#sortable-video .ui-state-default video").on("mouseenter", function() {
+            if ($(window).width() < 992) {
+                timeOut = setTimeout(function() {
+                    $("#sortable-video .ui-state-default video").addClass("shake-anim");
+                    $("#sortable-video").sortable("option", "disabled", false);
+                }, 500);
             }
-        });
-    </script>
-
-    <script>
-        $("#searchbox").click(function() {
-            $("#search_bar").toggleClass("active");
-        });
-    </script>
-
-    {{-- IMAGE UPLOAD --}}
-    <script>
-        $(".image-box").click(function(event) {
-            var previewImg = $(this).children("img");
-
-            $(this)
-                .siblings()
-                .children("input")
-                .trigger("click");
-
-            $(this)
-                .siblings()
-                .children("input")
-                .change(function() {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        var urll = e.target.result;
-                        $(previewImg).attr("src", urll);
-                        previewImg.parent().css("background", "transparent");
-                        previewImg.show();
-                        previewImg.siblings("p").hide();
-                    };
-                    reader.readAsDataURL(this.files[0]);
-                });
-        });
-    </script>
-    {{-- END IMAGE UPLOAD --}}
-
-    {{-- UPDATE FORM --}}
-    <script>
-        function editNameForm() {
-            var form = document.getElementById("name-form");
-            var content = document.getElementById("name-content");
-            var formInput = document.getElementById("name-form-input");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-
-            if (formInput.value == 'Food Name Here') {
-                formInput.value = '';
+        }).on("mouseup mouseleave", function() {
+            if ($(window).width() < 992) {
+                $("#sortable-video .ui-state-default video").removeClass("shake-anim");
+                $("#sortable-video").sortable("option", "disabled", true);
             }
-        }
+        })
+    });
 
-        function editNameCancel() {
-            var form = document.getElementById("name-form");
-            var formInput = document.getElementById("name-form-input");
-            var content = document.getElementById("name-content");
-            form.classList.remove("d-block");
-            content.classList.remove("d-none");
+    function position_photo() {
+        $('#edit_position_photo').modal('show');
+    }
+    // Save order
+    function save_reorder_photo() {
 
-            //mengembalikan value sebelum disave ketika klik button cancel
-            formInput.value = name_resto_backup;
+        let btn = document.getElementById("saveBtnReorderPhoto");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
 
-            if (formInput.value == 'Food Name Here') {
-                formInput.value = '';
-            }
-        }
-    </script>
-
-    <script>
-        function editShortDescriptionForm() {
-            var form = document.getElementById("short-description-form");
-            var content = document.getElementById("short-description-content");
-            var formInput = document.getElementById("short-description-form-input");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-            if (formInput.value == 'Make your short description here') {
-                formInput.value = '';
-            };
-        }
-
-        function editShortDescriptionCancel() {
-            var form = document.getElementById("short-description-form");
-            var formInput = document.getElementById("short-description-form-input");
-            var content = document.getElementById("short-description-content");
-            form.classList.remove("d-block");
-
-            //mengembalikan value sebelum disave ketika klik button cancel
-            formInput.value = short_desc_backup;
-
-            content.classList.remove("d-none");
-            if (formInput.value == 'Make your short description here') {
-                formInput.value = '';
-            };
-        }
-    </script>
-
-    <script>
-        function editTimeForm() {
-            var form = $("#time-form");
-            var content = $("#time-content");
-            let id_restaurant = $('#id_restaurant').val();
-
-            $.ajax({
-                type: "GET",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                url: "/restaurant/get/time",
-                data: {
-                    id_restaurant: id_restaurant,
-                },
-                success: function(response) {
-                    console.log(response);
-
-                    $("#open-time-input").val(response.data.open_time);
-                    $("#closed-time-input").val(response.data.closed_time);
-
-                    $(form).show();
-                    $(content).hide();
-                }
-            });
-
-        }
-
-        function editTimeFormMobile() {
-            var form = $("#time-form-mobile");
-            var content = $("#time-content-mobile");
-            $(form).show();
-            $(content).hide();
-        }
-
-        function editTimeFormCancel() {
-            var form = $("#time-form");
-            var content = $("#time-content");
-            // var openTimeInput = $('#open-time-input');
-            // var closeTimeInput = $('#close-time-input');
-            // $(openTimeInput).val('{{ $restaurant->open_time }}');
-            // $(closeTimeInput).val('{{ $restaurant->closed_time }}');
-            $(form).hide();
-            $(content).show();
-        }
-
-        function editTimeFormMobileCancel() {
-            var form = $("#time-form-mobile");
-            var content = $("#time-content-mobile");
-            var openTimeInput = $('#open-time-input');
-            var closeTimeInput = $('#close-time-input');
-            $(openTimeInput).val('{{ $restaurant->open_time }}');
-            $(closeTimeInput).val('{{ $restaurant->closed_time }}');
-            $(form).hide();
-            $(content).show();
-        }
-    </script>
-
-    <script>
-        function editTypeForm() {
-            var form = $("#type-form");
-            var content = $("#type-content");
-            $(form).show();
-            $(content).hide();
-        }
-
-        function editTypeFormCancel() {
-            var form = $("#type-form");
-            var content = $("#type-content");
-            // var restaurantTypeInput = $('#restaurant-type-input');
-            // var restaurantPriceInput = $('#restaurant-price-input');
-            // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
-            // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
-            $(form).hide();
-            $(content).show();
-        }
-    </script>
-
-    <script>
-        function editTypeFormMobile() {
-            var form = $("#type-form-mobile");
-            var content = $("#type-content-mobile");
-            $(form).show();
-            $(content).hide();
-        }
-
-        function editTypeFormMobileCancel() {
-            var form = $("#type-form-mobile");
-            var content = $("#type-content-mobile");
-            // var restaurantTypeInput = $('#restaurant-type-input');
-            // var restaurantPriceInput = $('#restaurant-price-input');
-            // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
-            // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
-            $(form).hide();
-            $(content).show();
-        }
-    </script>
-
-    <script>
-        function editDescriptionForm() {
-            var form = document.getElementById("description-form");
-            var content = document.getElementById("description-content");
-            var btn = document.getElementById("btnShowMoreDescription");
-            form.classList.add("d-block");
-            content.classList.add("d-none");
-            btn.classList.add("d-none");
-        }
-
-        function editDescriptionCancel() {
-            var form = document.getElementById("description-form");
-            var formInput = document.getElementById("description-form-input");
-            var content = document.getElementById("description-content");
-            var btn = document.getElementById("btnShowMoreDescription");
-            form.classList.remove("d-block");
-            content.classList.remove("d-none");
-            btn.classList.remove("d-none");
-            // formInput.value = '{{ $restaurant->description }}';
-        }
-    </script>
-    {{-- END UPDATE FORM --}}
-
-    {{-- DROPZONE JS --}}
-    <script src="{{ asset('assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
-    {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
-
-    <script>
-        var $gallery;
-        var $gallery2;
-        $(document).ready(function() {
-            $gallery = new SimpleLightbox('.gallery a', {});
-            $gallery2 = new SimpleLightbox('.gallery2 a', {});
+        var imageids_arr = [];
+        // get image ids order
+        $('#sortable-photo li').each(function() {
+            var id = $(this).data('id');
+            imageids_arr.push(id);
         });
-    </script>
-
-    <script>
-        // Dropzone.autoDiscover = false;
-        Dropzone.options.frmTarget = {
-            autoProcessQueue: false,
-            thumbnailWidth: 960,
-            url: '/restaurant/photo/store',
-            parallelUploads: 50,
-            init: function() {
-
-                var myDropzone = this;
-
-                // Update selector to match your button
-                $("#button").click(function(e) {
-                    e.preventDefault();
-                    if (!myDropzone.files.length) {
-                        $(".dz-image-add").css("border", "solid #e04f1a 1px");
-                        $('#err-dz').show();
-                    } else {
-                        $(".dz-image-add").css("border", "");
-                        $('#err-dz').hide();
-                        myDropzone.processQueue();
-
-                        $("#button").html('Uploading Gallery...');
-                        $("#button").addClass('disabled');
-                    }
-                });
-
-                this.on('sending', function(file, xhr, formData) {
-                    // Append all form inputs to the formData Dropzone will POST
-                    // var data = $('#frmTarget').serializeArray();
-                    // $.each(data, function(key, el) {
-                    //     formData.append(el.name, el.value);
-                    // });
-                    var value = $('form#formData #id_restaurant').val();
-                    formData.append('id_restaurant', value);
-                });
-
-                this.on('queuecomplete', function(file, response, message) {
-                    $("#button").html('Upload');
-                    $("#button").removeClass('disabled');
-                });
-
-                this.on("complete", function(file, response, message) {
-                    this.removeFile(file);
-                });
-
-                this.on("addedfile", function(file) {
-                    $(".dz-image-add").css("border", "");
-                    $('#err-dz').hide();
-                    // Create the remove button
-                    var removeButton = Dropzone.createElement(
-                        "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
-                    );
-
-
-                    // Capture the Dropzone instance as closure.
-                    var _this = this;
-
-                    // Listen to the click event
-                    removeButton.addEventListener("click", function(e) {
-                        // Make sure the button click doesn't submit the form:
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        // Remove the file preview.
-                        _this.removeFile(file);
-                        // If you want to the delete the file on the server as well,
-                        // you can do the AJAX request here.
-                    });
-
-                    // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
-                });
+        // AJAX request
+        $.ajax({
+            url: '/restaurant/update/photo/position',
+            type: 'post',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                imageids: imageids_arr,
+                id: '{{ $restaurant->id_restaurant }}'
             },
-            error: function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-
-                for (let i = 0; i < message.message.length; i++) {
-                    iziToast.error({
-                        title: "Error",
-                        message: message.message[i],
-                        position: "topRight",
-                    });
-                }
-            },
-            success: function(file, message, response) {
-                console.log(file);
-                // console.log(response);
-                console.log(message);
-
+            success: function(response) {
                 iziToast.success({
                     title: "Success",
-                    message: message.message,
+                    message: response.message,
                     position: "topRight",
                 });
 
                 let path = "/foto/restaurant/";
                 let slash = "/";
-                let uid = message.data.uid.uid;
+                let uid = response.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
-                let content;
-                let contentPositionModal;
-                let contentPositionModalVideo;
-                let contentStory;
+                let content = "";
+                let contentPositionModal = "";
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
-                let modalPhotoLength = $('#sortable-photo').find('li').length;
-                let modalVideoLength = $('#sortable-video').find('li').length;
 
-                if (modalPhotoLength == 0)
-                {
-                    $("#sortable-photo").html("");
-                }
-
-                if (modalVideoLength == 0)
-                {
-                    $('#sortable-video').html("");
-                }
-
-                if (galleryLength == 0)
-                {
+                if (galleryLength == 0) {
                     $('.gallery').html("");
                 }
 
-                if (message.data.photo.length > 0) {
-                    content = '<div class="col-4 grid-photo" id="displayPhoto' +
-                        message.data.photo[0].id_photo +
+                for (let i = 0; i < response.data.photo.length; i++) {
+                    content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                        response.data.photo[i].id_photo +
                         '"> <a href="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        path + lowerCaseUid + slash + response.data.photo[i].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        path + lowerCaseUid + slash + response.data.photo[i].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                        message.data.photo[0].id_photo +
+                        response.data.photo[i].id_photo +
                         '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
-                        message.data.photo[0].id_photo +
+                        response.data.photo[i].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
-                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
-                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                    contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[
+                            i]
+                        .id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
                         '"> <img src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
-                        '" title="' + message.data.photo[0].name + '"> </li>';
-
-                    $('.gallery').append(content);
-                    $('#sortable-photo').append(contentPositionModal);
+                        path + lowerCaseUid + slash + response.data.photo[i].name +
+                        '" title="' + response.data.photo[i].name + '"> </li>';
                 }
-                if (message.data.video.length > 0) {
-                    content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
-                        '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
-                        message.data.video[0].id_video +
-                        ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
-                        '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
-                        message.data.video[0].id_video +
-                        '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
-
-                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
-                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
-                        '"> <video loading="lazy" src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
-                        '#t=1.0"> </li>';
-
-                    contentStory =
-                        '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
-                        message.data.video[0].id_video +
-                        '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video_restaurant(' +
-                        message.data.video[0].id_video +
-                        ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
-                        path +
-                        lowerCaseUid +
-                        slash +
-                        message.data.video[0].name +
-                        '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
-                        id_restaurant +
-                        '" data-video="' +
-                        message.data.video[0].id_video +
-                        '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
-
-                    $('.gallery').append(content);
-                    $('#sortable-video').append(contentPositionModalVideo);
-                    $("#storyContent").append(contentStory);
-                    sliderRestaurant();
+                if (response.data.video.length > 0) {
+                    for (let v = 0; v < response.data.video.length; v++) {
+                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                            .id_video +
+                            '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
+                            response.data.video[v].id_video +
+                            ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                            path + lowerCaseUid + slash + response.data.video[v].name +
+                            '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
+                            response.data.video[v].id_video +
+                            '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                    }
                 }
+
+                btn.textContent = "{{ __('user_page.Save') }}";
+                btn.classList.remove("disabled");
+
+                $('.gallery').html("");
+                $('.gallery').append(content);
+                $('#sortable-photo').html("");
+                $('#sortable-photo').append(contentPositionModal);
+
+                $("#edit_position_photo").modal("hide");
 
                 $gallery.refresh();
+            }
+        });
+    }
 
-                this.removeFile(file);
+    function position_video() {
+        $('#edit_position_video').modal('show');
+    }
+
+    function save_reorder_video() {
+
+        let btn = document.getElementById("saveBtnReorderVideo");
+        btn.textContent = "Saving...";
+        btn.classList.add("disabled");
+
+        var videoids_arr = [];
+        // get video ids order
+        $('#sortable-video li').each(function() {
+            var id = $(this).data('id');
+            videoids_arr.push(id);
+        });
+        // AJAX request
+        $.ajax({
+            url: '/restaurant/update/video/position',
+            type: 'post',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                videoids: videoids_arr,
+                id: '{{ $restaurant->id_restaurant }}'
             },
-        }
-    </script>
-
-    <script>
-        // Dropzone.autoDiscover = false;
-        Dropzone.options.frmMenu = {
-            autoProcessQueue: false,
-            thumbnailWidth: 960,
-            url: '/restaurant/menu/store_multi',
-            parallelUploads: 50,
-            init: function() {
-
-                var myDropzone = this;
-
-                // Update selector to match your button
-                $("#button_menu").click(function(e) {
-                    e.preventDefault();
-                    if (!myDropzone.files.length) {
-                        $(".dz-mn").css("border", "solid #e04f1a 1px");
-                        $('#err-dz-mn').show();
-                    } else {
-                        $(".dz-mn").css("border", "");
-                        $('#err-dz-mn').hide();
-                        myDropzone.processQueue();
-
-                        $("#button_menu").html('Uploading Menu...');
-                        $("#button_menu").addClass('disabled');
-                    }
-                });
-
-                this.on('sending', function(file, xhr, formData) {
-                    // Append all form inputs to the formData Dropzone will POST
-                    // var data = $('#frmTarget').serializeArray();
-                    // $.each(data, function(key, el) {
-                    //     formData.append(el.name, el.value);
-                    // });
-                    var value = $('form#formData #id_restaurant').val();
-                    formData.append('id_restaurant', value);
-                });
-
-                this.on('queuecomplete', function() {});
-
-                this.on("complete", function(file, response, message) {
-                    this.removeFile(file);
-                });
-
-                this.on("addedfile", function(file) {
-                    $(".dz-mn").css("border", "");
-                    $('#err-dz-mn').hide();
-                    // Create the remove button
-                    var removeButton = Dropzone.createElement(
-                        "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
-                    );
-
-
-                    // Capture the Dropzone instance as closure.
-                    var _this = this;
-
-                    // Listen to the click event
-                    removeButton.addEventListener("click", function(e) {
-                        // Make sure the button click doesn't submit the form:
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        // Remove the file preview.
-                        _this.removeFile(file);
-                        // If you want to the delete the file on the server as well,
-                        // you can do the AJAX request here.
-                    });
-
-                    // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
-                });
-            },
-            error: function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-
-                for (let i = 0; i < message.message.length; i++) {
-                    iziToast.error({
-                        title: "Error",
-                        message: message.message[i],
-                        position: "topRight",
-                    });
-                }
-
-                $("#button_menu").html('Upload');
-                $("#button_menu").removeClass('disabled');
-            },
-            success: function(file, message, response) {
-                console.log(file);
-                // console.log(response);
-                console.log(message);
+            success: function(response) {
+                console.log(response);
 
                 iziToast.success({
                     title: "Success",
-                    message: message.message,
+                    message: response.message,
                     position: "topRight",
                 });
 
                 let path = "/foto/restaurant/";
                 let slash = "/";
-                let menuPath = "menu";
-                let uid = message.data.uid.uid;
-                var lowerCaseUid = uid.toLowerCase();
+                let uid = response.data.uid.uid;
+                let lowerCaseUid = uid.toLowerCase();
                 let content = "";
+                let contentPositionModal = "";
 
-                let menuDiv = $('.gallery2');
-                let menuLength = menuDiv.find('a').length;
-
-                if (menuLength == 0)
-                {
-                    $('.gallery2').html("");
-                    // $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
-                }
-
-                for (let i = 0; i < message.data.menu.length; i++) {
-                    content += '<div class="col-4 grid-photo" id="displayMenu' +
-                        message.data.menu[i].id_menu +
-                        '"> <a class="itemsMenu" href="' +
-                        path +
-                        lowerCaseUid +
-                        slash +
-                        menuPath +
-                        slash +
-                        message.data.menu[i].foto +
+                for (let i = 0; i < response.data.photo.length; i++) {
+                    content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                        response.data.photo[i].id_photo +
+                        '"> <a href="' +
+                        path + lowerCaseUid + slash + response.data.photo[i].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                        path +
-                        lowerCaseUid +
-                        slash +
-                        menuPath +
-                        slash +
-                        message.data.menu[i].foto +
+                        path + lowerCaseUid + slash + response.data.photo[i].name +
                         '" title="' +
-                        message.data.menu[i].name +
-                        '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
-                        message.data.menu[i].id_menu +
-                        '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+                        response.data.photo[i].caption +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                        response.data.photo[i].id_photo +
+                        '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                        response.data.photo[i].id_photo +
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                }
+                if (response.data.video.length > 0) {
+                    for (let v = 0; v < response.data.video.length; v++) {
+                        content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                            .id_video +
+                            '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
+                            response.data.video[v].id_video +
+                            ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                            path + lowerCaseUid + slash + response.data.video[v].name +
+                            '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
+                            response.data.video[v].id_video +
+                            '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data
+                            .video[v]
+                            .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
+                            '"> <video loading="lazy" src="' +
+                            path + lowerCaseUid + slash + response.data.video[v].name +
+                            '#t=1.0"> </li>';
+                    }
                 }
 
-                $(".gallery2").append(content);
+                btn.textContent = "{{ __('user_page.Save') }}";
+                btn.classList.remove("disabled");
 
-                $gallery2.refresh();
+                $('.gallery').html("");
+                $('.gallery').append(content);
+                $('#sortable-video').html("");
+                $('#sortable-video').append(contentPositionModal);
 
-                this.removeFile(file);
+                $("#edit_position_video").modal("hide");
 
-                $("#button_menu").html('Upload');
-                $("#button_menu").removeClass('disabled');
-            },
-        }
-    </script>
-
-    {{-- END DROPZONE JS --}}
-    <script>
-        $(document).ready(function() {
-            var $window = $(window);
-            var $sidebar = $("#sidebar_fix");
-            // var $amenitiesTop = $("#amenities").offset().top;
-            // var $sidebarHeight = $sidebar.height();
-            var $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;
-
-            // console.log($amenitiesOffsetTop);
-            $window.on("resize", function() {
-                // $amenitiesTop = $("#amenities").offset().top;
-                // $sidebarHeight = $sidebar.height();
-                $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;
-            });
-
-            $window.scroll(function() {
-                // $amenitiesTop = $("#amenities").offset().top + 110;
-                // $sidebarHeight = $sidebar.height();
-                $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($('#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css("top"))) - 60;
-                if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {
-                    $sidebar.addClass("fixed");
-                    $sidebar.css({
-                        "top": "0",
-                    });
-                } else {
-                    console.log($result);
-                    $sidebar.css({
-                        "top": $result,
-                        "position": "absolute"
-                    });
-                    $sidebar.removeClass("fixed");
-                }
-            });
+                $gallery.refresh();
+            }
         });
-    </script>
+    }
+</script>
+{{-- END EDIT POSITION PHOTO & VIDEO --}}
 
-    <script>
-        function add_tag() {
-            $('#modal-add_tag').modal('show');
-        }
-    </script>
+{{-- Guest Count --}}
+<script>
+    $('#adult2').on('change', function() {
+        var total_adult2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
+        $('#total_guest2').val(total_adult2);
+        $('#adult4').val($('#adult2').val());
+        $('#child4').val($('#child2').val());
+        $('#total_guest4').val($('#total_guest2').val());
+    });
 
-    <script>
-        // Show Hide Reserve Button
+    $('#child2').on('change', function() {
+        var total_child2 = parseInt($('#adult2').val()) + parseInt($('#child2').val());
+        $('#total_guest2').val(total_child2);
+        $('#adult4').val($('#adult2').val());
+        $('#child4').val($('#child2').val());
+        $('#total_guest4').val($('#total_guest2').val());
+    });
+</script>
 
-        $(window).on('scroll', function() {
-            if ($(window).scrollTop() >= $(
-                    '.rsv-block').offset().top + $('.rsv-block').outerHeight() - window.innerHeight) {
+<script>
+    $('#adult4').on('change', function() {
+        var total_adult4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
+        $('#total_guest4').val(total_adult4);
+        $('#adult2').val($('#adult4').val());
+        $('#child2').val($('#child4').val());
+        $('#total_guest2').val($('#total_guest4').val());
+    });
 
-                document.getElementById("rsv-block-btn").style.display = "block";
-                document.getElementById("navbarright").classList.remove("active");
+    $('#child4').on('change', function() {
+        var total_child4 = parseInt($('#adult4').val()) + parseInt($('#child4').val());
+        $('#total_guest4').val(total_child4);
+        $('#adult2').val($('#adult4').val());
+        $('#child2').val($('#child4').val());
+        $('#total_guest2').val($('#total_guest4').val());
+    });
+</script>
+
+<script>
+    $('#check_in').flatpickr({
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        mode: "range",
+        showMonths: 2,
+        onChange: function(selectedDates, dateStr, instance) {
+            var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+            var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+            var sum_night = (end - start) / 1000 / 60 / 60 / 24;
+            var min_stay = $('#min_stay').val();
+            var total = $('#price').val() * sum_night;
+            // console.log(sum_night);
+            if (sum_night < min_stay) {
+                alert("minimum stay is " + min_stay + " days");
             } else {
-                document.getElementById("rsv-block-btn").style.display = "none";
-            };
+                $('#sum_night').val(sum_night);
+                $("#total").text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+                $("#total_all").text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+            }
+            $('#check_in').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+            $('#check_out').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+            $('#check_in3').val($('#check_in').val());
+            $('#check_out3').val($('#check_out').val());
+            $('#sum_night3').val($('#sum_night').val());
+            $('#total3').text(total.toString().replace(
+                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                "."));
+            $('#total_all3').text(total.toString().replace(
+                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                "."));
+        }
+    });
+</script>
+
+<script>
+    $('#check_in2').flatpickr({
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        mode: "range",
+        showMonths: 2,
+        onChange: function(selectedDates, dateStr, instance) {
+            $('#check_out2').flatpickr({
+                enableTime: false,
+                dateFormat: "Y-m-d",
+                minDate: new Date(dateStr).fp_incr(1),
+                onChange: function(selectedDates, dateStr, instance) {
+                    var start = new Date($('#check_in2').val());
+                    var end = new Date($('#check_out2').val());
+                    var min_stay = $('#min_stay').val();
+                    var minimum = new Date($('#check_in2').val()).fp_incr(min_stay);
+                    if (sum_night < min_stay) {
+                        alert("minimum stay is " + min_stay + " days");
+                    }
+                }
+            });
+
+            $('#check_in2').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+            $('#check_out2').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+        }
+    });
+</script>
+
+<script>
+    $('#check_in3').flatpickr({
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        mode: "range",
+        showMonths: 2,
+        onChange: function(selectedDates, dateStr, instance) {
+            var start = new Date(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+            var end = new Date(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+            var sum_night = (end - start) / 1000 / 60 / 60 / 24;
+            var min_stay = $('#min_stay').val();
+            var total = $('#price').val() * sum_night;
+            // console.log(sum_night);
+            if (sum_night < min_stay) {
+                alert("minimum stay is " + min_stay + " days");
+            } else {
+                $('#sum_night3').val(sum_night);
+                $("#total3").text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+                $("#total_all3").text(total.toString().replace(
+                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    "."));
+            }
+            $('#check_in3').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+            $('#check_out3').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+            $('#check_in').val($('#check_in3').val());
+            $('#check_out').val($('#check_out3').val());
+            $('#sum_night').val($('#sum_night3').val());
+            $('#total').text(total.toString().replace(
+                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                "."));
+            $('#total_all').text(total.toString().replace(
+                /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                "."));
+        }
+    });
+</script>
+
+<script>
+    $("#searchbox").click(function() {
+        $("#search_bar").toggleClass("active");
+    });
+</script>
+
+{{-- IMAGE UPLOAD --}}
+<script>
+    $(".image-box").click(function(event) {
+        var previewImg = $(this).children("img");
+
+        $(this)
+            .siblings()
+            .children("input")
+            .trigger("click");
+
+        $(this)
+            .siblings()
+            .children("input")
+            .change(function() {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var urll = e.target.result;
+                    $(previewImg).attr("src", urll);
+                    previewImg.parent().css("background", "transparent");
+                    previewImg.show();
+                    previewImg.siblings("p").hide();
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+    });
+</script>
+{{-- END IMAGE UPLOAD --}}
+
+{{-- UPDATE FORM --}}
+<script>
+    function editNameForm() {
+        var form = document.getElementById("name-form");
+        var content = document.getElementById("name-content");
+        var formInput = document.getElementById("name-form-input");
+        form.classList.add("d-block");
+        content.classList.add("d-none");
+
+        if (formInput.value == 'Food Name Here') {
+            formInput.value = '';
+        }
+    }
+
+    function editNameCancel() {
+        var form = document.getElementById("name-form");
+        var formInput = document.getElementById("name-form-input");
+        var content = document.getElementById("name-content");
+        form.classList.remove("d-block");
+        content.classList.remove("d-none");
+
+        //mengembalikan value sebelum disave ketika klik button cancel
+        formInput.value = name_resto_backup;
+
+        if (formInput.value == 'Food Name Here') {
+            formInput.value = '';
+        }
+    }
+</script>
+
+<script>
+    function editShortDescriptionForm() {
+        var form = document.getElementById("short-description-form");
+        var content = document.getElementById("short-description-content");
+        var formInput = document.getElementById("short-description-form-input");
+        form.classList.add("d-block");
+        content.classList.add("d-none");
+        if (formInput.value == 'Make your short description here') {
+            formInput.value = '';
+        };
+    }
+
+    function editShortDescriptionCancel() {
+        var form = document.getElementById("short-description-form");
+        var formInput = document.getElementById("short-description-form-input");
+        var content = document.getElementById("short-description-content");
+        form.classList.remove("d-block");
+
+        //mengembalikan value sebelum disave ketika klik button cancel
+        formInput.value = short_desc_backup;
+
+        content.classList.remove("d-none");
+        if (formInput.value == 'Make your short description here') {
+            formInput.value = '';
+        };
+    }
+</script>
+
+<script>
+    function editTimeForm() {
+        var form = $("#time-form");
+        var content = $("#time-content");
+        let id_restaurant = $('#id_restaurant').val();
+
+        $.ajax({
+            type: "GET",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/restaurant/get/time",
+            data: {
+                id_restaurant: id_restaurant,
+            },
+            success: function(response) {
+                console.log(response);
+
+                $("#open-time-input").val(response.data.open_time);
+                $("#closed-time-input").val(response.data.closed_time);
+
+                $(form).show();
+                $(content).hide();
+            }
         });
-    </script>
 
-    <script>
-        // Collapsable
+    }
 
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+    function editTimeFormMobile() {
+        var form = $("#time-form-mobile");
+        var content = $("#time-content-mobile");
+        $(form).show();
+        $(content).hide();
+    }
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        }
-    </script>
+    function editTimeFormCancel() {
+        var form = $("#time-form");
+        var content = $("#time-content");
+        // var openTimeInput = $('#open-time-input');
+        // var closeTimeInput = $('#close-time-input');
+        // $(openTimeInput).val('{{ $restaurant->open_time }}');
+        // $(closeTimeInput).val('{{ $restaurant->closed_time }}');
+        $(form).hide();
+        $(content).show();
+    }
 
-    <script>
-        function adult_increment() {
-            document.getElementById('adult2').stepUp();
-            document.getElementById('total_guest2').stepUp();
-            document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
-            document.getElementById('adult4').value = document.getElementById('adult2').value;
-        }
+    function editTimeFormMobileCancel() {
+        var form = $("#time-form-mobile");
+        var content = $("#time-content-mobile");
+        var openTimeInput = $('#open-time-input');
+        var closeTimeInput = $('#close-time-input');
+        $(openTimeInput).val('{{ $restaurant->open_time }}');
+        $(closeTimeInput).val('{{ $restaurant->closed_time }}');
+        $(form).hide();
+        $(content).show();
+    }
+</script>
 
-        function adult_decrement() {
-            document.getElementById('adult2').stepDown();
-            document.getElementById('total_guest2').stepDown();
-            document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
-            document.getElementById('adult4').value = document.getElementById('adult2').value;
-        }
+<script>
+    function editTypeForm() {
+        var form = $("#type-form");
+        var content = $("#type-content");
+        $(form).show();
+        $(content).hide();
+    }
 
-        function child_increment() {
-            document.getElementById('child2').stepUp();
-            document.getElementById('total_guest2').stepUp();
-            document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
-            document.getElementById('child4').value = document.getElementById('child2').value;
-        }
+    function editTypeFormCancel() {
+        var form = $("#type-form");
+        var content = $("#type-content");
+        // var restaurantTypeInput = $('#restaurant-type-input');
+        // var restaurantPriceInput = $('#restaurant-price-input');
+        // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
+        // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
+        $(form).hide();
+        $(content).show();
+    }
+</script>
 
-        function child_decrement() {
-            document.getElementById('child2').stepDown();
-            document.getElementById('total_guest2').stepDown();
-            document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
-            document.getElementById('child4').value = document.getElementById('child2').value;
-        }
+<script>
+    function editTypeFormMobile() {
+        var form = $("#type-form-mobile");
+        var content = $("#type-content-mobile");
+        $(form).show();
+        $(content).hide();
+    }
 
-        function infant_increment() {
-            document.getElementById('infant2').stepUp();
-            document.getElementById('infant4').value = document.getElementById('infant2').value;
-        }
+    function editTypeFormMobileCancel() {
+        var form = $("#type-form-mobile");
+        var content = $("#type-content-mobile");
+        // var restaurantTypeInput = $('#restaurant-type-input');
+        // var restaurantPriceInput = $('#restaurant-price-input');
+        // $(restaurantTypeInput).val('{{ $restaurant->open_time }}');
+        // $(restaurantPriceInput).val('{{ $restaurant->closed_time }}');
+        $(form).hide();
+        $(content).show();
+    }
+</script>
 
-        function infant_decrement() {
-            document.getElementById('infant2').stepDown();
-            document.getElementById('infant4').value = document.getElementById('infant2').value;
-        }
+<script>
+    function editDescriptionForm() {
+        var form = document.getElementById("description-form");
+        var content = document.getElementById("description-content");
+        var btn = document.getElementById("btnShowMoreDescription");
+        form.classList.add("d-block");
+        content.classList.add("d-none");
+        btn.classList.add("d-none");
+    }
 
-        function pet_increment() {
-            document.getElementById('pet2').stepUp();
-            document.getElementById('pet4').value = document.getElementById('pet2').value;
-        }
+    function editDescriptionCancel() {
+        var form = document.getElementById("description-form");
+        var formInput = document.getElementById("description-form-input");
+        var content = document.getElementById("description-content");
+        var btn = document.getElementById("btnShowMoreDescription");
+        form.classList.remove("d-block");
+        content.classList.remove("d-none");
+        btn.classList.remove("d-none");
+        // formInput.value = '{{ $restaurant->description }}';
+    }
+</script>
+{{-- END UPDATE FORM --}}
 
-        function pet_decrement() {
-            document.getElementById('pet2').stepDown();
-            document.getElementById('pet4').value = document.getElementById('pet2').value;
-        }
-    </script>
+{{-- DROPZONE JS --}}
+<script src="{{ asset('assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
+{{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
 
-    {{-- Sweetalert Function Delete Profile Image --}}
-    <script>
-        function delete_profile_image(ids) {
-            var ids = ids;
-            Swal.fire({
-                title: `{{ __('user_page.Are you sure?') }}`,
-                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-                cancelButtonText: `{{ __('user_page.Cancel') }}`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/${ids.id}/delete/image`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            showingLoading();
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
-                        'error')
-                }
-            });
-        };
-    </script>
+<script>
+    var $gallery;
+    var $gallery2;
+    $(document).ready(function() {
+        $gallery = new SimpleLightbox('.gallery a', {});
+        $gallery2 = new SimpleLightbox('.gallery2 a', {});
+    });
+</script>
 
-    {{-- Sweetalert Function Delete Story --}}
-    <script>
-        function delete_story(e) {
-            var id = e.getAttribute("data-restaurant");
-            var story = e.getAttribute("data-story");
+<script>
+    // Dropzone.autoDiscover = false;
+    Dropzone.options.frmTarget = {
+        autoProcessQueue: false,
+        thumbnailWidth: 960,
+        url: '/restaurant/photo/store',
+        parallelUploads: 50,
+        init: function() {
 
-            Swal.fire({
-                title: `{{ __('user_page.Are you sure?') }}`,
-                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-                cancelButtonText: `{{ __('user_page.Cancel') }}`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/${id}/delete/story/${story}`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
+            var myDropzone = this;
 
-                            //remove element story
-                            $('#story' + story).remove();
-
-                            //update slider ketika story dihapus
-                            sliderRestaurant();
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
-                }
-            });
-        };
-    </script>
-
-    {{-- Sweetalert Function Delete Photo --}}
-    <script>
-        function delete_photo_photo(ids) {
-            let id = ids.getAttribute("data-id");
-            let photo = ids.getAttribute("data-photo");
-
-            Swal.fire({
-                title: `{{ __('user_page.Are you sure?') }}`,
-                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-                cancelButtonText: `{{ __('user_page.Cancel') }}`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let displayBlack = document.getElementById('untukDelete');
-                    displayBlack.style.display = "block";
-
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/${id}/delete/photo/photo/${photo}`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            $(`#displayPhoto${photo}`).remove();
-                            $("#positionPhotoGallery"+photo).remove();
-
-                            let galleryDiv = $('.gallery');
-                            let galleryLength = galleryDiv.find('a').length;
-
-                            if (galleryLength == 0)
-                            {
-                                $('.gallery').html("");
-                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
-                            }
-
-                            $gallery.refresh();
-                            displayBlack.style.display = "none";
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
-                        'error')
-                }
-            });
-        };
-    </script>
-
-    {{-- Sweetalert Function Delete Photo --}}
-    <script>
-        function delete_photo_video(ids) {
-            let id = ids.getAttribute("data-id");
-            let video = ids.getAttribute("data-video");
-
-            Swal.fire({
-                title: `{{ __('user_page.Are you sure?') }}`,
-                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-                cancelButtonText: `{{ __('user_page.Cancel') }}`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/${id}/delete/photo/video/${video}`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            // showingLoading();
-                            $('#displayVideo' + video).remove();
-                            $("#positionVideoGallery"+video).remove();
-                            $("#displayStoryVideo"+video).remove();
-                            sliderRestaurant();
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
-                }
-            });
-        };
-    </script>
-
-    {{-- Sweetalert Function Delete Photo --}}
-    <script>
-        function delete_menu(ids) {
-            let id = ids.getAttribute("data-id");
-            let menu = ids.getAttribute("data-menu");
-
-            Swal.fire({
-                title: `{{ __('user_page.Are you sure?') }}`,
-                text: 'You will not be able to recover this content!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
-                cancelButtonText: `{{ __('user_page.Cancel') }}`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/${id}/delete/menu/${menu}`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayMenu" + menu).remove();
-                            let menuDiv = $('.gallery2');
-                            let menuLength = menuDiv.find('a').length;
-
-                            if (menuLength == 0)
-                            {
-                                $('.gallery2').html("");
-                                $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
-                            }
-                            $gallery2.refresh();
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
-                }
-            });
-        };
-    </script>
-
-    {{-- Sweetalert Function Request Video to Owner --}}
-    <script>
-        function requestVideo(ids) {
-            var ids = ids;
-            Swal.fire({
-                title: `{{ __('user_page.Do you want request a video to the Owner?') }}`,
-                text: `{{ __('user_page.Requesting a video!') }}`,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#ff7400',
-                cancelButtonColor: '#000',
-                cancelButtonText: `{{ __('user_page.Cancel') }}`,
-                confirmButtonText: 'Yes, Request it'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: `/restaurant/request/video/${ids.id}/${ids.name}`,
-                        statusCode: {
-                            500: () => {
-                                Swal.fire('Failed', data.message, 'error');
-                            }
-                        },
-                        success: async function(data) {
-                            // console.log(data.message);
-                            await Swal.fire('Success', data.message, 'success');
-                            showingLoading();
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`,
-                        `{{ __('user_page.Canceled Request Video') }}`, 'error')
-                }
-            });
-        };
-    </script>
-
-    {{-- Highlight sticky --}}
-    <script>
-        jQuery(document).ready(function($) {
-            $(window).on('scroll', function() {
-                if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
-                        '#menu').offset().top - 60) {
-                    $('#gallery-sticky').addClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                } else if ($(window).scrollTop() >= $('#menu').offset().top - 60 && $(window).scrollTop() <=
-                    $('#description').offset().top - 60) {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').addClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
-                    .scrollTop() <= $('#amenities').offset().top - 60) {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').addClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
-                    .scrollTop() <= $('#location-map').offset().top - 60) {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').addClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                } else if ($(window).scrollTop() >= $('#location-map').offset().top - 60 && $(window)
-                    .scrollTop() <= $('#review').offset().top - 60) {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').addClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
-                    .scrollTop() <= $('#endSticky').offset().top - 60) {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').addClass('active-sticky');
-                } else {
-                    $('#gallery-sticky').removeClass('active-sticky');
-                    $('#menu-sticky').removeClass('active-sticky');
-                    $('#about-sticky').removeClass('active-sticky');
-                    $('#amenities-sticky').removeClass('active-sticky');
-                    $('#location-sticky').removeClass('active-sticky');
-                    $('#review-sticky').removeClass('active-sticky');
-                    //or use $('.menu').removeClass('addclass');
-                }
-            });
-        });
-    </script>
-
-    {{-- PREVENT TEXTAREA TYPE ENTER --}}
-    <script>
-        $("textarea").keydown(function(e) {
-            // Enter was pressed without shift key
-            if (e.keyCode == 13 && !e.shiftKey) {
-                // prevent default behavior
+            // Update selector to match your button
+            $("#button").click(function(e) {
                 e.preventDefault();
+                if (!myDropzone.files.length) {
+                    $(".dz-image-add").css("border", "solid #e04f1a 1px");
+                    $('#err-dz').show();
+                } else {
+                    $(".dz-image-add").css("border", "");
+                    $('#err-dz').hide();
+                    myDropzone.processQueue();
+
+                    $("#button").html('Uploading Gallery...');
+                    $("#button").addClass('disabled');
+                }
+            });
+
+            this.on('sending', function(file, xhr, formData) {
+                // Append all form inputs to the formData Dropzone will POST
+                // var data = $('#frmTarget').serializeArray();
+                // $.each(data, function(key, el) {
+                //     formData.append(el.name, el.value);
+                // });
+                var value = $('form#formData #id_restaurant').val();
+                formData.append('id_restaurant', value);
+            });
+
+            this.on('queuecomplete', function(file, response, message) {
+                $("#button").html('Upload');
+                $("#button").removeClass('disabled');
+            });
+
+            this.on("complete", function(file, response, message) {
+                this.removeFile(file);
+            });
+
+            this.on("addedfile", function(file) {
+                $(".dz-image-add").css("border", "");
+                $('#err-dz').hide();
+                // Create the remove button
+                var removeButton = Dropzone.createElement(
+                    "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
+                );
+
+
+                // Capture the Dropzone instance as closure.
+                var _this = this;
+
+                // Listen to the click event
+                removeButton.addEventListener("click", function(e) {
+                    // Make sure the button click doesn't submit the form:
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Remove the file preview.
+                    _this.removeFile(file);
+                    // If you want to the delete the file on the server as well,
+                    // you can do the AJAX request here.
+                });
+
+                // Add the button to the file preview element.
+                file.previewElement.appendChild(removeButton);
+            });
+        },
+        error: function(file, message, xhr) {
+            this.removeFile(file); // perhaps not remove on xhr errors
+
+            for (let i = 0; i < message.message.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: message.message[i],
+                    position: "topRight",
+                });
+            }
+        },
+        success: function(file, message, response) {
+            console.log(file);
+            // console.log(response);
+            console.log(message);
+
+            iziToast.success({
+                title: "Success",
+                message: message.message,
+                position: "topRight",
+            });
+
+            let path = "/foto/restaurant/";
+            let slash = "/";
+            let uid = message.data.uid.uid;
+            let lowerCaseUid = uid.toLowerCase();
+            let content;
+            let contentPositionModal;
+            let contentPositionModalVideo;
+            let contentStory;
+
+            let galleryDiv = $('.gallery');
+            let galleryLength = galleryDiv.find('a').length;
+            let modalPhotoLength = $('#sortable-photo').find('li').length;
+            let modalVideoLength = $('#sortable-video').find('li').length;
+
+            if (modalPhotoLength == 0) {
+                $("#sortable-photo").html("");
+            }
+
+            if (modalVideoLength == 0) {
+                $('#sortable-video').html("");
+            }
+
+            if (galleryLength == 0) {
+                $('.gallery').html("");
+            }
+
+            if (message.data.photo.length > 0) {
+                content = '<div class="col-4 grid-photo" id="displayPhoto' +
+                    message.data.photo[0].id_photo +
+                    '"> <a href="' +
+                    path + lowerCaseUid + slash + message.data.photo[0].name +
+                    '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                    path + lowerCaseUid + slash + message.data.photo[0].name +
+                    '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Photo Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                    message.data.photo[0].id_photo +
+                    '" onclick="add_photo_tag(this)"><i class="fa fa-pencil"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-photo="' +
+                    message.data.photo[0].id_photo +
+                    '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                    .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                    '"> <img src="' +
+                    path + lowerCaseUid + slash + message.data.photo[0].name +
+                    '" title="' + message.data.photo[0].name + '"> </li>';
+
+                $('.gallery').append(content);
+                $('#sortable-photo').append(contentPositionModal);
+            }
+            if (message.data.video.length > 0) {
+                content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
+                    '"> <a class="pointer-normal" onclick="view_video_restaurant(' +
+                    message.data.video[0].id_video +
+                    ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                    path + lowerCaseUid + slash + message.data.video[0].name +
+                    '#t=1.0"></video> <span class="video-grid-button"><i class="fa fa-play"></i></span> </a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-video="' +
+                    message.data.video[0].id_video +
+                    '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
+                    .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
+                    '"> <video loading="lazy" src="' +
+                    path + lowerCaseUid + slash + message.data.video[0].name +
+                    '#t=1.0"> </li>';
+
+                contentStory =
+                    '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                    message.data.video[0].id_video +
+                    '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video_restaurant(' +
+                    message.data.video[0].id_video +
+                    ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    message.data.video[0].name +
+                    '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                    id_restaurant +
+                    '" data-video="' +
+                    message.data.video[0].id_video +
+                    '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+
+                $('.gallery').append(content);
+                $('#sortable-video').append(contentPositionModalVideo);
+                $("#storyContent").append(contentStory);
+                sliderRestaurant();
+            }
+
+            $gallery.refresh();
+
+            this.removeFile(file);
+        },
+    }
+</script>
+
+<script>
+    // Dropzone.autoDiscover = false;
+    Dropzone.options.frmMenu = {
+        autoProcessQueue: false,
+        thumbnailWidth: 960,
+        url: '/restaurant/menu/store_multi',
+        parallelUploads: 50,
+        init: function() {
+
+            var myDropzone = this;
+
+            // Update selector to match your button
+            $("#button_menu").click(function(e) {
+                e.preventDefault();
+                if (!myDropzone.files.length) {
+                    $(".dz-mn").css("border", "solid #e04f1a 1px");
+                    $('#err-dz-mn').show();
+                } else {
+                    $(".dz-mn").css("border", "");
+                    $('#err-dz-mn').hide();
+                    myDropzone.processQueue();
+
+                    $("#button_menu").html('Uploading Menu...');
+                    $("#button_menu").addClass('disabled');
+                }
+            });
+
+            this.on('sending', function(file, xhr, formData) {
+                // Append all form inputs to the formData Dropzone will POST
+                // var data = $('#frmTarget').serializeArray();
+                // $.each(data, function(key, el) {
+                //     formData.append(el.name, el.value);
+                // });
+                var value = $('form#formData #id_restaurant').val();
+                formData.append('id_restaurant', value);
+            });
+
+            this.on('queuecomplete', function() {});
+
+            this.on("complete", function(file, response, message) {
+                this.removeFile(file);
+            });
+
+            this.on("addedfile", function(file) {
+                $(".dz-mn").css("border", "");
+                $('#err-dz-mn').hide();
+                // Create the remove button
+                var removeButton = Dropzone.createElement(
+                    "<center><button class='btn btn-outline-light btn-del'>{{ __('user_page.Remove') }}</button></center>"
+                );
+
+
+                // Capture the Dropzone instance as closure.
+                var _this = this;
+
+                // Listen to the click event
+                removeButton.addEventListener("click", function(e) {
+                    // Make sure the button click doesn't submit the form:
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Remove the file preview.
+                    _this.removeFile(file);
+                    // If you want to the delete the file on the server as well,
+                    // you can do the AJAX request here.
+                });
+
+                // Add the button to the file preview element.
+                file.previewElement.appendChild(removeButton);
+            });
+        },
+        error: function(file, message, xhr) {
+            this.removeFile(file); // perhaps not remove on xhr errors
+
+            for (let i = 0; i < message.message.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: message.message[i],
+                    position: "topRight",
+                });
+            }
+
+            $("#button_menu").html('Upload');
+            $("#button_menu").removeClass('disabled');
+        },
+        success: function(file, message, response) {
+            console.log(file);
+            // console.log(response);
+            console.log(message);
+
+            iziToast.success({
+                title: "Success",
+                message: message.message,
+                position: "topRight",
+            });
+
+            let path = "/foto/restaurant/";
+            let slash = "/";
+            let menuPath = "menu";
+            let uid = message.data.uid.uid;
+            var lowerCaseUid = uid.toLowerCase();
+            let content = "";
+
+            let menuDiv = $('.gallery2');
+            let menuLength = menuDiv.find('a').length;
+
+            if (menuLength == 0) {
+                $('.gallery2').html("");
+                // $('.gallery2').html('<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>');
+            }
+
+            for (let i = 0; i < message.data.menu.length; i++) {
+                content += '<div class="col-4 grid-photo" id="displayMenu' +
+                    message.data.menu[i].id_menu +
+                    '"> <a class="itemsMenu" href="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    menuPath +
+                    slash +
+                    message.data.menu[i].foto +
+                    '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    menuPath +
+                    slash +
+                    message.data.menu[i].foto +
+                    '" title="' +
+                    message.data.menu[i].name +
+                    '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                    message.data.menu[i].id_menu +
+                    '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
+            }
+
+            $(".gallery2").append(content);
+
+            $gallery2.refresh();
+
+            this.removeFile(file);
+
+            $("#button_menu").html('Upload');
+            $("#button_menu").removeClass('disabled');
+        },
+    }
+</script>
+
+{{-- END DROPZONE JS --}}
+<script>
+    $(document).ready(function() {
+        var $window = $(window);
+        var $sidebar = $("#sidebar_fix");
+        // var $amenitiesTop = $("#amenities").offset().top;
+        // var $sidebarHeight = $sidebar.height();
+        var $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+            '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
+            "top"))) - 60;
+
+        // console.log($amenitiesOffsetTop);
+        $window.on("resize", function() {
+            // $amenitiesTop = $("#amenities").offset().top;
+            // $sidebarHeight = $sidebar.height();
+            $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                '#sidebar_fix .reserve-block').height() + parseInt($(
+                '#sidebar_fix .reserve-block').css("top"))) - 60;
+        });
+
+        $window.scroll(function() {
+            // $amenitiesTop = $("#amenities").offset().top + 110;
+            // $sidebarHeight = $sidebar.height();
+            $result = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
+                '#sidebar_fix .reserve-block').height() + parseInt($(
+                '#sidebar_fix .reserve-block').css("top"))) - 60;
+            if ($window.scrollTop() >= 0 && $window.scrollTop() < $result) {
+                $sidebar.addClass("fixed");
+                $sidebar.css({
+                    "top": "0",
+                });
+            } else {
+                console.log($result);
+                $sidebar.css({
+                    "top": $result,
+                    "position": "absolute"
+                });
+                $sidebar.removeClass("fixed");
             }
         });
-    </script>
+    });
+</script>
 
+<script>
+    function add_tag() {
+        $('#modal-add_tag').modal('show');
+    }
+</script>
 
-    {{-- modal laguage and currency --}}
-    @include('user.modal.filter.filter_language')
-    {{-- modal laguage and currency --}}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script>
-        function language() {
-            $('#LegalModal').modal('show');
-            $('#trigger-tab-language').addClass('active');
-            $('#content-tab-language').addClass('active');
-            $('#trigger-tab-currency').removeClass('active');
-            $('#content-tab-currency').removeClass('active');
-        }
-        function currency() {
-            $('#LegalModal').modal('show');
-            $('#trigger-tab-language').removeClass('active');
-            $('#content-tab-language').removeClass('active');
-            $('#trigger-tab-currency').addClass('active');
-            $('#content-tab-currency').addClass('active');
-        }
-    </script>
+<script>
+    // Show Hide Reserve Button
 
-    <script>
-        // Slick Slier Carousel
-        $(document).ready(function() {
-            $(".SlickCarousel1").slick({
-                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
-                autoplay: false,
-                autoplaySpeed: 5000, //  Slide Delay
-                speed: 800, // Transition Speed
-                slidesToShow: 5, // Number Of Carousel
-                slidesToScroll: 1, // Slide To Move
-                pauseOnHover: false,
-                appendArrows: $(".Container1 .Head .Arrows1"), // Class For Arrows Buttons
-                prevArrow: '<span class="Slick-Prev"></span>',
-                nextArrow: '<span class="Slick-Next"></span>',
-                easing: "linear",
-                responsive: [{
-                        breakpoint: 801,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 641,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 481,
-                        settings: {
-                            slidesToShow: 1,
-                        }
-                    },
-                ],
-            })
-            $(".SlickCarousel1 .ProductBlock .Content").slick({
-                rtl: false,
-                autoplay: false,
-                autoplaySpeed: 5000,
-                speed: 800,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                pauseOnHover: false,
-                easing: "linear",
-                arrows: true
-            })
-            $(".SlickCarousel1 .ProductBlock .Content").on("mousedown mouseup", function() {
-                var firstItemIndex = $(".SlickCarousel1 .slick-current").first().attr("data-slick-index");
-                $(".SlickCarousel1").slick("slickGoTo", firstItemIndex);
-            })
-            $(".SlickCarousel1 .ProductBlock .Content .slick-prev").css("display", "none");
-            $(".SlickCarousel1 .ProductBlock .Content .slick-next").css("display", "none");
-            $('.SlickCarousel1 .ProductBlock .Content').mouseenter(function(e) {
-                $(this).children('.slick-prev').css('display', 'block');
-                $(this).children('.slick-next').css('display', 'block');
-            })
-            $('.SlickCarousel1 .ProductBlock .Content').mouseleave(function(e) {
-                $(this).children('.slick-prev').css('display', 'none');
-                $(this).children('.slick-next').css('display', 'none');
-            })
-        })
-    </script>
+    $(window).on('scroll', function() {
+        if ($(window).scrollTop() >= $(
+                '.rsv-block').offset().top + $('.rsv-block').outerHeight() - window.innerHeight) {
 
-    <script>
-        // Slick Slier Carousel
-        $(document).ready(function() {
-            $(".SlickCarousel2").slick({
-                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
-                autoplay: false,
-                autoplaySpeed: 5000, //  Slide Delay
-                speed: 800, // Transition Speed
-                slidesToShow: 5, // Number Of Carousel
-                slidesToScroll: 1, // Slide To Move
-                pauseOnHover: false,
-                appendArrows: $(".Container2 .Head .Arrows2"), // Class For Arrows Buttons
-                prevArrow: '<span class="Slick-Prev"></span>',
-                nextArrow: '<span class="Slick-Next"></span>',
-                easing: "linear",
-                responsive: [{
-                        breakpoint: 801,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 641,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 481,
-                        settings: {
-                            slidesToShow: 1,
-                        }
-                    },
-                ],
-            })
-            $(".SlickCarousel2 .ProductBlock .Content").slick({
-                rtl: false,
-                autoplay: false,
-                autoplaySpeed: 5000,
-                speed: 800,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                pauseOnHover: false,
-                easing: "linear",
-                arrows: true
-            })
-            $(".SlickCarousel2 .ProductBlock .Content").on("mousedown mouseup", function() {
-                var firstItemIndex = $(".SlickCarousel2 .slick-current").first().attr("data-slick-index");
-                $(".SlickCarousel2").slick("slickGoTo", firstItemIndex);
-            })
-            $(".SlickCarousel2 .ProductBlock .Content .slick-prev").css("display", "none");
-            $(".SlickCarousel2 .ProductBlock .Content .slick-next").css("display", "none");
-            $('.SlickCarousel2 .ProductBlock .Content').mouseenter(function(e) {
-                $(this).children('.slick-prev').css('display', 'block');
-                $(this).children('.slick-next').css('display', 'block');
-            })
-            $('.SlickCarousel2 .ProductBlock .Content').mouseleave(function(e) {
-                $(this).children('.slick-prev').css('display', 'none');
-                $(this).children('.slick-next').css('display', 'none');
-            })
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.SlickCarousel3').slick({
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 2000,
-                dots: true,
-                centerMode: false,
-                appendArrows: false,
-                responsive: false,
-            });
-        });
-    </script>
+            document.getElementById("rsv-block-btn").style.display = "block";
+            document.getElementById("navbarright").classList.remove("active");
+        } else {
+            document.getElementById("rsv-block-btn").style.display = "none";
+        };
+    });
+</script>
 
-    {{-- LAZY LOAD --}}
-    @include('components.lazy-load.lazy-load')
-    {{-- END LAZY LOAD --}}
+<script>
+    // Collapsable
 
-    {{-- Like --}}
-    @auth
-        @include('components.favorit.like-favorit')
-    @endauth
-    {{-- End Like --}}
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-    @include('components.promotion.mobile-app')
-    <script src="{{ asset('assets/js/translate.js') }}"></script>
-
-    {{-- Copy current URL to clipboard --}}
-    <script>
-        function copyURI(evt) {
-            evt.preventDefault();
-            navigator.clipboard.writeText(evt.target.getAttribute('href')).then(() => {
-                alert("Link copied");
-            }, () => {
-                alert("Oooppsss... failed");
-            });
-        }
-    </script>
-
-    @if ($restaurant->status == '2' && auth()->user()->id == $restaurant->created_by)
-        <script>
-            if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
-                var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
-                myModal.show()
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
             }
-        </script>
-    @endif
+        });
+    }
+</script>
+
+<script>
+    function adult_increment() {
+        document.getElementById('adult2').stepUp();
+        document.getElementById('total_guest2').stepUp();
+        document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+        document.getElementById('adult4').value = document.getElementById('adult2').value;
+    }
+
+    function adult_decrement() {
+        document.getElementById('adult2').stepDown();
+        document.getElementById('total_guest2').stepDown();
+        document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+        document.getElementById('adult4').value = document.getElementById('adult2').value;
+    }
+
+    function child_increment() {
+        document.getElementById('child2').stepUp();
+        document.getElementById('total_guest2').stepUp();
+        document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+        document.getElementById('child4').value = document.getElementById('child2').value;
+    }
+
+    function child_decrement() {
+        document.getElementById('child2').stepDown();
+        document.getElementById('total_guest2').stepDown();
+        document.getElementById('total_guest4').value = document.getElementById('total_guest2').value;
+        document.getElementById('child4').value = document.getElementById('child2').value;
+    }
+
+    function infant_increment() {
+        document.getElementById('infant2').stepUp();
+        document.getElementById('infant4').value = document.getElementById('infant2').value;
+    }
+
+    function infant_decrement() {
+        document.getElementById('infant2').stepDown();
+        document.getElementById('infant4').value = document.getElementById('infant2').value;
+    }
+
+    function pet_increment() {
+        document.getElementById('pet2').stepUp();
+        document.getElementById('pet4').value = document.getElementById('pet2').value;
+    }
+
+    function pet_decrement() {
+        document.getElementById('pet2').stepDown();
+        document.getElementById('pet4').value = document.getElementById('pet2').value;
+    }
+</script>
+
+{{-- Sweetalert Function Delete Profile Image --}}
+<script>
+    function delete_profile_image(ids) {
+        var ids = ids;
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/${ids.id}/delete/image`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Deleted', data.message, 'success');
+                        showingLoading();
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    };
+</script>
+
+{{-- Sweetalert Function Delete Story --}}
+<script>
+    function delete_story(e) {
+        var id = e.getAttribute("data-restaurant");
+        var story = e.getAttribute("data-story");
+
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/${id}/delete/story/${story}`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Deleted', data.message, 'success');
+
+                        //remove element story
+                        $('#story' + story).remove();
+
+                        //update slider ketika story dihapus
+                        sliderRestaurant();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
+            }
+        });
+    };
+</script>
+
+{{-- Sweetalert Function Delete Photo --}}
+<script>
+    function delete_photo_photo(ids) {
+        let id = ids.getAttribute("data-id");
+        let photo = ids.getAttribute("data-photo");
+
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let displayBlack = document.getElementById('untukDelete');
+                displayBlack.style.display = "block";
+
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/${id}/delete/photo/photo/${photo}`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Deleted', data.message, 'success');
+                        $(`#displayPhoto${photo}`).remove();
+                        $("#positionPhotoGallery" + photo).remove();
+
+                        let galleryDiv = $('.gallery');
+                        let galleryLength = galleryDiv.find('a').length;
+
+                        if (galleryLength == 0) {
+                            $('.gallery').html("");
+                            $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                        }
+
+                        $gallery.refresh();
+                        displayBlack.style.display = "none";
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    };
+</script>
+
+{{-- Sweetalert Function Delete Photo --}}
+<script>
+    function delete_photo_video(ids) {
+        let id = ids.getAttribute("data-id");
+        let video = ids.getAttribute("data-video");
+
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/${id}/delete/photo/video/${video}`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Deleted', data.message, 'success');
+                        // showingLoading();
+                        $('#displayVideo' + video).remove();
+                        $("#positionVideoGallery" + video).remove();
+                        $("#displayStoryVideo" + video).remove();
+                        sliderRestaurant();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
+            }
+        });
+    };
+</script>
+
+{{-- Sweetalert Function Delete Photo --}}
+<script>
+    function delete_menu(ids) {
+        let id = ids.getAttribute("data-id");
+        let menu = ids.getAttribute("data-menu");
+
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: 'You will not be able to recover this content!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/${id}/delete/menu/${menu}`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Deleted', data.message, 'success');
+                        $("#displayMenu" + menu).remove();
+                        let menuDiv = $('.gallery2');
+                        let menuLength = menuDiv.find('a').length;
+
+                        if (menuLength == 0) {
+                            $('.gallery2').html("");
+                            $('.gallery2').html(
+                                '<p style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">{{ __('user_page.There is no menu yet') }}</p>'
+                            );
+                        }
+                        $gallery2.refresh();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, 'Canceled Deleted Data', 'error')
+            }
+        });
+    };
+</script>
+
+{{-- Sweetalert Function Request Video to Owner --}}
+<script>
+    function requestVideo(ids) {
+        var ids = ids;
+        Swal.fire({
+            title: `{{ __('user_page.Do you want request a video to the Owner?') }}`,
+            text: `{{ __('user_page.Requesting a video!') }}`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            cancelButtonText: `{{ __('user_page.Cancel') }}`,
+            confirmButtonText: 'Yes, Request it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/restaurant/request/video/${ids.id}/${ids.name}`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(data) {
+                        // console.log(data.message);
+                        await Swal.fire('Success', data.message, 'success');
+                        showingLoading();
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`,
+                    `{{ __('user_page.Canceled Request Video') }}`, 'error')
+            }
+        });
+    };
+</script>
+
+{{-- Highlight sticky --}}
+<script>
+    jQuery(document).ready(function($) {
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() >= $('#gallery').offset().top - 80 && $(window).scrollTop() <= $(
+                    '#menu').offset().top - 60) {
+                $('#gallery-sticky').addClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+            } else if ($(window).scrollTop() >= $('#menu').offset().top - 60 && $(window).scrollTop() <=
+                $('#description').offset().top - 60) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').addClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+            } else if ($(window).scrollTop() >= $('#description').offset().top - 60 && $(window)
+                .scrollTop() <= $('#amenities').offset().top - 60) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').addClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+            } else if ($(window).scrollTop() >= $('#amenities').offset().top - 60 && $(window)
+                .scrollTop() <= $('#location-map').offset().top - 60) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').addClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+            } else if ($(window).scrollTop() >= $('#location-map').offset().top - 60 && $(window)
+                .scrollTop() <= $('#review').offset().top - 60) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').addClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+            } else if ($(window).scrollTop() >= $('#review').offset().top - 60 && $(window)
+                .scrollTop() <= $('#endSticky').offset().top - 60) {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').addClass('active-sticky');
+            } else {
+                $('#gallery-sticky').removeClass('active-sticky');
+                $('#menu-sticky').removeClass('active-sticky');
+                $('#about-sticky').removeClass('active-sticky');
+                $('#amenities-sticky').removeClass('active-sticky');
+                $('#location-sticky').removeClass('active-sticky');
+                $('#review-sticky').removeClass('active-sticky');
+                //or use $('.menu').removeClass('addclass');
+            }
+        });
+    });
+</script>
+
+{{-- PREVENT TEXTAREA TYPE ENTER --}}
+<script>
+    $("textarea").keydown(function(e) {
+        // Enter was pressed without shift key
+        if (e.keyCode == 13 && !e.shiftKey) {
+            // prevent default behavior
+            e.preventDefault();
+        }
+    });
+</script>
+
+
+{{-- modal laguage and currency --}}
+@include('user.modal.filter.filter_language')
+{{-- modal laguage and currency --}}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    function language() {
+        $('#LegalModal').modal('show');
+        $('#trigger-tab-language').addClass('active');
+        $('#content-tab-language').addClass('active');
+        $('#trigger-tab-currency').removeClass('active');
+        $('#content-tab-currency').removeClass('active');
+    }
+
+    function currency() {
+        $('#LegalModal').modal('show');
+        $('#trigger-tab-language').removeClass('active');
+        $('#content-tab-language').removeClass('active');
+        $('#trigger-tab-currency').addClass('active');
+        $('#content-tab-currency').addClass('active');
+    }
+</script>
+
+<script>
+    // Slick Slier Carousel
+    $(document).ready(function() {
+        $(".SlickCarousel1").slick({
+            rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+            autoplay: false,
+            autoplaySpeed: 5000, //  Slide Delay
+            speed: 800, // Transition Speed
+            slidesToShow: 5, // Number Of Carousel
+            slidesToScroll: 1, // Slide To Move
+            pauseOnHover: false,
+            appendArrows: $(".Container1 .Head .Arrows1"), // Class For Arrows Buttons
+            prevArrow: '<span class="Slick-Prev"></span>',
+            nextArrow: '<span class="Slick-Next"></span>',
+            easing: "linear",
+            responsive: [{
+                    breakpoint: 801,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                },
+                {
+                    breakpoint: 641,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                },
+                {
+                    breakpoint: 481,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                },
+            ],
+        })
+        $(".SlickCarousel1 .ProductBlock .Content").slick({
+            rtl: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            pauseOnHover: false,
+            easing: "linear",
+            arrows: true
+        })
+        $(".SlickCarousel1 .ProductBlock .Content").on("mousedown mouseup", function() {
+            var firstItemIndex = $(".SlickCarousel1 .slick-current").first().attr("data-slick-index");
+            $(".SlickCarousel1").slick("slickGoTo", firstItemIndex);
+        })
+        $(".SlickCarousel1 .ProductBlock .Content .slick-prev").css("display", "none");
+        $(".SlickCarousel1 .ProductBlock .Content .slick-next").css("display", "none");
+        $('.SlickCarousel1 .ProductBlock .Content').mouseenter(function(e) {
+            $(this).children('.slick-prev').css('display', 'block');
+            $(this).children('.slick-next').css('display', 'block');
+        })
+        $('.SlickCarousel1 .ProductBlock .Content').mouseleave(function(e) {
+            $(this).children('.slick-prev').css('display', 'none');
+            $(this).children('.slick-next').css('display', 'none');
+        })
+    })
+</script>
+
+<script>
+    // Slick Slier Carousel
+    $(document).ready(function() {
+        $(".SlickCarousel2").slick({
+            rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+            autoplay: false,
+            autoplaySpeed: 5000, //  Slide Delay
+            speed: 800, // Transition Speed
+            slidesToShow: 5, // Number Of Carousel
+            slidesToScroll: 1, // Slide To Move
+            pauseOnHover: false,
+            appendArrows: $(".Container2 .Head .Arrows2"), // Class For Arrows Buttons
+            prevArrow: '<span class="Slick-Prev"></span>',
+            nextArrow: '<span class="Slick-Next"></span>',
+            easing: "linear",
+            responsive: [{
+                    breakpoint: 801,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                },
+                {
+                    breakpoint: 641,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                },
+                {
+                    breakpoint: 481,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                },
+            ],
+        })
+        $(".SlickCarousel2 .ProductBlock .Content").slick({
+            rtl: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            pauseOnHover: false,
+            easing: "linear",
+            arrows: true
+        })
+        $(".SlickCarousel2 .ProductBlock .Content").on("mousedown mouseup", function() {
+            var firstItemIndex = $(".SlickCarousel2 .slick-current").first().attr("data-slick-index");
+            $(".SlickCarousel2").slick("slickGoTo", firstItemIndex);
+        })
+        $(".SlickCarousel2 .ProductBlock .Content .slick-prev").css("display", "none");
+        $(".SlickCarousel2 .ProductBlock .Content .slick-next").css("display", "none");
+        $('.SlickCarousel2 .ProductBlock .Content').mouseenter(function(e) {
+            $(this).children('.slick-prev').css('display', 'block');
+            $(this).children('.slick-next').css('display', 'block');
+        })
+        $('.SlickCarousel2 .ProductBlock .Content').mouseleave(function(e) {
+            $(this).children('.slick-prev').css('display', 'none');
+            $(this).children('.slick-next').css('display', 'none');
+        })
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('.SlickCarousel3').slick({
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            centerMode: false,
+            appendArrows: false,
+            responsive: false,
+        });
+    });
+</script>
+
+{{-- LAZY LOAD --}}
+@include('components.lazy-load.lazy-load')
+{{-- END LAZY LOAD --}}
+
+{{-- Like --}}
+@auth
+    @include('components.favorit.like-favorit')
+@endauth
+{{-- End Like --}}
+
+@include('components.promotion.mobile-app')
+<script src="{{ asset('assets/js/translate.js') }}"></script>
+
+{{-- Copy current URL to clipboard --}}
+<script>
+    function copyURI(evt) {
+        evt.preventDefault();
+        navigator.clipboard.writeText(evt.target.getAttribute('href')).then(() => {
+            alert("Link copied");
+        }, () => {
+            alert("Oooppsss... failed");
+        });
+    }
+</script>
+
+@if ($restaurant->status == '2' && auth()->user()->id == $restaurant->created_by)
+    <script>
+        if (!localStorage.getItem("shareAdver") || localStorage.getItem("shareAdver") != 'true') {
+            var myModal = new bootstrap.Modal(document.getElementById('advertListing-Modal'), {})
+            myModal.show()
+        }
+    </script>
+@endif
 </body>

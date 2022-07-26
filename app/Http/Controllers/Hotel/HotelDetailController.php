@@ -364,11 +364,6 @@ class HotelDetailController extends Controller
         $service = HotelService::select('service.icon as icon', 'service.name as name')->join('service', 'hotel_service.id_service', '=', 'service.id_service', 'left')->where('id_hotel', $id)->get();
         $detail = HotelDetailReview::where('id_hotel', $id)->get();
 
-        $createdby = Hotel::where('id_hotel', $id)
-            ->join('users', 'hotel.created_by', '=', 'users.id')
-            ->select('users.first_name')
-            ->get();
-
         // $get_hotel = Hotel::where('id_hotel', $id)->first();
         // $point = array('lat' => $get_hotel->latitude, 'long' => $get_hotel->longitude, 'id_location' => $get_hotel->id_location);
         // // ? Start Activity Slider
@@ -495,7 +490,7 @@ class HotelDetailController extends Controller
         $hotelFilter = HotelFilter::all();
         $hotelCategory = HotelCategory::all();
         $hotelHasCategory = HotelHasCategory::where('id_hotel', $id)->get();
-        return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelTags', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'createdby', 'propertyType', 'hotelTypeDetail'));
+        return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelTags', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'propertyType', 'hotelTypeDetail'));
     }
 
     public function grade(Request $request, $id)
