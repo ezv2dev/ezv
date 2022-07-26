@@ -58,8 +58,7 @@ class CollaboratorController extends Controller
     // profile
     public function collaborator($id)
     {
-        $this->authorize('collaborator_index');
-
+        // $this->authorize('collaborator_index');
         $profile = Collaborator::with('collaboratorSocial')->select('location.name as name_location', 'collaborator.*')
             ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
             ->join('users', 'users.id', '=', 'collaborator.created_by')
@@ -832,6 +831,8 @@ class CollaboratorController extends Controller
     public function collab_delete_photo_photo(Request $request)
     {
         $this->authorize('collaborator_update');
+        abort_if(!$request->id_photo || !$request->id, 500);
+        abort_if(!auth()->check(), 401);
 
         $collab = Collaborator::where('id_collab', $request->id)->first();
         $collabPhoto = CollaboratorPhoto::where('id_photo', $request->id_photo)->first();
@@ -871,6 +872,8 @@ class CollaboratorController extends Controller
     public function collab_delete_photo_video(Request $request)
     {
         $this->authorize('collaborator_update');
+        abort_if(!$request->id_video || !$request->id, 500);
+        abort_if(!auth()->check(), 401);
 
         $collab = Collaborator::where('id_collab', $request->id)->first();
         $collabVideo = CollaboratorVideo::where('id_video', $request->id_video)->first();
