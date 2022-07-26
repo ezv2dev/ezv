@@ -226,19 +226,33 @@
         <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
         {{-- Search Location --}}
         <script>
-               $(document).scroll(function() {
-                var scrollPosition = $(document).scrollTop();
-                var scrollReference = 100;
-                if (scrollPosition >= scrollReference) {      
-                    $("#sidebar_fix").addClass('fixed');   
-                } else {
-                    $("#sidebar_fix").removeClass('fixed');
-                    $("#sidebar_fix").addClass('abs');
-                };
-            });
-        </script>
-        <script>
             $(document).ready(() => {
+                var $sidebar = $("#sidebar_fix");
+                var $sidebarHeight = $sidebar.outerHeight();
+                var $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                $(window).on("resize", function() {
+                    $sidebarHeight = $sidebar.outerHeight();
+                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                })
+                $(window).on("scroll", function() {
+                    $sidebarHeight = $sidebar.outerHeight();
+                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() < $blogBodyHeight - $sidebarHeight - 15) {
+                        $sidebar.addClass("fixed");
+                    }else if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() > $blogBodyHeight - $sidebarHeight - 15){
+                        $sidebar.removeClass("fixed");
+                        $sidebar.addClass('abs');
+                        $sidebar.css({
+                            "top": $blogBodyHeight - $sidebarHeight - 15
+                        });
+                    }else {
+                        $sidebar.removeClass("fixed");
+                        $sidebar.addClass('abs');
+                        $sidebar.css({
+                            "top": ""
+                        });
+                    }
+                });
                 if (window.scrollY == 0 && window.innerWidth <= 991) {
                     document.getElementById("ul").style.display = "none";
                 }
