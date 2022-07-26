@@ -474,20 +474,16 @@ input:checked + .switch-background:active::before {
 
 /* The container */
 .container-mode {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    /* padding-left: 35px; */
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     cursor: pointer;
-    /* font-size: 22px; */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
+
 
 /* Hide the browser's default checkbox */
 .container-mode input {
@@ -501,12 +497,8 @@ input:checked + .switch-background:active::before {
 /* Create a custom checkbox */
 .checkmark-mode {
     position: relative;
-    /* top: 50%;
-    transform:translateY(-50%);
-    left: 5px; */
-    /* top: 5; */
+    display: block;
     height: 100%;
-    width: 100%;
     background-color: transparent;
 }
 
@@ -514,20 +506,19 @@ input:checked + .switch-background:active::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, -50%);
-    height: 22px;
-    width: 22px;
-    /* font-family: "Font Awesome 5 Free";
-    font-weight: 800;
-    content: "\f185";
-    color: white;
-    font-size: 17px; */
+    bottom:0;
+    transform:translate(-50%, -50%); 
+    width: 50%;
     content: url(../../assets/icon/menu/sun.svg);
 }
 
-#changeThemeMobile .checkmark-mode::before{
+#changeThemeMobile .container-mode-collab .checkmark-mode::before{
     height: 12px;
     width: 12px;
+}
+
+#changeThemeMobile .checkmark-mode::before{
+    height: 100%;
 }
 
 /* When the checkbox is checked, add a red background */
@@ -834,6 +825,7 @@ input:checked + .switch-background:active::before {
     width: 27px;
     height: 20.5px;
     border-radius: 3px;
+    padding: 0px;
 }
 
 .logged-user-menu-detail {

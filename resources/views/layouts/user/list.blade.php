@@ -225,11 +225,11 @@ if (isset($_COOKIE['tema'])) {
                     </div>
                     <div class="d-flex align-items mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu">
-                            <label class="container-mode">
+                            <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }} ">
                                 <input type="checkbox" id="background-color-switch"
                                     onclick="changeBackgroundTrigger(this)"
                                     {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                                <span class="checkmark-mode"></span>
+                                <div class="checkmark-mode"></div>
                             </label>
                         </div>
                         <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
@@ -288,7 +288,7 @@ if (isset($_COOKIE['tema'])) {
                 </div>
                 <div class="d-flex align-items-center mb-2" id="changeThemeMobile">
                     <div class="logged-user-menu" style="">
-                        <label class="container-mode">
+                        <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }}">
                             <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
                                 {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
                             <span class="checkmark-mode"></span>
