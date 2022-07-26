@@ -47,7 +47,7 @@
     @component('components.loading.loading-type2')
     @endcomponent
     <div class="expand-navbar-mobile" aria-expanded="false">
-        <div class="px-3 pt-2">
+        <div class="px-3 pt-2 h-100" style="overflow-x: hidden; overflow-y: auto;">
             @auth
                 <div>
                     <div class="d-flex align-items-center">

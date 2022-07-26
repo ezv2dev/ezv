@@ -2156,6 +2156,15 @@ span.flatpickr-weekday {
     }
 }
 
+@media only screen and (max-width: 576px) {
+    .expand-navbar-mobile .user-details-name {
+        font-size: 14px !important;
+    }
+    .expand-navbar-mobile .user-details-email p {
+        font-size: 12px !important;
+    }
+}
+
 @media only screen and (max-width: 649px) {
     .flatpickr-rContainer {
         width: 100% !important;
