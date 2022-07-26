@@ -130,23 +130,50 @@
                         </div>
                         <div class="list-description {{ $textColor }}">Price</div>
                     </div>
-                    @foreach ($hotelFilter->take(5)->sortBy('order') as $item)
+                    @php
+                        $starClickIds = explode(',', request()->get('fStar'));
+                    @endphp
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false, 5)">
+                        <div>
+                            <i class="fas fa-star text-18 list-description {{ $textColor }} sub-icon"
+                                @if (in_array(5, $starClickIds)) style="color: #ff7400 !important;" @endif></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">5 Star</div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false, 4)">
+                        <div>
+                            <i class="fas fa-star text-18 list-description {{ $textColor }} sub-icon"
+                                @if (in_array(4, $starClickIds)) style="color: #ff7400 !important;" @endif></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">4 Star</div>
+                    </div>
+                    <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false, 3)">
+                        <div>
+                            <i class="fas fa-star text-18 list-description {{ $textColor }} sub-icon"
+                                @if (in_array(3, $starClickIds)) style="color: #ff7400 !important;" @endif></i>
+                        </div>
+                        <div class="list-description {{ $textColor }}">3 Star</div>
+                    </div>
+                    @foreach ($hotelFilter->take(2)->sortBy('order') as $item)
                         <div class="grid-sub-cat-content-container text-13 "
                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
                             <div>
                                 <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
                                     @php
-                                        $isChecked = '';
                                         $filterIds = explode(',', request()->get('filter'));
                                     @endphp @if (in_array($item->id_hotel_filter, $filterIds))
-                                    style="color: #ff7400 !important;"@endif>
-                                </i>
-                            </div>
-                            <div class="list-description {{ $textColor }} translate-text-group-items">
-                                {{ $item->name }}
-                            </div>
-                        </div>
-                    @endforeach
+                                    style="color: #ff7400 !important;"
+                    @endif>
+                    </i>
+                </div>
+                <div class="list-description {{ $textColor }} translate-text-group-items">
+                    {{ $item->name }}
+                </div>
+            </div>
+            @endforeach
 
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
                 onclick="modalFiltersHotel()">
@@ -188,7 +215,8 @@
             <div class="grid-list-container lozad">
                 <div class=" grid-image-container mb-3 grid-desc-container h-auto list-image-container">
                     @guest
-                        <div class="list-like-button-container" style="position: absolute; z-index: 99; top: 10px; left: 10px;">
+                        <div class="list-like-button-container"
+                            style="position: absolute; z-index: 99; top: 10px; left: 10px;">
                             <a onclick="loginForm(1)" style="cursor: pointer;">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     role="presentation" focusable="false" class="favorite-button favorite-button-28">
@@ -878,7 +906,7 @@
             }
         });
 
-        function hotelFilter(valueCategory, valueClick, unCheckCategory) {
+        function hotelFilter(valueCategory, valueClick, unCheckCategory, valueStar) {
             var sLocationFormInput = $("input[name='sLocation']").val();
             var sCheck_inFormInput = $("input[name='sCheck_in']").val();
             var sCheck_outFormInput = $("input[name='sCheck_out']").val();
@@ -890,9 +918,37 @@
             }
 
             var fStarFormInput = [];
-            $("input[name='fStar[]']:checked").each(function() {
-                fStarFormInput.push(parseInt($(this).val()));
-            });
+
+            if (valueStar != null) {
+                $("input[name='fStar[]']:checked").each(function() {
+                    fStarFormInput.push(parseInt($(this).val()));
+                });
+                if (fStarFormInput.includes(valueStar) == true) {
+                    var filterStarCheck = fStarFormInput.filter(unCheck);
+
+                    function unCheck(dataCheck) {
+                        return dataCheck != valueStar;
+                    }
+
+                    var filteredStar = filterStarCheck.filter(function(item, pos) {
+                        return filterStarCheck.indexOf(item) == pos;
+                    });
+                } else {
+                    fStarFormInput.push(valueStar);
+
+                    var filteredStar = fStarFormInput.filter(function(item, pos) {
+                        return fStarFormInput.indexOf(item) == pos;
+                    });
+                }
+            } else {
+                $("input[name='fStar[]']:checked").each(function() {
+                    fStarFormInput.push(parseInt($(this).val()));
+                });
+
+                var filteredStar = fStarFormInput.filter(function(item, pos) {
+                    return fStarFormInput.indexOf(item) == pos;
+                });
+            }
 
             var filterFormInput = [];
             var fCategoryFormInput = [];
@@ -987,7 +1043,7 @@
             }
 
             var subUrl =
-                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&fStar=${fStarFormInput}&filter=${filteredArray}&fSort=${fSortFormInput}`;
+                `sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}&fMinPrice=${fMinPriceFormInput}&fMaxPrice=${fMaxPriceFormInput}&fCategory=${filteredCategory}&fStar=${filteredStar}&filter=${filteredArray}&fSort=${fSortFormInput}`;
 
             hotelRefreshFilter(subUrl);
         }
@@ -1033,15 +1089,20 @@
 
                     $('#average_show').html(`${data.detail_review.average}/5`);
                     $('#average_clean_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_clean * 30}px"></div>${data.detail_review.average_clean}`);
+                        `<div class="liner" style="width: ${data.detail_review.average_clean * 30}px"></div>${data.detail_review.average_clean}`
+                    );
                     $('#average_service_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_service * 30}px"></div>${data.detail_review.average_service}`);
+                        `<div class="liner" style="width: ${data.detail_review.average_service * 30}px"></div>${data.detail_review.average_service}`
+                    );
                     $('#average_check_in_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_check_in * 30}px"></div>${data.detail_review.average_check_in}`);
+                        `<div class="liner" style="width: ${data.detail_review.average_check_in * 30}px"></div>${data.detail_review.average_check_in}`
+                    );
                     $('#average_location_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_location * 30}px"></div>${data.detail_review.average_location}`);
+                        `<div class="liner" style="width: ${data.detail_review.average_location * 30}px"></div>${data.detail_review.average_location}`
+                    );
                     $('#average_value_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_value * 30}px"></div>${data.detail_review.average_value}`);
+                        `<div class="liner" style="width: ${data.detail_review.average_value * 30}px"></div>${data.detail_review.average_value}`
+                    );
 
                 }
             });
