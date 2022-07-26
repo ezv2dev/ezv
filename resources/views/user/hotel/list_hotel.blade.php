@@ -1064,45 +1064,50 @@
                 type: "GET",
                 url: `/hotel/details/${id}`,
                 success: (data) => {
-                    console.log(data);
-                    console.log(data.detail_review.average);
-                    $('.name-hotel').html(data.name);
-                    $('#descHotel').html(data.description);
-
                     var lengthAmenities = data.amenities.length;
-                    $('#amenitiesList').html('');
-                    for (i = 0; i < lengthAmenities; i++) {
-                        $('#amenitiesList').append(`
-                        <div class = "col-md-6 mb-2" >
-                            <span class = 'translate-text-group-items'>
-                                ${data.amenities[i].name}
-                            </span>
-                        </div>`);
+                    $('.name-hotel').html(data.name);
+
+                    if (data.description == null) {
+                        $('#descHotel').html('No description yet');
+                    } else {
+                        $('#descHotel').html(data.description);
                     }
 
-                    $('#average_show').empty();
-                    $('#average_clean_show').empty();
-                    $('#average_service_show').empty();
-                    $('#average_check_in_show').empty();
-                    $('#average_value_show').empty();
-                    $('#average_location_show').empty();
+                    $('#amenitiesList').html('');
+                    if (lengthAmenities == 0) {
+                        $('#amenitiesList').append(`No facilities yet`);
+                    } else {
+                        for (i = 0; i < lengthAmenities; i++) {
+                            $('#amenitiesList').append(`
+                            <div class = "col-md-6 mb-2" >
+                                <span class = 'translate-text-group-items'>
+                                    ${data.amenities[i].name}
+                                </span>
+                            </div>`);
+                        }
+                    }
 
-                    $('#average_show').html(`${data.detail_review.average}/5`);
-                    $('#average_clean_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_clean * 30}px"></div>${data.detail_review.average_clean}`
-                    );
-                    $('#average_service_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_service * 30}px"></div>${data.detail_review.average_service}`
-                    );
-                    $('#average_check_in_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_check_in * 30}px"></div>${data.detail_review.average_check_in}`
-                    );
-                    $('#average_location_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_location * 30}px"></div>${data.detail_review.average_location}`
-                    );
-                    $('#average_value_show').html(
-                        `<div class="liner" style="width: ${data.detail_review.average_value * 30}px"></div>${data.detail_review.average_value}`
-                    );
+                    if (data.detail_review == null) {
+                        $("#content-tab-reviews").html('There is no reviews');
+                    } else {
+                        $('#average_show').html(`${data.detail_review.average}/5`);
+                        $('#average_clean_show').html(
+                            `<div class="liner" style="width: ${data.detail_review.average_clean * 30}px"></div>${data.detail_review.average_clean}`
+                        );
+                        $('#average_service_show').html(
+                            `<div class="liner" style="width: ${data.detail_review.average_service * 30}px"></div>${data.detail_review.average_service}`
+                        );
+                        $('#average_check_in_show').html(
+                            `<div class="liner" style="width: ${data.detail_review.average_check_in * 30}px"></div>${data.detail_review.average_check_in}`
+                        );
+                        $('#average_location_show').html(
+                            `<div class="liner" style="width: ${data.detail_review.average_location * 30}px"></div>${data.detail_review.average_location}`
+                        );
+                        $('#average_value_show').html(
+                            `<div class="liner" style="width: ${data.detail_review.average_value * 30}px"></div>${data.detail_review.average_value}`
+                        );
+                    }
+
 
                 }
             });

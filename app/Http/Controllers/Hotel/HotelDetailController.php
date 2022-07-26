@@ -142,8 +142,7 @@ class HotelDetailController extends Controller
     public function hotel_details(Request $request)
     {
         $data = Hotel::with([
-            'location',
-            'hotel_room.hotelType', 'amenities', 'detailReview'
+            'location', 'amenities', 'detailReview'
         ])->where('id_hotel', $request->id)->first();
 
         if ($data) {
