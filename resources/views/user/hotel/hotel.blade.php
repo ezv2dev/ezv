@@ -2417,7 +2417,23 @@
                                 </div>
                                 <div class="col-5">
                                     <div class="member-profile">
-                                        <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
+                                        <div class="d-flex">
+                                            <h4>{{ __('user_page.Hosted by') }}
+                                                @if ($hotel[0]->ownerData->first_name == null || $hotel[0]->ownerData->last_name == null)
+                                                    Anonymous
+                                                @else
+                                                    {{ $hotel[0]->ownerData->first_name }}
+                                                    {{ $hotel[0]->ownerData->last_name }}
+                                                @endif
+                                            </h4>
+                                            @auth
+                                                @if (Auth::user()->id == $hotel[0]->created_by)
+                                                    &nbsp;
+                                                    <a type="button" href="{{ route('profile_user') }}"
+                                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
+                                                @endif
+                                            @endauth
+                                        </div>
                                         <p>{{ __('user_page.Joined in') }}
                                             {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}</p>
                                     </div>
@@ -2615,7 +2631,7 @@
                                     @endif
                                 @endauth
                                 {{-- END ALERT CONTENT STATUS --}}
-                                {{-- @guestx`
+                                {{-- @guest
                                     <hr>
                                     <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
                                     <div class="container-xxl mx-auto p-0">

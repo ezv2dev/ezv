@@ -338,9 +338,14 @@ class Activity extends Model
         return $this->belongsToMany(ActivitySubcategory::class, 'activity_has_subcategory', 'id_activity', 'id_subcategory', 'id_activity', 'id_subcategory')->withPivot('created_by', 'updated_by')->withTimestamps();
     }
 
-    public function createdByDetails()
+    public function ownerData()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }
 
     // favorit attribute

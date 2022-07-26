@@ -388,7 +388,7 @@ class Restaurant extends Model
         return $this->belongsToMany(RestaurantGoodfor::class, 'restaurant_has_goodfor', 'id_restaurant', 'id_goodfor', 'id_restaurant', 'id_goodfor')->withPivot('created_by', 'updated_by')->withTimestamps();
     }
 
-    public function createdByDetails()
+    public function ownerData()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
     }

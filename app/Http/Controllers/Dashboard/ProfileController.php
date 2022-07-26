@@ -21,11 +21,11 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', Auth::user()->id)->first();
 
         $owner_language = ProfileLanguage::where('user_id', Auth::user()->id)
-        ->select('owner_profile_language.language', 'host_language.name')
-        ->join('host_language', 'host_language.id_host_language', '=', 'owner_profile_language.language')
-        ->get();
+            ->select('owner_profile_language.language', 'host_language.name')
+            ->join('host_language', 'host_language.id_host_language', '=', 'owner_profile_language.language')
+            ->get();
 
-        return view('new-admin.partner.account.profile.profile',compact('languages','owner_language', 'profile'));
+        return view('new-admin.partner.account.profile.profile', compact('languages', 'owner_language', 'profile'));
     }
 
     public function upload_foto()
@@ -35,17 +35,15 @@ class ProfileController extends Controller
 
     public function store_foto(Request $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $foto_profile = $request->file('file');
 
-            if (Auth::user()->foto_profile != NULL)
-            {
-                File::delete('foto_profile/'. Auth::user()->foto_profile);
+            if (Auth::user()->foto_profile != NULL) {
+                File::delete('foto_profile/' . Auth::user()->foto_profile);
             }
 
             $filename = time() . '.' . $foto_profile->getClientOriginalExtension();
-            $foto_profile->move(public_path('foto_profile'),$filename);
+            $foto_profile->move(public_path('foto_profile'), $filename);
 
             //insert into database
             $data = User::where('id', Auth::user()->id)->update([
@@ -55,9 +53,7 @@ class ProfileController extends Controller
             return response()->json([
                 'message' => 'data has been updated'
             ], 200);
-        }
-
-        else {
+        } else {
             return response()->json([
                 'message' => 'data not found'
             ], 404);
@@ -68,8 +64,7 @@ class ProfileController extends Controller
     {
         $language = $request->language;
 
-        if(Profile::where('user_id', Auth::user()->id)->first())
-        {
+        if (Profile::where('user_id', Auth::user()->id)->first()) {
             Profile::where('user_id', Auth::user()->id)->update(
                 [
                     'user_id' => Auth::user()->id,
@@ -78,9 +73,7 @@ class ProfileController extends Controller
                     'location' => $request->location,
                 ]
             );
-        }
-        else
-        {
+        } else {
             Profile::create(
                 [
                     'user_id' => Auth::user()->id,
@@ -91,9 +84,9 @@ class ProfileController extends Controller
             );
         }
 
-        if ($language)//cek jika sudah ada language
+        if ($language) //cek jika sudah ada language
         {
-            $cek = ProfileLanguage::where('user_id',Auth::user()->id)->delete();
+            $cek = ProfileLanguage::where('user_id', Auth::user()->id)->delete();
         }
 
         //store ulang
@@ -107,6 +100,5 @@ class ProfileController extends Controller
         ProfileLanguage::insert($data);
 
         return redirect()->back()->with('success', 'Your profile updated');
-
     }
 }
