@@ -1,4 +1,5 @@
 <section style="box-sizing: border-box; background-color: #000000">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -8,7 +9,7 @@
 
         .footer-2-4 .footer-text-title {
             font-size: 18px;
-            margin-bottom: 1.5rem;
+            /* margin-bottom: 1.5rem; */
             font-weight: bold;
         }
 
@@ -44,7 +45,7 @@
         }
 
         .footer-2-4 .list-footer {
-            padding: 5rem 1rem 3rem 1rem;
+            padding: 3rem 1rem 1rem 2rem
         }
 
         .footer-2-4 .info-footer {
@@ -86,7 +87,21 @@
                 padding: 0 6rem 3rem;
             }
         }
-
+        .list-unstyled2 {
+            margin-bottom: 1.5rem;
+            padding-left: 0;
+            list-style: none;
+        }
+        .text-copyrights p {
+            color: #9b9b9b;
+            line-height: 1;
+            margin-top: 15px;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        .footer-social {
+            color: #fff;
+        }
     </style>
 
     <div class="footer-2-4 container-xxl mx-auto position-relative p-0">
@@ -94,7 +109,7 @@
             <div class="row gap-md-0 gap-5">
                 <div class="col-lg-3 col-md-6">
                     <h2 class="footer-text-title text-white">EZV 2</h2>
-                    <nav class="list-unstyled">
+                    <nav class="list-unstyled2">
                         <li class="list-space">
                             <a href="{{ route('list') }}" class="list-menu">{{ __('user_page.Homes') }}</a>
                         </li>
@@ -111,7 +126,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h2 class="footer-text-title text-white">{{ __('user_page.Company') }}</h2>
-                    <nav class="list-unstyled">
+                    <nav class="list-unstyled2">
                         <li class="list-space">
                             <a href="{{ route('contact_us') }}" class="list-menu">{{ __('user_page.Contact Us') }}</a>
                         </li>
@@ -125,7 +140,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h2 class="footer-text-title text-white">{{ __('user_page.Support') }}</h2>
-                    <nav class="list-unstyled">
+                    <nav class="list-unstyled2">
                         <li class="list-space">
                             <a href="{{ route('getting_started') }}" class="list-menu">{{ __('user_page.Getting Started') }}</a>
                         </li>
@@ -136,7 +151,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h2 class="footer-text-title text-white">{{ __('user_page.Information') }}</h2>
-                    <nav class="list-unstyled">
+                    <nav class="list-unstyled2">
                         <li class="list-space">
                             <a href="{{ route('privacy_policy') }}" class="list-menu">{{ __('user_page.Privacy Policy') }}</a>
                         </li>
@@ -149,16 +164,27 @@
                     </nav>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-social text-center">
-                        <a href="https://www.facebook.com/ezvillasbali/" target=_blank"><i class="fa fa-facebook"></i></a> <a href="https://www.instagram.com/ezv/" target=_blank"><i class="fa fa-instagram"></i></a> <a href="mailto:info@ezv2.com" target=_blank"><i class="fa fa-envelope"></i></a> <a href="call:+6285792260929" target=_blank"><i class="fa fa-phone"></i></a>
-                    </div>
+        </div>
+        <div class="row" style="margin-top: 1.5rem">
+            <div class="col-12">
+                <div class="footer-social text-center">
+                    <a href="https://www.facebook.com/ezvillasbali/" target=_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target=_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target=_blank">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a href="call:+6285792260929" style="margin-left: 10px;" target=_blank">
+                        <i class="fa fa-phone"></i>
+                    </a>
                 </div>
-                <div class="col-12">
-                    <div class="text-copyrights text-center">
-                        <p>&copy;{{ date('Y') }} EZV2</p>
-                    </div>
+            </div>
+            <div class="col-12">
+                <div class="text-copyrights text-center">
+                    <p>&copy;{{ date('Y') }} EZV2</p>
                 </div>
             </div>
         </div>
