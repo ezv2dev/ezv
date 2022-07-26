@@ -1287,6 +1287,7 @@
         $('#modal-map-content').removeClass('d-block mobile-map-desc');
         document.getElementById("mobile-map-close").classList.remove('d-block');
         document.getElementById("mobile-map-close").classList.add('d-none');
+        document.getElementsByTagName("html")[0].classList.remove('overflow-hidden');
         // document.getElementById("bottom-mobile").classList.remove('d-none');
         $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
         google.maps.event.clearListeners(map, 'click');
@@ -1317,6 +1318,7 @@
                 document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                 document.getElementById("map-mobile-overlay").classList.add('map-mobile-overlay');
                 document.getElementById("map-desc").classList.add('mobile-map');
+                document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                 $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                 // document.getElementById("bottom-mobile").classList.add('d-none');
 
@@ -1358,6 +1360,7 @@
         document.getElementById("modal-map-content").classList.remove('mobile-map-desc');
         // document.getElementById("bottom-mobile").classList.remove('d-none');
         document.getElementById("map-mobile-overlay").classList.remove('map-mobile-overlay');
+        document.getElementsByTagName("html")[0].classList.remove('overflow-hidden');
         $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 12px; position: relative; overflow: hidden;');
     }
 

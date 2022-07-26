@@ -108,12 +108,42 @@
     z-index: 1001;
     cursor: pointer;
 }
+.sub-drop {
+    font-size: 15px;
+    color: #585656;
+}
+.f-arrow {
+  border: solid black;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 7px;
+  margin-bottom: 3px;
+}
+.f-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.f-down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+@media (max-width: 533px) {
+    .flex-gap .bg-white {
+        width: 100%;
+    }
+}
+.overflow-x-auto::-webkit-scrollbar {
+    display: none;
+}
     </style>
 
 </head>
 
 <body class="nav-fixed">
-    @component('components.loading.loading-dashboard')
+    {{-- @component('components.loading.loading-dashboard')
+    @endcomponent --}}
+    @component('components.loading.loading-type2')
     @endcomponent
     <div class="expand-navbar-mobile" aria-expanded="false">
         <div class="px-3 pt-2">
@@ -129,68 +159,13 @@
                                     alt="">
                             @endif
                             <div class="dropdown">
-                                <div class="user-details ms-2" style="cursor: pointer; padding-left: 10px;" id="dropProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="user-details ms-2" style="cursor: pointer; padding-left: 10px;">
                                     <div class="user-details-name">
                                         {{ Auth::user()->first_name }}
                                         {{ Auth::user()->last_name }}</div>
                                     <div class="user-details-email">
                                         <p class="mb-0">{{ Auth::user()->email }}</p>
                                     </div>
-                                </div>
-                                <div class="dropdown-menu" aria-labelledby="dropProfile">
-                                    @if (in_array(Auth::user()->role_id, [1, 2, 3]))
-                                        <a class="dropdown-item" href="{{ route('profile_user') }}">
-                                            Profile
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('account_setting') }}">
-                                            Account
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('help_guest') }}">
-                                            Get Help
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{ route('partner_inbox') }}">
-                                            Inbox
-                                        </a><a class="dropdown-item" href="{{ route('calendar_index') }}">
-                                            Calendar
-                                        </a><a class="dropdown-item" href="{{ route('insight_dashboard') }}">
-                                            Insight
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0);" onclick="language()">
-                                            Language and translation
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:void(0);" onclick="currency()">
-                                            @if (isset(Auth::user()->currency->symbol) || isset(Auth::user()->currency->code))
-                                                {{ Auth::user()->currency->symbol }} {{ Auth::user()->currency->code }}
-                                            @else
-                                                $ USD
-                                            @endif
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        {{-- <a class="dropdown-item" href="{{ route('refer_host') }}">
-                                    Your Referral Code
-                                </a> --}}
-                                    @endIf
-                                    @if (in_array(Auth::user()->role_id, [1, 2, 3, 4, 5]))
-                                        <a class="dropdown-item" href="{{ route('index') }}">
-                                            Switch to traveling
-                                        </a>
-                                    @endIf
-                                    @if (in_array(Auth::user()->role_id, [1, 2, 3]))
-                                        <a class="dropdown-item" href="{{ route('admin_tax_setting') }}">
-                                            Tax Setting
-                                        </a>
-                                    @endIf
-                                    <a class="dropdown-item" href="#!"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                                        <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                                        Logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                        style="display: none">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -201,57 +176,110 @@
                     </div>
                     <hr>
                     <div class="dropdown">
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2 dropdown-toggle"
+                        <a id="nav-user" class="navbar-gap d-block mb-2"
+                            style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropProfile" aria-expanded="false" aria-controls="dropProfile">
+                            <i id="f-user" class="f-arrow f-right"></i>Users
+                        </a>
+                        <div class="collapse" id="dropProfile">
+                            @if (in_array(Auth::user()->role_id, [1, 2, 3]))
+                                <a class="dropdown-item sub-drop" href="{{ route('profile_user') }}">
+                                    Profile
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('account_setting') }}">
+                                    Account
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('help_guest') }}">
+                                    Get Help
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('partner_inbox') }}">
+                                    Inbox
+                                </a><a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">
+                                    Calendar
+                                </a><a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
+                                    Insight
+                                </a>
+                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="language()">
+                                    Language and translation
+                                </a>
+                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="currency()">
+                                    @if (isset(Auth::user()->currency->symbol) || isset(Auth::user()->currency->code))
+                                        {{ Auth::user()->currency->symbol }} {{ Auth::user()->currency->code }}
+                                    @else
+                                        $ USD
+                                    @endif
+                                </a>
+                            @endIf
+                            @if (in_array(Auth::user()->role_id, [1, 2, 3, 4, 5]))
+                                <a class="dropdown-item sub-drop" href="{{ route('index') }}">
+                                    Switch to traveling
+                                </a>
+                            @endIf
+                            @if (in_array(Auth::user()->role_id, [1, 2, 3]))
+                                <a class="dropdown-item sub-drop" href="{{ route('admin_tax_setting') }}">
+                                    Tax Setting
+                                </a>
+                            @endIf
+                            <a class="dropdown-item sub-drop" href="#!"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                <div class="dropdown-item-icon"><i data-feather="log-out" style="margin-right: 5px;"></i>Logout</div>
+
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                style="display: none">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+                        </div>
+                        <a id="nav-home" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHomes" aria-expanded="false" aria-controls="dropHomes">
-                            {{ __('user_page.Homes') }}
+                            <i id="f-home" class="f-arrow f-right"></i>{{ __('user_page.Homes') }}
                         </a>
                         <div class="collapse" id="dropHomes">
-                          <a class="dropdown-item" href="{{ route('listing_dashboard') }}">Listing</a>
-                          <a class="dropdown-item" href="{{ route('reservations_dashboard') }}">Reservations</a>
-                          <a class="dropdown-item" href="{{ route('admin_add_listing') }}">Create new listing</a>
-                          <a class="dropdown-item" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                          <a class="dropdown-item" href="{{ route('completed_payouts') }}">Transaction history</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('listing_dashboard') }}">Listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('reservations_dashboard') }}">Reservations</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2 dropdown-toggle"
+                        <a id="nav-hotels" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropHotels" aria-expanded="false" aria-controls="dropHotels">
-                            {{ __('user_page.Hotels') }}
+                            <i id="f-hotels" class="f-arrow f-right"></i>{{ __('user_page.Hotels') }}
                         </a>
                         <div class="collapse" id="dropHotels">
-                          <a class="dropdown-item" href="{{ route('dashboard_listing_hotel') }}">Listing</a>
-                          <a class="dropdown-item" href="{{ route('hotel_room_reservations_dashboard') }}">Reservations</a>
-                          <a class="dropdown-item" href="{{ route('admin_add_listing') }}">Create new listing</a>
-                          <a class="dropdown-item" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                          <a class="dropdown-item" href="{{ route('completed_payouts') }}">Transaction history</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('dashboard_listing_hotel') }}">Listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('hotel_room_reservations_dashboard') }}">Reservations</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2 dropdown-toggle"
+                        <a id="nav-food" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropFood" aria-expanded="false" aria-controls="dropFood">
-                            {{ __('user_page.Food') }}
+                            <i id="f-food" class="f-arrow f-right"></i>{{ __('user_page.Food') }}
                         </a>
                         <div class="collapse" id="dropFood">
-                          <a class="dropdown-item" href="{{ route('admin_restaurant') }}">List Restaurant</a>
-                          <a class="dropdown-item" href="{{ route('admin_add_listing') }}">Create new listing</a>
-                          <a class="dropdown-item" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                          <a class="dropdown-item" href="{{ route('completed_payouts') }}">Transaction history</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_restaurant') }}">List Restaurant</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2 dropdown-toggle"
+                        <a id="nav-wow" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropWow" aria-expanded="false" aria-controls="dropWow">
-                            Wow
+                            <i id="f-wow" class="f-arrow f-right"></i>Wow
                         </a>
                         <div class="collapse" id="dropWow">
-                          <a class="dropdown-item" href="{{ route('admin_activity') }}">List Things To Do</a>
-                          <a class="dropdown-item" href="{{ route('admin_add_listing') }}">Create new listing</a>
-                          <a class="dropdown-item" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                          <a class="dropdown-item" href="{{ route('completed_payouts') }}">Transaction history</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_activity') }}">List Things To Do</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new listing</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction history</a>
                         </div>
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2 dropdown-toggle"
+                        <a id="nav-reward" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content; text-decoration: none;" data-toggle="collapse" data-target="#dropReward" aria-expanded="false" aria-controls="dropReward">
-                            Reward
+                            <i id="f-reward" class="f-arrow f-right"></i>Reward
                         </a>
                         <div class="collapse" id="dropReward">
-                          <a class="dropdown-item" href="{{ route('admin_reward_category') }}">Reward Category</a>
-                          <a class="dropdown-item" href="{{ route('admin_user_reward') }}">User Reward</a>
-                          <a class="dropdown-item" href="{{ route('admin_user_reward_balance') }}">User Reward Balance</a>
-                          <a class="dropdown-item" href="{{ route('admin_staff_reward_balance') }}">Staff Reward Balance</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_reward_category') }}">Reward Category</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_user_reward') }}">User Reward</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_user_reward_balance') }}">User Reward Balance</a>
+                          <a class="dropdown-item sub-drop" href="{{ route('admin_staff_reward_balance') }}">Staff Reward Balance</a>
                         </div>
                     </div>
                     <hr>
@@ -263,7 +291,7 @@
                             @else
                                 <img style="width: 27px;" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
+                            <p class="sub-drop mb-0 ms-2" style="margin-left:5px; color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
                     <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
@@ -292,12 +320,12 @@
                             style="color: white;">
 
                             @if (session()->has('currency'))
-                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                <p class="sub-drop mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
                                 {{-- <img style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                             @else
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                <p class="sub-drop mb-0 ms-2" style="color: #585656">Choose Currency</p>
                                 {{-- <img style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
                             @endif
@@ -796,28 +824,28 @@
                                     </div>
                                 </h6>
                                 @if (in_array(Auth::user()->role_id, [1, 2, 3]))
-                                    <a class="dropdown-item" href="{{ route('profile_user') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('profile_user') }}">
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('account_setting') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('account_setting') }}">
                                         Account
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('help_guest') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('help_guest') }}">
                                         Get Help
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('partner_inbox') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('partner_inbox') }}">
                                         Inbox
-                                    </a><a class="dropdown-item" href="{{ route('calendar_index') }}">
+                                    </a><a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">
                                         Calendar
-                                    </a><a class="dropdown-item" href="{{ route('insight_dashboard') }}">
+                                    </a><a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
                                         Insight
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="language()">
+                                    <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="language()">
                                         Language and translation
                                     </a>
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="currency()">
+                                    <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="currency()">
                                         @if (isset(Auth::user()->currency->symbol) || isset(Auth::user()->currency->code))
                                             {{ Auth::user()->currency->symbol }} {{ Auth::user()->currency->code }}
                                         @else
@@ -825,21 +853,21 @@
                                         @endif
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    {{-- <a class="dropdown-item" href="{{ route('refer_host') }}">
+                                    {{-- <a class="dropdown-item sub-drop" href="{{ route('refer_host') }}">
                                 Your Referral Code
                             </a> --}}
                                 @endIf
                                 @if (in_array(Auth::user()->role_id, [1, 2, 3, 4, 5]))
-                                    <a class="dropdown-item" href="{{ route('index') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('index') }}">
                                         Switch to traveling
                                     </a>
                                 @endIf
                                 @if (in_array(Auth::user()->role_id, [1, 2, 3]))
-                                    <a class="dropdown-item" href="{{ route('admin_tax_setting') }}">
+                                    <a class="dropdown-item sub-drop" href="{{ route('admin_tax_setting') }}">
                                         Tax Setting
                                     </a>
                                 @endIf
-                                <a class="dropdown-item" href="#!"
+                                <a class="dropdown-item sub-drop" href="#!"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                                     Logout
@@ -888,36 +916,58 @@
 
     @yield('scripts')
     <script>
-                $(".btn-close-expand-navbar-mobile").on("click", function() {
-                    $("body").css({
-                        "height": "auto",
-                        "overflow": "auto"
-                    })
-                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
-                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
-                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
-                    $("#overlay").css("display", "none");
-                })
-                $(".navbar-toggler").on("click", function() {
-                    $("body").css({
-                        "height": "100%",
-                        "overflow": "hidden"
-                    })
-                    $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
-                    $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
-                    $(".expand-navbar-mobile").attr("aria-expanded", "true");
-                    $("#overlay").css("display", "block");
-                })
-                $('#overlay').click(function() {
-                    $("body").css({
-                        "height": "auto",
-                        "overflow": "auto"
-                    })
-                    $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
-                    $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
-                    $(".expand-navbar-mobile").attr("aria-expanded", "false");
-                    $("#overlay").css("display", "none");
-                })
+        $(".btn-close-expand-navbar-mobile").on("click", function() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        })
+        $(".navbar-toggler").on("click", function() {
+            $("body").css({
+                "height": "100%",
+                "overflow": "hidden"
+            })
+            $(".expand-navbar-mobile").removeClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "true");
+            $("#overlay").css("display", "block");
+        })
+        $('#overlay').click(function() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        })
+    </script>
+    <script>
+        $(function() {
+            $('#nav-user').click(function() {
+                $('#f-user').toggleClass('f-right f-down');
+            });
+            $('#nav-home').click(function() {
+                $('#f-home').toggleClass('f-right f-down');
+            });
+            $('#nav-hotels').click(function() {
+                $('#f-hotels').toggleClass('f-right f-down');
+            });
+            $('#nav-food').click(function() {
+                $('#f-food').toggleClass('f-right f-down');
+            });
+            $('#nav-wow').click(function() {
+                $('#f-wow').toggleClass('f-right f-down');
+            });
+            $('#nav-reward').click(function() {
+                $('#f-reward').toggleClass('f-right f-down');
+            });
+        })
     </script>
 </body>
 

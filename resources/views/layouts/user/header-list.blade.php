@@ -3296,78 +3296,79 @@
                         src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                 @endif
             </a>
-
             @auth
                 <div style="display: table; margin-right: 0px; float: right;">
                     <!--<h5 style="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>-->
                 </div>
-                <div class="logged-user-menu d-flex align-items-center">
+                <div class="logged-user-menu d-flex">
+                    <div style="flex:1;">
+                        <label class="container-mode" >
+                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
+                            <span class="checkmark-mode"></span>
+                            
+                        </label>
+                    </div>
 
-                    <label class="container-mode">
-                        <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
-                            {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
-                        <span class="checkmark-mode"></span>
+                    <div style="flex:1;">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" class="logged-user-photo" alt="">
+                            @else
+                                <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo"
+                                    alt="">
+                            @endif
 
-                    </label>
-
-                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" class="logged-user-photo" alt="">
-                        @else
-                            <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo"
-                                alt="">
-                        @endif
-
-                        <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
-                            aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
-                            <h6 class="dropdown-header d-flex align-items-center">
-                                @if (Auth::user()->foto_profile != null)
-                                    <img class="dropdown-user-img"
-                                        src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
-                                @elseIf (Auth::user()->avatar != null)
-                                    <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
-                                @else
-                                    <img class="dropdown-user-img"
-                                        src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                            <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
+                                aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+                                <h6 class="dropdown-header d-flex align-items-center">
+                                    @if (Auth::user()->foto_profile != null)
+                                        <img class="dropdown-user-img"
+                                            src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                    @elseIf (Auth::user()->avatar != null)
+                                        <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
+                                    @else
+                                        <img class="dropdown-user-img"
+                                            src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                    @endif
+                                    <div class="dropdown-user-details">
+                                        <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
+                                            {{ Auth::user()->last_name }}</div>
+                                        <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                                    </div>
+                                </h6>
+                                @php
+                                    $role = Auth::user()->role_id;
+                                @endphp
+                                @if ($role == 1 || $role == 2 || $role == 3)
+                                    <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
+                                        {{ __('user_page.Dashboard') }}
+                                    </a>
                                 @endif
-                                <div class="dropdown-user-details">
-                                    <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
-                                        {{ Auth::user()->last_name }}</div>
-                                    <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
-                                </div>
-                            </h6>
-                            @php
-                                $role = Auth::user()->role_id;
-                            @endphp
-                            @if ($role == 1 || $role == 2 || $role == 3)
-                                <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
-                                    {{ __('user_page.Dashboard') }}
+                                @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
+                                    <a class="dropdown-item" href="{{ route('collaborator_list') }}">
+                                        {{ __('user_page.Collab Portal') }}
+                                    </a>
+                                @endif
+                                <a class="dropdown-item" href="{{ route('profile_index') }}">
+                                    {{ __('user_page.My Profile') }}
                                 </a>
-                            @endif
-                            @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
-                                <a class="dropdown-item" href="{{ route('collaborator_list') }}">
-                                    {{ __('user_page.Collab Portal') }}
+                                <a class="dropdown-item" href="{{ route('change_password') }}">
+                                    {{ __('user_page.Change Password') }}
                                 </a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('profile_index') }}">
-                                {{ __('user_page.My Profile') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('change_password') }}">
-                                {{ __('user_page.Change Password') }}
-                            </a>
-                            <a class="dropdown-item" href="#!"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                                <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                                {{ __('user_page.Sign Out') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                style="display: none">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            </form>
-                        </div>
+                                <a class="dropdown-item" href="#!"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                                    {{ __('user_page.Sign Out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                    style="display: none">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </form>
+                            </div>
 
-                    </a>
+                        </a>
+                    </div>
                 </div>
             @else
                 @if (Route::current()->uri() == 'villa/{id}')

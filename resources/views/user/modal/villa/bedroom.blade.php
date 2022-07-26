@@ -730,21 +730,24 @@
         document
             .getElementById("hideBathroom")
             .classList.remove("display-none");
-        document
-            .getElementById("t1")
-            .checked = false;
-        document
-            .getElementById("t1.5")
-            .checked = false;
-        document
-            .getElementById("t2")
-            .checked = false;
-        document
-            .getElementById("t2.5")
-            .checked = false;
-        document
-            .getElementById("t3")
-            .checked = false;
+
+        $("input[name='bathroom']:checked").val("");
+        $("input[name='bathroom']").removeAttr('checked');
+        // document
+        //     .getElementById("t1")
+        //     .checked = false;
+        // document
+        //     .getElementById("t1.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3")
+        //     .checked = false;
         document
             .getElementById("t3.5")
             .checked = false;
@@ -769,6 +772,7 @@
     }
 
     function hideBathroom() {
+        $("#bathroom1").val("");
         document
             .getElementById("bathroomForm")
             .classList.add("display-none");

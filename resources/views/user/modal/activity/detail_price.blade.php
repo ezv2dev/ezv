@@ -136,6 +136,13 @@
         </div>
     </div>
 </div>
+
+<script>
+     function open_detail_price() {
+        $('#modal-room').modal('show');
+     }
+</script>
+
 <script>
     function view_room(id) {
         $.ajax({

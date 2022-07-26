@@ -99,6 +99,10 @@ hr:not([size]) {
   height: 1px;
 }
 
+.modal-open{
+  position: fixed;
+}
+
 .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.347) !important;
 }
