@@ -1743,20 +1743,20 @@
                                             {{ __('user_page.Cleanliness') }}
                                         </div>
                                         <div class="col-6 ">
-                                            <div class="liner"></div>{{ $detail[0]->average_clean }}
+                                            <div class="liner" style="width: {{ $detail[0]->average_clean * 10 }}%"></div>{{ $detail[0]->average_clean }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Check In') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>
+                                            <div class="liner" style="width: {{ $detail[0]->average_check_in * 10 }}%"></div>
                                             {{ $detail[0]->average_check_in }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Value') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_value }}
+                                            <div class="liner" style="width: {{ $detail[0]->average_value * 10 }}%"></div>{{ $detail[0]->average_value }}
                                         </div>
                                     </div>
                                 </div>
@@ -1766,13 +1766,13 @@
                                             {{ __('user_page.Service') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_service }}
+                                            <div class="liner" style="width: {{ $detail[0]->average_service * 10 }}%"></div>{{ $detail[0]->average_service }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Location') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>
+                                            <div class="liner" style="width: {{ $detail[0]->average_location * 10 }}%"></div>
                                             {{ $detail[0]->average_location }}
                                         </div>
                                     </div>

@@ -33,7 +33,7 @@
     </style>
     <section class="h-100 w-100">
         <div class="row m-0">
-            <div class="col-lg-5"
+            <div class="col-md-5"
                 style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(255, 225, 225, 0.5)), url('https://source.unsplash.com/random/?bali,villa,hotel,adventure,restaurant'); background-size: cover; background-position: center; height: 100vh;">
                 <div class="top-logo">
                     <a href="{{ route('partner_dashboard') }}" class="navbar-brand"
@@ -43,12 +43,18 @@
                 </div>
                 <div id="text">
                     <h1 class="headingWh" style="text-align: center; color: #fff;"> What type you want to add?</h1>
-                    <h4
-                        style="text-align: center; color: #fff; font-weight: 400; font-family: 'Poppins', sans-serif !important;">
+                    <h4 class="d-md-block"
+                        style="text-align: center; color: #fff; font-weight: 400; font-family: 'Poppins', sans-serif !important; display: none;">
                         Please Select Type First</h4>
+                    <h4 class="d-md-none"
+                        style="text-align: center;">
+                        <a href="#type-list" class="text-decoration-none" style="color: #fff; font-weight: 400; font-family: 'Poppins', sans-serif !important;">
+                            Click here to Select Type
+                        </a>
+                    </h4>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-md-7" id="type-list">
                 <div style="padding-left: 20px; padding-right:20px; margin-top: 12.5%;">
                     <div class="form-group">
                         <div class="row my-5">
