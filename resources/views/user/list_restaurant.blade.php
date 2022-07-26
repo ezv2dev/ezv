@@ -96,8 +96,7 @@
                                         $isChecked = '';
                                         $filterIds = explode(',', request()->get('fSubCategory'));
                                     @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                    style="color: #ff7400 !important;"
-                    @endif>
+                                    style="color: #ff7400 !important;"@endif>
                     </i>
                 </div>
                 <div>

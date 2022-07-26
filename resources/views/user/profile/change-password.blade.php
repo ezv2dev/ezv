@@ -52,6 +52,20 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .relative{
+            position:relative;
+        }
+        .icon-input-container{
+            position:absolute;
+            right:.5rem;
+            top:50%;
+            transform:translateY(-50%);
+            background:transparent;
+            outline:none;
+            border:0;
+        }
+    </style>
 </head>
 <body>
 <div id="page-container">
@@ -81,35 +95,44 @@
                 @method('PATCH')
 
                 <h5>Change Password</h5>
-                <label class="label" for="old_password">Current Password</label>
-                <input type="password" name="old_password" id="old_password"
-                    class="form-control adminlisting-font mb-2" size="50" placeholder="Old Password">
-
-                @error('old_password')
-                <div style="color: red; margin-top: 10px;">
-                    {{ $message }}
+                <div class="form-group">
+                    <label class="label" for="old_password">Current Password</label>
+                    <div class="relative">
+                        <input type="password" name="old_password" id="old_password"
+                            class="form-control adminlisting-font mb-2" size="50" placeholder="Old Password">
+                        <button type="button" class="icon-input-container">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </button>
+                    </div>
+    
+                    <span class="invalid-feedback" role="alert"></span>
                 </div>
-                @enderror
-
-                <label class="label" for="password">New Password</label>
-                <input type="password" name="password" id="password" class="form-control adminlisting-font mb-2"
-                    size="50" placeholder="New Password">
-
-                @error('password')
-                <div class="text-danger mt-2">
-                    {{ $message }}
+                
+                <div class="form-group">
+                    <label class="label" for="password">New Password</label>
+                    <div class="relative">
+                        <input type="password" name="password" id="password" class="form-control adminlisting-font mb-2"
+                            size="50" placeholder="New Password">
+                        <button type="button" class="icon-input-container">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </button>
+                    </div>
+    
+                    <span class="invalid-feedback" role="alert"></span>
                 </div>
-                @enderror
 
-                <label class="label" for="password_confirmation">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation"
-                    class="form-control adminlisting-font mb-2" size="50" placeholder="Confirm Password">
-
-                @error('password_confirmation')
-                <div class="text-danger mt-2">
-                    {{ $message }}
+                <div class="form-group">
+                    <label class="label" for="password_confirmation">Confirm Password</label>
+                    <div class="relative">
+                        <input type="password" name="password_confirmation" id="password_confirmation"
+                            class="form-control adminlisting-font mb-2" size="50" placeholder="Confirm Password">
+                        <button type="button" class="icon-input-container">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </button>
+                    </div>
+    
+                    <span class="invalid-feedback" role="alert"></span>
                 </div>
-                @enderror
                 <button type="submit"
                     style="border-radius: 5px; color: white; font-size: 12px; padding: 9px; box-sizing: border-box; margin-top: 9px; background-color: #FF7400;">Update
                     password</button>
@@ -121,7 +144,7 @@
         {{-- modal laguage and currency --}}
 
         {{-- modal login --}}
-        @include('user.modal.auth.login_register')
+        {{--@include('user.modal.auth.login_register')--}}
         {{-- @include('user.modal.user.bar_modal') --}}
 
         <!-- Footer -->
@@ -147,7 +170,6 @@
             });
         });
     </script>
-
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
 
     <!-- jQuery (required for Magnific Popup plugin) -->
@@ -182,7 +204,72 @@
         <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
         {{-- Search Location --}}
         <script>
+            //show password
+            $('.icon-input-container').on('click',function(){
+                let parent = $(this).parent()
+                let icon = $(this).find('.fa-solid')
+                if(icon.hasClass('fa-eye')){
+                    icon.removeClass('fa-eye')
+                    icon.addClass('fa-eye-slash')
+                    parent.find('.form-control').get(0).type = 'password'
+                }else{
+                    icon.removeClass('fa-eye-slash')
+                    icon.addClass('fa-eye')
+                    parent.find('.form-control').get(0).type = 'text'
+                }
+            })
+
+            //validasi form when on keyup
+            $('.form-control').on('keyup', function(){
+                validate($(this))
+            })
+
+            //validasi form when on focusout
+            $('.form-control').on('focusout', function(){
+                validate($(this))
+            })
+
+            async function validate(input){
+                let parentInput = input.parent()
+                let messageContainer = parentInput.parent().find('.invalid-feedback')
+                let iconInput = parentInput.find('.icon-input-container')
+                // reset error style
+                // await resetErrorStyle(input, parentInput)
+                console.log(input.val(), !input.val())
+                if(!input.val()){
+                    setErrorStyle(input, messageContainer, iconInput)
+                    messageContainer.text('{{ __('auth.empty_password') }}')
+                }else{
+                    if(input.val().length < 8){
+                        setErrorStyle(input, messageContainer, iconInput)
+                        messageContainer.text('{{ __('auth.min_password') }}')
+                    }else if(input.attr('id') == 'password_confirmation'){
+                        if(input.val() != $('#password').val()){
+                            setErrorStyle(input, messageContainer, iconInput)
+                            messageContainer.text('{{ __('auth.invalid_password') }}')
+                        }
+                    }else{
+                        resetErrorStyle(input, messageContainer, iconInput)
+                    } 
+                }
+            }
+            
+            function setErrorStyle(input, messageContainer, iconInput){                
+                input.hasClass('is-invalid') ? '' : input.addClass('is-invalid')
+                iconInput.hide()
+                messageContainer.show()
+            }
+
+            function resetErrorStyle(input, messageContainer, iconInput) {
+                input.removeClass('is-invalid')
+                iconInput.show()
+                messageContainer.hide()
+                messageContainer.text('')
+            }
+
             $(document).ready(() => {
+
+
                 if (window.scrollY == 0 && window.innerWidth <= 991) {
                     document.getElementById("ul").style.display = "none";
                 }

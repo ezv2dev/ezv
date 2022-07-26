@@ -68,10 +68,10 @@
 }
 
 .right-content {
-    position: absolute;
     border: solid 1px #ff7400;
     padding: 20px;
     border-radius: 12px;
+    margin-left: 15px;
 }
 
 .right-content ul li {

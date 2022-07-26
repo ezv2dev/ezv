@@ -139,15 +139,14 @@
                                         $isChecked = '';
                                         $filterIds = explode(',', request()->get('filter'));
                                     @endphp @if (in_array($item->id_hotel_filter, $filterIds))
-                                    style="color: #ff7400 !important;"
-                    @endif>
-                    </i>
-                </div>
-                <div class="list-description {{ $textColor }} translate-text-group-items">
-                    {{ $item->name }}
-                </div>
-            </div>
-            @endforeach
+                                    style="color: #ff7400 !important;"@endif>
+                                </i>
+                            </div>
+                            <div class="list-description {{ $textColor }} translate-text-group-items">
+                                {{ $item->name }}
+                            </div>
+                        </div>
+                    @endforeach
 
             <div class="grid-sub-cat-content-container text-13 list-description {{ $textColor }}"
                 onclick="modalFiltersHotel()">
