@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-edit_bedroom" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h7 class="modal-title">{{ __('user_page.Edit Bedroom, Bathroom, Adult, & Children') }}</h7>

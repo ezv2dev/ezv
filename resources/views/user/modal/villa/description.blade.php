@@ -10,7 +10,7 @@
             <div class="modal-body" style="padding: 1rem 2rem 2rem 2rem !important;" id="modalDescriptionVilla">
                 {!! $villa[0]->description !!}
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer border-0"></div>
         </div>
     </div>
 </div>

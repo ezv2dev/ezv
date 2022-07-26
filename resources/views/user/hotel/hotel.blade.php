@@ -4632,7 +4632,7 @@
             var content = document.getElementById("name-content");
             form.classList.remove("d-block");
             content.classList.remove("d-none");
-            formInput.value = '{{ $hotel[0]->name }}';
+            formInput.value = nameHotelBackup;
 
             if (formInput.value == 'Hotel Name Here') {
                 formInput.value = '';
@@ -4811,6 +4811,13 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content;
+
+                let galleryDiv = $('.gallery');
+                let galleryLength = galleryDiv.find('a').length;
+
+                if (galleryLength == 0) {
+                    $('.gallery').html("");
+                }
 
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +

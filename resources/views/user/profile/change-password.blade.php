@@ -111,6 +111,9 @@
                 transform: rotate(360deg);
             }
         }
+        .padding-right-custom{
+            padding-right:34px;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +128,11 @@
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
         <div class="col-lg-12 home-content">
+            
+            <div class="alert alert-success alert-dismissible d-none" id="alertSuccess" role="alert">
+                Ganti password berhasil! 
+            </div>
+            
             @if (session('success'))
             <div class="col-12">
                 <div style="background-color: #CCEEE1 !important; color: #005937 !important; " class="alert alert-danger alert-dismissible" role="alert">
@@ -148,7 +156,7 @@
                     <label class="label" for="old_password">Current Password</label>
                     <div class="relative">
                         <input type="password" name="old_password" id="old_password"
-                            class="form-control adminlisting-font mb-2" size="50" placeholder="Old Password">
+                            class="form-control adminlisting-font mb-2 padding-right-custom" size="50" placeholder="Old Password">
                         <button type="button" class="icon-input-container">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
@@ -160,7 +168,7 @@
                 <div class="form-group">
                     <label class="label" for="password">New Password</label>
                     <div class="relative">
-                        <input type="password" name="password" id="password" class="form-control adminlisting-font mb-2"
+                        <input type="password" name="password" id="password" class="form-control adminlisting-font mb-2 padding-right-custom"
                             size="50" placeholder="New Password">
                         <button type="button" class="icon-input-container">
                             <i class="fa-solid fa-eye-slash"></i>
@@ -174,7 +182,7 @@
                     <label class="label" for="password_confirmation">Confirm Password</label>
                     <div class="relative">
                         <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control adminlisting-font mb-2" size="50" placeholder="Confirm Password">
+                            class="form-control adminlisting-font mb-2 padding-right-custom" size="50" placeholder="Confirm Password">
                         <button type="button" class="icon-input-container">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
@@ -183,7 +191,7 @@
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
                 <button type="submit"
-                    style="border-radius: 5px; color: white; font-size: 12px; padding: 9px; box-sizing: border-box; margin-top: 9px; background-color: #FF7400;">Update
+                    style="border-radius: 5px; color: white; font-size: 12px; padding: 9px; box-sizing: border-box; margin-top: 9px; background-color: #FF7400; border:0px; outline:none;">Update
                     password</button>
             </form>
         </div>
@@ -269,12 +277,7 @@
             })
 
             //validasi form when on keyup
-            $('.form-control').on('keyup', function(){
-                validate($(this))
-            })
-
-            //validasi form when on focusout
-            $('.form-control').on('focusout', function(){
+            $('.form-control').on('keyup focusout', function(){
                 validate($(this))
             })
 
@@ -296,12 +299,21 @@
                             url: $(this).attr('action'),
                             data: $(this).serialize(),
                             dataType: 'json',
-                            success: function( data ){
-                                location.reload();                        
+                            success: function( data ){  
+                                $('#alertSuccess').removeClass('d-none')
+                                $('.container-loading-animation').addClass('d-none')
+
+                                $.each(input, function(index, value){
+                                    $(input[index]).val('')
+                                })
                             },
                             error: function( response ){    
                                 if(response.status == 200){
-                                    location.reload();                        
+                                    $('.container-loading-animation').addClass('d-none')
+                                    $('#alertSuccess').removeClass('d-none') 
+                                    $.each(input, function(index, value){
+                                        $(input[index]).val('')
+                                    })
                                 }else{
                                     var errors = response.responseJSON;
                                     $.each(errors.errors,function (el, val) {

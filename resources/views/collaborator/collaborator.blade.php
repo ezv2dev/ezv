@@ -1037,6 +1037,19 @@
                         {{-- language --}}
 
                         <ul class="stories inner-wrap">
+                            @if (Auth::guest() || Auth::user()->role_id == 4)
+                                @if ($stories->count() == 0 && $video->count() == 0)
+                                    <li class="story">
+                                        <div class="img-wrap">
+                                            <a type="button"
+                                                onclick="requestVideo({'id': '{{ $villa[0]->created_by }}', 'name': '{{ $villa[0]->name }}'})">
+                                                <img class="lozad" src="{{ LazyLoad::show() }}"
+                                                    data-src="{{ URL::asset('assets/2.png') }}">
+                                            </a>
+                                        </div>
+                                    </li>
+                                @endif
+                            @endif
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     @if ($stories->count() == 0)
@@ -1221,7 +1234,7 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                         <a href="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
                                             class="img-lightbox photosGrid__Photo"
                                             style="background-image: url('{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}')">
@@ -1230,7 +1243,7 @@
                                                 title="{{ $item->caption }}">
                                         </a>
                                         @auth
-                                            @if (Auth::user()->id == $profile->created_by)
+                                        @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $profile->created_by)
                                                 <span class="edit-icon">
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" type="button"><i
@@ -1241,7 +1254,9 @@
                                                             class="fa fa-arrows"></i></button>
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" href="javascript:void(0);"
-                                                        onclick="delete_photo_photo({'id': `{{ $profile->id_collab }}`, 'id_photo': `{{ $item->id_photo }}`})"><i
+                                                        data-id="{{ $profile->id_collab }}"
+                                                        data-photo="{{ $item->id_photo }}"
+                                                        onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
                                             @endif
@@ -2475,7 +2490,8 @@
                             $id = $item->id_photo;
                             $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionPhotoGallery{{ $id }}">
                                 <img src="{{ asset('foto/collaborator/' . $profile->uid . '/' . $item->name) }}"
                                     title="{{ $name }}">
                             </li>
@@ -2515,7 +2531,8 @@
                             $id = $item->id_video;
                             $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionVideoGallery{{ $id }}">
                                 <video
                                     src="{{ asset('foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -3733,35 +3750,52 @@
     {{-- Sweetalert Function Delete Photo Gallery --}}
     <script>
         function delete_photo_photo(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let photo = ids.getAttribute("data-photo");
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
+                title: `{{ __('user_page.Are you sure?') }}`,
+                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, deleted it',
-                cancelButtonText: 'Cancel'
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/collab/${ids.id}/delete/photo/photo/${ids.id_photo}`,
+                        url: `/collab/${id}/delete/photo/photo/${photo}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
                             }
                         },
-                        success: async function(data) {
+                        success: async function(response) {
                             // console.log(data.message);
-                            await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            // await Swal.fire('Deleted', data.message, 'success');
+                            // location.reload();
+
+                            await Swal.fire('Deleted', response.message, 'success');
+                            $(`#displayPhoto${photo}`).remove();
+                            $("#positionPhotoGallery"+photo).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
+                            $gallery.refresh();
                         }
                     });
                 } else {
-                    Swal.fire('Cancel', 'Canceled Deleted Data', 'error')
+                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                        'error')
                 }
             });
         };
@@ -3770,22 +3804,23 @@
     {{-- Sweetalert Function Delete Video Gallery --}}
     <script>
         function delete_photo_video(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let video = ids.getAttribute("data-video");
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
+                title: `{{ __('user_page.Are you sure?') }}`,
+                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, deleted it',
-                cancelButtonText: 'Cancel'
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/collab/${ids.id}/delete/photo/video/${ids.id_video}`,
+                        url: `/collab/${id}/delete/photo/video/${video}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
@@ -3793,12 +3828,18 @@
                         },
                         success: async function(data) {
                             // console.log(data.message);
+                            // await Swal.fire('Deleted', data.message, 'success');
+                            // location.reload();
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $("#displayVideo" + video).remove();
+                            $("#positionVideoGallery" + video).remove();
+                            $("#displayStoryVideo" + video).remove();
+                            sliderRestaurant();
                         }
                     });
                 } else {
-                    Swal.fire('Cancel', 'Canceled Deleted Data', 'error')
+                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                        'error')
                 }
             });
         };
@@ -3919,6 +3960,8 @@
                 $('#content-tab-currency').addClass('active');
             }
     </script>
+
+    @include('components.promotion.mobile-app')
 </body>
 
 </html>

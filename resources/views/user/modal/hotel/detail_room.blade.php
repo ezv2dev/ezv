@@ -13,16 +13,14 @@
         height: 100%;
     }
 
-    .sticky-div-modal
-    {
+    .sticky-div-modal {
         position: -webkit-sticky;
         position: sticky;
         top: 0;
         background-color: white;
     }
 
-    .image-content
-    {
+    .image-content {
         border-radius: 25px;
         height: 400px;
     }
@@ -32,8 +30,7 @@
 <div class="modal fade reset-padding" id="modal-room" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen" role="document" style="overflow-y: initial !important">
-        <div class="modal-content"
-            style="background: white;">
+        <div class="modal-content" style="background: white;">
             <div class="modal-header modal-header-amenities">
                 <h5 class="modal-title">Room Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -47,15 +44,17 @@
                         <h2 id="detail-room-type"></h2>
                         <p>
                             <i class="fas fa-expand"></i> <span id="detail-room-size"></span> m<sup>2</sup><br>
-                            <i class="fas fa-user-friends"></i> <span id="detail-room-capacity"></span> {{ __('user_page.People') }}<br>
+                            <i class="fas fa-user-friends"></i> <span id="detail-room-capacity"></span>
+                            {{ __('user_page.People') }}<br>
                             <i class="fas fa-bed"></i> <span id="detail-room-bed"></span> {{ __('user_page.Beds') }}<br>
-                            <i class="fas fa-door-open"></i> <span id="detail-room-total"></span> {{ __('user_page.Rooms') }}
+                            <i class="fas fa-door-open"></i> <span id="detail-room-total"></span>
+                            {{ __('user_page.Rooms') }}
                         </p>
 
                         <h2>Room Amenities</h2>
                         <h4><i class="fas fa-shower"></i> Bathroom</h4>
                         <ul style="list-style-type:circle">
-                           <div id="detail-room-bathroom"></div>
+                            <div id="detail-room-bathroom"></div>
                         </ul>
 
                         <h4><i class="fas fa-bed"></i> Bedroom</h4>
@@ -86,8 +85,8 @@
 
                         <div class="content list-image-content">
                             <div class="wrap-modal-slider">
-                                <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="false" data-arrows="true">
-                                    <div id="slider-photo-room" ></div>
+                                <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
+                                    data-dots="false" data-arrows="true" id="slider-photo-room">
                                 </div>
                             </div>
                         </div>
@@ -95,9 +94,9 @@
                         <h2>Room Option</h2>
                         <div class="col-12 m-0 ps-2 pe-2 row ">
                             <div class="col-2 border border-secondary border-end-0">
-                            @for ($i = 0; $i < 2; $i++)
-                                <i class="fas fa-user"></i>
-                            @endfor
+                                @for ($i = 0; $i < 2; $i++)
+                                    <i class="fas fa-user"></i>
+                                @endfor
                             </div>
                             <div class="col-4 border border-secondary border-end-0">
                                 <div class="price-tag">
@@ -146,12 +145,10 @@
                 $('#detail-room-total').html(data["detail_room"].number_of_room);
 
                 //data slider photo
-                if(data["photo"].length > 0)
-                {
+                if (data["photo"].length > 0) {
                     let content = ``;
 
-                    for($i = 0; $i < data["photo"].length; $i++)
-                    {
+                    for ($i = 0; $i < data["photo"].length; $i++) {
                         $('#slider-photo-room').append(`
                             <a class="grid-image-container">
                                 <img class="brd-radius img-fluid grid-image" style="height: 200px; display: block;" src="{{ env('APP_URL') }}/foto/hotel/12/${data["photo"][$i].name}" alt="">
@@ -161,10 +158,8 @@
                 }
 
                 //bathroom
-                if(data["bathroom"].length > 0)
-                {
-                    for($i = 0; $i < data["bathroom"].length; $i++)
-                    {
+                if (data["bathroom"].length > 0) {
+                    for ($i = 0; $i < data["bathroom"].length; $i++) {
                         $('#detail-room-bathroom').append(`
                            <li>${data["bathroom"][$i].name}</li>
                         `);
@@ -172,10 +167,8 @@
                 }
 
                 // bedroom
-                if(data["bedroom"].length > 0)
-                {
-                    for($i = 0; $i < data["bedroom"].length; $i++)
-                    {
+                if (data["bedroom"].length > 0) {
+                    for ($i = 0; $i < data["bedroom"].length; $i++) {
                         $('#detail-room-bedroom').append(`
                            <li>${data["bedroom"][$i].name}</li>
                         `);
@@ -183,10 +176,8 @@
                 }
 
                 //kitchen
-                if(data["kitchen"].length > 0)
-                {
-                    for($i = 0; $i < data["kitchen"].length; $i++)
-                    {
+                if (data["kitchen"].length > 0) {
+                    for ($i = 0; $i < data["kitchen"].length; $i++) {
                         $('#detail-room-kitchen').append(`
                            <li>${data["kitchen"][$i].name}</li>
                         `);
@@ -194,10 +185,8 @@
                 }
 
                 //safety
-                if(data["safety"].length > 0)
-                {
-                    for($i = 0; $i < data["safety"].length; $i++)
-                    {
+                if (data["safety"].length > 0) {
+                    for ($i = 0; $i < data["safety"].length; $i++) {
                         $('#detail-room-safety').append(`
                            <li>${data["safety"][$i].name}</li>
                         `);
@@ -205,16 +194,14 @@
                 }
 
                 //service
-                if(data["service"].length > 0)
-                {
-                    for($i = 0; $i < data["service"].length; $i++)
-                    {
+                if (data["service"].length > 0) {
+                    for ($i = 0; $i < data["service"].length; $i++) {
                         $('#detail-room-service').append(`
                            <li>${data["service"][$i].name}</li>
                         `);
                     }
                 }
-
+                $('.js-slider-test').slick();
                 $('#modal-room').modal('show');
             },
             error: function(jqXHR, exception) {
@@ -239,7 +226,7 @@
             },
         })
 
-        $('#modal-room').on('shown.bs.modal', function (e) {
+        $('#modal-room').on('shown.bs.modal', function(e) {
             $('.js-slider-test').slick('setPosition');
             $('.wrap-modal-slider').addClass('open');
         });

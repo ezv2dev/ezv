@@ -5,27 +5,6 @@
         float: left;
     }
 
-    .modal-header3 {
-        border-bottom: none !important;
-        padding: 2rem 3rem 1rem 3rem;
-        padding-left: 2.8rem !important;
-        padding-bottom: 2rem !important;
-    }
-    .modal-header3 h3 {
-        margin: 0;
-        padding: 20px 0px;
-    }
-
-    .modal-body3 {
-        padding: 0rem 2rem 2rem 2rem !important;
-        height: 490px !important;
-        overflow-y: auto !important;
-    }
-
-    .modal-content3 {
-        width: 60% !important;
-    }
-
     .guest-safety-container {
         padding-bottom: 10px;
     }
@@ -337,14 +316,14 @@
 </style>
 
 <div id="modal-cancelation-policy" class="modal fade bs-example-modal-lg" style="font-family: 'Poppins' !important">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content modal-content3" style="border-radius:15px; background: #fff;">
-            <div class="modal-header modal-header3 filter-modal d-flex justify-content-between">
-                <h3 style="margin: 0;padding-top: 20px;padding-bottom: 20px;">{{ __('user_page.Cancellation Policy') }}</h3>
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg">
+        <div class="modal-content" style="background: #fff;">
+            <div class="modal-header filter-modal d-flex justify-content-between">
+                <h3 class="mb-0">{{ __('user_page.Cancellation Policy') }}</h3>
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body modal-body3">
+            <div class="modal-body">
                 <div class="tabbable column-wrapper">
                     <form method="POST" action="{{ route('villa_update_cancellation_policy') }}">
                         @csrf
