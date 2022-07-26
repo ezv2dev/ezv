@@ -99,8 +99,23 @@
             font-size: 12px;
             margin-bottom: 3px;
         }
-        .footer-social {
+        #footer-soc-icon {
             color: #fff;
+        }
+        #footer-soc-icon {
+            width: 35px;
+            height: 35px;
+            border: solid 1px #9b9b9b;
+            padding: 10px 8px;
+            border-radius: 50%;
+            text-align: center;
+            color: #9b9b9b;
+            margin-right: 5px;
+        }
+
+        #footer-soc-icon:hover {
+            border: solid 1px #ff7400;
+            color: #ff7400;
         }
     </style>
 
@@ -169,16 +184,16 @@
             <div class="col-12">
                 <div class="footer-social text-center">
                     <a href="https://www.facebook.com/ezvillasbali/" target=_blank">
-                        <i class="fab fa-facebook"></i>
+                        <i id="footer-soc-icon" class="fab fa-facebook"></i>
                     </a>
                     <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target=_blank">
-                        <i class="fab fa-instagram"></i>
+                        <i id="footer-soc-icon" class="fab fa-instagram"></i>
                     </a>
                     <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target=_blank">
-                        <i class="fa fa-envelope"></i>
+                        <i id="footer-soc-icon" class="fa fa-envelope"></i>
                     </a>
                     <a href="call:+6285792260929" style="margin-left: 10px;" target=_blank">
-                        <i class="fa fa-phone"></i>
+                        <i id="footer-soc-icon" class="fa fa-phone"></i>
                     </a>
                 </div>
             </div>

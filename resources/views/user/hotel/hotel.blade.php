@@ -2419,7 +2419,7 @@
                                     <div class="member-profile">
                                         <h4>{{ __('user_page.Hosted by') }} {{ $createdby[0]->first_name }}</h4>
                                         <p>{{ __('user_page.Joined in') }}
-                                            {{ date_format($hotel[0]->ownerHotel->created_at, 'M Y') }}</p>
+                                            {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}</p>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -2427,9 +2427,21 @@
                                         <h4>Host Profile</h4>
                                         <p>
                                             About
-                                            <span>{{ $hotel[0]->ownerHotel->about ?? '-' }}</span><br>
+                                            <span>
+                                                @if ($hotel[0]->ownerHotel == null)
+                                                    -
+                                                @else
+                                                    {{ $hotel[0]->ownerHotel->about ?? '-' }}
+                                                @endif
+                                            </span><br>
                                             Location
-                                            <span>{{ $hotel[0]->ownerHotel->location ?? '-' }}</span>
+                                            <span>
+                                                @if ($hotel[0]->ownerHotel == null)
+                                                    -
+                                                @else
+                                                    {{ $hotel[0]->ownerHotel->location ?? '-' }}
+                                                @endif
+                                            </span>
                                         </p>
                                     </div>
                                 </div>

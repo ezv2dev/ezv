@@ -142,8 +142,7 @@ class HotelDetailController extends Controller
     public function hotel_details(Request $request)
     {
         $data = Hotel::with([
-            'location',
-            'hotel_room.hotelType', 'amenities', 'detailReview'
+            'location', 'amenities', 'detailReview'
         ])->where('id_hotel', $request->id)->first();
 
         if ($data) {
@@ -321,26 +320,19 @@ class HotelDetailController extends Controller
 
     public function hotel($id)
     {
-        $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel')->where('id_hotel', $id)->get();
+        $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData')->where('id_hotel', $id)->get();
 
         // check if the editor does not have authorization
         if (auth()->check()) {
             $find = Hotel::find($id);
             abort_if(!$find, 404);
             if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $find->created_by) {
-                $hotel = Hotel::with('hotel_room', 'location')->where('id_hotel', $id)->get();
+                $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData')->where('id_hotel', $id)->get();
             }
         }
 
-        abort_if(!$hotel, 404);
-
         // increase views
         $hotelAddViews = Hotel::find($id)->increment('views');
-
-        // appends additional data to hotel list
-        // $hotel->each(function ($item, $key) {
-        //     $item->setAppends(['villa_nearby', 'activity_nearby', 'restaurant_nearby']);
-        // });
 
         $hotelRoomPhoto = HotelRoomPhoto::where('id_hotel', $id)->get();
 

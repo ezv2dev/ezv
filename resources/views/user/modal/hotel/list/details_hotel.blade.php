@@ -321,11 +321,13 @@
             display: block !important;
             margin: 0px !important;
         }
+
         #modal-details .modal-dialog .modal-content {
             width: 100vw !important;
             height: 100vh !important;
             border-radius: 0px !important;
         }
+
         #modal-details .modal-dialog .modal-content .modal-body .tabbable {
             height: 100% !important;
         }
@@ -348,6 +350,7 @@
         <div class="modal-content modal-content-login" style="border-radius:15px;">
             <div class="modal-header">
                 <div class="col-lg-10">
+                    <h3 class="name-hotel" style="margin-bottom: 0;"></h3>
                     <ul class="nav filter-language-option-container nav-tabs sideTab column"
                         style="display: flex; flex-wrap: nowrap; padding: 0px;">
                         <li id="trigger-tab-description" onclick="switchTabHotel('description')" class="active"><a
@@ -367,11 +370,9 @@
                 <div class="tabbable column-wrapper col-12">
                     <div class="tab-content tab-content-language column rigth" id="tabs">
                         <div class="tab-pane active" id="content-tab-description">
-                            <h3 class="name-hotel"></h3>
-                            <p id="descHotel"></p>
+                            <p id="descHotel" style="margin-bottom: 0;"></p>
                         </div>
                         <div class="tab-pane" id="content-tab-facilities">
-                            <h3 class="name-hotel"></h3>
                             <div id="amenitiesList">
                                 <div class="col-md-6 mb-2">
                                     <span class='translate-text-group-items'>
@@ -382,7 +383,6 @@
                         <div class="tab-pane" id="content-tab-reviews">
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <h3 class="name-hotel"></h3>
                                 </div>
                                 <div>
                                     <h3 id="average_show"></h3>
