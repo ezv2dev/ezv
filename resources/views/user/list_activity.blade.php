@@ -82,17 +82,16 @@
                                             $isChecked = '';
                                             $filterIds = explode(',', request()->get('fSubCategory'));
                                         @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                        style="color: #ff7400 !important;"
-                        @endif>
-                        </i>
-                </div>
-                <div>
-                    <span class="translate-text-group-items list-description {{ $textColor }}">
-                        {{ $item->name }}
-                    </span>
-                </div>
-            </div>
-            @endforeach
+                                        style="color: #ff7400 !important;"@endif>
+                                    </i>
+                                </div>
+                                <div>
+                                    <span class="translate-text-group-items list-description {{ $textColor }}">
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
             @if ($subCategoryAll->count() > 6)
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
