@@ -53,22 +53,6 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        .blog-content {
-            max-width: 100%;
-        }
-
-        .blog-content p {
-            text-align: justify;
-        }
-
-        .blog-content img {
-            max-width: 100%;
-            margin-bottom: 20px;
-            aspect-ratio: 2/1;
-            object-fit: cover;
-        }
-    </style>
 </head>
 <body>
 <div id="page-container">
@@ -78,13 +62,13 @@
         @include('layouts.user.header_minimaliste')
     </section>
     <div class="container-fluid blog-header">
-        <div class="container vert-middle">
+        <div class="vert-middle">
             <div class="privacy-title mb-4"><h2>Blog</h2>
             </div>
         </div>
     <br>
     </div>
-    <nav aria-label="breadcrumb" class="container">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('blog')}}">Blog</a></li>
@@ -94,8 +78,11 @@
     <section class="blog-body">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="blog-content">
+            <div class="row">
+                <!-- ad-foreach disini -->
+	            <div class="blog-content">
                 <h1>Ramai Ramai Salahkan Jokowi</h1>
+                <p class="smaller">By EZV on 12/12-2022</p>
                 <img src="https://source.unsplash.com/random/?jokowi">
                 <p>Beberapa hari terakhir ini mata saya tertuju pada apa yang terjadi di Jakarta, ibukota negera kita tercinta, Indonesia. Kota yang menjadi ikonnya Indonesia ini kembali dikepung banjir. Juga seperti tahun-tahun sebelumnya, banjir kali ini hanya akan menyisakan penderitaan bagi warga yang mengalaminya. Konon banjir pada bulan Januari 2013 ini merupakan banjir terbesar yang pernah terjadi setidaknya dalam kurun waktu 10 tahun terakhir. Hampir 1/2 kota jakarta terendam, dengan ketinggian air di beberapa tempat bahkan mencapai 3 meter.</p>
                 <p>Dunia maya pun menjadi gempar, saling lempar kesalahan pun mewarnai komentar warga dalam setiap berita mengenai banjir Jakarta yang muncul di duina maya. Ada yang menyalahkan Fauzy Bowo atau Foke (Mantan Gubernur DKI) sebagai penyebab bencana ini terjadi. Konon Bang Kumis yang tidak menyiapkan infrastruktur yang benar pada masa dia menjadi pemimpin Jakarta.</p>
@@ -106,7 +93,30 @@
                 <p>Atau mungkin warga Jakarta menganggap Jokowi - Ahok adalah superman yang mampu mengubah wajah kota hanya dalam hitungan bulan ? Padahal seorang Jokowi harus menjalani beberapa tahapan dan mekanisme untuk membuat suatu terobosan kebijakan untuk mengurangi atau bahkan menghilangkan bencana tahunan ini. Ada tahap-tahap yang harus dijalani, ada ketentuan-ketentuan yang harus dipatuhi. Masyarakat Jakarta semestinya tahu itu. Kalau mereka menginginkan kota tempat mereka tinggal sekarang seperti Singapore, semestinya masyarakat Jakarta juga mampu meniru disiplin warga Singapore tanpa reserve.</p>
                 <p>Semestinya warga Jakarta menyadari seorang Jokowi hanya bertugas memanage atau mengelola sumber daya yang ada untuk mendukung apa yang dilakukan oleh warganya. Kalau tidak demikian, saya yakin siapapun Jokowi yang memimpin Jakarta, permasalahan banjir tidak akan pernah tuntas.</p>
                 <p>Tak iye ?</p>
-
+                </div>
+                <h1>Also Read</h1>
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?tractor">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 2</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
+                <!-- ad-foreach disini -->
+                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 pd-lr-0">
+                    <img class="blog-img" src="https://source.unsplash.com/random/?eel">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 3</p>
+                    <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
+                    <button class="more">Read More</button>
+                </div>
+                <hr>
+                <!-- /ad-foreach disini -->
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 right-block">
@@ -118,7 +128,6 @@
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 3</a></li>
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 4</a></li>
                     <li><a href="#">Lorem Ipsum Dolor Sit Amet 5</a></li>
-                    <li><a href="{{ route('blog')}}">More...</a></li>
                 </ul>
             </div>
         </div>
@@ -190,19 +199,33 @@
         <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
         {{-- Search Location --}}
         <script>
-               $(document).scroll(function() {
-                var scrollPosition = $(document).scrollTop();
-                var scrollReference = 100;
-                if (scrollPosition >= scrollReference) {      
-                    $("#sidebar_fix").addClass('fixed');   
-                } else {
-                    $("#sidebar_fix").removeClass('fixed');
-                    $("#sidebar_fix").addClass('abs');
-                };
-            });
-        </script>
-        <script>
             $(document).ready(() => {
+                var $sidebar = $("#sidebar_fix");
+                var $sidebarHeight = $sidebar.outerHeight();
+                var $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                $(window).on("resize", function() {
+                    $sidebarHeight = $sidebar.outerHeight();
+                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                })
+                $(window).on("scroll", function() {
+                    $sidebarHeight = $sidebar.outerHeight();
+                    $blogBodyHeight = $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
+                    if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() < $blogBodyHeight - $sidebarHeight - 15) {
+                        $sidebar.addClass("fixed");
+                    }else if ($("#header-container").hasClass("fix-header") && $(this).scrollTop() > $blogBodyHeight - $sidebarHeight - 15){
+                        $sidebar.removeClass("fixed");
+                        $sidebar.addClass('abs');
+                        $sidebar.css({
+                            "top": $blogBodyHeight - $sidebarHeight - 15
+                        });
+                    }else {
+                        $sidebar.removeClass("fixed");
+                        $sidebar.addClass('abs');
+                        $sidebar.css({
+                            "top": ""
+                        });
+                    }
+                });
                 if (window.scrollY == 0 && window.innerWidth <= 991) {
                     document.getElementById("ul").style.display = "none";
                 }

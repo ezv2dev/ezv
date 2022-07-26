@@ -62,13 +62,13 @@
         @include('layouts.user.header_minimaliste')
     </section>
     <div class="container-fluid blog-header">
-        <div class="container vert-middle">
+        <div class="vert-middle">
             <div class="privacy-title mb-4"><h2>Blog</h2>
             </div>
         </div>
     <br>
     </div>
-    <nav aria-label="breadcrumb" class="container">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Blog</a></li>
@@ -83,9 +83,11 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?car">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 1</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 1</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
-                    <button class="more">Read More</button>
+                    <button class="more" onclick="window.location='{{ route('blog')}}';">Read More</button>
+                    <!-- Pleae note: href mestinya mengarah ke /blog-detail -->
                 </div>
                 <hr>
                 <!-- /ad-foreach disini -->
@@ -94,7 +96,8 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?tractor">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 2</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 2</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
                     <button class="more">Read More</button>
                 </div>
@@ -105,7 +108,8 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?missile">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 3</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 3</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
                     <button class="more">Read More</button>
                 </div>
@@ -116,7 +120,8 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?motorbike">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 4</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 4</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
                     <button class="more">Read More</button>
                 </div>
@@ -127,7 +132,8 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?scorpions">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 5</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 5</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
                     <button class="more">Read More</button>
                 </div>
@@ -138,7 +144,8 @@
                     <img class="blog-img" src="https://source.unsplash.com/random/?forest">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-                    <p class="list-header">Lorem Ipsum Dolor Sit Amet 6</p>
+                    <h1 class="list-header">Lorem Ipsum Dolor Sit Amet 6</h1>
+                    <p class="smaller">By EZV on 12/12-2022</p>
                     <p>EZV2Villa exists to help build connections between people and make the world more open and inclusive....</p>
                     <button class="more">Read More</button>
                 </div>
