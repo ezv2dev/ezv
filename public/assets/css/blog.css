@@ -94,3 +94,16 @@
         padding: 1rem 2rem;
     }
 }
+
+.abs {
+    position: absolute;
+}
+.fixed {
+    position: fixed;
+    top: 130px !important;
+}
+@media only screen and (max-width: 767px) {
+    .right-block {
+        display: none;
+    }
+}
