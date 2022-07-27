@@ -1744,35 +1744,44 @@
             <div class="list-villa-user right-bar">
                 @auth
                     <div class="social-share-container" style="padding: 4px; border-radius: 9px;">
-                        <div class="text-center icon-center">
-                            <div style="width: 48px;">
-                                @if ($profile->is_favorit)
-                                    <a href="" style="cursor: pointer;">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                            role="presentation" focusable="false"
-                                            class="favorite-button favorite-button-22 likeButtonvilla{{ $profile->id_collab }}">
-                                            <path
-                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                            </path>
-                                        </svg>
-                                        <div style="font-size: 10px; color: #aaa">
-                                            {{ __('user_page.FAVORITE') }}</div>
-                                    </a>
-                                @else
-                                    <a href="" style="cursor: pointer;">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                            role="presentation" focusable="false"
-                                            class="favorite-button favorite-button-22 likeButtonvilla{{ $profile->id_collab }}">
-                                            <path
-                                                d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                            </path>
-                                        </svg>
-                                        <div style="font-size: 10px; color: #aaa">
-                                            {{ __('user_page.FAVORITE') }}</div>
-                                    </a>
-                                @endif
+                        @php
+                            $cekCollaborator = App\Models\CollaboratorSave::where('id_collab', $profile->id_collab)
+                                ->where('id_user', Auth::user()->id)
+                                ->first();
+                        @endphp
+                        @if (!$cekCollaborator)
+                            <div style="width: 48px;" class="text-center">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $profile->id_collab }}, 'collaborator')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button favorite-button-22 likeButtoncollaborator{{ $profile->id_collab }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captFav">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
                             </div>
-                        </div>
+                        @else
+                            <div class="text-center" style="width: 48px;">
+                                <a style="cursor: pointer;"
+                                    onclick="likeFavorit({{ $profile->id_collab }}, 'collaborator')">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        class="favorite-button-active favorite-button-22 unlikeButtoncollaborator{{ $profile->id_collab }}"
+                                        style="display: unset; margin-left: 0px;">
+                                        <path
+                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                        </path>
+                                    </svg>
+                                    <div style="color: #aaa; font-size: 10px;" id="captCan">
+                                        {{ __('user_page.FAVORITE') }}</div>
+                                </a>
+                            </div>
+                        @endif
                         <div class="text-center icon-center">
                             <div type="button" style="margin: 0px; color: #ff7400; font-size: 12px;">
                                 <svg class="detail-share-button" xmlns="http://www.w3.org/2000/svg"
@@ -4078,6 +4087,11 @@
     </script>
 
     @include('components.promotion.mobile-app')
+    {{-- Like --}}
+    @auth
+        @include('components.favorit.like-favorit')
+    @endauth
+    {{-- End Like --}}
 </body>
 
 </html>

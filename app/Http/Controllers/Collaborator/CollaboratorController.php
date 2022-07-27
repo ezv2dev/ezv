@@ -14,6 +14,7 @@ use App\Models\CollaboratorFilter;
 use App\Models\CollaboratorLanguage;
 use App\Models\Location;
 use App\Models\CollaboratorPhoto;
+use App\Models\CollaboratorSave;
 use App\Models\CollaboratorSocialMedia;
 use App\Models\CollaboratorStory;
 use App\Models\CollaboratorVideo;
@@ -1323,5 +1324,50 @@ class CollaboratorController extends Controller
         ));
 
         return redirect()->back()->with('success', 'Your data has been update');
+    }
+
+    public function like_collaborator(Request $request, $id)
+    {
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
+        }
+
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['required', 'integer'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // check if there same favorit content
+        $checkSameFavorit = CollaboratorSave::where([
+            ['id_collab', '=', $request->id_collab],
+            ['id_user', '=', auth()->user()->id],
+        ])->first();
+
+        if ($checkSameFavorit != null) {
+            $checkSameFavorit->delete();
+            $data = 0;
+            return $data;
+        } else {
+            // otherwise, create favorit
+            $data = CollaboratorSave::create([
+                'id_collab' => $request->id_collab,
+                'id_user' => auth()->user()->id,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id
+            ]);
+
+            $data = 1;
+            return $data;
+        };
     }
 }
