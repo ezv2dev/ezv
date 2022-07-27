@@ -64,11 +64,10 @@
         .subcategory-in-sidebar{
             border: 1px solid #ccc;
             border-radius:4px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
             margin:6px;
             gap:6px;
+            padding-left:1rem;
+            display:flex;
         }
         .subcategory-in-sidebar:hover{
             cursor:pointer;
@@ -76,6 +75,10 @@
         .subcategory-in-sidebar-container > *,
         .subcategory-in-sidebar > *{
             color:#585656;
+        }
+
+        .subcategory-in-sidebar i{
+            width:30px;
         }
     </style>
 </head>
