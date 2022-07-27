@@ -119,6 +119,10 @@
             border: solid 1px #dfdfdf;
             outline: none;
         }
+
+        .last {
+            border-bottom: none !important;
+        }
     </style>
 </head>
 <body>
@@ -255,7 +259,7 @@
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                             </div>
                         </div>
-                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home10">
+                        <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion" href="#home10">
                             <a class="accordion-title">
                             Question 10
                             </a>
@@ -364,7 +368,7 @@
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                             </div>
                         </div>
-                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food10">
+                        <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food10">
                             <a class="accordion-title">
                             Question 10
                             </a>
@@ -473,7 +477,7 @@
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                             </div>
                         </div>
-                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel10">
+                        <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel10">
                             <a class="accordion-title">
                             Question 10
                             </a>
@@ -582,7 +586,7 @@
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                             </div>
                         </div>
-                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow10">
+                        <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow10">
                             <a class="accordion-title">
                             Question 10
                             </a>
@@ -694,7 +698,7 @@
                         aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                     </div>
                 </div>
-                <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion5" href="#book10">
+                <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion5" href="#book10">
                     <a class="accordion-title">
                     Question 10
                     </a>
@@ -802,7 +806,7 @@
                         aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                     </div>
                 </div>
-                <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion6" href="#membership10">
+                <div class="accordion-header last collapsed" data-toggle="collapse" data-parent="#accordion6" href="#membership10">
                     <a class="accordion-title">
                     Question 10
                     </a>
