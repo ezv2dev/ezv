@@ -2297,8 +2297,11 @@
                                         @endif
                                     @endauth
                                 </div>
-                                <p>{{ __('user_page.Joined in') }}
-                                    {{ date_format($restaurant->ownerData->created_at, 'M Y') }}</p>
+                                @if (isset($restaurant->ownerData->created_at))
+                                    <p>
+                                        {{ __('user_page.Joined in') }} {{ date_format($restaurant->ownerData->created_at, 'M Y') }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-6 owner-profile">

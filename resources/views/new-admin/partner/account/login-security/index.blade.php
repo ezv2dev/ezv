@@ -2,6 +2,21 @@
 
 @section('title', 'Login & Security - EZV2')
 
+<style>
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-10p {
+            margin-left: 10px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+        .px-max-md-0p {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+</style>
+
 @section('content_admin')
 
 <div class="page-header">
@@ -27,7 +42,7 @@
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+                <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 30px;">
                     <div class="block-content">
                         <nav aria-label="breadcrumb" style="margin-left: -10px;">
                             <ol class="breadcrumb" style="background: transparent;">
@@ -45,18 +60,18 @@
 
                 <div class="col-12">
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
                         <div class="title-bar" style="border-bottom: 2px solid #FF7400; display: inline-block;">
                             <h6><b>LOGIN</b></h6>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-login">
                             <h3><b>Login</b></h3>
                         </div>
                     </div>
-                    <div id="passwordField" class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div id="passwordField" class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <span class="lead">Password</span>
                             <a class="float-right" style="color: #FF7400; font-size: 12pt;" href="javascript:void(0);"
@@ -70,7 +85,7 @@
                     </div>
 
                     @if (session('success'))
-                    <div class="col-7" style="margin-left: 20px">
+                    <div class="col-7 ml-max-md-0p" style="margin-left: 20px">
                         <div class="alert alert-success alert-dismissible" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             {{ session('success') }}
@@ -78,7 +93,7 @@
                     </div>
                     @endif
                     @if (session('error'))
-                    <div class="col-7" style="margin-left: 20px">
+                    <div class="col-7 ml-max-md-0dp" style="margin-left: 20px">
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             {{ session('error') }}
@@ -87,8 +102,8 @@
                     @endif
                     <!-- Form Update Password -->
                     <div id="updatePasswordForm" class="col-12" style="display: none;">
-                        <div class="col-12 mt-5 d-flex">
-                            <div class="col-md-7">
+                        <div class="col-12 mt-5 d-flex px-max-md-0p">
+                            <div class="col-md-7 px-max-md-0p">
                                 <div class="legal-name" style="padding-bottom:20px;">
                                     <span class="lead">Password</span>
                                     <a class="float-right" style="color: #FF7400; font-size: 12pt;"
@@ -140,12 +155,12 @@
                     </div>
                     <!-- Form Update Password -->
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-login">
                             <h3><b>Social accounts</b></h3>
                         </div>
                     </div>
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <span class="lead">Facebook</span>
                             @if (Auth::user()->facebook_id != null)
@@ -162,7 +177,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <span class="lead">Google</span>
                             @if (Auth::user()->google_id != null)
@@ -180,14 +195,14 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-login">
                             <h3><b>Account</b></h3>
                         </div>
                     </div>
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
-                        <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
-                            <span class="lead">Deactive your account</span>
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
+                        <div class="legal-name d-flex" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
+                            <span class="lead flex-fill">Deactive your account</span>
                             <a class="float-right" style="color: #F55353; font-size: 12pt;"
                                 href="{{ route('account-delete-form') }}">Deactive</a>
                             {{-- <p class="text-muted">Not Connected</p> --}}

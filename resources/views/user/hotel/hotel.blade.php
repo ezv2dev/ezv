@@ -1700,46 +1700,51 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-8 p-0">
-                                <div class="col-12 m-0 ps-2 pe-2 row ">
-                                    <div class="col-2 border border-secondary border-end-0">
-                                        @for ($i = 0; $i < $item->capacity; $i++)
-                                            <i class="fas fa-user"></i>
-                                        @endfor
-                                    </div>
-                                    <div class="col-4 border border-secondary border-end-0">
-                                        <div class="price-tag">
-                                            <p class="price-discount mb-2">IDR {{ number_format($item->price) }}</p>
-                                            <h6 class="price-current mb-0">IDR {{ number_format($item->price) }}
-                                            </h6>
+                            <div class="col-8 p-0" id="hotelTypeDetailList">
+                                @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
+                                    <div class="col-12 m-0 ps-2 pe-2 row ">
+                                        <div class="col-2 border border-secondary border-end-0">
+                                            @for ($i = 0; $i < $item2->capacity; $i++)
+                                                <i class="fas fa-user"></i>
+                                            @endfor
                                         </div>
-                                        <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
-                                    </div>
-                                    <div class="col-4 border border-secondary border-end-0">
-                                        <div class="choice-item">
-                                            <i class="fa-solid fa-mug-saucer regular-icon"></i>
-                                            <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                        <div class="col-4 border border-secondary border-end-0">
+                                            <div class="price-tag">
+                                                <p class="price-discount mb-2">IDR
+                                                    {{ number_format($item2->discount_price) }}
+                                                </p>
+                                                <h6 class="price-current mb-0">IDR
+                                                    {{ number_format($item2->price) }}
+                                                </h6>
+                                            </div>
+                                            <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
+                                        </div>
+                                        <div class="col-4 border border-secondary border-end-0">
+                                            <div class="choice-item">
+                                                <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                                <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 border border-secondary">
+                                            <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                                                <option value="0">0</option>
+                                                <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                                    {{ number_format($item2->price) }}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-2 border border-secondary">
-                                        <select name="room-amount" id="room-amount" style="width: 3.5rem;">
-                                            <option value="0">0</option>
-                                            <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                                {{ number_format($item->price) }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                @auth
-                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;
-                                        <a type="button" onclick="add_room_details({{ $item->id_hotel_room }})"
-                                            style="font-size: 12pt; font-weight: 600; color: #ff7400;">
-                                            Add Room Details
-                                        </a>
-                                    @endif
-                                @endauth
+                                @endforeach
                             </div>
+                            @auth
+                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    &nbsp;
+                                    <a type="button" onclick="add_room_details({{ $item->id_hotel_room }}, {{ $item->id_hotel }})"
+                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">
+                                        Add Room Details
+                                    </a>
+                                @endif
+                            @endauth
                             <hr class="mt-3 mb-3">
                         </div>
                     @empty
@@ -2453,8 +2458,11 @@
                                                 @endif
                                             @endauth
                                         </div>
-                                        <p>{{ __('user_page.Joined in') }}
-                                            {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}</p>
+                                        @if (isset($hotel[0]->ownerData->created_at))
+                                            <p>
+                                                {{ __('user_page.Joined in') }} {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -4708,7 +4716,6 @@
         }
     </script>
     {{-- END UPDATE FORM --}}
-    {{-- CONTACT HOST --}}
     <script>
         function contactHostForm() {
             $('#modal-contact-host').modal('show');
@@ -4722,14 +4729,14 @@
             $('#modal-tags-hotel').modal('show');
         }
 
-
-
-
-        function add_room_details(id_room_details) {
+        function add_room_details(id_room_details, id_hotel) {
             $.ajax({
                 type: "GET",
                 url: '/hotel/room/' + id_room_details,
                 success: function(data) {
+                    $('#idHotelRoom').val(id_room_details);
+                    $('#idHotel').val(id_hotel);
+                    $('#room_details_capacity').html(``);
                     for (let i = 1; i <= data['detail_room'].capacity; i++) {
                         $('#room_details_capacity').append(`<option value="${[i]}">${[i]}</option>`);
                     }
@@ -4758,7 +4765,6 @@
             })
         }
     </script>
-    {{-- END CONTACT HOST --}}
     {{-- DROPZONE JS --}}
     <script src="{{ asset('assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
     {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}

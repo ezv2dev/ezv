@@ -2450,7 +2450,7 @@
 <!-- MAP MODAL -->
 <div class="modal fade modal-map-padding overflow-hidden" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-xl overflow-y-scroll" role="document">
+    <div class="modal-dialog modal-fullscreen modal-xl overflow-y-scroll" role="document">
         <div class="modal-content modal-map">
             <div class="modal-header modal-header-map flex-column">
                 <div class="row" style="width:100%;">

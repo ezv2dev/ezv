@@ -30,9 +30,9 @@
     </div>
     <!-- END Hero -->
     {{-- CONTENT --}}
-    <div class="container d-flex" style="margin-top: 30px;padding-bottom: 50px;">
+    <div class="container-calendar container d-flex" style="margin-top: 30px;padding-bottom: 50px;">
 
-        <div class="col-lg-4">
+        <div class="col-calendar1 col-lg-4">
             <div class="filter-calendar">
                 <div class="card" style="box-shadow: 0px 3px 15px -8px rgb(100,100,100);">
                     <div class="card-header" style="background: #ff7400;">
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-calendar2 col-lg-8">
             <div id='calendar' class="calendar"></div>
         </div>
 
