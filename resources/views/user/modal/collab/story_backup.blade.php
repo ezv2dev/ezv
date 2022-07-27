@@ -1,15 +1,15 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-edit_story" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content modal-content-story">
             <div class="modal-header">
-                <h5 class="modal-title">{{ __('user_page.Story') }}</h5>
+                <h5 class="modal-title">Story</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
                 <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
-                    id="updateStoryForm">
+                id="updateStoryForm">
                     @csrf
                     <input type="hidden" name="id_collab" id="id_collab" value="{{ $profile->id_collab }}">
                     <div class="form-group">
@@ -19,8 +19,8 @@
                             </div>
                             <div class="story-video-preview" style="display: none;">
                                 <div style="display: flex; align-items: center; margin-bottom: 9px;">
-                                    <button type="button" class="button-choose-other btn btn-primary">{{ __('user_page.Choose another') }}</button>
-                                    <button class="button-reset" type="reset">{{ __('user_page.Remove') }}</button>
+                                    <button type="button" class="button-choose-other btn btn-primary">choose another</button>
+                                    <button class="button-reset" type="reset">remove</button>
                                 </div>
                                 <video class="w-100 story-upload-video-preview" controls>
                                     {{-- <source src="movie.mp4" type="video/mp4"> --}}
@@ -34,14 +34,14 @@
                     </div>
                     <small id="err-stry-vid" style="display: none;" class="invalid-feedback">{{ __('auth.empty_video') }}</small>
                     <div class="form-group story-title-gap">
-                        <input type="text" class="form-control" name="title" id="title" maxlength="15" placeholder="{{ __('user_page.Title...') }}">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Title...">
                     </div>
                     <small id="err-stry-ttl" style="display: none;" class="invalid-feedback">{{ __('auth.empty_title') }}</small>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
                             <button class="btn btn-sm btn-primary" id="btnSaveStory" form="updateStoryForm">
-                                <i class="fa fa-check"></i> {{ __('user_page.Upload') }}
+                                <i class="fa fa-check"></i> Upload
                             </button>
                         </div>
                     </div>
@@ -57,8 +57,8 @@
     var storyVideoForm = $(".story-upload").children('.story-video-form');
     var storyVideoInput = $(".story-upload").children('.story-video-input');
     var storyVideoPreview = $(".story-upload").children(".story-video-preview");
-    var storyChooseOtherInput = $(storyVideoPreview).children('div').children(".button-choose-other");
-    var storyResetInput = $(storyVideoPreview).children('div').children(".button-reset");
+    var storyChooseOtherInput = $(storyVideoPreview).children(".button-choose-other");
+    var storyResetInput = $(storyVideoPreview).children(".button-reset");
 
     $(storyVideoForm)
         .click(function() {
@@ -95,3 +95,4 @@
             $(storyVideoForm).show();
         });
 </script>
+{{-- END VIDEO UPLOAD --}}

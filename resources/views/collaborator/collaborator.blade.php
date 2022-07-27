@@ -608,12 +608,12 @@
                         <div class="d-flex align-items-center">
                             <div class="flex-fill d-flex align-items-center me-3">
                                 @if (Auth::user()->avatar)
-                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
+                                    <img class="user-avatar" loading="lazy"
+                                        src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
-                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                        data-src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}"
+                                    <img class="user-avatar" loading="lazy"
+                                        src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}"
                                         class="user-photo" alt="" style="border-radius: 50%">
                                 @endif
                                 <div class="user-details ms-2">
@@ -662,11 +662,11 @@
                             <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
                                 @if (session()->has('locale'))
-                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                    <img style="width: 27px;" loading="lazy"
+                                        src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                                 @else
-                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                    <img style="width: 27px;" loading="lazy"
+                                        src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                                 <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
                             </a>
@@ -707,15 +707,15 @@
                         <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
                             style="color: white; margin-right: 9px;" id="language">
                             @if (session()->has('locale'))
-                                <img style="border-radius: 3px; width: 27px;" class="lozad"
-                                    src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                <img style="border-radius: 3px; width: 27px;"
+                                    loading="lazy"
+                                    src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                             @else
-                                <img style="border-radius: 3px; width: 27px;" class="lozad"
-                                    src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                <img style="border-radius: 3px; width: 27px;"
+                                    loading="lazy"
+                                    src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                             @endif
-                            <p class="mb-0 ms-2" style="color: #585656">Choose Language</p>
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                         </a>
                     </div>
                 @endauth
@@ -1042,71 +1042,182 @@
                                     <li class="story">
                                         <div class="img-wrap">
                                             <a type="button"
-                                                onclick="requestVideo({'id': '{{ $villa[0]->created_by }}', 'name': '{{ $villa[0]->name }}'})">
-                                                <img class="lozad" src="{{ LazyLoad::show() }}"
-                                                    data-src="{{ URL::asset('assets/2.png') }}">
+                                                onclick="requestVideo({'id': '{{ $profile->created_by }}', 'name': '{{ $profile->name }}'})">
+                                                <img loading="lazy" src="{{ URL::asset('assets/2.png') }}">
                                             </a>
                                         </div>
                                     </li>
                                 @endif
                             @endif
                             @auth
-                                @if (Auth::user()->id == $profile->created_by)
+                                @if (Auth::user()->id == $profile->created_by ||
+                                    Auth::user()->role_id == 1 ||
+                                    Auth::user()->role_id == 2 ||
+                                    Auth::user()->role_id == 3)
                                     @if ($stories->count() == 0)
-                                        <li class="story">
-                                            <div class="img-wrap">
-                                                <a type="button" onclick="edit_story()">
-                                                    <img src="{{ URL::asset('assets/add_story.png') }}">
-                                                </a>
-                                            </div>
-                                        </li>
-                                    @else
-                                        @if ($stories->count() < 100)
+                                        @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <li class="story">
                                                 <div class="img-wrap">
                                                     <a type="button" onclick="edit_story()">
-                                                        <img src="{{ URL::asset('assets/add_story.png') }}">
+                                                        <img loading="lazy" src="{{ URL::asset('assets/add_story.png') }}">
                                                     </a>
                                                 </div>
                                             </li>
+                                        @endif
+                                        @if ($video->count() < 100)
                                             <div class="containerSlider4">
                                                 <div id="slide-left-container4">
                                                     <div class="slide-left4">
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
-                                                        @foreach ($stories as $item)
-                                                            <div class="card4 col-lg-3 radius-5">
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($video as $item)
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
-                                                                        <a type="button"
-                                                                            onclick="view_story({{ $item->id_story }});">
+                                                                        @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $profile->created_by)
+                                                                            <a type="button"
+                                                                                onclick="view({{ $item->id_video }})">
+                                                                            @else
+                                                                                <a type="button"
+                                                                                    onclick="showPromotionMobile()">
+                                                                        @endif
+                                                                        <div class="story-video-player"><i
+                                                                                class="fa fa-play"></i>
+                                                                        </div>
+                                                                        <video href="javascript:void(0)"
+                                                                            class="story-video-grid" loading="lazy"
+                                                                            style="object-fit: cover;"
+                                                                            src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
+                                                                        </video>
+                                                                        @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                                            <a class="delete-story"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $profile->id_collab }}"
+                                                                                data-video="{{ $item->id_video }}"
+                                                                                onclick="delete_photo_video(this)">
+                                                                                <i class="fa fa-trash"
+                                                                                    style="color:red; margin-left: 25px;"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ __('user_page.Delete') }}"></i>
+                                                                            </a>
+                                                                        @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
+                                                <div id="slide-right-container4">
+                                                    <div class="slide-right4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endIf
+                                    @else
+                                        @if ($stories->count() < 100)
+                                            @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                <li class="story">
+                                                    <div class="img-wrap">
+                                                        <a type="button" onclick="edit_story()">
+                                                            <img src="{{ URL::asset('assets/add_story.png') }}" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                            <div class="containerSlider4">
+                                                <div id="slide-left-container4">
+                                                    <div class="slide-left4">
+                                                    </div>
+                                                </div>
+                                                <div id="cards-container4">
+                                                    <div class="cards4" id="storyContent">
+                                                        @foreach ($stories as $item)
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStory{{ $item->id_story }}">
+                                                                <div class="img-wrap">
+                                                                    <div class="video-position">
+                                                                        @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $profile->created_by)
+                                                                            <a type="button"
+                                                                                onclick="view_story({{ $item->id_story }})">
+                                                                            @else
+                                                                                <a type="button"
+                                                                                    onclick="showPromotionMobile()">
+                                                                        @endif
+                                                                        <div class="story-video-player"><i
+                                                                                class="fa fa-play"></i>
+                                                                        </div>
+                                                                        <video href="javascript:void(0)"
+                                                                            class="story-video-grid" loading="lazy"
+                                                                            style="object-fit: cover;"
+                                                                            src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
+                                                                        </video>
+                                                                        @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                                            <a class="delete-story"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $profile->id_collab }}"
+                                                                                data-story="{{ $item->id_story }}"
+                                                                                onclick="delete_story(this)">
+                                                                                <i class="fa fa-trash"
+                                                                                    style="color:red; margin-left: 25px;"
+                                                                                    data-bs-toggle="popover"
+                                                                                    data-bs-animation="true"
+                                                                                    data-bs-placement="bottom"
+                                                                                    title="{{ __('user_page.Delete') }}"></i>
+                                                                            </a>
+                                                                        @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @if ($video->count() < 100)
+                                                            @foreach ($video as $item)
+                                                                <div class="card4 col-lg-3 radius-5"
+                                                                    id="displayStoryVideo{{ $item->id_video }}">
+                                                                    <div class="img-wrap">
+                                                                        <div class="video-position">
+                                                                            @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $profile->created_by)
+                                                                                <a type="button"
+                                                                                    onclick="view({{ $item->id_video }})">
+                                                                                @else
+                                                                                    <a type="button"
+                                                                                        onclick="showPromotionMobile()">
+                                                                            @endif
                                                                             <div class="story-video-player"><i
                                                                                     class="fa fa-play"></i>
                                                                             </div>
-                                                                            <video preload href=""
-                                                                                class="story-video-grid"
+                                                                            <video href="javascript:void(0)"
+                                                                                class="story-video-grid" loading="lazy"
                                                                                 style="object-fit: cover;"
                                                                                 src="{{ URL::asset('/foto/collaborator/' . $profile->uid . '/' . $item->name) }}#t=1.0">
                                                                             </video>
                                                                             @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                                                 <a class="delete-story"
                                                                                     href="javascript:void(0);"
-                                                                                    onclick="delete_story({'id': `{{ $profile->id_collab }}`, 'id_story': `{{ $item->id_story }}`})">
+                                                                                    data-id="{{ $profile->id_collab }}"
+                                                                                    data-video="{{ $item->id_video }}"
+                                                                                    onclick="delete_photo_video(this)">
                                                                                     <i class="fa fa-trash"
                                                                                         style="color:red; margin-left: 25px;"
                                                                                         data-bs-toggle="popover"
                                                                                         data-bs-animation="true"
                                                                                         data-bs-placement="bottom"
-                                                                                        title="Delete"></i>
+                                                                                        title="{{ __('user_page.Delete') }}"></i>
                                                                                 </a>
                                                                             @endif
-                                                                        </a>
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        @endforeach
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -2616,6 +2727,7 @@
     <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
+    <script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
     {{-- GOOGLE MAPS API --}}
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk&libraries=places">
     </script> --}}
@@ -3675,35 +3787,39 @@
     {{-- Sweetalert Function Delete Story --}}
     <script>
         function delete_story(ids) {
-            var ids = ids;
+            let id = ids.getAttribute("data-id");
+            let story = ids.getAttribute("data-story");
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
+                title: `{{ __('user_page.Are you sure?') }}`,
+                text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, deleted it',
-                cancelButtonText: 'Cancel'
+                confirmButtonColor: '#ff7400',
+                cancelButtonColor: '#000',
+                confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                cancelButtonText: `{{ __('user_page.Cancel') }}`
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
                         dataType: 'json',
-                        url: `/collab/${ids.id}/delete/story/${ids.id_story}`,
+                        url: `/collab/${id}/delete/story/${story}`,
                         statusCode: {
                             500: () => {
                                 Swal.fire('Failed', data.message, 'error');
                             }
                         },
                         success: async function(data) {
-                            // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            location.reload();
+                            $(`#displayStory${story}`).remove();
+
+                            //update slider ketika story dihapus
+                            sliderRestaurant();
                         }
                     });
                 } else {
-                    Swal.fire('Cancel', 'Canceled Deleted Data', 'error')
+                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                        'error')
                 }
             });
         };

@@ -529,7 +529,8 @@
 
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single" id="short-description-content2">{{ $hotel[0]->short_description }}</span>
+                            <span class="translate-text-single"
+                                id="short-description-content2">{{ $hotel[0]->short_description }}</span>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -624,7 +625,8 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4">
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5" id="displayVideo{{ $item->id_video }}">
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -648,7 +650,9 @@
                                                                                 onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                 'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $hotel[0]->id_hotel }}"
+                                                                                data-video="{{ $item->id_video }}"
                                                                                 onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -692,7 +696,8 @@
                                                 <div id="cards-container4">
                                                     <div class="cards4">
                                                         @foreach ($stories as $item)
-                                                            <div class="card4 col-lg-3 radius-5" id="displayStory{{ $item->id_story }}">
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStory{{ $item->id_story }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -716,7 +721,9 @@
                                                                                     onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                     'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-story="{{ $item->id_story }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $hotel[0]->id_hotel }}"
+                                                                                data-story="{{ $item->id_story }}"
                                                                                 onclick="delete_story(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -733,7 +740,8 @@
                                                             </div>
                                                         @endforeach
                                                         @foreach ($video as $item)
-                                                            <div class="card4 col-lg-3 radius-5" id="displayStoryVideo{{ $item->id_video }}">
+                                                            <div class="card4 col-lg-3 radius-5"
+                                                                id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -757,7 +765,9 @@
                                                                                     onclick="delete_story({'id': '{{$hotel[0]->id_hotel}}',
                                                                                     'id_story': '{{$item->id_story}}'})"> --}}
                                                                             <a class="delete-story"
-                                                                                href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
+                                                                                href="javascript:void(0);"
+                                                                                data-id="{{ $hotel[0]->id_hotel }}"
+                                                                                data-video="{{ $item->id_video }}"
                                                                                 onclick="delete_photo_video(this)">
                                                                                 {{-- <a href="{{ route('villa_delete_story', ['id' => $hotel[0]->id_hotel, 'id_story' => $item->id_story]) }}"> --}}
                                                                                 <i class="fa fa-trash"
@@ -961,7 +971,8 @@
                                                     <button data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="{{ $item->id_photo }}"
+                                                        href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}"
+                                                        data-photo="{{ $item->id_photo }}"
                                                         onclick="delete_photo_photo(this)"><i
                                                             class="fa fa-trash"></i></button>
                                                 </span>
@@ -994,10 +1005,11 @@
                                         @auth
                                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
-                                                    <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
+                                                    <button href="javascript:void(0);"
+                                                        data-id="{{ $hotel[0]->id_hotel }}"
+                                                        data-video="{{ $item->id_video }}"
+                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                        data-bs-animation="true" data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
                                                     <button type="button" onclick="position_video()"
@@ -1558,10 +1570,8 @@
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
                         <div class="col-12 row p-0">
-
                             <div class="col-4" style="border: 1px solid grey; border-radius: 15px; padding: 10px;">
                                 <div class="col-12">
-
                                     <div class="col-12">
                                         <div class="content list-image-content">
                                             <input type="hidden" value="" id="id_hotel" name="id_hotel">
@@ -1690,7 +1700,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-8 p-0">
                                 <div class="col-12 m-0 ps-2 pe-2 row ">
                                     <div class="col-2 border border-secondary border-end-0">
@@ -1716,10 +1725,20 @@
                                         <select name="room-amount" id="room-amount" style="width: 3.5rem;">
                                             <option value="0">0</option>
                                             <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                                {{ number_format($item->price) }}</option>
+                                                {{ number_format($item->price) }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
+                                @auth
+                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;
+                                        <a type="button" onclick="add_room_details({{ $item->id_hotel_room }})"
+                                            style="font-size: 12pt; font-weight: 600; color: #ff7400;">
+                                            Add Room Details
+                                        </a>
+                                    @endif
+                                @endauth
                             </div>
                             <hr class="mt-3 mb-3">
                         </div>
@@ -3338,6 +3357,7 @@
         @include('user.modal.hotel.tags_hotel')
         @include('user.modal.hotel.category_hotel')
         @include('user.modal.advert-listing')
+        @include('user.modal.hotel.add_rooms_details')
     @endauth
     @include('user.modal.hotel.description')
 
@@ -3547,7 +3567,6 @@
     <script>
         function view_amenities() {
             $('#modal-amenities').modal('show');
-            // console.log('hit amenities');
         }
     </script>
 
@@ -4702,6 +4721,42 @@
         function view_tags_hotel() {
             $('#modal-tags-hotel').modal('show');
         }
+
+
+
+
+        function add_room_details(id_room_details) {
+            $.ajax({
+                type: "GET",
+                url: '/hotel/room/' + id_room_details,
+                success: function(data) {
+                    for (let i = 1; i <= data['detail_room'].capacity; i++) {
+                        $('#room_details_capacity').append(`<option value="${[i]}">${[i]}</option>`);
+                    }
+                    $('#modal-add-room-details').modal('show');
+                },
+                error: function(jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                    btn.classList.remove("disabled");
+                },
+            })
+        }
     </script>
     {{-- END CONTACT HOST --}}
     {{-- DROPZONE JS --}}
@@ -5204,8 +5259,7 @@
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
 
-                            if (galleryLength == 0)
-                            {
+                            if (galleryLength == 0) {
                                 $('.gallery').html("");
                                 $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
                             }
@@ -5249,8 +5303,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayVideo"+video).remove();
-                            $("#displayStoryVideo"+video).remove();
+                            $("#displayVideo" + video).remove();
+                            $("#displayStoryVideo" + video).remove();
                         }
                     });
                 } else {

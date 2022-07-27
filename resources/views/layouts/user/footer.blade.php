@@ -52,6 +52,11 @@
             </p>
                 <ul>
                     <li>
+                        <a class="footer-link footer-link-dark" href="{{ route('about_us') }}">
+                            {{ __('user_page.About Us') }}
+                        </a>
+                    </li>
+                    <li>
                         <a class="footer-link footer-link-dark" href="{{ route('contact_us') }}">
                             {{ __('user_page.Contact Us') }}
                         </a>
@@ -59,11 +64,6 @@
                     <li>
                         <a class="footer-link footer-link-dark" href="{{ route('blog') }}">
                             {{ __('user_page.Blog') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="footer-link footer-link-dark" href="{{ route('culture') }}">
-                            {{ __('user_page.Culture') }}
                         </a>
                     </li>
                 </ul>
@@ -79,8 +79,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="footer-link footer-link-dark" href="{{ route('help_center') }}">
-                            {{ __('user_page.Help Center') }}
+                        <a class="footer-link footer-link-dark" href="{{ route('faq') }}">
+                            {{ __('user_page.FAQ') }}
                         </a>
                     </li>
                 </ul>

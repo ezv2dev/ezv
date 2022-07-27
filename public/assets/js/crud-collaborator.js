@@ -200,6 +200,206 @@ function editDescriptionCancel() {
     btn.classList.remove("d-none");
 }
 
+//add save story
+let storyCollab;
+var storyVideoForm = $(".story-upload").children(".story-video-form");
+var storyVideoInput = $(".story-upload").children(".story-video-input");
+var storyVideoPreview = $(".story-upload").children(".story-video-preview");
+
+$("#storyVideo").on("change", function (value) {
+    storyCollab = this.files[0];
+    if (document.getElementById("storyVideo").files.length != 0) {
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
+    }
+});
+$(document).on("keyup", "#title", function () {
+    $("#title").css("border", "");
+    $("#err-stry-ttl").hide();
+});
+$("#updateStoryForm").submit(function (e) {
+    let error = 0;
+    if (document.getElementById("storyVideo").files.length == 0) {
+        $(".story-video-form").css("border", "solid #e04f1a 1px");
+        $("#err-stry-vid").show();
+        error = 1;
+    } else {
+        $(".story-video-form").css("border", "");
+        $("#err-stry-vid").hide();
+    }
+    if (!$("#title").val()) {
+        $("#title").css("border", "solid #e04f1a 1px");
+        $("#err-stry-ttl").show();
+        error = 1;
+    } else {
+        $("#title").css("border", "");
+        $("#err-stry-ttl").hide();
+    }
+    if (error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
+        //validasi
+        if (
+            storyCollab.type.includes("video/mp4") ||
+            storyCollab.type.includes("video/mov")
+        ) {
+            //let validate = validateStory();
+
+            //if (validate > 0) {
+            //} else {
+            var formData = new FormData(this);
+            console.log(formData);
+
+            var btn = document.getElementById("btnSaveStory");
+            btn.textContent = "Saving Story...";
+            btn.classList.add("disabled");
+
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                    Accept: "application/json",
+                },
+                url: "/collab/update/story",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/collaborator/";
+                    let slash = "/";
+                    let uid = response.uid;
+                    var lowerCaseUid = uid.toLowerCase();
+                    let content;
+
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (i == 0) {
+                            content =
+                                '<div class="card4 col-lg-3" id="displayStory' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                                id_collab +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        } else {
+                            content =
+                                content +
+                                '<div class="card4 col-lg-3" id="displayStory' +
+                                response.data[i].id_story +
+                                '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
+                                response.data[i].id_story +
+                                ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.data[i].name +
+                                '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                                id_collab +
+                                '" data-story="' +
+                                response.data[i].id_story +
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        }
+                    }
+
+                    if (response.video.length > 0) {
+                        for (let v = 0; v < response.video.length; v++) {
+                            content +=
+                                '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                                response.video[v].id_video +
+                                '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view(' +
+                                response.video[v].id_video +
+                                ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                                path +
+                                lowerCaseUid +
+                                slash +
+                                response.video[v].name +
+                                '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                                id_collab +
+                                '" data-video="' +
+                                response.video[v].id_video +
+                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                        }
+                    }
+
+                    // console.log(content);
+
+                    $(storyVideoInput).children("input").val("");
+                    $(storyVideoPreview).hide();
+                    $(storyVideoForm).show();
+
+                    $("#storyContent").html("");
+                    $("#storyContent").append(content);
+                    $("#title").val("");
+
+                    $("#modal-edit_story").modal("hide");
+
+                    let sumStory = response.data.length + response.video.length;
+
+                    if (sumStory > 4) {
+                        sliderRestaurant();
+                    }
+
+                    // $("#profileDropzone").attr("src", "");
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+                error: function (jqXHR, exception) {
+                    console.log(jqXHR);
+                    // console.log(exception);
+
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+
+                    $("#modal-edit_story").modal("hide");
+
+                    // $("#profileDropzone").attr("src", "");
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+            });
+            //}
+        } else {
+            $(storyVideoInput).children("input").val("");
+            $(storyVideoPreview).hide();
+            $(storyVideoForm).show();
+            $("#title").val("");
+
+            iziToast.error({
+                title: "Error",
+                message: "The file must be a file of type: <b>mp4 / mov</b>",
+                position: "topRight",
+            });
+        }
+        // console.log(readerStoryRestaurant);
+    }
+});
+
 function saveDescription(id_collab) {
     let error = 0;
     if (!$('textarea#description-form-input').val()) {
