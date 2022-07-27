@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="roomnumber-filter-container">
-                                <input type="radio" value="6" id="t3.5" name="bathroom"
+                                <input type="radio" value="3.5" id="t3.5" name="bathroom"
                                     @if ($villa[0]->bathroom == 3.5) checked @endif>
                                 <label class="editnumberoption-checkbox-alias" for="t3.5">
                                     <div class="">
@@ -511,8 +511,8 @@
                 </div>
             </div>
             <div class="modal-footer" style="background-color: white;">
-                 <!-- Submit -->
-                 <div class="row items-push">
+                <!-- Submit -->
+                <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
                         <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
                             onclick="editBedroomVilla({{ $villa[0]->id_villa }})">
@@ -720,7 +720,18 @@
             .disabled = false;
     }
 
+    let bathroom1Backup = $("input[name='bathroom1']").val();
+    let bathroomBackup = $("input[name='bathroom']:checked").val();
+
+    // $("input[name='bathroom']").change(function () {
+    //     bathroomBackup = $("input[name='bathroom']:checked").val();
+    // });
+
     function showBathroom() {
+        console.log("uncheck bathroom "+bathroomBackup);
+        $("input[name='bathroom']").removeAttr("checked");
+        $("input[name='bathroom1']").val(bathroom1Backup);
+
         document
             .getElementById("bathroomForm")
             .classList.remove("display-none");
@@ -730,24 +741,21 @@
         document
             .getElementById("hideBathroom")
             .classList.remove("display-none");
-
-        $("input[name='bathroom']:checked").val("");
-        $("input[name='bathroom']").removeAttr('checked');
-        // document
-        //     .getElementById("t1")
-        //     .checked = false;
-        // document
-        //     .getElementById("t1.5")
-        //     .checked = false;
-        // document
-        //     .getElementById("t2")
-        //     .checked = false;
-        // document
-        //     .getElementById("t2.5")
-        //     .checked = false;
-        // document
-        //     .getElementById("t3")
-        //     .checked = false;
+        document
+            .getElementById("t1")
+            .checked = false;
+        document
+            .getElementById("t1.5")
+            .checked = false;
+        document
+            .getElementById("t2")
+            .checked = false;
+        document
+            .getElementById("t2.5")
+            .checked = false;
+        document
+            .getElementById("t3")
+            .checked = false;
         document
             .getElementById("t3.5")
             .checked = false;
@@ -772,7 +780,15 @@
     }
 
     function hideBathroom() {
+        console.log("checked bathroom broo"+bathroomBackup);
         $("#bathroom1").val("");
+        if (bathroomBackup == null) {
+
+        }
+        else {
+            document.getElementById("t"+bathroomBackup).checked = true;
+        }
+
         document
             .getElementById("bathroomForm")
             .classList.add("display-none");
@@ -782,24 +798,24 @@
         document
             .getElementById("hideBathroom")
             .classList.add("display-none");
-        document
-            .getElementById("t1")
-            .checked = false;
-        document
-            .getElementById("t1.5")
-            .checked = false;
-        document
-            .getElementById("t2")
-            .checked = false;
-        document
-            .getElementById("t2.5")
-            .checked = false;
-        document
-            .getElementById("t3")
-            .checked = false;
-        document
-            .getElementById("t3.5")
-            .checked = false;
+        // document
+        //     .getElementById("t1")
+        //     .checked = false;
+        // document
+        //     .getElementById("t1.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3.5")
+        //     .checked = false;
         document
             .getElementById("t1")
             .disabled = false;

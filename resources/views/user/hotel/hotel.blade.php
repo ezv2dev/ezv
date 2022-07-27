@@ -4714,10 +4714,6 @@
             autoProcessQueue: false,
             url: '/admin/hotel/store_gallery',
             parallelUploads: 50,
-            "error": function(file, message, xhr) {
-                this.removeFile(file); // perhaps not remove on xhr errors
-                alert(errorToString(message));
-            },
             init: function() {
 
                 var myDropzone = this;
@@ -5204,7 +5200,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayPhoto"+photo).remove();
-                            
+
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
 
