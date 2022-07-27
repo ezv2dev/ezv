@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CollaboratorStory extends Model
 {
     protected $fillable = [
-        'title', 'name', 'id_collab'
+        'title', 'name', 'id_collab', 'created_by', 'updated_by'
     ];
 
     protected $table = 'collaborator_story';

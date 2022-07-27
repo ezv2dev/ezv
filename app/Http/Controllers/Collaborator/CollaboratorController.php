@@ -731,60 +731,103 @@ class CollaboratorController extends Controller
 
     public function update_story(Request $request)
     {
-        $this->authorize('collaborator_update');
-
-        $status = 500;
-
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                $status = 500;
-            } else {
-                $find = CollaboratorStory::with('collab')->where('id_collab', $request->id_collab)->get();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = $find[0]->collab->uid;
-                // dd($folder);
-                $path = env("COLLAB_FILE_PATH") . $folder;
-                if (!File::isDirectory($path)) {
-
-                    File::makeDirectory($path, 0777, true, true);
-                }
-
-                $ext = strtolower($berkas->getClientOriginalExtension());
-
-                if ($ext == 'mp4') {
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    $data = CollaboratorStory::insert(array(
-                        'title' => $request->title,
-                        'name' => $name_file,
-                        'id_collab' => $request->id_collab,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            if ($data) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
+        // check if editor not authenticated
+        if(!auth()->check())
+        {
+            return response()->json([
+                'message' => 'Error, Please Login !'
+            ], 401);
         }
 
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
+        // validation
+        $validator = Validator::make($request->all(), [
+            'id_collab' => ['required', 'integer'],
+            'title' => ['required', 'string', 'max:100'],
+            'file' => ['required', 'mimes:mp4,mov']
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+            ], 500);
+        }
+
+        // collab data
+        $collab = Collaborator::find($request->id_collab);
+
+        // check if collab does not exist, abort 404
+        if (!$collab) {
+            return response()->json([
+                'message' => 'Data Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        $this->authorize('collaborator_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $collab->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        // store process
+        // $path = public_path() . '/foto/restaurant/' . $restaurant->name;
+        $folder = strtolower($collab->uid);
+        // dd($folder);
+        $path = env("COLLAB_FILE_PATH") . $folder;
+
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $ext = strtolower($request->file->getClientOriginalExtension());
+
+        if ($ext == 'mp4' || $ext == 'mov') {
+            $original_name = $request->file->getClientOriginalName();
+            // dd($original_name);
+            $name_file = time() . "_" . $original_name;
+            // isi dengan nama folder tempat kemana file diupload
+            $request->file->move($path, $name_file);
+
+            // dd($name_file);
+
+            //insert into database
+            $createdStory = CollaboratorStory::create([
+                'title' => $request->title,
+                'name' => $name_file,
+                'id_collab' => $request->id_collab,
+                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'created_by' => Auth::user()->id,
+                'updated_by' => Auth::user()->id,
+            ]);
+        }
+
+        $getStory = CollaboratorStory::where('id_collab', $request->id_collab)->select('name', 'id_story')->latest()->get();
+        $getUID = Collaborator::where('id_collab', $request->id_collab)->select('uid')->first();
+        $collabVideo = CollaboratorVideo::where('id_collab', $request->id_collab)->select('id_video', 'name')->orderBy('order', 'asc')->get();
+
+        $data = [];
+
+        $i = 0;
+
+        foreach ($getStory as $item) {
+            $data[$i]['id_story'] = $item->id_story;
+            $data[$i]['name'] = $item->name;
+            $i++;
+        }
+
+        // check if update is success or not
+        if ($createdStory) {
+            return response()->json([
+                'message' => 'Updated Collaborator Story',
+                'data' => $data,
+                'uid' => $getUID->uid,
+                'video' => $collabVideo,
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'message' => 'Updated Collaborator Story',
+            ], 500);
         }
     }
 
