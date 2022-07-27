@@ -51,14 +51,68 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <style>
-        .accordion .card-header:after {
+        .accordion .accordion-header:after {
             font-family: 'FontAwesome';  
-            content: "\f068";
+            content: "\f077";
             float: right; 
         }
-        .accordion .card-header.collapsed:after {
-            /* symbol for "collapsed" panels */
-            content: "\f067"; 
+        .accordion .accordion-header.collapsed:after {
+            content: "\f078"; 
+        }
+        .nav-item a img {
+            height: auto;
+            margin-right: 10px;
+        }
+        .homes, .hotel, .food {
+            filter: invert(100%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+            width: 20px;
+        }
+        .food {
+            width: 16px;
+        }
+        .wow {
+            width: 20px;
+        }
+        .accordion-header {
+            margin-bottom: 0;
+            background: #dfdfdf;
+            padding: 1rem 1.25rem;
+            border-bottom: solid 1px #fff;
+            cursor: pointer;
+        }
+        .accordion-title {
+            color: #5e5d5d !important;
+            font-weight: 600;
+        }
+        .accordion-title:hover {
+            color: #000 !important;
+        }
+        .nav-link.active {
+            outline: none;
+            border-top: solid 1px #dfdfdf;
+            border-left: solid 1px #dfdfdf;
+            border-right: solid 1px #dfdfdf;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background: #dfdfdf;
+        }
+        .nav-link.active:hover, .nav-link.active:focus, .nav-link.active:target, .nav-link.active:visited {
+            border-top: solid 1px #dfdfdf !important;
+            border-left: solid 1px #dfdfdf !important;
+            border-right: solid 1px #dfdfdf !important;
+            background: #dfdfdf !important;
+        }
+        .nav-link, .nav-link:hover, .nav-link:active, .nav-link:focus, .nav-link:target {
+            color: #000;
+            font-weight: 400;
+        }
+        .card {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
         }
     </style>
 </head>
@@ -84,67 +138,456 @@
     </div>
     <div class="privacy-description">
         <!-- Tabs Navigation -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav navi-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><img src="{{ asset('assets/icon/menu/homes.svg') }}" style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%); width: 33px; height: auto;">Homes</a>
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><img class="homes" src="{{ asset('assets/icon/menu/homes.svg') }}">Homes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Food</a>
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"><img class="food" src="{{ asset('assets/icon/menu/food.svg') }}">Food</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Hotels</a>
+                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"><img class="hotel" src="{{ asset('assets/icon/menu/hotel.svg') }}">Hotel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">WoW</a>
+                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"><img class="wow" src="{{ asset('assets/icon/menu/wow.svg') }}">WoW</a>
             </li>
-        </ul><!-- Tab panes -->
+        </ul>
+        <!-- Tab pane homes -->
         <div class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div id="accordion" class="accordion">
                     <div class="card mb-0">
-                        <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-                            <a class="card-title">
-                                Item 1
+                        <div class="accordion-header collapsed" data-toggle="collapse" href="#home1">
+                            <a class="accordion-title">
+                                Question 1
                             </a>
                         </div>
-                        <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
+                        <div id="home1" class="accordion-body collapse" data-parent="#accordion">
                             <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
                                 craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </p>
                         </div>
-                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <a class="card-title">
-                            Item 2
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home2">
+                            <a class="accordion-title">
+                            Question 2
                             </a>
                         </div>
-                        <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+                        <div id="home2" class="accordion-body collapse" data-parent="#accordion">
                             <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
                                 craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </p>
                         </div>
-                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <a class="card-title">
-                            Item 3
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home3">
+                            <a class="accordion-title">
+                            Question 3
                             </a>
                         </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordion" >
-                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                        <div id="home3" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home4">
+                            <a class="accordion-title">
+                            Question 4
+                            </a>
+                        </div>
+                        <div id="home4" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home5">
+                            <a class="accordion-title">
+                            Question 5
+                            </a>
+                        </div>
+                        <div id="home5" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home6">
+                            <a class="accordion-title">
+                            Question 6
+                            </a>
+                        </div>
+                        <div id="home6" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home7">
+                            <a class="accordion-title">
+                            Question 7
+                            </a>
+                        </div>
+                        <div id="home7" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home8">
+                            <a class="accordion-title">
+                            Question 8
+                            </a>
+                        </div>
+                        <div id="home8" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home9">
+                            <a class="accordion-title">
+                            Question 9
+                            </a>
+                        </div>
+                        <div id="home9" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#home10">
+                            <a class="accordion-title">
+                            Question 10
+                            </a>
+                        </div>
+                        <div id="home10" class="collapse" data-parent="#accordion">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
                                 aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Tabs pane Food -->
             <div class="tab-pane" id="tabs-2" role="tabpanel">
-                <p>Second Panel</p>
+            <div id="accordion2" class="accordion">
+                    <div class="card mb-0">
+                        <div class="accordion-header collapsed" data-toggle="collapse" href="#food1">
+                            <a class="accordion-title">
+                                Question 1
+                            </a>
+                        </div>
+                        <div id="food1" class="accordion-body collapse" data-parent="#accordion2">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food2">
+                            <a class="accordion-title">
+                            Question 2
+                            </a>
+                        </div>
+                        <div id="food2" class="accordion-body collapse" data-parent="#accordion2">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food3">
+                            <a class="accordion-title">
+                            Question 3
+                            </a>
+                        </div>
+                        <div id="food3" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food4">
+                            <a class="accordion-title">
+                            Question 4
+                            </a>
+                        </div>
+                        <div id="food4" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food5">
+                            <a class="accordion-title">
+                            Question 5
+                            </a>
+                        </div>
+                        <div id="food5" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food6">
+                            <a class="accordion-title">
+                            Question 6
+                            </a>
+                        </div>
+                        <div id="food6" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food7">
+                            <a class="accordion-title">
+                            Question 7
+                            </a>
+                        </div>
+                        <div id="food7" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food8">
+                            <a class="accordion-title">
+                            Question 8
+                            </a>
+                        </div>
+                        <div id="food8" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food9">
+                            <a class="accordion-title">
+                            Question 9
+                            </a>
+                        </div>
+                        <div id="food9" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#food10">
+                            <a class="accordion-title">
+                            Question 10
+                            </a>
+                        </div>
+                        <div id="food10" class="collapse" data-parent="#accordion2">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Tabs pane Hotel -->
             <div class="tab-pane" id="tabs-3" role="tabpanel">
-                <p>Third Panel</p>
+            <div id="accordion3" class="accordion">
+                    <div class="card mb-0">
+                        <div class="accordion-header collapsed" data-toggle="collapse" href="#hotel1">
+                            <a class="accordion-title">
+                                Question 1
+                            </a>
+                        </div>
+                        <div id="hotel1" class="accordion-body collapse" data-parent="#accordion3">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel2">
+                            <a class="accordion-title">
+                            Question 2
+                            </a>
+                        </div>
+                        <div id="hotel2" class="accordion-body collapse" data-parent="#accordion3">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel3">
+                            <a class="accordion-title">
+                            Question 3
+                            </a>
+                        </div>
+                        <div id="hotel3" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel4">
+                            <a class="accordion-title">
+                            Question 4
+                            </a>
+                        </div>
+                        <div id="hotel4" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel5">
+                            <a class="accordion-title">
+                            Question 5
+                            </a>
+                        </div>
+                        <div id="hotel5" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel6">
+                            <a class="accordion-title">
+                            Question 6
+                            </a>
+                        </div>
+                        <div id="hotel6" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel7">
+                            <a class="accordion-title">
+                            Question 7
+                            </a>
+                        </div>
+                        <div id="hotel7" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel8">
+                            <a class="accordion-title">
+                            Question 8
+                            </a>
+                        </div>
+                        <div id="hotel8" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel9">
+                            <a class="accordion-title">
+                            Question 9
+                            </a>
+                        </div>
+                        <div id="hotel9" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#hotel10">
+                            <a class="accordion-title">
+                            Question 10
+                            </a>
+                        </div>
+                        <div id="hotel10" class="collapse" data-parent="#accordion3">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Tabs pane WoW -->
             <div class="tab-pane" id="tabs-4" role="tabpanel">
-                <p>Fourth Panel</p>
+            <div id="accordion4" class="accordion">
+                    <div class="card mb-0">
+                        <div class="accordion-header collapsed" data-toggle="collapse" href="#wow1">
+                            <a class="accordion-title">
+                                Question 1
+                            </a>
+                        </div>
+                        <div id="wow1" class="accordion-body collapse" data-parent="#accordion4">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow2">
+                            <a class="accordion-title">
+                            Question 2
+                            </a>
+                        </div>
+                        <div id="wow2" class="accordion-body collapse" data-parent="#accordion4">
+                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow3">
+                            <a class="accordion-title">
+                            Question 3
+                            </a>
+                        </div>
+                        <div id="wow3" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow4">
+                            <a class="accordion-title">
+                            Question 4
+                            </a>
+                        </div>
+                        <div id="wow4" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow5">
+                            <a class="accordion-title">
+                            Question 5
+                            </a>
+                        </div>
+                        <div id="wow5" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow6">
+                            <a class="accordion-title">
+                            Question 6
+                            </a>
+                        </div>
+                        <div id="wow6" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow7">
+                            <a class="accordion-title">
+                            Question 7
+                            </a>
+                        </div>
+                        <div id="wow7" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow8">
+                            <a class="accordion-title">
+                            Question 8
+                            </a>
+                        </div>
+                        <div id="wow8" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow9">
+                            <a class="accordion-title">
+                            Question 9
+                            </a>
+                        </div>
+                        <div id="wow9" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                        <div class="accordion-header collapsed" data-toggle="collapse" data-parent="#accordion4" href="#wow10">
+                            <a class="accordion-title">
+                            Question 10
+                            </a>
+                        </div>
+                        <div id="wow10" class="collapse" data-parent="#accordion4">
+                            <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. samus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- End Tab Navigation -->
