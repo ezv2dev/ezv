@@ -141,7 +141,7 @@
     </nav>
     <br>
 
-    <small class="text-muted">What you need to know</small>
+    <small class="text-muted">What You Need To Know</small>
 
     <div class="privacy-title mb-4"><h2>Frequently Asked Questions [FAQ]</h2>
     </div>
