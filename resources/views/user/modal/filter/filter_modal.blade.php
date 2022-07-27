@@ -151,13 +151,13 @@ $get_category = request()->get('fCategory');
 
 <div class="modal fade" id="modalFiltersHome" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document" style="overflow-y: initial !important">
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal">
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="filter-modal-body" style=" height: 450px; overflow-y: auto;">
+            <div class="filter-modal-body modal-body" style=" height: 450px; overflow-y: auto;">
 
                 <div class="filter-modal-row" id="sortByMobile">
                     <h5 class="filter-modal-row-title">Sort By</h5>
