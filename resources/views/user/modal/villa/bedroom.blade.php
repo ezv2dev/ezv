@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="roomnumber-filter-container">
-                                <input type="radio" value="6" id="t3.5" name="bathroom"
+                                <input type="radio" value="3.5" id="t3.5" name="bathroom"
                                     @if ($villa[0]->bathroom == 3.5) checked @endif>
                                 <label class="editnumberoption-checkbox-alias" for="t3.5">
                                     <div class="">
@@ -511,8 +511,8 @@
                 </div>
             </div>
             <div class="modal-footer" style="background-color: white;">
-                 <!-- Submit -->
-                 <div class="row items-push">
+                <!-- Submit -->
+                <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
                         <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
                             onclick="editBedroomVilla({{ $villa[0]->id_villa }})">
@@ -720,7 +720,18 @@
             .disabled = false;
     }
 
+    let bathroom1Backup = $("input[name='bathroom1']").val();
+    let bathroomBackup = $("input[name='bathroom']:checked").val();
+
+    // $("input[name='bathroom']").change(function () {
+    //     bathroomBackup = $("input[name='bathroom']:checked").val();
+    // });
+
     function showBathroom() {
+        console.log("uncheck bathroom "+bathroomBackup);
+        $("input[name='bathroom']").removeAttr("checked");
+        $("input[name='bathroom1']").val(bathroom1Backup);
+
         document
             .getElementById("bathroomForm")
             .classList.remove("display-none");
@@ -730,24 +741,21 @@
         document
             .getElementById("hideBathroom")
             .classList.remove("display-none");
-
-        $("input[name='bathroom']:checked").val("");
-        $("input[name='bathroom']").removeAttr('checked');
-        // document
-        //     .getElementById("t1")
-        //     .checked = false;
-        // document
-        //     .getElementById("t1.5")
-        //     .checked = false;
-        // document
-        //     .getElementById("t2")
-        //     .checked = false;
-        // document
-        //     .getElementById("t2.5")
-        //     .checked = false;
-        // document
-        //     .getElementById("t3")
-        //     .checked = false;
+        document
+            .getElementById("t1")
+            .checked = false;
+        document
+            .getElementById("t1.5")
+            .checked = false;
+        document
+            .getElementById("t2")
+            .checked = false;
+        document
+            .getElementById("t2.5")
+            .checked = false;
+        document
+            .getElementById("t3")
+            .checked = false;
         document
             .getElementById("t3.5")
             .checked = false;
@@ -772,7 +780,15 @@
     }
 
     function hideBathroom() {
+        console.log("checked bathroom broo"+bathroomBackup);
         $("#bathroom1").val("");
+        if (bathroomBackup == null) {
+
+        }
+        else {
+            document.getElementById("t"+bathroomBackup).checked = true;
+        }
+
         document
             .getElementById("bathroomForm")
             .classList.add("display-none");
@@ -782,24 +798,24 @@
         document
             .getElementById("hideBathroom")
             .classList.add("display-none");
-        document
-            .getElementById("t1")
-            .checked = false;
-        document
-            .getElementById("t1.5")
-            .checked = false;
-        document
-            .getElementById("t2")
-            .checked = false;
-        document
-            .getElementById("t2.5")
-            .checked = false;
-        document
-            .getElementById("t3")
-            .checked = false;
-        document
-            .getElementById("t3.5")
-            .checked = false;
+        // document
+        //     .getElementById("t1")
+        //     .checked = false;
+        // document
+        //     .getElementById("t1.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2")
+        //     .checked = false;
+        // document
+        //     .getElementById("t2.5")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3")
+        //     .checked = false;
+        // document
+        //     .getElementById("t3.5")
+        //     .checked = false;
         document
             .getElementById("t1")
             .disabled = false;
@@ -820,6 +836,9 @@
             .disabled = false;
     }
 
+    let adult1Backup = $("input[name='adult1']").val();
+    let adultBackup = $("input[name='adult']:checked").val();
+
     function showAdult() {
         document
             .getElementById("adultForm")
@@ -831,9 +850,28 @@
             .getElementById("hideAdult")
             .classList.remove("display-none");
 
-        $("input[name='adult']:checked").val("");
+        console.log("uncheck adult "+adultBackup);
         $("input[name='adult']").removeAttr('checked');
-        // $("input[name='adult']").val("");
+        $("input[name='adult1']").val(adult1Backup);
+
+        document
+            .getElementById("x1")
+            .checked = false;
+        document
+            .getElementById("x2")
+            .checked = false;
+        document
+            .getElementById("x3")
+            .checked = false;
+        document
+            .getElementById("x4")
+            .checked = false;
+        document
+            .getElementById("x5")
+            .checked = false;
+        document
+            .getElementById("x6")
+            .checked = false;
 
         document
             .getElementById("x1")
@@ -856,7 +894,14 @@
     }
 
     function hideAdult() {
+        console.log("checked adult"+adultBackup);
         $("#adult1").val("");
+        if (adultBackup == null) {
+
+        }
+        else {
+            document.getElementById("x"+adultBackup).checked = true;
+        }
         document
             .getElementById("adultForm")
             .classList.add("display-none");
@@ -866,24 +911,24 @@
         document
             .getElementById("hideAdult")
             .classList.add("display-none");
-        document
-            .getElementById("x1")
-            .checked = false;
-        document
-            .getElementById("x2")
-            .checked = false;
-        document
-            .getElementById("x3")
-            .checked = false;
-        document
-            .getElementById("x4")
-            .checked = false;
-        document
-            .getElementById("x5")
-            .checked = false;
-        document
-            .getElementById("x6")
-            .checked = false;
+        // document
+        //     .getElementById("x1")
+        //     .checked = false;
+        // document
+        //     .getElementById("x2")
+        //     .checked = false;
+        // document
+        //     .getElementById("x3")
+        //     .checked = false;
+        // document
+        //     .getElementById("x4")
+        //     .checked = false;
+        // document
+        //     .getElementById("x5")
+        //     .checked = false;
+        // document
+        //     .getElementById("x6")
+        //     .checked = false;
         document
             .getElementById("x1")
             .disabled = false;
@@ -904,6 +949,9 @@
             .disabled = false;
     }
 
+    let children1Backup = $("input[name='children1']").val();
+    let childrenBackup = $("input[name='children']:checked").val();
+
     function showChildren() {
         document
             .getElementById("childrenForm")
@@ -915,9 +963,28 @@
             .getElementById("hideChildren")
             .classList.remove("display-none");
 
-        $("input[name='children']:checked").val("");
+        console.log("uncheck children "+childrenBackup);
         $("input[name='children']").removeAttr('checked');
-        // $("input[name='children']").val('');
+        $("input[name='children1']").val(children1Backup);
+
+        document
+            .getElementById("y1")
+            .checked = false;
+        document
+            .getElementById("y2")
+            .checked = false;
+        document
+            .getElementById("y3")
+            .checked = false;
+        document
+            .getElementById("y4")
+            .checked = false;
+        document
+            .getElementById("y5")
+            .checked = false;
+        document
+            .getElementById("y0")
+            .checked = false;
 
         document
             .getElementById("y1")
@@ -940,7 +1007,14 @@
     }
 
     function hideChildren() {
+        console.log("checked children"+childrenBackup);
         $("#children1").val("");
+        if (childrenBackup == null) {
+
+        }
+        else {
+            document.getElementById("y"+childrenBackup).checked = true;
+        }
         document
             .getElementById("childrenForm")
             .classList.add("display-none");
@@ -950,24 +1024,7 @@
         document
             .getElementById("hideChildren")
             .classList.add("display-none");
-        document
-            .getElementById("y1")
-            .checked = false;
-        document
-            .getElementById("y2")
-            .checked = false;
-        document
-            .getElementById("y3")
-            .checked = false;
-        document
-            .getElementById("y4")
-            .checked = false;
-        document
-            .getElementById("y5")
-            .checked = false;
-        document
-            .getElementById("y0")
-            .checked = false;
+        
         document
             .getElementById("y1")
             .disabled = false;

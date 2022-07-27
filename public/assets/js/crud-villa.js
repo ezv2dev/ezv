@@ -252,6 +252,13 @@ function editBedroomVilla(id_villa) {
                 $("#bathroomID").html(response.data.bathroom1);
             }
 
+            bathroom1Backup = response.data.bathroom1;
+            bathroomBackup = response.data.bathroom;
+            adult1Backup = response.data.adult1;
+            adultBackup = response.data.adult;
+            children1Backup = response.data.children1;
+            childrenBackup = response.data.children;
+
             let adultCount = 0;
             let childrenCount = 0;
 

@@ -162,6 +162,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/like/restaurant/{id}', [Restaurant\RestaurantController::class, 'like_restaurant'])->name('like_restaurant');
     Route::get('/like/hotel/{id}', [HotelController::class, 'like_hotel'])->name('like_hotel');
     Route::get('/like/things-to-do/{id}', [Activity\ActivityListController::class, 'like_things_to_do'])->name('like_things_to_do');
+    Route::get('/like/collaborator/{id}', [Collaborator\CollaboratorController::class, 'like_collaborator'])->name('like_collaborator');
 
     Route::get('/dashboard/permission', [PermissionController::class, 'index'])->name('admin_permission');
     Route::get('/dashboard/permission/datatable', [PermissionController::class, 'datatable'])->name('admin_permission_datatable');

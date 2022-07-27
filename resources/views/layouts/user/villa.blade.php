@@ -660,10 +660,10 @@
                         </div>
                         <div class="modal-body pb-1">
                             <!-- Dynamic Table Full -->
-                            <form action="{{ route('villa_booking_confirm') }}" method="POST" id="basic-form"
+                            <form action="{{ route('villa_booking_confirm') }}" method="POST"
                                 class="js-validation" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" id="id_villa" name="id_villa" value="{{ $villa[0]->id_villa }}">
+                                {{-- <input type="hidden" id="id_villa" name="id_villa" value="{{ $villa[0]->id_villa }}"> --}}
                                 <div class="block-content">
                                     <span class="content-heading border-bottom mb-4 pb-2">Booking Information</span>
                                     <div class="block-content font-size-sm mb-4">
@@ -930,7 +930,7 @@
         //         video.load();
         //         video.play();
         //         $("#title").html(data[0].title);
-        //         $('#price').html(data[0].created_at);  
+        //         $('#price').html(data[0].created_at);
         //         $('#videomodal').modal('show');
         //     }
         //     });
