@@ -130,7 +130,6 @@
     </div>
 </div>
 
-
 <script>
     function view_room(id) {
         $.ajax({

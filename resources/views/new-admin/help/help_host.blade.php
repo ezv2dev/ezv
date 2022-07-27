@@ -50,23 +50,23 @@
 @section('content_admin')
 
 <div class="container mb-5">
-    <div class="row">
-        <h4>Help Center</h4>
+    <div class="row h4-help-center">
+        <h4 style="position: absolute; left: 20px;">Help Center</h4>
     </div>
 
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mt-4" style="padding: 1.5rem;">
         <h1 class="text-bolder" style="font-size: 42px;">Hi {{ Auth::user()->first_name }}, how can we help?</h1>
     </div>
 
     <div class="row d-flex justify-content-center mt-n5">
-        <div class="col-5">
+        <div class="col-sm-5">
             <div class="search__container">
                 <input class="search__input" type="text" placeholder="Search more">
             </div>
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-5" style="margin-left: 0rem;">
         <div class="col-12 mt-4" style="border-bottom: 1px solid #DFDFDE;">
             <div class="title-bar p-0" style="margin-right: 20px; display: inline-block;">
                 <a style="text-decoration: none;" href="{{ route('help_guest') }}">

@@ -149,6 +149,9 @@
         font-size: 12px !important;
     }
 }
+/* @media only screen and (max-width: 350px) {
+
+} */
     </style>
 
 </head>
@@ -156,7 +159,7 @@
 <body class="nav-fixed">
     {{-- @component('components.loading.loading-dashboard')
     @endcomponent --}}
-    @component('components.loading.loading-type2')
+    @component('components.loading.loading-type1')
     @endcomponent
     <div class="expand-navbar-mobile" aria-expanded="false">
         <div class="px-3 pt-2 h-100">
@@ -169,7 +172,7 @@
                                     style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                             @else
                                 <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo"
-                                    alt="">
+                                    alt="" style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                             @endif
                             <div class="dropdown">
                                 <div class="user-details ms-2" style="cursor: pointer; padding-left: 10px;">
