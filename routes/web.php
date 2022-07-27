@@ -103,7 +103,7 @@ Route::get('/getting-started', function () {
     return view('user.getting_started');
 })->name('getting_started');
 
-Route::get('/fag', function () {
+Route::get('/faq', function () {
     return view('user.faq');
 })->name('faq');
 
