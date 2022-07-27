@@ -66,6 +66,15 @@
         color: #FF7400;
     }
 
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-10p {
+            margin-left: 10px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+    }
+
 </style>
 
 @section('content_admin')
@@ -74,7 +83,7 @@
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+                <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 30px;">
                     <div class="block-content">
                         @if (session('success'))
                         <div class="col-10 ml-n3 justify-content-center">
@@ -108,7 +117,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
                         <div class="title-bar"
                             style="margin-right: 20px; border-bottom: 2px solid #FF7400; display: inline-block;">
                             <a style="text-decoration: none;" href="{{ route('notification_setting') }}">
@@ -125,14 +134,14 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Hosting insights and rewards</b></h3>
                             <p>Learn about best hosting practices, and get access to exclusive hosting perks.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Recognition and achievements</h5>
                             @if ($notifications->recognition_achievements == "email")
@@ -145,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Insights and tips</h5>
                             @if ($notifications->insights_tips == "email")
@@ -158,7 +167,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Pricing trends and suggestions</h5>
                             @if ($notifications->pricing_trends_suggestions == "email")
@@ -171,7 +180,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Hosting perks</h5>
                             @if ($notifications->hosting_perks == "email")
@@ -188,14 +197,14 @@
 
                 <div class="col-12">
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Hosting updates</b></h3>
                             <p>Get updates about programs, features, and regulations.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>News and updates</h5>
                             @if ($notifications->news_updates == "email")
@@ -208,7 +217,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Local laws and regulations</h5>
                             @if ($notifications->local_laws_regulations == "email")
@@ -225,14 +234,14 @@
 
                 <div class="col-12">
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Travel tips and offers</b></h3>
                             <p>Inspire your next trip with personalized recommendations and special offers.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Inspiration and offers</h5>
                             @if ($notifications->inspiration_offers == "email")
@@ -245,7 +254,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Trip planning</h5>
                             @if ($notifications->trip_planning == "email")
@@ -262,14 +271,14 @@
 
                 <div class="col-12">
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>EZV updates</b></h3>
                             <p>Stay up to date on the latest news from EZV, and let us know how we can improve.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>News and programs</h5>
                             @if ($notifications->news_programs == "email")
@@ -282,7 +291,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Feedback</h5>
                             @if ($notifications->feedback == "email")
@@ -295,7 +304,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Travel regulations</h5>
                             @if ($notifications->travel_regulations == "email")
@@ -311,7 +320,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                                 onclick="showModalUnsub()">

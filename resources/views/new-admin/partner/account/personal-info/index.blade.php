@@ -2,13 +2,46 @@
 
 @section('title', 'Personal Information - Account Setting - EZV2')
 
+<style>
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-20p {
+            margin-left: 20px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+        .government-card {
+            width: 100% !important;
+            margin-left: 2rem !important;
+            margin-right: 2rem !important;
+            margin-top: 1rem !important;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        .government-card {
+            position: absolute;
+            width: 18rem !important;
+            right: 20px !important;
+            bottom: 0px !important;
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        .government-card {
+            position: absolute;
+            width: 23rem !important;
+            right: 20px !important;
+            bottom: 0px !important;
+        }
+    }
+</style>
+
 @section('content_admin')
 
 <div class="page-header">
     <div class="container text-dark">
         <div class="page-header-content pt-4">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+            <div class="row align-items-center justify-content-between" style="position: relative;">
+                <div class="col-12 mt-2 ml-max-md-20p" style="margin-left: 30px;">
                     <div class="block-content">
                         @if (session('success'))
                         <div class="col-8 justify-content-center ml-n3">
@@ -35,7 +68,7 @@
 
 
                 <div id="content" class="col-12">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;" id="divLegalName">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divLegalName">
                         <div class="col-md-7" id="legal-name">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Legal name</span>
@@ -45,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divGender">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divGender">
                         <div class="col-md-7" id="gender">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Gender</span>
@@ -55,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divBirthday">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divBirthday">
                         <div class="col-md-7" id="date-of-birth">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Date of birth</span>
@@ -65,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divEmailAddress">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divEmailAddress">
                         <div class="col-md-7" id="email-address">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Email address</span>
@@ -75,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divPhoneNumber">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divPhoneNumber">
                         <div class="col-md-7" id="phone-number">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Phone numbers</span>
@@ -85,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divGovernment">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divGovernment">
                         <div class="col-md-7" id="government">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Government ID</span>
@@ -115,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divAddress">
+                    <div class="col-12 mt-4 ml-max-md-0p d-flex" style="margin-left: 10px;" id="divAddress">
                         <div class="col-md-7" id="address">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Address</span>
@@ -149,7 +182,7 @@
 
                 <!-- Form Legal Name -->
                 <div id="legalform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Legal name</span>
@@ -182,7 +215,7 @@
 
                 <!-- Form Gender -->
                 <div id="genderform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Gender</span>
@@ -210,7 +243,7 @@
 
                 <!-- Form Birthday -->
                 <div id="birthdayform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Date of birth</span>
@@ -231,7 +264,7 @@
 
                 <!-- Form Email -->
                 <div id="emailform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Email address</span>
@@ -253,7 +286,7 @@
 
                 <!-- Form Phone Number -->
                 <div id="phoneform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Phone numbers</span>
@@ -276,7 +309,7 @@
 
                 <!-- Form Address -->
                 <div id="addressform" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 ml-max-md-0p d-flex" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Address</span>
@@ -297,8 +330,7 @@
                 <!-- Form Address -->
 
                 @if (Auth::user()->role->name == "superadmin" || Auth::user()->role->name == "admin")
-                <div class="col-3">
-                    <div class="card p-4" style="width: 23rem; margin-left: 750px; box-shadow: 0px 3px 15px -8px rgb(100,100,100); position: absolute; bottom: 0;">
+                    <div class="card p-4 government-card" style="box-shadow: 0px 3px 15px -8px rgb(100,100,100);">
                         <div class="card-body">
                             <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="display:block;height:48px;width:48px;fill:#E31C5F;stroke:currentColor" aria-hidden="true" role="presentation" focusable="false"><g stroke="none"><path d="m39 15.999v28.001h-30v-28.001z" fill-opacity=".2"></path><path d="m24 0c5.4292399 0 9.8479317 4.32667079 9.9961582 9.72009516l.0038418.27990484v2h7c1.0543618 0 1.9181651.8158778 1.9945143 1.8507377l.0054857.1492623v32c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-34c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623v-32c0-1.0543618.81587779-1.9181651 1.85073766-1.9945143l.14926234-.0054857h7v-2c0-5.5228475 4.4771525-10 10-10zm17 14h-34v32h34zm-17 14c1.6568542 0 3 1.3431458 3 3s-1.3431458 3-3 3-3-1.3431458-3-3 1.3431458-3 3-3zm0 2c-.5522847 0-1 .4477153-1 1s.4477153 1 1 1 1-.4477153 1-1-.4477153-1-1-1zm0-28c-4.3349143 0-7.8645429 3.44783777-7.9961932 7.75082067l-.0038068.24917933v2h16v-2c0-4.418278-3.581722-8-8-8z"></path></g></svg>
 
@@ -309,7 +341,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
                 @endIf
 
             </div>

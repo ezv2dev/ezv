@@ -2,13 +2,46 @@
 
 @section('title', 'Payouts - EZV2')
 
+<style>
+    @media only screen and (max-width: 767px) {
+        .card-pay-info {
+            width: 100% !important;
+            margin-left: 1.5rem !important;
+            margin-right: 1.5rem !important;
+            margin-top: 1rem !important;
+        }
+        .ml-max-md-10p {
+            margin-left: 10px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        .card-pay-info {
+            position: absolute !important;
+            width: 18rem !important;
+            top: 200px !important;
+            right: 5px !important;
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        .card-pay-info {
+            position: absolute !important;
+            width: 23rem !important;
+            top: 200px !important;
+            right: 0 !important;
+        }
+    }
+</style>
+
 @section('content_admin')
 
 <div class="page-header">
     <div class="container text-dark">
         <div class="page-header-content pt-4">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+            <div class="row align-items-center justify-content-between" style="position: relative;">
+                <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 30px;">
                     <div class="block-content">
                         <nav aria-label="breadcrumb" style="margin-left: -10px;">
                             <ol class="breadcrumb" style="background: transparent;">
@@ -25,7 +58,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
                         <div class="title-bar" style="margin-right: 20px; display: inline-block;">
                             <a style="text-decoration: none;" href="{{ route('payments') }}">
                                 <h6>Payments</h6>
@@ -51,8 +84,8 @@
 
                 </div>
 
-                <div class="col-9" style="margin-top: -50px;">
-                    <div class="col-md-10 mt-5" style="margin-left: 20px;">
+                <div class="col-12 col-md-9">
+                    <div class="col-md-10 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div>
                             <h3><b>How you’ll get paid</b></h3>
                             <p>Add at least one payout method so we know where to send your money.</p>
@@ -62,14 +95,12 @@
                     </div>
                 </div>
 
-                <div class="col-3">
-                    <div class="card p-4" style="width: 23rem; margin-top: 10px; margin-left: -80px;">
-                        <div class="card-body">
-                            <h3 class="card-title"><b>Need help?</b></h3>
-                            <h4><a href="#">When you'll get your payout</a> ></h4>
-                            <h4><a href="#">How payouts work</a> ></h4>
-                            <h4><a href="#">Go to your transaction history</a> ></h4>
-                        </div>
+                <div class="card p-4 card-pay-info">
+                    <div class="card-body">
+                        <h3 class="card-title"><b>Need help?</b></h3>
+                        <h4><a href="#">When you'll get your payout</a> ></h4>
+                        <h4><a href="#">How payouts work</a> ></h4>
+                        <h4><a href="#">Go to your transaction history</a> ></h4>
                     </div>
                 </div>
             </div>
