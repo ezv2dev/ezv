@@ -471,6 +471,10 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show button close full screen for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
@@ -484,6 +488,10 @@
                             document.getElementById("map-desc").classList.add('mobile-map');
                             $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
@@ -716,6 +724,10 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show button close full screen for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
@@ -729,6 +741,10 @@
                             document.getElementById("map-desc").classList.add('mobile-map');
                             $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
@@ -940,6 +956,10 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show button close full screen for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
@@ -953,6 +973,10 @@
                             document.getElementById("map-desc").classList.add('mobile-map');
                             $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
@@ -1196,6 +1220,10 @@
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show button close full screen for mobile
                             document.getElementById("map-desc").classList.remove('mobile-map-desc-close');
                             document.getElementById("map-desc").classList.add('mobile-map');
@@ -1209,6 +1237,10 @@
                             document.getElementById("map-desc").classList.add('mobile-map');
                             $('#map12').attr('style', 'width: 100%; height: 100%; border-radius: 10px; position: relative; overflow: hidden;');
                             document.getElementById("bottom-mobile").classList.add('d-none');
+                            //show map overlay
+                            $("#map-mobile-overlay").addClass('map-mobile-overlay');
+                            //stop scroll when map open
+                            document.getElementsByTagName("html")[0].classList.add('overflow-hidden');
                             // show right content on the map
                             $('#modal-map-content').removeClass('d-none');
                             $('#modal-map-content').addClass('d-block mobile-map-desc');
