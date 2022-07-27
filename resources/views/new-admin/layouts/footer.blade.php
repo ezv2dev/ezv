@@ -117,6 +117,10 @@
             border: solid 1px #ff7400;
             color: #ff7400;
         }
+
+        .footer-social a:hover {
+            color: transparent !important;
+        }
     </style>
 
     <div class="footer-2-4 container-xxl mx-auto position-relative p-0">
@@ -143,13 +147,13 @@
                     <h2 class="footer-text-title text-white">{{ __('user_page.Company') }}</h2>
                     <nav class="list-unstyled2">
                         <li class="list-space">
+                            <a href="{{ route('about_us') }}" class="list-menu">{{ __('user_page.About Us') }}</a>
+                        </li>
+                        <li class="list-space">
                             <a href="{{ route('contact_us') }}" class="list-menu">{{ __('user_page.Contact Us') }}</a>
                         </li>
                         <li class="list-space">
                             <a href="{{ route('blog') }}" class="list-menu">{{ __('user_page.Blog') }}</a>
-                        </li>
-                        <li class="list-space">
-                            <a href="{{ route('culture') }}" class="list-menu">{{ __('user_page.Culture') }}</a>
                         </li>
                     </nav>
                 </div>
@@ -160,7 +164,7 @@
                             <a href="{{ route('getting_started') }}" class="list-menu">{{ __('user_page.Getting Started') }}</a>
                         </li>
                         <li class="list-space">
-                            <a href="{{ route('help_center') }}" class="list-menu">{{ __('user_page.Help Center') }}</a>
+                            <a href="{{ route('faq') }}" class="list-menu">{{ __('user_page.FAQ') }}</a>
                         </li>
                     </nav>
                 </div>
@@ -183,16 +187,16 @@
         <div class="row" style="margin-top: 1.5rem">
             <div class="col-12">
                 <div class="footer-social text-center">
-                    <a href="https://www.facebook.com/ezvillasbali/" target=_blank">
+                    <a href="https://www.facebook.com/ezvillasbali/" target="_blank">
                         <i id="footer-soc-icon" class="fab fa-facebook"></i>
                     </a>
-                    <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target=_blank">
+                    <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target="_blank">
                         <i id="footer-soc-icon" class="fab fa-instagram"></i>
                     </a>
-                    <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target=_blank">
+                    <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target="_blank">
                         <i id="footer-soc-icon" class="fa fa-envelope"></i>
                     </a>
-                    <a href="call:+6285792260929" style="margin-left: 10px;" target=_blank">
+                    <a href="call:+6285792260929" style="margin-left: 10px;" target="_blank">
                         <i id="footer-soc-icon" class="fa fa-phone"></i>
                     </a>
                 </div>

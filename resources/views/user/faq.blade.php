@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Center - EZV</title>
+    <title>Frequently Ask Questions - EZV</title>
     <meta name="description" content="EZV2 created by pixelcave and published on Themeforest">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -64,14 +64,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Help Center</a></li>
+            <li class="breadcrumb-item"><a href="#">FAQ</a></li>
         </ol>
     </nav>
     <br>
 
     <small class="text-muted">Legal Terms</small>
 
-    <div class="privacy-title mb-4"><h2>Help Center</h2>
+    <div class="privacy-title mb-4"><h2>Frequently Ask Questions</h2>
     </div>
     <div class="privacy-description">
         {{-- <p class="mb-3 text-dark text-justify" style="font-size: 16pt"><b>Terms of Service for Non-European Users</b></p> --}}

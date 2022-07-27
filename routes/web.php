@@ -103,9 +103,9 @@ Route::get('/getting-started', function () {
     return view('user.getting_started');
 })->name('getting_started');
 
-Route::get('/help-center', function () {
-    return view('user.help_center');
-})->name('help_center');
+Route::get('/fag', function () {
+    return view('user.faq');
+})->name('faq');
 
 Route::get('/contact-us', function () {
     return view('user.contact_us');
@@ -117,9 +117,9 @@ Route::get('/blog-detail', function () {
     return view('user.blog_detail');
 })->name('blog_detail');
 
-Route::get('/culture', function () {
-    return view('user.culture');
-})->name('culture');
+Route::get('/about-us', function () {
+    return view('user.about_us');
+})->name('about_us');
 
 Route::get('/terms', function () {
     return view('user.terms');
