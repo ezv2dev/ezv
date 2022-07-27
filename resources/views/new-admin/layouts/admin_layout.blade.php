@@ -181,7 +181,7 @@
                                         {{ Auth::user()->first_name }}
                                         {{ Auth::user()->last_name }}</div>
                                     <div class="user-details-email">
-                                        <p class="mb-0">{{ Auth::user()->email }}</p>
+                                        <p class="mb-0" style="word-break: break-word;">{{ Auth::user()->email }}</p>
                                     </div>
                                 </div>
                             </div>
