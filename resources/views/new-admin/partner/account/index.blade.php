@@ -2,6 +2,24 @@
 
 @section('title', 'Account Setting - EZV2')
 
+<style>
+    @media only screen and (max-width: 425px) {
+        .card-subtitle {
+            font-size: 14px;
+        }
+    }
+    @media only screen and (min-width: 576px) and (max-width: 991px) {
+        .card {
+            height: 230px !important;
+        }
+    }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .card {
+            height: 200px !important;
+        }
+    }
+</style>
+
 @section('content_admin')
 
 <div class="page-header page-header-dark">
@@ -12,13 +30,15 @@
                     <h1 style="font-weight:bold; color: #383838; font-size:25pt;">
                         Account
                     </h1>
-                    <span style="color: #383838;"><b>{{ Auth::user()->first_name }}
-                            {{ Auth::user()->last_name }}</b></span> <span>{{ Auth::user()->email }}</span> <a
-                        class="text-dark" style="text-decoration: underline;" href="{{ route('profile_user') }}"><b>Go
-                            to Profile</b></a>
+                    <span class="d-block d-md-inline" style="color: #383838;"><b>{{ Auth::user()->first_name }}
+                            {{ Auth::user()->last_name }}</b></span> 
+                    <span class="d-block d-md-inline">{{ Auth::user()->email }}</span> 
+                    <a class="text-dark" style="text-decoration: underline;" href="{{ route('profile_user') }}">
+                        <b>Go to Profile</b>
+                    </a>
                 </div>
-                <div class="col-12 mt-5 justify-content-center d-flex">
-                    <div class="col-md-4">
+                <div class="row mt-5 px-4">
+                    <div class="col-12 col-sm-6 col-md-4 mb-3">
                         <a href="{{ route('personal_info') }}" class="text-dark" style="text-decoration: none;">
                             <div class="card pb-4 shadow" style="height: 180px;">
                                 <div class="card-block" style="padding: 25px;">
@@ -36,7 +56,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-sm-6 col-md-4 mb-3">
                         <a href="{{ route('login_security') }}" class="text-dark" style="text-decoration: none;">
                             <div class="card shadow" style="height: 180px;">
                                 <div class="card-block" style="padding: 25px;">
@@ -54,7 +74,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-sm-6 col-md-4 mb-3">
                         <a href="{{ route('payments') }}" class="text-dark" style="text-decoration: none;">
                             <div class="card shadow" style="height: 180px;">
                                 <div class="card-block" style="padding: 25px;">
@@ -73,9 +93,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="col-12 mt-3 justify-content-center d-flex">
-                    <div class="col-md-4">
+                    <div class="col-12 col-sm-6 col-md-4 mb-3 mb-md-0">
                         <a href="{{ route('notification_setting') }}" class="text-dark" style="text-decoration: none;">
                             <div class="card pb-4 shadow" style="height: 180px;">
                                 <div class="card-block" style="padding: 25px;">
@@ -93,6 +111,62 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-12 col-sm-6 col-md-4 mb-3 mb-md-0">
+                        <a href="{{ route('preferences') }}" class="text-dark" style="text-decoration: none;">
+                            <div class="card shadow" style="height: 180px;">
+                                <div class="card-block" style="padding: 25px;">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        style="display: block; height: 32px; width: 32px; fill: currentcolor;">
+                                        <path
+                                            d="m24 31a7 7 0 0 0 0-14h-16a7 7 0 0 0 0 14zm5-7a5 5 0 1 1 -5-5 5.00588 5.00588 0 0 1 5 5zm-26 0a5.00588 5.00588 0 0 1 5-5h11.11072a6.97751 6.97751 0 0 0 0 10h-11.11072a5.00588 5.00588 0 0 1 -5-5zm21-23h-16a7 7 0 0 0 0 14h16a7 7 0 0 0 0-14zm-21 7a5 5 0 1 1 5 5 5.00588 5.00588 0 0 1 -5-5zm21 5h-11.11035a6.97836 6.97836 0 0 0 0-10h11.11035a5 5 0 0 1 0 10z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="card-title pt-4"><b>Global preferences</b></h4>
+                                    <p class="card-subtitle text-muted p-y-1">Set your default language, currency, and
+                                        timezone.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <a href="{{ route('referral_index') }}" class="text-dark" style="text-decoration: none;">
+                            <div class="card shadow" style="height: 180px;">
+                                <div class="card-block" style="padding: 25px;">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        style="display: block; height: 32px; width: 32px; fill: currentcolor;">
+                                        <path
+                                            d="m28 2c1.0543618 0 1.9181651.81587779 1.9945143 1.85073766l.0054857.14926234v24c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-24c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623v-24c0-1.0543618.81587779-1.91816512 1.85073766-1.99451426l.14926234-.00548574zm-14.415 15h-9.585v11h11v-9.586l-4.2928932 4.2931068-1.41421358-1.4142136zm14.415 0h-9.585l4.2921068 4.2928932-1.4142136 1.4142136-4.2928932-4.2931068v9.586h11zm-13-13h-11v11l3.53577067.0011092c-.34073717-.5885973-.53577067-1.272077-.53577067-2.0011092 0-2.209139 1.790861-4 4-4 1.0347079 0 1.9884302.35717147 2.8159632 1.1592818.2940352.2850022.6817727.8549374 1.1838896 1.7366117zm6 7c-.5327919 0-.9841014.1690165-1.4239808.5953825-.2060299.1997004-.6246872.8766948-1.2206134 1.985144l-.247741.466282-.4926648.9531915h3.385c1.0016437 0 1.8313084-.7363297 1.9772306-1.6972257l.0172837-.153512.0054857-.1492623c0-1.1045695-.8954305-2-2-2zm7-7h-11l.0007292 7.8948717c.5018346-.8810929.889386-1.4506978 1.1833076-1.7355899.827533-.80211033 1.7812553-1.1592818 2.8159632-1.1592818 2.209139 0 4 1.790861 4 4 0 .7290322-.1950335 1.4125119-.5357707 2.0011092l3.5357707-.0011092zm-17 7c-1.1045695 0-2 .8954305-2 2l.00548574.1492623c.07634914 1.0348599.94015246 1.8507377 1.99451426 1.8507377h3.385l-.4926648-.9531915-.3645522-.6822055c-.533991-.9806703-.9115076-1.5828334-1.1038022-1.7692205-.4398794-.426366-.8911889-.5953825-1.4239808-.5953825z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="card-title pt-4"><b>Referral credit & coupon</b></h4>
+                                    <p class="card-subtitle text-muted p-y-1">You have $0 referral credits and coupon.
+                                        Learn more.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {{-- <div class="row mt-3 px-4"> --}}
+                    {{-- <div class="col-12 col-sm-6 col-md-4 mb-3 mb-md-0">
+                        <a href="{{ route('notification_setting') }}" class="text-dark" style="text-decoration: none;">
+                            <div class="card pb-4 shadow" style="height: 180px;">
+                                <div class="card-block" style="padding: 25px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
+                                        role="presentation" focusable="false"
+                                        style="display: block; height: 32px; width: 32px; fill: currentcolor;">
+                                        <path
+                                            d="M30.82812,3.72656A2.00276,2.00276,0,0,0,28.1875,2.71143L11.78772,10H7a5.99987,5.99987,0,0,0-.25928,11.99414L11,21.99811V29h2V22.53833l15.18848,6.75073A2.0003,2.0003,0,0,0,31,27.46094V4.53857A2.01958,2.01958,0,0,0,30.82812,3.72656ZM6.81641,19.99609A4.00016,4.00016,0,0,1,7,12h4v8H7.02246ZM29,27.46094,13,20.35059V11.6499L29,4.53857Z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="card-title pt-4"><b>Notifications</b></h4>
+                                    <p class="card-subtitle text-muted p-y-1">Choose notification preferences and how
+                                        you want to be contacted.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div> --}}
                     {{--
                         <div class="col-md-4">
                             <a href="{{ route('privacy_sharing') }}" class="text-dark" style="text-decoration: none;">
@@ -113,7 +187,7 @@
                     </a>
                 </div>
                 --}}
-                <div class="col-md-4">
+                {{-- <div class="col-12 col-sm-6 col-md-4 mb-3 mb-md-0">
                     <a href="{{ route('preferences') }}" class="text-dark" style="text-decoration: none;">
                         <div class="card shadow" style="height: 180px;">
                             <div class="card-block" style="padding: 25px;">
@@ -130,8 +204,8 @@
                             </div>
                         </div>
                     </a>
-                </div>
-                <div class="col-md-4">
+                </div> --}}
+                {{-- <div class="col-12 col-sm-6 col-md-4">
                     <a href="{{ route('referral_index') }}" class="text-dark" style="text-decoration: none;">
                         <div class="card shadow" style="height: 180px;">
                             <div class="card-block" style="padding: 25px;">
@@ -148,52 +222,52 @@
                             </div>
                         </div>
                     </a>
+                </div> --}}
+                {{-- </div> --}}
+                <div class="col-12 mt-3 justify-content-center d-flex">
+                    {{--
+                            <div class="col-md-4">
+                                <div class="card pb-4 shadow" style="height: 180px;">
+                                    <div class="card-block" style="padding: 25px;">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                            role="presentation" focusable="false"
+                                            style="display: block; height: 32px; width: 32px; fill: currentcolor;">
+                                            <path
+                                                d="M26 2a1 1 0 0 1 .922.612l.04.113 2 7a1 1 0 0 1-.847 1.269L28 11h-3v5h6v2h-2v13h-2l.001-2.536a3.976 3.976 0 0 1-1.73.527L25 29H7a3.982 3.982 0 0 1-2-.535V31H3V18H1v-2h5v-4a1 1 0 0 1 .883-.993L7 11h.238L6.086 8.406l1.828-.812L9.427 11H12a1 1 0 0 1 .993.883L13 12v4h10v-5h-3a1 1 0 0 1-.987-1.162l.025-.113 2-7a1 1 0 0 1 .842-.718L22 2h4zm1 16H5v7a2 2 0 0 0 1.697 1.977l.154.018L7 27h18a2 2 0 0 0 1.995-1.85L27 25v-7zm-16-5H8v3h3v-3zm14.245-9h-2.491l-1.429 5h5.349l-1.429-5z">
+                                            </path>
+                                        </svg>
+                                        <h4 class="card-title pt-4"><b>Travel for work</b></h4>
+                                        <p class="card-subtitle text-muted p-y-1">Add a work email for business trip benefits.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card shadow" style="height: 180px;">
+                                    <div class="card-block" style="padding: 25px;">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                            role="presentation" focusable="false"
+                                            style="display: block; height: 32px; width: 32px; fill: currentcolor;">
+                                            <path
+                                                d="m27 5h-4a2.00229 2.00229 0 0 0 -2 2v4h-4v-8a2.002 2.002 0 0 0 -2-2h-4a2.002 2.002 0 0 0 -2 2v8h-4a2.002 2.002 0 0 0 -2 2v16a2.00229 2.00229 0 0 0 2 2h22a2.0026 2.0026 0 0 0 2-2v-22a2.00229 2.00229 0 0 0 -2-2zm-18 24h-4l-.00146-16h4.00146zm6 0h-4v-16l-.00092-.00891-.00054-9.99109h4.00146zm6 0h-4v-16h4zm6 0h-4v-16l-.00073-.007-.00027-5.993h4.001z">
+                                            </path>
+                                        </svg>
+                                        <h4 class="card-title pt-4"><b>Professional hosting tools</b></h4>
+                                        <p class="card-subtitle text-muted p-y-1">Get professional tools if you manage several
+                                            properties on EZV2 Villa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        --}}
                 </div>
-            </div>
-            <div class="col-12 mt-3 justify-content-center d-flex">
-                {{--
-                        <div class="col-md-4">
-                            <div class="card pb-4 shadow" style="height: 180px;">
-                                <div class="card-block" style="padding: 25px;">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 32px; width: 32px; fill: currentcolor;">
-                                        <path
-                                            d="M26 2a1 1 0 0 1 .922.612l.04.113 2 7a1 1 0 0 1-.847 1.269L28 11h-3v5h6v2h-2v13h-2l.001-2.536a3.976 3.976 0 0 1-1.73.527L25 29H7a3.982 3.982 0 0 1-2-.535V31H3V18H1v-2h5v-4a1 1 0 0 1 .883-.993L7 11h.238L6.086 8.406l1.828-.812L9.427 11H12a1 1 0 0 1 .993.883L13 12v4h10v-5h-3a1 1 0 0 1-.987-1.162l.025-.113 2-7a1 1 0 0 1 .842-.718L22 2h4zm1 16H5v7a2 2 0 0 0 1.697 1.977l.154.018L7 27h18a2 2 0 0 0 1.995-1.85L27 25v-7zm-16-5H8v3h3v-3zm14.245-9h-2.491l-1.429 5h5.349l-1.429-5z">
-                                        </path>
-                                    </svg>
-                                    <h4 class="card-title pt-4"><b>Travel for work</b></h4>
-                                    <p class="card-subtitle text-muted p-y-1">Add a work email for business trip benefits.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card shadow" style="height: 180px;">
-                                <div class="card-block" style="padding: 25px;">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 32px; width: 32px; fill: currentcolor;">
-                                        <path
-                                            d="m27 5h-4a2.00229 2.00229 0 0 0 -2 2v4h-4v-8a2.002 2.002 0 0 0 -2-2h-4a2.002 2.002 0 0 0 -2 2v8h-4a2.002 2.002 0 0 0 -2 2v16a2.00229 2.00229 0 0 0 2 2h22a2.0026 2.0026 0 0 0 2-2v-22a2.00229 2.00229 0 0 0 -2-2zm-18 24h-4l-.00146-16h4.00146zm6 0h-4v-16l-.00092-.00891-.00054-9.99109h4.00146zm6 0h-4v-16h4zm6 0h-4v-16l-.00073-.007-.00027-5.993h4.001z">
-                                        </path>
-                                    </svg>
-                                    <h4 class="card-title pt-4"><b>Professional hosting tools</b></h4>
-                                    <p class="card-subtitle text-muted p-y-1">Get professional tools if you manage several
-                                        properties on EZV2 Villa.</p>
-                                </div>
-                            </div>
-                        </div>
-                    --}}
-            </div>
-            <div class="col-12 mt-5 justify-content-center text-center">
-                <p>Need to deactivate your account?</p>
-                <p><a href="{{ route('account-delete-form') }}" class="text-dark"
-                        style="text-decoration: underline;"><b>Take care of that now</b></a></p>
+                <div class="col-12 mt-5 justify-content-center text-center">
+                    <p>Need to deactivate your account?</p>
+                    <p><a href="{{ route('account-delete-form') }}" class="text-dark"
+                            style="text-decoration: underline;"><b>Take care of that now</b></a></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
