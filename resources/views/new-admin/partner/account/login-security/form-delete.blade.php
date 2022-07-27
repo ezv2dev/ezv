@@ -250,7 +250,7 @@
     [type="radio"]:not(:checked)+label:before {
         content: '';
         position: absolute;
-        left: 0;
+        right: 0;
         top: 0;
         width: 18px;
         height: 18px;
@@ -267,7 +267,7 @@
         background: #FF7400;
         position: absolute;
         top: 2px;
-        left: 2px;
+        right: 2px;
         border-radius: 100%;
         -webkit-transition: all 0.2s ease;
         transition: all 0.2s ease;
@@ -342,6 +342,22 @@
         }
     }
 
+    @media only screen and (max-width: 425px) {
+        .fs-title {
+            font-size: 20px !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .px-max-md-2r {
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
+        .mx-max-md-2r {
+            margin-left: 2rem !important;
+            margin-right: 2rem !important;
+        }
+    }
+
 </style>
 
 <div class="container-fluid">
@@ -351,16 +367,16 @@
                 <form id="msform" action="{{ route('account-store-delete') }}" method="post">
                     @csrf
                     <!-- progressbar -->
-                    <ul id="progressbar" style="margin-left: 100px;">
+                    <ul id="progressbar" class="d-flex justify-content-center">
                         <li class="active" id="account"><strong>Select reason</strong></li>
                         <li id="personal"><strong>Confirm</strong></li>
                         <li id="confirm"><strong>Done</strong></li>
                     </ul>
-                    <div class="progress">
+                    <div class="progress mx-max-md-2r">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> <br> <!-- fieldsets -->
-                    <fieldset>
+                    <fieldset class="px-max-md-2r">
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
@@ -370,54 +386,46 @@
                                     <h2 class="steps">Step 1 - 3</h2>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-11">
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <p>I have safety or privacy concerns.</p>
                                 </div>
-                                <div class="col-1">
+                                <div>
                                     <input type="radio" value="I have safety or privacy concerns" id="test1" name="reasonn" onclick="function1()">
                                     <label for="test1"></label>
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-11">
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <p>I can’t host anymore.</p>
                                 </div>
-                                <div class="col-1">
+                                <div>
                                     <input type="radio" value="I can’t host anymore" id="test2" name="reasonn" onclick="function2()">
                                     <label for="test2"></label>
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-11">
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <p>I can't comply with EZV's Terms of Service / Community Commitment.</p>
                                 </div>
-                                <div class="col-1">
+                                <div>
                                     <input type="radio" value="I can't comply with EZV's Terms of Service / Community Commitment" id="test3" name="reasonn" onclick="function3()">
                                     <label for="test3"></label>
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-11">
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <p>Others</p>
                                 </div>
-                                <div class="col-1">
+                                <div>
                                     <input type="radio" id="test4" name="reasonn" value="" onclick="function4()">
                                     <label for="test4"></label>
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
                             </div>
+                            <hr>
                             <div class="row display-none" id="reason">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -429,7 +437,7 @@
                         </div>
                         <input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
-                    <fieldset>
+                    <fieldset class="px-max-md-2r">
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">
@@ -461,7 +469,7 @@
                         </div> <input type="button" name="submit" class="submit action-button" value="Deactivate" />
                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
-                    <fieldset>
+                    <fieldset class="px-max-md-2r">
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-7">

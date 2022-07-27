@@ -2,13 +2,24 @@
 
 @section('title', 'Global Preferences - Account Setting - EZV2')
 
+<style>
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-20p {
+            margin-left: 20px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+    }
+</style>
+
 @section('content_admin')
 
 <div class="page-header">
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+                <div class="col-12 mt-2 ml-max-md-20p" style="margin-left: 30px;">
                     <div class="block-content">
                         @if (session('success'))
                         <div class="col-8 justify-content-center ml-n3">
@@ -34,7 +45,7 @@
                 </div>
 
                 <div id="content" class="col-12">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;" id="divLegalName">
+                    <div class="col-12 mt-5 d-flex ml-max-md-0p" style="margin-left: 10px;" id="divLegalName">
                         <div class="col-md-7" id="legal-name">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Preferred language</span>
@@ -46,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divGender">
+                    <div class="col-12 mt-4 d-flex ml-max-md-0p" style="margin-left: 10px;" id="divGender">
                         <div class="col-md-7" id="gender">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Preferred currency</span>
@@ -59,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex" style="margin-left: 10px;" id="divBirthday">
+                    <div class="col-12 mt-4 d-flex ml-max-md-0p" style="margin-left: 10px;" id="divBirthday">
                         <div class="col-md-7" id="date-of-birth">
                             <div class="legal-name" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                                 <span class="lead">Time zone</span>
@@ -76,7 +87,7 @@
 
                 <!-- Form Language -->
                 <div id="languageForm" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 d-flex ml-max-md-0p" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Preferred language</span>
@@ -104,7 +115,7 @@
 
                 <!-- Form Currency -->
                 <div id="currencyForm" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 d-flex ml-max-md-0p" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Preferred currency</span>
@@ -129,7 +140,7 @@
 
                 <!-- Form Timezone -->
                 <div id="timezoneForm" class="col-12" style="display: none;">
-                    <div class="col-12 mt-5 d-flex" style="margin-left: 10px;">
+                    <div class="col-12 mt-5 d-flex ml-max-md-0p" style="margin-left: 10px;">
                         <div class="col-md-7">
                             <div class="legal-name" style="padding-bottom:20px;">
                                 <span class="lead">Preferred timezone</span>

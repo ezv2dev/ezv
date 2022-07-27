@@ -61,8 +61,6 @@
         width: 30px;
         height: 30px;
         font-weight: bold;
-        margin-left: -240px !important;
-        margin-top: 50px !important;
         box-shadow: none !important;
     }
 
@@ -73,6 +71,23 @@
 
     .btn-primary:hover {
         border-color: #FF7400 !important;
+    }
+    .data-total{
+        font-size:2.5rem;
+        font-weight:bold;
+    }
+    @media (max-width:767px){
+        .text-xl{
+            font-size:1rem !important;
+        }
+        .rate {
+            width: 25px;
+            height: 25px;
+            font-weight: normal;
+        }
+        .data-total{
+            font-size:1.5rem;
+        }
     }
 
 </style>
@@ -99,50 +114,43 @@
             </ul>
         </div>
     </nav>
-    <div class="col-12 text-center">
-        <div class="views pt-5 pb-5 text-dark">
-            <div class="mt-2">
-                <div class="row">
-                    <div class="col-4 ml-n3">
-                        <h3 class="text-xl" style="color: rgb(54, 50, 50)"><b>{{ $views }}</b></h3>
-                        <p>Views</p>
-                    </div>
-                    <div class="col-4">
-                        <h3 class="text-xl" style="color: rgb(54, 50, 50)"><b>{{ $booking }}</b></h3>
-                        <p>New bookings</p>
-                    </div>
-                    <div class="col-4">
-                        <div class="row">
-                            <div class="col-11">
-                                <h3 class="text-xl" style="color: rgb(54, 50, 50)"><b>0 %</b></h3>
-                                <p>Booking rate</p>
-                            </div>
-                            <div class="col-1">
-                                <button type="button" class="rate btn-primary" data-toggle="tooltip" data-placement="bottom" title="The percentage of guests who book after viewing your listing">
-                                    ?
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+    <div class="views text-dark text-center my-3 my-lg-5">
+        <div class="mt-2">
+            <div class="row">
+                <div class="col-4">
+                    <h3 class="data-total" style="color: rgb(54, 50, 50)">{{ $views }}</h3>
+                    <p>Views</p>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div id="chartViews" class="mt-5"></div>
-                    </div>
+                <div class="col-4">
+                    <h3 class="data-total" style="color: rgb(54, 50, 50)">{{ $booking }}</h3>
+                    <p>New bookings</p>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div id="bookingViews" class="mt-5"></div>
+                <div class="col-4 d-flex">
+                    <div>
+                        <h3 class="data-total" style="color: rgb(54, 50, 50)">0 %</h3>
+                        <p>Booking rate</p>
                     </div>
+                    <button type="button" class="rate btn-primary" data-toggle="tooltip" data-placement="bottom" title="The percentage of guests who book after viewing your listing">
+                        ?
+                    </button>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div id="bookingRateViews" class="mt-5"></div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="chartViews" class="mt-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="bookingViews" class="mt-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="bookingRateViews" class="mt-5"></div>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 

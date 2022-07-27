@@ -103,7 +103,7 @@ Route::get('/getting-started', function () {
     return view('user.getting_started');
 })->name('getting_started');
 
-Route::get('/fag', function () {
+Route::get('/faq', function () {
     return view('user.faq');
 })->name('faq');
 
@@ -1322,6 +1322,9 @@ Route::get('/hotel/room/story/{id}', [Hotel\RoomDetailController::class, 'story'
 Route::get('/hotel/room/{id}/delete/story/{id_story}', [Hotel\RoomDetailController::class, 'room_delete_story'])->name('room_delete_story');
 Route::get('/hotel/room/video/open/{id}', [Hotel\RoomDetailController::class, 'video_open'])->name('room_video_open');
 Route::post('/hotel/room/update/name', [Hotel\RoomDetailController::class, 'room_update_name'])->name('room_update_name');
+
+// HOTEL ROOM DETAIL
+Route::post('hotel/room/details/add', [Hotel\RoomDetailController::class, 'add_room_details'])->name('add_room_details');
 
 Route::post('/hotel/room/update/image', [Hotel\RoomDetailController::class, 'room_update_image'])->name('room_update_image');
 Route::get('/hotel/room/{id}/delete/image', [Hotel\RoomDetailController::class, 'room_delete_image'])->name('room_delete_image');

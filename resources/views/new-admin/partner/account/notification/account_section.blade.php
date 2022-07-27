@@ -66,6 +66,15 @@
         color: #FF7400;
     }
 
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-10p {
+            margin-left: 10px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+    }
+
 </style>
 
 @section('content_admin')
@@ -74,7 +83,7 @@
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 30px;">
+                <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 30px;">
                     <div class="block-content">
                         @if (session('success'))
                         <div class="col-10 ml-n3 justify-content-center">
@@ -109,7 +118,7 @@
 
                 <div class="col-12">
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px; border-bottom: 1px solid #DFDFDE;">
                         <div class="title-bar" style="margin-right: 20px; display: inline-block;">
                             <a style="text-decoration: none;" href="{{ route('notification_setting') }}"><h6>Offers and updates</h6></a>
                         </div>
@@ -121,14 +130,14 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Account activity and policies</b></h3>
                             <p>Confirm your booking and account activity, and learn about important EZV policies.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Account activity</h5>
                             @if ($notifications->account_activity == "email")
@@ -140,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Listing activity</h5>
                             @if ($notifications->listing_activity == "email")
@@ -152,7 +161,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Guest policies</h5>
                             @if ($notifications->guest_policies == "email")
@@ -164,7 +173,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-4" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Host policies</h5>
                             @if ($notifications->host_policies == "email")
@@ -178,14 +187,14 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Reminders</b></h3>
                             <p>Get important reminders about your reservations, listings, and account activity.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting" style="border-bottom: 1px solid #DFDFDE; padding-bottom:20px;">
                             <h5>Reminders</h5>
                             @if ($notifications->reminders == "email")
@@ -199,14 +208,14 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="title-hosting-insight">
                             <h3><b>Guest and Host messages</b></h3>
                             <p>Keep in touch with your Host or guests before and during your trip.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-7 mt-5" style="margin-left: 20px;">
+                    <div class="col-md-7 mt-5 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="section-hosting">
                             <h5>Messages</h5>
                             @if ($notifications->messages == "email")

@@ -11,6 +11,7 @@ use App\Models\BathRoom;
 use App\Models\BedRoom;
 use App\Models\Hotel;
 use App\Models\HotelRoomDetailPrice;
+use App\Models\HotelRoomDetails;
 
 use App\Models\HotelRoomAvailability;
 
@@ -246,26 +247,26 @@ class RoomDetailController extends Controller
     {
         // check if hotel exist
         $detail_room = HotelTypeDetail::where('id_hotel_room', $id)->select('hotel_type_detail.*', 'hotel_type.name as type_room', 'bed.name as bed_type')
-                        ->join('hotel_type', 'hotel_type_detail.id_hotel_type', '=', 'hotel_type.id_hotel_type', 'left')
-                        ->join('bed', 'hotel_type_detail.id_bed', '=', 'bed.id_bed', 'left')
-                        ->first();
+            ->join('hotel_type', 'hotel_type_detail.id_hotel_type', '=', 'hotel_type.id_hotel_type', 'left')
+            ->join('bed', 'hotel_type_detail.id_bed', '=', 'bed.id_bed', 'left')
+            ->first();
 
         $photo = HotelRoomPhoto::where('id_hotel_room', $id)->orderBy('order', 'asc')->get();
 
         $bathroom = HotelRoomBathroom::select('hotel_room_bathroom.*', 'bathroom.name')->where('id_hotel_room', $id)
-                    ->join('bathroom', 'hotel_room_bathroom.id_bathroom', '=', 'bathroom.id_bathroom', 'left')->get();
+            ->join('bathroom', 'hotel_room_bathroom.id_bathroom', '=', 'bathroom.id_bathroom', 'left')->get();
 
         $bedroom = HotelRoomBedroom::select('hotel_room_bedroom.*', 'bedroom.name')->where('id_hotel_room', $id)
-                    ->join('bedroom', 'hotel_room_bedroom.id_bedroom', '=', 'bedroom.id_bed', 'left')->get();
+            ->join('bedroom', 'hotel_room_bedroom.id_bedroom', '=', 'bedroom.id_bed', 'left')->get();
 
         $kitchen = HotelRoomKitchen::select('hotel_room_kitchen.*', 'kitchen.name')->where('id_hotel_room', $id)
-                    ->join('kitchen', 'hotel_room_kitchen.id_kitchen', '=', 'kitchen.id_kitchen', 'left')->get();
+            ->join('kitchen', 'hotel_room_kitchen.id_kitchen', '=', 'kitchen.id_kitchen', 'left')->get();
 
         $safety = HotelRoomSafety::select('hotel_room_safety.*', 'safety.name')->where('id_hotel_room', $id)
-                    ->join('safety', 'hotel_room_safety.id_safety', '=', 'safety.id_safety', 'left')->get();
+            ->join('safety', 'hotel_room_safety.id_safety', '=', 'safety.id_safety', 'left')->get();
 
         $service = HotelRoomService::select('hotel_room_service.*', 'service.name')->where('id_hotel_room', $id)
-                    ->join('service', 'hotel_room_service.id_service', '=', 'service.id_service', 'left')->get();
+            ->join('service', 'hotel_room_service.id_service', '=', 'service.id_service', 'left')->get();
 
         $data = [
             'detail_room' => $detail_room,
@@ -326,6 +327,28 @@ class RoomDetailController extends Controller
         // $hotelRoom = HotelTypeDetail::with('bed', 'hotel', 'hotelType', 'typeAmenities')->where('id_hotel_room', $id)->first();
 
         // return view('user.hotel.hotel_room', compact('video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'createdby', 'nearby_restaurant', 'nearby_activities', 'createdby', 'nearby_restaurant', 'nearby_activities', 'propertyType', 'hotelRoom', 'beds'));
+    }
+
+    public function add_room_details(Request $request)
+    {
+        $roomDetails = new HotelRoomDetails;
+        $roomDetails->id_hotel = $request->idHotel;
+        $roomDetails->id_hotel_room = $request->idHotelRoom;
+        $roomDetails->price = $request->priceRoomDetails;
+        $roomDetails->discount_price = $request->priceDiscountRoomDetails;
+        $roomDetails->capacity = $request->roomDetailsCapacity;
+
+        $roomDetails->save();
+
+        $data = [
+            'id_hotel_room' => $request->idHotelRoom,
+            'price' => $request->priceRoomDetails,
+            'discount_price' => $request->priceDiscountRoomDetails,
+            'capacity' => $request->roomDetailsCapacity,
+            'message' => 'Success add room details'
+        ];
+
+        return $data;
     }
 
     public function room_update_image(Request $request)
@@ -603,7 +626,6 @@ class RoomDetailController extends Controller
             return back()
                 ->with('error', 'Please check the form below for errors');
         }
-
     }
 
     public function room_delete_photo_photo(Request $request)

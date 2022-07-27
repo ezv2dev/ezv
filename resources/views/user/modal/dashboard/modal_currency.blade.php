@@ -279,8 +279,8 @@
     }
 
     .propertytype-grid-container {
-        grid-template-columns: repeat(4, 1fr) !important;
-        grid-template-rows: repeat(1, auto) !important;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, auto);
         gap: 16px;
         display: grid;
     }
@@ -339,20 +339,19 @@
 </style>
 
 <div id="ModalCurrency" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered"
-        style="overflow-y: initial !important;">
-        <div class="modal-content modal-content3" style="border-radius:15px;">
-            <div class="modal-header modal-header3 filter-modal">
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-centered modal-horizontal-centered" style="overflow-y: initial !important;">
+        <div class="modal-content">
+            <div class="modal-header modal-header2 filter-modal">
+            <h3 class="modal-body-title m-0">Choose a currency</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body modal-body3">
+            <div class="modal-body modal-body-language">
                 <div class="tabbable column-wrapper">
                     <!-- Only required for left/right tabs -->
 
                     <div class="tab-content column rigth" id="tabs">
                         <div class="tab-pane active" id="currency">
-                            <h3 class="modal-body-title" style="margin-top: -5px;">Choose a currency</h3>
                             @php
                             $currency = App\Models\Currency::where('symbol', '!=', '')->get();
                             @endphp

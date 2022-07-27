@@ -6,19 +6,15 @@
         float: left;
     }
 
+    @media (max-width: 900px){
+        .propertytype-grid-container {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
     .modal-header2 {
         border-bottom: none !important;
-        padding: 2rem 3rem 0rem 3rem;
-    }
-
-    .modal-body2 {
-        padding: 0rem 2rem 2rem 2rem !important;
-        height: 490px !important;
-        overflow-y: auto !important;
-    }
-
-    .modal-content2 {
-        width: 90% !important;
+        padding: 1rem;
     }
 
     .modal-horizontal-centered {
@@ -279,8 +275,8 @@
     }
 
     .propertytype-grid-container {
-        grid-template-columns: repeat(4, 1fr) !important;
-        grid-template-rows: repeat(1, auto) !important;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, auto);
         gap: 16px;
         display: grid;
     }
@@ -334,24 +330,27 @@
         margin-top: 1.5rem;
     }
 
+    .modal-body-language{
+        height: 490px !important;
+        overflow-y: auto !important;
+    }
+
     /*End of filter radio option*/
 
 </style>
 
 <div id="ModalLanguage" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered"
-        style="overflow-y: initial !important;">
-        <div class="modal-content modal-content2" style="border-radius:15px;">
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-centered modal-horizontal-centered" style="overflow-y: initial !important;">
+        <div class="modal-content">
             <div class="modal-header modal-header2 filter-modal">
+                <h3 class="modal-body-title m-0">Choose a Language</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body modal-body2">
+            <div class="modal-body modal-body-language">
                 <div class="tabbable column-wrapper">
                     <!-- Only required for left/right tabs -->
                     <div class="tab-content column rigth" id="tabs">
                         <div class="tab-pane active" id="language">
-                            <h3 class="modal-body-title" style="margin-top: -5px;">Choose a Language</h3>
-
                             @php
                             $language = App\Http\Controllers\CurrencyController::language();
                             @endphp
@@ -361,7 +360,7 @@
 
                                 <div class="filter-modal-row">
                                     <div class="propertytype-input-row">
-                                        <div class="col-12 propertytype-grid-container">
+                                        <div class="col-12 p-0 propertytype-grid-container">
                                             @foreach ($language as $item)
                                             <div class="">
                                                 <div class="roomnumberoption-container" style="display: flex;">

@@ -31,6 +31,26 @@
         justify-content: center;
     }
 
+    @media only screen and (max-width: 576px) {
+        .px-max-sm-0p {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-10p {
+            margin-left: 10px !important;
+        }
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+        .px-max-md-0p {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+
 </style>
 
 @section('content_admin')
@@ -39,7 +59,7 @@
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-2" style="margin-left: 20px;">
+                <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 20px;">
                     <div class="col-md-5">
                         <h1 style="font-weight:bold; color: #383838;">
                             Upload images of your {!! isset($title) ? $title : "" !!}
@@ -58,14 +78,14 @@
                     <div class="col-md-6 text-dark">
                         <form action="{{ route('add_government.step_three') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-11 mb-4" style="margin-left: 10px;">
+                            <div class="col-11 mb-4 ml-max-md-0p" style="margin-left: 10px;">
                                 <div class="form-group">
                                     <label>No. {!! isset($title) ? $title : "" !!}</label>
                                     <input class="form-control" type="text" name="no_id">
                                 </div>
                             </div>
-                            <div class="col-12 text-center" style="display: flex;">
-                                <div class="col-12">
+                            <div class="col-12 text-center d-block d-md-flex">
+                                <div class="col-12 px-max-md-0p">
                                     <!-- Input File Front Picture -->
                                     <div class="upload-front" onclick="document.getElementById('getFilePassport').click()">
                                         <input type="file" id="getFilePassport" name="front_picture" style="display:none" onchange="previewPassport();">
@@ -98,14 +118,14 @@
                     <div class="col-md-6 text-dark">
                         <form action="{{ route('add_government.step_three') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-11 mb-4" style="margin-left: 10px;">
+                            <div class="col-11 mb-4 ml-max-md-0p" style="margin-left: 10px;">
                                 <div class="form-group">
                                     <label>No. {!! isset($title) ? $title : "" !!}</label>
                                     <input class="form-control" type="text" name="no_id">
                                 </div>
                             </div>
-                            <div class="col-12 text-center" style="display: flex;">
-                                <div class="col-6">
+                            <div class="col-12 text-center d-block d-sm-flex">
+                                <div class="col-12 col-sm-6 px-max-sm-0p mb-3 mb-sm-0">
                                     <!-- Input File Front Picture -->
                                     <div id="divFront" class="upload-front" onclick="document.getElementById('getFileFront').click()">
                                         <input type="file" id="getFileFront" name="front_picture" style="display:none" onchange="previewFront();">
@@ -117,7 +137,7 @@
                                         <img id="frameFront" width="100%" alt="">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-sm-6 px-max-sm-0p">
                                     <!-- Input File Front Picture -->
                                     <div id="divBack" class="upload-back" onclick="document.getElementById('getFileBack').click()">
                                         <input type="file" id="getFileBack" name="back_picture" style="display:none" onchange="previewBack();">

@@ -58,7 +58,7 @@
                 <div style="padding-left: 20px; padding-right:20px; margin-top: 12.5%;">
                     <div class="form-group">
                         <div class="row my-5">
-                            <div class="col-12 col-sm-6 mb-3">
+                            <div class="col-12 col-sm-6 mb-4">
                                 @php
                                     $has_villa = App\Http\Controllers\ListingController::has_villa(Auth::user()->id);
                                 @endphp
@@ -86,7 +86,7 @@
                                 </form>
                             </div>
 
-                            <div class="col-12 col-sm-6 mb-3">
+                            <div class="col-12 col-sm-6 mb-4">
                                 @php
                                     $has_hotel = App\Http\Controllers\ListingController::has_hotel(Auth::user()->id);
                                 @endphp
@@ -114,7 +114,7 @@
                                 </form>
                             </div>
 
-                            <div class="col-12 col-sm-6">
+                            <div class="col-12 col-sm-6 mb-4">
                                 @php
                                     $has_restaurant = App\Http\Controllers\ListingController::has_restaurant(Auth::user()->id);
                                 @endphp
@@ -143,7 +143,7 @@
                                 </form>
                             </div>
 
-                            <div class="col-12 col-sm-6">
+                            <div class="col-12 col-sm-6 mb-4">
                                 @php
                                     $has_activity = App\Http\Controllers\ListingController::has_activity(Auth::user()->id);
                                 @endphp
