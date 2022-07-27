@@ -12,6 +12,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
     <link href="{{ asset('assets/partner/css/styles.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/pagination-css.css') }}" rel="stylesheet" />
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://kit.fontawesome.com/3fa51a741b.js" crossorigin="anonymous"></script>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"

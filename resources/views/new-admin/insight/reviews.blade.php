@@ -89,12 +89,46 @@
         display: block;
     }
 
-    .sidebar-right-rating {
-        margin-top: 80px;
+    .sidebar-right-rating{
+        margin-bottom: 1.5rem;
+    }
+
+    .sidebar-right-rating .fa-star{
+        font-size: 30px;
     }
 
     .text-overal-rating {
         font-size: 13pt;
+    }
+
+    .overal-rating{
+        font-size:50px;
+    }
+    .sidebar-left-rating{
+        display:flex;
+        flex-direction:column;
+        row-gap:1.5rem;
+    }
+
+    .page-link{
+        font-weight:bold;
+    }
+    .page-item:hover{
+        cursor:pointer;
+    }
+    .pagination-link-reviews .page-item:not(.active) .page-link,
+    .pagination-link-reviews .page-link:hover{
+        color:black !important;
+    }
+
+    @media (min-width: 992px) { 
+        .sidebar-right-rating {
+            margin-bottom: 0;
+        }
+
+        #reviews{
+            padding:3rem 0;
+        }               
     }
 
 </style>
@@ -103,7 +137,7 @@
 
 <!-- Main page content-->
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light rounded">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto nav-insight">
                 <li class="nav-item">
@@ -121,23 +155,27 @@
             </ul>
         </div>
     </nav>
-    <div id="reviews" class="pt-5 pb-5 text-dark">
-        <div class="col-12">
-            <div class="col-4 float-right sidebar-right-rating">
-                <div class="d-inline-flex" style="margin-top: -80px !important;">
-                    <div class="col-6 mr-5">
-                        <span style="font-size: 50px !important;"
-                            class="overal-rating"><b>{{ number_format($avg, 1) }}</b></span> <i
-                            class="text-warning fa fa-star" style="font-size: 30px !important;"></i>
+    <div id="reviews" class="text-dark">
+        <div class="row">
+            <div class="col-lg-4 sidebar-right-rating order-lg-12">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center">
+                            <span class="overal-rating">
+                                <b>{{ number_format($avg, 1) }}</b>
+                            </span> 
+                            <i class="text-warning fa fa-star"></i>
+                        </div>
                         <p class="text-overal-rating">Overall rating</p>
                     </div>
                     <div class="col-6">
-                        <span style="font-size: 50px !important;" class="overal-rating"><b>{{ $count }}</b></span>
+                        <span class="overal-rating"><b>{{ $count }}</b></span>
                         <p class="text-overal-rating">Total reviews</p>
                     </div>
                 </div>
             </div>
-            <div class="col-8 mt-n4">
+
+            <div class="col-lg-8 sidebar-left-rating order-lg-1">
                 {{-- <div class="nav-rating">
                     <ul class="menu-rating">
                         <a href="" class="color-black">
@@ -161,15 +199,17 @@
                     </ul>
                 </div> --}}
 
-                @forelse ($createdBy as $item)
-                <div class="card p-4 mt-4">
+                @forelse ($createdBy as $index => $item)
+                <div class="card p-4">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-5 d-flex">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
                                 <img style="max-width: 15% !important;" class="img-fluid" src="{{ $item->avatar }}">
-                                <h5 class="mt-2 ml-2"><b>{{ $item->first_name }} {{ $item->last_name }}</b></h5>
+                                <h5 class="mt-2 ml-2">
+                                    <b>{{ $item->first_name }} {{ $item->last_name }}</b>
+                                </h5>
                             </div>
-                            <div class="col-7 d-flex mt-2 justify-content-end">
+                            <div class="d-flex mt-2 justify-content-end">
                                 <b>{{ $item->value }}&nbsp;</b>
                                 <i class="text-warning fa fa-star" style="margin-top: 3px;"></i>
                             </div>
@@ -186,10 +226,12 @@
                 </div>
                 @endforelse
             </div>
+
+
         </div>
     </div>
-    <div class="mt-3 d-flex justify-content-center">
-        {!! $createdBy->appends(Request::all())->links() !!}
+    <div class="mt-3 d-flex justify-content-center pagination-link-reviews">
+        {!! $createdBy->appends(Request::all())->links('vendor.pagination.bootstrap-4') !!}
     </div>
 </div>
 
