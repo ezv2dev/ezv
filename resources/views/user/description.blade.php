@@ -105,7 +105,7 @@
         <hr>
         <h2 id="availability">Availability</h2>
         <p style="text-align: justify; padding-top:10px; padding-bottom:10px">
-            
+
         </p>
         <hr>
         <h2 id="description">Review</h2>
@@ -137,10 +137,10 @@
         <h2 id="reserve">Reserve</h2>
             @auth
             <!-- Dynamic Table Full -->
-            <form action="{{ route('villa_booking_confirm') }}" method="POST" id="basic-form" class="js-validation" enctype="multipart/form-data" >
+            <form action="{{ route('villa_booking_confirm') }}" method="POST" class="js-validation" enctype="multipart/form-data" >
                 @csrf
-                <input type="hidden" id="id_villa" name="id_villa" value="{{ $villa[0]->id_villa }}">
-                <div class="block-content">            
+                {{-- <input type="hidden" id="id_villa" name="id_villa" value="{{ $villa[0]->id_villa }}"> --}}
+                <div class="block-content">
                     <span class="content-heading border-bottom mb-4 pb-2">Booking Information</span>
                     <div class="block-content font-size-sm mb-4">
                         <div class="form-group row">
@@ -215,11 +215,11 @@
                                 @else
                                     <input type="text" class="form-control" id="phone" name="phone" value="{{ Auth::user()->phone }}">
                                 @endif
-                                
+
                             </div>
                         </div>
                     </div>
-            
+
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
@@ -278,7 +278,7 @@
                        alert("minimum stay is " + min_stay + " days");
                    }
                }
-           }); 
+           });
        }
     });
 </script>
@@ -335,13 +335,13 @@ $("#basic-form").validate({
             required:!0,
             number: true,
             min: 1,
-        },    
+        },
         "check_in":{
             required:!0,
         },
         "check_out":{
             required:!0,
-        },        
+        },
     },
     messages:{
         "firstname":{
