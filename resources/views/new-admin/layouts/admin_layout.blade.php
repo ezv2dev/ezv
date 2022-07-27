@@ -169,7 +169,7 @@
                                     style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                             @else
                                 <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo"
-                                    alt="">
+                                    alt="" style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                             @endif
                             <div class="dropdown">
                                 <div class="user-details ms-2" style="cursor: pointer; padding-left: 10px;">
