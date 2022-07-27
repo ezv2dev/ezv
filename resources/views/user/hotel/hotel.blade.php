@@ -1739,7 +1739,7 @@
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="add_room_details({{ $item->id_hotel_room }})"
+                                    <a type="button" onclick="add_room_details({{ $item->id_hotel_room }}, {{ $item->id_hotel }})"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">
                                         Add Room Details
                                     </a>
@@ -4729,12 +4729,13 @@
             $('#modal-tags-hotel').modal('show');
         }
 
-        function add_room_details(id_room_details) {
+        function add_room_details(id_room_details, id_hotel) {
             $.ajax({
                 type: "GET",
                 url: '/hotel/room/' + id_room_details,
                 success: function(data) {
                     $('#idHotelRoom').val(id_room_details);
+                    $('#idHotel').val(id_hotel);
                     $('#room_details_capacity').html(``);
                     for (let i = 1; i <= data['detail_room'].capacity; i++) {
                         $('#room_details_capacity').append(`<option value="${[i]}">${[i]}</option>`);

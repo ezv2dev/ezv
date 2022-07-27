@@ -332,6 +332,7 @@ class RoomDetailController extends Controller
     public function add_room_details(Request $request)
     {
         $roomDetails = new HotelRoomDetails;
+        $roomDetails->id_hotel = $request->idHotel;
         $roomDetails->id_hotel_room = $request->idHotelRoom;
         $roomDetails->price = $request->priceRoomDetails;
         $roomDetails->discount_price = $request->priceDiscountRoomDetails;
@@ -347,11 +348,6 @@ class RoomDetailController extends Controller
             'message' => 'Success add room details'
         ];
 
-        // return response()->json([
-        //     'message' => 'Success add room details',
-        //     'data' => $data,
-        //     'status' => 200,
-        // ]);
         return $data;
     }
 
