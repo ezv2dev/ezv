@@ -60,12 +60,12 @@ class CollaboratorController extends Controller
     public function collaborator($id)
     {
         // $this->authorize('collaborator_index');
-        $profile = Collaborator::with('collaboratorSocial')->select('location.name as name_location', 'collaborator.*')
+        $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
             ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
             ->join('users', 'users.id', '=', 'collaborator.created_by')
             ->where('collaborator.id_collab', $id)->first();
-
         abort_if(!$profile, 404);
+        $profile->append('user_review');
 
         $user = User::where('id', $profile->created_by)->first();
         $tags = CollaboratorHasCategory::with('collaboratorCategory')->where('id_collab', $id)->get();
@@ -1345,6 +1345,14 @@ class CollaboratorController extends Controller
                 'message' => 'something error',
                 'errors' => $validator->errors()->all(),
             ], 500);
+        }
+
+        // check if the editor does not have authorization
+        // $this->authorize('collaborator_save_store');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner', 'collaborator'])) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         // check if there same favorit content

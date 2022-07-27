@@ -1927,96 +1927,216 @@
                 <section id="review" class="section-2">
                     <hr>
                     <div class="review-bottom">
-                        {{-- @if ($detail->count() > 0)
-                            <h2 style="margin: 0px;">{{ __('user_page.Review') }}</h2>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-xs-12">
+                        <h2>{{ __('user_page.Review') }}</h2>
+                        <div class="row">
+                            <div class="col-12">
+                                @if ($profile->detailReview)
                                     <div class="row">
                                         <div class="col-6">
-                                            {{ __('user_page.Cleanliness') }}
-                                        </div>
-                                        <div class="col-6 ">
-                                            <div class="liner"></div>{{ $detail[0]->average_clean }}
-                                        </div>
-                                        <div class="col-6">
-                                            {{ __('user_page.Check In') }}
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="liner"></div>
-                                            {{ $detail[0]->average_check_in }}
-                                        </div>
-                                        <div class="col-6">
-                                            {{ __('user_page.Value') }}
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_value }}
+                                            <div class="d-flex">
+                                                {{-- <div class="col-6">
+                                                    {{ __('user_page.Food') }}
+                                                </div> --}}
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $profile->detailReview->average_experience }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            {{ __('user_page.Service') }}
+                                @else
+                                    <div class="col-12 mt-3 d-flex review-container">
+                                        <div class="col-12 col-md-6 d-flex">
+                                            <div class="col-1 icon-review-container">
+                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                                    aria-hidden="true" role="presentation" focusable="false"
+                                                    style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                                    <path
+                                                        d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="review-txt">
+                                                    {{ __('user_page.there is no reviews yet') }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_service }}
-                                        </div>
-                                        <div class="col-6">
-                                            {{ __('user_page.Location') }}
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="liner"></div>
-                                            {{ $detail[0]->average_location }}
-                                        </div>
+                                        {{-- <div class="col-12 col-md-6 d-flex">
+                                                <div class="col-1 icon-review-container">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+                                                        aria-hidden="true" role="presentation" focusable="false"
+                                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                                        <path
+                                                            d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="review-txt">
+                                                        We’re here to help your trip go smoothly. Every reservation is covered by
+                                                        <span><a href="#">EZV's Guest Refund Policy.</a></span>
+                                                    </p>
+                                                </div>
+                                            </div> --}}
                                     </div>
-                                </div>
-                            </div>
-                        @else --}}
-                        <h3 style="margin: 0px;">{{ __('user_page.there is no reviews yet') }}</h3>
-                        <div class="col-12 mt-3 d-flex review-container">
-                            <div class="col-12 col-md-6 d-flex">
-                                <div class="col-1 icon-review-container">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="col-8">
-                                    <p class="review-txt">
-                                        This host has 720 reviews for other places to stay.
-                                        <span><a href="#">Show other reviews</a></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 d-flex">
-                                <div class="col-1 icon-review-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
-                                        role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="col-8">
-                                    <p class="review-txt">
-                                        We’re here to help your trip go smoothly. Every reservation is covered by
-                                        <span><a href="#">EZV's Guest Refund Policy.</a></span>
-                                    </p>
-                                </div>
+                                @endif
                             </div>
                         </div>
-                        {{-- @endif --}}
                         <hr>
                     </div>
                 </section>
+                @auth
+                    @if (in_array(Auth::user()->role_id, [1,2,3]))
+                        @if ($profile->user_review)
+                            <section id="user-review" class="section-2">
+                                <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
+                                    <div class="d-flex justify-content-left">
+                                        <h2>{{ __('user_page.Your Review') }}</h2>
+                                        <span>
+                                            <form action="{{ route('collab_delete_review') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_collab"
+                                                    value="{{ $profile->id_collab }}" required>
+                                                <input type="hidden" name="id_review"
+                                                    value="{{ $profile->user_review->id_review }}" required>
+                                                <span>
+                                                    <button type="submit" class="btn">
+                                                        <i class="fa fa-trash" style="color:#ff7400; font-size: 20px"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete') }}"></i>
+                                                    </button>
+                                                </span>
+                                            </form>
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        @if ($profile->user_review->comment)
+                                            <div class="col-12">
+                                                <div class="col-6 d-flex">
+                                                    <div class="col-6">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-6"
+                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        {{ $profile->user_review->comment }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="col-6 d-flex">
+                                            <div class="col-6">
+                                                {{ __('user_page.Experience') }}
+                                            </div>
+                                            <div class="col-6 ">
+                                                <div class="liner"></div>
+                                                {{ $profile->user_review->experience }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </section>
+                        @else
+                            {{-- STYLE FOR RATING STAR --}}
+                            <style>
+                                .cm-star-rating input[type=radio] {
+                                    display: none
+                                }
 
-                <div class="section" id="host_end">
+                                .cm-star-rating label {
+                                    font-size: 18px;
+                                    padding: 0;
+                                    cursor: pointer;
+                                    -webkit-transition: all .3s ease-in-out;
+                                    transition: all .3s ease-in-out
+                                }
 
-                </div>
+                                .cm-star-rating label:hover,
+                                .cm-star-rating label:hover~label,
+                                .cm-star-rating input[type=radio]:checked~label {
+                                    color: #f2b600
+                                }
+                            </style>
+                            {{-- END STYLE FOR RATING STAR --}}
+                            <section id="add-review" class="section-2">
+                                <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
+                                    <h2>{{ __('user_page.Give review') }}</h2>
+                                    <div class="row">
+                                        <form action="{{ route('collab_store_review') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id_collab"
+                                                value="{{ $profile->id_collab }}" readonly required>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Experience') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="star-5" type="radio" name="experience"
+                                                                    value="5" required />
+                                                                <label for="star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-4" type="radio" name="experience"
+                                                                    value="4" />
+                                                                <label for="star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-3" type="radio" name="experience"
+                                                                    value="3" />
+                                                                <label for="star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-2" type="radio" name="experience"
+                                                                    value="2" />
+                                                                <label for="star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-1" type="radio" name="experience"
+                                                                    value="1" />
+                                                                <label for="star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                    <div class="col-12">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <center>
+                                                        <button type="submit"
+                                                            class="btn btn-primary">{{ __('user_page.Save') }}</button>
+                                                    </center>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </section>
+                        @endif
+                    @endif
+                @endauth
+                <div class="section" id="host_end"></div>
             </div>
         </div>
     </div>

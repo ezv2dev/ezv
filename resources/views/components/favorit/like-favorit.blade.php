@@ -2,71 +2,172 @@
     async function likeFavorit(value, targetType) {
         let data;
         let postData;
-        try {
-            if (targetType == 'villa') {
-                const postData = await $.ajax({
-                    type: "GET",
-                    url: `/like/villa/${value}`,
-                    data: {
-                        villa: value,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
+        if (targetType == 'villa') {
+            await $.ajax({
+                type: "GET",
+                url: `/like/villa/${value}`,
+                data: {
+                    villa: value,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    data = response;
+                    changeColorFavorite(data, value, targetType);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
                     }
-                });
-                data = await postData;
-            }
-            if (targetType == 'restaurant') {
-                const postData = await $.ajax({
-                    type: "GET",
-                    url: `/like/restaurant/${value}`,
-                    data: {
-                        restaurant: value,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
-                    }
-                });
-                data = await postData;
-            }
-            if (targetType == 'hotel') {
-                const postData = await $.ajax({
-                    type: "GET",
-                    url: `/like/hotel/${value}`,
-                    data: {
-                        hotel: value,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
-                    }
-                });
-                data = await postData;
-            }
-            if (targetType == 'activity') {
-                const postData = await $.ajax({
-                    type: "GET",
-                    url: `/like/things-to-do/${value}`,
-                    data: {
-                        activity: value,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
-                    }
-                });
-                data = await postData;
-            }
-            if (targetType == 'collaborator') {
-                const postData = await $.ajax({
-                    type: "GET",
-                    url: `/like/collaborator/${value}`,
-                    data: {
-                        id_collab: value,
-                        _token: "{{ csrf_token() }}",
-                    }
-                });
-                data = await postData;
-            }
-        } catch (error) {
-            console.log(error);
+                    return;
+                }
+            });
         }
-
-
+        if (targetType == 'restaurant') {
+            await $.ajax({
+                type: "GET",
+                url: `/like/restaurant/${value}`,
+                data: {
+                    restaurant: value,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    data = response;
+                    changeColorFavorite(data, value, targetType);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+                    return;
+                }
+            });
+        }
+        if (targetType == 'hotel') {
+            await $.ajax({
+                type: "GET",
+                url: `/like/hotel/${value}`,
+                data: {
+                    hotel: value,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    data = response;
+                    changeColorFavorite(data, value, targetType);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+                    return;
+                }
+            });
+        }
+        if (targetType == 'activity') {
+            await $.ajax({
+                type: "GET",
+                url: `/like/things-to-do/${value}`,
+                data: {
+                    activity: value,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    data = response;
+                    changeColorFavorite(data, value, targetType);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+                    return;
+                }
+            });
+        }
+        if (targetType == 'collaborator') {
+            await $.ajax({
+                type: "GET",
+                url: `/like/collaborator/${value}`,
+                data: {
+                    id_collab: value,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    data = response;
+                    changeColorFavorite(data, value, targetType);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+                    return;
+                }
+            });
+        }
+    }
+    function changeColorFavorite(data, value, targetType) {
         if (data) {
             if (data == 1) {
                 console.log('like == true');
@@ -90,8 +191,6 @@
             // console.log('likeButton : '+$(`.likeButton${targetType+value}`).attr('class'));
             // console.log('unlikeButton : '+$(`.unlikeButton${targetType+value}`).attr('class'));
             // console.log('like-sign : '+$(`.like-sign-${targetType}-${value}`).attr('class'));
-        } else {
-            console.log('fail to do action like');
         }
     }
 </script>
