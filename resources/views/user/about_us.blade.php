@@ -69,7 +69,7 @@
     </nav>
     <br>
 
-    <small class="text-muted">Legal Terms</small>
+    <small class="text-muted">Company Profile</small>
 
     <div class="privacy-title mb-4"><h2>About Us</h2>
     </div>
