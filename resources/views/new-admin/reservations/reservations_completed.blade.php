@@ -102,7 +102,7 @@
         // load_tabel_first();
         var table = $('#dataTable').dataTable({
             dom:
-            "<'row'<'col-sm-12 col-md-9'l><'col-sm-12 col-md-3'f>>" +
+            "<'row'<'col-sm-12 col-md-9'l><'col-resv col-sm-12 col-md-3'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             pagingType:"full_numbers",
