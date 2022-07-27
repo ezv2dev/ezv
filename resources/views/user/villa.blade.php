@@ -4403,7 +4403,7 @@
                 let content = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
-                let contentStory;
+                let contentStory = "";
 
                 let modalPhotoLength = $('#sortable-photo').find('li').length;
                 let modalVideoLength = $('#sortable-video').find('li').length;

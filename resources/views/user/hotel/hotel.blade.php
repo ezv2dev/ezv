@@ -623,10 +623,10 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
+                                                    <div class="cards4" id="storyContent">
                                                         @foreach ($video as $item)
                                                             <div class="card4 col-lg-3 radius-5"
-                                                                id="displayVideo{{ $item->id_video }}">
+                                                                id="displayStoryVideo{{ $item->id_video }}">
                                                                 <div class="img-wrap">
                                                                     <div class="video-position">
                                                                         @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
@@ -694,7 +694,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="cards-container4">
-                                                    <div class="cards4">
+                                                    <div class="cards4" id="storyContent">
                                                         @foreach ($stories as $item)
                                                             <div class="card4 col-lg-3 radius-5"
                                                                 id="displayStory{{ $item->id_story }}">
@@ -1005,6 +1005,11 @@
                                         @auth
                                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 <span class="edit-video-icon">
+                                                    <button type="button" onclick="position_video()"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Swap Video Position') }}"><i
+                                                            class="fa fa-arrows"></i></button>
                                                     <button href="javascript:void(0);"
                                                         data-id="{{ $hotel[0]->id_hotel }}"
                                                         data-video="{{ $item->id_video }}"
@@ -1012,11 +1017,6 @@
                                                         data-bs-animation="true" data-bs-placement="bottom"
                                                         title="{{ __('user_page.Delete Video') }}"><i
                                                             class="fa fa-trash"></i></button>
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
                                                 </span>
                                             @endif
                                         @endauth
@@ -4838,6 +4838,8 @@
             error: function(file, message, xhr) {
                 this.removeFile(file);
 
+                console.log(message);
+
                 for (let i = 0; i < message.message.length; i++) {
                     iziToast.error({
                         title: "Error",
@@ -4861,7 +4863,8 @@
                 let slash = "/";
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
-                let content;
+                let content = "";
+                let contentStory = "";
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4892,7 +4895,24 @@
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentStory = '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                        message.data.video[0].id_video +
+                        '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_video(' +
+                        message.data.video[0].id_video +
+                        ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        message.data.video[0].name +
+                        '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
+                        id_hotel +
+                        '" data-video="' +
+                        message.data.video[0].id_video +
+                        '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+
                     $('.gallery').append(content);
+                    $("#storyContent").append(contentStory);
+                    sliderRestaurant();
                 }
 
                 $gallery.refresh();
@@ -5305,6 +5325,7 @@
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo" + video).remove();
                             $("#displayStoryVideo" + video).remove();
+                            sliderRestaurant();
                         }
                     });
                 } else {

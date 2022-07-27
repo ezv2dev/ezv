@@ -16,7 +16,7 @@ class Hotel extends Model
     protected $primaryKey = 'id_hotel';
 
     protected $fillable = [
-        'id_property_type', 'id_suitable', 'uid', 'star', 'grade', 'name', 'original_name', 'description', 'short_description', 'as_feature', 'adult', 'children', 'size', 'bedroom', 'bathroom', 'beds', 'parking', 'min_stay', 'booking', 'id_location', 'address', 'latitude', 'longitude', 'phone', 'email', 'price', 'discount', 'cancel', 'status', 'step', 'image', 'views'
+        'id_property_type', 'id_suitable', 'uid', 'star', 'grade', 'name', 'original_name', 'description', 'short_description', 'as_feature', 'adult', 'children', 'size', 'bedroom', 'bathroom', 'beds', 'parking', 'min_stay', 'booking', 'id_location', 'address', 'latitude', 'longitude', 'phone', 'email', 'price', 'discount', 'cancel', 'status', 'step', 'image', 'views', 'created_by', 'updated_at'
     ];
 
     protected $table = 'hotel';

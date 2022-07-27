@@ -4,6 +4,8 @@ $(document).on("keyup", "textarea#name-form-input", function () {
     $("#err-name").hide();
 });
 
+let id_hotel = $("#id_hotel").val();
+
 var nameHotelBackup = $("#name-form-input").val();
 
 function editNameHotel(id_hotel) {
@@ -330,7 +332,6 @@ $("#storyVideo").on("change", function (value) {
 
 $("#updateStoryForm").submit(function (e) {
     e.preventDefault();
-    let id_hotel = $("#id_hotel").val();
 
     if (
         storyHotel.type.includes("video/mp4") ||
@@ -365,46 +366,46 @@ $("#updateStoryForm").submit(function (e) {
                     position: "topRight",
                 });
 
-                let path = "/foto/gallery/";
+                let path = "/foto/hotel/";
                 let slash = "/";
                 let uid = response.uid;
                 var lowerCaseUid = uid.toLowerCase();
-                let content;
+                let content = "";
 
                 for (let i = 0; i < response.data.length; i++) {
-                    if (i == 0) {
-                        content =
-                            '<div class="card4 col-lg-3" id="displayStory' +
-                            response.data[i].id_story +
-                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
-                            response.data[i].id_story +
-                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                    content +=
+                        '<div class="card4 col-lg-3" id="displayStory' +
+                        response.data[i].id_story +
+                        '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
+                        response.data[i].id_story +
+                        ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        response.data[i].name +
+                        '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-hotel="' +
+                        id_hotel +
+                        '" data-story="' +
+                        response.data[i].id_story +
+                        '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                }
+                if (response.video.length > 0) {
+                    for (let v = 0; v < response.video.length; v++) {
+                        content +=
+                            '<div class="card4 col-lg-3 radius-5" id="displayStoryVideo' +
+                            response.video[v].id_video +
+                            '"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view(' +
+                            response.video[v].id_video +
+                            ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
                             path +
                             lowerCaseUid +
                             slash +
-                            response.data[i].name +
-                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-hotel="' +
+                            response.video[v].name +
+                            '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
                             id_hotel +
-                            '" data-story="' +
-                            response.data[i].id_story +
-                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
-                    } else {
-                        content =
-                            content +
-                            '<div class="card4 col-lg-3" id="displayStory' +
-                            response.data[i].id_story +
-                            '" style="border-radius: 5px;"> <div class="img-wrap"> <div class="video-position"> <a type="button" onclick="view_story(' +
-                            response.data[i].id_story +
-                            ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
-                            path +
-                            lowerCaseUid +
-                            slash +
-                            response.data[i].name +
-                            '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-hotel="' +
-                            id_hotel +
-                            '" data-story="' +
-                            response.data[i].id_story +
-                            '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                            '" data-video="' +
+                            response.video[v].id_video +
+                            '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
                     }
                 }
 
@@ -417,7 +418,9 @@ $("#updateStoryForm").submit(function (e) {
                 $("#title").val("");
                 $("#modal-edit_story").modal("hide");
 
-                if (response.data.length > 4) {
+                let sumStory = response.data.length + response.video.length;
+
+                if (sumStory > 4) {
                     sliderRestaurant();
                 }
 
@@ -425,11 +428,14 @@ $("#updateStoryForm").submit(function (e) {
                 btn.classList.remove("disabled");
             },
             error: function (jqXHR, exception) {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
+                console.log(jqXHR);
+                for (let i = 0; i < jqXHR.responseJSON.message.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
 
                 $("#modal-edit_story").modal("hide");
 
