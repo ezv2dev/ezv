@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Culture - EZV</title>
+    <title>About Us - EZV</title>
     <meta name="description" content="EZV2 created by pixelcave and published on Themeforest">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -64,14 +64,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Culture</a></li>
+            <li class="breadcrumb-item"><a href="#">About Us</a></li>
         </ol>
     </nav>
     <br>
 
     <small class="text-muted">Legal Terms</small>
 
-    <div class="privacy-title mb-4"><h2>Culture</h2>
+    <div class="privacy-title mb-4"><h2>About Us</h2>
     </div>
     <div class="privacy-description">
         {{-- <p class="mb-3 text-dark text-justify" style="font-size: 16pt"><b>Terms of Service for Non-European Users</b></p> --}}
@@ -97,8 +97,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-
     <script>
         //Sticky Bar
         $(function(){
@@ -112,30 +110,8 @@
             });
         });
     </script>
-
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
-
-    <!-- jQuery (required for Magnific Popup plugin) -->
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
-
-    <!-- Page JS Plugins -->
-    <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/view-villa.js') }}"></script>
-
-    <!-- Page JS Helpers (Magnific Popup Plugin) -->
-    <script>
-        Dashmix.helpersOnLoad(['jq-slick']);
-
-    </script>
-
-    <!-- Page JS Helpers (Magnific Popup Plugin) -->
-    <script>
-        Dashmix.helpersOnLoad(['jq-magnific-popup']);
-
-    </script>
-
-    <!-- Tambahan -->
     <script src="{{ asset('assets/js/home.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">

@@ -149,6 +149,9 @@
         font-size: 12px !important;
     }
 }
+/* @media only screen and (max-width: 350px) {
+
+} */
     </style>
 
 </head>
@@ -156,7 +159,7 @@
 <body class="nav-fixed">
     {{-- @component('components.loading.loading-dashboard')
     @endcomponent --}}
-    @component('components.loading.loading-type2')
+    @component('components.loading.loading-type1')
     @endcomponent
     <div class="expand-navbar-mobile" aria-expanded="false">
         <div class="px-3 pt-2 h-100">

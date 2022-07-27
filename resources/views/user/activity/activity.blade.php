@@ -1089,9 +1089,9 @@
                                 </h2>
                             </div>
                             @forelse ($activity->price as $item)
-                                <div class="col-12 d-flex p-3 mb-4"
+                                <div class="col-12 row p-3 mb-4 ms-0 me-0"
                                     style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-0">
                                         <div class="content list-image-content">
                                             <input type="hidden" value="" id="id_price" name="id_price">
                                             <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
@@ -1142,10 +1142,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-5 px-3">
+                                    <div class="col-12 col-md-5 col-lg-5 col-xl-5 px-3">
                                         <div class="col-12">
-                                            <h4>
-                                                <p>
+                                            <h4 class="mb-0">
+                                                <p class="mb-0">
                                                     <a href="{{ route('activity_price_index', $item->id_price) }}">
                                                         <span
                                                             clas="translate-text-group-items">{{ $item->name }}</span>
@@ -1159,14 +1159,16 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="col-12">
-                                            {{ CurrencyConversion::exchangeWithUnit($item->price) }}
-                                        </div>
-                                        <div class="col-12">
-                                            <a onclick="open_detail_price()" target="_blank"
-                                                style="display: inline-block; width: 50%;"
-                                                class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
+                                    <div class="col-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+                                        <div class="col-12 text-center">
+                                            <p class="mb-2">
+                                                {{ CurrencyConversion::exchangeWithUnit($item->price) }}
+                                            </p>
+                                            
+                                                <a onclick="open_detail_price()" target="_blank"
+                                                    style="display: inline-block; width: 50%;"
+                                                    class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
+                                           
                                         </div>
                                     </div>
                                 </div>

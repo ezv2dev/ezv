@@ -156,22 +156,22 @@
                     <div class="col-11">
                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
                             style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important;">
-                            <li class="active modal-price-title">
-                                <a class="tab1 filter-language-option-text" href="#editprice" data-toggle="tab"
+                            <li id="trigger-tab-price" onclick="switchTabPrice('price')" class="active modal-price-title">
+                                <a class="tab1 filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600;">
                                     {{ __('user_page.Edit Price') }}
                                 </a>
                             </li>
-                            <li class="modal-price-title" style="margin-left: 55px;">
-                                <a class="filter-language-option-text" href="#availablity" data-toggle="tab"
+                            <li id="trigger-tab-availability" onclick="switchTabPrice('availability')" class="modal-price-title" style="margin-left: 55px;">
+                                <a class="filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600; margin-left: -50px;">
                                     {{ __('user_page.Villa Availability') }}
                                 </a>
                             </li>
-                            <li class="modal-price-title" style="margin-left: 55px;">
-                                <a class="filter-language-option-text" href="#extraPrice" data-toggle="tab"
+                            <li id="trigger-tab-extraprice" onclick="switchTabPrice('extraprice')" class="modal-price-title" style="margin-left: 55px;">
+                                <a class="filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600; margin-left: -50px;">
                                     {{ __('user_page.Extra Price') }}
@@ -754,6 +754,32 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
+    function switchTabPrice(indicator){
+        if(indicator == 'availability'){
+            $('#trigger-tab-price').removeClass('active');
+            $('#editprice').removeClass('active');
+            $('#trigger-tab-extraprice').removeClass('active');
+            $('#content-tab-extraPrice').removeClass('active');
+            $('#trigger-tab-availability').addClass('active');
+            $('#availablity').addClass('active');
+        }
+        if(indicator == 'extraprice'){
+            $('#trigger-tab-extraprice').addClass('active');
+            $('#extraPrice').addClass('active');
+            $('#trigger-tab-availability').removeClass('active');
+            $('#availablity').removeClass('active');
+            $('#trigger-tab-price').removeClass('active');
+            $('#editprice').removeClass('active');
+        }
+        if(indicator == 'price') {
+            $('#trigger-tab-extraprice').removeClass('active');
+            $('#extraPrice').removeClass('active');
+            $('#trigger-tab-availability').removeClass('active');
+            $('#availablity').removeClass('active');
+            $('#trigger-tab-price').addClass('active');
+            $('#editprice').addClass('active');
+        }
+    }
 
     $(function() {
         $('#max_guest').keyup(function(e) {

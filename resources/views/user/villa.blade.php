@@ -1030,7 +1030,7 @@
                                 {{ __('user_page.Availability') }}
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="edit_price();" href="javascript:void(0);"
+                                        &nbsp;<a type="button" onclick="edit_availability();" href="javascript:void(0);"
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Availability') }}</a>
                                     @endif
                                 @endauth
