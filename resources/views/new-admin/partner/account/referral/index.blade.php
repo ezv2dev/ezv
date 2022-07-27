@@ -52,14 +52,14 @@
 
                     <hr style="margin-top: 80px;">
 
-                    <div class="col-12 mt-5" style="display: flex;">
-                        <div class="col-md-6">
+                    <div class="col-12 mt-5 d-block d-md-flex">
+                        <div class="col-12 col-md-6 mb-3 mb-md-0">
                             <h2 class="text-dark"><b>Common questions</b></h2>
                             <p>Check out these answers to common questions and review other program information in the
                                 <a class="text-dark" style="text-decoration: underline; color:black;" href="#"><b>Help
                                         Center</b></a>.</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12 col-md-6">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingOne">
