@@ -51,6 +51,17 @@
                 });
                 data = await postData;
             }
+            if (targetType == 'collaborator') {
+                const postData = await $.ajax({
+                    type: "GET",
+                    url: `/like/collaborator/${value}`,
+                    data: {
+                        id_collab: value,
+                        _token: "{{ csrf_token() }}",
+                    }
+                });
+                data = await postData;
+            }
         } catch (error) {
             console.log(error);
         }
