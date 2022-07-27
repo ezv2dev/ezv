@@ -21931,3 +21931,17 @@ pre[class*="language-"] {
         max-width: 70.6%;
     }
 }
+@media screen and (max-width: 767px) {
+    .container-calendar {
+        flex-direction: column;
+    }
+    .col-calendar2 {
+        padding-top: 2rem;
+    }
+}
+@media screen and (min-width: 375px) and (max-width: 767px) {
+    .col-calendar1 {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
