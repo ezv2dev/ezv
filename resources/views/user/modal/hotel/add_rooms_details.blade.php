@@ -76,6 +76,7 @@
             <div class="modal-body pb-1" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
                 <div class="form-group pt-2 px-4">
                     <input type="hidden" value="" id="idHotelRoom">
+                    <input type="hidden" value="" id="idHotel">
                     <div class="row mb-4" style="padding-left: 10px;">
                         <label for="" class="col-md-4">Price</label>
                         <div class="col-md-8">
@@ -126,12 +127,7 @@
         let priceDiscountRoomDetails = $("#price_discount_room_details").val();
         let roomDetailsCapacity = $("#room_details_capacity").val();
         let idHotelRoom = $("#idHotelRoom").val();
-
-
-        console.log(priceRoomDetails);
-        console.log(priceDiscountRoomDetails);
-        console.log(roomDetailsCapacity);
-        console.log(idHotelRoom);
+        let idHotel = $("#idHotel").val();
 
         $.ajax({
             type: "POST",
@@ -144,6 +140,7 @@
                 priceDiscountRoomDetails: priceDiscountRoomDetails,
                 roomDetailsCapacity: roomDetailsCapacity,
                 idHotelRoom: idHotelRoom,
+                idHotel: idHotel,
             },
             success: function(data) {
                 let priceDiscount = parseInt(data.discount_price);

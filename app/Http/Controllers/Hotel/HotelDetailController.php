@@ -825,61 +825,6 @@ class HotelDetailController extends Controller
 
     public function hotel_update_story(Request $request)
     {
-        $this->authorize('listvilla_update');
-        $status = 500;
-
-        try {
-            $berkas = $request->file;
-            if (empty($berkas)) {
-                $status = 500;
-            } else {
-                $find = Hotel::where('id_hotel', $request->id_hotel)->get();
-                // $folder = strtolower($find[0]->name);
-                // $path = public_path() . '/foto/gallery/' . $folder;
-                $folder = strtolower($find[0]->uid);
-                $path = env("HOTEL_FILE_PATH") . $folder;
-                if (!File::isDirectory($path)) {
-
-                    File::makeDirectory($path, 0777, true, true);
-                }
-
-                $ext = strtolower($berkas->getClientOriginalExtension());
-
-                if ($ext == 'mp4') {
-                    $original_name = $berkas->getClientOriginalName();
-
-                    $name_file = time() . "_" . $original_name;
-                    // isi dengan nama folder tempat kemana file diupload
-                    $berkas->move($path, $name_file);
-
-                    $data = HotelStory::insert(array(
-                        'title' => $request->title,
-                        'name' => $name_file,
-                        'id_hotel' => $request->id_hotel,
-                        // 'thumbnail' => $find[0]->image,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'created_by' => Auth::user()->id,
-                        'updated_by' => Auth::user()->id,
-                    ));
-                }
-            }
-
-            if ($data) {
-                $status = 200;
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 500;
-        }
-
-        if ($status == 200) {
-            return back()
-                ->with('success', 'Your data has been updated');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
-        }
-
         // test
         $validator = Validator::make($request->all(), [
             'id_hotel' => ['required', 'integer'],
@@ -889,7 +834,7 @@ class HotelDetailController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->errors(),
+                'message' => $validator->errors()->all(),
             ], 500);
         }
 
@@ -899,7 +844,7 @@ class HotelDetailController extends Controller
         // check if restaurant does not exist, abort 404
         if (!$hotel) {
             return response()->json([
-                'message' => 'Homes Not Found',
+                'message' => 'Hotel Not Found',
             ], 404);
         }
 
@@ -948,6 +893,7 @@ class HotelDetailController extends Controller
 
         $getStory = HotelStory::where('id_hotel', $request->id_hotel)->select('name', 'id_story')->latest()->get();
         $getUID = Hotel::where('id_hotel', $request->id_hotel)->select('uid')->first();
+        $hotelVideo = HotelVideo::where('id_hotel', $request->id_hotel)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
         $data = [];
 
@@ -967,6 +913,7 @@ class HotelDetailController extends Controller
                 'message' => 'Updated Hotel Story',
                 'data' => $data,
                 'uid' => $getUID->uid,
+                'video' => $hotelVideo,
             ], 200);
         } else {
             return response()->json([

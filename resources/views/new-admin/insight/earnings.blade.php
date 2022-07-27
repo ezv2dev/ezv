@@ -79,68 +79,68 @@ a.nav-link-insight:hover:before {
         </ul>
       </div>
     </nav>
-    <div class="col-8">
-        <div class="earnings pt-5 pb-5 text-dark">
-            <div class="select-month">
-                <label class="form-label" for="example-select">Select year</label>
-                <br>
-                  <select name="year" class="form-control" onchange="changeYear(this.value);">
-                    <option value="">Select a year</option>
-                    <?php
-                    $month = date('m');
-                    $nextmonth = $month +1;
-                    $year = date('Y');
-                    $previousyear = $year -1;
-                    for( $m=1; $m<=1; ++$m ) {
-                        $month_label = date('F', mktime(0, 0, 0, $m, 1));
-                      ?>
-                        <option value="<?php echo $previousyear; ?>"><?php echo $previousyear; ?></option>
-                      <?php } ?>
-
-                    <?php
-                    $month = date('m');
-                    $year = date('Y');
-                    // $previousyear = $year -1;
-                    for( $m=1; $m<=1; ++$m ) {
+    <div class="earnings text-dark my-3 my-lg-5">
+      <div class="col-lg-8">
+          <div class="select-month">
+              <label class="form-label" for="example-select">Select year</label>
+              <br>
+                <select name="year" class="form-control" onchange="changeYear(this.value);">
+                  <option value="">Select a year</option>
+                  <?php
+                  $month = date('m');
+                  $nextmonth = $month +1;
+                  $year = date('Y');
+                  $previousyear = $year -1;
+                  for( $m=1; $m<=1; ++$m ) {
                       $month_label = date('F', mktime(0, 0, 0, $m, 1));
                     ?>
-                      <option value="<?php echo $year; ?>"><?php echo $year; ?> (Current)</option>
+                      <option value="<?php echo $previousyear; ?>"><?php echo $previousyear; ?></option>
                     <?php } ?>
 
-                    <?php
-                    $month = date('m');
-                    $year = date('Y');
-                    $nextyear = $year +1;
-                    for( $m=1; $m<=1; ++$m ) {
-                        $month_label = date('F', mktime(0, 0, 0, $m, 1));
-                    ?>
-                        <option value="<?php echo $nextyear; ?>"><?php echo $nextyear; ?></option>
-                    <?php } ?>
-                  </select>
-            </div>
-            <div class="value-earnings mt-5">
-                <h3 id="getEarnings" class="text-xl" style="font-weight: bold; color: rgb(54, 50, 50)">IDR 0.00</h3>
-                <p>Booked earnings for <span id="select-year"><?php echo date('Y'); ?></span></p>
-            </div>
-            <div class="charts-bar">
-                <div id="chartViews" class="mt-5"></div>
-            </div>
-            <div class="details-earning mt-5">
-                <h3 class="text-md" style="color: rgb(54, 50, 50)"><b>2022 details</b></h3>
-                <hr>
-                <p>You have no listings currently listed</p>
-                <hr>
-                <p>Cleaning fees <span style="float: right">$0</span></p>
-                <hr>
-                <p>Cancellation fees <span style="float: right">$0</span></p>
-                <p>Incurred in 2022</p>
-                <hr>
-                <a href="#">View transaction history</a>
-                <hr>
-                <a href="#">View tax information</a>
-                <p class="mt-5"><a href="#" style="text-decoration: underline; color: black;">Give feedback</a></p>
-            </div>
-        </div>
+                  <?php
+                  $month = date('m');
+                  $year = date('Y');
+                  // $previousyear = $year -1;
+                  for( $m=1; $m<=1; ++$m ) {
+                    $month_label = date('F', mktime(0, 0, 0, $m, 1));
+                  ?>
+                    <option value="<?php echo $year; ?>"><?php echo $year; ?> (Current)</option>
+                  <?php } ?>
+
+                  <?php
+                  $month = date('m');
+                  $year = date('Y');
+                  $nextyear = $year +1;
+                  for( $m=1; $m<=1; ++$m ) {
+                      $month_label = date('F', mktime(0, 0, 0, $m, 1));
+                  ?>
+                      <option value="<?php echo $nextyear; ?>"><?php echo $nextyear; ?></option>
+                  <?php } ?>
+                </select>
+          </div>
+          <div class="value-earnings mt-3 mt-lg-5">
+              <h3 id="getEarnings" class="text-xl" style="font-weight: bold; color: rgb(54, 50, 50)">IDR 0.00</h3>
+              <p>Booked earnings for <span id="select-year"><?php echo date('Y'); ?></span></p>
+          </div>
+          <div class="charts-bar">
+              <div id="chartViews" class="mt-5"></div>
+          </div>
+          <div class="details-earning mt-5">
+              <h3 class="text-md" style="color: rgb(54, 50, 50)"><b>2022 details</b></h3>
+              <hr>
+              <p>You have no listings currently listed</p>
+              <hr>
+              <p>Cleaning fees <span style="float: right">$0</span></p>
+              <hr>
+              <p>Cancellation fees <span style="float: right">$0</span></p>
+              <p>Incurred in 2022</p>
+              <hr>
+              <a href="#">View transaction history</a>
+              <hr>
+              <a href="#">View tax information</a>
+              <p class="mt-5"><a href="#" style="text-decoration: underline; color: black;">Give feedback</a></p>
+          </div>
+      </div>
     </div>
 </div>
 
