@@ -1323,6 +1323,9 @@ Route::get('/hotel/room/{id}/delete/story/{id_story}', [Hotel\RoomDetailControll
 Route::get('/hotel/room/video/open/{id}', [Hotel\RoomDetailController::class, 'video_open'])->name('room_video_open');
 Route::post('/hotel/room/update/name', [Hotel\RoomDetailController::class, 'room_update_name'])->name('room_update_name');
 
+// HOTEL ROOM DETAIL
+Route::post('hotel/room/details/add', [Hotel\RoomDetailController::class, 'add_room_details'])->name('add_room_details');
+
 Route::post('/hotel/room/update/image', [Hotel\RoomDetailController::class, 'room_update_image'])->name('room_update_image');
 Route::get('/hotel/room/{id}/delete/image', [Hotel\RoomDetailController::class, 'room_delete_image'])->name('room_delete_image');
 Route::post('/hotel/room/update/short-description', [Hotel\RoomDetailController::class, 'room_update_short_description'])->name('room_update_short_description');
