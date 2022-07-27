@@ -1164,11 +1164,11 @@
                                             <p class="mb-2">
                                                 {{ CurrencyConversion::exchangeWithUnit($item->price) }}
                                             </p>
-                                            
-                                                <a onclick="open_detail_price()" target="_blank"
-                                                    style="display: inline-block; width: 50%;"
-                                                    class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
-                                           
+
+                                            <a onclick="open_detail_price()" target="_blank"
+                                                style="display: inline-block; width: 50%;"
+                                                class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -2787,8 +2787,12 @@
                                         @endif
                                     @endauth
                                 </div>
-                                <p>{{ __('user_page.Joined in') }}
-                                    {{ date_format($activity->ownerData->created_at, 'M Y') }}</p>
+                                @if (isset($activity->ownerData->created_at))
+                                    <p>
+                                        {{ __('user_page.Joined in') }}
+                                        {{ date_format($activity->ownerData->created_at, 'M Y') }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12 col-md-6 owner-profile">
