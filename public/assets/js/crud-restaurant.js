@@ -210,6 +210,8 @@ function saveNameRestaurant() {
 
                 $("#name-content2").html(response.data.name);
 
+                $("#name-content-mobile").html(response.data.name);
+
                 $("#nameRestoInContact").html(response.data.name);
 
                 name_input.value = response.data.name;
