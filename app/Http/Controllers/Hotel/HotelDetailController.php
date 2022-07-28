@@ -1604,7 +1604,11 @@ class HotelDetailController extends Controller
 
         $hotel = Hotel::where('id_hotel', $request->id)->first();
 
-        abort_if(!$hotel, 404);
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'Hotel Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('listvilla_update');
@@ -1647,26 +1651,33 @@ class HotelDetailController extends Controller
 
     public function update_position_video(Request $request)
     {
-        abort_if(!auth()->check(), 401);
         $validator = Validator::make($request->all(), [
             'videoids' => ['required', 'array'],
             'id' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $videoids_arr = $request->videoids;
 
         $hotel = Hotel::where('id_hotel', $request->id)->first();
 
-        abort_if(!$hotel, 404);
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'Hotel Not Found',
+            ], 404);
+        }
 
         // check if the editor does not have authorization
         $this->authorize('listvilla_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $hotel->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         if (count($videoids_arr) > 0) {
@@ -1683,8 +1694,15 @@ class HotelDetailController extends Controller
                 $position++;
             }
 
+            $data = [
+                'photo' => HotelPhoto::where('id_hotel', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => HotelVideo::where('id_hotel', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Hotel::where('id_hotel', $request->id)->select('uid')->first(),
+            ];
+
             return response()->json([
-                'message' => 'data has been updated'
+                'data' => $data,
+                'message' => 'Updated Position Video'
             ], 200);
         } else {
             return response()->json([
