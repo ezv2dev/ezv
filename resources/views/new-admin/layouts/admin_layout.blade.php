@@ -216,16 +216,6 @@
                                 </a><a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
                                     Insight
                                 </a>
-                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="language()">
-                                    Language and translation
-                                </a>
-                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="currency()">
-                                    @if (isset(Auth::user()->currency->symbol) || isset(Auth::user()->currency->code))
-                                        {{ Auth::user()->currency->symbol }} {{ Auth::user()->currency->code }}
-                                    @else
-                                        $ USD
-                                    @endif
-                                </a>
                             @endIf
                             @if (in_array(Auth::user()->role_id, [1, 2, 3, 4, 5]))
                                 <a class="dropdown-item sub-drop" href="{{ route('index') }}">
