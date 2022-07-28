@@ -61,7 +61,7 @@ class Collaborator extends Model
     public function getUserReviewAttribute()
     {
         if (auth()->check()) {
-            $isExist = CollaboratorReview::where('id_collab', $this->id_collab)->where('created_by', 288)->first();
+            $isExist = CollaboratorReview::where('id_collab', $this->id_collab)->where('created_by', auth()->user()->id)->first();
             if($isExist){
                 return $isExist;
             }

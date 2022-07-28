@@ -81,10 +81,16 @@ class CollaboratorReviewController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        $reviews = $createdReview;
+        $detailReview = CollaboratorDetailReview::where('id_collab', $request->id_collab)->first();
+
         if ($createdReview) {
             return response()->json([
                 'message' => 'Successfuly Create Review',
-                'data' => $createdReview
+                'data' => (object)[
+                    'reviews' => $reviews,
+                    'detailReview' => $detailReview,
+                ],
             ], 200);
         } else {
             return response()->json([
