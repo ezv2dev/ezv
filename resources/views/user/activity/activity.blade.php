@@ -1344,7 +1344,7 @@
         {{-- END LEFT CONTENT --}}
         {{-- RIGHT CONTENT --}}
         <div class="col-lg-3 col-md-3 col-12">
-            <div class="sidebar sidebar-activity sidebar-activity-idle" id="sidebar_fix">
+            <div class="sidebar sidebar-activity" id="sidebar_fix">
                 <div class="reserve-block sidebar-mf">
                     <style>
                         .gradient-try {

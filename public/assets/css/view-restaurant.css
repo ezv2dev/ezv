@@ -451,6 +451,14 @@ color: #FEFBE7;
         margin-left: 220px !important;
         margin-top: -272px !important;
     }
+
+    .sidebar-restaurant {
+        right: 4px !important;
+    }
+}
+
+.sidebar-restaurant {
+    margin-right: 0;
 }
 
 .about-place-block {

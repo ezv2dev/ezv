@@ -1504,7 +1504,7 @@
         {{-- END LEFT CONTENT --}}
         {{-- RIGHT CONTENT --}}
         <div class="col-lg-3 col-md-3 col-12">
-            <div class="sidebar sidebar-idle sidebar-restaurant" id="sidebar_fix">
+            <div class="sidebar sidebar-restaurant" id="sidebar_fix">
                 <div class="reserve-block sidebar-mf">
                     <div class="gradient-try">
                         <center>
