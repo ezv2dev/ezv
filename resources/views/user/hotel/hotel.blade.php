@@ -1567,7 +1567,7 @@
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
                         <div class="col-12 m-0 row p-0">
-                            <div class="col-12 col-lg-4"
+                            <div class="col-12 col-lg-3"
                                 style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                                 <div class="col-12">
                                     <div class="col-12">
@@ -1698,7 +1698,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-8 p-0" id="hotelTypeDetailList">
+                            <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
                                     <div class="col-12 m-0 ps-2 pe-2 row ">
                                         <div class="col-12 row m-0 p-0 mb-2"
@@ -1739,6 +1739,15 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                            <div class="col-12 col-lg-2">
+                                <div class="total-container">
+                                    <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
+                                    <button class="price-button"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;">
+                                        Reserve Now
+                                    </button>
+                                </div>
                             </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
