@@ -421,7 +421,9 @@
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
                             <span class="translate-text-single"
-                                id="short-description-content2">{{ $villa[0]->short_description ?? __('user_page.There is no description yet') }}</span>
+                                id="short-description-content2">
+                                {{ Translate::translate($villa[0]->short_description) ?? __('user_page.There is no description yet') }}
+                                {{-- {{ $villa[0]->short_description ?? __('user_page.There is no description yet') }} --}}</span>
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;<a type="button" onclick="editShortDescriptionForm()"
@@ -1793,7 +1795,7 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                            There is no reviews yet
+                                        {{ __('user_page.There is no reviews yet') }}
                                         </p>
                                     </div>
                                 </div>
@@ -2411,11 +2413,11 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="owner-profile">
-                                    <h4>Host Profile</h4>
+                                    <h4>{{ __('user_page.Host Profile') }}</h4>
                                     <p>
-                                        About
+                                        {{ __('user_page.About') }}
                                         <span>{{ $createdby[0]->about_owner ?? '-' }}</span><br>
-                                        Location
+                                        {{ __('user_page.Location') }}
                                         <span>{{ $createdby[0]->location_owner ?? '-' }}</span>
                                     </p>
                                 </div>

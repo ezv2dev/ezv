@@ -38,6 +38,12 @@ return [
     'There is no description yet' => 'Belum ada deskripsi',
     'Start from' => 'Mulai dari',
     'Property Type :' => 'Tipe Properti :',
+    'There is no reviews yet' => 'Belum ada ulasan',
+    'About' => 'Tentang',
+    'Location' => 'Lokasi',
+    'Host Profile' => 'Profil Tuan Rumah',
+    'Fully Furlindable' => 'Dapat Di Refund Penuh',
+    'Reserve now pay later' => 'Bisa bayar belakangan',
 
     'night' => 'malam',
     'Price is unknown' => 'Harga tidak diketahui',

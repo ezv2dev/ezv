@@ -42,6 +42,8 @@ return [
     'There is no description yet' => 'There is no description yet',
     'Start from' => 'Start from',
     'Property Type :' => 'Property Type :',
+    'There is no reviews yet' => 'There is no reviews yet',
+    'There is no reviews yet' => 'There is no reviews yet',
 
     'night' => 'night',
     'Price is unknown' => 'Price is unknown',
@@ -76,7 +78,11 @@ return [
     'Infants are allowed' => 'Infants are allowed',
     'Pets are allowed' => 'Pets are allowed',
     'Smoking is allowed' => 'Smoking is allowed',
-    'Events are allowed' => 'Events are allowed',
+    'About' => 'About',
+    'Location' => 'Location',
+    'Host Profile' => 'Host Profile',
+    'Fully Furlindable' => 'Fully Furlindable',
+    'Reserve now pay later' => 'Reserve now pay later',
 
     'No children' => 'No children',
     'No infants' => 'No infants',
