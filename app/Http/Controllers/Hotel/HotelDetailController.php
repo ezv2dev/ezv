@@ -513,7 +513,7 @@ class HotelDetailController extends Controller
             ], 500);
         }
 
-        $checkID = HouseRules::where('id_villa', '=', $request->id_villa)->first();
+        $checkID = HotelRules::where('id_villa', '=', $request->id_villa)->first();
 
         $data = [
             'id_villa' => $request->id_villa,
@@ -526,7 +526,7 @@ class HotelDetailController extends Controller
 
         if ($checkID == null) {
             // ID villa doesn't exist
-            $checkID = HouseRules::create(array(
+            $checkID = HotelRules::create(array(
                 'id_villa' => $request->id_villa,
                 'children' => $request->children,
                 'infants' => $request->infants,

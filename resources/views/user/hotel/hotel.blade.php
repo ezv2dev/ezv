@@ -1475,80 +1475,77 @@
                                 </div>
                             </div>
                             {{-- <div class="col-12"
-                                style="display: flex; flex-direction: column; border: 2px solid #ff7400; border-radius:15px; padding: 9px; box-sizing: border-box; box-shadow: 1px 1px 10px #a4a4a4">
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6" style="border-right: 2px solid #ff7400;">
-                                        <p style="font-size: 12px; margin:0px;">Total Nights</p>
-                                    </div>
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <input id="sum_night" value="0"
-                                            style="font-size: 12px; text-align:left; width: 20px; border:0">
-                                    </div>
-                                </div>
-
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6" style="border-right: 2px solid #ff7400;">
-                                        <p style="font-size: 12px; margin:0px;">Sub Total</p>
+                                    style="display: flex; flex-direction: column; border: 2px solid #ff7400; border-radius:15px; padding: 9px; box-sizing: border-box; box-shadow: 1px 1px 10px #a4a4a4">
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6" style="border-right: 2px solid #ff7400;">
+                                            <p style="font-size: 12px; margin:0px;">Total Nights</p>
+                                        </div>
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <input id="sum_night" value="0"
+                                                style="font-size: 12px; text-align:left; width: 20px; border:0">
+                                        </div>
                                     </div>
 
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <p id="total" style="font-size:12px; margin:0px;">0</p>
-                                    </div>
-                                </div>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6" style="border-right: 2px solid #ff7400;">
+                                            <p style="font-size: 12px; margin:0px;">Sub Total</p>
+                                        </div>
 
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6">
-                                        <p style="font-size: 12px; margin:0px; border-right: 2px solid #ff7400;">Tax &
-                                            Service</p>
-                                    </div>
-
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <p style="font-size: 12px; margin:0px">IDR
-                                            {{ number_format(0, 0, ',', '.') }}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12"
-                                    style="display: flex; margin-top: 10px; border-top: 2px solid #ff7400; padding-top: 10px;">
-                                    <div class="col-6">
-                                        <p style="margin: 0px; font-size: 12px;">Total</p>
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <p id="total" style="font-size:12px; margin:0px;">0</p>
+                                        </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <span style="font-size: 12px;">IDR</span>
-                                        <span id="total_all"
-                                            style="font-size:100%; font-size: 12px; margin: 0px;">0</span>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6">
+                                            <p style="font-size: 12px; margin:0px; border-right: 2px solid #ff7400;">Tax &
+                                                Service</p>
+                                        </div>
+
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <p style="font-size: 12px; margin:0px">IDR
+                                                {{ number_format(0, 0, ',', '.') }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                    <div class="col-12"
+                                        style="display: flex; margin-top: 10px; border-top: 2px solid #ff7400; padding-top: 10px;">
+                                        <div class="col-6">
+                                            <p style="margin: 0px; font-size: 12px;">Total</p>
+                                        </div>
 
-                            <div class="col-12 p-5-price text-center" style="padding: 0px; margin-top: 20px;"><input
-                                    class="price-button" type="submit" style="box-shadow: 1px 1px 10px #a4a4a4;"
-                                    value="RESERVE NOOW"></div>
+                                        <div class="col-12">
+                                            <span style="font-size: 12px;">IDR</span>
+                                            <span id="total_all"
+                                                style="font-size:100%; font-size: 12px; margin: 0px;">0</span>
+                                        </div>
+                                    </div>
 
-                            <div class="col-12 p-5-price price-box text-center" style="margin-top: 9px;">You won't be
-                                charged yet</div> --}}
+                                    </div>
+
+                                    <div class="col-12 p-5-price text-center" style="padding: 0px; margin-top: 20px;"><input
+                                            class="price-button" type="submit" style="box-shadow: 1px 1px 10px #a4a4a4;"
+                                            value="RESERVE NOOW"></div>
+
+                                    <div class="col-12 p-5-price price-box text-center" style="margin-top: 9px;">You won't be
+                                        charged yet</div> --}}
                         </form>
                     </div>
 
-
-
-                    <!--
-                <div class="diamond-block price-box">
-                    <div class="row">
-                        <div class="col-9">
-                            <strong>This is a rare find.</strong> {{ $hotel[0]->name }}'s place on EZ Villas Bali is
-                            usually fully
-                            booked.
+                    {{-- <div class="diamond-block price-box">
+                        <div class="row">
+                            <div class="col-9">
+                                <strong>This is a rare find.</strong> {{ $hotel[0]->name }}'s place on EZ Villas Bali
+                                is
+                                usually fully
+                                booked.
+                            </div>
+                            <div class="col-3"><img
+                                    src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/gp-pdp-core-ui-sections/images/stays/icon-uc-diamond.296a9c250dc9ee3d995629f834798cb1.gif">
+                            </div>
                         </div>
-                        <div class="col-3"><img
-                                src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/gp-pdp-core-ui-sections/images/stays/icon-uc-diamond.296a9c250dc9ee3d995629f834798cb1.gif">
-                        </div>
-                    </div>
-                </div>
-                -->
+                    </div> --}}
 
                 </div>
             </div>
@@ -2414,64 +2411,64 @@
                                 <h6 class="mb-2">{{ __('user_page.House Rules') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editHouseRules()"
+                                        &nbsp;<a type="button" onclick="editHotelRules()"
                                             style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
                                     @endif
                                 @endauth
                             </div>
                             <p style="margin-bottom: 0px !important" id="houseRuleContent">
-                                @if (!isset($houseRules))
+                                @if (!isset($hotelRules))
                                     {{ __('user_page.No data found') }}
                                 @endif
 
-                                @if (isset($houseRules))
-                                    @if ($houseRules->children == 'yes')
+                                @if (isset($hotelRules))
+                                    @if ($hotelRules->children == 'yes')
                                         <i class="fas fa-child"></i>
                                         {{ __('user_page.Childrens are allowed') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->infants == 'yes')
+                                    @if ($hotelRules->infants == 'yes')
                                         <i class="fas fa-child"></i>
                                         {{ __('user_page.Infants are allowed') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->pets == 'yes')
+                                    @if ($hotelRules->pets == 'yes')
                                         <i class="fas fa-paw"></i>
                                         {{ __('user_page.Pets are allowed') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->smoking == 'yes')
+                                    @if ($hotelRules->smoking == 'yes')
                                         <i class="fas fa-smoking"></i>
                                         {{ __('user_page.Smoking is allowed') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->events == 'yes')
+                                    @if ($hotelRules->events == 'yes')
                                         <i class="fas fa-calendar"></i>
                                         {{ __('user_page.Events are allowed') }}
                                         <br>
                                     @endif
 
-                                    @if ($houseRules->children == 'no')
+                                    @if ($hotelRules->children == 'no')
                                         <i class="fas fa-ban"></i>
                                         {{ __('user_page.No children') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->infants == 'no')
+                                    @if ($hotelRules->infants == 'no')
                                         <i class="fas fa-ban"></i>
                                         {{ __('user_page.No infants') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->pets == 'no')
+                                    @if ($hotelRules->pets == 'no')
                                         <i class="fas fa-ban"></i>
                                         {{ __('user_page.No pets') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->smoking == 'no')
+                                    @if ($hotelRules->smoking == 'no')
                                         <i class="fas fa-ban"></i>
                                         {{ __('user_page.No smoking') }}
                                         <br>
                                     @endif
-                                    @if ($houseRules->events == 'no')
+                                    @if ($hotelRules->events == 'no')
                                         <i class="fas fa-ban"></i>
                                         {{ __('user_page.No events') }}
                                         <br>
@@ -3463,6 +3460,7 @@
         {{-- END FULL WIDTH ABOVE FOOTER --}}
     </div>
     {{-- MODAL --}}
+    @include('user.modal.hotel.guest-safety')
     @auth
         @include('user.modal.hotel.bedroom')
         @include('user.modal.hotel.add_room')
@@ -3475,6 +3473,8 @@
         @include('user.modal.hotel.category_hotel')
         @include('user.modal.advert-listing')
         @include('user.modal.hotel.add_rooms_details')
+        @include('user.modal.hotel.edit-guest-safety')
+        @include('user.modal.hotel.edit-hotel-rules')
     @endauth
     @include('user.modal.hotel.description')
 
@@ -5844,6 +5844,14 @@
         </script>
     @endif
     @include('user.modal.hotel.detail_room')
+
+    {{-- HOTEL RULES SAFETY --}}
+    <script>
+        function editHotelRules() {
+            $("#modal-edit-house-rules").modal("show");
+        }
+    </script>
+    {{-- HOTEL RULES SAFETY --}}
 </body>
 
 </html>
