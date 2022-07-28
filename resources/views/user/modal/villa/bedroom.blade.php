@@ -528,6 +528,14 @@
 <!-- END Fade In Default Modal -->
 
 <script>
+    $(document).ready(function () {
+        if ($("input[name='bedroom']").is(":checked") == true) {
+            let valueBedroom = $("input[name='bedroom']:checked").val();
+            console.log(valueBedroom);
+            showAddBedroomDetailForm($("#bedroomFormSelect"), 'radio');
+        }
+    });
+
     function showBedroom() {
         document
             .getElementById("bedroomForm")
@@ -1024,7 +1032,7 @@
         document
             .getElementById("hideChildren")
             .classList.add("display-none");
-        
+
         document
             .getElementById("y1")
             .disabled = false;
