@@ -4154,7 +4154,8 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionPhotoGallery{{ $id }}">
                                 <img src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}"
                                     title="{{ $name }}">
                             </li>
@@ -4194,7 +4195,8 @@
                                 $id = $item->id_video;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionVideoGallery{{ $id }}">
                                 <video
                                     src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -4202,12 +4204,12 @@
                             {{ __('user_page.there is no video yet') }}
                         @endforelse
                     </ul>
-
-                    <div style="clear: both;">
-                        <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Submit') }}" onclick="save_reorder_video()">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; width: 100%;">
+                        <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
+                            onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -4980,6 +4982,19 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content = "";
                 let contentStory = "";
+                let contentPositionModal;
+                let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0) {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0) {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4999,7 +5014,14 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                        '"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
@@ -5025,8 +5047,15 @@
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
 
+                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
+                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
+                        '"> <video src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=1.0"> </li>';
+
                     $('.gallery').append(content);
                     $("#storyContent").append(contentStory);
+                    $('#sortable-video').append(contentPositionModalVideo);
                     sliderRestaurant();
                 }
 
