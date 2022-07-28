@@ -4183,7 +4183,7 @@
         form.classList.remove("d-block");
         content.classList.remove("d-none");
         contentMobile.classList.remove("d-none");
-        formInput.value = '{{ $activity->name }}';
+        // formInput.value = '{{ $activity->name }}';
 
         if (formInput.value == 'Wow Name Here') {
             formInput.value = '';

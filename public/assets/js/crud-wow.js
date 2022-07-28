@@ -203,6 +203,9 @@ $(document).on("keyup", "textarea#name-form-input", function () {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
+
+let nameBackup = $("#name-form-input").val();
+
 function saveNameActivity() {
     let error = 0;
     if (!$("textarea#name-form-input").val()) {
@@ -216,8 +219,6 @@ function saveNameActivity() {
     if (error == 1) {
         return false;
     } else {
-        let name = $("#name-form-input").val();
-
         let btn = document.getElementById("btnSaveName");
         btn.textContent = "Saving Name...";
         btn.classList.add("disabled");
@@ -230,7 +231,7 @@ function saveNameActivity() {
             url: "/things-to-do/update/name",
             data: {
                 id_activity: id_activity,
-                name: name,
+                name: $("#name-form-input").val(),
             },
             success: function (response) {
                 console.log(response.data.name);
@@ -238,8 +239,6 @@ function saveNameActivity() {
 
                 $("#name-content2").html(response.data.name);
                 $("#name-content2-mobile").html(response.data.name);
-
-                name_input.value = response.data.name;
 
                 iziToast.success({
                     title: "Success",
@@ -251,6 +250,9 @@ function saveNameActivity() {
                 btn.classList.remove("disabled");
 
                 editNameCancel();
+
+                nameBackup = response.data.name;
+                name_input.value = response.data.name;
             },
             error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
