@@ -52,9 +52,9 @@
                                 <th class="text-center">NO</th>
                                 <th class="text-center">NO INVOICE</th>
                                 <th class="text-center">VILLA NAME</th>
-                                <th class="d-none d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
-                                <th class="d-none d-sm-table-cell text-center" >PRICE</th>
-                                <th class="d-none d-sm-table-cell text-center" >STATUS</th>
+                                <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
+                                <th class="d-sm-table-cell text-center" >PRICE</th>
+                                <th class="d-sm-table-cell text-center" >STATUS</th>
                                 <th class="text-center" style="width: 15%;">ACTION</th>
                             </tr>
                         </thead>
@@ -65,9 +65,9 @@
                                     <th class="text-center">NO</th>
                                     <th class="text-center">NO INVOICE</th>
                                     <th class="text-center">VILLA NAME</th>
-                                    <th class="d-none d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
-                                    <th class="d-none d-sm-table-cell text-center" >PRICE</th>
-                                    <th class="d-none d-sm-table-cell text-center" >STATUS</th>
+                                    <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
+                                    <th class="d-sm-table-cell text-center" >PRICE</th>
+                                    <th class="d-sm-table-cell text-center" >STATUS</th>
                                     <th class="text-center" style="width: 15%;">ACTION</th>
                                 </tr>
                             </tfoot>
