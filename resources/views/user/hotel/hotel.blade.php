@@ -1570,7 +1570,7 @@
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
                         <div class="col-12 m-0 row p-0">
-                            <div class="col-12 col-lg-4" style="border: 1px solid grey; border-radius: 15px; padding: 10px;">
+                            <div class="col-12 col-lg-4" style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                                 <div class="col-12">
                                     <div class="col-12">
                                         <div class="content list-image-content">
@@ -1703,35 +1703,37 @@
                             <div class="col-12 col-lg-8 p-0" id="hotelTypeDetailList">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
                                     <div class="col-12 m-0 ps-2 pe-2 row ">
-                                        <div style="border-radius: 12px 0px 0px 12px;" class="col-2 border border-secondary mb-2 border-end-0">
-                                            @for ($i = 0; $i < $item2->capacity; $i++)
-                                                <i class="fas fa-user"></i>
-                                            @endfor
-                                        </div>
-                                        <div class="col-4 mb-2 border border-secondary border-end-0">
-                                            <div class="price-tag">
-                                                <p class="price-discount mb-2">IDR
-                                                    {{ number_format($item2->discount_price) }}
-                                                </p>
-                                                <h6 class="price-current mb-0">IDR
-                                                    {{ number_format($item2->price) }}
-                                                </h6>
+                                        <div class="col-12 row m-0 p-0 mb-2" style="box-shadow: 1px 1px 10px rgb(63 62 62 / 16%); border-radius: 12px; border: 1px solid #d6d6d6;">
+                                            <div class="col-2 d-flex align-items-center justify-content-center">
+                                                @for ($i = 0; $i < $item2->capacity; $i++)
+                                                    <i class="fas fa-user"></i>
+                                                @endfor
                                             </div>
-                                            <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
-                                        </div>
-                                        <div class="col-4 mb-2 border border-secondary border-end-0">
-                                            <div class="choice-item">
-                                                <i class="fa-solid fa-mug-saucer regular-icon"></i>
-                                                <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                            <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                                                <div class="price-tag">
+                                                    <p class="price-discount mb-2">IDR
+                                                        {{ number_format($item2->discount_price) }}
+                                                    </p>
+                                                    <h6 class="price-current mb-0">IDR
+                                                        {{ number_format($item2->price) }}
+                                                    </h6>
+                                                </div>
+                                                <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
                                             </div>
-                                        </div>
-                                        <div style="border-radius: 0px 12px 12px 0px" class="col-2 mb-2 border border-secondary">
-                                            <select name="room-amount" id="room-amount" style="width: 3.5rem;">
-                                                <option value="0">0</option>
-                                                <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                                    {{ number_format($item2->price) }}
-                                                </option>
-                                            </select>
+                                            <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                                                <div class="choice-item">
+                                                    <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                                    <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 d-flex align-items-center justify-content-center" style="border-left: 1px solid #d6d6d6;">
+                                                <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                                                    <option value="0">0</option>
+                                                    <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                                        {{ number_format($item2->price) }}
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
