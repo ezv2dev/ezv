@@ -188,19 +188,21 @@
                                 onclick="showLegalName()">Cancel</a>
                                 <p class="text-muted">This is the name on your travel document, which could be a license or a passport.</p>
                             </div>
-                            <form action="{{ route('personal_update_name') }}" method="post">
+                            <form action="{{ route('personal_update_name') }}" method="post" id="profile-name">
                                 @csrf
                                 <div class="row g-2">
                                     <div class="col-md">
                                         <div class="mb-4">
                                             <label class="form-label" for="example-text-input">First name</label>
-                                            <input type="text" class="form-control" name="first_name" value="{{ Auth::user()->first_name }}">
+                                            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ Auth::user()->first_name }}">
+                                            <small id="err-fname" style="display: none;" class="invalid-feedback">The first name field is required</small>
                                         </div>
                                     </div>
                                     <div class="col-md">
                                         <div class="mb-4">
                                             <label class="form-label" for="example-text-input">Last name</label>
-                                            <input type="text" class="form-control" name="last_name" value="{{ Auth::user()->last_name }}">
+                                            <input type="text" class="form-control" name="last_name" id="last_name" value="{{ Auth::user()->last_name }}">
+                                            <small id="err-lname" style="display: none;" class="invalid-feedback">The last name field is required</small>
                                         </div>
                                     </div>
                                 </div>
@@ -225,8 +227,7 @@
                                 @csrf
                                 <div class="mb-4">
                                     <select style="width: 100%; padding:10px;" class="form-select" name="gender">
-                                        <option selected>Gender</option>
-                                        <option value="0"></option>
+                                        <option value="0" selected>Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
@@ -270,10 +271,11 @@
                                 onclick="showEmail()">Cancel</a>
                                 <p class="text-muted">Use an address you’ll always have access to.</p>
                             </div>
-                            <form action="{{ route('personal_update_email') }}" method="post">
+                            <form action="{{ route('personal_update_email') }}" method="post" id="profile-email">
                                 @csrf
                                 <div class="mb-4">
-                                    <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
+                                    <input type="email" class="form-control" name="email" id="user_email" value="{{ Auth::user()->email }}">
+                                    <small id="err-email" style="display: none;" class="invalid-feedback">The email field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -292,11 +294,12 @@
                                 onclick="showPhoneNumber()">Cancel</a>
                                 <p class="text-muted">Add a number so confirmed guests and EZV can get in touch. You can add other numbers and choose how they’re used.</p>
                             </div>
-                            <form action="{{ route('personal_update_phone') }}" method="post">
+                            <form action="{{ route('personal_update_phone') }}" method="post" id="profile-phone">
                                 @csrf
                                 <div class="mb-4">
                                     <label for="">Enter a phone number</label>
-                                    <input type="text" class="form-control" name="phone" value="{{ Auth::user()->phone }}">
+                                    <input type="text" class="form-control" name="phone" id="profile_phone" value="{{ Auth::user()->phone }}">
+                                    <small id="err-phone" style="display: none;" class="invalid-feedback">The phone number field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -315,10 +318,11 @@
                                 onclick="showAddress()">Cancel</a>
                                 {{-- <p class="text-muted">Add a number so confirmed guests and EZV can get in touch. You can add other numbers and choose how they’re used.</p> --}}
                             </div>
-                            <form action="{{ route('personal_update_address') }}" method="post">
+                            <form action="{{ route('personal_update_address') }}" method="post" id="profile-address">
                                 @csrf
                                 <div class="mb-4">
-                                    <input type="text" class="form-control" name="address" value="{{ Auth::user()->address }}">
+                                    <input type="text" class="form-control" name="address" id="profile_address" value="{{ Auth::user()->address }}">
+                                    <small id="err-address" style="display: none;" class="invalid-feedback">The address field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -438,6 +442,82 @@
         document.getElementById("content").style.display = "block";
     }
 
+</script>
+<script>
+    // validasi
+    $(function() {
+        $('#first_name').keyup(function (e) {
+            $('#first_name').removeClass('is-invalid');
+            $('#err-fname').hide();
+        });
+        $('#last_name').keyup(function (e) {
+            $('#last_name').removeClass('is-invalid');
+            $('#err-lname').hide();
+        });
+        $('#user_email').keyup(function (e) {
+            $('#user_email').removeClass('is-invalid');
+            $('#err-email').hide();
+        });
+        $('#profile_phone').keyup(function (e) {
+            $('#profile_phone').removeClass('is-invalid');
+            $('#err-phone').hide();
+        });
+        $('#profile_address').keyup(function (e) {
+            $('#profile_address').removeClass('is-invalid');
+            $('#err-address').hide();
+        });
+        $('#profile-name').submit(function (e) {
+            if(!$('#first_name').val()) {
+                $('#first_name').addClass('is-invalid');
+                $('#err-fname').show();
+                e.preventDefault();
+            } else {
+                $('#first_name').removeClass('is-invalid');
+                $('#err-fname').hide();
+            }
+            if(!$('#last_name').val()) {
+                $('#last_name').addClass('is-invalid');
+                $('#err-lname').show();
+                e.preventDefault();
+            } else {
+                $('#last_name').removeClass('is-invalid');
+                $('#err-lname').hide();
+            }
+        });
+        $('#profile-email').submit(function (e) {
+            if(!$('#user_email').val()) {
+                $('#err-email').show();
+                $('#user_email').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#user_email').removeClass('is-invalid');
+                $('#err-email').hide();
+            }
+
+
+        });
+        $('#profile-phone').submit(function (e) {
+            if(!$('#profile_phone').val()) {
+                $('#err-phone').show();
+                $('#profile_phone').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#profile_phone').removeClass('is-invalid');
+                $('#err-phone').hide();
+            }
+
+        });
+        $('#profile-address').submit(function (e) {
+            if(!$('#profile_address').val()) {
+                $('#err-address').show();
+                $('#profile_address').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#profile_address').removeClass('is-invalid');
+                $('#err-address').hide();
+            }
+        });
+    })
 </script>
 
 @endsection

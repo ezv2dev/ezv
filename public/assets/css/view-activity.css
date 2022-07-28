@@ -207,6 +207,14 @@
     .row-grid-location {
         margin-right: 0 !important;
     }
+    
+    .sidebar-activity {
+        right: 4px !important;
+    }
+}
+
+.sidebar-activity {
+    margin-right: 0;
 }
 
 @media only screen and (max-width: 425px) {

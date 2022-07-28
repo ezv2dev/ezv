@@ -367,7 +367,7 @@
                 <form id="msform" action="{{ route('account-store-delete') }}" method="post">
                     @csrf
                     <!-- progressbar -->
-                    <ul id="progressbar" class="d-flex justify-content-center">
+                    <ul id="progressbar" class="d-flex justify-content-center" style="padding-right: 2rem;">
                         <li class="active" id="account"><strong>Select reason</strong></li>
                         <li id="personal"><strong>Confirm</strong></li>
                         <li id="confirm"><strong>Done</strong></li>
