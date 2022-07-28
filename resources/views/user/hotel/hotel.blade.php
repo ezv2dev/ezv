@@ -1566,8 +1566,8 @@
                         @endauth
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
-                        <div class="col-12 m-0 row p-0">
-                            <div class="col-12 col-lg-3"
+                        <div class="col-12 m-0 row px-2 px-lg-0">
+                            <div class="col-12 col-lg-3 mb-2 mb-lg-0"
                                 style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                                 <div class="col-12">
                                     <div class="col-12">
@@ -1700,7 +1700,7 @@
                             </div>
                             <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
-                                    <div class="col-12 m-0 ps-2 pe-2 row ">
+                                    <div class="col-12 m-0 px-0 px-lg-2 row ">
                                         <div class="col-12 row m-0 p-0 mb-2"
                                             style="box-shadow: 1px 1px 10px rgb(63 62 62 / 16%); border-radius: 12px; border: 1px solid #d6d6d6;">
                                             <div class="col-2 d-flex align-items-center justify-content-center">
@@ -1740,7 +1740,7 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="col-12 col-lg-2">
+                            <div class="col-12 col-lg-2 px-0 px-lg-2">
                                 <div class="total-container">
                                     <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
                                     <button class="price-button"
