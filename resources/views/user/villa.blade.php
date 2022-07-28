@@ -3406,7 +3406,7 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down modal-lg" role="document" style="overflow-y: initial !important">
+        <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document" style="overflow-y: initial !important">
             <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -3551,6 +3551,8 @@
             $('#modal-amenities').modal('show');
         }
     </script>
+
+  
 
     <script>
         function details_reserve() {
