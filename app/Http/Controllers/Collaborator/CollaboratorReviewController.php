@@ -122,7 +122,7 @@ class CollaboratorReviewController extends Controller
         }
 
         // check if the editor does not have authorization
-        $this->authorize('collaborator_review_store');
+        // $this->authorize('collaborator_review_store');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner'])) {
             return response()->json([
                 'message' => 'This action is unauthorized',
