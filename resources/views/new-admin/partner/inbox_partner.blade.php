@@ -30,15 +30,44 @@
         text-decoration: inherit;
         background-color: #f7f7f7;
     }
+    .border-left{
+        border-left:1px solid #eee !important;
+    }
+    .border-right{
+        border-right:1px solid #eee !important;
+    }
+    .border-top{
+        border-top:1px solid #eee !important;
+    }
+    .border-bottom{
+        border-bottom:1px solid #eee !important;
+    }
+    .border{
+        border:1px solid #eee !important;
+    }
+    .overflow-x-auto{
+        overflow-x:auto;
+    }
 
 </style>
 
-<hr class="mt-n2">
-<div id="layoutSidenav" style="margin-top: -58px;">
-    <div id="layoutSidenav_nav">
-        <nav class="sidenav shadow-right sidenav-light" style="margin-top: 90px;">
+<!-- di komen yang awal -->
+<!-- <div id="layoutSidenav" style="margin-top: -58px;"> -->
+
+<!-- Baru -->
+<div id="layoutSidenav" class="pt-4">
+    <!-- di komen yang awal -->
+    <!-- <div id="layoutSidenav_nav"> -->
+    <div id="layoutSidenav_nav" class="border-right border-top" style="top: 94.27px;">
+
+        <!-- di komen yang awal -->
+        <!-- <nav class="sidenav shadow-right sidenav-light" style="margin-top: 90px;" > -->
+        <nav class="sidenav shadow-right sidenav-light pt-0"  >
             <div class="sidenav-menu">
-                <div class="nav accordion" style="margin-top: -28px;" id="accordionSidenav">
+        
+                <!-- di komen yang awal -->
+                <!-- <div class="nav accordion" id="accordionSidenav" style="margin-top: -28px;> -->
+                <div class="nav accordion" id="accordionSidenav">
                     <div class="sidenav-menu-heading mb-3" style="font-size: 16px; color: #000">Inbox</div>
                     <a class="nav-link" href="tables.html">
                         <div class="nav-link-icon"><i data-feather="filter"></i></div>
@@ -71,11 +100,20 @@
             </div>
         </nav>
     </div>
+
+    <!-- di komen yang awal -->
+    <!-- <div id="layoutSidenav_content"> -->
     <div id="layoutSidenav_content">
+        <div class="sidebar-background"></div>
         <main>
-            <div class="container justify-content-center">
+        
+            <!-- di komen yang awal -->
+            <!-- <div class="container justify-content-center"> -->
+            <div class="container justify-content-center px-5">
                 <div class="page-header-content">
-                    <div class="row align-items-center justify-content-between">
+
+                <!-- di komen yang awal -->
+                <!-- <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <h1 style="color: black" class="page-header-title">
                                 <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2"
@@ -83,20 +121,37 @@
                                         style="color: black"></i></button>
                                 All messages
                             </h1>
-
                             {{-- <form role="form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control empty" id="iconified"
-                                        placeholder="&#xF002; Search inbox" />
-                                </div>
-                            </form> --}}
-                        </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control empty" id="iconified"
+                                    placeholder="&#xF002; Search inbox" />
+                            </div>
+                        </form> --}}
+                    </div>
+                </div> -->
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-icon border btn-transparent-dark mr-3" id="sidebarToggle" href="#">
+                            <i data-feather="menu" style="color: black"></i>
+                        </button>
+                        <h1 style="color: black" class="page-header-title m-0">
+                            All messages
+                        </h1>
+
+                        {{-- <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control empty" id="iconified"
+                                    placeholder="&#xF002; Search inbox" />
+                            </div>
+                        </form> --}}
                     </div>
                 </div>
                 {{-- <div class="row justify-content-center mt-10">
                     <i class="fa fa-check" aria-hidden="true" style="color: #000"></i>
                 </div> --}}
-                <div class="row justify-content-center mt-2">
+
+                <!-- di komen yang awal -->
+                <!-- <div class="row justify-content-center mt-2 "> -->
+                <div class="row justify-content-center mt-4 ">
                     {{-- <table class="table table-striped w-100" id="tabel">
                         <thead>
                             <tr>
@@ -111,7 +166,10 @@
                         <tbody>
                         </tbody>
                     </table> --}}
-                    <div class="datatable px-5">
+    
+                    <!-- di komen yang awal -->
+                    <!-- <div class="datatable px-5"> -->
+                    <div class="datatable ">
                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>

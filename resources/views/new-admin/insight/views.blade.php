@@ -95,7 +95,7 @@
 @section('content_admin')
 
 <!-- Main page content-->
-<div class="container">
+<div class="container pt-4">
     <nav class="navbar navbar-expand-lg navbar-light rounded">
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto nav-insight">
