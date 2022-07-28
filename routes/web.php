@@ -444,7 +444,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/admin/restaurant/delete/{id}', [RestaurantListingController::class, 'destroy'])->name('admin_restaurant_destroy');
     Route::post('/admin/things-to-do/store', [ActivityListingController::class, 'store'])->name('admin_activity_store');
     Route::get('/admin/things-to-do/delete/{id}', [ActivityListingController::class, 'destroy'])->name('admin_activity_destroy');
-    Route::get('/admin/things-to-do/update-status/{id}', [Activity\ActivityController::class, 'update_status'])->name('admin_activity_update_status');
+    Route::get('/admin/wow/update-status/{id}', [Activity\ActivityController::class, 'update_status'])->name('admin_wow_update_status');
     Route::get('/villa/status/{id}', [VillaListingController::class, 'status'])->name('villa_update_status');
     Route::post('/villa/grade/{id}', [VillaListingController::class, 'grade'])->name('villa_update_grade');
     // Route::post('/villa/extra/{id}', 'VillaListingController@grade')->name('villa_update_grade');
@@ -501,7 +501,7 @@ Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra']
 // ! End Verified
 Route::post('/villa/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
 Route::patch('/restaurant/{id}/update/request-update-status', [Restaurant\RestaurantController::class, 'request_update_status'])->name('restaurant_request_update_status');
-Route::patch('/things-to-do/{id}/update/request-update-status', [Activity\ActivityController::class, 'request_update_status'])->name('activity_request_update_status');
+Route::post('/wow/update/request-update-status', [Activity\ActivityController::class, 'request_update_status'])->name('activity_request_update_status');
 Route::patch('/hotel/{id}/update/request-update-status', [Hotel\HotelDetailController::class, 'request_update_status'])->name('hotel_request_update_status');
 Route::get('/villa/request/video/{id}/{name}', [ViewController::class, 'villa_request_video'])->name('villa_request_video');
 Route::get('/hotel/request/video/{id}/{name}', [Hotel\HotelDetailController::class, 'hotel_request_video'])->name('hotel_request_video');
@@ -1201,7 +1201,7 @@ Route::get('/wow/price/{id}/details', [Activity\ActivityPriceController::class, 
 
 Route::get('/wow/{id}', [Activity\ActivityController::class, 'index'])->name('activity');
 
-Route::post('/things-to-do/grade/{id}', [Activity\ActivityController::class, 'grade'])->name('activity_update_grade');
+Route::post('/wow/grade/{id}', [Activity\ActivityController::class, 'grade'])->name('activity_update_grade');
 
 Route::get('/things-to-do/map/{id}', [Activity\ActivityListController::class, 'activity_map'])->name('activity_map');
 // Route::get('/things-to-do/price/{id}', 'Activity\ActivityListController@activity_price')->name('activity_price');
@@ -1238,7 +1238,7 @@ Route::post('/things-to-do/price/store', [Activity\ActivityListController::class
 Route::post('/things-to-do/story/store', [Activity\ActivityListController::class, 'activity_store_story'])->name('activity_store_story');
 Route::post('/things-to-do/facilities/store', [Activity\ActivityListController::class, 'activity_store_facilities'])->name('activity_store_facilities');
 Route::post('/things-to-do/update/image', [Activity\ActivityListController::class, 'activity_update_image'])->name('activity_update_image');
-Route::patch('/things-to-do/{id}/update/cancel-request-update-status', [Activity\ActivityController::class, 'cancel_request_update_status'])->name('activity_cancel_request_update_status');
+Route::post('/wow/update/cancel-request-update-status', [Activity\ActivityController::class, 'cancel_request_update_status'])->name('wow_cancel_request_update_status');
 Route::get('/things-to-do/{id}/delete/story/{id_story}', [Activity\ActivityListController::class, 'activity_delete_story'])->name('activity_delete_story');
 // Route::get('/things-to-do/{id}/delete/image', [Activity\ActivityListController::class, 'activity_delete_image'])->name('activity_delete_image');
 Route::get('/things-to-do/{id}/delete/photo/video/{id_video}', [Activity\ActivityListController::class, 'activity_delete_photo_video'])->name('activity_delete_photo_video');

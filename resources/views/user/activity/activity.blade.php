@@ -2811,88 +2811,66 @@
                     @auth
                         @if (auth()->user()->id == $activity->created_by)
                             @if ($activity->status == '0')
-                                <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                    <span>{{ __('user_page.this content is deactive') }}, </span>
-                                    <form
-                                        action="{{ route('activity_request_update_status', $activity->id_activity) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_activity"
-                                            value="{{ $activity->id_activity }}">
-                                        <button class="btn"
+                                <div id="activation0">
+                                    <div class="alert alert-danger d-flex flex-row align-items-center"
+                                        role="alert">
+                                        <span>{{ __('user_page.this content is deactive,') }} </span>
+                                        <button class="btn" onclick="requestActivation()"
                                             type="submit">{{ __('user_page.request activation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '1')
-                                <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                    <span>{{ __('user_page.this content is active') }}, </span>
-                                    <form
-                                        action="{{ route('activity_request_update_status', $activity->id_activity) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_activity"
-                                            value="{{ $activity->id_activity }}">
-                                        <button class="btn"
+                                <div id="activation1">
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active') }},</span>
+                                        <button class="btn" onclick="requestDeactivation()"
                                             type="submit">{{ __('user_page.request deactivation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '2')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.you have been request activation for this content') }},
-                                    </span>
-                                    <form
-                                        action="{{ route('activity_cancel_request_update_status', $activity->id_activity) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_activity"
-                                            value="{{ $activity->id_activity }}">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.cancel activation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="activation2">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                        </span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '3')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.you have been request deactivation for this content') }},
-                                    </span>
-                                    <form
-                                        action="{{ route('activity_cancel_request_update_status', $activity->id_activity) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_activity"
-                                            value="{{ $activity->id_activity }}">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="activation3">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                        </span>
+                                        <button class="btn" type="submit"
+                                            onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                         @endif
                         @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
                             @if ($activity->status == '0')
-                                <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                    {{ __('user_page.this content is deactive') }}
+                                <div id="adminVilla0">
+                                    <div class="alert alert-danger d-flex flex-row align-items-center"
+                                        role="alert">
+                                        <span>{{ __('user_page.this content is deactive') }}</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '1')
-                                <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                    {{ __('user_page.this content is active, edit grade things to do') }}
-
-                                    <form action="{{ route('activity_update_grade', $activity->id_activity) }}"
-                                        method="post">
-                                        @csrf
+                                <div id="adminVilla1">
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
-                                                onchange='this.form.submit()'>
+                                                id="gradeWow">
                                                 <option value="AA"
                                                     {{ $activity->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
@@ -2909,20 +2887,18 @@
                                                     {{ $activity->grade == 'D' ? 'selected' : '' }}>D
                                                 </option>
                                             </select>
-                                            <noscript><input type="submit" value="Submit"></noscript>
                                         </div>
-                                    </form>
+
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '2')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.the owner request activation, choose grade things to do') }}
-                                    </span>
-                                    <form
-                                        action="{{ route('admin_activity_update_status', $activity->id_activity) }}"
-                                        method="get" class="d-flex">
+                                <div id="adminWow2">
+                                    <div class="alert alert-warning d-flex justify-content-start" role="warning">
+                                        <span>{{ __('user_page.the owner request activation, choose grade Wow') }}
+                                        </span>
                                         <div style="margin-left: 10px;">
-                                            <select class="custom-select grade" name="grade">
+                                            <select class="custom-select grade" name="grade" id="grade2">
                                                 <option value="AA"
                                                     {{ $activity->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
@@ -2941,21 +2917,23 @@
                                             </select>
                                         </div>
                                         <span style="margin-left: 10px;">and</span>
-                                        <button class="btn" type="submit" style="margin-top: -7px;">
-                                            {{ __('user_page.activate this content') }}</button>
-                                    </form>
+                                        <button class="btn" type="submit" style="margin-top: -7px;"
+                                            onclick="ActivationContent()">{{ __('user_page.activate this content') }}</button>
+                                    </div>
                                 </div>
                             @endif
                             @if ($activity->status == '3')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.the owner request deactivation') }}, </span>
-                                    <form
-                                        action="{{ route('admin_activity_update_status', $activity->id_activity) }}"
-                                        method="get">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="adminVilla3">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.the owner request deactivation,') }}' </span>
+                                        <form action="{{ route('admin_villa_update_status', $activity->id_villa) }}"
+                                            method="get">
+                                            <button class="btn"
+                                                type="submit">{{ __('user_page.deactivate this content') }}</button>
+                                        </form>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                         @endif
@@ -3130,6 +3108,7 @@
     }
 </script>
 {{-- END MODAL SCRIPT --}}
+
 {{-- STORY MODAL --}}
 <div class="modal fade" id="storymodalactivity" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
@@ -3148,6 +3127,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function view_story_activity(id) {
         $.ajax({
@@ -3179,6 +3159,7 @@
         });
     });
 </script>
+
 {{-- MODAL VIDEO --}}
 <div class="modal fade" id="videomodalactivity" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
@@ -3196,6 +3177,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function view_video_activity(id) {
         $.ajax({
@@ -3320,6 +3302,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function view_subcategory() {
         $('#modal-subcategory').modal('show');
@@ -3350,6 +3333,7 @@
         </div>
     </div>
 </div>
+
 <script>
     async function view_price(id) {
         await $.ajax({
@@ -3493,6 +3477,7 @@
     </div>
     </div>
     </div> --}}
+
 
 {{-- MODAL SHARE --}}
 <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
@@ -3861,6 +3846,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function contact_activity() {
         $('#modal-contact_activity').modal('show');
@@ -5550,6 +5536,237 @@
         $('#modal-add_subcategory').modal('show');
     }
 </script>
+
+{{-- Request Active Deactive --}}
+<script>
+    function requestActivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/wow/update/request-update-status`,
+            data: {
+                id_wow: id_activity
+            },
+            success: function(response) {
+                if (response.data == 2) {
+                    $("#activation0").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                </span>
+                            </div>
+                        `)
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        });
+    }
+
+    function ActivationContent() {
+        var grade = $("#grade2 option:selected").val();
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `Yes, Activate it`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    url: `/admin/wow/update-status/${id_activity}`,
+                    data: {
+                        grade: grade
+                    },
+                    success: function(response) {
+                        if (response.data == 1) {
+                            if (response.grade == "AA") {
+                                $("#adminWow2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeWowAA">
+                                                    <option value="AA" selected>AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `);
+
+                                gradeAA();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "A") {
+                                $("#adminWow2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeWowA">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A" selected>A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+
+                                gradeA();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "B") {
+                                $("#adminWow2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeWowB">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B" selected>B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+
+                                gradeB();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "C") {
+                                $("#adminWow2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeWowC">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C" selected>C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+
+                                gradeC();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "D") {
+                                $("#adminWow2").html(`
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                            <div style="margin-left: 10px;">
+                                                <select class="custom-select grade-success" name="grade"
+                                                    id="gradeWowD">
+                                                    <option value="AA">AA</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D" selected>D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    `)
+
+                                gradeD();
+                                $("#activation2").addClass('d-none');
+                            }
+
+                            iziToast.success({
+                                title: "Success",
+                                message: response.message,
+                                position: "topRight",
+                            });
+                        }
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`,
+                    `Canceled Activate Data`,
+                    'error')
+            }
+        });
+    }
+
+    function requestDeactivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/wow/update/request-update-status`,
+            data: {
+                id_wow: id_activity
+            },
+            success: function(response) {
+                if (response.data == 3) {
+                    $("#activation1").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                </span>
+                                <button class="btn"
+                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                <span> ?</span>
+                            </div>
+                        `);
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        })
+    }
+
+    function cancelDeactivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/wow/update/cancel-request-update-status`,
+            data: {
+                id_wow: id_activity
+            },
+            success: function(response) {
+                if (response.data == 1) {
+                    $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        })
+    }
+</script>
+{{-- End Active Deactive --}}
 
 @if ($activity->status == '2' && auth()->user()->id == $activity->created_by)
     <script>

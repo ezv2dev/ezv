@@ -373,10 +373,10 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="flex-fill">
                                         <p class="text-14 fw-400 grid-one-line mb-0">
-                                            Fully Furlindable
+                                        {{ __('user_page.Fully Furlindable') }}
                                         </p>
                                         <p class="text-14 fw-400 grid-one-line mb-0">
-                                            Reserve now pay later
+                                        {{ __('user_page.Reserve now pay later') }}
                                         </p>
                                     </div>
                                     <div>

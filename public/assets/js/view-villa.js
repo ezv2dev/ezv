@@ -1193,6 +1193,16 @@ function showingLoading() {
     $("#loading-content").show();
 }
 
+
+$(document) .ready(function(){
+  $('.modal').on('shown.bs.modal', function () {
+      $('html').css('overflow','hidden');
+      }).on('hidden.bs.modal', function() {
+      $('html').css('overflow','auto');
+  });
+});
+
+
 //call calendar
 calendar_header(2);
 calendar_availability(2);

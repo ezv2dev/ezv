@@ -1842,7 +1842,7 @@
                                         </div>
                                         <div class="col-8">
                                             <p class="review-txt">
-                                                There is no reviews yet
+                                            {{ __('user_page.There is no reviews yet') }}
                                             </p>
                                         </div>
                                     </div>
@@ -2313,9 +2313,9 @@
                         <div class="col-12 col-md-6 owner-profile">
                             <h4>Host Profile</h4>
                             <p>
-                                About
+                                {{ __('user_page.About') }}
                                 <span>{{ $restaurant->owner->about ?? '-' }}</span><br>
-                                Location
+                                {{ __('user_page.Location') }}
                                 <span>{{ $restaurant->owner->location ?? '-' }}</span>
                             </p>
                         </div>
@@ -3146,6 +3146,13 @@
 
 {{-- MODAL SCRIPT --}}
 <script>
+    $(document) .ready(function(){
+        $('.modal').on('shown.bs.modal', function () {
+            $('html').css('overflow','hidden');
+            }).on('hidden.bs.modal', function() {
+            $('html').css('overflow','auto');
+        });
+    });
     function edit_contact() {
         $('#modal-edit_contact').modal('show');
     }

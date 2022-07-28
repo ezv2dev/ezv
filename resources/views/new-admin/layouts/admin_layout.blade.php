@@ -946,6 +946,7 @@
         $(document).ready(function(){
             let navBarHeight = $('#navBar').outerHeight()
             $('.main').css('margin-top',navBarHeight)
+            $('#layoutSidenav_nav').css('top',navBarHeight)
         })
         $(".btn-close-expand-navbar-mobile").on("click", function() {
             $("body").css({

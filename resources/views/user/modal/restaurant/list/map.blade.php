@@ -2472,12 +2472,12 @@
 <!-- MAP MODAL -->
 <div class="modal fade modal-map-padding overflow-hidden" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-xl overflow-y-scroll" role="document" style="height:100vh;">
+    <div class="modal-dialog modal-fullscreen modal-xl overflow-y-scroll w-100" role="document" style="height:100vh;">
         <div class="modal-content modal-map">
             <div class="modal-header modal-header-map flex-column">
-                <div class="row" style="width:100%;">
-                    <div class="col-3"><h5 class="modal-title">{{ __('user_page.Map') }}</h5></div>
-                    <div class="col-6">
+                <div class="d-flex justify-content-between align-items-center" style="width:100%;">
+                    <div style="flex:1;"><h5 class="modal-title">{{ __('user_page.Map') }}</h5></div>
+                    <div style="flex:2;">
                         <div class="d-flex justify-content-center">
                             <a class="icon-filter-map" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
                                 <img
@@ -2516,7 +2516,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-3 d-flex justify-content-end px-0 align-items-center">
+                    <div style="flex:1;" class="d-flex justify-content-end px-0 align-items-center">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
