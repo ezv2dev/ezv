@@ -90,6 +90,11 @@ class Hotel extends Model
         return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }
 
+    public function guestSafety()
+    {
+        return $this->belongsToMany(GuestSafety::class, 'hotel_has_guest_safety', 'id_hotel', 'id_guest_safety', 'id_hotel', 'id_guest_safety');
+    }
+
     public function ownerData()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
