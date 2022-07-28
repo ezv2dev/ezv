@@ -81,10 +81,16 @@ class CollaboratorReviewController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        $reviews = $createdReview;
+        $detailReview = CollaboratorDetailReview::where('id_collab', $request->id_collab)->first();
+
         if ($createdReview) {
             return response()->json([
                 'message' => 'Successfuly Create Review',
-                'data' => $createdReview
+                'data' => (object)[
+                    'reviews' => $reviews,
+                    'detailReview' => $detailReview,
+                ],
             ], 200);
         } else {
             return response()->json([
@@ -116,7 +122,7 @@ class CollaboratorReviewController extends Controller
         }
 
         // check if the editor does not have authorization
-        $this->authorize('collaborator_review_store');
+        // $this->authorize('collaborator_review_store');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner'])) {
             return response()->json([
                 'message' => 'This action is unauthorized',
