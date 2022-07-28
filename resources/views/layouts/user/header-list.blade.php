@@ -917,7 +917,7 @@
 
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_check_search"
-                                    style="margin-left: -955px; width: fit-content; padding: 0px;z-index: 999;">
+                                    style="margin-left: -955px; width: fit-content; padding: 0px;z-index: 999; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -1628,7 +1628,7 @@
                                 </div>
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_check_search"
-                                    style="margin-left: -975px; width:800px; padding:0px;">
+                                    style="margin-left: -975px; width:800px; padding:0px; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -2820,7 +2820,7 @@
 
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_wow"
-                                    style="margin-left: -975px; width:800px; padding:0px; z-index: 999;">
+                                    style="margin-left: -975px; width:800px; padding:0px; z-index: 999; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -3256,7 +3256,7 @@
 
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_wow"
-                                    style="margin-left: -975px; width:800px; padding:0px; z-index: 999;">
+                                    style="margin-left: -975px; width:800px; padding:0px; z-index: 999; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">

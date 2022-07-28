@@ -502,7 +502,7 @@
 
                             {{-- calendar --}}
                             <div class="content sidebar-popup" id="popup_wow"
-                                style="margin-left: -1185px; width:800px; padding:0px; z-index: 999;">
+                                style="margin-left: -1185px; width:800px; padding:0px; z-index: 999; min-height: 430px; max-height: 430px;">
                                 <div class="desk-e-call">
                                     <div class="flatpickr-container"
                                         style="display: flex; justify-content: center;">

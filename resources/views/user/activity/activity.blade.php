@@ -159,6 +159,12 @@
                                 {{ __('user_page.Dashboard') }}
                             </a>
                         @endif
+                        @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
+                            <a class="d-block mb-2" href="{{ route('collaborator_list') }}"
+                                style="width: fit-content; color:#585656;">
+                                {{ __('user_page.Collab Portal') }}
+                            </a>
+                        @endif
                         <a class="d-block mb-2" href="{{ route('profile_index') }}"
                             style="width: fit-content; color:#585656;">
                             {{ __('user_page.My Profile') }}

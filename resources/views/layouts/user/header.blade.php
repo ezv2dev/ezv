@@ -663,7 +663,7 @@
 
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_check_search"
-                                    style="margin-left: -1057px; width: fit-content; padding: 20px 0;">
+                                    style="margin-left: -1057px; width: fit-content; padding: 20px 0; min-height: 430px; max-height: 430px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -1878,7 +1878,7 @@
 
                                     {{-- calendar --}}
                                     <div class="content sidebar-popup" id="popup_check_search"
-                                        style="margin-left: -1064px; width: 720px; padding: 20px 0;">
+                                        style="margin-left: -1064px; width: 720px; padding: 20px 0; min-height: 430px; max-height: 430px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
@@ -2433,7 +2433,7 @@
                                 </div>
                                 {{-- calendar --}}
                                 <div class="content sidebar-popup" id="popup_wow"
-                                    style="margin-left: -1064px; width: 720px; padding: 20px 0;">
+                                    style="margin-left: -1064px; width: 720px; padding: 20px 0; min-height: 430px; max-height: 430px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
                                             style="display: flex; justify-content: center;">
@@ -2713,6 +2713,9 @@
                             </h6>
                             <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
                                 Dashboard
+                            </a>
+                            <a class="dropdown-item" href="{{ route('collaborator_list') }}">
+                                {{ __('user_page.Collab Portal') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('profile_index') }}">
                                 My Profile

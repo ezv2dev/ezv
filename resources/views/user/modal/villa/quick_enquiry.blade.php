@@ -134,7 +134,7 @@ use Illuminate\Support\Facades\Crypt;
 
 
 
-                            <div class="content calendar-modal" id="popup_check2">
+                            <div class="content calendar-modal" id="popup_check2" style="min-height: 400px; max-height: 400px;">
                                 <div class="desk-e-call">
                                     <div class="flatpickr-container" style="display: flex; justify-content: center;">
                                         <div style="display: table;">

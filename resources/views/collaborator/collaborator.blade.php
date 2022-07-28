@@ -1628,7 +1628,7 @@
                                     {{-- calendar --}}
                                     <div class="content sidebar-popup side-check-in-calendar side-check-in-calendar-collaborator"
                                         id="popup_check"
-                                        style="margin-left: -675px; width: 700px; padding:0px; z-index: 999; margin-top: -16px;">
+                                        style="margin-left: -675px; width: 700px; padding:0px; z-index: 999; margin-top: -16px; min-height: 430px; max-height: 430px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
