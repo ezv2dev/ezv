@@ -1589,14 +1589,15 @@ class HotelDetailController extends Controller
 
     public function update_position_photo(Request $request)
     {
-        abort_if(!auth()->check(), 401);
         $validator = Validator::make($request->all(), [
             'imageids' => ['required', 'array'],
             'id' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
-            abort(500);
+            return response()->json([
+                'message' => $validator->errors()->all(),
+            ], 500);
         }
 
         $imageids_arr = $request->imageids;
@@ -1608,7 +1609,9 @@ class HotelDetailController extends Controller
         // check if the editor does not have authorization
         $this->authorize('listvilla_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $hotel->created_by) {
-            abort(403);
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
         }
 
         if (count($imageids_arr) > 0) {
@@ -1625,8 +1628,15 @@ class HotelDetailController extends Controller
                 $position++;
             }
 
+            $data = [
+                'photo' => HotelPhoto::where('id_hotel', $request->id)->orderBy('order', 'asc')->get(),
+                'video' => HotelVideo::where('id_hotel', $request->id)->orderBy('order', 'asc')->get(),
+                'uid' => Hotel::where('id_hotel', $request->id)->select('uid')->first(),
+            ];
+
             return response()->json([
-                'message' => 'data has been updated'
+                'data' => $data,
+                'message' => 'Updated Position Photo'
             ], 200);
         } else {
             return response()->json([

@@ -4955,6 +4955,16 @@
                             $("#displayVideo" + video).remove();
                             $("#positionVideoGallery" + video).remove();
                             $("#displayStoryVideo" + video).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             sliderRestaurant();
                         }
                     });
