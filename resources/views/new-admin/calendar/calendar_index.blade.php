@@ -43,7 +43,7 @@
                             <label style="font-weight: 500;">Select villa :</label>
                             <select class="form-control" name="select_villa" id="select_villa"
                             onchange="changeVillaName(this.value);">
-                                <option value=""></option>
+                                <option value="" disabled selected>Choose villa...</option>
                                 @foreach ($data as $item)
                                     {{-- <option value="{{$item->id_villa}}">{{ $item->name }}</option> --}}
                                     {{-- <option data-id="{{$item->id_villa}}" data-price="{{$item->price}}">{{ $item->name }}</option> --}}
