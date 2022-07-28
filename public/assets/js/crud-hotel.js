@@ -1,5 +1,5 @@
 //Change name
-$(document).on("keyup", "textarea#name-form-input", function () {
+$(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
@@ -34,7 +34,7 @@ function editNameHotel(id_hotel) {
                 id_hotel: id_hotel,
                 name: $("#name-form-input").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 $("#name-content2").html(response.data);
                 $("#name-content-mobile").html(response.data);
                 $("#hotelTitle").html(response.data + " - EZV2");
@@ -49,7 +49,7 @@ function editNameHotel(id_hotel) {
                 btn.classList.remove("disabled");
                 editNameCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -78,7 +78,7 @@ function editNameHotel(id_hotel) {
 let shortDescBackup = $("#short-description-form-input").val();
 
 //Change short desc
-$(document).on("keyup", "textarea#short-description-form-input", function () {
+$(document).on("keyup", "textarea#short-description-form-input", function() {
     $("#short-description-form-input").css("border", "");
     $("#err-shrt-desc").hide();
 });
@@ -109,7 +109,7 @@ function editShortDesc(id_hotel) {
                 id_hotel: id_hotel,
                 short_description: $("#short-description-form-input").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 $("#short-description-content2").html(response.data);
                 $("#short-description-form-input").val(response.data);
                 shortDescBackup = response.data;
@@ -122,7 +122,7 @@ function editShortDesc(id_hotel) {
                 btn.classList.remove("disabled");
                 editShortDescriptionCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -151,7 +151,7 @@ function editShortDesc(id_hotel) {
 }
 
 //change profile pic
-$("#imageHotel").on("change", function (ev) {
+$("#imageHotel").on("change", function(ev) {
     if (document.getElementById("imageHotel").files.length != 0) {
         $(".image-box").css("border", "");
         $("#err-img").hide();
@@ -161,7 +161,7 @@ $("#imageHotel").on("change", function (ev) {
 
     readerImageHotel = new FileReader();
 });
-$("#updateImageForm").submit(function (e) {
+$("#updateImageForm").submit(function(e) {
     let error = 0;
     if (document.getElementById("imageHotel").files.length == 0) {
         $(".image-box").css("border", "solid #e04f1a 1px");
@@ -194,14 +194,14 @@ $("#updateImageForm").submit(function (e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageHotel.addEventListener("load", function () {
+                readerImageHotel.addEventListener("load", function() {
                     $("#imageProfileHotel").attr(
                         "src",
                         readerImageHotel.result
@@ -213,7 +213,7 @@ $("#updateImageForm").submit(function (e) {
                 btn.classList.remove("disabled");
                 $("#modal-edit_hotel_profile").modal("hide");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -239,10 +239,11 @@ $("#updateImageForm").submit(function (e) {
 });
 
 //Change long desc
-$(document).on("keyup", "textarea#description-form-input", function () {
+$(document).on("keyup", "textarea#description-form-input", function() {
     $("#description-form-input").css("border", "");
     $("#err-desc").hide();
 });
+
 function editDescriptionHotel(id_hotel) {
     let error = 0;
     if (!$("textarea#description-form-input").val()) {
@@ -269,7 +270,7 @@ function editDescriptionHotel(id_hotel) {
                 id_hotel: id_hotel,
                 description: $("#description-form-input").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 $("#description-content").html(response.data.substring(0, 600));
 
                 iziToast.success({
@@ -292,7 +293,7 @@ function editDescriptionHotel(id_hotel) {
                 btn.classList.remove("disabled");
                 editDescriptionCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -326,11 +327,11 @@ var storyVideoForm = $(".story-upload").children(".story-video-form");
 var storyVideoInput = $(".story-upload").children(".story-video-input");
 var storyVideoPreview = $(".story-upload").children(".story-video-preview");
 
-$("#storyVideo").on("change", function (value) {
+$("#storyVideo").on("change", function(value) {
     storyHotel = this.files[0];
 });
 
-$("#updateStoryForm").submit(function (e) {
+$("#updateStoryForm").submit(function(e) {
     e.preventDefault();
 
     if (
@@ -357,7 +358,7 @@ $("#updateStoryForm").submit(function (e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
 
                 iziToast.success({
@@ -427,7 +428,7 @@ $("#updateStoryForm").submit(function (e) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 console.log(jqXHR);
                 for (let i = 0; i < jqXHR.responseJSON.message.length; i++) {
                     iziToast.error({
@@ -457,30 +458,30 @@ $("#updateStoryForm").submit(function (e) {
     }
 });
 
-$(".check-cat").change(function () {
-    $("#check_cat").each(function () {
+$(".check-cat").change(function() {
+    $("#check_cat").each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length > 0) {
             $(".checklist-cat").css("border", "");
             $("#err-slc-cat").hide();
         }
     });
 });
+
 function editCategoryH(id_hotel) {
     let error = 0;
 
-    $("#check_cat").each(function () {
+    $("#check_cat").each(function() {
         if ($(this).find('input[type="checkbox"]:checked').length == 0) {
             $(".checklist-cat").css("border", "solid #e04f1a 1px");
             $("#err-slc-cat").show();
             error = 1;
-        } else {
-        }
+        } else {}
     });
     if (error == 1) {
         return false;
     } else {
         var hotelCategory = [];
-        $("input[name='hotelCategory[]']:checked").each(function () {
+        $("input[name='hotelCategory[]']:checked").each(function() {
             hotelCategory.push(parseInt($(this).val()));
         });
 
@@ -498,7 +499,7 @@ function editCategoryH(id_hotel) {
                 id_hotel: id_hotel,
                 hotelCategory: hotelCategory,
             },
-            success: function (response) {
+            success: function(response) {
                 $("#ModalCategoryHotel").modal("hide");
 
                 btn.innerHTML = '<i class="fa fa-check"></i> Save';
@@ -521,9 +522,7 @@ function editCategoryH(id_hotel) {
                         content =
                             content +
                             `<span class="badge rounded-pill fw-normal translate-text-group-items" style="background-color: #FF7400;">${response.data[j]["hotel_category"]["name"]} </span>`;
-                    } else if (j > 2) {
-                    } else {
-                    }
+                    } else if (j > 2) {} else {}
                 }
 
                 $("#displayCategory").html(content);
@@ -556,27 +555,27 @@ function editCategoryH(id_hotel) {
 function addComa(x) {
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-$("#name_room").keyup(function () {
+$("#name_room").keyup(function() {
     $("#name_room").removeClass("is-invalid");
     $("#err-rname").hide();
 });
-$("#room_size").keyup(function () {
+$("#room_size").keyup(function() {
     $("#room_size").removeClass("is-invalid");
     $("#err-rsize").hide();
 });
-$("#number_of_room").keyup(function () {
+$("#number_of_room").keyup(function() {
     $("#number_of_room").removeClass("is-invalid");
     $("#err-numrom").hide();
 });
-$("#capacity").keyup(function () {
+$("#capacity").keyup(function() {
     $("#capacity").removeClass("is-invalid");
     $("#err-cap").hide();
 });
-$("#frm-price").keyup(function () {
+$("#frm-price").keyup(function() {
     $("#frm-price").removeClass("is-invalid");
     $("#err-prc").hide();
 });
-$("#add-room-hotel").submit(function (e) {
+$("#add-room-hotel").submit(function(e) {
     let error = 0;
     if (!$("#name_room").val()) {
         $("#name_room").addClass("is-invalid");
@@ -627,7 +626,7 @@ $("#add-room-hotel").submit(function (e) {
                 status: $("#status").val(),
                 price: $("#frm-price").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -656,9 +655,9 @@ $("#add-room-hotel").submit(function (e) {
                     rooms += '<i class="fas fa-user" aria-hidden="true"></i>';
                 }
                 rooms +=
-                    $("#id_bed").val() == 1
-                        ? '<p style="margin-bottom: 10px; font-size: 13px;">Single</p><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px" viewBox="0 0 40 28" style="fill: #222222;"><g id="Group_2" data-name="Group 2" transform="translate(-66 524)"><path id="bed_FILL1_wght400_GRAD0_opsz48" d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z" transform="translate(62 -534)"></path></g></svg></div>'
-                        : '<p style="margin-bottom: 10px; font-size: 13px;"> Twin </p><svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 82 28.001" style="fill: #222222;"> <g id="Group_4" data-name="Group 4" transform="translate(-61 525)"> <path id="Subtraction_1" data-name="Subtraction 1" d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z" transform="translate(61 -525)"></path> <path id="Subtraction_2" data-name="Subtraction 2" d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z" transform="translate(103 -525)"></path> </g> </svg></div>';
+                    $("#id_bed").val() == 1 ?
+                    '<p style="margin-bottom: 10px; font-size: 13px;">Single</p><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="30px" viewBox="0 0 40 28" style="fill: #222222;"><g id="Group_2" data-name="Group 2" transform="translate(-66 524)"><path id="bed_FILL1_wght400_GRAD0_opsz48" d="M4,38V25.25a5.612,5.612,0,0,1,.5-2.35A4.368,4.368,0,0,1,6,21.1V15.3A5.209,5.209,0,0,1,11.3,10h9a4.336,4.336,0,0,1,2.05.5A5.348,5.348,0,0,1,24,11.85a5.454,5.454,0,0,1,1.625-1.35A4.19,4.19,0,0,1,27.65,10h9a5.211,5.211,0,0,1,3.8,1.525A5.085,5.085,0,0,1,42,15.3v5.8a4.368,4.368,0,0,1,1.5,1.8,5.612,5.612,0,0,1,.5,2.35V38H41V34H7v4ZM25.5,20.25H39V15.3a2.192,2.192,0,0,0-.675-1.65A2.32,2.32,0,0,0,36.65,13H27.5a1.775,1.775,0,0,0-1.425.7,2.45,2.45,0,0,0-.575,1.6ZM9,20.25H22.5V15.3a2.45,2.45,0,0,0-.575-1.6A1.775,1.775,0,0,0,20.5,13H11.3A2.3,2.3,0,0,0,9,15.3Z" transform="translate(62 -534)"></path></g></svg></div>' :
+                    '<p style="margin-bottom: 10px; font-size: 13px;"> Twin </p><svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 82 28.001" style="fill: #222222;"> <g id="Group_4" data-name="Group 4" transform="translate(-61 525)"> <path id="Subtraction_1" data-name="Subtraction 1" d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z" transform="translate(61 -525)"></path> <path id="Subtraction_2" data-name="Subtraction 2" d="M3,28H0V15.25A5.631,5.631,0,0,1,.5,12.9,4.389,4.389,0,0,1,2,11.1V5.3A5.21,5.21,0,0,1,7.3,0H32.65a5.234,5.234,0,0,1,3.8,1.525A5.109,5.109,0,0,1,38,5.3v5.8a4.391,4.391,0,0,1,1.5,1.8,5.644,5.644,0,0,1,.5,2.35V28H37V24H3v4ZM7,3A2,2,0,0,0,5,5v6H35V5a2,2,0,0,0-2-2H7Z" transform="translate(103 -525)"></path> </g> </svg></div>';
                 rooms +=
                     '<div class="col-6 col-md-2 text-center tab-body price-room" style="cursor: pointer;" onclick="window.open(\'' +
                     response.data +
@@ -668,7 +667,7 @@ $("#add-room-hotel").submit(function (e) {
                 $(".room-content").last().append(rooms);
                 $("#modal-add_room").modal("hide");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -702,22 +701,22 @@ function editAmenitiesHotel(id_hotel) {
     let safety = [];
     let service = [];
 
-    $("input[name='amenities[]']:checked").each(function () {
+    $("input[name='amenities[]']:checked").each(function() {
         amenities.push(parseInt($(this).val()));
     });
-    $("input[name='bathroom[]']:checked").each(function () {
+    $("input[name='bathroom[]']:checked").each(function() {
         bathroom.push(parseInt($(this).val()));
     });
-    $("input[name='bedroom[]']:checked").each(function () {
+    $("input[name='bedroom[]']:checked").each(function() {
         bedroom.push(parseInt($(this).val()));
     });
-    $("input[name='kitchen[]']:checked").each(function () {
+    $("input[name='kitchen[]']:checked").each(function() {
         kitchen.push(parseInt($(this).val()));
     });
-    $("input[name='safety[]']:checked").each(function () {
+    $("input[name='safety[]']:checked").each(function() {
         safety.push(parseInt($(this).val()));
     });
-    $("input[name='service[]']:checked").each(function () {
+    $("input[name='service[]']:checked").each(function() {
         service.push(parseInt($(this).val()));
     });
 
@@ -736,7 +735,7 @@ function editAmenitiesHotel(id_hotel) {
             safety: safety,
             service: service,
         },
-        success: function (response) {
+        success: function(response) {
             var lengthAmenities = response.getAmenities.length;
             var lengthBathroom = response.getBathroom.length;
             var lengthBedroom = response.getBedroom.length;
@@ -992,9 +991,9 @@ function saveLocation() {
         id_hotel: parseInt(form.find(`input[name='id_hotel']`).val()),
         id_location: parseInt(
             form
-                .find(`select[name=id_location] option`)
-                .filter(":selected")
-                .val()
+            .find(`select[name=id_location] option`)
+            .filter(":selected")
+            .val()
         ),
         longitude: form.find(`input[name='longitude']`).val(),
         latitude: form.find(`input[name='latitude']`).val(),
@@ -1015,7 +1014,7 @@ function saveLocation() {
         url: "/hotel/update/location",
         data: formData,
         // response data
-        success: function (response) {
+        success: function(response) {
             let latitudeOld = parseFloat(response.data.latitude);
             let longitudeOld = parseFloat(response.data.longitude);
             // variabel global edit marker
@@ -1037,7 +1036,7 @@ function saveLocation() {
             $("#modal-edit_location").modal("hide");
         },
         // response error
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             // alert error
@@ -1064,3 +1063,189 @@ function saveLocation() {
         },
     });
 }
+
+//save house rules
+$("#hotelRuleForm").submit(function(e) {
+    e.preventDefault();
+
+    let btn = document.getElementById("btnSaveHotelRules");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/hotelrules/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log(response);
+            console.log('klengci');
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+
+            if (response.data.children == "yes") {
+                content += '<i class="fas fa-child"></i> Childrens are allowed';
+                content += "<br>";
+            }
+            if (response.data.children == "no") {
+                content += '<i class="fas fa-ban"></i> No children';
+                content += "<br>";
+            }
+
+            if (response.data.infants == "yes") {
+                content += '<i class="fas fa-child"></i> Infants are allowed';
+                content += "<br>";
+            }
+            if (response.data.infants == "no") {
+                content += '<i class="fas fa-ban"></i> No infants';
+                content += "<br>";
+            }
+
+            if (response.data.pets == "yes") {
+                content += '<i class="fas fa-paw"></i> Pets are allowed';
+                content += "<br>";
+            }
+            if (response.data.pets == "no") {
+                content += '<i class="fas fa-ban"></i> No pets';
+                content += "<br>";
+            }
+
+            if (response.data.smoking == "yes") {
+                content += '<i class="fas fa-smoking"></i> Smoking is allowed';
+                content += "<br>";
+            }
+            if (response.data.smoking == "no") {
+                content += '<i class="fas fa-ban"></i> No smoking';
+                content += "<br>";
+            }
+
+            if (response.data.events == "yes") {
+                content += '<i class="fas fa-calendar"></i> Events are allowed';
+                content += "<br>";
+            }
+            if (response.data.events == "no") {
+                content += '<i class="fas fa-ban"></i> No events';
+                content += "<br>";
+            }
+
+            $("#hotelRuleContent").html(content);
+
+            $("#modal-edit-hotel-rules").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function(jqXHR, exception) {
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});
+
+$("#guestSafetyFormHotel").submit(function(e) {
+    e.preventDefault();
+    console.log('leakkkk');
+
+    let btn = document.getElementById("btnSaveGuestSafety");
+    btn.textContent = "Saving...";
+    btn.classList.add("disabled");
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            Accept: "application/json",
+        },
+        url: "/hotelguestsafety/post",
+        dataType: "json",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            let content = "";
+            let contentModal = "";
+
+            for (let i = 0; i < 4; i++) {
+                content +=
+                    '<i class="fas fa-' +
+                    response.data[i].icon +
+                    '"></i> <span class="translate-text-single">' +
+                    response.data[i].guest_safety +
+                    "</span><br>";
+            }
+
+            $("#btnShowMoreGuestSafety").html("");
+
+            content +=
+                '<p style="margin-bottom: 0px !important"> <a href="javascript:void(0)" onclick="showMoreGuestSafety()">Show more <i class="fas fa-chevron-right"></i> </a> </p>';
+
+            $("#guestSafetyContent").html(content);
+
+            for (let j = 0; j < response.data.length; j++) {
+                contentModal +=
+                    '<p> <i class="fas fa-' +
+                    response.data[j].icon +
+                    '"></i> <span class="translate-text-group-items">' +
+                    response.data[j].guest_safety +
+                    '</span> </p> <p style="font-size: 12px; margin-top: -20px;"> <span class="translate-text-group-items">' +
+                    response.data[j].description +
+                    "</span> </p>";
+            }
+
+            $("#guestSafetyContentModal").html(contentModal);
+
+            $("#modal-edit-guest-safety").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+        error: function(jqXHR, exception) {
+            console.log(jqXHR);
+
+            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.errors[i],
+                    position: "topRight",
+                });
+            }
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
+        },
+    });
+});

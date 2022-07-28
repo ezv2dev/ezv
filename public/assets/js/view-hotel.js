@@ -16,7 +16,7 @@ $.ajax({
     //create an ajax request to display.php
     type: "GET",
     url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
+    success: function(data) {
         $("#inline").flatpickr({
             enableTime: false,
             dateFormat: "Y-m-d",
@@ -25,7 +25,7 @@ $.ajax({
             mode: "range",
             showMonths: 2,
             disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
+            onClose: function(selectedDates, dateStr, instance) {
                 var start = new Date(
                     instance.formatDate(selectedDates[0], "Y-m-d")
                 );
@@ -44,7 +44,7 @@ $.ajax({
                         end: end.toISOString().split("T")[0],
                         _token: "{{ csrf_token() }}",
                     },
-                    success: function (data) {
+                    success: function(data) {
                         var total = data;
                         if (sum_night < min_stay) {
                             alert("minimum stay is " + min_stay + " days");
@@ -58,19 +58,19 @@ $.ajax({
                             $("#sum_night").val(sum_night);
                             $("#total").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                             $("#total_all").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                         }
                     },
@@ -84,7 +84,7 @@ $.ajax({
     //create an ajax request to display.php
     type: "GET",
     url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
+    success: function(data) {
         $("#inline2").flatpickr({
             enableTime: false,
             dateFormat: "Y-m-d",
@@ -93,7 +93,7 @@ $.ajax({
             mode: "range",
             showMonths: 1,
             disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
+            onClose: function(selectedDates, dateStr, instance) {
                 var start = new Date(
                     instance.formatDate(selectedDates[0], "Y-m-d")
                 );
@@ -112,7 +112,7 @@ $.ajax({
                         end: end.toISOString().split("T")[0],
                         _token: "{{ csrf_token() }}",
                     },
-                    success: function (data) {
+                    success: function(data) {
                         var total = data;
                         if (sum_night < min_stay) {
                             alert("minimum stay is " + min_stay + " days");
@@ -126,19 +126,19 @@ $.ajax({
                             $("#sum_night").val(sum_night);
                             $("#total").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                             $("#total_all").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                         }
                     },
@@ -152,7 +152,7 @@ $.ajax({
     //create an ajax request to display.php
     type: "GET",
     url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
+    success: function(data) {
         $("#inline_reserve").flatpickr({
             enableTime: false,
             dateFormat: "Y-m-d",
@@ -161,7 +161,7 @@ $.ajax({
             mode: "range",
             showMonths: 2,
             disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
+            onClose: function(selectedDates, dateStr, instance) {
                 var start = new Date(
                     instance.formatDate(selectedDates[0], "Y-m-d")
                 );
@@ -180,7 +180,7 @@ $.ajax({
                         end: end.toISOString().split("T")[0],
                         _token: "{{ csrf_token() }}",
                     },
-                    success: function (data) {
+                    success: function(data) {
                         var total = data;
                         if (sum_night < min_stay) {
                             alert("minimum stay is " + min_stay + " days");
@@ -194,19 +194,19 @@ $.ajax({
                             $("#sum_night").val(sum_night);
                             $("#total").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                             $("#total_all").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                         }
                     },
@@ -220,7 +220,7 @@ $.ajax({
     //create an ajax request to display.php
     type: "GET",
     url: "/villa/date_disabled/" + $("#id_villa").val(),
-    success: function (data) {
+    success: function(data) {
         $("#inline_reserve_search").flatpickr({
             enableTime: false,
             dateFormat: "Y-m-d",
@@ -229,7 +229,7 @@ $.ajax({
             mode: "range",
             showMonths: 2,
             disable: data,
-            onClose: function (selectedDates, dateStr, instance) {
+            onClose: function(selectedDates, dateStr, instance) {
                 var start = new Date(
                     instance.formatDate(selectedDates[0], "Y-m-d")
                 );
@@ -248,7 +248,7 @@ $.ajax({
                         end: end.toISOString().split("T")[0],
                         _token: "{{ csrf_token() }}",
                     },
-                    success: function (data) {
+                    success: function(data) {
                         var total = data;
                         if (sum_night < min_stay) {
                             alert("minimum stay is " + min_stay + " days");
@@ -262,19 +262,19 @@ $.ajax({
                             $("#sum_night").val(sum_night);
                             $("#total").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                             $("#total_all").text(
                                 total
-                                    .toString()
-                                    .replace(
-                                        /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                                        "."
-                                    )
+                                .toString()
+                                .replace(
+                                    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                                    "."
+                                )
                             );
                         }
                     },
@@ -321,7 +321,7 @@ function view_story(id) {
         type: "GET",
         url: "/hotel/story/" + id,
         dataType: "JSON",
-        success: function (data) {
+        success: function(data) {
             console.log(data);
             $('[name="id_story"]').val(data.id_story);
             let hotel = document.getElementById("hotel").value;
@@ -339,18 +339,18 @@ function view_story(id) {
     });
 }
 
-$(function () {
+$(function() {
     $("#storymodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function () {
+        .on("hidden.bs.modal", function() {
             $(this).find("video")[0].pause();
         });
 });
 
 // Sticky Menu
-window.onscroll = function () {
+window.onscroll = function() {
     myFunction();
 };
 
@@ -467,14 +467,6 @@ function edit_photo() {
     $("#modal-edit_photo").modal("show");
 }
 
-function editHouseRules() {
-    $("#modal-edit-house-rules").modal("show");
-}
-
-function editGuestSafety() {
-    $("#modal-edit-guest-safety").modal("show");
-}
-
 function amenities() {
     $("#modal-amenities").modal("show");
 }
@@ -484,7 +476,7 @@ function view_video(id) {
         type: "GET",
         url: "/hotel/video/open/" + id,
         dataType: "JSON",
-        success: function (data) {
+        success: function(data) {
             var video = document.getElementById("video1");
             var public = "/foto/hotel/";
             var slash = "/";
@@ -499,12 +491,12 @@ function view_video(id) {
         },
     });
 }
-$(function () {
+$(function() {
     $("#videomodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function () {
+        .on("hidden.bs.modal", function() {
             $(this).find("video")[0].pause();
         });
 });
@@ -514,7 +506,7 @@ function showingLoading() {
     $("#loading-content").show();
 }
 
-$("#clear_date_header").click(function () {
+$("#clear_date_header").click(function() {
     $("#check_in4").val("");
     $("#check_out4").val("");
     calendar_header();
@@ -541,7 +533,7 @@ function calendar_header() {
         showMonths: 2,
         // disable: data,
         defaultDate: [check_in_val, check_out_val],
-        onChange: function (selectedDates, dateStr, instance) {
+        onChange: function(selectedDates, dateStr, instance) {
             $("#check_in4").val(instance.formatDate(selectedDates[0], "Y-m-d"));
             $("#check_out4").val(
                 instance.formatDate(selectedDates[1], "Y-m-d")

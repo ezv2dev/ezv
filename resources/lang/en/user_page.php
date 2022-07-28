@@ -70,6 +70,7 @@ return [
     'Delete Photo' => 'Delete Photo',
     'Things to know' => 'Things to know',
     'House Rules' => 'House Rules',
+    'Hotel Rules' => 'Hotel Rules',
     'No data found' => 'No data found',
     'Childrens are allowed' => 'Childrens are allowed',
     'Infants are allowed' => 'Infants are allowed',
