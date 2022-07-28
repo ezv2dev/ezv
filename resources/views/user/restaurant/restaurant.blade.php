@@ -3140,6 +3140,13 @@
 
 {{-- MODAL SCRIPT --}}
 <script>
+    $(document) .ready(function(){
+        $('.modal').on('shown.bs.modal', function () {
+            $('html').css('overflow','hidden');
+            }).on('hidden.bs.modal', function() {
+            $('html').css('overflow','auto');
+        });
+    });
     function edit_contact() {
         $('#modal-edit_contact').modal('show');
     }
