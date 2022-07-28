@@ -492,6 +492,10 @@ color: #FEFBE7;
     cursor: default;
 }
 
+.owner-block {
+    padding-right: 10px;
+}
+
 /* video.photosGrid__Photo {
     margin-bottom: -140px;
     margin-right: 12px;

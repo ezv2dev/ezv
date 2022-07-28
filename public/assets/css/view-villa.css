@@ -4344,6 +4344,10 @@ span.flatpickr-weekday {
     .owner-profile span {
         font-size: 12px !important;
     }
+
+    .desk-e-call {
+        width: 105%;
+    }
 }
 
 .owner-block {
