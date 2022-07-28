@@ -2400,10 +2400,10 @@
                                         <p class="p-wow">{{ __('user_page.Date') }}</p>
 
                                         @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') || (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
-                                            <p id="add_date_wow" class="add-date-wow">
+                                            <p id="add_date_wow" class="add-date-wow" style="display: none;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @else
-                                            <p id="add_date_wow" class="add-date-wow">
+                                            <p id="add_date_wow" class="add-date-wow" style="display: block;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
 

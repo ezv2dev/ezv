@@ -3136,6 +3136,12 @@ input::-webkit-inner-spin-button {
     -webkit-line-clamp: 2;
 }
 
+.bar-activity .guests,
+.bar-collaborator .guests {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
 .container-grid-hotel .grid-list-container {
     border: solid 1px #bbb;
     padding: 8px;
