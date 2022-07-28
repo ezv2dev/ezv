@@ -12,14 +12,12 @@
         }
         .government-card {
             width: 100% !important;
-            margin-left: 2rem !important;
-            margin-right: 2rem !important;
             margin-top: 1rem !important;
         }
     }
     @media only screen and (min-width: 768px) and (max-width: 1199px) {
         .government-card {
-            position: absolute;
+            position: absolute !important;
             width: 18rem !important;
             right: 20px !important;
             bottom: 0px !important;
@@ -27,7 +25,7 @@
     }
     @media only screen and (min-width: 1200px) {
         .government-card {
-            position: absolute;
+            position: absolute !important;
             width: 23rem !important;
             right: 20px !important;
             bottom: 0px !important;
@@ -190,19 +188,21 @@
                                 onclick="showLegalName()">Cancel</a>
                                 <p class="text-muted">This is the name on your travel document, which could be a license or a passport.</p>
                             </div>
-                            <form action="{{ route('personal_update_name') }}" method="post">
+                            <form action="{{ route('personal_update_name') }}" method="post" id="profile-name">
                                 @csrf
                                 <div class="row g-2">
                                     <div class="col-md">
                                         <div class="mb-4">
                                             <label class="form-label" for="example-text-input">First name</label>
-                                            <input type="text" class="form-control" name="first_name" value="{{ Auth::user()->first_name }}">
+                                            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ Auth::user()->first_name }}">
+                                            <small id="err-fname" style="display: none;" class="invalid-feedback">The first name field is required</small>
                                         </div>
                                     </div>
                                     <div class="col-md">
                                         <div class="mb-4">
                                             <label class="form-label" for="example-text-input">Last name</label>
-                                            <input type="text" class="form-control" name="last_name" value="{{ Auth::user()->last_name }}">
+                                            <input type="text" class="form-control" name="last_name" id="last_name" value="{{ Auth::user()->last_name }}">
+                                            <small id="err-lname" style="display: none;" class="invalid-feedback">The last name field is required</small>
                                         </div>
                                     </div>
                                 </div>
@@ -227,8 +227,7 @@
                                 @csrf
                                 <div class="mb-4">
                                     <select style="width: 100%; padding:10px;" class="form-select" name="gender">
-                                        <option selected>Gender</option>
-                                        <option value="0"></option>
+                                        <option value="0" selected>Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
@@ -272,10 +271,11 @@
                                 onclick="showEmail()">Cancel</a>
                                 <p class="text-muted">Use an address you’ll always have access to.</p>
                             </div>
-                            <form action="{{ route('personal_update_email') }}" method="post">
+                            <form action="{{ route('personal_update_email') }}" method="post" id="profile-email">
                                 @csrf
                                 <div class="mb-4">
-                                    <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
+                                    <input type="email" class="form-control" name="email" id="user_email" value="{{ Auth::user()->email }}">
+                                    <small id="err-email" style="display: none;" class="invalid-feedback">The email field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -294,11 +294,12 @@
                                 onclick="showPhoneNumber()">Cancel</a>
                                 <p class="text-muted">Add a number so confirmed guests and EZV can get in touch. You can add other numbers and choose how they’re used.</p>
                             </div>
-                            <form action="{{ route('personal_update_phone') }}" method="post">
+                            <form action="{{ route('personal_update_phone') }}" method="post" id="profile-phone">
                                 @csrf
                                 <div class="mb-4">
                                     <label for="">Enter a phone number</label>
-                                    <input type="text" class="form-control" name="phone" value="{{ Auth::user()->phone }}">
+                                    <input type="text" class="form-control" name="phone" id="profile_phone" value="{{ Auth::user()->phone }}">
+                                    <small id="err-phone" style="display: none;" class="invalid-feedback">The phone number field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -317,10 +318,11 @@
                                 onclick="showAddress()">Cancel</a>
                                 {{-- <p class="text-muted">Add a number so confirmed guests and EZV can get in touch. You can add other numbers and choose how they’re used.</p> --}}
                             </div>
-                            <form action="{{ route('personal_update_address') }}" method="post">
+                            <form action="{{ route('personal_update_address') }}" method="post" id="profile-address">
                                 @csrf
                                 <div class="mb-4">
-                                    <input type="text" class="form-control" name="address" value="{{ Auth::user()->address }}">
+                                    <input type="text" class="form-control" name="address" id="profile_address" value="{{ Auth::user()->address }}">
+                                    <small id="err-address" style="display: none;" class="invalid-feedback">The address field is required</small>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -330,15 +332,17 @@
                 <!-- Form Address -->
 
                 @if (Auth::user()->role->name == "superadmin" || Auth::user()->role->name == "admin")
-                    <div class="card p-4 government-card" style="box-shadow: 0px 3px 15px -8px rgb(100,100,100);">
-                        <div class="card-body">
-                            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="display:block;height:48px;width:48px;fill:#E31C5F;stroke:currentColor" aria-hidden="true" role="presentation" focusable="false"><g stroke="none"><path d="m39 15.999v28.001h-30v-28.001z" fill-opacity=".2"></path><path d="m24 0c5.4292399 0 9.8479317 4.32667079 9.9961582 9.72009516l.0038418.27990484v2h7c1.0543618 0 1.9181651.8158778 1.9945143 1.8507377l.0054857.1492623v32c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-34c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623v-32c0-1.0543618.81587779-1.9181651 1.85073766-1.9945143l.14926234-.0054857h7v-2c0-5.5228475 4.4771525-10 10-10zm17 14h-34v32h34zm-17 14c1.6568542 0 3 1.3431458 3 3s-1.3431458 3-3 3-3-1.3431458-3-3 1.3431458-3 3-3zm0 2c-.5522847 0-1 .4477153-1 1s.4477153 1 1 1 1-.4477153 1-1-.4477153-1-1-1zm0-28c-4.3349143 0-7.8645429 3.44783777-7.9961932 7.75082067l-.0038068.24917933v2h16v-2c0-4.418278-3.581722-8-8-8z"></path></g></svg>
+                    <div class="col-12" style="padding-left: 2rem; padding-right: 2rem;">
+                        <div class="card p-4 government-card" style="box-shadow: 0px 3px 15px -8px rgb(100,100,100);">
+                            <div class="card-body">
+                                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="display:block;height:48px;width:48px;fill:#E31C5F;stroke:currentColor" aria-hidden="true" role="presentation" focusable="false"><g stroke="none"><path d="m39 15.999v28.001h-30v-28.001z" fill-opacity=".2"></path><path d="m24 0c5.4292399 0 9.8479317 4.32667079 9.9961582 9.72009516l.0038418.27990484v2h7c1.0543618 0 1.9181651.8158778 1.9945143 1.8507377l.0054857.1492623v32c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-34c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623v-32c0-1.0543618.81587779-1.9181651 1.85073766-1.9945143l.14926234-.0054857h7v-2c0-5.5228475 4.4771525-10 10-10zm17 14h-34v32h34zm-17 14c1.6568542 0 3 1.3431458 3 3s-1.3431458 3-3 3-3-1.3431458-3-3 1.3431458-3 3-3zm0 2c-.5522847 0-1 .4477153-1 1s.4477153 1 1 1 1-.4477153 1-1-.4477153-1-1-1zm0-28c-4.3349143 0-7.8645429 3.44783777-7.9961932 7.75082067l-.0038068.24917933v2h16v-2c0-4.418278-3.581722-8-8-8z"></path></g></svg>
 
-                            <h5 class="card-title mt-4"><b>Approved Government ID</b></h5>
-                            <p class="card-text">
-                                All List Data Need Approval By SuperAdmin / Admin
-                                <a href="{{ route('government_approval_index') }}" class="btn btn-outline-success d-block" style="margin-top: 10px;">Government Data</a>
-                            </p>
+                                <h5 class="card-title mt-4"><b>Approved Government ID</b></h5>
+                                <p class="card-text">
+                                    All List Data Need Approval By SuperAdmin / Admin
+                                    <a href="{{ route('government_approval_index') }}" class="btn btn-outline-success d-block" style="margin-top: 10px;">Government Data</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @endIf
@@ -438,6 +442,82 @@
         document.getElementById("content").style.display = "block";
     }
 
+</script>
+<script>
+    // validasi
+    $(function() {
+        $('#first_name').keyup(function (e) {
+            $('#first_name').removeClass('is-invalid');
+            $('#err-fname').hide();
+        });
+        $('#last_name').keyup(function (e) {
+            $('#last_name').removeClass('is-invalid');
+            $('#err-lname').hide();
+        });
+        $('#user_email').keyup(function (e) {
+            $('#user_email').removeClass('is-invalid');
+            $('#err-email').hide();
+        });
+        $('#profile_phone').keyup(function (e) {
+            $('#profile_phone').removeClass('is-invalid');
+            $('#err-phone').hide();
+        });
+        $('#profile_address').keyup(function (e) {
+            $('#profile_address').removeClass('is-invalid');
+            $('#err-address').hide();
+        });
+        $('#profile-name').submit(function (e) {
+            if(!$('#first_name').val()) {
+                $('#first_name').addClass('is-invalid');
+                $('#err-fname').show();
+                e.preventDefault();
+            } else {
+                $('#first_name').removeClass('is-invalid');
+                $('#err-fname').hide();
+            }
+            if(!$('#last_name').val()) {
+                $('#last_name').addClass('is-invalid');
+                $('#err-lname').show();
+                e.preventDefault();
+            } else {
+                $('#last_name').removeClass('is-invalid');
+                $('#err-lname').hide();
+            }
+        });
+        $('#profile-email').submit(function (e) {
+            if(!$('#user_email').val()) {
+                $('#err-email').show();
+                $('#user_email').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#user_email').removeClass('is-invalid');
+                $('#err-email').hide();
+            }
+
+
+        });
+        $('#profile-phone').submit(function (e) {
+            if(!$('#profile_phone').val()) {
+                $('#err-phone').show();
+                $('#profile_phone').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#profile_phone').removeClass('is-invalid');
+                $('#err-phone').hide();
+            }
+
+        });
+        $('#profile-address').submit(function (e) {
+            if(!$('#profile_address').val()) {
+                $('#err-address').show();
+                $('#profile_address').addClass('is-invalid');
+                e.preventDefault();
+            } else {
+                $('#profile_address').removeClass('is-invalid');
+                $('#err-address').hide();
+            }
+        });
+    })
 </script>
 
 @endsection

@@ -1344,7 +1344,7 @@
         {{-- END LEFT CONTENT --}}
         {{-- RIGHT CONTENT --}}
         <div class="col-lg-3 col-md-3 col-12">
-            <div class="sidebar sidebar-activity sidebar-activity-idle" id="sidebar_fix">
+            <div class="sidebar sidebar-activity" id="sidebar_fix">
                 <div class="reserve-block sidebar-mf">
                     <style>
                         .gradient-try {
@@ -2787,12 +2787,8 @@
                                         @endif
                                     @endauth
                                 </div>
-                                @if (isset($activity->ownerData->created_at))
-                                    <p>
-                                        {{ __('user_page.Joined in') }}
-                                        {{ date_format($activity->ownerData->created_at, 'M Y') }}
-                                    </p>
-                                @endif
+                                <p>{{ __('user_page.Joined in') }}
+                                    {{ date_format($activity->ownerData->created_at, 'M Y') }}</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 owner-profile">
@@ -4187,7 +4183,7 @@
         form.classList.remove("d-block");
         content.classList.remove("d-none");
         contentMobile.classList.remove("d-none");
-        formInput.value = '{{ $activity->name }}';
+        // formInput.value = '{{ $activity->name }}';
 
         if (formInput.value == 'Wow Name Here') {
             formInput.value = '';

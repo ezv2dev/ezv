@@ -1372,6 +1372,8 @@ Route::post('/collaborator/update/photo', [Collaborator\CollaboratorController::
 Route::get('/collaborator/video/open/{id}', [Collaborator\CollaboratorController::class, 'video_open'])->name('video_open');
 Route::post('/collaborator/update/photo/position', [Collaborator\CollaboratorController::class, 'update_position_photo'])->name('collab_photo_edit_position');
 Route::post('/collaborator/update/video/position', [Collaborator\CollaboratorController::class, 'update_position_video'])->name('collab_video_edit_position');
+Route::post('/collaborator/review/store', [Collaborator\CollaboratorReviewController::class, 'store'])->name('collab_store_review');
+Route::post('/collaborator/review/delete', [Collaborator\CollaboratorReviewController::class, 'destroy'])->name('collab_delete_review');
 
 Route::patch('/collab/{id}/update/request-update-status', [Collaborator\CollaboratorController::class, 'request_update_status'])->name('collab_request_update_status');
 Route::patch('/collab/{id}/update/cancel-request-update-status', [Collaborator\CollaboratorController::class, 'cancel_request_update_status'])->name('collab_cancel_request_update_status');

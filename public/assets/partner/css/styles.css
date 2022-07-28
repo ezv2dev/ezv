@@ -1303,7 +1303,11 @@ pre code {
         flex: 0 0 16.6666666667%;
         max-width: 16.6666666667%;
     }
-
+    .col-resv {
+        flex: 0 0 100% !important;
+        position: absolute;
+        max-width: none !important;
+    }
     .col-md-3 {
         flex: 0 0 25%;
         max-width: 25%;
@@ -2974,7 +2978,7 @@ pre code {
 .datatable {
     display: block;
     width: 100%;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     -webkit-overflow-scrolling: touch;
 }
 .table-responsive > .table-bordered,
@@ -21953,10 +21957,25 @@ pre[class*="language-"] {
     .col-calendar2 {
         padding-top: 2rem;
     }
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        justify-content: center !important;
+    }
 }
 @media screen and (min-width: 375px) and (max-width: 767px) {
     .col-calendar1 {
         padding-left: 3rem;
         padding-right: 3rem;
     }
+}
+@media screen and (min-width: 320px) and (max-width: 850px) {
+    .content-full .d-flex .flex-grow-1 {
+        padding-left: 1.5rem;
+    }
+}
+
+#dataTable_wrapper .row {
+    position: relative;
+}
+#dataTable_wrapper .row .col-sm-12 {
+    overflow-x: auto;
 }

@@ -86,7 +86,7 @@
                         <div class="content list-image-content">
                             <div class="wrap-modal-slider">
                                 <div class="js-slider js-slider-test list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
-                                    data-dots="false" data-arrows="true" id="slider-photo-room">
+                                    data-dots="false" data-arrows="true">
                                 </div>
                             </div>
                         </div>
@@ -145,15 +145,13 @@
 
                 //data slider photo
                 if (data["photo"].length > 0) {
-                    let content = ``;
+                    let content = "";
 
-                    for ($i = 0; $i < data["photo"].length; $i++) {
-                        $('#slider-photo-room').append(`
-                            <a class="grid-image-container">
-                                <img class="brd-radius img-fluid grid-image" style="height: 200px; display: block;" src="{{ env('APP_URL') }}/foto/hotel/12/${data["photo"][$i].name}" alt="">
-                            </a>
-                        `);
+                    for (let i = 0; i < data["photo"].length; i++) {
+                        content += `<a class="grid-image-container"> <img class="brd-radius img-fluid grid-image" style="height: 200px; display: block;" src="/foto/hotel/12/${data['photo'][i].name}" alt=""> </a>`;
                     }
+
+                    $('.js-slider-test').append(content);
                 }
 
                 //bathroom
@@ -200,8 +198,10 @@
                         `);
                     }
                 }
+
                 $('.js-slider-test').slick();
                 $('#modal-room').modal('show');
+                // $('.js-slider-test').slick();
             },
             error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
@@ -226,7 +226,6 @@
         })
 
         $('#modal-room').on('shown.bs.modal', function(e) {
-            $('.js-slider-test').slick('setPosition');
             $('.wrap-modal-slider').addClass('open');
         });
     }

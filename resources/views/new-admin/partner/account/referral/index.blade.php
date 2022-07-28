@@ -13,6 +13,11 @@
         background-color: #e7f1ff;
         box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
     }
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-20p {
+            margin-left: 20px !important;
+        }
+    }
 </style>
 
 
@@ -20,7 +25,7 @@
     <div class="container text-dark">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between">
-                <div class="col-12 mt-4" style="margin-left: 30px;">
+                <div class="col-12 mt-4 ml-max-md-20p" style="margin-left: 30px;">
                     <h1 style="font-weight:bold; color: #383838; font-size:25pt; margin-top: -20px;">
                         Guest referral
                     </h1>

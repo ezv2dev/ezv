@@ -474,6 +474,7 @@ function initialize(latitude, longitude) {
     let map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
         center: myLatLng,
+        fullscreenControl: false,
         scrollwheel: false,
         draggable: false,
         // gestureHandling: "greedy",

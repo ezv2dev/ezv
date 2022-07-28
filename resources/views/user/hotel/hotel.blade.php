@@ -1475,87 +1475,84 @@
                                 </div>
                             </div>
                             {{-- <div class="col-12"
-                                style="display: flex; flex-direction: column; border: 2px solid #ff7400; border-radius:15px; padding: 9px; box-sizing: border-box; box-shadow: 1px 1px 10px #a4a4a4">
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6" style="border-right: 2px solid #ff7400;">
-                                        <p style="font-size: 12px; margin:0px;">Total Nights</p>
-                                    </div>
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <input id="sum_night" value="0"
-                                            style="font-size: 12px; text-align:left; width: 20px; border:0">
-                                    </div>
-                                </div>
-
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6" style="border-right: 2px solid #ff7400;">
-                                        <p style="font-size: 12px; margin:0px;">Sub Total</p>
+                                    style="display: flex; flex-direction: column; border: 2px solid #ff7400; border-radius:15px; padding: 9px; box-sizing: border-box; box-shadow: 1px 1px 10px #a4a4a4">
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6" style="border-right: 2px solid #ff7400;">
+                                            <p style="font-size: 12px; margin:0px;">Total Nights</p>
+                                        </div>
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <input id="sum_night" value="0"
+                                                style="font-size: 12px; text-align:left; width: 20px; border:0">
+                                        </div>
                                     </div>
 
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <p id="total" style="font-size:12px; margin:0px;">0</p>
-                                    </div>
-                                </div>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6" style="border-right: 2px solid #ff7400;">
+                                            <p style="font-size: 12px; margin:0px;">Sub Total</p>
+                                        </div>
 
-                                <div class="col-12" style="display: flex;">
-                                    <div class="col-6">
-                                        <p style="font-size: 12px; margin:0px; border-right: 2px solid #ff7400;">Tax &
-                                            Service</p>
-                                    </div>
-
-                                    <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
-                                        <p style="font-size: 12px; margin:0px">IDR
-                                            {{ number_format(0, 0, ',', '.') }}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12"
-                                    style="display: flex; margin-top: 10px; border-top: 2px solid #ff7400; padding-top: 10px;">
-                                    <div class="col-6">
-                                        <p style="margin: 0px; font-size: 12px;">Total</p>
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <p id="total" style="font-size:12px; margin:0px;">0</p>
+                                        </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <span style="font-size: 12px;">IDR</span>
-                                        <span id="total_all"
-                                            style="font-size:100%; font-size: 12px; margin: 0px;">0</span>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-6">
+                                            <p style="font-size: 12px; margin:0px; border-right: 2px solid #ff7400;">Tax &
+                                                Service</p>
+                                        </div>
+
+                                        <div class="col-6" style="padding-left: 12px; box-sizing: border-box;">
+                                            <p style="font-size: 12px; margin:0px">IDR
+                                                {{ number_format(0, 0, ',', '.') }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                    <div class="col-12"
+                                        style="display: flex; margin-top: 10px; border-top: 2px solid #ff7400; padding-top: 10px;">
+                                        <div class="col-6">
+                                            <p style="margin: 0px; font-size: 12px;">Total</p>
+                                        </div>
 
-                            <div class="col-12 p-5-price text-center" style="padding: 0px; margin-top: 20px;"><input
-                                    class="price-button" type="submit" style="box-shadow: 1px 1px 10px #a4a4a4;"
-                                    value="RESERVE NOOW"></div>
+                                        <div class="col-12">
+                                            <span style="font-size: 12px;">IDR</span>
+                                            <span id="total_all"
+                                                style="font-size:100%; font-size: 12px; margin: 0px;">0</span>
+                                        </div>
+                                    </div>
 
-                            <div class="col-12 p-5-price price-box text-center" style="margin-top: 9px;">You won't be
-                                charged yet</div> --}}
+                                    </div>
+
+                                    <div class="col-12 p-5-price text-center" style="padding: 0px; margin-top: 20px;"><input
+                                            class="price-button" type="submit" style="box-shadow: 1px 1px 10px #a4a4a4;"
+                                            value="RESERVE NOOW"></div>
+
+                                    <div class="col-12 p-5-price price-box text-center" style="margin-top: 9px;">You won't be
+                                        charged yet</div> --}}
                         </form>
                     </div>
 
-
-
-                    <!--
-                <div class="diamond-block price-box">
-                    <div class="row">
-                        <div class="col-9">
-                            <strong>This is a rare find.</strong> {{ $hotel[0]->name }}'s place on EZ Villas Bali is
-                            usually fully
-                            booked.
+                    {{-- <div class="diamond-block price-box">
+                        <div class="row">
+                            <div class="col-9">
+                                <strong>This is a rare find.</strong> {{ $hotel[0]->name }}'s place on EZ Villas Bali
+                                is
+                                usually fully
+                                booked.
+                            </div>
+                            <div class="col-3"><img
+                                    src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/gp-pdp-core-ui-sections/images/stays/icon-uc-diamond.296a9c250dc9ee3d995629f834798cb1.gif">
+                            </div>
                         </div>
-                        <div class="col-3"><img
-                                src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/gp-pdp-core-ui-sections/images/stays/icon-uc-diamond.296a9c250dc9ee3d995629f834798cb1.gif">
-                        </div>
-                    </div>
-                </div>
-                -->
+                    </div> --}}
 
                 </div>
             </div>
             {{-- END RIGHT CONTENT --}}
 
 
-            <section id="room" class="section ss">
+            <section id="room" class="section">
                 <div class="row room">
                     <hr>
                     <h2>{{ __('user_page.Rooms') }}
@@ -1569,8 +1566,9 @@
                         @endauth
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
-                        <div class="col-12 row p-0">
-                            <div class="col-4" style="border: 1px solid grey; border-radius: 15px; padding: 10px;">
+                        <div class="col-12 m-0 row p-0">
+                            <div class="col-12 col-lg-3"
+                                style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                                 <div class="col-12">
                                     <div class="col-12">
                                         <div class="content list-image-content">
@@ -1700,46 +1698,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-8 p-0" id="hotelTypeDetailList">
+                            <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
                                     <div class="col-12 m-0 ps-2 pe-2 row ">
-                                        <div class="col-2 border border-secondary border-end-0">
-                                            @for ($i = 0; $i < $item2->capacity; $i++)
-                                                <i class="fas fa-user"></i>
-                                            @endfor
-                                        </div>
-                                        <div class="col-4 border border-secondary border-end-0">
-                                            <div class="price-tag">
-                                                <p class="price-discount mb-2">IDR
-                                                    {{ number_format($item2->discount_price) }}
+                                        <div class="col-12 row m-0 p-0 mb-2"
+                                            style="box-shadow: 1px 1px 10px rgb(63 62 62 / 16%); border-radius: 12px; border: 1px solid #d6d6d6;">
+                                            <div class="col-2 d-flex align-items-center justify-content-center">
+                                                @for ($i = 0; $i < $item2->capacity; $i++)
+                                                    <i class="fas fa-user"></i>
+                                                @endfor
+                                            </div>
+                                            <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                                                <div class="price-tag">
+                                                    <p class="price-discount mb-2">IDR
+                                                        {{ number_format($item2->discount_price) }}
+                                                    </p>
+                                                    <h6 class="price-current mb-0">IDR
+                                                        {{ number_format($item2->price) }}
+                                                    </h6>
+                                                </div>
+                                                <p class="mb-0 text-secondary text-small">Includes taxes and charges
                                                 </p>
-                                                <h6 class="price-current mb-0">IDR
-                                                    {{ number_format($item2->price) }}
-                                                </h6>
                                             </div>
-                                            <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
-                                        </div>
-                                        <div class="col-4 border border-secondary border-end-0">
-                                            <div class="choice-item">
-                                                <i class="fa-solid fa-mug-saucer regular-icon"></i>
-                                                <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                            <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                                                <div class="choice-item">
+                                                    <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                                                    <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-2 border border-secondary">
-                                            <select name="room-amount" id="room-amount" style="width: 3.5rem;">
-                                                <option value="0">0</option>
-                                                <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                                    {{ number_format($item2->price) }}
-                                                </option>
-                                            </select>
+                                            <div class="col-2 d-flex align-items-center justify-content-center"
+                                                style="border-left: 1px solid #d6d6d6;">
+                                                <select name="room-amount" id="room-amount"
+                                                    style="width: 3.5rem;">
+                                                    <option value="0">0</option>
+                                                    <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
+                                                        {{ number_format($item2->price) }}
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="col-12 col-lg-2">
+                                <div class="total-container">
+                                    <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
+                                    <button class="price-button"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;">
+                                        Reserve Now
+                                    </button>
+                                </div>
+                            </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
-                                    <a type="button" onclick="add_room_details({{ $item->id_hotel_room }}, {{ $item->id_hotel }})"
+                                    <a type="button"
+                                        onclick="add_room_details({{ $item->id_hotel_room }}, {{ $item->id_hotel }})"
                                         style="font-size: 12pt; font-weight: 600; color: #ff7400;">
                                         Add Room Details
                                     </a>
@@ -2401,264 +2415,365 @@
                 <section id="endSticky" class="section-2">
                     <h3>{{ __('user_page.Things to know') }}</h3>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <h6>House Rules</h6>
-                            <p><i class="fas fa-clock"></i> Check-in: After 3:00 PM<br>
-                                <i class="fas fa-smoking-ban"></i> No smoking<br>
-                                <i class="fas fa-ban"></i> No parties or events
-                            </p>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <h6>Health & Safety</h6>
-                            <p><i class="fas fa-hands-wash"></i> EZ Villas Bali's social-distancing and
-                                other COVID-19-related guidelines apply<br>
-                                <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
-                                <span><a href="#">Show More</a></span><br>
-                                <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a
-                                        href="#">Show
-                                        More</a></span>
-                            </p>
-                            <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <h6>Cancellation Policy</h6>
-                            <p>Add your trip dates to get the cancellation details for this stay.</p>
-                            <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
-                        </div>
-                    </div>
-                    </secion>
-                    <hr>
-                    <div class="section">
-                        <div>
-                            <div class="row owner-block">
-                                <div class="col-1 host-profile">
-                                    @if ($hotel[0]->image)
-                                        <img
-                                            src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
-                                    @else
-                                        <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                    @endif
-                                </div>
-                                <div class="col-5">
-                                    <div class="member-profile">
-                                        <div class="d-flex">
-                                            <h4>{{ __('user_page.Hosted by') }}
-                                                @if ($hotel[0]->ownerData->first_name == null || $hotel[0]->ownerData->last_name == null)
-                                                    Anonymous
-                                                @else
-                                                    {{ $hotel[0]->ownerData->first_name }}
-                                                    {{ $hotel[0]->ownerData->last_name }}
-                                                @endif
-                                            </h4>
-                                            @auth
-                                                @if (Auth::user()->id == $hotel[0]->created_by)
-                                                    &nbsp;
-                                                    <a type="button" href="{{ route('profile_user') }}"
-                                                        style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
-                                                @endif
-                                            @endauth
-                                        </div>
-                                        @if (isset($hotel[0]->ownerData->created_at))
-                                            <p>
-                                                {{ __('user_page.Joined in') }} {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}
-                                            </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="owner-profile">
-                                        <h4>Host Profile</h4>
-                                        <p>
-                                            About
-                                            <span>
-                                                @if ($hotel[0]->ownerHotel == null)
-                                                    -
-                                                @else
-                                                    {{ $hotel[0]->ownerHotel->about ?? '-' }}
-                                                @endif
-                                            </span><br>
-                                            Location
-                                            <span>
-                                                @if ($hotel[0]->ownerHotel == null)
-                                                    -
-                                                @else
-                                                    {{ $hotel[0]->ownerHotel->location ?? '-' }}
-                                                @endif
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="member-profile-desc">
-                                <div class="row mt-20">
-                                    <div class="col-1 payment-warning-icon">
-                                        <i class="fa fa-exclamation-triangle"></i>
-                                    </div>
-                                    <div class="col-11 payment-warning">
-                                        {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
-                                    </div>
-                                </div>
-                                {{-- ALERT CONTENT STATUS --}}
+                        <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                            <div class="d-flex">
+                                <h6 class="mb-2">{{ __('user_page.House Rules') }}</h6>
                                 @auth
-                                    @if (auth()->user()->id == $hotel[0]->created_by)
-                                        @if ($hotel[0]->status == '0')
-                                            <div class="alert alert-danger d-flex flex-row align-items-center"
-                                                role="alert">
-                                                <span>{{ __('user_page.this content is deactive,') }} </span>
-                                                <form
-                                                    action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.request activation') }}</button>
-                                                </form>
-                                                <span> ?</span>
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '1')
-                                            <div class="alert alert-success d-flex flex-row align-items-center"
-                                                role="success">
-                                                <span>{{ __('user_page.this content is active') }}, </span>
-                                                <form
-                                                    action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.request deactivation') }}</button>
-                                                </form>
-                                                <span> ?</span>
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '2')
-                                            <div class="alert alert-warning d-flex flex-row align-items-center"
-                                                role="warning">
-                                                <span>{{ __('user_page.you have been request activation for this content,') }}
-                                                </span>
-                                                <form
-                                                    action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.cancel activation') }}</button>
-                                                </form>
-                                                <span> ?</span>
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '3')
-                                            <div class="alert alert-warning d-flex flex-row align-items-center"
-                                                role="warning">
-                                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
-                                                </span>
-                                                <form
-                                                    action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                                </form>
-                                                <span> ?</span>
-                                            </div>
-                                        @endif
-                                    @endif
-                                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
-                                        @if ($hotel[0]->status == '0')
-                                            <div class="alert alert-danger d-flex flex-row align-items-center"
-                                                role="alert">
-                                                {{ __('user_page.this content is deactive') }}
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '1')
-                                            <div class="alert alert-success d-flex flex-row align-items-center"
-                                                role="success">
-                                                {{ __('user_page.this content is active, edit grade hotel') }}
-                                                <form action="{{ route('hotel_update_grade', $hotel[0]->id_hotel) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <div style="margin-left: 10px;">
-                                                        <select class="custom-select grade-success" name="grade"
-                                                            onchange='this.form.submit()'>
-                                                            <option value="AA"
-                                                                {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                            </option>
-                                                            <option value="A"
-                                                                {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                            </option>
-                                                            <option value="B"
-                                                                {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                            </option>
-                                                            <option value="C"
-                                                                {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                            </option>
-                                                            <option value="D"
-                                                                {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                            </option>
-                                                        </select>
-                                                        <noscript><input type="submit" value="Submit"></noscript>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '2')
-                                            <div class="alert alert-warning d-flex flex-row align-items-center"
-                                                role="warning">
-                                                <span>{{ __('user_page.the owner request activation, choose grade Hotel') }}</span>
-                                                <form
-                                                    action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="get" class="d-flex">
-                                                    <div style="margin-left: 10px;">
-                                                        <select class="custom-select grade" name="grade">
-                                                            <option value="AA"
-                                                                {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
-                                                            </option>
-                                                            <option value="A"
-                                                                {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
-                                                            </option>
-                                                            <option value="B"
-                                                                {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
-                                                            </option>
-                                                            <option value="C"
-                                                                {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
-                                                            </option>
-                                                            <option value="D"
-                                                                {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <span style="margin-left: 10px;">and</span>
-                                                    <button class="btn" type="submit"
-                                                        style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                                </form>
-                                            </div>
-                                        @endif
-                                        @if ($hotel[0]->status == '3')
-                                            <div class="alert alert-warning d-flex flex-row align-items-center"
-                                                role="warning">
-                                                <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                                <form
-                                                    action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
-                                                    method="get">
-                                                    <button class="btn"
-                                                        type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                                </form>
-                                                <span> ?</span>
-                                            </div>
-                                        @endif
+                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;<a type="button" onclick="editHotelRules()"
+                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
                                     @endif
                                 @endauth
-                                {{-- END ALERT CONTENT STATUS --}}
-                                {{-- @guest
+                            </div>
+                            <p style="margin-bottom: 0px !important" id="houseRuleContent">
+                                @if (!isset($hotelRules))
+                                    {{ __('user_page.No data found') }}
+                                @endif
+
+                                @if (isset($hotelRules))
+                                    @if ($hotelRules->children == 'yes')
+                                        <i class="fas fa-child"></i>
+                                        {{ __('user_page.Childrens are allowed') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->infants == 'yes')
+                                        <i class="fas fa-child"></i>
+                                        {{ __('user_page.Infants are allowed') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->pets == 'yes')
+                                        <i class="fas fa-paw"></i>
+                                        {{ __('user_page.Pets are allowed') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->smoking == 'yes')
+                                        <i class="fas fa-smoking"></i>
+                                        {{ __('user_page.Smoking is allowed') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->events == 'yes')
+                                        <i class="fas fa-calendar"></i>
+                                        {{ __('user_page.Events are allowed') }}
+                                        <br>
+                                    @endif
+
+                                    @if ($hotelRules->children == 'no')
+                                        <i class="fas fa-ban"></i>
+                                        {{ __('user_page.No children') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->infants == 'no')
+                                        <i class="fas fa-ban"></i>
+                                        {{ __('user_page.No infants') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->pets == 'no')
+                                        <i class="fas fa-ban"></i>
+                                        {{ __('user_page.No pets') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->smoking == 'no')
+                                        <i class="fas fa-ban"></i>
+                                        {{ __('user_page.No smoking') }}
+                                        <br>
+                                    @endif
+                                    @if ($hotelRules->events == 'no')
+                                        <i class="fas fa-ban"></i>
+                                        {{ __('user_page.No events') }}
+                                        <br>
+                                    @endif
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                            <div class="d-flex">
+                                <h6 class="mb-2">{{ __('user_page.Health & Safety') }}</h6>
+                                @auth
+                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;<a type="button" onclick="editGuestSafety()"
+                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                    @endif
+                                @endauth
+                            </div>
+                            <p style="margin-bottom: 0px !important" id="guestSafetyContent">
+                                @forelse ($hotel[0]->guestSafety->take(4) as $item)
+                                    <i class="fas fa-{{ $item->icon }}"></i>
+                                    <span class="translate-text-single">{{ $item->guest_safety }}</span><br>
+                                @empty
+                                    {{ __('user_page.No data found') }}
+                                @endforelse
+                            </p>
+                            @php
+                                $countGuest = count($hotel[0]->guestSafety);
+                            @endphp
+                            @if ($countGuest > 5)
+                                <p style="margin-bottom: 0px !important" id="btnShowMoreGuestSafety">
+                                    <a href="javascript:void(0)" onclick="showMoreGuestSafety()">
+                                        {{ __('user_page.Show more') }}
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12 mb-1 mb-md-3">
+                            <div class="d-flex">
+                                <h6 class="mb-2">{{ __('user_page.Cancellation Policy') }}</h6>
+                                @auth
+                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                        &nbsp;<a type="button" onclick="editCancelationPolicy()"
+                                            style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit') }}</a>
+                                    @endif
+                                @endauth
+                            </div>
+                            <p style="margin-bottom: 0px !important">
+                                {{ __('user_page.Add your trip dates to get the cancellation details for this stay') }}<br>
+                            </p>
+                            <p style="margin-bottom: 0px !important; margin-top:14px">
+                                <a onclick="addDatesFunction()"
+                                    style="text-decoration: underline; color: #ff7400; cursor: pointer;"
+                                    class="d-none" id="addDates">Add Dates
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                                <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
+                                    style="text-decoration: underline; color: #ff7400;" class="d-none"
+                                    id="showCancel">{{ __('user_page.Show more') }}
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <div class="section">
+                    <div>
+                        <div class="row owner-block">
+                            <div class="col-1 host-profile">
+                                @if ($hotel[0]->image)
+                                    <img
+                                        src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $hotel[0]->image) }}">
+                                @else
+                                    <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                @endif
+                            </div>
+                            <div class="col-5">
+                                <div class="member-profile">
+                                    <div class="d-flex">
+                                        <h4>{{ __('user_page.Hosted by') }}
+                                            @if ($hotel[0]->ownerData->first_name == null || $hotel[0]->ownerData->last_name == null)
+                                                Anonymous
+                                            @else
+                                                {{ $hotel[0]->ownerData->first_name }}
+                                                {{ $hotel[0]->ownerData->last_name }}
+                                            @endif
+                                        </h4>
+                                        @auth
+                                            @if (Auth::user()->id == $hotel[0]->created_by)
+                                                &nbsp;
+                                                <a type="button" href="{{ route('profile_user') }}"
+                                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Profile') }}</a>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                    @if (isset($hotel[0]->ownerData->created_at))
+                                        <p>
+                                            {{ __('user_page.Joined in') }}
+                                            {{ date_format($hotel[0]->ownerData->created_at, 'M Y') }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="owner-profile">
+                                    <h4>Host Profile</h4>
+                                    <p>
+                                        About
+                                        <span>
+                                            @if ($hotel[0]->ownerHotel == null)
+                                                -
+                                            @else
+                                                {{ $hotel[0]->ownerHotel->about ?? '-' }}
+                                            @endif
+                                        </span><br>
+                                        Location
+                                        <span>
+                                            @if ($hotel[0]->ownerHotel == null)
+                                                -
+                                            @else
+                                                {{ $hotel[0]->ownerHotel->location ?? '-' }}
+                                            @endif
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-profile-desc">
+                            <div class="row mt-20">
+                                <div class="col-1 payment-warning-icon">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="col-11 payment-warning">
+                                    {{ __('user_page.To protect your payment, never transfer money or communicate outside of the EZVillas Bali website or app') }}
+                                </div>
+                            </div>
+                            {{-- ALERT CONTENT STATUS --}}
+                            @auth
+                                @if (auth()->user()->id == $hotel[0]->created_by)
+                                    @if ($hotel[0]->status == '0')
+                                        <div class="alert alert-danger d-flex flex-row align-items-center"
+                                            role="alert">
+                                            <span>{{ __('user_page.this content is deactive,') }} </span>
+                                            <form
+                                                action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="id_hotel"
+                                                    value="{{ $hotel[0]->id_hotel }}">
+                                                <button class="btn"
+                                                    type="submit">{{ __('user_page.request activation') }}</button>
+                                            </form>
+                                            <span> ?</span>
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '1')
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            <span>{{ __('user_page.this content is active') }}, </span>
+                                            <form
+                                                action="{{ route('hotel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="id_hotel"
+                                                    value="{{ $hotel[0]->id_hotel }}">
+                                                <button class="btn"
+                                                    type="submit">{{ __('user_page.request deactivation') }}</button>
+                                            </form>
+                                            <span> ?</span>
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '2')
+                                        <div class="alert alert-warning d-flex flex-row align-items-center"
+                                            role="warning">
+                                            <span>{{ __('user_page.you have been request activation for this content,') }}
+                                            </span>
+                                            <form
+                                                action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="id_hotel"
+                                                    value="{{ $hotel[0]->id_hotel }}">
+                                                <button class="btn"
+                                                    type="submit">{{ __('user_page.cancel activation') }}</button>
+                                            </form>
+                                            <span> ?</span>
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '3')
+                                        <div class="alert alert-warning d-flex flex-row align-items-center"
+                                            role="warning">
+                                            <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                            </span>
+                                            <form
+                                                action="{{ route('hotel_cancel_request_update_status', $hotel[0]->id_hotel) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="id_hotel"
+                                                    value="{{ $hotel[0]->id_hotel }}">
+                                                <button class="btn"
+                                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                            </form>
+                                            <span> ?</span>
+                                        </div>
+                                    @endif
+                                @endif
+                                @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                                    @if ($hotel[0]->status == '0')
+                                        <div class="alert alert-danger d-flex flex-row align-items-center"
+                                            role="alert">
+                                            {{ __('user_page.this content is deactive') }}
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '1')
+                                        <div class="alert alert-success d-flex flex-row align-items-center"
+                                            role="success">
+                                            {{ __('user_page.this content is active, edit grade hotel') }}
+                                            <form action="{{ route('hotel_update_grade', $hotel[0]->id_hotel) }}"
+                                                method="post">
+                                                @csrf
+                                                <div style="margin-left: 10px;">
+                                                    <select class="custom-select grade-success" name="grade"
+                                                        onchange='this.form.submit()'>
+                                                        <option value="AA"
+                                                            {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                        </option>
+                                                        <option value="A"
+                                                            {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                        </option>
+                                                        <option value="B"
+                                                            {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                        </option>
+                                                        <option value="C"
+                                                            {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                        </option>
+                                                        <option value="D"
+                                                            {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                        </option>
+                                                    </select>
+                                                    <noscript><input type="submit" value="Submit"></noscript>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '2')
+                                        <div class="alert alert-warning d-flex flex-row align-items-center"
+                                            role="warning">
+                                            <span>{{ __('user_page.the owner request activation, choose grade Hotel') }}</span>
+                                            <form action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
+                                                method="get" class="d-flex">
+                                                <div style="margin-left: 10px;">
+                                                    <select class="custom-select grade" name="grade">
+                                                        <option value="AA"
+                                                            {{ $hotel[0]->grade == 'AA' ? 'selected' : '' }}>AA
+                                                        </option>
+                                                        <option value="A"
+                                                            {{ $hotel[0]->grade == 'A' ? 'selected' : '' }}>A
+                                                        </option>
+                                                        <option value="B"
+                                                            {{ $hotel[0]->grade == 'B' ? 'selected' : '' }}>B
+                                                        </option>
+                                                        <option value="C"
+                                                            {{ $hotel[0]->grade == 'C' ? 'selected' : '' }}>C
+                                                        </option>
+                                                        <option value="D"
+                                                            {{ $hotel[0]->grade == 'D' ? 'selected' : '' }}>D
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <span style="margin-left: 10px;">and</span>
+                                                <button class="btn" type="submit"
+                                                    style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    @if ($hotel[0]->status == '3')
+                                        <div class="alert alert-warning d-flex flex-row align-items-center"
+                                            role="warning">
+                                            <span>{{ __('user_page.the owner request deactivation,') }} </span>
+                                            <form action="{{ route('admin_hotel_update_status', $hotel[0]->id_hotel) }}"
+                                                method="get">
+                                                <button class="btn"
+                                                    type="submit">{{ __('user_page.deactivate this content') }}</button>
+                                            </form>
+                                            <span> ?</span>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endauth
+                            {{-- END ALERT CONTENT STATUS --}}
+                            {{-- @guest
                                     <hr>
                                     <h4>{{ __('user_page.Nearby Restaurants & Things To Do') }}</h4>
                                     <div class="container-xxl mx-auto p-0">
@@ -3346,14 +3461,15 @@
                                         </div>
                                     @endif
                                 @endauth --}}
-                            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         {{-- END FULL WIDTH ABOVE FOOTER --}}
     </div>
     {{-- MODAL --}}
+    @include('user.modal.hotel.guest-safety')
     @auth
         @include('user.modal.hotel.bedroom')
         @include('user.modal.hotel.add_room')
@@ -3366,6 +3482,8 @@
         @include('user.modal.hotel.category_hotel')
         @include('user.modal.advert-listing')
         @include('user.modal.hotel.add_rooms_details')
+        @include('user.modal.hotel.edit-guest-safety')
+        @include('user.modal.hotel.edit-hotel-rules')
     @endauth
     @include('user.modal.hotel.description')
 
@@ -4045,7 +4163,8 @@
                                 $id = $item->id_photo;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionPhotoGallery{{ $id }}">
                                 <img src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}"
                                     title="{{ $name }}">
                             </li>
@@ -4056,8 +4175,8 @@
                 </div>
                 <div class="modal-footer">
                     <div style="clear: both; width: 100%;">
-                        <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Save') }}" onclick="save_reorder_photo()">
+                        <button type='submit' id="saveBtnReorderPhoto" class="btn-edit-position-photos"
+                            onclick="save_reorder_photo()">{{ __('user_page.Save') }}</button>
                     </div>
                 </div>
             </div>
@@ -4085,7 +4204,8 @@
                                 $id = $item->id_video;
                                 $name = $item->name;
                             @endphp
-                            <li class="ui-state-default" data-id="{{ $id }}">
+                            <li class="ui-state-default" data-id="{{ $id }}"
+                            id="positionVideoGallery{{ $id }}">
                                 <video
                                     src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -4093,12 +4213,12 @@
                             {{ __('user_page.there is no video yet') }}
                         @endforelse
                     </ul>
-
-                    <div style="clear: both;">
-                        <input type='button' class="btn-edit-position-photos"
-                            value="{{ __('user_page.Submit') }}" onclick="save_reorder_video()">
+                </div>
+                <div class="modal-footer">
+                    <div style="clear: both; width: 100%;">
+                        <button type='submit' id="saveBtnReorderVideo" class="btn-edit-position-photos"
+                            onclick="save_reorder_video()">{{ __('user_page.Save') }}</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -4363,6 +4483,11 @@
         }
         // Save order
         function save_reorder_photo() {
+
+            let btn = document.getElementById("saveBtnReorderPhoto");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+
             var imageids_arr = [];
             // get image ids order
             $('#sortable-photo li').each(function() {
@@ -4379,7 +4504,64 @@
                     id: '{{ $hotel[0]->id_hotel }}'
                 },
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/hotel/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content = "";
+                    let contentPositionModal = "";
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '"> <a href="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[
+                                i].id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
+                            '"> <img src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </li>';
+                    }
+
+                    if (response.data.video.length > 0) {
+                        for (let v = 0; v < response.data.video.length; v++) {
+                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                                .id_video +
+                                '"> <a class="pointer-normal" onclick="view_video(' + response.data.video[v]
+                                .id_video +
+                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_villa }}" data-video="' +
+                                response.data.video[v].id_video +
+                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+                        }
+                    }
+
+                    btn.textContent = "{{ __('user_page.Save') }}";
+                    btn.classList.remove("disabled");
+
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-photo').html("");
+                    $('#sortable-photo').append(contentPositionModal);
+
+                    $("#edit_position_photo").modal("hide");
+
+                    $gallery.refresh();
                 }
             });
         }
@@ -4389,6 +4571,10 @@
         }
 
         function save_reorder_video() {
+            let btn = document.getElementById("saveBtnReorderVideo");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+
             var videoids_arr = [];
             // get video ids order
             $('#sortable-video li').each(function() {
@@ -4405,7 +4591,66 @@
                     id: '{{ $hotel[0]->id_hotel }}'
                 },
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+
+                    let path = "/foto/hotel/";
+                    let slash = "/";
+                    let uid = response.data.uid.uid;
+                    let lowerCaseUid = uid.toLowerCase();
+                    let content = "";
+                    let contentPositionModal = "";
+
+                    for (let i = 0; i < response.data.photo.length; i++) {
+                        content += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '"> <a href="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+                    }
+
+                    if (response.data.video.length > 0) {
+                        for (let v = 0; v < response.data.video.length; v++) {
+                            content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                                .id_video +
+                                '"> <a class="pointer-normal" onclick="view_video(' + response.data.video[v]
+                                .id_video +
+                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
+                                response.data.video[v].id_video +
+                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                            contentPositionModal += '<li class="ui-state-default" data-id="' + response.data
+                                .video[v]
+                                .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
+                                '"> <video loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=1.0"> </li>';
+                        }
+                    }
+
+                    btn.textContent = "{{ __('user_page.Save') }}";
+                    btn.classList.remove("disabled");
+
+
+                    $('.gallery').html("");
+                    $('.gallery').append(content);
+                    $('#sortable-video').html("");
+                    $('#sortable-video').append(contentPositionModal);
+
+                    $("#edit_position_video").modal("hide");
+
+                    $gallery.refresh();
                 }
             });
         }
@@ -4871,6 +5116,19 @@
                 let lowerCaseUid = uid.toLowerCase();
                 let content = "";
                 let contentStory = "";
+                let contentPositionModal;
+                let contentPositionModalVideo;
+
+                let modalPhotoLength = $('#sortable-photo').find('li').length;
+                let modalVideoLength = $('#sortable-video').find('li').length;
+
+                if (modalPhotoLength == 0) {
+                    $("#sortable-photo").html("");
+                }
+
+                if (modalVideoLength == 0) {
+                    $('#sortable-video').html("");
+                }
 
                 let galleryDiv = $('.gallery');
                 let galleryLength = galleryDiv.find('a').length;
@@ -4890,7 +5148,14 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
+                        .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
+                        '"> <img src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </li>';
+
                     $('.gallery').append(content);
+                    $('#sortable-photo').append(contentPositionModal);
                 }
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
@@ -4916,8 +5181,15 @@
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
 
+                    contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
+                        .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
+                        '"> <video src="' +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        '#t=1.0"> </li>';
+
                     $('.gallery').append(content);
                     $("#storyContent").append(contentStory);
+                    $('#sortable-video').append(contentPositionModalVideo);
                     sliderRestaurant();
                 }
 
@@ -5280,7 +5552,8 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayPhoto"+photo).remove();
+                            $("#displayPhoto" + photo).remove();
+                            $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
@@ -5331,6 +5604,17 @@
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayVideo" + video).remove();
                             $("#displayStoryVideo" + video).remove();
+                            $("#positionVideoGallery" + video).remove();
+
+                            let galleryDiv = $('.gallery');
+                            let galleryLength = galleryDiv.find('a').length;
+
+                            if (galleryLength == 0)
+                            {
+                                $('.gallery').html("");
+                                $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
+                            }
+
                             sliderRestaurant();
                         }
                     });
@@ -5706,6 +5990,14 @@
         </script>
     @endif
     @include('user.modal.hotel.detail_room')
+
+    {{-- HOTEL RULES SAFETY --}}
+    <script>
+        function editHotelRules() {
+            $("#modal-edit-house-rules").modal("show");
+        }
+    </script>
+    {{-- HOTEL RULES SAFETY --}}
 </body>
 
 </html>

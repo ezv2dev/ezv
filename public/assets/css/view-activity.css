@@ -179,13 +179,16 @@
 }
 
 @media (min-width: 1260px) and (max-width: 1359px) {
-    .reserve-block-activity {
-        width: 252px;
-        margin-left: 16px;
+    .gallery {
+        padding-right: 13px;
     }
 
-    .review-bottom {
-        margin-left: 22px !important;
+    .menu-liner {
+        width: 97.5% !important;
+    }
+
+    .price {
+        margin-right: 20px;
     }
 
     .host {
@@ -201,12 +204,22 @@
         padding-right: 14px;
     }
 
-    .pd-tlr-10 {
-        padding: 10px 0 0 10px;
-    }
-
     .row-grid-location {
         margin-right: 0 !important;
+    }
+    
+    .sidebar-activity {
+        right: 4px !important;
+    }
+}
+
+.sidebar-activity {
+    margin-right: 0;
+}
+
+@media only screen and (max-width: 425px) {
+.owner-block {
+    margin-right: -20px;
     }
 }
 
@@ -216,7 +229,7 @@
 }
 
 .row-grid-location {
-    margin-right: 3px;
+    margin-right: -5px;
 }
 
 .delete-story {
@@ -277,4 +290,12 @@
     .prices h2 {
         padding-left: 10px;
     }
+}
+
+#location-map {
+    margin-left: -3px;
+}
+
+.owner-block {
+    padding-right: 0;
 }

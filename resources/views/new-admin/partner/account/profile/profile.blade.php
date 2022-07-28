@@ -46,8 +46,8 @@
     }
 
     #editButton{
-        display: block; 
-        text-decoration: underline; 
+        display: block;
+        text-decoration: underline;
         margin-top: 20px;
     }
 
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="col-md-8 profile-right">
             <hr>
             <div class="section-profile">
@@ -133,17 +133,19 @@
                 <a id="editButton" class="text-dark" href="javascript:void(0);" onclick="showFormEditProfile();">Edit profile</a>
             </div>
             <div id="formEditProfile" class="section-form-profile d-none">
-                <form action="{{ route('store_profile') }}" method="post">
+                <form action="{{ route('store_profile') }}" method="post" id="EditProfileForm">
                     @csrf
                     <div class="form-group">
                         <label class="label-input">About</label>
-                        <textarea name="about" class="form-control" id="" cols="30" rows="4">
+                        <textarea name="about" class="form-control" id="user-about" cols="30" rows="4">
                             {{ isset($profile->about) ? $profile->about : '' }}
                         </textarea>
+                        <small id="err-about" style="display: none;" class="invalid-feedback">The about field is required</small>
                     </div>
                     <div class="form-group">
                         <label class="label-input">Location</label>
                         <input type="text" id="locationForm" class="form-control" name="location" value="{{ isset($profile->location) ? $profile->location : '' }}">
+                        <small id="err-location" style="display: none;" class="invalid-feedback">The location field is required</small>
                     </div>
                     <div class="form-group">
                         <label class="label-input">Languages I speak</label>
@@ -159,7 +161,8 @@
                     </div>
                     <div class="form-group">
                         <label class="label-input">Work</label>
-                        <input type="text" class="form-control" name="work" value="{{ isset($profile->work) ? $profile->work : '' }}">
+                        <input type="text" class="form-control" id="user-work" name="work" value="{{ isset($profile->work) ? $profile->work : '' }}">
+                        <small id="err-work" style="display: none;" class="invalid-feedback">The work field is required</small>
                     </div>
                     <!-- Modal Checkbox-->
                     <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -177,7 +180,7 @@
                                             We have many international travelers who appreciate hosts who can speak their language.
                                         </span>
                                     </div>
-    
+
                                     @foreach ($languages as $item)
                                     <div class="form-check">
                                         @php
@@ -195,7 +198,7 @@
                                         </label>
                                     </div>
                                     @endforeach
-    
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" class="close" data-dismiss="modal" aria-label="Close">
@@ -306,4 +309,50 @@
 
 </script>
 
+<script>
+    $(function() {
+        $('#user-about').keyup(function() {
+            $('#user-about').removeClass('is-invalid');
+            $('#err-about').hide();
+        })
+        $('#locationForm').keyup(function() {
+            $('#locationForm').removeClass('is-invalid');
+            $('#err-location').hide();
+        })
+        $('#user-work').keyup(function() {
+            $('#user-work').removeClass('is-invalid');
+            $('#err-work').hide();
+        })
+        $('#EditProfileForm').submit(function (e) {
+            let error = 0;
+            if(!$('#user-about').val()) {
+                $('#user-about').addClass('is-invalid');
+                $('#err-about').show();
+                error = 1;
+            } else {
+                $('#user-about').removeClass('is-invalid');
+                $('#err-about').hide();
+            }
+            if(!$('#locationForm').val()) {
+                $('#locationForm').addClass('is-invalid');
+                $('#err-location').show();
+                error = 1;
+            } else {
+                $('#locationForm').removeClass('is-invalid');
+                $('#err-location').hide();
+            }
+            if(!$('#user-work').val()) {
+                $('#user-work').addClass('is-invalid');
+                $('#err-work').show();
+                error = 1;
+            } else {
+                $('#user-work').removeClass('is-invalid');
+                $('#err-work').hide();
+            }
+            if(error) {
+                e.preventDefault();
+            }
+        });
+    })
+</script>
 @endsection

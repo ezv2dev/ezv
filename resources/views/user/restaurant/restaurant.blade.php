@@ -1250,7 +1250,7 @@
                     {{-- END ADD GALLERY --}}
                     {{-- MENU --}}
                     <section id="menu" class="section-2 menu-gallery">
-                        <div class="about-place-block">
+                        <div class="about-place-block px-sm-24p">
                             <hr>
                             <h2>Menu
                                 @auth
@@ -1340,7 +1340,7 @@
                         {{-- add multiple menu --}}
                     </section>
 
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-sm-24p">
                         {{-- Description --}}
                         <div class="about-place-block">
                             <hr>
@@ -1398,7 +1398,7 @@
                         </div>
                     </section>
 
-                    <section id="amenities" class="section-2">
+                    <section id="amenities" class="section-2 px-sm-24p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1504,7 +1504,7 @@
         {{-- END LEFT CONTENT --}}
         {{-- RIGHT CONTENT --}}
         <div class="col-lg-3 col-md-3 col-12">
-            <div class="sidebar sidebar-idle sidebar-restaurant" id="sidebar_fix">
+            <div class="sidebar sidebar-restaurant" id="sidebar_fix">
                 <div class="reserve-block sidebar-mf">
                     <div class="gradient-try">
                         <center>
@@ -2245,7 +2245,7 @@
                 </div>
             </section> --}}
             <div class="section">
-                <div>
+                <div class="px-xs-12p px-sm-24p">
                     <div class="row owner-block">
                         <div class="col-1 host-profile">
                             @if ($restaurant->image)

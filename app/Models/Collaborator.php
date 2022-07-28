@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\CollaboratorReview;
 
 class Collaborator extends Model
 {
@@ -50,5 +51,21 @@ class Collaborator extends Model
     public function collaboratorSocial()
     {
         return $this->hasOne(CollaboratorSocialMedia::class, 'id_collab', 'id_collab');
+    }
+
+    public function detailReview()
+    {
+        return $this->hasOne(CollaboratorDetailReview::class, 'id_collab', 'id_collab');
+    }
+
+    public function getUserReviewAttribute()
+    {
+        if (auth()->check()) {
+            $isExist = CollaboratorReview::where('id_collab', $this->id_collab)->where('created_by', auth()->user()->id)->first();
+            if($isExist){
+                return $isExist;
+            }
+        }
+        return false;
     }
 }
