@@ -59,12 +59,31 @@ class CollaboratorController extends Controller
     // profile
     public function collaborator($id)
     {
-        // $this->authorize('collaborator_index');
+        // check if editor not authenticated
+        abort_if(!auth()->check(), 401);
+
         $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
             ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
             ->join('users', 'users.id', '=', 'collaborator.created_by')
-            ->where('collaborator.id_collab', $id)->first();
+            ->where('collaborator.id_collab', $id)
+            ->where('collaborator.status', 1)
+            ->first();
+
+        // check if collab does not exist, abort 404
         abort_if(!$profile, 404);
+
+        // check if the editor does not have authorization
+        // $this->authorize('collaborator_index');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner', 'collaborator']) && auth()->user()->id != $profile->created_by) {
+            abort(403);
+        }elseif(in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $profile->created_by){
+            $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
+                ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
+                ->join('users', 'users.id', '=', 'collaborator.created_by')
+                ->where('collaborator.id_collab', $id)
+                ->where('collaborator.status', 1)
+                ->first();
+        };
         $profile->append('user_review');
 
         $user = User::where('id', $profile->created_by)->first();
@@ -506,8 +525,7 @@ class CollaboratorController extends Controller
     public function collab_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if(!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
