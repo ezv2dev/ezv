@@ -39,7 +39,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <h1 style="font-weight:bold; color: #383838; font-size:25pt; margin-top: -20px;">
+                    <h1 style="font-weight:bold; color: #383838; font-size:25pt; margin-top: -20px; padding-right: 1.5rem;">
                         Global preferences
                     </h1>
                 </div>

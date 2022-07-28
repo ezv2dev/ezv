@@ -37,7 +37,7 @@
                         <b>Go to Profile</b>
                     </a>
                 </div>
-                <div class="row mt-5 px-4">
+                <div class="row mt-5 pl-4 pr-0">
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
                         <a href="{{ route('personal_info') }}" class="text-dark" style="text-decoration: none;">
                             <div class="card pb-4 shadow" style="height: 180px;">

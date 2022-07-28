@@ -4,11 +4,13 @@
 
 <style>
     @media only screen and (max-width: 767px) {
+        .card-pay-info-container {
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+            margin-top: 1rem !important;
+        }
         .card-pay-info {
             width: 100% !important;
-            margin-left: 1.5rem !important;
-            margin-right: 1.5rem !important;
-            margin-top: 1rem !important;
         }
         .ml-max-md-10p {
             margin-left: 10px !important;
@@ -17,20 +19,38 @@
             margin-left: 0px !important;
         }
     }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .card-pay-info-container {
+            position: absolute !important;
+            top: 200px !important;
+            right: 7rem !important;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .mb-md-3r {
+            margin-bottom: 3rem !important;
+        }
+    }
     @media only screen and (min-width: 768px) and (max-width: 1199px) {
         .card-pay-info {
-            position: absolute !important;
             width: 18rem !important;
-            top: 200px !important;
-            right: 5px !important;
+        }
+    }
+    @media only screen and (min-width: 992px) {
+        .card-pay-info-container {
+            position: absolute !important;
+            top: 180px !important;
+            right: 7rem !important;
         }
     }
     @media only screen and (min-width: 1200px) {
-        .card-pay-info {
+        .card-pay-info-container {
             position: absolute !important;
+            top: 180px !important;
+            right: 7rem !important;
+        }
+        .card-pay-info {
             width: 23rem !important;
-            top: 200px !important;
-            right: 0 !important;
         }
     }
 </style>
@@ -38,7 +58,7 @@
 @section('content_admin')
 
 <div class="page-header">
-    <div class="container text-dark">
+    <div class="container text-dark mb-md-3r">
         <div class="page-header-content pt-4">
             <div class="row align-items-center justify-content-between" style="position: relative;">
                 <div class="col-12 mt-2 ml-max-md-10p" style="margin-left: 30px;">
@@ -95,12 +115,14 @@
                     </div>
                 </div>
 
-                <div class="card p-4 card-pay-info">
-                    <div class="card-body">
-                        <h3 class="card-title"><b>Need help?</b></h3>
-                        <h4><a href="#">When you'll get your payout</a> ></h4>
-                        <h4><a href="#">How payouts work</a> ></h4>
-                        <h4><a href="#">Go to your transaction history</a> ></h4>
+                <div class="col-12 col-md-3 card-pay-info-container">
+                    <div class="card p-4 card-pay-info">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Need help?</b></h3>
+                            <h4><a href="#">When you'll get your payout</a> ></h4>
+                            <h4><a href="#">How payouts work</a> ></h4>
+                            <h4><a href="#">Go to your transaction history</a> ></h4>
+                        </div>
                     </div>
                 </div>
             </div>
