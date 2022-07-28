@@ -180,6 +180,7 @@ return [
     'this content is active' => 'konten ini aktif',
     'this content is active, edit grade villa' => 'konten ini aktif, ubah kelas vila',
     'the owner request activation, choose grade Villa' => 'pemilik meminta aktivasi, pilih vila kelas',
+    'the owner request activation' => 'pemilik meminta aktivasi',
     'the owner request deactivation,' => 'pemilik meminta penonaktifan,',
     'activate this content' => 'aktifkan konten ini',
     'deactivate this content' => 'nonaktifkan konten ini',
@@ -299,8 +300,8 @@ return [
     'Edit Tags' => 'Ubah Tag',
     'Click here to upload your files' => 'Klik di sini untuk mengunggah file',
 
-    'this content is active, edit grade things to do' => 'konten ini aktif, ubah kelas aktivitas',
-    'the owner request activation, choose grade things to do' => 'pemilik meminta aktivasi, pilih aktivitas kelas',
+    'this content is active, edit grade Wow' => 'konten ini aktif, ubah kelas WOW',
+    'the owner request activation, choose grade Wow' => 'pemilik meminta aktivasi, pilih WOW kelas',
     'there is no tag yet' => 'belum ada tag',
     'PRICE' => 'HARGA',
     'Prices' => 'Harga',

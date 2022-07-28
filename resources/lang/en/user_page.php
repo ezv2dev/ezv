@@ -184,6 +184,7 @@ return [
     'this content is active' => 'this content is active',
     'this content is active, edit grade villa' => 'this content is active, edit grade villa',
     'the owner request activation, choose grade Villa' => 'the owner request activation, choose grade Villa',
+    'the owner request activation' => 'the owner request activation',
     'the owner request deactivation,' => 'the owner request deactivation,',
     'activate this content' => 'activate this content',
     'deactivate this content' => 'deactivate this content',
@@ -303,8 +304,8 @@ return [
     'Edit Tags' => 'Edit Tags',
     'Click here to upload your files' => 'Click here to upload your files',
 
-    'this content is active, edit grade things to do' => 'this content is active, edit grade things to do',
-    'the owner request activation, choose grade things to do' => 'the owner request activation, choose grade things to do',
+    'this content is active, edit grade Wow' => 'this content is active, edit grade Wow',
+    'the owner request activation, choose grade Wow' => 'the owner request activation, choose grade WOW',
     'there is no tag yet' => 'there is no tag yet',
     'PRICE' => 'PRICE',
     'Prices' => 'Prices',

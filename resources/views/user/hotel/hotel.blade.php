@@ -1742,7 +1742,7 @@
                             </div>
                             <div class="col-12 col-lg-2 px-0 px-lg-2">
                                 <div class="total-container">
-                                    <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
+                                    <h6 class="mb-2">IDR {{ number_format($item2->price) }}</h6>
                                     <button class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;">
                                         Reserve Now
@@ -5553,7 +5553,7 @@
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
                             $("#displayPhoto" + photo).remove();
-                            $("#positionPhotoGallery"+photo).remove();
+                            $("#positionPhotoGallery" + photo).remove();
 
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
@@ -5609,8 +5609,7 @@
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
 
-                            if (galleryLength == 0)
-                            {
+                            if (galleryLength == 0) {
                                 $('.gallery').html("");
                                 $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
                             }
