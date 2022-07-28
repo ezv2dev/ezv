@@ -55,14 +55,14 @@
 <!-- <div id="layoutSidenav" style="margin-top: -58px;"> -->
 
 <!-- Baru -->
-<div id="layoutSidenav" class="pt-4">
+<div id="layoutSidenav">
     <!-- di komen yang awal -->
     <!-- <div id="layoutSidenav_nav"> -->
-    <div id="layoutSidenav_nav" class="border-right border-top" style="top: 94.27px;">
+    <div id="layoutSidenav_nav" class="border-right">
 
         <!-- di komen yang awal -->
         <!-- <nav class="sidenav shadow-right sidenav-light" style="margin-top: 90px;" > -->
-        <nav class="sidenav shadow-right sidenav-light pt-0"  >
+        <nav class="sidenav shadow-right sidenav-light"  >
             <div class="sidenav-menu">
         
                 <!-- di komen yang awal -->
@@ -93,9 +93,9 @@
                     </a>
                 </div>
                 <div style="margin-top: 100px; margin-left: 30px; beckground-color:#fff">
-                    <li type="button" class="btn btn-light"
+                    <a type="button" class="btn btn-light"
                         style="color: #000; border-radius: 10px; border: 1px solid black; background-color:#fff;">
-                        <i class="fa fa-plane" aria-hidden="true" style="color: #000"></i> Give Feedback</li>
+                        <i class="fa fa-plane" aria-hidden="true" style="color: #000"></i> Give Feedback</a>
                 </div>
             </div>
         </nav>
@@ -103,13 +103,13 @@
 
     <!-- di komen yang awal -->
     <!-- <div id="layoutSidenav_content"> -->
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" class="pt-4">
         <div class="sidebar-background"></div>
         <main>
         
             <!-- di komen yang awal -->
             <!-- <div class="container justify-content-center"> -->
-            <div class="container justify-content-center px-5">
+            <div class="container px-5">
                 <div class="page-header-content">
 
                 <!-- di komen yang awal -->

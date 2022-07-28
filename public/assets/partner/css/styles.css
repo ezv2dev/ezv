@@ -16853,9 +16853,10 @@ body {
     height: 100vh;
     z-index: 1038;
 }
-.nav-fixed #layoutSidenav #layoutSidenav_nav .sidenav {
+/* dikomen yang awal */
+/* .nav-fixed #layoutSidenav #layoutSidenav_nav .sidenav {
     padding-top: 3.625rem;
-}
+} */
 .nav-fixed #layoutSidenav #layoutSidenav_nav .sidenav .sidenav-menu {
     overflow-y: hidden;
 }
@@ -19834,8 +19835,13 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
+.sidenav-menu #accordionSidenav{
+    padding:1.75rem 0 0 1.5rem;
+}
+
 .sidenav .sidenav-menu .nav .sidenav-menu-heading {
-    padding: 1.75rem 1rem 0.75rem;
+    padding: 0 1rem;
     font-size: 0.7rem;
     font-weight: bold;
     text-transform: uppercase;

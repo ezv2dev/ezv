@@ -3,12 +3,33 @@
 @section('title', 'Listing Dashboard - EZV2')
 
 @section('content_admin')
+    <style>
+        .border-left{
+            border-left:1px solid #eee !important;
+        }
+        .border-right{
+            border-right:1px solid #eee !important;
+        }
+        .border-top{
+            border-top:1px solid #eee !important;
+        }
+        .border-bottom{
+            border-bottom:1px solid #eee !important;
+        }
+        .border{
+            border:1px solid #eee !important;
+        }
+        .overflow-x-auto{
+            overflow-x:auto;
+        }
+    </style>
     {{-- CONTENT --}}
-    <div class="container">
         <!-- Example DataTable for Dashboard Demo-->
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sidenav shadow-right sidenav-light" style="margin-top: 103px; z-index: -1;">
+            <div id="layoutSidenav_nav" class="border-right">
+                <!-- dikomen yang awal -->
+                <!-- <nav class="sidenav shadow-right sidenav-light" style="margin-top: 103px; z-index: -1;"> -->
+                <nav class="sidenav shadow-right sidenav-light">
                     <div class="sidenav-menu">
                         <div class="nav accordion" id="accordionSidenav">
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
@@ -46,12 +67,19 @@
                 </nav>
             </div>
 
-            <div id="layoutSidenav_content" style="margin-top: 60px; padding-left: 210px">
-                <div class="container-fluid">
-                    <div class="page-header-content" class="mb-4">
+            <!-- dikomen yang awal -->
+            <!-- <div id="layoutSidenav_content" style="margin-top: 60px; padding-left: 210px"> -->
+            <div id="layoutSidenav_content" class="pt-4">
+                <div class="sidebar-background"></div>
+
+                <div class="container px-5">
+                    <div class="page-header-content mb-3">
                         <div class="row align-items-center justify-content-between pt-3">
-                            <div class="col-auto mb-3">
-                                <h1 class="page-header-title">
+                            <div class="col-auto pl-0 d-flex align-items-center mb-3">
+                                <button class="btn btn-icon border btn-transparent-dark mr-3" id="sidebarToggle" href="#">
+                                    <i data-feather="menu" style="color: black"></i>
+                                </button>
+                                <h1 class="page-header-title m-0">
                                     <strong>House in Canggu</strong>
                                 </h1>
                             </div>
@@ -87,7 +115,6 @@
 
             </div>
         </div>
-    </div>
 
 
     {{-- END CONTENT --}}
