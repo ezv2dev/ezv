@@ -25,9 +25,22 @@
   });
 
   // Toggle the side navigation
+  
+  // dikomen yang awal 
+  // $("#sidebarToggle").on("click", function(e) {
+  //   e.preventDefault();
+  //   $("body").toggleClass("sidenav-toggled");
+  // });
+
+  // baru
   $("#sidebarToggle").on("click", function(e) {
     e.preventDefault();
     $("body").toggleClass("sidenav-toggled");
+    if (window.innerWidth >= 992) {
+      $("body").css("overflow-y","auto");
+    }else{
+      $("body").hasClass("sidenav-toggled") ? $("body").css("overflow-y","hidden") : $("body").css("overflow-y","auto") 
+    }
   });
 
   // Activate Feather icons
@@ -60,16 +73,31 @@
     }
   });
 
-  // Click to collapse responsive sidebar
-  $("#layoutSidenav_content").click(function() {
+  // dikomen yang awal
+  // $("#layoutSidenav_content").click(function(e) {
+  //   const BOOTSTRAP_LG_WIDTH = 992;
+  //   if (window.innerWidth >= 992) {
+  //     return;
+  //   }else{
+  //     if ($("body").hasClass("sidenav-toggled")) {
+  //        $("body").toggleClass("sidenav-toggled");
+  //     }
+  //   }
+  // });
+
+  //  baru
+  $(".sidebar-background").click(function(e) {
     const BOOTSTRAP_LG_WIDTH = 992;
     if (window.innerWidth >= 992) {
       return;
-    }
-    if ($("body").hasClass("sidenav-toggled")) {
-        $("body").toggleClass("sidenav-toggled");
+    }else{
+      if ($("body").hasClass("sidenav-toggled")) {
+          $("body").removeClass("sidenav-toggled");
+          $("body").css("overflow-y","auto") 
+      }
     }
   });
+
 
   // Init sidebar
   let activatedPath = window.location.pathname.match(/([\w-]+\.html)/, '$1');

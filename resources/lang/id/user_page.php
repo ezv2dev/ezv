@@ -66,6 +66,7 @@ return [
     'Delete Photo' => 'Hapus Foto',
     'Things to know' => 'Hal yang perlu diketahui',
     'House Rules' => 'Peraturan Rumah',
+    'Hotel Rules' => 'Peraturan Hotel',
     'No data found' => 'Data tidak ditemukan',
     'Childrens are allowed' => 'Anak-anak diperbolehkan',
     'Infants are allowed' => 'Bayi diperbolehkan',

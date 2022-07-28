@@ -315,7 +315,7 @@
     /* End Radio Button */
 </style>
 
-<div id="modal-edit-house-rules" class="modal fade bs-example-modal-lg">
+<div id="modal-edit-hotel-rules" class="modal fade bs-example-modal-lg">
     <div class="modal-dialog modal-fullscreen-md-down modal-lg" style="overflow-y: initial !important;">
         <div class="modal-content" style="background-color: #fff;">
             <div class="modal-header filter-modal d-flex justify-content-between">
@@ -326,7 +326,7 @@
             <div class="modal-body">
                 <div class="tabbable column-wrapper translate-text-group">
                     <hr style="margin-top: -20px;">
-                    <form method="POST" action="javascript:void(0);" id="houseRuleForm">
+                    <form method="POST" action="javascript:void(0);" id="hotelRuleForm">
                         @csrf
                         <input type="hidden" id="hotel" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
 
@@ -451,7 +451,7 @@
                         </p>
                     </div>
                     <div class="col-4 d-flex justify-content-end">
-                        <button type="submit" id="btnSaveHouseRules" form="houseRuleForm"
+                        <button type="submit" id="btnSaveHouseRules" form="hotelRuleForm"
                             style="border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
                             class="btn btn-primary btn-lg btn-block">
                             Save

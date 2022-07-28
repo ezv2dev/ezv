@@ -1062,7 +1062,7 @@
                                     @endif
                                 @endauth
                             </h2>
-                            <div class="d-flex justify-content-left">
+                            {{-- <div class="d-flex justify-content-left">
                                 <div id="displayTags">
                                     @forelse ($hotelTags->take(5) as $item)
                                         <span class="badge rounded-pill fw-normal translate-text-group-items"
@@ -1082,7 +1082,7 @@
                                             style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Tags') }}</a>
                                     @endif
                                 @endauth
-                            </div>
+                            </div> --}}
                             <p id="description-content">
                                 {!! Str::limit(Translate::translate($hotel[0]->description), 600, ' ...') ??
                                     __('user_page.There is no description yet') !!}
@@ -1566,8 +1566,8 @@
                         @endauth
                     </h2>
                     @forelse ($hotelTypeDetail as $item)
-                        <div class="col-12 m-0 row p-0">
-                            <div class="col-12 col-lg-3"
+                        <div class="col-12 m-0 row px-2 px-lg-0">
+                            <div class="col-12 col-lg-3 mb-2 mb-lg-0"
                                 style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                                 <div class="col-12">
                                     <div class="col-12">
@@ -1700,7 +1700,7 @@
                             </div>
                             <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
-                                    <div class="col-12 m-0 ps-2 pe-2 row ">
+                                    <div class="col-12 m-0 px-0 px-lg-2 row ">
                                         <div class="col-12 row m-0 p-0 mb-2"
                                             style="box-shadow: 1px 1px 10px rgb(63 62 62 / 16%); border-radius: 12px; border: 1px solid #d6d6d6;">
                                             <div class="col-2 d-flex align-items-center justify-content-center">
@@ -1740,7 +1740,7 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="col-12 col-lg-2">
+                            <div class="col-12 col-lg-2 px-0 px-lg-2">
                                 <div class="total-container">
                                     <h6 class="mb-2">IDR {{ number_format($item->price) }}</h6>
                                     <button class="price-button"
@@ -2417,7 +2417,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                             <div class="d-flex">
-                                <h6 class="mb-2">{{ __('user_page.House Rules') }}</h6>
+                                <h6 class="mb-2">{{ __('user_page.Hotel Rules') }}</h6>
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editHotelRules()"
@@ -4164,7 +4164,7 @@
                                 $name = $item->name;
                             @endphp
                             <li class="ui-state-default" data-id="{{ $id }}"
-                            id="positionPhotoGallery{{ $id }}">
+                                id="positionPhotoGallery{{ $id }}">
                                 <img src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}"
                                     title="{{ $name }}">
                             </li>
@@ -4205,7 +4205,7 @@
                                 $name = $item->name;
                             @endphp
                             <li class="ui-state-default" data-id="{{ $id }}"
-                            id="positionVideoGallery{{ $id }}">
+                                id="positionVideoGallery{{ $id }}">
                                 <video
                                     src="{{ asset('foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}#t=1.0">
                             </li>
@@ -5994,7 +5994,11 @@
     {{-- HOTEL RULES SAFETY --}}
     <script>
         function editHotelRules() {
-            $("#modal-edit-house-rules").modal("show");
+            $("#modal-edit-hotel-rules").modal("show");
+        }
+
+        function editGuestSafety() {
+            $("#modal-edit-guest-safety").modal("show");
         }
     </script>
     {{-- HOTEL RULES SAFETY --}}

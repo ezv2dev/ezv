@@ -323,7 +323,7 @@
             </div>
             <div class="modal-body modal-body3">
                 <div class="tabbable column-wrapper translate-text-group">
-                    <form method="POST" action="javascript:void(0);" id="guestSafetyForm">
+                    <form method="POST" action="javascript:void(0);" id="guestSafetyFormHotel">
                         @csrf
                         <input type="hidden" id="hotel" name="id_hotel" value="{{ $hotel[0]->id_hotel }}">
 
@@ -815,7 +815,7 @@
                         </p>
                     </div>
                     <div class="col-4 d-flex justify-content-end">
-                        <button type="submit" id="btnSaveHouseRules" form="houseRuleForm"
+                        <button type="submit" id="btnSaveGuestSafety" form="guestSafetyForm"
                             style="border-radius: 9px; padding : 8px; box-sizing: border-box; background-color: #FF7400; border: none;"
                             class="btn btn-primary btn-lg btn-block">
                             Save

@@ -130,6 +130,24 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
+.border-left{
+    border-left:1px solid #eee !important;
+}
+.border-right{
+    border-right:1px solid #eee !important;
+}
+.border-top{
+    border-top:1px solid #eee !important;
+}
+.border-bottom{
+    border-bottom:1px solid #eee !important;
+}
+
+#loading-content{
+    position:fixed;
+    top:0;
+    left:0;
+}
 @media only screen and (max-width: 533px) {
     .flex-gap .bg-white {
         width: 100%;
@@ -151,6 +169,7 @@
         font-size: 12px !important;
     }
 }
+
 /* @media only screen and (max-width: 350px) {
 
 } */
@@ -405,9 +424,8 @@
 
     </div>
     <div id="overlay"></div>
-    {{-- <nav class="fixed-top shadow bg-white navbar-1-1 navbar navbar-expand-lg navbar-light p-4 px-md-4" --}}
-    <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}"
-        style="margin-bottom:-2%;">
+    <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4 px-md-4" 
+    {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}}
         <div class="container">
             <a href="{{ route('partner_dashboard') }}" class="navbar-brand mb-n1" target="_blank">
                 <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
@@ -892,8 +910,9 @@
         </div>
     </nav>
 
-    <main style="overflow-y: auto; overflow-x: hidden;">
-        <hr style="background-color: transparent; border-color: transparent;">
+    <!-- <main style="overflow-y: auto; overflow-x: hidden;"> -->
+    <main class="main">
+        <!-- <hr style="background-color: transparent; border-color: transparent;"> -->
         @yield('content_admin')
 
         @include('user.modal.dashboard.modal_language')
@@ -924,6 +943,10 @@
 
     @yield('scripts')
     <script>
+        $(document).ready(function(){
+            let navBarHeight = $('#navBar').outerHeight()
+            $('.main').css('margin-top',navBarHeight)
+        })
         $(".btn-close-expand-navbar-mobile").on("click", function() {
             $("body").css({
                 "height": "auto",
@@ -943,6 +966,14 @@
             $(".expand-navbar-mobile").addClass("expanding-navbar-mobile");
             $(".expand-navbar-mobile").attr("aria-expanded", "true");
             $("#overlay").css("display", "block");
+
+            // baru
+            if (window.innerWidth < 992) {
+                if ($("body").hasClass("sidenav-toggled")) {
+                    $("body").removeClass("sidenav-toggled");
+                    $("body").css("overflow-y","auto") 
+                }
+            }
         })
         $('#overlay').click(function() {
             $("body").css({

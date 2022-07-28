@@ -816,6 +816,10 @@ Route::post('/guessafety/post', [ViewController::class, 'villa_update_guest_safe
 Route::post('/cancellation_policy/post', [ViewController::class, 'villa_update_cancellation_policy'])->name('villa_update_cancellation_policy');
 Route::post('/villa/photo/caption/update', [ViewController::class, 'villa_update_caption_photo'])->name('villa_update_caption_photo');
 
+// things to know hotel
+Route::post('/hotelrules/post', [Hotel\HotelDetailController::class, 'hotel_update_hotel_rules'])->name('hotel_update_hotel_rules');
+Route::post('/hotelguestsafety/post', [Hotel\HotelDetailController::class, 'hotel_update_guest_safety'])->name('hotel_update_guest_safety');
+
 //-- RESTAURANT ---
 Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::post('/restaurant/update/photo/position', [Restaurant\RestaurantController::class, 'restaurant_update_position_photo'])->name('restaurant_update_photo_photo_position');

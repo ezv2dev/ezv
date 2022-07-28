@@ -73,7 +73,7 @@
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: #fff;">×</span></button>
                 </div>
                 <div class="modal-body" style="font-size: 11pt; color: #000;">
-                    <form action="{{ route('calendar_store') }}" method="POST">
+                    <form action="{{ route('calendar_store') }}" method="POST" id="calendar_store">
                         @csrf
                         <div class="row" style="display: flex;">
                             <div class="col-6">
@@ -106,18 +106,21 @@
                         <div class="form-group">
                             <label for="">Start date</label>
                             <input type="date" class="form-control" id="start" name="start" placeholder="Start date">
+                            <small id="err-sdate" style="display: none;" class="invalid-feedback">The start date field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">End date</label>
                             <input type="date" class="form-control" id="end" name="end" placeholder="End date">
+                            <small id="err-edate" style="display: none;" class="invalid-feedback">The end date field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Special Price</label>
-                            <input type="text" class="form-control" name="price" placeholder="Price" required>
+                            <input type="text" class="form-control" name="price" id="special_price" placeholder="Price">
+                            <small id="err-sprice" style="display: none;" class="invalid-feedback">The special price field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Discount</label>
-                            <input type="text" class="form-control" name="disc" placeholder="Discount" value="0">
+                            <input type="text" class="form-control" name="disc" id="discount" placeholder="Discount" value="0">
                         </div>
                         <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
                     </form>
@@ -137,7 +140,7 @@
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: #fff;">×</span></button>
                 </div>
                 <div class="modal-body" style="font-size: 11pt; color: #000;">
-                    <form action="{{ route('calendar_update') }}" method="POST">
+                    <form action="{{ route('calendar_update') }}" method="POST" id="calendar_update">
                         @csrf
                         <div class="form-group">
                             <label for="">Villa name</label>
@@ -151,14 +154,17 @@
                         <div class="form-group">
                             <label for="">Start date</label>
                             <input type="date" class="form-control" id="edit-start" name="start" placeholder="Start date" date-format="Y-m-d">
+                            <small id="err-usdate" style="display: none;" class="invalid-feedback">The end date field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">End date</label>
                             <input type="date" class="form-control" id="edit-end" name="end" placeholder="End date" date-format="Y-m-d">
+                            <small id="err-uedate" style="display: none;" class="invalid-feedback">The end date field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Special Price</label>
-                            <input type="text" class="form-control" id="special_price" name="price" placeholder="Price">
+                            <input type="text" class="form-control" id="special-price" name="price" placeholder="Price">
+                            <small id="err-usprice" style="display: none;" class="invalid-feedback">The special price field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Discount</label>
@@ -309,7 +315,7 @@
                         $('#id_detail').val(event.id_detail);
                         $('#edit-start').val(start);
                         $('#edit-end').val(end);
-                        $('#special_price').val(event.title);
+                        $('#special-price').val(event.title);
                         $('#villa_name').val(event.name);
                         $('#disc').val(event.disc);
                         $('#editSpecialModal').modal('show');
@@ -336,4 +342,95 @@
 
 </script>
 
+<script>
+    $(function() {
+        $('#start').change(function (e) {
+            $('#start').removeClass('is-invalid');
+            $('#err-sdate').hide();
+        });
+        $('#end').change(function (e) {
+            $('#end').removeClass('is-invalid');
+            $('#err-edate').hide();
+        });
+        $('#special_price').keyup(function (e) {
+            $('#special_price').removeClass('is-invalid');
+            $('#err-sprice').hide();
+        });
+        $('#calendar_store').submit(function (e) {
+            let error = 0;
+            if(!$('#start').val()) {
+                $('#start').addClass('is-invalid');
+                $('#err-sdate').show();
+                error = 1;
+            } else {
+                $('#start').removeClass('is-invalid');
+                $('#err-sdate').hide();
+            }
+            if(!$('#end').val()) {
+                $('#err-edate').show();
+                $('#end').addClass('is-invalid');
+                error = 1;
+            } else {
+                $('#end').removeClass('is-invalid');
+                $('#err-edate').hide();
+            }
+            if(!$('#special_price').val()) {
+                $('#err-sprice').show();
+                $('#special_price').addClass('is-invalid');
+                error = 1;
+            } else {
+                $('#special_price').removeClass('is-invalid');
+                $('#err-sprice').hide();
+            }
+
+            if(error) {
+                e.preventDefault();
+            }
+        });
+
+        $('#edit-start').change(function (e) {
+            $('#edit-start').removeClass('is-invalid');
+            $('#err-usdate').hide();
+        });
+        $('#edit-end').change(function (e) {
+            $('#edit-end').removeClass('is-invalid');
+            $('#err-uedate').hide();
+        });
+        $('#special-price').keyup(function (e) {
+            $('#special-price').removeClass('is-invalid');
+            $('#err-usprice').hide();
+        });
+        $('#calendar_update').submit(function (e) {
+            let error = 0;
+            if(!$('#edit-start').val()) {
+                $('#edit-start').addClass('is-invalid');
+                $('#err-usdate').show();
+                error = 1;
+            } else {
+                $('#edit-start').removeClass('is-invalid');
+                $('#err-usdate').hide();
+            }
+            if(!$('#edit-end').val()) {
+                $('#err-uedate').show();
+                $('#edit-end').addClass('is-invalid');
+                error = 1;
+            } else {
+                $('#edit-end').removeClass('is-invalid');
+                $('#err-uedate').hide();
+            }
+            if(!$('#special-price').val()) {
+                $('#err-usprice').show();
+                $('#special-price').addClass('is-invalid');
+                error = 1;
+            } else {
+                $('#special-price').removeClass('is-invalid');
+                $('#err-usprice').hide();
+            }
+
+            if(error) {
+                e.preventDefault();
+            }
+        });
+    })
+</script>
 @endsection

@@ -497,7 +497,7 @@ class HotelDetailController extends Controller
         return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelRoomDetails', 'hotelTags', 'hotelRules', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'propertyType', 'hotelTypeDetail'));
     }
 
-    public function villa_update_house_rules(Request $request)
+    public function hotel_update_hotel_rules(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'children' => 'required',
@@ -513,10 +513,10 @@ class HotelDetailController extends Controller
             ], 500);
         }
 
-        $checkID = HotelRules::where('id_villa', '=', $request->id_villa)->first();
+        $checkID = HotelRules::where('id_hotel', '=', $request->id_hotel)->first();
 
         $data = [
-            'id_villa' => $request->id_villa,
+            'id_hotel' => $request->id_hotel,
             'children' => $request->children,
             'infants' => $request->infants,
             'pets' => $request->pets,
@@ -525,9 +525,8 @@ class HotelDetailController extends Controller
         ];
 
         if ($checkID == null) {
-            // ID villa doesn't exist
             $checkID = HotelRules::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'children' => $request->children,
                 'infants' => $request->infants,
                 'pets' => $request->pets,
@@ -537,11 +536,11 @@ class HotelDetailController extends Controller
 
             return response()->json([
                 'data' => $data,
-                'message' => 'Updated House Rules Homes',
+                'message' => 'Updated Hotel Rules',
             ], 200);
         } else {
             $checkID->update(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'children' => $request->children,
                 'infants' => $request->infants,
                 'pets' => $request->pets,
@@ -551,12 +550,12 @@ class HotelDetailController extends Controller
 
             return response()->json([
                 'data' => $data,
-                'message' => 'Updated House Rules Homes',
+                'message' => 'Updated Hotel Rules',
             ], 200);
         }
     }
 
-    public function villa_update_guest_safety(Request $request)
+    public function hotel_update_guest_safety(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'pool' => 'required',
@@ -582,14 +581,14 @@ class HotelDetailController extends Controller
             ], 500);
         }
 
-        $deleteID = HotelHasGuestSafety::where('id_villa', '=', $request->id_villa)->delete();
+        $deleteID = HotelHasGuestSafety::where('id_hotel', '=', $request->id_hotel)->delete();
 
         $data = [];
         $i = 0;
 
         if ($request->pool == 1) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 1,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -601,7 +600,7 @@ class HotelDetailController extends Controller
         }
         if ($request->lake == 2) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 2,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -614,7 +613,7 @@ class HotelDetailController extends Controller
         }
         if ($request->climb == 3) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 3,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -627,7 +626,7 @@ class HotelDetailController extends Controller
         }
         if ($request->height == 4) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 4,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -640,7 +639,7 @@ class HotelDetailController extends Controller
         }
         if ($request->animal == 5) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 5,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -653,7 +652,7 @@ class HotelDetailController extends Controller
         }
         if ($request->camera == 6) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 6,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -666,7 +665,7 @@ class HotelDetailController extends Controller
         }
         if ($request->monoxide == 7) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 7,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -679,7 +678,7 @@ class HotelDetailController extends Controller
         }
         if ($request->alarm == 8) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 8,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -692,7 +691,7 @@ class HotelDetailController extends Controller
         }
         if ($request->must == 9) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 9,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -705,7 +704,7 @@ class HotelDetailController extends Controller
         }
         if ($request->potential == 10) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 10,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -718,7 +717,7 @@ class HotelDetailController extends Controller
         }
         if ($request->come == 11) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 11,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -731,7 +730,7 @@ class HotelDetailController extends Controller
         }
         if ($request->parking == 12) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 12,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -744,7 +743,7 @@ class HotelDetailController extends Controller
         }
         if ($request->shared == 13) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 13,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -757,7 +756,7 @@ class HotelDetailController extends Controller
         }
         if ($request->amenity == 14) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 14,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -770,7 +769,7 @@ class HotelDetailController extends Controller
         }
         if ($request->weapon == 15) {
             HotelHasGuestSafety::create(array(
-                'id_villa' => $request->id_villa,
+                'id_hotel' => $request->id_hotel,
                 'id_guest_safety' => 15,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
@@ -784,8 +783,8 @@ class HotelDetailController extends Controller
 
         return response()->json([
             'data' => $data,
-            'id_villa' => $request->id_villa,
-            'message' => 'Update Health & Safety Homes',
+            'id_hotel' => $request->id_hotel,
+            'message' => 'Update Health & Safety Hotel',
         ], 200);
     }
 
