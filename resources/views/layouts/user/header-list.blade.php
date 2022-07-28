@@ -749,7 +749,7 @@
                                         <ul class="nav">
                                             <li class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px; border: 0;margin-right:5px; text-align: right;"
+                                                    style="width: 30px; border: 0;margin-right:5px; text-align: right; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
@@ -1461,7 +1461,7 @@
                                         <ul class="nav">
                                             <li class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px;margin-right:5px; border: 0; text-align: right;"
+                                                    style="width: 30px;margin-right:5px; border: 0; text-align: right; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
@@ -2784,11 +2784,11 @@
                                         @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') ||
                                             (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
                                             <p id="add_date_wow"
-                                                style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
+                                                style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 55px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @else
                                             <p id="add_date_wow"
-                                                style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
+                                                style="position: absolute; color: grey; font-size: 15px; top:34px; left: 55px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
@@ -3222,11 +3222,11 @@
                                         @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') ||
                                             (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
                                             <p id="add_date_wow"
-                                                style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
+                                                style="display: none; position: absolute; color: grey; font-size: 15px; top:34px; left: 55px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @else
                                             <p id="add_date_wow"
-                                                style="position: absolute; color: grey; font-size: 15px; top:34px; left: 75px; font-weight: 400;">
+                                                style="position: absolute; color: grey; font-size: 15px; top:34px; left: 55px; font-weight: 400;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @endIf
                                         <div style="display: flex; padding: 0px;"

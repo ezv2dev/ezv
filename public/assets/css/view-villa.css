@@ -3234,6 +3234,11 @@ span.flatpickr-weekday {
 .navigationItemText {
     display: inline;
 }
+.bar-activity-detail .guests,
+.bar-collaborator-detail .guests {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
 
 #type-content-mobile{
     display: none;
