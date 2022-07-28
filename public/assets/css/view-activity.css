@@ -216,7 +216,7 @@
 }
 
 .row-grid-location {
-    margin-right: 3px;
+    margin-right: -5px;
 }
 
 .delete-story {
@@ -277,4 +277,12 @@
     .prices h2 {
         padding-left: 10px;
     }
+}
+
+#location-map {
+    margin-left: -3px;
+}
+
+.owner-block {
+    padding-right: 0;
 }

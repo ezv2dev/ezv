@@ -1267,9 +1267,9 @@
                 </div>
             </section>
                     <section id="description" class="section-2">
-                        <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
+                        <hr>
                             <h2>
                                 {{ __('user_page.About this place') }}
                                 @auth
@@ -1524,20 +1524,18 @@
         {{-- END RIGHT CONTENT --}}
 
         <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
-            <div class="row-grid-amenities">
-                <hr>
-                <div>
-                    <h2>
-                        {{ __("user_page.What's nearby ?") }}
-                        @auth
-                            @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;
-                                <a type="button" onclick="edit_location()"
-                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
-                            @endif
-                        @endauth
-                    </h2>
-                </div>
+            <hr>
+            <div>
+                <h2>
+                    {{ __("user_page.What's nearby ?") }}
+                    @auth
+                        @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                            &nbsp;
+                            <a type="button" onclick="edit_location()"
+                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Location') }}</a>
+                        @endif
+                    @endauth
+                </h2>
             </div>
             <div class="row-grid-location">
                 @include('user.modal.activity.map-location')

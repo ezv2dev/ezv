@@ -2007,6 +2007,18 @@ li.button-dropdown {
     margin-top: 20px;
     z-index: 1;
 }
+
+.sidebar-activity {
+    right: 7px !important;
+}
+
+.price {
+    margin-left: -4px;
+}
+
+.price hr {
+    margin-left: 14px;
+}
 /* /css details reserve */
 
 .row-border-bottom {
