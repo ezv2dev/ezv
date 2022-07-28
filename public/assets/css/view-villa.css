@@ -498,6 +498,7 @@ a:hover {
     padding: 0;
     background: #fff;
     position: relative;
+    right: 7px;
 }
 
 .reserve-inner-block {
@@ -4339,7 +4340,7 @@ span.flatpickr-weekday {
 }
 
 .owner-block {
-    padding-right: 10px;
+    padding-right: 0;
 }
 
 .owner-profile p {
