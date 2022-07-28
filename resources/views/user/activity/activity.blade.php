@@ -1736,40 +1736,11 @@
                                     <div class="col-6">
                                         <div class="d-flex">
                                             <div class="col-6">
-                                                {{ __('user_page.Food') }}
+                                                {{ __('user_page.Experience') }}
                                             </div>
                                             <div class="col-6 ">
                                                 <div class="liner"></div>
-                                                {{ $activity->detailReview->average_food }}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Service') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_service }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Value') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_value }}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Atmosphere') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_atmosphere }}
+                                                {{ $activity->detailReview->average_experience }}
                                             </div>
                                         </div>
                                     </div>
@@ -1788,7 +1759,7 @@
                                         </div>
                                         <div class="col-8">
                                             <p class="review-txt">
-                                                There is no reviews yet
+                                                {{ __('user_page.there is no reviews yet') }}
                                             </p>
                                         </div>
                                     </div>
