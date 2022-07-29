@@ -860,6 +860,7 @@ function saveLanguage() {
         },
     });
 }
+
 function saveTags() {
     console.log('hit saveTag');
 
@@ -967,6 +968,68 @@ function saveTags() {
             btn.removeClass("disabled");
 
             $('#modal-add_tag').modal('hide');
+        },
+    });
+}
+
+function saveReview() {
+    console.log('hit saveReview');
+
+    const form = $('#saveReviewForm');
+    const formData = {
+        id_collab: form.find(`input[name='id_collab']`).val(),
+        experience: form.find(`input[name='experience']:checked`).val(),
+        comment: form.find(`input[name='comment']`).val()
+    };
+    console.log(formData);
+
+    let btn = form.find('#btnSaveReview');
+    btn.text("Saving...");
+    btn.addClass("disabled");
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/collaborator/review/store",
+        data: formData,
+        success: function (response) {
+            console.log(response);
+            // notification
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+
+            // append updated data
+
+            // enabled button
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            btn.html("<i class='fa fa-check'></i> Save");
+            btn.removeClass("disabled");
         },
     });
 }

@@ -2064,7 +2064,7 @@
                                 <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
                                     <h2>{{ __('user_page.Give review') }}</h2>
                                     <div class="row">
-                                        <form action="{{ route('collab_store_review') }}" method="post">
+                                        {{-- <form action="{{ route('collab_store_review') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id_collab"
                                                 value="{{ $profile->id_collab }}" readonly required>
@@ -2108,7 +2108,6 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
 
@@ -2128,7 +2127,67 @@
                                                 </div>
 
                                             </div>
-                                        </form>
+                                        </form> --}}
+                                        <div id="saveReviewForm">
+                                            <input type="hidden" name="id_collab" value="{{ $profile->id_collab }}" readonly required>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                    <div class="d-flex">
+                                                        <div class="col-4 review-container">
+                                                            {{ __('user_page.Experience') }}
+                                                        </div>
+                                                        <div class="col-8 review-container">
+                                                            <div class="cm-star-rating">
+                                                                <input id="star-5" type="radio" name="experience"
+                                                                    value="5" required />
+                                                                <label for="star-5"
+                                                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-4" type="radio" name="experience"
+                                                                    value="4" />
+                                                                <label for="star-4"
+                                                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-3" type="radio" name="experience"
+                                                                    value="3" />
+                                                                <label for="star-3"
+                                                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-2" type="radio" name="experience"
+                                                                    value="2" />
+                                                                <label for="star-2"
+                                                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input id="star-1" type="radio" name="experience"
+                                                                    value="1" />
+                                                                <label for="star-1"
+                                                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                    <div class="col-12">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <center>
+                                                        <button type="submit" class="btn btn-primary" id="btnSaveReview" onclick="saveReview()">{{ __('user_page.Save') }}</button>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr>
                                 </div>
