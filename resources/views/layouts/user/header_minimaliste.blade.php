@@ -151,6 +151,7 @@
                 @endauth
             </div>
         </div>
+        <div id="overlay"></div>
         <div class="header-4-4 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
             <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
                 <div class="collapse navbar-collapse navbar-dekstop" id="navbarTogglerDemo">
