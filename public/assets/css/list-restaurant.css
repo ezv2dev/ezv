@@ -294,6 +294,9 @@
         /* aspect-ratio: 4/3 !important; */
         height: 350px !important;
     }
+    .aspect-ratio-3 {
+        height: 350px !important;
+    }
 }
 
 @media (min-width: 550px) {
