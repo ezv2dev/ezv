@@ -7,7 +7,7 @@ $.ajaxSetup({
 let id_activity = $("#id_activity").val();
 
 //ganti short description activity
-$(document).on("keyup", "textarea#short-description-form-input", function () {
+$(document).on("keyup", "textarea#short-description-form-input", function() {
     $("#short-description-form-input").css("border", "");
     $("#err-shrt-desc").hide();
 });
@@ -41,7 +41,7 @@ function saveShortDescription() {
                 id_activity: id_activity,
                 short_description: short_desc,
             },
-            success: function (response) {
+            success: function(response) {
                 // console.log(response.data.short_description);
                 let short_desc_input = document.getElementById(
                     "short-description-form-input"
@@ -64,7 +64,7 @@ function saveShortDescription() {
 
                 editShortDescriptionCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -98,7 +98,7 @@ function saveShortDescription() {
     }
 }
 
-$(document).on("keyup", "textarea#description-form-input", function () {
+$(document).on("keyup", "textarea#description-form-input", function() {
     $("#description-form-input").css("border", "");
     $("#err-desc").hide();
 });
@@ -132,7 +132,7 @@ function saveDescription() {
                 id_activity: id_activity,
                 description: desc,
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 console.log(response.data.description.length);
 
@@ -170,7 +170,7 @@ function saveDescription() {
 
                 editDescriptionCancel();
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -199,7 +199,7 @@ function saveDescription() {
 }
 
 //ganti nama wow
-$(document).on("keyup", "textarea#name-form-input", function () {
+$(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
@@ -233,7 +233,7 @@ function saveNameActivity() {
                 id_activity: id_activity,
                 name: $("#name-form-input").val(),
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response.data.name);
                 let name_input = document.getElementById("name-form-input");
 
@@ -254,7 +254,7 @@ function saveNameActivity() {
                 nameBackup = response.data.name;
                 name_input.value = response.data.name;
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -287,7 +287,7 @@ function saveNameActivity() {
 let imageProfileActivity;
 let readerImageActivity;
 
-$("#imageActivity").on("change", function (ev) {
+$("#imageActivity").on("change", function(ev) {
     if (document.getElementById("imageActivity").files.length != 0) {
         $(".image-box").css("border", "");
         $("#err-img").hide();
@@ -297,7 +297,7 @@ $("#imageActivity").on("change", function (ev) {
     readerImageActivity = new FileReader();
 });
 
-$("#updateImageForm").submit(function (e) {
+$("#updateImageForm").submit(function(e) {
     let error = 0;
     if (document.getElementById("imageActivity").files.length == 0) {
         $(".image-box").css("border", "solid #e04f1a 1px");
@@ -330,14 +330,14 @@ $("#updateImageForm").submit(function (e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageActivity.addEventListener("load", function () {
+                readerImageActivity.addEventListener("load", function() {
                     $(".imageProfileActivity").attr(
                         "src",
                         readerImageActivity.result
@@ -353,7 +353,7 @@ $("#updateImageForm").submit(function (e) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 // console.log(jqXHR.responseJSON);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -386,7 +386,7 @@ $("#updateImageForm").submit(function (e) {
 function saveSubcategoryActivity() {
     let subcategory = [];
 
-    $("input[name='subcategory[]']:checked").each(function () {
+    $("input[name='subcategory[]']:checked").each(function() {
         subcategory.push(parseInt($(this).val()));
     });
 
@@ -404,7 +404,7 @@ function saveSubcategoryActivity() {
             id_activity: id_activity,
             subcategory: subcategory,
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
             // console.log(response.data.tags.length);
 
@@ -473,7 +473,7 @@ function saveSubcategoryActivity() {
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -522,7 +522,7 @@ function saveTimeActivity() {
             open_time: open_time,
             closed_time: closed_time,
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
 
             iziToast.success({
@@ -545,7 +545,7 @@ function saveTimeActivity() {
             $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -595,7 +595,7 @@ function saveTimeActivityMobile() {
             open_time: open_time,
             closed_time: closed_time,
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
 
             iziToast.success({
@@ -618,7 +618,7 @@ function saveTimeActivityMobile() {
             $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -669,12 +669,165 @@ let priceImageActivity;
 $("#modal-add_price")
     .find("input[name='image']")
     .eq(0)
-    .on("change", function (ev) {
+    .on("change", function(ev) {
         priceImageActivity = this.files[0];
         console.log("hit data");
     });
 
-$("#addPriceForm").submit(function (e) {
+// $("#addPriceForm").submit(function(e) {
+//     e.preventDefault();
+//     let btn = document.getElementById("btnSavePrice");
+//     btn.textContent = "Saving Price...";
+//     btn.classList.add("disabled");
+
+//     var formData = new FormData(this);
+
+//     $.ajax({
+//         type: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         url: "/things-to-do/price/store",
+//         data: formData,
+//         cache: false,
+//         processData: false,
+//         contentType: false,
+//         enctype: "multipart/form-data",
+//         dataType: "json",
+//         success: function(response) {
+//             console.log(response);
+
+//             iziToast.success({
+//                 title: "Success",
+//                 message: response.message,
+//                 position: "topRight",
+//             });
+
+//             const path = "/foto/activity/";
+//             const uid = response.uid.uid;
+//             const slash = "/";
+//             const lowerCaseUid = uid.toLowerCase();
+
+//             let content = "";
+
+//             content += '<div class="col-12 col-md-4 text-center tab-body">';
+//             content += '<div class="content list-image-content">';
+//             content +=
+//                 '<div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"';
+//             content += 'data-dots="false" data-arrows="true">';
+
+//             if (response.data.foto) {
+//                 content +=
+//                     '<a href="/wow/price/' +
+//                     response.data.id_price +
+//                     '/details"';
+//                 content += 'target="_blank" class="grid-image-container">';
+//                 content += '<img class="brd-radius img-fluid grid-image lozad"';
+//                 content += 'style="height: 200px; display: block;"';
+//                 content +=
+//                     'src="' +
+//                     path +
+//                     lowerCaseUid +
+//                     slash +
+//                     response.data.foto +
+//                     '" alt="">';
+//                 content += "</a>";
+//             } else {
+//                 content +=
+//                     '<a href="/wow/price/' +
+//                     response.data.id_price +
+//                     '/details"';
+//                 content += 'target="_blank" class="grid-image-container">';
+//                 content += '<img class="brd-radius img-fluid grid-image lozad"';
+//                 content += 'style="height: 200px; display: block;"';
+//                 content += 'src="/foto/default/no-image.jpeg" alt="">';
+//                 content += "</a>";
+//             }
+
+//             content += "</div> </div> </div>";
+//             content +=
+//                 '<div class="col-12 col-md-4 text-justify tab-body" style="cursor: pointer;"';
+//             content +=
+//                 'onclick="window.location=/wow/price/' +
+//                 response.data.id_price +
+//                 '/details">';
+//             content += "<h4>";
+//             content += "<p>";
+//             content +=
+//                 '<a href="/wow/price/' + response.data.id_price + '/details">';
+//             content +=
+//                 '<span class="translate-text-group-items">' +
+//                 response.data.name +
+//                 "</span> </a> </p> </h4>";
+
+//             content += '<p class="desc-hotel">';
+//             content += limit(response.data.description, 200);
+//             content += "</p> </div>";
+
+//             content +=
+//                 '<div class="col-12 col-md-4 text-center tab-body" style="cursor: pointer;"';
+//             content +=
+//                 'onclick="window.location=/wow/price/' +
+//                 response.data.id_price +
+//                 '/details">';
+//             content += "IDR " + response.data.price;
+//             content += "<br>";
+//             content +=
+//                 '<a href="/wow/price/' + response.data.id_price + '/details"';
+//             content +=
+//                 'target="_blank" style="display: inline-block; width: 50%;"';
+//             content +=
+//                 'class="btn btn-outline-dark table-room-button">Select</a>';
+//             content += "</div>";
+
+//             let lengthContent = $("#price-content").find(
+//                 ".list-image-content"
+//             ).length;
+
+//             if (lengthContent == 0) {
+//                 $("#price-content").html("");
+//             }
+
+//             $("#price-content").append(content);
+
+//             $("#modal-add_price").find("input[name='id_activity']").val("");
+//             $("#modal-add_price").find("input[name='name']").val("");
+//             $("#modal-add_price").find("input[name='price']").val("");
+//             $("#modal-add_price").find("input[name='start_date']").val("");
+//             $("#modal-add_price").find("input[name='end_date']").val("");
+//             $("#modal-add_price").find("input[name='description']").val("");
+//             $("#modal-add_price").find("input[name='image']").val("");
+//             $("#modal-add_price").find("img").attr("src", "");
+
+//             btn.innerHTML = "<i class='fa fa-check'></i> Save";
+//             btn.classList.remove("disabled");
+
+//             $("#modal-add_price").modal("hide");
+//         },
+//         error: function(jqXHR, exception) {
+//             if (jqXHR.responseJSON.errors) {
+//                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+//                     iziToast.error({
+//                         title: "Error",
+//                         message: jqXHR.responseJSON.errors[i],
+//                         position: "topRight",
+//                     });
+//                 }
+//             } else {
+//                 iziToast.error({
+//                     title: "Error",
+//                     message: jqXHR.responseJSON.message,
+//                     position: "topRight",
+//                 });
+//             }
+
+//             btn.innerHTML = "<i class='fa fa-check'></i> Save";
+//             btn.classList.remove("disabled");
+//         },
+//     });
+// });
+
+$("#addPriceForm").submit(function(e) {
     e.preventDefault();
     let btn = document.getElementById("btnSavePrice");
     btn.textContent = "Saving Price...";
@@ -694,9 +847,7 @@ $("#addPriceForm").submit(function (e) {
         contentType: false,
         enctype: "multipart/form-data",
         dataType: "json",
-        success: function (response) {
-            console.log(response);
-
+        success: function(response) {
             iziToast.success({
                 title: "Success",
                 message: response.message,
@@ -708,87 +859,71 @@ $("#addPriceForm").submit(function (e) {
             const slash = "/";
             const lowerCaseUid = uid.toLowerCase();
 
+            var start_date = new Date(response.data.start_date);
+            var end_date = new Date(response.data.end_date);
+
             let content = "";
 
-            content += '<div class="col-12 col-md-4 text-center tab-body">';
-            content += '<div class="content list-image-content">';
-            content +=
-                '<div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"';
-            content += 'data-dots="false" data-arrows="true">';
-
-            if (response.data.foto) {
-                content +=
-                    '<a href="/wow/price/' +
-                    response.data.id_price +
-                    '/details"';
-                content += 'target="_blank" class="grid-image-container">';
-                content += '<img class="brd-radius img-fluid grid-image lozad"';
-                content += 'style="height: 200px; display: block;"';
-                content +=
-                    'src="' +
-                    path +
-                    lowerCaseUid +
-                    slash +
-                    response.data.foto +
-                    '" alt="">';
-                content += "</a>";
-            } else {
-                content +=
-                    '<a href="/wow/price/' +
-                    response.data.id_price +
-                    '/details"';
-                content += 'target="_blank" class="grid-image-container">';
-                content += '<img class="brd-radius img-fluid grid-image lozad"';
-                content += 'style="height: 200px; display: block;"';
-                content += 'src="/foto/default/no-image.jpeg" alt="">';
-                content += "</a>";
-            }
+            content += `<div class="col-12 row p-3 mb-4 ms-0 me-0" style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
+                            <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-0">
+                                <div class="content list-image-content">
+                                    <input type="hidden" value="" id="id_price" name="id_price">
+                                    <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
+                                        data-dots="false" data-arrows="true">`;
+            content += `<a href="/wow/price/${response.data.id_price}/details" target="_blank" class="grid-image-container">
+                            <img class="brd-radius img-fluid grid-image lozad" style="height: 200px; display: block;"`;
+            content += 'src="' + path + lowerCaseUid + slash + response.data.foto + '" alt="">';
+            content += "</a>";
 
             content += "</div> </div> </div>";
-            content +=
-                '<div class="col-12 col-md-4 text-justify tab-body" style="cursor: pointer;"';
-            content +=
-                'onclick="window.location=/wow/price/' +
-                response.data.id_price +
-                '/details">';
-            content += "<h4>";
-            content += "<p>";
-            content +=
-                '<a href="/wow/price/' + response.data.id_price + '/details">';
-            content +=
-                '<span class="translate-text-group-items">' +
-                response.data.name +
-                "</span> </a> </p> </h4>";
 
-            content += '<p class="desc-hotel">';
-            content += limit(response.data.description, 200);
-            content += "</p> </div>";
+            content += `<div class="col-12 col-md-5 col-lg-5 col-xl-5 px-3">
+                        <div class="col-12">
+                            <h4 class="mb-0">
+                                <p class="mb-0">
+                                <a href="">
+                                    <span
+                                        clas="translate-text-group-items">${response.data.name}</span>
+                                </a>
+                                </p>
+                            </h4>
+                        </div>
+                        <div class="col-12">
+                            <p class="desc-hotel mb-0">`;
 
-            content +=
-                '<div class="col-12 col-md-4 text-center tab-body" style="cursor: pointer;"';
-            content +=
-                'onclick="window.location=/wow/price/' +
-                response.data.id_price +
-                '/details">';
-            content += "IDR " + response.data.price;
-            content += "<br>";
-            content +=
-                '<a href="/wow/price/' + response.data.id_price + '/details"';
-            content +=
-                'target="_blank" style="display: inline-block; width: 50%;"';
-            content +=
-                'class="btn btn-outline-dark table-room-button">Select</a>';
-            content += "</div>";
+            content += `${limit(response.data.description, 200)}
+                        </p>
+                            </div>
+                            <div class="col-12">
+                                <p><b>${start_date.toDateString()}</b> -
+                                    <b>${end_date.toDateString()}</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+                            <div class="col-12 text-center">
+                                <p class="mb-2">`;
 
-            let lengthContent = $(".price-content").find(
+            content += "IDR " + response.data.price.toLocaleString();
+
+            content += `</p>
+                            <a onclick="open_detail_price()" target="_blank"
+                                style="display: inline-block; width: 50%;"
+                                class="btn btn-primary table-room-button">Select</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            let lengthContent = $("#price-content").find(
                 ".list-image-content"
             ).length;
 
             if (lengthContent == 0) {
-                $(".price-content").html("");
+                $("#price-content").html("");
             }
 
-            $(".price-content").append(content);
+            $("#price-content").append(content);
 
             $("#modal-add_price").find("input[name='id_activity']").val("");
             $("#modal-add_price").find("input[name='name']").val("");
@@ -804,7 +939,7 @@ $("#addPriceForm").submit(function (e) {
 
             $("#modal-add_price").modal("hide");
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
                 for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                     iziToast.error({
@@ -834,7 +969,7 @@ function limit(string = "", limit = 0) {
 function saveFacilities() {
     let facilities = [];
 
-    $("input[name='facilities[]']:checked").each(function () {
+    $("input[name='facilities[]']:checked").each(function() {
         facilities.push(parseInt($(this).val()));
     });
 
@@ -852,7 +987,7 @@ function saveFacilities() {
             id_activity: id_activity,
             facilities: facilities,
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
 
             $("#modal-add_facilities").modal("hide");
@@ -951,7 +1086,7 @@ function saveFacilities() {
                 $("#contentModalFacilities").html(contentFacilities);
             }
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -977,14 +1112,15 @@ function saveFacilities() {
         },
     });
 }
-$("#emailWow").keyup(function (e) {
+$("#emailWow").keyup(function(e) {
     $("#emailWow").removeClass("is-invalid");
     $("#err-email").hide();
 });
-$("#phoneWow").keyup(function (e) {
+$("#phoneWow").keyup(function(e) {
     $("#phoneWow").removeClass("is-invalid");
     $("#err-phone").hide();
 });
+
 function saveContactActivity() {
     let error = 0;
     let regexMail = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
@@ -1032,7 +1168,7 @@ function saveContactActivity() {
                 phone: phone,
                 email: email,
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 $("#modal-edit_contact")
                     .find("input[name='phone']")
@@ -1056,8 +1192,8 @@ function saveContactActivity() {
                 } else {
                     $("#contentEmailActivity").html(
                         '<a id="btnEmailActivity" target="_blank" type="button" href="mailto:' +
-                            response.data.email +
-                            '"> <i class="fa-solid fa-envelope"></i> </a>'
+                        response.data.email +
+                        '"> <i class="fa-solid fa-envelope"></i> </a>'
                     );
                 }
 
@@ -1072,7 +1208,7 @@ function saveContactActivity() {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -1108,18 +1244,18 @@ var storyVideoPreview = $(".story-upload").children(".story-video-preview");
 
 $(storyVideoInput)
     .children("input")
-    .on("change", function (value) {
+    .on("change", function(value) {
         storyActivity = this.files[0];
         if (document.getElementById("storyVideo").files.length != 0) {
             $(".story-video-form").css("border", "");
             $("#err-stry-vid").hide();
         }
     });
-$(document).on("keyup", "#title", function () {
+$(document).on("keyup", "#title", function() {
     $("#title").css("border", "");
     $("#err-stry-ttl").hide();
 });
-$("#storeStoryForm").submit(function (e) {
+$("#storeStoryForm").submit(function(e) {
     let error = 0;
     if (document.getElementById("storyVideo").files.length == 0) {
         $(".story-video-form").css("border", "solid #e04f1a 1px");
@@ -1168,7 +1304,7 @@ $("#storeStoryForm").submit(function (e) {
                 contentType: false,
                 enctype: "multipart/form-data",
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
 
                     iziToast.success({
@@ -1263,15 +1399,13 @@ $("#storeStoryForm").submit(function (e) {
                     btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
                 },
-                error: function (jqXHR, exception) {
+                error: function(jqXHR, exception) {
                     // console.log(jqXHR);
                     // console.log(exception);
 
                     if (jqXHR.responseJSON.errors) {
                         for (
-                            let i = 0;
-                            i < jqXHR.responseJSON.errors.length;
-                            i++
+                            let i = 0; i < jqXHR.responseJSON.errors.length; i++
                         ) {
                             iziToast.error({
                                 title: "Error",
@@ -1319,9 +1453,9 @@ function saveLocation() {
         id_activity: parseInt(form.find(`input[name='id_activity']`).val()),
         id_location: parseInt(
             form
-                .find(`select[name=id_location] option`)
-                .filter(":selected")
-                .val()
+            .find(`select[name=id_location] option`)
+            .filter(":selected")
+            .val()
         ),
         longitude: form.find(`input[name='longitude']`).val(),
         latitude: form.find(`input[name='latitude']`).val(),
@@ -1342,7 +1476,7 @@ function saveLocation() {
         url: "/things-to-do/update/location",
         data: formData,
         // response data
-        success: function (response) {
+        success: function(response) {
             let latitudeOld = parseFloat(response.data.latitude);
             let longitudeOld = parseFloat(response.data.longitude);
             // variabel global edit marker
@@ -1364,7 +1498,7 @@ function saveLocation() {
             $("#modal-edit_location").modal("hide");
         },
         // response error
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             // alert error
