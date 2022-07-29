@@ -296,7 +296,7 @@ if (isset($_COOKIE['tema'])) {
                             </a>
                         </div>
 
-                        <div class="col-12 villa-info-contanier" style="position:relative;">
+                        <div class="col-12 d-none d-sm-block villa-info-contanier" style="position:relative;">
                             <div class="villa-list-description-container skeleton skeleton-h-4 skeleton-w-100">
                                 <p
                                     class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">
