@@ -229,6 +229,8 @@ class ActivityController extends Controller
         $wowHasSubCategory = ActivityHasSubcategory::where('id_activity', $id)->get();
         $wowSubCategory = ActivitySubcategory::all();
 
+        // dd($activity->price);
+
         return view('user.activity.activity', compact('villaRandom', 'wowSubCategory', 'wowHasSubCategory', 'activity', 'locations', 'facilities', 'nearby_villas', 'nearby_restaurant', 'subCategory', 'villas_advertise', 'villa_amenities', 'activity_rules'));
     }
 

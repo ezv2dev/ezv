@@ -173,23 +173,26 @@ if (isset($_COOKIE['tema'])) {
                         @forelse ($gallery->sortBy('order') as $item)
                             <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                 class="col-lg-6 list-image-container">
-                                <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                     src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $item->photo) }}"
+                                    data-src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $item->photo) }}"
                                     alt="EZV_{{ $item->photo }}">
                             </a>
                         @empty
                             @if ($data->image)
                                 <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                     class="col-lg-6 list-image-container">
-                                    <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                    <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                         src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}"
+                                        data-src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}"
                                         alt="EZV_{{ $data->image }}">
                                 </a>
                             @else
                                 <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                     class="col-lg-6 list-image-container ">
-                                    <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                    <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                         src="{{ URL::asset('/template/villa/template_profile.jpg') }}"
+                                        data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}"
                                         alt="EZV_no-image.jpeg">
                                 </a>
                             @endif
@@ -293,7 +296,7 @@ if (isset($_COOKIE['tema'])) {
                             </a>
                         </div>
 
-                        <div class="col-12 villa-info-contanier" style="position:relative;">
+                        <div class="col-12 d-none d-sm-block villa-info-contanier" style="position:relative;">
                             <div class="villa-list-description-container skeleton skeleton-h-4 skeleton-w-100">
                                 <p
                                     class="villa-list-title {{ $textColor }} list-description limit-text-list-villa">

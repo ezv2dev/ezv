@@ -424,7 +424,7 @@
 
     </div>
     <div id="overlay"></div>
-    <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4 px-md-4" 
+    <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4 px-md-4"
     {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}}
         <div class="container">
             <a href="{{ route('partner_dashboard') }}" class="navbar-brand mb-n1" target="_blank">
@@ -439,14 +439,14 @@
                 <ul class="navbar-nav mx-auto mb-lg-0">
                     @if (Request::is('account-settings*') || Request::is('referral*') || Request::is('users/edit-photo') || Request::is('account-delete') || Request::is('profile*') || Request::is('owner*'))
                     @else
-                        <li class="nav-item">
+                        <li class="nav-item mr-2">
                             <a class="borderr nav-link px-md-4 {{ Request::is('dashboard') || Request::is('dashboard/arriving_soon') || Request::is('dashboard/checkout') || Request::is('dashboard/upcoming') ? 'border-bottom' : '' }}"
                                 href="{{ route('partner_dashboard') }}"
                                 style="color: #000000; {{ Request::is('dashboard') || Request::is('dashboard/arriving_soon') || Request::is('dashboard/checkout') || Request::is('dashboard/upcoming') ? 'font-weight: 600;' : '' }}">Today</a>
                         </li>
 
                         {{-- Villa --}}
-                        <li class="nav-item dropdown no-caret mr-1 ml-n1 dropdown-notifications">
+                        <li class="nav-item dropdown no-caret mr-2 ml-2 dropdown-notifications">
                             <a class="{{ Request::is('dashboard/listing') || Request::is('dashboard/reservation*') || Request::is('users/*') || Request::is('manage-guidebook') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -498,7 +498,7 @@
                         </li>
 
                         <!-- HOTEL -->
-                        <li class="nav-item dropdown no-caret mr-2 ml-n1 dropdown-notifications">
+                        <li class="nav-item dropdown no-caret mr-2 ml-2 dropdown-notifications">
                             <a class="{{ Request::is('dashboard/hotel*') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -550,9 +550,8 @@
                         </li>
 
                         {{-- Restaurant --}}
-                        <li class="nav-item dropdown no-caret mr-2 dropdown-notifications" style="margin-left: 5px;">
-                            <a style="padding: 0px 60px;"
-                                class="{{ Request::is('dashboard/restaurant*') ? 'border-bottom' : '' }} borderr nav-link btn btn-icon btn-transparent-dark dropdown-toggle"
+                        <li class="nav-item dropdown no-caret mr-2 ml-2 dropdown-notifications">
+                            <a class="{{ Request::is('dashboard/restaurant*') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <p
@@ -599,9 +598,8 @@
                         </li>
 
                         {{-- Things To Do --}}
-                        <li class="nav-item dropdown no-caret ml-3 mr-2 dropdown-notifications">
-                            <a style="padding: 0px 60px;"
-                                class="{{ Request::is('dashboard/things-to-do*') ? 'border-bottom' : '' }} borderr nav-link btn btn-icon btn-transparent-dark dropdown-toggle"
+                        <li class="nav-item dropdown no-caret ml-2 dropdown-notifications">
+                            <a class="{{ Request::is('dashboard/things-to-do*') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <p
@@ -972,7 +970,7 @@
             if (window.innerWidth < 992) {
                 if ($("body").hasClass("sidenav-toggled")) {
                     $("body").removeClass("sidenav-toggled");
-                    $("body").css("overflow-y","auto") 
+                    $("body").css("overflow-y","auto")
                 }
             }
         })

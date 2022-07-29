@@ -3348,6 +3348,10 @@ input::-webkit-inner-spin-button {
     #villa-list-video-mobile {
         display: block !important;
     }
+    .villa-list-video-container {
+        width: 50px;
+        height: 50px;
+    }
     .pagination {
         width: 100vw !important;
         padding-left: 0.5rem !important;
@@ -3456,8 +3460,8 @@ input::-webkit-inner-spin-button {
         width: 40px !important;
     }
     #villa-data {
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
     }
 
     #villa-search-data {
@@ -3560,3 +3564,36 @@ input::-webkit-inner-spin-button {
 .grid-sub-cat-content-container:hover .list-description{
     color: #ff7400;
 }
+
+a.orange-hover {
+    margin-left: 10px;
+    top: -2px;
+    position: relative;
+}
+
+.btn-what {
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+}
+.btn-what.list-description.js-bs-tooltip-enabled.font-light {
+    border: solid 1px #fff;
+}
+.btn-what.list-description.js-bs-tooltip-enabled.font-black {
+    border: solid 1px #000;
+}
+
+.non-star i {
+    color: #ff7400;
+}
+/* @media (max-width: 549px) {
+    .img-fluid, .grid-image {
+        aspect-ratio: 4/3 !important;
+        height: auto !important;
+    }
+    .skeleton-h-100 {
+        height: auto !important;
+        border-radius: 0.25rem !important;
+        aspect-ratio: 4/3 !important;
+    }
+} */

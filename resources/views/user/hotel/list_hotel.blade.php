@@ -352,8 +352,8 @@
                                 </div>
                             @else
                                 <div class="text-13 text-md-end non-star">
-                                    <span>Non-star</span>
-                                    <i class="fa-solid fa-star" style="color: #febb02;"></i>
+                                    <span class="{{ $textColor }} list-description">Non-star</span>
+                                    <i class="fa fa-star-o"></i>
                                 </div>
                             @endif
                         </div>
@@ -372,16 +372,16 @@
                             <div class="col-6 pe-0">
                                 <div class="d-flex flex-column h-100">
                                     <div class="flex-fill">
-                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                        <p class="text-14 fw-400 grid-one-line mb-0 {{ $textColor }} list-description">
                                         {{ __('user_page.Fully Furlindable') }}
                                         </p>
-                                        <p class="text-14 fw-400 grid-one-line mb-0">
+                                        <p class="text-14 fw-400 grid-one-line mb-0 {{ $textColor }} list-description">
                                         {{ __('user_page.Reserve now pay later') }}
                                         </p>
                                     </div>
                                     <div>
                                         @if ($data->detailReview)
-                                            <p class="text-14 fw-600 grid-one-line max-lines mb-0">
+                                            <p class="text-14 fw-600 grid-one-line max-lines mb-0 {{ $textColor }} list-description">
                                                 {{ $data->detailReview->average }}/5
                                             </p>
                                             <a class="text-12 fw-400 grid-one-line text-orange mt-1" href="#"
@@ -389,7 +389,7 @@
                                                 Review
                                             </a>
                                         @else
-                                            <p class="text-14 fw-400 grid-one-line max-lines mb-0">
+                                            <p class="text-14 fw-400 grid-one-line max-lines mb-0 {{ $textColor }} list-description">
                                             {{ __('user_page.No reviews yet') }}
                                             </p>
                                         @endif
@@ -420,15 +420,31 @@
                                                     {{ CurrencyConversion::exchangeWithUnit($data->price) }}
                                                 </span>
                                             @else
-                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                <span class="fw-400 {{ $textColor }} list-description" style="font-size: 14px; font-weight: 600;">
                                                     {{ __('user_page.Price is unknown') }}
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="text-12 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                                            <span class="fw-400 {{ $textColor }} list-description">
-                                                Included taxes and changes
-                                            </span>
+                                            @if ($data->price_inclusion)
+                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                {{ __('user_page.Nett') }}
+                                                    <button type="button" class="btn-what {{ $textColor }} list-description" data-bs-toggle="tooltip"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.The price quoted are inclusive of taxes and services charge.') }}">
+                                                        ?
+                                                    </button>
+                                                </span>
+                                            @else
+                                                <span class="fw-400 {{ $textColor }} list-description" style="font-size: 14px; font-weight: 600;">
+                                                    ++
+                                                    <button type="button" class="btn-what {{ $textColor }} list-description" data-bs-toggle="tooltip"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.The price quoted are exclusive of taxes and services charge.') }}">
+                                                        ?
+                                                    </button>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

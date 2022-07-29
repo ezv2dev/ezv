@@ -12,44 +12,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
-                        <div class="form-group mb-4">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('user_page.name') }}" required>
-                        </div>
-                        <div class="form-group mb-4">
-                            <input type="text" class="form-control" id="price" name="price" placeholder="{{ __('user_page.price') }}"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                required>
-                        </div>
-                        <div class="mb-4" style="display: flex;">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input type="date" class="form-control"
-                                        name="start_date" placeholder="{{ __('user_page.Start Date') }}">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input type="date" class="form-control"
-                                        name="end_date" placeholder="{{ __('user_page.End Date') }}">
-                                </div>
+                    <p class="modal-title">Name</p>
+                    <div class="form-group mb-4">
+                        <input type="text" class="form-control" id="name" name="name"
+                            placeholder="Input name here" required>
+                    </div>
+                    <p class="modal-title">Price</p>
+                    <div class="form-group mb-4">
+                        <input type="text" style="margin-top: 0;" class="form-control" id="price" name="price"
+                            placeholder="Input price here"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            required>
+                    </div>
+                    <div class="mb-4" style="display: flex;">
+                        <div class="col-6">
+                            <p class="modal-title">Start Date</p>
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="start_date" id="startDate"
+                                    placeholder="{{ __('user_page.Start Date') }}">
                             </div>
                         </div>
+                        <div class="col-6">
+                            <p class="modal-title">End Date</p>
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="end_date" id="endDate"
+                                    placeholder="{{ __('user_page.End Date') }}">
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="form-group mb-4">
-                            <textarea id="description" name="description" class="form-control" style="height: 200px"></textarea>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="file-upload" id="file-upload1">
-                                <div class="image-box dropzone">
-                                    <p>{{ __('user_page.Upload Image') }}</p>
-                                    <img style="width: 100%" src="" alt="">
-                                </div>
-                                <div class="controls" style="display: none;">
-                                    <input type="file" name="image" accept=".jpeg,.png,.jpg,.webp"/>
-                                </div>
+                    <p class="modal-title">Description</p>
+                    <div class="form-group mb-4">
+                        <textarea id="description" name="description" class="form-control" style="height: 200px"
+                            placeholder="Input Description here"></textarea>
+                    </div>
+
+                    <p class="modal-title">Image</p>
+                    <div class="form-group mb-4">
+                        <div class="file-upload" id="file-upload1">
+                            <div class="image-box dropzone">
+                                <p>{{ __('user_page.Upload Image') }}</p>
+                                <img style="width: 100%" src="" alt="">
+                            </div>
+                            <div class="controls" style="display: none;">
+                                <input type="file" name="image" accept=".jpeg,.png,.jpg,.webp" />
                             </div>
                         </div>
-                        {{-- <div class="form-group">
+                    </div>
+                    {{-- <div class="form-group">
                             <input type="file" name="image" accept=".png,.jpg,.jpeg">
                         </div> --}}
                     <!-- END Submit -->
@@ -57,7 +67,8 @@
                 <div class="modal-filter-footer d-flex justify-content-center"
                     style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                     <div class="col-4" style="text-align: center;">
-                        <button type="submit" id="btnSavePrice" class="btn btn-sm btn-primary w-100" form="addPriceForm">
+                        <button type="submit" id="btnSavePrice" class="btn btn-sm btn-primary w-100"
+                            form="addPriceForm">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
