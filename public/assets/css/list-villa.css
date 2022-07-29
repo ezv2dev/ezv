@@ -3586,3 +3586,14 @@ a.orange-hover {
 .non-star i {
     color: #ff7400;
 }
+@media (max-width: 549px) {
+    .img-fluid, .grid-image {
+        aspect-ratio: 4/3 !important;
+        height: auto !important;
+    }
+    .skeleton-h-100 {
+        height: auto !important;
+        border-radius: 0.25rem !important;
+        aspect-ratio: 4/3 !important;
+    }
+}
