@@ -1050,8 +1050,7 @@
                                         <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
                                             class="col-lg-12">
                                             <a type="button" id="clear1" style="margin: 0px; font-size: 13px;"
-                                                class="py-2 py-md-0">Clear
-                                                Dates</a>
+                                                class="py-2 py-md-0">{{ __('user_page.Clear Dates') }}</a>
                                         </div>
 
                                         <div class="flatpickr" id="inline" style="text-align: left;">
@@ -2325,7 +2324,7 @@
                             <p style="margin-bottom: 0px !important; margin-top:14px">
                                 <a onclick="addDatesFunction()"
                                     style="text-decoration: underline; color: #ff7400; cursor: pointer;"
-                                    class="d-none" id="addDates">Add Dates
+                                    class="d-none" id="addDates">{{ __('user_page.Add Dates') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                                 <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
