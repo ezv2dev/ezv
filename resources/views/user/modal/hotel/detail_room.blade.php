@@ -131,6 +131,10 @@
 </div>
 
 <script>
+    $(document).ready(function (){
+        $(".js-slider-test").not('.slick-initialized').slick();
+    });
+
     function view_room(id) {
         $.ajax({
             type: "GET",

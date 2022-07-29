@@ -13,6 +13,16 @@ Dashmix.helpersOnLoad(["jq-magnific-popup"]);
 // }
 // Date Picker
 
+function setCookie2(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
 function getCookie2(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -24,14 +34,19 @@ function getCookie2(name) {
     return null;
 }
 
-function checkCheckInOutDate() {
+$(document).ready(function () {
     let checkIn = getCookie2("sCheck_in");
     let checkOut = getCookie2("sCheck_out");
     let adult = getCookie2("sAdult");
     let child = getCookie2("sChild");
     let id_villa = $("#id_villa").val();
+    var today = new Date().toISOString().slice(0, 10);
 
-    if (checkIn == null && checkOut == null) {
+    if (checkIn < today) {
+        setCookie2("sCheck_in", null);
+        setCookie2("sCheck_out", null);
+        console.log("satt");
+    } else if (checkIn == null && checkOut == null) {
     } else {
         $.ajax({
             type: "GET",
@@ -52,17 +67,19 @@ function checkCheckInOutDate() {
             },
         });
     }
-}
+});
 
 function runningCookiesDate(checkIn, checkOut, adult, child) {
     $("#check_in").val(checkIn);
     $("#check_in2").val(checkIn);
     $("#check_in3").val(checkIn);
+    $("#check_in4").val(checkIn);
     $("#check_in_date").val($("#check_in3").val());
 
     $("#check_out").val(checkOut);
     $("#check_out2").val(checkOut);
     $("#check_out3").val(checkOut);
+    $("#check_out4").val(checkOut);
     $("#check_out_date").val($("#check_out3").val());
 
     $("#adult").val(adult);
@@ -162,8 +179,6 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
         },
     });
 }
-
-checkCheckInOutDate();
 
 $(document).ready(function () {
     if ($(window).width() <= 991) {
@@ -1193,15 +1208,15 @@ function showingLoading() {
     $("#loading-content").show();
 }
 
-
-$(document) .ready(function(){
-  $('.modal').on('shown.bs.modal', function () {
-      $('html').css('overflow','hidden');
-      }).on('hidden.bs.modal', function() {
-      $('html').css('overflow','auto');
-  });
+$(document).ready(function () {
+    $(".modal")
+        .on("shown.bs.modal", function () {
+            $("html").css("overflow", "hidden");
+        })
+        .on("hidden.bs.modal", function () {
+            $("html").css("overflow", "auto");
+        });
 });
-
 
 //call calendar
 calendar_header(2);
