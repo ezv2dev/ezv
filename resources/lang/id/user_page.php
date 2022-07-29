@@ -215,6 +215,7 @@ return [
     'Check in' => 'Check in',
     'Check out' => 'Check out',
     'Add dates' => 'Tambah tanggal',
+    'Add Dates' => 'Tambah Tanggal',
     'Guest' => 'Tamu',
     'Add' => 'Tambah',
     'Age 13 or above' => 'Usia 13 tahun ke atas',

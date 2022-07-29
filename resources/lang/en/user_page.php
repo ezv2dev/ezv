@@ -220,6 +220,7 @@ return [
     'Check in' => 'Check in',
     'Check out' => 'Check out',
     'Add dates' => 'Add dates',
+    'Add Dates' => 'Add Dates',
     'Guest' => 'Guest',
     'Add' => 'Add',
     'Age 13 or above' => 'Age 13 or above',
