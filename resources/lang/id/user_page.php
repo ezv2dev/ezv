@@ -248,6 +248,9 @@ return [
     "Learn about listing your home, hotel, food, or business" => "Pelajari tentang mencantumkan rumah, hotel, kuliner, atau bisnis",
     'Ask a Super Host' => 'Tanyakan pada Super Host',
     'Learn More' => 'Pelajari Selengkapnya',
+    'The price quoted are inclusive of taxes and services charge.' => 'Harga yang tercantum sudah termasuk pajak dan biaya layanan.',
+    'The price quoted are exclusive of taxes and services charge.' => 'Harga yang tercantum belum termasuk pajak dan biaya layanan.',
+    'Nett' => 'Bersih',
 
     'Map' => 'Peta',
     'this content is active, edit grade restaurant' => 'konten ini aktif, ubah kelas restoran',

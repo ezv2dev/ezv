@@ -253,6 +253,9 @@ return [
     "Learn about listing your home, hotel, food, or business" => "Learn about listing your home, hotel, food, or business",
     'Ask a Super Host' => 'Ask a Super Host',
     'Learn More' => 'Learn More',
+    'The price quoted are inclusive of taxes and services charge.' => 'The price quoted are inclusive of taxes and services charge.',
+    'The price quoted are exclusive of taxes and services charge.' => 'The price quoted are exclusive of taxes and services charge.',
+    'Nett' => 'Nett',
 
     'Map' => 'Map',
     'this content is active, edit grade restaurant' => 'this content is active, edit grade restaurant',
