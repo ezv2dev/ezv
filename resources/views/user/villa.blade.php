@@ -3306,7 +3306,7 @@
     @auth
         @include('user.modal.villa.price')
         @include('user.modal.villa.bedroom')
-        @include('user.modal.villa.guest')
+        {{-- @include('user.modal.villa.guest') --}}
         @include('user.modal.villa.location')
         @include('user.modal.villa.amenities_add')
         @include('user.modal.villa.short_description')
@@ -3558,7 +3558,7 @@
         }
     </script>
 
-  
+
 
     <script>
         function details_reserve() {
