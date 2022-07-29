@@ -1096,8 +1096,8 @@
                                                     data-dots="false" data-arrows="true">
                                                     @if (count($activity->PricePhoto->where('id_price', $item->id_price)) > 0)
                                                         @foreach ($activity->PricePhoto->where('id_price', $item->id_price) as $galleryPrice)
-                                                            <a href="{{ route('activity_price_index', $item->id_price) }}"
-                                                                target="_blank" class="grid-image-container">
+                                                            <a onclick="open_detail_price()" target="_blank"
+                                                                class="grid-image-container">
                                                                 <img class="brd-radius img-fluid grid-image lozad"
                                                                     style="height: 200px; display: block;"
                                                                     src="{{ LazyLoad::show() }}"
@@ -1106,8 +1106,8 @@
                                                             </a>
                                                         @endforeach
                                                     @elseif (!empty($item->foto))
-                                                        <a href="{{ route('activity_price_index', $item->id_price) }}"
-                                                            target="_blank" class="grid-image-container">
+                                                        <a onclick="open_detail_price()" target="_blank"
+                                                            class="grid-image-container">
                                                             <img class="brd-radius img-fluid grid-image lozad"
                                                                 style="height: 200px; display: block;"
                                                                 src="{{ LazyLoad::show() }}"
@@ -1115,8 +1115,8 @@
                                                                 alt="">
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('activity_price_index', $item->id_price) }}"
-                                                            target="_blank" class="grid-image-container">
+                                                        <a onclick="open_detail_price()" target="_blank"
+                                                            class="grid-image-container">
                                                             <img class="brd-radius img-fluid grid-image lozad"
                                                                 style="height: 200px; display: block;"
                                                                 src="{{ LazyLoad::show() }}"
