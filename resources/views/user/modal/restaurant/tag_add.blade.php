@@ -69,7 +69,7 @@
 
 <div class="modal fade" id="modal-add_tag" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered modal-lg" role="document">
         <div class="modal-content" style="height: 550px;">
             <div class="modal-header" style="padding-left: 2.3rem !important;">
                 <h5 class="modal-title">{{ __('user_page.Edit Subcategory') }}</h5>
