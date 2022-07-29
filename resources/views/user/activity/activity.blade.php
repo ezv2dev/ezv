@@ -74,22 +74,14 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    {{-- GOOGLE MAP AUTOCOMPLETE LIST ZINDEX --}}
-
-    {{-- END GOOGLE MAP AUTOCOMPLETE LIST ZINDEX --}}
-
     <style>
         .brd-radius {
             border-radius: 10px;
         }
 
-        /* .slick-prev {
-            margin-top: -20px;
+        .d-none {
+            display: none;
         }
-
-        .slick-next {
-            margin-top: -20px;
-        } */
     </style>
 </head>
 
@@ -1173,7 +1165,7 @@
 
                                             <a onclick="open_detail_price()" target="_blank"
                                                 style="display: inline-block; width: 50%;"
-                                                class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
+                                                class="btn btn-primary table-room-button">{{ __('user_page.Select') }}</a>
 
                                         </div>
                                     </div>
@@ -2833,7 +2825,7 @@
                                 </div>
                             @endif
                             @if ($activity->status == '2')
-                                <div id="activation2">
+                                <div id="activation2" class="">
                                     <div class="alert alert-warning d-flex flex-row align-items-center"
                                         role="warning">
                                         <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
@@ -5570,6 +5562,7 @@
 
     function ActivationContent() {
         var grade = $("#grade2 option:selected").val();
+        console.log(grade);
         Swal.fire({
             title: `{{ __('user_page.Are you sure?') }}`,
             icon: 'warning',
@@ -5587,104 +5580,105 @@
                         grade: grade
                     },
                     success: function(response) {
+                        // console.log('sattt');
                         if (response.data == 1) {
                             if (response.grade == "AA") {
                                 $("#adminWow2").html(`
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeWowAA">
-                                                    <option value="AA" selected>AA</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
-                                                </select>
-                                            </div>
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeWowAA">
+                                                <option value="AA" selected>AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
                                         </div>
-                                    `);
+                                    </div>
+                                `);
 
                                 gradeAA();
                                 $("#activation2").addClass('d-none');
                             } else if (response.grade == "A") {
                                 $("#adminWow2").html(`
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeWowA">
-                                                    <option value="AA">AA</option>
-                                                    <option value="A" selected>A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
-                                                </select>
-                                            </div>
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeWowA">
+                                                <option value="AA">AA</option>
+                                                <option value="A" selected>A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
                                         </div>
-                                    `)
+                                    </div>
+                                `)
 
                                 gradeA();
                                 $("#activation2").addClass('d-none');
                             } else if (response.grade == "B") {
                                 $("#adminWow2").html(`
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeWowB">
-                                                    <option value="AA">AA</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B" selected>B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
-                                                </select>
-                                            </div>
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeWowB">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B" selected>B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
                                         </div>
-                                    `)
+                                    </div>
+                                `)
 
                                 gradeB();
                                 $("#activation2").addClass('d-none');
                             } else if (response.grade == "C") {
                                 $("#adminWow2").html(`
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeWowC">
-                                                    <option value="AA">AA</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C" selected>C</option>
-                                                    <option value="D">D</option>
-                                                </select>
-                                            </div>
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeWowC">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C" selected>C</option>
+                                                <option value="D">D</option>
+                                            </select>
                                         </div>
-                                    `)
+                                    </div>
+                                `)
 
                                 gradeC();
                                 $("#activation2").addClass('d-none');
                             } else if (response.grade == "D") {
                                 $("#adminWow2").html(`
-                                        <div class="alert alert-success d-flex flex-row align-items-center"
-                                            role="success">
-                                            <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
-                                            <div style="margin-left: 10px;">
-                                                <select class="custom-select grade-success" name="grade"
-                                                    id="gradeWowD">
-                                                    <option value="AA">AA</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D" selected>D</option>
-                                                </select>
-                                            </div>
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeWowD">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D" selected>D</option>
+                                            </select>
                                         </div>
-                                    `)
+                                    </div>
+                                `)
 
                                 gradeD();
                                 $("#activation2").addClass('d-none');
@@ -5765,6 +5759,145 @@
             }
         })
     }
+
+    // ! gradeWow
+    $("#gradeWow").change(function() {
+        var grade = $(this).val();
+        console.log(`klenggg ${grade}`);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/wow/grade/${id_activity}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+
+    function gradeAA() {
+        $("#gradeWowAA").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/wow/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeA() {
+        $("#gradeWowA").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/wow/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeB() {
+        $("#gradeWowB").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/wow/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeC() {
+        $("#gradeWowC").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/wow/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeD() {
+        $("#gradeWowD").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/wow/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+    // ! End gradeWow
 </script>
 {{-- End Active Deactive --}}
 

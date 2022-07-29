@@ -506,6 +506,14 @@ function showingLoading() {
     $("#loading-content").show();
 }
 
+$(document) .ready(function(){
+    $('.modal').on('shown.bs.modal', function () {
+        $('html').css('overflow','hidden');
+        }).on('hidden.bs.modal', function() {
+        $('html').css('overflow','auto');
+    });
+  });
+
 $("#clear_date_header").click(function() {
     $("#check_in4").val("");
     $("#check_out4").val("");

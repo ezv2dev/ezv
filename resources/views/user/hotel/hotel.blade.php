@@ -2537,7 +2537,7 @@
                             <p style="margin-bottom: 0px !important; margin-top:14px">
                                 <a onclick="addDatesFunction()"
                                     style="text-decoration: underline; color: #ff7400; cursor: pointer;"
-                                    class="d-none" id="addDates">Add Dates
+                                    class="d-none" id="addDates">{{ __('user_page.Add Dates') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                                 <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"

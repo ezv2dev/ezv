@@ -1050,8 +1050,7 @@
                                         <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
                                             class="col-lg-12">
                                             <a type="button" id="clear1" style="margin: 0px; font-size: 13px;"
-                                                class="py-2 py-md-0">Clear
-                                                Dates</a>
+                                                class="py-2 py-md-0">{{ __('user_page.Clear Dates') }}</a>
                                         </div>
 
                                         <div class="flatpickr" id="inline" style="text-align: left;">
@@ -2325,7 +2324,7 @@
                             <p style="margin-bottom: 0px !important; margin-top:14px">
                                 <a onclick="addDatesFunction()"
                                     style="text-decoration: underline; color: #ff7400; cursor: pointer;"
-                                    class="d-none" id="addDates">Add Dates
+                                    class="d-none" id="addDates">{{ __('user_page.Add Dates') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                                 <a onclick="showMoreCancelationPolicy();" href="javascript:void(0);"
@@ -2341,17 +2340,16 @@
                 <section>
                     {{-- Insurance --}}
                     <div class="">
-                        <h2>
-                            EZV Cover
-                        </h2>
+                        <h3>
+                        {{ __('user_page.EZV Cover') }}
+                        </h3>
                         <p id="description-content">
-                            Every booking includes free protection from Host cancellations, listing inaccuracies, and
-                            other issues like trouble checking in.
+                        {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
                         </p>
 
                         <a id="" style="font-weight: 600;" href="javascript:void(0);"
                             onclick="showMoreInsurance();">
-                            <span style="text-decoration: underline; color: #ff7400;">Learn more</span>
+                            <span style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
                         </a>
 
                     </div>

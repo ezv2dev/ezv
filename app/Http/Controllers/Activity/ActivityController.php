@@ -234,8 +234,6 @@ class ActivityController extends Controller
 
     public function grade(Request $request, $id)
     {
-        $status = 500;
-
         $find = Activity::where('id_activity', $id)->first();
 
         $find->update(array(
@@ -244,7 +242,7 @@ class ActivityController extends Controller
             'updated_by' => Auth::user()->id,
         ));
 
-        return redirect()->back()->with('success', 'Your data has been update');
+        return response()->json(['success' => true, 'message' => 'Succesfully Update Grade WOW to ' . $request->grade,  'data' => $request->grade]);
     }
 
     public function update_status(Request $request, $id)
