@@ -408,9 +408,9 @@
                                                 ,
                                                 {{ $data->adult }}
                                                 @if (in_array($data->adult, [0, 1]))
-                                                    adult
+                                                {{ __('user_page.adult') }}
                                                 @else
-                                                    adults
+                                                {{ __('user_page.adults') }}
                                                 @endif
                                             </span>
                                         </div>
@@ -1084,7 +1084,7 @@
                     $('.name-hotel').html(data.name);
 
                     if (data.description == null) {
-                        $('#descHotel').html('No description yet');
+                        $('#descHotel').html('{{ __('user_page.No description yet') }}');
                     } else {
                         $('#descHotel').html(data.description);
                     }

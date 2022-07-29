@@ -256,6 +256,9 @@ return [
     'The price quoted are inclusive of taxes and services charge.' => 'The price quoted are inclusive of taxes and services charge.',
     'The price quoted are exclusive of taxes and services charge.' => 'The price quoted are exclusive of taxes and services charge.',
     'Nett' => 'Nett',
+    'adult' => 'adult',
+    'adults' => 'adults',
+    'No description yet' => 'No description yet',
 
     'Map' => 'Map',
     'this content is active, edit grade restaurant' => 'this content is active, edit grade restaurant',

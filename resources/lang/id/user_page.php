@@ -157,6 +157,7 @@ return [
     'New' => 'Baru',
     'Reviews' => 'Ulasan',
     'More Details' => 'Lebih Detail',
+    'No description yet' => 'Belum ada deskripsi',
 
     // tombol
     'Done' => 'Selesai',
@@ -251,6 +252,8 @@ return [
     'The price quoted are inclusive of taxes and services charge.' => 'Harga yang tercantum sudah termasuk pajak dan biaya layanan.',
     'The price quoted are exclusive of taxes and services charge.' => 'Harga yang tercantum belum termasuk pajak dan biaya layanan.',
     'Nett' => 'Bersih',
+    'adult' => 'dewasa',
+    'adults' => 'dewasa',
 
     'Map' => 'Peta',
     'this content is active, edit grade restaurant' => 'konten ini aktif, ubah kelas restoran',

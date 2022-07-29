@@ -324,12 +324,13 @@
 
         #modal-details .modal-dialog .modal-content {
             width: 100vw !important;
-            height: 100vh !important;
+            min-height: 100vh !important;
             border-radius: 0px !important;
         }
 
         #modal-details .modal-dialog .modal-content .modal-body .tabbable {
             height: 100% !important;
+            background: #fff;
         }
     }
 
@@ -354,11 +355,11 @@
                     <ul class="nav filter-language-option-container nav-tabs sideTab column"
                         style="display: flex; flex-wrap: nowrap; padding: 0px;">
                         <li id="trigger-tab-description" onclick="switchTabHotel('description')" class="active"><a
-                                class="filter-language-option-text">Description</a></li>
+                                class="filter-language-option-text">{{ __('user_page.Description') }}</a></li>
                         <li id="trigger-tab-facilities" onclick="switchTabHotel('facilities')"><a
-                                class="tab1 filter-language-option-text">Facilities</a></li>
+                                class="tab1 filter-language-option-text">{{ __('user_page.Facilities') }}</a></li>
                         <li id="trigger-tab-reviews" onclick="switchTabHotel('reviews')"><a
-                                class="tab2 filter-language-option-text">Reviews</a></li>
+                                class="tab2 filter-language-option-text">{{ __('user_page.Reviews') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 right">

@@ -1736,7 +1736,7 @@ li.button-dropdown {
 } */
 
 .button-dropdown {
-    font-size: 140%;
+    font-size: 130%;
     margin-top: 4px;
     min-width: 150px;
 }
@@ -4396,4 +4396,11 @@ span.flatpickr-weekday {
     80% { transform: rotate(1deg); }
     90% { transform: rotate(0deg); }
     100% { transform: rotate(-1deg); }
+}
+input#check_in::placeholder, input#check_out::placeholder {
+    font-size: 10px !important;
+}
+
+input::placeholder {
+    font-size: 14px!important;
 }

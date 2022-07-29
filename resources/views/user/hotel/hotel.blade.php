@@ -2036,7 +2036,7 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                            There is no reviews yet
+                                            {{ __('user_page.There is no reviews yet') }}
                                         </p>
                                     </div>
                                 </div>
@@ -2590,9 +2590,9 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="owner-profile">
-                                    <h4>Host Profile</h4>
+                                    <h4>{{ __('user_page.Host Profile') }}</h4>
                                     <p>
-                                        About
+                                        {{ __('user_page.About') }}
                                         <span>
                                             @if ($hotel[0]->ownerHotel == null)
                                                 -
@@ -2600,7 +2600,7 @@
                                                 {{ $hotel[0]->ownerHotel->about ?? '-' }}
                                             @endif
                                         </span><br>
-                                        Location
+                                        {{ __('user_page.Location') }}
                                         <span>
                                             @if ($hotel[0]->ownerHotel == null)
                                                 -
