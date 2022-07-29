@@ -25,7 +25,7 @@ class CollaboratorReviewController extends Controller
         $validator = Validator::make($request->all(), [
             'id_collab' => ['required', 'integer'],
             'experience' => ['required', 'numeric'],
-            'comment' => ['string']
+            'comment' => ['nullable','string']
         ]);
         if ($validator->fails()) {
             return response()->json([
