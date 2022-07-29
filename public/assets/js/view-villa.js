@@ -176,6 +176,7 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
 
             calendar_reserve(2);
             calendar_reserve2(2);
+            calendar_header(2);
         },
     });
 }
