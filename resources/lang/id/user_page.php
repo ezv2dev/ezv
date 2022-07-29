@@ -232,6 +232,9 @@ return [
     'Collab Portal' => 'Daftar Kolaborator',
     'Collabs' => 'Kolaborasi',
     'Dashboard' => 'Dashboard',
+    'EZV Cover' => 'Perlindungan EZV',
+    'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.' => 'Setiap pemesanan mencakup perlindungan gratis dari pembatalan oleh host, ketidakakuratan daftar, dan masalah lain seperti masalah saat check-in.',
+    'Learn more' => 'Pelajari lebih lanjut',
 
     'The Best Way To Find Home, Hotel, Food, And Wow' => 'Cara Terbaik Untuk Menemukan Rumah, Hotel, Kuliner, Dan Wow',
     "Let's Go" => "Ayo Pergi",
@@ -274,6 +277,7 @@ return [
     'Nearby Villas & Things To Do' => 'Vila & Aktivitas Terdekat',
     'No villas found' => 'Tidak ada vila yang ditemukan',
     'No things to do found' => 'Tidak aktivitas yang ditemukan',
+    'No reviews yet' => 'Belum ada penilaian',
     'All Facilities' => 'Semua Fasilitas',
     'All Tags' => 'Semua Tag',
     'Cuisine' => 'Masakan',

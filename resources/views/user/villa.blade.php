@@ -2340,17 +2340,16 @@
                 <section>
                     {{-- Insurance --}}
                     <div class="">
-                        <h2>
-                            EZV Cover
-                        </h2>
+                        <h3>
+                        {{ __('user_page.EZV Cover') }}
+                        </h3>
                         <p id="description-content">
-                            Every booking includes free protection from Host cancellations, listing inaccuracies, and
-                            other issues like trouble checking in.
+                        {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
                         </p>
 
                         <a id="" style="font-weight: 600;" href="javascript:void(0);"
                             onclick="showMoreInsurance();">
-                            <span style="text-decoration: underline; color: #ff7400;">Learn more</span>
+                            <span style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
                         </a>
 
                     </div>

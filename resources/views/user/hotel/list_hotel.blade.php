@@ -351,9 +351,9 @@
                                     <i class="fa-solid fa-star" style="color: #febb02"></i>
                                 </div>
                             @else
-                                <div class="text-13 text-md-end">
-                                    <span>No stars yet</span>
-                                    <i class="fa-solid fa-star" style="color: #febb02"></i>
+                                <div class="text-13 text-md-end non-star">
+                                    <span>Non-star</span>
+                                    <i class="fa-solid fa-star" style="color: #febb02;"></i>
                                 </div>
                             @endif
                         </div>
@@ -390,7 +390,7 @@
                                             </a>
                                         @else
                                             <p class="text-14 fw-400 grid-one-line max-lines mb-0">
-                                                No reviews yet
+                                            {{ __('user_page.No reviews yet') }}
                                             </p>
                                         @endif
                                     </div>
