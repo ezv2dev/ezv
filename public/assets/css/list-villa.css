@@ -3460,8 +3460,8 @@ input::-webkit-inner-spin-button {
         width: 40px !important;
     }
     #villa-data {
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
     }
 
     #villa-search-data {
@@ -3586,7 +3586,7 @@ a.orange-hover {
 .non-star i {
     color: #ff7400;
 }
-@media (max-width: 549px) {
+/* @media (max-width: 549px) {
     .img-fluid, .grid-image {
         aspect-ratio: 4/3 !important;
         height: auto !important;
@@ -3596,4 +3596,4 @@ a.orange-hover {
         border-radius: 0.25rem !important;
         aspect-ratio: 4/3 !important;
     }
-}
+} */
