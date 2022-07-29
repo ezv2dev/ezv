@@ -3456,6 +3456,8 @@
     {{-- UPDATE FORM --}}
     <script>
         function editNameForm() {
+            var formattedText = asciiToString(document.getElementById("name-form-input").value);
+            document.getElementById("name-form-input").value = formattedText;
             var form = document.getElementById("name-form");
             var content = document.getElementById("name-content");
             form.classList.add("d-block");

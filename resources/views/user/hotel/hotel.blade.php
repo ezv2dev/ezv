@@ -4890,9 +4890,78 @@
     </script>
     {{-- END IMAGE UPLOAD --}}
 
+    <script>
+        // function replace ascii to string in every input
+        function asciiToString(str) {
+            var newStr = str;
+            var arrAsciiIndex = [...str.matchAll(/[&#0-9;]/g)];
+            if (arrAsciiIndex.length >= 3) {
+                for (var i = 0; i < arrAsciiIndex.length; i++) {
+                    if (str[arrAsciiIndex[i].index] === "&" && str[arrAsciiIndex[i + 1].index] === "#"
+                        && !isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
+                            var lastIndex = i + 3;
+                            var number = str[arrAsciiIndex[i + 2].index];
+                            while(lastIndex < arrAsciiIndex.length) {
+                                if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
+                                    number += str[arrAsciiIndex[lastIndex].index];
+                                    lastIndex++;
+                                } else {
+                                    break;
+                                }
+                            }
+                            var escapeChar = String.fromCharCode(parseInt(number));
+                            var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
+                                        + number + ";" 
+                            newStr = newStr.replace(pattern, escapeChar);
+                    }
+                }
+            }
+            return newStr;
+        }
+    </script>
+
+    <script>
+        // function replace ascii to string in every input
+        function asciiToString(str) {
+            var newStr = str;
+            var arrAsciiIndex = [...str.matchAll(/[&#0-9;]/g)];
+            if (arrAsciiIndex.length >= 3) {
+                for (var i = 0; i < arrAsciiIndex.length; i++) {
+                    if (str[arrAsciiIndex[i].index] === "&" && i != arrAsciiIndex.length - 1) {
+                        if (arrAsciiIndex[i + 1] != undefined) {
+                            if (str[arrAsciiIndex[i + 1].index] === "#") {
+                                if (arrAsciiIndex[i + 2] != undefined) {
+                                    if (!isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
+                                        var lastIndex = i + 3;
+                                        var number = str[arrAsciiIndex[i + 2].index];
+                                        while(lastIndex < arrAsciiIndex.length) {
+                                            if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
+                                                number += str[arrAsciiIndex[lastIndex].index];
+                                                lastIndex++;
+                                            } else {
+                                                break;
+                                            }
+                                        }
+                                        var escapeChar = String.fromCharCode(parseInt(number));
+                                        var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
+                                                    + number + ";" 
+                                        newStr = newStr.replace(pattern, escapeChar);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return newStr;
+        }
+    </script>
+
     {{-- UPDATE FORM --}}
     <script>
         function editNameForm() {
+            var formattedText = asciiToString(document.getElementById("name-form-input").value);
+            document.getElementById("name-form-input").value = formattedText;
             var form = document.getElementById("name-form");
             var content = document.getElementById("name-content");
             var formInput = document.getElementById("name-form-input");
@@ -4921,6 +4990,8 @@
     {{-- UPDATE FORM --}}
     <script>
         function editShortDescriptionForm() {
+            var formattedText = asciiToString(document.getElementById("short-description-form-input").value);
+            document.getElementById("short-description-form-input").value = formattedText;
             var form = document.getElementById("short-description-form");
             var content = document.getElementById("short-description-content");
             var formInput = document.getElementById("short-description-form-input");
@@ -4947,12 +5018,16 @@
     </script>
     <script>
         function editDescriptionForm() {
+            var formattedText = asciiToString(document.getElementById("description-form-input").value);
+            document.getElementById("description-form-input").value = formattedText;
             var form = document.getElementById("description-form");
             var content = document.getElementById("description-content");
             var btn = document.getElementById("btnShowMoreDescription");
             form.classList.add("d-block");
             content.classList.add("d-none");
-            btn.classList.add("d-none");
+            if (btn != null) {
+                btn.classList.add("d-none");
+            }
         }
 
         function editDescriptionCancel() {
