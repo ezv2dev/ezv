@@ -1173,7 +1173,7 @@
 
                                             <a onclick="open_detail_price()" target="_blank"
                                                 style="display: inline-block; width: 50%;"
-                                                class="btn btn-outline-dark table-room-button">{{ __('user_page.Select') }}</a>
+                                                class="btn btn-primary table-room-button">{{ __('user_page.Select') }}</a>
 
                                         </div>
                                     </div>
