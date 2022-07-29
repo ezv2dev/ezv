@@ -483,7 +483,8 @@
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
                                         <input type="text" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" value="{{ $_COOKIE['sCheck_in'] ?? '' }}"
+                                            class="form-control"
+                                            {{-- value="{{ $_COOKIE['sCheck_in'] ?? '' }}" --}}
                                             id="check_in4" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00; margin-top: 2px;">
                                     </div>
@@ -494,7 +495,8 @@
                                         <p>{{ __('user_page.Check out') }}</p>
                                         <input type="text" style="background-color: #ffffff00; margin-top: 2px;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
-                                            value="{{ $_COOKIE['sCheck_out'] ?? '' }}" id="check_out4"
+                                            {{-- value="{{ $_COOKIE['sCheck_out'] ?? '' }}" --}}
+                                            id="check_out4"
                                             name="sCheck_out" readonly>
                                     </div>
 
