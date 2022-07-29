@@ -3348,6 +3348,10 @@ input::-webkit-inner-spin-button {
     #villa-list-video-mobile {
         display: block !important;
     }
+    .villa-list-video-container {
+        width: 50px;
+        height: 50px;
+    }
     .pagination {
         width: 100vw !important;
         padding-left: 0.5rem !important;
@@ -3565,4 +3569,11 @@ a.orange-hover {
     margin-left: 10px;
     top: -2px;
     position: relative;
+}
+
+@media (max-width: 549px) {
+    .img-fluid, .grid-image {
+        aspect-ratio: 4/3 !important;
+        height: auto !important;
+    }
 }

@@ -50,6 +50,7 @@ if (isset($_COOKIE['tema'])) {
 @foreach ($villas as $data)
     <div class="row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0">
         <!-- Left Sedtion -->
+        {{--start here <div class="col-lg-6 py-0 col-xs-12 h-auto list-image-container grid-desc-container list-image-container"> --}}
         <div class="col-lg-6 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
             <div class="content list-image-content list-image-content-villa">
                 @guest
@@ -173,23 +174,26 @@ if (isset($_COOKIE['tema'])) {
                         @forelse ($gallery->sortBy('order') as $item)
                             <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                 class="col-lg-6 list-image-container">
-                                <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                     src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $item->photo) }}"
+                                    data-src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $item->photo) }}"
                                     alt="EZV_{{ $item->photo }}">
                             </a>
                         @empty
                             @if ($data->image)
                                 <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                     class="col-lg-6 list-image-container">
-                                    <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                    <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                         src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}"
+                                        data-src="{{ URL::asset('/foto/gallery/' . strtolower($data->uid) . '/' . $data->image) }}"
                                         alt="EZV_{{ $data->image }}">
                                 </a>
                             @else
                                 <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
                                     class="col-lg-6 list-image-container ">
-                                    <img class="img-fluid grid-image" style="display: block;" loading="lazy"
+                                    <img class="lozad img-fluid grid-image" style="display: block;" loading="lazy"
                                         src="{{ URL::asset('/template/villa/template_profile.jpg') }}"
+                                        data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}"
                                         alt="EZV_no-image.jpeg">
                                 </a>
                             @endif
