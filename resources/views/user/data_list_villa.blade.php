@@ -50,8 +50,7 @@ if (isset($_COOKIE['tema'])) {
 @foreach ($villas as $data)
     <div class="row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0">
         <!-- Left Sedtion -->
-        {{--start here <div class="col-lg-6 py-0 col-xs-12 list-image-container grid-desc-container list-image-container"> --}}
-        <div class="col-lg-6 py-0 col-xs-12 list-image-container grid-desc-container h-auto list-image-container">
+        <div class="col-lg-6 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
             <div class="content list-image-content list-image-content-villa">
                 @guest
                     <div class="list-like-button-container"
