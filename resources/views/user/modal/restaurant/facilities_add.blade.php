@@ -70,7 +70,7 @@
 
 <div class="modal fade" id="modal-add_facilities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document">
         <div class="modal-content">
             <form action="javascript:void(0);" method="POST" id="basic-form"
                     class="js-validation" enctype="multipart/form-data">

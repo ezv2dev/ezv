@@ -323,7 +323,7 @@
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-body3">
                 <div class="tabbable column-wrapper">
                     <form method="POST" action="{{ route('villa_update_cancellation_policy') }}">
                         @csrf
