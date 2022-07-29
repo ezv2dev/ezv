@@ -237,6 +237,9 @@ return [
     'Collab Portal' => 'Collab Portal',
     'Collabs' => 'Collabs',
     'Dashboard' => 'Dashboard',
+    'EZV Cover' => 'EZV Cover',
+    'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.' => 'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.',
+    'Learn more' => 'Learn more',
 
     'The Best Way To Find Home, Hotel, Food, And Wow' => 'The Best Way To Find Home, Hotel, Food, And Wow',
     "Let's Go" => "Let's Go",
@@ -279,6 +282,7 @@ return [
     'Nearby Villas & Things To Do' => 'Nearby Villas & Things To Do',
     'No villas found' => 'No villas found',
     'No things to do found' => 'No things to do found',
+    'No reviews yet' => 'No reviews yet',
     'All Facilities' => 'All Facilities',
     'All Tags' => 'All Tags',
     'Cuisine' => 'Cuisine',
