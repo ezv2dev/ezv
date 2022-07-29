@@ -3560,3 +3560,9 @@ input::-webkit-inner-spin-button {
 .grid-sub-cat-content-container:hover .list-description{
     color: #ff7400;
 }
+
+a.orange-hover {
+    margin-left: 10px;
+    top: -2px;
+    position: relative;
+}

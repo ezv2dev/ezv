@@ -420,15 +420,21 @@
                                                     {{ CurrencyConversion::exchangeWithUnit($data->price) }}
                                                 </span>
                                             @else
-                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                <span class="fw-400 {{ $textColor }} list-description" style="font-size: 14px; font-weight: 600;">
                                                     {{ __('user_page.Price is unknown') }}
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="text-12 grid-one-line  mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                                            <span class="fw-400 {{ $textColor }} list-description">
-                                                Included taxes and changes
-                                            </span>
+                                            @if ($data->price_inclusion)
+                                                <span class="fw-400 {{ $textColor }} list-description">
+                                                    Nett price
+                                                </span>
+                                            @else
+                                                <span class="fw-400 {{ $textColor }} list-description" style="font-size: 14px; font-weight: 600;">
+                                                    Price ++
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
