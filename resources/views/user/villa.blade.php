@@ -99,7 +99,7 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
-            <div class="d-flex" style="align-items: center;">
+            <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     {{-- <input class="price-button" onclick="details_reserve()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
@@ -124,10 +124,10 @@
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
-                    <span class="price" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
+                    <span class="price m-0" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
                     </span>
-                    <span class="price d-none" id="priceBottomFilled"></span>
-                    <span class="price d-none" id="dateSelected"></span>
+                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none" id="priceBottomFilled"></span>
+                    <span style="font-size: 13px;" class="price m-0 d-none" id="dateSelected"></span>
                 </div>
             </div>
         </div>
