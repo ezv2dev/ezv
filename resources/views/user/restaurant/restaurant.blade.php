@@ -185,7 +185,8 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-
+                                <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
                                         ({{ session('currency') }})
@@ -249,7 +250,8 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-
+                            <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -1442,6 +1444,15 @@
                                             </div>
                                         </div>
                                     @endfor
+                                    <div class="list-amenities">
+                                        <button class="amenities-button" type="button"
+                                            onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange"
+                                                style="font-size: 40px;"></i>
+                                            <div style="font-size: 15px;" class="translate-text-group-items">
+                                                {{ __('user_page.More') }}</div>
+                                        </button>
+                                    </div>
                                 @else
                                     @forelse ($restaurant->facilities as $item)
                                         <div class="list-amenities">
@@ -1462,14 +1473,6 @@
                                     @empty
                                         {{-- <p id="default-amen-null">{{ __('user_page.there is no facilities yet') }}</p> --}}
                                     @endforelse
-                                @endif
-                                @if ($restaurant->facilities->count() > 6)
-                                    <div class="list-amenities">
-                                        <button class="amenities-button" type="button" onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                            <div style="font-size: 15px;">{{ __('user_page.More') }}</div>
-                                        </button>
-                                    </div>
                                 @endif
                             </div>
                         @empty($restaurant->facilities->count())
@@ -4526,7 +4529,7 @@
                                     }
                                     var escapeChar = String.fromCharCode(parseInt(number));
                                     var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                                + number + ";" 
+                                                + number + ";"
                                     newStr = newStr.replace(pattern, escapeChar);
                                 }
                             }

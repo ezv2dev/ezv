@@ -451,10 +451,10 @@ a:hover {
 .video-title {
     color: #fff;
     text-shadow: 1px 1px 1px #000;
-    top: 34px;
+    top: 10px;
     position: absolute;
     z-index: 99;
-    left: 30px;
+    left: 10px;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -3260,7 +3260,9 @@ span.flatpickr-weekday {
     width: 100% !important;
     margin: 0px !important;
 }
-#storymodal .modal-content-story .video-modal {
+#storymodal .modal-content .video-modal,
+#storymodalrestaurant .modal-dialog .modal-content .video-modal,
+#storymodalactivity .modal-dialog .modal-content .video-modal {
     width: 100% !important;
 }
 #edit_position_photo .modal-dialog .modal-content {
@@ -3889,6 +3891,9 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (min-width: 992px) {
+    #modal-edit_story .modal-dialog .modal-content {
+        width: 80% !important;
+    }
     .side-check-in-calendar {
         left: auto;
         right: 105%;

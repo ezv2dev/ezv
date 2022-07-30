@@ -201,7 +201,8 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-
+                                <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
                                         ({{ session('currency') }})
@@ -266,7 +267,8 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-
+                            <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -1148,7 +1150,7 @@
                         </div>
                         <div class="row-grid-amenities">
                             <div class="row-grid-list-amenities translate-text-group">
-                                @if ($hotel_amenities->count() >= 6)
+                                @if ($hotel_amenities->count() > 6)
                                     @foreach ($hotel_amenities->take(6) as $item1)
                                         <div class="list-amenities ">
                                             <div class="text-align-center">
@@ -1166,9 +1168,18 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    <div class="list-amenities">
+                                        <button class="amenities-button" type="button"
+                                            onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange"
+                                                style="font-size: 40px;"></i>
+                                            <div style="font-size: 15px;" class="translate-text-group-items">
+                                                {{ __('user_page.More') }}</div>
+                                        </button>
+                                    </div>
                                 @endif
 
-                                @if ($hotel_amenities->count() < 6)
+                                @if ($hotel_amenities->count() <= 6)
                                     @foreach ($hotel_amenities->take(3) as $item1)
                                         <div class="list-amenities ">
                                             <div class="text-align-center">
@@ -1238,15 +1249,6 @@
                                         </div>
                                     @endforeach
                                 @endif
-                                <div class="list-amenities">
-                                    <button class="amenities-button" type="button" onclick="view_amenities()">
-                                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                                        <div style="font-size: 15px; font-weight: 600;"
-                                            class="translate-text-group-items">
-                                            {{ __('user_page.More') }}
-                                        </div>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </section>
@@ -4911,7 +4913,7 @@
                             }
                             var escapeChar = String.fromCharCode(parseInt(number));
                             var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                        + number + ";" 
+                                        + number + ";"
                             newStr = newStr.replace(pattern, escapeChar);
                     }
                 }
@@ -4944,7 +4946,7 @@
                                         }
                                         var escapeChar = String.fromCharCode(parseInt(number));
                                         var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                                    + number + ";" 
+                                                    + number + ";"
                                         newStr = newStr.replace(pattern, escapeChar);
                                     }
                                 }

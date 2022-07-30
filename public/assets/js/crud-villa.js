@@ -27,7 +27,7 @@ function asciiToString(str) {
                                 }
                                 var escapeChar = String.fromCharCode(parseInt(number));
                                 var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                            + number + ";" 
+                                            + number + ";"
                                 newStr = newStr.replace(pattern, escapeChar);
                             }
                         }
@@ -940,7 +940,7 @@ function editAmenitiesVilla(id_villa) {
                 );
             }
 
-            if (lengthAmenities > 5) {
+            if (lengthAmenities > 6) {
                 for (i = 0; i < lengthAmenities; i++) {
                     if (i === 6) {
                         break;
@@ -961,6 +961,14 @@ function editAmenitiesVilla(id_villa) {
                     </div>
                     `);
                 }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                            <div style="font-size: 15px;" class="translate-text-group-items">More</div>
+                        </button>
+                    </div>
+                `);
             } else {
                 var count;
                 var total_last;
@@ -1117,18 +1125,6 @@ function editAmenitiesVilla(id_villa) {
                 }
 
                 count = count - lengthBathroom;
-            }
-
-            if (total > 5) {
-                $("#listAmenities").append(`
-                    <div class="list-amenities">
-                        <button class="amenities-button" type="button" onclick="view_amenities()">
-                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                            <div style="font-size: 15px;" class="translate-text-group-items">
-                                More</div>
-                        </button>
-                    </div>
-                `);
             }
 
             $("#moreAmenities").html(`

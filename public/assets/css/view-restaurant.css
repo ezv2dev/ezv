@@ -261,7 +261,7 @@
     .review-container {
         margin-right: 20px;
     }
-    
+
 }
 
 .edit-menu-icon {
@@ -469,6 +469,7 @@ color: #FEFBE7;
 
 .row-grid-amenities {
     margin-left: 9px;
+    margin-right: 9px;
 }
 
 .member-profile-desc {

@@ -1008,7 +1008,7 @@ function saveFacilities() {
                 );
             }
 
-            if (response.data.length > 5) {
+            if (response.data.length > 6) {
                 for (let i = 0; i < 6; i++) {
                     if (i == 0) {
                         content =
@@ -1033,7 +1033,7 @@ function saveFacilities() {
                 }
                 content =
                     content +
-                    '<div class="list-amenities"> <button class="amenities-button" type="button" onclick="view_amenities()"> <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i> <div style="font-size: 15px;">More</div> </button> </div>';
+                    '<div class="list-amenities"> <button class="amenities-button" type="button" onclick="view_amenities()"> <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i> <div style="font-size: 15px;" class="translate-text-group-items">More</div> </button> </div>';
             } else {
                 for (let i = 0; i < response.data.length; i++) {
                     if (i == 0) {
@@ -1065,7 +1065,7 @@ function saveFacilities() {
             $("#contentFacilities").html(content);
 
             //modal
-            if (response.data.length > 5) {
+            if (response.data.length > 6) {
                 let contentFacilities;
 
                 for (let h = 0; h < response.data.length; h++) {

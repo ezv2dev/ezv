@@ -99,11 +99,37 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
-            <input class="price-button" onclick="details_reserve()"
-                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-            <span
-                class="price"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}</span>
+            <div class="d-flex" style="align-items: center;">
+                <div class="button-view-detail">
+                    {{-- <input class="price-button" onclick="details_reserve()"
+                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                        value="{{ __('user_page.VIEW DETAILS') }}" readonly> --}}
+                    @if ($villa[0]->instant_book == 'yes')
+                            <input class="price-button" onclick="details_reserve()"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                    @else
+                        @guest
+                            <input class="price-button" onclick="loginForm(2)"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                        @endguest
+
+                        @auth
+                            <input class="price-button" onclick="details_quick_enquiry()"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                        @endauth
+                    @endif
+                </div>
+
+                <div class="d-flex" style="flex-direction: column;">
+                    <span class="price" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
+                    </span>
+                    <span class="price d-none" id="priceBottomFilled"></span>
+                    <span class="price d-none" id="dateSelected"></span>
+                </div>
+            </div>
         </div>
         {{-- END STICKY BOTTOM FOR MOBILE --}}
 
@@ -186,7 +212,8 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-
+                                <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
                                         ({{ session('currency') }})</p>
@@ -250,7 +277,8 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-
+                            <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -1235,7 +1263,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if ($i <= 0)
+                                        {{-- @if ($i <= 0)
                                             <div class="list-amenities">
                                                 <button class="amenities-button" type="button"
                                                     onclick="view_amenities()">
@@ -1245,7 +1273,7 @@
                                                         {{ __('user_page.More') }}</div>
                                                 </button>
                                             </div>
-                                        @endif
+                                        @endif --}}
                                     @endif
                                 @endif
                             </div>

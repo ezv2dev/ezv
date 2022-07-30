@@ -240,6 +240,7 @@ function calendar_availability(months) {
                     var minimum = new Date($("#check_in").val()).fp_incr(
                         min_stay
                     );
+
                     $.ajax({
                         type: "GET",
                         url: "/villa/get_total/" + $("#id_villa").val(),
@@ -375,6 +376,43 @@ function calendar_availability(months) {
                                     $("#cleaning_div").css("display", "block");
                                 }
 
+                                let checkIn = instance.formatDate(
+                                    selectedDates[0],
+                                    "d M Y"
+                                );
+
+                                let checkOut = instance.formatDate(
+                                    selectedDates[1],
+                                    "d M Y"
+                                );
+
+                                // if ((checkIn == null) & (checkOut == null)) {
+                                //     document
+                                //         .getElementById("dateSelected")
+                                //         .classList.add("d-none");
+
+                                //     $("#priceBottom").removeClass("d-none");
+                                //     $("#priceBottomFilled").addClass("d-none");
+                                // } else {
+                                document
+                                    .getElementById("dateSelected")
+                                    .classList.remove("d-none");
+
+                                $("#dateSelected").html(
+                                    checkIn + " - " + checkOut
+                                );
+
+                                $("#priceBottom").addClass("d-none");
+                                $("#priceBottomFilled").removeClass("d-none");
+
+                                $("#priceBottomFilled").html(
+                                    total["total_all"] +
+                                        "/" +
+                                        sum_night +
+                                        " night"
+                                );
+                                // }
+
                                 calendar_reserve(2);
                                 calendar_reserve2(2);
                             }
@@ -387,6 +425,10 @@ function calendar_availability(months) {
 }
 
 $("#clear1").click(function () {
+    document.getElementById("dateSelected").classList.add("d-none");
+    $("#priceBottom").removeClass("d-none");
+    $("#priceBottomFilled").addClass("d-none");
+
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
