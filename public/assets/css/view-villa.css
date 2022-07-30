@@ -3282,9 +3282,9 @@ span.flatpickr-weekday {
 #name-content,
 #description #description-content,
 #short-description-content #short-description-content,
-#short-description-content #short-description-content2 {
+/* #short-description-content #short-description-content2 {
     white-space: pre-line;
-}
+} */
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-icon,
     #gallery .gallery .grid-photo:nth-child(3n+0) .edit-video-icon,
