@@ -6,7 +6,7 @@
     <!-- Hero -->
     <style>
         .overflow-x-scroll{
-            overflow-x:scroll;
+            overflow-x:auto;
         }
         .layout-header-footer{
             display:flex;
@@ -16,6 +16,11 @@
             row-gap:12px;
         }
 
+        .container-dashboard{
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
         @media (min-width: 768px) { 
             .layout-header-footer{
                 flex-direction:row;
@@ -23,71 +28,78 @@
                 justify-content:space-between;
                 row-gap:0px;
             }
+
+            .container-dashboard{
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
         }
     </style>
-    <div class="container px-4">
-        <div class="bg-body-light">
-            <div class="content content-full">
-                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center my-3">
-                    <h1 class="flex-grow-1 fs-3 fw-semibold">Activity</h1>
-                    <!-- <nav class="flex-shrink-0 my-2 my-sm-0 ms-sm-3" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary"
-                                href="{{ route('admin_add_listing') }}">
-                                <i class="fa fa-plus-circle mr-2"></i> Add Data
-                            </a>
-                        </ol>
-                    </nav> -->
-                    <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary btn-light py-3 px-4" href="{{ route('admin_add_listing') }}">
-                        <i class="fa fa-plus-circle mr-2"></i> Add Data
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END Hero -->
-    {{-- CONTENT --}}
-    <div class="container px-4" style="padding-bottom: 30px;">
-        <!-- Example DataTable for Dashboard Demo-->
-        <div class="card mb-4">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-lg">
-                        <a class="btn btn-danger" style="color: #fff" href="{{ route('admin_activity_trash') }}"><i class="fa fa-trash mr-2" aria-hidden="true"></i> Trash Data</a></span>
+    <div class="container-dashboard">
+        <div class="container px-4">
+            <div class="bg-body-light">
+                <div class="content content-full">
+                    <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center my-3">
+                        <h1 class="flex-grow-1 fs-3 fw-semibold">Activity</h1>
+                        <!-- <nav class="flex-shrink-0 my-2 my-sm-0 ms-sm-3" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary"
+                                    href="{{ route('admin_add_listing') }}">
+                                    <i class="fa fa-plus-circle mr-2"></i> Add Data
+                                </a>
+                            </ol>
+                        </nav> -->
+                        <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary btn-light py-3 px-4" href="{{ route('admin_add_listing') }}">
+                            <i class="fa fa-plus-circle mr-2"></i> Add Data
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="" style="padding: 20px;">
-                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">NAME</th>
-                                <th class="text-center">ADDRESS</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">NAME</th>
-                                <th class="text-center">ADDRESS</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        </tbody>
-                    </table>
+        </div>
+        <!-- END Hero -->
+        {{-- CONTENT --}}
+        <div class="container px-4" style="padding-bottom: 30px;">
+            <!-- Example DataTable for Dashboard Demo-->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg">
+                            <a class="btn btn-danger" style="color: #fff" href="{{ route('admin_activity_trash') }}"><i class="fa fa-trash mr-2" aria-hidden="true"></i> Trash Data</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="" style="padding: 20px;">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">NAME</th>
+                                    <th class="text-center">ADDRESS</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
+                                    <th class="text-center" style="width: 15%;">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">NAME</th>
+                                    <th class="text-center">ADDRESS</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
+                                    <th class="text-center" style="width: 15%;">ACTION</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        {{-- END CONTENT --}}
     </div>
-    {{-- END CONTENT --}}
 @endsection
 
 @section('scripts')

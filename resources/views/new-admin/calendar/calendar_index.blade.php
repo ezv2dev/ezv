@@ -17,7 +17,17 @@
         box-shadow: 0px 3px 15px -8px rgb(100,100,100);
     }
 
-}
+    .container-calendar{
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    @media (min-width: 768px) {
+        .container-calendar{
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+    }
 </style>
 
 @section('content_admin')
