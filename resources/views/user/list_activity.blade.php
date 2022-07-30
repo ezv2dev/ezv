@@ -299,7 +299,7 @@
                     </div>
                     <div
                         class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        <a class="orange-hover" href="#!" onclick="view_maps('{{ $data->id_activity }}')"></i><i
+                        <a class="orange-hover m-0" href="#!" onclick="view_maps('{{ $data->id_activity }}')"></i><i
                                 class="fa-solid fa-location-dot"></i>
                             {{ $data->location->name ?? __('user_page.Location not found') }}
                         </a>
