@@ -1593,40 +1593,152 @@
                         }
                     }
                 })
-                // $(".SlickCarousel").slick({
-                //     rtl: false, // If RTL Make it true & .slick-slide{float:right;}
-                //     autoplay: false,
-                //     autoplaySpeed: 5000, //  Slide Delay
-                //     speed: 800, // Transition Speed
-                //     slidesToShow: 5, // Number Of Carousel
-                //     slidesToScroll: 3, // Slide To Move
-                //     pauseOnHover: false,
-                //     appendArrows: $(".Container .Head .Arrows"),
-                //     prevArrow: '<span class="Slick-Prev"></span>',
-                //     nextArrow: '<span class="Slick-Next"></span>',
-                //     easing: "linear",
-                //     responsive: [{
-                //             breakpoint: 801,
-                //             settings: {
-                //                 slidesToShow: 3,
-                //             }
-                //         },
-                //         {
-                //             breakpoint: 641,
-                //             settings: {
-                //                 slidesToShow: 3,
-                //             }
-                //         },
-                //         {
-                //             breakpoint: 481,
-                //             settings: {
-                //                 slidesToShow: 1,
-                //             }
-                //         },
-                //     ],
-                // })
+                $(".SlickCarousel").slick({
+                    rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                    autoplay: false,
+                    autoplaySpeed: 5000, //  Slide Delay
+                    speed: 800, // Transition Speed
+                    slidesToShow: 5, // Number Of Carousel
+                    slidesToScroll: 3, // Slide To Move
+                    pauseOnHover: false,
+                    appendArrows: $(".Container .Head .Arrows"),
+                    prevArrow: '<span class="Slick-Prev"></span>',
+                    nextArrow: '<span class="Slick-Next"></span>',
+                    easing: "linear",
+                    responsive: [{
+                            breakpoint: 801,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 641,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 481,
+                            settings: {
+                                slidesToShow: 1,
+                            }
+                        },
+                    ],
+                })
             })
         </script>
+
+        <script>
+            $(document).ready(function() {
+                $(".SlickCarouselthree").slick({
+                    rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                    autoplay: false,
+                    autoplaySpeed: 5000, //  Slide Delay
+                    speed: 800, // Transition Speed
+                    slidesToShow: 5, // Number Of Carousel
+                    slidesToScroll: 3, // Slide To Move
+                    pauseOnHover: false,
+                    appendArrows: $(".Containerthree .Head .Arrows"),
+                    prevArrow: '<span class="Slick-Prev"></span>',
+                    nextArrow: '<span class="Slick-Next"></span>',
+                    easing: "linear",
+                    responsive: [{
+                            breakpoint: 801,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 641,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 481,
+                            settings: {
+                                slidesToShow: 1,
+                            }
+                        },
+                    ],
+                })
+            })
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(".SlickCarousel2").slick({
+                    rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                    autoplay: false,
+                    autoplaySpeed: 5000, //  Slide Delay
+                    speed: 800, // Transition Speed
+                    slidesToShow: 6, // Number Of Carousel
+                    slidesToScroll: 1, // Slide To Move
+                    pauseOnHover: false,
+                    appendArrows: $(".Container .Arrows2"), // Class For Arrows Buttons
+                    prevArrow: '<div class="col-6 nav-left"><span class="Slick-Prev"></span></div>',
+                    nextArrow: '<div class="col-6 nav-right"><span class="Slick-Next"></span></div>',
+                    easing: "linear",
+                    responsive: [{
+                            breakpoint: 801,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 641,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 481,
+                            settings: {
+                                slidesToShow: 1,
+                            }
+                        },
+                    ],
+                })
+            })
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(".SlickCarousel3").slick({
+                    rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                    autoplay: false,
+                    autoplaySpeed: 5000, //  Slide Delay
+                    speed: 800, // Transition Speed
+                    slidesToShow: 6, // Number Of Carousel
+                    slidesToScroll: 1, // Slide To Move
+                    pauseOnHover: false,
+                    appendArrows: $(".Container .Arrows3"), // Class For Arrows Buttons
+                    prevArrow: '<div class="col-6 nav-left"><span class="Slick-Prev"></span></div>',
+                    nextArrow: '<div class="col-6 nav-right"><span class="Slick-Next"></span></div>',
+                    easing: "linear",
+                    responsive: [{
+                            breakpoint: 801,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 641,
+                            settings: {
+                                slidesToShow: 3,
+                            }
+                        },
+                        {
+                            breakpoint: 481,
+                            settings: {
+                                slidesToShow: 1,
+                            }
+                        },
+                    ],
+                })
+            })
+        </script>
+
         <script>
             function view_LoginModal() {
                 $('#LoginModal').modal('show');
