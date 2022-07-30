@@ -373,6 +373,22 @@ span .irs-bar,
 .irs-slider.to {
     margin-top: 0 !important;
 }
+#map12{
+    flex:2;
+}
+#modal-map-right{
+    flex:1;
+}
+.map-text-description,
+.map-price-dekstop,
+.map-villa-detail-link
+{
+    display: none !important;
+}
+
+.map-price-mobile{
+    display:block !important;
+}
 
 /* END Tambahan Drai Raija */
 
@@ -3052,7 +3068,7 @@ input::-webkit-inner-spin-button {
 }
 
 .modal-body-map {
-    padding: 0 0.5rem 1rem 0.5rem;
+    padding: 0.5rem;
     overflow-y: auto;
     height: 89vh;
 }
@@ -3072,6 +3088,7 @@ input::-webkit-inner-spin-button {
 
 .map-modal-container .map-container{
     height: 50%;
+    border-radius:15px;
 }
 .map-modal-container .map-content{
     height: 100%;
@@ -3310,7 +3327,6 @@ input::-webkit-inner-spin-button {
 
     .map-modal-container .map-container {
         width: 60%;
-        border-radius: 15px;
     }
     .map-modal-container .map-content {
         width: 40%;
@@ -3333,6 +3349,21 @@ input::-webkit-inner-spin-button {
     .h-mobile-100{
         height: auto !important;
     }
+    
+    #map12{
+        flex:auto;
+    }
+
+    .map-text-description,
+    .map-price-dekstop,
+    .map-villa-detail-link{
+        display: block !important;
+    }
+
+    .map-price-mobile{
+        display:none !important;
+    }
+
 }
 
 @media only screen and (max-width: 949px) {

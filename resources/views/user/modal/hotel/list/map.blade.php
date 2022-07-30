@@ -516,7 +516,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-end modal-view-detail">
+                                <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -574,7 +574,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    $('#map12').removeClass('h-mobile-100');
+                    // $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -732,8 +732,8 @@
                                         <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description mb-2">${short_description}</p>
-                                            <p class="card-text text-orange text-17 fw-500">${price}/Night</p>
+                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description mb-2">${short_description}</p>
+                                            <p class="card-text text-orange text-17 fw-500 map-price-dekstop">${price}/Night</p>
                                         </a>
                                     </div>
 
@@ -752,13 +752,15 @@
                                         <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                     </div> --}}
                                 </div>
-                                <div class="d-flex align-items-end modal-view-detail">
-                                    <div class="col-6">
+                                <div class="d-flex align-items-center mt-3 modal-view-detail ">
+                                    <div class="col-6 map-villa-detail-link">
                                         <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
                                             <i class=" text-orange fa-solid fa-arrow-right"></i>
                                         </a>
                                     </div>
+
+                                    <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
 
                                     <div class="d-flex justify-content-end col-6">
                                         <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
@@ -809,7 +811,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    $('#map12').removeClass('h-mobile-100');
+                    // $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -961,7 +963,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-end modal-view-detail">
+                                <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -1016,7 +1018,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    $('#map12').removeClass('h-mobile-100');
+                    // $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1203,7 +1205,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-end modal-view-detail">
+                                <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
                                         <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
@@ -1258,7 +1260,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    $('#map12').removeClass('h-mobile-100');
+                    // $('#map12').removeClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
