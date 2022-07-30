@@ -3160,7 +3160,6 @@ input::-webkit-inner-spin-button {
 }
 
 .container-grid-hotel .grid-list-container {
-    padding: 8px;
     border-radius: 20px;
     height: fit-content;
 }

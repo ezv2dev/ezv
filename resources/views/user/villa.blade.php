@@ -99,7 +99,7 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
-            <div class="d-flex" style="align-items: center;">
+            <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     {{-- <input class="price-button" onclick="details_reserve()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
@@ -124,10 +124,10 @@
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
-                    <span class="price" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
+                    <span class="price m-0" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
                     </span>
-                    <span class="price d-none" id="priceBottomFilled"></span>
-                    <span class="price d-none" id="dateSelected"></span>
+                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none" id="priceBottomFilled"></span>
+                    <span style="font-size: 13px;" class="price m-0 d-none" id="dateSelected"></span>
                 </div>
             </div>
         </div>
@@ -212,7 +212,7 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
@@ -277,7 +277,7 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
+                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
