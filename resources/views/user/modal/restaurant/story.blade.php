@@ -23,7 +23,7 @@
                                     <button type="button" class="button-choose-other btn btn-primary">{{ __('user_page.Choose another') }}</button>
                                     <button class="button-reset" type="reset">{{ __('user_page.Remove') }}</button>
                                 </div>
-                                <video class="w-100 story-upload-video-preview" style="height: 400px !important;" controls>
+                                <video class="w-100 story-upload-video-preview" controls>
                                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                                 </video>
                             </div>
