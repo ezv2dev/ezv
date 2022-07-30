@@ -99,7 +99,7 @@
 
         {{-- STICKY BOTTOM FOR MOBILE --}}
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
-            <div class="d-flex">
+            <div class="d-flex" style="align-items: center;">
                 <div class="button-view-detail">
                     {{-- <input class="price-button" onclick="details_reserve()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
