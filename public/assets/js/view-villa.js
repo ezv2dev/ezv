@@ -406,7 +406,10 @@ function calendar_availability(months) {
                                 $("#priceBottomFilled").removeClass("d-none");
 
                                 $("#priceBottomFilled").html(
-                                    total["total_all"]
+                                    total["total_all"] +
+                                        "/" +
+                                        sum_night +
+                                        " night"
                                 );
                                 // }
 
