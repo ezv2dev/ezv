@@ -101,9 +101,26 @@
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <div class="d-flex">
                 <div class="button-view-detail">
-                    <input class="price-button" onclick="details_reserve()"
+                    {{-- <input class="price-button" onclick="details_reserve()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                        value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        value="{{ __('user_page.VIEW DETAILS') }}" readonly> --}}
+                    @if ($villa[0]->instant_book == 'yes')
+                            <input class="price-button" onclick="details_reserve()"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                    @else
+                        @guest
+                            <input class="price-button" onclick="loginForm(2)"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                        @endguest
+
+                        @auth
+                            <input class="price-button" onclick="details_quick_enquiry()"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                        @endauth
+                    @endif
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
