@@ -306,7 +306,7 @@
 
                     <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
                         <div class="skeleton">
-                            <a class="orange-hover" href="#!"
+                            <a class="ms-0 orange-hover" href="#!"
                                 onclick="view_maps('{{ $data->id_restaurant }}')"><i
                                     class="fa-solid fa-location-dot text-13 text-orange"></i>
                                 {{ $data->location->name ?? __('user_page.Location not found') }}</a>
