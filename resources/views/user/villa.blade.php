@@ -1263,7 +1263,7 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if ($i <= 0)
+                                        {{-- @if ($i <= 0)
                                             <div class="list-amenities">
                                                 <button class="amenities-button" type="button"
                                                     onclick="view_amenities()">
@@ -1273,7 +1273,7 @@
                                                         {{ __('user_page.More') }}</div>
                                                 </button>
                                             </div>
-                                        @endif
+                                        @endif --}}
                                     @endif
                                 @endif
                             </div>

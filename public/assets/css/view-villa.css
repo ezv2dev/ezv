@@ -3894,9 +3894,6 @@ span.flatpickr-weekday {
     #modal-edit_story .modal-dialog .modal-content {
         width: 80% !important;
     }
-    #modal-edit_story .modal-dialog .modal-content .modal-body {
-        border-radius: 0px 0px 5px 5px;
-    }
     .side-check-in-calendar {
         left: auto;
         right: 105%;
