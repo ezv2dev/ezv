@@ -6,7 +6,7 @@
     <!-- Hero -->
     <style>
         .overflow-x-scroll{
-            overflow-x:scroll;
+            overflow-x:auto;
         }
         .layout-header-footer{
             display:flex;
@@ -14,6 +14,11 @@
             text-align:center;
             align-items:center;
             row-gap:12px;
+        }
+        
+        .container-dashboard{
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
         }
 
         @media (min-width: 768px) { 
@@ -23,9 +28,14 @@
                 justify-content:space-between;
                 row-gap:0px;
             }
+
+            .container-dashboard{
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
         }
     </style>
-    <div class="container px-4">
+    <div class="container container-dashboard px-4">
         <div class="bg-body-light">
             <div class="content content-full">
                 <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center my-3">

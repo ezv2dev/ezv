@@ -3,59 +3,94 @@
 @section('title', 'Restaurant - EZV2')
 
 @section('content_admin')
-    <!-- Hero -->
-    <div class="container">
-        <div class="bg-body-light">
-            <div class="content content-full">
-                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                    <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">Restaurant</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END Hero -->
-    {{-- CONTENT --}}
-    <div class="container" style="padding-bottom: 30px;">
-        <!-- Example DataTable for Dashboard Demo-->
-        <div class="card mb-4">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-lg">
-                        <a class="btn btn-success" style="color: #fff" href="{{ route('admin_restaurant') }}"><i class="fa fa-list mr-2" aria-hidden="true"></i> Data Restaurant</a></span>
+
+    <style>
+
+        .overflow-x-scroll{
+            overflow-x:auto;
+        }
+        .layout-header-footer{
+            display:flex;
+            flex-direction:column;
+            text-align:center;
+            align-items:center;
+            row-gap:12px;
+        }
+        .container-dashboard{
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        @media (min-width: 768px) { 
+            .layout-header-footer{
+                flex-direction:row;
+                text-align:left;
+                justify-content:space-between;
+                row-gap:0px;
+            }
+
+            .container-dashboard{
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+    </style>
+
+    <div class="container-dashboard">
+        <!-- Hero -->
+        <div class="container">
+            <div class="bg-body-light">
+                <div class="content content-full">
+                    <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                        <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">Restaurant</h1>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="datatable" style="padding: 20px;">
-                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">NAME</th>
-                                <th class="text-center">ADDRESS</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">NAME</th>
-                                <th class="text-center">ADDRESS</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
-                                <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        </tbody>
-                    </table>
+        </div>
+        <!-- END Hero -->
+        {{-- CONTENT --}}
+        <div class="container" style="padding-bottom: 30px;">
+            <!-- Example DataTable for Dashboard Demo-->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg">
+                            <a class="btn btn-success" style="color: #fff" href="{{ route('admin_restaurant') }}"><i class="fa fa-list mr-2" aria-hidden="true"></i> Data Restaurant</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="datatable" style="padding: 20px;">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">NAME</th>
+                                    <th class="text-center">ADDRESS</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
+                                    <th class="text-center" style="width: 15%;">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">NAME</th>
+                                    <th class="text-center">ADDRESS</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">PHONE</th>
+                                    <th class="d-none d-sm-table-cell text-center" style="width: 10%;">STATUS</th>
+                                    <th class="text-center" style="width: 15%;">ACTION</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        {{-- END CONTENT --}}
     </div>
-    {{-- END CONTENT --}}
 @endsection
 
 @section('scripts')
@@ -76,10 +111,13 @@
     <script>
         // load_tabel_first();
         var table = $('#dataTable').dataTable({
-            dom:
-            "<'row'<'col-sm-12 col-md-9'l><'col-sm-12 col-md-3'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            // dom:
+            // "<'row'<'col-sm-12 col-md-9'l><'col-sm-12 col-md-3'f>>" +
+            // "<'row'<'col-sm-12'tr>>" +
+            // "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            dom: "<'layout-header-footer'<l><f>>" +
+            "<'overflow-x-scroll'<tr>>" +
+            "<'layout-header-footer'<i><p>>",
             pagingType:"full_numbers",
             pageLength:10,
             lengthMenu:[[10,20,50],[10,20,50]],
