@@ -1298,261 +1298,265 @@
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price') }}</a>
                             @endif
                         @endauth
-                        {{-- <form class="js-validation" method="POST" action="{{ route('villa_booking_confirm') }}"
-                            id="form_reserve1"> --}}
-                        @csrf
-                        <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="price-box" style="display: none">
-                                    <span id="cross_price"
-                                        style="text-decoration: line-through; color:grey;">{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</span>
-                                </p>
-                                <p class="price-box">
-                                    <span
-                                        id="normal_price">{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</span>/{{ __('user_page.night') }}
-                                </p>
-                            </div>
-                            {{-- <div class="col-3" style="display: flex; align-items: center;">
-                                    <p class="price-box" style="text-align: end;"><i class="fa fa-star"
-                                            style="color: orange; font-size:14px"></i>
-                                        @if ($ratting->count() > 0)
-                                            {{ $ratting[0]->average }} {{ __('user_page.Reviews') }}
-                                        @endif
+                        <form method="POST" action="{{ route('villa_booking_confirm') }}" >
+                            @csrf
+                            <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="price-box" style="display: none">
+                                        <span id="cross_price"
+                                            style="text-decoration: line-through; color:grey;">{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</span>
                                     </p>
-                                </div> --}}
-                        </div>
-                        <div class="reserve-inner-block">
-                            <div class="col-12"
-                                style="display: flex; border: 2px solid #FF7400; border-radius: 15px; padding-top: 15px; padding-bottom: 15px; box-shadow: 1px 1px 10px #a4a4a4">
-
-                                <div class="col-6 p-5-price line-right-orange">
-                                    <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check" style="background-color: white;">
-                                            <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
-                                                {{ __('user_page.CHECK-IN') }}
-                                            </p>
-                                            <input class="date-form" type="text" id="check_in" name="check_in"
-                                                placeholder="{{ __('user_page.Add Date') }}" readonly>
-                                        </a>
-                                    </div>
+                                    <p class="price-box">
+                                        <span
+                                            id="normal_price">{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</span>/{{ __('user_page.night') }}
+                                    </p>
                                 </div>
-                                <div class="col-6 p-5-price">
-                                    <div class="col-12" style="text-align: center;">
-                                        <a type="button" class="collapsible_check" style="background-color: white;">
-                                            <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
-                                                {{ __('user_page.CHECK-OUT') }}
-                                            </p>
-                                            <input class="date-form" type="text" id="check_out" name="check_out"
-                                                placeholder="{{ __('user_page.Add Date') }}" readonly>
-                                        </a>
-                                    </div>
-                                </div>
+                                {{-- <div class="col-3" style="display: flex; align-items: center;">
+                                        <p class="price-box" style="text-align: end;"><i class="fa fa-star"
+                                                style="color: orange; font-size:14px"></i>
+                                            @if ($ratting->count() > 0)
+                                                {{ $ratting[0]->average }} {{ __('user_page.Reviews') }}
+                                            @endif
+                                        </p>
+                                    </div> --}}
+                            </div>
+                            <div class="reserve-inner-block">
+                                <div class="col-12"
+                                    style="display: flex; border: 2px solid #FF7400; border-radius: 15px; padding-top: 15px; padding-bottom: 15px; box-shadow: 1px 1px 10px #a4a4a4">
 
-                                <!-- <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
-                                    style="width: fit-content; margin-left: -675px; margin-top: -17px;"> -->
-                                <div class="content sidebar-popup side-check-in-calendar" id="popup_check" style="min-height: 430px; max-height: 430px;">
-                                    <div class="desk-e-call">
-                                        <div class="flatpickr-container"
-                                            style="display: flex; justify-content: center;">
-                                            <div style="display: table;">
-                                                <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
-                                                    class="col-lg-12">
-                                                    <a type="button" id="clear_date"
-                                                        style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
-                                                </div>
-                                                <div class="flatpickr" id="inline_reserve" style="text-align: left;">
-                                                    {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
+                                    <div class="col-6 p-5-price line-right-orange">
+                                        <div class="col-12" style="text-align: center;">
+                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                                <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
+                                                    {{ __('user_page.CHECK-IN') }}
+                                                </p>
+                                                <input class="date-form" type="text" id="check_in" name="check_in"
+                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 p-5-price">
+                                        <div class="col-12" style="text-align: center;">
+                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                                <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
+                                                    {{ __('user_page.CHECK-OUT') }}
+                                                </p>
+                                                <input class="date-form" type="text" id="check_out" name="check_out"
+                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
+                                        style="width: fit-content; margin-left: -675px; margin-top: -17px;"> -->
+                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check" style="min-height: 430px; max-height: 430px;">
+                                        <div class="desk-e-call">
+                                            <div class="flatpickr-container"
+                                                style="display: flex; justify-content: center;">
+                                                <div style="display: table;">
+                                                    <div style="padding-left: 15px; padding-right: 30px; text-align: right; text-align: center;"
+                                                        class="col-lg-12">
+                                                        <a type="button" id="clear_date"
+                                                            style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
+                                                    </div>
+                                                    <div class="flatpickr" id="inline_reserve" style="text-align: left;">
+                                                        {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 p-9-price line-top"
+                                    style="border: 2px solid #FF7400; margin-top: 19px; border-radius: 15px; box-shadow: 1px 1px 10px #a4a4a4">
+                                    <button type="button" class="collapsible">{{ __('user_page.Number of Guest') }}
+                                        <p class="guest-right">
+                                            {{ __('user_page.guest') }}</p>
+                                        <input class="guest-right-input" type="number" id="total_guest2" value="1"
+                                            min="0" readonly>
+                                    </button>
+                                    <div class="content sidebar-popup sidebar-popup-tamu" id="popup_guest">
+                                        <div class="row" style="margin-top: 10px;">
+
+                                            <div class="reserve-input-row">
+                                                <div class="col-6">
+                                                    <div class="col-12">
+                                                        <p class="price-box">
+                                                            {{ __('user_page.Adults') }}</p>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p class="price-box" style="color: grey">
+                                                            {{ __('user_page.Ages') }} 13+</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6"
+                                                    style="display: flex; align-items: center; justify-content: end;">
+                                                    <a type="button" onclick="adult_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="adult2" name="adult"
+                                                                value="1" min="1"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="adult_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="reserve-input-row">
+                                                <div class="col-6">
+                                                    <div class="col-12">
+                                                        <p class="price-box">
+                                                            {{ __('user_page.Children') }}</p>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p class="price-box" style="color: grey">
+                                                            {{ __('user_page.Ages') }} 2-12</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6"
+                                                    style="display: flex; align-items: center; justify-content: end;">
+                                                    <a type="button" onclick="child_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="child2" name="child"
+                                                                value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="child_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="reserve-input-row">
+                                                <div class="col-6">
+                                                    <div class="col-12">
+                                                        <p class="price-box">
+                                                            {{ __('user_page.Infant') }}</p>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p class="price-box" style="color: grey">
+                                                            {{ __('user_page.Under') }}2</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6"
+                                                    style="display: flex; align-items: center; justify-content: end;">
+                                                    <a type="button" onclick="infant_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="infant2" name="infant"
+                                                                value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="infant_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="reserve-input-row">
+                                                <div class="col-6">
+                                                    <div class="col-12">
+                                                        <p class="price-box">
+                                                            {{ __('user_page.Pets') }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6"
+                                                    style="display: flex; align-items: center; justify-content: end;">
+                                                    <a type="button" onclick="pet_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="pet2" name="pet"
+                                                                value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="pet_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 p-9-price line-top"
-                                style="border: 2px solid #FF7400; margin-top: 19px; border-radius: 15px; box-shadow: 1px 1px 10px #a4a4a4">
-                                <button type="button" class="collapsible">{{ __('user_page.Number of Guest') }}
-                                    <p class="guest-right">
-                                        {{ __('user_page.guest') }}</p>
-                                    <input class="guest-right-input" type="number" id="total_guest2" value="1"
-                                        min="0" readonly>
-                                </button>
-                                <div class="content sidebar-popup sidebar-popup-tamu" id="popup_guest">
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="reserve-input-row">
-                                            <div class="col-6">
-                                                <div class="col-12">
-                                                    <p class="price-box">
-                                                        {{ __('user_page.Adults') }}</p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="price-box" style="color: grey">
-                                                        {{ __('user_page.Ages') }} 13+</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6"
-                                                style="display: flex; align-items: center; justify-content: end;">
-                                                <a type="button" onclick="adult_decrement()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                                </a>
-                                                <div
-                                                    style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                    <p><input type="number" id="adult2" name="adult"
-                                                            value="1" min="1"
-                                                            style="text-align: center; border:none; width:30px;"
-                                                            min="0" readonly></p>
-                                                </div>
-                                                <a type="button" onclick="adult_increment()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="reserve-input-row">
-                                            <div class="col-6">
-                                                <div class="col-12">
-                                                    <p class="price-box">
-                                                        {{ __('user_page.Children') }}</p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="price-box" style="color: grey">
-                                                        {{ __('user_page.Ages') }} 2-12</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6"
-                                                style="display: flex; align-items: center; justify-content: end;">
-                                                <a type="button" onclick="child_decrement()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                                </a>
-                                                <div
-                                                    style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                    <p><input type="number" id="child2" name="child"
-                                                            value="0"
-                                                            style="text-align: center; border:none; width:30px;"
-                                                            min="0" readonly></p>
-                                                </div>
-                                                <a type="button" onclick="child_increment()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="reserve-input-row">
-                                            <div class="col-6">
-                                                <div class="col-12">
-                                                    <p class="price-box">
-                                                        {{ __('user_page.Infant') }}</p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="price-box" style="color: grey">
-                                                        {{ __('user_page.Under') }}2</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6"
-                                                style="display: flex; align-items: center; justify-content: end;">
-                                                <a type="button" onclick="infant_decrement()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                                </a>
-                                                <div
-                                                    style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                    <p><input type="number" id="infant2" name="infant"
-                                                            value="0"
-                                                            style="text-align: center; border:none; width:30px;"
-                                                            min="0" readonly></p>
-                                                </div>
-                                                <a type="button" onclick="infant_increment()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="reserve-input-row">
-                                            <div class="col-6">
-                                                <div class="col-12">
-                                                    <p class="price-box">
-                                                        {{ __('user_page.Pets') }}</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6"
-                                                style="display: flex; align-items: center; justify-content: end;">
-                                                <a type="button" onclick="pet_decrement()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-minus" style="padding:30%"></i>
-                                                </a>
-                                                <div
-                                                    style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                                    <p><input type="number" id="pet2" name="pet"
-                                                            value="0"
-                                                            style="text-align: center; border:none; width:30px;"
-                                                            min="0" readonly></p>
-                                                </div>
-                                                <a type="button" onclick="pet_increment()"
-                                                    style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
-                                                    <i class="fa-solid fa-plus" style="padding:30%"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                            <div class="col-12" style="display: none; margin-top: 10px; padding-top: 10px;"
+                                id="total_all2_div">
+                                <div class="col-6">
+                                    <p style="margin: 0px; font-size: 12px;">
+                                        <b>Total</b>
+                                    </p>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12" style="display: none; margin-top: 10px; padding-top: 10px;"
-                            id="total_all2_div">
-                            <div class="col-6">
-                                <p style="margin: 0px; font-size: 12px;">
-                                    <b>Total</b>
-                                </p>
+                                <div class="col-6" style="text-align: right">
+                                    <span style="font-size: 12px;"></span>
+                                    <b><span id="total_all2"
+                                            style="font-size:100%; font-size: 12px; margin: 0px;">0</span></b>
+                                </div>
+
                             </div>
 
-                            <div class="col-6" style="text-align: right">
-                                <span style="font-size: 12px;"></span>
-                                <b><span id="total_all2"
-                                        style="font-size:100%; font-size: 12px; margin: 0px;">0</span></b>
-                            </div>
-
-                        </div>
-
-                        <div class="col-12 p-5-price text-center"
-                            style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
-                            @if ($villa[0]->instant_book == 'yes')
-                                <input class="price-button" onclick="details_reserve()"
-                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                    value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-                            @else
-                                @guest
-                                    <input class="price-button" onclick="loginForm(2)"
+                            <div class="col-12 p-5-price text-center"
+                                style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
+                                @if ($villa[0]->instant_book == 'yes')
+                                    <input class="price-button" onclick="details_reserve()"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
-                                @endguest
-
-                                @auth
-                                    <input class="price-button" onclick="details_quick_enquiry()"
+                                        value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                                    {{-- <input type ="submit" class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
-                                @endauth
-                            @endif
-                        </div>
+                                        value="{{ __('user_page.VIEW DETAILS') }}"> --}}
+                                    {{-- <a class="price-button"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a> --}}
+                                @else
+                                    @guest
+                                        <input class="price-button" onclick="loginForm(2)"
+                                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                            value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                                    @endguest
+                                    @auth
+                                        <input class="price-button" onclick="details_quick_enquiry()"
+                                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                            value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                                    @endauth
+                                @endif
+                            </div>
 
-                        <div class="rightbar-advert-container"
-                            style="box-shadow: 1px 1px 15px rgb(0 0 0 / 16%); margin-top: 20px; min-height: 150px; border-radius: 12px; padding: 12px;">
-                            <img class="advert-img"
-                                src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                        </div>
-                        {{-- </form> --}}
+                            <div class="rightbar-advert-container"
+                                style="box-shadow: 1px 1px 15px rgb(0 0 0 / 16%); margin-top: 20px; min-height: 150px; border-radius: 12px; padding: 12px;">
+                                <img class="advert-img"
+                                    src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -399,4 +399,29 @@ class VillabookingController extends Controller
 
         return $data;
     }
+
+    public function confirm(Request $request)
+    {
+        // dd($request->all());
+
+        $id = $request->id_villa;
+        $villa = Villa::where('id_villa', $id)->first();
+
+        // dd($villa);
+
+        //get number of night
+        $startTimeStamp = strtotime($request->check_in);
+        $endTimeStamp = strtotime($request->check_out);
+        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+        $numberDays = $timeDiff / 86400;
+        $night = intval($numberDays);
+
+        //total
+        $total = $night * $villa->price;
+
+        $data = $request;
+        // dd($data, $villa, $night, $total);
+
+        return view('user.confirm-booking', compact('data', 'villa', 'night', 'total'));
+    }
 }

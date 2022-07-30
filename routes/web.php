@@ -793,6 +793,7 @@ Route::get('/villa/safety/{id}', [ViewController::class, 'safety'])->name('list_
 Route::get('/villa/service/{id}', [ViewController::class, 'service'])->name('list_service');
 Route::get('/villa/review/{id}', [ViewController::class, 'review'])->name('villa_review');
 Route::get('/villa/availabality/{id}', [ViewController::class, 'availabality'])->name('villa_availabality');
+Route::post('/villa/confirm/', [VillabookingController::class, 'confirm'])->name('villa_booking_confirm');
 Route::post('/villa/confirm/store', [VillabookingController::class, 'user_store'])->name('villa_booking_user_store');
 
 Route::get('/villa/availability/{id}/datatable', [ViewController::class, 'datatable_availability'])->name('villa_availability_datatable');
@@ -1380,7 +1381,8 @@ Route::post('/collaborator/update/photo', [Collaborator\CollaboratorController::
 Route::get('/collaborator/video/open/{id}', [Collaborator\CollaboratorController::class, 'video_open'])->name('video_open');
 Route::post('/collaborator/update/photo/position', [Collaborator\CollaboratorController::class, 'update_position_photo'])->name('collab_photo_edit_position');
 Route::post('/collaborator/update/video/position', [Collaborator\CollaboratorController::class, 'update_position_video'])->name('collab_video_edit_position');
-Route::post('/collaborator/review/store', [Collaborator\CollaboratorReviewController::class, 'store'])->name('collab_store_review');
+Route::post('
+', [Collaborator\CollaboratorReviewController::class, 'store'])->name('collab_store_review');
 Route::post('/collaborator/review/delete', [Collaborator\CollaboratorReviewController::class, 'destroy'])->name('collab_delete_review');
 
 Route::patch('/collab/{id}/update/request-update-status', [Collaborator\CollaboratorController::class, 'request_update_status'])->name('collab_request_update_status');
