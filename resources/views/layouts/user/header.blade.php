@@ -483,9 +483,8 @@
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
                                         <input type="text" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control"
-                                            {{-- value="{{ $_COOKIE['sCheck_in'] ?? '' }}" --}}
-                                            id="check_in4" name="sCheck_in"
+                                            class="form-control" {{-- value="{{ $_COOKIE['sCheck_in'] ?? '' }}" --}} id="check_in4"
+                                            name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00; margin-top: 2px;">
                                     </div>
                                     <div class="check-out">
@@ -495,9 +494,7 @@
                                         <p>{{ __('user_page.Check out') }}</p>
                                         <input type="text" style="background-color: #ffffff00; margin-top: 2px;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
-                                            {{-- value="{{ $_COOKIE['sCheck_out'] ?? '' }}" --}}
-                                            id="check_out4"
-                                            name="sCheck_out" readonly>
+                                            {{-- value="{{ $_COOKIE['sCheck_out'] ?? '' }}" --}} id="check_out4" name="sCheck_out" readonly>
                                     </div>
 
                                     <div class="guests">
@@ -912,8 +909,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" class="nav-link-form-detail"
+                                        target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="font-black nav-link-gap nav-link-style-detail nav-link-icon-style-detail">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -1077,102 +1074,43 @@
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                             placeholder="{{ __('user_page.Where are you going?') }}">
 
-                                        <div id="sugest2" class="location-popup display-none">
+                                        <div id="sugest2" class="location-popup display-none"
+                                            style="width: 560px; left: -262px; height: 390px;">
                                             <div class="location-popup-container h-100">
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="row location-popup-desc-container sugest-list-first"
                                                     style="display: none;">
-                                                    <div class="location-popup-map sugest-list-map">
-                                                        <img class="location-popup-map-image lozad"
-                                                            style="background: #222222;"
-                                                            src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                    </div>
-                                                    <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op2"
-                                                            data-value="Pizza">Pizza</a>
-                                                    </div>
+                                                    @php
+                                                        $restaurantSubCategory = App\Http\Controllers\Restaurant\RestaurantController::restaurant_subcategory();
+                                                    @endphp
+
+                                                    @foreach ($restaurantSubCategory as $item)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex"
+                                                            style="padding-left: 0px !important; align-items: center;">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    style="background: #222222;"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op2"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                    style="display: none;">
-                                                    <div class="location-popup-map sugest-list-map">
-                                                        <img class="location-popup-map-image lozad"
-                                                            style="background: #222222;"
-                                                            src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                    </div>
-                                                    <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op2"
-                                                            data-value="Seafood">Seafood</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                    style="display: none;">
-                                                    <div class="location-popup-map sugest-list-map">
-                                                        <img class="location-popup-map-image lozad"
-                                                            style="background: #222222;"
-                                                            src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                    </div>
-                                                    <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op2"
-                                                            data-value="Barbeque">Barbeque</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                    style="display: none;">
-                                                    <div class="location-popup-map sugest-list-map">
-                                                        <img class="location-popup-map-image lozad"
-                                                            style="background: #222222;"
-                                                            src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                    </div>
-                                                    <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op2"
-                                                            data-value="Fast Food">Fast
-                                                            Food</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                                    style="display: none;">
-                                                    <div class="location-popup-map sugest-list-map">
-                                                        <img class="location-popup-map-image lozad"
-                                                            style="background: #222222;"
-                                                            src="{{ LazyLoad::show() }}"
-                                                            data-src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                    </div>
-                                                    <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op2"
-                                                            data-value="Grill">Grill</a>
-                                                    </div>
-                                                </div>
-                                                @php
-                                                    $restaurantCuisine = App\Http\Controllers\Restaurant\RestaurantController::get_cuisine();
-                                                    $restaurantMenu = App\Http\Controllers\Restaurant\RestaurantController::get_menu();
-                                                @endphp
-                                                @foreach ($restaurantCuisine as $item3)
+
+                                                @foreach ($restaurantSubCategory as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none; cursor: pointer;">
                                                         <div class="location-popup-map sugest-list-map">
                                                             <img class="location-popup-map-image"
                                                                 style="background: #222222;"
-                                                                src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
+                                                                src="{{ asset('assets/icon/map/restaurant.png') }}">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a type="button" class="location_op2" target="_blank"
-                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                @foreach ($restaurantMenu as $item3)
-                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
-                                                        style="display: none; cursor: pointer;">
-                                                        <div class="location-popup-map sugest-list-map">
-                                                            <img class="location-popup-map-image"
-                                                                src="{{ asset('assets/icon/map/restaurant_unclicked.png') }}">
-                                                        </div>
-                                                        <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op2" target="_blank"
-                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -1185,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div class="button" style="padding-left: 0px;">
-                                        <button onclick="restaurantFilter()"
+                                        <button onclick="foodFilter(true)"
                                             style="z-index: 1; border: none; background: transparent;">
                                             <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
@@ -1529,8 +1467,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" class="nav-link-form-detail"
+                                        target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="font-black nav-link-gap nav-link-style-detail nav-link-icon-style-detail">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -1706,9 +1644,9 @@
                                             <p>{{ __('user_page.Check out') }}</p>
                                             <input type="text"
                                                 style="background-color: #ffffff00; margin-top: 2px;"
-                                                placeholder="{{ __('user_page.Add dates') }}"
-                                                class="form-control" value="{{ $_COOKIE['sCheck_out'] ?? '' }}"
-                                                id="check_out4" name="sCheck_out" readonly>
+                                                placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                                value="{{ $_COOKIE['sCheck_out'] ?? '' }}" id="check_out4"
+                                                name="sCheck_out" readonly>
                                         </div>
                                         <div class="guests">
                                             <p>{{ __('user_page.Guests') }}</p>
@@ -2401,7 +2339,8 @@
                                         <a type="button" class="collapsible_wow"></a>
                                         <p class="p-wow">{{ __('user_page.Date') }}</p>
 
-                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') || (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
+                                        @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '') ||
+                                            (isset($_COOKIE['sCheck_out']) && $_COOKIE['sCheck_out'] != ''))
                                             <p id="add_date_wow" class="add-date-wow" style="display: none;">
                                                 {{ __('user_page.Add dates') }}</p>
                                         @else
@@ -2467,7 +2406,15 @@
             @endif
 
             @auth
-                @if (Route::current()->uri() == 'homes/{id}' || Route::current()->uri() == 'food/{id}' || Route::is('hotel') || Route::is('restaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
+                @if (Route::current()->uri() == 'homes/{id}' ||
+                    Route::current()->uri() == 'food/{id}' ||
+                    Route::is('hotel') ||
+                    Route::is('restaurant') ||
+                    Route::is('activity') ||
+                    Route::is('privacy_policy') ||
+                    Route::is('terms') ||
+                    Route::is('license') ||
+                    Route::is('room_hotel'))
                     <!-- NEW NAV SHARE BUTTON-->
                     <div class="social-share-container">
                         <div class="text-center icon-center">
@@ -2744,7 +2691,14 @@
                     <i class="fa-solid fa-bars list-description font-black"></i>
                 </button>
             @else
-                @if (Route::current()->uri() == 'homes/{id}' || Route::is('hotel') || Route::is('restaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
+                @if (Route::current()->uri() == 'homes/{id}' ||
+                    Route::is('hotel') ||
+                    Route::is('restaurant') ||
+                    Route::is('activity') ||
+                    Route::is('privacy_policy') ||
+                    Route::is('terms') ||
+                    Route::is('license') ||
+                    Route::is('room_hotel'))
                     <!-- NEW NAV SHARE BUTTON-->
                     <div class="social-share-container" style="margin: 0px;">
                         <div class="text-center">
@@ -3178,25 +3132,47 @@
             function restaurantRefreshFilter(suburl) {
                 window.location.href = `{{ env('APP_URL') }}/food/search?${suburl}`;
             }
-        </script>
 
-        <script>
-            function restaurantFilter() {
+            function foodFilter(whatToEat) {
                 var sLocationFormInput = $("input[name='sLocation']").val();
-                // console.log(sLocationFormInput);
 
-                var sKeywordFormInput = $("input[name='sKeyword']").val();
-                // console.log(sKeywordFormInput);
+                function setCookie2(name, value, days) {
+                    var expires = "";
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        expires = "; expires=" + date.toUTCString();
+                    }
+                    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                }
 
-                var sCuisineFormInput = [];
-                $("input[name='sCuisine[]']:checked").each(function() {
-                    sCuisineFormInput.push(parseInt($(this).val()));
-                });
-                // console.log(sCuisineFormInput);
+                setCookie2("sLocation", sLocationFormInput, 1);
+
+                if (whatToEat == true) {
+                    var sKeywordFormInput = function() {
+                        var tmp = null;
+                        $.ajax({
+                            async: false,
+                            type: "GET",
+                            global: false,
+                            dataType: 'json',
+                            url: "/food/subcategory",
+                            data: {
+                                name: $("input[name='sKeyword']").val()
+                            },
+                            success: function(response) {
+                                tmp = response.data;
+                            }
+                        });
+                        return tmp;
+                    }();
+                }
+
+                filterFormInput = [];
+                var filteredArray = filterFormInput.push(sKeywordFormInput);
 
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&sKeyword=${sKeywordFormInput}&sCuisine=${sCuisineFormInput}`;
-                // console.log(subUrl);
+                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
                 restaurantRefreshFilter(subUrl);
             }
         </script>
