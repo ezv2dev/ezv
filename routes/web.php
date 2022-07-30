@@ -1198,6 +1198,10 @@ Route::get('/wow/sub', [Activity\WowSubSearchController::class, 'index'])->name(
 // Route::get('/things-to-do/description/{id}', 'ViewController@activity_description')->name('activity_description');
 // Route::get('/things-to-do/price/{id}', 'ViewController@activity_price')->name('activity_price');
 Route::get('/wow/price/{id}/details', [Activity\ActivityPriceController::class, 'index'])->name('activity_price_index');
+Route::get('/wow/price/{id}', [Activity\ActivityPriceController::class, 'price_detail'])->name('wow_price_detail');
+Route::get('/wow/{id}/delete/price', [Activity\ActivityPriceController::class, 'wow_delete_price'])->name('wow_delete_price');
+
+
 
 Route::get('/wow/{id}', [Activity\ActivityController::class, 'index'])->name('activity');
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use DataTables;
-use App\Activity;
+use App\Models\Activity;
 
 class ActivityPrice extends Model
 {

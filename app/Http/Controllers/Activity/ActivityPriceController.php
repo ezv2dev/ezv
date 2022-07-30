@@ -180,6 +180,31 @@ class ActivityPriceController extends Controller
         return view('user.activity.prices.prices_index', compact('stories', 'activityPrice', 'photo', 'video', 'activity', 'nearby_villas', 'nearby_restaurant', 'locations', 'facilities', 'subCategory', 'villas_advertise', 'villa_amenities', 'activity_rules'));
     }
 
+    public function price_detail($id)
+    {
+        $activityPrice = ActivityPrice::with('activity')->where('id_price', $id)->select('id_price', 'id_activity', 'name', 'description', 'price', 'foto', 'start_date', 'end_date')->first();
+
+        return response()->json(['data' => $activityPrice]);
+    }
+
+    public function wow_delete_price(Request $request)
+    {
+        $wowPrice = ActivityPrice::find($request->id);
+        $deletedWowPrice = $wowPrice->delete();
+
+        if ($deletedWowPrice) {
+            return response()->json([
+                'message' => 'Delete Data Successfuly',
+                'status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed Delete Data',
+                'status' => 500,
+            ], 500);
+        }
+    }
+
     public function update_price(Request $request)
     {
         // check if editor not authenticated

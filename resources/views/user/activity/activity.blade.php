@@ -258,7 +258,7 @@
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
                             <img class="lozad" style="width: 18px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -1090,7 +1090,8 @@
                             <div id="price-content">
                                 @forelse ($activity->price as $item)
                                     <div class="col-12 row p-3 mb-4 ms-0 me-0"
-                                        style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
+                                        style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;"
+                                        id="displayPrice{{ $item->id_price }}">
                                         <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-0">
                                             <div class="content list-image-content">
                                                 <input type="hidden" value="" id="id_price" name="id_price">
@@ -1098,8 +1099,8 @@
                                                     data-dots="false" data-arrows="true">
                                                     @if (count($activity->PricePhoto->where('id_price', $item->id_price)) > 0)
                                                         @foreach ($activity->PricePhoto->where('id_price', $item->id_price) as $galleryPrice)
-                                                            <a onclick="open_detail_price()" target="_blank"
-                                                                class="grid-image-container">
+                                                            <a onclick="view_price({{ $item->id_price }})"
+                                                                target="_blank" class="grid-image-container">
                                                                 <img class="brd-radius img-fluid grid-image lozad"
                                                                     style="height: 200px; display: block;"
                                                                     src="{{ LazyLoad::show() }}"
@@ -1108,8 +1109,8 @@
                                                             </a>
                                                         @endforeach
                                                     @elseif (!empty($item->foto))
-                                                        <a onclick="open_detail_price()" target="_blank"
-                                                            class="grid-image-container">
+                                                        <a onclick="view_price({{ $item->id_price }})"
+                                                            target="_blank" class="grid-image-container">
                                                             <img class="brd-radius img-fluid grid-image lozad"
                                                                 style="height: 200px; display: block;"
                                                                 src="{{ LazyLoad::show() }}"
@@ -1117,8 +1118,8 @@
                                                                 alt="">
                                                         </a>
                                                     @else
-                                                        <a onclick="open_detail_price()" target="_blank"
-                                                            class="grid-image-container">
+                                                        <a onclick="view_price({{ $item->id_price }})"
+                                                            target="_blank" class="grid-image-container">
                                                             <img class="brd-radius img-fluid grid-image lozad"
                                                                 style="height: 200px; display: block;"
                                                                 src="{{ LazyLoad::show() }}"
@@ -1157,11 +1158,18 @@
                                                 <p class="mb-2">
                                                     {{ CurrencyConversion::exchangeWithUnit($item->price) }}
                                                 </p>
-
-                                                <a onclick="open_detail_price()" target="_blank"
+                                                <a onclick="view_price({{ $item->id_price }})" target="_blank"
                                                     style="display: inline-block; width: 50%;"
                                                     class="btn btn-primary table-room-button">{{ __('user_page.Select') }}</a>
-
+                                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <button type="submit" class="btn mt-2"
+                                                        onclick="deletePrice({{ $item->id_price }})">
+                                                        <i class="fa fa-trash" style="color:red; font-size: 20px"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete') }}"></i>
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -1271,10 +1279,8 @@
                                         </div>
                                     @endfor
                                     <div class="list-amenities">
-                                        <button class="amenities-button" type="button"
-                                            onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange"
-                                                style="font-size: 40px;"></i>
+                                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
                                             <div style="font-size: 15px;" class="translate-text-group-items">
                                                 {{ __('user_page.More') }}</div>
                                         </button>
@@ -1537,7 +1543,8 @@
                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail" alt="">
+                            <img src="{{ Auth::user()->avatar }}" class="logged-user-photo-detail"
+                                alt="">
                         @else
                             <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
                                 class="logged-user-photo-detail" alt="">
@@ -1740,7 +1747,7 @@
                                                     value="{{ $activity->userReview->id_review }}" required>
                                                 <span>
                                                     <button type="submit" class="btn">
-                                                        <i class="fa fa-trash" style="color:#ff7400; font-size: 20px"
+                                                        <i class="fa fa-trash" style="color:red; font-size: 20px"
                                                             data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
                                                             title="{{ __('user_page.Delete') }}"></i>
@@ -3301,7 +3308,7 @@
 </script>
 
 <!-- PRICE MODAL -->
-<div class="modal fade" id="modal-price" tabindex="-1" role="dialog"
+{{-- <div class="modal fade" id="modal-price" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-fadein" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" id="modal-price-content" style="background: white; border-radius:25px">
@@ -3319,9 +3326,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<script>
+{{-- <script>
     async function view_price(id) {
         await $.ajax({
             type: "get",
@@ -3356,7 +3363,7 @@
             }
         });
     }
-</script>
+</script> --}}
 <!-- END PRICE MODAL -->
 
 {{-- MODAL RESERVE --}}
@@ -4153,7 +4160,7 @@
                                 if (!isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
                                     var lastIndex = i + 3;
                                     var number = str[arrAsciiIndex[i + 2].index];
-                                    while(lastIndex < arrAsciiIndex.length) {
+                                    while (lastIndex < arrAsciiIndex.length) {
                                         if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
                                             number += str[arrAsciiIndex[lastIndex].index];
                                             lastIndex++;
@@ -4162,8 +4169,8 @@
                                         }
                                     }
                                     var escapeChar = String.fromCharCode(parseInt(number));
-                                    var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                                + number + ";"
+                                    var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index] +
+                                        number + ";"
                                     newStr = newStr.replace(pattern, escapeChar);
                                 }
                             }
@@ -5939,6 +5946,43 @@
     // ! End gradeWow
 </script>
 {{-- End Active Deactive --}}
+
+{{-- Delete Price --}}
+<script>
+    function deletePrice(ids) {
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: `/wow/${ids}/delete/price`,
+                    statusCode: {
+                        500: () => {
+                            Swal.fire('Failed', data.message, 'error');
+                        }
+                    },
+                    success: async function(response) {
+                        await Swal.fire('Deleted', response.message, 'success');
+                        $(`#displayPrice${ids}`).remove();
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    'error')
+            }
+        });
+    };
+</script>
+{{-- End Price --}}
 
 
 @if ($activity->status == '2' && auth()->user()->id == $activity->created_by)

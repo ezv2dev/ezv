@@ -27,8 +27,8 @@
 </style>
 
 {{-- MODAL AMENITIES --}}
-<div class="modal fade reset-padding" id="modal-room" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-    aria-hidden="true">
+<div class="modal fade reset-padding" id="modalPriceDetail" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen" role="document" style="overflow-y: initial !important">
         <div class="modal-content" style="background: white;">
             <div class="modal-header modal-header-amenities">
@@ -41,20 +41,23 @@
                 <div class="d-flex">
                     {{-- RIGHT CONTENT --}}
                     <div class="col-lg-5 col-md-5 col-xs-12 rsv-block alert-detail">
-                        <img class="image-content" id="imageProfileHotelRoom"
+                        <img class="image-content" id="imagePriceModal"
                             src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                     </div>
                     <div class="col-lg-7 col-md-7 col-xs-12 rsv-block alert-detail">
                         <div style="margin-left: 20px;">
-                            <h2>Price</h2>
+                            <h2 id="priceName">Price</h2>
                             <div class="price-tag">
-                                <h6 class="price-current mb-0">IDR {{ number_format(500000) }}</h6>
+                                <h6 class="price-current mb-0" id="priceModal">IDR {{ number_format(500000) }}</h6>
                             </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic iure vitae inventore, quas
+                            <p id="descPriceModal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic iure
+                                vitae
+                                inventore, quas
                                 modi
                                 quibusdam laboriosam, consectetur quis quidem culpa et nihil est, fugiat recusandae
                                 veniam
                                 impedit illum quae unde.</p>
+                            <p><b id="startDateModal"></b>-<b id="endDateModal"></b></p>
                         </div>
                     </div>
                     {{-- END RIGHT CONTENT --}}
@@ -68,23 +71,25 @@
 </div>
 
 <script>
-    function open_detail_price() {
-        $('#modal-room').modal('show');
-    }
-</script>
-
-<script>
-    function view_room(id) {
+    function view_price(id) {
         $.ajax({
             type: "GET",
-            url: '/hotel/room/' + id,
-            success: function(data) {
-                $('#detail-room-type').html(data.type_room);
-                $('#detail-room-size').html(data.room_size);
-                $('#detail-room-capacity').html(data.capacity);
-                $('#detail-room-bed').html(data.bed_type);
-                $('#detail-room-total').html(data.number_of_room);
-                $('#modal-room').modal('show');
+            url: '/wow/price/' + id,
+            success: function(response) {
+                // console.log(response);
+                // console.log(response.data.price.toLocaleString());
+                let path = "/foto/activity/";
+                let slash = "/";
+                let uid = response.data.activity.uid;
+                var lowerCaseUid = uid.toLowerCase();
+                // console.log(path + lowerCaseUid + slash + response.data.foto);
+                $('#imagePriceModal').attr("src", path + lowerCaseUid + slash + response.data.foto);
+                $('#priceName').html(response.data.name);
+                $('#priceModal').html(`IDR ${response.data.price.toLocaleString()}`);
+                $('#descPriceModal').html(response.data.description);
+                $('#startDateModal').html(response.data.start_date);
+                $('#endDateModal').html(response.data.end_date);
+                $('#modalPriceDetail').modal('show');
             },
             error: function(jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
