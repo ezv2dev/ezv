@@ -3497,6 +3497,13 @@ input::-webkit-inner-spin-button {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
     }
+    
+    .roomnumberoption-checkbox-alias {
+        padding: 2px 3px;
+        }
+    .roomnumberoption-container {
+        gap: 5px !important;
+    }
 }
 @media only screen and (min-width: 426px) and (max-width: 645px) {
     #villa-data {
