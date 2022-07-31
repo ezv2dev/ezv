@@ -118,7 +118,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
+                                        style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -184,7 +184,9 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
@@ -249,8 +251,10 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -562,7 +566,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                                            @method('PATCH') -->
+                                                                                @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -1444,10 +1448,8 @@
                                         </div>
                                     @endfor
                                     <div class="list-amenities">
-                                        <button class="amenities-button" type="button"
-                                            onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange"
-                                                style="font-size: 40px;"></i>
+                                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
                                             <div style="font-size: 15px;" class="translate-text-group-items">
                                                 {{ __('user_page.More') }}</div>
                                         </button>
@@ -1481,8 +1483,8 @@
                 </section>
 
                 <!--<section id="location-map" class="section-2">
-            <div class="about-place-block">
-                {{-- <h2>
+        <div class="about-place-block">
+            {{-- <h2>
                                 Location
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1498,11 +1500,11 @@
                                 id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
                             </div> --}}
-            </div>
-        </section> -->
+        </div>
+    </section> -->
                 <!-- <div style="padding-left: 10px; padding-right: 10px;">
-            <hr>
-        </div> -->
+        <hr>
+    </div> -->
 
             </div>
             {{-- END PAGE CONTENT --}}
@@ -1852,7 +1854,7 @@
                                         </div>
                                         <div class="col-8">
                                             <p class="review-txt">
-                                            {{ __('user_page.There is no reviews yet') }}
+                                                {{ __('user_page.There is no reviews yet') }}
                                             </p>
                                         </div>
                                     </div>
@@ -2328,7 +2330,8 @@
                                 </div>
                                 @if (isset($restaurant->ownerData->created_at))
                                     <p>
-                                        {{ __('user_page.Joined in') }} {{ date_format($restaurant->ownerData->created_at, 'M Y') }}
+                                        {{ __('user_page.Joined in') }}
+                                        {{ date_format($restaurant->ownerData->created_at, 'M Y') }}
                                     </p>
                                 @endif
                             </div>
@@ -2348,89 +2351,66 @@
                     @auth
                         @if (auth()->user()->id == $restaurant->created_by)
                             @if ($restaurant->status == '0')
-                                <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                    <span>{{ __('user_page.this content is deactive,') }} </span>
-                                    <form
-                                        action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}">
-                                        <button class="btn"
+                                <div id="activation0">
+                                    <div class="alert alert-danger d-flex flex-row align-items-center"
+                                        role="alert">
+                                        <span>{{ __('user_page.this content is deactive,') }} </span>
+                                        <button class="btn" onclick="requestActivation()"
                                             type="submit">{{ __('user_page.request activation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '1')
-                                <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                    <span>{{ __('user_page.this content is active,') }} </span>
-                                    <form
-                                        action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}">
-                                        <button class="btn"
+                                <div id="activation1">
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active') }},</span>
+                                        <button class="btn" onclick="requestDeactivation()"
                                             type="submit">{{ __('user_page.request deactivation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '2')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.you have been request activation for this content,') }}
-                                    </span>
-                                    <form
-                                        action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.cancel activation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="activation2" class="">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                        </span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '3')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.you have been request deactivation for this content,') }}
-                                    </span>
-                                    <form
-                                        action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.cancel deactivation') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="activation3">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                        </span>
+                                        <button class="btn" type="submit"
+                                            onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                         @endif
                         @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
                             @if ($restaurant->status == '0')
-                                <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                                    {{ __('user_page.this content is deactive') }}
+                                <div id="adminFood0">
+                                    <div class="alert alert-danger d-flex flex-row align-items-center"
+                                        role="alert">
+                                        <span>{{ __('user_page.this content is deactive') }}</span>
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '1')
-                                <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                                    <span>{{ __('user_page.this content is active, edit grade restaurant') }}</span>
-
-                                    <form
-                                        action="{{ route('restaurant_update_grade', $restaurant->id_restaurant) }}"
-                                        method="post">
-                                        @csrf
+                                <div id="adminFood1">
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
-                                                onchange='this.form.submit()'>
+                                                id="gradeWow">
                                                 <option value="AA"
                                                     {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
@@ -2447,21 +2427,18 @@
                                                     {{ $restaurant->grade == 'D' ? 'selected' : '' }}>D
                                                 </option>
                                             </select>
-                                            <noscript><input type="submit" value="Submit"></noscript>
                                         </div>
-                                    </form>
 
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '2')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.the owner request activation, choose grade Restaurant') }}
-                                    </span>
-                                    <form
-                                        action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                        method="get" class="d-flex">
+                                <div id="adminFood2">
+                                    <div class="alert alert-warning d-flex justify-content-start" role="warning">
+                                        <span>{{ __('user_page.the owner request activation, choose grade Wow') }}
+                                        </span>
                                         <div style="margin-left: 10px;">
-                                            <select class="custom-select grade" name="grade">
+                                            <select class="custom-select grade" name="grade" id="grade2">
                                                 <option value="AA"
                                                     {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
@@ -2479,22 +2456,25 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <span style="margin-left: 10px;">{{ __('user_page.and') }}</span>
-                                        <button class="btn" type="submit"
-                                            style="margin-top: -7px;">{{ __('user_page.activate this content') }}</button>
-                                    </form>
+                                        <span style="margin-left: 10px;">and</span>
+                                        <button class="btn" type="submit" style="margin-top: -7px;"
+                                            onclick="ActivationContent()">{{ __('user_page.activate this content') }}</button>
+                                    </div>
                                 </div>
                             @endif
                             @if ($restaurant->status == '3')
-                                <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                                    <span>{{ __('user_page.the owner request deactivation,') }} </span>
-                                    <form
-                                        action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
-                                        method="get">
-                                        <button class="btn"
-                                            type="submit">{{ __('user_page.deactivate this content') }}</button>
-                                    </form>
-                                    <span> ?</span>
+                                <div id="adminFood3">
+                                    <div class="alert alert-warning d-flex flex-row align-items-center"
+                                        role="warning">
+                                        <span>{{ __('user_page.the owner request deactivation,') }}' </span>
+                                        <form
+                                            action="{{ route('admin_wow_update_status', $restaurant->id_activity) }}"
+                                            method="get">
+                                            <button class="btn"
+                                                type="submit">{{ __('user_page.deactivate this content') }}</button>
+                                        </form>
+                                        <span> ?</span>
+                                    </div>
                                 </div>
                             @endif
                         @endif
@@ -3169,13 +3149,14 @@
 
 {{-- MODAL SCRIPT --}}
 <script>
-    $(document) .ready(function(){
-        $('.modal').on('shown.bs.modal', function () {
-            $('html').css('overflow','hidden');
-            }).on('hidden.bs.modal', function() {
-            $('html').css('overflow','auto');
+    $(document).ready(function() {
+        $('.modal').on('shown.bs.modal', function() {
+            $('html').css('overflow', 'hidden');
+        }).on('hidden.bs.modal', function() {
+            $('html').css('overflow', 'auto');
         });
     });
+
     function edit_contact() {
         $('#modal-edit_contact').modal('show');
     }
@@ -4539,7 +4520,7 @@
                                 if (!isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
                                     var lastIndex = i + 3;
                                     var number = str[arrAsciiIndex[i + 2].index];
-                                    while(lastIndex < arrAsciiIndex.length) {
+                                    while (lastIndex < arrAsciiIndex.length) {
                                         if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
                                             number += str[arrAsciiIndex[lastIndex].index];
                                             lastIndex++;
@@ -4548,8 +4529,8 @@
                                         }
                                     }
                                     var escapeChar = String.fromCharCode(parseInt(number));
-                                    var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                                + number + ";"
+                                    var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index] +
+                                        number + ";"
                                     newStr = newStr.replace(pattern, escapeChar);
                                 }
                             }
@@ -5754,6 +5735,377 @@
 
 @include('components.promotion.mobile-app')
 <script src="{{ asset('assets/js/translate.js') }}"></script>
+
+{{-- Request Active Deactive --}}
+<script>
+    function requestActivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/food/update/request-update-status`,
+            data: {
+                id_food: id_restaurant
+            },
+            success: function(response) {
+                if (response.data == 2) {
+                    $("#activation0").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request activation for this content, Please wait until the process is complete.') }}
+                                </span>
+                            </div>
+                        `)
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        });
+    }
+
+    function ActivationContent() {
+        var grade = $("#grade2 option:selected").val();
+        console.log(grade);
+        Swal.fire({
+            title: `{{ __('user_page.Are you sure?') }}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff7400',
+            cancelButtonColor: '#000',
+            confirmButtonText: `Yes, Activate it`,
+            cancelButtonText: `{{ __('user_page.Cancel') }}`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    url: `/admin/food/update-status/${id_activity}`,
+                    data: {
+                        grade: grade
+                    },
+                    success: function(response) {
+                        // console.log('sattt');
+                        if (response.data == 1) {
+                            if (response.grade == "AA") {
+                                $("#adminFood2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeFoodAA">
+                                                <option value="AA" selected>AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                `);
+
+                                gradeAA();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "A") {
+                                $("#adminFood2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeFoodA">
+                                                <option value="AA">AA</option>
+                                                <option value="A" selected>A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                `)
+
+                                gradeA();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "B") {
+                                $("#adminFood2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeFoodB">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B" selected>B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                `)
+
+                                gradeB();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "C") {
+                                $("#adminFood2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeFoodC">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C" selected>C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                `)
+
+                                gradeC();
+                                $("#activation2").addClass('d-none');
+                            } else if (response.grade == "D") {
+                                $("#adminFood2").html(`
+                                    <div class="alert alert-success d-flex flex-row align-items-center"
+                                        role="success">
+                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <div style="margin-left: 10px;">
+                                            <select class="custom-select grade-success" name="grade"
+                                                id="gradeFoodD">
+                                                <option value="AA">AA</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D" selected>D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                `)
+
+                                gradeD();
+                                $("#activation2").addClass('d-none');
+                            }
+
+                            iziToast.success({
+                                title: "Success",
+                                message: response.message,
+                                position: "topRight",
+                            });
+                        }
+                    }
+                });
+            } else {
+                Swal.fire(`{{ __('user_page.Cancel') }}`,
+                    `Canceled Activate Data`,
+                    'error')
+            }
+        });
+    }
+
+    function requestDeactivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/food/update/request-update-status`,
+            data: {
+                id_food: id_restaurant
+            },
+            success: function(response) {
+                if (response.data == 3) {
+                    $("#activation1").html(`
+                            <div class="alert alert-warning d-flex flex-row align-items-center"
+                                role="warning">
+                                <span>{{ __('user_page.you have been request deactivation for this content,') }}
+                                </span>
+                                <button class="btn"
+                                    type="submit" onclick="cancelDeactivation()">{{ __('user_page.cancel deactivation') }}</button>
+                                <span> ?</span>
+                            </div>
+                        `);
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        })
+    }
+
+    function cancelDeactivation() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/food/update/cancel-request-update-status`,
+            data: {
+                id_food: id_restaurant
+            },
+            success: function(response) {
+                if (response.data == 1) {
+                    $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                }
+            }
+        })
+    }
+
+    // ! gradeFood
+    $("#gradeFood").change(function() {
+        var grade = $(this).val();
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: `/food/grade/${id_activity}`,
+            data: {
+                grade: grade,
+            },
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
+    });
+
+    function gradeAA() {
+        $("#gradeFoodAA").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/food/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeA() {
+        $("#gradeFoodA").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/food/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeB() {
+        $("#gradeFoodB").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/food/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeC() {
+        $("#gradeFoodC").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/food/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+
+    function gradeD() {
+        $("#gradeFoodD").change(function() {
+            var grade = $(this).val();
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: `/food/grade/${id_activity}`,
+                data: {
+                    grade: grade,
+                },
+                success: function(response) {
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        });
+    }
+    // ! End gradeFood
+</script>
+{{-- End Active Deactive --}}
 
 {{-- Copy current URL to clipboard --}}
 <script>
