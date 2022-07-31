@@ -1929,7 +1929,9 @@
                                                         {{ __('user_page.Cleanliness') }}
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->cleanliness }}
                                                     </div>
                                                 </div>
@@ -1938,7 +1940,9 @@
                                                         {{ __('user_page.Check In') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->check_in }}
                                                     </div>
                                                 </div>
@@ -1947,7 +1951,9 @@
                                                         {{ __('user_page.Value') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->value }}
                                                     </div>
                                                 </div>
@@ -1958,7 +1964,9 @@
                                                         {{ __('user_page.Service') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->service }}
                                                     </div>
                                                 </div>
@@ -1967,7 +1975,9 @@
                                                         {{ __('user_page.Location') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->location }}
                                                     </div>
                                                 </div>
