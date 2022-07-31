@@ -1795,7 +1795,9 @@
                                                 {{ __('user_page.Food') }}
                                             </div>
                                             <div class="col-6 ">
-                                                <div class="liner"></div>
+                                                <div class="liner">
+                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
+                                                </div>
                                                 {{ $restaurant->detailReview->average_food }}
                                             </div>
                                         </div>
@@ -1804,7 +1806,9 @@
                                                 {{ __('user_page.Service') }}
                                             </div>
                                             <div class="col-6">
-                                                <div class="liner"></div>
+                                                <div class="liner">
+                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
+                                                </div>
                                                 {{ $restaurant->detailReview->average_service }}
                                             </div>
                                         </div>
@@ -1815,7 +1819,9 @@
                                                 {{ __('user_page.Value') }}
                                             </div>
                                             <div class="col-6">
-                                                <div class="liner"></div>
+                                                <div class="liner">
+                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
+                                                </div>
                                                 {{ $restaurant->detailReview->average_value }}
                                             </div>
                                         </div>
@@ -1824,7 +1830,9 @@
                                                 {{ __('user_page.Atmosphere') }}
                                             </div>
                                             <div class="col-6">
-                                                <div class="liner"></div>
+                                                <div class="liner">
+                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
+                                                </div>
                                                 {{ $restaurant->detailReview->average_atmosphere }}
                                             </div>
                                         </div>
@@ -1867,6 +1875,11 @@
                                         </div> --}}
                                 </div>
                             @endif
+                        </div>
+                        <div class="col-12 pt-3">
+                            <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                Show all reviews
+                            </button>
                         </div>
                     </div>
                     <hr>
@@ -1917,7 +1930,9 @@
                                                     {{ __('user_page.Food') }}
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <div class="liner"></div>
+                                                    <div class="liner">
+                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->food * 20 }}%"></span>
+                                                    </div>
                                                     {{ $restaurant->userReview->food }}
                                                 </div>
                                             </div>
@@ -1926,7 +1941,9 @@
                                                     {{ __('user_page.Service') }}
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="liner"></div>
+                                                    <div class="liner">
+                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->service * 20 }}%"></span>
+                                                    </div>
                                                     {{ $restaurant->userReview->service }}
                                                 </div>
                                             </div>
@@ -1937,7 +1954,9 @@
                                                     {{ __('user_page.Value') }}
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="liner"></div>
+                                                    <div class="liner">
+                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->value * 20 }}%"></span>
+                                                    </div>
                                                     {{ $restaurant->userReview->value }}
                                                 </div>
                                             </div>
@@ -1946,7 +1965,9 @@
                                                     {{ __('user_page.Atmosphere') }}
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="liner"></div>
+                                                    <div class="liner">
+                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->atmosphere * 20 }}%"></span>
+                                                    </div>
                                                     {{ $restaurant->userReview->atmosphere }}
                                                 </div>
                                             </div>
