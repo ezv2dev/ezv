@@ -3145,6 +3145,7 @@
     @include('user.modal.advert-listing')
 @endauth
 @include('user.modal.restaurant.description')
+@include('user.modal.restaurant.review')
 {{-- END OTHER MODAL --}}
 
 {{-- MODAL SCRIPT --}}
@@ -3175,6 +3176,10 @@
 
     function edit_description() {
         $('#modal-edit_description').modal('show');
+    }
+
+    function showMoreReview() {
+        $("#modal-show_review").modal("show");
     }
 
     function edit_photo() {
