@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="padding: 1rem 2rem !important;">
-                <h5 class="modal-title">Insurance</h5>
+                <h5 class="modal-title">Review</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="overflow-y: unset;" class="modal-body pe-0" id="modalDescriptionVilla">
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
-                                        Indra Mahendra
+                                        David Jones
                                     </h6>
                                     <div>
                                         <p class="m-0">July 2022</p>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="col-12 pt-3">
                                 <p class="m-0">
-                                    Tempat yang sempurna bagi mereka yang menginginkan tempat yang murah, lengkap, dan indah. Terletak di tengah - tengah Bali, naik ke utara atau ke bawah selatan atau bahkan keramaian pusat kota sangatlah mudah. Anda akan mendapatkan semua yang Anda butuhkan dengan mudah. Keramahtamahan dan tempat yang luar biasa
+                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
                                 </p>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
-                                        Indra Mahendra
+                                        Christian
                                     </h6>
                                     <div>
                                         <p class="m-0">July 2022</p>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-12 pt-3">
                                 <p class="m-0">
-                                    Tempat yang sempurna bagi mereka yang menginginkan tempat yang murah, lengkap, dan indah. Terletak di tengah - tengah Bali, naik ke utara atau ke bawah selatan atau bahkan keramaian pusat kota sangatlah mudah. Anda akan mendapatkan semua yang Anda butuhkan dengan mudah. Keramahtamahan dan tempat yang luar biasa
+                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
                                 </p>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
-                                        Indra Mahendra
+                                        Tony Fernandes
                                     </h6>
                                     <div>
                                         <p class="m-0">July 2022</p>
@@ -141,7 +141,7 @@
                             </div>
                             <div class="col-12 pt-3">
                                 <p class="m-0">
-                                    Tempat yang sempurna bagi mereka yang menginginkan tempat yang murah, lengkap, dan indah. Terletak di tengah - tengah Bali, naik ke utara atau ke bawah selatan atau bahkan keramaian pusat kota sangatlah mudah. Anda akan mendapatkan semua yang Anda butuhkan dengan mudah. Keramahtamahan dan tempat yang luar biasa
+                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
                                 </p>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
-                                        Indra Mahendra
+                                        Jamaludin
                                     </h6>
                                     <div>
                                         <p class="m-0">July 2022</p>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-12 pt-3">
                                 <p class="m-0">
-                                    Tempat yang sempurna bagi mereka yang menginginkan tempat yang murah, lengkap, dan indah. Terletak di tengah - tengah Bali, naik ke utara atau ke bawah selatan atau bahkan keramaian pusat kota sangatlah mudah. Anda akan mendapatkan semua yang Anda butuhkan dengan mudah. Keramahtamahan dan tempat yang luar biasa
+                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
                                 </p>
                             </div>
                         </div>
