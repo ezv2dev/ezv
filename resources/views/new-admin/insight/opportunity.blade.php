@@ -91,8 +91,8 @@
 @section('content_admin')
 
 <!-- Main page content-->
-<div class="container pt-4">
-    <nav class="navbar navbar-expand-lg navbar-light rounded">
+<div class="container container-dashboard px-4">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light rounded">
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto nav-insight">
                 <li class="nav-item active">
@@ -109,7 +109,15 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
+
+    <div class="mb-4 tab-bar">
+        <a class="title-bar active" href="{{ route('insight_dashboard') }}">Opportunities</a>
+        <a class="title-bar " href="{{ route('insight_dashboard_reviews') }}">Reviews</a>
+        <a class="title-bar " href="{{ route('insight_dashboard_earnings') }}">Earnings</a>
+        <a class="title-bar " href="{{ route('insight_dashboard_views') }}">Views</a>
+    </div>
+
     <div class="opportunity">
         <h3>Resources for hosting now</h3>
         <div class="container mt-3">

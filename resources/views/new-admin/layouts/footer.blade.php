@@ -184,27 +184,24 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 1.5rem">
-            <div class="col-12">
-                <div class="footer-social text-center">
-                    <a href="https://www.facebook.com/ezvillasbali/" target="_blank">
-                        <i id="footer-soc-icon" class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target="_blank">
-                        <i id="footer-soc-icon" class="fab fa-instagram"></i>
-                    </a>
-                    <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target="_blank">
-                        <i id="footer-soc-icon" class="fa fa-envelope"></i>
-                    </a>
-                    <a href="call:+6285792260929" style="margin-left: 10px;" target="_blank">
-                        <i id="footer-soc-icon" class="fa fa-phone"></i>
-                    </a>
-                </div>
+        <div class="mt-4">
+            <div class="footer-social text-center">
+                <a href="https://www.facebook.com/ezvillasbali/" target="_blank">
+                    <i id="footer-soc-icon" class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/ezv/" style="margin-left: 10px;" target="_blank">
+                    <i id="footer-soc-icon" class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:info@ezv2.com" style="margin-left: 10px;" target="_blank">
+                    <i id="footer-soc-icon" class="fa fa-envelope"></i>
+                </a>
+                <a href="call:+6285792260929" style="margin-left: 10px;" target="_blank">
+                    <i id="footer-soc-icon" class="fa fa-phone"></i>
+                </a>
             </div>
-            <div class="col-12">
-                <div class="text-copyrights text-center">
-                    <p>&copy;{{ date('Y') }} EZV2</p>
-                </div>
+            
+            <div class="text-copyrights text-center">
+                <p>&copy;{{ date('Y') }} EZV2</p>
             </div>
         </div>
         <div class="footer-bottom-space"></div>

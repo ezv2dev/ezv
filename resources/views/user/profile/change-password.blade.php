@@ -114,6 +114,11 @@
         .padding-right-custom{
             padding-right:34px;
         }
+
+        #header-container{
+            position:fixed;
+            width:100%;
+        }
     </style>
 </head>
 <body>
@@ -214,16 +219,21 @@
     </script>
     <script>
         //Sticky Bar
-        $(function(){
-        $(window).scroll(function(){
-            var winTop = $(window).scrollTop();
-            if(winTop >= 100){
-            $("#header-container").addClass("fix-header");
-            }else{
-            $("#header-container").removeClass("fix-header");
-            }
-            });
-        });
+        // $(function(){
+        // $(window).scroll(function(){
+        //     var winTop = $(window).scrollTop();
+        //     if(winTop >= 100){
+        //     $("#header-container").addClass("fix-header");
+        //     }else{
+        //     $("#header-container").removeClass("fix-header");
+        //     }
+        //     });
+        // });
+
+        $(document).ready(function(){
+            let heightNav =  $("#header-container").outerHeight();
+            $('.homes').css('margin-top', heightNav)
+        })
     </script>
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
