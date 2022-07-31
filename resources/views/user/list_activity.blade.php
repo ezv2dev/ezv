@@ -71,7 +71,8 @@
             </div>
             <div class="stickySubCategory">
                 <div id="filter-subcat-bg-color" style="width: 100%;"
-                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark pt-15p pb-15p" style="">
+                    class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark pt-15p pb-15p"
+                    style="">
                     @if (request()->get('fCategory') == null)
                         @foreach ($subCategoryAll->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
@@ -82,16 +83,17 @@
                                             $isChecked = '';
                                             $filterIds = explode(',', request()->get('fSubCategory'));
                                         @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                        style="color: #ff7400 !important;"@endif>
-                                    </i>
-                                </div>
-                                <div>
-                                    <span class="translate-text-group-items list-description {{ $textColor }}">
-                                        {{ $item->name }}
-                                    </span>
-                                </div>
-                            </div>
-                        @endforeach
+                                        style="color: #ff7400 !important;"
+                        @endif>
+                        </i>
+                </div>
+                <div>
+                    <span class="translate-text-group-items list-description {{ $textColor }}">
+                        {{ $item->name }}
+                    </span>
+                </div>
+            </div>
+            @endforeach
             @if ($subCategoryAll->count() > 6)
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
@@ -271,8 +273,7 @@
                 </div>
 
                 <div class="desc-container-grid mb-2">
-                    <a href="{{ route('activity', $data->id_activity) }}" target="_blank"
-                        class="grid-overlay-desc"></a>
+                    <a href="{{ route('activity', $data->id_activity) }}" target="_blank" class="grid-overlay-desc"></a>
                     <div class="max-lines skeleton skeleton-w-100 skeleton-h-2">
                         <span class="text-14 max-lines fw-500 {{ $textColor }} list-description">
                             {{ $data->name ?? __('user_page.There is no name yet') }}
@@ -299,8 +300,8 @@
                     </div>
                     <div
                         class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 skeleton skeleton-w-50 skeleton-h-1">
-                        <a class="orange-hover m-0" href="#!" onclick="view_maps('{{ $data->id_activity }}')"></i><i
-                                class="fa-solid fa-location-dot"></i>
+                        <a class="orange-hover m-0" href="#!"
+                            onclick="view_maps('{{ $data->id_activity }}')"></i><i class="fa-solid fa-location-dot"></i>
                             {{ $data->location->name ?? __('user_page.Location not found') }}
                         </a>
                     </div>
@@ -314,23 +315,21 @@
     <!-- End Grid 43 -->
     </div>
 
-    @if (count($activitys) != 0)
-        <div class="col-12" id="view-map-button-float">
-            <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
-                <button onclick="view_main_map()" style="height:inherit;">
+    <div class="col-12" id="view-map-button-float">
+        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4">
+            <button onclick="view_main_map()" style="height:inherit;">
 
-                    <div class="notice">
-                        <span class="world">
-                            <span class="images" style="color: #52EB35;">
-                                <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
-                            </span>
+                <div class="notice">
+                    <span class="world">
+                        <span class="images" style="color: #52EB35;">
+                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
                         </span>
-                    </div>
-                    <!-- partial -->
-                </button>
-            </div>
+                    </span>
+                </div>
+                <!-- partial -->
+            </button>
         </div>
-    @endif
+    </div>
     <!-- End Refresh Page -->
     </div>
     <!-- End Page Content -->
@@ -572,12 +571,12 @@
     <script>
         // Show modal pop up on first time visit
         var thisshow = localStorage.getItem('thisshow');
-        if (thisshow== null) {
-        localStorage.setItem('thisshow', 1);
-        // Show popup here
-        setTimeout(function(){
-            jQuery('#introModal').modal('show');
-            },5000);
+        if (thisshow == null) {
+            localStorage.setItem('thisshow', 1);
+            // Show popup here
+            setTimeout(function() {
+                jQuery('#introModal').modal('show');
+            }, 5000);
         }
     </SCRIPT>
 
