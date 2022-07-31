@@ -1781,20 +1781,34 @@
                                             {{ __('user_page.Cleanliness') }}
                                         </div>
                                         <div class="col-6 ">
-                                            <div class="liner" style="width: {{ $detail[0]->average_clean * 10 }}%"></div>{{ $detail[0]->average_clean }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_clean }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Check In') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_check_in * 10 }}%"></div>
-                                            {{ $detail[0]->average_check_in }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_check_in }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Value') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_value * 10 }}%"></div>{{ $detail[0]->average_value }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_value }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1804,16 +1818,30 @@
                                             {{ __('user_page.Service') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_service * 10 }}%"></div>{{ $detail[0]->average_service }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_service }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Location') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_location * 10 }}%"></div>
-                                            {{ $detail[0]->average_location }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_location }}
+                                            </span>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                        Show all reviews
+                                    </button>
                                 </div>
                             </div>
                         @else
@@ -3353,6 +3381,7 @@
     @endauth
     @include('user.modal.villa.description')
     @include('user.modal.villa.insurance')
+    @include('user.modal.villa.review')
     @include('user.modal.villa.cancelation-policy-modal')
 
     {{-- MORE TAG MODAL --}}

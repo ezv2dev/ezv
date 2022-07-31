@@ -441,11 +441,6 @@ a:hover {
     */
 }
 
-body.modal-open {
-    overflow: hidden;
-    position: fixed;
-}
-
 .video-modal {
     border-radius: 14px;
     display: block;
@@ -847,11 +842,22 @@ a.active {
 
 .liner {
     display: inline-block;
-    height: 3px;
+    height: 5px;
+    position: relative;
     width: 50%;
-    background: #000;
+    border-radius: 12px;
+    background: silver;
     margin-right: 5px;
     vertical-align: middle;
+    border-radius: 50px;
+}
+
+.liner-bar{
+    background: black;
+    height: 5px;
+    position: absolute;
+    border-radius: 50px;
+    margin: 0px !important;
 }
 
 /* .reserve-fixed {

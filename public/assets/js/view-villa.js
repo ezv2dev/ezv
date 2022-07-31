@@ -1141,6 +1141,10 @@ function showMoreInsurance() {
     $("#modal-show_insurance").modal("show");
 }
 
+function showMoreReview() {
+    $("#modal-show_review").modal("show");
+}
+
 function showMoreCancelationPolicy() {
     $("#modal-show_cancelationpolicy").modal("show");
 }
