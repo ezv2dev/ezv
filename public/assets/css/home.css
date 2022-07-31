@@ -2468,3 +2468,14 @@ span.flatpickr-weekday {
     border-radius: 10px;
     margin-bottom: 15px;
 }
+
+.navbar-gap.d-block.mb-2::before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f205';
+    font-weight: 900;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    font-size: 16px;
+    border-radius: 3px;
+}
