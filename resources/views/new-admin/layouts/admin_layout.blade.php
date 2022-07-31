@@ -376,7 +376,7 @@
                             </div>
                         </a>
                     </div>
-                    {{-- <div class="d-flex align-items mb-2" id="changeThemeMobile">
+                    {{-- <div class="d-flex align-items navbar-gap mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu">
                             <label class="container-mode">
                                 <input type="checkbox" id="background-color-switch"
