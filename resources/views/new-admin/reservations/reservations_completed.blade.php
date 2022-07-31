@@ -3,77 +3,45 @@
 @section('title', 'Reservations Dashboard - EZV2')
 
 @section('content_admin')
-    <!-- Hero -->
-    <div class="container mb-3">
-        <div class="bg-body-light">
-            <div class="content content-full">
-                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                    <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">Reservations</h1>
-                    <nav class="flex-shrink-0 my-2 my-sm-0 ms-sm-3" aria-label="breadcrumb">
-                    {{-- <ol class="breadcrumb">
-                        <a type="button" class="btn btn-sm admin-adddata-button btn-alt-primary" href="#">
-                            <i class="fa fa-plus-circle mr-2"></i> Create Listing
-                        </a>
-                    </ol> --}}
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END Hero -->
+
     {{-- CONTENT --}}
-    <div class="container" style="margin-bottom: 40px;">
+    <div class="container container-dashboard px-4">
+        <h1 class="fw-semibold mb-5">Reservations</h1>
 
-        <div class="col-12">
-
-            <div class="col-md-7 mt-5" style="border-bottom: 1px solid #DFDFDE;">
-                <div class="title-bar" style="margin-right: 20px; display: inline-block;">
-                    <a style="text-decoration: none;" href="{{ route('reservations_dashboard') }}"><h6>Upcoming</h6></a>
-                </div>
-                <div class="title-bar" style="margin-right: 20px; display: inline-block; border-bottom: 2px solid #FF7400;">
-                    <a style="text-decoration: none;" href="{{ route('reservations_completed_index') }}"><h6><b>Completed</b></h6></a>
-                </div>
-                <div class="title-bar" style="margin-right: 20px; display: inline-block;">
-                    <a style="text-decoration: none;" href="{{ route('reservations_canceled_index') }}"><h6>Canceled</h6></a>
-                </div>
-                <div class="title-bar" style="margin-right: 20px; display: inline-block;">
-                    <a style="text-decoration: none;" href="{{ route('reservations_all_index') }}"><h6>All</h6></a>
-                </div>
-            </div>
-
+        <div class="mb-4 tab-bar">
+            <a class="title-bar" href="{{ route('reservations_dashboard') }}">Upcoming</a>
+            <a class="title-bar active" href="{{ route('reservations_completed_index') }}">Completed</a>
+            <a class="title-bar" href="{{ route('reservations_canceled_index') }}">Canceled</a>
+            <a class="title-bar" href="{{ route('reservations_all_index') }}">All</a>
         </div>
 
-        <div class="col-12">
-            <div class="container" style="margin-top: 30px;">
-                <div class="datatable">
-                    <table class="table table-bordered table-hover" style="color: #383838" id="dataTable" width="100%" cellspacing="0">
-                        <thead style="color: #383838;" class="thead-dark table-borderless">
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">NO INVOICE</th>
-                                <th class="text-center">VILLA NAME</th>
-                                <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
-                                <th class="d-sm-table-cell text-center" >PRICE</th>
-                                <th class="d-sm-table-cell text-center" >STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                            <tfoot style="color: #383838">
-                                <tr>
-                                    <th class="text-center">NO</th>
-                                    <th class="text-center">NO INVOICE</th>
-                                    <th class="text-center">VILLA NAME</th>
-                                    <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
-                                    <th class="d-sm-table-cell text-center" >PRICE</th>
-                                    <th class="d-sm-table-cell text-center" >STATUS</th>
-                                    <th class="text-center" style="width: 15%;">ACTION</th>
-                                </tr>
-                            </tfoot>
-                    </table>
-                </div>
-            </div>
+        <div class="datatable">
+            <table class="table table-bordered table-hover" style="color: #383838" id="dataTable" width="100%" cellspacing="0">
+                <thead style="color: #383838;" class="thead-dark table-borderless">
+                    <tr>
+                        <th class="text-center">NO</th>
+                        <th class="text-center">NO INVOICE</th>
+                        <th class="text-center">VILLA NAME</th>
+                        <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
+                        <th class="d-sm-table-cell text-center" >PRICE</th>
+                        <th class="d-sm-table-cell text-center" >STATUS</th>
+                        <th class="text-center" style="width: 15%;">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                    <tfoot style="color: #383838">
+                        <tr>
+                            <th class="text-center">NO</th>
+                            <th class="text-center">NO INVOICE</th>
+                            <th class="text-center">VILLA NAME</th>
+                            <th class="d-sm-table-cell text-center" >CHECK-IN/CHECK-OUT</th>
+                            <th class="d-sm-table-cell text-center" >PRICE</th>
+                            <th class="d-sm-table-cell text-center" >STATUS</th>
+                            <th class="text-center" style="width: 15%;">ACTION</th>
+                        </tr>
+                    </tfoot>
+            </table>
         </div>
 
     </div>
@@ -101,10 +69,13 @@
     <script>
         // load_tabel_first();
         var table = $('#dataTable').dataTable({
-            dom:
-            "<'row'<'col-sm-12 col-md-9'l><'col-resv col-sm-12 col-md-3'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            // dom:
+            // "<'row'<'col-sm-12 col-md-9'l><'col-resv col-sm-12 col-md-3'f>>" +
+            // "<'row'<'col-sm-12'tr>>" +
+            // "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            dom: "<'layout-header-footer'<l><f>>" +
+            "<'overflow-x-scroll'<tr>>" +
+            "<'layout-header-footer'<i><p>>",
             pagingType:"full_numbers",
             pageLength:10,
             lengthMenu:[[10,20,50],[10,20,50]],

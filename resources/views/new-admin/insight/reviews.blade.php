@@ -136,8 +136,8 @@
 @section('content_admin')
 
 <!-- Main page content-->
-<div class="container pt-4">
-    <nav class="navbar navbar-expand-lg navbar-light">
+<div class="container container-dashboard px-4">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto nav-insight">
                 <li class="nav-item">
@@ -154,7 +154,15 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
+
+    <div class="mb-4 tab-bar">
+        <a class="title-bar " href="{{ route('insight_dashboard') }}">Opportunities</a>
+        <a class="title-bar active" href="{{ route('insight_dashboard_reviews') }}">Reviews</a>
+        <a class="title-bar " href="{{ route('insight_dashboard_earnings') }}">Earnings</a>
+        <a class="title-bar " href="{{ route('insight_dashboard_views') }}">Views</a>
+    </div>
+
     <div id="reviews" class="text-dark">
         <div class="row">
             <div class="col-lg-4 sidebar-right-rating order-lg-12">

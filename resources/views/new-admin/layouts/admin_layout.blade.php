@@ -173,6 +173,82 @@
 /* @media only screen and (max-width: 350px) {
 
 } */
+
+        .overflow-x-scroll{
+            overflow-x:auto;
+        }
+        
+        .layout-header-footer{
+            display:flex;
+            flex-direction:column;
+            text-align:center;
+            align-items:center;
+            row-gap:12px;
+        }
+
+        .container-dashboard{
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        @media (min-width: 768px) { 
+            .layout-header-footer{
+                flex-direction:row;
+                text-align:left;
+                justify-content:space-between;
+                row-gap:0px;
+            }
+
+            .container-dashboard{
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+
+        .tab-bar{
+            display:flex;
+            flex-wrap:nowrap;
+            gap:1rem;
+            border-bottom:1px solid #ddd;
+            overflow-x:auto;
+        }
+
+        .title-bar{
+            text-decoration:none;
+            height:2rem;
+            position:relative;
+            color:black !important;
+            white-space:nowrap;
+        }
+
+        .title-bar::before{
+            content:'';
+            width:0;
+            height: 2px;
+            background: #FF7400;
+            position: absolute;
+            bottom:0;
+            left:50%;
+            transform:translateX(-50%);
+        }
+
+        .title-bar.active{
+            font-weight:bold;
+        }
+
+        .title-bar.active,
+        .title-bar:hover{
+            text-decoration:none;
+        }
+
+        .title-bar.active::before,
+        .title-bar:hover::before{
+            width:100%;
+        }
+        
+        .title-bar:hover::before{
+            transition:.2s all ease-in;
+        }
     </style>
 
 </head>
@@ -424,7 +500,7 @@
 
     </div>
     <div id="overlay"></div>
-    <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4 px-md-4"
+    <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4" style="z-index:4;">
     {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}}
         <div class="container">
             <a href="{{ route('partner_dashboard') }}" class="navbar-brand mb-n1" target="_blank">
@@ -779,23 +855,24 @@
                                     @php
                                         $notificationOwner = App\Models\NotificationOwner::where('id_user', Auth::user()->id)->get();
                                     @endphp
-
-                                    @foreach ($notificationOwner as $item)
-                                        <a class="dropdown-item dropdown-notifications-item"
-                                            href="{{ route('notification_owner') }}">
-                                            <div class="dropdown-notifications-item-icon bg-warning"><i
-                                                    data-feather="activity"></i>
-                                            </div>
-                                            <div class="dropdown-notifications-item-content">
-                                                <div class="dropdown-notifications-item-content-details">
-                                                    {{ $item->created_at->format('j F, Y h:i:s') }}
+                                    
+                                        @foreach ($notificationOwner as $item)
+                                            <a class="dropdown-item dropdown-notifications-item"
+                                                href="{{ route('notification_owner') }}">
+                                                <div class="dropdown-notifications-item-icon bg-warning"><i
+                                                        data-feather="activity"></i>
                                                 </div>
-                                                <div class="dropdown-notifications-item-content-text">
-                                                    {{ $item->message }}
+                                                <div class="dropdown-notifications-item-content">
+                                                    <div class="dropdown-notifications-item-content-details">
+                                                        {{ $item->created_at->format('j F, Y h:i:s') }}
+                                                    </div>
+                                                    <div class="dropdown-notifications-item-content-text">
+                                                        {{ $item->message }}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    @endforeach
+                                            </a>
+                                        @endforeach
+                                    
                                 </div>
                             </li>
                         @endif

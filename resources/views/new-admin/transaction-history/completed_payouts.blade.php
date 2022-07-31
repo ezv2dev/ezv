@@ -3,44 +3,30 @@
 @section('title', 'Transaction History - EZV2')
 
 @section('content_admin')
-<div class="container mb-10">
-    <div class="row mt-5">
-        <div class="col-8 p-0">
-            <div class="card p-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-1">
-                            <button class="btn btn-warning rounded-circle" style="width: 50px; height: 50px;">
-                                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
-                                    style="display:block;height:16px;width:16px;fill:currentColor" aria-hidden="true"
-                                    role="presentation" focusable="false">
-                                    <path
-                                        d="M7.237.21c.347-.206.76-.263 1.148-.16.34.092.637.3.841.586l.082.128 6.487 11.318a1.564 1.564 0 0 1 .004 1.544 1.53 1.53 0 0 1-.554.566 1.497 1.497 0 0 1-.599.2l-.159.008H1.514c-.334 0-.659-.113-.924-.32a1.558 1.558 0 0 1-.452-1.863l.069-.135L6.692.764c.132-.23.32-.42.545-.555zM8 10.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm.8-6.6H7.2v5.2h1.6z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-11">
-                            <b>Add a payout method</b>
-                            <p>You'll need to set up your payouts in order to get paid.</p>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <a href="#"><u>Learn More</u></a>
-                                    <div class="btn btn-primary">Get Started</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container container-dashboard px-4">
+    <div class="row p-4 border">
+        <div class="col-md-1">
+            <button class="btn btn-warning rounded-circle" style="width: 50px; height: 50px;">
+                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                    style="display:block;height:16px;width:16px;fill:currentColor" aria-hidden="true"
+                    role="presentation" focusable="false">
+                    <path
+                        d="M7.237.21c.347-.206.76-.263 1.148-.16.34.092.637.3.841.586l.082.128 6.487 11.318a1.564 1.564 0 0 1 .004 1.544 1.53 1.53 0 0 1-.554.566 1.497 1.497 0 0 1-.599.2l-.159.008H1.514c-.334 0-.659-.113-.924-.32a1.558 1.558 0 0 1-.452-1.863l.069-.135L6.692.764c.132-.23.32-.42.545-.555zM8 10.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm.8-6.6H7.2v5.2h1.6z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div class="col-md-11 mt-3 mt-md-0">
+            <b>Add a payout method</b>
+            <p>You'll need to set up your payouts in order to get paid.</p>
+            <div class="d-flex justify-content-between mt-3">
+                <a href="#"><u>Learn More</u></a>
+                <div class="btn btn-primary">Get Started</div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-8 p-0">
-            <h1 style="font-weight: 600;">Transaction History</h1>
-        </div>
-    </div>
+    <h1 class="mt-5 mb-3" style="font-weight: 600;">Transaction History</h1>
 
     <div class="row">
         <div class="col-8 mt-4" style="border-bottom: 1px solid #DFDFDE;">
