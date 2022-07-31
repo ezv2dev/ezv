@@ -124,7 +124,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
+                                        style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -190,7 +190,9 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
@@ -256,8 +258,10 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -5808,7 +5812,6 @@
     // ! gradeWow
     $("#gradeWow").change(function() {
         var grade = $(this).val();
-        console.log(`klenggg ${grade}`);
         $.ajax({
             type: "POST",
             headers: {
