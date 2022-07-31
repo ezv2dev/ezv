@@ -27,6 +27,10 @@ class ProfileController extends Controller
         $location = VillaSave::select('location.name', 'location.id_location as id_cek')->join('villa', 'villa_save.id_villa', '=', 'villa.id_villa')
             ->join('location', 'villa.id_location', '=', 'location.id_location')->where('id_user', Auth::user()->id)->groupBy('id_cek')->get();
 
+        // $location = VillaSave::with(['villa.location'])->where('id_user', Auth::user()->id)->get();
+
+        // dd($location, $location2);
+
         $save = VillaSave::join('villa', 'villa_save.id_villa', '=', 'villa.id_villa')
             ->where('id_user', Auth::user()->id)->get();
 
