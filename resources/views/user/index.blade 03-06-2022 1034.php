@@ -395,7 +395,7 @@
                         @auth
                         <div class="d-flex" style="display: inline-block; align-items: center;">
                             <a href="{{ route('partner_dashboard') }}" class="navbar-gap" style="color: #b9b9b9;">
-                                {{ Translate::translate('Switch to hosting') }}
+                                {{ Translate::translate('Switch to Hosting') }}
                             </a>
 
                             <a type="button" onclick="language()" class="navbar-gap" style="color: white; width:27px;">

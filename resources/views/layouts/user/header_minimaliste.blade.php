@@ -63,7 +63,7 @@
 
                         <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2"
                             style="color:#585656; width: fit-content;">
-                            {{ __('user_page.Switch to hosting') }}
+                            {{ __('user_page.Switch to Hosting') }}
                         </a>
                         <hr>
                         <div class="d-flex align-items-center mb-2">

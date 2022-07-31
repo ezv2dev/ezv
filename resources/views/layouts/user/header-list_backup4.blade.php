@@ -708,7 +708,7 @@
 
                 @auth
                 <a href="{{ route('partner_dashboard') }}" class="navbar-gap" style="color: #b9b9b9; margin-right: 9px; font-size: 15px;">
-                    Switch to hosting
+                    Switch to Hosting
                 </a>
                 @endauth
             @endif

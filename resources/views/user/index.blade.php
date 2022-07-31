@@ -116,7 +116,7 @@
 
                     <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2"
                         style="color:#585656; width: fit-content;">
-                        {{ __('user_page.Switch to hosting') }}
+                        {{ __('user_page.Switch to Hosting') }}
                     </a>
                     <hr>
                     <div class="d-flex align-items-center mb-2">
@@ -686,7 +686,7 @@
                         @auth
                             <div class="d-flex" style="display: inline-block; align-items: center;">
                                 <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
-                                    {{ __('user_page.Switch to hosting') }}
+                                    {{ __('user_page.Switch to Hosting') }}
                                 </a>
 
                                 <a type="button" onclick="language()" class="navbar-gap"
