@@ -1123,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div class="button" style="padding-left: 0px;">
-                                        <button onclick="foodFilter(true)"
+                                        <button onclick="foodFilter()"
                                             style="z-index: 1; border: none; background: transparent;">
                                             <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
@@ -3133,7 +3133,7 @@
                 window.location.href = `{{ env('APP_URL') }}/food/search?${suburl}`;
             }
 
-            function foodFilter(whatToEat) {
+            function foodFilter() {
                 var sLocationFormInput = $("input[name='sLocation']").val();
 
                 function setCookie2(name, value, days) {
@@ -3148,31 +3148,31 @@
 
                 setCookie2("sLocation", sLocationFormInput, 1);
 
-                if (whatToEat == true) {
-                    var sKeywordFormInput = function() {
-                        var tmp = null;
-                        $.ajax({
-                            async: false,
-                            type: "GET",
-                            global: false,
-                            dataType: 'json',
-                            url: "/food/subcategory",
-                            data: {
-                                name: $("input[name='sKeyword']").val()
-                            },
-                            success: function(response) {
-                                tmp = response.data;
-                            }
-                        });
-                        return tmp;
-                    }();
-                }
+                console.log($("input[name='sKeyword']").val());
 
-                filterFormInput = [];
-                var filteredArray = filterFormInput.push(sKeywordFormInput);
+                var sKeywordFormInput = function() {
+                    var tmp = null;
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        global: false,
+                        dataType: 'json',
+                        url: "/food/subcategory",
+                        data: {
+                            name: $("input[name='sKeyword']").val()
+                        },
+                        success: function(response) {
+                            tmp = response.data;
+                        }
+                    });
+                    return tmp;
+                }();
+
+                keyWordTemp = [];
+                keyWordTemp.push(sKeywordFormInput);
 
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${filteredArray}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${keyWordTemp}`;
                 restaurantRefreshFilter(subUrl);
             }
         </script>
