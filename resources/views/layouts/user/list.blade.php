@@ -200,7 +200,7 @@ if (isset($_COOKIE['tema'])) {
 
                     <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2"
                         style="color:#585656; width: fit-content;">
-                        {{ __('user_page.Switch to hosting') }}
+                        {{ __('user_page.Switch to Hosting') }}
                     </a>
                     <hr>
                     <div class="d-flex align-items-center mb-2">
@@ -226,7 +226,7 @@ if (isset($_COOKIE['tema'])) {
                             </div>
                         </a>
                     </div>
-                    <div class="d-flex align-items mb-2" id="changeThemeMobile">
+                    <div class="d-flex align-items navbar-gap mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu">
                             <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }} ">
                                 <input type="checkbox" id="background-color-switch"

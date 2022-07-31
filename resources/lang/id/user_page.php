@@ -225,7 +225,7 @@ return [
     'Under 2' => 'Di Bawah 2',
     'Service animal ?' => 'Pelayanan hewan ?',
     'Become a host' => 'Menjadi host',
-    'Switch to hosting' => 'Beralih ke host',
+    'Switch to Hosting' => 'Beralih ke Host',
     'Sign Out' => 'Keluar',
     'Change Password' => 'Ubah Kata Sandi',
     'My Profile' => 'Profil Saya',

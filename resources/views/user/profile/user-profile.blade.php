@@ -74,7 +74,7 @@
             <div class="col-2">
                 <a href="{{ route('profile_index') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-house" style="font-size:40px;"></i>
-                    <p class="font-weight-600">Villas</p>
+                    <p class="font-weight-600">Homes</p>
                 </a>
             </div>
             <div class="col-2">
@@ -86,13 +86,13 @@
             <div class="col-2">
                 <a href="{{ route('profile_restaurants') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-utensils" style="font-size:40px;"></i>
-                    <p>Restaurants</p>
+                    <p>Foods</p>
                 </a>
             </div>
             <div class="col-2">
                 <a href="{{ route('profile_activities') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-person-hiking" style="font-size:40px;"></i>
-                    <p>Activities</p>
+                    <p>WoW</p>
                 </a>
             </div>
         </div>

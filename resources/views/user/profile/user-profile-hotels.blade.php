@@ -61,20 +61,20 @@
                 </div>
             </div>
 
-            <div class="col-2 d-flex justify-content-center">
+            {{-- <div class="col-2 d-flex justify-content-center">
                 <a href="{{ route('reward_program') }}" class="black" style="text-decoration: none !important;">
                     <img src="https://cdn-icons-png.flaticon.com/512/1426/1426708.png" class="img-fluid"
                         style="height:80px; width: 80px; cursor: pointer; margin-left: 25px;">
                     <p class="font-weight-bolder">Reward Program</p>
                 </a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row d-flex justify-content-center text-center my-5">
             <div class="col-2">
                 <a href="{{ route('profile_index') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-house" style="font-size:40px;"></i>
-                    <p>Villas</p>
+                    <p>Homes</p>
                 </a>
             </div>
             <div class="col-2">
@@ -86,13 +86,13 @@
             <div class="col-2">
                 <a href="{{ route('profile_restaurants') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-utensils" style="font-size:40px;"></i>
-                    <p>Restaurants</p>
+                    <p>Foods</p>
                 </a>
             </div>
             <div class="col-2">
                 <a href="{{ route('profile_activities') }}" class="black" style="text-decoration: none !important;">
                     <i class="fa-solid fa-person-hiking" style="font-size:40px;"></i>
-                    <p>Activities</p>
+                    <p>WoW</p>
                 </a>
             </div>
         </div>

@@ -1087,6 +1087,7 @@ input:checked + .switch-background:active::before {
 @media only screen and (max-width: 425px) {
     .user-avatar {
         width: 40px !important;
+        height: 40px;
     }
     .nav-row {
         padding: 0px !important;

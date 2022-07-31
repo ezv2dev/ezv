@@ -118,9 +118,8 @@
                                         data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
-                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                        data-src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}"
-                                        class="user-photo" alt="" style="border-radius: 50%">
+                                    <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">

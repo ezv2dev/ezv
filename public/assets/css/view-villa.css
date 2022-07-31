@@ -264,12 +264,13 @@ hr.pendek {
 .video-container {
     position: relative;
     max-width: 100%;
+    background: transparent !important;
 }
 
 .video-container .overlay-desc {
     position: relative;
     z-index: 999;
-    max-width: 900px;
+    max-width: 1920px;
     margin: 0 auto;
     margin-top: 300px;
     margin-left: 20px;
@@ -841,11 +842,22 @@ a.active {
 
 .liner {
     display: inline-block;
-    height: 3px;
+    height: 5px;
+    position: relative;
     width: 50%;
-    background: #000;
+    border-radius: 12px;
+    background: silver;
     margin-right: 5px;
     vertical-align: middle;
+    border-radius: 50px;
+}
+
+.liner-bar{
+    background: black;
+    height: 5px;
+    position: absolute;
+    border-radius: 50px;
+    margin: 0px !important;
 }
 
 /* .reserve-fixed {
@@ -2949,13 +2961,13 @@ video {
 .video-grid-button {
     display: inline-block;
     position: relative;
-    top: -140px;
-    left: 150px;
+    top: -40%;
+    left: 45%;
     width: 40px;
     height: 40px;
     font-size: 16px;
-    color: #fff;
-    border: solid 1px #fff;
+    color: rgb(225, 225, 225);
+    border: solid 1px rgb(225, 225, 225);
     padding: 8px 13px;
     border-radius: 50%;
     opacity: 0.7;
@@ -3371,6 +3383,7 @@ span.flatpickr-weekday {
         font-size: 28px !important;
     }
 }
+
 @media only screen and (max-width: 575px) {
     .head-inner-wrap {
         padding-left: 20px !important;
@@ -3675,6 +3688,10 @@ span.flatpickr-weekday {
     .navigationItem span:hover {
         color: #000;
         }
+    .video-grid-button {
+        top: -30%;
+        left: 37%;
+    }
 
 }
 
@@ -3811,6 +3828,10 @@ span.flatpickr-weekday {
     }
     .sidebar {
         width: 22% !important;
+    }
+    .video-grid-button {
+        left: 40%;
+        top: -37%;
     }
 }
 

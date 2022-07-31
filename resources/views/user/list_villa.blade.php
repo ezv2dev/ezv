@@ -72,23 +72,21 @@
         <div id="div-to-refresh" class="container__list">
             <!-- Refresh Page -->
             <div class="col-lg-12" style="position: relative; min-height: 100px;">
-                @if (count($villas) != 0)
-                    <div class="w-100" id="view-map-button-float">
-                        <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
-                            <button onclick="view_main_map()" style="height:inherit;">
-                                <!-- partial:index.partial.html -->
-                                <div class="notice">
-                                    <span class="world">
-                                        <span class="images" style="color: #52EB35;">
-                                            <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
-                                        </span>
+                <div class="w-100" id="view-map-button-float">
+                    <div class="map-floating-button skeleton skeleton-h-4 skeleton-w-4 {{ $shadowColor }}">
+                        <button onclick="view_main_map()" style="height:inherit;">
+                            <!-- partial:index.partial.html -->
+                            <div class="notice">
+                                <span class="world">
+                                    <span class="images" style="color: #52EB35;">
+                                        <img src="{{ asset('assets/earth.svg') }}" alt="Earth SVG">
                                     </span>
-                                </div>
-                                <!-- partial -->
-                            </button>
-                        </div>
+                                </span>
+                            </div>
+                            <!-- partial -->
+                        </button>
                     </div>
-                @endif
+                </div>
 
                 <div id="filter-cat-bg-color" class="container-grid-cat {{ $bgColor }} top-min-10p pb-10p"
                     style="width: 100%;" data-isshow="true">
@@ -175,10 +173,11 @@
                                 @php
                                     $amenitiesIds = explode(',', request()->get('fAmenities'));
                                 @endphp @if (in_array($item->id_amenities, $amenitiesIds))
-                                style="color: #ff7400;"@endif></i>
-                            <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
-                        </div>
-                    @endforeach
+                                style="color: #ff7400;"
+                    @endif></i>
+                    <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
+                </div>
+                @endforeach
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
                     <div>
                         <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>

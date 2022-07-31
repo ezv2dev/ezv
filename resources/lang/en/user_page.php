@@ -229,7 +229,7 @@ return [
     'Under 2' => 'Under 2',
     'Service animal ?' => 'Service animal ?',
     'Become a host' => 'Become a host',
-    'Switch to hosting' => 'Switch to hosting',
+    'Switch to Hosting' => 'Switch to Hosting',
     'Sign Out' => 'Sign Out',
     'Change Password' => 'Change Password',
     'My Profile' => 'My Profile',

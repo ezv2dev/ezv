@@ -147,7 +147,6 @@
         a:hover {
             color: #ff7400 !important;
         }
-
     </style>
 
     <style>
@@ -183,13 +182,12 @@
         .orange {
             color: #ff7400;
         }
-
     </style>
 
 </head>
 
 <body class="nav-fixed">
-    @component('components.loading.loading-dashboard')
+    @component('components.loading.loading-type1')
     @endcomponent
 
     {{-- <nav class="fixed-top shadow bg-white navbar-1-1 navbar navbar-expand-lg navbar-light p-4 px-md-4" --}}
@@ -198,8 +196,9 @@
             <a href="" class="navbar-brand mb-n1" target="_blank">
                 <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -263,13 +262,11 @@
                             href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             @if (Auth::user()->foto_profile != null)
-                                <img class="img-fluid"
-                                    src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                <img class="img-fluid" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
                             @elseIf (Auth::user()->avatar != null)
                                 <img class="img-fluid" src="{{ Auth::user()->avatar }}">
                             @else
-                                <img class="img-fluid"
-                                    src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                <img class="img-fluid" src="{{ asset('assets/icon/menu/user_default.svg') }}">
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"

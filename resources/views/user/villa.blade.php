@@ -144,9 +144,8 @@
                                         data-src="{{ Auth::user()->avatar }}" class="user-photo mt-n2" alt=""
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
-                                    <img class="lozad user-avatar" src="{{ LazyLoad::show() }}"
-                                        data-src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name }}"
-                                        class="user-photo" alt="" style="border-radius: 50%">
+                                    <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
+                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -1782,20 +1781,34 @@
                                             {{ __('user_page.Cleanliness') }}
                                         </div>
                                         <div class="col-6 ">
-                                            <div class="liner" style="width: {{ $detail[0]->average_clean * 10 }}%"></div>{{ $detail[0]->average_clean }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_clean }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Check In') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_check_in * 10 }}%"></div>
-                                            {{ $detail[0]->average_check_in }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_check_in }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Value') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_value * 10 }}%"></div>{{ $detail[0]->average_value }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_value }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1805,16 +1818,30 @@
                                             {{ __('user_page.Service') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_service * 10 }}%"></div>{{ $detail[0]->average_service }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_service }}
+                                            </span>
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Location') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner" style="width: {{ $detail[0]->average_location * 10 }}%"></div>
-                                            {{ $detail[0]->average_location }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                            </div>
+                                            <span>
+                                                {{ $detail[0]->average_location }}
+                                            </span>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                        Show all reviews
+                                    </button>
                                 </div>
                             </div>
                         @else
@@ -1902,7 +1929,9 @@
                                                         {{ __('user_page.Cleanliness') }}
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->cleanliness }}
                                                     </div>
                                                 </div>
@@ -1911,7 +1940,9 @@
                                                         {{ __('user_page.Check In') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->check_in }}
                                                     </div>
                                                 </div>
@@ -1920,7 +1951,9 @@
                                                         {{ __('user_page.Value') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->value }}
                                                     </div>
                                                 </div>
@@ -1931,7 +1964,9 @@
                                                         {{ __('user_page.Service') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->service }}
                                                     </div>
                                                 </div>
@@ -1940,7 +1975,9 @@
                                                         {{ __('user_page.Location') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
+                                                        </div>
                                                         {{ $villa[0]->userReview->location }}
                                                     </div>
                                                 </div>
@@ -3354,6 +3391,7 @@
     @endauth
     @include('user.modal.villa.description')
     @include('user.modal.villa.insurance')
+    @include('user.modal.villa.review')
     @include('user.modal.villa.cancelation-policy-modal')
 
     {{-- MORE TAG MODAL --}}
