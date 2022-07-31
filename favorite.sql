@@ -12,9 +12,7 @@ MySQL - 5.7.33 : Database - db_ezv
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ezv` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `db_ezv`;
 
 /*Table structure for table `activity_save` */
 
@@ -33,7 +31,7 @@ CREATE TABLE `activity_save` (
 
 /*Data for the table `activity_save` */
 
-insert  into `activity_save`(`id_activitysave`,`id_activity`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values 
+insert  into `activity_save`(`id_activitysave`,`id_activity`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values
 (2,3,1,'2022-04-02 18:21:44','2022-04-02 18:21:44',1,1),
 (5,28,1,'2022-06-17 02:09:09','2022-06-17 02:09:09',1,1),
 (6,79,1,'2022-06-29 02:01:46','2022-06-29 02:01:46',1,1),
@@ -60,7 +58,7 @@ CREATE TABLE `district` (
 
 /*Data for the table `district` */
 
-insert  into `district`(`id_district`,`name`,`latitude`,`longitude`,`created_at`,`updated_at`,`created_by`,`updated_by`) values 
+insert  into `district`(`id_district`,`name`,`latitude`,`longitude`,`created_at`,`updated_at`,`created_by`,`updated_by`) values
 (1,'Badung',-8.5448056,114.8873382,'2022-04-13 18:07:48','2022-04-13 18:07:49',1,1),
 (2,'Bangli',-8.3336208,115.2049049,'2022-04-13 18:08:48','2022-04-13 18:08:50',1,1),
 (3,'Singaraja',-8.1186359,115.0713735,'2022-04-13 18:08:58','2022-04-13 18:09:00',1,1),
@@ -111,7 +109,7 @@ CREATE TABLE `location` (
 
 /*Data for the table `location` */
 
-insert  into `location`(`id_location`,`id_district`,`name`,`description`,`image`,`latitude`,`longitude`,`created_at`,`updated_at`,`created_by`,`updated_by`) values 
+insert  into `location`(`id_location`,`id_district`,`name`,`description`,`image`,`latitude`,`longitude`,`created_at`,`updated_at`,`created_by`,`updated_by`) values
 (1,1,'Canggu','Canggu is a resort village on the south coast of the Indonesian island of Bali. It\'s surrounded by terraced rice paddies and known for beaches like Canggu and Echo, with strong surf. The nearby Seminyak resort area has high-end shops and restaurants. Just south of Seminyak, the beachside town of Kuta is known for its nightlife. North of Canggu, Tanah Lot is a Hindu temple that sits just offshore on a rocky outcrop.',NULL,-8.6395259,115.1049962,'2022-04-13 18:32:13','2022-04-13 18:32:15',1,1),
 (2,1,'Dalung','Dalung is a town in the Badung Regency of Bali, Indonesia.',NULL,-8.6429069,115.1174937,'2022-04-13 18:32:23','2022-04-13 18:32:24',1,1),
 (3,1,'Tibubeneng','Tibubeneng is a village in the south of Bali, Indonesia. Tibubeng was part of Canggu until it was split off in 1997. It is headed by an elected perbekel, or village head',NULL,-8.6474704,115.1161656,'2022-04-13 18:32:38','2022-04-13 18:32:42',1,1),
@@ -761,7 +759,7 @@ CREATE TABLE `restaurant_save` (
 
 /*Data for the table `restaurant_save` */
 
-insert  into `restaurant_save`(`id_restaurantsave`,`id_restaurant`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values 
+insert  into `restaurant_save`(`id_restaurantsave`,`id_restaurant`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values
 (1,1,1,'2022-03-31 02:13:04','2022-03-31 02:13:04',1,1),
 (8,20,1,'2022-06-22 00:07:45','2022-06-22 00:07:45',1,1),
 (11,129,1,'2022-06-29 02:01:44','2022-06-29 02:01:44',1,1),
@@ -794,7 +792,7 @@ CREATE TABLE `villa_save` (
 
 /*Data for the table `villa_save` */
 
-insert  into `villa_save`(`id_villasave`,`id_villa`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values 
+insert  into `villa_save`(`id_villasave`,`id_villa`,`id_user`,`created_at`,`updated_at`,`created_by`,`updated_by`) values
 (1,20,1,'2022-03-24 01:01:52','2022-03-24 01:01:52',18,18),
 (2,18,1,'2022-03-24 01:04:35','2022-03-24 01:04:35',18,18),
 (4,14,1,'2022-03-24 20:52:21','2022-03-24 20:52:21',22,22),
