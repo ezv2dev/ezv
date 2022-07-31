@@ -425,6 +425,9 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/dashmix.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
+    <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
 </head>
 
 <body style="background-color:white">
@@ -454,7 +457,7 @@
                         </div>
                     </div>
                 </div> --}}
-        <form action="{{ route('villa_booking_user_store') }}" method="POST" id="basic-form" class="js-validation" enctype="multipart/form-data" >
+    <form action="{{ route('villa_booking_user_store') }}" method="POST" id="basic-form" class="js-validation" enctype="multipart/form-data" >
         @csrf
         <input type="hidden" id="id_villa" name="id_villa" value="{{ $villa->id_villa }}">
         <input type="hidden" id="firstname" name="firstname" value="{{ $data['firstname'] }}">
@@ -469,50 +472,154 @@
                         <div class="col-lg-6 col-sm-6 col-sm-12 col-xs-12">
                             <h3>Your Trip</h3>
                             <hr>
-                            <div class="row mb-2">
-                                <div class="col-6 confirm-date-block">
-                                    <p>Check In Date<span>{{ $data['check_in'] }}</span></p>
-                                </div>
-                                <div class="col-6 confirm-date-block">
-                                    <input type="text" class="flatpickr bg-white" id="check_in" name="check_in" value="EDIT">
-                                </div>
-                                <div class="col-6 confirm-date-block">
-                                    <p>Check Out Date<span>{{ $data['check_out'] }}</span></p>
-                                </div>
-                                <div class="col-6 confirm-date-block">
-                                    <input type="text" class="flatpickr bg-white" id="check_out" name="check_out" value="EDIT">
-                                </div>
-                            </div>
                             <div class="row mb-3">
-                                <div class="col-md-6 confirm-date-block">
-                                    <p>Adult <span>{{ $data['adult'] }}</span></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row float-right">
-                                        <div class="col-2">
-                                            <button class="plus-min" href="#">-</button>
-                                        </div>
-                                        <div class="col-2 align-center">
-                                            0
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="plus-min" href="#">+</button>
-                                        </div>
+                                <div class="col-6 confirm-date-block" id="confirmBookingDateForm">
+                                    <div class="fw-bold">Date</div>
+                                    <div onchange="fetchTotalPrice()">
+                                        <input type="date" name="check_in" value="{{ $data['check_in'] }}">
+                                        <input type="date" name="check_out" value="{{ $data['check_out'] }}">
+                                    </div>
+                                    <div>
+                                        <span style="display:inline-block">{{ $data['check_in'] }}</span>
+                                         -
+                                        <span style="display:inline-block">{{ $data['check_out'] }}</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6 confirm-date-block">
-                                    <p>Children <span>{{ $data['child'] }}</span></p>
+                                <div class="col-6 d-flex justify-content-end">
+                                    <a href="#" class="fw-bold" onclick="showDate()" id="openCheckInDate"><u>Edit</u></a>
+                                    <a href="#" class="fw-bold d-none" onclick="hideDate()" id="closeCheckInDate"><u>Close</u></a>
                                 </div>
-                                <div class="col-md-6">
-                                <div class="row float-right">
-                                        <div class="col-2">
-                                            <button class="plus-min" href="#">-</button>
+                            </div>
+                            <div class="row mb-3" id="checkInDate"></div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 confirm-date-block">
+                                    <div class="fw-bold">Guest</div>
+                                    <div>[ count ] Guest</div>
+                                </div>
+                                <div class="col-6 d-flex justify-content-end">
+                                    {{-- <a href="#" class="fw-bold"><u>Edit</u></a> --}}
+                                </div>
+                                <div class="content sidebar-popup2" style="left: 633px;" id="popup_guest2">
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <p class="price-box">
+                                                        {{ Translate::translate('Adults') }}</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="price-box" style="color: grey">
+                                                        {{ Translate::translate('Age') }} 13+</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6"
+                                                style="display: flex; align-items: center; justify-content: end;">
+                                                <div class="row">
+                                                    <a type="button" onclick="adult_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p>
+                                                            <input type="number" id="adult4" name="adult" value="1"
+                                                                min="1"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" value="{{ request()->query("adult") ?? 1 }}" readonly>
+                                                        </p>
+                                                    </div>
+                                                    <a type="button" onclick="adult_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-2 align-center">
-                                            0
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <p class="price-box">
+                                                        {{ Translate::translate('Children') }}</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="price-box" style="color: grey">
+                                                        {{ Translate::translate('Ages') }} 2-12</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                                <div class="row">
+                                                    <a type="button" onclick="child_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="child4" name="child" value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" value="{{ request()->query("child") ?? 0 }}" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="child_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-2">
-                                            <button class="plus-min" href="#">+</button>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <p class="price-box">
+                                                        {{ Translate::translate('Infant') }}</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="price-box" style="color: grey">
+                                                        {{ Translate::translate('Under') }} 2</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                                <div class="row">
+                                                    <a type="button" onclick="infant_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="infant4" name="infant" value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" value="{{ request()->query('infant') ?? 0 }}" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="infant_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <p class="price-box">
+                                                        {{ Translate::translate('Pets') }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6" style="display: flex; align-items: center; justify-content: end;">
+                                                <div class="row">
+                                                    <a type="button" onclick="pet_decrement()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-minus" style="padding:30%"></i>
+                                                    </a>
+                                                    <div
+                                                        style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
+                                                        <p><input type="number" id="pet4" name="pet" value="0"
+                                                                style="text-align: center; border:none; width:30px;"
+                                                                min="0" value="{{ request()->query('pet') ?? 0 }}" readonly></p>
+                                                    </div>
+                                                    <a type="button" onclick="pet_increment()"
+                                                        style="height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;">
+                                                        <i class="fa-solid fa-plus" style="padding:30%"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -521,6 +628,19 @@
                             <h3>Choose how to pay</h3>
                             <div class="payment-box">
                                 <div class="row col-12">
+                                    @guest
+                                        <div class="col-12">
+                                            <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
+                                            <input type="text" class="form-control" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
+                                            <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
+                                            <input type="text" class="form-control" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
+                                            <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
+                                            <input type="email" class="form-control" name="email_va" id="email_va" value="" placeholder="email">
+                                            <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
+                                        </div>
+                                    @endguest
                                     <div class="col-12">
                                         <div class="row" style="font-size: 13px;">
                                             <label class="container-checkbox2">
@@ -539,17 +659,6 @@
                                                 @auth
                                                     <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
                                                 @endauth
-                                                @guest
-                                                    <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
-                                                    <input type="text" class="form-control" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
-                                                    <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
-                                                    <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
-                                                    <input type="text" class="form-control" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
-                                                    <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
-                                                    <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
-                                                    <input type="email" class="form-control" name="email_va" id="email_va" value="" placeholder="email">
-                                                    <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
-                                                @endguest
                                                     <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa->id_villa) }}">
                                                     <input type="hidden" name="check_in_date" id="check_in_date" value="">
                                                     <input type="hidden" name="check_out_date" id="check_out_date" value="">
@@ -679,8 +788,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6 col-sm-6 col-sm-12 col-xs-12">
+                    <div class="col-lg-6 col-sm-6 col-sm-12 col-xs-12">
                         <div id="wrapper">
                             <div id="sticky">
                                 <div class="block-confirm-info">
@@ -696,29 +804,96 @@
                                         <div class="pt-5">
                                         <hr>
                                             <h4>Price Details</h4>
-                                            <div class="row">
+                                            {{-- <div class="row">
                                                 <div class="col-7">
                                                 IDR {{ number_format($villa->price, 0, ',', '.') }} x {{ $night }} nights
                                                 </div>
                                                 <div class="col-5 text-right">
                                                 IDR {{ number_format($total, 0, ',', '.') }}
                                                 </div>
-                                            </div>
-                                            <div class="row">
+                                            </div> --}}
+                                            {{-- <div class="row">
                                                 <div class="col-7">
                                                 Discount
                                                 </div>
                                                 <div class="col-5 text-right">
                                                 IDR 0
                                                 </div>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div>{{ Translate::translate('Total Nights') }}</div>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <div>
+                                                        {{-- <input id="total_night" value="0" step="1" style="text-align:left; width: 20px; border:0"> --}}
+                                                        <span id="total_night">0</span>
+                                                        <span>nights</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div>{{ Translate::translate('Sub Total') }}</div>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <div>
+                                                        <p id="total" style="margin:0px;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row d-none" id="discountContent">
+                                                <div class="col-6">
+                                                    <div>{{ Translate::translate('Discount') }}</div>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <div>
+                                                        <p id="discount" style="margin:0px;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row d-none" id="cleaningFeeContent">
+                                                <div class="col-6">
+                                                    <div>{{ Translate::translate('Cleaning fee') }}</div>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <div>
+                                                        <p id="cleaning_fee" style="margin:0px;">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div>{{ Translate::translate('Service') }}</div>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <div>
+                                                        <p style="margin:0px" id="tax">0</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
+                                            <div class="row" id="totalAllContent">
                                                 <div class="col-7">
                                                 <strong>TOTAL</strong>
                                                 </div>
                                                 <div class="col-5 text-right">
-                                                IDR <strong>{{ number_format($total, 0, ',', '.') }}</strong>
+                                                <strong><p id="total_all" style="margin: 0px;">0</p></strong>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="price-box fw-bold">
+                                                        <span>{{ Translate::translate('Cancellation policy') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="detail-box">
+                                                        <span style="text-align: justify; font-size:12px;">100% refund of amount paid if you cancel
+                                                            by Oct 4, 2022. 50% refund of amount paid (minus the service fee) if you cancel by Nov 3,
+                                                            2022. No refund if you cancel after Nov 3, 2022.</span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -737,74 +912,79 @@
                         </button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        This is the last step before reserve. Please check your booking summary again.
+                    </div>
+                </div>
                 <!-- END Submit -->
-            <div class="row">
+        {{-- <div class="row">
             <div class="col-6 login">
-            <hr>
-            <p>Log in or <a href="{{ route('register') }}">sign up</a> to continue booking</p>
-            <form action="{{ route('login') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <div class="fxt-transformY-50 fxt-transition-delay-1">
-                        <input type="text"
-                            class="form-control form-control-alt {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-                            name="login" placeholder="Email Address" required="required">
-                        <i class="fa fa-envelope"></i>
+                <hr>
+                <p>Log in or <a href="{{ route('register') }}">sign up</a> to continue booking</p>
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <div class="fxt-transformY-50 fxt-transition-delay-1">
+                            <input type="text"
+                                class="form-control form-control-alt {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
+                                name="login" placeholder="Email Address" required="required">
+                            <i class="fa fa-envelope"></i>
 
-                        @error($errors->has('username') || $errors->has('email'))
+                            @error($errors->has('username') || $errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password"
+                            class="form-control form-control-alt @error('password') is-invalid @enderror"
+                            id="password" name="password" placeholder="Password" required="required">
+                        <i class="fa fa-lock"></i>
+
+                        @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="password"
-                        class="form-control form-control-alt @error('password') is-invalid @enderror"
-                        id="password" name="password" placeholder="Password" required="required">
-                    <i class="fa fa-lock"></i>
-
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <div class="fxt-content-between">
-                        <button type="submit" class="btn-fill" style="border-radius: 10px">Log in</button>
-                        <a href="forgot-password-1.html" class="switcher-text">Forgot Password</a>
+                    <div class="form-group">
+                        <div class="fxt-content-between">
+                            <button type="submit" class="btn-fill" style="border-radius: 10px">Log in</button>
+                            <a href="forgot-password-1.html" class="switcher-text">Forgot Password</a>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-            <center>
-                <p>or with</p>
-            </center>
-            <div class="confirm-socials">
-                <ul>
-                    <li class="social-facebook">
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="social-twitter">
-                        <a href="#" title="twitter"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="social-google">
-                        <a href="{{ route('user.login.google') }}" title="google"><i
-                                class="fab fa-google"></i></a>
-                    </li>
-                    <li class="social-linkedin">
-                        <a href="#" title="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                    </li>
-                    <li class="social-pinterest">
-                        <a href="#" title="pinterest"><i class="fab fa-pinterest-p"></i></a>
-                    </li>
-                </ul>
+                <center>
+                    <p>or with</p>
+                </center>
+                <div class="confirm-socials">
+                    <ul>
+                        <li class="social-facebook">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="social-twitter">
+                            <a href="#" title="twitter"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="social-google">
+                            <a href="{{ route('user.login.google') }}" title="google"><i
+                                    class="fab fa-google"></i></a>
+                        </li>
+                        <li class="social-linkedin">
+                            <a href="#" title="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                        <li class="social-pinterest">
+                            <a href="#" title="pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>
+        </div> --}}
     </section>
-    </form>
+</form>
     </main>
     @include('layouts.user.footer')
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
@@ -903,31 +1083,6 @@
 
     </script> -->
     <script>
-        $('#check_in').flatpickr({
-        enableTime: false,
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        onChange: function(selectedDates, dateStr, instance) {
-            $('#check_out').flatpickr({
-                enableTime: false,
-                dateFormat: "Y-m-d",
-                minDate: new Date(dateStr).fp_incr(1),
-                onChange: function(selectedDates, dateStr, instance){
-                    var start = new Date($('#check_in').val());
-                    var end = new Date($('#check_out').val());
-                    var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                    var min_stay = $('#min_stay').val();
-                    var minimum = new Date($('#check_in').val()).fp_incr(min_stay);
-                    if(sum_night < min_stay)
-                    {
-                        alert("minimum stay is " + min_stay + " days");
-                    }
-                }
-            });
-        }
-        });
-    </script>
-    <script>
         function paymentCheck() {
             if (document.getElementById('va').checked) {
                 document.getElementById('panel_va').style.display = 'block';
@@ -937,6 +1092,136 @@
                 document.getElementById('panel_credit').style.display = 'block';
             }
 
+        }
+    </script>
+    <script>
+        function fetchTotalPrice() {
+            const id = `{{ request()->id_villa }}`;
+            const checkIn = new Date($('#confirmBookingDateForm').find(`input[name='check_in']`).val());
+            const checkOut = new Date($('#confirmBookingDateForm').find(`input[name='check_out']`).val());
+            var sum_night = (checkOut - checkIn) / 1000 / 60 / 60 / 24;
+
+            const formData = {
+                id_villa: id,
+                check_in: checkIn,
+                check_out: checkOut,
+                total_night: sum_night,
+                sub_total: total
+            };
+            console.log(formData);
+
+            // disabled change on edit date form
+            $('#confirmBookingDateForm').find(`input[name='check_in']`).attr('readonly', true);
+            $('#confirmBookingDateForm').find(`input[name='check_out']`).attr('readonly', true);
+
+            $('#discountContent').addClass('d-none');
+            $('#cleaningFeeContent').addClass('d-none');
+
+            $.ajax({
+                type: "GET",
+                url: "/villa/get_total/" + id,
+                data: {
+                    start: checkIn.toISOString().split("T")[0],
+                    end: checkOut.toISOString().split("T")[0],
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function (response) {
+                    // disabled change on edit date form
+                    $('#confirmBookingDateForm').find(`input[name='check_in']`).attr('readonly', false);
+                    $('#confirmBookingDateForm').find(`input[name='check_out']`).attr('readonly', false);
+
+                    // append data to element
+                    $('#total_night').html(sum_night);
+                    $('#total').html(response.total);
+                    if(response.discount){
+                        $('#discountContent').removeClass('d-none');
+                        $('#discount').html(response.discount);
+                    }
+                    if(response.cleaning_fee){
+                        $('#cleaningFeeContent').removeClass('d-none');
+                        $('#cleaning_fee').html(response.cleaning_fee);
+                    }
+                    $('#tax').html(response.tax);
+                    $('#total_all').html(response.total_all);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+
+                    // disabled change on edit date form
+                    $('#confirmBookingDateForm').find(`input[name='check_in']`).attr('readonly', false);
+                    $('#confirmBookingDateForm').find(`input[name='check_out']`).attr('readonly', false);
+                },
+            });
+        }
+        function calendar_availability() {
+            console.log('load calendar_availability');
+            $.ajax({
+                //create an ajax request to display.php
+                type: "GET",
+                url: "/villa/date_disabled/" + $("#id_villa").val(),
+                success: function (data) {
+                    const check_in_val = $('#confirmBookingDateForm').find(`input[name='check_in']`).val();
+                    const check_out_val = $('#confirmBookingDateForm').find(`input[name='check_out']`).val();
+
+                    $("#checkInDate").flatpickr({
+                        enableTime: false,
+                        dateFormat: "Y-m-d",
+                        minDate: "today",
+                        inline: true,
+                        mode: "range",
+                        defaultDate: [check_in_val, check_out_val],
+                        disable: data,
+                        onClose: function (selectedDates, dateStr, instance) {
+
+                            $('#confirmBookingDateForm').find(`input[name='check_in']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $('#confirmBookingDateForm').find(`input[name='check_out']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
+
+                            var start = new Date(
+                                instance.formatDate(selectedDates[0], "Y-m-d")
+                            );
+                            var end = new Date(
+                                instance.formatDate(selectedDates[1], "Y-m-d")
+                            );
+                            var sum_night = (end - start) / 1000 / 60 / 60 / 24;
+                            var min_stay = 3;
+                            if(sum_night < min_stay){
+                                alert("minimum stay is " + min_stay + " days");
+                            } else {
+                                fetchTotalPrice();
+                            }
+                            console.log('close calender');
+                        },
+                    });
+                },
+            });
+        }
+        $(window).on('load', ()=>{
+            fetchTotalPrice();
+            calendar_availability();
+        });
+        function hideDate() {
+            $('#checkInDate').addClass('d-none');
+            $('#openCheckInDate').addClass('d-none');
+            $('#closeCheckInDate').removeClass('d-none');
+        }
+        function showDate() {
+            $('#checkInDate').removeClass('d-none');
+            $('#openCheckInDate').removeClass('d-none');
+            $('#closeCheckInDate').addClass('d-none');
         }
     </script>
 </body>
