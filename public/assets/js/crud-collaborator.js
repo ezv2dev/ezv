@@ -32,7 +32,7 @@ function asciiToString(str) {
                                 }
                                 var escapeChar = String.fromCharCode(parseInt(number));
                                 var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                            + number + ";" 
+                                            + number + ";"
                                 newStr = newStr.replace(pattern, escapeChar);
                             }
                         }
@@ -471,16 +471,28 @@ function saveDescription(id_collab) {
                     message: response.message,
                     position: "topRight",
                 });
-
-                if (response.data.length > 600) {
-                    $("#btnShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").append(
-                        '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
-                    );
-                    //$("#modalDescriptionVilla").html(response.data);
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    if (response.data.length > 400) {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        //$("#modalDescriptionVilla").html(response.data);
+                    } else {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 } else {
-                    $("#btnShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").remove();
+                    if (response.data.length > 600) {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        //$("#modalDescriptionVilla").html(response.data);
+                    } else {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 }
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
