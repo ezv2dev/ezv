@@ -1787,11 +1787,11 @@
                 <hr>
                 <div class="review-bottom">
                     <h2>{{ __('user_page.Review') }}</h2>
-                    <div class="row">
+                    <div class="row review-container">
                         <div class="col-12">
                             @if ($restaurant->detailReview)
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="d-flex">
                                             <div class="col-6">
                                                 {{ __('user_page.Food') }}
@@ -1817,7 +1817,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="d-flex">
                                             <div class="col-6">
                                                 {{ __('user_page.Value') }}
@@ -1842,6 +1842,11 @@
                                                 {{ $restaurant->detailReview->average_atmosphere }}
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 pt-3">
+                                        <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                            Show all reviews
+                                        </button>
                                     </div>
                                 </div>
                             @else
@@ -1881,11 +1886,6 @@
                                         </div> --}}
                                 </div>
                             @endif
-                        </div>
-                        <div class="col-12 pt-3">
-                            <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
-                                Show all reviews
-                            </button>
                         </div>
                     </div>
                     <hr>

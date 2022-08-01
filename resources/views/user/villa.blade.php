@@ -1785,7 +1785,7 @@
                     <hr>
                     <div class="review-bottom">
                         @if ($detail->count() > 0)
-                            <h2 style="margin: 0px;">{{ __('user_page.Review') }}</h2>
+                            <h2>{{ __('user_page.Review') }}</h2>
                             <div class="row review-container">
                                 <div class="col-lg-6 col-md-6 col-xs-12">
                                     <div class="row">

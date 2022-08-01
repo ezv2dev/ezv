@@ -2019,30 +2019,38 @@
             <div class="col-12">
                 <section id="review" class="section-2">
                     <hr>
-                    <div class="review-bottom-hotel">
+                    <div class="review-bottom">
                         @if ($detail->count() > 0)
-                            <h2 style="margin: 0px;">{{ __('user_page.Review') }}</h2>
-                            <div class="row">
+                            <h2>{{ __('user_page.Review') }}</h2>
+                            <div class="row review-container">
                                 <div class="col-lg-6 col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-6">
                                             {{ __('user_page.Cleanliness') }}
                                         </div>
                                         <div class="col-6 ">
-                                            <div class="liner"></div>{{ $detail[0]->average_clean }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                            </div>
+                                            {{ $detail[0]->average_clean }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Check In') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                            </div>
                                             {{ $detail[0]->average_check_in }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Value') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_value }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                            </div>
+                                            {{ $detail[0]->average_value }}
                                         </div>
                                     </div>
                                 </div>
@@ -2052,16 +2060,26 @@
                                             {{ __('user_page.Service') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>{{ $detail[0]->average_service }}
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                            </div>
+                                            {{ $detail[0]->average_service }}
                                         </div>
                                         <div class="col-6">
                                             {{ __('user_page.Location') }}
                                         </div>
                                         <div class="col-6">
-                                            <div class="liner"></div>
+                                            <div class="liner">
+                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                            </div>
                                             {{ $detail[0]->average_location }}
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                        Show all reviews
+                                    </button>
                                 </div>
                             </div>
                         @else
@@ -2148,7 +2166,9 @@
                                                         {{ __('user_page.Cleanliness') }}
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->cleanliness * 20 }}%"></span>
+                                                        </div>
                                                         {{ $hotel[0]->userReview->cleanliness }}
                                                     </div>
                                                 </div>
@@ -2157,7 +2177,9 @@
                                                         {{ __('user_page.Check In') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->check_in * 20 }}%"></span>
+                                                        </div>
                                                         {{ $hotel[0]->userReview->check_in }}
                                                     </div>
                                                 </div>
@@ -2166,7 +2188,9 @@
                                                         {{ __('user_page.Value') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->value * 20 }}%"></span>
+                                                        </div>
                                                         {{ $hotel[0]->userReview->value }}
                                                     </div>
                                                 </div>
@@ -2177,7 +2201,9 @@
                                                         {{ __('user_page.Service') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->service * 20 }}%"></span>
+                                                        </div>
                                                         {{ $hotel[0]->userReview->service }}
                                                     </div>
                                                 </div>
@@ -2186,7 +2212,9 @@
                                                         {{ __('user_page.Location') }}
                                                     </div>
                                                     <div class="col-6">
-                                                        <div class="liner"></div>
+                                                        <div class="liner">
+                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->location * 20 }}%"></span>
+                                                        </div>
                                                         {{ $hotel[0]->userReview->location }}
                                                     </div>
                                                 </div>
@@ -3535,6 +3563,7 @@
         @include('user.modal.hotel.edit-hotel-rules')
     @endauth
     @include('user.modal.hotel.description')
+    @include('user.modal.hotel.review')
 
     {{-- MORE TAG MODAL --}}
     <div class="modal fade" id="modal-subcategory" tabindex="-1" role="dialog"
