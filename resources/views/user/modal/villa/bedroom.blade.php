@@ -478,7 +478,7 @@
                                 @endforeach
                             </div>
                             @foreach ($bed as $data)
-                                <div class="col-4 bedroomDetailFormContentBed">
+                                <div class="col-6 col-lg-4 bedroomDetailFormContentBed">
                                     <div class="reserve-input-row">
                                         <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
                                             {{ $data->name }}
@@ -1155,7 +1155,7 @@
                     @endforeach
                 </div>
                 @foreach ($bed as $data)
-                    <div class="col-4 bedroomDetailFormContentBed">
+                    <div class="col-6 col-lg-4 bedroomDetailFormContentBed">
                         <div class="reserve-input-row">
                             <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
                                 {{ $data->name }}
