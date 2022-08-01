@@ -3280,7 +3280,29 @@ span.flatpickr-weekday {
     width: 60%;
     margin-left: 20%;
 }
-
+#modal-edit_story .modal-body {
+    border-radius: 0px 0px 15px 15px !important;
+}
+#modal-edit-house-rules .modal-body3,
+#modal-edit-guest-safety .modal-body3,
+#modal-cancelation-policy .modal-body3 {
+    padding-top: 1rem !important;
+    padding-left: 0.2rem !important;
+    padding-right: 0.5rem !important;
+}
+#modal-edit-house-rules .modal-body3 .container,
+#modal-edit-guest-safety .modal-body3 .container,
+#modal-cancelation-policy .modal-body3 .container {
+    max-width: none !important;
+}
+#modal-edit_bedroom .modal-footer,
+#modal-edit_villa_profile .modal-body,
+#modal-edit_restaurant_profile .modal-body,
+#modal-edit_hotel_profile .modal-body,
+#modal-edit_location .modal-body,
+#modal-edit_bedroom .modal-body {
+    background-color: transparent !important;
+}
 #modal-show_description .modal-dialog,
 #storymodal .modal-dialog,
 #edit_position_photo .modal-dialog {
@@ -3289,13 +3311,6 @@ span.flatpickr-weekday {
     left: 0px !important;
     right: 0px !important;
     bottom: 0px !important;
-}
-#modal-show_description .modal-content {
-    height: 100% !important;
-}
-#modal-show_description .modal-content .modal-body {
-    overflow-x: hidden !important;
-    overflow-y: scroll !important;
 }
 #storymodal .modal-content-story {
     width: 100% !important;
@@ -4019,7 +4034,7 @@ span.flatpickr-weekday {
     }
     .rsv-block .sticky {
         width: 71.3% !important;
-        max-width: 1010px !important;
+        max-width: 1050px !important;
     }
     #rsv-block-btn .rsv {
         min-width: 400px !important;
@@ -4062,6 +4077,14 @@ span.flatpickr-weekday {
     #fix-contact-m {
         padding-right: 10px !important;
         padding-left: 10px !important;
+    }
+    #modal-edit-house-rules .modal-content .modal-body,
+    #modal-edit-guest-safety .modal-content .modal-body,
+    #modal-cancelation-policy .modal-content .modal-body,
+    #modal-show_description .modal-content .modal-body {
+        max-height: 450px;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
     }
 }
 @media only screen and (min-width: 1024px) {

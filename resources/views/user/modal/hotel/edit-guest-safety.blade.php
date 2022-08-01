@@ -314,7 +314,7 @@
 </style>
 
 <div id="modal-edit-guest-safety" class="modal fade bs-example-modal-lg" style="font-family: 'Poppins' !important">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered">
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal d-flex justify-content-between">
                 <h3 class="mb-0">{{ __('user_page.Health & Safety') }}</h3>
