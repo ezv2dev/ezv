@@ -1560,9 +1560,9 @@
                                     <input class="price-button" onclick="details_reserve()"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-                                    {{-- <input type ="submit" class="price-button"
+                                    <input type ="submit" class="price-button d-none" id="btnBookingDetail"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.VIEW DETAILS') }}"> --}}
+                                        value="{{ __('user_page.VIEW DETAILS') }}">
                                     {{-- <a class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a> --}}
