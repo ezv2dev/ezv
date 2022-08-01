@@ -12,4 +12,9 @@ class HotelAmenities extends Model
 
     protected $table = 'hotel_amenities';
     protected $primaryKey = 'id_detail';
+
+    public function amenities()
+    {
+        return $this->belongsTo(Amenities::class, 'id_amenities', 'id_amenities');
+    }
 }

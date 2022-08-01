@@ -12,4 +12,9 @@ class HotelService extends Model
 
     protected $table = 'hotel_service';
     protected $primaryKey = 'id_detail';
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'id_service', 'id_service');
+    }
 }

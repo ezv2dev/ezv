@@ -1189,15 +1189,6 @@
         {{-- Search Location --}}
         <script>
             $(document).ready(() => {
-                if (window.innerWidth <= 991) {
-                    document.getElementById("ul").classList.add("ul-display-none");
-                    document.getElementById("ul").classList.remove("ul-display-block");
-                    document.getElementById("bar").classList.add("display-none");
-                    document.querySelector("#searchbox").classList.remove("display-none");
-                    document.querySelector("#searchbox").classList.add("display-block");
-                    document.getElementById("nav").classList.add("position-fixed");
-                    document.getElementById("nav").classList.add("padding-top-0");
-                }
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").css({
                         "height": "auto",
@@ -1428,7 +1419,7 @@
             window.addEventListener('scroll', function() {
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
-                if (window.scrollY == 0 && window.innerWidth > 991) {
+                if (window.scrollY == 0) {
                     document.getElementById("ul").classList.remove("ul-display-none");
                     document.getElementById("ul").classList.add("ul-display-block");
                     document.getElementById("bar").classList.remove("display-none");
@@ -1580,19 +1571,6 @@
                     if ($(this).width() !== windowWidth) {
                         windowWidth = $(this).width();
                         handleResponsive(windowWidth);
-                        if (windowWidth <= 991) {
-                            if (window.scrollY == 0) {
-                                document.getElementById("nav").classList.add("position-fixed");
-                                document.getElementById("nav").classList.add("padding-top-0");
-                                document.getElementById("nav").classList.add("search-height");
-                            }
-                        }else {
-                            if (window.scrollY == 0) {
-                                document.getElementById("nav").classList.remove("position-fixed");
-                                document.getElementById("nav").classList.remove("padding-top-0");
-                                document.getElementById("nav").classList.remove("search-height");
-                            }
-                        }
                     }
                 })
                 // $(".SlickCarousel").slick({

@@ -12,4 +12,9 @@ class HotelKitchen extends Model
 
     protected $table = 'hotel_kitchen';
     protected $primaryKey = 'id_detail';
+
+    public function kitchen()
+    {
+        return $this->belongsTo(Kitchen::class, 'id_kitchen', 'id_kitchen');
+    }
 }

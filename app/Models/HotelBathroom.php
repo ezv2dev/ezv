@@ -12,4 +12,9 @@ class HotelBathroom extends Model
 
     protected $table = 'hotel_bathroom';
     protected $primaryKey = 'id_detail';
+
+    public function bathroom()
+    {
+        return $this->belongsTo(BathRoom::class, 'id_bathroom', 'id_bathroom');
+    }
 }
