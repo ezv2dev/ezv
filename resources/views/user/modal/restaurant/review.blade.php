@@ -3,20 +3,20 @@
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="padding: 1rem 2rem !important;">
+            <div class="modal-header p-3">
                 <h5 class="modal-title">Review</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div style="overflow-y: unset;" class="modal-body pe-0" id="modalDescriptionVilla">
-                <div class="col-12 d-flex">
-                    <div class="col-4">
+            <div class="overflow-auto modal-body pe-lg-0" id="modalDescriptionVilla">
+                <div class="col-12 d-lg-flex">
+                    <div class="col-12 col-lg-4">
                         <div class="col-12 row">
                         @if ($restaurant->detailReview)
                             <div class="col-6">
                                 {{ __('user_page.Food') }}
                             </div>
-                            <div class="col-6 ">
-                                <div class="liner">
+                            <div class="col-6 px-0">
+                                <div class="liner-modal">
                                     <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
                                 </div>
                                 {{ $restaurant->detailReview->average_food }}
@@ -24,8 +24,8 @@
                             <div class="col-6">
                                 {{ __('user_page.Service') }}
                             </div>
-                            <div class="col-6">
-                                <div class="liner">
+                            <div class="col-6 px-0">
+                                <div class="liner-modal">
                                     <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
                                 </div>
                                 {{ $restaurant->detailReview->average_service }}
@@ -33,8 +33,8 @@
                             <div class="col-6">
                                 {{ __('user_page.Value') }}
                             </div>
-                            <div class="col-6">
-                                <div class="liner">
+                            <div class="col-6 px-0">
+                                <div class="liner-modal">
                                     <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
                                 </div>
                                 {{ $restaurant->detailReview->average_value }}
@@ -42,8 +42,8 @@
                             <div class="col-6">
                                 {{ __('user_page.Atmosphere') }}
                             </div>
-                            <div class="col-6">
-                                <div class="liner">
+                            <div class="col-6 px-0">
+                                <div class="liner-modal">
                                     <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
                                 </div>
                                 {{ $restaurant->detailReview->average_atmosphere }}
@@ -55,11 +55,11 @@
                             
                         </div>
                     </div>
-                    <div class="col-8" style="height: 510px; overflow-y: scroll;">
+                    <div class="col-12 mt-4 mt-lg-0 col-lg-8 review-comment-container">
                         <div class="col-12 mb-4">
                             <div class="col-12 d-flex">
                                 <div>
-                                    <img style="width: 48px; height: 48px; border-radius: 50%;" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
@@ -82,7 +82,7 @@
                         <div class="col-12 mb-4">
                             <div class="col-12 d-flex">
                                 <div>
-                                    <img style="width: 48px; height: 48px; border-radius: 50%;" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
@@ -105,7 +105,7 @@
                         <div class="col-12 mb-4">
                             <div class="col-12 d-flex">
                                 <div>
-                                    <img style="width: 48px; height: 48px; border-radius: 50%;" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">
@@ -128,7 +128,7 @@
                         <div class="col-12 mb-4">
                             <div class="col-12 d-flex">
                                 <div>
-                                    <img style="width: 48px; height: 48px; border-radius: 50%;" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
                                 </div>
                                 <div class="ms-3">
                                     <h6 class="m-0">

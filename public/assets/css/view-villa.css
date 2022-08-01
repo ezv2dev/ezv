@@ -852,6 +852,27 @@ a.active {
     border-radius: 50px;
 }
 
+.review-comment-container{
+    height: 510px; 
+    overflow-y: scroll;
+}
+
+.review-user-profile-pic{
+    width: 48px; height: 48px; border-radius: 50%;
+}
+
+.liner-modal {
+    display: inline-block;
+    height: 5px;
+    position: relative;
+    width: 70%;
+    border-radius: 12px;
+    background: silver;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-radius: 50px;
+}
+
 .liner-bar{
     background: black;
     height: 5px;
@@ -3510,6 +3531,7 @@ span.flatpickr-weekday {
     }
     .review-container {
         display: block !important;
+        margin: 0px !important;
     }
     #page-container .profile-image img {
         width: 100px !important;
@@ -4151,6 +4173,16 @@ span.flatpickr-weekday {
     #modal-map-content{
         display: none;
         border: 0px !important;
+    }
+    .review-comment-container{
+        overflow-y : unset; 
+    }
+    .liner-modal{
+        width: 80%;
+    }
+
+    .liner{
+        width: 78%;
     }
 }
 
