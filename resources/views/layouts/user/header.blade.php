@@ -413,6 +413,20 @@
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
                                                 @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none">
                                                         <div class="location-popup-map sugest-list-map">
@@ -1002,6 +1016,20 @@
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
                                                 @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
                                                         <div class="location-popup-map sugest-list-map">
@@ -1559,6 +1587,20 @@
                                                         $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                     @endphp
+                                                    @foreach ($location as $item)
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                            style="display: none ">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                     @foreach ($location as $item)
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                             style="display: none ">
@@ -2159,7 +2201,20 @@
                                                     $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
-
+                                                @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                                 @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">

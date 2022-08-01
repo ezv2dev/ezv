@@ -421,8 +421,8 @@
                                         </p>
                                         </a>
                                     @else
-                                        <a href="{{ route('restaurant_list') }}" id="restaurant-form"
-                                            target="_blank" class="nav-link-form-detail">
+                                        <a href="{{ route('restaurant_list') }}" id="restaurant-form" target="_blank"
+                                            class="nav-link-form-detail">
                                             @if ($condition_restaurant)
                                                 <div
                                                     class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-style-detail-active nav-link-icon-style-detail">
@@ -594,6 +594,12 @@
                                             placeholder="{{ __('user_page.Where are you going?') }}">
 
                                         <div id="sugest" class="location-popup display-none">
+                                            @php
+                                                $location = App\Http\Controllers\ViewController::get_location();
+                                                $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                                                $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                                            @endphp
                                             <div class="location-popup-container h-100">
                                                 <div class="col-lg-12 location-popup-desc-container sugest-list-first"
                                                     style="display: none ">
@@ -655,12 +661,20 @@
                                                             data-value="Pecatu">Pecatu</a>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $location = App\Http\Controllers\ViewController::get_location();
-                                                    $hotelName = App\Http\Controllers\HotelController::get_name();
-                                                    $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
-                                                    $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
-                                                @endphp
+                                                @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                                 @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
@@ -747,14 +761,16 @@
                                     <div class="guests">
                                         <p>{{ __('user_page.Guests') }}</p>
                                         <ul class="nav">
-                                            <li class="button-dropdown d-flex align-items-center justify-content-center">
+                                            <li
+                                                class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
                                                     style="width: 30px; border: 0;margin-right:5px; text-align: right; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
                                                 </a>
-                                                <a class="dropdown-toggle-icon d-flex align-items-center" style="margin-left: 10px;">
+                                                <a class="dropdown-toggle-icon d-flex align-items-center"
+                                                    style="margin-left: 10px;">
                                                     {{ __('user_page.Add') }}
                                                 </a>
                                                 <div class="guest-popup dropdown-menu">
@@ -1373,6 +1389,20 @@
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
                                                 @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
                                                         <div class="location-popup-map sugest-list-map">
@@ -1459,14 +1489,16 @@
                                     <div class="guests">
                                         <p>{{ __('user_page.Guests') }}</p>
                                         <ul class="nav">
-                                            <li class="button-dropdown d-flex align-items-center justify-content-center">
+                                            <li
+                                                class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
                                                     style="width: 30px;margin-right:5px; border: 0; text-align: right; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
                                                 </a>
-                                                <a class="dropdown-toggle-icon d-flex align-items-center" style="margin-left:10px;">
+                                                <a class="dropdown-toggle-icon d-flex align-items-center"
+                                                    style="margin-left:10px;">
                                                     {{ __('user_page.Add') }}
                                                 </a>
                                                 <div class="guest-popup dropdown-menu">
@@ -2037,6 +2069,20 @@
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
                                                 @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
                                                         <div class="location-popup-map sugest-list-map">
@@ -2414,8 +2460,8 @@
                                                 {{ __('user_page.Hotels') }}</p>
                                             </a>
                                         @else
-                                            <a href="{{ route('hotel_list') }}" id="hotel-form"
-                                                target="_blank" class="nav-link-form-detail">
+                                            <a href="{{ route('hotel_list') }}" id="hotel-form" target="_blank"
+                                                class="nav-link-form-detail">
                                                 @if ($condition_hotel)
                                                     <div
                                                         class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-style-detail-active nav-link-icon-style-detail">
@@ -2596,6 +2642,20 @@
                                                     $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
+                                                @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                                 @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
@@ -2794,8 +2854,7 @@
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
-                                                name="start_date" id="start_date"
-                                                value="{{ $get_start ?? '' }}"
+                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
@@ -2931,8 +2990,7 @@
                         <div id="search_bar" class="searchbar-list-display-none">
                             <div id="change_display_block" class="display-none nav-menu-container">
                                 <ul class="nav-link-container">
-                                    <a href="{{ route('list') }}" id="villa-form"
-                                        class="nav-link-form-detail">
+                                    <a href="{{ route('list') }}" id="villa-form" class="nav-link-form-detail">
                                         @if ($condition_villa)
                                             <div
                                                 class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-style-detail-active nav-link-icon-style-detail">
@@ -3133,6 +3191,20 @@
                                                     $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                 @endphp
                                                 @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
                                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                         style="display: none ">
                                                         <div class="location-popup-map sugest-list-map">
@@ -3232,8 +3304,7 @@
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
                                             <input type="text" placeholder="" class="form-control"
-                                                name="start_date" id="start_date"
-                                                value="{{ $get_start ?? '' }}"
+                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
                                             <input type="text" placeholder="" class="form-control"
                                                 name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
@@ -3302,8 +3373,9 @@
                 </div>
                 <div class="logged-user-menu d-flex">
                     <div style="flex:1;">
-                        <label class="container-mode" >
-                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                        <label class="container-mode">
+                            <input type="checkbox" id="background-color-switch"
+                                onclick="changeBackgroundTrigger(this)"
                                 {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
                             <span class="checkmark-mode"></span>
 
@@ -3311,7 +3383,8 @@
                     </div>
 
                     <div style="flex:1;">
-                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             @if (Auth::user()->avatar)
                                 <img src="{{ Auth::user()->avatar }}" class="logged-user-photo" alt="">
                             @else
@@ -3401,40 +3474,40 @@
                 var mode = localStorage.getItem("mode");
 
                 $(window).on("resize", function() {
-                    if(mode != null) {
-                        if(mode == "dark") {
-                            if(window.innerWidth < 950) {
+                    if (mode != null) {
+                        if (mode == "dark") {
+                            if (window.innerWidth < 950) {
                                 $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px")
                             } else {
                                 $('.grid-img-filter').css("box-shadow", "")
                             }
                         } else {
-                            if(window.innerWidth < 950) {
+                            if (window.innerWidth < 950) {
                                 $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                             } else {
                                 $('.grid-img-filter').css("box-shadow", "")
                             }
                         }
                     } else {
-                        if(window.innerWidth < 950) {
+                        if (window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         } else {
                             $('.grid-img-filter').css("box-shadow", "")
                         }
                     }
                 });
-                if(mode != null) {
-                    if(mode == "dark") {
-                        if(window.innerWidth < 950) {
+                if (mode != null) {
+                    if (mode == "dark") {
+                        if (window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px")
                         }
                     } else {
-                        if(window.innerWidth < 950) {
+                        if (window.innerWidth < 950) {
                             $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                         }
                     }
                 } else {
-                    if(window.innerWidth < 950) {
+                    if (window.innerWidth < 950) {
                         $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px")
                     }
                 }
@@ -4006,6 +4079,7 @@
                 $('#trigger-tab-currency').removeClass('active');
                 $('#content-tab-currency').removeClass('active');
             }
+
             function currency() {
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
@@ -4015,14 +4089,13 @@
             }
         </script>
         <script>
-            $(function () {
-                $('#switcher').click(function () {
+            $(function() {
+                $('#switcher').click(function() {
                     $('#background-color-switch').trigger("click");
                 });
             });
         </script>
         <script>
-
             function initChangeBackgroundTrigger() {
                 // check if mode has been set
                 var checkBox = document.getElementById("background-color-switch");
@@ -4097,8 +4170,8 @@
                 localStorage.setItem("mode", tipe == 'black' ? "dark" : 'light');
 
                 $('.grid-img-filter').css("box-shadow", "");
-                if(window.innerWidth < 950) {
-                    if(tipe == 'black') {
+                if (window.innerWidth < 950) {
+                    if (tipe == 'black') {
                         $('.grid-img-filter').css("box-shadow", "rgb(255 255 255 / 75%) 0px 0px 20px");
                     } else {
                         $('.grid-img-filter').css("box-shadow", "rgb(0 0 0 / 75%) 0px 0px 8px");

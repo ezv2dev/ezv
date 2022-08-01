@@ -57,11 +57,11 @@ class WowSearchController extends Controller
         ])->whereIn('id_activity', $activityIds)->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
 
         $subCategory = ActivitySubcategory::where('id_category', $fCategory)->get();
-        $subCategoryAll = ActivitySubcategory::all();
+        $subCategory = ActivitySubcategory::all();
 
-        // dd($subCategoryAll);
+        // dd($subCategory);
 
-        return view('user.list_activity', compact('activity', 'categories', 'subCategory', 'subCategoryAll'));
+        return view('user.list_activity', compact('activity', 'categories', 'subCategory', 'subCategory'));
     }
 
     private function search($activities, $request)

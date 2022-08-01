@@ -223,7 +223,12 @@
         padding: 0 0.75em;
         max-width: 17em;
     }
-
+    @media only screen and (min-width: 992px) {
+        form#frmRgs {
+            padding: 0;
+            max-width: 100%;
+        }
+    }
     .range:not(:last-child) {
         margin-bottom: 1.5em;
     }
@@ -676,7 +681,7 @@ if (request()->fCategory) {
                 $(this).find(".slick-slide").each(function(i, el) {
                     if(!$(this).hasClass("slick-cloned")) {
                         sliderLength = parseInt($(this).attr("data-slick-index"));
-                        maxSlickIndex = sliderLength; 
+                        maxSlickIndex = sliderLength;
                     }
                 })
                 var dotsContainer = $(this).parent().find(".dots-container");
@@ -691,7 +696,7 @@ if (request()->fCategory) {
                 } else if (sliderLength > 0 && sliderLength <= 4 && sliderLength != 0){
                     for (var j = 0; j <= sliderLength; j++) {
                         if (j == 0) {
-                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');    
+                            dotsContainer.append('<div class="circle activeIndicator" data-index='+ j + '></div>');
                         }else {
                             dotsContainer.append('<div class="circle" data-index='+ j + '></div>');
                         }
@@ -703,7 +708,7 @@ if (request()->fCategory) {
                 var maxSlickIndex = 0;
                 $(this).find(".slick-slide").each(function(i, el) {
                     if(!$(this).hasClass("slick-cloned")) {
-                        maxSlickIndex = parseInt($(this).attr("data-slick-index")); 
+                        maxSlickIndex = parseInt($(this).attr("data-slick-index"));
                     }
                 })
                 var allDots = $(this).parent().find(".dots-container").find(".circle");

@@ -2469,53 +2469,55 @@
         <div class="modal-content modal-map">
             <div class="modal-header modal-header-map flex-column">
                 <div class="d-flex align-items-center justify-content-center" style="width:100%;">
-                    <div style="flex:1;"><h5 class="modal-title">{{ __('user_page.Map') }}</h5></div>
+                    <div style="flex:1;"><h5 class="modal-titlemodal-title d-none d-sm-block">{{ __('user_page.Map') }}</h5></div>
                     <div style="flex:2;">
                         <div class="d-flex justify-content-center">
-                            <a class="icon-filter-map" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
+
+                            <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
                                 <img
-                                    src="{{asset('assets/icon/map/villa.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/villa.png')}}"
                                     data-src-active="{{asset('assets/icon/map/villa_active.png')}}"
                                     data-src="{{asset('assets/icon/map/villa.png')}}"
                                     alt="villa-icon">
+                                    <p class="mb-0">Homes</p>
                             </a>
-                            <a class="icon-filter-map" id="map-filter-restaurant" data-indicator="false" onclick="filter_map('restaurant')">
+
+                            <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-restaurant" data-indicator="false" onclick="filter_map('restaurant')">
                                 <img
-                                    src="{{asset('assets/icon/map/restaurant.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/restaurant.png')}}"
                                     data-src-active="{{asset('assets/icon/map/restaurant_active.png')}}"
                                     data-src="{{asset('assets/icon/map/restaurant.png')}}"
                                     alt="restaurant-icon">
+                                    <p class="mb-0">Food</p>
                             </a>
-                            <a class="icon-filter-map" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
+                            <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
                                 <img
-                                    src="{{asset('assets/icon/map/hotel.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/hotel.png')}}"
                                     data-src-active="{{asset('assets/icon/map/hotel_active.png')}}"
                                     data-src="{{asset('assets/icon/map/hotel.png')}}"
                                     alt="hotel-icon">
+                                    <p class="mb-0">Hotel</p>
                             </a>
-                            <a class="icon-filter-map" id="map-filter-activity" data-indicator="true" onclick="filter_map('activity')">
+                            <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-activity" data-indicator="true" onclick="filter_map('activity')">
                                 <img
-                                    src="{{asset('assets/icon/map/activity_active.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/activity_active.png')}}"
                                     data-src-active="{{asset('assets/icon/map/activity_active.png')}}"
                                     data-src="{{asset('assets/icon/map/activity.png')}}"
                                     alt="activity-icon">
+                                    <p class="mb-0">WoW</p>
                             </a>
-                            <a class="icon-filter-map" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
+                            <a class="d-flex mx-2 flex-column align-items-center" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
                                 <img
-                                    src="{{asset('assets/icon/menu/search.svg')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/menu/search_fill.png')}}"
                                     data-src-active="{{asset('assets/icon/menu/search.svg')}}"
                                     data-src="{{asset('assets/icon/menu/search.svg')}}"
                                     alt="search-icon">
+                                    <p class="mb-0">Search</p>
                             </a>
                         </div>
                     </div>
                     <div style="flex:1;" class=" d-flex justify-content-end px-0 align-items-center">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                </div>
-                <div class="row col-12 justify-content-center" id="searchMapDekstop">
-                    <div class="col-12 col-lg-3 close-modal modal-search" onclick="popUp();">
-                        Search here ...
                     </div>
                 </div>
             </div>

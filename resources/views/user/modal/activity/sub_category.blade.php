@@ -66,7 +66,8 @@
 
 <div class="modal fade" id="modalSubCategory" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered" role="document"
+        style="overflow-y: initial !important">
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal" style="padding-left: 2.2rem !important;">
                 <div class="col-10">
@@ -81,7 +82,7 @@
                     <div id="modal-language-default" class="col-12">
                         <div class="row modal-checkbox-row translate-text-group">
                             @if (request()->get('fCategory') == null)
-                                @foreach ($subCategoryAll as $item)
+                                @foreach ($subCategory as $item)
                                     <div class="col-6 checkdesign-gap">
                                         <label class="checkdesign checkdesign-modal-filter">
                                             <span class="translate-text-group-items">

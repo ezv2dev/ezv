@@ -5,7 +5,7 @@
 @section('content')
     {{-- function get data --}}
     @php
-    $restaurants = $restaurant->shuffle()->sortBy('grade');
+    $restaurants = $restaurant;
     $list = [];
     foreach ($restaurants as $item) {
         array_push($list, $item->id_restaurant);

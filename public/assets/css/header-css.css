@@ -814,8 +814,8 @@ input:checked + .switch-background:active::before {
 .logged-user-menu {
     display: inline-block;
     width: 80px;
-    background-color: #ff7400;
-    border-radius: 50px;
+    background-image: linear-gradient(to right, #FEA429 , #FD6920);
+    border-radius: 20px;
     padding: 5px;
     /* top: -40px;
     right: -150px; */
