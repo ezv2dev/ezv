@@ -21,7 +21,7 @@
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
-    
+
     @media (min-width: 768px) {
         .container-calendar{
             padding-top: 2rem !important;
@@ -125,12 +125,12 @@
                         </div>
                         <div class="form-group">
                             <label for="">Special Price</label>
-                            <input type="text" class="form-control" name="price" id="special_price" placeholder="Price">
+                            <input type="number" class="form-control" name="price" id="special_price" placeholder="Price">
                             <small id="err-sprice" style="display: none;" class="invalid-feedback">The special price field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Discount</label>
-                            <input type="text" class="form-control" name="disc" id="discount" placeholder="Discount" value="0">
+                            <input type="number" class="form-control" name="disc" id="discount" placeholder="Discount" value="0">
                         </div>
                         <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
                     </form>
@@ -173,12 +173,12 @@
                         </div>
                         <div class="form-group">
                             <label for="">Special Price</label>
-                            <input type="text" class="form-control" id="special-price" name="price" placeholder="Price">
+                            <input type="number" class="form-control" id="special-price" name="price" placeholder="Price">
                             <small id="err-usprice" style="display: none;" class="invalid-feedback">The special price field is required</small>
                         </div>
                         <div class="form-group">
                             <label for="">Discount</label>
-                            <input type="text" class="form-control" id="disc" name="disc" placeholder="Discount" value="0">
+                            <input type="number" class="form-control" id="disc" name="disc" placeholder="Discount" value="0">
                         </div>
                         <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-floppy-disk mr-2"></i>Update</button>
                         <a href="javascript:void(0);" onclick="deleteEvent();" class="btn btn-outline-danger"><i class="fa-solid fa-trash mr-2"></i>Delete</a>
