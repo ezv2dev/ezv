@@ -249,7 +249,7 @@
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100" onclick="editAmenitiesHotel({{ $hotel[0]->id_hotel }})">
+                    <button id="btnSaveAmenities" type="submit" class="btn btn-primary btn-sm w-100" onclick="editAmenitiesHotel({{ $hotel[0]->id_hotel }})">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>

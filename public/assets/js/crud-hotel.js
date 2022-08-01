@@ -707,9 +707,9 @@ function editAmenitiesHotel(id_hotel) {
     $("input[name='bathroom[]']:checked").each(function() {
         bathroom.push(parseInt($(this).val()));
     });
-    $("input[name='bedroom[]']:checked").each(function() {
-        bedroom.push(parseInt($(this).val()));
-    });
+    // $("input[name='bedroom[]']:checked").each(function() {
+    //     bedroom.push(parseInt($(this).val()));
+    // });
     $("input[name='kitchen[]']:checked").each(function() {
         kitchen.push(parseInt($(this).val()));
     });
@@ -719,6 +719,10 @@ function editAmenitiesHotel(id_hotel) {
     $("input[name='service[]']:checked").each(function() {
         service.push(parseInt($(this).val()));
     });
+
+    btn = document.getElementById("btnSaveAmenities");
+    btn.textContent = "Saving Amenities...";
+    btn.classList.add("disabled");
 
     $.ajax({
         type: "POST",
@@ -738,12 +742,16 @@ function editAmenitiesHotel(id_hotel) {
         success: function(response) {
             var lengthAmenities = response.getAmenities.length;
             var lengthBathroom = response.getBathroom.length;
-            var lengthBedroom = response.getBedroom.length;
+            //var lengthBedroom = response.getBedroom.length;
             var lengthKitchen = response.getKitchen.length;
             var lengthSafety = response.getSafety.length;
             var lengthService = response.getService.length;
 
             $("#modal-edit_amenities").modal("hide");
+            $("#default-amen-null").hide();
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
 
             iziToast.success({
                 title: "Success",
@@ -753,6 +761,13 @@ function editAmenitiesHotel(id_hotel) {
 
             $("#listAmenities").html("");
 
+            if (lengthAmenities == 0) {
+                $("#row-amenities").append(
+                    `<p id="default-amen-null">There is no amenities</p>`
+                );
+            }
+
+            /*
             for (i = 0; i < lengthAmenities; i++) {
                 if (i === 2) {
                     break;
@@ -857,7 +872,193 @@ function editAmenitiesHotel(id_hotel) {
                     </div>
                 `);
             }
+            */
+            if (lengthAmenities > 6) {
+                for (i = 0; i < lengthAmenities; i++) {
+                    if (i === 6) {
+                        break;
+                    }
+                    $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    `);
+                }
+                $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
+                            <div style="font-size: 15px;" class="translate-text-group-items">More</div>
+                        </button>
+                    </div>
+                `);
+            } else {
+                var count;
+                var total_last;
+                var total;
+                var stop;
+                for (i = 0; i < lengthAmenities; i++) {
+                    // if (i === 2) { break; }
+                    $("#listAmenities").append(`
+                    <div class="list-amenities">
+                        <div class="text-align-center">
+                            <i class="f-40 fa fa-${response.getAmenities[i].amenities.icon}"></i>
+                            <div class="mb-0 max-line">
+                                <span
+                                    class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                            </div>
+                        </div>
+                        <div class="mb-0 list-more">
+                            <span
+                                class="translate-text-group-items">${response.getAmenities[i].amenities.name}</span>
+                        </div>
+                    </div>
+                    `);
+                }
 
+                count = 6 - lengthAmenities;
+                if (count > 0) {
+                    total_last = 6 - lengthAmenities;
+                    total = lengthAmenities + lengthKitchen;
+
+                    if (total <= 6) {
+                        stop = lengthKitchen;
+                    } else {
+                        stop = total_last;
+                    }
+
+                    for (k = 0; k < lengthKitchen; k++) {
+                        if (k === stop) {
+                            break;
+                        }
+                        $("#listAmenities").append(`
+                            <div class="list-amenities">
+                                <div class="text-align-center">
+                                    <i class="f-40 fa fa-${response.getKitchen[k].kitchen.icon}"></i>
+                                    <div class="mb-0 max-line">
+                                        <span
+                                            class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-0 list-more">
+                                    <span
+                                        class="translate-text-group-items">${response.getKitchen[k].kitchen.name}</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                }
+
+                count = count - lengthKitchen;
+                if (count > 0) {
+                    total_last = 6 - total;
+                    total = total + lengthSafety;
+
+                    if (total <= 6) {
+                        stop = lengthSafety;
+                    } else {
+                        stop = total_last;
+                    }
+                    for (k = 0; k < lengthSafety; k++) {
+                        if (k === stop) {
+                            break;
+                        }
+                        $("#listAmenities").append(`
+                            <div class="list-amenities">
+                                <div class="text-align-center">
+                                    <i class="f-40 fa fa-${response.getSafety[k].safety.icon}"></i>
+                                    <div class="mb-0 max-line">
+                                        <span
+                                            class="translate-text-group-items">${response.getSafety[k].safety.name}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-0 list-more">
+                                    <span
+                                        class="translate-text-group-items">${response.getSafety[k].safety.name}</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                }
+
+                count = count - lengthSafety;
+                if (count > 0) {
+                    total_last = 6 - total;
+                    total = total + lengthService;
+
+                    if (total <= 6) {
+                        stop = lengthService;
+                    } else {
+                        stop = total_last;
+                    }
+
+                    for (l = 0; l < lengthService; l++) {
+                        if (l === stop) {
+                            break;
+                        }
+                        $("#listAmenities").append(`
+                            <div class="list-amenities">
+                                <div class="text-align-center">
+                                    <i class="f-40 fa fa-${response.getService[l].service.icon}"></i>
+                                    <div class="mb-0 max-line">
+                                        <span
+                                            class="translate-text-group-items">${response.getService[l].service.name}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-0 list-more">
+                                    <span
+                                        class="translate-text-group-items">${response.getService[l].service.name}</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                }
+
+                count = count - lengthService;
+                if (count > 0) {
+                    total_last = 6 - total;
+                    total = total + lengthBathroom;
+
+                    if (total <= 6) {
+                        stop = lengthBathroom;
+                    } else {
+                        stop = total_last;
+                    }
+
+                    for (j = 0; j < lengthBathroom; j++) {
+                        if (j === stop) {
+                            break;
+                        }
+                        $("#listAmenities").append(`
+                        <div class="list-amenities">
+                            <div class="text-align-center">
+                                <i class="f-40 fa fa-${response.getBathroom[j].bathroom.icon}"></i>
+                                <div class="mb-0 max-line">
+                                    <span
+                                        class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                                </div>
+                            </div>
+                            <div class="mb-0 list-more">
+                                <span
+                                    class="translate-text-group-items">${response.getBathroom[j].bathroom.name}</span>
+                            </div>
+                        </div>
+                        `);
+                    }
+                }
+
+                count = count - lengthBathroom;
+            }
             $("#listAmenities").append(`
                 <div class="list-amenities">
                     <button class="amenities-button" type="button" onclick="view_amenities()">
@@ -904,26 +1105,26 @@ function editAmenitiesHotel(id_hotel) {
                 `);
             }
 
-            $("#moreBedroomz").html(`
-                <div class="col-md-6">
-                    <span class='translate-text-group-items'>
-                        ${response.getBedroom[0].bedroom.name}
-                    </span>
-                </div>
-            `);
+            // $("#moreBedroomz").html(`
+            //     <div class="col-md-6">
+            //         <span class='translate-text-group-items'>
+            //             ${response.getBedroom[0].bedroom.name}
+            //         </span>
+            //     </div>
+            // `);
 
-            for (k = 1; k < lengthBedroom; k++) {
-                $("#moreBedroomz").append(`
-                    <div class="col-md-6">
-                        <span class='translate-text-group-items'>
-                            ${response.getBedroom[k].bedroom.name}
-                        </span>
-                    </div>
-                `);
-            }
+            // for (k = 1; k < lengthBedroom; k++) {
+            //     $("#moreBedroomz").append(`
+            //         <div class="col-md-6">
+            //             <span class='translate-text-group-items'>
+            //                 ${response.getBedroom[k].bedroom.name}
+            //             </span>
+            //         </div>
+            //     `);
+            // }
 
-            console.log(response.getBedroom[0].bedroom.name);
-            console.log(response.getBathroom[0].bathroom.name);
+            // console.log(response.getBedroom[0].bedroom.name);
+            // console.log(response.getBathroom[0].bathroom.name);
 
             $("#moreKitchen").html(`
                 <div class="col-md-6">
@@ -978,6 +1179,30 @@ function editAmenitiesHotel(id_hotel) {
                     </div>
                 `);
             }
+        },
+        error: function (jqXHR, exception) {
+            // console.log(jqXHR);
+            // console.log(exception);
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
+
+            $("#modal-edit_amenities").modal("hide");
+
+            btn.innerHTML = "<i class='fa fa-check'></i> Save";
+            btn.classList.remove("disabled");
         },
     });
 }

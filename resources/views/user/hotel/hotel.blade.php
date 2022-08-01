@@ -134,7 +134,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
+                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -1147,8 +1147,8 @@
                                 </h2>
                             </div>
                         </div>
-                        <div class="row-grid-amenities">
-                            <div class="row-grid-list-amenities translate-text-group">
+                        <div class="row-grid-amenities" id="row-amenities">
+                            <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
                                 @if ($hotel_amenities->count() > 6)
                                     @foreach ($hotel_amenities->take(6) as $item1)
                                         <div class="list-amenities ">
@@ -1179,7 +1179,10 @@
                                 @endif
 
                                 @if ($hotel_amenities->count() <= 6)
-                                    @foreach ($hotel_amenities->take(3) as $item1)
+                                    @php
+                                        $i = 6 - $hotel_amenities->count();
+                                    @endphp
+                                    @foreach ($hotel_amenities->take($hotel_amenities->count()) as $item1)
                                         <div class="list-amenities ">
                                             <div class="text-align-center">
                                                 <i class="f-40 fa fa-{{ $item1->icon }}"></i>
@@ -1196,59 +1199,98 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    @foreach ($bathroom->take(1) as $item2)
-                                        <div class="list-amenities ">
-                                            <div class="text-align-center">
-                                                <i class="f-40 fa fa-{{ $item2->icon }}"></i>
-                                                <div class="mb-0 max-line">
+                                    @if ($i > 0)
+                                        @php
+                                            $i = $i - $bathroom->count();
+                                            $total_last = 6 - $hotel_amenities->count();
+                                            $total = $hotel_amenities->count() + $bathroom->count();
+                                            if ($total <= 6) {
+                                                $stop = $bathroom->count();
+                                            } else {
+                                                $stop = $total_last;
+                                            }
+                                        @endphp
+                                        @foreach ($bathroom->take($stop) as $item2)
+                                            <div class="list-amenities ">
+                                                <div class="text-align-center">
+                                                    <i class="f-40 fa fa-{{ $item2->icon }}"></i>
+                                                    <div class="mb-0 max-line">
+                                                        <span class="translate-text-group-items">
+                                                            {{ $item2->name }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-0 list-more">
                                                     <span class="translate-text-group-items">
                                                         {{ $item2->name }}
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="mb-0 list-more">
-                                                <span class="translate-text-group-items">
-                                                    {{ $item2->name }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @foreach ($bedroom->take(1) as $item3)
-                                        <div class="list-amenities ">
-                                            <div class="text-align-center">
-                                                <i class="f-40 fa fa-{{ $item3->icon }}"></i>
-                                                <div class="mb-0 max-line">
+                                        @endforeach
+                                    @endif
+                                    @if ($i > 0)
+                                        @php
+                                            $i = $i - $bedroom->count();
+                                            $total_last = 6 - $total;
+                                            $total = $total + $bedroom->count();
+                                            if ($total <= 6) {
+                                                $stop = $bedroom->count();
+                                            } else {
+                                                $stop = $total_last;
+                                            }
+                                        @endphp
+                                        @foreach ($bedroom->take($stop) as $item3)
+                                            <div class="list-amenities ">
+                                                <div class="text-align-center">
+                                                    <i class="f-40 fa fa-{{ $item3->icon }}"></i>
+                                                    <div class="mb-0 max-line">
+                                                        <span class="translate-text-group-items">
+                                                            {{ $item3->name }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-0 list-more">
                                                     <span class="translate-text-group-items">
                                                         {{ $item3->name }}
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="mb-0 list-more">
-                                                <span class="translate-text-group-items">
-                                                    {{ $item3->name }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @foreach ($safety->take(1) as $item4)
-                                        <div class="list-amenities ">
-                                            <div class="text-align-center">
-                                                <i class="f-40 fa fa-{{ $item4->icon }}"></i>
-                                                <div class="mb-0 max-line">
+                                        @endforeach
+                                    @endif
+                                    @if ($i > 0)
+                                        @php
+                                            $i = $i - $safety->count();
+                                            $total_last = 6 - $total;
+                                            $total = $total + $safety->count();
+                                            if ($total <= 6) {
+                                                $stop = $safety->count();
+                                            } else {
+                                                $stop = $total_last;
+                                            }
+                                        @endphp
+                                        @foreach ($safety->take($stop) as $item4)
+                                            <div class="list-amenities ">
+                                                <div class="text-align-center">
+                                                    <i class="f-40 fa fa-{{ $item4->icon }}"></i>
+                                                    <div class="mb-0 max-line">
+                                                        <span class="translate-text-group-items">
+                                                            {{ $item4->name }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-0 list-more">
                                                     <span class="translate-text-group-items">
                                                         {{ $item4->name }}
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="mb-0 list-more">
-                                                <span class="translate-text-group-items">
-                                                    {{ $item4->name }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 @endif
                             </div>
+                            @empty($hotel_amenities->count())
+                                <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
+                            @endempty
                         </div>
                     </section>
                 </div>

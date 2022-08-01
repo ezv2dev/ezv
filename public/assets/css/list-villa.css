@@ -3348,7 +3348,7 @@ input::-webkit-inner-spin-button {
     .h-mobile-100{
         height: auto !important;
     }
-    
+
     #map12{
         flex:auto;
     }
@@ -3497,7 +3497,7 @@ input::-webkit-inner-spin-button {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
     }
-    
+
     .roomnumberoption-checkbox-alias {
         padding: 2px 3px;
         }
@@ -3645,4 +3645,9 @@ a.orange-hover {
     font-family: 'Font Awesome 5 Free';
     content: '\f204';
     font-weight: 900;
+}
+@media only screen and (min-width: 1375px) {
+    .bar p {
+        font-size: 147%;
+    }
 }
