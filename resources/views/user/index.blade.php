@@ -319,6 +319,12 @@
                                                     placeholder="{{ __('user_page.Where are you going?') }}">
 
                                                 <div id="sugest" class="location-popup display-none">
+                                                    @php
+                                                        $location = App\Http\Controllers\ViewController::get_location();
+                                                        $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                        $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                                                        $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                                                    @endphp
                                                     <div class="location-popup-container h-100">
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list-first"
                                                             style="display: none;">
@@ -395,12 +401,20 @@
                                                                     data-value="Pecatu">Pecatu</a>
                                                             </div>
                                                         </div>
-                                                        @php
-                                                            $location = App\Http\Controllers\ViewController::get_location();
-                                                            // $hotelName = App\Http\Controllers\HotelController::get_name();
-                                                            // $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
-                                                            // $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
-                                                        @endphp
+                                                        @foreach ($location as $item)
+                                                            <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                                style="display: none ">
+                                                                <div class="location-popup-map sugest-list-map">
+                                                                    <img class="location-popup-map-image lozad"
+                                                                        src="{{ LazyLoad::show() }}"
+                                                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                                </div>
+                                                                <div class="location-popup-text sugest-list-text">
+                                                                    <a type="button" class="location_op"
+                                                                        data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
                                                         @foreach ($location as $item)
                                                             <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                                 style="display: none ">
@@ -415,7 +429,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                        {{-- @foreach ($hotelName as $item2)
+                                                        @foreach ($hotelName as $item2)
                                                             <div class="col-lg-12 location-popup-desc-container sugest-list"
                                                                 style="display: none; cursor: pointer;"
                                                                 onclick="window.open('{{ route('hotel', $item2->id_hotel) }}', '_blank');">
@@ -462,7 +476,7 @@
                                                                         data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                                                 </div>
                                                             </div>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                         <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
                                                             style="display: none">
                                                             <p>{{ __('user_page.Location not found') }}</p>
