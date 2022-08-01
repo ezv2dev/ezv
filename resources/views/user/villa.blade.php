@@ -105,9 +105,9 @@
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                         value="{{ __('user_page.VIEW DETAILS') }}" readonly> --}}
                     @if ($villa[0]->instant_book == 'yes')
-                            <input class="price-button" onclick="details_reserve()"
-                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        <input class="price-button" onclick="details_reserve()"
+                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                            value="{{ __('user_page.VIEW DETAILS') }}" readonly>
                     @else
                         @guest
                             <input class="price-button" onclick="loginForm(2)"
@@ -124,9 +124,11 @@
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
-                    <span class="price m-0" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
+                    <span class="price m-0"
+                        id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
                     </span>
-                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none" id="priceBottomFilled"></span>
+                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none"
+                        id="priceBottomFilled"></span>
                     <span style="font-size: 13px;" class="price m-0 d-none" id="dateSelected"></span>
                 </div>
             </div>
@@ -145,7 +147,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
+                                        style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -211,11 +213,14 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
-                                        ({{ session('currency') }})</p>
+                                        ({{ session('currency') }})
+                                    </p>
                                     {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                                 @else
@@ -276,8 +281,10 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -453,8 +460,7 @@
 
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single"
-                                id="short-description-content2">
+                            <span class="translate-text-single" id="short-description-content2">
                                 {{ Translate::translate($villa[0]->short_description) ?? __('user_page.There is no description yet') }}
                                 {{-- {{ $villa[0]->short_description ?? __('user_page.There is no description yet') }} --}}</span>
                             @auth
@@ -733,9 +739,9 @@
                                                                     <a type="button"
                                                                         onclick="view({{ $item->id_video }})"
                                                                         style="height: 70px; width: 70px;">
-                                                                @else
-                                                                    <a type="button" onclick="showPromotionMobile()"
-                                                                        style="height: 70px; width: 70px;">
+                                                                    @else
+                                                                        <a type="button" onclick="showPromotionMobile()"
+                                                                            style="height: 70px; width: 70px;">
                                                                 @endif
                                                             @endauth
                                                             <div class="story-video-player"><i class="fa fa-play"></i>
@@ -1297,7 +1303,7 @@
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price') }}</a>
                             @endif
                         @endauth
-                        <form method="POST" action="{{ route('villa_booking_confirm') }}" >
+                        <form method="POST" action="{{ route('villa_booking_confirm') }}">
                             @csrf
                             <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
                             <div class="row">
@@ -1326,30 +1332,35 @@
 
                                     <div class="col-6 p-5-price line-right-orange">
                                         <div class="col-12" style="text-align: center;">
-                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                            <a type="button" class="collapsible_check"
+                                                style="background-color: white;">
                                                 <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-IN') }}
                                                 </p>
-                                                <input class="date-form" type="text" id="check_in" name="check_in"
-                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                                <input class="date-form" type="text" id="check_in"
+                                                    name="check_in" placeholder="{{ __('user_page.Add Date') }}"
+                                                    readonly>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-6 p-5-price">
                                         <div class="col-12" style="text-align: center;">
-                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                            <a type="button" class="collapsible_check"
+                                                style="background-color: white;">
                                                 <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-OUT') }}
                                                 </p>
-                                                <input class="date-form" type="text" id="check_out" name="check_out"
-                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                                <input class="date-form" type="text" id="check_out"
+                                                    name="check_out" placeholder="{{ __('user_page.Add Date') }}"
+                                                    readonly>
                                             </a>
                                         </div>
                                     </div>
 
                                     <!-- <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
                                         style="width: fit-content; margin-left: -675px; margin-top: -17px;"> -->
-                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check" style="min-height: 430px; max-height: 430px;">
+                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
+                                        style="min-height: 430px; max-height: 430px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
@@ -1359,7 +1370,8 @@
                                                         <a type="button" id="clear_date"
                                                             style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     </div>
-                                                    <div class="flatpickr" id="inline_reserve" style="text-align: left;">
+                                                    <div class="flatpickr" id="inline_reserve"
+                                                        style="text-align: left;">
                                                         {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
                                                     </div>
                                                 </div>
@@ -1373,8 +1385,8 @@
                                     <button type="button" class="collapsible">{{ __('user_page.Number of Guest') }}
                                         <p class="guest-right">
                                             {{ __('user_page.guest') }}</p>
-                                        <input class="guest-right-input" type="number" id="total_guest2" value="1"
-                                            min="0" readonly>
+                                        <input class="guest-right-input" type="number" id="total_guest2"
+                                            value="1" min="0" readonly>
                                     </button>
                                     <div class="content sidebar-popup sidebar-popup-tamu" id="popup_guest">
                                         <div class="row" style="margin-top: 10px;">
@@ -1782,7 +1794,8 @@
                                         </div>
                                         <div class="col-6 ">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_clean }}
@@ -1793,7 +1806,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_check_in }}
@@ -1804,7 +1818,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_value * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_value }}
@@ -1819,7 +1834,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_service * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_service }}
@@ -1830,7 +1846,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_location * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_location }}
@@ -1839,7 +1856,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 pt-3">
-                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                    <button type="button" onclick="showMoreReview();"
+                                        class="btn btn-outline-dark">
                                         Show all reviews
                                     </button>
                                 </div>
@@ -1859,7 +1877,7 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                        {{ __('user_page.There is no reviews yet') }}
+                                            {{ __('user_page.There is no reviews yet') }}
                                         </p>
                                     </div>
                                 </div>
@@ -1930,7 +1948,8 @@
                                                     </div>
                                                     <div class="col-6 ">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->cleanliness }}
                                                     </div>
@@ -1941,7 +1960,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->check_in }}
                                                     </div>
@@ -1952,7 +1972,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->value }}
                                                     </div>
@@ -1965,7 +1986,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->service }}
                                                     </div>
@@ -1976,7 +1998,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->location }}
                                                     </div>
@@ -2410,15 +2433,16 @@
                     {{-- Insurance --}}
                     <div class="">
                         <h3>
-                        {{ __('user_page.EZV Cover') }}
+                            {{ __('user_page.EZV Cover') }}
                         </h3>
                         <p id="description-content">
-                        {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
+                            {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
                         </p>
 
                         <a id="" style="font-weight: 600;" href="javascript:void(0);"
                             onclick="showMoreInsurance();">
-                            <span style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
+                            <span
+                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
                         </a>
 
                     </div>
@@ -3482,7 +3506,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document" style="overflow-y: initial !important">
+        <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered"
+            role="document" style="overflow-y: initial !important">
             <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -3688,7 +3713,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                            <button onclick="share_function()">Copy link</button> -->
+                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5037,8 +5062,7 @@
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
 
-                            if (galleryLength == 0)
-                            {
+                            if (galleryLength == 0) {
                                 $('.gallery').html("");
                                 $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
                             }
@@ -5577,7 +5601,7 @@
                                 <span>{{ __('user_page.you have been request deactivation for this content,') }}
                                 </span>
                                 <button class="btn"
-                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                    type="submit" onclick="cancelDeactivation()>{{ __('user_page.cancel deactivation') }}</button>
                                 <span> ?</span>
                             </div>
                         `);
@@ -5609,6 +5633,14 @@
                                 <span>{{ __('user_page.this content is active') }}</span>
                             </div>
                         `);
+
+                        $("#activation1").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+
                         iziToast.success({
                             title: "Success",
                             message: response.message,

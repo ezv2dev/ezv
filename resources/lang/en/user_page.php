@@ -261,8 +261,8 @@ return [
     'No description yet' => 'No description yet',
 
     'Map' => 'Map',
-    'this content is active, edit grade restaurant' => 'this content is active, edit grade restaurant',
-    'the owner request activation, choose grade Restaurant' => 'the owner request activation, choose grade Restaurant',
+    'this content is active, edit grade Food' => 'this content is active, edit grade Food',
+    'the owner request activation, choose grade Food' => 'the owner request activation, choose grade Food',
     'and' => 'and',
     'no price rate yet' => 'no price rate yet',
     'MENU' => 'MENU',

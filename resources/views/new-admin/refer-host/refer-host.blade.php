@@ -30,9 +30,9 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col-7">
+            <div class="col-8">
                 <div class="card px-5 py-3 shadow">
-                    <div class="card-body">
+                    <div class="card-body d-flex justify-content-between">
                         <input type="text" value="{{ env('APP_URL') }}/register?ref={{ Auth::user()->user_code }}"
                             id="myInput" style=" background: #ffffff; width: 445px; border: 1px;" disabled>
                         <button onclick="myCopy()" class="btn btn-primary">Copy</button>

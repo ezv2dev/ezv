@@ -5799,6 +5799,13 @@
                                 <span>{{ __('user_page.this content is active') }}</span>
                             </div>
                         `);
+
+                                        $("#activation1").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
                     iziToast.success({
                         title: "Success",
                         message: response.message,

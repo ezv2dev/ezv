@@ -566,7 +566,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                                                @method('PATCH') -->
+                                                                                                                                                        @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -1483,8 +1483,8 @@
                 </section>
 
                 <!--<section id="location-map" class="section-2">
-        <div class="about-place-block">
-            {{-- <h2>
+<div class="about-place-block">
+{{-- <h2>
                                 Location
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1500,11 +1500,11 @@
                                 id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
                             </div> --}}
-        </div>
-    </section> -->
+</div>
+</section> -->
                 <!-- <div style="padding-left: 10px; padding-right: 10px;">
-        <hr>
-    </div> -->
+<hr>
+</div> -->
 
             </div>
             {{-- END PAGE CONTENT --}}
@@ -1798,7 +1798,8 @@
                                             </div>
                                             <div class="col-6 ">
                                                 <div class="liner">
-                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
                                                 </div>
                                                 {{ $restaurant->detailReview->average_food }}
                                             </div>
@@ -1809,7 +1810,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="liner">
-                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
                                                 </div>
                                                 {{ $restaurant->detailReview->average_service }}
                                             </div>
@@ -1822,7 +1824,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="liner">
-                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
                                                 </div>
                                                 {{ $restaurant->detailReview->average_value }}
                                             </div>
@@ -1833,7 +1836,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="liner">
-                                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
                                                 </div>
                                                 {{ $restaurant->detailReview->average_atmosphere }}
                                             </div>
@@ -1933,7 +1937,8 @@
                                                 </div>
                                                 <div class="col-6 ">
                                                     <div class="liner">
-                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->food * 20 }}%"></span>
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $restaurant->userReview->food * 20 }}%"></span>
                                                     </div>
                                                     {{ $restaurant->userReview->food }}
                                                 </div>
@@ -1944,7 +1949,8 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="liner">
-                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->service * 20 }}%"></span>
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $restaurant->userReview->service * 20 }}%"></span>
                                                     </div>
                                                     {{ $restaurant->userReview->service }}
                                                 </div>
@@ -1957,7 +1963,8 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="liner">
-                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->value * 20 }}%"></span>
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $restaurant->userReview->value * 20 }}%"></span>
                                                     </div>
                                                     {{ $restaurant->userReview->value }}
                                                 </div>
@@ -1968,7 +1975,8 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="liner">
-                                                        <span class="liner-bar" style="width: {{ $restaurant->userReview->atmosphere * 20 }}%"></span>
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $restaurant->userReview->atmosphere * 20 }}%"></span>
                                                     </div>
                                                     {{ $restaurant->userReview->atmosphere }}
                                                 </div>
@@ -2407,10 +2415,10 @@
                                 <div id="adminFood1">
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
-                                                id="gradeWow">
+                                                id="gradeFood">
                                                 <option value="AA"
                                                     {{ $restaurant->grade == 'AA' ? 'selected' : '' }}>AA
                                                 </option>
@@ -2435,7 +2443,7 @@
                             @if ($restaurant->status == '2')
                                 <div id="adminFood2">
                                     <div class="alert alert-warning d-flex justify-content-start" role="warning">
-                                        <span>{{ __('user_page.the owner request activation, choose grade Wow') }}
+                                        <span>{{ __('user_page.the owner request activation, choose grade Food') }}
                                         </span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade" name="grade" id="grade2">
@@ -2468,7 +2476,7 @@
                                         role="warning">
                                         <span>{{ __('user_page.the owner request deactivation,') }}' </span>
                                         <form
-                                            action="{{ route('admin_wow_update_status', $restaurant->id_activity) }}"
+                                            action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
                                             method="get">
                                             <button class="btn"
                                                 type="submit">{{ __('user_page.deactivate this content') }}</button>
@@ -2483,8 +2491,8 @@
 
                     @guest
                         <hr>
-                        <!-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
-                                                        </h4> -->
+                        {{-- <h4 style="margin-bottom: -10px;">{{ __('user_page.Nearby Villas & Things To Do') }}
+                        </h4> --}}
                         {{-- EDIT TO SWIPE CAROUSEL --}}
 
                         {{-- <div class="container-xxl mx-auto p-0">
@@ -5751,7 +5759,7 @@
             },
             url: `/food/update/request-update-status`,
             data: {
-                id_food: id_restaurant
+                id_restaurant: id_restaurant
             },
             success: function(response) {
                 if (response.data == 2) {
@@ -5787,7 +5795,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "get",
-                    url: `/admin/food/update-status/${id_activity}`,
+                    url: `/admin/food/update-status/${id_restaurant}`,
                     data: {
                         grade: grade
                     },
@@ -5798,7 +5806,7 @@
                                 $("#adminFood2").html(`
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 id="gradeFoodAA">
@@ -5818,7 +5826,7 @@
                                 $("#adminFood2").html(`
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 id="gradeFoodA">
@@ -5838,7 +5846,7 @@
                                 $("#adminFood2").html(`
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 id="gradeFoodB">
@@ -5858,7 +5866,7 @@
                                 $("#adminFood2").html(`
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 id="gradeFoodC">
@@ -5878,7 +5886,7 @@
                                 $("#adminFood2").html(`
                                     <div class="alert alert-success d-flex flex-row align-items-center"
                                         role="success">
-                                        <span>{{ __('user_page.this content is active, edit grade Wow') }}</span>
+                                        <span>{{ __('user_page.this content is active, edit grade Food') }}</span>
                                         <div style="margin-left: 10px;">
                                             <select class="custom-select grade-success" name="grade"
                                                 id="gradeFoodD">
@@ -5920,7 +5928,7 @@
             },
             url: `/food/update/request-update-status`,
             data: {
-                id_food: id_restaurant
+                id_restaurant: id_restaurant
             },
             success: function(response) {
                 if (response.data == 3) {
@@ -5952,11 +5960,17 @@
             },
             url: `/food/update/cancel-request-update-status`,
             data: {
-                id_food: id_restaurant
+                id_restaurant: id_restaurant
             },
             success: function(response) {
                 if (response.data == 1) {
                     $("#activation3").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+                    $("#activation1").html(`
                             <div class="alert alert-success d-flex flex-row align-items-center"
                                 role="success">
                                 <span>{{ __('user_page.this content is active') }}</span>
@@ -5980,7 +5994,7 @@
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: `/food/grade/${id_activity}`,
+            url: `/food/grade/${id_restaurant}`,
             data: {
                 grade: grade,
             },
@@ -6002,7 +6016,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: `/food/grade/${id_activity}`,
+                url: `/food/grade/${id_restaurant}`,
                 data: {
                     grade: grade,
                 },
@@ -6025,7 +6039,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: `/food/grade/${id_activity}`,
+                url: `/food/grade/${id_restaurant}`,
                 data: {
                     grade: grade,
                 },
@@ -6048,7 +6062,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: `/food/grade/${id_activity}`,
+                url: `/food/grade/${id_restaurant}`,
                 data: {
                     grade: grade,
                 },
@@ -6071,7 +6085,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: `/food/grade/${id_activity}`,
+                url: `/food/grade/${id_restaurant}`,
                 data: {
                     grade: grade,
                 },
@@ -6094,7 +6108,7 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: `/food/grade/${id_activity}`,
+                url: `/food/grade/${id_restaurant}`,
                 data: {
                     grade: grade,
                 },

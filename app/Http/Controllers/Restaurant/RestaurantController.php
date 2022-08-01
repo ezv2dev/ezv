@@ -284,14 +284,7 @@ class RestaurantController extends Controller
 
     public function update_status(Request $request, $id)
     {
-        abort_if(!auth()->check(), 401);
-        abort_if(!$id, 500);
-        abort_if(!in_array(auth()->user()->role->name, ['admin', 'superadmin']), 403);
         $find = Restaurant::where('id_restaurant', $id)->first();
-        abort_if(!$find, 404);
-
-        $status = false;
-
         if ($find->status == 2) {
             $find->update(array(
                 'status' =>  1,
@@ -299,30 +292,21 @@ class RestaurantController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
+
+            return response()->json(['message' => 'Successfuly activate ' . $find->name, 'data' => 1, 'grade' => $request->grade]);
         } else {
             $find->update(array(
                 'status' =>  0,
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
-        }
 
-        if ($status) {
-            return back()
-                ->with('success', 'Your data has been updated');
-        } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json(['message' => 'Successfuly deactivate ' . $find->name, 'data' => 0]);
         }
     }
 
     public function grade(Request $request, $id)
     {
-        // dd($request->all());
-        $status = 500;
-
         $find = Restaurant::where('id_restaurant', $id)->first();
 
         $find->update(array(
@@ -331,22 +315,13 @@ class RestaurantController extends Controller
             'updated_by' => Auth::user()->id,
         ));
 
-        return redirect()->back()->with('success', 'Your data has been update');
+        return response()->json(['success' => true, 'message' => 'Succesfully Update Grade Food to ' . $request->grade,  'data' => $request->grade]);
     }
 
     public function request_update_status(Request $request)
     {
-        $id = $request->id;
-        abort_if(!auth()->check(), 401);
-        abort_if(!$id, 500);
+        $id = $request->id_restaurant;
         $find = Restaurant::where('id_restaurant', $id)->first();
-        abort_if(!$find, 404);
-        $this->authorize('restaurant_update');
-        abort_if(auth()->user()->id != $find->created_by, 403);
-
-        $find = Restaurant::where('id_restaurant', $id)->first();
-
-        $status = false;
 
         if ($find->status == 0) {
             $find->update(array(
@@ -354,7 +329,7 @@ class RestaurantController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
+            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 2]);
         }
 
         if ($find->status == 1) {
@@ -363,31 +338,14 @@ class RestaurantController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
-        }
-
-        if ($status) {
-            return back()
-                ->with('success', 'request has been sended');
-        } else {
-            return back()
-                ->with('error', 'request fail to sended due internal server error');
+            return response()->json(['message' => 'Successfuly request for deactivation', 'data' => 3]);
         }
     }
 
     public function cancel_request_update_status(Request $request)
     {
-        $id = $request->id;
-        abort_if(!auth()->check(), 401);
-        abort_if(!$id, 500);
+        $id = $request->id_restaurant;
         $find = Restaurant::where('id_restaurant', $id)->first();
-        abort_if(!$find, 404);
-        $this->authorize('restaurant_update');
-        abort_if(auth()->user()->id != $find->created_by, 403);
-
-        $find = Restaurant::where('id_restaurant', $id)->first();
-
-        $status = false;
 
         if ($find->status == 2) {
             $find->update(array(
@@ -395,7 +353,7 @@ class RestaurantController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
+            return response()->json(['message' => 'Successfuly cancel request activiation', 'data' => 0]);
         }
 
         if ($find->status == 3) {
@@ -404,15 +362,7 @@ class RestaurantController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            $status = true;
-        }
-
-        if ($status) {
-            return back()
-                ->with('success', 'request has been sended');
-        } else {
-            return back()
-                ->with('error', 'request fail to sended due internal server error');
+            return response()->json(['message' => 'Successfuly cancel request deactiviation', 'data' => 1]);
         }
     }
 

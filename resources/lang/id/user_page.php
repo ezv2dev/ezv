@@ -256,8 +256,8 @@ return [
     'adults' => 'dewasa',
 
     'Map' => 'Peta',
-    'this content is active, edit grade restaurant' => 'konten ini aktif, ubah kelas restoran',
-    'the owner request activation, choose grade Restaurant' => 'pemilik meminta aktivasi, pilih restoran kelas',
+    'this content is active, edit grade Food' => 'konten ini aktif, ubah kelas restoran',
+    'the owner request activation, choose grade Food' => 'pemilik meminta aktivasi, pilih kelas restoran',
     'and' => 'dan',
     'no price rate yet' => 'belum ada tarif harga',
     'MENU' => 'MENU',
