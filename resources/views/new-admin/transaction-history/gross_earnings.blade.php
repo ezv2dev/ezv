@@ -3,116 +3,85 @@
 @section('title', 'Transaction History - EZV2')
 
 @section('content_admin')
-<div class="container mb-10">
-    <div class="row mt-5">
-        <div class="col-8 p-0">
-            <div class="card p-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-1">
-                            <button class="btn btn-warning rounded-circle" style="width: 50px; height: 50px;">
-                                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
-                                    style="display:block;height:16px;width:16px;fill:currentColor" aria-hidden="true"
-                                    role="presentation" focusable="false">
-                                    <path
-                                        d="M7.237.21c.347-.206.76-.263 1.148-.16.34.092.637.3.841.586l.082.128 6.487 11.318a1.564 1.564 0 0 1 .004 1.544 1.53 1.53 0 0 1-.554.566 1.497 1.497 0 0 1-.599.2l-.159.008H1.514c-.334 0-.659-.113-.924-.32a1.558 1.558 0 0 1-.452-1.863l.069-.135L6.692.764c.132-.23.32-.42.545-.555zM8 10.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm.8-6.6H7.2v5.2h1.6z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-11">
-                            <b>Add a payout method</b>
-                            <p>You'll need to set up your payouts in order to get paid.</p>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <a href="#"><u>Learn More</u></a>
-                                    <div class="btn btn-primary">Get Started</div>
-                                </div>
-                            </div>
-                        </div>
+<style>
+    .banner-information-container{
+        display:flex;
+        flex-direction:column;
+        gap:.75rem;
+    }
+
+    @media (min-width: 768px){
+        .banner-information-container{
+            flex-direction:row;
+        }
+    }
+</style>
+<div class="container container-dashboard px-4">
+    <div class="row mx-0 px-0">
+        <div class="col-md-8 px-0 mx-0">
+            <div class="pt-4 pb-3 px-4 border banner-information-container">
+                <div class="w-auto">
+                    <button class="btn btn-warning rounded-circle" style="width: 50px; height: 50px;">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                            style="display:block;height:16px;width:16px;fill:currentColor" aria-hidden="true"
+                            role="presentation" focusable="false">
+                            <path
+                                d="M7.237.21c.347-.206.76-.263 1.148-.16.34.092.637.3.841.586l.082.128 6.487 11.318a1.564 1.564 0 0 1 .004 1.544 1.53 1.53 0 0 1-.554.566 1.497 1.497 0 0 1-.599.2l-.159.008H1.514c-.334 0-.659-.113-.924-.32a1.558 1.558 0 0 1-.452-1.863l.069-.135L6.692.764c.132-.23.32-.42.545-.555zM8 10.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm.8-6.6H7.2v5.2h1.6z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="w-100">
+                    <b>Add a payout method</b>
+                    <p>You'll need to set up your payouts in order to get paid.</p>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="#"><u>Learn More</u></a>
+                        <div class="btn btn-primary">Get Started</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row mt-5">
-        <div class="col-8 p-0">
-            <h1 style="font-weight: 600;">Transaction History</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-8 mt-4" style="border-bottom: 1px solid #DFDFDE;">
-            <div class="title-bar p-0" style="margin-right: 20px; display: inline-block;">
-                <a style="text-decoration: none;" href="{{ route('completed_payouts') }}">
-                    <h6>Completed Payouts</h6>
-                </a>
+            <h1 class="mt-4 mt-md-5 mb-3 px-0" style="font-weight: 600;">Transaction History</h1>
+            <div class="mb-4 tab-bar px-0">
+                <a class="title-bar" href="{{ route('completed_payouts') }}">Completed Payouts</a>
+                <a class="title-bar " href="{{ route('upcoming_payouts') }}">Upcoming Payouts</a>
+                <a class="title-bar active" href="{{ route('gross_earnings') }}">Gross Earnings</a>
             </div>
-            <div class="title-bar" style="margin-right: 20px; display: inline-block;">
-                <a style="text-decoration: none;" href="{{ route('upcoming_payouts') }}">
-                    <h6>Upcoming Payouts</h6>
-                </a>
+            <div class="row px-0 mx-0">
+                <div class="col-sm-6 col-md-4 px-0 pr-sm-2 mb-2">
+                    <select class="form-control">
+                        <option><b>Form:</b> January</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-md-2 px-0 mb-2">
+                    <select class="form-control">
+                        <option>2022</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-md-4 px-0 pr-sm-2 pl-md-2 mb-2">
+                    <select class="form-control">
+                        <option><b>To:</b> April</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-md-2 px-0">
+                    <select class="form-control">
+                        <option>2022</option>
+                    </select>
+                </div>
             </div>
-            <div class="title-bar" style="margin-right: 20px; display: inline-block; border-bottom: 2px solid #FF7400;">
-                <a style="text-decoration: none;" href="{{ route('gross_earnings') }}">
-                    <h6><b>Gross Earnings</b></h6>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-8 d-flex justify-content-between mt-2 p-0">
-            <div class="col-4 py-0 pl-0 pr-1">
-                <select class="form-control">
-                    <option><b>Form:</b> January</option>
-                </select>
-            </div>
-            <div class="col-2 py-0 pl-1 pr-1">
-                <select class="form-control">
-                    <option>2022</option>
-                </select>
-            </div>
-            <div class="col-4 py-0 pl-1 pr-1">
-                <select class="form-control">
-                    <option><b>To:</b> April</option>
-                </select>
-            </div>
-            <div class="col-2 py-0 pl-1 pr-0">
-                <select class="form-control">
-                    <option>2022</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-8 mt-2 d-flex justify-content-between px-0">
-            <div class="col-9 px-0 d-flex justify-content-left">
-            </div>
-            <div class="col-3 px-0">
-                <select class="form-control">
+            <div class="px-0 d-flex justify-content-between align-items-center mt-4">
+                <div></div>
+                <select class="form-control w-auto">
                     <option>Export CSV</option>
                 </select>
             </div>
-        </div>
-    </div>
 
-    <div class="row mt-4">
-        <div class="col-8 px-0">
-            <div class="card p-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <p>You do not have any transactions</p>
-                            <p>For the dates, listings, and payout method currently selected</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="mt-4 border p-4">
+                <p>You do not have any transactions</p>
+                <p>For the dates, listings, and payout method currently selected</p>
             </div>
         </div>
     </div>
+
 </div>
 
 @include('new-admin.layouts.footer')
