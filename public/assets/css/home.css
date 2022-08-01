@@ -2258,6 +2258,9 @@ span.flatpickr-weekday {
 }
 
 @media only screen and (max-width: 991px) {
+    .first-section-top .header-4-4 {
+        padding-top: 11rem !important;
+    }
     .flatpickr-container .flatpickr-weekdays {
         margin-left: 0px !important;
     }
