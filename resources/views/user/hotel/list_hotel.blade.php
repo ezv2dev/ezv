@@ -286,10 +286,10 @@
                         </div>
                     </a>
 
-                    <div class="content list-image-content" style="margin: 0; padding: 0; max-width: 1200px !important;">
+                    <div class="content list-image-content skeleton skeleton-w-100 skeleton-h-lg" style="margin: 0; padding: 0; max-width: 1200px !important;">
                         <input type="hidden" value="{{ $data->id_hotel }}" id="id_hotel" name="id_hotel">
                         <div class="dots-container d-flex justify-content-center"></div>
-                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white skeleton skeleton-w-100 skeleton-h-lg"
+                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white "
                             data-dots="false" data-arrows="true">
 
                             @forelse ($data->photo->sortBy('order') as $item)

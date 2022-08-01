@@ -1,5 +1,4 @@
 .skeleton {
-    margin: 4px;
     animation: skeleton-loading 1s linear infinite alternate !important;
     height: 0;
     width: 0;
@@ -14,6 +13,70 @@
         background-color: hsl(200, 20%, 95%);
     }
 }
+
+.skeleton-w-1, .skeleton-w-2, .skeleton-w-3, .skeleton-w-4, .skeleton-w-5,
+.skeleton-w-6, .skeleton-w-7, .skeleton-w-8, .skeleton-w-9, .skeleton-w-10,
+.skeleton-w-25, .skeleton-w-50, .skeleton-w-75, .skeleton-w-100, 
+.skeleton-w-lg, .skeleton-w-xl, .skeleton-w-xxl,
+
+.skeleton-h-1, .skeleton-h-2, .skeleton-h-3, .skeleton-h-4, .skeleton-h-5,
+.skeleton-h-6, .skeleton-h-7, .skeleton-h-8, .skeleton-h-9, .skeleton-h-10,
+.skeleton-h-25, .skeleton-h-50, .skeleton-h-75, .skeleton-h-100, 
+.skeleton-h-lg, .skeleton-h-xl, .skeleton-h-xxl,
+
+.skeleton-xl-w-1, .skeleton-xl-w-2, .skeleton-xl-w-3, .skeleton-xl-w-4, .skeleton-xl-w-5,
+.skeleton-xl-w-6, .skeleton-xl-w-7, .skeleton-xl-w-8, .skeleton-xl-w-9, .skeleton-xl-w-10,
+.skeleton-xl-w-25, .skeleton-xl-w-50, .skeleton-xl-w-75, .skeleton-xl-w-100, 
+.skeleton-xl-w-lg, .skeleton-xl-w-xl, .skeleton-xl-w-xxl,
+
+.skeleton-xl-h-1, .skeleton-xl-h-2, .skeleton-xl-h-3, .skeleton-xl-h-4, .skeleton-xl-h-5,
+.skeleton-xl-h-6, .skeleton-xl-h-7, .skeleton-xl-h-8, .skeleton-xl-h-9, .skeleton-xl-h-10,
+.skeleton-xl-h-25, .skeleton-xl-h-50, .skeleton-xl-h-75, .skeleton-xl-h-100, 
+.skeleton-xl-h-lg, .skeleton-xl-h-xl, .skeleton-xl-h-xxl,
+
+.skeleton-lg-w-1, .skeleton-lg-w-2, .skeleton-lg-w-3, .skeleton-lg-w-4, .skeleton-lg-w-5,
+.skeleton-lg-w-6, .skeleton-lg-w-7, .skeleton-lg-w-8, .skeleton-lg-w-9, .skeleton-lg-w-10,
+.skeleton-lg-w-25, .skeleton-lg-w-50, .skeleton-lg-w-75, .skeleton-lg-w-100, 
+.skeleton-lg-w-lg, .skeleton-lg-w-xl, .skeleton-lg-w-xxl,
+
+.skeleton-lg-h-1, .skeleton-lg-h-2, .skeleton-lg-h-3, .skeleton-lg-h-4, .skeleton-lg-h-5,
+.skeleton-lg-h-6, .skeleton-lg-h-7, .skeleton-lg-h-8, .skeleton-lg-h-9, .skeleton-lg-h-10,
+.skeleton-lg-h-25, .skeleton-lg-h-50, .skeleton-lg-h-75, .skeleton-lg-h-100, 
+.skeleton-lg-h-lg, .skeleton-lg-h-xl, .skeleton-lg-h-xxl,
+
+.skeleton-md-w-1, .skeleton-md-w-2, .skeleton-md-w-3, .skeleton-md-w-4, .skeleton-md-w-5,
+.skeleton-md-w-6, .skeleton-md-w-7, .skeleton-md-w-8, .skeleton-md-w-9, .skeleton-md-w-10,
+.skeleton-md-w-25, .skeleton-md-w-50, .skeleton-md-w-75, .skeleton-md-w-100, 
+.skeleton-md-w-lg, .skeleton-md-w-xl, .skeleton-md-w-xxl,
+
+.skeleton-md-h-1, .skeleton-md-h-2, .skeleton-md-h-3, .skeleton-md-h-4, .skeleton-md-h-5,
+.skeleton-md-h-6, .skeleton-md-h-7, .skeleton-md-h-8, .skeleton-md-h-9, .skeleton-md-h-10,
+.skeleton-md-h-25, .skeleton-md-h-50, .skeleton-md-h-75, .skeleton-md-h-100, 
+.skeleton-md-h-lg, .skeleton-md-h-xl, .skeleton-md-h-xxl,
+
+.skeleton-sm-w-1, .skeleton-sm-w-2, .skeleton-sm-w-3, .skeleton-sm-w-4, .skeleton-sm-w-5,
+.skeleton-sm-w-6, .skeleton-sm-w-7, .skeleton-sm-w-8, .skeleton-sm-w-9, .skeleton-sm-w-10,
+.skeleton-sm-w-25, .skeleton-sm-w-50, .skeleton-sm-w-75, .skeleton-sm-w-100, 
+.skeleton-sm-w-lg, .skeleton-sm-w-xl, .skeleton-sm-w-xxl,
+
+.skeleton-sm-h-1, .skeleton-sm-h-2, .skeleton-sm-h-3, .skeleton-sm-h-4, .skeleton-sm-h-5,
+.skeleton-sm-h-6, .skeleton-sm-h-7, .skeleton-sm-h-8, .skeleton-sm-h-9, .skeleton-sm-h-10,
+.skeleton-sm-h-25, .skeleton-sm-h-50, .skeleton-sm-h-75, .skeleton-sm-h-100, 
+.skeleton-sm-h-lg, .skeleton-sm-h-xl, .skeleton-sm-h-xxl,
+
+.skeleton-xs-w-1, .skeleton-xs-w-2, .skeleton-xs-w-3, .skeleton-xs-w-4, .skeleton-xs-w-5,
+.skeleton-xs-w-6, .skeleton-xs-w-7, .skeleton-xs-w-8, .skeleton-xs-w-9, .skeleton-xs-w-10,
+.skeleton-xs-w-25, .skeleton-xs-w-50, .skeleton-xs-w-75, .skeleton-xs-w-100, 
+.skeleton-xs-w-lg, .skeleton-xs-w-xl, .skeleton-xs-w-xxl,
+
+.skeleton-xs-h-1, .skeleton-xs-h-2, .skeleton-xs-h-3, .skeleton-xs-h-4, .skeleton-xs-h-5,
+.skeleton-xs-h-6, .skeleton-xs-h-7, .skeleton-xs-h-8, .skeleton-xs-h-9, .skeleton-xs-h-10,
+.skeleton-xs-h-25, .skeleton-xs-h-50, .skeleton-xs-h-75, .skeleton-xs-h-100, 
+.skeleton-xs-h-lg, .skeleton-xs-h-xl, .skeleton-xs-h-xxl{
+    margin:3px 0;
+}
+
+
 
 .skeleton * {
     display: none !important;
@@ -59,6 +122,18 @@
     width: 10rem !important;
 }
 
+.skeleton-w-lg {
+    width: 20rem !important;
+}
+
+.skeleton-w-xl {
+    width: 30rem !important;
+}
+
+.skeleton-w-xxl {
+    width: 50rem !important;
+}
+
 .skeleton-w-25 {
     width: 25% !important;
 }
@@ -66,7 +141,6 @@
 .skeleton-w-50 {
     width: 50% !important;
 }
-
 
 .skeleton-w-75 {
     width: 75% !important;
