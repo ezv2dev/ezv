@@ -77,6 +77,12 @@
         padding: 10px 30px;
     }
 
+    #languagelist{
+        display:flex;
+        flex-wrap:wrap;
+        gap:.5rem;
+    }
+
     @media (min-width: 768px) {
         .container-profile{
             padding-top: 2rem !important;
@@ -137,9 +143,8 @@
                     @csrf
                     <div class="form-group">
                         <label class="label-input">About</label>
-                        <textarea name="about" class="form-control" id="user-about" cols="30" rows="4">
-                            {{ isset($profile->about) ? $profile->about : '' }}
-                        </textarea>
+                        <!-- text area menampilkan semua yang ada di antara tag textarea, termasuk spasi -->
+                        <textarea name="about" class="form-control" id="user-about" cols="30" rows="4">{{isset($profile->about)?$profile->about:''}}</textarea>
                         <small id="err-about" style="display: none;" class="invalid-feedback">The about field is required</small>
                     </div>
                     <div class="form-group">
@@ -152,7 +157,7 @@
                         @if ($owner_language != null)
                         <div id="languagelist">
                             @foreach ($owner_language as $item)
-                                <a href="#" class="btn btn-outline-success mr-2">{{ $item->name }}</a>
+                                <a href="#" class="btn btn-outline-success">{{ $item->name }}</a>
                             @endforeach
                         </div>
                         @endif
@@ -291,7 +296,7 @@
             // span.id = 'bebas';
             // span.innerHTML = data[index].name;
             // document.getElementById("append").appendChild('span');
-            $('#languagelist').append('<a href="#" class="btn btn-outline-success mr-2">' +data[index].name+ '</a>');
+            $('#languagelist').append('<a href="#" class="btn btn-outline-success">' +data[index].name+ '</a>');
         }
     }
 

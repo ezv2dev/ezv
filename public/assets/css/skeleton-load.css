@@ -3,6 +3,7 @@
     animation: skeleton-loading 1s linear infinite alternate !important;
     height: 0;
     width: 0;
+    border-radius: 1rem;
 }
 
 @keyframes skeleton-loading {
@@ -20,157 +21,126 @@
 
 .skeleton-w-1 {
     width: 1rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-2 {
     width: 2rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-3 {
     width: 3rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-4 {
     width: 4rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-5 {
     width: 5rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-6 {
     width: 6rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-7 {
     width: 7rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-8 {
     width: 8rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-9 {
     width: 9rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-10 {
     width: 10rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-25 {
     width: 25% !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-50 {
     width: 50% !important;
-    border-radius: 0.25rem !important;
 }
 
 
 .skeleton-w-75 {
     width: 75% !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-w-100 {
     width: 100% !important;
-    border-radius: 0.25rem;
 }
 
 /* Height --------------------------------------------------*/ 
 .skeleton-h-1 {
     height: 1rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-2 {
     height: 2rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-3 {
     height: 3rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-4 {
     height: 4rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-5 {
     height: 5rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-6 {
     height: 6rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-7 {
     height: 7rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-8 {
     height: 8rem !important;
-    border-radius: 0.25rem !important;
 }
 .skeleton-h-9 {
     height: 9rem !important;
-    border-radius: 0.25rem !important;
 }
 .skeleton-h-10 {
     height: 10rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-lg {
     height: 20rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-xl {
     height: 30rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-xxl {
     height: 50rem !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-25 {
     height: 25% !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-50 {
     height: 50% !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-75 {
     height: 75% !important;
-    border-radius: 0.25rem !important;
 }
 
 .skeleton-h-100 {
     height: 100% !important;
-    border-radius: 0.25rem !important;
 }
 
 
@@ -178,187 +148,150 @@
     /* Width */
     .skeleton-xl-w-1 {
         width: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-2 {
         width: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-3 {
         width: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-4 {
         width: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-5 {
         width: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-6 {
         width: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-7 {
         width: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-8 {
         width: 8rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-9 {
         width: 9rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-10 {
         width: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-lg {
         width: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-w-xl {
         width: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-w-xxl {
         width: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-25 {
         width: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-50 {
         width: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
 
     .skeleton-xl-w-75 {
         width: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-w-100 {
         width: 100% !important;
-        border-radius: 0.25rem;
     }
 
     /* Height --------------------------------------------------*/ 
     .skeleton-xl-h-1 {
         height: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-2 {
         height: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-3 {
         height: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-4 {
         height: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-5 {
         height: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-6 {
         height: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-7 {
         height: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-8 {
         height: 8rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-xl-h-9 {
         height: 9rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-xl-h-10 {
         height: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-25 {
         height: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xl-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-50 {
         height: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-75 {
         height: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xl-h-100 {
         height: 100% !important;
-        border-radius: 0.25rem !important;
     }
 }
 
@@ -367,172 +300,138 @@
     /* Width */
     .skeleton-lg-w-1 {
         width: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-2 {
         width: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-3 {
         width: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-4 {
         width: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-5 {
         width: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-6 {
         width: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-7 {
         width: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-8 {
         width: 8rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-9 {
         width: 9rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-10 {
         width: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-lg {
         width: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-lg-w-xl {
         width: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-lg-w-xxl {
         width: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-25 {
         width: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-50 {
         width: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
 
     .skeleton-lg-w-75 {
         width: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-w-100 {
         width: 100% !important;
-        border-radius: 0.25rem;
     }
 
     /* Height --------------------------------------------------*/ 
     .skeleton-lg-h-1 {
         height: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-2 {
         height: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-3 {
         height: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-4 {
         height: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-5 {
         height: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-6 {
         height: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-7 {
         height: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-8 {
         height: 8rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-lg-h-9 {
         height: 9rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-lg-h-10 {
         height: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-lg-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-lg-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-25 {
         height: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-50 {
         height: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-75 {
         height: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-lg-h-100 {
         height: 100% !important;
-        border-radius: 0.25rem !important;
     }
 }
 
@@ -540,172 +439,138 @@
     /* Width */
     .skeleton-md-w-1 {
         width: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-2 {
         width: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-3 {
         width: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-4 {
         width: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-5 {
         width: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-6 {
         width: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-7 {
         width: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-8 {
         width: 8rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-9 {
         width: 9rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-10 {
         width: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-lg {
         width: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-md-w-xl {
         width: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-md-w-xxl {
         width: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-25 {
         width: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-50 {
         width: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
 
     .skeleton-md-w-75 {
         width: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-w-100 {
         width: 100% !important;
-        border-radius: 0.25rem;
     }
 
     /* Height --------------------------------------------------*/ 
     .skeleton-md-h-1 {
         height: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-2 {
         height: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-3 {
         height: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-4 {
         height: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-5 {
         height: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-6 {
         height: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-7 {
         height: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-8 {
         height: 8rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-md-h-9 {
         height: 9rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-md-h-10 {
         height: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-md-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-md-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-25 {
         height: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-50 {
         height: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-75 {
         height: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-md-h-100 {
         height: 100% !important;
-        border-radius: 0.25rem !important;
     }
 }
 
@@ -713,172 +578,138 @@
     /* Width */
     .skeleton-sm-w-1 {
         width: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-2 {
         width: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-3 {
         width: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-4 {
         width: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-5 {
         width: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-6 {
         width: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-7 {
         width: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-8 {
         width: 8rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-9 {
         width: 9rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-10 {
         width: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-lg {
         width: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-sm-w-xl {
         width: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-sm-w-xxl {
         width: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-25 {
         width: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-50 {
         width: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
 
     .skeleton-sm-w-75 {
         width: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-w-100 {
         width: 100% !important;
-        border-radius: 0.25rem;
     }
 
     /* Height --------------------------------------------------*/ 
     .skeleton-sm-h-1 {
         height: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-2 {
         height: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-3 {
         height: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-4 {
         height: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-5 {
         height: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-6 {
         height: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-7 {
         height: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-8 {
         height: 8rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-sm-h-9 {
         height: 9rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-sm-h-10 {
         height: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-sm-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-sm-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-25 {
         height: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-50 {
         height: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-75 {
         height: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-sm-h-100 {
         height: 100% !important;
-        border-radius: 0.25rem !important;
     }
 
 }
@@ -887,172 +718,138 @@
     /* Width */
     .skeleton-xs-w-1 {
         width: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-2 {
         width: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-3 {
         width: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-4 {
         width: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-5 {
         width: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-6 {
         width: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-7 {
         width: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-8 {
         width: 8rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-9 {
         width: 9rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-10 {
         width: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-lg {
         width: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xs-w-xl {
         width: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xs-w-xxl {
         width: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-25 {
         width: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-50 {
         width: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
 
     .skeleton-xs-w-75 {
         width: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-w-100 {
         width: 100% !important;
-        border-radius: 0.25rem;
     }
 
     /* Height --------------------------------------------------*/ 
     .skeleton-xs-h-1 {
         height: 1rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-2 {
         height: 2rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-3 {
         height: 3rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-4 {
         height: 4rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-5 {
         height: 5rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-6 {
         height: 6rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-7 {
         height: 7rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-8 {
         height: 8rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-xs-h-9 {
         height: 9rem !important;
-        border-radius: 0.25rem !important;
     }
     .skeleton-xs-h-10 {
         height: 10rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-lg {
         height: 20rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xs-h-xl {
         height: 30rem !important;
-        border-radius: 0.25rem !important;
     }
     
     .skeleton-xs-h-xxl {
         height: 50rem !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-25 {
         height: 25% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-50 {
         height: 50% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-75 {
         height: 75% !important;
-        border-radius: 0.25rem !important;
     }
 
     .skeleton-xs-h-100 {
         height: 100% !important;
-        border-radius: 0.25rem !important;
     }
 }
 
