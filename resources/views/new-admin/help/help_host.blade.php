@@ -49,7 +49,7 @@
 
 @section('content_admin')
 
-<div class="container mb-5">
+<div class="container container-dashboard mb-5">
     <div class="row h4-help-center">
         <h4 style="position: absolute; left: 20px;">Help Center</h4>
     </div>

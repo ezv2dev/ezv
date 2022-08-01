@@ -17,6 +17,71 @@
     }
 </style>
 
+<style>
+        .relative{
+            position:relative;
+        }
+        .icon-input-container{
+            position:absolute;
+            right:.5rem;
+            top:50%;
+            transform:translateY(-50%);
+            background:transparent;
+            outline:none;
+            border:0;
+        }
+
+        /* Loading Animation */
+        .container-loading-animation{
+            position:absolute;
+            top:50%;
+            left:50%;
+            right:auto;
+            bottom:auto;
+            transform:translate(-50%, -50%);
+            z-index: 3;
+        }
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border: 8px solid #ddd;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #ddd transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .padding-right-custom{
+            padding-right:34px;
+        }
+
+    </style>
+
 @section('content_admin')
 
 <div class="page-header">
@@ -83,7 +148,7 @@
                             @endif
                         </div>
                     </div>
-
+                    
                     @if (session('success'))
                     <div class="col-7 ml-max-md-0p" style="margin-left: 20px">
                         <div class="alert alert-success alert-dismissible" role="alert">
@@ -110,14 +175,18 @@
                                         href="javascript:void(0);" onclick="showPasswordField()"><b>Cancel</b></a>
                                     {{-- <p class="text-muted">This is the name on your travel document, which could be a license or a passport.</p> --}}
                                 </div>
-                                <form action="{{ route('password_update') }}" method="POST">
+                                <form action="{{ route('password_update') }}" id="formUpdatePassword" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <div class="mb-3">
+                                    <div class="form-group mb-3">
                                         <label for="old_password">Current password</label>
-                                        <input type="password" class="form-control" name="old_password"
+                                        <input type="password" class="form-control padding-right-custom" name="old_password"
                                             id="old_password">
+                                        <button type="button" class="icon-input-container">
+                                            <i class="fa-solid fa-eye-slash"></i>
+                                        </button>
 
+                                        <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('old_password')
                                         <div class="text-danger mt-2">
                                             {{ $message }}
@@ -126,21 +195,29 @@
 
                                         <small><a href="#" style="color: #FF7400;">Need a new password?</a></small>
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="form-group mb-3">
                                         <label for="password">New password</label>
-                                        <input type="password" class="form-control" name="password" id="password">
-
+                                        <input type="password" class="form-control padding-right-custom" name="password" id="password">
+                                        <button type="button" class="icon-input-container">
+                                            <i class="fa-solid fa-eye-slash"></i>
+                                        </button>
+                                        
+                                        <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('password')
                                         <div class="text-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="form-group mb-4">
                                         <label for="password_confirmation">Confirm password</label>
-                                        <input type="password" class="form-control" name="password_confirmation"
+                                        <input type="password" class="form-control padding-right-custom" name="password_confirmation"
                                             id="password_confirmation">
+                                        <button type="button" class="icon-input-container">
+                                            <i class="fa-solid fa-eye-slash"></i>
+                                        </button>
 
+                                        <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('password_confirmation')
                                         <div class="text-danger mt-2">
                                             {{ $message }}
@@ -231,6 +308,125 @@
     function showPasswordField() {
         document.getElementById("updatePasswordForm").style.display = "none";
         document.getElementById("passwordField").style.display = "block";
+    }
+
+    //show password
+    $('.icon-input-container').on('click',function(){
+        let parent = $(this).parent()
+        let icon = $(this).find('.fa-solid')
+        if(icon.hasClass('fa-eye')){
+            icon.removeClass('fa-eye')
+            icon.addClass('fa-eye-slash')
+            parent.find('.form-control').get(0).type = 'password'
+        }else{
+            icon.removeClass('fa-eye-slash')
+            icon.addClass('fa-eye')
+            parent.find('.form-control').get(0).type = 'text'
+        }
+    })
+
+    //validasi form when on keyup
+    $('.form-control').on('keyup focusout', function(){
+        validate($(this))
+    })
+
+    $('#formChangePassword').submit(function(e){
+        if(typeof e.cancelable !== 'boolean' || e.cancelable){
+            e.preventDefault();
+            let input = $('#formChangePassword .form-control');
+            let error = 0
+            $.each(input, function(index, value){
+                const validation = validate($(input[index]))
+                validation ? error = 0 : error = 1 
+            })
+
+            if(error == 0){
+                $('.container-loading-animation').removeClass('d-none')
+
+                $.ajax({
+                    type: "POST",
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function( data ){  
+                        $('#alertSuccess').removeClass('d-none')
+                        $('.container-loading-animation').addClass('d-none')
+
+                        $.each(input, function(index, value){
+                            $(input[index]).val('')
+                        })
+                    },
+                    error: function( response ){    
+                        if(response.status == 200){
+                            $('.container-loading-animation').addClass('d-none')
+                            $('#alertSuccess').removeClass('d-none') 
+                            $.each(input, function(index, value){
+                                $(input[index]).val('')
+                            })
+                        }else{
+                            var errors = response.responseJSON;
+                            $.each(errors.errors,function (el, val) {
+                                let input = $('#formChangePassword input[name='+el+']')
+                                let parentInput = input.parent()
+                                let messageContainer = parentInput.parent().find('.invalid-feedback')
+                                let iconInput = parentInput.find('.icon-input-container')
+
+                                $('.container-loading-animation').addClass('d-none')
+                                setErrorStyle(input, messageContainer, iconInput)
+
+                                $.each(val, function(index, errMessage){
+                                    $(messageContainer).text(errMessage)
+                                })
+        
+                            });
+                        }                       
+                    }
+                });
+            }
+        }
+    })
+
+    function validate(input){
+        let status = true;
+        let parentInput = input.parent()
+        let messageContainer = parentInput.parent().find('.invalid-feedback')
+        let iconInput = parentInput.find('.icon-input-container')
+
+        // reset error style
+        resetErrorStyle(input, messageContainer, iconInput)
+
+        if(!input.val()){
+            setErrorStyle(input, messageContainer, iconInput)
+            messageContainer.text('{{ __('auth.empty_password') }}')
+            status = false
+        }else{
+            if(input.val().length < 8){
+                setErrorStyle(input, messageContainer, iconInput)
+                messageContainer.text('{{ __('auth.min_password') }}')
+                status = false
+            }else if(input.attr('id') == 'password_confirmation'){
+                if(input.val() != $('#password').val()){
+                    setErrorStyle(input, messageContainer, iconInput)
+                    messageContainer.text('{{ __('auth.invalid_password') }}')
+                    status = false
+                }
+            }
+        }
+
+        return status
+    }
+    
+    function setErrorStyle(input, messageContainer, iconInput){                
+        input.addClass('is-invalid')
+        iconInput.hide()
+        messageContainer.show()
+    }
+
+    function resetErrorStyle(input, messageContainer, iconInput) {
+        input.removeClass('is-invalid')
+        iconInput.show()
+        messageContainer.hide()
+        messageContainer.text('')
     }
 
 </script>

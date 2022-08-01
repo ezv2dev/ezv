@@ -252,7 +252,7 @@
                             <form action="{{ route('personal_update_birthday') }}" method="post">
                                 @csrf
                                 <div class="mb-4">
-                                    <input type="date" class="form-control" name="birthday" date-format="Y-m-d" value="{{ Auth::user()->birthday ? Auth::user()->birthday->format('Y-m-d') : '' }}">
+                                    <input type="date" class="form-control" name="birthday" date-format="Y-m-d" value="{{ Auth::user()->birthday ? Auth::user()->birthday->format('Y-m-d') : '' }}" id="birthday-input">
                                 </div>
                                 <button type="submit" class="btn btn-dark">Save</button>
                             </form>
@@ -359,6 +359,22 @@
 @section('scripts')
 
 <script>
+    // set max birthday value
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd < 10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("birthday-input").setAttribute("max", today);
+
+
     //function show form legal name
     function showformLegalName() {
         document.getElementById("legalform").style.display = "block";
