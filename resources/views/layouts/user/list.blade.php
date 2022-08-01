@@ -61,24 +61,26 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/skeleton-load.css') }}">
 
     <style>
-        .subcategory-in-sidebar{
+        .subcategory-in-sidebar {
             border: 1px solid #ccc;
-            border-radius:4px;
-            margin:6px;
-            gap:6px;
-            padding-left:1rem;
-            display:flex;
-        }
-        .subcategory-in-sidebar:hover{
-            cursor:pointer;
-        }
-        .subcategory-in-sidebar-container > *,
-        .subcategory-in-sidebar > *{
-            color:#585656;
+            border-radius: 4px;
+            margin: 6px;
+            gap: 6px;
+            padding-left: 1rem;
+            display: flex;
         }
 
-        .subcategory-in-sidebar i{
-            width:30px;
+        .subcategory-in-sidebar:hover {
+            cursor: pointer;
+        }
+
+        .subcategory-in-sidebar-container>*,
+        .subcategory-in-sidebar>* {
+            color: #585656;
+        }
+
+        .subcategory-in-sidebar i {
+            width: 30px;
         }
     </style>
 </head>
@@ -240,15 +242,17 @@ if (isset($_COOKIE['tema'])) {
                     <div class="d-flex align-items-center">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
                                 {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                             @else
-                               <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
                                 {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
                             @endif
@@ -303,8 +307,10 @@ if (isset($_COOKIE['tema'])) {
                 <div class="d-flex align-items-center mb-2">
                     <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                         style="color: white;">
-                        <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                        <img class="lozad"
+                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                            src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                         @if (session()->has('currency'))
                             <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
                             {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
@@ -321,92 +327,98 @@ if (isset($_COOKIE['tema'])) {
             @endauth
 
             <hr>
-            @if($condition_villa)
+            @if ($condition_villa)
                 <div class="subcategory-in-sidebar-container ">
                     <p class="m-0">Choose Sub Category</p>
                     <div class="mt-2">
                         @foreach ($amenities->sortBy('order')->take(4) as $item)
-                            <div class="subcategory-in-sidebar py-2" onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_amenities }})">
-                                <i class="fas fa-{{ $item->icon }}"
-                                    @php
-                                        $amenitiesIds = explode(',', request()->get('fAmenities'));
-                                    @endphp
-                                    @if (in_array($item->id_amenities, $amenitiesIds)) style="color: #ff7400;"@endif>
-                                </i>
-                                <p class="m-0">{{ $item->name }}</p>
-                            </div>
-                        @endforeach
-                        <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHomes()">
-                            <i class="fas fa-ellipsis"></i>
-                            <p class="m-0">Filters</p>
-                        </div>
+                            <div class="subcategory-in-sidebar py-2"
+                                onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_amenities }})">
+                                <i class="fas fa-{{ $item->icon }}" @php
+                                    $amenitiesIds = explode(',', request()->get('fAmenities'));
+                                @endphp @if (in_array($item->id_amenities, $amenitiesIds))
+                                    style="color: #ff7400;"
+                        @endif>
+                        </i>
+                        <p class="m-0">{{ $item->name }}</p>
                     </div>
-                </div>
-            @elseif($condition_restaurant)
-                <div class="subcategory-in-sidebar-container ">
-                    <p class="m-0">Choose Sub Category</p>
-                    <div class="mt-2">
-                        @foreach ($subcategories->take(4) as $item)
-                            <div class="subcategory-in-sidebar py-2"onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }}, false)">
-                                <i class="{{ $item->icon }}"
-                                    @php
-                                        $isChecked = '';
-                                        $filterIds = explode(',', request()->get('fSubCategory'));
-                                    @endphp @if (in_array($item->id_subcategory, $filterIds)) style="color: #ff7400 !important;"@endif>
-                                </i>
-                                <p class="m-0">{{ $item->name }}</p>
-                            </div>
-                        @endforeach
-                        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
-                            <i class="fa-solid fa-ellipsis"></i>
-                            <p class="m-0">{{ __('user_page.More') }}</p>
-                        </div>
-                    </div>
-                </div>
-            @elseif($condition_hotel)
-                <div class="subcategory-in-sidebar-container">
-                    <p class="m-0">Choose Sub Category</p>
-                    @foreach ($hotelFilter->take(4)->sortBy('order') as $item)
-                        <div class="subcategory-in-sidebar py-2" onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
-                            <i class="{{ $item->icon }}"
-                                @php
-                                    $isChecked = '';
-                                    $filterIds = explode(',', request()->get('filter'));
-                                @endphp @if (in_array($item->id_hotel_filter, $filterIds))style="color: #ff7400 !important;"@endif>
-                            </i>
-                            <p class="m-0">{{ $item->name }}</p>
-                        </div>
-                    @endforeach
-                    <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHotel()">
-                        <i class="fa-solid fa-ellipsis"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
-                </div>
-
-            @elseif($condition_things_to_do)
-                <div class="subcategory-in-sidebar-container">
-                    <p class="m-0">Choose Sub Category</p>
-                    @foreach ($subCategoryAll->take(4) as $item)
-                        <div class="subcategory-in-sidebar py-2" onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
-                            <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
-                                @php
-                                    $isChecked = '';
-                                    $filterIds = explode(',', request()->get('fSubCategory'));
-                                @endphp @if (in_array($item->id_subcategory, $filterIds))
-                                style="color: #ff7400 !important;"@endif>
-                            </i>
-                            <p class="m-0">{{ $item->name }}</p>
-                        </div>
-                    @endforeach
-                    @if ($subCategoryAll->count() > 6)
-                        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
-                            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-                            <p class="m-0">{{ __('user_page.More') }}</p>
-                        </div>
-                    @endif
-                </div>
-            @endif
+            @endforeach
+            <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHomes()">
+                <i class="fas fa-ellipsis"></i>
+                <p class="m-0">Filters</p>
+            </div>
         </div>
+    </div>
+@elseif($condition_restaurant)
+    <div class="subcategory-in-sidebar-container ">
+        <p class="m-0">Choose Sub Category</p>
+        <div class="mt-2">
+            @foreach ($subcategories->take(4) as $item)
+                <div
+                    class="subcategory-in-sidebar py-2"onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }}, false)">
+                    <i class="{{ $item->icon }}" @php
+                        $isChecked = '';
+                        $filterIds = explode(',', request()->get('fSubCategory'));
+                    @endphp @if (in_array($item->id_subcategory, $filterIds))
+                        style="color: #ff7400 !important;"
+            @endif>
+            </i>
+            <p class="m-0">{{ $item->name }}</p>
+        </div>
+        @endforeach
+        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
+            <i class="fa-solid fa-ellipsis"></i>
+            <p class="m-0">{{ __('user_page.More') }}</p>
+        </div>
+    </div>
+    </div>
+@elseif($condition_hotel)
+    <div class="subcategory-in-sidebar-container">
+        <p class="m-0">Choose Sub Category</p>
+        @foreach ($hotelFilter->take(4)->sortBy('order') as $item)
+            <div class="subcategory-in-sidebar py-2"
+                onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
+                <i class="{{ $item->icon }}" @php
+                    $isChecked = '';
+                    $filterIds = explode(',', request()->get('filter'));
+                @endphp @if (in_array($item->id_hotel_filter, $filterIds))
+                    style="color: #ff7400 !important;"
+        @endif>
+        </i>
+        <p class="m-0">{{ $item->name }}</p>
+    </div>
+    @endforeach
+    <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHotel()">
+        <i class="fa-solid fa-ellipsis"></i>
+        <p class="m-0">{{ __('user_page.Filters') }}</p>
+    </div>
+    </div>
+@elseif($condition_things_to_do)
+    <div class="subcategory-in-sidebar-container">
+        <p class="m-0">Choose Sub Category</p>
+        @foreach ($subCategory->take(4) as $item)
+            <div class="subcategory-in-sidebar py-2"
+                onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
+                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                    @php
+                        $isChecked = '';
+                        $filterIds = explode(',', request()->get('fSubCategory'));
+                    @endphp @if (in_array($item->id_subcategory, $filterIds))
+                    style="color: #ff7400 !important;"
+        @endif>
+        </i>
+        <p class="m-0">{{ $item->name }}</p>
+    </div>
+    @endforeach
+    @if ($subCategory->count() > 6)
+        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
+            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
+            <p class="m-0">{{ __('user_page.More') }}</p>
+        </div>
+    @endif
+    </div>
+    @endif
+    </div>
 
     </div>
     <div id="overlay"></div>
@@ -1339,7 +1351,6 @@ if (isset($_COOKIE['tema'])) {
         function filterCollab() {
             $('#modalFiltersCollab').modal('show');
         }
-
     </script>
 
     <script>
@@ -1517,8 +1528,8 @@ if (isset($_COOKIE['tema'])) {
         });
 
         // close sidebar menu in dekstop size
-        $(window).resize(function(){
-            if($(document).width() > 991){
+        $(window).resize(function() {
+            if ($(document).width() > 991) {
                 $('.btn-close-expand-navbar-mobile').click()
             }
         })

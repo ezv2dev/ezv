@@ -33,50 +33,21 @@ class ActivityListController extends Controller
 {
     public function activity_list(Request $request)
     {
-        if ($request->location == '') {
-            // $activity = Activity::select('activity.*', DB::raw('(select name from activity_video where id_activity = activity.id_activity order by id_video asc limit 1) as video'), DB::raw('(select name from activity_photo where id_activity = activity.id_activity order by id_photo asc limit 1) as photo'), 'activity_detail_review.average as average', 'activity_detail_review.count_person as person')
-            //     ->join('activity_detail_review', 'activity.id_activity', '=', 'activity_detail_review.id_activity', 'left')
-            //     ->join('location', 'activity.id_location', '=', 'location.id_location', 'left')
-            //     ->inRandomOrder()->get();
-            $activity = Activity::where('status', 1)->inRandomOrder()->get();
-        } else {
-            // $activity = Activity::select('activity.*', DB::raw('(select name from activity_video where id_activity = activity.id_activity order by id_video asc limit 1) as video'), DB::raw('(select name from activity_photo where id_activity = activity.id_activity order by id_photo asc limit 1) as photo'), 'activity_detail_review.average as average', 'activity_detail_review.count_person as person')
-            //     ->join('activity_detail_review', 'activity.id_activity', '=', 'activity_detail_review.id_activity', 'left')
-            //     ->join('location', 'activity.id_location', '=', 'location.id_location', 'left')
-            //     ->where('location.name', 'like', '%' . $request->location . '%')
-            //     ->inRandomOrder()->get();
-            $activity = Activity::whereHas('location', function (Builder $query) use ($request) {
-                $query->where('name', 'like', '%' . $request->location . '%');
-            })->where('status', 1)->inRandomOrder()->get();
-        }
-
-        $amenities = Amenities::all();
-        $locations = Location::all();
-        $facilities = ActivityFacilities::all();
         $categories = ActivityCategory::all();
         $subCategory = ActivitySubcategory::all();
-        $subCategoryAll = ActivitySubcategory::all();
-        $property_type = PropertyTypeVilla::all();
 
-        $activityIds = $activity->modelKeys();
         $activity = Activity::with([
             'video',
             'photo',
             'detailReview',
             'facilities'
-        ])->whereIn('id_activity', $activityIds)->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
+        ])->where('status', 1)->inRandomOrder()->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
 
-        $activity->each(function ($item, $key) {
-            $item->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);
-        });
+        // $activity->each(function ($item, $key) {
+        //     $item->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);
+        // });
 
-        // if (DeviceCheckService::isMobile()) {
-        //     return view('user.m-list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'facilities', 'property_type'));
-        // }
-        // if (DeviceCheckService::isDesktop()) {
-        //     return view('user.list_activity', compact('req', 'activity', 'amenities', 'locations', 'categories', 'subCategory', 'facilities', 'property_type'));
-        // }
-        return view('user.list_activity', compact('activity', 'amenities', 'locations', 'categories', 'subCategory', 'subCategoryAll', 'facilities', 'property_type'));
+        return view('user.list_activity', compact('activity', 'categories', 'subCategory', 'subCategory'));
     }
 
     public function activity_update_name(Request $request)
@@ -266,8 +237,7 @@ class ActivityListController extends Controller
     public function activity_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1286,7 +1256,7 @@ class ActivityListController extends Controller
 
         $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name', 'id_story')->latest()->get();
         $getUID = Activity::where('id_activity', $request->id_activity)->select('uid')->first();
-        $activityVideo = ActivityVideo::where('id_activity', $request->id_activity)->select('id_video','name')->orderBy('order','asc')->get();
+        $activityVideo = ActivityVideo::where('id_activity', $request->id_activity)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
         $data = [];
 

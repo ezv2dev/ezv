@@ -74,7 +74,7 @@
                     class="container-grid-sub-cat translate-text-group {{ $bgColor }} bg-dark pt-15p pb-15p"
                     style="">
                     @if (request()->get('fCategory') == null)
-                        @foreach ($subCategoryAll->take(8) as $item)
+                        @foreach ($subCategory->take(8) as $item)
                             <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
                                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
                                 <div>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             @endforeach
-            @if ($subCategoryAll->count() > 6)
+            @if ($subCategory->count() > 6)
                 <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="moreSubCategory()">
                     <div>
                         <div>
