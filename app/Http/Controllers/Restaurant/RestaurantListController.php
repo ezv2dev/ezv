@@ -46,47 +46,30 @@ class RestaurantListController extends Controller
 {
     public function restaurant_list(Request $request)
     {
-        if (empty($request)) {
-            $req = 0;
-        } else {
-            $req = $request->all();
-        }
-
-        if ($request->location == '') {
-            $restaurant = Restaurant::where('status', 1)->get();
-        } else {
-            $restaurant = Restaurant::whereHas('location', function (Builder $query) use ($request) {
-                $query->where('name', 'like', '%' . $request->location . '%');
-            })->where('status', 1)->get();
-        }
-
-        // dd($restaurant);
-
-        $amenities = Amenities::all();
+        // $amenities = Amenities::all();
+        // $types = RestaurantType::all();
+        // $facilities = RestaurantFacilities::all();
+        // $meals = RestaurantMeal::all();
+        // $dishes = RestaurantDishes::all();
+        // $dietaryfoods = RestaurantDietaryFood::all();
+        // $goodfors = RestaurantGoodfor::all();
+        // $property_type = PropertyTypeVilla::all();
         $locations = Location::all();
-        $types = RestaurantType::all();
-        $facilities = RestaurantFacilities::all();
-        $meals = RestaurantMeal::all();
         $prices = RestaurantPrice::all();
         $cuisines = RestaurantCuisine::all();
-        $dishes = RestaurantDishes::all();
-        $dietaryfoods = RestaurantDietaryFood::all();
-        $goodfors = RestaurantGoodfor::all();
-        $property_type = PropertyTypeVilla::all();
         $categories = RestaurantCuisine::all();
         $subcategories = RestaurantSubCategory::all();
 
-        $restaurantIds = collect($restaurant->modelKeys());
         $restaurant = Restaurant::with([
             'location',
             'cuisine',
             'detailReview',
             'menu'
-        ])->whereIn('id_restaurant', $restaurantIds)->orderByRaw("FIELD(grade, \"A\", \"B\", \"C\", \"D\")")->paginate(env('CONTENT_PER_PAGE_LIST_RESTAURANT'));
+        ])->where('status', 1)->inRandomOrder()->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_RESTAURANT'));
 
-        $restaurant->each(function ($item, $key) {
-            $item->setAppends(['villa_nearby', 'activity_nearby', 'hotel_nearby']);
-        });
+        // $restaurant->each(function ($item, $key) {
+        //     $item->setAppends(['villa_nearby', 'activity_nearby', 'hotel_nearby']);
+        // });
 
         // if (DeviceCheckService::isMobile()) {
         //     return view('user.m-list_restaurant', compact(
@@ -126,17 +109,9 @@ class RestaurantListController extends Controller
         // }
         return view('user.list_restaurant', compact(
             'restaurant',
-            'amenities',
             'locations',
-            'types',
-            'facilities',
-            'meals',
             'prices',
             'cuisines',
-            'dishes',
-            'dietaryfoods',
-            'goodfors',
-            'property_type',
             'categories',
             'subcategories'
         ));
@@ -160,8 +135,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -199,8 +173,7 @@ class RestaurantListController extends Controller
     public function restaurant_update_contact(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -225,7 +198,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if(!$restaurant){
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found',
             ], 404);
@@ -287,8 +260,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -358,8 +330,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -412,8 +383,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -451,8 +421,7 @@ class RestaurantListController extends Controller
     public function restaurant_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -516,7 +485,7 @@ class RestaurantListController extends Controller
 
     public function restaurant_get_time(Request $request)
     {
-        $restaurant = Restaurant::where('id_restaurant', $request->id_restaurant)->select('open_time','closed_time')->first();
+        $restaurant = Restaurant::where('id_restaurant', $request->id_restaurant)->select('open_time', 'closed_time')->first();
 
         $openTime = date('H:i', strtotime($restaurant->open_time));
         $closedTime = date('H:i', strtotime($restaurant->closed_time));
@@ -551,8 +520,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -599,7 +567,7 @@ class RestaurantListController extends Controller
         // validation
         $validator = Validator::make($request->all(), [
             'id_restaurant' => ['required', 'integer'],
-            'description' => ['required','string'],
+            'description' => ['required', 'string'],
             'name' => 'required',
             'price' => ['required', 'numeric'],
             'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
@@ -615,7 +583,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if(!$restaurant) {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found'
             ], 404);
@@ -682,7 +650,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if(!$restaurant) {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found'
             ], 404);
@@ -716,8 +684,7 @@ class RestaurantListController extends Controller
                 'file' => ['required', 'dimensions:min_width=960']
             ]);
 
-            if ($validator2->fails())
-            {
+            if ($validator2->fails()) {
                 return response()->json([
                     'message' => $validator2->errors()->all(),
                 ], 500);
@@ -756,8 +723,7 @@ class RestaurantListController extends Controller
                 'file' => ['required', 'mimes:jpeg,png,jpg,webp']
             ]);
 
-            if ($validator->fails())
-            {
+            if ($validator->fails()) {
                 return response()->json([
                     'message' => $validator->errors()->all(),
                 ], 500);
@@ -810,8 +776,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found',
                 'status' => 404,
@@ -938,7 +903,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if(!$restaurant){
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found'
             ], 404);
@@ -1160,8 +1125,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
                 'status' => 404,
@@ -1213,8 +1177,7 @@ class RestaurantListController extends Controller
     public function restaurant_store_story(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1237,8 +1200,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id_restaurant);
 
         // check if restaurant does not exist, abort 404
-        if(!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Food Not Found',
             ], 404);
@@ -1285,16 +1247,15 @@ class RestaurantListController extends Controller
             ]);
         }
 
-        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name','id_story')->latest()->get();
+        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name', 'id_story')->latest()->get();
         $getUID = Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first();
-        $restaurantVideo = RestaurantVideo::where('id_restaurant', $request->id_restaurant)->select('id_video','name')->orderBy('order','asc')->get();
+        $restaurantVideo = RestaurantVideo::where('id_restaurant', $request->id_restaurant)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
         $data = [];
 
         $i = 0;
 
-        foreach ($getStory as $item)
-        {
+        foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
             $i++;
@@ -1381,8 +1342,7 @@ class RestaurantListController extends Controller
         $restaurant = Restaurant::find($request->id);
 
         // check if restaurant does not exist, abort 404
-        if (!$restaurant)
-        {
+        if (!$restaurant) {
             return response()->json([
                 'message' => 'Restaurant Not Found',
             ], 404);
@@ -1726,8 +1686,7 @@ class RestaurantListController extends Controller
                 'updated_by' => auth()->user()->id,
             ]);
 
-            if ($update)
-            {
+            if ($update) {
                 $status = 200;
             }
         } catch (\Illuminate\Database\QueryException $e) {
@@ -1752,21 +1711,21 @@ class RestaurantListController extends Controller
         try {
             // dd($request->all());
 
-            $data = RestaurantHasSubCategory::updateOrCreate([
-                'id_restaurant' => $request->id_restaurant,
-                'id_photo' => $request->id_photo
-            ],
-            [
-                'id_subcategory' => $request->tag,
-                'created_by' => Auth::user()->id,
-                'updated_by' => Auth::user()->id,
-            ]);
+            $data = RestaurantHasSubCategory::updateOrCreate(
+                [
+                    'id_restaurant' => $request->id_restaurant,
+                    'id_photo' => $request->id_photo
+                ],
+                [
+                    'id_subcategory' => $request->tag,
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ]
+            );
 
-            if ($data)
-            {
+            if ($data) {
                 $status = 200;
             }
-
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 500;
         }
