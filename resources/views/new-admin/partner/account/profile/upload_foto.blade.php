@@ -67,7 +67,7 @@
 
 @section('content_admin')
 
-<div class="container">
+<div class="container container-dashboard">
     <div class="header-edit-photo">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent m-0 pl-0">

@@ -322,8 +322,7 @@
                 <div class="col-12">
                     <div class="col-md-7 mt-4 ml-max-md-0p" style="margin-left: 20px;">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                onclick="showModalUnsub()">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" onchange="showModalUnsub(this)">
                             <label class="form-check-label" for="flexCheckChecked">
                                 Unsubscribe from all marketing emails
                             </label>
@@ -835,11 +834,13 @@
 @section('scripts')
 
 <script>
-    function showModalUnsub() {
-        $("#unsubModal").modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+    function showModalUnsub(el) {
+        if(el.checked){
+            $("#unsubModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
     }
 
     function showModalRecognition() {
