@@ -3281,6 +3281,7 @@ span.flatpickr-weekday {
     margin-left: 20%;
 }
 
+#modal-show_description .modal-dialog,
 #storymodal .modal-dialog,
 #edit_position_photo .modal-dialog {
     position: absolute !important;
@@ -3288,6 +3289,13 @@ span.flatpickr-weekday {
     left: 0px !important;
     right: 0px !important;
     bottom: 0px !important;
+}
+#modal-show_description .modal-content {
+    height: 100% !important;
+}
+#modal-show_description .modal-content .modal-body {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
 }
 #storymodal .modal-content-story {
     width: 100% !important;
@@ -3314,7 +3322,9 @@ span.flatpickr-weekday {
 #name-content-mobile,
 #name-content,
 #description #description-content,
-#short-description-content #short-description-content,
+#short-description-content #short-description-content {
+    white-space: pre-line;
+}
 /* #short-description-content #short-description-content2 {
     white-space: pre-line;
 } */
