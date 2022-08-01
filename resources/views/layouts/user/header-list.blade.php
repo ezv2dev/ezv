@@ -3306,7 +3306,7 @@
                             <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
                                 {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
                             <span class="checkmark-mode"></span>
-                            
+
                         </label>
                     </div>
 
@@ -3384,7 +3384,7 @@
                             {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
                         <span class="checkmark-mode"></span>
                     </label>
-                    <div style="width: 50%;">
+                    <div style="width: 60%;">
                         <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                             style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
                             <i class="fa-solid fa-user icon-clear"></i>
