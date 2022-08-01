@@ -369,12 +369,169 @@
                     </div>
                 </div>
 
-                    <div class="col-12 text-center">
-                        <input class="price-button" type="submit"
-                        onclick="confirmBooking()"
-                        value="{{ Translate::translate('RESERVE NOW') }}">
+
+                    <div class="row" style="padding-left:15px">
+                        <div class="col-12">
+                            <div class="row" style="font-size: 13px;">
+                                <label class="container-checkbox2">
+                                    <span class="translate-text-group-items">Virtual Account</span>
+                                    <input type="radio" value="va" id="va" name="payment"
+                                        onclick="paymentCheck()" autocomplete="off">
+                                    <span class="checkmark2"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="panel_va" style="display: none; padding:0 30px 10px 20px">
+                            <form method="POST" id="va-form" action="{{ route('api.createVa') }}">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    @csrf
+                                    @auth
+                                        <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+                                    @endauth
+                                    @guest
+                                        <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
+                                        <input type="text" class="form-control" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
+                                        <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
+                                        <input type="text" class="form-control" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
+                                        <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
+                                        <input type="email" class="form-control" name="email_va" id="email_va" value="" placeholder="email">
+                                        <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
+                                    @endguest
+                                        <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa[0]->id_villa) }}">
+                                        <input type="hidden" name="check_in_date" id="check_in_date" value="">
+                                        <input type="hidden" name="check_out_date" id="check_out_date" value="">
+                                        <input type="hidden" name="adult_va" id="adult_va" value="">
+                                        <input type="hidden" name="child_va" id="child_va" value="">
+
+                                        <div id="va_brand" class="row" style="font-size: 13px;">
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bca-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BCA" id="bca" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bni-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BNI" id="bni" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bri-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="BRI" id="bri" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/mandiri-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="MANDIRI" id="mandiri" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/permata-logo.svg') }}">
+                                                    <input class="chckbrnd2" type="radio" value="PERMATA" id="permata" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="container-checkbox2">
+                                                    <img src="{{ URL::asset('assets/payment_logo/bsi-logo.png') }}"
+                                                        style="width: 50%">
+                                                    <input class="chckbrnd2" type="radio" value="BSI" id="bsi" name="bank_option"
+                                                        autocomplete="off">
+                                                    <span class="checkmark2 chckbrnd"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small id="err-slc-pay" style="display: none;" class="invalid-feedback"></small>
+                                        <div class="mt-3 col-12 text-center"><input class="price-button" type="submit"
+                                            value="{{ Translate::translate('RESERVE NOW') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12">
+                            <div class="row" style="font-size: 13px;">
+                                <label class="container-checkbox2">
+                                    <span class="translate-text-group-items">Credit Card</span>
+                                    <input type="radio" value="credit" id="credit" name="payment"
+                                        onclick="paymentCheck()" autocomplete="off">
+                                    <span class="checkmark2"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="panel_credit" style="display: none; padding:0 30px 10px 20px">
+                            <form method="POST" id="payment-form" action="javascript:void(0);">
+                                @csrf
+                                @auth
+                                    <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+                                @endauth
+                                <input type="hidden" name="price_total2" id="price_total2" value="">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label style="margin: 0px; font-weight: 500;">{{ __('user_page.Card Number') }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" id="card-number"
+                                                    placeholder="Card number" value="" onpaste="return false" oncut="return false" />
+                                                <small id="err-cnm-pay" style="display: none;" class="invalid-feedback"></small>
+                                                {{-- <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7 col-md-7">
+                                        <div class="form-group">
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Expiration') }}</label>
+                                            <input class="form-control" type="text" id="card-exp-month"
+                                            placeholder="mm/yy" value="" />
+                                            <small id="err-exp-pay" style="display: none;" class="invalid-feedback"></small>
+                                                {{-- <div class="col-md-6">
+                                                    <input class="form-control" type="text" id="card-exp-year"
+                                                    placeholder="Card expiration year (yyyy)" value="" />
+                                                </div> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-md-4 pull-right hide-if-multi">
+                                        <div class="form-group">
+                                            <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Cvn Code') }}</label>
+                                            <input class="form-control" type="text" id="card-cvn" placeholder="Cvn"
+                                                value="" />
+                                            <small id="err-cvn-pay" style="display: none;" class="invalid-feedback"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small id="res-xnd-pay" style="display: none;" class="invalid-feedback mt-2 mb-2"></small>
+                                <input class="form-control" type="hidden" id="currency"
+                                    placeholder="IDR" value="IDR" />
+
+                                <div class="mt-3 col-12 text-center"><input class="price-button" type="submit"
+                                    value="{{ Translate::translate('RESERVE NOW') }}">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                {{-- </form> --}}
+
+                    {{-- <div class="col-12 text-center"><input class="price-button" type="submit"
+                            value="{{ Translate::translate('RESERVE NOW') }}">
+                    </div>
+                </form> --}}
 
                 <div id="success" style="display:none;">
                     <p>Success! Use the token id below to charge the credit card.</p>
@@ -860,10 +1017,5 @@
             document.getElementById('panel_credit').style.display = 'block';
         }
 
-    }
-</script>
-<script>
-    function confirmBooking() {
-        $('#btnBookingDetail').trigger('click');
     }
 </script>
