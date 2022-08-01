@@ -60,30 +60,36 @@ class CollaboratorController extends Controller
     public function collaborator($id)
     {
         // check if editor not authenticated
-        abort_if(!auth()->check(), 401);
+        // abort_if(!auth()->check(), 401);
 
+        // $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
+        //     ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
+        //     ->join('users', 'users.id', '=', 'collaborator.created_by')
+        //     ->where('collaborator.id_collab', $id)
+        //     ->where('collaborator.status', 1)
+        //     ->first();
+
+        // // check if collab does not exist, abort 404
+        // abort_if(!$profile, 404);
+
+        // // check if the editor does not have authorization
+        // // $this->authorize('collaborator_index');
+        // if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner', 'collaborator']) && auth()->user()->id != $profile->created_by) {
+        //     abort(403);
+        // } elseif (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $profile->created_by) {
+        //     $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
+        //         ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
+        //         ->join('users', 'users.id', '=', 'collaborator.created_by')
+        //         ->where('collaborator.id_collab', $id)
+        //         ->where('collaborator.status', 1)
+        //         ->first();
+        // };
         $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
             ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
             ->join('users', 'users.id', '=', 'collaborator.created_by')
             ->where('collaborator.id_collab', $id)
             ->where('collaborator.status', 1)
             ->first();
-
-        // check if collab does not exist, abort 404
-        abort_if(!$profile, 404);
-
-        // check if the editor does not have authorization
-        // $this->authorize('collaborator_index');
-        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin', 'partner', 'collaborator']) && auth()->user()->id != $profile->created_by) {
-            abort(403);
-        }elseif(in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $profile->created_by){
-            $profile = Collaborator::with(['collaboratorSocial', 'detailReview'])->select('location.name as name_location', 'collaborator.*')
-                ->join('location', 'collaborator.id_location', '=', 'location.id_location', 'left')
-                ->join('users', 'users.id', '=', 'collaborator.created_by')
-                ->where('collaborator.id_collab', $id)
-                ->where('collaborator.status', 1)
-                ->first();
-        };
         $profile->append('user_review');
 
         $user = User::where('id', $profile->created_by)->first();
@@ -385,8 +391,7 @@ class CollaboratorController extends Controller
     public function collab_update_gender(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -448,8 +453,7 @@ class CollaboratorController extends Controller
     public function collab_store_category(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -525,7 +529,7 @@ class CollaboratorController extends Controller
     public function collab_update_location(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check()) {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -598,8 +602,7 @@ class CollaboratorController extends Controller
     public function collab_update_social_media(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -644,7 +647,7 @@ class CollaboratorController extends Controller
 
         // update
         $findCollabSocialMedia = CollaboratorSocialMedia::where('id_collab', $request->id_collab)->first();
-        if($findCollabSocialMedia){
+        if ($findCollabSocialMedia) {
             $updatedCollab = $findCollabSocialMedia->update([
                 'id_collab' => $request->id_collab,
                 'instagram_link' => $request->instagram_link,
@@ -751,8 +754,7 @@ class CollaboratorController extends Controller
     public function update_story(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1008,8 +1010,7 @@ class CollaboratorController extends Controller
     public function update_language(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1047,7 +1048,7 @@ class CollaboratorController extends Controller
         }
 
         CollaboratorLanguage::where('id_collab', $request->id_collab)->delete();
-        if($request->language){
+        if ($request->language) {
             foreach ($request->language as $item) {
                 $data[] = [
                     'id_collab' => $request->id_collab,
@@ -1081,8 +1082,7 @@ class CollaboratorController extends Controller
     public function collab_update_photo(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -1347,8 +1347,7 @@ class CollaboratorController extends Controller
     public function like_collaborator(Request $request, $id)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
