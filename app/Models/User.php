@@ -56,6 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
+    public function roles()
+    {
+        return $this->belongsTo(UserHasRoles::class, 'role_id', 'id');
+    }
 
     public function language()
     {

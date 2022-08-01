@@ -143,12 +143,48 @@
         background-color: #ff7400;
         box-shadow: none;
     }
+    @media only screen and (max-width: 767px) {
+        .modal-dialog .modal-content {
+            border-radius: 0px !important;
+        }
+        .modal-header-editprice,
+        .modal-body-editprice {
+            padding: 1rem !important;
+        }
+        .modal-header-editprice .nav {
+            overflow-x: scroll !important;
+            overflow-y: hidden !important;
+        }
+        .modal-header-editprice .nav li a {
+            white-space: nowrap !important;
+        }
+        .modal-body-editprice .tab-pane .modal-header-editprice {
+            padding: 2rem 3rem 2rem 2rem !important;
+        }
+        .info-todo {
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .button-submit-container button {
+            width: 100% !important;
+        }
+    }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        #btn-submit-availability {
+            margin-left: -35px;
+        }
+        #submitSpecialPrice {
+            margin-left: -45px;
+        }
+    }
 </style>
 
 <!-- Extra large modal -->
 <div class="modal fade modal-availability" id="modal-edit_price" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-fadein" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content" style="border-radius:15px;">
             <div class="modal-header-editprice"
             style="border-bottom: 0.1rem solid #2C3333 !important;">
@@ -237,7 +273,7 @@
                                             <input type="hidden" name="id_villa" id="id_villa"
                                                 value="{{ $villa[0]->id_villa }}">
 
-                                            <div class="row"
+                                            <div class="row info-todo"
                                                 style="margin-bottom: 15px; background: #DAE5D0; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
                                                 <div class="col-12">
                                                     <span style="color: #383838; margin-left: 8px;">
@@ -334,11 +370,11 @@
                                                 value="{{ $villa[0]->id_villa }}">
 
                                             <div class="row">
-                                                <div class="col-8" style="height: 60vh; overflow-y: scroll;">
+                                                <div class="col-12 col-md-8" style="height: 60vh; overflow-y: scroll;">
                                                     <div id="calendar"></div>
                                                 </div>
 
-                                                <div class="col-4">
+                                                <div class="col-12 col-md-4">
 
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -373,7 +409,7 @@
                                                         <!-- Submit -->
                                                         <div class="row items-push">
                                                             <center>
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6 button-submit-container">
                                                                     <button type="submit" class="btn btn-sm btn-primary mt-3"
                                                                         id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
                                                                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
@@ -465,7 +501,7 @@
                             <div class="tabbable column-wrapper">
                                 <div class="tab-content tab-content-language column rigth" id="tabs">
                                     <div class="tab-pane active" id="importCalendar">
-                                        <div class="row"
+                                        <div class="row info-todo"
                                             style="margin-bottom: 15px; background: #1B2430; padding: 10px; margin-left: -32px;margin-right: -32px;margin-top: 15px;">
                                             <div class="col-12">
                                                 <span style="color: #fff; margin-left: 8px;">
@@ -499,13 +535,13 @@
                                     <div class="tab-pane" id="addAvailability">
                                         {{-- <hr class="mt-3"> --}}
                                         <div class="row">
-                                            <div class="col-8" style="height: 60vh; overflow-y: scroll;">
+                                            <div class="col-12 col-md-8" style="height: 60vh; overflow-y: scroll;">
                                                 <div id="calendar2"></div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-12 col-md-4">
                                                 <div class="row items-push">
                                                     <center>
-                                                        <div class="col-6">
+                                                        <div class="col-12 col-lg-6 button-submit-container">
                                                             <button type="submit" id="btn-submit-availability"
                                                                 class="btn btn-sm btn-danger mt-2"
                                                                 name="action" style="width: 200px;">
@@ -758,6 +794,7 @@
         if(indicator == 'availability'){
             $('#trigger-tab-price').removeClass('active');
             $('#editprice').removeClass('active');
+            $('#extraPrice').removeClass('active');
             $('#trigger-tab-extraprice').removeClass('active');
             $('#content-tab-extraPrice').removeClass('active');
             $('#trigger-tab-availability').addClass('active');

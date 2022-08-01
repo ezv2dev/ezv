@@ -3160,6 +3160,8 @@ input::-webkit-inner-spin-button {
 }
 
 .container-grid-hotel .grid-list-container {
+    border: solid 1px #bbb;
+    padding: 8px;
     border-radius: 20px;
     height: fit-content;
 }
@@ -3186,13 +3188,19 @@ input::-webkit-inner-spin-button {
         font-size: 142%;
     }
 }
+@media only screen and (max-width: 599px) {
+    .container-grid-hotel .grid-list-container {
+        border: none !important;
+        padding: 0px !important;
+    }
+}
 @media only screen and (max-width: 649px) {
     .villa-list-name {
         font-size: 18px !important;
     }
     .villa-list-video {
-        width: 56px !important;
-        height: 56px !important;
+        width: 44px !important;
+        height: 44px !important;
     }
     .video-button {
         margin-top: 0px !important;
@@ -3207,6 +3215,11 @@ input::-webkit-inner-spin-button {
     }
     .villa-list-description-container {
         text-align: left;
+    }
+}
+@media only screen and (min-width: 615px) and (max-width: 648px) {
+    .slick-slide {
+        width: 600px;
     }
 }
 @media only screen and (min-width: 649px) and (max-width: 991px) {
@@ -3294,6 +3307,9 @@ input::-webkit-inner-spin-button {
     .slick-arrow {
         display: none !important;
     }
+    .list-image-content-villa .absolute-right {
+        right: 15px !important;
+    }
 }
 @media only screen and (min-width: 576px) {
     .dots-container {
@@ -3371,6 +3387,10 @@ input::-webkit-inner-spin-button {
     }
 }
 @media only screen and (max-width: 991px) {
+    .villa-list-video {
+        width: 46px !important;
+        height: 46px !important;
+    }
     #villa-list-video-desktop {
         display: none !important;
     }

@@ -105,9 +105,9 @@
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                         value="{{ __('user_page.VIEW DETAILS') }}" readonly> --}}
                     @if ($villa[0]->instant_book == 'yes')
-                            <input class="price-button" onclick="details_reserve()"
-                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        <input class="price-button" onclick="details_reserve()"
+                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                            value="{{ __('user_page.VIEW DETAILS') }}" readonly>
                     @else
                         @guest
                             <input class="price-button" onclick="loginForm(2)"
@@ -124,9 +124,11 @@
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
-                    <span class="price m-0" id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
+                    <span class="price m-0"
+                        id="priceBottom"><strong>{{ CurrencyConversion::exchangeWithUnit($villa[0]->price) }}</strong>/{{ __('user_page.night') }}
                     </span>
-                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none" id="priceBottomFilled"></span>
+                    <span style="font-size: 14px; font-weight: 700;" class="price text-end m-0 d-none"
+                        id="priceBottomFilled"></span>
                     <span style="font-size: 13px;" class="price m-0 d-none" id="dateSelected"></span>
                 </div>
             </div>
@@ -145,7 +147,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">						
+                                        style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -211,11 +213,14 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
-                                        ({{ session('currency') }})</p>
+                                        ({{ session('currency') }})
+                                    </p>
                                     {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                                 @else
@@ -276,8 +281,10 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -453,8 +460,7 @@
 
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
-                            <span class="translate-text-single"
-                                id="short-description-content2">
+                            <span class="translate-text-single" id="short-description-content2">
                                 {{ Translate::translate($villa[0]->short_description) ?? __('user_page.There is no description yet') }}
                                 {{-- {{ $villa[0]->short_description ?? __('user_page.There is no description yet') }} --}}</span>
                             @auth
@@ -733,9 +739,9 @@
                                                                     <a type="button"
                                                                         onclick="view({{ $item->id_video }})"
                                                                         style="height: 70px; width: 70px;">
-                                                                @else
-                                                                    <a type="button" onclick="showPromotionMobile()"
-                                                                        style="height: 70px; width: 70px;">
+                                                                    @else
+                                                                        <a type="button" onclick="showPromotionMobile()"
+                                                                            style="height: 70px; width: 70px;">
                                                                 @endif
                                                             @endauth
                                                             <div class="story-video-player"><i class="fa fa-play"></i>
@@ -987,18 +993,36 @@
                                     @endif
                                 @endauth
                             </div> --}}
+                            @php
+                                $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$_SERVER['HTTP_USER_AGENT'])||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($_SERVER['HTTP_USER_AGENT'],0,4));
+                            @endphp
                             <p id="description-content">
+                                @if ($isMobile)
+                                {!! Str::limit(Translate::translate($villa[0]->description), 400, ' ...') ??
+                                __('user_page.There is no description yet') !!}
+                                @else
                                 {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
                                     __('user_page.There is no description yet') !!}
+                                @endif
                             </p>
                             <span id="buttonShowMoreDescription">
-                                @if (Str::length($villa[0]->description) > 600)
-                                    <a id="btnShowMoreDescription" style="font-weight: 600;"
-                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
-                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                        <span style="color: #ff7400;">></span></a>
+                                @if ($isMobile)
+                                    @if (Str::length($villa[0]->description) > 400)
+                                        <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                            href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                            <span style="color: #ff7400;">></span></a>
+                                    @endIf
+                                @else
+                                    @if (Str::length($villa[0]->description) > 600)
+                                        <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                            href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                            <span style="color: #ff7400;">></span></a>
+                                    @endIf
                                 @endIf
                             </span>
+
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     <div id="description-form" style="display:none;">
@@ -1297,7 +1321,7 @@
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Price') }}</a>
                             @endif
                         @endauth
-                        <form method="POST" action="{{ route('villa_booking_confirm') }}" >
+                        <form method="POST" action="{{ route('villa_booking_confirm') }}">
                             @csrf
                             <input type="hidden" name="id_villa" value="{{ $villa[0]->id_villa }}">
                             <div class="row">
@@ -1326,30 +1350,35 @@
 
                                     <div class="col-6 p-5-price line-right-orange">
                                         <div class="col-12" style="text-align: center;">
-                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                            <a type="button" class="collapsible_check"
+                                                style="background-color: white;">
                                                 <p style="margin-left: 0px; margin-bottom:0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-IN') }}
                                                 </p>
-                                                <input class="date-form" type="text" id="check_in" name="check_in"
-                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                                <input class="date-form" type="text" id="check_in"
+                                                    name="check_in" placeholder="{{ __('user_page.Add Date') }}"
+                                                    readonly>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-6 p-5-price">
                                         <div class="col-12" style="text-align: center;">
-                                            <a type="button" class="collapsible_check" style="background-color: white;">
+                                            <a type="button" class="collapsible_check"
+                                                style="background-color: white;">
                                                 <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-OUT') }}
                                                 </p>
-                                                <input class="date-form" type="text" id="check_out" name="check_out"
-                                                    placeholder="{{ __('user_page.Add Date') }}" readonly>
+                                                <input class="date-form" type="text" id="check_out"
+                                                    name="check_out" placeholder="{{ __('user_page.Add Date') }}"
+                                                    readonly>
                                             </a>
                                         </div>
                                     </div>
 
                                     <!-- <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
                                         style="width: fit-content; margin-left: -675px; margin-top: -17px;"> -->
-                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check" style="min-height: 430px; max-height: 430px;">
+                                    <div class="content sidebar-popup side-check-in-calendar" id="popup_check"
+                                        style="min-height: 430px; max-height: 430px;">
                                         <div class="desk-e-call">
                                             <div class="flatpickr-container"
                                                 style="display: flex; justify-content: center;">
@@ -1359,7 +1388,8 @@
                                                         <a type="button" id="clear_date"
                                                             style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     </div>
-                                                    <div class="flatpickr" id="inline_reserve" style="text-align: left;">
+                                                    <div class="flatpickr" id="inline_reserve"
+                                                        style="text-align: left;">
                                                         {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
                                                     </div>
                                                 </div>
@@ -1373,8 +1403,8 @@
                                     <button type="button" class="collapsible">{{ __('user_page.Number of Guest') }}
                                         <p class="guest-right">
                                             {{ __('user_page.guest') }}</p>
-                                        <input class="guest-right-input" type="number" id="total_guest2" value="1"
-                                            min="0" readonly>
+                                        <input class="guest-right-input" type="number" id="total_guest2"
+                                            value="1" min="0" readonly>
                                     </button>
                                     <div class="content sidebar-popup sidebar-popup-tamu" id="popup_guest">
                                         <div class="row" style="margin-top: 10px;">
@@ -1773,7 +1803,7 @@
                     <hr>
                     <div class="review-bottom">
                         @if ($detail->count() > 0)
-                            <h2 style="margin: 0px;">{{ __('user_page.Review') }}</h2>
+                            <h2>{{ __('user_page.Review') }}</h2>
                             <div class="row review-container">
                                 <div class="col-lg-6 col-md-6 col-xs-12">
                                     <div class="row">
@@ -1782,7 +1812,8 @@
                                         </div>
                                         <div class="col-6 ">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_clean }}
@@ -1793,7 +1824,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_check_in }}
@@ -1804,7 +1836,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_value * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_value }}
@@ -1819,7 +1852,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_service * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_service }}
@@ -1830,7 +1864,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_location * 20 }}%"></span>
                                             </div>
                                             <span>
                                                 {{ $detail[0]->average_location }}
@@ -1839,7 +1874,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 pt-3">
-                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                    <button type="button" onclick="showMoreReview();"
+                                        class="btn btn-outline-dark">
                                         Show all reviews
                                     </button>
                                 </div>
@@ -1859,7 +1895,7 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="review-txt">
-                                        {{ __('user_page.There is no reviews yet') }}
+                                            {{ __('user_page.There is no reviews yet') }}
                                         </p>
                                     </div>
                                 </div>
@@ -1930,7 +1966,8 @@
                                                     </div>
                                                     <div class="col-6 ">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->cleanliness * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->cleanliness }}
                                                     </div>
@@ -1941,7 +1978,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->check_in * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->check_in }}
                                                     </div>
@@ -1952,7 +1990,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->value * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->value }}
                                                     </div>
@@ -1965,7 +2004,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->service * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->service }}
                                                     </div>
@@ -1976,7 +2016,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $villa[0]->userReview->location * 20 }}%"></span>
                                                         </div>
                                                         {{ $villa[0]->userReview->location }}
                                                     </div>
@@ -2410,15 +2451,16 @@
                     {{-- Insurance --}}
                     <div class="">
                         <h3>
-                        {{ __('user_page.EZV Cover') }}
+                            {{ __('user_page.EZV Cover') }}
                         </h3>
                         <p id="description-content">
-                        {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
+                            {{ __('user_page.Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.') }}
                         </p>
 
                         <a id="" style="font-weight: 600;" href="javascript:void(0);"
                             onclick="showMoreInsurance();">
-                            <span style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
+                            <span
+                                style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Learn more') }}</span>
                         </a>
 
                     </div>
@@ -3482,7 +3524,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document" style="overflow-y: initial !important">
+        <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered"
+            role="document" style="overflow-y: initial !important">
             <div class="modal-content">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -3688,7 +3731,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                            <button onclick="share_function()">Copy link</button> -->
+                                                        <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5037,8 +5080,7 @@
                             let galleryDiv = $('.gallery');
                             let galleryLength = galleryDiv.find('a').length;
 
-                            if (galleryLength == 0)
-                            {
+                            if (galleryLength == 0) {
                                 $('.gallery').html("");
                                 $('.gallery').html('{{ __('user_page.there is no gallery yet') }}');
                             }
@@ -5577,7 +5619,7 @@
                                 <span>{{ __('user_page.you have been request deactivation for this content,') }}
                                 </span>
                                 <button class="btn"
-                                    type="submit">{{ __('user_page.cancel deactivation') }}</button>
+                                    type="submit" onclick="cancelDeactivation()>{{ __('user_page.cancel deactivation') }}</button>
                                 <span> ?</span>
                             </div>
                         `);
@@ -5609,6 +5651,14 @@
                                 <span>{{ __('user_page.this content is active') }}</span>
                             </div>
                         `);
+
+                        $("#activation1").html(`
+                            <div class="alert alert-success d-flex flex-row align-items-center"
+                                role="success">
+                                <span>{{ __('user_page.this content is active') }}</span>
+                            </div>
+                        `);
+
                         iziToast.success({
                             title: "Success",
                             message: response.message,

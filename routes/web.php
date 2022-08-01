@@ -438,8 +438,8 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::post('/admin/villa/store', [VillaListingController::class, 'store'])->name('admin_villa_store');
     Route::get('/admin/villa/delete/{id}', [VillaListingController::class, 'destroy'])->name('admin_villa_destroy');
     Route::get('/admin/villa/update-status/{id}', [VillaListingController::class, 'status'])->name('admin_villa_update_status');
-    Route::get('/admin/restaurant/update-status/{id}', [Restaurant\RestaurantController::class, 'update_status'])->name('admin_restaurant_update_status');
-    Route::post('/admin/restaurant/grade/{id}', [Restaurant\RestaurantController::class, 'grade'])->name('restaurant_update_grade');
+    Route::get('/admin/food/update-status/{id}', [Restaurant\RestaurantController::class, 'update_status'])->name('admin_food_update_status');
+    Route::post('/food/grade/{id}', [Restaurant\RestaurantController::class, 'grade'])->name('restaurant_update_grade');
     Route::post('/admin/restaurant/store', [RestaurantListingController::class, 'store'])->name('admin_restaurant_store');
     Route::get('/admin/restaurant/delete/{id}', [RestaurantListingController::class, 'destroy'])->name('admin_restaurant_destroy');
     Route::post('/admin/things-to-do/store', [ActivityListingController::class, 'store'])->name('admin_activity_store');
@@ -500,7 +500,7 @@ Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra']
 
 // ! End Verified
 Route::post('/villa/update/request-update-status', [ViewController::class, 'request_update_status'])->name('villa_request_update_status');
-Route::patch('/restaurant/{id}/update/request-update-status', [Restaurant\RestaurantController::class, 'request_update_status'])->name('restaurant_request_update_status');
+Route::post('/food/update/request-update-status', [Restaurant\RestaurantController::class, 'request_update_status'])->name('restaurant_request_update_status');
 Route::post('/wow/update/request-update-status', [Activity\ActivityController::class, 'request_update_status'])->name('activity_request_update_status');
 Route::patch('/hotel/{id}/update/request-update-status', [Hotel\HotelDetailController::class, 'request_update_status'])->name('hotel_request_update_status');
 Route::get('/villa/request/video/{id}/{name}', [ViewController::class, 'villa_request_video'])->name('villa_request_video');
@@ -1059,7 +1059,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/restaurant/get/time', [Restaurant\RestaurantListController::class, 'restaurant_get_time'])->name('restaurant_get_time');
     Route::post('/restaurant/update/time', [Restaurant\RestaurantListController::class, 'restaurant_update_time'])->name('restaurant_update_time');
     Route::post('/restaurant/update/type', [Restaurant\RestaurantListController::class, 'restaurant_update_type'])->name('restaurant_update_type');
-    Route::patch('/restaurant/{id}/update/cancel-request-update-status', [Restaurant\RestaurantController::class, 'cancel_request_update_status'])->name('restaurant_cancel_request_update_status');
+    Route::post('/food/update/cancel-request-update-status', [Restaurant\RestaurantController::class, 'cancel_request_update_status'])->name('restaurant_cancel_request_update_status');
     // Route::post('/restaurant/update/story', 'ViewController@villa_update_story')->name('villa_update_story');
     Route::post('/restaurant/photo/store', [Restaurant\RestaurantListController::class, 'restaurant_store_photo'])->name('restaurant_store_photo');
     Route::post('/restaurant/menu/store', [Restaurant\RestaurantListController::class, 'restaurant_store_menu'])->name('restaurant_store_menu');

@@ -272,7 +272,11 @@ function editDescription() {
                 description: $("#description-form-input").val(),
             },
             success: function (response) {
-                $("#description-content").html(response.data.substring(0, 600));
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                } else {
+                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                }
 
                 console.log(response.data.length);
 
@@ -283,16 +287,28 @@ function editDescription() {
                     message: response.message,
                     position: "topRight",
                 });
-
-                if (response.data.length > 600) {
-                    $("#buttonShowMoreDescription").html("");
-                    $("#buttonShowMoreDescription").append(
-                        '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
-                    );
-                    $("#modalDescriptionVilla").html(response.data);
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    if (response.data.length > 400) {
+                        $("#buttonShowMoreDescription").html("");
+                        $("#buttonShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        $("#modalDescriptionVilla").html(response.data);
+                    } else {
+                        $("#buttonShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 } else {
-                    $("#buttonShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").remove();
+                    if (response.data.length > 600) {
+                        $("#buttonShowMoreDescription").html("");
+                        $("#buttonShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        $("#modalDescriptionVilla").html(response.data);
+                    } else {
+                        $("#buttonShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 }
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");

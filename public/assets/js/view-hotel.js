@@ -415,6 +415,10 @@ function add_room() {
     $("#modal-add_room").modal("show");
 }
 
+function showMoreReview() {
+    $("#modal-show_review").modal("show");
+}
+
 function edit_price() {
     $("#modal-edit_price").modal("show");
 }

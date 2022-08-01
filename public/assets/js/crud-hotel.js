@@ -271,23 +271,39 @@ function editDescriptionHotel(id_hotel) {
                 description: $("#description-form-input").val(),
             },
             success: function(response) {
-                $("#description-content").html(response.data.substring(0, 600));
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                } else {
+                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                }
 
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
-
-                if (response.data.length > 600) {
-                    $("#btnShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").append(
-                        '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
-                    );
-                    $("#modalDescriptionHotel").html(response.data);
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    if (response.data.length > 400) {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        $("#modalDescriptionHotel").html(response.data);
+                    } else {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 } else {
-                    $("#btnShowMoreDescription").html("");
-                    $("#btnShowMoreDescription").remove();
+                    if (response.data.length > 600) {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").append(
+                            '<a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);" onclick="showMoreDescription();"><span style="text-decoration: underline; color: #ff7400;">Show more</span> <span style="color: #ff7400;">></span></a>'
+                        );
+                        $("#modalDescriptionHotel").html(response.data);
+                    } else {
+                        $("#btnShowMoreDescription").html("");
+                        $("#btnShowMoreDescription").remove();
+                    }
                 }
                 btn.innerHTML = "<i class='fa fa-check'></i> Done";
                 btn.classList.remove("disabled");
