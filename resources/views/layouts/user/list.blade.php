@@ -290,7 +290,7 @@ if (isset($_COOKIE['tema'])) {
                         <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                     </a>
                 </div>
-                <div class="d-flex align-items-center mb-2" id="changeThemeMobile">
+                <div class="d-flex align-items-center mb-2" id="changeThemeMobile" style="padding-left: 7px;">
                     <div class="logged-user-menu" style="">
                         <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }}">
                             <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
@@ -330,7 +330,7 @@ if (isset($_COOKIE['tema'])) {
                                 <i class="fas fa-{{ $item->icon }}"
                                     @php
                                         $amenitiesIds = explode(',', request()->get('fAmenities'));
-                                    @endphp 
+                                    @endphp
                                     @if (in_array($item->id_amenities, $amenitiesIds)) style="color: #ff7400;"@endif>
                                 </i>
                                 <p class="m-0">{{ $item->name }}</p>
@@ -1341,7 +1341,7 @@ if (isset($_COOKIE['tema'])) {
         }
 
     </script>
-    
+
     <script>
         $("input[name='fViews[]']").on('click', function() {
             var $box = $(this);
@@ -1516,9 +1516,9 @@ if (isset($_COOKIE['tema'])) {
             }
         });
 
-        // close sidebar menu in dekstop size 
+        // close sidebar menu in dekstop size
         $(window).resize(function(){
-            if($(document).width() > 991){ 
+            if($(document).width() > 991){
                 $('.btn-close-expand-navbar-mobile').click()
             }
         })
