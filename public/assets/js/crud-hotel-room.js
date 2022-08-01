@@ -272,7 +272,11 @@ function editDescription() {
                 description: $("#description-form-input").val(),
             },
             success: function (response) {
-                $("#description-content").html(response.data.substring(0, 600));
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                } else {
+                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                }
 
                 console.log(response.data.length);
 

@@ -133,9 +133,11 @@ function saveDescription() {
                     "description-form-input"
                 );
 
-                $("#description-content").html(
-                    response.data.description.substring(0, 600)
-                );
+                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                } else {
+                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                }
 
                 desc_input.value = response.data.description;
 

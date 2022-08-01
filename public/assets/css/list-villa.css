@@ -3198,6 +3198,10 @@ input::-webkit-inner-spin-button {
     .villa-list-name {
         font-size: 18px !important;
     }
+    .villa-list-video {
+        width: 44px !important;
+        height: 44px !important;
+    }
     .video-button {
         margin-top: 0px !important;
         margin-left: 0px !important;
