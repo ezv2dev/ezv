@@ -196,7 +196,7 @@
         .overflow-x-scroll{
             overflow-x:auto;
         }
-        
+
         .layout-header-footer{
             display:flex;
             flex-direction:column;
@@ -210,7 +210,7 @@
             padding-bottom: 1rem !important;
         }
 
-        @media (min-width: 768px) { 
+        @media (min-width: 768px) {
             .layout-header-footer{
                 flex-direction:row;
                 text-align:left;
@@ -264,7 +264,7 @@
         .title-bar:hover::before{
             width:100%;
         }
-        
+
         .title-bar:hover::before{
             transition:.2s all ease-in;
         }
@@ -464,19 +464,16 @@
                         <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
                     </div> --}}
                     <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
-                            style="color: white;">
-
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
+                            <img style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
-                                <p class="sub-drop mb-0 ms-2" style="color: #585656">Change Currency
-                                    ({{ session('currency') }})
-                                </p>
-                                {{-- <img style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                             @else
-                                <p class="sub-drop mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                                {{-- <img style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
                             @endif
 
                         </a>
