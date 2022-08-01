@@ -96,8 +96,7 @@
                             {{ __('user_page.Collabs') }}
                         </a>
                     @endif
-                    <a class="d-block mb-2" href="{{ route('profile_index') }}"
-                        style="width: fit-content; color:#585656;">
+                    <a class="d-block mb-2" href="{{ route('profile_index') }}" style="width: fit-content; color:#585656;">
                         {{ __('user_page.My Profile') }}
                     </a>
                     <a class="d-block mb-2" href="{{ route('change_password') }}"
@@ -133,20 +132,24 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
-                        <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                        @if (session()->has('currency'))
-                        <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                        <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                            @endif
 
-                    </a>
+                        </a>
                     </div>
                     <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -194,20 +197,23 @@
                     </a>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center" style="color: white;">
-                    <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                    @if (session()->has('currency'))
-                    <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                        style="color: white;">
+                        <img class="lozad"
+                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                            src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                        @if (session()->has('currency'))
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                    @else
-                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                        @else
+                            <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                    @endif
+                        @endif
 
-                </a>
+                    </a>
                 </div>
             @endauth
         </div>
@@ -290,7 +296,7 @@
                                 <div class="nav-link-form" id="collaborator-form">
                                     <li class="nav-item">
                                         <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
-                                            target="_blank" href="{{ route('collaborator_intro') }}"><img
+                                            target="_blank" href="{{ route('collaborator_list') }}"><img
                                                 src="{{ asset('assets/icon/menu/collab1.svg') }}"
                                                 style="width: 34px; height: auto; filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(2deg) brightness(112%) contrast(101%)"></a>
                                     </li>
@@ -302,8 +308,8 @@
                             {{-- Header Search --}}
                             <div class="search-box">
                                 <div id="search_bar">
-                                    <form action="{{ route('search_home_combine') }}" method="GET"
-                                        id="basic-form" autocomplete="off">
+                                    <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form"
+                                        autocomplete="off">
                                         <div id="bar" class="bar">
                                             <div class="location">
                                                 <p>{{ __('user_page.Location') }}</p>
@@ -769,8 +775,7 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;"
-                                target="_blank">
+                            <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
                                 {{ __('user_page.Become a host') }}
                             </a>
 
@@ -850,11 +855,13 @@
                                 <p style="text-align: center;">
                                     <a href="https://www.apple.com/id/app-store/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                        <img src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                        <img
+                                            src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                     </a>
                                     <a href="https://play.google.com/" target="_blank"
                                         class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                        <img src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                        <img
+                                            src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                     </a>
                                 </p>
                             </div>
@@ -870,7 +877,8 @@
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 2rem 6rem;" class="discover-experiences-container">
-                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">{{ __('user_page.Discover Experiences') }}</h1>
+                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">
+                            {{ __('user_page.Discover Experiences') }}</h1>
                         <div class="row-grid" id="discover-experiences-food">
                             <div class="mb-3">
                                 <div class="card card-overlay  bg-dark text-white border-0 overflow-hidden"
@@ -913,7 +921,8 @@
             <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 0rem 6rem;" class="discover-experiences-container">
-                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">{{ __('user_page.Discover Experiences') }}</h1>
+                        <h1 class="mb-5" style="margin-bottom: 1rem !important;">
+                            {{ __('user_page.Discover Experiences') }}</h1>
                         <div class="row-grid" id="discover-experiences-things-todo">
                             <div class="mb-3">
                                 <div class="row-grid-img">
@@ -1520,6 +1529,7 @@
                 $('#trigger-tab-currency').removeClass('active');
                 $('#content-tab-currency').removeClass('active');
             }
+
             function currency() {
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
