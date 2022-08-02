@@ -320,6 +320,11 @@ class Activity extends Model
         return $this->hasOne(ActivityDetailReview::class, 'id_activity', 'id_activity');
     }
 
+    public function detailComment()
+    {
+        return $this->hasMany(ActivityReview::class, 'id_activity', 'id_activity');
+    }
+
     public function userReview()
     {
         if (auth()->check()) {
