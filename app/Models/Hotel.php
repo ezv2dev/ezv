@@ -150,6 +150,11 @@ class Hotel extends Model
         return $this->hasOne(HotelDetailReview::class, 'id_hotel', 'id_hotel');
     }
 
+    public function detailComment()
+    {
+        return $this->hasMany(HotelReview::class, 'id_hotel', 'id_hotel');
+    }
+
     public function extendGuest()
     {
         return $this->hasOne(HotelExtendGuest::class, 'id_hotel', 'id_hotel');
