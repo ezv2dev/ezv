@@ -231,7 +231,7 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                            <div id="searchbox-mob" class="searchbox display-block" onclick="popUp();"
+                            <div id="searchbox-mob" class="searchbox display-none" onclick="popUp();"
                                 style="cursor: pointer; border: none; margin:0;">
                                 <span class="top-search"><i class="fa fa-search"></i></span>
                             </div>
@@ -1450,6 +1450,8 @@
                     document.querySelector("#searchbox").classList.remove("display-block");
                     document.getElementById("nav").classList.remove("position-fixed");
                     document.getElementById("nav").classList.remove("padding-top-0");
+                    document.getElementById("searchbox-mob").classList.add("display-none");
+                    document.getElementById("searchbox-mob").classList.remove("display-block");
 
                     function removeClass(elements, className) {
                         for (var i = 0; i < elements.length; i++) {
@@ -1477,6 +1479,9 @@
                         document.getElementById("nav").classList.add("position-fixed");
                         document.getElementById("nav").classList.add("padding-top-0");
                         document.getElementById("nav").classList.remove("search-height");
+                        document.getElementById("searchbox-mob").classList.remove("display-none");
+                        document.getElementById("searchbox-mob").classList.add("display-block");
+                        
 
                         function addClass(elements, className) {
                             for (var i = 0; i < elements.length; i++) {
@@ -1504,6 +1509,10 @@
 
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
+
+                        
+                    
+                        
                     }
                 }
             });
