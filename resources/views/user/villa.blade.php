@@ -2038,9 +2038,9 @@
                                                     @csrf
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
-                                                <div class="col-12 justify-content-start">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                                    
+													<div class="row">
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                                                             <div class="d-flex">
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Cleanliness') }}
@@ -2287,7 +2287,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                                                             <div class="col-12">
                                                                 {{ __('user_page.Comment') }}
                                                             </div>
@@ -2302,7 +2302,6 @@
                                                                     style="width: 200px">{{ __('user_page.Save') }}</button>
                                                             </center>
                                                         </div>
-                                                    </div>
                                                 </div>
                                                 </form>
                                             </div>
