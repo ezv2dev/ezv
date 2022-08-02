@@ -1035,7 +1035,7 @@
         if(activityLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
                         alt="">
@@ -1043,13 +1043,13 @@
             }
         } else {
             if(activityLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -1158,7 +1158,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                        <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                             <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
@@ -1184,7 +1184,7 @@
 
                                 <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
-                                        <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="link-detail">
+                                        <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
                                             <i class=" text-orange fa-solid fa-arrow-right"></i>
                                         </a>
