@@ -1459,7 +1459,7 @@
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
                                                                 @if (isset($_COOKIE['sCheck_in']) && isset($_COOKIE['sCheck_out']))
-                                                                    <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
+                                                                    <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
