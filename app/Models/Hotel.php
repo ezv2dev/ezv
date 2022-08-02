@@ -140,6 +140,11 @@ class Hotel extends Model
         return $this->hasMany(HotelVideo::class, 'id_hotel', 'id_hotel');
     }
 
+    public function story()
+    {
+        return $this->hasMany(HotelStory::class, 'id_hotel', 'id_hotel');
+    }
+
     public function photo()
     {
         return $this->hasMany(HotelPhoto::class, 'id_hotel', 'id_hotel');

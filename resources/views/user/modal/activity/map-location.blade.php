@@ -298,6 +298,27 @@
             }
         }
 
+        // check if video exist
+        let video = '';
+        if(restaurantLocations.video && restaurantLocations.video.length != 0){
+            const lastIndex = restaurantLocations.video.length-1;
+            const videoName = restaurantLocations.video[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/restaurant/${restaurantLocations.uid}/${videoName}#1.0`;
+            video = url;
+        } else if(restaurantLocations.photo && restaurantLocations.photo.length != 0){
+            const lastIndex = restaurantLocations.photo.length-1;
+            const photoName = restaurantLocations.photo[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/restaurant/${restaurantLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else if(restaurantLocations.image){
+            const photoName = restaurantLocations.image;
+            const url = `{{ env('APP_URL') }}/foto/restaurant/${restaurantLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = url;
+        }
+
         var name = restaurantLocations.name;
         if(name.length > 37) {
             name = restaurantLocations.name.substring(0, 37)+'...';
@@ -414,6 +435,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank">
+                                        ${video}
                                         <p class="card-text text-20 text-orange fw-600 mt-1">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
                                         <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -574,6 +596,27 @@
             }
         }
 
+        // check if video exist
+        let video = '';
+        if(villaLocations.video && villaLocations.video.length != 0){
+            const lastIndex = villaLocations.video.length-1;
+            const videoName = villaLocations.video[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/villa/${villaLocations.uid}/${videoName}#1.0`;
+            video = url;
+        } else if(villaLocations.photo && villaLocations.photo.length != 0){
+            const lastIndex = villaLocations.photo.length-1;
+            const photoName = villaLocations.photo[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/villa/${villaLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else if(villaLocations.image){
+            const photoName = villaLocations.image;
+            const url = `{{ env('APP_URL') }}/foto/villa/${villaLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = url;
+        }
+
         var name = villaLocations.name;
         if(name.length > 37) {
             name = villaLocations.name.substring(0, 37)+'...';
@@ -681,6 +724,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank">
+                                        ${video}
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>
@@ -841,6 +885,27 @@
             }
         }
 
+        // check if video exist
+        let video = '';
+        if(hotelLocations.video && hotelLocations.video.length != 0){
+            const lastIndex = hotelLocations.video.length-1;
+            const videoName = hotelLocations.video[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/hotel/${hotelLocations.uid}/${videoName}#1.0`;
+            video = url;
+        } else if(hotelLocations.photo && hotelLocations.photo.length != 0){
+            const lastIndex = hotelLocations.photo.length-1;
+            const photoName = hotelLocations.photo[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/hotel/${hotelLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else if(hotelLocations.image){
+            const photoName = hotelLocations.image;
+            const url = `{{ env('APP_URL') }}/foto/hotel/${hotelLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = url;
+        }
+
         var name = hotelLocations.name;
         if(name.length > 37) {
             name = hotelLocations.name.substring(0, 37)+'...';
@@ -929,6 +994,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
+                                        ${video}
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from this activity</span></p>
                                     </a>
@@ -1086,6 +1152,27 @@
             }
         }
 
+        // check if video exist
+        let video = '';
+        if(activityLocations.video && activityLocations.video.length != 0){
+            const lastIndex = activityLocations.video.length-1;
+            const videoName = activityLocations.video[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/activity/${activityLocations.uid}/${videoName}#1.0`;
+            video = url;
+        } else if(activityLocations.photo && activityLocations.photo.length != 0){
+            const lastIndex = activityLocations.photo.length-1;
+            const photoName = activityLocations.photo[lastIndex].name;
+            const url = `{{ env('APP_URL') }}/foto/activity/${activityLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else if(activityLocations.image){
+            const photoName = activityLocations.image;
+            const url = `{{ env('APP_URL') }}/foto/activity/${activityLocations.uid}/${photoName}#1.0`;
+            video = url;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = url;
+        }
+
         var name = activityLocations.name;
         if(name.length > 37) {
             name = activityLocations.name.substring(0, 37)+'...';
@@ -1201,6 +1288,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
+                                        ${video}
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                         <p class="card-text text-grey-2 text-12 fw-500 text-align-justify mt-1">${short_description}</p>

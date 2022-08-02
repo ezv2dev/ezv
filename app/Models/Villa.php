@@ -556,6 +556,10 @@ class Villa extends Model
     {
         return $this->hasMany(VillaVideo::class, 'id_villa', 'id_villa');
     }
+    public function story()
+    {
+        return $this->hasMany(VillaStory::class, 'id_villa', 'id_villa');
+    }
     public function amenities()
     {
         return $this->belongsToMany(Amenities::class, 'villa_amenities', 'id_villa', 'id_amenities', 'id_villa', 'id_amenities');

@@ -16,7 +16,7 @@ class LocationByCoordinateAreaController extends Controller
     public function restaurant(Request $request)
     {
         $restaurant = Restaurant::with([
-                'location','cuisine','detailReview','menu','photo','video'
+                'location','cuisine','detailReview','menu','photo','video', 'story'
             ])
             ->whereBetween('latitude', [$request->latitude_h, $request->latitude_j])
             ->whereBetween('longitude', [$request->longitude_h, $request->longitude_j])
@@ -39,7 +39,7 @@ class LocationByCoordinateAreaController extends Controller
     public function villa(Request $request)
     {
         $villa = Villa::with([
-                'photo', 'video', 'detailReview', 'propertyType', 'location'
+                'photo', 'video', 'detailReview', 'propertyType', 'location', 'story'
             ])
             ->whereBetween('latitude', [$request->latitude_h, $request->latitude_j])
             ->whereBetween('longitude', [$request->longitude_h, $request->longitude_j])
@@ -62,7 +62,7 @@ class LocationByCoordinateAreaController extends Controller
     public function hotel(Request $request)
     {
         $hotel = Hotel::with([
-                'photo','video'
+                'photo','video', 'story'
             ])
             ->whereBetween('latitude', [$request->latitude_h, $request->latitude_j])
             ->whereBetween('longitude', [$request->longitude_h, $request->longitude_j])
@@ -84,7 +84,7 @@ class LocationByCoordinateAreaController extends Controller
     public function activity(Request $request)
     {
         $activity = Activity::with([
-                'video', 'photo', 'facilities', 'location', 'detailReview'
+                'video', 'photo', 'facilities', 'location', 'detailReview', 'story'
             ])
             ->whereBetween('latitude', [$request->latitude_h, $request->latitude_j])
             ->whereBetween('longitude', [$request->longitude_h, $request->longitude_j])
@@ -108,7 +108,7 @@ class LocationByCoordinateAreaController extends Controller
     public function search_restaurant(Request $request)
     {
         $restaurant = Restaurant::with([
-            'location','cuisine','detailReview','menu','photo','video'
+            'location','cuisine','detailReview','menu','photo','video', 'story'
         ])->where('id_restaurant', $request->id)->first();
 
         if(auth()->check()){
@@ -140,7 +140,7 @@ class LocationByCoordinateAreaController extends Controller
     public function search_villa(Request $request)
     {
         $villa = Villa::with([
-            'photo', 'video', 'detailReview', 'propertyType', 'location'
+            'photo', 'video', 'detailReview', 'propertyType', 'location', 'story'
         ])->where('id_villa', $request->id)->first();
 
         if(auth()->check()) {
@@ -172,7 +172,7 @@ class LocationByCoordinateAreaController extends Controller
     public function search_hotel(Request $request)
     {
         $hotel = hotel::with([
-            'photo', 'video', 'detailReview', 'location'
+            'photo', 'video', 'detailReview', 'location', 'story'
         ])->where('id_hotel', $request->id)->first();
 
         if(auth()->check()){
@@ -204,7 +204,7 @@ class LocationByCoordinateAreaController extends Controller
     public function search_activity(Request $request)
     {
         $activity = Activity::with([
-            'video', 'photo', 'facilities', 'location', 'detailReview'
+            'video', 'photo', 'facilities', 'location', 'detailReview', 'story'
         ])->where('id_activity', $request->id)->first();
 
         if(auth()->check()){
