@@ -52,8 +52,8 @@
     }
 
     .icon-filter-map{
-        width:28px;
-        height:28px;
+        width:40px;
+        height:40px;
     }
 
     .icon-filter-map:hover{
