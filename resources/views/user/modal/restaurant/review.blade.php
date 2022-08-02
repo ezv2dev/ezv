@@ -61,7 +61,10 @@
                             <div class="col-12 mb-4">
                                 <div class="col-12 d-flex">
                                     <div>
-                                        @if ($item->user->avatar)
+                                        @if ($item->user->foto_profile != null)
+                                            <img class="review-user-profile-pic"
+                                                src="{{ asset('foto_profile/' . $item->user->foto_profile) }} ">
+                                        @elseIf ($item->user->avatar != null)
                                             <img class="review-user-profile-pic" src="{{ $item->user->avatar }}">
                                         @else
                                             <img class="review-user-profile-pic"
