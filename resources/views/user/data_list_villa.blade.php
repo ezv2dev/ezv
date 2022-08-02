@@ -237,6 +237,18 @@ if (isset($_COOKIE['tema'])) {
                                                 {{ $data->beach }}
                                             @endif
                                         </span>
+                                        <span class="villa-list-location-desktop">
+                                            •
+                                            @if (isset($data->km))
+                                                {{ number_format($data->km, 1) }}
+                                                {{ __('user_page.km to') }}
+                                                {{ $data->airport }}
+                                            @elseif(isset($data->km2))
+                                                {{ number_format($data->km2, 1) }}
+                                                {{ __('user_page.km to') }}
+                                                {{ $data->beach }}
+                                            @endif
+                                        </span>
                                     </span>
                                 </div>
                             </div>
@@ -341,7 +353,7 @@ if (isset($_COOKIE['tema'])) {
                                     </span> --}}
                                 </div>
 
-                                <div class="villa-list-location">
+                                <!-- <div class="villa-list-location">
                                     @if (isset($data->km))
                                         <span class="{{ $textColor }} list-description">
                                             {{ number_format($data->km, 1) }}
@@ -360,7 +372,7 @@ if (isset($_COOKIE['tema'])) {
                                         </span>
                                     @endif
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
