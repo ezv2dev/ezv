@@ -3646,11 +3646,11 @@ a.orange-hover {
     transition: 0.3s;
 }
 
-.navbar-gap.d-block.mb-2::before {
+/* .navbar-gap.d-block.mb-2::before {
     font-family: 'Font Awesome 5 Free';
     content: '\f204';
     font-weight: 900;
-}
+} */
 @media only screen and (min-width: 1375px) {
     .bar p {
         font-size: 147%;

@@ -61,7 +61,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </form>
 
-                        <a href="{{ route('switch') }}" class="navbar-gap d-block mb-2"
+                        <a href="{{ route('switch') }}" class="d-block mb-2"
                             style="color:#585656; width: fit-content;">
                             {{ __('user_page.Switch to Hosting') }}
                         </a>
