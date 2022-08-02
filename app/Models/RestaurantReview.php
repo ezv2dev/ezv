@@ -21,4 +21,10 @@ class RestaurantReview extends Model
 
     protected $table = 'restaurant_review';
     protected $primaryKey = 'id_review';
+
+    // * relationship
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

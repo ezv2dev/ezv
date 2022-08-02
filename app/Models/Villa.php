@@ -565,6 +565,11 @@ class Villa extends Model
         return $this->hasOne(DetailReview::class, 'id_villa', 'id_villa');
     }
 
+    public function detailComment()
+    {
+        return $this->hasMany(VillaReview::class, 'id_villa', 'id_villa');
+    }
+
     public function extendGuest()
     {
         return $this->hasOne(VillaExtendGuest::class, 'id_villa', 'id_villa');

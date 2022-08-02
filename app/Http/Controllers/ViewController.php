@@ -140,7 +140,7 @@ class ViewController extends Controller
     public function villa($id)
     {
         $villa = Villa::select('villa.*', 'location.name as location')
-            ->join('location', 'villa.id_location', '=', 'location.id_location', 'left')->where('id_villa', $id)->with(['guestSafety', 'amenities', 'userCreate'])->where('status', 1)->get();
+            ->join('location', 'villa.id_location', '=', 'location.id_location', 'left')->where('id_villa', $id)->with(['guestSafety', 'amenities', 'userCreate', 'detailComment.user'])->where('status', 1)->get();
 
         // check if the editor does not have authorization
         if (auth()->check()) {
@@ -148,7 +148,7 @@ class ViewController extends Controller
             abort_if(!$find, 404);
             if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $find->created_by) {
                 $villa = Villa::select('villa.*', 'location.name as location')
-                    ->join('location', 'villa.id_location', '=', 'location.id_location', 'left')->with(['amenities'])->where('id_villa', $id)->get();
+                    ->join('location', 'villa.id_location', '=', 'location.id_location', 'left')->with(['amenities', 'detailComment.user'])->where('id_villa', $id)->get();
             }
         }
 
@@ -270,7 +270,6 @@ class ViewController extends Controller
         $villaExtraGuest = VillaExtraGuest::where('id_villa', $id)->first();
         $villaExtraBed = VillaExtraBed::where('id_villa', $id)->first();
         $villaExtraPet = VillaExtraPet::where('id_villa', $id)->first();
-
         $villaTags = VillaHasFilter::where('id_villa', $id)->get();
         $villaFilter = VillaFilter::all();
         $villaCategory = VillaCategory::all();

@@ -11,74 +11,23 @@
                 <div class="col-12 d-lg-flex">
                     <div class="col-12 col-lg-4">
                         <div class="col-12 row">
-                            @if ($detail->count() > 0)
+                            @if ($activity->detailReview)
                                 <div class="col-6">
-                                    {{ __('user_page.Cleanliness') }}
+                                    {{ __('user_page.Experience') }}
                                 </div>
                                 <div class="col-6 px-0">
                                     <div class="liner-modal">
                                         <span class="liner-bar"
-                                            style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                            style="width: {{ $activity->detailReview->average_experience * 20 }}%"></span>
                                     </div>
-                                    <span>
-                                        {{ $detail[0]->average_clean }}
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    {{ __('user_page.Check In') }}
-                                </div>
-                                <div class="col-6 px-0">
-                                    <div class="liner-modal">
-                                        <span class="liner-bar"
-                                            style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
-                                    </div>
-                                    <span>
-                                        {{ $detail[0]->average_check_in }}
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    {{ __('user_page.Value') }}
-                                </div>
-                                <div class="col-6 px-0">
-                                    <div class="liner-modal">
-                                        <span class="liner-bar"
-                                            style="width: {{ $detail[0]->average_value * 20 }}%"></span>
-                                    </div>
-                                    <span>
-                                        {{ $detail[0]->average_value }}
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    {{ __('user_page.Service') }}
-                                </div>
-                                <div class="col-6 px-0">
-                                    <div class="liner-modal">
-                                        <span class="liner-bar"
-                                            style="width: {{ $detail[0]->average_service * 20 }}%"></span>
-                                    </div>
-                                    <span>
-                                        {{ $detail[0]->average_service }}
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    {{ __('user_page.Location') }}
-                                </div>
-                                <div class="col-6 px-0">
-                                    <div class="liner-modal">
-                                        <span class="liner-bar"
-                                            style="width: {{ $detail[0]->average_location * 20 }}%"></span>
-                                    </div>
-                                    <span>
-                                        {{ $detail[0]->average_location }}
-                                    </span>
+                                    {{ $activity->detailReview->average_experience }}
                                 </div>
                             @else
                             @endif
-
                         </div>
                     </div>
                     <div class="col-12 mt-4 mt-lg-0 col-lg-8 review-comment-container">
-                        @foreach ($villa[0]->detailComment as $item)
+                        @foreach ($activity->detailComment as $item)
                             <div class="col-12 mb-4">
                                 <div class="col-12 d-flex">
                                     <div>
@@ -95,7 +44,6 @@
                                     <div class="ms-3">
                                         <h6 class="m-0">
                                             {{ $item->user->name }}
-
                                         </h6>
                                         <div>
                                             <p class="m-0">{{ date_format($item->created_at, 'M Y') }}</p>

@@ -69,8 +69,8 @@
 
 <div class="modal fade" id="ModalCategoryHotel" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="height: 550px;">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
             <div class="modal-header" style="padding-left: 2.3rem !important;">
                 <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

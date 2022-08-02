@@ -91,7 +91,7 @@
         $condition_restaurant = Route::is('restaurant');
         $condition_hotel = Route::is('hotel') || Route::is('room_hotel');
         $condition_things_to_do = Route::is('activity') || Route::is('activity_price_index');
-
+        
         if (isset($_COOKIE['sCheck_in'])) {
             $get_check_in = $_COOKIE['sCheck_in'];
             $get_check_out = $_COOKIE['sCheck_out'];
@@ -99,16 +99,16 @@
             $get_check_in = null;
             $get_check_out = null;
         }
-
+        
         function dateDiff($get_check_in, $get_check_out)
         {
             $date1_ts = strtotime($get_check_in);
             $date2_ts = strtotime($get_check_out);
             $datediff = $date2_ts - $date1_ts;
-
+        
             return round($datediff / (60 * 60 * 24));
         }
-
+        
         $dateDiffe = dateDiff($get_check_in, $get_check_out);
     @endphp
 
@@ -1207,7 +1207,7 @@
                         <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
-                            <h2>
+                            <h2 style="margin-bottom: 0;">
                                 {{ __('user_page.About this place') }}
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1224,8 +1224,7 @@
                                         substr($_SERVER['HTTP_USER_AGENT'], 0, 4),
                                     );
                             @endphp
-                            <p id="description-content"
-                                style="text-align: justify; padding-top:10px; padding-bottom:12px">
+                            <p id="description-content" style="text-align: justify;">
                                 @if ($isMobile)
                                     {!! Str::limit(Translate::translate($activity->description), 400, ' ...') ??
                                         __('user_page.There is no description yet') !!}
@@ -1703,45 +1702,25 @@
                         <div class="col-12">
                             @if ($activity->detailReview)
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="d-flex">
                                             <div class="col-6">
-                                                {{ __('user_page.Food') }}
+                                                {{ __('user_page.Experience') }}
                                             </div>
                                             <div class="col-6 ">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_food }}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Service') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_service }}
+                                                <div class="liner">
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $activity->detailReview->average_experience * 20 }}%"></span>
+                                                </div>
+                                                {{ $activity->detailReview->average_experience }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Value') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_value }}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Atmosphere') }}
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="liner"></div>
-                                                {{ $activity->detailReview->average_atmosphere }}
-                                            </div>
-                                        </div>
+                                    <div class="col-12 pt-3">
+                                        <button type="button" onclick="showMoreReview();"
+                                            class="btn btn-outline-dark">
+                                            Show all reviews
+                                        </button>
                                     </div>
                                 </div>
                             @else
@@ -1762,23 +1741,6 @@
                                             </p>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-12 col-md-6 d-flex">
-                                            <div class="col-1 icon-review-container">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                                                    aria-hidden="true" role="presentation" focusable="false"
-                                                    style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                                    <path
-                                                        d="M16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C1 7.716 7.716 1 16 1zm4.398 21.001h-8.796C12.488 26.177 14.23 29 16 29c1.77 0 3.512-2.823 4.398-6.999zm-10.845 0H4.465a13.039 13.039 0 0 0 7.472 6.351c-1.062-1.58-1.883-3.782-2.384-6.351zm17.982 0h-5.088c-.5 2.57-1.322 4.77-2.384 6.352A13.042 13.042 0 0 0 27.535 22zM9.238 12H3.627A12.99 12.99 0 0 0 3 16c0 1.396.22 2.74.627 4h5.61A33.063 33.063 0 0 1 9 16c0-1.383.082-2.724.238-4zm11.502 0h-9.482A30.454 30.454 0 0 0 11 16c0 1.4.092 2.743.26 4.001h9.48C20.908 18.743 21 17.4 21 16a30.31 30.31 0 0 0-.26-4zm7.632 0h-5.61c.155 1.276.237 2.617.237 4s-.082 2.725-.238 4h5.61A12.99 12.99 0 0 0 29 16c0-1.396-.22-2.74-.627-4zM11.937 3.647l-.046.016A13.04 13.04 0 0 0 4.464 10h5.089c.5-2.57 1.322-4.77 2.384-6.353zM16 3l-.129.005c-1.725.133-3.405 2.92-4.269 6.995h8.796C19.512 5.824 17.77 3 16 3zm4.063.648l.037.055C21.144 5.28 21.952 7.46 22.447 10h5.089a13.039 13.039 0 0 0-7.473-6.352z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <div class="col-8">
-                                                <p class="review-txt">
-                                                    We’re here to help your trip go smoothly. Every reservation is covered by
-                                                    <span><a href="#">EZV's Guest Refund Policy.</a></span>
-                                                </p>
-                                            </div>
-                                        </div> --}}
                                 </div>
                             @endif
                         </div>
@@ -1833,7 +1795,10 @@
                                                 {{ __('user_page.Experience') }}
                                             </div>
                                             <div class="col-6 ">
-                                                <div class="liner"></div>
+                                                <div class="liner">
+                                                    <span class="liner-bar"
+                                                        style="width: {{ $activity->userReview->experience * 20 }}%"></span>
+                                                </div>
                                                 {{ $activity->userReview->experience }}
                                             </div>
                                         </div>
@@ -3001,6 +2966,7 @@
 
 {{-- OTHER MODAL --}}
 @include('user.modal.activity.activity-guest-safety')
+@include('user.modal.activity.review')
 @auth
     @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $activity->created_by)
         @include('user.modal.activity.activity-guest-safety')
@@ -3136,6 +3102,10 @@
 
     function edit_description() {
         $('#modal-edit_description').modal('show');
+    }
+
+    function showMoreReview() {
+        $("#modal-show_review").modal("show");
     }
 
     function edit_photo() {

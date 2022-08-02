@@ -348,6 +348,11 @@ class Restaurant extends Model
         return false;
     }
 
+    public function detailComment()
+    {
+        return $this->hasMany(RestaurantReview::class, 'id_restaurant', 'id_restaurant');
+    }
+
     public function type()
     {
         return $this->hasOne(RestaurantType::class, 'id_type', 'id_type');

@@ -134,7 +134,7 @@
                                         style="border-radius: 50%; width: 50px; border: solid 2px #ff7400;">
                                 @else
                                     <img src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                    style="width: 40px; height: 40px; border-radius: 50%;" alt="">
+                                        style="width: 40px; height: 40px; border-radius: 50%;" alt="">
                                 @endif
                                 <div class="user-details ms-2">
                                     <div class="user-details-name">
@@ -200,7 +200,9 @@
                         <div class="d-flex align-items-center mb-2">
                             <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                                 style="color: white;">
-                                <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
                                     data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                                 @if (session()->has('currency'))
                                     <p class="mb-0 ms-2" style="color: #585656">Change Currency
@@ -266,8 +268,10 @@
                     <div class="d-flex align-items-center mb-2">
                         <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
                             style="color: white;">
-                            <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                             @if (session()->has('currency'))
                                 <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
                                 </p>
@@ -289,8 +293,8 @@
         {{-- PROFILE --}}
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
-            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
-                <div class="row top-profile" id="first-detail-content">
+            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($hotel[0]->image)
@@ -330,7 +334,7 @@
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
                             </div>
-                            <div class="showStar" id="showStar">
+                            <div class="showStar hide-in-mobile" id="showStar">
                                 @for ($i = 0; $i < $hotel[0]->star; $i++)
                                     <i class="star-active fa fa-star" aria-hidden="true"></i>
                                 @endfor
@@ -343,7 +347,7 @@
                                     @endfor
                                 @endif
                             </div>
-                            <div class="cm-star-rating stars d-none" id="editStar">
+                            <div class="cm-star-rating stars d-none hide-in-mobile" id="editStar">
                                 <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
                                 <label for="hotel-star-5"
                                     title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
@@ -372,16 +376,23 @@
                             </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStar"
-                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
-                                        Star</a>
-                                    &nbsp;<a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
-                                        id="buttonSaveStar" class="d-none"
+                                    <a type="button" onclick="editStar()" id="buttonEditStar" class="hide-in-mobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        &nbsp; Edit Star
+                                    </a>
+                                    <a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})" id="buttonSaveStar"
+                                        class="d-none hide-in-mobile"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
-                                        Star</a>
+                                        Star
+                                    </a>
+                                    <a type="button" onclick="cancelSaveStar()" id="buttonCancelSaveStar"
+                                        class="d-none hide-in-mobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        &nbsp; Cancel
+                                    </a>
                                 @endif
                             @endauth
-                            <div class="distance">
+                            <div class="distance hide-in-mobile">
                                 <p class="location-font-size"><a onclick="view_map('{{ $hotel[0]->id_hotel }}')"
                                         href="javascript:void(0);"><i class="fa fa-map-marker-alt"></i>
                                         {{ $hotel[0]->location->name }}</a>
@@ -532,6 +543,66 @@
                                         {{ $hotel[0]->location->name }}</a>
                                 </p>
                             </div>
+                        </div>
+
+                        {{-- STAR FOR MOBILE --}}
+                        <div id="star-mobile" class="d-md-none">
+                            <div class="showStar" id="showStarMobile">
+                                @for ($i = 0; $i < $hotel[0]->star; $i++)
+                                    <i class="star-active fa fa-star" aria-hidden="true"></i>
+                                @endfor
+                                @php
+                                    $j = 5 - $hotel[0]->star;
+                                @endphp
+                                @if ($j > 0)
+                                    @for ($i = 0; $i < $j; $i++)
+                                        <i class="star-not-active fa fa-star" aria-hidden="true"></i>
+                                    @endfor
+                                @endif
+                            </div>
+                            <div class="cm-star-rating stars d-none" id="editStarMobile">
+                                <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
+                                <label for="hotel-star-5"
+                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-4" type="radio" name="starHotel" value="4" required />
+                                <label for="hotel-star-4"
+                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-3" type="radio" name="starHotel" value="3" required />
+                                <label for="hotel-star-3"
+                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-2" type="radio" name="starHotel" value="2" required />
+                                <label for="hotel-star-2"
+                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-1" type="radio" name="starHotel" value="1" required />
+                                <label for="hotel-star-1"
+                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            @auth
+                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStarMobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
+                                        Star</a>
+                                    <a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
+                                        id="buttonSaveStarMobile" class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
+                                        Star</a>
+                                    &nbsp;<a type="button" onclick="cancelSaveStar()" id="buttonCancelSaveStarMobile"
+                                        class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        Cancel
+                                    </a>
+                                @endif
+                            @endauth
                         </div>
 
                         {{-- SHORT DESCRIPTION --}}
@@ -1057,9 +1128,10 @@
                         @endif
                     @endauth
                     {{-- END ADD GALLERY --}}
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p px-md-12p">
                         {{-- Description --}}
                         <div class="about-place">
+                            <hr class="hr-about">
                             <h2>{{ __('user_page.About this place') }}
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1091,32 +1163,37 @@
                                 @endauth
                             </div> --}}
                             @php
-                                $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$_SERVER['HTTP_USER_AGENT'])||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($_SERVER['HTTP_USER_AGENT'],0,4));
+                                $isMobile =
+                                    preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i', $_SERVER['HTTP_USER_AGENT']) ||
+                                    preg_match(
+                                        '/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',
+                                        substr($_SERVER['HTTP_USER_AGENT'], 0, 4),
+                                    );
                             @endphp
                             <p id="description-content">
                                 @if ($isMobile)
-                                {!! Str::limit(Translate::translate($hotel[0]->description), 400, ' ...') ??
-                                __('user_page.There is no description yet') !!}
+                                    {!! Str::limit(Translate::translate($hotel[0]->description), 400, ' ...') ??
+                                        __('user_page.There is no description yet') !!}
                                 @else
-                                {!! Str::limit(Translate::translate($hotel[0]->description), 600, ' ...') ??
-                                    __('user_page.There is no description yet') !!}
+                                    {!! Str::limit(Translate::translate($hotel[0]->description), 600, ' ...') ??
+                                        __('user_page.There is no description yet') !!}
                                 @endif
                                 {{-- {!! substr($villa[0]->description, 0, 600) ?? 'there is no description yet' !!} --}}
                             </p>
                             @if ($isMobile)
-                            @if (Str::length($hotel[0]->description) > 400)
-                            <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
-                                onclick="showMoreDescription();"><span
-                                    style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                <span style="color: #ff7400;">></span></a>
-                            @endif
+                                @if (Str::length($hotel[0]->description) > 400)
+                                    <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
+                                @endif
                             @else
-                            @if (Str::length($hotel[0]->description) > 600)
-                                <a id="btnShowMoreDescription" style="font-weight: 600;" href="javascript:void(0);"
-                                    onclick="showMoreDescription();"><span
-                                        style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
-                                    <span style="color: #ff7400;">></span></a>
-                            @endif
+                                @if (Str::length($hotel[0]->description) > 600)
+                                    <a id="btnShowMoreDescription" style="font-weight: 600;"
+                                        href="javascript:void(0);" onclick="showMoreDescription();"><span
+                                            style="text-decoration: underline; color: #ff7400;">{{ __('user_page.Show more') }}</span>
+                                        <span style="color: #ff7400;">></span></a>
+                                @endif
                             @endif
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1148,7 +1225,7 @@
                         </div>
                     </section>
 
-                    <section id="amenities" class="section-2">
+                    <section id="amenities" class="section-2 px-xs-12p px-sm-24p px-md-12p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1185,10 +1262,8 @@
                                         </div>
                                     @endforeach
                                     <div class="list-amenities">
-                                        <button class="amenities-button" type="button"
-                                            onclick="view_amenities()">
-                                            <i class="fa-solid fa-ellipsis text-orange"
-                                                style="font-size: 40px;"></i>
+                                        <button class="amenities-button" type="button" onclick="view_amenities()">
+                                            <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
                                             <div style="font-size: 15px;" class="translate-text-group-items">
                                                 {{ __('user_page.More') }}</div>
                                         </button>
@@ -1618,7 +1693,7 @@
             {{-- END RIGHT CONTENT --}}
 
 
-            <section id="room" class="section">
+            <section id="room" class="section px-xs-12p px-sm-24p px-md-12p">
                 <div class="row room">
                     <hr>
                     <h2>{{ __('user_page.Rooms') }}
@@ -1833,7 +1908,7 @@
                 </div>
             </section>
 
-            <section id="location-map" class="section">
+            <section id="location-map" class="section px-xs-20p px-sm-24p">
                 <hr>
                 <div class="row-grid-location">
                     <h2>
@@ -2047,7 +2122,8 @@
                                         </div>
                                         <div class="col-6 ">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_clean * 20 }}%"></span>
                                             </div>
                                             {{ $detail[0]->average_clean }}
                                         </div>
@@ -2056,7 +2132,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_check_in * 20 }}%"></span>
                                             </div>
                                             {{ $detail[0]->average_check_in }}
                                         </div>
@@ -2065,7 +2142,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_value * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_value * 20 }}%"></span>
                                             </div>
                                             {{ $detail[0]->average_value }}
                                         </div>
@@ -2078,7 +2156,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_service * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_service * 20 }}%"></span>
                                             </div>
                                             {{ $detail[0]->average_service }}
                                         </div>
@@ -2087,14 +2166,16 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="liner">
-                                                <span class="liner-bar" style="width: {{ $detail[0]->average_location * 20 }}%"></span>
+                                                <span class="liner-bar"
+                                                    style="width: {{ $detail[0]->average_location * 20 }}%"></span>
                                             </div>
                                             {{ $detail[0]->average_location }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 pt-3">
-                                    <button type="button" onclick="showMoreReview();" class="btn btn-outline-dark">
+                                    <button type="button" onclick="showMoreReview();"
+                                        class="btn btn-outline-dark">
                                         Show all reviews
                                     </button>
                                 </div>
@@ -2184,7 +2265,8 @@
                                                     </div>
                                                     <div class="col-6 ">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->cleanliness * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $hotel[0]->userReview->cleanliness * 20 }}%"></span>
                                                         </div>
                                                         {{ $hotel[0]->userReview->cleanliness }}
                                                     </div>
@@ -2195,7 +2277,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->check_in * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $hotel[0]->userReview->check_in * 20 }}%"></span>
                                                         </div>
                                                         {{ $hotel[0]->userReview->check_in }}
                                                     </div>
@@ -2206,7 +2289,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->value * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $hotel[0]->userReview->value * 20 }}%"></span>
                                                         </div>
                                                         {{ $hotel[0]->userReview->value }}
                                                     </div>
@@ -2219,7 +2303,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->service * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $hotel[0]->userReview->service * 20 }}%"></span>
                                                         </div>
                                                         {{ $hotel[0]->userReview->service }}
                                                     </div>
@@ -2230,7 +2315,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="liner">
-                                                            <span class="liner-bar" style="width: {{ $hotel[0]->userReview->location * 20 }}%"></span>
+                                                            <span class="liner-bar"
+                                                                style="width: {{ $hotel[0]->userReview->location * 20 }}%"></span>
                                                         </div>
                                                         {{ $hotel[0]->userReview->location }}
                                                     </div>
@@ -2252,8 +2338,8 @@
                                                     <input type="hidden" name="id_hotel"
                                                         value="{{ $hotel[0]->id_hotel }}" readonly required>
                                                     <div class="row">
-                                                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                                                            <div class="d-flex mb-4">
+                                                        <div class="col-12 col-lg-6 mb-lg-0">
+                                                            <div class="d-flex">
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Cleanliness') }}
                                                                 </div>
@@ -2302,7 +2388,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex mb-4">
+                                                            <div class="d-flex">
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Service') }}
                                                                 </div>
@@ -2346,7 +2432,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex mb-4">
+                                                            <div class="d-flex">
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Check in') }}
                                                                 </div>
@@ -2390,7 +2476,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex mb-4">
+                                                            <div class="d-flex">
                                                                 <div class="col-4 review-container">
                                                                     {{ __('user_page.Location') }}
                                                                 </div>
@@ -3718,7 +3804,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3730,7 +3816,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedroom') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3742,7 +3828,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3754,7 +3840,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3766,7 +3852,7 @@
                         }
                         echo '</div>';
                         echo '';
-
+                        
                         echo '<div class="row-modal-amenities padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
@@ -4986,22 +5072,22 @@
             var arrAsciiIndex = [...str.matchAll(/[&#0-9;]/g)];
             if (arrAsciiIndex.length >= 3) {
                 for (var i = 0; i < arrAsciiIndex.length; i++) {
-                    if (str[arrAsciiIndex[i].index] === "&" && str[arrAsciiIndex[i + 1].index] === "#"
-                        && !isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
-                            var lastIndex = i + 3;
-                            var number = str[arrAsciiIndex[i + 2].index];
-                            while(lastIndex < arrAsciiIndex.length) {
-                                if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
-                                    number += str[arrAsciiIndex[lastIndex].index];
-                                    lastIndex++;
-                                } else {
-                                    break;
-                                }
+                    if (str[arrAsciiIndex[i].index] === "&" && str[arrAsciiIndex[i + 1].index] === "#" &&
+                        !isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
+                        var lastIndex = i + 3;
+                        var number = str[arrAsciiIndex[i + 2].index];
+                        while (lastIndex < arrAsciiIndex.length) {
+                            if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
+                                number += str[arrAsciiIndex[lastIndex].index];
+                                lastIndex++;
+                            } else {
+                                break;
                             }
-                            var escapeChar = String.fromCharCode(parseInt(number));
-                            var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                        + number + ";"
-                            newStr = newStr.replace(pattern, escapeChar);
+                        }
+                        var escapeChar = String.fromCharCode(parseInt(number));
+                        var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index] +
+                            number + ";"
+                        newStr = newStr.replace(pattern, escapeChar);
                     }
                 }
             }
@@ -5023,7 +5109,7 @@
                                     if (!isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
                                         var lastIndex = i + 3;
                                         var number = str[arrAsciiIndex[i + 2].index];
-                                        while(lastIndex < arrAsciiIndex.length) {
+                                        while (lastIndex < arrAsciiIndex.length) {
                                             if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
                                                 number += str[arrAsciiIndex[lastIndex].index];
                                                 lastIndex++;
@@ -5032,8 +5118,8 @@
                                             }
                                         }
                                         var escapeChar = String.fromCharCode(parseInt(number));
-                                        var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                                    + number + ";"
+                                        var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index] +
+                                            number + ";"
                                         newStr = newStr.replace(pattern, escapeChar);
                                     }
                                 }
@@ -5955,9 +6041,49 @@
                 message: 'Insert the star!',
                 position: 'topLeft'
             });
+            $("#showStar").addClass('d-none');
             $("#buttonEditStar").addClass('d-none');
             $("#editStar").removeClass('d-none');
             $("#buttonSaveStar").removeClass('d-none');
+            $("#buttonCancelSaveStar").removeClass('d-none');
+            $("#editStar").css({
+                "display": "flex",
+                "justify-content": "center"
+            });
+
+            // FOR MOBILE
+            $("#showStarMobile").addClass('d-none');
+            $("#buttonEditStarMobile").addClass('d-none');
+            $("#editStarMobile").removeClass('d-none');
+            $("#buttonSaveStarMobile").removeClass('d-none');
+            $("#buttonCancelSaveStarMobile").removeClass('d-none');
+            $("#editStarMobile").css({
+                "display": "flex",
+                "justify-content": "center"
+            });
+        }
+
+        function cancelSaveStar() {
+            $("#showStar").removeClass('d-none');
+            $("#buttonEditStar").removeClass('d-none');
+            $("#editStar").addClass('d-none');
+            $("#buttonSaveStar").addClass('d-none');
+            $("#buttonCancelSaveStar").addClass('d-none');
+            $("#editStar").css({
+                "display": "",
+                "justify-content": ""
+            });
+
+            // FOR MOBILE
+            $("#showStarMobile").removeClass('d-none');
+            $("#buttonEditStarMobile").removeClass('d-none');
+            $("#editStarMobile").addClass('d-none');
+            $("#buttonSaveStarMobile").addClass('d-none');
+            $("#buttonCancelSaveStarMobile").addClass('d-none');
+            $("#editStarMobile").css({
+                "display": "",
+                "justify-content": ""
+            });
         }
 
         function saveStar(id_hotel) {
@@ -5975,8 +6101,11 @@
                 },
                 success: function(response) {
                     $("#showStar").html(``);
+                    $("#showStarMobile").html(``);
                     for (let i = 0; i < response.data; i++) {
                         $("#showStar").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
+                        $("#showStarMobile").append(
+                        `<i class="star-active fa fa-star" aria-hidden="true"></i>`);
                     }
 
                     let j = 5 - response.data;
@@ -5985,12 +6114,20 @@
                         for (let k = 0; k < j; k++) {
                             $("#showStar").append(
                                 `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
+                            $("#showStarMobile").append(
+                                `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
                         }
                     }
 
                     $("#buttonEditStar").removeClass('d-none');
                     $("#editStar").addClass('d-none');
                     $("#buttonSaveStar").addClass('d-none');
+                    $("#buttonCancelSaveStar").addClass('d-none');
+
+                    $("#buttonEditStarMobile").removeClass('d-none');
+                    $("#editStarMobile").addClass('d-none');
+                    $("#buttonSaveStarMobile").addClass('d-none');
+                    $("#buttonCancelSaveStarMobile").addClass('d-none');
 
                     iziToast.success({
                         title: "Success",

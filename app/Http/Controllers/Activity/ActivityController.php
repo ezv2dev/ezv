@@ -61,7 +61,9 @@ class ActivityController extends Controller
             'owner',
             'facilities',
             'price',
-            'ownerData'
+            'ownerData',
+            'detailReview',
+            'detailComment'
         ])
             ->where([
                 ['id_activity', $request->id],
@@ -82,7 +84,9 @@ class ActivityController extends Controller
                     'story',
                     'owner',
                     'facilities',
-                    'price'
+                    'price',
+                    'detailReview',
+                    'detailComment'
                 ])
                     ->where([
                         ['id_activity', $request->id],
@@ -91,8 +95,8 @@ class ActivityController extends Controller
         }
 
         // check if activity exist
-        abort_if(!$activity, 404);
-        $activity->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);
+        // abort_if(!$activity, 404);
+        // $activity->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);
 
         $locations = Location::orderby('name', 'ASC')->get();
         $facilities = ActivityFacilities::orderby('name', 'ASC')->get();
@@ -105,133 +109,128 @@ class ActivityController extends Controller
             ->where('grade', 'A')->where('status', 1)
             ->inRandomOrder()->limit(5)->get();
 
-        $get_activity = Activity::where('id_activity', $id)->first();
-        $point = array('lat' => $get_activity->latitude, 'long' => $get_activity->longitude, 'id_location' => $get_activity->id_location);
-        // ? Start Villa Slider
-        $compare_villa = Villa::all();
+        // $get_activity = Activity::where('id_activity', $id)->first();
+        // $point = array('lat' => $get_activity->latitude, 'long' => $get_activity->longitude, 'id_location' => $get_activity->id_location);
+        // // ? Start Villa Slider
+        // $compare_villa = Villa::all();
 
-        $kilometers = array();
-        $i = 0;
-        foreach ($compare_villa as $item) {
-            $lat1 = $point['lat'];
-            $lon1 = $point['long'];
-            $lat2 = $item->latitude;
-            $lon2 = $item->longitude;
-            $id_villa = $item->id_villa;
-            $name = $item->name;
-            $theta = $lon1 - $lon2;
+        // $kilometers = array();
+        // $i = 0;
+        // foreach ($compare_villa as $item) {
+        //     $lat1 = $point['lat'];
+        //     $lon1 = $point['long'];
+        //     $lat2 = $item->latitude;
+        //     $lon2 = $item->longitude;
+        //     $id_villa = $item->id_villa;
+        //     $name = $item->name;
+        //     $theta = $lon1 - $lon2;
 
-            $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-            $miles = acos($miles);
-            $miles = rad2deg($miles);
-            $miles = $miles * 60 * 1.1515;
-            $kilometers[$i][] = number_format((float)$miles * 1.609344, 1, '.', '');
-            $kilometers[$i][] = $id_villa;
-            $kilometers[$i][] = $name;
-            $i++;
-        }
+        //     $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+        //     $miles = acos($miles);
+        //     $miles = rad2deg($miles);
+        //     $miles = $miles * 60 * 1.1515;
+        //     $kilometers[$i][] = number_format((float)$miles * 1.609344, 1, '.', '');
+        //     $kilometers[$i][] = $id_villa;
+        //     $kilometers[$i][] = $name;
+        //     $i++;
+        // }
 
-        $unsorted_data = collect($kilometers);
-        $sorted_data1 = $unsorted_data->sortBy('0');
-        $last = $sorted_data1;
+        // $unsorted_data = collect($kilometers);
+        // $sorted_data1 = $unsorted_data->sortBy('0');
+        // $last = $sorted_data1;
 
-        $locArray = array();
-        foreach ($last as $item1) {
-            array_push($locArray, $item1[1]);
-        }
-        // ? End Villa Slider
+        // $locArray = array();
+        // foreach ($last as $item1) {
+        //     array_push($locArray, $item1[1]);
+        // }
+        // // ? End Villa Slider
 
-        // ? Start Restaurant Slider
-        $compare_restaurant = Restaurant::all();
+        // // ? Start Restaurant Slider
+        // $compare_restaurant = Restaurant::all();
 
-        $kilometers2 = array();
-        $j = 0;
-        foreach ($compare_restaurant as $item) {
-            $lat3 = $point['lat'];
-            $lon3 = $point['long'];
-            $lat4 = $item->latitude;
-            $lon4 = $item->longitude;
-            $id_restaurant = $item->id_restaurant;
-            $name2 = $item->name;
-            $theta2 = $lon3 - $lon4;
+        // $kilometers2 = array();
+        // $j = 0;
+        // foreach ($compare_restaurant as $item) {
+        //     $lat3 = $point['lat'];
+        //     $lon3 = $point['long'];
+        //     $lat4 = $item->latitude;
+        //     $lon4 = $item->longitude;
+        //     $id_restaurant = $item->id_restaurant;
+        //     $name2 = $item->name;
+        //     $theta2 = $lon3 - $lon4;
 
-            $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta2)));
-            $miles2 = acos($miles2);
-            $miles2 = rad2deg($miles2);
-            $miles2 = $miles2 * 60 * 1.1515;
-            $kilometers2[$j][] = number_format((float)$miles2 * 1.609344, 1, '.', '');
-            $kilometers2[$j][] = $id_restaurant;
-            $kilometers2[$j][] = $name2;
-            $j++;
-        }
+        //     $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta2)));
+        //     $miles2 = acos($miles2);
+        //     $miles2 = rad2deg($miles2);
+        //     $miles2 = $miles2 * 60 * 1.1515;
+        //     $kilometers2[$j][] = number_format((float)$miles2 * 1.609344, 1, '.', '');
+        //     $kilometers2[$j][] = $id_restaurant;
+        //     $kilometers2[$j][] = $name2;
+        //     $j++;
+        // }
 
-        $unsorted_data2 = collect($kilometers2);
-        $sorted_data2 = $unsorted_data2->sortBy('0');
-        $last2 = $sorted_data2;
+        // $unsorted_data2 = collect($kilometers2);
+        // $sorted_data2 = $unsorted_data2->sortBy('0');
+        // $last2 = $sorted_data2;
 
-        $locArray2 = array();
-        foreach ($last2 as $item2) {
-            array_push($locArray2, $item2[1]);
-        }
-        // ? End Restaurant Slider
+        // $locArray2 = array();
+        // foreach ($last2 as $item2) {
+        //     array_push($locArray2, $item2[1]);
+        // }
+        // // ? End Restaurant Slider
 
-        $ids_ordered = implode(',', $locArray);
-        $ids_ordered2 = implode(',', $locArray2);
+        // $ids_ordered = implode(',', $locArray);
+        // $ids_ordered2 = implode(',', $locArray2);
 
-        $nearby_villas = Nearby::villa($id);
-        $nearby_villas = collect($nearby_villas)->slice(0, 20);
-        // $nearby_villas = collect($nearby_villas);
+        // $nearby_villas = Nearby::villa($id);
+        // $nearby_villas = collect($nearby_villas)->slice(0, 20);
 
-        $nearby_restaurant = Nearby::restaurant($id);
-        $nearby_restaurant = collect($nearby_restaurant)->slice(0, 20);
+        // $nearby_restaurant = Nearby::restaurant($id);
+        // $nearby_restaurant = collect($nearby_restaurant)->slice(0, 20);
         // $nearby_restaurant = collect($nearby_restaurant);
 
-        $latitudeActivity = $activity->latitude;
-        $longitudeActivity = $activity->longitude;
-        $googleApi = 'AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk';
+        // $latitudeActivity = $activity->latitude;
+        // $longitudeActivity = $activity->longitude;
+        // $googleApi = 'AIzaSyCjPdG66Pt3sqya1EC_tjg9a4F2KVC5cTk';
 
-        $k = 0;
+        // $k = 0;
+        // foreach ($nearby_villas as $item) {
+        //     $point1 = array('lat' => $latitudeActivity, 'long' => $longitudeActivity);
+        //     $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
 
-        foreach ($nearby_villas as $item) {
-            $point1 = array('lat' => $latitudeActivity, 'long' => $longitudeActivity);
-            $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
+        //     $urlDriving =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
+        //     $urlWalking =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
 
-            $urlDriving =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
-            $urlWalking =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
+        //     $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
+        //     $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
+        //     $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
 
-            $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
-            $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
-            $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
+        //     $k++;
+        // }
 
-            $k++;
-        }
+        // $h = 0;
+        // foreach ($nearby_restaurant as $item) {
+        //     $point1 = array('lat' => $latitudeActivity, 'long' => $longitudeActivity);
+        //     $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
 
-        $h = 0;
+        //     $urlDriving =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
+        //     $urlWalking =
+        //         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
 
-        foreach ($nearby_restaurant as $item) {
-            $point1 = array('lat' => $latitudeActivity, 'long' => $longitudeActivity);
-            $point2 = array('lat2' => $item->detail->latitude, 'long2' => $item->detail->longitude);
+        //     $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
+        //     $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
+        //     $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
 
-            $urlDriving =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=driving&key=${googleApi}";
-            $urlWalking =
-                'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $point1['lat'] . ',' . $point1['long'] . '&destinations=' . $point2['lat2'] . ',' . $point2['long2'] . "&mode=walking&key=${googleApi}";
-
-            $item->kilometer = GoogleMaps::calculateDistance($urlDriving);
-            $item->detail['eta_driving'] = GoogleMaps::calculateTime($urlDriving);
-            $item->detail['eta_walking'] = GoogleMaps::calculateTime($urlWalking);
-
-            $h++;
-        }
+        //     $h++;
+        // }
 
         $wowHasSubCategory = ActivityHasSubcategory::where('id_activity', $id)->get();
         $wowSubCategory = ActivitySubcategory::all();
 
-        // dd($activity->price);
-
-        return view('user.activity.activity', compact('villaRandom', 'wowSubCategory', 'wowHasSubCategory', 'activity', 'locations', 'facilities', 'nearby_villas', 'nearby_restaurant', 'subCategory', 'villas_advertise', 'villa_amenities', 'activity_rules'));
+        return view('user.activity.activity', compact('villaRandom', 'wowSubCategory', 'wowHasSubCategory', 'activity', 'locations', 'facilities', 'subCategory', 'villas_advertise', 'villa_amenities', 'activity_rules'));
     }
 
     public function grade(Request $request, $id)

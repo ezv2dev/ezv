@@ -905,12 +905,6 @@
                 $('#err-prc').show();
                 error = 1;
             }
-                // if (!$('#disc').val()) {
-                //     $('#disc').addClass('is-invalid');
-                //     $('#err-disc').show();
-                //     error = 1;
-                // }
-            // }
             if (error == 1) {
                 e.preventDefault();
             }
