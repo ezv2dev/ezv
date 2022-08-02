@@ -1208,7 +1208,7 @@
                         {{-- Description --}}
                         <div class="pd-tlr-10">
                             <h2 style="margin-bottom: 0;">
-                                {{ __('user_page.About this place') }}
+                                {{ __('user_page.Description') }}
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editDescriptionForm()"
@@ -1494,7 +1494,7 @@
                 <hr>
                 <div>
                     <h2>
-                        {{ __("user_page.What's nearby ?") }}
+                        {{ __("user_page.Explore what's nearby") }}
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 &nbsp;

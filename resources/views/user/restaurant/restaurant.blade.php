@@ -1375,7 +1375,7 @@
                         <div class="about-place-block">
                             <hr>
                             <h2>
-                                {{ __('user_page.About this place') }}
+                                {{ __('user_page.Description') }}
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;<a type="button" onclick="editDescriptionForm()"
@@ -1638,7 +1638,7 @@
         <section id="location-map" class="section-2 px-xs-20p px-sm-24p">
             <hr calss="pendek">
             <h2>
-                {{ __("user_page.What's nearby ?") }}
+                {{ __("user_page.Explore what's nearby") }}
                 @auth
                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                         &nbsp;

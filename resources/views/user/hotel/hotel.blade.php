@@ -1132,7 +1132,7 @@
                         {{-- Description --}}
                         <div class="about-place">
                             <hr class="hr-about">
-                            <h2>{{ __('user_page.About this place') }}
+                            <h2>{{ __('user_page.Description') }}
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
@@ -1912,7 +1912,7 @@
                 <hr>
                 <div class="row-grid-location">
                     <h2>
-                        {{ __("user_page.What's nearby ?") }}
+                        {{ __("user_page.Explore what's nearby") }}
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 &nbsp;
