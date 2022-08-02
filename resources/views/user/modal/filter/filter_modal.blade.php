@@ -551,14 +551,14 @@ $get_category = request()->get('fCategory');
                             @endforeach
 
                         </div>
-                        <h6 id="show-more-category" class="filter-modal-row-title-secondary"
+                        <h6 id="show-more-category" class="filter-modal-row-title-secondary display-none"
                             onclick="showMoreCategory();"
                             style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
                             {{ Translate::translate('Show more') }}
                         </h6>
                     </div>
 
-                    <div id="modal-category-all" class="col-12 mt-1rem display-none">
+                    <div id="modal-category-all" class="col-12 mt-1rem">
                         <div class="row modal-checkbox-row">
                             @foreach ($category3 as $item)
                                 @php
@@ -609,14 +609,14 @@ $get_category = request()->get('fCategory');
                             @endforeach
 
                         </div>
-                        <h6 id="show-more-amenities" class="filter-modal-row-title-secondary"
+                        <h6 id="show-more-amenities" class="filter-modal-row-title-secondary display-none"
                             onclick="showmoreamenities();"
                             style="margin-top: 2rem; margin-bottom: 0px; cursor: pointer; text-decoration: underline;">
                             {{ Translate::translate('Show more') }}
                         </h6>
                     </div>
 
-                    <div id="modal-amenities-all" class="col-12 mt-1rem display-none">
+                    <div id="modal-amenities-all" class="col-12 mt-1rem">
                         <div class="row modal-checkbox-row">
                             @foreach ($amenities3 as $item)
                                 @php

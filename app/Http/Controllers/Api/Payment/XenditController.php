@@ -66,9 +66,9 @@ class XenditController extends Controller
 
         Xendit::setApiKey($this->token);
 
-        if(Auth::user())
+        if(auth()->check())
         {
-            $user = User::where('id', $request->user)->first();
+            $user = User::where('id', auth()->user()->id)->first();
             $name = $user->first_name." ".$user->last_name;
         }else{
             $name = $request->firstname_va." ".$request->lastname_va;
@@ -88,18 +88,22 @@ class XenditController extends Controller
 
         $createVA = \Xendit\VirtualAccounts::create($params);
 
-        if(Auth::user())
+        // dd($request->all());
+
+        if(auth()->check())
         {
-            $user = $request->user;
-            $email = $user->email;
+            $user_id = auth()->user()->id;
+            $email = auth()->user()->email;
         }else{
-            $user = NULL;
+            $user_id = NULL;
             $email = $request->email_va;
         }
 
+        // dd($user, $email);
+
         $insert = Payment::insert([
             'external_id' => $createVA['external_id'],
-            'id_user' => $user,
+            'id_user' => $user_id,
             'payment_channel' => 'Virtual Account',
             'bank' => $createVA['bank_code'],
             'name' => $createVA['name'],
@@ -108,7 +112,8 @@ class XenditController extends Controller
             'price' => $createVA['expected_amount'],
         ]);
 
-        return redirect()->route('api.invoiceVa');
+        // return redirect()->route('api.invoiceVa');
+        return $insert;
     }
 
     public function callbackVa(Request $request)

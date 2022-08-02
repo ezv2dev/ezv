@@ -79,10 +79,10 @@ use Illuminate\Support\Facades\Crypt;
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content " style="background: white; border-radius:20px; height:100%; margin-top:0 !important;">
             <div class="modal-header modal-header-amenities"
-                style="padding-left: 1.3rem !important; margin-bottom: -2rem;">
+                style="padding-left: 1.3rem !important;">
                 <div class="d-flex flex-column">
                     <h5 class="modal-title">{{ Translate::translate('Quick Enquiry') }}</h5>
-                    <p>We will get back to you ASAP!</p>
+                    <p class="mb-0">We will get back to you ASAP!</p>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     style="margin-top: -2rem;"></button>

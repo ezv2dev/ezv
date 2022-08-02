@@ -56,4 +56,15 @@ return [
 
     'empty_phone' => 'The phone number field is required',
     'empty_default' => 'This form is required',
+
+    'empty_sdate' => 'This start date field is required',
+    'empty_edate' => 'This end date field is required',
+
+
+    'empty_mguest' => 'This max guest field is required',
+    'empty_prcperson' => 'This price per person field is required',
+    'empty_mbed' => 'This max bed field is required',
+    'empty_mpet' => 'This max pet field is required',
+
+
 ];

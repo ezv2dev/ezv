@@ -367,7 +367,7 @@
         if(restaurantLocations.photo && restaurantLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < restaurantLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.photo[j].name}')}}"
                         alt="">
@@ -375,13 +375,13 @@
             }
         } else {
             if(restaurantLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -421,8 +421,8 @@
         if (restaurantLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -437,8 +437,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -458,8 +458,8 @@
                                     <div class="image-in-map-container">
                                         @guest
                                             <div
-                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                                                     onclick="loginForm(1)">
                                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                         focusable="false" class="favorite-button favorite-button-28 ">
@@ -469,6 +469,14 @@
                                                     </svg>
                                                 </a>
                                             </div>
+
+                                            <a href="#" target="_blank" class="absolute-right">
+                                                <div class="villa-list-video-container video-show-buttons">
+                                                    <i class="fas fa-2x fa-play video-button"></i>
+                                                        <img class="villa-list-video" loading="lazy"
+                                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                                </div>
+                                            </a>
                                         @endguest
                                         @auth
                                             ${favorite}
@@ -485,7 +493,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank">
+                                        <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank">
                                             {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
                                             <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
@@ -511,7 +519,7 @@
 
                                 <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
-                                        <a href="{{ env('APP_URL') }}/restaurant/${restaurantLocations.id_restaurant}" target="_blank" class="link-detail">
+                                        <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
                                             <i class=" text-orange fa-solid fa-arrow-right"></i>
                                         </a>
@@ -618,7 +626,7 @@
         if(villaLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < villaLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.photo[j].name}')}}"
                         alt="">
@@ -626,13 +634,13 @@
             }
         } else {
             if(villaLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -663,8 +671,8 @@
         if (villaLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -679,8 +687,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -700,8 +708,8 @@
                                     <div class="image-in-map-container">
                                         @guest
                                             <div
-                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                                                     onclick="loginForm(1)">
                                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                         focusable="false" class="favorite-button favorite-button-28">
@@ -711,6 +719,14 @@
                                                     </svg>
                                                 </a>
                                             </div>
+
+                                            <a href="#" target="_blank" class="absolute-right">
+                                                <div class="villa-list-video-container video-show-buttons">
+                                                    <i class="fas fa-2x fa-play video-button"></i>
+                                                        <img class="villa-list-video" loading="lazy"
+                                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                                </div>
+                                            </a>
                                         @endguest
                                         @auth
                                             ${favorite}
@@ -727,7 +743,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank">
+                                        <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                             <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description mb-2">${short_description}</p>
@@ -737,7 +753,7 @@
                                 </div>
                                 <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6 map-villa-detail-link">
-                                        <a href="{{ env('APP_URL') }}/villa/${villaLocations.id_villa}" target="_blank" class="link-detail">
+                                        <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
                                             <i class=" text-orange fa-solid fa-arrow-right"></i>
                                         </a>
@@ -865,8 +881,8 @@
         if (hotelLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -881,8 +897,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -902,8 +918,8 @@
                                     <div class="image-in-map-container">
                                         @guest
                                             <div
-                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                                                     onclick="loginForm(1)">
                                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                         focusable="false" class="favorite-button favorite-button-28">
@@ -913,6 +929,13 @@
                                                     </svg>
                                                 </a>
                                             </div>
+                                            <a href="#" target="_blank" class="absolute-right">
+                                                <div class="villa-list-video-container video-show-buttons">
+                                                    <i class="fas fa-2x fa-play video-button"></i>
+                                                        <img class="villa-list-video" loading="lazy"
+                                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                                </div>
+                                            </a>
                                         @endguest
                                         @auth
                                             ${favorite}
@@ -939,7 +962,7 @@
                                                     <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                                         <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                                     </a>
-    
+
                                                     <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
                                                         <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                     </a>
@@ -1050,7 +1073,7 @@
         if(activityLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
                         alt="">
@@ -1058,13 +1081,13 @@
             }
         } else {
             if(activityLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image image-in-map" loading="lazy"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
@@ -1109,8 +1132,8 @@
         if (activityLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -1125,8 +1148,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -1146,8 +1169,8 @@
                                     <div class="image-in-map-container">
                                         @guest
                                             <div
-                                                style="position: absolute; right: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; right: 10px; cursor: pointer;"
+                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
                                                     onclick="loginForm(1)">
                                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                         focusable="false" class="favorite-button favorite-button-28">
@@ -1157,6 +1180,13 @@
                                                     </svg>
                                                 </a>
                                             </div>
+                                            <a href="#" target="_blank" class="absolute-right">
+                                                <div class="villa-list-video-container video-show-buttons">
+                                                    <i class="fas fa-2x fa-play video-button"></i>
+                                                        <img class="villa-list-video" loading="lazy"
+                                                            src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                                </div>
+                                            </a>
                                         @endguest
                                         @auth
                                             ${favorite}
@@ -1173,7 +1203,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank">
+                                        <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
                                             <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
                                             <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
@@ -1186,7 +1216,7 @@
                                                 <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                                     <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                                 </a>
-    
+
                                                 <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
                                                     <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                 </a>
@@ -1199,7 +1229,7 @@
 
                                 <div class="d-flex align-items-center mt-3 modal-view-detail">
                                     <div class="col-6">
-                                        <a href="{{ env('APP_URL') }}/things-to-do/${activityLocations.id_activity}" target="_blank" class="link-detail">
+                                        <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="link-detail">
                                             <p class="card-text text-17 text-orange fw-600">View Detail</p>
                                             <i class=" text-orange fa-solid fa-arrow-right"></i>
                                         </a>

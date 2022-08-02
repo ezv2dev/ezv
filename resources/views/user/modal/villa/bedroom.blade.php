@@ -478,7 +478,7 @@
                                 @endforeach
                             </div>
                             @foreach ($bed as $data)
-                                <div class="col-4 bedroomDetailFormContentBed">
+                                <div class="col-6 col-lg-4 bedroomDetailFormContentBed">
                                     <div class="reserve-input-row">
                                         <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
                                             {{ $data->name }}
@@ -510,7 +510,7 @@
                     @endfor
                 </div>
             </div>
-            <div class="modal-footer" style="background-color: white;">
+            <div class="modal-footer">
                 <!-- Submit -->
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
@@ -1155,7 +1155,7 @@
                     @endforeach
                 </div>
                 @foreach ($bed as $data)
-                    <div class="col-4 bedroomDetailFormContentBed">
+                    <div class="col-6 col-lg-4 bedroomDetailFormContentBed">
                         <div class="reserve-input-row">
                             <div class="col-6 align-items-center d-flex" style="font-size: 0.8rem;">
                                 {{ $data->name }}

@@ -2472,8 +2472,8 @@ span.flatpickr-weekday {
     margin-bottom: 15px;
 }
 
-.navbar-gap.d-block.mb-2::before {
+/* .navbar-gap.d-block.mb-2::before {
     font-family: 'Font Awesome 5 Free';
     content: '\f204';
     font-weight: 900;
-}
+} */
