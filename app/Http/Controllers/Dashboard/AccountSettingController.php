@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Profile;
 use App\Models\ProfileLanguage;
+use Session;
 
 class AccountSettingController extends Controller
 {
@@ -73,10 +74,11 @@ class AccountSettingController extends Controller
                 'password' => bcrypt(request('password')),
                 'updated_at_password' => date('Y-m-d H:i:s', time())
             ]);
-
-            return back()->with('success', 'You have successfully changed your password');
+            return response()->json(['status' => 'success', 'message' => 'You have successfully changed your password']);
+            // return back()->with('success', 'You have successfully changed your password');
         } else {
-            return back()->with('error', 'Make sure you fill in your current password');
+            return response()->json(['status' => 'error', 'message' => 'Make sure you fill in your current password']);
+            // return back()->with('error', 'Make sure you fill in your current password');
         }
     }
 

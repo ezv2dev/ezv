@@ -85,6 +85,9 @@
 @section('content_admin')
 
 <div class="page-header">
+    <div class="container-loading-animation d-none">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
     @if (session('successDC'))
     <div class="col-12 d-flex justify-content-center">
         <div class="alert alert-info alert-dismissible" role="alert" style="width: 90%;">
@@ -149,6 +152,12 @@
                         </div>
                     </div>
                     
+                    <div class="col-7 ml-max-md-0p d-none mt-4" style="margin-left: 20px" id="alertResponse">
+                        <div class="alert alert-dismissible" role="alert">
+                            <span></span>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                    </div>
                     @if (session('success'))
                     <div class="col-7 ml-max-md-0p" style="margin-left: 20px">
                         <div class="alert alert-success alert-dismissible" role="alert">
@@ -180,11 +189,13 @@
                                     @method('PATCH')
                                     <div class="form-group mb-3">
                                         <label for="old_password">Current password</label>
-                                        <input type="password" class="form-control padding-right-custom" name="old_password"
-                                            id="old_password">
-                                        <button type="button" class="icon-input-container">
-                                            <i class="fa-solid fa-eye-slash"></i>
-                                        </button>
+                                        <div class="relative">
+                                            <input type="password" class="form-control padding-right-custom" name="old_password"
+                                                id="old_password">
+                                            <button type="button" class="icon-input-container">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </button>
+                                        </div>
 
                                         <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('old_password')
@@ -197,10 +208,12 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="password">New password</label>
-                                        <input type="password" class="form-control padding-right-custom" name="password" id="password">
-                                        <button type="button" class="icon-input-container">
-                                            <i class="fa-solid fa-eye-slash"></i>
-                                        </button>
+                                        <div class="relative">
+                                            <input type="password" class="form-control padding-right-custom" name="password" id="password">
+                                            <button type="button" class="icon-input-container">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </button>
+                                        </div>
                                         
                                         <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('password')
@@ -211,11 +224,13 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="password_confirmation">Confirm password</label>
-                                        <input type="password" class="form-control padding-right-custom" name="password_confirmation"
-                                            id="password_confirmation">
-                                        <button type="button" class="icon-input-container">
-                                            <i class="fa-solid fa-eye-slash"></i>
-                                        </button>
+                                        <div class="relative">
+                                            <input type="password" class="form-control padding-right-custom" name="password_confirmation"
+                                                id="password_confirmation">
+                                            <button type="button" class="icon-input-container">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </button>
+                                        </div>
 
                                         <div class="text-danger mt-2 invalid-feedback"></div>
                                         @error('password_confirmation')
@@ -224,7 +239,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <button type="submit" class="btn text-white" style="background: #FF7400;">Update
+                                    <button id="btnUpdatePass" type="submit" class="btn text-white" style="background: #FF7400;">Update
                                         password</button>
                                 </form>
                             </div>
@@ -330,10 +345,10 @@
         validate($(this))
     })
 
-    $('#formChangePassword').submit(function(e){
+    $('#formUpdatePassword').submit(function(e){
         if(typeof e.cancelable !== 'boolean' || e.cancelable){
             e.preventDefault();
-            let input = $('#formChangePassword .form-control');
+            let input = $('#formUpdatePassword .form-control');
             let error = 0
             $.each(input, function(index, value){
                 const validation = validate($(input[index]))
@@ -349,7 +364,13 @@
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function( data ){  
-                        $('#alertSuccess').removeClass('d-none')
+                        $('#alertResponse .alert').removeClass('alert-success')
+                        $('#alertResponse .alert').removeClass('alert-warning')
+                        $('#alertResponse').removeClass('d-none')
+
+                        data.status == 'success' ? $('#alertResponse .alert').addClass('alert-success') : $('#alertResponse .alert').addClass('alert-warning')
+
+                        $('#alertResponse span').text(data.message)
                         $('.container-loading-animation').addClass('d-none')
 
                         $.each(input, function(index, value){
@@ -359,14 +380,14 @@
                     error: function( response ){    
                         if(response.status == 200){
                             $('.container-loading-animation').addClass('d-none')
-                            $('#alertSuccess').removeClass('d-none') 
+                            $('#alertResponse').removeClass('d-none') 
                             $.each(input, function(index, value){
                                 $(input[index]).val('')
                             })
                         }else{
                             var errors = response.responseJSON;
                             $.each(errors.errors,function (el, val) {
-                                let input = $('#formChangePassword input[name='+el+']')
+                                let input = $('#formUpdatePassword input[name='+el+']')
                                 let parentInput = input.parent()
                                 let messageContainer = parentInput.parent().find('.invalid-feedback')
                                 let iconInput = parentInput.find('.icon-input-container')
@@ -420,6 +441,7 @@
         input.addClass('is-invalid')
         iconInput.hide()
         messageContainer.show()
+        $('#btnUpdatePass').prop('disabled', true);
     }
 
     function resetErrorStyle(input, messageContainer, iconInput) {
@@ -427,6 +449,10 @@
         iconInput.show()
         messageContainer.hide()
         messageContainer.text('')
+
+        //Jikamasih ada input yang tidak valid  disabled button submit
+        let isInvalid = document.querySelectorAll('.is-invalid')
+        isInvalid.length > 0 ? $('#btnUpdatePass').prop('disabled', true) : $('#btnUpdatePass').prop('disabled', false) 
     }
 
 </script>
