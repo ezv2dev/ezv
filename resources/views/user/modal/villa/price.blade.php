@@ -381,11 +381,15 @@
                                                             <label for="">{{ __('user_page.Start date') }}</label>
                                                             <input type="text" class="form-control" id="start" name="start"
                                                                 placeholder="{{ __('user_page.Start date') }}.." readonly>
+                                                            <small id="err-sdate" style="display: none;"
+                                                                class="invalid-feedback">{{ __('auth.empty_sdate') }}</small>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label for="">{{ __('user_page.End date') }}</label>
                                                             <input type="text" class="form-control" id="end" name="end"
                                                                 placeholder="{{ __('user_page.End date') }}.." readonly>
+                                                            <small id="err-edate" style="display: none;"
+                                                                class="invalid-feedback">{{ __('auth.empty_edate') }}</small>
                                                         </div>
                                                     </div>
 
@@ -603,7 +607,7 @@
                                         <input type="number" class="form-control" id="max_guest" name="max_guest"
                                             placeholder="{{ __('user_page.Input Max Guest') }}"
                                             value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
-                                        <small id="err-mxguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
+                                        <small id="err-mxguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -611,7 +615,7 @@
                                             name="price_extra_guest"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
-                                        <small id="err-exguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
+                                        <small id="err-exguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -626,7 +630,7 @@
                                         <input type="number" class="form-control" id="max_bed" name="max_bed"
                                             placeholder="{{ __('user_page.Input Max Bed') }}"
                                             value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
-                                        <small id="err-maxbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
+                                        <small id="err-maxbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -634,7 +638,7 @@
                                             name="price_extra_bed"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
-                                        <small id="err-exbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
+                                        <small id="err-exbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -661,7 +665,7 @@
                                         <input type="number" class="form-control" id="max_pet" name="max_pet"
                                             placeholder="{{ __('user_page.Input Max Pet') }}"
                                             value="{{ !empty($villaExtraPet->max) ? $villaExtraPet->max : '' }}">
-                                        <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_default') }}</small>
+                                        <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mpet') }}</small>
                                     </div>
                                     <div class="col-12 d-none" id="depositPrice">
                                         <label>{{ __('user_page.Deposit Price') }}</label>
@@ -1218,13 +1222,45 @@
 </script>
 
 <script>
+    $('#special_price').keyup(function (e) {
+        $('#special_price').removeClass('is-invalid');
+        $('#err-spcl-prc').hide();
+    });
+    $('#start').change(function (e) {
+        $('#start').removeClass('is-invalid');
+        $('#err-sdate').hide();
+    });
+    $('#end').change(function (e) {
+        $('#end').removeClass('is-invalid');
+        $('#err-edate').hide();
+    });
+
     $("#edit-special-price").submit(function (e) {
         let error = 0;
+        if(!$('#start').val()) {
+            $('#start').addClass('is-invalid');
+            $('#err-sdate').show();
+            error = 1;
+        } else {
+            $('#start').removeClass('is-invalid');
+            $('#err-sdate').hide();
+        }
+        if(!$('#end').val()) {
+            $('#end').addClass('is-invalid');
+            $('#err-edate').show();
+            error = 1;
+        } else {
+            $('#end').removeClass('is-invalid');
+            $('#err-edate').hide();
+        }
         if ($('#start').val() && $('#end').val()) {
             if (!$('#special_price').val()) {
                 $('#special_price').addClass('is-invalid');
                 $('#err-spcl-prc').show();
                 error = 1;
+            } else {
+                $('#special_price').removeClass('is-invalid');
+                $('#err-spcl-prc').hide();
             }
         }
         if (error == 1) {
