@@ -4498,7 +4498,3 @@ input#check_in::placeholder, input#check_out::placeholder {
 input::placeholder {
     font-size: 14px!important;
 }
-
-.profile-info h2 {
-    margin-top: -50px;
-}
