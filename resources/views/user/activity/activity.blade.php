@@ -1207,7 +1207,7 @@
                         <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
-                            <h2>
+                            <h2 style="margin-bottom: 0;">
                                 {{ __('user_page.About this place') }}
                                 @auth
                                     @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1224,8 +1224,7 @@
                                         substr($_SERVER['HTTP_USER_AGENT'], 0, 4),
                                     );
                             @endphp
-                            <p id="description-content"
-                                style="text-align: justify; padding-top:10px; padding-bottom:12px">
+                            <p id="description-content" style="text-align: justify;">
                                 @if ($isMobile)
                                     {!! Str::limit(Translate::translate($activity->description), 400, ' ...') ??
                                         __('user_page.There is no description yet') !!}

@@ -323,14 +323,14 @@ class HotelDetailController extends Controller
 
     public function hotel($id)
     {
-        $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData')->where('id_hotel', $id)->get();
+        $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData', 'detailReview', 'detailComment')->where('id_hotel', $id)->get();
 
         // check if the editor does not have authorization
         if (auth()->check()) {
             $find = Hotel::find($id);
             abort_if(!$find, 404);
             if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $find->created_by) {
-                $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData')->where('id_hotel', $id)->get();
+                $hotel = Hotel::with('hotel_room', 'location', 'ownerHotel', 'ownerData', 'detailReview', 'detailComment')->where('id_hotel', $id)->get();
             }
         }
 
