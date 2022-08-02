@@ -510,7 +510,7 @@
                     @endfor
                 </div>
             </div>
-            <div class="modal-footer" style="background-color: white;">
+            <div class="modal-footer">
                 <!-- Submit -->
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">

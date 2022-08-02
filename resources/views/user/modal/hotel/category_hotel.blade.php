@@ -75,7 +75,7 @@
                 <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
+            <div class="modal-body" style="height: 450px; overflow-y: auto; border-radius: 0px;">
                 <div class="form-group pt-2 px-4">
                     <div class="row">
                         <label class="form-label"><b>Category</b></label>
