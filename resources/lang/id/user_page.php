@@ -57,6 +57,7 @@ return [
     'Service' => 'Layanan',
     'Location' => 'Lokasi',
     "What's nearby ?" => 'Ada apa disekitar ?',
+    "Explore what's nearby" => "Jelajahi sekitar",
     'km to' => 'km ke',
     'Location not found' => 'Lokasi tidak ditemukan',
     'Availability' => 'Ketersediaan',

@@ -57,6 +57,7 @@ return [
     'Service' => 'Service',
     'Location' => 'Location',
     "What's nearby ?" => "What's nearby ?",
+    "Explore what's nearby" => "Explore what's nearby",
     'km to' => 'km to',
     'Location not found' => 'Location not found',
     'Availability' => 'Availability',
