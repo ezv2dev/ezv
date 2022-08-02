@@ -112,7 +112,6 @@ textarea.error {
 .favorite-button {
     display: block;
     fill: rgba(0, 0, 0, 0.5);
-    margin-left: 16px;
     stroke: white;
     stroke-width: 2px;
 }
@@ -3293,7 +3292,6 @@ span.flatpickr-weekday {
 }
 #modal-edit_story .modal-body {
     background-color: #fff;
-    border-radius: 0px 0px 15px 15px !important;
 }
 #modal-edit-house-rules .modal-body3,
 #modal-edit-guest-safety .modal-body3,
@@ -3410,7 +3408,23 @@ span.flatpickr-weekday {
     #edit_position_photo .modal-body #sortable-photo li {
         width: 33.33% !important;
     }
+    .villa-list-video-container {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .villa-list-video {
+        width: 46px !important;
+        height: 46px !important;
+    }
 }
+
+@media only screen and (max-width: 649px){
+    .villa-list-video {
+        width: 44px !important;
+        height: 44px !important;
+    }
+}
+
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
         font-size: 24px !important;
@@ -3771,7 +3785,7 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 768px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
     .add-gallery,
     .add-menu {
         padding-left: 24px !important;
@@ -4097,6 +4111,9 @@ span.flatpickr-weekday {
         max-height: 450px;
         overflow-x: hidden !important;
         overflow-y: auto !important;
+    }
+    #modal-edit_story .modal-body {
+        border-radius: 0px 0px 15px 15px !important;
     }
 }
 @media only screen and (min-width: 1024px) {
@@ -4513,4 +4530,34 @@ input#check_in::placeholder, input#check_out::placeholder {
 
 input::placeholder {
     font-size: 14px!important;
+}
+
+.absolute-right {
+    left: auto;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    z-index: 99;
+}
+
+.villa-list-video-container {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: black;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ff7400;
+    z-index: 200;
+    position: relative;
+    box-shadow: 1px 1px 15px rgb(0 0 0 / 27%);
+}
+
+.villa-list-video {
+    width: 59px;
+    height: 59px;
+    border-radius: 50%;
+    object-fit: cover;
 }

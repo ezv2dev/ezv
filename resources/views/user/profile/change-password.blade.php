@@ -134,8 +134,10 @@
         </div>
         <div class="col-lg-12 home-content">
             
-            <div class="alert alert-success alert-dismissible d-none" id="alertSuccess" role="alert">
-                Ganti password berhasil! 
+            <div class="d-none" id="alertResponse">
+                <div class="alert alert-dismissible " role="alert">
+                    <span></span>
+                </div>
             </div>
             
             @if (session('success'))
@@ -216,25 +218,7 @@
     <!-- END Page Container -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    <script>
-        //Sticky Bar
-        // $(function(){
-        // $(window).scroll(function(){
-        //     var winTop = $(window).scrollTop();
-        //     if(winTop >= 100){
-        //     $("#header-container").addClass("fix-header");
-        //     }else{
-        //     $("#header-container").removeClass("fix-header");
-        //     }
-        //     });
-        // });
-
-        $(document).ready(function(){
-            let heightNav =  $("#header-container").outerHeight();
-            $('.homes').css('margin-top', heightNav)
-        })
-    </script>
+    </script>    
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
@@ -246,6 +230,24 @@
         <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
+        <script>
+            //Sticky Bar
+            // $(function(){
+            // $(window).scroll(function(){
+            //     var winTop = $(window).scrollTop();
+            //     if(winTop >= 100){
+            //     $("#header-container").addClass("fix-header");
+            //     }else{
+            //     $("#header-container").removeClass("fix-header");
+            //     }
+            //     });
+            // });
+
+            $(document).ready(function(){
+                let heightNav =  $("#header-container").outerHeight();
+                $('.homes').css('margin-top', heightNav)
+            })
+        </script>
         {{-- Search Location --}}
         <script>
             //show password
@@ -287,7 +289,13 @@
                             data: $(this).serialize(),
                             dataType: 'json',
                             success: function( data ){  
-                                $('#alertSuccess').removeClass('d-none')
+                                $('#alertResponse .alert').removeClass('alert-success')
+                                $('#alertResponse .alert').removeClass('alert-warning')
+                                $('#alertResponse').removeClass('d-none')
+
+                                data.status == 'success' ? $('#alertResponse .alert').addClass('alert-success') : $('#alertResponse .alert').addClass('alert-warning')
+
+                                $('#alertResponse span').text(data.message)
                                 $('.container-loading-animation').addClass('d-none')
 
                                 $.each(input, function(index, value){
@@ -297,7 +305,7 @@
                             error: function( response ){    
                                 if(response.status == 200){
                                     $('.container-loading-animation').addClass('d-none')
-                                    $('#alertSuccess').removeClass('d-none') 
+                                    $('#alertResponse').removeClass('d-none') 
                                     $.each(input, function(index, value){
                                         $(input[index]).val('')
                                     })

@@ -335,8 +335,8 @@
         if (restaurantLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -351,8 +351,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -376,8 +376,8 @@
                                 <div class="modal-map-image-container">
                                     @guest
                                         <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                                                 onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button-22 favorite-button">
@@ -391,6 +391,15 @@
                                     @auth
                                         ${favorite}
                                     @endauth
+
+                                    <a href="#" target="_blank" class="absolute-right">
+                                        <div class="villa-list-video-container video-show-buttons">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                                <img class="villa-list-video" loading="lazy"
+                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                        </div>
+                                    </a>
+
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -593,8 +602,8 @@
         if (villaLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -609,8 +618,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -634,8 +643,8 @@
                                 <div class="modal-map-image-container">
                                     @guest
                                         <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                                                 onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
@@ -649,6 +658,15 @@
                                     @auth
                                         ${favorite}
                                     @endauth
+
+                                    <a href="#" target="_blank" class="absolute-right">
+                                        <div class="villa-list-video-container video-show-buttons">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                                <img class="villa-list-video" loading="lazy"
+                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                        </div>
+                                    </a>
+
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -829,8 +847,8 @@
         if (hotelLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -845,8 +863,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -870,8 +888,8 @@
                                 <div class="modal-map-image-container">
                                     @guest
                                         <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                                                 onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
@@ -885,6 +903,15 @@
                                     @auth
                                         ${favorite}
                                     @endauth
+
+                                    <a href="#" target="_blank" class="absolute-right">
+                                        <div class="villa-list-video-container video-show-buttons">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                                <img class="villa-list-video" loading="lazy"
+                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                        </div>
+                                    </a>
+
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -1088,8 +1115,8 @@
         if (activityLocations.is_favorit) {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -1104,8 +1131,8 @@
         } else {
             favorite = `
                 <div
-                    style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                    style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                    <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                         onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
@@ -1129,8 +1156,8 @@
                                 <div class="modal-map-image-container">
                                     @guest
                                         <div
-                                            style="position: absolute; right: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 43; top: 10px; right: 10px; cursor: pointer;"
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 43; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 43; top: 10px; left: 10px; cursor: pointer;"
                                                 onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-22">
@@ -1144,6 +1171,15 @@
                                     @auth
                                         ${favorite}
                                     @endauth
+
+                                    <a href="#" target="_blank" class="absolute-right">
+                                        <div class="villa-list-video-container video-show-buttons">
+                                            <i class="fas fa-2x fa-play video-button"></i>
+                                                <img class="villa-list-video" loading="lazy"
+                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
+                                        </div>
+                                    </a>
+                                    
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>

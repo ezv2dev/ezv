@@ -69,8 +69,8 @@
 
 <div class="modal fade" id="modal-add_subcategory" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="height: 550px;">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
             <div class="modal-header" style="padding-left: 2.3rem !important;">
                 <h5 class="modal-title">{{ __('user_page.Edit Subcategory') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -87,7 +87,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($subCategory as $data)
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
