@@ -3602,8 +3602,8 @@
             $(document).ready(() => {
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").css({
-                        "height": "auto",
-                        "overflow": "auto"
+                        "height": "",
+                        "overflow": ""
                     })
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
@@ -3622,8 +3622,8 @@
                 })
                 $('#overlay').click(function() {
                     $("body").css({
-                        "height": "auto",
-                        "overflow": "auto"
+                        "height": "",
+                        "overflow": ""
                     })
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");

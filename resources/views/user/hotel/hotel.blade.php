@@ -290,7 +290,7 @@
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
             <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($hotel[0]->image)
@@ -330,7 +330,7 @@
                                         onclick="view_subcategory()">{{ __('user_page.More') }}</button>
                                 @endif
                             </div>
-                            <div class="showStar" id="showStar">
+                            <div class="showStar hide-in-mobile" id="showStar">
                                 @for ($i = 0; $i < $hotel[0]->star; $i++)
                                     <i class="star-active fa fa-star" aria-hidden="true"></i>
                                 @endfor
@@ -343,7 +343,7 @@
                                     @endfor
                                 @endif
                             </div>
-                            <div class="cm-star-rating stars d-none" id="editStar">
+                            <div class="cm-star-rating stars d-none hide-in-mobile" id="editStar">
                                 <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
                                 <label for="hotel-star-5"
                                     title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
@@ -372,16 +372,23 @@
                             </div>
                             @auth
                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStar"
-                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
-                                        Star</a>
-                                    &nbsp;<a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
-                                        id="buttonSaveStar" class="d-none"
+                                    <a type="button" onclick="editStar()" id="buttonEditStar" class="hide-in-mobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        &nbsp; Edit Star
+                                    </a>
+                                    <a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
+                                        id="buttonSaveStar" class="d-none hide-in-mobile"
                                         style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
-                                        Star</a>
+                                        Star
+                                    </a>
+                                    <a type="button" onclick="cancelSaveStar()"
+                                        id="buttonCancelSaveStar" class="d-none hide-in-mobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        &nbsp; Cancel
+                                    </a>
                                 @endif
                             @endauth
-                            <div class="distance">
+                            <div class="distance hide-in-mobile">
                                 <p class="location-font-size"><a onclick="view_map('{{ $hotel[0]->id_hotel }}')"
                                         href="javascript:void(0);"><i class="fa fa-map-marker-alt"></i>
                                         {{ $hotel[0]->location->name }}</a>
@@ -532,6 +539,66 @@
                                         {{ $hotel[0]->location->name }}</a>
                                 </p>
                             </div>
+                        </div>
+
+                        {{-- STAR FOR MOBILE --}}
+                        <div id="star-mobile" class="d-md-none">
+                            <div class="showStar" id="showStarMobile">
+                                @for ($i = 0; $i < $hotel[0]->star; $i++)
+                                    <i class="star-active fa fa-star" aria-hidden="true"></i>
+                                @endfor
+                                @php
+                                    $j = 5 - $hotel[0]->star;
+                                @endphp
+                                @if ($j > 0)
+                                    @for ($i = 0; $i < $j; $i++)
+                                        <i class="star-not-active fa fa-star" aria-hidden="true"></i>
+                                    @endfor
+                                @endif
+                            </div>
+                            <div class="cm-star-rating stars d-none" id="editStarMobile">
+                                <input id="hotel-star-5" type="radio" name="starHotel" value="5" required />
+                                <label for="hotel-star-5"
+                                    title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-4" type="radio" name="starHotel" value="4" required />
+                                <label for="hotel-star-4"
+                                    title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-3" type="radio" name="starHotel" value="3" required />
+                                <label for="hotel-star-3"
+                                    title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-2" type="radio" name="starHotel" value="2" required />
+                                <label for="hotel-star-2"
+                                    title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="hotel-star-1" type="radio" name="starHotel" value="1" required />
+                                <label for="hotel-star-1"
+                                    title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            @auth
+                                @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    &nbsp;<a type="button" onclick="editStar()" id="buttonEditStarMobile"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Edit
+                                        Star</a>
+                                    <a type="button" onclick="saveStar({{ $hotel[0]->id_hotel }})"
+                                        id="buttonSaveStarMobile" class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">Save
+                                        Star</a>
+                                    &nbsp;<a type="button" onclick="cancelSaveStar()"
+                                        id="buttonCancelSaveStarMobile" class="d-none"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400; margin-top: 5px;">
+                                        Cancel
+                                    </a>
+                                @endif
+                            @endauth
                         </div>
 
                         {{-- SHORT DESCRIPTION --}}
@@ -1057,7 +1124,7 @@
                         @endif
                     @endauth
                     {{-- END ADD GALLERY --}}
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p">
                         {{-- Description --}}
                         <div class="about-place">
                             <h2>{{ __('user_page.About this place') }}
@@ -1148,7 +1215,7 @@
                         </div>
                     </section>
 
-                    <section id="amenities" class="section-2">
+                    <section id="amenities" class="section-2 px-xs-12p px-sm-24p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1618,7 +1685,7 @@
             {{-- END RIGHT CONTENT --}}
 
 
-            <section id="room" class="section">
+            <section id="room" class="section px-xs-12p px-sm-24p">
                 <div class="row room">
                     <hr>
                     <h2>{{ __('user_page.Rooms') }}
@@ -1833,7 +1900,7 @@
                 </div>
             </section>
 
-            <section id="location-map" class="section">
+            <section id="location-map" class="section px-xs-20p px-sm-24p">
                 <hr>
                 <div class="row-grid-location">
                     <h2>
@@ -5955,9 +6022,49 @@
                 message: 'Insert the star!',
                 position: 'topLeft'
             });
+            $("#showStar").addClass('d-none');
             $("#buttonEditStar").addClass('d-none');
             $("#editStar").removeClass('d-none');
             $("#buttonSaveStar").removeClass('d-none');
+            $("#buttonCancelSaveStar").removeClass('d-none');
+            $("#editStar").css({
+                "display": "flex",
+                "justify-content": "center"
+            });
+
+            // FOR MOBILE
+            $("#showStarMobile").addClass('d-none');
+            $("#buttonEditStarMobile").addClass('d-none');
+            $("#editStarMobile").removeClass('d-none');
+            $("#buttonSaveStarMobile").removeClass('d-none');
+            $("#buttonCancelSaveStarMobile").removeClass('d-none');
+            $("#editStarMobile").css({
+                "display": "flex",
+                "justify-content": "center"
+            });
+        }
+
+        function cancelSaveStar() {
+            $("#showStar").removeClass('d-none');
+            $("#buttonEditStar").removeClass('d-none');
+            $("#editStar").addClass('d-none');
+            $("#buttonSaveStar").addClass('d-none');
+            $("#buttonCancelSaveStar").addClass('d-none');
+            $("#editStar").css({
+                "display": "",
+                "justify-content": ""
+            });
+
+            // FOR MOBILE
+            $("#showStarMobile").removeClass('d-none');
+            $("#buttonEditStarMobile").removeClass('d-none');
+            $("#editStarMobile").addClass('d-none');
+            $("#buttonSaveStarMobile").addClass('d-none');
+            $("#buttonCancelSaveStarMobile").addClass('d-none');
+            $("#editStarMobile").css({
+                "display": "",
+                "justify-content": ""
+            });
         }
 
         function saveStar(id_hotel) {
@@ -5975,8 +6082,10 @@
                 },
                 success: function(response) {
                     $("#showStar").html(``);
+                    $("#showStarMobile").html(``);
                     for (let i = 0; i < response.data; i++) {
                         $("#showStar").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
+                        $("#showStarMobile").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
                     }
 
                     let j = 5 - response.data;
@@ -5985,12 +6094,20 @@
                         for (let k = 0; k < j; k++) {
                             $("#showStar").append(
                                 `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
+                            $("#showStarMobile").append(
+                                `<i class="star-not-active fa fa-star" aria-hidden="true"></i>`);
                         }
                     }
 
                     $("#buttonEditStar").removeClass('d-none');
                     $("#editStar").addClass('d-none');
                     $("#buttonSaveStar").addClass('d-none');
+                    $("#buttonCancelSaveStar").addClass('d-none');
+
+                    $("#buttonEditStarMobile").removeClass('d-none');
+                    $("#editStarMobile").addClass('d-none');
+                    $("#buttonSaveStarMobile").addClass('d-none');
+                    $("#buttonCancelSaveStarMobile").addClass('d-none');
 
                     iziToast.success({
                         title: "Success",
