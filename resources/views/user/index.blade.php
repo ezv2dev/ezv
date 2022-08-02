@@ -504,7 +504,7 @@
                                                 <ul class="nav">
                                                     <li class="button-dropdown">
                                                         <input type="number" id="total_guest2" value="1"
-                                                            style="width: 30px; border: 0; margin-right: 0; text-align: right;"
+                                                            style="width: 30px; border: 0; margin-right: 0; text-align: right; -moz-appearance: textfield; background-color: transparent;"
                                                             disabled min="1"> {{ __('user_page.Guest') }}
                                                         <a href="javascript:void(0)"
                                                             class="dropdown-toggle input-guest">
@@ -539,7 +539,7 @@
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                         <input type="number" id="adult2"
                                                                             name="sAdult" value="1"
-                                                                            style="text-align: center; border:none; width:40px;"
+                                                                            style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
                                                                     </div>
                                                                     <a type="button"
@@ -576,7 +576,7 @@
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                         <input type="number" id="child2"
                                                                             name="sChild" value="0"
-                                                                            style="text-align: center; border:none; width:40px;"
+                                                                            style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
                                                                     </div>
                                                                     <a type="button"
@@ -613,7 +613,7 @@
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                         <input type="number" id="infant2"
                                                                             name="" value="0"
-                                                                            style="text-align: center; border:none; width:40px;"
+                                                                            style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
                                                                     </div>
                                                                     <a type="button"
@@ -649,7 +649,7 @@
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                         <input type="number" id="pet2"
                                                                             name="" value="0"
-                                                                            style="text-align: center; border:none; width:40px;"
+                                                                            style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
                                                                     </div>
                                                                     <a type="button" onclick="pet_increment_index()"
@@ -1481,7 +1481,7 @@
                         document.getElementById("nav").classList.remove("search-height");
                         document.getElementById("searchbox-mob").classList.remove("display-none");
                         document.getElementById("searchbox-mob").classList.add("display-block");
-                        
+
 
                         function addClass(elements, className) {
                             for (var i = 0; i < elements.length; i++) {
@@ -1510,9 +1510,9 @@
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
 
-                        
-                    
-                        
+
+
+
                     }
                 }
             });

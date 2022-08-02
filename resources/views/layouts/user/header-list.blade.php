@@ -764,7 +764,7 @@
                                             <li
                                                 class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px; border: 0;margin-right:5px; text-align: right; background: transparent;"
+                                                    style="width: 30px; border: 0;margin-right:5px; text-align: right; -moz-appearance: textfield; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
@@ -798,7 +798,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="adult5" name="sAdult"
                                                                     value="{{ $get_adult }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="1" readonly>
                                                             </div>
                                                             <a type="button" onclick="adult_increment_header_list()"
@@ -832,7 +832,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="child5" name="sChild"
                                                                     value="{{ $get_child }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="child_increment_header_list()"
@@ -866,7 +866,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="infant5" name="sInfant"
                                                                     value="{{ $get_infant }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="infant_increment_header_list()"
@@ -901,7 +901,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="pet5" name="sPet"
                                                                     value="{{ $get_pet }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="pet_increment_header_list()"
@@ -1492,7 +1492,7 @@
                                             <li
                                                 class="button-dropdown d-flex align-items-center justify-content-center">
                                                 <input type="number" id="total_guest5" value="{{ $get_guest }}"
-                                                    style="width: 30px;margin-right:5px; border: 0; text-align: right; background: transparent;"
+                                                    style="width: 30px;margin-right:5px; border: 0; text-align: right; background: transparent; -moz-appearance: textfield;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
                                                 <a href="javascript:void(0)" class="dropdown-toggle input-guest">
@@ -1526,7 +1526,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="adult5" name="sAdult"
                                                                     value="{{ $get_adult }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="1" readonly>
                                                             </div>
                                                             <a type="button" onclick="adult_increment_header_list()"
@@ -1560,7 +1560,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="child5" name="sChild"
                                                                     value="{{ $get_child }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="child_increment_header_list()"
@@ -1594,7 +1594,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="infant5" name="sInfant"
                                                                     value="{{ $get_infant }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="infant_increment_header_list()"
@@ -1629,7 +1629,7 @@
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
                                                                 <input type="number" id="pet5" name="sPet"
                                                                     value="{{ $get_pet }}"
-                                                                    style="text-align: center; border:none; width:40px;"
+                                                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
                                                             </div>
                                                             <a type="button" onclick="pet_increment_header_list()"
