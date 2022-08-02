@@ -3293,6 +3293,7 @@ span.flatpickr-weekday {
 #modal-edit_story .modal-body {
     background-color: #fff;
 }
+#modal-edit-hotel-rules .modal-body,
 #modal-edit-house-rules .modal-body3,
 #modal-edit-guest-safety .modal-body3,
 #modal-cancelation-policy .modal-body3 {
@@ -3300,6 +3301,7 @@ span.flatpickr-weekday {
     padding-left: 0.2rem !important;
     padding-right: 0.5rem !important;
 }
+#modal-edit-hotel-rules .modal-body .container,
 #modal-edit-house-rules .modal-body3 .container,
 #modal-edit-guest-safety .modal-body3 .container,
 #modal-cancelation-policy .modal-body3 .container {
@@ -4104,6 +4106,7 @@ span.flatpickr-weekday {
         padding-right: 10px !important;
         padding-left: 10px !important;
     }
+    #modal-edit-hotel-rules .modal-content .modal-body,
     #modal-edit-house-rules .modal-content .modal-body,
     #modal-edit-guest-safety .modal-content .modal-body,
     #modal-cancelation-policy .modal-content .modal-body,
