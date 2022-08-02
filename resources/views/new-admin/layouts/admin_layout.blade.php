@@ -269,7 +269,6 @@
             transition:.2s all ease-in;
         }
     </style>
-
 </head>
 
 <body class="nav-fixed">
@@ -1117,7 +1116,7 @@
         })
     </script>
     <script>
-        function cleanClass(data) {
+        function toogleNav(data) {
             switch (data) {
                 case 'user':
                     $("#f-home").removeClass('f-down').addClass('f-right');
@@ -1130,6 +1129,7 @@
                     $('#dropWow').removeClass('show');
                     $("#f-reward").removeClass('f-down').addClass('f-right');
                     $('#dropReward').removeClass('show');
+                    $('#f-user').toggleClass('f-right f-down');
                     break;
                 case 'home':
                     $("#f-user").removeClass('f-down').addClass('f-right');
@@ -1142,6 +1142,7 @@
                     $('#dropWow').removeClass('show');
                     $("#f-reward").removeClass('f-down').addClass('f-right');
                     $('#dropReward').removeClass('show');
+                    $('#f-home').toggleClass('f-right f-down');
                     break;
                 case 'hotels':
                     $("#f-user").removeClass('f-down').addClass('f-right');
@@ -1154,6 +1155,7 @@
                     $('#dropWow').removeClass('show');
                     $("#f-reward").removeClass('f-down').addClass('f-right');
                     $('#dropReward').removeClass('show');
+                    $('#f-hotels').toggleClass('f-right f-down');
                     break;
                 case 'food':
                     $("#f-user").removeClass('f-down').addClass('f-right');
@@ -1166,6 +1168,7 @@
                     $('#dropWow').removeClass('show');
                     $("#f-reward").removeClass('f-down').addClass('f-right');
                     $('#dropReward').removeClass('show');
+                    $('#f-food').toggleClass('f-right f-down');
                     break;
                 case 'wow':
                     $("#f-user").removeClass('f-down').addClass('f-right');
@@ -1178,6 +1181,7 @@
                     $('#dropFood').removeClass('show');
                     $("#f-reward").removeClass('f-down').addClass('f-right');
                     $('#dropReward').removeClass('show');
+                    $('#f-wow').toggleClass('f-right f-down');
                     break;
                 case 'reward':
                     $("#f-user").removeClass('f-down').addClass('f-right');
@@ -1190,34 +1194,29 @@
                     $('#dropFood').removeClass('show');
                     $("#f-wow").removeClass('f-down').addClass('f-right');
                     $('#dropWow').removeClass('show');
+                    $('#f-reward').toggleClass('f-right f-down');
                     break;
                 default:
             }
         }
         $(function() {
             $('#nav-user').click(function() {
-                cleanClass("user");
-                $('#f-user').toggleClass('f-right f-down');
+                toogleNav("user");
             });
             $('#nav-home').click(function() {
-                cleanClass("home");
-                $('#f-home').toggleClass('f-right f-down');
+                toogleNav("home");
             });
             $('#nav-hotels').click(function() {
-                cleanClass("hotels");
-                $('#f-hotels').toggleClass('f-right f-down');
+                toogleNav("hotels");
             });
             $('#nav-food').click(function() {
-                cleanClass("food");
-                $('#f-food').toggleClass('f-right f-down');
+                toogleNav("food");
             });
             $('#nav-wow').click(function() {
-                cleanClass("wow");
-                $('#f-wow').toggleClass('f-right f-down');
+                toogleNav("wow");
             });
             $('#nav-reward').click(function() {
-                cleanClass("reward");
-                $('#f-reward').toggleClass('f-right f-down');
+                toogleNav("reward");
             });
         })
     </script>
