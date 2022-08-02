@@ -289,7 +289,7 @@
         {{-- PROFILE --}}
         <div class="row page-content" style="margin-top: -60px;">
             {{-- LEFT CONTENT --}}
-            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block alert-detail">
+            <div class="col-lg-9 col-md-9 col-xs-12 rsv-block">
                 <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
@@ -1124,9 +1124,10 @@
                         @endif
                     @endauth
                     {{-- END ADD GALLERY --}}
-                    <section id="description" class="section-2 px-xs-12p px-sm-24p">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p px-md-12p">
                         {{-- Description --}}
                         <div class="about-place">
+                            <hr class="hr-about">
                             <h2>{{ __('user_page.About this place') }}
                                 @auth
                                     @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1215,7 +1216,7 @@
                         </div>
                     </section>
 
-                    <section id="amenities" class="section-2 px-xs-12p px-sm-24p">
+                    <section id="amenities" class="section-2 px-xs-12p px-sm-24p px-md-12p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1685,7 +1686,7 @@
             {{-- END RIGHT CONTENT --}}
 
 
-            <section id="room" class="section px-xs-12p px-sm-24p">
+            <section id="room" class="section px-xs-12p px-sm-24p px-md-12p">
                 <div class="row room">
                     <hr>
                     <h2>{{ __('user_page.Rooms') }}
