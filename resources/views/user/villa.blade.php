@@ -961,7 +961,7 @@
                         <div class="about-place">
                             <hr class="hr-about">
                             <h2>
-                                {{ __('user_page.About this place') }}
+                                {{ __('user_page.Description') }}
                                 @auth
                                     @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                         &nbsp;
@@ -1595,7 +1595,7 @@
                     <hr class="pendek">
                     <div class="section-title">
                         <h2 class="mb-0">
-                            {{ __("user_page.What's nearby ?") }}
+                            {{ __("user_page.Explore what's nearby") }}
                             @auth
                                 @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                     &nbsp;
@@ -1948,18 +1948,17 @@
                                         <div class="row">
                                             @if ($villa[0]->userReview->comment)
                                                 <div class="col-12">
-                                                    <div class="col-6 d-flex">
+                                                    <div class="col-12 col-lg-6 d-flex">
                                                         <div class="col-6">
                                                             {{ __('user_page.Comment') }}
                                                         </div>
-                                                        <div class="col-6"
-                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                        <div class="col-6 review-comment-text">
                                                             {{ $villa[0]->userReview->comment }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endif
-                                            <div class="col-6">
+                                            <div class="col-12 col-lg-6">
                                                 <div class="d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Cleanliness') }}
@@ -1997,7 +1996,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-lg-6">
                                                 <div class="d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Service') }}

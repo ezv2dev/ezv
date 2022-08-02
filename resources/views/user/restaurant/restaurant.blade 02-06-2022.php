@@ -158,7 +158,7 @@
                 @if ($restaurant->status == '2')
                 <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                     <span>the owner request activation, choose grade Restaurant </span>
-                    <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}" method="get" class="d-flex">
+                    <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}" method="get" class="d-flex">
                         <div style="margin-left: 10px;">
                             <select class="custom-select grade" name="grade">
                                 <option value="A" {{ $restaurant->grade == 'A' ? 'selected' : '' }}>A
@@ -180,7 +180,7 @@
                 @if ($restaurant->status == '3')
                 <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                     <span>the owner request deactivation, </span>
-                    <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}" method="get">
+                    <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}" method="get">
                         <button class="btn" type="submit">deactivate this content</button>
                     </form>
                     <span> ?</span>
