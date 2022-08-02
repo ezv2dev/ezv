@@ -134,7 +134,7 @@ class Restaurant extends Model
                                     Delete data
                                 </div>
                             </a>
-                            <a class='dropdown-item py-3' href='" . route('admin_restaurant_update_status', $data->id_restaurant) . "'>
+                            <a class='dropdown-item py-3' href='" . route('admin_food_update_status', $data->id_restaurant) . "'>
                                 <div class='icon-stack bg-primary-soft text-primary mr-4'><i data-feather='code'></i></div>
                                 <div>
                                 <div class='small text-gray-500'>Update Status</div>

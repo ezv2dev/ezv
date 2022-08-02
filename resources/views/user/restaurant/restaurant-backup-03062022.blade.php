@@ -26,7 +26,8 @@
 
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -82,8 +83,7 @@
                         @if ($restaurant->status == '0')
                             <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
                                 <span>this content is deactive, </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
                                     method="post">
                                     @csrf
                                     @method('PATCH')
@@ -96,8 +96,7 @@
                         @if ($restaurant->status == '1')
                             <div class="alert alert-success d-flex flex-row align-items-center" role="success">
                                 <span>this content is active, </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
                                     method="post">
                                     @csrf
                                     @method('PATCH')
@@ -170,7 +169,7 @@
                         @if ($restaurant->status == '2')
                             <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                                 <span>the owner request activation, choose grade Restaurant </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
                                     method="get" class="d-flex">
                                     <div style="margin-left: 10px;">
                                         <select class="custom-select grade" name="grade">
@@ -193,7 +192,7 @@
                         @if ($restaurant->status == '3')
                             <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                                 <span>the owner request deactivation, </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
                                     method="get">
                                     <button class="btn" type="submit">deactivate this content</button>
                                 </form>
@@ -222,8 +221,8 @@
                                             onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
                                             {{-- <a href="{{ route('restaurant_delete_image', $restaurant->id_restaurant) }}"> --}}
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Delete"></i></a>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Delete"></i></a>
                                     @endif
                                 @endif
                             @endauth
@@ -292,7 +291,8 @@
                                     </div>
                                     <div class="col-3">
                                         @if ($restaurant->email)
-                                            <a target="_blank" type="button" href="mailto:{{ $restaurant->email }}">
+                                            <a target="_blank" type="button"
+                                                href="mailto:{{ $restaurant->email }}">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
                                         @else
@@ -361,8 +361,8 @@
                                                                         $isSelected = 'selected';
                                                                     }
                                                                 @endphp
-                                                                <option value="{{ $item->id_type }}"
-                                                                    {{ $isSelected }}>{{ $item->name }}</option>
+                                                                <option value="{{ $item->id_type }}" {{ $isSelected }}>
+                                                                    {{ $item->name }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
@@ -427,7 +427,8 @@
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> Done
                                         </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <button type="reset" class="btn btn-sm btn-secondary"
+                                            onclick="editNameCancel()">
                                             <i class="fa fa-xmark"></i> Cancel
                                         </button>
                                     </form>
@@ -452,8 +453,7 @@
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                            cols="30" rows="3" maxlength="255"
-                                            required>{{ $restaurant->short_description }}</textarea>
+                                            cols="30" rows="3" maxlength="255" required>{{ $restaurant->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> Done
                                         </button>
@@ -673,7 +673,8 @@
                                                                     <i class="fa fa-play"></i>
                                                                 </div>
                                                                 <video href="javascript:void(0)"
-                                                                    class="story-video-grid" style="object-fit: cover;"
+                                                                    class="story-video-grid"
+                                                                    style="object-fit: cover;"
                                                                     src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
                                                                 </video>
                                                             </a>
@@ -691,7 +692,8 @@
                                                                     <i class="fa fa-play"></i>
                                                                 </div>
                                                                 <video href="javascript:void(0)"
-                                                                    class="story-video-grid" style="object-fit: cover;"
+                                                                    class="story-video-grid"
+                                                                    style="object-fit: cover;"
                                                                     src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=0.1">
                                                                 </video>
                                                             </a>
@@ -746,8 +748,8 @@
                         <li class="navigationItem">
                             <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('gallery').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp;<span>
+                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp;<span>
                                     GALLERY</span>
                             </a>
                         </li>
@@ -770,8 +772,8 @@
                         <li class="navigationItem ">
                             <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('amenities').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp;<span>
+                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp;<span>
                                     FACILITIES</span>
                             </a>
                         </li>
@@ -794,8 +796,8 @@
                         <li class="navigationItem">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('review').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp;<span>
+                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp;<span>
                                     REVIEW</span>
                             </a>
                         </li>
@@ -809,27 +811,36 @@
                         <div class="gallery simple-lightbox-container">
                             @if ($restaurant->photo->count() > 0)
                                 @foreach ($restaurant->photo->sortBy('order') as $item)
-                                        <a
-                                            href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
-                                            <img class="photosGrid__Photo img-lightbox lozad-gallery-load lozad-gallery"
-                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
-                                                title="{{ $item->caption }}">
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                <a data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="Add Photo Caption" onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i class="fa fa-pencil"></i></a>
-                                                <a data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Swap Photo Position" type="button" style="left: -40px !important; " onclick="position_photo()"><i class="fa fa-arrows"></i></a>
-                                                <a data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Photo" href="javascript:void(0);" onclick="delete_photo_photo({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}'})"><i class="fa fa-trash"></i></a>
-                                                </span>
-                                            @endif
-                                        @endauth
+                                    <a
+                                        href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
+                                        <img class="photosGrid__Photo img-lightbox lozad-gallery-load lozad-gallery"
+                                            src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
+                                            title="{{ $item->caption }}">
+                                    </a>
+                                    @auth
+                                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                            <span class="edit-icon">
+                                                <a data-bs-toggle="popover" data-bs-animation="true"
+                                                    data-bs-placement="bottom" type="button" title="Add Photo Caption"
+                                                    onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                        class="fa fa-pencil"></i></a>
+                                                <a data-bs-toggle="popover" data-bs-animation="true"
+                                                    data-bs-placement="bottom" title="Swap Photo Position" type="button"
+                                                    style="left: -40px !important; " onclick="position_photo()"><i
+                                                        class="fa fa-arrows"></i></a>
+                                                <a data-bs-toggle="popover" data-bs-animation="true"
+                                                    data-bs-placement="bottom" title="Delete Photo"
+                                                    href="javascript:void(0);"
+                                                    onclick="delete_photo_photo({'id': '{{ $restaurant->id_restaurant }}', 'id_photo': '{{ $item->id_photo }}'})"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </span>
+                                        @endif
+                                    @endauth
                                 @endforeach
                             @endif
                             @if ($restaurant->video->count() > 0)
                                 @foreach ($restaurant->video->sortBy('order') as $item)
-                                    <a class="video-grid"
-                                        onclick="view_video_restaurant({{ $item->id_video }})"
+                                    <a class="video-grid" onclick="view_video_restaurant({{ $item->id_video }})"
                                         href="javascript:void(0);">
                                         <i class="fas fa-2x fa-play video-button"></i>
                                         <video href="javascript:void(0)" class="photosGrid__Photo"
@@ -841,11 +852,12 @@
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a class="delete" style="height:40px" href="javascript:void(0);"
                                                 onclick="delete_photo_video({'id': '{{ $restaurant->id_restaurant }}', 'id_video': '{{ $item->id_video }}'})"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Delete Video"><i class="fa fa-trash"></i></a>
-                                            <a type="button" class="delete"
-                                                style="left: -40px !important; height:40px;" onclick="position_video()"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Delete Video"><i
+                                                    class="fa fa-trash"></i></a>
+                                            <a type="button" class="delete" style="left: -40px !important; height:40px;"
+                                                onclick="position_video()" data-bs-toggle="popover"
+                                                data-bs-animation="true" data-bs-placement="bottom"
                                                 title="Swap Video Position"><i class="fa fa-arrows"></i></a>
                                         @endif
                                     @endauth
@@ -882,8 +894,8 @@
                                         &nbsp;
                                         <a type="button" onclick="edit_menu()">
                                             <i class="fa fa-plus" style="color:#FF7400; padding-right:5px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Add"></i>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Add"></i>
                                         </a>
                                     @endif
                                 @endauth
@@ -937,8 +949,8 @@
                                     style="padding-right: 10px; padding-left:5px; box-sizing: border-box;">
                                     <form class="dropzone" id="frmMenu">
                                         @csrf
-                                        <input type="hidden" value="{{ $restaurant->id_restaurant }}" id="id_restaurant"
-                                            name="id_restaurant">
+                                        <input type="hidden" value="{{ $restaurant->id_restaurant }}"
+                                            id="id_restaurant" name="id_restaurant">
                                     </form>
                                     <button type="submit" id="button_menu" class="btn btn-primary">Upload</button>
                                 </section>
@@ -1093,8 +1105,7 @@
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
-                                                    required>{{ $restaurant->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100" rows="5" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -1154,39 +1165,48 @@
                     <!-- Random Villa Slider Start -->
                     <div class="popular-block-activity">
                         <h4>Popular Villa<h4>
-                        <div class="SlickCarousel3">
-                            <!-- Start Slider Items -->
-                            @forelse ($villaRandom as $popular)
-                            <div>
-                                <div class="popular-card">
-                                    <div class="popular-card-header" onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');" style="cursor: pointer;">
-                                        <img src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
-                                    </div>
-                                    <div>
-                                        <div class="card-content">
-                                            <div class="popular-card-title"><a href="{{ route('villa', ['id' => $popular->id_villa]) }}" target="_blank">{{ $popular->name }}</a></div>
-                                            <div class="popular-card-text">
-                                                <p>{{ $popular->bedroom }} Bedroom, {{ $popular->bathroom }} Bathroom</p>
-                                                <p style="color: #000;">
-                                                    @foreach ($popular->amenities as $item)
-                                                    <i class="fa fa-{{ $item->icon }}"></i>
-                                                    @endforeach
-                                                    {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                </p>
-                                                <!-- Description max 100 character -->
-                                                <p style="text-align: justify;">{{ Str::limit($popular->description, 150, ' ...') }}</p>
-                                            </div>
-                                            <div class="popular-card-price">
-                                                <p>Price per night: IDR {{ number_format($popular->price, 0, ',', '.') }}</p>
+                                <div class="SlickCarousel3">
+                                    <!-- Start Slider Items -->
+                                    @forelse ($villaRandom as $popular)
+                                        <div>
+                                            <div class="popular-card">
+                                                <div class="popular-card-header"
+                                                    onclick="window.open('{{ route('villa', ['id' => $popular->id_villa]) }}', '_blank');"
+                                                    style="cursor: pointer;">
+                                                    <img
+                                                        src="{{ asset('/foto/gallery/' . $popular->uid . '/' . $popular->image) }}">
+                                                </div>
+                                                <div>
+                                                    <div class="card-content">
+                                                        <div class="popular-card-title"><a
+                                                                href="{{ route('villa', ['id' => $popular->id_villa]) }}"
+                                                                target="_blank">{{ $popular->name }}</a></div>
+                                                        <div class="popular-card-text">
+                                                            <p>{{ $popular->bedroom }} Bedroom,
+                                                                {{ $popular->bathroom }} Bathroom</p>
+                                                            <p style="color: #000;">
+                                                                @foreach ($popular->amenities as $item)
+                                                                    <i class="fa fa-{{ $item->icon }}"></i>
+                                                                @endforeach
+                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
+                                                            </p>
+                                                            <!-- Description max 100 character -->
+                                                            <p style="text-align: justify;">
+                                                                {{ Str::limit($popular->description, 150, ' ...') }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="popular-card-price">
+                                                            <p>Price per night: IDR
+                                                                {{ number_format($popular->price, 0, ',', '.') }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @empty
+                                    @endforelse
+                                    <!-- End Slider Items -->
                                 </div>
-                            </div>
-                            @empty
-                            @endforelse
-                            <!-- End Slider Items -->
-                        </div>
                     </div>
                     <!-- End Random Slider -->
                 </div>
@@ -1207,7 +1227,14 @@
                 @endif
 
                 @auth
-                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('hotel') || Route::is('resrtaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
+                    @if (Route::current()->uri() == 'villa/{id}' ||
+                        Route::is('hotel') ||
+                        Route::is('resrtaurant') ||
+                        Route::is('activity') ||
+                        Route::is('privacy_policy') ||
+                        Route::is('terms') ||
+                        Route::is('license') ||
+                        Route::is('room_hotel'))
                         <a type="button" style="top: 0px !important;" onclick="location.href='{{ route('ahost') }}';"
                             value="{{ Translate::translate('Become a Host') }}" target="_blank"></a>
                     @endif
@@ -1221,7 +1248,14 @@
                         @endif
                     </a>
                 @else
-                    @if (Route::current()->uri() == 'villa/{id}' || Route::is('hotel') || Route::is('restaurant') || Route::is('activity') || Route::is('privacy_policy') || Route::is('terms') || Route::is('license') || Route::is('room_hotel'))
+                    @if (Route::current()->uri() == 'villa/{id}' ||
+                        Route::is('hotel') ||
+                        Route::is('restaurant') ||
+                        Route::is('activity') ||
+                        Route::is('privacy_policy') ||
+                        Route::is('terms') ||
+                        Route::is('license') ||
+                        Route::is('room_hotel'))
                         <input type="button" style="top: 0px !important;"
                             onclick="location.href='{{ route('ahost') }}';"
                             value="{{ Translate::translate('Become a Host') }}" />
@@ -1426,32 +1460,32 @@
                                                                 </div>
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
-                                                                        <input id="service-star-5" type="radio" name="service"
-                                                                            value="5" required />
+                                                                        <input id="service-star-5" type="radio"
+                                                                            name="service" value="5" required />
                                                                         <label for="service-star-5" title="5 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="service-star-4" type="radio" name="service"
-                                                                            value="4" required />
+                                                                        <input id="service-star-4" type="radio"
+                                                                            name="service" value="4" required />
                                                                         <label for="service-star-4" title="4 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="service-star-3" type="radio" name="service"
-                                                                            value="3" required />
+                                                                        <input id="service-star-3" type="radio"
+                                                                            name="service" value="3" required />
                                                                         <label for="service-star-3" title="3 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="service-star-2" type="radio" name="service"
-                                                                            value="2" required />
+                                                                        <input id="service-star-2" type="radio"
+                                                                            name="service" value="2" required />
                                                                         <label for="service-star-2" title="2 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="service-star-1" type="radio" name="service"
-                                                                            value="1" required />
+                                                                        <input id="service-star-1" type="radio"
+                                                                            name="service" value="1" required />
                                                                         <label for="service-star-1" title="1 star">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
@@ -1465,32 +1499,32 @@
                                                                 </div>
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
-                                                                        <input id="value-star-5" type="radio" name="value"
-                                                                            value="5" required />
+                                                                        <input id="value-star-5" type="radio"
+                                                                            name="value" value="5" required />
                                                                         <label for="value-star-5" title="5 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="value-star-4" type="radio" name="value"
-                                                                            value="4" required />
+                                                                        <input id="value-star-4" type="radio"
+                                                                            name="value" value="4" required />
                                                                         <label for="value-star-4" title="4 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="value-star-3" type="radio" name="value"
-                                                                            value="3" required />
+                                                                        <input id="value-star-3" type="radio"
+                                                                            name="value" value="3" required />
                                                                         <label for="value-star-3" title="3 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="value-star-2" type="radio" name="value"
-                                                                            value="2" required />
+                                                                        <input id="value-star-2" type="radio"
+                                                                            name="value" value="2" required />
                                                                         <label for="value-star-2" title="2 stars">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
-                                                                        <input id="value-star-1" type="radio" name="value"
-                                                                            value="1" required />
+                                                                        <input id="value-star-1" type="radio"
+                                                                            name="value" value="1" required />
                                                                         <label for="value-star-1" title="1 star">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
@@ -1548,7 +1582,8 @@
                                                                 </div>
                                                             </div>
                                                             <center>
-                                                                <button type="submit" class="btn btn-block btn-sm btn-primary"
+                                                                <button type="submit"
+                                                                    class="btn btn-block btn-sm btn-primary"
                                                                     style="width: 200px">Done</button>
                                                             </center>
                                                         </div>
@@ -1772,15 +1807,14 @@
     {{-- OTHER MODAL --}}
     @include('user.modal.restaurant.restaurant-guest-safety')
     @auth
-        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $restaurant->created_by)
+        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
+            auth()->user()->id == $restaurant->created_by)
             {{-- @include('user.modal.restaurant.name') --}}
             {{-- @include('user.modal.restaurant.short_description') --}}
             {{-- @include('user.modal.restaurant.description') --}}
             {{-- @include('user.modal.restaurant.photo') --}}
             @include('user.modal.restaurant.restaurant-guest-safety')
-            @include(
-                'user.modal.restaurant.edit.edit-restaurant-guest-safety'
-            )
+            @include('user.modal.restaurant.edit.edit-restaurant-guest-safety')
             @include('user.modal.restaurant.edit.edit-restaurant-rules')
             @include('user.modal.restaurant.facilities_add')
             @include('user.modal.restaurant.menu')
@@ -1830,9 +1864,11 @@
     {{-- END MODAL SCRIPT --}}
     {{-- STORY MODAL --}}
     <div class="modal fade" id="storymodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
+        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+        style="border-radius: 10px;">
         <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             <div class="modal-content modal-content-story video-container" style="width:980px;">
                 <center>
                     <h5 class="video-title" id="story-title"></h5>
@@ -1877,9 +1913,11 @@
     </script>
     {{-- MODAL VIDEO --}}
     <div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
+        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+        style="border-radius: 10px;">
         <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             <h5 class="video-title" id="video-title"></h5><br>
             <div class="modal-content video-container">
                 <center>
@@ -1921,8 +1959,8 @@
         // });
     </script>
     {{-- MODAL AMENITIES --}}
-    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
@@ -1971,7 +2009,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Photo Caption</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('restaurant_update_caption_photo') }}" method="post">
@@ -1981,7 +2020,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <label>Max 200 character</label>
-                                <input type="text" class="add-caption" id="caption_photo" name="caption" value="">
+                                <input type="text" class="add-caption" id="caption_photo" name="caption"
+                                    value="">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -1993,8 +2033,8 @@
 
 
     {{-- MODAL TAGS --}}
-    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
@@ -2057,13 +2097,14 @@
     </script>
 
     <!-- MENU MODAL -->
-    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" id="modal-menu-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <img src="" alt="" class="img-fluid" style="border-radius:15px;">
@@ -2215,13 +2256,14 @@
     </div> --}}
 
     {{-- MODAL SHARE --}}
-    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">Share</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <p class="fs-3 fw-bold mb-0">Share this place with your friend and family</p>
@@ -2281,8 +2323,8 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a type="button" class="d-flex p-0" onclick="copy_link_auth()">
-                                        <div class="pr-5"><i class="fas fa-copy"></i> <span
-                                                class="fw-normal">Copy Link</span></div>
+                                        <div class="pr-5"><i class="fas fa-copy"></i> <span class="fw-normal">Copy
+                                                Link</span></div>
                                     </a>
                                 </div>
                                 <div class="col-lg col-12 p-3 border br-10">
@@ -2321,15 +2363,16 @@
         </div>
     </div>
     @guest
-    <script type="text/javascript">
+        <script type="text/javascript">
             function copy_link() {
                 // navigator.clipboard.writeText(window.location.origin + window.location.pathname);
                 let html = "<p>Link copied :-)</p>";
                 navigator.clipboard.writeText(window.location.origin + window.location.pathname);
                 this.insertAdjacentHTML('afterend', 'html');
-                setTimeout(() => { document.querySelectorAll('#myCopy').forEach(el => el.remove());
-                }, 
-                3000);
+                setTimeout(() => {
+                        document.querySelectorAll('#myCopy').forEach(el => el.remove());
+                    },
+                    3000);
                 // alert('link has been copied');
             }
         </script>
@@ -2352,7 +2395,8 @@
             <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ $restaurant->name }} Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="row">
@@ -2386,7 +2430,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">FAQ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <form action="{{ route('villa_store_user_message') }}" method="post">
@@ -2484,8 +2529,8 @@
     </div>
 
     <!-- MAP MODAL -->
-    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-map">
                 <div class="modal-header">
@@ -3636,17 +3681,17 @@
         })
     </script>
     <script>
-        $(document).ready(function(){
-        $('.SlickCarousel3').slick({
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots:true,
-            centerMode: false,
-            appendArrows: false,
-            responsive: false,
+        $(document).ready(function() {
+            $('.SlickCarousel3').slick({
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                dots: true,
+                centerMode: false,
+                appendArrows: false,
+                responsive: false,
             });
         });
     </script>

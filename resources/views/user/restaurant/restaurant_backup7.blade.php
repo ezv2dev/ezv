@@ -26,7 +26,8 @@
 
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -517,7 +518,6 @@
         .active-sticky {
             color: #ff7400;
         }
-
     </style>
 
     {{-- style reorder image --}}
@@ -543,7 +543,6 @@
             height: 140px;
             border-radius: 15px;
         }
-
     </style>
     {{-- /reorder image --}}
     {{-- style reorder video --}}
@@ -570,7 +569,6 @@
             border-radius: 15px;
             object-fit: cover;
         }
-
     </style>
     {{-- /reorder video --}}
 
@@ -639,8 +637,7 @@
                         @if ($restaurant->status == '0')
                             <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
                                 <span>this content is deactive, </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
                                     method="post">
                                     @csrf
                                     @method('PATCH')
@@ -653,8 +650,7 @@
                         @if ($restaurant->status == '1')
                             <div class="alert alert-success d-flex flex-row align-items-center" role="success">
                                 <span>this content is active, </span>
-                                <form
-                                    action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
                                     method="post">
                                     @csrf
                                     @method('PATCH')
@@ -707,7 +703,7 @@
                         @if ($restaurant->status == '2')
                             <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                                 <span>the owner request activation, </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
                                     method="get">
                                     <button class="btn" type="submit">activate this content</button>
                                 </form>
@@ -717,7 +713,7 @@
                         @if ($restaurant->status == '3')
                             <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
                                 <span>the owner request deactivation, </span>
-                                <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}"
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
                                     method="get">
                                     <button class="btn" type="submit">deactivate this content</button>
                                 </form>
@@ -738,16 +734,17 @@
                             @endif
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="edit_restaurant_profile()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="edit_restaurant_profile()"><i
+                                            class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
+                                            title="Edit"></i></a>
                                     @if ($restaurant->image)
                                         <a class="delete-profile" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': `{{ $restaurant->id_restaurant }}`})">
                                             {{-- <a href="{{ route('restaurant_delete_image', $restaurant->id_restaurant) }}"> --}}
                                             <i class="fa fa-trash" style="color:red; margin-left: 25px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Delete"></i></a>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Delete"></i></a>
                                     @endif
                                 @endif
                             @endauth
@@ -807,8 +804,8 @@
                                 <div class="col-12"
                                     style="display: flex; padding-right: 70px; padding-left: 70px; margin-top: 18px;">
                                     <div class="col-4">
-                                        <a onclick="view_map('{{ $restaurant->id_restaurant }}')"
-                                            type="button"> <i class="fa-solid fa-location-dot"></i>
+                                        <a onclick="view_map('{{ $restaurant->id_restaurant }}')" type="button"> <i
+                                                class="fa-solid fa-location-dot"></i>
                                         </a>
                                     </div>
                                     <div class="col-4">
@@ -874,30 +871,34 @@
                                                     value="{{ $restaurant->id_restaurant }}" required>
                                                 <div class="form-group d-flex justify-content-center align-items-center">
                                                     <div class="col-auto">
-                                                        <select name="id_type" id="restaurant-type-input" class="form-control">
+                                                        <select name="id_type" id="restaurant-type-input"
+                                                            class="form-control">
                                                             @forelse ($restaurant_type as $item)
                                                                 @php
                                                                     $isSelected = '';
-                                                                    if($item->id_type == $restaurant->id_type) {
+                                                                    if ($item->id_type == $restaurant->id_type) {
                                                                         $isSelected = 'selected';
                                                                     }
                                                                 @endphp
-                                                                <option value="{{ $item->id_type }}" {{ $isSelected }}>{{ $item->name }}</option>
+                                                                <option value="{{ $item->id_type }}" {{ $isSelected }}>
+                                                                    {{ $item->name }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
                                                     </div>
                                                     <span class="mx-2">-</span>
                                                     <div class="col-auto">
-                                                        <select name="id_price" id="restaurant-price-input" class="form-control">
+                                                        <select name="id_price" id="restaurant-price-input"
+                                                            class="form-control">
                                                             @forelse ($restaurant_price as $item)
                                                                 @php
                                                                     $isSelected = '';
-                                                                    if($item->id_price == $restaurant->id_price) {
+                                                                    if ($item->id_price == $restaurant->id_price) {
                                                                         $isSelected = 'selected';
                                                                     }
                                                                 @endphp
-                                                                <option value="{{ $item->id_price }}" {{ $isSelected }}>{{ $item->name }}</option>
+                                                                <option value="{{ $item->id_price }}"
+                                                                    {{ $isSelected }}>{{ $item->name }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
@@ -939,13 +940,15 @@
                                         @method('patch')
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <input type="text" style="width: 100%;" class="form-control" name="name" id="name-form-input" maxlength="100" value="{{ $restaurant->name }}"
+                                        <input type="text" style="width: 100%;" class="form-control" name="name"
+                                            id="name-form-input" maxlength="100" value="{{ $restaurant->name }}"
                                             required>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> Done
                                         </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
+                                        <button type="reset" class="btn btn-sm btn-secondary"
+                                            onclick="editNameCancel()">
                                             <i class="fa fa-xmark"></i> Cancel
                                         </button>
                                     </form>
@@ -956,9 +959,10 @@
                         <p class="short-desc" id="short-description-content">{{ $restaurant->short_description }}
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editShortDescriptionForm()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="editShortDescriptionForm()"><i
+                                            class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
+                                            title="Edit"></i></a>
                                 @endif
                             @endauth
                         </p>
@@ -971,8 +975,7 @@
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
                                         <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
-                                            cols="30" rows="3" maxlength="255"
-                                            required>{{ $restaurant->short_description }}</textarea>
+                                            cols="30" rows="3" maxlength="255" required>{{ $restaurant->short_description }}</textarea>
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fa fa-check"></i> Done
                                         </button>
@@ -1051,7 +1054,8 @@
                                                                                     aria-hidden="true"></i>
                                                                             </div>
 
-                                                                            <video preload href="" class="story-video-grid"
+                                                                            <video preload href=""
+                                                                                class="story-video-grid"
                                                                                 style="object-fit: cover;"
                                                                                 src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=1.0">
                                                                             </video>
@@ -1158,8 +1162,8 @@
                         <li class="navigationItem">
                             <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('gallery').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp
+                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp
                                 GALLERY
                             </a>
                         </li>
@@ -1182,8 +1186,8 @@
                         <li class="navigationItem ">
                             <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('amenities').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp
+                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp
                                 FACILITIES
                             </a>
                         </li>
@@ -1206,8 +1210,8 @@
                         <li class="navigationItem">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('review').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i>&nbsp
+                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i>&nbsp
                                 REVIEW
                             </a>
                         </li>
@@ -1230,10 +1234,10 @@
                                             onclick="delete_photo_photo({'id': `{{ $restaurant->id_restaurant }}`, 'id_photo': `{{ $item->id_photo }}`})"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="Delete"><i class="fa fa-trash"></i></a>
-                                        <a type="button" class="delete"
-                                            style="left: -40px !important; height:40px;" onclick="position_photo()"
-                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                            title="Edit Position"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="delete" style="left: -40px !important; height:40px;"
+                                            onclick="position_photo()" data-bs-toggle="popover" data-bs-animation="true"
+                                            data-bs-placement="bottom" title="Edit Position"><i
+                                                class="fa fa-pencil"></i></a>
                                     @endif
                                 @endauth
                             @endforeach
@@ -1242,7 +1246,8 @@
                             @foreach ($restaurant->video->sortBy('order') as $item)
                                 <a class="video-grid" onclick="view_video_restaurant({{ $item->id_video }})">
                                     <i class="fas fa-2x fa-play video-button"></i>
-                                    <video preload href="" class="photosGrid__Photo" style="object-fit: cover;"
+                                    <video preload href="" class="photosGrid__Photo"
+                                        style="object-fit: cover;"
                                         src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=1.0">
                                     </video>
                                 </a>
@@ -1256,10 +1261,10 @@
                                             href="{{ route('restaurant_delete_photo_video', ['id' => $restaurant->id_restaurant, 'id_video' => $item->id_video]) }}"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="Delete"><i class="fa fa-trash"></i></a> --}}
-                                        <a type="button" class="delete"
-                                            style="left: -40px !important; height:40px;" onclick="position_video()"
-                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                            title="Edit Position"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="delete" style="left: -40px !important; height:40px;"
+                                            onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true"
+                                            data-bs-placement="bottom" title="Edit Position"><i
+                                                class="fa fa-pencil"></i></a>
                                     @endif
                                 @endauth
                             @endforeach
@@ -1294,8 +1299,8 @@
                                         &nbsp;
                                         <a type="button" onclick="edit_menu()">
                                             <i class="fa fa-plus" style="color:#FF7400; padding-right:5px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Add"></i>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Add"></i>
                                         </a>
                                     @endif
                                 @endauth
@@ -1329,9 +1334,10 @@
                                 @endif
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editDescriptionForm()"><i class="fa fa-pencil-alt"
-                                                style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                        &nbsp;<a type="button" onclick="editDescriptionForm()"><i
+                                                class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </p>
@@ -1344,8 +1350,7 @@
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
-                                                    required>{{ $restaurant->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100" rows="5" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -1372,7 +1377,8 @@
                                         &nbsp;
                                         <a type="button" onclick="add_facilities()"><i class="fa fa-pencil-alt"
                                                 style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </h2>
@@ -1418,11 +1424,13 @@
                                         &nbsp;
                                         <a type="button" onclick="edit_location()"><i class="fa fa-pencil-alt"
                                                 style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </h2>
-                            <input type="hidden" value="{{ $restaurant->latitude }}" name="latitude" id="latitude">
+                            <input type="hidden" value="{{ $restaurant->latitude }}" name="latitude"
+                                id="latitude">
                             <input type="hidden" value="{{ $restaurant->longitude }}" name="longitude"
                                 id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
@@ -1493,10 +1501,10 @@
                         <input type="hidden" id="id_restaurant" name="id_restaurant"
                             value="{{ $restaurant->id_restaurant }}">
                         @auth
-                                                                                                                                                                                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                                                                                                                                                                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
     &nbsp;<a type="button" onclick="edit_price()"><i class="fa fa-pencil-alt"
-                                                                                                                                                                                                                style="color: #FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                                                                                                                                                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                                                                                                                                                                                                    style="color: #FF7400; padding-right:5px;" data-bs-toggle="popover"
+                                                                                                                                                                                                                    data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
     @endif
                         @endauth
                         <form method="POST" action="{{ route('villa_booking_confirm') }}">
@@ -1827,7 +1835,6 @@
                                 .cm-star-rating input[type=radio]:checked~label {
                                     color: #f2b600
                                 }
-
                             </style>
                             {{-- END STYLE FOR RATING STAR --}}
                             <section id="add-review" class="section-2 padding-x-2">
@@ -1849,28 +1856,28 @@
                                                                     class="w-100" required>
                                                             </div> --}}
                                                         <div class="cm-star-rating d-flex align-items-center">
-                                                            <input id="food-star-5" type="radio" name="food" value="5"
-                                                                required />
+                                                            <input id="food-star-5" type="radio" name="food"
+                                                                value="5" required />
                                                             <label for="food-star-5" title="5 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="food-star-4" type="radio" name="food" value="4"
-                                                                required />
+                                                            <input id="food-star-4" type="radio" name="food"
+                                                                value="4" required />
                                                             <label for="food-star-4" title="4 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="food-star-3" type="radio" name="food" value="3"
-                                                                required />
+                                                            <input id="food-star-3" type="radio" name="food"
+                                                                value="3" required />
                                                             <label for="food-star-3" title="3 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="food-star-2" type="radio" name="food" value="2"
-                                                                required />
+                                                            <input id="food-star-2" type="radio" name="food"
+                                                                value="2" required />
                                                             <label for="food-star-2" title="2 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="food-star-1" type="radio" name="food" value="1"
-                                                                required />
+                                                            <input id="food-star-1" type="radio" name="food"
+                                                                value="1" required />
                                                             <label for="food-star-1" title="1 star">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
@@ -1885,28 +1892,28 @@
                                                                     class="w-100" required>
                                                             </div> --}}
                                                         <div class="cm-star-rating d-flex align-items-center">
-                                                            <input id="service-star-5" type="radio" name="service" value="5"
-                                                                required />
+                                                            <input id="service-star-5" type="radio" name="service"
+                                                                value="5" required />
                                                             <label for="service-star-5" title="5 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="service-star-4" type="radio" name="service" value="4"
-                                                                required />
+                                                            <input id="service-star-4" type="radio" name="service"
+                                                                value="4" required />
                                                             <label for="service-star-4" title="4 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="service-star-3" type="radio" name="service" value="3"
-                                                                required />
+                                                            <input id="service-star-3" type="radio" name="service"
+                                                                value="3" required />
                                                             <label for="service-star-3" title="3 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="service-star-2" type="radio" name="service" value="2"
-                                                                required />
+                                                            <input id="service-star-2" type="radio" name="service"
+                                                                value="2" required />
                                                             <label for="service-star-2" title="2 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="service-star-1" type="radio" name="service" value="1"
-                                                                required />
+                                                            <input id="service-star-1" type="radio" name="service"
+                                                                value="1" required />
                                                             <label for="service-star-1" title="1 star">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
@@ -1921,28 +1928,28 @@
                                                                     class="w-100" required>
                                                             </div> --}}
                                                         <div class="cm-star-rating d-flex align-items-center">
-                                                            <input id="value-star-5" type="radio" name="value" value="5"
-                                                                required />
+                                                            <input id="value-star-5" type="radio" name="value"
+                                                                value="5" required />
                                                             <label for="value-star-5" title="5 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="value-star-4" type="radio" name="value" value="4"
-                                                                required />
+                                                            <input id="value-star-4" type="radio" name="value"
+                                                                value="4" required />
                                                             <label for="value-star-4" title="4 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="value-star-3" type="radio" name="value" value="3"
-                                                                required />
+                                                            <input id="value-star-3" type="radio" name="value"
+                                                                value="3" required />
                                                             <label for="value-star-3" title="3 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="value-star-2" type="radio" name="value" value="2"
-                                                                required />
+                                                            <input id="value-star-2" type="radio" name="value"
+                                                                value="2" required />
                                                             <label for="value-star-2" title="2 stars">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
-                                                            <input id="value-star-1" type="radio" name="value" value="1"
-                                                                required />
+                                                            <input id="value-star-1" type="radio" name="value"
+                                                                value="1" required />
                                                             <label for="value-star-1" title="1 star">
                                                                 <i class="active fa fa-star" aria-hidden="true"></i>
                                                             </label>
@@ -2029,7 +2036,8 @@
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 &nbsp;<a type="button" onclick="editRestaurantRules()"><i
-                                                        class="fa fa-pencil-alt" style="color:#FF7400; margin-left: 10px;"
+                                                        class="fa fa-pencil-alt"
+                                                        style="color:#FF7400; margin-left: 10px;"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" title="Edit"></i></a>
                                             @endif
@@ -2082,7 +2090,8 @@
                                         @auth
                                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                                 &nbsp;<a type="button" onclick="editRestaurantGuestSafety()"><i
-                                                        class="fa fa-pencil-alt" style="color:#FF7400; margin-left: 10px;"
+                                                        class="fa fa-pencil-alt"
+                                                        style="color:#FF7400; margin-left: 10px;"
                                                         data-bs-toggle="popover" data-bs-animation="true"
                                                         data-bs-placement="bottom" title="Edit"></i></a>
                                             @endif
@@ -2181,7 +2190,8 @@
                                         <div class="cards">
                                             @forelse ($nearby_villas as $item)
                                                 <div class="card col-lg-3" style="border-radius: 5px;">
-                                                    <a href="{{ route('villa', $item->id_villa) }}" target="_blank">
+                                                    <a href="{{ route('villa', $item->id_villa) }}"
+                                                        target="_blank">
                                                         @if ($item->image)
                                                             <img src="{{ URL::asset('/foto/gallery/' . strtolower($item->uid) . '/' . $item->image) }}"
                                                                 alt="Villas"
@@ -2282,18 +2292,15 @@
     {{-- OTHER MODAL --}}
     @include('user.modal.restaurant.restaurant-guest-safety')
     @auth
-        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $restaurant->created_by)
+        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
+            auth()->user()->id == $restaurant->created_by)
             {{-- @include('user.modal.restaurant.name') --}}
             {{-- @include('user.modal.restaurant.short_description') --}}
             {{-- @include('user.modal.restaurant.description') --}}
             {{-- @include('user.modal.restaurant.photo') --}}
             @include('user.modal.restaurant.restaurant-guest-safety')
-            @include(
-                'user.modal.restaurant.edit.edit-restaurant-guest-safety'
-            )
-            @include(
-                'user.modal.restaurant.edit.edit-restaurant-rules'
-            )
+            @include('user.modal.restaurant.edit.edit-restaurant-guest-safety')
+            @include('user.modal.restaurant.edit.edit-restaurant-rules')
             @include('user.modal.restaurant.facilities_add')
             @include('user.modal.restaurant.menu')
             @include('user.modal.restaurant.location')
@@ -2341,9 +2348,11 @@
     {{-- END MODAL SCRIPT --}}
     {{-- STORY MODAL --}}
     <div class="modal fade" id="storymodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
+        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+        style="border-radius: 10px;">
         <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             <div class="modal-content modal-content-story video-container" style="width:980px;">
                 <center>
                     <h5 class="video-title" id="story-title"></h5>
@@ -2388,9 +2397,11 @@
     </script>
     {{-- MODAL VIDEO --}}
     <div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
-        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
+        aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
+        style="border-radius: 10px;">
         <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             <h5 class="video-title" id="video-title"></h5><br>
             <div class="modal-content video-container">
                 <center>
@@ -2437,8 +2448,8 @@
         });
     </script>
     {{-- MODAL AMENITIES --}}
-    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
@@ -2471,8 +2482,8 @@
     </script>
 
     {{-- MODAL TAGS --}}
-    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
@@ -2535,13 +2546,14 @@
     </script>
 
     <!-- MENU MODAL -->
-    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" id="modal-menu-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <img src="" alt="" class="img-fluid" style="border-radius:15px;">
@@ -2693,13 +2705,14 @@
     </div> --}}
 
     {{-- MODAL SHARE --}}
-    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">Share</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <p class="fs-3 fw-bold mb-0">Share this place with your friend and family</p>
@@ -2718,8 +2731,8 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a type="button" class="d-flex p-0" onclick="copy_link()">
-                                        <div class="pr-5"><i class="fas fa-copy"></i> <span
-                                                class="fw-normal">Copy Link</span></div>
+                                        <div class="pr-5"><i class="fas fa-copy"></i> <span class="fw-normal">Copy
+                                                Link</span></div>
                                     </a>
                                 </div>
                                 <div class="col-lg col-12 p-3 border br-10">
@@ -2757,8 +2770,8 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <a type="button" class="d-flex p-0" onclick="copy_link_auth()">
-                                        <div class="pr-5"><i class="fas fa-copy"></i> <span
-                                                class="fw-normal">Copy Link</span></div>
+                                        <div class="pr-5"><i class="fas fa-copy"></i> <span class="fw-normal">Copy
+                                                Link</span></div>
                                     </a>
                                 </div>
                                 <div class="col-lg col-12 p-3 border br-10">
@@ -2822,7 +2835,8 @@
             <div class="modal-content" style="background: white; border-radius:25px; margin-top: 150px;">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ $restaurant->name }} Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="row">
@@ -2868,7 +2882,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">FAQ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <form action="{{ route('villa_store_user_message') }}" method="post">
@@ -2965,8 +2980,8 @@
     </div>
 
     <!-- MAP MODAL -->
-    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-map">
                 <div class="modal-header">

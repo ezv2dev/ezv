@@ -25,7 +25,8 @@
 
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('assets/media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -58,7 +59,8 @@
 </head>
 
 <body style="background-color:white">
-    @component('components.loading.loading-type1')@endcomponent
+    @component('components.loading.loading-type1')
+    @endcomponent
     {{-- <input type="hidden" id="min_stay" name="min_stay" value="{{ $restaurant->min_stay }}">
     <input type="hidden" id="price" name="price" value="{{ $restaurant->price }}">
     <input type="hidden" id="price3" name="price" value="{{ $restaurant->price }}"> --}}
@@ -105,113 +107,123 @@
         {{-- END HEADER --}}
         {{-- PROFILE --}}
         <div class="row page-content">
-        <div class="alert-detail">
-            {{-- ALERT CONTENT STATUS --}}
-            @auth
-                @if (auth()->user()->id == $restaurant->created_by)
-                    @if ($restaurant->status == '0')
-                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                            <span>this content is deactive, </span>
-                            <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
-                                <button class="btn" type="submit">request activation</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
+            <div class="alert-detail">
+                {{-- ALERT CONTENT STATUS --}}
+                @auth
+                    @if (auth()->user()->id == $restaurant->created_by)
+                        @if ($restaurant->status == '0')
+                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                                <span>this content is deactive, </span>
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <button class="btn" type="submit">request activation</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '1')
+                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                                <span>this content is active, </span>
+                                <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <button class="btn" type="submit">request deactivation</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '2')
+                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                <span>you have been request activation for this content, </span>
+                                <form
+                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <button class="btn" type="submit">cancel activation</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '3')
+                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                <span>you have been request deactivation for this content, </span>
+                                <form
+                                    action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                                    <button class="btn" type="submit">cancel deactivation</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
                     @endif
-                    @if ($restaurant->status == '1')
-                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                            <span>this content is active, </span>
-                            <form action="{{ route('restaurant_request_update_status', $restaurant->id_restaurant) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
-                                <button class="btn" type="submit">request deactivation</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
+                    @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
+                        @if ($restaurant->status == '0')
+                            <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
+                                this content is deactive
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '1')
+                            <div class="alert alert-success d-flex flex-row align-items-center" role="success">
+                                this content is active
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '2')
+                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                <span>the owner request activation, </span>
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
+                                    method="get">
+                                    <button class="btn" type="submit">activate this content</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
+                        @if ($restaurant->status == '3')
+                            <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
+                                <span>the owner request deactivation, </span>
+                                <form action="{{ route('admin_food_update_status', $restaurant->id_restaurant) }}"
+                                    method="get">
+                                    <button class="btn" type="submit">deactivate this content</button>
+                                </form>
+                                <span> ?</span>
+                            </div>
+                        @endif
                     @endif
-                    @if ($restaurant->status == '2')
-                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                            <span>you have been request activation for this content, </span>
-                            <form action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
-                                <button class="btn" type="submit">cancel activation</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
-                    @endif
-                    @if ($restaurant->status == '3')
-                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                            <span>you have been request deactivation for this content, </span>
-                            <form action="{{ route('restaurant_cancel_request_update_status', $restaurant->id_restaurant) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
-                                <button class="btn" type="submit">cancel deactivation</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
-                    @endif
-                @endif
-                @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']))
-                    @if ($restaurant->status == '0')
-                        <div class="alert alert-danger d-flex flex-row align-items-center" role="alert">
-                            this content is deactive
-                        </div>
-                    @endif
-                    @if ($restaurant->status == '1')
-                        <div class="alert alert-success d-flex flex-row align-items-center" role="success">
-                            this content is active
-                        </div>
-                    @endif
-                    @if ($restaurant->status == '2')
-                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                            <span>the owner request activation, </span>
-                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}" method="get">
-                                <button class="btn" type="submit">activate this content</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
-                    @endif
-                    @if ($restaurant->status == '3')
-                        <div class="alert alert-warning d-flex flex-row align-items-center" role="warning">
-                            <span>the owner request deactivation, </span>
-                            <form action="{{ route('admin_restaurant_update_status', $restaurant->id_restaurant) }}" method="get">
-                                <button class="btn" type="submit">deactivate this content</button>
-                            </form>
-                            <span> ?</span>
-                        </div>
-                    @endif
-                @endif
-            @endauth
-            {{-- END ALERT CONTENT STATUS --}}
+                @endauth
+                {{-- END ALERT CONTENT STATUS --}}
             </div>
             <div class="col-12">
                 <div class="row top-profile">
                     <div class="col-12 pd-0">
                         <div class="profile-image">
                             @if ($restaurant->image)
-                                <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $restaurant->image) }}">
+                                <img
+                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $restaurant->image) }}">
                             @else
                                 <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
                             @endif
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a class="edit-profile" type="button" onclick="edit_restaurant_profile()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a class="edit-profile" type="button" onclick="edit_restaurant_profile()"><i
+                                            class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
+                                            title="Edit"></i></a>
                                     @if ($restaurant->image)
                                         <a class="delete-profile" href="javascript:void(0);"
                                             onclick="delete_profile_image({'id': `{{ $restaurant->id_restaurant }}`})">
                                             {{-- <a href="{{ route('restaurant_delete_image', $restaurant->id_restaurant) }}"> --}}
                                             <i class="fa fa-trash" style="color:red; margin-left: 30px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Delete"></i></a>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Delete"></i></a>
                                     @endif
                                 @endif
                             @endauth
@@ -248,10 +260,13 @@
                                                                     <div class="card4 col-lg-3 radius-5">
                                                                         <div class="img-wrap">
                                                                             <div class="video-position">
-                                                                                <a type="button" onclick="view_story_restaurant({{ $item->id_story }});">
-                                                                                    <div class="story-video-player"><i class="fa fa-play"></i>
+                                                                                <a type="button"
+                                                                                    onclick="view_story_restaurant({{ $item->id_story }});">
+                                                                                    <div class="story-video-player"><i
+                                                                                            class="fa fa-play"></i>
                                                                                     </div>
-                                                                                    <video preload href="" class="story-video-grid"
+                                                                                    <video preload href=""
+                                                                                        class="story-video-grid"
                                                                                         style="object-fit: cover;"
                                                                                         src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $item->name) }}#t=1.0">
                                                                                     </video>
@@ -296,10 +311,13 @@
                                                     @foreach ($restaurant->story as $item)
                                                         <div class="card3 col-lg-3" style="border-radius: 5px;">
                                                             <div class="img-wrap">
-                                                                <a type="button" onclick="view_story_restaurant({{ $item->id_story }});">
-                                                                <div class="story-video-player"><i class="fa fa-play"></i>
-                                                                </div>
-                                                                    <video preload href="" class="story-video-grid"
+                                                                <a type="button"
+                                                                    onclick="view_story_restaurant({{ $item->id_story }});">
+                                                                    <div class="story-video-player"><i
+                                                                            class="fa fa-play"></i>
+                                                                    </div>
+                                                                    <video preload href=""
+                                                                        class="story-video-grid"
                                                                         style="object-fit: cover;"
                                                                         src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $item->name) }}#t=1.0">
                                                                     </video>
@@ -330,9 +348,9 @@
                                     @auth
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <a type="button" onclick="editTimeForm()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom"
-                                            title="Edit"></i></a>
+                                                    style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
+                                                    data-bs-animation="true" data-bs-placement="bottom"
+                                                    title="Edit"></i></a>
                                         @endif
                                     @endauth
                                 </p>
@@ -422,34 +440,35 @@
                         <p class="short-desc" id="short-description-content">{{ $restaurant->short_description }}
                             @auth
                                 @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                    &nbsp;<a type="button" onclick="editShortDescriptionForm()"><i class="fa fa-pencil-alt"
-                                            style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                            data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                    &nbsp;<a type="button" onclick="editShortDescriptionForm()"><i
+                                            class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
+                                            title="Edit"></i></a>
                                 @endif
                             @endauth
                         </p>
                         <p>
-                        @auth
-                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                <div id="short-description-form" style="display:none;">
-                                    <form action="{{ route('restaurant_update_short_description') }}" method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="id_restaurant"
-                                            value="{{ $restaurant->id_restaurant }}" required>
-                                        <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30" rows="3"
-                                            maxlength="255" required>{{ $restaurant->short_description }}</textarea>
-                                        <button type="submit" class="btn btn-sm btn-primary">
-                                            <i class="fa fa-check"></i> Done
-                                        </button>
-                                        <button type="reset" class="btn btn-sm btn-secondary"
-                                            onclick="editShortDescriptionCancel()">
-                                            <i class="fa fa-xmark"></i> Cancel
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                        @endauth
+                            @auth
+                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                    <div id="short-description-form" style="display:none;">
+                                        <form action="{{ route('restaurant_update_short_description') }}" method="post">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="id_restaurant"
+                                                value="{{ $restaurant->id_restaurant }}" required>
+                                            <textarea style="width: 100%;" name="short_description" id="short-description-form-input" cols="30"
+                                                rows="3" maxlength="255" required>{{ $restaurant->short_description }}</textarea>
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                <i class="fa fa-check"></i> Done
+                                            </button>
+                                            <button type="reset" class="btn btn-sm btn-secondary"
+                                                onclick="editShortDescriptionCancel()">
+                                                <i class="fa fa-xmark"></i> Cancel
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endauth
                         </p>
                         {{-- END SHORT DESCRIPTION --}}
                         {{-- TAG --}}
@@ -488,9 +507,9 @@
                         <li class="navigationItem">
                             <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('gallery').scrollIntoView();">
-                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
-                                GALLERY</span>
+                                <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                    GALLERY</span>
                             </a>
                         </li>
                         <li class="navigationItem">
@@ -498,7 +517,7 @@
                                 onClick="document.getElementById('menu').scrollIntoView();">
                                 <i aria-label="Posts" class="fa-solid fa-book navigationItem__Icon svg-icon"
                                     fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
-                                MENU</span>
+                                    MENU</span>
                             </a>
                         </li>
                         <li class="navigationItem ">
@@ -506,15 +525,15 @@
                                 onClick="document.getElementById('description').scrollIntoView();">
                                 <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
                                     fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
-                                ABOUT</span>
+                                    ABOUT</span>
                             </a>
                         </li>
                         <li class="navigationItem ">
                             <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('amenities').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
-                                FACILITIES</span>
+                                <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                    FACILITIES</span>
                             </a>
                         </li>
                         <li class="navigationItem ">
@@ -522,7 +541,7 @@
                                 onClick="document.getElementById('location-map').scrollIntoView();">
                                 <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
                                     fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
-                                LOCATION</span>
+                                    LOCATION</span>
                             </a>
                         </li>
                         {{-- <li class="navigationItem">
@@ -536,9 +555,9 @@
                         <li class="navigationItem">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button"
                                 onClick="document.getElementById('review').scrollIntoView();">
-                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon" fill="#262626"
-                                    viewBox="0 0 20 20"></i><span>&nbsp
-                                REVIEW</span>
+                                <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
+                                    fill="#262626" viewBox="0 0 20 20"></i><span>&nbsp
+                                    REVIEW</span>
                             </a>
                         </li>
                     </ul>
@@ -561,10 +580,10 @@
                                             onclick="delete_photo_photo({'id': `{{ $restaurant->id_restaurant }}`, 'id_photo': `{{ $item->id_photo }}`})"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="Delete"><i class="fa fa-trash"></i></a>
-                                        <a type="button" class="delete"
-                                            style="left: -40px !important; height:40px;" onclick="position_photo()"
-                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                            title="Edit Position"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="delete" style="left: -40px !important; height:40px;"
+                                            onclick="position_photo()" data-bs-toggle="popover" data-bs-animation="true"
+                                            data-bs-placement="bottom" title="Edit Position"><i
+                                                class="fa fa-pencil"></i></a>
                                     @endif
                                 @endauth
                             @endforeach
@@ -574,7 +593,8 @@
                                 <a class="video-grid" type="button"
                                     onclick="view_video_restaurant({{ $item->id_video }});">
                                     <i class="fas fa-2x fa-play video-button"></i>
-                                    <video preload href="" class="photosGrid__Photo" style="object-fit: cover;"
+                                    <video preload href="" class="photosGrid__Photo"
+                                        style="object-fit: cover;"
                                         src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $item->name) }}#t=1.0">
                                     </video>
                                 </a>
@@ -588,10 +608,10 @@
                                             href="{{ route('restaurant_delete_photo_video', ['id' => $restaurant->id_restaurant, 'id_video' => $item->id_video]) }}"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="Delete"><i class="fa fa-trash"></i></a> --}}
-                                        <a type="button" class="delete"
-                                            style="left: -40px !important; height:40px;" onclick="position_video()"
-                                            data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                            title="Edit Position"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="delete" style="left: -40px !important; height:40px;"
+                                            onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true"
+                                            data-bs-placement="bottom" title="Edit Position"><i
+                                                class="fa fa-pencil"></i></a>
                                     @endif
                                 @endauth
                             @endforeach
@@ -626,8 +646,8 @@
                                         &nbsp;
                                         <a type="button" onclick="edit_menu()">
                                             <i class="fa fa-plus" style="color:#FF7400; padding-right:5px;"
-                                                data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
-                                                title="Add"></i>
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Add"></i>
                                         </a>
                                     @endif
                                 @endauth
@@ -640,7 +660,9 @@
                                 </a>
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        <a class="delete delete-photo-video" href="{{ route('restaurant_delete_menu', ['id' => $restaurant->id_restaurant, 'id_menu' => $menu->id_menu]) }}"><i class="fa fa-trash"></i></a>
+                                        <a class="delete delete-photo-video"
+                                            href="{{ route('restaurant_delete_menu', ['id' => $restaurant->id_restaurant, 'id_menu' => $menu->id_menu]) }}"><i
+                                                class="fa fa-trash"></i></a>
                                     @endif
                                 @endauth
                             @empty
@@ -664,9 +686,10 @@
                                 @endif
                                 @auth
                                     @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editDescriptionForm()"><i class="fa fa-pencil-alt"
-                                                style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                        &nbsp;<a type="button" onclick="editDescriptionForm()"><i
+                                                class="fa fa-pencil-alt" style="color:#FF7400; padding-right:5px;"
+                                                data-bs-toggle="popover" data-bs-animation="true"
+                                                data-bs-placement="bottom" title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </p>
@@ -679,8 +702,7 @@
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group">
-                                                <textarea name="description" id="description-form-input" class="w-100" rows="5"
-                                                    required>{{ $restaurant->description }}</textarea>
+                                                <textarea name="description" id="description-form-input" class="w-100" rows="5" required>{{ $restaurant->description }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -707,7 +729,8 @@
                                         &nbsp;
                                         <a type="button" onclick="add_facilities()"><i class="fa fa-pencil-alt"
                                                 style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </h2>
@@ -751,11 +774,13 @@
                                         &nbsp;
                                         <a type="button" onclick="edit_location()"><i class="fa fa-pencil-alt"
                                                 style="color:#FF7400; padding-right:5px;" data-bs-toggle="popover"
-                                                data-bs-animation="true" data-bs-placement="bottom" title="Edit"></i></a>
+                                                data-bs-animation="true" data-bs-placement="bottom"
+                                                title="Edit"></i></a>
                                     @endif
                                 @endauth
                             </h2>
-                            <input type="hidden" value="{{ $restaurant->latitude }}" name="latitude" id="latitude">
+                            <input type="hidden" value="{{ $restaurant->latitude }}" name="latitude"
+                                id="latitude">
                             <input type="hidden" value="{{ $restaurant->longitude }}" name="longitude"
                                 id="longitude">
                             <div id="map" style="width:100%;height:380px; border-radius: 9px;" class="mb-2">
@@ -772,7 +797,7 @@
                             <div class="flatpickr-container" style="display: flex; justify-content: center;">
 
                             </div> -->
-                            <!--
+                    <!--
                         <div class="flatpickr-container" style="display: flex; justify-content: center;">
                             <div class="flatpickr" id="inline" style="text-align: left;">
                                 {{-- <input type="hidden" class="flatpickr bg-white" name="check_in"> --}}
@@ -780,7 +805,7 @@
                         </div>
                         -->
 
-                            <!-- <div class="footer">
+                    <!-- <div class="footer">
                             </div>
 
                     </section> -->
@@ -799,7 +824,8 @@
                             @endif --}}
                             </div>
                             <div class="col-5 text-right">
-                                <button onclick="reserve()" type="bitton" class="reserve-mobile-button">CONTACT</button>
+                                <button onclick="reserve()" type="bitton"
+                                    class="reserve-mobile-button">CONTACT</button>
                             </div>
                         </div>
                     </div>
@@ -807,16 +833,16 @@
                 {{-- END MOBILE --}}
             </div>
         </div>
-            <!-- <div id="rsv-block-btn">
+        <!-- <div id="rsv-block-btn">
                 {{-- RESERVE BUTTON TOP RIGHT --}}
                 <div class="rsv">
                     <a onclick="contact_restaurant()" type="button" class="rsv-btn-button">CONTACT RESTAURANT</a>
                 </div>
                 {{-- END RESERVE BUTTON TOP RIGHT --}}
             </div> -->
-            {{-- FULL WIDTH ABOVE FOOTER --}}
+        {{-- FULL WIDTH ABOVE FOOTER --}}
         <div class="col-lg-12 pd-left-right-10">
-                <div class="col-12">
+            <div class="col-12">
                 <section id="review" class="section-2">
                     <h2 class="margin-0">Review</h2>
                     <div class="row review">
@@ -852,254 +878,254 @@
                                         {{ $restaurant->detailReview->average_atmosphere }}
                                     </div>
                                 </div>
-                            </div>
-                            @else
-                                <div class="col-12 no-review">There is no review yet</div>
-                            @endif
                         </div>
-                        <hr>
-                    </section>
-                    @auth
-                        @can('review_create')
-                            @if ($restaurant->userReview)
-                                <section id="user-review" class="section-2">
-                                    <div class="pd-tlr-10">
-                                        <h2>Your Review</h2>
-                                        <span>
-                                            <form action="{{ route('restaurant_review_delete') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id_restaurant"
-                                                    value="{{ $restaurant->id_restaurant }}" required>
-                                                <input type="hidden" name="id_review"
-                                                    value="{{ $restaurant->userReview->id_review }}" required>
-                                                <span><button type="submit" class="btn btn-primary">remove
-                                                        review</button></span>
-                                            </form>
-                                        </span>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        Food
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->food }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        Service
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->service }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        Value
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->value }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        Atmosphere
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner"></div>
-                                                        {{ $restaurant->userReview->atmosphere }}
-                                                    </div>
-                                                    @if ($restaurant->userReview->comment)
-                                                        <div class="col-12">
-                                                            Comment
-                                                        </div>
-                                                        <div class="col-12">
-                                                            "{{ $restaurant->userReview->comment }}"
-                                                        </div>
-                                                    @endif
+                    @else
+                        <div class="col-12 no-review">There is no review yet</div>
+                        @endif
+                    </div>
+                    <hr>
+                </section>
+                @auth
+                    @can('review_create')
+                        @if ($restaurant->userReview)
+                            <section id="user-review" class="section-2">
+                                <div class="pd-tlr-10">
+                                    <h2>Your Review</h2>
+                                    <span>
+                                        <form action="{{ route('restaurant_review_delete') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id_restaurant"
+                                                value="{{ $restaurant->id_restaurant }}" required>
+                                            <input type="hidden" name="id_review"
+                                                value="{{ $restaurant->userReview->id_review }}" required>
+                                            <span><button type="submit" class="btn btn-primary">remove
+                                                    review</button></span>
+                                        </form>
+                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Food
                                                 </div>
+                                                <div class="col-6 ">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->food }}
+                                                </div>
+                                                <div class="col-6">
+                                                    Service
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->service }}
+                                                </div>
+                                                <div class="col-6">
+                                                    Value
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->value }}
+                                                </div>
+                                                <div class="col-6">
+                                                    Atmosphere
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner"></div>
+                                                    {{ $restaurant->userReview->atmosphere }}
+                                                </div>
+                                                @if ($restaurant->userReview->comment)
+                                                    <div class="col-12">
+                                                        Comment
+                                                    </div>
+                                                    <div class="col-12">
+                                                        "{{ $restaurant->userReview->comment }}"
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
-                                        <hr>
                                     </div>
-                                </section>
-                                @else
-                                <section id="add-review" class="section-2">
-                                    <div class="pd-tlr-10">
-                                        <h2>Add review</h2>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-xs-12">
-                                                <form action="{{ route('restaurant_review_store') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_restaurant"
-                                                        value="{{ $restaurant->id_restaurant }}" readonly required>
-                                                    <div class="row">
-                                                        <div class="col-6 review-container">
-                                                            Food
-                                                        </div>
-                                                        <div class="col-6 review-container">
-                                                            {{-- <div class="form-group">
+                                    <hr>
+                                </div>
+                            </section>
+                        @else
+                            <section id="add-review" class="section-2">
+                                <div class="pd-tlr-10">
+                                    <h2>Add review</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-xs-12">
+                                            <form action="{{ route('restaurant_review_store') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_restaurant"
+                                                    value="{{ $restaurant->id_restaurant }}" readonly required>
+                                                <div class="row">
+                                                    <div class="col-6 review-container">
+                                                        Food
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        {{-- <div class="form-group">
                                                                 <input type="number" name="food" min="1" max="5"
                                                                     class="w-100" required>
                                                             </div> --}}
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="food-star-5" type="radio" name="food" value="5"
-                                                                    required />
-                                                                <label for="food-star-5" title="5 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="food-star-4" type="radio" name="food" value="4"
-                                                                    required />
-                                                                <label for="food-star-4" title="4 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="food-star-3" type="radio" name="food" value="3"
-                                                                    required />
-                                                                <label for="food-star-3" title="3 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="food-star-2" type="radio" name="food" value="2"
-                                                                    required />
-                                                                <label for="food-star-2" title="2 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="food-star-1" type="radio" name="food" value="1"
-                                                                    required />
-                                                                <label for="food-star-1" title="1 star">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                            </div>
+                                                        <div class="cm-star-rating d-flex align-items-center">
+                                                            <input id="food-star-5" type="radio" name="food"
+                                                                value="5" required />
+                                                            <label for="food-star-5" title="5 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="food-star-4" type="radio" name="food"
+                                                                value="4" required />
+                                                            <label for="food-star-4" title="4 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="food-star-3" type="radio" name="food"
+                                                                value="3" required />
+                                                            <label for="food-star-3" title="3 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="food-star-2" type="radio" name="food"
+                                                                value="2" required />
+                                                            <label for="food-star-2" title="2 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="food-star-1" type="radio" name="food"
+                                                                value="1" required />
+                                                            <label for="food-star-1" title="1 star">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
                                                         </div>
-                                                        <div class="col-6 review-container">
-                                                            Service
-                                                        </div>
-                                                        <div class="col-6 review-container">
-                                                            {{-- <div class="form-group">
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        Service
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        {{-- <div class="form-group">
                                                                 <input type="number" name="service" min="1" max="5"
                                                                     class="w-100" required>
                                                             </div> --}}
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="service-star-5" type="radio" name="service" value="5"
-                                                                    required />
-                                                                <label for="service-star-5" title="5 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="service-star-4" type="radio" name="service" value="4"
-                                                                    required />
-                                                                <label for="service-star-4" title="4 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="service-star-3" type="radio" name="service" value="3"
-                                                                    required />
-                                                                <label for="service-star-3" title="3 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="service-star-2" type="radio" name="service" value="2"
-                                                                    required />
-                                                                <label for="service-star-2" title="2 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="service-star-1" type="radio" name="service" value="1"
-                                                                    required />
-                                                                <label for="service-star-1" title="1 star">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                            </div>
+                                                        <div class="cm-star-rating d-flex align-items-center">
+                                                            <input id="service-star-5" type="radio" name="service"
+                                                                value="5" required />
+                                                            <label for="service-star-5" title="5 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="service-star-4" type="radio" name="service"
+                                                                value="4" required />
+                                                            <label for="service-star-4" title="4 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="service-star-3" type="radio" name="service"
+                                                                value="3" required />
+                                                            <label for="service-star-3" title="3 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="service-star-2" type="radio" name="service"
+                                                                value="2" required />
+                                                            <label for="service-star-2" title="2 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="service-star-1" type="radio" name="service"
+                                                                value="1" required />
+                                                            <label for="service-star-1" title="1 star">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
                                                         </div>
-                                                        <div class="col-6 review-container">
-                                                            Value
-                                                        </div>
-                                                        <div class="col-6 review-container">
-                                                            {{-- <div class="form-group">
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        Value
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        {{-- <div class="form-group">
                                                                 <input type="number" name="value" min="1" max="5"
                                                                     class="w-100" required>
                                                             </div> --}}
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="value-star-5" type="radio" name="value" value="5"
-                                                                    required />
-                                                                <label for="value-star-5" title="5 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="value-star-4" type="radio" name="value" value="4"
-                                                                    required />
-                                                                <label for="value-star-4" title="4 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="value-star-3" type="radio" name="value" value="3"
-                                                                    required />
-                                                                <label for="value-star-3" title="3 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="value-star-2" type="radio" name="value" value="2"
-                                                                    required />
-                                                                <label for="value-star-2" title="2 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="value-star-1" type="radio" name="value" value="1"
-                                                                    required />
-                                                                <label for="value-star-1" title="1 star">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                            </div>
+                                                        <div class="cm-star-rating d-flex align-items-center">
+                                                            <input id="value-star-5" type="radio" name="value"
+                                                                value="5" required />
+                                                            <label for="value-star-5" title="5 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="value-star-4" type="radio" name="value"
+                                                                value="4" required />
+                                                            <label for="value-star-4" title="4 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="value-star-3" type="radio" name="value"
+                                                                value="3" required />
+                                                            <label for="value-star-3" title="3 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="value-star-2" type="radio" name="value"
+                                                                value="2" required />
+                                                            <label for="value-star-2" title="2 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="value-star-1" type="radio" name="value"
+                                                                value="1" required />
+                                                            <label for="value-star-1" title="1 star">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
                                                         </div>
-                                                        <div class="col-6 review-container">
-                                                            Atmosphere
-                                                        </div>
-                                                        <div class="col-6 review-container">
-                                                            {{-- <div class="form-group">
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        Atmosphere
+                                                    </div>
+                                                    <div class="col-6 review-container">
+                                                        {{-- <div class="form-group">
                                                                 <input type="number" name="atmosphere" min="1" max="5"
                                                                     class="w-100" required>
                                                             </div> --}}
-                                                            <div class="cm-star-rating d-flex align-items-center">
-                                                                <input id="atmosphere-star-5" type="radio" name="atmosphere"
-                                                                    value="5" required />
-                                                                <label for="atmosphere-star-5" title="5 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="atmosphere-star-4" type="radio" name="atmosphere"
-                                                                    value="4" required />
-                                                                <label for="atmosphere-star-4" title="4 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="atmosphere-star-3" type="radio" name="atmosphere"
-                                                                    value="3" required />
-                                                                <label for="atmosphere-star-3" title="3 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="atmosphere-star-2" type="radio" name="atmosphere"
-                                                                    value="2" required />
-                                                                <label for="atmosphere-star-2" title="2 stars">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                                <input id="atmosphere-star-1" type="radio" name="atmosphere"
-                                                                    value="1" required />
-                                                                <label for="atmosphere-star-1" title="1 star">
-                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            Comment
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <textarea name="comment" rows="3" class="form-control"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary">Done</button>
+                                                        <div class="cm-star-rating d-flex align-items-center">
+                                                            <input id="atmosphere-star-5" type="radio" name="atmosphere"
+                                                                value="5" required />
+                                                            <label for="atmosphere-star-5" title="5 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="atmosphere-star-4" type="radio" name="atmosphere"
+                                                                value="4" required />
+                                                            <label for="atmosphere-star-4" title="4 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="atmosphere-star-3" type="radio" name="atmosphere"
+                                                                value="3" required />
+                                                            <label for="atmosphere-star-3" title="3 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="atmosphere-star-2" type="radio" name="atmosphere"
+                                                                value="2" required />
+                                                            <label for="atmosphere-star-2" title="2 stars">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                            <input id="atmosphere-star-1" type="radio" name="atmosphere"
+                                                                value="1" required />
+                                                            <label for="atmosphere-star-1" title="1 star">
+                                                                <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                    <div class="col-12">
+                                                        Comment
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <textarea name="comment" rows="3" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary">Done</button>
+                                                    </div>
+                                                </div>
+                                            </form>
 
-                                            </div>
                                         </div>
-                                        <hr>
                                     </div>
-                                </section>
-                            @endif
-                        @endcan
-                    @endauth
-                    <div class="section" id="host_end">
-                        <div class="host">
+                                    <hr>
+                                </div>
+                            </section>
+                        @endif
+                    @endcan
+                @endauth
+                <div class="section" id="host_end">
+                    <div class="host">
                         {{-- <div class="row">
                             <div class="col-2 host-profile">
                                 <img src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->name) . '/' . $restaurant->image) }}">
@@ -1128,50 +1154,50 @@
                                     To protect your payment, never transfer money or communicate outside of the EZ
                                     Villas Bali website or app.</span>
                                 </div> --}}
-                                <!-- <div class="col-11 payment-warning">
+                        <!-- <div class="col-11 payment-warning">
                                     To protect your payment, never transfer money or communicate outside of the EZ
                                     Villas Bali website or app.
                                 </div> -->
-                            {{-- </div>
+                        {{-- </div>
                             <hr> --}}
-                                <h4>Things to know</h4>
-                                <div class="row">
-                                    <div class="col-12 ml-10">
-                                        <h6>House Rules</h6>
-                                        <p><i class="fas fa-clock"></i> Check-in: After 3:00 PM<br>
-                                            <i class="fas fa-smoking-ban"></i> No smoking<br>
-                                            <i class="fas fa-ban"></i> No parties or events
-                                        </p>
-                                    </div>
-                                    <div class="col-12 ml-10">
-                                        <h6>Health & Safety</h6>
-                                        <p><i class="fas fa-hands-wash"></i> EZ Villas Bali's social-distancing and
-                                            other COVID-19-related guidelines apply<br>
-                                            <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
-                                            <span><a href="#">Show More</a></span><br>
-                                            <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a
-                                                    href="#">Show
-                                                    More</a></span>
-                                        </p>
-                                        <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
-                                    </div>
-                                    <div class="col-12 ml-10">
-                                        <h6>Cancellation Policy</h6>
-                                        <p>Add your trip dates to get the cancellation details for this stay.</p>
-                                        <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-12 extra-info ml-10">
-                                        <h4><span><i class="fa-solid fa-house"></i> </span> Villas</h4>
-                                        @foreach ($villas_nearby as $item)
-                                            @if (!empty($item))
-                                                <p>{{ $item[2] }} <span>{{ $item[0] }} Km</span></p>
-                                            @endif
-                                        @endforeach
-                                        {{-- <h4><span><i class="fas fa-eye"></i> </span> What's Surrounding</h4> --}}
-                                        {{-- <p>Kertagosha <span>1.1 Km</span></p>
+                        <h4>Things to know</h4>
+                        <div class="row">
+                            <div class="col-12 ml-10">
+                                <h6>House Rules</h6>
+                                <p><i class="fas fa-clock"></i> Check-in: After 3:00 PM<br>
+                                    <i class="fas fa-smoking-ban"></i> No smoking<br>
+                                    <i class="fas fa-ban"></i> No parties or events
+                                </p>
+                            </div>
+                            <div class="col-12 ml-10">
+                                <h6>Health & Safety</h6>
+                                <p><i class="fas fa-hands-wash"></i> EZ Villas Bali's social-distancing and
+                                    other COVID-19-related guidelines apply<br>
+                                    <i class="far fa-bell-slash"></i> Carbon monoxide alarm not reported
+                                    <span><a href="#">Show More</a></span><br>
+                                    <i class="far fa-bell-slash"></i> Smoke alarm not reported <span><a
+                                            href="#">Show
+                                            More</a></span>
+                                </p>
+                                <p><a href="#">Show More <i class="fas fa-chevron-right"></i></a></p>
+                            </div>
+                            <div class="col-12 ml-10">
+                                <h6>Cancellation Policy</h6>
+                                <p>Add your trip dates to get the cancellation details for this stay.</p>
+                                <p><a href="#">Add Date <i class="fas fa-chevron-right"></i></a></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 extra-info ml-10">
+                                <h4><span><i class="fa-solid fa-house"></i> </span> Villas</h4>
+                                @foreach ($villas_nearby as $item)
+                                    @if (!empty($item))
+                                        <p>{{ $item[2] }} <span>{{ $item[0] }} Km</span></p>
+                                    @endif
+                                @endforeach
+                                {{-- <h4><span><i class="fas fa-eye"></i> </span> What's Surrounding</h4> --}}
+                                {{-- <p>Kertagosha <span>1.1 Km</span></p>
                                 <p>Yeh Panes <span>0.2 Km</span></p>
                                 <p>Danau Beratan <span>3.8 Km</span></p>
                                 <p>Pura Taman Ayun <span>2.1 Km</span></p>
@@ -1182,134 +1208,131 @@
                                 <p>Besakih Mother Temple <span>5.6 Km</span></p>
                                 <p>Batur Temple <span>2.7 Km</span></p>
                                 <p>Petulu Village <span>4.7 Km</span></p> --}}
-                                    </div>
-                                    <div class="col-12 extra-info ml-10">
-                                        <h4><span><i class="fas fa-glasses"></i> </span> Top Things To Do</h4>
-                                        @foreach ($thingstodo_nearby as $item)
-                                            @if (!empty($item))
-                                                <p>{{ $item[2] }} <span>{{ $item[0] }} Km</span></p>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <div class="col-12 extra-info ml-10">
-                                        <h4><span><i class="fas fa-leaf"></i> </span> Beauty & Spas</h4>
-                                        <p>Beauty Salon- La Cantiques <span>0.6 Km</span></p>
-                                        <p>Gym - Gym Papa & Mama <span>2.9 Km</span></p>
-                                        <p>Spa - Be Retreat Spa <span>5.7 Km</span></p>
-                                        <p>Haircut - TamPans Baber Shop <span>1.4 Km</span></p>
-                                        <p>Nail Care - Svndari Salon & Spa <span>2.7s Km</span></p>
-                                        <h4><span><i class="fas fa-map-marker-alt"></i> </span> Closest Airport</h4>
-                                        <p><i class="fas fa-plane"></i> Ngurah Rai International Airport <span>30
-                                                Km</span></p>
-                                        <h6>How to get to <strong>{{ $restaurant->name }}</strong> from Ngurah Rai
-                                            International
-                                            Airport?</h6>
-                                        <p><i class="fas fa-car"></i> Taxi &nbsp; <i class="fas fa-bus"></i>
-                                            Private Suttle
-                                            &nbsp; <i class="fas fa-motorcycle"></i> GoJek</p>
-                                        <p><i class="fas fa-coffee"></i> <strong>Free welcome drink</strong> upon
-                                            arrival.</p>
+                            </div>
+                            <div class="col-12 extra-info ml-10">
+                                <h4><span><i class="fas fa-glasses"></i> </span> Top Things To Do</h4>
+                                @foreach ($thingstodo_nearby as $item)
+                                    @if (!empty($item))
+                                        <p>{{ $item[2] }} <span>{{ $item[0] }} Km</span></p>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="col-12 extra-info ml-10">
+                                <h4><span><i class="fas fa-leaf"></i> </span> Beauty & Spas</h4>
+                                <p>Beauty Salon- La Cantiques <span>0.6 Km</span></p>
+                                <p>Gym - Gym Papa & Mama <span>2.9 Km</span></p>
+                                <p>Spa - Be Retreat Spa <span>5.7 Km</span></p>
+                                <p>Haircut - TamPans Baber Shop <span>1.4 Km</span></p>
+                                <p>Nail Care - Svndari Salon & Spa <span>2.7s Km</span></p>
+                                <h4><span><i class="fas fa-map-marker-alt"></i> </span> Closest Airport</h4>
+                                <p><i class="fas fa-plane"></i> Ngurah Rai International Airport <span>30
+                                        Km</span></p>
+                                <h6>How to get to <strong>{{ $restaurant->name }}</strong> from Ngurah Rai
+                                    International
+                                    Airport?</h6>
+                                <p><i class="fas fa-car"></i> Taxi &nbsp; <i class="fas fa-bus"></i>
+                                    Private Suttle
+                                    &nbsp; <i class="fas fa-motorcycle"></i> GoJek</p>
+                                <p><i class="fas fa-coffee"></i> <strong>Free welcome drink</strong> upon
+                                    arrival.</p>
+                            </div>
+                        </div>
+                        <p style="font-size: small;">* All distances are measured in straight lines. Actual
+                            travel
+                            distances may vary.</p>
+                        <hr>
+                        <h4>Nearby Villas & Things To Do</h4>
+
+                        {{-- Oke --}}
+
+                        <div class="row related-items">
+                            <h6><span><i class="fa-solid fa-house"></i></span> Villas</h6>
+                            <div class="containerSlider">
+                                <div id="slide-left-container">
+                                    <div class="slide-left">
                                     </div>
                                 </div>
-                                <p style="font-size: small;">* All distances are measured in straight lines. Actual
-                                    travel
-                                    distances may vary.</p>
-                                <hr>
-                                <h4>Nearby Villas & Things To Do</h4>
-
-                                {{-- Oke --}}
-
-                                <div class="row related-items">
-                                    <h6><span><i class="fa-solid fa-house"></i></span> Villas</h6>
-                                    <div class="containerSlider">
-                                        <div id="slide-left-container">
-                                            <div class="slide-left">
+                                <div id="cards-container">
+                                    <div class="cards">
+                                        @forelse ($nearby_villas as $item)
+                                            <div class="card col-lg-3" style="border-radius: 5px;">
+                                                <a href="{{ route('villa', $item->id_villa) }}" target="_blank">
+                                                    @if ($item->image)
+                                                        <img src="{{ URL::asset('/foto/gallery/' . strtolower($item->name) . '/' . $item->image) }}"
+                                                            alt="Villas"
+                                                            style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
+                                                            class="img-shadow">
+                                                    @else
+                                                        <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
+                                                            alt="Villas"
+                                                            style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
+                                                            class="img-shadow">
+                                                    @endif
+                                                </a>
+                                                <center>
+                                                    <p style="margin-top: 10px;">
+                                                    <p>{{ $item->name }}</p>
+                                                    </p>
+                                                </center>
                                             </div>
-                                        </div>
-                                        <div id="cards-container">
-                                            <div class="cards">
-                                                @forelse ($nearby_villas as $item)
-                                                    <div class="card col-lg-3" style="border-radius: 5px;">
-                                                        <a href="{{ route('villa', $item->id_villa) }}"
-                                                            target="_blank">
-                                                            @if ($item->image)
-                                                                <img src="{{ URL::asset('/foto/gallery/' . strtolower($item->name) . '/' . $item->image) }}"
-                                                                    alt="Villas"
-                                                                    style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
-                                                                    class="img-shadow">
-                                                            @else
-                                                                <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
-                                                                    alt="Villas"
-                                                                    style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
-                                                                    class="img-shadow">
-                                                            @endif
-                                                        </a>
-                                                        <center>
-                                                            <p style="margin-top: 10px;">
-                                                            <p>{{ $item->name }}</p>
-                                                            </p>
-                                                        </center>
-                                                    </div>
-                                                @empty
-                                                    <div class="col-12">
-                                                        <p class="no-related-items">
-                                                            <span>There is no nearby villas found.</span></a>
-                                                        </p>
-                                                    </div>
-                                                @endforelse
+                                        @empty
+                                            <div class="col-12">
+                                                <p class="no-related-items">
+                                                    <span>There is no nearby villas found.</span></a>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div id="slide-right-container">
-                                            <div class="slide-right">
-                                            </div>
-                                        </div>
+                                        @endforelse
                                     </div>
                                 </div>
+                                <div id="slide-right-container">
+                                    <div class="slide-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                <div class="row related-items">
-                                    <h6><span><i class="fas fa-utensils"></i></span> Things To Do</h6>
-                                    <div class="containerSlider2">
-                                        <div id="slide-left-container2">
-                                            <div class="slide-left2">
+                        <div class="row related-items">
+                            <h6><span><i class="fas fa-utensils"></i></span> Things To Do</h6>
+                            <div class="containerSlider2">
+                                <div id="slide-left-container2">
+                                    <div class="slide-left2">
+                                    </div>
+                                </div>
+                                <div id="cards-container2">
+                                    <div class="cards2">
+                                        @forelse ($nearby_activities as $item)
+                                            <div class="card2 col-lg-3" style="border-radius: 5px;">
+                                                <a href="{{ route('activity', $item->id_activity) }}"
+                                                    target="_blank">
+                                                    @if ($item->image)
+                                                        <img src="{{ URL::asset('/foto/activity/' . strtolower($item->name) . '/' . $item->image) }}"
+                                                            alt="Things To Do"
+                                                            style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
+                                                            class="img-shadow">
+                                                    @else
+                                                        <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
+                                                            alt="Things To Do"
+                                                            style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
+                                                            class="img-shadow">
+                                                    @endif
+                                                </a>
+                                                <center>
+                                                    <p style="margin-top: 10px;">
+                                                    <p>{{ $item->name }}</p>
+                                                    </p>
+                                                </center>
                                             </div>
-                                        </div>
-                                        <div id="cards-container2">
-                                            <div class="cards2">
-                                                @forelse ($nearby_activities as $item)
-                                                <div class="card2 col-lg-3" style="border-radius: 5px;">
-                                                    <a href="{{ route('activity', $item->id_activity) }}"
-                                                        target="_blank">
-                                                        @if ($item->image)
-                                                            <img src="{{ URL::asset('/foto/activity/' . strtolower($item->name) . '/' . $item->image) }}"
-                                                                alt="Things To Do"
-                                                                style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
-                                                                class="img-shadow">
-                                                        @else
-                                                            <img src="{{ URL::asset('/foto/default/no-image.jpeg') }}"
-                                                                alt="Things To Do"
-                                                                style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 15px; height: 250px;"
-                                                                class="img-shadow">
-                                                        @endif
-                                                    </a>
-                                                    <center>
-                                                        <p style="margin-top: 10px;">
-                                                        <p>{{ $item->name }}</p>
-                                                        </p>
-                                                    </center>
-                                                </div>
-                                                @empty
-                                                    <div class="col-12">
-                                                        <p class="no-related-items">
-                                                            <span>There is no things to do found.</span></a>
-                                                        </p>
-                                                    </div>
-                                                @endforelse
+                                        @empty
+                                            <div class="col-12">
+                                                <p class="no-related-items">
+                                                    <span>There is no things to do found.</span></a>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div id="slide-right-container2">
-                                            <div class="slide-right2">
-                                            </div>
-                                        </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                                <div id="slide-right-container2">
+                                    <div class="slide-right2">
                                     </div>
                                 </div>
                             </div>
@@ -1319,13 +1342,16 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
     {{-- END FULL WIDTH ABOVE FOOTER --}}
-</div>
+    </div>
     {{-- MODAL --}}
 
     {{-- OTHER MODAL --}}
     @auth
-        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $restaurant->created_by)
+        @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
+            auth()->user()->id == $restaurant->created_by)
             {{-- @include('user.modal.restaurant.name') --}}
             {{-- @include('user.modal.restaurant.short_description') --}}
             {{-- @include('user.modal.restaurant.description') --}}
@@ -1467,8 +1493,8 @@
         });
     </script>
     {{-- MODAL AMENITIES --}}
-    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
@@ -1565,13 +1591,14 @@
     </script>
 
     <!-- MENU MODAL -->
-    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-menu" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" id="modal-menu-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <img src="" alt="" class="img-fluid" style="border-radius:15px;">
@@ -1718,13 +1745,14 @@
     </div> --}}
 
     {{-- MODAL SHARE --}}
-    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-share" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">Share</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <p class="fs-3 fw-bold mb-0">Share this place with your friend and family</p>
@@ -1742,8 +1770,8 @@
                         <div class="row row-cols-1 row-cols-lg-2">
                             <div class="col-lg col-12 p-3 border share-med">
                                 <a type="button" class="d-flex p-0" onclick="copy_link()">
-                                    <div class="pr-5"><i class="fas fa-copy"></i> <span
-                                            class="fw-normal">Copy Link</span></div>
+                                    <div class="pr-5"><i class="fas fa-copy"></i> <span class="fw-normal">Copy
+                                            Link</span></div>
                                 </a>
                             </div>
                             <div class="col-lg col-12 p-3 border share-med">
@@ -1799,7 +1827,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ $restaurant->name }} Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="row">
@@ -1849,7 +1878,8 @@
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header">
                     <h5 class="modal-title">FAQ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
                     <form action="{{ route('villa_store_user_message') }}" method="post">
@@ -1946,8 +1976,8 @@
     </div>
 
     <!-- MAP MODAL -->
-    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-map" tabindex="-1" role="dialog"
+        aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-map">
                 <div class="modal-header">
@@ -2786,6 +2816,7 @@
             $('#trigger-tab-currency').removeClass('active');
             $('#content-tab-currency').removeClass('active');
         }
+
         function currency() {
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').removeClass('active');
@@ -2795,67 +2826,66 @@
         }
     </script>
 
-<script>
-//Show/hide bottom menu
-document.addEventListener("DOMContentLoaded", function(){
+    <script>
+        //Show/hide bottom menu
+        document.addEventListener("DOMContentLoaded", function() {
 
-el_autohide = document.querySelector('.autohide');
+            el_autohide = document.querySelector('.autohide');
 
-// add padding-top to bady (if necessary)
-navbar_height = document.querySelector('.reserve-mobile').offsetHeight;
-//document.body.style.paddingTop = navbar_height + 'px';
+            // add padding-top to bady (if necessary)
+            navbar_height = document.querySelector('.reserve-mobile').offsetHeight;
+            //document.body.style.paddingTop = navbar_height + 'px';
 
-if(el_autohide){
-  var last_scroll_top = 0;
-  window.addEventListener('scroll', function() {
-        let scroll_top = window.scrollY;
-       if(scroll_top < last_scroll_top) {
-            el_autohide.classList.remove('scrolled-down');
-            el_autohide.classList.add('scrolled-up');
-        }
-        else {
-            el_autohide.classList.remove('scrolled-up');
-            el_autohide.classList.add('scrolled-down');
-        }
-        last_scroll_top = scroll_top;
-  });
-  // window.addEventListener
-}
-// if
+            if (el_autohide) {
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                    let scroll_top = window.scrollY;
+                    if (scroll_top < last_scroll_top) {
+                        el_autohide.classList.remove('scrolled-down');
+                        el_autohide.classList.add('scrolled-up');
+                    } else {
+                        el_autohide.classList.remove('scrolled-up');
+                        el_autohide.classList.add('scrolled-down');
+                    }
+                    last_scroll_top = scroll_top;
+                });
+                // window.addEventListener
+            }
+            // if
 
-});
-// DOMContentLoaded  end
-</script>
+        });
+        // DOMContentLoaded  end
+    </script>
 
-<script>
-//Show/hide top menu
-document.addEventListener("DOMContentLoaded", function(){
+    <script>
+        //Show/hide top menu
+        document.addEventListener("DOMContentLoaded", function() {
 
-el_autohide2 = document.querySelector('.autohide2');
+            el_autohide2 = document.querySelector('.autohide2');
 
-// add padding-top to bady (if necessary)
-navbar_height = document.querySelector('.head-inner-wrap').offsetHeight;
-//document.body.style.paddingTop = navbar_height + 'px';
+            // add padding-top to bady (if necessary)
+            navbar_height = document.querySelector('.head-inner-wrap').offsetHeight;
+            //document.body.style.paddingTop = navbar_height + 'px';
 
-if(el_autohide2){
-  var last_scroll_top = 0;
-  window.addEventListener('scroll', function() {
-        let scroll_top = window.scrollY;
-       if(scroll_top > last_scroll_top) {
-            el_autohide2.classList.remove('scroll-down');
-            el_autohide2.classList.add('scroll-up');
-        }
-        else {
-            el_autohide2.classList.remove('scroll-up');
-            el_autohide2.classList.add('scroll-down');
-        }
-        last_scroll_top = scroll_top;
-  });
-  // window.addEventListener
-}
-// if
+            if (el_autohide2) {
+                var last_scroll_top = 0;
+                window.addEventListener('scroll', function() {
+                    let scroll_top = window.scrollY;
+                    if (scroll_top > last_scroll_top) {
+                        el_autohide2.classList.remove('scroll-down');
+                        el_autohide2.classList.add('scroll-up');
+                    } else {
+                        el_autohide2.classList.remove('scroll-up');
+                        el_autohide2.classList.add('scroll-down');
+                    }
+                    last_scroll_top = scroll_top;
+                });
+                // window.addEventListener
+            }
+            // if
 
-});
-</script>
+        });
+    </script>
 </body>
+
 </html>
