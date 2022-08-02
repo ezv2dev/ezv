@@ -3293,7 +3293,6 @@ span.flatpickr-weekday {
 }
 #modal-edit_story .modal-body {
     background-color: #fff;
-    border-radius: 0px 0px 15px 15px !important;
 }
 #modal-edit-house-rules .modal-body3,
 #modal-edit-guest-safety .modal-body3,
@@ -3771,7 +3770,7 @@ span.flatpickr-weekday {
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 768px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
     .add-gallery,
     .add-menu {
         padding-left: 24px !important;
@@ -4097,6 +4096,9 @@ span.flatpickr-weekday {
         max-height: 450px;
         overflow-x: hidden !important;
         overflow-y: auto !important;
+    }
+    #modal-edit_story .modal-body {
+        border-radius: 0px 0px 15px 15px !important;
     }
 }
 @media only screen and (min-width: 1024px) {

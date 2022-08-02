@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-add_price" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
         <div class="modal-content">
             <form class="form-edit-menu-container" action="javascript:void(0)" method="POST"
                 enctype="multipart/form-data" id="addPriceForm" style="gap: 0px !important;">
@@ -24,15 +24,15 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             required>
                     </div>
-                    <div class="mb-4" style="display: flex;">
-                        <div class="col-6">
+                    <div class="row mb-4">
+                        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                             <p class="modal-title">Start Date</p>
                             <div class="form-group">
                                 <input type="date" class="form-control" name="start_date" id="startDate"
                                     placeholder="{{ __('user_page.Start Date') }}">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-sm-6">
                             <p class="modal-title">End Date</p>
                             <div class="form-group">
                                 <input type="date" class="form-control" name="end_date" id="endDate"

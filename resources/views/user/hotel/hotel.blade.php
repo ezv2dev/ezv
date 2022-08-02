@@ -4308,8 +4308,8 @@
     {{-- MODAL Reorder image --}}
     <div class="modal fade" id="edit_position_photo" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-xl modal-fullscreen" role="document">
+            <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Photos') }}</h7>
@@ -4349,8 +4349,8 @@
     {{-- MODAL Reorder video --}}
     <div class="modal fade" id="edit_position_video" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-xl modal-fullscreen" role="document">
+            <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
                         {{ __('user_page.Edit Position Video') }}</h7>
