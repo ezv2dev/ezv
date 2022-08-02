@@ -75,9 +75,8 @@ class RestaurantController extends Controller
      */
     public function index(Request $request, $id)
     {
-        // dd($id);
         $restaurant = Restaurant::with([
-            'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'ownerData', 'facilities', 'owner'
+            // 'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'detailComment[0]->user[0].user', 'ownerData', 'facilities', 'owner'
         ])
             ->where([
                 ['id_restaurant', $request->id],
@@ -101,7 +100,7 @@ class RestaurantController extends Controller
             abort_if(!$find, 404);
             if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) || auth()->user()->id == $find->created_by) {
                 $restaurant = Restaurant::with([
-                    'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'ownerData', 'facilities', 'owner'
+                    // 'favorit', 'type', 'price', 'photo', 'video', 'menu', 'story', 'detailReview', 'detailComment[0]->user[0].user', 'ownerData', 'facilities', 'owner'
                 ])
                     ->where([
                         ['id_restaurant', $request->id],
@@ -256,7 +255,7 @@ class RestaurantController extends Controller
             ->where('grade', 'A')->where('status', 1)
             ->whereIn('id_villa', $locArray2)->orderByRaw("FIELD(id_villa, $ids_ordered2)")->limit(5)->get();
 
-        // dd($restaurant);
+        // dd($restaurant->detailComment[0]->user[0]);
 
         return view('user.restaurant.restaurant', compact(
             'restaurant',

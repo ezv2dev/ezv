@@ -11,143 +11,82 @@
                 <div class="col-12 d-lg-flex">
                     <div class="col-12 col-lg-4">
                         <div class="col-12 row">
-                        @if ($restaurant->detailReview)
-                            <div class="col-6">
-                                {{ __('user_page.Food') }}
-                            </div>
-                            <div class="col-6 px-0">
-                                <div class="liner-modal">
-                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
+                            @if ($restaurant->detailReview)
+                                <div class="col-6">
+                                    {{ __('user_page.Food') }}
                                 </div>
-                                {{ $restaurant->detailReview->average_food }}
-                            </div>
-                            <div class="col-6">
-                                {{ __('user_page.Service') }}
-                            </div>
-                            <div class="col-6 px-0">
-                                <div class="liner-modal">
-                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
+                                <div class="col-6 px-0">
+                                    <div class="liner-modal">
+                                        <span class="liner-bar"
+                                            style="width: {{ $restaurant->detailReview->average_food * 20 }}%"></span>
+                                    </div>
+                                    {{ $restaurant->detailReview->average_food }}
                                 </div>
-                                {{ $restaurant->detailReview->average_service }}
-                            </div>
-                            <div class="col-6">
-                                {{ __('user_page.Value') }}
-                            </div>
-                            <div class="col-6 px-0">
-                                <div class="liner-modal">
-                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
+                                <div class="col-6">
+                                    {{ __('user_page.Service') }}
                                 </div>
-                                {{ $restaurant->detailReview->average_value }}
-                            </div>
-                            <div class="col-6">
-                                {{ __('user_page.Atmosphere') }}
-                            </div>
-                            <div class="col-6 px-0">
-                                <div class="liner-modal">
-                                    <span class="liner-bar" style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
+                                <div class="col-6 px-0">
+                                    <div class="liner-modal">
+                                        <span class="liner-bar"
+                                            style="width: {{ $restaurant->detailReview->average_service * 20 }}%"></span>
+                                    </div>
+                                    {{ $restaurant->detailReview->average_service }}
                                 </div>
-                                {{ $restaurant->detailReview->average_atmosphere }}
-                            </div>
-                        @else
-
-
-                        @endif
-                            
+                                <div class="col-6">
+                                    {{ __('user_page.Value') }}
+                                </div>
+                                <div class="col-6 px-0">
+                                    <div class="liner-modal">
+                                        <span class="liner-bar"
+                                            style="width: {{ $restaurant->detailReview->average_value * 20 }}%"></span>
+                                    </div>
+                                    {{ $restaurant->detailReview->average_value }}
+                                </div>
+                                <div class="col-6">
+                                    {{ __('user_page.Atmosphere') }}
+                                </div>
+                                <div class="col-6 px-0">
+                                    <div class="liner-modal">
+                                        <span class="liner-bar"
+                                            style="width: {{ $restaurant->detailReview->average_atmosphere * 20 }}%"></span>
+                                    </div>
+                                    {{ $restaurant->detailReview->average_atmosphere }}
+                                </div>
+                            @else
+                            @endif
                         </div>
                     </div>
                     <div class="col-12 mt-4 mt-lg-0 col-lg-8 review-comment-container">
-                        <div class="col-12 mb-4">
-                            <div class="col-12 d-flex">
-                                <div>
-                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
-                                </div>
-                                <div class="ms-3">
-                                    <h6 class="m-0">
-                                        David Jones
-                                    </h6>
+                        @foreach ($restaurant->detailComment as $item)
+                            <div class="col-12 mb-4">
+                                <div class="col-12 d-flex">
                                     <div>
-                                        <p class="m-0">July 2022</p>
+                                        @if ($item->user->avatar)
+                                            <img class="review-user-profile-pic" src="{{ $item->user->avatar }}">
+                                        @else
+                                            <img class="review-user-profile-pic"
+                                                src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                        @endif
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="m-0">
+                                            {{ $item->user->name }}
+                                        </h6>
+                                        <div>
+                                            <p class="m-0">{{ date_format($item->created_at, 'M Y') }}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+
                                     </div>
                                 </div>
-                                <div>
-                                    
+                                <div class="col-12 pt-3">
+                                    <p class="m-0">
+                                        {{ $item->comment }}
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-12 pt-3">
-                                <p class="m-0">
-                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="col-12 d-flex">
-                                <div>
-                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
-                                </div>
-                                <div class="ms-3">
-                                    <h6 class="m-0">
-                                        Christian
-                                    </h6>
-                                    <div>
-                                        <p class="m-0">July 2022</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-12 pt-3">
-                                <p class="m-0">
-                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="col-12 d-flex">
-                                <div>
-                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
-                                </div>
-                                <div class="ms-3">
-                                    <h6 class="m-0">
-                                        Tony Fernandes
-                                    </h6>
-                                    <div>
-                                        <p class="m-0">July 2022</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-12 pt-3">
-                                <p class="m-0">
-                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="col-12 d-flex">
-                                <div>
-                                    <img class="review-user-profile-pic" src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
-                                </div>
-                                <div class="ms-3">
-                                    <h6 class="m-0">
-                                        Jamaludin
-                                    </h6>
-                                    <div>
-                                        <p class="m-0">July 2022</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-12 pt-3">
-                                <p class="m-0">
-                                    Martin, Flora and all the staff were amazing - they couldn’t have been more accommodating. The island is one of the most beautiful places we’ve ever been and perfect for a big family gathering - 21 of us! There is so much to see and do - we leave with wonderful memories and can’t recommend Floral Island highly enough. Thank you all yet again for your incredible hospitality!
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
