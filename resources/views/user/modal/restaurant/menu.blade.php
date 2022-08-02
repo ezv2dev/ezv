@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-edit_menu" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
         <div class="modal-content">
             <form class="form-edit-menu-container" action="javascript:void(0);" method="POST"
                 enctype="multipart/form-data" id="addMenuForm" style="gap: 0px !important;">

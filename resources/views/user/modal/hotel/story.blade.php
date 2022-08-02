@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-edit_story" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
         <div class="modal-content modal-content-story">
             <div class="modal-header">
                 <h5 class="modal-title">{{ __('user_page.Story') }}</h5>

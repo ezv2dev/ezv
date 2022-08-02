@@ -843,6 +843,10 @@
         }
     }
 
+    $("#unsubModal button[data-dismiss='modal']").on('click', function(){
+        $('#flexCheckChecked').prop('checked', false)
+    });
+
     function showModalRecognition() {
         $("#recognitionModal").modal({
             backdrop: 'static',

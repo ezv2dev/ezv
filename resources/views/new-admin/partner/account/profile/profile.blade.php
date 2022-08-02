@@ -175,7 +175,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalScrollableTitle">Languages I speak</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetDataSementara()">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -197,7 +197,7 @@
                                             }
                                         @endphp
                                         <input class="form-check-input" type="checkbox" name="language[]" id="languages" style="width: 20px;
-                                        height: 20px;" value="{{ $item->id_host_language }}" {{ $isChecked }} onchange="addlanguages(this.value);">
+                                        height: 20px;" value="{{ $item->id_host_language }}" {{ $isChecked }} onchange="addlanguages(this);">
                                         <label class="form-check-label" style="margin-left: 10px; margin-top: 3px;">
                                         {{$item->name}}
                                         </label>
@@ -206,7 +206,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" onclick="appendLanguage()" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                                         Done
                                     </button>
                                 </div>
@@ -247,22 +247,36 @@
         $('#languageModal').modal();
     }
 
-    function addlanguages()
+
+    //get id from modal language
+    let modalLanguage = [];
+
+    //buat array baru untuk ditampilkan di form berdasarkan modal
+    let data = [];
+
+    // data checked sementara
+    let dataSementara = [];
+
+    function addlanguages(input)
     {
+        if(input.checked){
+            if(!dataSementara.includes(input.value)) dataSementara.push(input.value) 
+        }
+
         //get language owner
-        let language = @json($languages);
+        // let language = @json($languages);
 
         //get id from modal language
-        let modalLanguage = [];
+        // let modalLanguage = [];
 
         //buat array baru untuk ditampilkan di form berdasarkan modal
-        let data = [];
+        // let data = [];
 
         // var checkbox = document.getElementById('languages');
-
-        $("input[name='language[]']:checked").each(function () {
-            modalLanguage.push(parseInt($(this).val()));
-        });
+        // --
+        // $("input[name='language[]']:checked").each(function () {
+        //     modalLanguage.push(parseInt($(this).val()));
+        // });
 
         // console.log(modalLanguage);
 
@@ -275,6 +289,47 @@
         //         // break;
         //     }
         // }
+
+        // ---
+        // for (let i = 0; i < modalLanguage.length; i++) {
+        //     for (let j = 0; j < language.length; j++) {
+        //         if(language[j].id_host_language == modalLanguage[i]) {
+        //             data.push(language[j]);
+        //         }
+        //     }
+        // }
+
+        // console.log(data);
+
+        // appendLanguage(data);
+    }
+
+    function resetDataSementara(){
+        dataSementara.forEach(el => {
+            $('.form-check-input[value="'+el+'"]').prop('checked', false)
+        })
+    }
+
+    $(document).click(function(e){
+        if(e.target == $('#languageModal')[0] && $('body').hasClass('modal-open')){
+            resetDataSementara()
+        }
+    })
+
+    // function appendLanguage(data)
+    function appendLanguage()
+    {
+        let language = @json($languages);
+        //get id from modal language
+        modalLanguage = [];
+
+        //buat array baru untuk ditampilkan di form berdasarkan modal
+        data = [];
+
+        $("input[name='language[]']:checked").each(function () {
+            modalLanguage.push(parseInt($(this).val()));
+        });
+
         for (let i = 0; i < modalLanguage.length; i++) {
             for (let j = 0; j < language.length; j++) {
                 if(language[j].id_host_language == modalLanguage[i]) {
@@ -283,13 +338,6 @@
             }
         }
 
-        // console.log(data);
-
-        appendLanguage(data);
-    }
-
-    function appendLanguage(data)
-    {
         $('#languagelist').html('');
         for (let index = 0; index < data.length; index++) {
             // let span = document.createElement('span');
@@ -298,6 +346,7 @@
             // document.getElementById("append").appendChild('span');
             $('#languagelist').append('<a href="#" class="btn btn-outline-success">' +data[index].name+ '</a>');
         }
+
     }
 
     function showFormEditProfile()
