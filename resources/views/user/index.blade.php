@@ -113,8 +113,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     </form>
 
-                    <a href="{{ route('switch') }}" class="d-block mb-2"
-                        style="color:#585656; width: fit-content;">
+                    <a href="{{ route('switch') }}" class="d-block mb-2" style="color:#585656; width: fit-content;">
                         {{ __('user_page.Switch to Hosting') }}
                     </a>
                     <hr>
@@ -313,7 +312,7 @@
                                         <div id="bar" class="bar">
                                             <div class="location">
                                                 <p>{{ __('user_page.Location') }}</p>
-                                                <input type="text" {{-- onfocus="this.value=''" --}}
+                                                <input type="text" onfocus="this.value=''"
                                                     class="form-control input-transparant input-location"
                                                     style="margin-top: -2px;" id="loc_sugest" name="sLocation"
                                                     placeholder="{{ __('user_page.Where are you going?') }}">

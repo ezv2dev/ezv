@@ -586,7 +586,7 @@
                                         <p>
                                             {{ __('user_page.Location') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('homes-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -1313,7 +1313,7 @@
                                         <p>
                                             {{ __('user_page.Location / Hotel Name') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('hotel-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -1993,7 +1993,7 @@
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('food-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest"
@@ -2567,7 +2567,7 @@
                                 <div class="bar bar-activity">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('wow-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -3115,7 +3115,7 @@
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('collaborator-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"

@@ -339,8 +339,8 @@
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
                                         <input type="text" class="form-control input-transparant"
-                                            value="{{ $_COOKIE['sLocation'] ?? '' }}" id="loc_sugest"
-                                            name="sLocation"
+                                            onfocus="this.value=''" value="{{ $_COOKIE['sLocation'] ?? '' }}"
+                                            id="loc_sugest" name="sLocation"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                             placeholder="Where are you going?">
 
@@ -941,7 +941,8 @@
                                 <div class="bar bar-restaurant-detail" style="margin-left: -150px;">
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}</p>
-                                        <input type="text" class="form-control input-transparant" name="sLocation"
+                                        <input type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sLocation"
                                             autocomplete="off" value="{{ request()->get('sLocation') ?? '' }}"
                                             id="loc_sugest" name="location"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -1514,8 +1515,9 @@
                                     <div class="bar" style="margin-left: -150px;">
                                         <div class="location">
                                             <p>{{ __('user_page.Location') }}</p>
-                                            <input type="text" class="form-control input-transparant"
-                                                value="" id="loc_sugest" name="sLocation"
+                                            <input type="text" onfocus="this.value=''"
+                                                class="form-control input-transparant" value="" id="loc_sugest"
+                                                name="sLocation"
                                                 style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                                 placeholder="Where are you going?">
 
@@ -2126,9 +2128,9 @@
                                 <div class="bar bar-activity-detail" style="margin-left: -150px;">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
-                                        <input type="text" class="form-control input-transparant"
-                                            name="sLocation" value="{{ request()->get('sLocation') }}"
-                                            id="loc_sugest"
+                                        <input type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sLocation"
+                                            value="{{ request()->get('sLocation') }}" id="loc_sugest"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                             placeholder="Where are you going?">
 
