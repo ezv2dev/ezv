@@ -349,7 +349,7 @@
                                             <form action="javascript:void(0)" onsubmit="saveTimeActivity()">
                                                 <input type="hidden" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $activity->open_time }}"
@@ -1091,7 +1091,7 @@
                     @endauth
                     {{-- END ADD GALLERY --}}
                     {{-- PRICES --}}
-                    <section id="price" class="section-2">
+                    <section id="price" class="section-2 px-sm-12p">
                         <div class="pd-tlr-10">
                             <div class="d-flex prices">
                                 <hr>
@@ -1203,7 +1203,7 @@
 
                     </section>
 
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-sm-12p">
                         <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
