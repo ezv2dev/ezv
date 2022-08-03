@@ -41,8 +41,6 @@ class XenditController extends Controller
 
     public function createVa(Request $request)
     {
-        $this->storeUsersBooking($request, 'virtual_account', collect(['id_payment'=> 1]));
-
         //get id villa
         $decrypt_id = Crypt::decryptString($request->price_total);
         $villa = Villa::select('price', 'adult', 'children')->where('id_villa', $decrypt_id)->where('status', 1)->first();
@@ -109,7 +107,7 @@ class XenditController extends Controller
         // dd($user, $email);
 
         // save data payment
-        $storePayment = Payment::insert([
+        $storePayment = Payment::create([
             'external_id' => $createVA['external_id'],
             'id_user' => $user_id,
             'payment_channel' => 'Virtual Account',
@@ -121,13 +119,17 @@ class XenditController extends Controller
         ]);
 
         // save data booking
-        // if($storePayment){
-        //     $storeBooking = VillaBooking::create([]);
-        // }
+        if($storePayment){
+            $storeBooking = $this->storeUsersBooking($request, 'virtual_account', $storePayment);
+        }
+
+        if($storeBooking){
+            return 'success';
+        } else {
+            return 'fail';
+        }
 
         // return redirect()->route('api.invoiceVa');
-        // return $insert;
-        return $storePayment;
     }
 
     public function callbackVa(Request $request)
@@ -327,66 +329,78 @@ class XenditController extends Controller
 
     private function storeUsersBooking($request, $paymentMethod, $paymentDetail)
     {
+        // set invoice number
         $no = "01";
         $invoice = "EZV-0122" . $no;
 
+        // find villa
         $id_villa = Crypt::decryptString($request->price_total) ?? null;
         $villa = Villa::where('id_villa', $id_villa)->where('status', 1)->first();
+        if(!$villa){
+            return false;
+        }
+
+        // set date check in check out & stay duration
         $check_in = null;
         $check_out = null;
         if($paymentMethod == 'virtual_account'){
             $check_in = $request->check_in_date;
             $check_out = $request->check_out_date;
         } else {
-            abort(404);
+            return false;
         }
         $stay = date_diff(date_create($check_out), date_create($check_in));
 
-        $data = [
-            'id_payment' => $paymentDetail["id_payment"],
-            'no_invoice' => $invoice,
-            'firstname' => $request->firstname_va,
-            'lastname' => $request->lastname_va,
-            'email' => $request->email_va,
-            'phone' => null,
-            'id_villa' => $id_villa,
-            'adult' => $request->adult_va,
-            'child' => $request->child_va,
-            'id_extra_price' => 0,
-            'number_extra' => 0,
-            'check_in' => $request->check_in_date,
-            'check_out' => $request->check_out_date,
-            'villa_price' => $villa->price,
-            'extra_price' => 0,
-            'total_price' => $villa->price*$stay->d,
-            'status' =>  0,
-            'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-            'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-            'created_by' => Auth::user()->id ?? null,
-            'updated_by' => Auth::user()->id ?? null,
-        ];
+        // save booking
+        if($paymentMethod == 'virtual_account'){
+            // store booking
+            $data = [
+                'id_payment' => $paymentDetail->id_payment,
+                'no_invoice' => $invoice,
+                'firstname' => $request->firstname_va,
+                'lastname' => $request->lastname_va,
+                'email' => $request->email_va,
+                'phone' => null,
+                'id_villa' => $id_villa,
+                'adult' => $request->adult_va,
+                'child' => $request->child_va,
+                'id_extra_price' => 0,
+                'number_extra' => 0,
+                'check_in' => $request->check_in_date,
+                'check_out' => $request->check_out_date,
+                'villa_price' => $villa->price,
+                'extra_price' => 0,
+                'total_price' => $villa->price*$stay->d,
+                'status' =>  0,
+                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'created_by' => Auth::user()->id ?? null,
+                'updated_by' => Auth::user()->id ?? null,
+            ];
+            $storeBooking = villabooking::create($data);
 
-        // dd($request->all(), $data);
-        $storeBooking = villabooking::create($data);
-        $details = [
-            'no_invoice' => $storeBooking->no_invoice,
-            'name' => $storeBooking->firstname . ", " . $storeBooking->lastname,
-            'email' => $storeBooking->email,
-            'phone' => $storeBooking->phone,
-            'villa_name' => $villa->name,
-            'villa_photo' => $villa->image ?? null,
-            'villa_price' => $storeBooking->villa_price,
-            'stay' => $stay->d,
-            'check_in' => $storeBooking->check_in,
-            'check_out' => $storeBooking->check_out,
-            'adult' => $storeBooking->adult,
-            'children' => $storeBooking->child,
-            'total_price' => ($storeBooking->villa_price * $stay->d),
-        ];
-        // dd($details);
+            // // send email
+            // $details = [
+            //     'no_invoice' => $storeBooking->no_invoice,
+            //     'name' => $storeBooking->firstname . ", " . $storeBooking->lastname,
+            //     'email' => $storeBooking->email,
+            //     'phone' => $storeBooking->phone,
+            //     'villa_name' => $villa->name,
+            //     'villa_photo' => $villa->image ?? null,
+            //     'villa_price' => $storeBooking->villa_price,
+            //     'stay' => $stay->d,
+            //     'check_in' => $storeBooking->check_in,
+            //     'check_out' => $storeBooking->check_out,
+            //     'adult' => $storeBooking->adult,
+            //     'children' => $storeBooking->child,
+            //     'total_price' => ($storeBooking->villa_price * $stay->d),
+            // ];
+            // Mail::to($storeBooking->email)->send(new \App\Mail\MyTestMail($details));
+            // Mail::to($villa->email)->send(new \App\Mail\BlockDateToVilla($details));
 
-        Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
-        Mail::to($villa->email)->send(new \App\Mail\BlockDateToVilla($details));
-        dd("Email sudah terkirim.");
+            return $storeBooking;
+        } else {
+            return false;
+        }
     }
 }

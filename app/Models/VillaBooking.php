@@ -32,6 +32,10 @@ class VillaBooking extends Model
         'check_out',
         'villa_price',
         'extra_price',
+        'service_price',
+        'discount_price',
+        'cleaning_fee_price',
+        'service_price',
         'total_price',
         'status'
     ];
