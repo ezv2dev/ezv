@@ -830,7 +830,7 @@
                                 <p class="text-white text-center" style="font-size: 22px;">
                                     {{-- __('user_page.The Best Way To Find Accommodation, Restaurants, And Things To Do') --}}
 
-                                    {{ __('user_page.The Best Way To Find Home, Hotel, Food, And Wow') }}
+                                    {{ __('user_page.The Best Way To Find Accomodation, Restaurant, And Things To Do') }}
                                 </p>
                                 <div
                                     class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">

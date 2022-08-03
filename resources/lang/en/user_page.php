@@ -243,7 +243,7 @@ return [
     'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.' => 'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.',
     'Learn more' => 'Learn more',
 
-    'The Best Way To Find Home, Hotel, Food, And Wow' => 'The Best Way To Find Home, Hotel, Food, And Wow',
+    'The Best Way To Find Accomodation, Restaurant, And Things To Do' => 'The Best Way To Find Accomodation, Restaurant, And Things To Do',
     "Let's Go" => "Let's Go",
     'Download The App' => 'Download The App',
     'Unlock all the features today' => 'Unlock all the features today',
