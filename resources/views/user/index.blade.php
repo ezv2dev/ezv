@@ -735,7 +735,7 @@
                                         @endif
 
                                         <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
-                                            aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+                                            aria-labelledby="navbarDropdownUserImage" style="left: -186px; top: 120%; min-width: 239px;">
                                             <h6 class="dropdown-header d-flex align-items-center">
                                                 @if (Auth::user()->foto_profile != null)
                                                     <img class="dropdown-user-img lozad" src="{{ LazyLoad::show() }}"
@@ -803,12 +803,23 @@
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
-                            <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
+                            <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
                                 class="btn btn-fill border-0 navbar-gap"
                                 style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
-                            </a>
+                            </a> -->
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="{{ route('login') }}">Login</a>
+                                    <a href="{{ route('register') }}">Register</a>
+                                    <hr>
+                                    <a href="{{ route('ahost') }}">Become a Host</a>
+                                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                                    <a href="{{ route('faq') }}">FAQ</a>
+                                </div>
+                            </div>
                         @endauth
                     </div>
                 </div>
@@ -1763,6 +1774,30 @@
                 }
                 restaurantRefreshFilter(subUrl);
             }
+        </script>
+
+
+
+        <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                }
+            }
+        }
         </script>
 
         {{-- LAZY LOAD --}}
