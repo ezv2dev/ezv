@@ -91,7 +91,7 @@
         $condition_restaurant = Route::is('restaurant');
         $condition_hotel = Route::is('hotel') || Route::is('room_hotel');
         $condition_things_to_do = Route::is('activity') || Route::is('activity_price_index');
-        
+
         if (isset($_COOKIE['sCheck_in'])) {
             $get_check_in = $_COOKIE['sCheck_in'];
             $get_check_out = $_COOKIE['sCheck_out'];
@@ -99,16 +99,16 @@
             $get_check_in = null;
             $get_check_out = null;
         }
-        
+
         function dateDiff($get_check_in, $get_check_out)
         {
             $date1_ts = strtotime($get_check_in);
             $date2_ts = strtotime($get_check_out);
             $datediff = $date2_ts - $date1_ts;
-        
+
             return round($datediff / (60 * 60 * 24));
         }
-        
+
         $dateDiffe = dateDiff($get_check_in, $get_check_out);
     @endphp
 
@@ -1462,8 +1462,8 @@
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ $get_check_in }} </b> to
-                                                                        <b>{{ $get_check_out }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/

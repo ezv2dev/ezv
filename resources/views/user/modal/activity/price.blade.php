@@ -15,14 +15,15 @@
                     <p class="modal-title">Name</p>
                     <div class="form-group mb-4">
                         <input type="text" class="form-control" id="name" name="name"
-                            placeholder="Input name here" required>
+                            placeholder="Input name here">
+                        <small id="err-xname" style="display: none;" class="invalid-feedback">{{ __('auth.empty_name') }}</small>
                     </div>
                     <p class="modal-title">Price</p>
                     <div class="form-group mb-4">
-                        <input type="text" style="margin-top: 0;" class="form-control" id="price" name="price"
+                        <input type="text" style="margin-top: 0;" class="form-control" id="xprice" name="price"
                             placeholder="Input price here"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            required>
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <small id="err-price" style="display: none;" class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                     </div>
                     <div class="row mb-4">
                         <div class="col-12 col-sm-6 mb-3 mb-sm-0">
@@ -30,6 +31,7 @@
                             <div class="form-group">
                                 <input type="date" class="form-control" name="start_date" id="startDate"
                                     placeholder="{{ __('user_page.Start Date') }}">
+                                <small id="err-sdateprc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_sdate') }}</small>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -37,14 +39,16 @@
                             <div class="form-group">
                                 <input type="date" class="form-control" name="end_date" id="endDate"
                                     placeholder="{{ __('user_page.End Date') }}">
+                                <small id="err-edateprc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_edate') }}</small>
                             </div>
                         </div>
                     </div>
 
                     <p class="modal-title">Description</p>
                     <div class="form-group mb-4">
-                        <textarea id="description" name="description" class="form-control" style="height: 200px"
+                        <textarea id="xdescription" name="description" class="form-control" style="height: 200px"
                             placeholder="Input Description here"></textarea>
+                        <small id="err-descprc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_desc') }}</small>
                     </div>
 
                     <p class="modal-title">Image</p>
@@ -54,8 +58,9 @@
                                 <p>{{ __('user_page.Upload Image') }}</p>
                                 <img style="width: 100%" src="" alt="">
                             </div>
+                            <small id="err-imgprc" style="display: none;" class="invalid-feedback">{{ __('auth.empty_img') }}</small>
                             <div class="controls" style="display: none;">
-                                <input type="file" name="image" accept=".jpeg,.png,.jpg,.webp" />
+                                <input id="imgPrice" type="file" name="image" accept=".jpeg,.png,.jpg,.webp" />
                             </div>
                         </div>
                     </div>

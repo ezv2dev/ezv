@@ -25,7 +25,7 @@ class VillaListingController extends Controller
             'bathroom' => "1",
             'latitude' => -8.4553718,
             'longitude' => 114.7913786,
-            // 'phone' => $request->phone,
+            'size' => 0,
             'id_location' => 1,
             // 'email' => $request->email,
             // 'image' => $name_file,

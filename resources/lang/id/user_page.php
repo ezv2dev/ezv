@@ -214,6 +214,7 @@ return [
     'Location' => 'Lokasi',
     'Where are you going?' => 'Kemana anda pergi ?',
     'location not found' => 'lokasi tidak ditemukan',
+    'Check Availability' => 'Cek Ketersediaan',
     'Check in' => 'Check in',
     'Check out' => 'Check out',
     'Add dates' => 'Tambah tanggal',

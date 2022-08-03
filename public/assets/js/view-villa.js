@@ -13,6 +13,8 @@ Dashmix.helpersOnLoad(["jq-magnific-popup"]);
 // }
 // Date Picker
 
+let instant_book = $("#instant_book_check").val();
+
 function setCookie2(name, value, days) {
     var expires = "";
     if (days) {
@@ -61,6 +63,14 @@ $(document).ready(function () {
                 // console.log(response.status);
                 console.log(response.data.length);
                 if (response.data.length > 0) {
+                    let buttonBottomMob = "";
+
+                    buttonBottomMob = `<input class="price-button" onclick="addDatesFunction()"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="CHECK AVAILABILITY" readonly>`;
+
+                    $(".button-view-detail").html("");
+                    $(".button-view-detail").html(buttonBottomMob);
                 } else {
                     runningCookiesDate(checkIn, checkOut, adult, child);
                 }
@@ -173,6 +183,29 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
                 $("#cleaning_fee").text(total["cleaning_fee"]);
                 $("#cleaning_div").css("display", "block");
             }
+
+            let check_In = moment(checkIn).format("DD MMM YYYY");
+
+            let check_Out = moment(checkOut).format("DD MMM YYYY");
+
+            // if ((checkIn == null) & (checkOut == null)) {
+            //     document
+            //         .getElementById("dateSelected")
+            //         .classList.add("d-none");
+
+            //     $("#priceBottom").removeClass("d-none");
+            //     $("#priceBottomFilled").addClass("d-none");
+            // } else {
+            document.getElementById("dateSelected").classList.remove("d-none");
+
+            $("#dateSelected").html(check_In + " - " + check_Out);
+
+            $("#priceBottom").addClass("d-none");
+            $("#priceBottomFilled").removeClass("d-none");
+
+            $("#priceBottomFilled").html(
+                total["total_all"] + "/" + diffDays + " night"
+            );
 
             calendar_reserve(2);
             calendar_reserve2(2);
@@ -376,6 +409,7 @@ function calendar_availability(months) {
                                     $("#cleaning_div").css("display", "block");
                                 }
 
+                                //mobile
                                 let checkIn = instance.formatDate(
                                     selectedDates[0],
                                     "d M Y"
@@ -386,14 +420,6 @@ function calendar_availability(months) {
                                     "d M Y"
                                 );
 
-                                // if ((checkIn == null) & (checkOut == null)) {
-                                //     document
-                                //         .getElementById("dateSelected")
-                                //         .classList.add("d-none");
-
-                                //     $("#priceBottom").removeClass("d-none");
-                                //     $("#priceBottomFilled").addClass("d-none");
-                                // } else {
                                 document
                                     .getElementById("dateSelected")
                                     .classList.remove("d-none");
@@ -411,7 +437,22 @@ function calendar_availability(months) {
                                         sum_night +
                                         " night"
                                 );
-                                // }
+
+                                let buttonBottomMob = "";
+
+                                if (instant_book == "yes") {
+                                    buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="VIEW DETAILS" readonly>`;
+                                } else {
+                                    buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="QUICK ENQUIRY" readonly>`;
+                                }
+
+                                $(".button-view-detail").html("");
+                                $(".button-view-detail").html(buttonBottomMob);
+                                //end mobile
 
                                 calendar_reserve(2);
                                 calendar_reserve2(2);
@@ -428,6 +469,15 @@ $("#clear1").click(function () {
     document.getElementById("dateSelected").classList.add("d-none");
     $("#priceBottom").removeClass("d-none");
     $("#priceBottomFilled").addClass("d-none");
+
+    let buttonBottomMob = "";
+
+    buttonBottomMob = `<input class="price-button" onclick="addDatesFunction()"
+    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+    value="CHECK AVAILABILITY" readonly>`;
+
+    $(".button-view-detail").html("");
+    $(".button-view-detail").html(buttonBottomMob);
 
     $("#check_in").val("");
     $("#check_in3").val("");
@@ -484,6 +534,19 @@ $("#clear_date").click(function () {
 });
 
 $("#clear_date2").click(function () {
+    document.getElementById("dateSelected").classList.add("d-none");
+    $("#priceBottom").removeClass("d-none");
+    $("#priceBottomFilled").addClass("d-none");
+
+    let buttonBottomMob = "";
+
+    buttonBottomMob = `<input class="price-button" onclick="addDatesFunction()"
+    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+    value="CHECK AVAILABILITY" readonly>`;
+
+    $(".button-view-detail").html("");
+    $(".button-view-detail").html(buttonBottomMob);
+
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -1101,7 +1164,7 @@ function edit_availability() {
     $("#modal-edit_price").modal("show");
     $("#trigger-tab-price").removeClass("active");
     $("#editprice").removeClass("active");
-    $('#extraPrice').removeClass('active');
+    $("#extraPrice").removeClass("active");
     $("#trigger-tab-extraprice").removeClass("active");
     $("#content-tab-extraPrice").removeClass("active");
     $("#trigger-tab-availability").addClass("active");

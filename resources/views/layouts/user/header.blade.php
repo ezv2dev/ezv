@@ -339,8 +339,8 @@
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
                                         <input type="text" class="form-control input-transparant"
-                                            value="{{ $_COOKIE['sLocation'] ?? '' }}" id="loc_sugest"
-                                            name="sLocation"
+                                            onfocus="this.value=''" value="{{ $_COOKIE['sLocation'] ?? '' }}"
+                                            id="loc_sugest" name="sLocation"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                             placeholder="Where are you going?">
 
@@ -496,9 +496,9 @@
                                             style="position : absolute; z-index:1; width:350px; height: 60px; margin-left: -90px; margin-top: -8px;"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" {{-- value="{{ $_COOKIE['sCheck_in'] ?? '' }}" --}} id="check_in4"
-                                            name="sCheck_in"
+                                        <input type="text" onfocus="this.value=''"
+                                            placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                            {{-- value="{{ $_COOKIE['sCheck_in'] ?? '' }}" --}} id="check_in4" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00; margin-top: 2px;">
                                     </div>
                                     <div class="check-out">
@@ -506,7 +506,8 @@
                                             style="position : absolute; z-index:1; width:150px; height: 60px; margin-left: -90px; margin-top: -8px;"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" style="background-color: #ffffff00; margin-top: 2px;"
+                                        <input type="text" onfocus="this.value=''"
+                                            style="background-color: #ffffff00; margin-top: 2px;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             {{-- value="{{ $_COOKIE['sCheck_out'] ?? '' }}" --}} id="check_out4" name="sCheck_out" readonly>
                                     </div>
@@ -941,7 +942,8 @@
                                 <div class="bar bar-restaurant-detail" style="margin-left: -150px;">
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}</p>
-                                        <input type="text" class="form-control input-transparant" name="sLocation"
+                                        <input type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sLocation"
                                             autocomplete="off" value="{{ request()->get('sLocation') ?? '' }}"
                                             id="loc_sugest" name="location"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -1096,7 +1098,7 @@
                                     </div>
                                     <div class="guests" style="width: auto;">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sKeyword" value=""
                                             id="search_sugest"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -1514,8 +1516,9 @@
                                     <div class="bar" style="margin-left: -150px;">
                                         <div class="location">
                                             <p>{{ __('user_page.Location') }}</p>
-                                            <input type="text" class="form-control input-transparant"
-                                                value="" id="loc_sugest" name="sLocation"
+                                            <input type="text" onfocus="this.value=''"
+                                                class="form-control input-transparant" value="" id="loc_sugest"
+                                                name="sLocation"
                                                 style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                                 placeholder="Where are you going?">
 
@@ -1674,9 +1677,10 @@
                                                 style="position : absolute; z-index:1; width:350px; height: 60px; margin-left: -90px; margin-top: -8px;"
                                                 class="collapsible_check_search"></a>
                                             <p>{{ __('user_page.Check in') }}</p>
-                                            <input type="text" placeholder="{{ __('user_page.Add dates') }}"
-                                                class="form-control" value="{{ $_COOKIE['sCheck_in'] ?? '' }}"
-                                                id="check_in4" name="sCheck_in"
+                                            <input type="text" onfocus="this.value=''"
+                                                placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                                value="{{ $_COOKIE['sCheck_in'] ?? '' }}" id="check_in4"
+                                                name="sCheck_in"
                                                 style="width: 100% !important; background-color: #ffffff00; margin-top: 2px;">
                                         </div>
                                         <div class="check-out">
@@ -1684,7 +1688,7 @@
                                                 style="position : absolute; z-index:1; width:150px; height: 60px; margin-left: -90px; margin-top: -8px;"
                                                 class="collapsible_check_search"></a>
                                             <p>{{ __('user_page.Check out') }}</p>
-                                            <input type="text"
+                                            <input type="text" onfocus="this.value=''"
                                                 style="background-color: #ffffff00; margin-top: 2px;"
                                                 placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                                 value="{{ $_COOKIE['sCheck_out'] ?? '' }}" id="check_out4"
@@ -2126,9 +2130,9 @@
                                 <div class="bar bar-activity-detail" style="margin-left: -150px;">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
-                                        <input type="text" class="form-control input-transparant"
-                                            name="sLocation" value="{{ request()->get('sLocation') }}"
-                                            id="loc_sugest"
+                                        <input type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sLocation"
+                                            value="{{ request()->get('sLocation') }}" id="loc_sugest"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                             placeholder="Where are you going?">
 
@@ -2292,7 +2296,7 @@
                                             {{ __('user_page.Search') }}
                                         </p>
 
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sKeyword" value=""
                                             id="search_sugest"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -2404,12 +2408,12 @@
                                         @endIf
 
                                         <div style="display: flex; padding: 0px;" class="input-date">
-                                            <input type="text" placeholder="" class="form-control"
-                                                name="start_date" id="start_date"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="start_date" id="start_date"
                                                 value="{{ $_COOKIE['sCheck_in'] ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" placeholder="" class="form-control"
-                                                name="end_date" id="end_date"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="end_date" id="end_date"
                                                 value="{{ $_COOKIE['sCheck_out'] ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>

@@ -586,7 +586,7 @@
                                         <p>
                                             {{ __('user_page.Location') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('homes-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -746,14 +746,14 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" placeholder="{{ __('user_page.Add dates') }}"
+                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
                                             class="form-control" value="{{ $get_check_in }}" id="check_in2"
                                             name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -1313,7 +1313,7 @@
                                         <p>
                                             {{ __('user_page.Location / Hotel Name') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('hotel-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -1474,14 +1474,14 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" placeholder="{{ __('user_page.Add dates') }}"
+                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
                                             class="form-control" value="{{ $get_check_in }}" id="check_in2"
                                             name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -1993,7 +1993,7 @@
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('food-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest"
@@ -2151,7 +2151,7 @@
                                     </div>
                                     <div class="guests">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sKeyword" value=""
                                             id="search_sugest"
                                             style="width: 100%; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -2567,7 +2567,7 @@
                                 <div class="bar bar-activity">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('wow-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -2736,7 +2736,7 @@
                                             value="{{ request()->get('sKeyword') ?? '' }}" id="keyword"
                                             name="sKeyword"> --}}
 
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sKeyword" value=""
                                             id="search_sugest"
                                             style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
@@ -2853,10 +2853,10 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" placeholder="" class="form-control"
+                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
                                                 name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" placeholder="" class="form-control"
+                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
                                                 name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
@@ -3115,7 +3115,7 @@
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}
                                         </p>
-                                        <input autocomplete="off" type="text"
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
                                             value="{{ Request::is('collaborator-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest" name="sLocation"
@@ -3279,7 +3279,7 @@
                                             <!-- <i class="fa fa-search" aria-hidden="true"></i> -->&nbsp;
                                             {{ __('user_page.Category') }}
                                         </p>
-                                        <input type="text"
+                                        <input type="text" onfocus="this.value=''"
                                             style="background-color: #ffffff00; border:none; padding: 0.4rem 0 0 0; font-size: 140%;"
                                             placeholder="{{ __('user_page.Search here') }}"
                                             value="{{ request()->get('sKeyword') ?? '' }}" id="keyword"
@@ -3303,10 +3303,10 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" placeholder="" class="form-control"
+                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
                                                 name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" placeholder="" class="form-control"
+                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
                                                 name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
