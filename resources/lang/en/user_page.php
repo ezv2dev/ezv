@@ -218,6 +218,7 @@ return [
     'Location' => 'Location',
     'Where are you going?' => 'Where are you going?',
     'location not found' => 'location not found',
+    'Check Availability' => 'Check Availability',
     'Check in' => 'Check in',
     'Check out' => 'Check out',
     'Add dates' => 'Add dates',

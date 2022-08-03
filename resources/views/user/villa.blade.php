@@ -101,26 +101,30 @@
         <div id="bottom-mobile" class="sticky-bottom-mobile d-xs-block d-md-none">
             <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
-                    {{-- <input class="price-button" onclick="details_reserve()"
+                    <input type="hidden" id="instant_book_check" value="{{ $villa[0]->instant_book }}">
+                    @if (isset($_COOKIE['sCheck_in']) == null && isset($_COOKIE['sCheck_out']) == null)
+                    <input class="price-button" onclick="addDatesFunction()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                        value="{{ __('user_page.VIEW DETAILS') }}" readonly> --}}
-                    @if ($villa[0]->instant_book == 'yes')
-                        <input class="price-button" onclick="details_reserve()"
-                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                            value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        value="{{ __('user_page.Check Availability') }}" readonly>
                     @else
-                        @guest
-                            <input class="price-button" onclick="loginForm(2)"
+                        @if ($villa[0]->instant_book == 'yes')
+                            <input class="price-button" onclick="details_reserve()"
                                 style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
-                        @endguest
+                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        @else
+                            @guest
+                                <input class="price-button" onclick="loginForm(2)"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                            @endguest
 
-                        @auth
-                            <input class="price-button" onclick="details_quick_enquiry()"
-                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
-                        @endauth
-                    @endif
+                            @auth
+                                <input class="price-button" onclick="details_quick_enquiry()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
+                            @endauth
+                        @endif
+                    @endIf
                 </div>
 
                 <div class="d-flex" style="flex-direction: column;">
@@ -2037,7 +2041,7 @@
                                                     @csrf
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
-                                                    
+
 													<div class="row">
                                                         <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                                                             <div class="d-flex">
