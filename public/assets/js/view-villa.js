@@ -13,6 +13,8 @@ Dashmix.helpersOnLoad(["jq-magnific-popup"]);
 // }
 // Date Picker
 
+let instant_book = $("#instant_book_check").val();
+
 function setCookie2(name, value, days) {
     var expires = "";
     if (days) {
@@ -61,6 +63,14 @@ $(document).ready(function () {
                 // console.log(response.status);
                 console.log(response.data.length);
                 if (response.data.length > 0) {
+                    let buttonBottomMob = "";
+
+                    buttonBottomMob = `<input class="price-button" onclick="addDatesFunction()"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="CHECK AVAILABILITY" readonly>`;
+
+                    $(".button-view-detail").html("");
+                    $(".button-view-detail").html(buttonBottomMob);
                 } else {
                     runningCookiesDate(checkIn, checkOut, adult, child);
                 }
@@ -223,8 +233,6 @@ $(window).on("resize", function () {
         calendar_reserve2(2);
     }
 });
-
-let instant_book = $("#instant_book_check").val();
 
 function calendar_availability(months) {
     $.ajax({
