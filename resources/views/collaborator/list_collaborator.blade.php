@@ -635,21 +635,6 @@ if (request()->fCategory) {
                             </span>
                         </div>
                         </a>
-                        <div class="text-14 fw-400 grid-one-line {{ $textColor }} list-description skeleton"
-                            style="display: flex;">
-                            <a href="mailto:{{ $data->email }}?subject=I want to collab">
-                                <div
-                                    style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fa-regular fa-envelope"></i>
-                                </div>
-                            </a>
-                            <a href="https://api.whatsapp.com/send?text={{ $data->phone }}">
-                                <div
-                                    style="width: 40px; height: 40px; color: white; background-color: #ff7400; border-radius: 50%; margin-left: 8px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                </div>
-                            </a>
-                        </div>
 
                     </div>
                 </div>

@@ -265,14 +265,56 @@
                                     <img style="border-radius: 3px;" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
-                            <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
+                            <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
                                 class="btn btn-fill border-0 navbar-gap"
                                 style="color: #ffffff; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
-                            </a>
+                            </a> -->
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="{{ route('login') }}">Login</a>
+                                    <a href="{{ route('register') }}">Register</a>
+                                    <hr>
+                                    <a href="{{ route('ahost') }}">Become a Host</a>
+                                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                                    <a href="{{ route('faq') }}">FAQ</a>
+                                </div>
+                            </div>
                         @endauth
                     </div>
                 </div>
             </nav>
         </div>
+        <style>
+            .dropbtn {
+            border-radius: 50%;
+            }
+            .dropbtn:hover {
+                --tw-shadow: none;
+                box-shadow: none;
+                transition: none;
+            }
+        </style>
+        <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                }
+            }
+        }
+        </script>

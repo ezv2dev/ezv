@@ -1422,7 +1422,7 @@
                     </div>
                     <!-- Random Villa Slider Start -->
                     <div class="popular-block-activity">
-                        <h4>Popular Villa<h4>
+                        <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
                                 <div class="SlickCarousel3">
                                     @forelse ($villaRandom as $popular)
                                         <!-- Start Slider Items -->
@@ -1444,12 +1444,12 @@
                                                                 {{ __('user_page.Bedroom') }},
                                                                 {{ $popular->bathroom }}
                                                                 {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
+                                                            {{-- <p style="color: #000;">
                                                                 @foreach ($popular->amenities as $item)
                                                                     <i class="fa fa-{{ $item->icon }}"></i>
                                                                 @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
+                                                                <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i>
+                                                            </p> --}}
                                                             <!-- Description max 100 character -->
                                                             <p style="text-align: justify;">
                                                                 {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
@@ -1457,7 +1457,7 @@
                                                         </div>
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
-                                                                @if (isset($_COOKIE['sCheck_in']) && isset($_COOKIE['sCheck_out']))
+                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != "")
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}

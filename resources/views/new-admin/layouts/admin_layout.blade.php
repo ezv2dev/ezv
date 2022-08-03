@@ -268,6 +268,30 @@
         .title-bar:hover::before{
             transition:.2s all ease-in;
         }
+
+        .list-notif-container::-webkit-scrollbar {
+            background-color: transparent;
+            width: 6px;
+            position:absolute;
+            top:0;
+            right:0;
+            bottom:0;
+            height:100%;
+        }
+
+        .list-notif-container::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            width:4px;
+            border-radius:4px;
+        }
+
+        .list-notif-container:hover::-webkit-scrollbar{
+            background-color:rgb(0,0,0,.2);
+        }
+
+        .list-notif-container:hover::-webkit-scrollbar-thumb {
+            background-color: rgb(0,0,0,.5);
+        }
     </style>
 </head>
 
@@ -902,8 +926,8 @@
                                 aria-expanded="false"><i data-feather="bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-                                aria-labelledby="navbarDropdownAlerts">
-                                <h6 class="dropdown-header dropdown-notifications-header">
+                                aria-labelledby="navbarDropdownAlerts" >
+                                <h6 class="dropdown-header dropdown-notifications-header" style="position:static;">
                                     <i class="mr-2" data-feather="bell"></i>
                                     Alerts Center
                                 </h6>
@@ -912,22 +936,30 @@
                                     $notificationOwner = App\Models\NotificationOwner::where('id_user', Auth::user()->id)->get();
                                 @endphp
 
-                                @foreach ($notificationOwner as $item)
-                                    <a class="dropdown-item dropdown-notifications-item"
-                                        href="{{ route('notification_owner') }}">
-                                        <div class="dropdown-notifications-item-icon bg-warning"><i
-                                                data-feather="activity"></i>
-                                        </div>
-                                        <div class="dropdown-notifications-item-content">
-                                            <div class="dropdown-notifications-item-content-details">
-                                                {{ $item->created_at->format('j F, Y h:i:s') }}
+                                @if(count($notificationOwner) > 0)
+
+                                <div class="list-notif-container" style="position:relative; height:250px; overflow-y:overlay;">
+                                    @foreach ($notificationOwner as $item)
+
+                                        <a class="dropdown-item dropdown-notifications-item"
+                                            href="{{ route('notification_owner') }}">
+                                            <div class="dropdown-notifications-item-icon bg-warning"><i
+                                                    data-feather="activity"></i>
                                             </div>
-                                            <div class="dropdown-notifications-item-content-text">
-                                                {{ $item->message }}
+                                            <div class="dropdown-notifications-item-content">
+                                                <div class="dropdown-notifications-item-content-details">
+                                                    {{ $item->created_at->format('j F, Y h:i:s') }}
+                                                </div>
+                                                <div class="dropdown-notifications-item-content-text">
+                                                    {{ $item->message }}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                @endforeach
+                                        </a>
+                                    @endforeach
+                                </div>
+
+                                @endif
+
                             </div>
                         </li>
                     @endif

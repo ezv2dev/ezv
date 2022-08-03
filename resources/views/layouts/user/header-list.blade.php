@@ -177,6 +177,67 @@
             margin-right: 5px;
             padding: 0 12px;
         }
+
+        /*Dropdown users stile*/
+
+        .dropbtn {
+            margin-right: 0px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #ffffff !important;
+            padding: 0;
+        }
+
+        .dropbtn::after {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: "\f007";
+            color: #ff7400;
+            font-size: 18px;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #ff7400;
+            box-shadow: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 232px;
+            overflow: auto;
+            z-index: 1;
+            right: -6px;
+            top: 64px;
+            border-radius: 15px;
+            border: solid 2px #ff7400;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: #282828;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 16px;
+            text-align: left;
+        }
+
+        .dropdown a:hover {
+            color: #ff7400;
+        }
+
+        .show {
+            display: block;
+        }
     </style>
 
     @php
@@ -3458,15 +3519,48 @@
                         <span class="checkmark-mode"></span>
                     </label>
                     <div style="width: 60%;">
-                        <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                        <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                             style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
                             <i class="fa-solid fa-user icon-clear"></i>
-                        </a>
+                        </a> -->
+                        <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="{{ route('login') }}">Login</a>
+                                    <a href="{{ route('register') }}">Register</a>
+                                    <hr>
+                                    <a href="{{ route('ahost') }}">Become a Host</a>
+                                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                                    <a href="{{ route('faq') }}">FAQ</a>
+                                </div>
+                            </div>
                     </div>
                 </div>
 
             @endauth
         </div>
+
+        <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                }
+            }
+        }
+        </script>
 
         {{-- Search Location --}}
         <script>
@@ -3629,6 +3723,13 @@
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
                     $("#overlay").css("display", "none");
+                    document.getElementById("new-bar-black").classList.remove("header-popup-list");
+                    document.getElementById("new-bar-black").classList.remove("search-height");
+                    document.getElementById("searchbox").classList.add("searchbox-display-block");
+                    document.getElementById("searchbox").classList.remove("searchbox-display-none");
+                    document.getElementById("search_bar").classList.remove("active");
+                    document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
+                    document.getElementById("search_bar").classList.add("searchbar-list-display-none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
@@ -3912,6 +4013,7 @@
                 document.getElementById("new-bar-black").classList.add("search-height");
                 document.getElementById("search_bar").classList.add("searchbar-list-display-block");
                 document.getElementById("search_bar").classList.remove("searchbar-list-display-none");
+                $("#overlay").css("display", "block");
 
                 function addClass(elements, className) {
                     for (var i = 0; i < elements.length; i++) {
@@ -3985,6 +4087,7 @@
                     document.getElementById("new-bar-black").classList.remove("search-height");
                     document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+                    $("#overlay").css("display", "none");
 
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     addClass(els, 'display-none');

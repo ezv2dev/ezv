@@ -65,6 +65,7 @@ return [
     'empty_prcperson' => 'This price per person field is required',
     'empty_mbed' => 'This max bed field is required',
     'empty_mpet' => 'This max pet field is required',
+    'empty_expet' => 'This deposit price field is required',
 
 
 ];

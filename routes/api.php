@@ -26,4 +26,4 @@ Route::post('xendit/va/callback', [Api\Payment\XenditController::class, 'callbac
 
 Route::get('xendit/payment_channel/list', [Api\Payment\XenditController::class, 'getlistchannel']);
 
-Route::post('xendit/credit_card/charge', [Api\Payment\XenditController::class, 'creditcard']);
+Route::post('xendit/credit_card/charge', [Api\Payment\XenditController::class, 'creditcard'])->name('api.creditcard');

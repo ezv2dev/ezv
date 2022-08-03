@@ -21840,7 +21840,7 @@ pre[class*="language-"] {
 
   .Container {
     padding: 0 15px;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
   }
 
   .Container:after,

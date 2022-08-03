@@ -12,7 +12,7 @@ body {
 
 .header-popup-list {
     border-bottom: 0 !important;
-    z-index: 1000 !important;
+    z-index: 1100 !important;
     padding-bottom: 25px !important;
 }
 
@@ -1051,7 +1051,7 @@ input:checked + .switch-background:active::before {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 1001;
+    z-index: 1099;
     cursor: pointer;
 }
 
