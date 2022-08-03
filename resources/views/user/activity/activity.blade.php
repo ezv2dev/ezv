@@ -1283,7 +1283,7 @@
                             @endauth
                         </div>
                     </section>
-                    <section id="amenities" class="section-2">
+                    <section id="amenities" class="section-2 px-sm-14p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>

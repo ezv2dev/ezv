@@ -102,7 +102,7 @@
             <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     <input type="hidden" id="instant_book_check" value="{{ $villa[0]->instant_book }}">
-                    @if (isset($_COOKIE['sCheck_in']) == null && isset($_COOKIE['sCheck_out']) == null)
+                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '')
                     <input class="price-button" onclick="addDatesFunction()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                         value="{{ __('user_page.Check Availability') }}" readonly>

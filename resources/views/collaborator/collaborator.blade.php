@@ -854,7 +854,7 @@
                     @endif
                 @endauth
                 {{-- END ALERT CONTENT STATUS --}}
-                <div class="row top-profile" id="first-detail-content">
+                <div class="row top-profile px-xs-12p px-sm-24p" id="first-detail-content">
                     <div class="col-lg-4 col-md-4 col-xs-12 pd-0">
                         <div class="profile-image">
                             @if ($profile->image)
@@ -1442,7 +1442,7 @@
                         @endif
                     @endauth
                     {{-- END ADD GALLERY --}}
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-xs-12p px-sm-24p">
                         {{-- Description --}}
                         <div class="about-place">
                             <h2>About
@@ -1544,7 +1544,7 @@
                     <div style="padding-left: 10px; padding-right: 10px;">
                         <hr>
                     </div>
-                    <section id="availability" class="section-2">
+                    <section id="availability" class="section-2 px-xs-12p px-sm-24p">
                         <div class="pd-tlr-10">
                             <h2>Availability</h2>
 
@@ -2789,8 +2789,8 @@
     {{-- MODAL Reorder image --}}
     <div class="modal fade" id="edit_position_photo" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-xl modal-fullscreen" role="document">
+            <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Photos</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
@@ -2829,8 +2829,8 @@
     {{-- MODAL Reorder video --}}
     <div class="modal fade" id="edit_position_video" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="background: white; border-radius:25px">
+        <div class="modal-dialog modal-xl modal-fullscreen" role="document">
+            <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Video</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"
