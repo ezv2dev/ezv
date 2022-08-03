@@ -99,84 +99,6 @@ class SearchHomeController extends Controller
             }
         }
 
-        if ($sLocation) {
-            $location = $sLocation;
-
-            // ! start
-            $latitude = Location::select('latitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
-            $longitude = Location::select('longitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
-
-            // * get latitude & longitude dari array
-            $get_latitude = $latitude->latitude;
-            $get_longitude = $longitude->longitude;
-
-            // * get latitude and longitude data lainnya
-            $get_latitude_others = Location::whereNotIn('latitude', [$get_latitude])->select('latitude', 'id_location')->get();
-            $get_longitude_others = Location::whereNotIn('longitude', [$get_longitude])->select('longitude', 'id_location')->get();
-
-            // *if latitude & longitude others is null
-            if (!$get_latitude_others || !$get_longitude_others) {
-                $villa = collect([]);
-                return $villa;
-            };
-
-            $get_lat_long_others = Location::whereNotIn('latitude', [$get_latitude])
-                ->whereNotIn('longitude', [$get_longitude])
-                ->select('latitude', 'longitude', 'id_location')
-                ->get();
-
-            $point1 = array('lat' => $get_latitude, 'long' => $get_longitude, 'id_location');
-
-            $kilometers = array();
-            $i = 0;
-            foreach ($get_lat_long_others as $item) {
-                $lat1 = $point1['lat'];
-                $lon1 = $point1['long'];
-                $lat2 = $item->latitude;
-                $lon2 = $item->longitude;
-                $id_location_near = $item->id_location;
-                $theta = $lon1 - $lon2;
-
-                $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-                $miles = acos($miles);
-                $miles = rad2deg($miles);
-                $miles = $miles * 60 * 1.1515;
-                $kilometers[$i][] = $miles * 1.609344;
-                $kilometers[$i][] = $id_location_near;
-                $i++;
-            }
-
-            $unsorted_data = collect($kilometers);
-            $sorted_data = $unsorted_data->sortBy('0');
-
-            $tempLoc = [];
-            $getLoc = Location::where('name', 'like', '%' . $location . '%')->select('id_location')->first();
-            array_push($tempLoc, $getLoc->id_location);
-            foreach ($sorted_data as $item) {
-                array_push($tempLoc, $item['1']);
-            }
-            // dd($tempLoc);
-
-            $villaIds = $villa->modelKeys();
-            $villa = Villa::where('status', 1)->whereIn('id_location', $tempLoc)->whereIn('id_villa', $villaIds)->get();
-
-            $tempVilla = [];
-            for ($i = 0; $i < collect($tempLoc)->count(); $i++) {
-                for ($j = 0; $j < $villa->count(); $j++) {
-                    if ($tempLoc[$i] == $villa[$j]->id_location) {
-                        array_push($tempVilla, $villa[$j]);
-                    }
-                }
-            }
-            // dd($tempVilla);
-            // dd(collect($tempVilla)->pluck('id_villa', 'id_location'));
-            // !End
-            // $villaAround = Villa::where('status', 1)
-            //     ->whereIn('id_villa', $villaIds)
-            //     ->whereIn('id_location', $sorted_data[1])->get();
-            $villa = collect($tempVilla);
-        }
-
         //* order by grade
         //     $villaIds = $villa->modelKeys();
         //     $villas = Villa::with('villaHasCategory')
@@ -372,90 +294,90 @@ class SearchHomeController extends Controller
 
             // ! start
             // // * get latitude & longitude dari nama yang diinput user
-            $latitude = Location::select('latitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
-            $longitude = Location::select('longitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
+            // $latitude = Location::select('latitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
+            // $longitude = Location::select('longitude', 'id_location')->where('name', 'like', '%' . $location . '%')->first();
 
-            // *if latitude & longitude is null
-            if (!$latitude || !$longitude) {
-                $villa = collect([]);
-                return $villa;
-            };
+            // // *if latitude & longitude is null
+            // if (!$latitude || !$longitude) {
+            //     $villa = collect([]);
+            //     return $villa;
+            // };
 
-            // * get latitude & longitude dari array
-            $get_latitude = $latitude->latitude;
-            $get_longitude = $longitude->longitude;
+            // // * get latitude & longitude dari array
+            // $get_latitude = $latitude->latitude;
+            // $get_longitude = $longitude->longitude;
 
-            // * get latitude and longitude data lainnya
-            $get_latitude_others = Location::whereNotIn('latitude', [$get_latitude])->select('latitude', 'id_location')->get();
-            $get_longitude_others = Location::whereNotIn('longitude', [$get_longitude])->select('longitude', 'id_location')->get();
+            // // * get latitude and longitude data lainnya
+            // $get_latitude_others = Location::whereNotIn('latitude', [$get_latitude])->select('latitude', 'id_location')->get();
+            // $get_longitude_others = Location::whereNotIn('longitude', [$get_longitude])->select('longitude', 'id_location')->get();
 
-            // *if latitude & longitude others is null
-            if (!$get_latitude_others || !$get_longitude_others) {
-                $villa = collect([]);
-                return $villa;
-            };
+            // // *if latitude & longitude others is null
+            // if (!$get_latitude_others || !$get_longitude_others) {
+            //     $villa = collect([]);
+            //     return $villa;
+            // };
 
-            $get_lat_long_others = DB::table('location')
-                ->whereNotIn('latitude', [$get_latitude])
-                ->whereNotIn('longitude', [$get_longitude])
-                ->select('latitude', 'longitude', 'id_location')
-                ->get();
+            // $get_lat_long_others = DB::table('location')
+            //     ->whereNotIn('latitude', [$get_latitude])
+            //     ->whereNotIn('longitude', [$get_longitude])
+            //     ->select('latitude', 'longitude', 'id_location')
+            //     ->get();
 
-            $point1 = array('lat' => $get_latitude, 'long' => $get_longitude, 'id_location');
+            // $point1 = array('lat' => $get_latitude, 'long' => $get_longitude, 'id_location');
 
-            $kilometers = array();
-            $i = 0;
-            foreach ($get_lat_long_others as $item) {
-                $lat1 = $point1['lat'];
-                $lon1 = $point1['long'];
-                $lat2 = $item->latitude;
-                $lon2 = $item->longitude;
-                $id_location_near = $item->id_location;
-                $theta = $lon1 - $lon2;
+            // $kilometers = array();
+            // $i = 0;
+            // foreach ($get_lat_long_others as $item) {
+            //     $lat1 = $point1['lat'];
+            //     $lon1 = $point1['long'];
+            //     $lat2 = $item->latitude;
+            //     $lon2 = $item->longitude;
+            //     $id_location_near = $item->id_location;
+            //     $theta = $lon1 - $lon2;
 
-                $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-                $miles = acos($miles);
-                $miles = rad2deg($miles);
-                $miles = $miles * 60 * 1.1515;
-                $kilometers[$i][] = $miles * 1.609344;
-                $kilometers[$i][] = $id_location_near;
-                $i++;
-            }
+            //     $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+            //     $miles = acos($miles);
+            //     $miles = rad2deg($miles);
+            //     $miles = $miles * 60 * 1.1515;
+            //     $kilometers[$i][] = $miles * 1.609344;
+            //     $kilometers[$i][] = $id_location_near;
+            //     $i++;
+            // }
 
-            $unsorted_data = collect($kilometers);
-            $sorted_data = $unsorted_data->sortBy('0');
+            // $unsorted_data = collect($kilometers);
+            // $sorted_data = $unsorted_data->sortBy('0');
 
-            $tempLoc = [];
-            $getLoc = Location::where('name', 'like', '%' . $location . '%')->select('id_location')->first();
-            array_push($tempLoc, $getLoc->id_location);
-            foreach ($sorted_data as $item) {
-                array_push($tempLoc, $item['1']);
-            }
-            // dd($tempLoc);
+            // $tempLoc = [];
+            // $getLoc = Location::where('name', 'like', '%' . $location . '%')->select('id_location')->first();
+            // array_push($tempLoc, $getLoc->id_location);
+            // foreach ($sorted_data as $item) {
+            //     array_push($tempLoc, $item['1']);
+            // }
+            // // dd($tempLoc);
 
             $villaIds = $villa->modelKeys();
-            $villa = Villa::where('status', 1)->whereIn('id_location', $tempLoc)->whereIn('id_villa', $villaIds)->get();
+            // $villa = Villa::where('status', 1)->whereIn('id_location', $tempLoc)->whereIn('id_villa', $villaIds)->get();
 
-            $tempVilla = [];
-            for ($i = 0; $i < collect($tempLoc)->count(); $i++) {
-                for ($j = 0; $j < $villa->count(); $j++) {
-                    if ($tempLoc[$i] == $villa[$j]->id_location) {
-                        array_push($tempVilla, $villa[$j]);
-                    }
-                }
-            }
+            // $tempVilla = [];
+            // for ($i = 0; $i < collect($tempLoc)->count(); $i++) {
+            //     for ($j = 0; $j < $villa->count(); $j++) {
+            //         if ($tempLoc[$i] == $villa[$j]->id_location) {
+            //             array_push($tempVilla, $villa[$j]);
+            //         }
+            //     }
+            // }
             // dd($tempVilla);
             // dd(collect($tempVilla)->pluck('id_villa', 'id_location'));
             // !End
             // $villaAround = Villa::where('status', 1)
             //     ->whereIn('id_villa', $villaIds)
             //     ->whereIn('id_location', $sorted_data[1])->get();
-            $villa = collect($tempVilla);
-            // $villa = Villa::where('status', 1)
-            //     ->whereIn('id_villa', $villaIds)
-            //     ->whereHas('location', function (Builder $query) use ($location) {
-            //         $query->where('name', 'like', '%' . $location . '%');
-            //     })->get();
+            // $villa = collect($tempVilla);
+            $villa = Villa::where('status', 1)
+                ->whereIn('id_villa', $villaIds)
+                ->whereHas('location', function (Builder $query) use ($location) {
+                    $query->where('name', 'like', '%' . $location . '%');
+                })->get();
 
             // $villa = new Collection();
             // $villa = $villa->merge($villaOther);
