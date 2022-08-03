@@ -1093,7 +1093,8 @@ class HotelDetailController extends Controller
             $find = Hotel::where('id_hotel', $request->id_hotel)->firstOrFail();
 
             $find->update(array(
-                'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
+                'short_description' => $request->short_description,
+                // 'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
@@ -1296,7 +1297,8 @@ class HotelDetailController extends Controller
             $find = hotel::where('id_hotel', $request->id_hotel)->first();
 
             $find->update(array(
-                'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+                'description' => $request->description,
+                // 'description' => str_replace(array("\n", "\r"), ' ', $request->description),
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));

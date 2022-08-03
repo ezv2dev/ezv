@@ -44,6 +44,24 @@ function asciiToString(str) {
     return newStr;
 }
 
+function editNameForm() {
+    var formattedText = asciiToString(document.getElementById("name-form-input").value);
+    document.getElementById("name-form-input").value = formattedText;
+    var form = document.getElementById("name-form");
+    var content = document.getElementById("name-content");
+    form.classList.add("d-block");
+    content.classList.add("d-none");
+}
+
+function editNameCancel() {
+    var form = document.getElementById("name-form");
+    var formInput = document.getElementById("name-form-input");
+    var content = document.getElementById("name-content");
+    form.classList.remove("d-block");
+    content.classList.remove("d-none");
+    // formInput.value = '{{ $user->first_name }} {{ $user->last_name }}';
+}
+
 //Change name
 $(document).on("keyup", "textarea#name-form-input", function() {
     $("#name-form-input").css("border", "");
@@ -224,7 +242,9 @@ function editDescriptionForm() {
     var btn = document.getElementById("btnShowMoreDescription");
     form.classList.add("d-block");
     content.classList.add("d-none");
-    btn.classList.add("d-none");
+    if (btn != null) {
+        btn.classList.add("d-none");
+    }
 }
 
 function editDescriptionCancel() {
@@ -234,7 +254,9 @@ function editDescriptionCancel() {
     var btn = document.getElementById("btnShowMoreDescription");
     form.classList.remove("d-block");
     content.classList.remove("d-none");
-    btn.classList.remove("d-none");
+    if (btn != null) {
+        btn.classList.remove("d-none");
+    }
 }
 
 //add save story

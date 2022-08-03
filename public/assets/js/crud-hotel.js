@@ -6,6 +6,32 @@ $(document).on("keyup", "textarea#name-form-input", function() {
 
 let id_hotel = $("#id_hotel").val();
 
+function editDescriptionForm() {
+    var formattedText = asciiToString(document.getElementById("description-form-input").value);
+    document.getElementById("description-form-input").value = formattedText;
+    var form = document.getElementById("description-form");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.add("d-block");
+    content.classList.add("d-none");
+    if (btn != null) {
+        btn.classList.add("d-none");
+    }
+}
+
+function editDescriptionCancel() {
+    var form = document.getElementById("description-form");
+    var formInput = document.getElementById("description-form-input");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.remove("d-block");
+    content.classList.remove("d-none");
+    if (btn != null) {
+        btn.classList.remove("d-none");
+    }
+    // formInput.value = '{{ $hotel[0]->description }}';
+}
+
 var nameHotelBackup = $("#name-form-input").val();
 
 function editNameHotel(id_hotel) {

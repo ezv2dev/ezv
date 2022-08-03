@@ -6,6 +6,32 @@ $.ajaxSetup({
 
 let id_restaurant = $("#id_restaurant").val();
 
+function editDescriptionForm() {
+    var formattedText = asciiToString(document.getElementById("description-form-input").value);
+    document.getElementById("description-form-input").value = formattedText;
+    var form = document.getElementById("description-form");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.add("d-block");
+    content.classList.add("d-none");
+    if (btn != null) {
+        btn.classList.add("d-none");
+    }
+}
+
+function editDescriptionCancel() {
+    var form = document.getElementById("description-form");
+    var formInput = document.getElementById("description-form-input");
+    var content = document.getElementById("description-content");
+    var btn = document.getElementById("btnShowMoreDescription");
+    form.classList.remove("d-block");
+    content.classList.remove("d-none");
+    if (btn != null) {
+        btn.classList.remove("d-none");
+    }
+    // formInput.value = '{{ $restaurant->description }}';
+}
+
 //ganti short description restaurant
 $(document).on("keyup", "textarea#short-description-form-input", function () {
     $("#short-description-form-input").css("border", "");
@@ -134,9 +160,9 @@ function saveDescription() {
                 );
 
                 if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                    $("#description-content").html(response.data.description.substring(0, 400) + '...');
                 } else {
-                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                    $("#description-content").html(response.data.description.substring(0, 600) + '...');
                 }
 
                 desc_input.value = response.data.description;

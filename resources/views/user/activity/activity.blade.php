@@ -4244,7 +4244,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
     function editShortDescriptionForm() {
         var formattedText = asciiToString(document.getElementById("short-description-form-input").value);
         document.getElementById("short-description-form-input").value = formattedText;
@@ -4271,7 +4271,7 @@
             formInput.value = '';
         }
     }
-</script>
+</script> --}}
 <script>
     function editTimeForm() {
         var form = $("#time-form");
@@ -4347,7 +4347,7 @@
         $(content).show();
     }
 </script>
-<script>
+{{-- <script>
     function editDescriptionForm() {
         var formattedText = asciiToString(document.getElementById("description-form-input").value);
         document.getElementById("description-form-input").value = formattedText;
@@ -4369,7 +4369,7 @@
         btn.classList.remove("d-none");
         // formInput.value = '{{ $activity->description }}';
     }
-</script>
+</script> --}}
 {{-- END UPDATE FORM --}}
 {{-- CONTACT HOST --}}
 <script>
@@ -4695,7 +4695,7 @@
 </script>
 
 {{-- PREVENT TEXTAREA TYPE ENTER --}}
-<script>
+{{-- <script>
     $("textarea").keydown(function(e) {
         // Enter was pressed without shift key
         if (e.keyCode == 13 && !e.shiftKey) {
@@ -4703,7 +4703,7 @@
             e.preventDefault();
         }
     });
-</script>
+</script> --}}
 
 {{-- Highlight sticky --}}
 

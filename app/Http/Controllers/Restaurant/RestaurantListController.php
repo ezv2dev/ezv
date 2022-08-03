@@ -346,8 +346,10 @@ class RestaurantListController extends Controller
 
         // update
         $updatedRestaurant = $restaurant->update([
-            'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+            'description' => $request->description,
             'updated_by' => auth()->user()->id,
+            // 'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+            // 'updated_by' => auth()->user()->id,
         ]);
 
         $data = Restaurant::where('id_restaurant', $request->id_restaurant)->select('description')->first();
@@ -399,8 +401,10 @@ class RestaurantListController extends Controller
 
         // update
         $updatedRestaurant = Restaurant::where('id_restaurant', $request->id)->update([
-            'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_desc),
+            'short_description' => $request->short_desc,
             'updated_by' => auth()->user()->id,
+            // 'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_desc),
+            // 'updated_by' => auth()->user()->id,
         ]);
 
         $restaurantData = Restaurant::where('id_restaurant', $request->id)->select('short_description')->first();
