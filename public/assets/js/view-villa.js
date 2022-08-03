@@ -188,14 +188,9 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
 
             let check_Out = moment(checkOut).format("DD MMM YYYY");
 
-            // if ((checkIn == null) & (checkOut == null)) {
-            //     document
-            //         .getElementById("dateSelected")
-            //         .classList.add("d-none");
+            // console.log(check_In);
+            // console.log(check_Out);
 
-            //     $("#priceBottom").removeClass("d-none");
-            //     $("#priceBottomFilled").addClass("d-none");
-            // } else {
             document.getElementById("dateSelected").classList.remove("d-none");
 
             $("#dateSelected").html(check_In + " - " + check_Out);
@@ -206,6 +201,21 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
             $("#priceBottomFilled").html(
                 total["total_all"] + "/" + diffDays + " night"
             );
+
+            let buttonBottomMob = "";
+
+            if (instant_book == "yes") {
+                buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                value="VIEW DETAILS" readonly>`;
+            } else {
+                buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                value="QUICK ENQUIRY" readonly>`;
+            }
+
+            $(".button-view-detail").html("");
+            $(".button-view-detail").html(buttonBottomMob);
 
             calendar_reserve(2);
             calendar_reserve2(2);
