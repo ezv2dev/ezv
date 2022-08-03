@@ -1610,8 +1610,8 @@
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ $get_check_in }}</b> to
-                                                                        <b>{{ $get_check_out }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
