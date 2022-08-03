@@ -863,9 +863,9 @@ a.active {
 }
 
 @media only screen and (min-width: 992px) {
-    .modal-dialog-scrollable .modal-body {
+    /* .modal-dialog-scrollable .modal-body {
         overflow-y: hidden !important;
-    }
+    } */
 
     .review-comment-text {
         margin-left: -8px;

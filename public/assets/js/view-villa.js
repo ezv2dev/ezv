@@ -1101,6 +1101,7 @@ function edit_availability() {
     $("#modal-edit_price").modal("show");
     $("#trigger-tab-price").removeClass("active");
     $("#editprice").removeClass("active");
+    $('#extraPrice').removeClass('active');
     $("#trigger-tab-extraprice").removeClass("active");
     $("#content-tab-extraPrice").removeClass("active");
     $("#trigger-tab-availability").addClass("active");
