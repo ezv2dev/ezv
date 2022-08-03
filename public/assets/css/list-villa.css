@@ -3329,7 +3329,7 @@ input::-webkit-inner-spin-button {
         width: 60%;
     }
     .map-modal-container .map-content {
-        width: 40%;
+        min-width: 40%;
     }
 
     .map-modal-container .map-container {
@@ -3339,7 +3339,7 @@ input::-webkit-inner-spin-button {
     .image-in-map,
     .image-in-map-container,
     #location-map-content-right-image-loading{
-        height: 220px;
+        height: 260px;
     }
 
     .map-title-description{
@@ -3475,7 +3475,7 @@ input::-webkit-inner-spin-button {
         width: 70%;
     }
     .map-modal-container .map-content {
-        width: 30%;
+        min-width: 30%;
     }
 }
 

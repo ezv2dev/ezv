@@ -576,9 +576,9 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -861,9 +861,9 @@
                                     <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
 
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-next" disabled="true" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1132,9 +1132,9 @@
                                         </a>
                                     </div>
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1437,9 +1437,9 @@
                                         </a>
                                     </div>
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
