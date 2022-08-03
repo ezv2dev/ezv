@@ -135,7 +135,6 @@ class SearchHomeController extends Controller
                     }
                 }
             }
-
             $villas = collect($tempVilla);
         } else {
             $fSort = $request->fSort;
@@ -168,7 +167,7 @@ class SearchHomeController extends Controller
         $i = 0;
         $j = 0;
         $near = array();
-        foreach ($villa as $item) {
+        foreach ($villas as $item) {
             $point1 = array('lat' => $item->latitude, 'long' => $item->longitude, 'name' => $item->name);
             $airportPoint = array('lat2' => -8.7433916, 'long2' => 115.1644194);
 
@@ -186,21 +185,21 @@ class SearchHomeController extends Controller
             $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
             $kilometers[$i][] = $name;
 
-            if ($near == null) {
-                $near[0] = $kilometers[$i];
-            } else {
-                if ($kilometers[$i][0] <= $near[0][0]) {
-                    $near[0] = $kilometers[$i];
-                }
-            }
-            $villa[$i]['km'] = $near[0][0];
-            $villa[$i]['airport'] = 'Ngurah Rai Airport';
+            // if ($near == null) {
+            //     $near[0] = $kilometers[$i];
+            // } else {
+            //     if ($kilometers[$i][0] <= $near[0][0]) {
+            //         $near[0] = $kilometers[$i];
+            //     }
+            // }
+            $item['km'] = $kilometers[$i][0];
+            $item['airport'] = 'Ngurah Rai Airport';
 
             $i++;
         }
         //! end find nearby function
 
-        $villa = $villa->paginate(10);
+        $villa = $villas->paginate(env('CONTENT_PER_PAGE_LIST_VILLA'));
         return view('user.list_villa', compact('villa', 'amenities', 'villaCategory'));
     }
 
