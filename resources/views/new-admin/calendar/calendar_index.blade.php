@@ -125,7 +125,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Special Price</label>
-                            <input type="number" class="form-control" name="price" id="special_price" placeholder="Price">
+                            <input type="number" class="form-control" name="price" min="0" id="special_price" placeholder="Price"  inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+">
                             <small id="err-sprice" style="display: none;" class="invalid-feedback">The special price field is required</small>
                         </div>
                         <div class="form-group">
@@ -202,7 +202,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
 <script>
+    $('input[name="price"]').on('keypress', function(evt) {
+        if($(this).val() == '0' || $(this).val() == 0 ){
+            $(this).val('')
+        }
+        
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+    });
 
+    $('input[name="disc"]').on('keypress', function(evt){
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+    })
     //delete event
     function deleteEvent()
     {

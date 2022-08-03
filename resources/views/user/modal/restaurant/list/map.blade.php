@@ -631,7 +631,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    // $('#map12').removeClass('h-mobile-100');
+                    $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -930,7 +930,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    // $('#map12').removeClass('h-mobile-100');
+                    $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1199,7 +1199,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    // $('#map12').removeClass('h-mobile-100');
+                    $('#map12').hasClass('h-mobile-100') ? '' :$('#map12').addClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -1504,7 +1504,7 @@
                     // show right content
                     // $('#map12').addClass('w-70');
                     $('#map12').removeClass('w-100');
-                    // $('#map12').removeClass('h-mobile-100');
+                    $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
                     setTimeout(() => {
                         $('#modal-map-right').show();
                         // load slick slider
@@ -2227,8 +2227,8 @@
         showOnlyFilteredMarker();
         // reset right content
         // $('#map12').removeClass('w-70');
-        $('#map12').addClass('w-100');
-        $('#map12').addClass('h-mobile-100');
+        $('#map12').hasClass('w-100') ? '' : $('#map12').addClass('w-100');
+        $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
         $('#modal-map-right-content').html('');
         $('#modal-map-right').hide();
         // hide primary marker control
@@ -2409,7 +2409,7 @@
                 // show right content
                 // $('#map12').addClass('w-70');
                 $('#map12').removeClass('w-100');
-                $('#map12').removeClass('h-mobile-100');
+                $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
                 setTimeout(async () => {
                     $('#modal-map-right').show();
                     // load slick slider
@@ -2449,8 +2449,8 @@
 
         // reset right content
         // $('#map12').removeClass('w-70');
-        $('#map12').addClass('w-100');
-        $('#map12').addClass('h-mobile-100');
+        $('#map12').hasClass('w-100') ? '' : $('#map12').addClass('w-100');
+        $('#map12').hasClass('h-mobile-100') ? '' : $('#map12').addClass('h-mobile-100');
 
         $('#modal-map-right').hide();
 
