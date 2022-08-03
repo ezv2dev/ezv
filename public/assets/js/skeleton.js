@@ -9,6 +9,11 @@ window.addEventListener("load", event => {
     removeSkeletonClass()
 });
 
+window.addEventListener('offline', () => {
+    console.log('Lost connection')
+    removeSkeletonClass()
+});
+
 function removeSkeletonClass(){
     console.log('remove class skeleton')
     let skeleton = document.querySelectorAll('.skeleton')

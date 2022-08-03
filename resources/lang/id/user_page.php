@@ -499,6 +499,6 @@ return [
     "Make your short description here" => "Buat deskripsi singkat Anda di sini",
 
     "data not found" => "data tidak ditemukan",
-    "Popular Stays Nearby" => "Penginapan Populer Terdekat"
+    "Popular Stays Nearby" => "Penginapan Populer Terdekat",
 
 ];

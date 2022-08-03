@@ -16,7 +16,24 @@ class VillaBooking extends Model
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'phone', 'id_villa', 'adult', 'child', 'id_extra_price', 'number_extra', 'check_in', 'check_out', 'villa_price', 'extra price', 'total_price', 'method', 'status'
+        'id_payment',
+        'no_invoice',
+        'id_user',
+        'firstname',
+        'lastname',
+        'email',
+        'phone',
+        'id_villa',
+        'adult',
+        'child',
+        'id_extra_price',
+        'number_extra',
+        'check_in',
+        'check_out',
+        'villa_price',
+        'extra_price',
+        'total_price',
+        'status'
     ];
 
     protected $table = 'villa_booking';
