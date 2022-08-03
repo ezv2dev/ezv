@@ -448,6 +448,13 @@
             if (fSortFormInput == undefined) {
                 var fSortFormInput = '';
             }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const fSort = urlParams.get('fSort')
+            if (fSortFormInput == fSort) {
+                var fSortFormInput = '';
+            }
+
             var fBedsFormInput = $("input[name='fBeds']:checked").val();
             var fAmenitiesFormInput = [];
             var fCategoryFormInput = [];
