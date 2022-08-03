@@ -335,7 +335,7 @@
                             </div>
 
                             <div>
-                                <div class="bar" style="margin-left: -160px;">
+                                <div class="bar" id="parentBar">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
                                         <input type="text" class="form-control input-transparant"
@@ -939,7 +939,7 @@
                             </div>
 
                             <div>
-                                <div class="bar bar-restaurant-detail" style="margin-left: -150px;">
+                                <div class="bar bar-restaurant-detail" id="parentBar">
                                     <div class="location-restaurant">
                                         <p>{{ __('user_page.Location / Restaurant') }}</p>
                                         <input type="text" onfocus="this.value=''"
@@ -1513,7 +1513,7 @@
                             <div>
                                 <form action="{{ route('search_hotel') }}" method="GET" id="basic-form"
                                     autocomplete="off">
-                                    <div class="bar" style="margin-left: -150px;">
+                                    <div id="parentBar" class="bar">
                                         <div class="location">
                                             <p>{{ __('user_page.Location') }}</p>
                                             <input type="text" onfocus="this.value=''"
@@ -2127,7 +2127,7 @@
                             </div>
 
                             <div>
-                                <div class="bar bar-activity-detail" style="margin-left: -150px;">
+                                <div class="bar bar-activity-detail" id="parentBar">
                                     <div class="location">
                                         <p>{{ __('user_page.Location') }}</p>
                                         <input type="text" onfocus="this.value=''"
