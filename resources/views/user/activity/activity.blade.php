@@ -1753,8 +1753,7 @@
                     @can('review_create')
                         @if ($activity->userReview)
                             <section id="user-review" class="section-2">
-                                <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
-
+                                <div style="padding-top:10px; padding-bottom: 10px;">
                                     <div class="d-flex justify-content-left">
                                         <h2>{{ __('user_page.Your Review') }}</h2>
                                         <span>
@@ -1779,27 +1778,28 @@
                                     <div class="row">
                                         @if ($activity->userReview->comment)
                                             <div class="col-12">
-                                                <div class="col-6 d-flex">
+                                                <div class="col-12 col-lg-6 d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-6"
-                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                    <div class="col-6 review-comment-text">
                                                         {{ $activity->userReview->comment }}
                                                     </div>
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="col-6 d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Experience') }}
-                                            </div>
-                                            <div class="col-6 ">
-                                                <div class="liner">
-                                                    <span class="liner-bar"
-                                                        style="width: {{ $activity->userReview->experience * 20 }}%"></span>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Experience') }}
                                                 </div>
-                                                {{ $activity->userReview->experience }}
+                                                <div class="col-6 ">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $activity->userReview->experience * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $activity->userReview->experience }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

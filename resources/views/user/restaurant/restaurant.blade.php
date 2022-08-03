@@ -1970,18 +1970,17 @@
                                     <div class="row">
                                         @if ($restaurant->userReview->comment)
                                             <div class="col-12">
-                                                <div class="col-6 d-flex">
+                                                <div class="col-12 col-lg-6 d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-6"
-                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                    <div class="col-6 review-comment-text">
                                                         {{ $restaurant->userReview->comment }}
                                                     </div>
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="col-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="d-flex">
                                                 <div class="col-6">
                                                     {{ __('user_page.Food') }}
@@ -2007,7 +2006,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="d-flex">
                                                 <div class="col-6">
                                                     {{ __('user_page.Value') }}

@@ -4005,6 +4005,7 @@
     <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
 
     {{-- Page JS Plugins --}}
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
