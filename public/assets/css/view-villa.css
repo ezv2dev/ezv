@@ -846,6 +846,7 @@ a.active {
     margin-right: 5px;
     vertical-align: middle;
     border-radius: 50px;
+    background: #d1d1d1;
 }
 
 .review-comment-container {
@@ -862,12 +863,11 @@ a.active {
 }
 
 @media only screen and (min-width: 992px) {
-    /* .modal-dialog-scrollable .modal-body {
-        overflow-y: hidden !important;
-    } */
-
     .review-comment-text {
         margin-left: -8px;
+    }
+    .modal-dialog-noscroll {
+        overflow-y: hidden !important;
     }
 }
 
@@ -875,6 +875,10 @@ a.active {
     width: 48px;
     height: 48px;
     border-radius: 50%;
+}
+
+.modal-dialog-noscroll {
+    overflow-y: auto;
 }
 
 .liner-modal {

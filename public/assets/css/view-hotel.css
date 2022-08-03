@@ -470,3 +470,9 @@ video {
         margin: 0px !important;
     }
 }
+
+@media only screen and (max-width: 450px) {
+    .owner-profile {
+        margin-right: 15px;
+    }
+}
