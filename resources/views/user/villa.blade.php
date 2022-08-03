@@ -1802,8 +1802,8 @@
                     <div class="dropdown2">
                         <button onclick="myFunction2()" class="dropbtn2 btn border-0 navbar-gap"></button>
                         <div id="myDropdown2" class="dropdown-content2">
-                            <a href="{{ route('login') }}">Login</a>
-                            <a href="{{ route('register') }}">Register</a>
+                            <a onclick="loginForm(2)">Login</a>
+                            <a onclick="loginForm(2)">Register</a>
                             <hr>
                             <a href="{{ route('ahost') }}">Become a Host</a>
                             <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
