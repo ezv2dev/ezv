@@ -4611,7 +4611,7 @@ input::placeholder {
     right: 10px;
     top: 10px;
     position: absolute;
-    z-index: 99;
+    z-index: 44;
 }
 
 .villa-list-video-container {
