@@ -489,16 +489,18 @@
                                         @endif
                                     @endauth
                                 </p>
-                                @foreach ($hotelHasCategory->take(3) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">
-                                        {{ $item->hotelCategory->name }}
-                                    </span>
-                                @endforeach
-                                @if ($hotelHasCategory->count() > 3)
-                                    <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
-                                        onclick="view_subcategory()">{{ __('user_page.More') }}</button>
-                                @endif
+                                <div id="displayCategoryMobile">
+                                    @foreach ($hotelHasCategory->take(3) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">
+                                            {{ $item->hotelCategory->name }}
+                                        </span>
+                                    @endforeach
+                                    @if ($hotelHasCategory->count() > 3)
+                                        <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
+                                            onclick="view_subcategory()">{{ __('user_page.More') }}</button>
+                                    @endif
+                                </div>
                                 {{-- <p>
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -2224,107 +2226,104 @@
                         @if (Auth::user()->role_id != 3)
                             @if ($hotel[0]->userReview)
                                 <section id="user-review" class="section-2" style="margin-left: 0px;">
-                                    <div class="about-place-block">
-                                        <div class="d-flex justify-content-left">
-                                            <h2>{{ __('user_page.Your Review') }}</h2>
-                                            <span>
-                                                <form action="{{ route('hotel_review_delete') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id_hotel"
-                                                        value="{{ $hotel[0]->id_hotel }}" required>
-                                                    <input type="hidden" name="id_review"
-                                                        value="{{ $hotel[0]->userReview->id_review }}" required>
-                                                    <button class="delete-profile" type="submit"
-                                                        style="background-color: white;">
-                                                        <i class="fa fa-trash mt-2"
-                                                            style="color:#ff7400; margin-left: 25px; font-size: 20px"
-                                                            data-bs-toggle="popover" data-bs-animation="true"
-                                                            data-bs-placement="bottom"
-                                                            title="{{ __('user_page.Delete') }}"></i></button>
-                                                </form>
-                                            </span>
-                                        </div>
-                                        <div class="row">
-                                            @if ($hotel[0]->userReview->comment)
-                                                <div class="col-12">
-                                                    <div class="col-6 d-flex">
-                                                        <div class="col-6">
-                                                            {{ __('user_page.Comment') }}
-                                                        </div>
-                                                        <div class="col-6"
-                                                            style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
-                                                            {{ $hotel[0]->userReview->comment }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div class="col-6">
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Cleanliness') }}
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <div class="liner">
-                                                            <span class="liner-bar"
-                                                                style="width: {{ $hotel[0]->userReview->cleanliness * 20 }}%"></span>
-                                                        </div>
-                                                        {{ $hotel[0]->userReview->cleanliness }}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Check In') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner">
-                                                            <span class="liner-bar"
-                                                                style="width: {{ $hotel[0]->userReview->check_in * 20 }}%"></span>
-                                                        </div>
-                                                        {{ $hotel[0]->userReview->check_in }}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Value') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner">
-                                                            <span class="liner-bar"
-                                                                style="width: {{ $hotel[0]->userReview->value * 20 }}%"></span>
-                                                        </div>
-                                                        {{ $hotel[0]->userReview->value }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Service') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner">
-                                                            <span class="liner-bar"
-                                                                style="width: {{ $hotel[0]->userReview->service * 20 }}%"></span>
-                                                        </div>
-                                                        {{ $hotel[0]->userReview->service }}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-6">
-                                                        {{ __('user_page.Location') }}
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="liner">
-                                                            <span class="liner-bar"
-                                                                style="width: {{ $hotel[0]->userReview->location * 20 }}%"></span>
-                                                        </div>
-                                                        {{ $hotel[0]->userReview->location }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
+                                    <div class="d-flex justify-content-left">
+                                        <h2>{{ __('user_page.Your Review') }}</h2>
+                                        <span>
+                                            <form action="{{ route('hotel_review_delete') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_hotel"
+                                                    value="{{ $hotel[0]->id_hotel }}" required>
+                                                <input type="hidden" name="id_review"
+                                                    value="{{ $hotel[0]->userReview->id_review }}" required>
+                                                <button class="delete-profile" type="submit"
+                                                    style="background-color: white;">
+                                                    <i class="fa fa-trash mt-2"
+                                                        style="color:#ff7400; margin-left: 25px; font-size: 20px"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Delete') }}"></i></button>
+                                            </form>
+                                        </span>
                                     </div>
+                                    <div class="row">
+                                        @if ($hotel[0]->userReview->comment)
+                                            <div class="col-12">
+                                                <div class="col-12 col-lg-6 d-flex">
+                                                    <div class="col-6">
+                                                        {{ __('user_page.Comment') }}
+                                                    </div>
+                                                    <div class="col-6 review-comment-text">
+                                                        {{ $hotel[0]->userReview->comment }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="col-12 col-lg-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Cleanliness') }}
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $hotel[0]->userReview->cleanliness * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $hotel[0]->userReview->cleanliness }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Check In') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $hotel[0]->userReview->check_in * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $hotel[0]->userReview->check_in }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Value') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $hotel[0]->userReview->value * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $hotel[0]->userReview->value }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Service') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $hotel[0]->userReview->service * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $hotel[0]->userReview->service }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Location') }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $hotel[0]->userReview->location * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $hotel[0]->userReview->location }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </section>
                             @else
                                 {{-- END STYLE FOR RATING STAR --}}

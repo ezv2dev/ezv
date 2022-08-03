@@ -347,7 +347,7 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $restaurant->open_time }}"
@@ -448,7 +448,7 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center range-edit-price">
                                                     <div class="col-auto">
                                                         <select name="id_type" id="restaurant-type-input"
                                                             class="form-control">
@@ -749,7 +749,7 @@
                                                 @method('PATCH') --}}
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <div class="form-group d-flex justify-content-center align-items-center">
+                                        <div class="form-group d-flex justify-content-start align-items-center">
                                             <div class="col-auto">
                                                 <select name="id_type" id="restaurant-type-input-mobile"
                                                     class="form-control">
@@ -1587,12 +1587,12 @@
                                                                 {{ __('user_page.Bedroom') }},
                                                                 {{ $popular->bathroom }}
                                                                 {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
+                                                            {{-- <p style="color: #000;">
                                                                 @foreach ($popular->amenities as $item)
                                                                     <i class="fa fa-{{ $item->icon }}"></i>
                                                                 @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
+                                                                <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i>
+                                                            </p> --}}
                                                             <!-- Description max 100 character -->
                                                             <p style="text-align: justify;">
                                                                 @if (!empty($popular->description))
@@ -1605,13 +1605,13 @@
                                                         </div>
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
-                                                                @if (isset($_COOKIE['sCheck_in']) && isset($_COOKIE['sCheck_out']))
+                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != "")
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ $get_check_in }}</b> to
-                                                                        <b>{{ $get_check_out }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
@@ -1970,18 +1970,17 @@
                                     <div class="row">
                                         @if ($restaurant->userReview->comment)
                                             <div class="col-12">
-                                                <div class="col-6 d-flex">
+                                                <div class="col-12 col-lg-6 d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-6"
-                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                    <div class="col-6 review-comment-text">
                                                         {{ $restaurant->userReview->comment }}
                                                     </div>
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="col-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="d-flex">
                                                 <div class="col-6">
                                                     {{ __('user_page.Food') }}
@@ -2007,7 +2006,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="d-flex">
                                                 <div class="col-6">
                                                     {{ __('user_page.Value') }}

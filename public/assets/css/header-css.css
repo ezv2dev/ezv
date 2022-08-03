@@ -318,7 +318,8 @@ i.fa-solid.fa-bars {
 
 .form-control:focus {
     background-color: rgba(255, 255, 255, 0) !important;
-    box-shadow: none !important;
+    /* box-shadow: none !important; */
+    box-shadow: none;
 }
 
 .cuisine-popup {
@@ -506,7 +507,7 @@ input:checked + .switch-background:active::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, -50%); 
+    transform:translate(-50%, -50%);
     width: 18px;
     height: 18px;
     content: url(../../assets/icon/menu/sun.svg);
@@ -1566,4 +1567,30 @@ input:checked + .switch-background:active::before {
     top: 34px;
     left: 70px;
     font-weight: 400 !important;
+}
+#parentBar {
+    position: relative;
+    left: 25%;
+}
+@media only screen and (min-width: 1025px) and (max-width: 1125px) {
+    #parentBar {
+       left: 12%;
+    }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #parentBar {
+       left: 10%;
+    }
+    /* #change_display_block {
+        margin-left: 95px;
+    } */
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    #change_display_block .nav-link-container {
+        margin-left: 50px
+    }
+    .nav-link-form-detail p {
+        min-height: 40px !important;
+    }
 }

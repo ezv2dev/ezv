@@ -261,9 +261,6 @@
     #price .table-body {
         padding-left: 35px !important;
     }
-    #amenities {
-        padding-left: 25px !important;
-    }
     #first-detail-content {
         padding-left: 25px !important;
         padding-right: 25px !important;
@@ -286,9 +283,6 @@
     }
     #description .pd-tlr-10 {
         margin-right: 12px !important;
-    }
-    .prices h2 {
-        padding-left: 10px;
     }
 }
 

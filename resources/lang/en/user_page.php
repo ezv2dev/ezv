@@ -218,6 +218,7 @@ return [
     'Location' => 'Location',
     'Where are you going?' => 'Where are you going?',
     'location not found' => 'location not found',
+    'Check Availability' => 'Check Availability',
     'Check in' => 'Check in',
     'Check out' => 'Check out',
     'Add dates' => 'Add dates',
@@ -242,7 +243,7 @@ return [
     'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.' => 'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.',
     'Learn more' => 'Learn more',
 
-    'The Best Way To Find Home, Hotel, Food, And Wow' => 'The Best Way To Find Home, Hotel, Food, And Wow',
+    'The Best Way To Find Accomodation, Restaurant, And Things To Do' => 'The Best Way To Find Accomodation, Restaurant, And Things To Do',
     "Let's Go" => "Let's Go",
     'Download The App' => 'Download The App',
     'Unlock all the features today' => 'Unlock all the features today',
@@ -482,6 +483,7 @@ return [
     "Input Max Pet" => "Input Max Pet",
     "Deposit Price" => "Deposit Price",
     "Input Price per Person" => "Input Price per Person",
+    "Input Deposit Price" => "Input Deposit Price",
     'There is no amenities' => 'There is no amenities',
 
     'Edit Name' => 'Edit Name',
@@ -506,7 +508,7 @@ return [
 
     "data not found" => "data not found",
 
-    "Popular Stays Nearby" => "Popular Stays Nearby",
+    "Popular Stays Nearby" => "Popular Homes Nearby",
     "Events are allowed" => "Events are allowed"
     // {{ __('user_page.Map') }}
     // user_page.

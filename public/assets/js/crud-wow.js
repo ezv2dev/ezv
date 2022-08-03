@@ -829,139 +829,217 @@ $("#modal-add_price")
 //     });
 // });
 
+$('#name').keyup(function (e) {
+    $('#name').removeClass('is-invalid')
+    $('#err-xname').hide();
+});
+$('#xprice').keyup(function (e) {
+    $('#xprice').removeClass('is-invalid')
+    $('#err-price').hide();
+});
+$('#xdescription').keyup(function (e) {
+    $('#xdescription').removeClass('is-invalid')
+    $('#err-descprc').hide();
+});
+$('#startDate').change(function (e) {
+    $('#startDate').removeClass('is-invalid')
+    $('#err-sdateprc').hide();
+});
+$('#endDate').change(function (e) {
+    $('#endDate').removeClass('is-invalid')
+    $('#err-edateprc').hide();
+});
+$('#imgPrice').change(function (e) {
+    $('#file-upload1').children('.image-box').css('border-color', '')
+    $('#err-imgprc').hide();
+});
+
 $("#addPriceForm").submit(function(e) {
-    e.preventDefault();
-    let btn = document.getElementById("btnSavePrice");
-    btn.textContent = "Saving Price...";
-    btn.classList.add("disabled");
+    let error = 0;
+    if(!$('#name').val()) {
+        $('#name').addClass('is-invalid')
+        $('#err-xname').show();
+        error = 1;
+    } else {
+        $('#name').removeClass('is-invalid')
+        $('#err-xname').hide();
+    }
+    if(!$('#xprice').val()) {
+        $('#xprice').addClass('is-invalid')
+        $('#err-price').show();
+        error = 1;
+    } else {
+        $('#xprice').removeClass('is-invalid')
+        $('#err-price').hide();
+    }
+    if(!$('#startDate').val()) {
+        $('#startDate').addClass('is-invalid')
+        $('#err-sdateprc').show();
+        error = 1;
+    } else {
+        $('#startDate').removeClass('is-invalid')
+        $('#err-sdateprc').hide();
+    }
+    if(!$('#endDate').val()) {
+        $('#endDate').addClass('is-invalid')
+        $('#err-edateprc').show();
+        error = 1;
+    } else {
+        $('#endDate').removeClass('is-invalid')
+        $('#err-edateprc').hide();
+    }
+    if(!$('#xdescription').val()) {
+        $('#xdescription').addClass('is-invalid')
+        $('#err-descprc').show();
+        error = 1;
+    } else {
+        $('#xdescription').removeClass('is-invalid')
+        $('#err-descprc').hide();
+    }
+    if(document.getElementById("imgPrice").files.length == 0 ){
+        $('#file-upload1').children('.image-box').css('border-color', '#e04f1a')
+        $('#err-imgprc').show();
+        error = 1;
+    } else {
+        $('#file-upload1').children('.image-box').css('border-color', '')
+        $('#err-imgprc').hide();
+    }
+    if(error == 1) {
+        e.preventDefault();
+    } else {
+        e.preventDefault();
+        let btn = document.getElementById("btnSavePrice");
+        btn.textContent = "Saving Price...";
+        btn.classList.add("disabled");
 
-    var formData = new FormData(this);
+        var formData = new FormData(this);
 
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/things-to-do/price/store",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-        enctype: "multipart/form-data",
-        dataType: "json",
-        success: function(response) {
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/things-to-do/price/store",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            dataType: "json",
+            success: function(response) {
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            const path = "/foto/activity/";
-            const uid = response.uid.uid;
-            const slash = "/";
-            const lowerCaseUid = uid.toLowerCase();
+                const path = "/foto/activity/";
+                const uid = response.uid.uid;
+                const slash = "/";
+                const lowerCaseUid = uid.toLowerCase();
 
-            var start_date = new Date(response.data.start_date);
-            var end_date = new Date(response.data.end_date);
+                var start_date = new Date(response.data.start_date);
+                var end_date = new Date(response.data.end_date);
 
-            let content = "";
+                let content = "";
 
-            content += `<div class="col-12 row p-3 mb-4 ms-0 me-0" style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
-                            <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-0">
-                                <div class="content list-image-content">
-                                    <input type="hidden" value="" id="id_price" name="id_price">
-                                    <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
-                                        data-dots="false" data-arrows="true">`;
-            content += `<a href="/wow/price/${response.data.id_price}/details" target="_blank" class="grid-image-container">
-                            <img class="brd-radius img-fluid grid-image lozad" style="height: 200px; display: block;"`;
-            content += 'src="' + path + lowerCaseUid + slash + response.data.foto + '" alt="">';
-            content += "</a>";
+                content += `<div class="col-12 row p-3 mb-4 ms-0 me-0" style="box-shadow: 1px 1px 15px rgb(0 0 0 / 17%); background-color: white; border-radius: 15px;">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-0">
+                                    <div class="content list-image-content">
+                                        <input type="hidden" value="" id="id_price" name="id_price">
+                                        <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
+                                            data-dots="false" data-arrows="true">`;
+                content += `<a href="/wow/price/${response.data.id_price}/details" target="_blank" class="grid-image-container">
+                                <img class="brd-radius img-fluid grid-image lozad" style="height: 200px; display: block;"`;
+                content += 'src="' + path + lowerCaseUid + slash + response.data.foto + '" alt="">';
+                content += "</a>";
 
-            content += "</div> </div> </div>";
+                content += "</div> </div> </div>";
 
-            content += `<div class="col-12 col-md-5 col-lg-5 col-xl-5 px-3">
-                        <div class="col-12">
-                            <h4 class="mb-0">
-                                <p class="mb-0">
-                                <a href="">
-                                    <span
-                                        clas="translate-text-group-items">${response.data.name}</span>
-                                </a>
-                                </p>
-                            </h4>
-                        </div>
-                        <div class="col-12">
-                            <p class="desc-hotel mb-0">`;
-
-            content += `${limit(response.data.description, 200)}
-                        </p>
+                content += `<div class="col-12 col-md-5 col-lg-5 col-xl-5 px-3">
+                            <div class="col-12">
+                                <h4 class="mb-0">
+                                    <p class="mb-0">
+                                    <a href="">
+                                        <span
+                                            clas="translate-text-group-items">${response.data.name}</span>
+                                    </a>
+                                    </p>
+                                </h4>
                             </div>
                             <div class="col-12">
-                                <p><b>${start_date.toDateString()}</b> -
-                                    <b>${end_date.toDateString()}</b>
-                                </p>
+                                <p class="desc-hotel mb-0">`;
+
+                content += `${limit(response.data.description, 200)}
+                            </p>
+                                </div>
+                                <div class="col-12">
+                                    <p><b>${start_date.toDateString()}</b> -
+                                        <b>${end_date.toDateString()}</b>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+                                <div class="col-12 text-center">
+                                    <p class="mb-2">`;
+
+                content += "IDR " + response.data.price.toLocaleString();
+
+                content += `</p>
+                                <a onclick="open_detail_price()" target="_blank"
+                                    style="display: inline-block; width: 50%;"
+                                    class="btn btn-primary table-room-button">Select</a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
-                            <div class="col-12 text-center">
-                                <p class="mb-2">`;
-
-            content += "IDR " + response.data.price.toLocaleString();
-
-            content += `</p>
-                            <a onclick="open_detail_price()" target="_blank"
-                                style="display: inline-block; width: 50%;"
-                                class="btn btn-primary table-room-button">Select</a>
-                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            let lengthContent = $("#price-content").find(
-                ".list-image-content"
-            ).length;
+                let lengthContent = $("#price-content").find(
+                    ".list-image-content"
+                ).length;
 
-            if (lengthContent == 0) {
-                $("#price-content").html("");
-            }
+                if (lengthContent == 0) {
+                    $("#price-content").html("");
+                }
 
-            $("#price-content").append(content);
+                $("#price-content").append(content);
 
-            $("#modal-add_price").find("input[name='id_activity']").val("");
-            $("#modal-add_price").find("input[name='name']").val("");
-            $("#modal-add_price").find("input[name='price']").val("");
-            $("#modal-add_price").find("input[name='start_date']").val("");
-            $("#modal-add_price").find("input[name='end_date']").val("");
-            $("#modal-add_price").find("input[name='description']").val("");
-            $("#modal-add_price").find("input[name='image']").val("");
-            $("#modal-add_price").find("img").attr("src", "");
+                $("#modal-add_price").find("input[name='id_activity']").val("");
+                $("#modal-add_price").find("input[name='name']").val("");
+                $("#modal-add_price").find("input[name='price']").val("");
+                $("#modal-add_price").find("input[name='start_date']").val("");
+                $("#modal-add_price").find("input[name='end_date']").val("");
+                $("#modal-add_price").find("input[name='description']").val("");
+                $("#modal-add_price").find("input[name='image']").val("");
+                $("#modal-add_price").find("img").attr("src", "");
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
 
-            $("#modal-add_price").modal("hide");
-        },
-        error: function(jqXHR, exception) {
-            if (jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                $("#modal-add_price").modal("hide");
+            },
+            error: function(jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
 
-            btn.innerHTML = "<i class='fa fa-check'></i> Save";
-            btn.classList.remove("disabled");
-        },
-    });
+                btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                btn.classList.remove("disabled");
+            },
+        });
+    }
 });
 
 function limit(string = "", limit = 0) {

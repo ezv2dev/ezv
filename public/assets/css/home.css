@@ -2477,3 +2477,68 @@ span.flatpickr-weekday {
     content: '\f204';
     font-weight: 900;
 } */
+
+/*Dropdown users stile*/
+
+.dropbtn {
+    margin-right: 0px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ff7400 !important;
+}
+
+.dropbtn:hover {
+    color: #000000;
+    --tw-shadow: inset 0 0px 18px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition: 0.3s;
+}
+
+.dropbtn::after {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    content: "\f007";
+    color: #fff;
+    font-size: 18px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #ff7400;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 225px;
+    overflow: auto;
+    z-index: 1;
+    right: 0;
+    top: 70px;
+    border-radius: 15px;
+    border: solid 2px #ff7400;
+    padding: 10px 0;
+}
+
+.dropdown-content a {
+    color: #282828;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+}
+
+.dropdown a:hover {
+    color: #ff7400;
+}
+
+.show {
+    display: block;
+}

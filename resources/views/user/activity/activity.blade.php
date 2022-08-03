@@ -91,7 +91,7 @@
         $condition_restaurant = Route::is('restaurant');
         $condition_hotel = Route::is('hotel') || Route::is('room_hotel');
         $condition_things_to_do = Route::is('activity') || Route::is('activity_price_index');
-        
+
         if (isset($_COOKIE['sCheck_in'])) {
             $get_check_in = $_COOKIE['sCheck_in'];
             $get_check_out = $_COOKIE['sCheck_out'];
@@ -99,16 +99,16 @@
             $get_check_in = null;
             $get_check_out = null;
         }
-        
+
         function dateDiff($get_check_in, $get_check_out)
         {
             $date1_ts = strtotime($get_check_in);
             $date2_ts = strtotime($get_check_out);
             $datediff = $date2_ts - $date1_ts;
-        
+
             return round($datediff / (60 * 60 * 24));
         }
-        
+
         $dateDiffe = dateDiff($get_check_in, $get_check_out);
     @endphp
 
@@ -349,7 +349,7 @@
                                             <form action="javascript:void(0)" onsubmit="saveTimeActivity()">
                                                 <input type="hidden" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $activity->open_time }}"
@@ -1091,7 +1091,7 @@
                     @endauth
                     {{-- END ADD GALLERY --}}
                     {{-- PRICES --}}
-                    <section id="price" class="section-2">
+                    <section id="price" class="section-2 px-sm-12p">
                         <div class="pd-tlr-10">
                             <div class="d-flex prices">
                                 <hr>
@@ -1203,7 +1203,7 @@
 
                     </section>
 
-                    <section id="description" class="section-2">
+                    <section id="description" class="section-2 px-sm-12p">
                         <hr>
                         {{-- Description --}}
                         <div class="pd-tlr-10">
@@ -1283,7 +1283,7 @@
                             @endauth
                         </div>
                     </section>
-                    <section id="amenities" class="section-2">
+                    <section id="amenities" class="section-2 px-sm-14p">
                         <div class="row-grid-amenities">
                             <hr>
                             <div>
@@ -1422,7 +1422,7 @@
                     </div>
                     <!-- Random Villa Slider Start -->
                     <div class="popular-block-activity">
-                        <h4>Popular Villa<h4>
+                        <h4>{{ __('user_page.Popular Stays Nearby') }}<h4>
                                 <div class="SlickCarousel3">
                                     @forelse ($villaRandom as $popular)
                                         <!-- Start Slider Items -->
@@ -1444,12 +1444,12 @@
                                                                 {{ __('user_page.Bedroom') }},
                                                                 {{ $popular->bathroom }}
                                                                 {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
+                                                            {{-- <p style="color: #000;">
                                                                 @foreach ($popular->amenities as $item)
                                                                     <i class="fa fa-{{ $item->icon }}"></i>
                                                                 @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
+                                                                <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i>
+                                                            </p> --}}
                                                             <!-- Description max 100 character -->
                                                             <p style="text-align: justify;">
                                                                 {{ Str::limit(Translate::translate($popular->description), 150, ' ...') }}
@@ -1457,13 +1457,13 @@
                                                         </div>
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
-                                                                @if (isset($_COOKIE['sCheck_in']) && isset($_COOKIE['sCheck_out']))
+                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != "")
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ $get_check_in }} </b> to
-                                                                        <b>{{ $get_check_out }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
@@ -1753,8 +1753,7 @@
                     @can('review_create')
                         @if ($activity->userReview)
                             <section id="user-review" class="section-2">
-                                <div style="padding-top:10px; padding-left:10px; padding-right:10px;">
-
+                                <div style="padding-top:10px; padding-bottom: 10px;">
                                     <div class="d-flex justify-content-left">
                                         <h2>{{ __('user_page.Your Review') }}</h2>
                                         <span>
@@ -1779,27 +1778,28 @@
                                     <div class="row">
                                         @if ($activity->userReview->comment)
                                             <div class="col-12">
-                                                <div class="col-6 d-flex">
+                                                <div class="col-12 col-lg-6 d-flex">
                                                     <div class="col-6">
                                                         {{ __('user_page.Comment') }}
                                                     </div>
-                                                    <div class="col-6"
-                                                        style="font-size: 22px; font-family: 'Poppins'; font-weight: 600;">
+                                                    <div class="col-6 review-comment-text">
                                                         {{ $activity->userReview->comment }}
                                                     </div>
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="col-6 d-flex">
-                                            <div class="col-6">
-                                                {{ __('user_page.Experience') }}
-                                            </div>
-                                            <div class="col-6 ">
-                                                <div class="liner">
-                                                    <span class="liner-bar"
-                                                        style="width: {{ $activity->userReview->experience * 20 }}%"></span>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                    {{ __('user_page.Experience') }}
                                                 </div>
-                                                {{ $activity->userReview->experience }}
+                                                <div class="col-6 ">
+                                                    <div class="liner">
+                                                        <span class="liner-bar"
+                                                            style="width: {{ $activity->userReview->experience * 20 }}%"></span>
+                                                    </div>
+                                                    {{ $activity->userReview->experience }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

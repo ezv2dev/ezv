@@ -667,12 +667,13 @@
                                             value="{{ !empty($villaExtraPet->max) ? $villaExtraPet->max : '' }}">
                                         <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mpet') }}</small>
                                     </div>
-                                    <div class="col-12 d-none" id="depositPrice">
+                                    <div class="col-12 {{ !empty($villaExtraPet->deposit) == 1 ? 'd-block' : 'd-none' }}" id="depositPrice">
                                         <label>{{ __('user_page.Deposit Price') }}</label>
                                         <input type="number" class="form-control" id="price_extra_pet"
                                             name="price_extra_pet"
-                                            placeholder="{{ __('user_page.Input Price per Person') }}"
+                                            placeholder="{{ __('user_page.Input Deposit Price') }}"
                                             value="{{ !empty($villaExtraPet->price_deposit) ? $villaExtraPet->price_deposit : '' }}">
+                                        <small id="err-expet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_expet') }}</small>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center">
@@ -843,33 +844,63 @@
             $('#max_pet').removeClass('is-invalid');
             $('#err-maxpet').hide();
         });
+        $('#price_extra_pet').keyup(function (e) {
+            $('#price_extra_pet').removeClass('is-invalid');
+            $('#err-expet').hide();
+        });
         $('#edit-extra').submit(function(e) {
             let error = 0;
             if(!$('#max_guest').val()) {
                 $('#max_guest').addClass('is-invalid');
                 $('#err-mxguest').show();
                 error = 1;
+            } else {
+                $('#max_guest').removeClass('is-invalid');
+                $('#err-mxguest').hide();
             }
             if(!$('#price_extra_guest').val()) {
                 $('#price_extra_guest').addClass('is-invalid');
                 $('#err-exguest').show();
                 error = 1;
+            } else {
+                $('#price_extra_guest').removeClass('is-invalid');
+                $('#err-exguest').hide();
             }
             if(!$('#max_bed').val()) {
                 $('#max_bed').addClass('is-invalid');
                 $('#err-maxbed').show();
                 error = 1;
+            } else {
+                $('#max_bed').removeClass('is-invalid');
+                $('#err-maxbed').hide();
             }
             if(!$('#price_extra_bed').val()) {
                 $('#price_extra_bed').addClass('is-invalid');
                 $('#err-exbed').show();
                 error = 1;
+            } else {
+                $('#price_extra_bed').removeClass('is-invalid');
+                $('#err-exbed').hide();
             }
             if(!$('#max_pet').val()) {
                 $('#max_pet').addClass('is-invalid');
                 $('#err-maxpet').show();
                 error = 1;
+            } else {
+                $('#max_pet').removeClass('is-invalid');
+                $('#err-maxpet').hide();
             }
+            if($('#depositPrice').hasClass('d-block')) {
+                if(!$('#price_extra_pet').val()) {
+                    $('#price_extra_pet').addClass('is-invalid');
+                    $('#err-expet').show();
+                    error = 1;
+                } else {
+                    $('#price_extra_pet').removeClass('is-invalid');
+                    $('#err-expet').hide();
+                }
+            }
+
             if(error == 1) {
                 e.preventDefault();
             } else {

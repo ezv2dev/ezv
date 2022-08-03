@@ -577,9 +577,9 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="tex-13">Previous</small>
+                                            <small class="tex-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -878,9 +878,9 @@
                                     <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
 
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="tex-13">Previous</small>
+                                            <small class="tex-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-next" disabled="true" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -901,7 +901,7 @@
                 long: villaLocations[i].longitude
             }, {
                 text: villaLocations[i].price_with_exchange_unit,
-                className: 'text-black fw-bold px-1 py-1 rounded-pill bg-white'
+                className: 'text-black fw-bold rounded-pill-map bg-white'
             });
 
             // show & highlight villa when click
@@ -1001,7 +1001,7 @@
         if(hotelLocations.video && hotelLocations.video.length != 0){
             const lastIndex = hotelLocations.video.length-1;
             const videoName = hotelLocations.video[lastIndex].name;
-            const url = `${imageLink}/${videoName}#1.0`;
+            const url = `${videoLink}/${videoName}#1.0`;
             video = `
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
@@ -1147,9 +1147,9 @@
                                         </a>
                                     </div>
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1452,9 +1452,9 @@
                                         </a>
                                     </div>
                                     <div class="d-flex justify-content-end col-6">
-                                        <div class="me-1 d-flex align-items-center flex-column">
+                                        <div class="me-2 d-flex align-items-center flex-column">
                                             <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Previous</small>
+                                            <small class="text-13">Prev</small>
                                         </div>
                                         <div class="d-flex align-items-center flex-column">
                                             <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1700,7 +1700,7 @@
     function setPrimaryMarker(data, markerType) {
         var markerIcon = null;
         if(markerType == 'villa') {
-            markerIcon = `{{ asset('assets/icon/map/villa_active.png') }}`;
+            markerIcon = `{{ asset('assets/icon/map/transparent.png') }}`;
             primaryContent = addCustomContentVilla(data);
         } else if (markerType == 'restaurant') {
             markerIcon = `{{ asset('assets/icon/map/restaurant_active.png') }}`;
@@ -1733,7 +1733,7 @@
                     map: map,
                     label: {
                         text: data.price_with_exchange_unit,
-                        className: 'text-white fw-bold px-1 py-1 rounded-pill bg-orange'
+                        className: 'text-white fw-bold rounded-pill-map bg-orange'
                     },
                     icon: {
                         url: markerIcon,
@@ -1776,7 +1776,7 @@
             for (let index = 0; index < markerVilla.length; index++) {
                 markerVilla[index].setLabel({
                     text: markerVilla[index].label.text,
-                    className: 'text-black fw-bold px-1 py-1 rounded-pill bg-white'
+                    className: 'text-black fw-bold rounded-pill-map bg-white'
                 });
                 markerVilla[index].setMap(map);
             }
@@ -2044,7 +2044,7 @@
                                 try {
                                     markerVilla[j].setLabel({
                                         text: markerVilla[j].label.text,
-                                        className: 'text-black fw-bold px-1 py-1 rounded-pill bg-clicked'
+                                        className: 'text-black fw-bold rounded-pill-map bg-clicked'
                                     });
                                 } catch (error) {}
                             } else {
@@ -2738,7 +2738,7 @@
                                     data-src-active="{{asset('assets/icon/map/villa_active.png')}}"
                                     data-src="{{asset('assets/icon/map/villa.png')}}"
                                     alt="villa-icon">
-                                    <p class="mb-0">Homes</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Homes</p>
                             </a>
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-restaurant" data-indicator="true" onclick="filter_map('restaurant')">
@@ -2747,7 +2747,7 @@
                                     data-src-active="{{asset('assets/icon/map/restaurant_active.png')}}"
                                     data-src="{{asset('assets/icon/map/restaurant.png')}}"
                                     alt="restaurant-icon">
-                                    <p class="mb-0">Food</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Food</p>
                             </a>
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
@@ -2756,7 +2756,7 @@
                                     data-src-active="{{asset('assets/icon/map/hotel_active.png')}}"
                                     data-src="{{asset('assets/icon/map/hotel.png')}}"
                                     alt="hotel-icon">
-                                    <p class="mb-0">Hotel</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Hotel</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-activity" data-indicator="false" onclick="filter_map('activity')">
                                 <img
@@ -2764,7 +2764,7 @@
                                     data-src-active="{{asset('assets/icon/map/activity_active.png')}}"
                                     data-src="{{asset('assets/icon/map/activity.png')}}"
                                     alt="activity-icon">
-                                    <p class="mb-0">WoW</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">WoW</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
                                 <img
@@ -2772,7 +2772,7 @@
                                     data-src-active="{{asset('assets/icon/menu/search.svg')}}"
                                     data-src="{{asset('assets/icon/menu/search.svg')}}"
                                     alt="search-icon">
-                                    <p class="mb-0">Search</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Search</p>
                             </a>
                         </div>
                     </div>

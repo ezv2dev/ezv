@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal fade" id="modal-show_review" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-noscroll" role="document">
         <div class="modal-content">
             <div class="modal-header p-3">
                 <h5 class="modal-title">Review</h5>
