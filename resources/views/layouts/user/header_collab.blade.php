@@ -756,13 +756,113 @@
                 @endif
             </a>
 
-            <a href="{{ route('login') }}" class="btn btn-fill border-0 navbar-gap"
+            <!-- <a href="{{ route('login') }}" class="btn btn-fill border-0 navbar-gap"
                 style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                 <i class="fa-solid fa-user"></i>
-            </a>
+            </a> -->
+            <div class="dropdown">
+                <button onclick="myFunction1()" class="dropbtn btn border-0 navbar-gap"></button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+                    <hr>
+                    <a href="{{ route('ahost') }}">Become a Host</a>
+                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                    <a href="{{ route('faq') }}">FAQ</a>
+                </div>
+            </div>
 
             @endauth
         </div>
+
+        <style>
+                    /*Dropdown users stile*/
+
+        .dropbtn {
+            margin-right: 0px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ff7400 !important;
+            padding: 17px;
+        }
+
+        .dropbtn:hover {
+            --tw-shadow: none;
+            box-shadow: none;
+            transition: none;
+        }
+
+        .dropbtn::after {
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 900; 
+            content: "\f007";
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #ff7400;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 225px;
+            overflow: auto;
+            z-index: 1;
+            right: 0;
+            top: 70px;
+            border-radius: 15px;
+            border: solid 2px #ff7400;
+            padding: 10px 0;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: #282828;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 16px;
+        }
+
+        .dropdown a:hover {
+            color: #ff7400;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+        <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction1() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                }
+            }
+        }
+        </script>
 
         <script>
             var coll = document.getElementsByClassName("collapsible_wow");

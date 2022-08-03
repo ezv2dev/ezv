@@ -1885,7 +1885,7 @@
                             </div>
                             <div class="col-12 col-lg-2 px-0 px-lg-2">
                                 <div class="total-container">
-                                    <h6 class="mb-2">IDR {{ number_format($item2->price) }}</h6>
+                                    {{-- <h6 class="mb-2">IDR {{ number_format($item2->price) }}</h6> --}}
                                     <button class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;">
                                         Reserve Now
@@ -3803,7 +3803,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bathroom') . '</h5></div>';
                         foreach ($bathroom as $item) {
@@ -3815,7 +3815,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Bedroom') . '</h5></div>';
                         foreach ($bedroom as $item) {
@@ -3827,7 +3827,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Kitchen') . '</h5></div>';
                         foreach ($kitchen as $item) {
@@ -3839,7 +3839,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities row-border-bottom padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Safety') . '</h5></div>';
                         foreach ($safety as $item) {
@@ -3851,7 +3851,7 @@
                         }
                         echo '</div>';
                         echo '';
-                        
+
                         echo '<div class="row-modal-amenities padding-top-bottom-18px">';
                         echo '<div class="col-md-12"><h5 class="mb-3">' . __('user_page.Service') . '</h5></div>';
                         foreach ($service as $item) {
