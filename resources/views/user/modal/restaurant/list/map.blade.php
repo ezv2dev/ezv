@@ -1001,7 +1001,7 @@
         if(hotelLocations.video && hotelLocations.video.length != 0){
             const lastIndex = hotelLocations.video.length-1;
             const videoName = hotelLocations.video[lastIndex].name;
-            const url = `${imageLink}/${videoName}#1.0`;
+            const url = `${videoLink}/${videoName}#1.0`;
             video = `
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
