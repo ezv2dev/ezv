@@ -3649,6 +3649,12 @@ a.orange-hover {
     transition: 0.3s;
 }
 
+.rounded-pill-map{
+    padding: 6px 7px !important;
+    border-radius: 50px;
+    box-shadow: rgb(0 0 0 / 4%) 0px 0px 0px 1px, rgb(0 0 0 / 18%) 0px 2px 4px;
+}
+
 /* .navbar-gap.d-block.mb-2::before {
     font-family: 'Font Awesome 5 Free';
     content: '\f204';

@@ -910,7 +910,7 @@
                 long: villaLocations[i].longitude
             }, {
                 text: villaLocations[i].price_with_exchange_unit,
-                className: 'text-black fw-bold px-1 py-1 rounded-pill bg-white'
+                className: 'text-black fw-bold rounded-pill-map bg-white'
             });
 
             // show & highlight villa when click
@@ -1711,7 +1711,7 @@
     function setPrimaryMarker(data, markerType) {
         var markerIcon = null;
         if(markerType == 'villa') {
-            markerIcon = `{{ asset('assets/icon/map/villa_active.png') }}`;
+            markerIcon = `{{ asset('assets/icon/map/transparent.png') }}`;
             primaryContent = addCustomContentVilla(data);
         } else if (markerType == 'restaurant') {
             markerIcon = `{{ asset('assets/icon/map/restaurant_active.png') }}`;
@@ -1744,7 +1744,7 @@
                     map: map,
                     label: {
                         text: data.price_with_exchange_unit,
-                        className: 'text-white fw-bold px-1 py-1 rounded-pill bg-orange'
+                        className: 'text-white fw-bold rounded-pill-map bg-orange'
                     },
                     icon: {
                         url: markerIcon,
@@ -1787,7 +1787,7 @@
             for (let index = 0; index < markerVilla.length; index++) {
                 markerVilla[index].setLabel({
                     text: markerVilla[index].label.text,
-                    className: 'text-black fw-bold px-1 py-1 rounded-pill bg-white'
+                    className: 'text-black fw-bold rounded-pill-map bg-white'
                 });
                 markerVilla[index].setMap(map);
             }
@@ -2055,7 +2055,7 @@
                                 try {
                                     markerVilla[j].setLabel({
                                         text: markerVilla[j].label.text,
-                                        className: 'text-black fw-bold px-1 py-1 rounded-pill bg-clicked'
+                                        className: 'text-black fw-bold rounded-pill-map bg-clicked'
                                     });
                                 } catch (error) {}
                             } else {
