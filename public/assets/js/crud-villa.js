@@ -585,6 +585,7 @@ function editCategoryV(id_villa) {
                 }
 
                 $("#displayCategory").html(content);
+                $("#displayCategoryMobile").html(content);
 
                 if (length > 3) {
                     $("#moreCategory").removeClass("d-none");

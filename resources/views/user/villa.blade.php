@@ -428,12 +428,14 @@
                                         @endif
                                     @endauth
                                 </p>
-                                @foreach ($villaHasCategory->take(3) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">
-                                        {{ $item->villaCategory->name }}
-                                    </span>
-                                @endforeach
+                                <div id="displayCategoryMobile">
+                                    @foreach ($villaHasCategory->take(3) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">
+                                            {{ $item->villaCategory->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         {{-- END TYPE AND DISTANCE FOR MOBILE --}}

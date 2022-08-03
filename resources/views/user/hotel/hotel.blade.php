@@ -489,16 +489,18 @@
                                         @endif
                                     @endauth
                                 </p>
-                                @foreach ($hotelHasCategory->take(3) as $item)
-                                    <span class="badge rounded-pill fw-normal translate-text-group-items"
-                                        style="background-color: #FF7400; margin-right: 5px;">
-                                        {{ $item->hotelCategory->name }}
-                                    </span>
-                                @endforeach
-                                @if ($hotelHasCategory->count() > 3)
-                                    <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
-                                        onclick="view_subcategory()">{{ __('user_page.More') }}</button>
-                                @endif
+                                <div id="displayCategoryMobile">
+                                    @foreach ($hotelHasCategory->take(3) as $item)
+                                        <span class="badge rounded-pill fw-normal translate-text-group-items"
+                                            style="background-color: #FF7400; margin-right: 5px;">
+                                            {{ $item->hotelCategory->name }}
+                                        </span>
+                                    @endforeach
+                                    @if ($hotelHasCategory->count() > 3)
+                                        <button class="btn btn-outline-dark btn-sm rounded hotel-tag-button"
+                                            onclick="view_subcategory()">{{ __('user_page.More') }}</button>
+                                    @endif
+                                </div>
                                 {{-- <p>
                                     @auth
                                         @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)

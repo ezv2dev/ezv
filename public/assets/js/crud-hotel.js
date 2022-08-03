@@ -542,6 +542,7 @@ function editCategoryH(id_hotel) {
                 }
 
                 $("#displayCategory").html(content);
+                $("#displayCategoryMobile").html(content);
 
                 if (length > 3) {
                     $("#moreCategory").removeClass("d-none");
