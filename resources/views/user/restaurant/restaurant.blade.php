@@ -1587,12 +1587,12 @@
                                                                 {{ __('user_page.Bedroom') }},
                                                                 {{ $popular->bathroom }}
                                                                 {{ __('user_page.Bathroom') }}</p>
-                                                            <p style="color: #000;">
+                                                            {{-- <p style="color: #000;">
                                                                 @foreach ($popular->amenities as $item)
                                                                     <i class="fa fa-{{ $item->icon }}"></i>
                                                                 @endforeach
-                                                                {{-- <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i> --}}
-                                                            </p>
+                                                                <i class="fa fa-wifi"></i> <i class="fa fa-phone"></i>
+                                                            </p> --}}
                                                             <!-- Description max 100 character -->
                                                             <p style="text-align: justify;">
                                                                 @if (!empty($popular->description))
