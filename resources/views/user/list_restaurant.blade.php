@@ -314,21 +314,18 @@
                             </a>
                         </div>
                         <div class="skeleton">
-                            @if ($data->price->name == 'Cheap Prices')
-                                <span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true"
-                                    data-bs-placement="bottom"
-                                    title="{{ Translate::translate($data->price->name) }}">$</span>
-                            @elseif ($data->price->name == 'Middle Range')
-                                <span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true"
-                                    data-bs-placement="bottom"
-                                    title="{{ Translate::translate($data->price->name) }}">$$</span>
-                            @elseif ($data->price->name == 'Fine Dining')
-                                <span style="color: #FF7400" data-bs-toggle="popover" data-bs-animation="true"
-                                    data-bs-placement="bottom"
-                                    title="{{ Translate::translate($data->price->name) }}">$$$</span>
-                            @else
-                                <span>{{ __('user_page.no price rate yet') }}</span>
-                            @endif
+                            <span 
+                            @if(in_array($data->price->name, ['Cheap Prices','Middle Range','Fine Dining'])) style="color: #FF7400" @endif>
+                                @if ($data->price->name == 'Cheap Prices')
+                                $
+                                @elseif ($data->price->name == 'Middle Range')
+                                $$
+                                @elseif ($data->price->name == 'Fine Dining')
+                                $$$
+                                @else
+                                {{ __('user_page.no price rate yet') }}
+                                @endif
+                            </span>
                         </div>
                     </div>
                 </div>

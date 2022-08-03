@@ -175,7 +175,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalScrollableTitle">Languages I speak</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetDataSementara()">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetDataChecked()">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -242,26 +242,25 @@
 
     var autocomplete = new google.maps.places.Autocomplete(input);
 
+    // data untuk language
+    // get id from modal language
+    let modalLanguage = [];
+
+    // buat array baru untuk ditampilkan di form berdasarkan modal
+    let data = [];
+
     function addmore()
     {
         $('#languageModal').modal();
+
+        // simpan data awal yang checked ketika buka modal
+        $("input[name='language[]']:checked").each(function () {
+            modalLanguage.push(parseInt($(this).val()));
+        });
     }
-
-
-    //get id from modal language
-    let modalLanguage = [];
-
-    //buat array baru untuk ditampilkan di form berdasarkan modal
-    let data = [];
-
-    // data checked sementara
-    let dataSementara = [];
 
     function addlanguages(input)
     {
-        if(input.checked){
-            if(!dataSementara.includes(input.value)) dataSementara.push(input.value) 
-        }
 
         //get language owner
         // let language = @json($languages);
@@ -303,16 +302,22 @@
 
         // appendLanguage(data);
     }
-
-    function resetDataSementara(){
-        dataSementara.forEach(el => {
-            $('.form-check-input[value="'+el+'"]').prop('checked', false)
+    
+    // ketika batal melakukan perubahan data language, reset sesuai dengan data awal ketika modal language di buka
+    function resetDataChecked(){
+        $('#languageModal .form-check-input').each(function(){
+            if(modalLanguage.includes(parseInt($(this).val()))){
+                $(this).prop('checked', true)
+            }else{
+                $(this).prop('checked', false)
+            }
         })
     }
 
+    // ketika backdrop modal di klik reset data language checked
     $(document).click(function(e){
         if(e.target == $('#languageModal')[0] && $('body').hasClass('modal-open')){
-            resetDataSementara()
+            resetDataChecked()
         }
     })
 

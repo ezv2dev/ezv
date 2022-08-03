@@ -3350,10 +3350,6 @@ input::-webkit-inner-spin-button {
         height: auto !important;
     }
 
-    #map12{
-        flex:auto;
-    }
-
     .map-text-description,
     .map-price-dekstop,
     .map-villa-detail-link{
