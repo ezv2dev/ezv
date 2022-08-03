@@ -2732,7 +2732,7 @@
                                     data-src-active="{{asset('assets/icon/map/villa_active.png')}}"
                                     data-src="{{asset('assets/icon/map/villa.png')}}"
                                     alt="villa-icon">
-                                    <p class="mb-0">Homes</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Homes</p>
                             </a>
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-restaurant" data-indicator="false" onclick="filter_map('restaurant')">
@@ -2741,7 +2741,7 @@
                                     data-src-active="{{asset('assets/icon/map/restaurant_active.png')}}"
                                     data-src="{{asset('assets/icon/map/restaurant.png')}}"
                                     alt="restaurant-icon">
-                                    <p class="mb-0">Food</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Food</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-hotel" data-indicator="false" onclick="filter_map('hotel')">
                                 <img
@@ -2749,7 +2749,7 @@
                                     data-src-active="{{asset('assets/icon/map/hotel_active.png')}}"
                                     data-src="{{asset('assets/icon/map/hotel.png')}}"
                                     alt="hotel-icon">
-                                    <p class="mb-0">Hotel</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Hotel</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-activity" data-indicator="true" onclick="filter_map('activity')">
                                 <img
@@ -2757,7 +2757,7 @@
                                     data-src-active="{{asset('assets/icon/map/activity_active.png')}}"
                                     data-src="{{asset('assets/icon/map/activity.png')}}"
                                     alt="activity-icon">
-                                    <p class="mb-0">WoW</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">WoW</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
                                 <img
@@ -2765,7 +2765,7 @@
                                     data-src-active="{{asset('assets/icon/menu/search.svg')}}"
                                     data-src="{{asset('assets/icon/menu/search.svg')}}"
                                     alt="search-icon">
-                                    <p class="mb-0">Search</p>
+                                    <p class="mb-0" style="font-size: 12px; font-weight: 600;">Search</p>
                             </a>
                         </div>
                     </div>
