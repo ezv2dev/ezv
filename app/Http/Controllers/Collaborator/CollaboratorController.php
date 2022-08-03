@@ -984,7 +984,8 @@ class CollaboratorController extends Controller
 
             $find->update(array(
                 //'description' => str_replace(array("\n", "\r"), ' ', $request->description),
-                'description' => str_replace(array("\r\n"), "<br><br>", $request->collab_description),
+                // 'description' => str_replace(array("\r\n"), "<br><br>", $request->collab_description),
+                'description' => $request->collab_description,
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));

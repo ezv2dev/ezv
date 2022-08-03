@@ -891,7 +891,8 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-xs-12 profile-info">
-                        <h2 id="name-content">{{ $user->first_name }} {{ $user->last_name }}
+                        <h2 id="name-content">
+                            <span id="name-content2">{{ $user->first_name }} {{ $user->last_name }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="editNameForm({{ $profile->created_by }})"
@@ -3530,7 +3531,7 @@
     {{-- END IMAGE UPLOAD --}}
 
     {{-- UPDATE FORM --}}
-    <script>
+    {{-- <script>
         function editNameForm() {
             var formattedText = asciiToString(document.getElementById("name-form-input").value);
             document.getElementById("name-form-input").value = formattedText;
@@ -3548,7 +3549,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $user->first_name }} {{ $user->last_name }}';
         }
-    </script>
+    </script> --}}
     {{-- END UPDATE FORM --}}
 
     {{-- CONTACT HOST --}}
@@ -4246,7 +4247,7 @@
     </script> --}}
 
     {{-- PREVENT TEXTAREA TYPE ENTER --}}
-    <script>
+    {{-- <script>
         $("textarea").keydown(function(e) {
             // Enter was pressed without shift key
             if (e.keyCode == 13 && !e.shiftKey) {
@@ -4254,7 +4255,7 @@
                 e.preventDefault();
             }
         });
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
         //copy link

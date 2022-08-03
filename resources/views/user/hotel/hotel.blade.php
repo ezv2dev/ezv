@@ -606,7 +606,6 @@
                                 @endif
                             @endauth
                         </div>
-
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
                             <span class="translate-text-single"
@@ -628,30 +627,6 @@
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" placeholder="{{ __('user_page.Make your short description here') }}" rows="3"
                                         maxlength="255">{{ $hotel[0]->short_description }}</textarea>
-                                    <small id="err-shrt-desc" style="display: none;"
-                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
-                                        onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                    </button>
-                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                        onclick="editShortDescriptionCancel()">
-                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                    </button>
-                                    {{-- </form> --}}
-                                </div>
-                            @endif
-                        @endauth
-                        </p>
-                        @auth
-                            @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                <div id="short-description-form" style="display:none;">
-                                    {{-- <form action="{{ route('hotel_update_short_description') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                            required> --}}
-                                    <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30"
-                                        rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
                                     <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
@@ -5190,7 +5165,7 @@
             }
         }
     </script>
-    <script>
+    {{-- <script>
         function editDescriptionForm() {
             var formattedText = asciiToString(document.getElementById("description-form-input").value);
             document.getElementById("description-form-input").value = formattedText;
@@ -5214,7 +5189,7 @@
             btn.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->description }}';
         }
-    </script>
+    </script> --}}
     {{-- END UPDATE FORM --}}
     <script>
         function contactHostForm() {
@@ -5996,7 +5971,7 @@
     </script>
 
     {{-- PREVENT TEXTAREA TYPE ENTER --}}
-    <script>
+    {{-- <script>
         $("textarea").keydown(function(e) {
             // Enter was pressed without shift key
             if (e.keyCode == 13 && !e.shiftKey) {
@@ -6004,7 +5979,7 @@
                 e.preventDefault();
             }
         });
-    </script>
+    </script> --}}
 
     {{-- modal laguage and currency --}}
     @include('user.modal.filter.filter_language')

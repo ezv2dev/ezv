@@ -4766,7 +4766,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
     function editDescriptionForm() {
         var formattedText = asciiToString(document.getElementById("description-form-input").value);
         document.getElementById("description-form-input").value = formattedText;
@@ -4792,7 +4792,7 @@
         }
         // formInput.value = '{{ $restaurant->description }}';
     }
-</script>
+</script> --}}
 {{-- END UPDATE FORM --}}
 
 {{-- DROPZONE JS --}}
@@ -5612,7 +5612,7 @@
 </script>
 
 {{-- PREVENT TEXTAREA TYPE ENTER --}}
-<script>
+{{-- <script>
     $("textarea").keydown(function(e) {
         // Enter was pressed without shift key
         if (e.keyCode == 13 && !e.shiftKey) {
@@ -5620,7 +5620,7 @@
             e.preventDefault();
         }
     });
-</script>
+</script> --}}
 
 
 {{-- modal laguage and currency --}}

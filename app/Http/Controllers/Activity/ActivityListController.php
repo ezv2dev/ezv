@@ -153,7 +153,8 @@ class ActivityListController extends Controller
 
         // update
         $updatedActivity = $activity->update([
-            'description' => str_replace(array("\n", "\r"), ' ', $request->description),
+            'description' => $request->description,
+            // 'description' => str_replace(array("\n", "\r"), ' ', $request->description),
             'updated_by' => auth()->user()->id,
         ]);
 
@@ -215,7 +216,8 @@ class ActivityListController extends Controller
 
         // update
         $updatedActivity = $activity->update([
-            'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
+            'short_description' => $request->short_description,
+            // 'short_description' => str_replace(array("\n", "\r"), ' ', $request->short_description),
             'updated_by' => auth()->user()->id,
         ]);
 

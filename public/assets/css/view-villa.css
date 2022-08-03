@@ -3373,7 +3373,11 @@ span.flatpickr-weekday {
 #name-content #name-content2,
 #name-content-mobile,
 #description #description-content,
-#short-description-content #short-description-content {
+#short-description-content #short-description-content2,
+#short-description-content #short_description_contents,
+#modal-show_description #modalDescriptionVilla,
+#modal-show_description #modalDescriptionHotel,
+#modal-show_description #modalDescriptionContent {
     white-space: pre-line;
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
