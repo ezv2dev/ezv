@@ -2205,8 +2205,8 @@ li.button-dropdown {
 
     .flatpickr-day {
         max-width: 45px;
-        height: 45px;
-        line-height: 45px;
+        /* height: 45px;
+        line-height: 45px; */
         margin: 0;
     }
 
