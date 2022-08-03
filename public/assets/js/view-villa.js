@@ -174,6 +174,29 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
                 $("#cleaning_div").css("display", "block");
             }
 
+            let check_In = moment(checkIn).format("DD MMM YYYY");
+
+            let check_Out = moment(checkOut).format("DD MMM YYYY");
+
+            // if ((checkIn == null) & (checkOut == null)) {
+            //     document
+            //         .getElementById("dateSelected")
+            //         .classList.add("d-none");
+
+            //     $("#priceBottom").removeClass("d-none");
+            //     $("#priceBottomFilled").addClass("d-none");
+            // } else {
+            document.getElementById("dateSelected").classList.remove("d-none");
+
+            $("#dateSelected").html(check_In + " - " + check_Out);
+
+            $("#priceBottom").addClass("d-none");
+            $("#priceBottomFilled").removeClass("d-none");
+
+            $("#priceBottomFilled").html(
+                total["total_all"] + "/" + diffDays + " night"
+            );
+
             calendar_reserve(2);
             calendar_reserve2(2);
             calendar_header(2);
@@ -484,6 +507,10 @@ $("#clear_date").click(function () {
 });
 
 $("#clear_date2").click(function () {
+    document.getElementById("dateSelected").classList.add("d-none");
+    $("#priceBottom").removeClass("d-none");
+    $("#priceBottomFilled").addClass("d-none");
+
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
