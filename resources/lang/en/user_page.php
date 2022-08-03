@@ -483,6 +483,7 @@ return [
     "Input Max Pet" => "Input Max Pet",
     "Deposit Price" => "Deposit Price",
     "Input Price per Person" => "Input Price per Person",
+    "Input Deposit Price" => "Input Deposit Price",
     'There is no amenities' => 'There is no amenities',
 
     'Edit Name' => 'Edit Name',
