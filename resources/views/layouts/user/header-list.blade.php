@@ -3723,6 +3723,13 @@
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
                     $("#overlay").css("display", "none");
+                    document.getElementById("new-bar-black").classList.remove("header-popup-list");
+                    document.getElementById("new-bar-black").classList.remove("search-height");
+                    document.getElementById("searchbox").classList.add("searchbox-display-block");
+                    document.getElementById("searchbox").classList.remove("searchbox-display-none");
+                    document.getElementById("search_bar").classList.remove("active");
+                    document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
+                    document.getElementById("search_bar").classList.add("searchbar-list-display-none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
@@ -4006,6 +4013,7 @@
                 document.getElementById("new-bar-black").classList.add("search-height");
                 document.getElementById("search_bar").classList.add("searchbar-list-display-block");
                 document.getElementById("search_bar").classList.remove("searchbar-list-display-none");
+                $("#overlay").css("display", "block");
 
                 function addClass(elements, className) {
                     for (var i = 0; i < elements.length; i++) {
@@ -4079,6 +4087,7 @@
                     document.getElementById("new-bar-black").classList.remove("search-height");
                     document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+                    $("#overlay").css("display", "none");
 
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     addClass(els, 'display-none');

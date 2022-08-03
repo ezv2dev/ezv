@@ -2766,7 +2766,7 @@
                                     alt="activity-icon">
                                     <p class="mb-0" style="font-size: 12px; font-weight: 600;">WoW</p>
                             </a>
-                            <a class="d-flex mx-2 flex-column align-items-center" id="searchMapMobile" onclick="popUp()" data-bs-dismiss="modal" aria-label="Close">
+                            <a class="d-flex mx-2 flex-column align-items-center" id="searchMapMobile" onclick="popUp()">
                                 <img
                                     class="icon-filter-map" src="{{asset('assets/icon/menu/search_fill.png')}}"
                                     data-src-active="{{asset('assets/icon/menu/search.svg')}}"
