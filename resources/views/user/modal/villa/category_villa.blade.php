@@ -70,7 +70,7 @@
 <div class="modal fade" id="ModalCategoryVilla" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" role="document">
-        <div class="modal-content" style="height: 550px;">
+        <div class="modal-content">
             <div class="modal-header" style="padding-left: 2.3rem !important;">
                 <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

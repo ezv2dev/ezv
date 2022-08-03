@@ -347,7 +347,7 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $restaurant->open_time }}"
@@ -448,7 +448,7 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center">
+                                                <div class="form-group d-flex justify-content-center align-items-center range-edit-price">
                                                     <div class="col-auto">
                                                         <select name="id_type" id="restaurant-type-input"
                                                             class="form-control">
@@ -749,7 +749,7 @@
                                                 @method('PATCH') --}}
                                         <input type="hidden" name="id_restaurant"
                                             value="{{ $restaurant->id_restaurant }}" required>
-                                        <div class="form-group d-flex justify-content-center align-items-center">
+                                        <div class="form-group d-flex justify-content-start align-items-center">
                                             <div class="col-auto">
                                                 <select name="id_type" id="restaurant-type-input-mobile"
                                                     class="form-control">
