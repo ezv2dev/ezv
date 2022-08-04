@@ -584,7 +584,7 @@
             position: relative;
             margin-right: 26px;
         }
-            
+
         .dropdwn {
         display: none;
         right: 0 !important;
@@ -705,7 +705,7 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -4328,7 +4328,7 @@
                 $('#content-tab-currency').addClass('active');
             }
     </script>
-    
+
     <script>
         //Drop down login 2
         var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;

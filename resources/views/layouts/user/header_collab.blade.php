@@ -759,7 +759,7 @@
             <!-- <a href="{{ route('login') }}" class="btn btn-fill border-0 navbar-gap"
                 style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                 <i class="fa-solid fa-user"></i>
-            </a> -->        
+            </a> -->
             <div class="dropdown">
                 <button type="button" class="btn-dropdown dropbtn btn border-0 navbar-gap"></button>
                 <div class="dropdown-content">
@@ -798,8 +798,8 @@
         }
 
         .dropbtn::after {
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900; 
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: "\f007";
             color: #fff;
             font-size: 18px;
@@ -879,6 +879,31 @@
                 }
                 sidebarhide();
                 $('#LoginModal').modal('show');
+            }
+
+            function loginRegisterForm(value, type) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
             }
         </script>
 
