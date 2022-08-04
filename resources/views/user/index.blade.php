@@ -1310,6 +1310,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when user filled location
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
