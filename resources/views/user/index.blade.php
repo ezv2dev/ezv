@@ -813,8 +813,8 @@
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
-                                    <a href="#" onclick="view_LoginModal('login');">Login</a>
-                                    <a href="#" onclick="view_LoginModal('register');">Register</a>
+                                    <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
+                                    <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -1709,7 +1709,16 @@
             })
         </script>
         <script>
-            function view_LoginModal(type) {
+            function loginRegisterForm(value, type) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
                 sidebarhide();
                 $('#LoginModal').modal('show');
                 if (type == 'login') {
@@ -1723,7 +1732,6 @@
                     $('#trigger-tab-login').removeClass('active');
                     $('#content-tab-login').removeClass('active');
                 }
-
             }
         </script>
 
@@ -1846,7 +1854,7 @@
                 restaurantRefreshFilter(subUrl);
             }
         </script>
-        
+
     <script>
         //Drop down login
         $(document).ready(function () {
@@ -1861,7 +1869,7 @@
                 // document.activeElement.blur();//lose focus
             });
         });
-        
+
     </script>
 
         {{-- LAZY LOAD --}}
