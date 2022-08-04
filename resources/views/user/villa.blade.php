@@ -5691,7 +5691,7 @@
             });
         }
     </script>
-    {{-- <script>
+    <script>
         //Drop down login 2
         var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
         $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
@@ -5701,9 +5701,9 @@
 
         $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
         $('.dropdwn').slideUp('fast');
-        document.activeElement.blur();//lose focus
+        // document.activeElement.blur();//lose focus
         });
-    </script> --}}
+    </script>
     </body>
 
 </html>
