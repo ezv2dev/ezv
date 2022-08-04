@@ -735,7 +735,8 @@
                                         @endif
 
                                         <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
-                                            aria-labelledby="navbarDropdownUserImage" style="left: -186px; top: 120%; min-width: 239px;">
+                                            aria-labelledby="navbarDropdownUserImage"
+                                            style="left: -186px; top: 120%; min-width: 239px;">
                                             <h6 class="dropdown-header d-flex align-items-center">
                                                 @if (Auth::user()->foto_profile != null)
                                                     <img class="dropdown-user-img lozad" src="{{ LazyLoad::show() }}"
@@ -804,11 +805,11 @@
                                 @endif
                             </a>
                             <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                class="btn btn-fill border-0 navbar-gap"
-                                style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                id="login">
-                                <i class="fa-solid fa-user"></i>
-                            </a> -->
+                                    class="btn btn-fill border-0 navbar-gap"
+                                    style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
+                                    id="login">
+                                    <i class="fa-solid fa-user"></i>
+                                </a> -->
                             <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                                 <div id="myDropdown" class="dropdown-content">
@@ -1184,22 +1185,26 @@
         <script>
             function adult_increment_index() {
                 document.getElementById('adult2').stepUp();
-                document.getElementById('total_guest2').stepUp();
+                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value);
             }
 
             function adult_decrement_index() {
                 document.getElementById('adult2').stepDown();
-                document.getElementById('total_guest2').stepDown();
+                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value);
             }
 
             function child_increment_index() {
                 document.getElementById('child2').stepUp();
-                document.getElementById('total_guest2').stepUp();
+                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value);
             }
 
             function child_decrement_index() {
                 document.getElementById('child2').stepDown();
-                document.getElementById('total_guest2').stepDown();
+                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value);
             }
 
             function infant_increment_index() {
@@ -1467,12 +1472,12 @@
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
                 if (window.scrollY == 0) {
-                        //$('#ul').show();
-                        $('#ul').removeClass('ul-display-none').addClass('ul-display-block');
-                        $('#bar').removeClass('display-none');
-                        $('#searchbox').removeClass('display-block').addClass('display-none');
-                        $('#nav').removeClass('position-fixed').removeClass('padding-top-0');
-                        $('#searchbox-mob').removeClass('display-block').addClass('display-none');
+                    //$('#ul').show();
+                    $('#ul').removeClass('ul-display-none').addClass('ul-display-block');
+                    $('#bar').removeClass('display-none');
+                    $('#searchbox').removeClass('display-block').addClass('display-none');
+                    $('#nav').removeClass('position-fixed').removeClass('padding-top-0');
+                    $('#searchbox-mob').removeClass('display-block').addClass('display-none');
 
                     function removeClass(elements, className) {
                         for (var i = 0; i < elements.length; i++) {
@@ -1524,7 +1529,7 @@
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
                     } else {
-                        if(!isFocused && $(window).scrollTop() > 200) {
+                        if (!isFocused && $(window).scrollTop() > 200) {
                             // $('#ul').hide();
                             $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
                             $('#bar').addClass('display-none');
@@ -1601,6 +1606,7 @@
                 $(".expand-navbar-mobile").attr("aria-expanded", "false");
                 $("#overlay").css("display", "none");
             }
+
             function language() {
                 sidebarhide();
                 $('#LegalModal').modal('show');
@@ -1706,7 +1712,7 @@
             function view_LoginModal(type) {
                 sidebarhide();
                 $('#LoginModal').modal('show');
-                if(type == 'login') {
+                if (type == 'login') {
                     $('#trigger-tab-register').removeClass('active');
                     $('#content-tab-register').removeClass('active');
                     $('#trigger-tab-login').addClass('active');
@@ -1844,25 +1850,25 @@
 
 
         <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        }
+            /* When the user clicks on the button,
+                toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
                 }
             }
-        }
         </script>
 
         {{-- LAZY LOAD --}}
