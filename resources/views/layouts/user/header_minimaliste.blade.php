@@ -287,16 +287,6 @@
                 </div>
             </nav>
         </div>
-        <style>
-            .dropbtn {
-            border-radius: 50%;
-            }
-            .dropbtn:hover {
-                --tw-shadow: none;
-                box-shadow: none;
-                transition: none;
-            }
-        </style>
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */

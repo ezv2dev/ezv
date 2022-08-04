@@ -110,7 +110,7 @@
             font-size: 18px;
         }
 
-        .dropbtn:hover, .dropbtn:focus {
+        .dropbtn:hover, .dropbtn1:focus {
             background-color: #ff7400;
         }
 
@@ -143,12 +143,20 @@
             padding: 6px 16px;
         }
 
-        .dropdown a:hover {
+        .dropdown1 a:hover {
             color: #ff7400;
         }
 
         .show {
             display: block;
+        }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
         }
     </style>
 
@@ -2915,7 +2923,7 @@
                 </a> -->
                 
                 <div class="dropdown">
-                    <button onclick="myFunction1()" class="dropbtn btn border-0 navbar-gap"></button>
+                    <button onclick="thisFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                     <div id="myDropdown" class="dropdown-content">
                         <a onclick="loginForm(2)">Login</a>
                         <a onclick="loginForm(2)">Register</a>
@@ -3442,7 +3450,7 @@
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
-        function myFunction1() {
+        function thisFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
         }
 

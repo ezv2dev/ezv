@@ -134,3 +134,20 @@
 .modal-open {
     position: relative !important;
 }
+
+.dropbtn {
+border-radius: 50% !important;
+}
+.dropbtn:hover {
+    --tw-shadow: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.dropdown-content a {
+    cursor: pointer;
+}
+
+.dropdown-content a:hover {
+    color: #ff7400 !important;
+}

@@ -4642,7 +4642,7 @@ input::placeholder {
 
 /*Dropdown users stile*/
 
-.dropbtn2 {
+.dropdwnbtn {
     margin-right: 0px;
     width: 50px;
     height: 50px;
@@ -4650,13 +4650,13 @@ input::placeholder {
     background: #ff7400 !important;
 }
 
-.dropbtn2:hover {
+.dropdwnbtn:hover {
     --tw-shadow: none;
     box-shadow: none;
     transition: none;
 }
 
-.dropbtn2::after {
+.dropdwnbtn::after {
     font-family: "Font Awesome 5 Free"; 
     font-weight: 900; 
     content: "\f007";
@@ -4664,16 +4664,16 @@ input::placeholder {
     font-size: 18px;
 }
 
-.dropbtn2:hover, .dropbtn2:focus {
+.dropdwnbtn:hover, .dropdwnbtn:focus {
     background-color: #ff7400;
 }
 
-.dropdown2 {
+.dropdwn {
     position: relative;
     display: inline-block;
 }
 
-.dropdown-content2 {
+.dropdwn-content {
     display: none;
     position: absolute;
     background-color: #fff;
@@ -4688,7 +4688,7 @@ input::placeholder {
     text-align: left;
 }
 
-.dropdown-content2 a {
+.dropdwn-content a {
     color: #282828;
     text-decoration: none;
     display: block;
@@ -4697,10 +4697,18 @@ input::placeholder {
     padding: 6px 16px;
 }
 
-.dropdown2 a:hover {
+.dropdwn a:hover {
     color: #ff7400;
 }
 
 .show {
     display: block;
+}
+
+.dropdwn-content a {
+    cursor: pointer;
+}
+
+.dropdwn-content a:hover {
+    color: #ff7400 !important;
 }

@@ -238,6 +238,14 @@
         .show {
             display: block;
         }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
+        }
     </style>
 
     @php

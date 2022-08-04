@@ -1794,22 +1794,10 @@
                         @endif
                     </a>
 
-                    <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
-                    </a> -->
-
-                    <div class="dropdown2">
-                        <button onclick="myFunction2()" class="dropbtn2 btn border-0 navbar-gap"></button>
-                        <div id="myDropdown2" class="dropdown-content2">
-                            <a onclick="loginForm(2)">Login</a>
-                            <a onclick="loginForm(2)">Register</a>
-                            <hr>
-                            <a href="{{ route('ahost') }}">Become a Host</a>
-                            <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
-                            <a href="{{ route('faq') }}">FAQ</a>
-                        </div>
-                    </div>
+                    </a>
                 @endauth
             </div>
         </div>
@@ -5700,27 +5688,6 @@
                 message: "Please add Check In and Check Out Date",
                 position: "topRight",
             });
-        }
-    </script>
-    <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction2() {
-        document.getElementById("myDropdown2").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn2')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content2");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
         }
     </script>
 </body>
