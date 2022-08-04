@@ -347,6 +347,22 @@
                                                 </div>
                                             </div>
 
+                                            <div class="row mb-12 mt-3">
+                                                <label class="col-sm-4 col-form-label" for="min_stay">
+                                                    <strong>
+                                                        {{ __('user_page.Min Stay') }}
+                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">
+                                                        </span>
+                                                    </strong>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" min="0" class="form-control" id="villa-min-stay"
+                                                        name="min_stay" placeholder="Min Stay.." value="{{ $villa[0]->min_stay }}">
+                                                    {{-- <small id="err-min" style="display: none;"
+                                                        class="invalid-feedback">{{ __('auth.empty_price') }}</small> --}}
+                                                </div>
+                                            </div>
+
                                             <!-- Submit -->
                                             <div class="row items-push">
                                                 <center>

@@ -785,6 +785,11 @@ class ViewController extends Controller
                 $instant_book = 'no';
             }
 
+            if ($request->min_stay) {
+                $min_stay = $request->min_stay;
+                $find->update(['min_stay' => $min_stay]);
+            }
+
             $villaInstant = Villa::where('id_villa', $request->id_villa);
             $villaInstant->update(array('instant_book' => $instant_book));
 
