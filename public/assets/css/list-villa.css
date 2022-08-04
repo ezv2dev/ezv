@@ -3304,6 +3304,14 @@ input::-webkit-inner-spin-button {
         display: none !important;
     }
 }
+@media only screen and (max-width: 767px) {
+    #modalSubCategory .filter-modal-body {
+        height: 100% !important;
+    }
+    #modalSubCategory .modal-filter-footer {
+        display: none !important;
+    }
+}
 
 @media only screen and (min-width: 769px) {
     #searchMapDekstop {

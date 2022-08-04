@@ -272,31 +272,88 @@
     }
     // function to desclare custom content for restaurant
     function addCustomContentRestaurant(restaurantLocations) {
+        const contentLink = `{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}`;
+        const imageLink = `{{ env('APP_URL') }}/foto/restaurant/${restaurantLocations.uid}`;
+        const videoLink = `{{ env('APP_URL') }}/foto/restaurant/${restaurantLocations.uid}`;
+
         // check if image exist
         let image = '';
         if(restaurantLocations.photo && restaurantLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < restaurantLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.photo[j].name}')}}"
+                        src="${imageLink}/${restaurantLocations.photo[j].name}"
                         alt="">
                 </a>`;
             }
         } else {
             if(restaurantLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/restaurant/${restaurantLocations.uid.toLowerCase()}/${restaurantLocations.image}')}}"
+                        src="${imageLink}/${restaurantLocations.image}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
             }
+        }
+
+        // check if video exist
+        let video = '';
+        if(restaurantLocations.video && restaurantLocations.video.length != 0){
+            const lastIndex = restaurantLocations.video.length-1;
+            const videoName = restaurantLocations.video[lastIndex].name;
+            const url = `${videoLink}/${videoName}#1.0`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
+                    </div>
+                </a>
+            `;
+        } else if(restaurantLocations.photo && restaurantLocations.photo.length != 0){
+            const lastIndex = restaurantLocations.photo.length-1;
+            const photoName = restaurantLocations.photo[lastIndex].name;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else if(restaurantLocations.image){
+            const photoName = restaurantLocations.image;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
         }
 
         var name = restaurantLocations.name;
@@ -397,15 +454,7 @@
                                     @auth
                                         ${favorite}
                                     @endauth
-
-                                    <a href="#" target="_blank" class="absolute-right">
-                                        <div class="villa-list-video-container video-show-buttons">
-                                            <i class="fas fa-2x fa-play video-button"></i>
-                                                <img class="villa-list-video" loading="lazy"
-                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                        </div>
-                                    </a>
-
+                                    ${video}
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -414,7 +463,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <a href="{{ env('APP_URL') }}/food/${restaurantLocations.id_restaurant}" target="_blank">
+                                <a href="${contentLink}" target="_blank">
                                 <div class="mt-3">
                                         <p class="card-text text-20 text-orange fw-600 mt-1">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
@@ -551,31 +600,88 @@
     }
     // function to desclare custom content for villa
     function addCustomContentVilla(villaLocations) {
+        const contentLink = `{{ env('APP_URL') }}/homes/${villaLocations.id_villa}`;
+        const imageLink = `{{ env('APP_URL') }}/foto/gallery/${villaLocations.uid}`;
+        const videoLink = `{{ env('APP_URL') }}/foto/gallery/${villaLocations.uid}`;
+
         // check if image exist
         let image = '';
         if(villaLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < villaLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.photo[j].name}')}}"
+                        src="${imageLink}/${villaLocations.photo[j].name}"
                         alt="">
                 </a>`;
             }
         } else {
             if(villaLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/gallery/${villaLocations.uid.toLowerCase()}/${villaLocations.image}')}}"
+                        src="${imageLink}/${villaLocations.image}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
             }
+        }
+
+        // check if video exist
+        let video = '';
+        if(villaLocations.video && villaLocations.video.length != 0){
+            const lastIndex = villaLocations.video.length-1;
+            const videoName = villaLocations.video[lastIndex].name;
+            const url = `${videoLink}/${videoName}#1.0`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
+                    </div>
+                </a>
+            `;
+        } else if(villaLocations.photo && villaLocations.photo.length != 0){
+            const lastIndex = villaLocations.photo.length-1;
+            const photoName = villaLocations.photo[lastIndex].name;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else if(villaLocations.image){
+            const photoName = villaLocations.image;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
         }
 
         var name = villaLocations.name;
@@ -666,15 +772,7 @@
                                     @auth
                                         ${favorite}
                                     @endauth
-
-                                    <a href="#" target="_blank" class="absolute-right">
-                                        <div class="villa-list-video-container video-show-buttons">
-                                            <i class="fas fa-2x fa-play video-button"></i>
-                                                <img class="villa-list-video" loading="lazy"
-                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                        </div>
-                                    </a>
-
+                                    ${video}
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -684,7 +782,7 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ env('APP_URL') }}/homes/${villaLocations.id_villa}" target="_blank">
+                                <a href="${contentLink}" target="_blank">
                                     <div class="mt-3">
                                             <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                             <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
@@ -816,31 +914,88 @@
     }
     // function to desclare custom content for hotel
     function addCustomContentHotel(hotelLocations) {
+        const contentLink = `{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}`;
+        const imageLink = `{{ env('APP_URL') }}/foto/hotel/${hotelLocations.uid}`;
+        const videoLink = `{{ env('APP_URL') }}/foto/hotel/${hotelLocations.uid}`;
+
         // check if image exist
         let image = '';
         if(hotelLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < hotelLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.photo[j].name}')}}"
+                        src="${imageLink}/${hotelLocations.photo[j].name}"
                         alt="">
                 </a>`;
             }
         } else {
             if(hotelLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/hotel/${hotelLocations.uid.toLowerCase()}/${hotelLocations.image}')}}"
+                        src="${imageLink}/${hotelLocations.image}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
             }
+        }
+
+        // check if video exist
+        let video = '';
+        if(hotelLocations.video && hotelLocations.video.length != 0){
+            const lastIndex = hotelLocations.video.length-1;
+            const videoName = hotelLocations.video[lastIndex].name;
+            const url = `${videoLink}/${videoName}#1.0`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
+                    </div>
+                </a>
+            `;
+        } else if(hotelLocations.photo && hotelLocations.photo.length != 0){
+            const lastIndex = hotelLocations.photo.length-1;
+            const photoName = hotelLocations.photo[lastIndex].name;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else if(hotelLocations.image){
+            const photoName = hotelLocations.image;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
         }
 
         var name = hotelLocations.name;
@@ -915,15 +1070,7 @@
                                     @auth
                                         ${favorite}
                                     @endauth
-
-                                    <a href="#" target="_blank" class="absolute-right">
-                                        <div class="villa-list-video-container video-show-buttons">
-                                            <i class="fas fa-2x fa-play video-button"></i>
-                                                <img class="villa-list-video" loading="lazy"
-                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                        </div>
-                                    </a>
-
+                                    ${video}
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -932,7 +1079,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <a href="{{ env('APP_URL') }}/hotel/${hotelLocations.id_hotel}" target="_blank">
+                                <a href="${contentLink}" target="_blank">
                                     <div class="mt-3">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
@@ -1067,31 +1214,88 @@
     }
     // function to desclare custom content for activity
     function addCustomContentActivity(activityLocations) {
+        const contentLink = `{{ env('APP_URL') }}/wow/${activityLocations.id_activity}`;
+        const imageLink = `{{ env('APP_URL') }}/foto/activity/${activityLocations.uid}`;
+        const videoLink = `{{ env('APP_URL') }}/foto/activity/${activityLocations.uid}`;
+
         // check if image exist
         let image = '';
         if(activityLocations.photo.length != 0) {
             image = '';
             for (let j = 0; j < activityLocations.photo.length; j++) {
-                image += `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image += `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.photo[j].name}')}}"
+                        src="${imageLink}/${activityLocations.photo[j].name}"
                         alt="">
                 </a>`;
             }
         } else {
             if(activityLocations.image != null) {
-                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height: 260px;"
-                        src="{{ URL::asset('/foto/activity/${activityLocations.uid.toLowerCase()}/${activityLocations.image}')}}"
+                        src="${imageLink}/${activityLocations.image}"
                         alt="">
                 </a>`;
             } else {
-                image = `<a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank" class="col-lg-6 grid-image-container">
+                image = `<a href="${contentLink}" target="_blank" class="col-lg-6 grid-image-container">
                     <img class="img-fluid grid-image" loading="lazy" style="display: block; height:260px;"
                         src="{{ URL::asset('/foto/default/no-image.jpeg')}}"
                         alt="">
                 </a>`;
             }
+        }
+
+        // check if video exist
+        let video = '';
+        if(activityLocations.video && activityLocations.video.length != 0){
+            const lastIndex = activityLocations.video.length-1;
+            const videoName = activityLocations.video[lastIndex].name;
+            const url = `${videoLink}/${videoName}#1.0`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
+                    </div>
+                </a>
+            `;
+        } else if(activityLocations.photo && activityLocations.photo.length != 0){
+            const lastIndex = activityLocations.photo.length-1;
+            const photoName = activityLocations.photo[lastIndex].name;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else if(activityLocations.image){
+            const photoName = activityLocations.image;
+            const url = `${imageLink}/${photoName}`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
+        } else {
+            const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
+            video = `
+                <a href="${contentLink}" target="_blank" class="absolute-right">
+                    <div class="villa-list-video-container video-show-buttons">
+                        <i class="fas fa-2x fa-play video-button"></i>
+                            <img class="villa-list-video" loading="lazy"
+                                src="${url}">
+                    </div>
+                </a>
+            `;
         }
 
         var name = activityLocations.name;
@@ -1192,15 +1396,7 @@
                                     @auth
                                         ${favorite}
                                     @endauth
-
-                                    <a href="#" target="_blank" class="absolute-right">
-                                        <div class="villa-list-video-container video-show-buttons">
-                                            <i class="fas fa-2x fa-play video-button"></i>
-                                                <img class="villa-list-video" loading="lazy"
-                                                    src="{{ URL::asset('/foto/default/no-image.jpeg') }}">
-                                        </div>
-                                    </a>
-                                    
+                                    ${video}
                                     <div id="location-map-content-right-image-loading" style="background-color: #e8e8e8; height: 260px; width: 100%; position: absolute; border-radius: 15px; z-index: 99; display: flex; justify-content: center; align-items: center;">
                                         <img style="width: 50px" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
@@ -1209,7 +1405,7 @@
                                         ${image}
                                     </div>
                                 </div>
-                                <a href="{{ env('APP_URL') }}/wow/${activityLocations.id_activity}" target="_blank">
+                                <a href="${contentLink}" target="_blank">
                                     <div class="mt-3">
                                         <p class="card-text text-orange mb-0 text-20 fw-600">${name}</p>
                                         <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
@@ -1419,7 +1615,7 @@
     function mapMobile(){
          //mobile map
          map.addListener("click", ()=>{
-            console.log('hit mapMobile'); 
+            console.log('hit mapMobile');
             if(!contentIsExist && !mapMobileIsOpen) {
                 console.log('ketika tidak full  screen dan content tidak terbuka');
                 contentIsExist = true;
@@ -2568,7 +2764,7 @@
                 console.log('mapMobileIsOpen: '+mapMobileIsOpen);
             }
         });
-        
+
         $(window).on('resize', () => {
             if ($(window).width() < 768) {
                 contentIsExist = false;
@@ -2584,7 +2780,7 @@
             }
         });
     });
-   
+
 </script>
 
 {{-- MAP CONTENT --}}

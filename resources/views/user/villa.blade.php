@@ -102,10 +102,10 @@
             <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     <input type="hidden" id="instant_book_check" value="{{ $villa[0]->instant_book }}">
-                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '')
-                    <input class="price-button" onclick="addDatesFunction()"
-                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                        value="{{ __('user_page.Check Availability') }}" readonly>
+                    @if ((isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '') || !isset($_COOKIE['sCheck_in']))
+                        <input class="price-button" onclick="addDatesFunction()"
+                            style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                            value="{{ __('user_page.Check Availability') }}" readonly>
                     @else
                         @if ($villa[0]->instant_book == 'yes')
                             <input class="price-button" onclick="details_reserve()"
@@ -779,9 +779,8 @@
                 <div class="menu-liner"></div>
                 <div id="navbar" class="sticky-div">
                     <ul class="navigationList">
-                        <li class="navigationItem">
-                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('gallery').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('gallery').scrollIntoView();">
+                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -789,9 +788,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="about-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('description').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('description').scrollIntoView();">
+                            <a id="about-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -799,9 +797,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem">
-                            <a id="availability-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('availability').scrollIntoView();">
+                        <li class="navigationItem"
+                            onClick="document.getElementById('availability').scrollIntoView();">
+                            <a id="availability-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-calendar-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -809,9 +807,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('amenities').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('amenities').scrollIntoView();">
+                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -819,9 +816,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="location-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem"
+                            onClick="document.getElementById('location-map').scrollIntoView();">
+                            <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -829,9 +826,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('review').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('review').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -839,9 +835,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none"
+                            onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1000,15 +996,20 @@
                                 @endauth
                             </div> --}}
                             @php
-                                $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$_SERVER['HTTP_USER_AGENT'])||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($_SERVER['HTTP_USER_AGENT'],0,4));
+                                $isMobile =
+                                    preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i', $_SERVER['HTTP_USER_AGENT']) ||
+                                    preg_match(
+                                        '/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',
+                                        substr($_SERVER['HTTP_USER_AGENT'], 0, 4),
+                                    );
                             @endphp
                             <p id="description-content">
                                 @if ($isMobile)
-                                {!! Str::limit(Translate::translate($villa[0]->description), 400, ' ...') ??
-                                __('user_page.There is no description yet') !!}
+                                    {!! Str::limit(Translate::translate($villa[0]->description), 400, ' ...') ??
+                                        __('user_page.There is no description yet') !!}
                                 @else
-                                {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
-                                    __('user_page.There is no description yet') !!}
+                                    {!! Str::limit(Translate::translate($villa[0]->description), 600, ' ...') ??
+                                        __('user_page.There is no description yet') !!}
                                 @endif
                             </p>
                             <span id="buttonShowMoreDescription">
@@ -1566,7 +1567,7 @@
                                     <input class="price-button" onclick="details_reserve()"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-                                    <input type ="submit" class="price-button d-none" id="btnBookingDetail"
+                                    <input type="submit" class="price-button d-none" id="btnBookingDetail"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         value="{{ __('user_page.VIEW DETAILS') }}">
                                     {{-- <a class="price-button"
@@ -1793,23 +1794,24 @@
                             <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
                     </a>
+                    <!--
+                                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                                                style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                                <i class="fa-solid fa-user"></i>
+                                            </a> -->
 
-                    <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                        style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                        <i class="fa-solid fa-user"></i>
-                    </a> -->
-                    
-                    <div class="dropdown2">
-                        <button onclick="myFunction2()" class="dropbtn2 btn border-0 navbar-gap"></button>
-                        <div id="myDropdown2" class="dropdown-content2">
-                            <a href="{{ route('login') }}">Login</a>
-                            <a href="{{ route('register') }}">Register</a>
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                            <a href="#" onclick="view_LoginModal('login');">Login</a>
+                            <a href="#" onclick="view_LoginModal('register');">Register</a>
                             <hr>
                             <a href="{{ route('ahost') }}">Become a Host</a>
                             <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
                             <a href="{{ route('faq') }}">FAQ</a>
                         </div>
                     </div>
+
                 @endauth
             </div>
         </div>
@@ -2056,7 +2058,7 @@
                                                     <input type="hidden" name="id_villa"
                                                         value="{{ $villa[0]->id_villa }}" readonly required>
 
-													<div class="row">
+                                                    <div class="row">
                                                         <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                                                             <div class="d-flex">
                                                                 <div class="col-4 review-container">
@@ -2114,40 +2116,35 @@
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
                                                                         <input id="service-star-5" type="radio"
-                                                                            name="service" value="5"
-                                                                            required />
+                                                                            name="service" value="5" required />
                                                                         <label for="service-star-5"
                                                                             title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="service-star-4" type="radio"
-                                                                            name="service" value="4"
-                                                                            required />
+                                                                            name="service" value="4" required />
                                                                         <label for="service-star-4"
                                                                             title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="service-star-3" type="radio"
-                                                                            name="service" value="3"
-                                                                            required />
+                                                                            name="service" value="3" required />
                                                                         <label for="service-star-3"
                                                                             title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="service-star-2" type="radio"
-                                                                            name="service" value="2"
-                                                                            required />
+                                                                            name="service" value="2" required />
                                                                         <label for="service-star-2"
                                                                             title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="service-star-1" type="radio"
-                                                                            name="service" value="1"
-                                                                            required />
+                                                                            name="service" value="1" required />
                                                                         <label for="service-star-1"
                                                                             title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                             <i class="active fa fa-star"
@@ -2163,40 +2160,35 @@
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
                                                                         <input id="atmosphere-star-5" type="radio"
-                                                                            name="check_in" value="5"
-                                                                            required />
+                                                                            name="check_in" value="5" required />
                                                                         <label for="atmosphere-star-5"
                                                                             title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="atmosphere-star-4" type="radio"
-                                                                            name="check_in" value="4"
-                                                                            required />
+                                                                            name="check_in" value="4" required />
                                                                         <label for="atmosphere-star-4"
                                                                             title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="atmosphere-star-3" type="radio"
-                                                                            name="check_in" value="3"
-                                                                            required />
+                                                                            name="check_in" value="3" required />
                                                                         <label for="atmosphere-star-3"
                                                                             title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="atmosphere-star-2" type="radio"
-                                                                            name="check_in" value="2"
-                                                                            required />
+                                                                            name="check_in" value="2" required />
                                                                         <label for="atmosphere-star-2"
                                                                             title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="atmosphere-star-1" type="radio"
-                                                                            name="check_in" value="1"
-                                                                            required />
+                                                                            name="check_in" value="1" required />
                                                                         <label for="atmosphere-star-1"
                                                                             title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                             <i class="active fa fa-star"
@@ -2212,40 +2204,35 @@
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
                                                                         <input id="location-star-5" type="radio"
-                                                                            name="location" value="5"
-                                                                            required />
+                                                                            name="location" value="5" required />
                                                                         <label for="location-star-5"
                                                                             title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="location-star-4" type="radio"
-                                                                            name="location" value="4"
-                                                                            required />
+                                                                            name="location" value="4" required />
                                                                         <label for="location-star-4"
                                                                             title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="location-star-3" type="radio"
-                                                                            name="location" value="3"
-                                                                            required />
+                                                                            name="location" value="3" required />
                                                                         <label for="location-star-3"
                                                                             title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="location-star-2" type="radio"
-                                                                            name="location" value="2"
-                                                                            required />
+                                                                            name="location" value="2" required />
                                                                         <label for="location-star-2"
                                                                             title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="location-star-1" type="radio"
-                                                                            name="location" value="1"
-                                                                            required />
+                                                                            name="location" value="1" required />
                                                                         <label for="location-star-1"
                                                                             title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                             <i class="active fa fa-star"
@@ -2261,40 +2248,35 @@
                                                                 <div class="col-8 review-container">
                                                                     <div class="cm-star-rating">
                                                                         <input id="value-star-5" type="radio"
-                                                                            name="value" value="5"
-                                                                            required />
+                                                                            name="value" value="5" required />
                                                                         <label for="value-star-5"
                                                                             title="{{ trans_choice('user_page.x stars', 5, ['number' => 5]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="value-star-4" type="radio"
-                                                                            name="value" value="4"
-                                                                            required />
+                                                                            name="value" value="4" required />
                                                                         <label for="value-star-4"
                                                                             title="{{ trans_choice('user_page.x stars', 4, ['number' => 4]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="value-star-3" type="radio"
-                                                                            name="value" value="3"
-                                                                            required />
+                                                                            name="value" value="3" required />
                                                                         <label for="value-star-3"
                                                                             title="{{ trans_choice('user_page.x stars', 3, ['number' => 3]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="value-star-2" type="radio"
-                                                                            name="value" value="2"
-                                                                            required />
+                                                                            name="value" value="2" required />
                                                                         <label for="value-star-2"
                                                                             title="{{ trans_choice('user_page.x stars', 2, ['number' => 2]) }}">
                                                                             <i class="active fa fa-star"
                                                                                 aria-hidden="true"></i>
                                                                         </label>
                                                                         <input id="value-star-1" type="radio"
-                                                                            name="value" value="1"
-                                                                            required />
+                                                                            name="value" value="1" required />
                                                                         <label for="value-star-1"
                                                                             title="{{ trans_choice('user_page.x stars', 1, ['number' => 1]) }}">
                                                                             <i class="active fa fa-star"
@@ -2319,7 +2301,7 @@
                                                                     style="width: 200px">{{ __('user_page.Save') }}</button>
                                                             </center>
                                                         </div>
-                                                </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -2447,7 +2429,7 @@
                                 {{ __('user_page.Add your trip dates to get the cancellation details for this stay') }}<br>
                             </p>
                             <p style="margin-bottom: 0px !important; margin-top:14px">
-                                <a onclick="addDatesFunction()"
+                                {{-- <a onclick="addDatesFunction()"
                                     style="text-decoration: underline; color: #ff7400; cursor: pointer;"
                                     class="d-none" id="addDates">{{ __('user_page.Add Dates') }}
                                     <i class="fas fa-chevron-right"></i>
@@ -2456,7 +2438,12 @@
                                     style="text-decoration: underline; color: #ff7400;" class="d-none"
                                     id="showCancel">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
+                                </a> --}}
+                                <a onclick="showMoreCancelationPolicy();"
+                                    href="javascript:void(0);">{{ __('user_page.Show more') }}
+                                    <i class="fas fa-chevron-right"></i>
                                 </a>
+
                             </p>
                         </div>
                     </div>
@@ -3746,7 +3733,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                        <button onclick="share_function()">Copy link</button> -->
+                                                                                <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -3997,7 +3984,7 @@
                 $('#loginAlert').addClass('d-none');
                 $('#registerAlert').addClass('d-none');
             }
-
+            sidebarhide();
             $('#LoginModal').modal('show');
         }
     </script>
@@ -5238,7 +5225,19 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
+        function sidebarhide() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        }
+
         function language() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').addClass('active');
             $('#content-tab-language').addClass('active');
@@ -5247,6 +5246,7 @@
         }
 
         function currency() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').removeClass('active');
             $('#content-tab-language').removeClass('active');
@@ -5271,23 +5271,6 @@
             }
         </script>
     @endif
-
-    <script>
-        $.ajax({
-            url: "/houserules/post",
-            method: "POST",
-            data: {
-                '_token': $('input[name=_token]').val(),
-                'children': children,
-                id: '{{ $villa[0]->id_villa }}'
-            },
-            success: function(data) {
-                // console.log(data);
-                jQuery('.alert').show();
-                jQuery('.alert').html(data.success);
-            }
-        });
-    </script>
 
     {{-- validation --}}
     <script>
@@ -5703,25 +5686,26 @@
         }
     </script>
     <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction2() {
-        document.getElementById("myDropdown2").classList.toggle("show");
-        }
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function(event) {
+            event.stopPropagation();
+            $('.dropdwn').slideToggle('fast');
+        });
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn2')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content2");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
-        }
+        <<
+        << << < Updated upstream
+        $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+                    $('.dropdwn').slideUp('fast');
+                    // document.activeElement.blur();//lose focus
+                    ===
+                    === =
+                    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+                        $('.dropdwn').slideUp('fast');
+                        document.activeElement.blur(); //lose focus
+                        >>>
+                        >>> > Stashed changes
+                    });
     </script>
 </body>
 

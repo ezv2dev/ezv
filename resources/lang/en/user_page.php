@@ -509,7 +509,8 @@ return [
     "data not found" => "data not found",
 
     "Popular Stays Nearby" => "Popular Homes Nearby",
-    "Events are allowed" => "Events are allowed"
+    "Events are allowed" => "Events are allowed",
+    "Min Stay" => "Min Stay"
     // {{ __('user_page.Map') }}
     // user_page.
     // __

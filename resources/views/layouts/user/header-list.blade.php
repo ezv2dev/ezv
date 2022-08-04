@@ -178,6 +178,10 @@
             padding: 0 12px;
         }
 
+        body {
+            overflow-y: scroll !important;
+        }
+
         /*Dropdown users stile*/
 
         .dropbtn {
@@ -197,7 +201,8 @@
             font-size: 18px;
         }
 
-        .dropbtn:hover, .dropbtn:focus {
+        .dropbtn:hover,
+        .dropbtn:focus {
             background-color: #ff7400;
             box-shadow: none;
         }
@@ -205,6 +210,12 @@
         .dropdown {
             position: relative;
             display: inline-block;
+        }
+
+        @media only screen and (max-width: 991px) {
+            .dropdown {
+                display: none !important;
+            }
         }
 
         .dropdown-content {
@@ -237,6 +248,14 @@
 
         .show {
             display: block;
+        }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
         }
     </style>
 
@@ -272,7 +291,9 @@
 
                 <button type="button" class="btn-filter-header"
                     @if ($condition_villa) onclick="modalFiltersHomes();"
-                    @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
+                    @elseif($condition_hotel)
+                        onclick="modalFiltersHotel();"
+                    @elseif($condition_restaurant || $condition_things_to_do)
                         onclick="moreSubCategory();"
                     @elseif($condition_collaborator)
                         onclick="filterCollab();" @endif>
@@ -807,14 +828,15 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" value="{{ $get_check_in }}" id="check_in2"
-                                            name="sCheck_in"
+                                        <input type="text" onfocus="this.value=''"
+                                            placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                            value="{{ $get_check_in }}" id="check_in2" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''"
+                                            style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -1535,14 +1557,15 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" value="{{ $get_check_in }}" id="check_in2"
-                                            name="sCheck_in"
+                                        <input type="text" onfocus="this.value=''"
+                                            placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                            value="{{ $get_check_in }}" id="check_in2" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''"
+                                            style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -2914,11 +2937,13 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="start_date" id="start_date"
+                                                value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="end_date" id="end_date"
+                                                value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
 
@@ -3364,11 +3389,13 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="start_date" id="start_date"
+                                                value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="end_date" id="end_date"
+                                                value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
                                     </div>
@@ -3520,14 +3547,14 @@
                     </label>
                     <div style="width: 60%;">
                         <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                            style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-user icon-clear"></i>
-                        </a> -->
-                        <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
-                                <div id="myDropdown" class="dropdown-content">
-                                    <a onclick="loginForm(2)">Login</a>
-                                    <a onclick="loginForm(2)">Register</a>
+                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-user icon-clear"></i>
+                            </a> -->
+                            <div class="dropdown">
+                                <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                                <div class="dropdown-content">
+                                    <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
+                                    <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -3541,25 +3568,17 @@
         </div>
 
         <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        }
+            //Drop down login
+            var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+            $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+            event.stopPropagation();
+            $('.dropdown-content').slideToggle('fast');
+            });
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
-        }
+            $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+            $('.dropdown-content').slideUp('fast');
+            // document.activeElement.blur();//lose focus
+            });
         </script>
 
         {{-- Search Location --}}
@@ -3694,11 +3713,11 @@
             // document.getElementById("myRef").value = ref3;
 
             $(document).ready(() => {
+                $("body").on("hidden.bs.modal", function() {
+                    $(this).removeAttr("style");
+                });
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
-                    $("body").css({
-                        "height": "",
-                        "overflow": ""
-                    })
+                    $("body").removeAttr("style");
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
@@ -3715,10 +3734,7 @@
                     $("#overlay").css("display", "block");
                 })
                 $('#overlay').click(function() {
-                    $("body").css({
-                        "height": "",
-                        "overflow": ""
-                    })
+                    $("body").removeAttr("style");
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
@@ -3789,6 +3805,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when location click
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -3802,6 +3832,8 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(1);
                         });
                         $("#clear_date_wow").click(function() {
@@ -3957,22 +3989,26 @@
         <script>
             function adult_increment_header_list() {
                 document.getElementById('adult5').stepUp();
-                document.getElementById('total_guest5').stepUp();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function adult_decrement_header_list() {
                 document.getElementById('adult5').stepDown();
-                document.getElementById('total_guest5').stepDown();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function child_increment_header_list() {
                 document.getElementById('child5').stepUp();
-                document.getElementById('total_guest5').stepUp();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function child_decrement_header_list() {
                 document.getElementById('child5').stepDown();
-                document.getElementById('total_guest5').stepDown();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function infant_increment_header_list() {
@@ -4169,13 +4205,68 @@
                     $('#loginAlert').addClass('d-none');
                     $('#registerAlert').addClass('d-none');
                 }
-
+                sidebarhide();
                 $('#LoginModal').modal('show');
+            }
+            function loginRegisterForm(value, type) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
             }
         </script>
 
         <script>
+            function view_LoginModal(type) {
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
+
+            }
+        </script>
+
+        <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
+
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -4184,6 +4275,7 @@
             }
 
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');

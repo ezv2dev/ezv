@@ -1083,9 +1083,8 @@
                 <div class="menu-liner"></div>
                 <div id="navbar" class="sticky-div">
                     <ul class="navigationList">
-                        <li class="navigationItem">
-                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('gallery').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('gallery').scrollIntoView();">
+                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1093,9 +1092,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem">
-                            <a id="menu-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('menu').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('menu').scrollIntoView();">
+                            <a id="menu-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fa-solid fa-book navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1103,9 +1101,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="about-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('description').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('description').scrollIntoView();">
+                            <a id="about-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1113,9 +1110,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('amenities').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('amenities').scrollIntoView();">
+                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1123,9 +1119,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="location-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('location-map').scrollIntoView();">
+                            <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1143,9 +1138,8 @@
                             </span>
                         </a>
                     </li> --}}
-                        <li class="navigationItem">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('review').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('review').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1153,9 +1147,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none" onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -1824,10 +1817,22 @@
                     @endif
                 </a>
 
-                <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
-                </a>
+                </a> -->
+
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                        <a href="#" onclick="view_LoginModal('login');">Login</a>
+                        <a href="#" onclick="view_LoginModal('register');">Register</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
+                        </div>
+                    </div>
             @endauth
 
         </div>
@@ -3954,7 +3959,7 @@
             $('#loginAlert').addClass('d-none');
             $('#registerAlert').addClass('d-none');
         }
-
+        sidebarhide();
         $('#LoginModal').modal('show');
     }
 </script>
@@ -5628,7 +5633,18 @@
 {{-- modal laguage and currency --}}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
+    function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
     function language() {
+        sidebarhide();
         $('#LegalModal').modal('show');
         $('#trigger-tab-language').addClass('active');
         $('#content-tab-language').addClass('active');
@@ -5637,6 +5653,7 @@
     }
 
     function currency() {
+        sidebarhide();
         $('#LegalModal').modal('show');
         $('#trigger-tab-language').removeClass('active');
         $('#content-tab-language').removeClass('active');
@@ -6196,4 +6213,18 @@
         }
     </script>
 @endif
+
+<script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        // document.activeElement.blur();//lose focus
+        });
+    </script>
 </body>

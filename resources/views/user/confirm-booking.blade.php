@@ -540,7 +540,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row" onclick="recountGuest()">
+                                            <div class="row" onclick="recountGuest();reinitDetailGuest();">
                                                 <div class="col-6">
                                                     <div class="col-12">
                                                         <p class="price-box">
@@ -928,7 +928,6 @@
                 document.getElementById('panel_va').style.display = 'none';
                 document.getElementById('panel_credit').style.display = 'block';
             }
-
         }
     </script>
     <script>
@@ -1031,12 +1030,15 @@
                         defaultDate: [check_in_val, check_out_val],
                         disable: data,
                         onClose: function (selectedDates, dateStr, instance) {
-
+                            // set main form date value
                             $('#confirmBookingDateForm').find(`input[name='check_in']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
                             $('#confirmBookingDateForm').find(`input[name='check_out']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
-
+                            // update ui date
                             $('#confirmBookingDateForm').find(`#check_in_content`).text(instance.formatDate(selectedDates[0], "d/m/Y"));
                             $('#confirmBookingDateForm').find(`#check_out_content`).text(instance.formatDate(selectedDates[1], "d/m/Y"));
+                            // update virtual account date form value
+                            $('#va-form').find(`input[name='check_in_date']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $('#va-form').find(`input[name='check_out_date']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
 
                             var start = new Date(
                                 instance.formatDate(selectedDates[0], "Y-m-d")
@@ -1079,6 +1081,14 @@
             let adult = $('#adult').val();
             let children = $('#child').val();
             $('#total_guest').text(parseInt(adult)+parseInt(children));
+        }
+        function reinitDetailGuest() {
+            const adultTotal = $("#adult").val();
+            let childTotal = $('#child').val();
+            let infantTotal = $('#infant').val();
+            let petTotal = $('#pet').val();
+            $('#va-form').find(`input[name="adult_va"]`).val(adultTotal);
+            $('#va-form').find(`input[name="child_va"]`).val(childTotal);
         }
         function increment_by_id(elementId) {
             document.getElementById(elementId).stepUp();

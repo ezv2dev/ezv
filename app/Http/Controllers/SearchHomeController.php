@@ -152,6 +152,72 @@ class SearchHomeController extends Controller
                     $villas = Villa::whereIn('id_villa', $highestIds)->whereIn('id_villa', $villaIds)->whereHas('location', function (Builder $query) use ($location) {
                         $query->where('name', 'like', '%' . $location . '%');
                     })->where('status', 1)->get();
+                } else if ($fSort == 'ezv_top_pick') {
+                    $villas = Villa::where('grade', 'AA')->whereIn('id_villa', $villaIds)->whereHas('location', function (Builder $query) use ($location) {
+                        $query->where('name', 'like', '%' . $location . '%');
+                    })->where('status', 1)->get();
+                } else if ($fSort == 'beach') {
+                    // ! Find Beach
+                    $k = 0;
+                    $l = 0;
+                    $near2 = array();
+
+                    // ! End find Beach
+                    $villas = Villa::whereIn('id_villa', $villaIds)->whereHas('location', function (Builder $query) use ($location) {
+                        $query->where('name', 'like', '%' . $location . '%');
+                    })->where('status', 1)->get();
+
+                    foreach ($villas as $item3) {
+                        $things_loc2 = Activity::where('id_location', $item3->id_location)->join('activity_has_subcategory', 'activity.id_activity', '=', 'activity_has_subcategory.id_activity', 'left')
+                            ->select('name', 'latitude', 'longitude', 'id_location', 'id_subcategory', 'activity.id_activity')
+                            ->where('id_subcategory', 1)
+                            ->where('status', 1)
+                            ->get();
+
+                        if (count($things_loc2) == 0) {
+                            $things_loc2 = Activity::where('id_location', $item3->id_location)
+                                ->select('name', 'latitude', 'longitude', 'id_location')
+                                ->where('status', 1)
+                                ->get();
+
+                            if (count($things_loc2) == 0) {
+                                $things_loc2 = Activity::where('id_activity', 3)
+                                    ->select('name', 'latitude', 'longitude', 'id_location')
+                                    ->get();
+                            }
+                        }
+
+                        $point2 = array('lat' => $item3->latitude, 'long' => $item3->longitude, 'name' => $item3->name);
+
+                        foreach ($things_loc2 as $item4) {
+                            $lat3 = $point2['lat'];
+                            $lon3 = $point2['long'];
+                            $lat4 = $item4->latitude;
+                            $lon4 = $item4->longitude;
+                            $name2 = $item4->name;
+                            $theta = $lon3 - $lon4;
+
+                            $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta)));
+                            $miles2 = acos($miles2);
+                            $miles2 = rad2deg($miles2);
+                            $miles2 = $miles2 * 60 * 1.1515;
+                            $kilometers2[$k][] = ($miles2 * 1.609344 / 40) * 60;
+                            $kilometers2[$k][] = $name2;
+
+                            if ($near2 == null) {
+                                $near2[0] = $kilometers2[$k];
+                            } else {
+                                if ($kilometers2[$k][0] <= $near2[0][0]) {
+                                    $near2[0] = $kilometers2[$k];
+                                }
+                            }
+                            $k++;
+                        }
+                        $villas[$l]['km2'] = $near2[0][0];
+                        $villas[$l]['beach'] = $near2[0][1];
+
+                        $l++;
+                    }
                 }
             }
         } else {
@@ -176,6 +242,71 @@ class SearchHomeController extends Controller
                     $countHighest = DetailReview::orderBy('average', 'DESC')->get();
                     $highestIds = $countHighest->pluck('id_villa');
                     $villas = Villa::whereIn('id_villa', $highestIds)->whereIn('id_villa', $villaIds)->where('status', 1)->get();
+                } else if ($fSort == 'ezv_top_pick') {
+                    $villaIds = $villa->modelKeys();
+                    $villas = Villa::where('grade', 'AA')->whereIn('id_villa', $villaIds)->where('status', 1)->get();
+                } else if ($fSort == 'beach') {
+                    $villaIds = $villa->modelKeys();
+
+                    // ! Find Beach
+                    $k = 0;
+                    $l = 0;
+                    $near2 = array();
+
+                    // ! End find Beach
+                    $villas = Villa::whereIn('id_villa', $villaIds)->where('status', 1)->get();
+
+                    foreach ($villas as $item3) {
+                        $things_loc2 = Activity::where('id_location', $item3->id_location)->join('activity_has_subcategory', 'activity.id_activity', '=', 'activity_has_subcategory.id_activity', 'left')
+                            ->select('name', 'latitude', 'longitude', 'id_location', 'id_subcategory', 'activity.id_activity')
+                            ->where('id_subcategory', 1)
+                            ->where('status', 1)
+                            ->get();
+
+                        if (count($things_loc2) == 0) {
+                            $things_loc2 = Activity::where('id_location', $item3->id_location)
+                                ->select('name', 'latitude', 'longitude', 'id_location')
+                                ->where('status', 1)
+                                ->get();
+
+                            if (count($things_loc2) == 0) {
+                                $things_loc2 = Activity::where('id_activity', 3)
+                                    ->select('name', 'latitude', 'longitude', 'id_location')
+                                    ->get();
+                            }
+                        }
+
+                        $point2 = array('lat' => $item3->latitude, 'long' => $item3->longitude, 'name' => $item3->name);
+
+                        foreach ($things_loc2 as $item4) {
+                            $lat3 = $point2['lat'];
+                            $lon3 = $point2['long'];
+                            $lat4 = $item4->latitude;
+                            $lon4 = $item4->longitude;
+                            $name2 = $item4->name;
+                            $theta = $lon3 - $lon4;
+
+                            $miles2 = (sin(deg2rad($lat3)) * sin(deg2rad($lat4))) + (cos(deg2rad($lat3)) * cos(deg2rad($lat4)) * cos(deg2rad($theta)));
+                            $miles2 = acos($miles2);
+                            $miles2 = rad2deg($miles2);
+                            $miles2 = $miles2 * 60 * 1.1515;
+                            $kilometers2[$k][] = ($miles2 * 1.609344 / 40) * 60;
+                            $kilometers2[$k][] = $name2;
+
+                            if ($near2 == null) {
+                                $near2[0] = $kilometers2[$k];
+                            } else {
+                                if ($kilometers2[$k][0] <= $near2[0][0]) {
+                                    $near2[0] = $kilometers2[$k];
+                                }
+                            }
+                            $k++;
+                        }
+                        $villas[$l]['km2'] = $near2[0][0];
+                        $villas[$l]['beach'] = $near2[0][1];
+
+                        $l++;
+                    }
                 }
             }
         }

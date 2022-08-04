@@ -500,5 +500,6 @@ return [
 
     "data not found" => "data tidak ditemukan",
     "Popular Stays Nearby" => "Penginapan Populer Terdekat",
+    "Min Stay" => "Min Stay",
 
 ];
