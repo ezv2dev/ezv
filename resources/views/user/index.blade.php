@@ -164,7 +164,7 @@
             @else
                 <div class="d-flex align-items-center">
                     <div class="flex-fill d-flex align-items-center">
-                        <a type="button" onclick="view_LoginModal();" href="#"
+                        <a type="button" onclick="view_LoginModal('login');" href="#"
                             class="btn btn-fill border-0 d-flex align-items-center btn-login"
                             style="color: #ddd; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                             id="login">
@@ -812,8 +812,8 @@
                             <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                                 <div id="myDropdown" class="dropdown-content">
-                                    <a onclick="view_LoginModal();">Login</a>
-                                    <a onclick="view_LoginModal();">Register</a>
+                                    <a href="#" onclick="view_LoginModal('login');">Login</a>
+                                    <a href="#" onclick="view_LoginModal('register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -1310,6 +1310,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when user filled location
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -1453,15 +1467,12 @@
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
                 if (window.scrollY == 0) {
-                    document.getElementById("ul").classList.remove("ul-display-none");
-                    document.getElementById("ul").classList.add("ul-display-block");
-                    document.getElementById("bar").classList.remove("display-none");
-                    document.querySelector("#searchbox").classList.add("display-none");
-                    document.querySelector("#searchbox").classList.remove("display-block");
-                    document.getElementById("nav").classList.remove("position-fixed");
-                    document.getElementById("nav").classList.remove("padding-top-0");
-                    document.getElementById("searchbox-mob").classList.add("display-none");
-                    document.getElementById("searchbox-mob").classList.remove("display-block");
+                        //$('#ul').show();
+                        $('#ul').removeClass('ul-display-none').addClass('ul-display-block');
+                        $('#bar').removeClass('display-none');
+                        $('#searchbox').removeClass('display-block').addClass('display-none');
+                        $('#nav').removeClass('position-fixed').removeClass('padding-top-0');
+                        $('#searchbox-mob').removeClass('display-block').addClass('display-none');
 
                     function removeClass(elements, className) {
                         for (var i = 0; i < elements.length; i++) {
@@ -1479,19 +1490,13 @@
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     removeClass(els, 'display-none');
                 } else {
-                    if (!isFocused || window.innerWidth > 991) {
+                    if (!isFocused && window.innerWidth > 991) {
                         console.log("oke");
-                        document.getElementById("ul").classList.add("ul-display-none");
-                        document.getElementById("ul").classList.remove("ul-display-block");
-                        document.getElementById("bar").classList.add("display-none");
-                        document.querySelector("#searchbox").classList.remove("display-none");
-                        document.querySelector("#searchbox").classList.add("display-block");
-                        document.getElementById("nav").classList.add("position-fixed");
-                        document.getElementById("nav").classList.add("padding-top-0");
-                        document.getElementById("nav").classList.remove("search-height");
-                        document.getElementById("searchbox-mob").classList.remove("display-none");
-                        document.getElementById("searchbox-mob").classList.add("display-block");
-
+                        $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
+                        $('#bar').addClass('display-none');
+                        $('#searchbox').removeClass('display-none').addClass('display-block');
+                        $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
+                        $('#searchbox-mob').removeClass('display-none').addClass('display-block');
 
                         function addClass(elements, className) {
                             for (var i = 0; i < elements.length; i++) {
@@ -1516,13 +1521,43 @@
                                 }
                             }
                         }
-
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
+                    } else {
+                        if(!isFocused && $(window).scrollTop() > 200) {
+                            // $('#ul').hide();
+                            $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
+                            $('#bar').addClass('display-none');
+                            $('#searchbox').removeClass('display-none').addClass('display-block');
+                            $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
+                            $('#searchbox-mob').removeClass('display-none').addClass('display-block');
 
+                            function addClass(elements, className) {
+                                for (var i = 0; i < elements.length; i++) {
+                                    var element = elements[i];
+                                    if (element.classList) {
+                                        element.classList.add(className);
+                                    } else {
+                                        element.className += ' ' + className;
+                                    }
+                                }
+                            }
 
-
-
+                            function removeClass(elements, className) {
+                                for (var i = 0; i < elements.length; i++) {
+                                    var element = elements[i];
+                                    if (element.classList) {
+                                        element.classList.remove(className);
+                                    } else {
+                                        element.className = element.className.replace(new RegExp('(^|\\b)' + className
+                                            .split(' ')
+                                            .join('|') + '(\\b|$)', 'gi'), ' ');
+                                    }
+                                }
+                            }
+                            var els = document.getElementsByClassName("flatpickr-calendar");
+                            addClass(els, 'display-none');
+                        }
                     }
                 }
             });
@@ -1530,6 +1565,7 @@
 
         <script>
             function popUp() {
+                //$('#ul').show();
                 document.getElementById("ul").classList.remove("ul-display-none");
                 document.getElementById("ul").classList.add("ul-display-block");
                 document.getElementById("bar").classList.remove("display-none");
@@ -1555,7 +1591,18 @@
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -1564,6 +1611,7 @@
             }
 
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');
@@ -1580,12 +1628,16 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(1);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(2);
                         });
                         calendar_search(2);
@@ -1651,8 +1703,21 @@
             })
         </script>
         <script>
-            function view_LoginModal() {
+            function view_LoginModal(type) {
+                sidebarhide();
                 $('#LoginModal').modal('show');
+                if(type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
+
             }
         </script>
 
@@ -1779,7 +1844,7 @@
 
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");

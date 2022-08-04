@@ -206,6 +206,12 @@
             position: relative;
             display: inline-block;
         }
+        
+        @media only screen and (max-width: 991px) {
+            .dropdown {
+            display: none !important;
+            }
+        }
 
         .dropdown-content {
             display: none;
@@ -237,6 +243,14 @@
 
         .show {
             display: block;
+        }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
         }
     </style>
 
@@ -3543,7 +3557,7 @@
         </div>
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -3788,6 +3802,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when location click
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -3801,6 +3829,8 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(1);
                         });
                         $("#clear_date_wow").click(function() {
@@ -4168,13 +4198,24 @@
                     $('#loginAlert').addClass('d-none');
                     $('#registerAlert').addClass('d-none');
                 }
-
+                sidebarhide();
                 $('#LoginModal').modal('show');
             }
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -4183,6 +4224,7 @@
             }
 
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');

@@ -4640,67 +4640,17 @@ input::placeholder {
     object-fit: cover;
 }
 
-/*Dropdown users stile*/
+/*Dropdowm login 2 */
+    .btn-dropdwn {
+        padding: 0 !important;
+    }
 
-.dropbtn2 {
-    margin-right: 0px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #ff7400 !important;
-}
-
-.dropbtn2:hover {
-    --tw-shadow: none;
-    box-shadow: none;
-    transition: none;
-}
-
-.dropbtn2::after {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f007";
-    color: #fff;
-    font-size: 18px;
-}
-
-.dropbtn2:hover, .dropbtn2:focus {
-    background-color: #ff7400;
-}
-
-.dropdown2 {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content2 {
+    .dropdwn-container {
+        position: relative;
+        margin: auto;
+    }
+  
+    .dropdwn {
     display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 225px;
-    overflow: auto;
-    z-index: 1;
-    right: 0;
-    top: 70px;
-    border-radius: 15px;
-    border: solid 2px #ff7400;
-    padding: 10px 0;
-    text-align: left;
-}
-
-.dropdown-content2 a {
-    color: #282828;
-    text-decoration: none;
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 16px;
-}
-
-.dropdown2 a:hover {
-    color: #ff7400;
-}
-
-.show {
-    display: block;
-}
+    right: 23px !important;
+    }

@@ -1090,11 +1090,23 @@
 
 
     <script>
+        function sidebarhide() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        }
         function language() {
+            sidebarhide();
             $('#ModalLanguage').modal('show');
         }
 
         function currency() {
+            sidebarhide();
             $('#ModalCurrency').modal('show');
         }
     </script>

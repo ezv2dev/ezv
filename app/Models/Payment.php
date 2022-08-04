@@ -11,5 +11,5 @@ class Payment extends Model
     ];
 
     protected $table = 'payment';
-    protected $primaryKey = 'external_id';
+    protected $primaryKey = 'id_payment';
 }

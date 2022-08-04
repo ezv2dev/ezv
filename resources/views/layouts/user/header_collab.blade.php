@@ -810,6 +810,12 @@
             display: inline-block;
         }
 
+        @media only screen and (max-width: 991px) {
+            .dropdown {
+            display: none !important;
+            }
+        }
+
         .dropdown-content {
             display: none;
             position: absolute;

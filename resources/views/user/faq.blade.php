@@ -52,12 +52,12 @@
 
     <style>
         .accordion .accordion-header:after {
-            font-family: 'FontAwesome';  
+            font-family: 'FontAwesome';
             content: "\f077";
-            float: right; 
+            float: right;
         }
         .accordion .accordion-header.collapsed:after {
-            content: "\f078"; 
+            content: "\f078";
         }
         .nav-item a img {
             height: auto;
@@ -941,7 +941,18 @@
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -949,6 +960,7 @@
                 $('#content-tab-currency').removeClass('active');
             }
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');
