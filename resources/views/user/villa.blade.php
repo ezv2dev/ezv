@@ -102,7 +102,7 @@
             <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     <input type="hidden" id="instant_book_check" value="{{ $villa[0]->instant_book }}">
-                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '')
+                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '' || !isset($_COOKIE['sCheck_in']))
                     <input class="price-button" onclick="addDatesFunction()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                         value="{{ __('user_page.Check Availability') }}" readonly>
@@ -1798,7 +1798,7 @@
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
                     </a> -->
-                    
+
                     <div class="dropdown2">
                         <button onclick="myFunction2()" class="dropbtn2 btn border-0 navbar-gap"></button>
                         <div id="myDropdown2" class="dropdown-content2">
@@ -5703,7 +5703,7 @@
         }
     </script>
     <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction2() {
         document.getElementById("myDropdown2").classList.toggle("show");
