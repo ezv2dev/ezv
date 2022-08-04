@@ -16,15 +16,15 @@
         overflow-y: auto !important;
     }
 
-    #modal-edit_price .modal-dialog{
-    position: absolute !important;
-    top: 0px !important;
-    left: 0px !important;
-    right: 0px !important;
-    bottom: 0px !important;
+    #modal-edit_price .modal-dialog {
+        position: absolute !important;
+        top: 0px !important;
+        left: 0px !important;
+        right: 0px !important;
+        bottom: 0px !important;
     }
 
-    #modal-edit_price .modal-dialog .modal-content{
+    #modal-edit_price .modal-dialog .modal-content {
         height: 100% !important;
         margin: 0px !important;
     }
@@ -143,38 +143,47 @@
         background-color: #ff7400;
         box-shadow: none;
     }
+
     @media only screen and (max-width: 767px) {
         .modal-dialog .modal-content {
             border-radius: 0px !important;
         }
+
         .modal-header-editprice,
         .modal-body-editprice {
             padding: 1rem !important;
         }
+
         .modal-header-editprice .nav {
             overflow-x: scroll !important;
             overflow-y: hidden !important;
         }
+
         .modal-header-editprice .nav li a {
             white-space: nowrap !important;
         }
+
         .modal-body-editprice .tab-pane .modal-header-editprice {
             padding: 2rem 3rem 2rem 2rem !important;
         }
+
         .info-todo {
             margin-left: 0px !important;
             margin-right: 0px !important;
         }
     }
+
     @media only screen and (min-width: 768px) and (max-width: 991px) {
         .button-submit-container button {
             width: 100% !important;
         }
     }
+
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
         #btn-submit-availability {
             margin-left: -35px;
         }
+
         #submitSpecialPrice {
             margin-left: -45px;
         }
@@ -186,27 +195,29 @@
     aria-labelledby="modal-default-fadein" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content" style="border-radius:15px;">
-            <div class="modal-header-editprice"
-            style="border-bottom: 0.1rem solid #2C3333 !important;">
+            <div class="modal-header-editprice" style="border-bottom: 0.1rem solid #2C3333 !important;">
                 <div class="row">
                     <div class="col-11">
                         <ul class="nav filter-language-option-container nav-tabs sideTab column"
                             style="display: flex; flex-wrap: nowrap; padding-bottom: 0px !important;">
-                            <li id="trigger-tab-price" onclick="switchTabPrice('price')" class="active modal-price-title">
+                            <li id="trigger-tab-price" onclick="switchTabPrice('price')"
+                                class="active modal-price-title">
                                 <a class="tab1 filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600;">
                                     {{ __('user_page.Edit Price') }}
                                 </a>
                             </li>
-                            <li id="trigger-tab-availability" onclick="switchTabPrice('availability')" class="modal-price-title" style="margin-left: 55px;">
+                            <li id="trigger-tab-availability" onclick="switchTabPrice('availability')"
+                                class="modal-price-title" style="margin-left: 55px;">
                                 <a class="filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600; margin-left: -50px;">
                                     {{ __('user_page.Villa Availability') }}
                                 </a>
                             </li>
-                            <li id="trigger-tab-extraprice" onclick="switchTabPrice('extraprice')" class="modal-price-title" style="margin-left: 55px;">
+                            <li id="trigger-tab-extraprice" onclick="switchTabPrice('extraprice')"
+                                class="modal-price-title" style="margin-left: 55px;">
                                 <a class="filter-language-option-text" data-toggle="tab"
                                     style="font-size: 12pt;
                                     font-weight: 600; margin-left: -50px;">
@@ -227,7 +238,8 @@
                     <div class="tab-content tab-content-language column rigth" id="tabs">
                         <div class="tab-pane active" id="editprice">
                             <!-- Sub Header Tab Edit Price -->
-                            <div class="modal-header-editprice" style="
+                            <div class="modal-header-editprice"
+                                style="
                             margin-top: -25px;
                             margin-bottom: -20px;">
                                 <div class="row">
@@ -294,8 +306,9 @@
                                                     </strong>
                                                 </label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" min="0" class="form-control" id="villa-price"
-                                                        name="price" placeholder="Price.." value="{{ $villa[0]->price }}">
+                                                    <input type="number" min="0" class="form-control"
+                                                        id="villa-price" name="price" placeholder="Price.."
+                                                        value="{{ $villa[0]->price }}">
                                                     <small id="err-prc" style="display: none;"
                                                         class="invalid-feedback">{{ __('auth.empty_price') }}</small>
                                                 </div>
@@ -304,7 +317,8 @@
                                             <div class="row mb-12 mt-3">
                                                 <label class="col-sm-4 col-form-label" for="price">
                                                     <strong>{{ __('user_page.Commission') }}
-                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">*</span>
+                                                        <span title="Required"
+                                                            style="font-size: 12pt; color: #EB5353;">*</span>
                                                     </strong>
                                                 </label>
                                                 <div class="col-sm-8">
@@ -327,7 +341,8 @@
                                                 <label class="col-sm-4 col-form-label" for="price">
                                                     <strong>
                                                         {{ __('user_page.Instant Book') }}
-                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">
+                                                        <span title="Required"
+                                                            style="font-size: 12pt; color: #EB5353;">
                                                             *
                                                         </span>
                                                     </strong>
@@ -351,13 +366,15 @@
                                                 <label class="col-sm-4 col-form-label" for="min_stay">
                                                     <strong>
                                                         {{ __('user_page.Min Stay') }}
-                                                        <span title="Required" style="font-size: 12pt; color: #EB5353;">
+                                                        <span title="Required"
+                                                            style="font-size: 12pt; color: #EB5353;">
                                                         </span>
                                                     </strong>
                                                 </label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" min="0" class="form-control" id="villa-min-stay"
-                                                        name="min_stay" placeholder="Min Stay.." value="{{ $villa[0]->min_stay }}">
+                                                    <input type="number" min="0" class="form-control"
+                                                        id="villa-min-stay" name="min_stay" placeholder="Min Stay.."
+                                                        value="{{ $villa[0]->min_stay }}">
                                                     {{-- <small id="err-min" style="display: none;"
                                                         class="invalid-feedback">{{ __('auth.empty_price') }}</small> --}}
                                                 </div>
@@ -386,7 +403,8 @@
                                                 value="{{ $villa[0]->id_villa }}">
 
                                             <div class="row">
-                                                <div class="col-12 col-md-8" style="height: 60vh; overflow-y: scroll;">
+                                                <div class="col-12 col-md-8"
+                                                    style="height: 60vh; overflow-y: scroll;">
                                                     <div id="calendar"></div>
                                                 </div>
 
@@ -394,16 +412,22 @@
 
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <label for="">{{ __('user_page.Start date') }}</label>
-                                                            <input type="text" class="form-control" id="start" name="start"
-                                                                placeholder="{{ __('user_page.Start date') }}.." readonly>
+                                                            <label
+                                                                for="">{{ __('user_page.Start date') }}</label>
+                                                            <input type="text" class="form-control" id="start"
+                                                                name="start"
+                                                                placeholder="{{ __('user_page.Start date') }}.."
+                                                                readonly>
                                                             <small id="err-sdate" style="display: none;"
                                                                 class="invalid-feedback">{{ __('auth.empty_sdate') }}</small>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <label for="">{{ __('user_page.End date') }}</label>
-                                                            <input type="text" class="form-control" id="end" name="end"
-                                                                placeholder="{{ __('user_page.End date') }}.." readonly>
+                                                            <label
+                                                                for="">{{ __('user_page.End date') }}</label>
+                                                            <input type="text" class="form-control" id="end"
+                                                                name="end"
+                                                                placeholder="{{ __('user_page.End date') }}.."
+                                                                readonly>
                                                             <small id="err-edate" style="display: none;"
                                                                 class="invalid-feedback">{{ __('auth.empty_edate') }}</small>
                                                         </div>
@@ -412,32 +436,37 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <label>{{ __('user_page.Price') }}</label>
-                                                            <input type="number" class="form-control" id="special_price"
-                                                                name="special_price" placeholder="{{ __('user_page.Price') }}..">
+                                                            <input type="number" class="form-control"
+                                                                id="special_price" name="special_price"
+                                                                placeholder="{{ __('user_page.Price') }}..">
                                                             <small id="err-spcl-prc" style="display: none;"
                                                                 class="invalid-feedback">{{ __('auth.empty_special_price') }}</small>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>{{ __('user_page.Discount') }}</label>
-                                                            <input type="number" class="form-control" id="disc" name="disc"
+                                                            <input type="number" class="form-control" id="disc"
+                                                                name="disc"
                                                                 placeholder="{{ __('user_page.Discount') }}..">
                                                             <small id="err-disc" style="display: none;"
                                                                 class="invalid-feedback">{{ __('auth.empty_discount') }}</small>
                                                         </div>
                                                     </div>
 
-                                                        <!-- Submit -->
-                                                        <div class="row items-push">
-                                                            <center>
-                                                                <div class="col-12 col-lg-6 button-submit-container">
-                                                                    <button type="submit" class="btn btn-sm btn-primary mt-3"
-                                                                        id="submitSpecialPrice" form="edit-special-price" style="width: 200px;">
-                                                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                                                                    </button>
-                                                                </div>
-                                                            </center>
-                                                        </div>
-                                                        <!-- END Submit -->
+                                                    <!-- Submit -->
+                                                    <div class="row items-push">
+                                                        <center>
+                                                            <div class="col-12 col-lg-6 button-submit-container">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary mt-3"
+                                                                    id="submitSpecialPrice" form="edit-special-price"
+                                                                    style="width: 200px;">
+                                                                    <i class="fa fa-check"></i>
+                                                                    {{ __('user_page.Save') }}
+                                                                </button>
+                                                            </div>
+                                                        </center>
+                                                    </div>
+                                                    <!-- END Submit -->
                                                 </div>
                                             </div>
 
@@ -482,7 +511,8 @@
                         </div>
 
                         <div class="tab-pane" id="availablity">
-                            <div class="modal-header-editprice" style="
+                            <div class="modal-header-editprice"
+                                style="
                             margin-top: -25px;
                             margin-bottom: -20px;">
                                 <div class="row">
@@ -563,8 +593,8 @@
                                                     <center>
                                                         <div class="col-12 col-lg-6 button-submit-container">
                                                             <button type="submit" id="btn-submit-availability"
-                                                                class="btn btn-sm btn-danger mt-2"
-                                                                name="action" style="width: 200px;">
+                                                                class="btn btn-sm btn-danger mt-2" name="action"
+                                                                style="width: 200px;">
                                                                 <i class="fa fa-floppy-disk"></i>
                                                                 {{ __('user_page.Save Date') }}
                                                             </button>
@@ -616,14 +646,15 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4 style="margin-bottom: -10px;">{{ __('user_page.Extra Guest') }}</h4>
+                                        <h4 style="margin-bottom: -10px;">Extra Person (without bed)</h4>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Max Guest') }}</label>
                                         <input type="number" class="form-control" id="max_guest" name="max_guest"
-                                            placeholder="{{ __('user_page.Input Max Guest') }}"
+                                            placeholder="Input Max Person"
                                             value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
-                                        <small id="err-mxguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
+                                        <small id="err-mxguest" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -631,7 +662,8 @@
                                             name="price_extra_guest"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
-                                        <small id="err-exguest" style="display: none;" class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
+                                        <small id="err-exguest" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -639,14 +671,15 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h4 style="margin-bottom: -10px; margin-top: 20px;">
-                                            {{ __('user_page.Extra Bed') }}</h4>
+                                            Extra Bed (Include Extra Person)</h4>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Max Bed') }}</label>
                                         <input type="number" class="form-control" id="max_bed" name="max_bed"
                                             placeholder="{{ __('user_page.Input Max Bed') }}"
                                             value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
-                                        <small id="err-maxbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
+                                        <small id="err-maxbed" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
                                     </div>
                                     <div class="col-12">
                                         <label>{{ __('user_page.Price per Person') }}</label>
@@ -654,7 +687,8 @@
                                             name="price_extra_bed"
                                             placeholder="{{ __('user_page.Input Price per Person') }}"
                                             value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
-                                        <small id="err-exbed" style="display: none;" class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
+                                        <small id="err-exbed" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                     </div>
                                 </div>
                                 <hr class="mt-5">
@@ -681,15 +715,18 @@
                                         <input type="number" class="form-control" id="max_pet" name="max_pet"
                                             placeholder="{{ __('user_page.Input Max Pet') }}"
                                             value="{{ !empty($villaExtraPet->max) ? $villaExtraPet->max : '' }}">
-                                        <small id="err-maxpet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_mpet') }}</small>
+                                        <small id="err-maxpet" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_mpet') }}</small>
                                     </div>
-                                    <div class="col-12 {{ !empty($villaExtraPet->deposit) == 1 ? 'd-block' : 'd-none' }}" id="depositPrice">
+                                    <div class="col-12 {{ !empty($villaExtraPet->deposit) == 1 ? 'd-block' : 'd-none' }}"
+                                        id="depositPrice">
                                         <label>{{ __('user_page.Deposit Price') }}</label>
                                         <input type="number" class="form-control" id="price_extra_pet"
                                             name="price_extra_pet"
                                             placeholder="{{ __('user_page.Input Deposit Price') }}"
                                             value="{{ !empty($villaExtraPet->price_deposit) ? $villaExtraPet->price_deposit : '' }}">
-                                        <small id="err-expet" style="display: none;" class="invalid-feedback">{{ __('auth.empty_expet') }}</small>
+                                        <small id="err-expet" style="display: none;"
+                                            class="invalid-feedback">{{ __('auth.empty_expet') }}</small>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center">
@@ -811,8 +848,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
-    function switchTabPrice(indicator){
-        if(indicator == 'availability'){
+    function switchTabPrice(indicator) {
+        if (indicator == 'availability') {
             $('#trigger-tab-price').removeClass('active');
             $('#editprice').removeClass('active');
             $('#extraPrice').removeClass('active');
@@ -821,7 +858,7 @@
             $('#trigger-tab-availability').addClass('active');
             $('#availablity').addClass('active');
         }
-        if(indicator == 'extraprice'){
+        if (indicator == 'extraprice') {
             $('#trigger-tab-extraprice').addClass('active');
             $('#extraPrice').addClass('active');
             $('#trigger-tab-availability').removeClass('active');
@@ -829,7 +866,7 @@
             $('#trigger-tab-price').removeClass('active');
             $('#editprice').removeClass('active');
         }
-        if(indicator == 'price') {
+        if (indicator == 'price') {
             $('#trigger-tab-extraprice').removeClass('active');
             $('#extraPrice').removeClass('active');
             $('#trigger-tab-availability').removeClass('active');
@@ -860,13 +897,13 @@
             $('#max_pet').removeClass('is-invalid');
             $('#err-maxpet').hide();
         });
-        $('#price_extra_pet').keyup(function (e) {
+        $('#price_extra_pet').keyup(function(e) {
             $('#price_extra_pet').removeClass('is-invalid');
             $('#err-expet').hide();
         });
         $('#edit-extra').submit(function(e) {
             let error = 0;
-            if(!$('#max_guest').val()) {
+            if (!$('#max_guest').val()) {
                 $('#max_guest').addClass('is-invalid');
                 $('#err-mxguest').show();
                 error = 1;
@@ -874,7 +911,7 @@
                 $('#max_guest').removeClass('is-invalid');
                 $('#err-mxguest').hide();
             }
-            if(!$('#price_extra_guest').val()) {
+            if (!$('#price_extra_guest').val()) {
                 $('#price_extra_guest').addClass('is-invalid');
                 $('#err-exguest').show();
                 error = 1;
@@ -882,7 +919,7 @@
                 $('#price_extra_guest').removeClass('is-invalid');
                 $('#err-exguest').hide();
             }
-            if(!$('#max_bed').val()) {
+            if (!$('#max_bed').val()) {
                 $('#max_bed').addClass('is-invalid');
                 $('#err-maxbed').show();
                 error = 1;
@@ -890,7 +927,7 @@
                 $('#max_bed').removeClass('is-invalid');
                 $('#err-maxbed').hide();
             }
-            if(!$('#price_extra_bed').val()) {
+            if (!$('#price_extra_bed').val()) {
                 $('#price_extra_bed').addClass('is-invalid');
                 $('#err-exbed').show();
                 error = 1;
@@ -898,7 +935,7 @@
                 $('#price_extra_bed').removeClass('is-invalid');
                 $('#err-exbed').hide();
             }
-            if(!$('#max_pet').val()) {
+            if (!$('#max_pet').val()) {
                 $('#max_pet').addClass('is-invalid');
                 $('#err-maxpet').show();
                 error = 1;
@@ -906,8 +943,8 @@
                 $('#max_pet').removeClass('is-invalid');
                 $('#err-maxpet').hide();
             }
-            if($('#depositPrice').hasClass('d-block')) {
-                if(!$('#price_extra_pet').val()) {
+            if ($('#depositPrice').hasClass('d-block')) {
+                if (!$('#price_extra_pet').val()) {
                     $('#price_extra_pet').addClass('is-invalid');
                     $('#err-expet').show();
                     error = 1;
@@ -917,7 +954,7 @@
                 }
             }
 
-            if(error == 1) {
+            if (error == 1) {
                 e.preventDefault();
             } else {
                 let btn = document.getElementById("sbmt-extra");
@@ -926,7 +963,7 @@
             }
         });
     });
-    </script>
+</script>
 <script>
     $(function() {
         $("#villa-price").keyup(function() {
@@ -1008,7 +1045,7 @@
             // $('#addSpecialModal').modal('show');
         },
 
-        eventClick: function (event) {
+        eventClick: function(event) {
             // var start = moment(event.start).format('YYYY-MM-DD');
             // var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
             // $('#start').val(start);
@@ -1048,7 +1085,8 @@
                         }
                     });
                 } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    Swal.fire(`{{ __('user_page.Cancel') }}`,
+                        `{{ __('user_page.Canceled Deleted Data') }}`,
                         'error')
                 }
             });
@@ -1116,7 +1154,7 @@
             // calendar2.fullCalendar('selected');
             // $('#addSpecialModal').modal('show');
         },
-        eventClick: function (event) {
+        eventClick: function(event) {
             let id = event.id_availability;
             Swal.fire({
                 title: `{{ __('user_page.Delete Date Availability?') }}`,
@@ -1152,7 +1190,8 @@
                         }
                     });
                 } else {
-                    Swal.fire(`{{ __('user_page.Cancel') }}`, `{{ __('user_page.Canceled Deleted Data') }}`,
+                    Swal.fire(`{{ __('user_page.Cancel') }}`,
+                        `{{ __('user_page.Canceled Deleted Data') }}`,
                         'error')
                 }
             });
@@ -1166,7 +1205,6 @@
             return seen.has(k) ? false : seen.add(k);
         });
     }
-
 </script>
 
 <!-- Datatables CSS -->
@@ -1263,22 +1301,22 @@
 </script>
 
 <script>
-    $('#special_price').keyup(function (e) {
+    $('#special_price').keyup(function(e) {
         $('#special_price').removeClass('is-invalid');
         $('#err-spcl-prc').hide();
     });
-    $('#start').change(function (e) {
+    $('#start').change(function(e) {
         $('#start').removeClass('is-invalid');
         $('#err-sdate').hide();
     });
-    $('#end').change(function (e) {
+    $('#end').change(function(e) {
         $('#end').removeClass('is-invalid');
         $('#err-edate').hide();
     });
 
-    $("#edit-special-price").submit(function (e) {
+    $("#edit-special-price").submit(function(e) {
         let error = 0;
-        if(!$('#start').val()) {
+        if (!$('#start').val()) {
             $('#start').addClass('is-invalid');
             $('#err-sdate').show();
             error = 1;
@@ -1286,7 +1324,7 @@
             $('#start').removeClass('is-invalid');
             $('#err-sdate').hide();
         }
-        if(!$('#end').val()) {
+        if (!$('#end').val()) {
             $('#end').addClass('is-invalid');
             $('#err-edate').show();
             error = 1;
@@ -1306,8 +1344,7 @@
         }
         if (error == 1) {
             e.preventDefault();
-        }
-        else {
+        } else {
             let btn = document.getElementById("submitSpecialPrice");
             btn.textContent = "Saving Date...";
             btn.classList.add("disabled");
@@ -1351,7 +1388,7 @@
                     btn.innerHTML = '<i class="fa fa-check"></i> {{ __('user_page.Save') }}';
                     btn.classList.remove("disabled");
                 },
-                error: function (jqXHR, response) {
+                error: function(jqXHR, response) {
                     iziToast.error({
                         title: "Error",
                         message: jqXHR.responseJSON.message,
@@ -1439,7 +1476,8 @@
                 multiEvent = [];
                 d = "";
 
-                btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
+                btn.innerHTML =
+                    '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
                 btn.classList.remove("disabled");
 
                 // update All Calendar Detail
@@ -1447,14 +1485,15 @@
                 calendar_reserve(2);
                 calendar_reserve2(2);
             },
-            error: function (jqXHR, response) {
+            error: function(jqXHR, response) {
                 iziToast.error({
                     title: "Error",
                     message: jqXHR.responseJSON.message,
                     position: "topRight",
                 });
 
-                btn.innerHTML = '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
+                btn.innerHTML =
+                    '<i class="fa fa-floppy-disk"></i> {{ __('user_page.Save Date') }}';
                 btn.classList.remove("disabled");
             }
         });
@@ -1502,7 +1541,6 @@
     //         }
     //     });
     // }
-
 </script>
 
 <script type="text/javascript">

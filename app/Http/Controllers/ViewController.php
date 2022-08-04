@@ -881,7 +881,7 @@ class ViewController extends Controller
         }
 
         // check if the editor does not have authorization
-        $this->authorize('activity_update');
+        $this->authorize('listvilla_update');
         if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
             return response()->json([
                 'message' => 'This action is unauthorized',

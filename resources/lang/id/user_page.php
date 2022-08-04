@@ -459,7 +459,7 @@ return [
     "Import type file" => "Impor tipe berkas",
     "Import Calendar" => "Impor Kalender",
     "Save Date" => "Simpan Tanggal",
-    "Extra Guest" => "Tamu Ekstra",
+    "Extra Person" => "Tamu Ekstra",
     "Max Guest" => "Max Tamu",
     "Input Max Guest" => "Masukkan Max Tamu",
     "Input Price per Person" => "Masukkan Harga per Orang",

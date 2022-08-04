@@ -465,7 +465,7 @@ return [
     "Import type file" => "Import :type file",
     "Import Calendar" => "Import Calendar",
     "Save Date" => "Save Date",
-    "Extra Guest" => "Extra Guest",
+    "Extra Person" => "Extra Guest",
     "Max Guest" => "Max Guest",
     "Input Max Guest" => "Input Max Guest",
     "Input Price per Person" => "Input Price per Person",
