@@ -1824,10 +1824,22 @@
                     @endif
                 </a>
 
-                <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
-                </a>
+                </a> -->
+                
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                        <a onclick="loginForm(2)">Login</a>
+                        <a onclick="loginForm(2)">Register</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
+                        </div>
+                    </div>
             @endauth
 
         </div>
@@ -3954,7 +3966,7 @@
             $('#loginAlert').addClass('d-none');
             $('#registerAlert').addClass('d-none');
         }
-
+        sidebarhide();
         $('#LoginModal').modal('show');
     }
 </script>
@@ -4766,7 +4778,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
     function editDescriptionForm() {
         var formattedText = asciiToString(document.getElementById("description-form-input").value);
         document.getElementById("description-form-input").value = formattedText;
@@ -4792,7 +4804,7 @@
         }
         // formInput.value = '{{ $restaurant->description }}';
     }
-</script>
+</script> --}}
 {{-- END UPDATE FORM --}}
 
 {{-- DROPZONE JS --}}
@@ -5612,7 +5624,7 @@
 </script>
 
 {{-- PREVENT TEXTAREA TYPE ENTER --}}
-<script>
+{{-- <script>
     $("textarea").keydown(function(e) {
         // Enter was pressed without shift key
         if (e.keyCode == 13 && !e.shiftKey) {
@@ -5620,7 +5632,7 @@
             e.preventDefault();
         }
     });
-</script>
+</script> --}}
 
 
 {{-- modal laguage and currency --}}
@@ -5628,7 +5640,18 @@
 {{-- modal laguage and currency --}}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
+    function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
     function language() {
+        sidebarhide();
         $('#LegalModal').modal('show');
         $('#trigger-tab-language').addClass('active');
         $('#content-tab-language').addClass('active');
@@ -5637,6 +5660,7 @@
     }
 
     function currency() {
+        sidebarhide();
         $('#LegalModal').modal('show');
         $('#trigger-tab-language').removeClass('active');
         $('#content-tab-language').removeClass('active');
@@ -6196,4 +6220,18 @@
         }
     </script>
 @endif
+
+<script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script>
 </body>

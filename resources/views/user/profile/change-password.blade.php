@@ -133,13 +133,13 @@
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
         <div class="col-lg-12 home-content">
-            
+
             <div class="d-none" id="alertResponse">
                 <div class="alert alert-dismissible " role="alert">
                     <span></span>
                 </div>
             </div>
-            
+
             @if (session('success'))
             <div class="col-12">
                 <div style="background-color: #CCEEE1 !important; color: #005937 !important; " class="alert alert-danger alert-dismissible" role="alert">
@@ -168,10 +168,10 @@
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                     </div>
-    
+
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="label" for="password">New Password</label>
                     <div class="relative">
@@ -181,7 +181,7 @@
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                     </div>
-    
+
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
 
@@ -194,7 +194,7 @@
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                     </div>
-    
+
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
                 <button type="submit"
@@ -218,7 +218,7 @@
     <!-- END Page Container -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>    
+    </script>
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
@@ -277,7 +277,7 @@
                     let error = 0
                     $.each(input, function(index, value){
                         const validation = validate($(input[index]))
-                        validation ? error = 0 : error = 1 
+                        validation ? error = 0 : error = 1
                     })
 
                     if(error == 0){
@@ -288,7 +288,7 @@
                             url: $(this).attr('action'),
                             data: $(this).serialize(),
                             dataType: 'json',
-                            success: function( data ){  
+                            success: function( data ){
                                 $('#alertResponse .alert').removeClass('alert-success')
                                 $('#alertResponse .alert').removeClass('alert-warning')
                                 $('#alertResponse').removeClass('d-none')
@@ -302,10 +302,10 @@
                                     $(input[index]).val('')
                                 })
                             },
-                            error: function( response ){    
+                            error: function( response ){
                                 if(response.status == 200){
                                     $('.container-loading-animation').addClass('d-none')
-                                    $('#alertResponse').removeClass('d-none') 
+                                    $('#alertResponse').removeClass('d-none')
                                     $.each(input, function(index, value){
                                         $(input[index]).val('')
                                     })
@@ -316,16 +316,16 @@
                                         let parentInput = input.parent()
                                         let messageContainer = parentInput.parent().find('.invalid-feedback')
                                         let iconInput = parentInput.find('.icon-input-container')
-    
+
                                         $('.container-loading-animation').addClass('d-none')
                                         setErrorStyle(input, messageContainer, iconInput)
-    
+
                                         $.each(val, function(index, errMessage){
                                             $(messageContainer).text(errMessage)
                                         })
-                
+
                                     });
-                                }                       
+                                }
                             }
                         });
                     }
@@ -361,8 +361,8 @@
 
                 return status
             }
-            
-            function setErrorStyle(input, messageContainer, iconInput){                
+
+            function setErrorStyle(input, messageContainer, iconInput){
                 input.addClass('is-invalid')
                 iconInput.hide()
                 messageContainer.show()
@@ -462,7 +462,18 @@
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -470,6 +481,7 @@
                 $('#content-tab-currency').removeClass('active');
             }
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');

@@ -126,6 +126,12 @@
                         </a>
                         <div class="sort-popup dropdown-menu text-center">
                             <h5 style="margin-bottom: 0;">Sort by</h5>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">EZV Top Pick
+                                <input type="checkbox" class="fSort" name="fSort[]" value="ezv_top_pick"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'ezv_top_pick') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
                                 <input type="checkbox" class="fSort" name="fSort[]" value="highest"
                                     onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
@@ -148,6 +154,12 @@
                                 <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
                                     onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Closest to the Beach
+                                <input type="checkbox" class="fSort" name="fSort[]" value="beach"
+                                    onchange="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'beach') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -178,13 +190,15 @@
                     <div class="list-description {{ $textColor }}">{{ $item->name }}</div>
                 </div>
                 @endforeach
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                    onclick="modalFiltersHomes()">
                     <div>
                         <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                     </div>
                     <div class="list-description {{ $textColor }}">Filters</div>
                 </div>
-                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13" onclick="modalFiltersHomes()">
+                <div style="cursor:pointer;" class="grid-sub-cat-content-container text-13"
+                    onclick="modalFiltersHomes()">
                     <div>
                         <i class="fas fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
                     </div>

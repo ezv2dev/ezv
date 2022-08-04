@@ -7,8 +7,10 @@
                 <h5 class="modal-title">{{ __('user_page.Description') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="padding: 1rem 2rem 2rem 2rem !important;" id="modalDescriptionVilla">
-                {!! $villa[0]->description !!}
+            <div class="modal-body" style="padding: 1rem 2rem 2rem 2rem !important;">
+                <span id="modalDescriptionVilla">
+                    {!! $villa[0]->description !!}
+                </span>
             </div>
             <div class="modal-footer border-0"></div>
         </div>

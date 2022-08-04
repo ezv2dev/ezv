@@ -574,6 +574,25 @@
         }
 
         /* End Social Media */
+
+        /*Dropdowm login 2 */
+        .btn-dropdwn {
+            padding: 0 !important;
+        }
+
+        .drodwn-container {
+            position: relative;
+            margin-right: 26px;
+        }
+            
+        .dropdwn {
+        display: none;
+        right: 0 !important;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
+        }
     </style>
     {{-- /reorder video --}}
 </head>
@@ -891,7 +910,8 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-xs-12 profile-info">
-                        <h2 id="name-content">{{ $user->first_name }} {{ $user->last_name }}
+                        <h2 id="name-content">
+                            <span id="name-content2">{{ $user->first_name }} {{ $user->last_name }}</span>
                             @auth
                                 @if (Auth::user()->id == $profile->created_by)
                                     &nbsp;<a type="button" onclick="editNameForm({{ $profile->created_by }})"
@@ -1930,10 +1950,22 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('login') }}" class="btn btn-fill border-0 navbar-gap"
+                    <!-- <a href="{{ route('login') }}" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
-                    </a>
+                    </a> -->
+
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}">Register</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
+                        </div>
+                    </div>
                 @endauth
             </div>
         </div>
@@ -3530,7 +3562,7 @@
     {{-- END IMAGE UPLOAD --}}
 
     {{-- UPDATE FORM --}}
-    <script>
+    {{-- <script>
         function editNameForm() {
             var formattedText = asciiToString(document.getElementById("name-form-input").value);
             document.getElementById("name-form-input").value = formattedText;
@@ -3548,7 +3580,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $user->first_name }} {{ $user->last_name }}';
         }
-    </script>
+    </script> --}}
     {{-- END UPDATE FORM --}}
 
     {{-- CONTACT HOST --}}
@@ -4246,7 +4278,7 @@
     </script> --}}
 
     {{-- PREVENT TEXTAREA TYPE ENTER --}}
-    <script>
+    {{-- <script>
         $("textarea").keydown(function(e) {
             // Enter was pressed without shift key
             if (e.keyCode == 13 && !e.shiftKey) {
@@ -4254,7 +4286,7 @@
                 e.preventDefault();
             }
         });
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
         //copy link
@@ -4268,7 +4300,18 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -4276,12 +4319,27 @@
                 $('#content-tab-currency').removeClass('active');
             }
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');
                 $('#trigger-tab-currency').addClass('active');
                 $('#content-tab-currency').addClass('active');
             }
+    </script>
+    
+    <script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
     </script>
 
     @include('components.promotion.mobile-app')

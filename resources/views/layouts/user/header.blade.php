@@ -103,20 +103,26 @@
         }
 
         .dropbtn::after {
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900; 
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: "\f007";
             color: #fff;
             font-size: 18px;
         }
 
-        .dropbtn:hover, .dropbtn:focus {
+        .dropbtn:hover, .dropbtn1:focus {
             background-color: #ff7400;
         }
 
         .dropdown {
             position: relative;
             display: inline-block;
+        }
+
+        @media only screen and (max-width: 991px) {
+            .dropdown {
+            display: none !important;
+            }
         }
 
         .dropdown-content {
@@ -143,12 +149,20 @@
             padding: 6px 16px;
         }
 
-        .dropdown a:hover {
+        .dropdown1 a:hover {
             color: #ff7400;
         }
 
         .show {
             display: block;
+        }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
         }
     </style>
 
@@ -2913,12 +2927,12 @@
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
                 </a> -->
-                
+
                 <div class="dropdown">
-                    <button onclick="myFunction1()" class="dropbtn btn border-0 navbar-gap"></button>
+                    <button onclick="thisFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a onclick="loginForm(2)">Login</a>
+                        <a onclick="loginForm(2)">Register</a>
                         <hr>
                         <a href="{{ route('ahost') }}">Become a Host</a>
                         <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -3119,6 +3133,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when location click
+                    var content = document.getElementById('popup_check_search');
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -3440,9 +3468,9 @@
         </script>
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
-        function myFunction1() {
+        function thisFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
         }
 

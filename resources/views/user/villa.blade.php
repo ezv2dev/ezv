@@ -102,7 +102,7 @@
             <div class="d-flex justify-content-between" style="align-items: center;">
                 <div class="button-view-detail">
                     <input type="hidden" id="instant_book_check" value="{{ $villa[0]->instant_book }}">
-                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '')
+                    @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] == '' || !isset($_COOKIE['sCheck_in']))
                     <input class="price-button" onclick="addDatesFunction()"
                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                         value="{{ __('user_page.Check Availability') }}" readonly>
@@ -1793,11 +1793,24 @@
                             <img class="language-flag-icon" src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
                     </a>
-
+                    <!-- 
                     <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
-                    </a>
+                    </a> -->
+
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                        <a onclick="loginForm(2)">Login</a>
+                        <a onclick="loginForm(2)">Register</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
+                        </div>
+                    </div>
+
                 @endauth
             </div>
         </div>
@@ -3985,7 +3998,7 @@
                 $('#loginAlert').addClass('d-none');
                 $('#registerAlert').addClass('d-none');
             }
-
+            sidebarhide();
             $('#LoginModal').modal('show');
         }
     </script>
@@ -5226,7 +5239,18 @@
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
+        function sidebarhide() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        }
         function language() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').addClass('active');
             $('#content-tab-language').addClass('active');
@@ -5235,6 +5259,7 @@
         }
 
         function currency() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').removeClass('active');
             $('#content-tab-language').removeClass('active');
@@ -5690,6 +5715,19 @@
             });
         }
     </script>
-</body>
+    <script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script>
+    </body>
 
 </html>

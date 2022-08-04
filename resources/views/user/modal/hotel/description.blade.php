@@ -8,7 +8,9 @@
         </div>
         <div class="modal-body" style="padding: 1rem 2rem 2rem 2rem !important;">
             {{-- {!! Translate::translate($hotel[0]->description) !!} --}}
-            {!! $hotel[0]->description !!}
+            <span id="modalDescriptionHotel">
+                {!! $hotel[0]->description !!}
+            </span>
         </div>
     </div>
     </div>

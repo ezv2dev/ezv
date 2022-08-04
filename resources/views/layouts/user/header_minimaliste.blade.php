@@ -274,8 +274,8 @@
                             <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                                 <div id="myDropdown" class="dropdown-content">
-                                    <a href="{{ route('login') }}">Login</a>
-                                    <a href="{{ route('register') }}">Register</a>
+                                    <a onclick="loginForm(2)">Login</a>
+                                    <a onclick="loginForm(2)">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -287,16 +287,6 @@
                 </div>
             </nav>
         </div>
-        <style>
-            .dropbtn {
-            border-radius: 50%;
-            }
-            .dropbtn:hover {
-                --tw-shadow: none;
-                box-shadow: none;
-                transition: none;
-            }
-        </style>
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */

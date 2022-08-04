@@ -223,14 +223,14 @@
                     $sidebarHeight = $sidebar.outerHeight();
                     $sidebarPos = $("#sidebar_fix").offset().top + $sidebarHeight;
                     $blogBodyHeight = $(".blog-body").offset().top + $(".blog-body").outerHeight() - parseInt($(".blog-body").css("padding-bottom"));
-                    if ($("#header-container").hasClass("fix-header") 
+                    if ($("#header-container").hasClass("fix-header")
                             && $(this).scrollTop() + 65 > $(".blog-contents div").last().offset().top - 65){
                         $sidebar.removeClass("fixed");
                         $sidebar.addClass('abs');
                         $sidebar.css({
                             "top": $blogBodyHeight - $sidebarHeight
                         });
-                    } else if ($("#header-container").hasClass("fix-header") 
+                    } else if ($("#header-container").hasClass("fix-header")
                             && $(this).scrollTop() + 65 < $(".blog-contents div").last().offset().top - 65) {
                         $sidebar.addClass("fixed");
                     } else {
@@ -325,7 +325,18 @@
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -333,6 +344,7 @@
                 $('#content-tab-currency').removeClass('active');
             }
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');

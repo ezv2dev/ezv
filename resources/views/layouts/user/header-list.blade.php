@@ -206,6 +206,12 @@
             position: relative;
             display: inline-block;
         }
+        
+        @media only screen and (max-width: 991px) {
+            .dropdown {
+            display: none !important;
+            }
+        }
 
         .dropdown-content {
             display: none;
@@ -237,6 +243,14 @@
 
         .show {
             display: block;
+        }
+
+        .dropdown-content a {
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            color: #ff7400 !important;
         }
     </style>
 
@@ -3526,8 +3540,8 @@
                         <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                                 <div id="myDropdown" class="dropdown-content">
-                                    <a href="{{ route('login') }}">Login</a>
-                                    <a href="{{ route('register') }}">Register</a>
+                                    <a onclick="loginForm(2)">Login</a>
+                                    <a onclick="loginForm(2)">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -3541,7 +3555,7 @@
         </div>
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -3723,6 +3737,13 @@
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
                     $("#overlay").css("display", "none");
+                    document.getElementById("new-bar-black").classList.remove("header-popup-list");
+                    document.getElementById("new-bar-black").classList.remove("search-height");
+                    document.getElementById("searchbox").classList.add("searchbox-display-block");
+                    document.getElementById("searchbox").classList.remove("searchbox-display-none");
+                    document.getElementById("search_bar").classList.remove("active");
+                    document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
+                    document.getElementById("search_bar").classList.add("searchbar-list-display-none");
                 })
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
@@ -3782,6 +3803,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when location click
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -3795,6 +3830,8 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(1);
                         });
                         $("#clear_date_wow").click(function() {
@@ -4006,6 +4043,7 @@
                 document.getElementById("new-bar-black").classList.add("search-height");
                 document.getElementById("search_bar").classList.add("searchbar-list-display-block");
                 document.getElementById("search_bar").classList.remove("searchbar-list-display-none");
+                $("#overlay").css("display", "block");
 
                 function addClass(elements, className) {
                     for (var i = 0; i < elements.length; i++) {
@@ -4079,6 +4117,7 @@
                     document.getElementById("new-bar-black").classList.remove("search-height");
                     document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+                    $("#overlay").css("display", "none");
 
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     addClass(els, 'display-none');
@@ -4160,13 +4199,24 @@
                     $('#loginAlert').addClass('d-none');
                     $('#registerAlert').addClass('d-none');
                 }
-
+                sidebarhide();
                 $('#LoginModal').modal('show');
             }
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -4175,6 +4225,7 @@
             }
 
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');

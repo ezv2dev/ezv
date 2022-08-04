@@ -606,7 +606,6 @@
                                 @endif
                             @endauth
                         </div>
-
                         {{-- SHORT DESCRIPTION --}}
                         <p class="short-desc" id="short-description-content">
                             <span class="translate-text-single"
@@ -628,30 +627,6 @@
                                     <textarea class="form-control" style="width: 100%;" name="short_description" id="short-description-form-input"
                                         cols="30" placeholder="{{ __('user_page.Make your short description here') }}" rows="3"
                                         maxlength="255">{{ $hotel[0]->short_description }}</textarea>
-                                    <small id="err-shrt-desc" style="display: none;"
-                                        class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
-                                    <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
-                                        onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
-                                    </button>
-                                    <button type="reset" class="btn btn-sm btn-secondary"
-                                        onclick="editShortDescriptionCancel()">
-                                        <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
-                                    </button>
-                                    {{-- </form> --}}
-                                </div>
-                            @endif
-                        @endauth
-                        </p>
-                        @auth
-                            @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                <div id="short-description-form" style="display:none;">
-                                    {{-- <form action="{{ route('hotel_update_short_description') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id_hotel" value="{{ $hotel[0]->id_hotel }}"
-                                            required> --}}
-                                    <textarea class="form-control" name="short_description" id="short-description-form-input" cols="30"
-                                        rows="3" maxlength="255" placeholder="{{ __('user_page.Make your short description here') }}" required>{{ $hotel[0]->short_description }}</textarea>
                                     <small id="err-shrt-desc" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
@@ -2101,10 +2076,22 @@
                         @endif
                     </a>
 
-                    <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                    <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
                         style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                         <i class="fa-solid fa-user"></i>
-                    </a>
+                    </a> -->
+
+                    <div class="drodwn-container">
+                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                        <div class="dropdwn dropdown-content">
+                        <a onclick="loginForm(2)">Login</a>
+                        <a onclick="loginForm(2)">Register</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
+                        </div>
+                    </div>
                 @endauth
             </div>
         </div>
@@ -4437,7 +4424,7 @@
                 $('#loginAlert').addClass('d-none');
                 $('#registerAlert').addClass('d-none');
             }
-
+            sidebarhide();
             $('#LoginModal').modal('show');
         }
     </script>
@@ -5190,7 +5177,7 @@
             }
         }
     </script>
-    <script>
+    {{-- <script>
         function editDescriptionForm() {
             var formattedText = asciiToString(document.getElementById("description-form-input").value);
             document.getElementById("description-form-input").value = formattedText;
@@ -5214,7 +5201,7 @@
             btn.classList.remove("d-none");
             formInput.value = '{{ $hotel[0]->description }}';
         }
-    </script>
+    </script> --}}
     {{-- END UPDATE FORM --}}
     <script>
         function contactHostForm() {
@@ -5996,7 +5983,7 @@
     </script>
 
     {{-- PREVENT TEXTAREA TYPE ENTER --}}
-    <script>
+    {{-- <script>
         $("textarea").keydown(function(e) {
             // Enter was pressed without shift key
             if (e.keyCode == 13 && !e.shiftKey) {
@@ -6004,13 +5991,24 @@
                 e.preventDefault();
             }
         });
-    </script>
+    </script> --}}
 
     {{-- modal laguage and currency --}}
     @include('user.modal.filter.filter_language')
     {{-- modal laguage and currency --}}
     <script>
+        function sidebarhide() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        }
         function language() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').addClass('active');
             $('#content-tab-language').addClass('active');
@@ -6019,6 +6017,7 @@
         }
 
         function currency() {
+            sidebarhide();
             $('#LegalModal').modal('show');
             $('#trigger-tab-language').removeClass('active');
             $('#content-tab-language').removeClass('active');
@@ -6307,6 +6306,21 @@
         }
     </script>
     {{-- HOTEL RULES SAFETY --}}
+
+    
+    <script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script>
 </body>
 
 </html>
