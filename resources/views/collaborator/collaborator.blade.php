@@ -1958,12 +1958,12 @@
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                         <div class="dropdwn dropdown-content">
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                        <hr>
-                        <a href="{{ route('ahost') }}">Become a Host</a>
-                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
-                        <a href="{{ route('faq') }}">FAQ</a>
+                            <a href="#" onclick="view_LoginModal('login');">Login</a>
+                            <a href="#" onclick="view_LoginModal('register');">Register</a>
+                            <hr>
+                            <a href="{{ route('ahost') }}">Become a Host</a>
+                            <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                            <a href="{{ route('faq') }}">FAQ</a>
                         </div>
                     </div>
                 @endauth
