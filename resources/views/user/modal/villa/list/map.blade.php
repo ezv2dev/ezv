@@ -403,8 +403,8 @@
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
-                            <img class="villa-list-video" loading="lazy"
-                                src="${url}">
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
                     </div>
                 </a>
             `;
@@ -712,8 +712,8 @@
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
-                            <img class="villa-list-video" loading="lazy"
-                                src="${url}">
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
                     </div>
                 </a>
             `;
@@ -990,8 +990,8 @@
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
-                            <img class="villa-list-video" loading="lazy"
-                                src="${url}">
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
                     </div>
                 </a>
             `;
@@ -1260,8 +1260,8 @@
                 <a href="${contentLink}" target="_blank" class="absolute-right">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
-                            <img class="villa-list-video" loading="lazy"
-                                src="${url}">
+                        <video class="villa-list-video" loading="lazy"
+                            src="${url}"></video>
                     </div>
                 </a>
             `;
