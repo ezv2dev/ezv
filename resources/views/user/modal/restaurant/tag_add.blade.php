@@ -75,7 +75,7 @@
                 <h5 class="modal-title">{{ __('user_page.Edit Subcategory') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
+            <div class="modal-body" style="height: 450px; overflow-y: auto; border-radius: 0px;">
                 {{-- <form action="{{ route('restaurant_store_tag') }}" method="POST" id="basic-form" --}}
                     <input type="hidden" name="id_restaurant" id="id_restaurant"
                         value="{{ $restaurant->id_restaurant }}">
@@ -87,7 +87,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($cuisine as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
@@ -114,7 +114,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($dietaryfood as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
@@ -142,7 +142,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($dishes as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
@@ -169,7 +169,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($goodfor as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
@@ -197,7 +197,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($meal as $data)
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';

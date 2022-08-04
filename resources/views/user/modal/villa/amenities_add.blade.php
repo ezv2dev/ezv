@@ -81,7 +81,7 @@
                         <label class="form-label"><b>{{ __('user_page.Amenities') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($amenities_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';
@@ -107,7 +107,7 @@
                         <label class="form-label"><b>{{ __('user_page.Bathroom') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($bathroom_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';
@@ -263,11 +263,12 @@
                         </div>
                     </div>
                     <hr> -->
+                    <hr>
                     <div class="row">
                         <label class="form-label"><b>{{ __('user_page.Kitchen') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($kitchen_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';
@@ -293,7 +294,7 @@
                         <label class="form-label"><b>{{ __('user_page.Safety') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($safety_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';
@@ -319,7 +320,7 @@
                         <label class="form-label"><b>{{ __('user_page.Service') }}</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($service_m as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';

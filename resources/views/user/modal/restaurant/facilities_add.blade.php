@@ -81,12 +81,12 @@
                     <h5 class="modal-title">{{ __('user_page.Edit Facilities') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body pb-1" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
+                <div class="modal-body pb-1" style="height: 450px; overflow-y: auto; border-radius: 0px;">
                         <div class="form-group">
                             <div class="row" style="padding-left: 10px">
-                                <div class="space-y-2 translate-text-group">
+                                <div class="row space-y-2 translate-text-group">
                                     @foreach ($facilities as $data)
-                                        <div class="form-check row admin-edit-aminities-modal translate-text-group">
+                                        <div class="col-12 col-md-6 col-lg-4 form-check row admin-edit-aminities-modal translate-text-group">
                                             @php
                                                 $isChecked = '';
                                                 foreach ($restaurant->facilities as $item) {

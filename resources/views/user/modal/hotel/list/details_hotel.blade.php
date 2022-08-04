@@ -346,7 +346,7 @@
 </style>
 
 <div id="modal-details" class="modal modal-login fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered"
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered modal-fullscreen-md-down"
         style="overflow-y: initial !important;">
         <div class="modal-content modal-content-login" style="border-radius:15px;">
             <div class="modal-header">

@@ -66,6 +66,12 @@
         transform: rotate(45deg);
     }
 
+    @media only screen and (max-width: 767px) {
+        .ml-max-md-0p {
+            margin-left: 0px !important;
+        }
+    }
+
 </style>
 
 <div class="modal fade" id="modal-edit_amenities" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
@@ -84,12 +90,12 @@
 
                 <div class="form-group pt-2 px-4">
                     <div class="row translate-text-group">
-                        <div class="col-md-4">
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Amenities') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($amenities_m as $data)
-                                    <div class="form-check row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($hotel_amenities as $item) {
@@ -111,12 +117,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <hr>
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Bathroom') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($bathroom_m as $data)
-                                    <div class="form-check row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($bathroom as $item) {
@@ -137,12 +144,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <hr>
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Bedroom') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($bedroom_m as $data)
-                                    <div class="form-check row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($bedroom as $item) {
@@ -163,12 +171,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <hr>
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Kitchen') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($kitchen_m as $data)
-                                    <div class="form-check  row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($kitchen as $item) {
@@ -189,12 +198,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <hr>
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Safety') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($safety_m as $data)
-                                    <div class="form-check  row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($safety as $item) {
@@ -215,12 +225,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <hr>
+                        <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label">{{ __('user_page.Service') }}</label>
-                                <div class="space-y-2">
+                                <div class="row ml-max-md-0p" style="margin-left: -5px;">
                                     @foreach($service_m as $data)
-                                    <div class="form-check  row admin-edit-aminities-modal">
+                                    <div class="form-check col-12 col-md-6 col-lg-4 row admin-edit-aminities-modal">
                                         @php
                                             $isChecked = "";
                                             foreach ($service as $item) {

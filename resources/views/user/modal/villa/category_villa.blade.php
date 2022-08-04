@@ -75,7 +75,7 @@
                 <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 450px; overflow-y: scroll; border-radius: 0px;">
+            <div class="modal-body" style="height: 450px; overflow-y: auto; border-radius: 0px;">
                 {{-- <form action="{{ route('villa_update_category') }}" method="POST" id="basic-form"
                     class="js-validation" enctype="multipart/form-data">
                     @csrf
@@ -85,7 +85,7 @@
                         <label class="form-label"><b>Category</b></label>
                         <div id="check_cat" class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             @foreach ($villaCategory as $data)
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-md-6 col-lg-4">
                                     <div class="row" style="font-size: 13px;">
                                         @php
                                             $isChecked = '';

@@ -87,7 +87,7 @@
                             <div class="translate-text-group"
                                 style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                                 @foreach ($subCategory as $data)
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="row" style="font-size: 13px;">
                                             @php
                                                 $isChecked = '';
