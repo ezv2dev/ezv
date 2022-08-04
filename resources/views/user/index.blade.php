@@ -164,7 +164,7 @@
             @else
                 <div class="d-flex align-items-center">
                     <div class="flex-fill d-flex align-items-center">
-                        <a type="button" onclick="view_LoginModal();" href="#"
+                        <a type="button" onclick="view_LoginModal('login');" href="#"
                             class="btn btn-fill border-0 d-flex align-items-center btn-login"
                             style="color: #ddd; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                             id="login">
@@ -812,8 +812,8 @@
                             <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                                 <div id="myDropdown" class="dropdown-content">
-                                    <a href="#" onclick="view_LoginModal();">Login</a>
-                                    <a href="#" onclick="view_LoginModal();">Register</a>
+                                    <a href="#" onclick="view_LoginModal('login');">Login</a>
+                                    <a href="#" onclick="view_LoginModal('register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -1591,7 +1591,18 @@
         </script>
 
         <script>
+            function sidebarhide() {
+                $("body").css({
+                    "height": "auto",
+                    "overflow": "auto"
+                })
+                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+                $(".expand-navbar-mobile").attr("aria-expanded", "false");
+                $("#overlay").css("display", "none");
+            }
             function language() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').addClass('active');
                 $('#content-tab-language').addClass('active');
@@ -1600,6 +1611,7 @@
             }
 
             function currency() {
+                sidebarhide();
                 $('#LegalModal').modal('show');
                 $('#trigger-tab-language').removeClass('active');
                 $('#content-tab-language').removeClass('active');
@@ -1691,8 +1703,21 @@
             })
         </script>
         <script>
-            function view_LoginModal() {
+            function view_LoginModal(type) {
+                sidebarhide();
                 $('#LoginModal').modal('show');
+                if(type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
+
             }
         </script>
 
