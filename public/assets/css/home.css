@@ -2550,3 +2550,11 @@ span.flatpickr-weekday {
 .dropdown-content a:hover {
     color: #ff7400 !important;
 }
+
+.modal-open .modal {
+    overflow-y: hidden;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}

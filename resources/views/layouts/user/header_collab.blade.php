@@ -776,8 +776,7 @@
         </div>
 
         <style>
-                    /*Dropdown users stile*/
-
+        /*Dropdown users stile*/
         .dropbtn {
             margin-right: 0px;
             width: 50px;
@@ -860,6 +859,41 @@
             $('.dropdown-content').slideUp('fast');
             document.activeElement.blur();//lose focus
             });
+        </script>
+
+        <script>
+            function loginForm(value) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+                sidebarhide();
+                $('#LoginModal').modal('show');
+            }
+        </script>
+
+        <script>
+            function view_LoginModal(type) {
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
+
+            }
         </script>
 
         <script>

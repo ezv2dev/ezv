@@ -2951,6 +2951,7 @@
     </script>
 
     @include('layouts.user.footer')
+    @include('user.modal.auth.login_register')
     </div>
     {{-- END MODAL --}}
 

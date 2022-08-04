@@ -300,3 +300,22 @@
             document.activeElement.blur();//lose focus
             });
         </script>
+
+    <script>
+        function view_LoginModal(type) {
+            sidebarhide();
+            $('#LoginModal').modal('show');
+            if (type == 'login') {
+                $('#trigger-tab-register').removeClass('active');
+                $('#content-tab-register').removeClass('active');
+                $('#trigger-tab-login').addClass('active');
+                $('#content-tab-login').addClass('active');
+            } else {
+                $('#trigger-tab-register').addClass('active');
+                $('#content-tab-register').addClass('active');
+                $('#trigger-tab-login').removeClass('active');
+                $('#content-tab-login').removeClass('active');
+            }
+
+        }
+    </script>
