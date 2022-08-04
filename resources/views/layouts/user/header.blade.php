@@ -123,7 +123,7 @@
             display: inline-block;
         }
 
-        @media only screen and (max-width: 991px) {
+        @media only screen and (max-width: 767px) {
             .dropdown {
             display: none !important;
             }
@@ -3484,7 +3484,7 @@
         // document.activeElement.blur();//lose focus
         });
     </script>
-    
+
     <script>
         function view_LoginModal(type) {
             sidebarhide();
