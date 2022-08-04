@@ -144,7 +144,8 @@ $get_category = request()->get('fCategory');
 
 <div class="modal fade" id="modalFiltersHotel" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-md-down" role="document" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-md-down" role="document"
+        style="overflow-y: initial !important">
         <div class="modal-content" style="background: #fff;">
             <div class="modal-header filter-modal">
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
@@ -157,9 +158,9 @@ $get_category = request()->get('fCategory');
                     <div class="col-12">
                         <div class="row modal-checkbox-row">
                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
-                                <label class="checkdesign checkdesign-modal-filter">Highest to Lowest Price
-                                    <input type="checkbox" class="fSort" name="fSort[]" value="highest"
-                                        @if (request()->get('fSort') == 'highest') checked @endif>
+                                <label class="checkdesign checkdesign-modal-filter">Ezv top pick
+                                    <input type="checkbox" class="fSort" name="fSort[]" value="ezv_top_pick"
+                                        @if (request()->get('fSort') == 'ezv_top_pick') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -171,6 +172,13 @@ $get_category = request()->get('fCategory');
                                 </label>
                             </div>
                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter">Best Reviewed
+                                    <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
+                                        @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Popularity
                                     <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
                                         @if (request()->get('fSort') == 'popularity') checked @endif>
@@ -178,9 +186,16 @@ $get_category = request()->get('fCategory');
                                 </label>
                             </div>
                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
-                                <label class="checkdesign checkdesign-modal-filter">Best Reviewed
-                                    <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
-                                        @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                <label class="checkdesign checkdesign-modal-filter">Highest to Lowest Price
+                                    <input type="checkbox" class="fSort" name="fSort[]" value="highest"
+                                        @if (request()->get('fSort') == 'highest') checked @endif>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <label class="checkdesign checkdesign-modal-filter">Closest to the beach
+                                    <input type="checkbox" class="fSort" name="fSort[]" value="beach"
+                                        @if (request()->get('fSort') == 'beach') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

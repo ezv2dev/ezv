@@ -97,6 +97,12 @@
                         </a>
                         <div class="sort-popup dropdown-menu text-center">
                             <h5 style="margin-bottom: 0;">Sort by</h5>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">EZV Top Pick
+                                <input type="checkbox" class="fSort" name="fSort[]" value="ezv_top_pick"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'ezv_top_pick') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
                             <label class="checkdesign checkdesign-modal-filter mt-1">Highest to Lowest Price
                                 <input type="checkbox" class="fSort" name="fSort[]" value="highest"
                                     onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
@@ -119,6 +125,12 @@
                                 <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
                                     onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
                                     @if (request()->get('fSort') == 'best_reviewed') checked @endif>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkdesign checkdesign-modal-filter mt-1">Closest to the Beach
+                                <input type="checkbox" class="fSort" name="fSort[]" value="beach"
+                                    onchange="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }})"
+                                    @if (request()->get('fSort') == 'beach') checked @endif>
                                 <span class="checkmark"></span>
                             </label>
                         </div>
