@@ -924,9 +924,8 @@
                 <div class="menu-liner"></div>
                 <div id="navbar" class="sticky-div">
                     <ul class="navigationList">
-                        <li class="navigationItem">
-                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('gallery').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('gallery').scrollIntoView();">
+                            <a id="gallery-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-image navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -934,9 +933,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="about-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('description').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('description').scrollIntoView();">
+                            <a id="about-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="far fa-list-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -944,9 +942,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('amenities').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('amenities').scrollIntoView();">
+                            <a id="amenities-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-bell navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -954,9 +951,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem">
-                            <a id="room-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('room').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('room').scrollIntoView();">
+                            <a id="room-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fa fa-bed navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -964,9 +960,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem ">
-                            <a id="location-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('location-map').scrollIntoView();">
+                            <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -974,9 +969,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('review').scrollIntoView();">
+                        <li class="navigationItem" onClick="document.getElementById('review').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-check navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
@@ -984,9 +978,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none">
-                            <a id="review-sticky" class="hoover font-13 navigationItem__Button"
-                                onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none" onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                            <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
                                         fill="#262626" viewBox="0 0 20 20"></i>
