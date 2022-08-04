@@ -202,23 +202,45 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
 <script>
-    $('input[name="price"]').on('keypress', function(evt) {
-        if($(this).val() == '0' || $(this).val() == 0 ){
-            $(this).val('')
-        }
-        
+
+    // validasi agar tidak menginputkan selain angka ke input price
+    $('input[name="price"]').on('keypress', function(evt) {        
         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
         {
             evt.preventDefault();
         }
     });
 
+    // validasi agar tidak menginputkan angka 0 sebelum angka lainnya ke input price
+    // $('input[name="price"]').on('keyup', function(evt) {        
+    //     let splitVal = $(this).val().split('')
+    //     if(splitVal.length > 1){
+    //         for(let i = 0; i < splitVal.length; i++){
+    //             if(typeof splitVal[i] === 'string' || splitVal[i] instanceof String){
+    //                 if(splitVal[i] != '0'){
+    //                     break;
+    //                 }
+    //             }
+    
+    //             splitVal = splitVal.slice(i+1)
+    //             let value = '';
+    //             splitVal.forEach(char => {
+    //                 value = value + char
+    //             })
+    
+    //             $(this).val(value)
+    //         }
+    //     }
+    // })
+
+    // validasi agar tidak menginputkan selain angka ke input discount
     $('input[name="disc"]').on('keypress', function(evt){
         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
         {
             evt.preventDefault();
         }
     })
+
     //delete event
     function deleteEvent()
     {

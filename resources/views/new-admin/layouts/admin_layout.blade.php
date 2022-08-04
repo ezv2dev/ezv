@@ -970,18 +970,18 @@
                             href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             {{-- @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" class="img-fluid"
-                            alt="Pict">
+                            <img src="{{ Auth::user()->avatar }}" class="w-100 h-100 border rounded-circle"
+                            alt="Pict" style="object-fit:cover;">
                             @else
-                            <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="img-fluid"
-                                alt="Pict">
+                            <img src="{{ asset('assets/icon/menu/user_default.svg') }}" class="w-100 h-100 border rounded-circle"
+                                alt="Pict" style="object-fit:cover;">
                             @endif --}}
                             @if (Auth::user()->foto_profile != null)
-                                <img class="img-fluid" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                <img class="w-100 h-100 border rounded-circle" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} " style="object-fit:cover;">
                             @elseIf (Auth::user()->avatar != null)
-                                <img class="img-fluid" src="{{ Auth::user()->avatar }}">
+                                <img class="w-100 h-100 border rounded-circle" src="{{ Auth::user()->avatar }}" style="object-fit:cover;">
                             @else
-                                <img class="img-fluid" src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                <img class="w-100 h-100 border rounded-circle" src="{{ asset('assets/icon/menu/user_default.svg') }}" style="object-fit:cover;">
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"

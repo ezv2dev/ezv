@@ -20,7 +20,8 @@
         border-radius: 50%;
         margin-top: 30px;
         margin-bottom: 10px;
-        asset-ratio : 1/1;
+        aspect-ratio : 1/1;
+        object-fit:cover;
     }
 
     .name-user {
