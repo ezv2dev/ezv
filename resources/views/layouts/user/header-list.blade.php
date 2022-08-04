@@ -197,7 +197,8 @@
             font-size: 18px;
         }
 
-        .dropbtn:hover, .dropbtn:focus {
+        .dropbtn:hover,
+        .dropbtn:focus {
             background-color: #ff7400;
             box-shadow: none;
         }
@@ -206,10 +207,10 @@
             position: relative;
             display: inline-block;
         }
-        
+
         @media only screen and (max-width: 991px) {
             .dropdown {
-            display: none !important;
+                display: none !important;
             }
         }
 
@@ -823,14 +824,15 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" value="{{ $get_check_in }}" id="check_in2"
-                                            name="sCheck_in"
+                                        <input type="text" onfocus="this.value=''"
+                                            placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                            value="{{ $get_check_in }}" id="check_in2" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''"
+                                            style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -1551,14 +1553,15 @@
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
                                             class="collapsible_check_search"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
-                                        <input type="text" onfocus="this.value=''" placeholder="{{ __('user_page.Add dates') }}"
-                                            class="form-control" value="{{ $get_check_in }}" id="check_in2"
-                                            name="sCheck_in"
+                                        <input type="text" onfocus="this.value=''"
+                                            placeholder="{{ __('user_page.Add dates') }}" class="form-control"
+                                            value="{{ $get_check_in }}" id="check_in2" name="sCheck_in"
                                             style="width: 100% !important; background-color: #ffffff00;">
                                     </div>
                                     <div class="check-out">
                                         <p>{{ __('user_page.Check out') }}</p>
-                                        <input type="text" onfocus="this.value=''" style="background-color: #ffffff00;"
+                                        <input type="text" onfocus="this.value=''"
+                                            style="background-color: #ffffff00;"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
                                             value="{{ $get_check_out }}" id="check_out2" name="sCheck_out"
                                             readonly>
@@ -2930,11 +2933,13 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="start_date" id="start_date"
+                                                value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="end_date" id="end_date"
+                                                value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
 
@@ -3380,11 +3385,13 @@
                                         @endIf
                                         <div style="display: flex; padding: 0px;"
                                             class="header-date-input-container">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="start_date" id="start_date" value="{{ $get_start ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="start_date" id="start_date"
+                                                value="{{ $get_start ?? '' }}"
                                                 style="width: 100%; background-color: #ffffff00;">
-                                            <input type="text" onfocus="this.value=''" placeholder="" class="form-control"
-                                                name="end_date" id="end_date" value="{{ $get_end ?? '' }}"
+                                            <input type="text" onfocus="this.value=''" placeholder=""
+                                                class="form-control" name="end_date" id="end_date"
+                                                value="{{ $get_end ?? '' }}"
                                                 style="width: 100%;  background-color: #ffffff00;">
                                         </div>
                                     </div>
@@ -3536,14 +3543,14 @@
                     </label>
                     <div style="width: 60%;">
                         <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                            style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-user icon-clear"></i>
-                        </a> -->
-                        <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
-                                <div id="myDropdown" class="dropdown-content">
-                                    <a onclick="loginForm(2)">Login</a>
-                                    <a onclick="loginForm(2)">Register</a>
+                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-user icon-clear"></i>
+                            </a> -->
+                            <div class="dropdown">
+                                <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                                <div class="dropdown-content">
+                                    <a href="#" onclick="view_LoginModal('login');">Login</a>
+                                    <a href="#" onclick="view_LoginModal('register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -3557,25 +3564,17 @@
         </div>
 
         <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        }
+            //Drop down login
+            var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+            $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+            event.stopPropagation();
+            $('.dropdown-content').slideToggle('fast');
+            });
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
-        }
+            $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+            $('.dropdown-content').slideUp('fast');
+            document.activeElement.blur();//lose focus
+            });
         </script>
 
         {{-- Search Location --}}
@@ -3986,22 +3985,26 @@
         <script>
             function adult_increment_header_list() {
                 document.getElementById('adult5').stepUp();
-                document.getElementById('total_guest5').stepUp();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function adult_decrement_header_list() {
                 document.getElementById('adult5').stepDown();
-                document.getElementById('total_guest5').stepDown();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function child_increment_header_list() {
                 document.getElementById('child5').stepUp();
-                document.getElementById('total_guest5').stepUp();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function child_decrement_header_list() {
                 document.getElementById('child5').stepDown();
-                document.getElementById('total_guest5').stepDown();
+                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                    parseInt(document.getElementById('child5').value);
             }
 
             function infant_increment_header_list() {
@@ -4214,6 +4217,7 @@
                 $(".expand-navbar-mobile").attr("aria-expanded", "false");
                 $("#overlay").css("display", "none");
             }
+
             function language() {
                 sidebarhide();
                 $('#LegalModal').modal('show');

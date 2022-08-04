@@ -2927,12 +2927,12 @@
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
                 </a> -->
-
+                
                 <div class="dropdown">
-                    <button onclick="thisFunction()" class="dropbtn btn border-0 navbar-gap"></button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a onclick="loginForm(2)">Login</a>
-                        <a onclick="loginForm(2)">Register</a>
+                    <button type="button" class="btn-dropdown dropbtn btn border-0 navbar-gap"></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="view_LoginModal('login');">Login</a>
+                        <a href="#" onclick="view_LoginModal('register');">Register</a>
                         <hr>
                         <a href="{{ route('ahost') }}">Become a Host</a>
                         <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -3467,24 +3467,17 @@
             }
         </script>
 
-        <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function thisFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        }
+    <script>
+        //Drop down login
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdown-content').slideToggle('fast');
+        });
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
-        }
-        </script>
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdown-content').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script>
+
