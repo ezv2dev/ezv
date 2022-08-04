@@ -3467,7 +3467,7 @@
             }
         </script>
 
-    <script>
+    {{-- <script>
         //Drop down login
         var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
         $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
@@ -3479,5 +3479,5 @@
         $('.dropdown-content').slideUp('fast');
         document.activeElement.blur();//lose focus
         });
-    </script>
+    </script> --}}
 

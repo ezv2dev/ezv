@@ -5691,7 +5691,19 @@
             });
         }
     </script>
-    
+    {{-- <script>
+        //Drop down login 2
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
+        });
+
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdwn').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script> --}}
     </body>
 
 </html>
