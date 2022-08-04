@@ -4412,7 +4412,7 @@
                 $('#loginAlert').addClass('d-none');
                 $('#registerAlert').addClass('d-none');
             }
-
+            sidebarhide();
             $('#LoginModal').modal('show');
         }
     </script>

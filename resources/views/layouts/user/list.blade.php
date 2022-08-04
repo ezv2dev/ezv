@@ -349,7 +349,6 @@ if (isset($_COOKIE['tema'])) {
             </div>
         </div>
     </div>
-    <div id="overlay"></div>
 @elseif($condition_restaurant)
     <div class="subcategory-in-sidebar-container ">
         <p class="m-0">Choose Sub Category</p>
@@ -1333,6 +1332,16 @@ if (isset($_COOKIE['tema'])) {
     <script src='https://kenwheeler.github.io/slick/slick/slick.js'></script>
 
     <script>
+        function sidebarhide() {
+            $("body").css({
+                "height": "auto",
+                "overflow": "auto"
+            })
+            $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+            $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+            $(".expand-navbar-mobile").attr("aria-expanded", "false");
+            $("#overlay").css("display", "none");
+        }
         function moreCategory() {
             $('#categoryModal').modal('show');
         }
@@ -1342,6 +1351,7 @@ if (isset($_COOKIE['tema'])) {
         }
 
         function modalFiltersHomes() {
+            sidebarhide();
             $('#modalFiltersHome').modal('show');
         }
 
