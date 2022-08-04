@@ -1580,12 +1580,16 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(1);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
                             calendar_search(2);
                         });
                         calendar_search(2);
@@ -1779,7 +1783,7 @@
 
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
