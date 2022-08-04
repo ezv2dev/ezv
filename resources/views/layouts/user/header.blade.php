@@ -103,8 +103,8 @@
         }
 
         .dropbtn::after {
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900; 
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: "\f007";
             color: #fff;
             font-size: 18px;
@@ -2921,7 +2921,7 @@
                     style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
                     <i class="fa-solid fa-user"></i>
                 </a> -->
-                
+
                 <div class="dropdown">
                     <button onclick="thisFunction()" class="dropbtn btn border-0 navbar-gap"></button>
                     <div id="myDropdown" class="dropdown-content">
@@ -3127,6 +3127,20 @@
                     $('#loc_sugest').val($(this).data("value"));
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
+
+                    //calendar show when location click
+                    var content = document.getElementById('popup_check_search');
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
                 });
             });
         </script>
@@ -3448,7 +3462,7 @@
         </script>
 
         <script>
-        /* When the user clicks on the button, 
+        /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function thisFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
