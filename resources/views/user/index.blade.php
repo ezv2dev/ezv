@@ -164,7 +164,7 @@
             @else
                 <div class="d-flex align-items-center">
                     <div class="flex-fill d-flex align-items-center">
-                        <a type="button" onclick="view_LoginModal('login');" href="#"
+                        <a type="button" onclick="loginRegisterForm(2, 'login');" href="#"
                             class="btn btn-fill border-0 d-flex align-items-center btn-login"
                             style="color: #ddd; margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                             id="login">
