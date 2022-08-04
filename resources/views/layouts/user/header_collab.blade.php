@@ -772,6 +772,11 @@
                 </div>
             </div>
 
+            {{-- button toggler for mobile --}}
+            <button class="navbar-toggler d-flex d-md-none" type="button" id="expand-mobile-btn">
+                <i class="fa-solid fa-bars list-description font-black"></i>
+            </button>
+
             @endauth
         </div>
 
