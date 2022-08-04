@@ -272,7 +272,9 @@
 
                 <button type="button" class="btn-filter-header"
                     @if ($condition_villa) onclick="modalFiltersHomes();"
-                    @elseif($condition_hotel || $condition_restaurant || $condition_things_to_do)
+                    @elseif($condition_hotel)
+                        onclick="modalFiltersHotel();"
+                    @elseif($condition_restaurant || $condition_things_to_do)
                         onclick="moreSubCategory();"
                     @elseif($condition_collaborator)
                         onclick="filterCollab();" @endif>
@@ -3694,11 +3696,11 @@
             // document.getElementById("myRef").value = ref3;
 
             $(document).ready(() => {
+                $("body").on("hidden.bs.modal", function() {
+                    $(this).removeAttr("style");
+                });
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
-                    $("body").css({
-                        "height": "",
-                        "overflow": ""
-                    })
+                    $("body").removeAttr("style");
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
@@ -3715,10 +3717,7 @@
                     $("#overlay").css("display", "block");
                 })
                 $('#overlay').click(function() {
-                    $("body").css({
-                        "height": "",
-                        "overflow": ""
-                    })
+                    $("body").removeAttr("style");
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
                     $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
