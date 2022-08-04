@@ -1795,10 +1795,10 @@
                         @endif
                     </a>
                     <!--
-                                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                                                <i class="fa-solid fa-user"></i>
-                                            </a> -->
+                                                        <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                                                            style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                                            <i class="fa-solid fa-user"></i>
+                                                        </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -2439,10 +2439,12 @@
                                     id="showCancel">{{ __('user_page.Show more') }}
                                     <i class="fas fa-chevron-right"></i>
                                 </a> --}}
-                                <a onclick="showMoreCancelationPolicy();"
-                                    href="javascript:void(0);">{{ __('user_page.Show more') }}
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
+                                @if ($cancellation_policy != null)
+                                    <a onclick="showMoreCancelationPolicy();"
+                                        href="javascript:void(0);">{{ __('user_page.Show more') }}
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                @endif
 
                             </p>
                         </div>
@@ -3436,8 +3438,9 @@
     @include('user.modal.villa.description')
     @include('user.modal.villa.insurance')
     @include('user.modal.villa.review')
-    @include('user.modal.villa.cancelation-policy-modal')
-
+    @if ($cancellation_policy != null)
+        @include('user.modal.villa.cancelation-policy-modal')
+    @endif
     {{-- MORE TAG MODAL --}}
     <div class="modal fade" id="modal-subcategory" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
@@ -3733,7 +3736,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                <button onclick="share_function()">Copy link</button> -->
+                                                                                            <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
@@ -5694,17 +5697,23 @@
         });
 
         <<
-        << << < Updated upstream
+        <<
+        <<
+        <
+        Updated upstream
         $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
                     $('.dropdwn').slideUp('fast');
                     // document.activeElement.blur();//lose focus
                     ===
-                    === =
+                    ===
+                    =
                     $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
                         $('.dropdwn').slideUp('fast');
                         document.activeElement.blur(); //lose focus
                         >>>
-                        >>> > Stashed changes
+                        >>>
+                        >
+                        Stashed changes
                     });
     </script>
 </body>
