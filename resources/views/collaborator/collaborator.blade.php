@@ -4339,7 +4339,7 @@
 
         $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
         $('.dropdwn').slideUp('fast');
-        document.activeElement.blur();//lose focus
+        // document.activeElement.blur();//lose focus
         });
     </script>
 
