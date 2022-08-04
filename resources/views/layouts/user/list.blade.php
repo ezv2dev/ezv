@@ -349,6 +349,7 @@ if (isset($_COOKIE['tema'])) {
             </div>
         </div>
     </div>
+    <div id="overlay"></div>
 @elseif($condition_restaurant)
     <div class="subcategory-in-sidebar-container ">
         <p class="m-0">Choose Sub Category</p>
