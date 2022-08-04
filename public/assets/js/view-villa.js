@@ -1339,6 +1339,15 @@ $(document).ready(function () {
         });
 });
 
+
+//validasi agar tidak menginputkan selain angka ke input phone
+$('#VillaQuickEnquiry #phone').on('keypress', function(evt){
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+})
+
 //call calendar
 calendar_header(2);
 calendar_availability(2);

@@ -9,6 +9,7 @@
         height: 150px;
         border-radius: 50%;
         aspect-ratio : 1/1;
+        object-fit:cover;
     }
 
     .title-header{

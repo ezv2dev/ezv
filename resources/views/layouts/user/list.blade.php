@@ -1338,19 +1338,48 @@ if (isset($_COOKIE['tema'])) {
 
         function moreSubCategory() {
             $('#modalSubCategory').modal('show');
+
+            // close sidebar di mobile size
+            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+
+            // close searchbar di mobile size
+            $( "#bodyList #overlay" ).trigger( "click" )
         }
 
         function modalFiltersHomes() {
             $('#modalFiltersHome').modal('show');
+
+            // close sidebar di mobile size
+            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+
+            // close searchbar di mobile size
+            $( "#bodyList #overlay" ).trigger( "click" )
         }
 
         function modalFiltersHotel() {
             $('#modalFiltersHotel').modal('show');
+
+           // close sidebar di mobile size
+           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+
+            // close searchbar di mobile size
+            $( "#bodyList #overlay" ).trigger( "click" )
         }
 
         function filterCollab() {
             $('#modalFiltersCollab').modal('show');
+
+           // close sidebar di mobile size
+           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+
+            // close searchbar di mobile size
+            $( "#bodyList #overlay" ).trigger( "click" )
         }
+
+        // fix bug scroll ketika open sidebar dan open modal subcategory di mobile size
+        $('#modalSubCategory, #modalFiltersHome, #modalFiltersHotel, #modalFiltersCollab').on('hidden.bs.modal', function (e) {
+            $('body').css({"overflow": ""})
+        })
     </script>
 
     <script>

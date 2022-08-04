@@ -2516,7 +2516,7 @@
                                     </a>
                                 @endif
                             </div>
-                            <div class="col-5">
+                            <div class="col-9 col-md-5">
                                 <div class="member-profile">
                                     <div class="d-flex">
                                         <h4>{{ __('user_page.Hosted by') }}
