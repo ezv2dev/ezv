@@ -811,8 +811,8 @@
                                     <i class="fa-solid fa-user"></i>
                                 </a> -->
                             <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn btn border-0 navbar-gap"></button>
-                                <div id="myDropdown" class="dropdown-content">
+                                <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                                <div class="dropdown-content">
                                     <a href="#" onclick="view_LoginModal('login');">Login</a>
                                     <a href="#" onclick="view_LoginModal('register');">Register</a>
                                     <hr>
@@ -1846,30 +1846,20 @@
                 restaurantRefreshFilter(subUrl);
             }
         </script>
+        
+    <script>
+        //Drop down login
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+        event.stopPropagation();
+        $('.dropdown-content').slideToggle('fast');
+        });
 
-
-
-        <script>
-            /* When the user clicks on the button,
-                toggle between hiding and showing the dropdown content */
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
-                    var i;
-                    for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-                }
-            }
-        </script>
+        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+        $('.dropdown-content').slideUp('fast');
+        document.activeElement.blur();//lose focus
+        });
+    </script>
 
         {{-- LAZY LOAD --}}
         @include('components.lazy-load.lazy-load')
