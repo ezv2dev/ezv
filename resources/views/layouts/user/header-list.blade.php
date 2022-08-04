@@ -3553,8 +3553,8 @@
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
-                                    <a href="#" onclick="view_LoginModal('login');">Login</a>
-                                    <a href="#" onclick="view_LoginModal('register');">Register</a>
+                                    <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
+                                    <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
                                     <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
@@ -4207,6 +4207,30 @@
                 }
                 sidebarhide();
                 $('#LoginModal').modal('show');
+            }
+            function loginRegisterForm(value, type) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
             }
         </script>
 
