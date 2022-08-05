@@ -400,11 +400,12 @@
                                 &nbsp;
                                 <a type="button" onclick="edit_villa_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
-                                    |</a>
-                                &nbsp;
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |
+                                </a>
                                 <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">
+                                    {{ __('user_page.Edit Name') }}
+                                </a>
                                 {{-- @if ($villa[0]->image)
                                     <a class="delete-profile" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $villa[0]->id_villa }}'})">

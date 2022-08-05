@@ -422,9 +422,9 @@ a:hover {
     position: relative;
 }
 
-.modal {
+/* .modal {
     overflow-y: hidden;
-}
+} */
 
 .modal-content {
     display: flex;
@@ -4509,6 +4509,10 @@ span.flatpickr-weekday {
     }
     .review-comment-container {
         height: auto;
+    }
+    #name-form-input {
+        font-size: 16px;
+        height: 80px;
     }
 }
 
