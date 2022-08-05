@@ -1297,17 +1297,17 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        {{-- @if ($i <= 0)
-                                            <div class="list-amenities">
-                                                <button class="amenities-button" type="button"
-                                                    onclick="view_amenities()">
-                                                    <i class="fa-solid fa-ellipsis text-orange"
-                                                        style="font-size: 40px;"></i>
-                                                    <div style="font-size: 15px;" class="translate-text-group-items">
-                                                        {{ __('user_page.More') }}</div>
-                                                </button>
-                                            </div>
-                                        @endif --}}
+                                        @if ($countAllAmenities >= 6)
+                                        <div class="list-amenities">
+                                            <button class="amenities-button" type="button"
+                                                onclick="view_amenities()">
+                                                <i class="fa-solid fa-ellipsis text-orange"
+                                                    style="font-size: 40px;"></i>
+                                                <div style="font-size: 15px;" class="translate-text-group-items">
+                                                    {{ __('user_page.More') }}</div>
+                                            </button>
+                                        </div>
+                                        @endIf
                                     @endif
                                 @endif
                             </div>
