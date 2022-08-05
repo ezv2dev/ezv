@@ -1869,6 +1869,7 @@ class ViewController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 

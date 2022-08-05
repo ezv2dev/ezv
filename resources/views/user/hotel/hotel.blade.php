@@ -716,7 +716,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -788,7 +788,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -833,7 +833,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -6300,7 +6300,7 @@
     </script>
     {{-- HOTEL RULES SAFETY --}}
 
-    
+
     <script>
         //Drop down login 2
         var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
