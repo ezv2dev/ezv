@@ -402,12 +402,13 @@ class VillabookingController extends Controller
 
     public function confirm(Request $request)
     {
+        // dd(auth()->check());
         // dd($request->all(), request()->adult);
 
         $id = $request->id_villa;
         $villa = Villa::where('id_villa', $id)->first();
 
-        // dd($villa);
+        dd($villa);
 
         //get number of night
         $startTimeStamp = strtotime($request->check_in);

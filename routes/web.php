@@ -1450,3 +1450,6 @@ Route::get('id', function () {
 });
 //SESSION
 Route::get('/session/theme', [CookiesController::class, 'set_cookie_theme'])->name('cookie_theme.set');
+
+// xendit
+Route::post('xendit/va/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
