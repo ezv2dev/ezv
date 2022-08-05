@@ -36,7 +36,7 @@
 
                 <div id="content" class="col-12 mt-5">
                     <div class="col-md-6 text-dark ml-max-md-0p" style="margin-left: 18px;">
-                        <form action="{{ route('add_government.step_two') }}" method="post">
+                        <form action="{{ route('add_government.step_two') }}" id="step_two" method="post">
                             @csrf
                             <div class="col-12 mb-5">
                                 <span>Issuing country/region</span>
@@ -49,7 +49,7 @@
                             <div class="col-12">
                                 <div class="label">
                                     <span>Driver's license</span>
-                                    <input class="float-right" type="radio" name="chooseGovernmentID" value="driver_license" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'driver_license') ? "checked" : "" }}>
+                                    <input class="float-right" type="radio" id="driver_license" name="chooseGovernmentID" value="driver_license" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'driver_license') ? "checked" : "" }}>
                                     {{-- <p>Recommended</p> --}}
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                             <div class="col-12 mt-4">
                                 <div class="label">
                                     <span>Passport</span>
-                                    <input class="float-right" type="radio" name="chooseGovernmentID" value="passport" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'passport') ? "checked" : "" }}>
+                                    <input class="float-right" type="radio" id="passport" name="chooseGovernmentID" value="passport" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'passport') ? "checked" : "" }}>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -69,12 +69,13 @@
                             <div class="col-12 mt-4">
                                 <div class="label">
                                     <span>Identity card</span>
-                                    <input class="float-right" type="radio" name="chooseGovernmentID" value="identity_card" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'identity_card') ? "checked" : "" }}>
+                                    <input class="float-right" type="radio" id="identity_card" name="chooseGovernmentID" value="identity_card" {{ (isset($government['chooseGovernmentID']) && $government['chooseGovernmentID'] == 'identity_card') ? "checked" : "" }}>
                                 </div>
                             </div>
                             <div class="col-12" style="margin-top: 60px;">
                                 <hr>
-                            </div>
+                                <small id="err-choose" class="invalid-feedback">Please choose an ID type to add</small>
+                            </div><br>
 
                             <div class="col-12">
                                 <span><a class="text-dark" href="{{ route('add_government') }}"><i class="fa-solid fa-angle-left mr-2"></i> <b>Back</b></a></span>
@@ -98,7 +99,26 @@
 @section('scripts')
 
 <script>
+    $(document).ready(function () {
+        $('#driver_license').change(function (e) {
+            $('#err-choose').hide();
 
+        });
+        $('#passport').change(function (e) {
+            $('#err-choose').hide();
+
+        });
+        $('#identity_card').change(function (e) {
+            $('#err-choose').hide();
+
+        });
+        $('#step_two').submit(function (e) {
+            if(!$("#driver_license").is(":checked") && !$("#passport").is(":checked") && !$("#identity_card").is(":checked")) {
+                $('#err-choose').show();
+                e.preventDefault();
+            }
+        });
+    });
 </script>
 
 @endsection

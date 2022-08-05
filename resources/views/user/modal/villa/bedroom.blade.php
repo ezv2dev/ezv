@@ -1205,6 +1205,19 @@
             $('#bedroomFormSelect').find(`input[name=bedroom]`).prop("checked",false);
             $('#bedroomForm').find(`input[name='bedroom1']`).val(value);
         }
+
+        let currBedIndex = parseInt($('#btnAddBedroom').attr('data-index'));
+
+        // decrease value in data-index
+        $('#btnAddBedroom').attr('data-index', currBedIndex - 1);
+
+        // re-render bedroom
+        let template = "";
+        for (var i = 0; i < currBedIndex - 1; i++) {
+            let content = contentBedroomDetailForm(i, null);
+            template += content;
+        }
+        $('#bedroomDetailForm').html(template);
     }
     function addAddBedroomDetailForm() {
         console.log('hit addAddBedroomDetailForm');
