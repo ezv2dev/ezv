@@ -655,7 +655,9 @@
                                     <label>{{ __('user_page.Max Guest') }}</label>
                                     <input type="number" class="form-control" id="max_guest" name="max_guest"
                                         placeholder="Input Max Person"
-                                        value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
+                                        @if (isset($villaExtra)) @if ($villaExtra->type_extra == 'extra_person') value="{{ !empty($villaExtra->max_extra) ? $villaExtraGuest->max_extra : '' }}" @endif
+                                        @endif
+                                    >
                                     <small id="err-mxguest" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
                                 </div>
@@ -664,7 +666,9 @@
                                     <input type="number" class="form-control" id="price_extra_guest"
                                         name="price_extra_guest"
                                         placeholder="{{ __('user_page.Input Price per Person') }}"
-                                        value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
+                                        @if (isset($villaExtra)) @if ($villaExtra->type_extra == 'extra_person') value="{{ !empty($villaExtra->price) ? $villaExtra->price : '' }}" @endif
+                                        @endif
+                                    >
                                     <small id="err-exguest" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                 </div>
@@ -678,7 +682,9 @@
                                     <label>{{ __('user_page.Max Bed') }}</label>
                                     <input type="number" class="form-control" id="max_bed" name="max_bed"
                                         placeholder="{{ __('user_page.Input Max Bed') }}"
-                                        value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
+                                        @if (isset($villaExtra)) @if ($villaExtra->type_extra == 'extra_bed') value="{{ !empty($villaExtra->max_extra) ? $villaExtra->max_extra : '' }}" @endif
+                                        @endif
+                                    >
                                     <small id="err-maxbed" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
                                 </div>
@@ -687,7 +693,9 @@
                                     <input type="number" class="form-control" id="price_extra_bed"
                                         name="price_extra_bed"
                                         placeholder="{{ __('user_page.Input Price per Person') }}"
-                                        value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
+                                        @if (isset($villaExtra)) @if ($villaExtra->type_extra == 'extra_bed') value="{{ !empty($villaExtra->price) ? $villaExtra->price : '' }}" @endif
+                                        @endif
+                                    >
                                     <small id="err-exbed" style="display: none;"
                                         class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
                                 </div>
