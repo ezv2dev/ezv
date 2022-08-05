@@ -65,10 +65,6 @@
         font-weight: 500 !important;
     }
 
-    .d-none {
-        display: none !important;
-    }
-
     .d-block {
         display: block !important;
     }
