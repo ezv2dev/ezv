@@ -1449,7 +1449,9 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         } else {
                             content =
                                 content +
@@ -1466,7 +1468,9 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         }
                     }
 
@@ -1486,7 +1490,7 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-video="' +
                                 response.video[v].id_video +
-                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a>  </div> </div> </div>';
                         }
                     }
 
