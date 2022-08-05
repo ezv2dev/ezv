@@ -1302,7 +1302,7 @@ function editAmenitiesVilla(id_villa) {
                 `);
             }
 
-            $("#moreBathroom").html(`
+            $("#moreBathroomz").html(`
                 <div class="col-md-6">
                     <span class="translate-text-group-items">
                         ${response.getBathroom[0].bathroom.name}
@@ -1311,7 +1311,7 @@ function editAmenitiesVilla(id_villa) {
             `);
 
             for (j = 1; j < lengthBathroom; j++) {
-                $("#moreBathroom").append(`
+                $("#moreBathroomz").append(`
                     <div class="col-md-6">
                         <span class='translate-text-group-items'>
                             ${response.getBathroom[j].bathroom.name}

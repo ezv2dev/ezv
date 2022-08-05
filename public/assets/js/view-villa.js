@@ -12,6 +12,17 @@ Dashmix.helpersOnLoad(["jq-magnific-popup"]);
 //     console.log(z);
 // }
 // Date Picker
+let user_info;
+
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "/user-check/login",
+        success: function (response) {
+            user_info = response;
+        },
+    });
+});
 
 let instant_book = $("#instant_book_check").val();
 
@@ -205,13 +216,25 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
             let buttonBottomMob = "";
 
             if (instant_book == "yes") {
-                buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
-                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                value="VIEW DETAILS" readonly>`;
+                if (user_info == true) {
+                    buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="VIEW DETAILS" readonly>`;
+                } else {
+                    buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="VIEW DETAILS" readonly>`;
+                }
             } else {
-                buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
-                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                value="QUICK ENQUIRY" readonly>`;
+                if (user_info == true) {
+                    buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="QUICK ENQUIRY" readonly>`;
+                } else {
+                    buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                    value="QUICK ENQUIRY" readonly>`;
+                }
             }
 
             $(".button-view-detail").html("");
@@ -451,13 +474,25 @@ function calendar_availability(months) {
                                 let buttonBottomMob = "";
 
                                 if (instant_book == "yes") {
-                                    buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
-                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                    value="VIEW DETAILS" readonly>`;
+                                    if (user_info == true) {
+                                        buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="VIEW DETAILS" readonly>`;
+                                    } else {
+                                        buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="VIEW DETAILS" readonly>`;
+                                    }
                                 } else {
-                                    buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
-                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                    value="QUICK ENQUIRY" readonly>`;
+                                    if (user_info == true) {
+                                        buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="QUICK ENQUIRY" readonly>`;
+                                    } else {
+                                        buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                        value="QUICK ENQUIRY" readonly>`;
+                                    }
                                 }
 
                                 $(".button-view-detail").html("");
@@ -1339,14 +1374,15 @@ $(document).ready(function () {
         });
 });
 
-
 //validasi agar tidak menginputkan selain angka ke input phone
-$('#VillaQuickEnquiry #phone').on('keypress', function(evt){
-    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-    {
+$("#VillaQuickEnquiry #phone").on("keypress", function (evt) {
+    if (
+        (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
+        evt.which > 57
+    ) {
         evt.preventDefault();
     }
-})
+});
 
 //call calendar
 calendar_header(2);

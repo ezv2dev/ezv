@@ -3557,7 +3557,11 @@
                         $safetyGet = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
                         $serviceGet = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
                     @endphp
-                    <div class="row-modal-amenities translate-text-group row-border-bottom" id="moreAmenities">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom" >
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Amenities') }}</h5>
+                        </div>
+                        <div id="moreAmenities">
                         @foreach ($amenitiesGet as $item)
                             <div class="col-md-6 mb-2">
                                 <span class='translate-text-group-items'>
@@ -3565,6 +3569,7 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
@@ -3612,7 +3617,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
-                        <div id="moreBathroom">
+                        <div id="moreBathroomz">
                         @foreach ($bathroomGet as $item)
                             <div class="col-md-6">
                                 <span class="translate-text-group-items">
@@ -5712,25 +5717,9 @@
             $('.dropdwn').slideToggle('fast');
         });
 
-        <<
-        <<
-        <<
-        <
-        Updated upstream
         $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                    $('.dropdwn').slideUp('fast');
-                    // document.activeElement.blur();//lose focus
-                    ===
-                    ===
-                    =
-                    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                        $('.dropdwn').slideUp('fast');
-                        document.activeElement.blur(); //lose focus
-                        >>>
-                        >>>
-                        >
-                        Stashed changes
-                    });
+            $('.dropdwn').slideUp('fast');
+        });
     </script>
 </body>
 

@@ -42,6 +42,7 @@ class XenditController extends Controller
 
     public function createVa(Request $request)
     {
+        // dd(auth()->check());
         // dd($request->all());
         //get id villa
         $decrypt_id = Crypt::decryptString($request->price_total);
@@ -51,21 +52,21 @@ class XenditController extends Controller
         abort_if(!$villa, 404);
 
         //get check_in, check_out, night
-        $check_in = $request->check_in_date;
-        $check_out = $request->check_out_date;
+        $check_in = $request->check_in;
+        $check_out = $request->check_out;
 
         //get adult child
-        if($request->adult_va == null || $request->adult_va == 0)
+        if($request->adult == null || $request->adult == 0)
         {
             $adult = 1;
         }else{
-            $adult = $request->adult_va;
+            $adult = $request->adult;
         }
-        if($request->child_va == null || $request->child_va == 0)
+        if($request->children == null || $request->children == 0)
         {
             $child = 0;
         }else{
-            $child = $request->child_va;
+            $child = $request->children;
         }
 
         //price villa
@@ -75,10 +76,10 @@ class XenditController extends Controller
 
         if(auth()->check())
         {
-            $user = User::where('id', auth()->user()->id)->first();
+            $user = auth()->user();
             $name = $user->first_name." ".$user->last_name;
         }else{
-            $name = $request->firstname_va." ".$request->lastname_va;
+            $name = $request->firstname." ".$request->lastname;
         }
 
         $external_id = 'va-'.time();
@@ -103,7 +104,7 @@ class XenditController extends Controller
             $email = auth()->user()->email;
         }else{
             $user_id = NULL;
-            $email = $request->email_va;
+            $email = $request->email;
         }
 
         // dd($user, $email);
@@ -332,8 +333,32 @@ class XenditController extends Controller
     private function storeUsersBooking($request, $paymentMethod, $paymentDetail)
     {
         // set invoice number
-        $no = "01";
-        $invoice = "EZV-0122" . $no;
+        $companyCode = "EZV";
+        $dateSection = date('ym');
+        $invoice = VillaBooking::latest()->first();
+        if($invoice){
+            $lastYearCode = substr($invoice->no_invoice,4,2);
+            $isInSameYear = ($lastYearCode == date('y'));
+            $lastNumberCode = substr($invoice->no_invoice,9);
+            if($isInSameYear){
+                $numberSection = $lastNumberCode+1;
+                if($numberSection < 10){
+                    $numberSection = '00'.$numberSection;
+                } else if($numberSection < 100){
+                    $numberSection = '0'.$numberSection;
+                };
+                // dd('code when it is in the same year', $numberSection);
+            } else {
+                $numberSection = 1;
+                $numberSection = '00'.$numberSection;
+                // dd('code when it is not in the same year', $numberSection);
+            }
+        } else {
+            $numberSection = 1;
+            $numberSection = '00'.$numberSection;
+            // dd('code when there is not invoice yet', $numberSection);
+        }
+        $invoice_code = $companyCode.'-'.$dateSection.'-'.$numberSection;
 
         // find villa
         $id_villa = Crypt::decryptString($request->price_total) ?? null;
@@ -346,8 +371,8 @@ class XenditController extends Controller
         $check_in = null;
         $check_out = null;
         if($paymentMethod == 'virtual_account'){
-            $check_in = $request->check_in_date;
-            $check_out = $request->check_out_date;
+            $check_in = $request->check_in;
+            $check_out = $request->check_out;
         } else {
             return false;
         }
@@ -361,24 +386,28 @@ class XenditController extends Controller
             ],
             $id_villa
         );
+
         // save booking
         if($paymentMethod == 'virtual_account'){
             // store booking
             $data = [
                 'id_payment' => $paymentDetail->id_payment,
-                'no_invoice' => $invoice,
-                'firstname' => $request->firstname_va,
-                'lastname' => $request->lastname_va,
-                'email' => $request->email_va,
+                'no_invoice' =>$invoice_code,
+                'firstname' => auth()->user()->first_name ?? $request->firstname,
+                'lastname' => auth()->user()->last_name ?? $request->lastname,
+                'email' => auth()->user()->email ?? $request->email,
                 'phone' => null,
                 'id_villa' => $id_villa,
-                'adult' => $request->adult_va,
-                'child' => $request->child_va,
-                'id_extra_price' => 0,
-                'number_extra' => 0,
-                'check_in' => $request->check_in_date,
-                'check_out' => $request->check_out_date,
-                'extra_price' => 0,
+                'adult' => $request->adult,
+                'children' => $request->children,
+                'infant' => $request->infant,
+                'pet' => $request->pet,
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
+                'id_extra' => null,
+                'number_extra' => null,
+                'type_extra' => null,
+                'price_extra' => null,
                 'villa_price' => $detailPrice->normal_price,
                 'total_price' => $detailPrice->total,
                 'service_price' => $detailPrice->service,
@@ -410,7 +439,7 @@ class XenditController extends Controller
                 'check_in' => $storeBooking->check_in,
                 'check_out' => $storeBooking->check_out,
                 'adult' => $storeBooking->adult,
-                'child' => $storeBooking->child,
+                'children' => $storeBooking->children,
                 'status' => $storeBooking->status
             ];
 

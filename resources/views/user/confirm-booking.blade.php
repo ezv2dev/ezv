@@ -507,8 +507,8 @@
                                         {{-- <a href="#" class="fw-bold"><u>Edit</u></a> --}}
                                     </div>
                                     <div class="content sidebar-popup2" style="left: 633px;" id="popup_guest2">
-                                        <div class="row" style="margin-top: 10px;">
-                                            <div class="row" onclick="recountGuest()">
+                                        <div class="row" style="margin-top: 10px;" onclick="recountGuest();reinitDetailGuest();">
+                                            <div class="row">
                                                 <div class="col-6">
                                                     <div class="col-12">
                                                         <p class="price-box">
@@ -540,7 +540,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row" onclick="recountGuest();reinitDetailGuest();">
+                                            <div class="row">
                                                 <div class="col-6">
                                                     <div class="col-12">
                                                         <p class="price-box">
@@ -652,13 +652,13 @@
                                                     @guest
                                                         <div class="col-12">
                                                             <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
-                                                            <input type="text" class="form-control" name="firstname_va" id="firstname_va" value="" placeholder="firstname">
+                                                            <input type="text" class="form-control" name="firstname" id="firstname_va" value="" placeholder="firstname">
                                                             <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
                                                             <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
-                                                            <input type="text" class="form-control" name="lastname_va" id="lastname_va" value="" placeholder="lastname">
+                                                            <input type="text" class="form-control" name="lastname" id="lastname_va" value="" placeholder="lastname">
                                                             <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
                                                             <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
-                                                            <input type="email" class="form-control" name="email_va" id="email_va" value="" placeholder="email">
+                                                            <input type="email" class="form-control" name="email" id="email_va" value="" placeholder="email">
                                                             <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
                                                         </div>
                                                     @endguest
@@ -666,10 +666,12 @@
                                                         <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
                                                     @endauth
                                                         <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa->id_villa) }}">
-                                                        <input type="hidden" name="check_in_date" id="check_in_date" value="{{ request()->check_in }}">
-                                                        <input type="hidden" name="check_out_date" id="check_out_date" value="{{ request()->check_out }}">
-                                                        <input type="hidden" name="adult_va" id="adult_va" value="{{ request()->adult }}">
-                                                        <input type="hidden" name="child_va" id="child_va" value="{{ request()->child }}">
+                                                        <input type="hidden" name="check_in" value="{{ request()->check_in }}">
+                                                        <input type="hidden" name="check_out" value="{{ request()->check_out }}">
+                                                        <input type="hidden" name="adult" value="{{ request()->adult }}">
+                                                        <input type="hidden" name="children" value="{{ request()->child }}">
+                                                        <input type="hidden" name="infant" value="{{ request()->infant }}">
+                                                        <input type="hidden" name="pet" value="{{ request()->pet }}">
 
                                                         <div id="va_brand" class="row" style="font-size: 13px;">
                                                             <div class="col-3">
@@ -1037,8 +1039,8 @@
                             $('#confirmBookingDateForm').find(`#check_in_content`).text(instance.formatDate(selectedDates[0], "d/m/Y"));
                             $('#confirmBookingDateForm').find(`#check_out_content`).text(instance.formatDate(selectedDates[1], "d/m/Y"));
                             // update virtual account date form value
-                            $('#va-form').find(`input[name='check_in_date']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                            $('#va-form').find(`input[name='check_out_date']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                            $('#va-form').find(`input[name='check_in']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $('#va-form').find(`input[name='check_out']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
 
                             var start = new Date(
                                 instance.formatDate(selectedDates[0], "Y-m-d")
@@ -1053,7 +1055,8 @@
                             } else {
                                 fetchTotalPrice();
                             }
-                            console.log('close calender');
+                            // close date
+                            $('#closeCheckInDate').trigger('click');
                         },
                     });
                 },
@@ -1087,8 +1090,10 @@
             let childTotal = $('#child').val();
             let infantTotal = $('#infant').val();
             let petTotal = $('#pet').val();
-            $('#va-form').find(`input[name="adult_va"]`).val(adultTotal);
-            $('#va-form').find(`input[name="child_va"]`).val(childTotal);
+            $('#va-form').find(`input[name="adult"]`).val(adultTotal);
+            $('#va-form').find(`input[name="children"]`).val(childTotal);
+            $('#va-form').find(`input[name="infant"]`).val(infantTotal);
+            $('#va-form').find(`input[name="pet"]`).val(petTotal);
         }
         function increment_by_id(elementId) {
             document.getElementById(elementId).stepUp();

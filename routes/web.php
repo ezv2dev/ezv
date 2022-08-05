@@ -195,6 +195,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/dashboard/user/delete/{id}', [UserController::class, 'destroy'])->name('admin_user_delete');
 });
 
+Route::get('/user-check/login', [UserController::class, 'getLoginInfo']);
 Route::get('/dashboard-switch', [PartnerController::class, 'switch'])->name('switch')->middleware('auth');
 
 // PARTNER
@@ -1450,3 +1451,6 @@ Route::get('id', function () {
 });
 //SESSION
 Route::get('/session/theme', [CookiesController::class, 'set_cookie_theme'])->name('cookie_theme.set');
+
+// xendit
+Route::post('xendit/va/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
