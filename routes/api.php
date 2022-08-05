@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('xendit/va/list', [Api\Payment\XenditController::class, 'getlistVa']);
-Route::post('xendit/va/invoice', [Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
+// Route::post('xendit/va/invoice', [Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
 Route::get('xendit/va/invoice/detail/{va}', [Api\Payment\XenditController::class, 'invoice_va'])->name('api.invoiceVa');
 Route::post('xendit/va/callback', [Api\Payment\XenditController::class, 'callbackVa']);
 
