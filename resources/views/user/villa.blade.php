@@ -5714,25 +5714,9 @@
             $('.dropdwn').slideToggle('fast');
         });
 
-        <<
-        <<
-        <<
-        <
-        Updated upstream
         $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                    $('.dropdwn').slideUp('fast');
-                    // document.activeElement.blur();//lose focus
-                    ===
-                    ===
-                    =
-                    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                        $('.dropdwn').slideUp('fast');
-                        document.activeElement.blur(); //lose focus
-                        >>>
-                        >>>
-                        >
-                        Stashed changes
-                    });
+            $('.dropdwn').slideUp('fast');
+        });
     </script>
 </body>
 
