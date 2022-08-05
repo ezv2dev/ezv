@@ -1138,8 +1138,11 @@
 
                         </div>
                         <div class="row-grid-amenities" id="row-amenities">
+                            @php
+                                $countAllAmenities = $villa_amenities->count() + $kitchen->count() + $safety->count() + $bathroom->count() + $service->count();
+                            @endphp
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                @if (!empty($villa_amenities->count()))
+                                @if (!empty($countAllAmenities))
                                     @if ($villa_amenities->count() > 6)
                                         @foreach ($villa_amenities->take(6) as $item1)
                                             <div class="list-amenities ">
@@ -1307,7 +1310,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @empty($villa_amenities->count())
+                            @empty($countAllAmenities)
                                 <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
                             @endempty
                         </div>
