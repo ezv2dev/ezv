@@ -3102,90 +3102,29 @@ class ViewController extends Controller
 
     public function villa_update_extra(Request $request)
     {
-        // dd($request->all());
-        $this->authorize('listvilla_update');
-        $status = 500;
-
         try {
-            $find = Villa::where('id_villa', $request->id_villa)->first();
-
             $checkVillaExtraGuest = VillaExtraGuest::where('id_villa', '=', $request->id_villa)->first();
             $checkVillaExtraBed = VillaExtraBed::where('id_villa', '=', $request->id_villa)->first();
-            $checkVillaExtraPet = VillaExtraPet::where('id_villa', '=', $request->id_villa)->first();
+            // $checkVillaExtraPet = VillaExtraPet::where('id_villa', '=', $request->id_villa)->first();
 
-            if ($checkVillaExtraGuest == null) {
-                VillaExtraGuest::insertGetId(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_guest,
-                    'price' => $request->price_extra_guest,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
+            if ($request->max_guest == null && $request->price_extra_guest == null) {
+                VillaExtraGuest::where('id_villa', '=', $request->id_villa)->delete();
             } else {
-                $checkVillaExtraGuest->update(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_guest,
-                    'price' => $request->price_extra_guest,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-
-            if ($checkVillaExtraBed == null) {
-                VillaExtraBed::insertGetId(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_bed,
-                    'price' => $request->price_extra_bed,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            } else {
-                $checkVillaExtraBed->update(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_bed,
-                    'price' => $request->price_extra_bed,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-
-            if ($checkVillaExtraPet == null) {
-                VillaExtraPet::insertGetId(array(
-                    'deposit' => $request->deposit,
-                    'max' => $request->max_pet,
-                    'id_villa' => $request->id_villa,
-                    'price_deposit' => $request->price_deposit,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            } else {
-                if ($request->deposit == 0) {
-                    $checkVillaExtraPet->update(array(
-                        'deposit' => $request->deposit,
-                        'max' => $request->max_pet,
+                if ($checkVillaExtraGuest == null) {
+                    VillaExtraGuest::insertGetId(array(
                         'id_villa' => $request->id_villa,
-                        'price_deposit' => null,
+                        'max' => $request->max_guest,
+                        'price' => $request->price_extra_guest,
                         'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id,
                     ));
-                } else if ($request->deposit == 1) {
-                    $checkVillaExtraPet->update(array(
-                        'deposit' => $request->deposit,
-                        'max' => $request->max_pet,
+                } else {
+                    $checkVillaExtraGuest->update(array(
                         'id_villa' => $request->id_villa,
-                        'price_deposit' => $request->price_deposit,
+                        'max' => $request->max_guest,
+                        'price' => $request->price_extra_guest,
                         'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                         'created_by' => Auth::user()->id,
@@ -3194,23 +3133,80 @@ class ViewController extends Controller
                 }
             }
 
-            if ($find) {
-                $status = 200;
+            if ($request->max_bed == null && $request->price_extra_bed == null) {
+                VillaExtraBed::where('id_villa', '=', $request->id_villa)->delete();
+            } else {
+                if ($checkVillaExtraBed == null) {
+                    VillaExtraBed::insertGetId(array(
+                        'id_villa' => $request->id_villa,
+                        'max' => $request->max_bed,
+                        'price' => $request->price_extra_bed,
+                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                        'created_by' => Auth::user()->id,
+                        'updated_by' => Auth::user()->id,
+                    ));
+                } else {
+                    $checkVillaExtraBed->update(array(
+                        'id_villa' => $request->id_villa,
+                        'max' => $request->max_bed,
+                        'price' => $request->price_extra_bed,
+                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                        'created_by' => Auth::user()->id,
+                        'updated_by' => Auth::user()->id,
+                    ));
+                }
             }
+
+            // if ($checkVillaExtraPet == null) {
+            //     VillaExtraPet::insertGetId(array(
+            //         'deposit' => $request->deposit,
+            //         'max' => $request->max_pet,
+            //         'id_villa' => $request->id_villa,
+            //         'price_deposit' => $request->price_deposit,
+            //         'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //         'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //         'created_by' => Auth::user()->id,
+            //         'updated_by' => Auth::user()->id,
+            //     ));
+            // } else {
+            //     if ($request->deposit == 0) {
+            //         $checkVillaExtraPet->update(array(
+            //             'deposit' => $request->deposit,
+            //             'max' => $request->max_pet,
+            //             'id_villa' => $request->id_villa,
+            //             'price_deposit' => null,
+            //             'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //             'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //             'created_by' => Auth::user()->id,
+            //             'updated_by' => Auth::user()->id,
+            //         ));
+            //     } else if ($request->deposit == 1) {
+            //         $checkVillaExtraPet->update(array(
+            //             'deposit' => $request->deposit,
+            //             'max' => $request->max_pet,
+            //             'id_villa' => $request->id_villa,
+            //             'price_deposit' => $request->price_deposit,
+            //             'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //             'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            //             'created_by' => Auth::user()->id,
+            //             'updated_by' => Auth::user()->id,
+            //         ));
+            //     }
+            // }
+
+            $status = 200;
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 500;
         }
 
         if ($status == 200) {
-            // return back()
-            //     ->with('success', 'Your data has been updated');
             return response()->json([
                 'success' => true,
-                'message' => 'Your data has been updated',
+                'message' => 'Successfuly Update Extra Price',
             ], 200);
         } else {
-            // return back()
-            //     ->with('error', 'Please check the form below for errors');
             return response()->json([
                 'success' => false,
                 'message' => 'Please check the form below for errors',

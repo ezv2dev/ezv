@@ -250,7 +250,8 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -1139,8 +1140,11 @@
 
                         </div>
                         <div class="row-grid-amenities" id="row-amenities">
+                            @php
+                                $countAllAmenities = $villa_amenities->count() + $kitchen->count() + $safety->count() + $bathroom->count() + $service->count();
+                            @endphp
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                @if (!empty($villa_amenities->count()))
+                                @if (!empty($countAllAmenities))
                                     @if ($villa_amenities->count() > 6)
                                         @foreach ($villa_amenities->take(6) as $item1)
                                             <div class="list-amenities ">
@@ -1294,21 +1298,21 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        {{-- @if ($i <= 0)
-                                            <div class="list-amenities">
-                                                <button class="amenities-button" type="button"
-                                                    onclick="view_amenities()">
-                                                    <i class="fa-solid fa-ellipsis text-orange"
-                                                        style="font-size: 40px;"></i>
-                                                    <div style="font-size: 15px;" class="translate-text-group-items">
-                                                        {{ __('user_page.More') }}</div>
-                                                </button>
-                                            </div>
-                                        @endif --}}
+                                        @if ($countAllAmenities >= 6)
+                                        <div class="list-amenities">
+                                            <button class="amenities-button" type="button"
+                                                onclick="view_amenities()">
+                                                <i class="fa-solid fa-ellipsis text-orange"
+                                                    style="font-size: 40px;"></i>
+                                                <div style="font-size: 15px;" class="translate-text-group-items">
+                                                    {{ __('user_page.More') }}</div>
+                                            </button>
+                                        </div>
+                                        @endIf
                                     @endif
                                 @endif
                             </div>
-                            @empty($villa_amenities->count())
+                            @empty($countAllAmenities)
                                 <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
                             @endempty
                         </div>
@@ -1796,10 +1800,10 @@
                         @endif
                     </a>
                     <!--
-                                                        <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                            style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                                                            <i class="fa-solid fa-user"></i>
-                                                        </a> -->
+                                                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                                                                style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -2501,8 +2505,11 @@
                                                     target="_blank">
                                         @endIf
                                     @endauth
-                                    <img class="lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
+                                        target="_blank">
+
+                                        <img class="lozad" src="{{ LazyLoad::show() }}"
+                                            data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
@@ -3556,11 +3563,11 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreKitchen">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
+                        <div id="moreKitchen">
                         @foreach ($kitchenGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3568,12 +3575,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreSafety">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
+                        <div id="moreSafety">
                         @foreach ($safetyGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3581,11 +3589,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
+                        <div id="moreService">
                         @foreach ($serviceGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3593,12 +3603,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBathroom">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
+                        <div id="moreBathroom">
                         @foreach ($bathroomGet as $item)
                             <div class="col-md-6">
                                 <span class="translate-text-group-items">
@@ -3606,6 +3617,7 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     {{-- @for ($i = 1; $i <= 3; $i++)
                         <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
@@ -3737,7 +3749,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                            <button onclick="share_function()">Copy link</button> -->
+                                                                                                <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
