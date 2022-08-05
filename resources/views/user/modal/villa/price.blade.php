@@ -638,62 +638,63 @@
                         </div>
 
                         <div class="tab-pane" id="extraPrice">
-                            <form action="{{ route('villa_update_extra') }}" method="POST" id="edit-extra"
-                                class="js-validation" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="id_villa" id="id_villa"
-                                    value="{{ $villa[0]->id_villa }}">
+                            <div class="col-12">
+                                <label>Choose Extra</label>
+                                <select name="extra" id="extra" class="form-control"
+                                    onclick="displayExtra(this.value)">
+                                    <option value="0">Extra Person (Without bed)</option>
+                                    <option value="1">Extra Bed (Include Extra Person)</option>
+                                </select>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4 style="margin-bottom: -10px;">Extra Person (without bed)</h4>
-                                    </div>
-                                    <div class="col-12">
-                                        <label>{{ __('user_page.Max Guest') }}</label>
-                                        <input type="number" class="form-control" id="max_guest" name="max_guest"
-                                            placeholder="Input Max Person"
-                                            value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
-                                        <small id="err-mxguest" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
-                                    </div>
-                                    <div class="col-12">
-                                        <label>{{ __('user_page.Price per Person') }}</label>
-                                        <input type="number" class="form-control" id="price_extra_guest"
-                                            name="price_extra_guest"
-                                            placeholder="{{ __('user_page.Input Price per Person') }}"
-                                            value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
-                                        <small id="err-exguest" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
-                                    </div>
+                            <div class="row d-none mt-1" id="extraPersonForm">
+                                <div class="col-12">
+                                    <h4 style="margin-top: 20px; margin-bottom: 0;">Extra Person (Without bed)</h4>
                                 </div>
-                                <hr class="mt-5">
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4 style="margin-bottom: -10px; margin-top: 20px;">
-                                            Extra Bed (Include Extra Person)</h4>
-                                    </div>
-                                    <div class="col-12">
-                                        <label>{{ __('user_page.Max Bed') }}</label>
-                                        <input type="number" class="form-control" id="max_bed" name="max_bed"
-                                            placeholder="{{ __('user_page.Input Max Bed') }}"
-                                            value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
-                                        <small id="err-maxbed" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
-                                    </div>
-                                    <div class="col-12">
-                                        <label>{{ __('user_page.Price per Person') }}</label>
-                                        <input type="number" class="form-control" id="price_extra_bed"
-                                            name="price_extra_bed"
-                                            placeholder="{{ __('user_page.Input Price per Person') }}"
-                                            value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
-                                        <small id="err-exbed" style="display: none;"
-                                            class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
-                                    </div>
+                                <div class="col-12">
+                                    <label>{{ __('user_page.Max Guest') }}</label>
+                                    <input type="number" class="form-control" id="max_guest" name="max_guest"
+                                        placeholder="Input Max Person"
+                                        value="{{ !empty($villaExtraGuest->max) ? $villaExtraGuest->max : '' }}">
+                                    <small id="err-mxguest" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_mguest') }}</small>
                                 </div>
-                                <hr class="mt-5">
+                                <div class="col-12">
+                                    <label>{{ __('user_page.Price per Person') }}</label>
+                                    <input type="number" class="form-control" id="price_extra_guest"
+                                        name="price_extra_guest"
+                                        placeholder="{{ __('user_page.Input Price per Person') }}"
+                                        value="{{ !empty($villaExtraGuest->price) ? $villaExtraGuest->price : '' }}">
+                                    <small id="err-exguest" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
+                                </div>
+                            </div>
+                            <div class="row d-none" id="extraBedForm">
+                                <div class="col-12">
+                                    <h4 style="margin-top: 20px; margin-bottom: 0;">
+                                        Extra Bed (Include Extra Person)</h4>
+                                </div>
+                                <div class="col-12">
+                                    <label>{{ __('user_page.Max Bed') }}</label>
+                                    <input type="number" class="form-control" id="max_bed" name="max_bed"
+                                        placeholder="{{ __('user_page.Input Max Bed') }}"
+                                        value="{{ !empty($villaExtraBed->max) ? $villaExtraBed->max : '' }}">
+                                    <small id="err-maxbed" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_mbed') }}</small>
+                                </div>
+                                <div class="col-12">
+                                    <label>{{ __('user_page.Price per Person') }}</label>
+                                    <input type="number" class="form-control" id="price_extra_bed"
+                                        name="price_extra_bed"
+                                        placeholder="{{ __('user_page.Input Price per Person') }}"
+                                        value="{{ !empty($villaExtraBed->price) ? $villaExtraBed->price : '' }}">
+                                    <small id="err-exbed" style="display: none;"
+                                        class="invalid-feedback">{{ __('auth.empty_prcperson') }}</small>
+                                </div>
+                            </div>
+                            <hr class="mt-5">
 
-                                <div class="row">
+                            {{-- <div class="row">
                                     <div class="col-12">
                                         <h4 style="margin-bottom: -10px; margin-top: 20px;">
                                             {{ __('user_page.Extra Pet') }}</h4>
@@ -728,18 +729,18 @@
                                         <small id="err-expet" style="display: none;"
                                             class="invalid-feedback">{{ __('auth.empty_expet') }}</small>
                                     </div>
+                                </div> --}}
+                            <div class="row d-flex justify-content-center d-none" id="saveExtra"
+                                onclick="saveExtra()">
+                                <div class="col-6 mt-5">
+                                    <center>
+                                        <button type="submit" class="btn btn-primary btn-sm" id="sbmt-extra"
+                                            style="width: 200px;">
+                                            <i class="fa fa-check"></i> {{ __('user_page.Save') }}
+                                        </button>
+                                    </center>
                                 </div>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-6 mt-5">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm" id="sbmt-extra"
-                                                style="width: 200px;">
-                                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
-                                            </button>
-                                        </center>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1005,6 +1006,56 @@
             element.classList.add("d-none");
             element.classList.remove("d-block");
         }
+    }
+
+    function displayExtra(id) {
+        if (id == 0) {
+            document.getElementById("extraPersonForm").classList.remove("d-none");
+            document.getElementById("extraPersonForm").classList.add("d-block");
+            document.getElementById("extraBedForm").classList.add("d-none");
+            document.getElementById("extraBedForm").classList.remove("d-block");
+            document.getElementById("max_bed").value = null;
+            document.getElementById("price_extra_bed").value = null;
+            document.getElementById("saveExtra").classList.remove("d-none");
+        } else {
+            document.getElementById("extraBedForm").classList.remove("d-none");
+            document.getElementById("extraBedForm").classList.add("d-block");
+            document.getElementById("extraPersonForm").classList.add("d-none");
+            document.getElementById("extraPersonForm").classList.remove("d-block");
+            document.getElementById("max_guest").value = null;
+            document.getElementById("price_extra_guest").value = null;
+            document.getElementById("saveExtra").classList.remove("d-none");
+        }
+    }
+
+    function saveExtra() {
+        var max_guest = $("#max_guest").val()
+        var price_extra_guest = $("#price_extra_guest").val()
+        var max_bed = $("#max_bed").val()
+        var price_extra_bed = $("#price_extra_bed").val()
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/update/extra",
+            data: {
+                id_villa: id_villa,
+                max_guest: max_guest,
+                price_extra_guest: price_extra_guest,
+                max_bed: max_bed,
+                price_extra_bed: price_extra_bed,
+            },
+            success: function(response) {
+                $("#modal-edit_price").modal("hide");
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+            },
+        });
     }
 </script>
 

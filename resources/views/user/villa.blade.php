@@ -250,7 +250,8 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -1798,10 +1799,10 @@
                         @endif
                     </a>
                     <!--
-                                                        <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                            style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                                                            <i class="fa-solid fa-user"></i>
-                                                        </a> -->
+                                                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                                                                style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -2503,8 +2504,11 @@
                                                     target="_blank">
                                         @endIf
                                     @endauth
-                                    <img class="lozad" src="{{ LazyLoad::show() }}"
-                                        data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
+                                    <a href="{{ route('owner_profile_show', $createdby[0]->id) }}"
+                                        target="_blank">
+
+                                        <img class="lozad" src="{{ LazyLoad::show() }}"
+                                            data-src="{{ URL::asset('/template/villa/template_profile.jpg') }}">
                                     </a>
                                 @endif
                             </div>
@@ -3739,7 +3743,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                            <button onclick="share_function()">Copy link</button> -->
+                                                                                                <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>
