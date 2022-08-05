@@ -3608,7 +3608,7 @@
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
-                        <div id="moreBathroom">
+                        <div id="moreBathroomz">
                         @foreach ($bathroomGet as $item)
                             <div class="col-md-6">
                                 <span class="translate-text-group-items">
