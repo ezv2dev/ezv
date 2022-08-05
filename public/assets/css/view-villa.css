@@ -3060,9 +3060,9 @@ video {
 }
 
 .delete-story {
-    right: -4px;
-    position: relative;
-    top: 38px;
+    right: 0px;
+    position: absolute;
+    top: 0px;
 }
 
 .grid-photo {
@@ -3841,17 +3841,20 @@ span.flatpickr-weekday {
 }
 @media only screen and (min-width: 768px) and (max-width: 800px) {
     .sidebar {
-        right: 0px !important;
+        right: 7px !important;
+        margin-right: 0px !important;
     }
 }
 @media only screen and (min-width: 801px) and (max-width: 900px) {
     .sidebar {
-        right: 3px !important;
+        right: 7px !important;
+        margin-right: 0px !important;
     }
 }
 @media only screen and (min-width: 901px) and (max-width: 1024px) {
     .sidebar {
-        right: 5px !important;
+        right: 8px !important;
+        margin-right: 0px !important;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -4478,6 +4481,17 @@ span.flatpickr-weekday {
     background: #d8d8d8;
 }
 
+.title-story {
+    position: relative;
+    top: 38px;
+    left: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 575px) {
     .px-xs-12p {
         padding-left: 12px !important;
@@ -4513,6 +4527,21 @@ span.flatpickr-weekday {
     #name-form-input {
         font-size: 16px;
         height: 80px;
+    }
+    #storymodalrestaurant {
+        border-radius: 0px !important;
+    }
+    #storymodalrestaurant .btn-close {
+        position: absolute !important;
+        top: 7px !important;
+        right: 5px !important;
+        z-index: 1 !important;
+        padding: 5px !important;
+        opacity: 1 !important;
+    }
+    #storymodalrestaurant #story-video {
+        max-height: none !important;
+        border-radius: 0px !important;
     }
 }
 

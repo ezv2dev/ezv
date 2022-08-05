@@ -690,6 +690,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">Title story</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -758,6 +759,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">Title story</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -799,6 +801,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">Title story</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
