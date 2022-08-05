@@ -7,7 +7,9 @@ $.ajaxSetup({
 let id_restaurant = $("#id_restaurant").val();
 
 function editDescriptionForm() {
-    var formattedText = asciiToString(document.getElementById("description-form-input").value);
+    var formattedText = asciiToString(
+        document.getElementById("description-form-input").value
+    );
     document.getElementById("description-form-input").value = formattedText;
     var form = document.getElementById("description-form");
     var content = document.getElementById("description-content");
@@ -159,10 +161,18 @@ function saveDescription() {
                     "description-form-input"
                 );
 
-                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-                    $("#description-content").html(response.data.description.substring(0, 400) + '...');
+                if (
+                    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+                        navigator.userAgent.toLowerCase()
+                    )
+                ) {
+                    $("#description-content").html(
+                        response.data.description.substring(0, 400) + "..."
+                    );
                 } else {
-                    $("#description-content").html(response.data.description.substring(0, 600) + '...');
+                    $("#description-content").html(
+                        response.data.description.substring(0, 600) + "..."
+                    );
                 }
 
                 desc_input.value = response.data.description;
@@ -1193,7 +1203,9 @@ $("#storeStoryForm").submit(function (e) {
                                 id_restaurant +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         } else {
                             content =
                                 content +
@@ -1210,7 +1222,9 @@ $("#storeStoryForm").submit(function (e) {
                                 id_restaurant +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span>  </div> </div> </div>";
                         }
                     }
 

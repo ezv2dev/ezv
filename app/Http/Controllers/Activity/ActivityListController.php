@@ -1256,7 +1256,7 @@ class ActivityListController extends Controller
             ]);
         }
 
-        $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name', 'id_story')->latest()->get();
+        $getStory = ActivityStory::where('id_activity', $request->id_activity)->select('name', 'id_story', 'title')->latest()->get();
         $getUID = Activity::where('id_activity', $request->id_activity)->select('uid')->first();
         $activityVideo = ActivityVideo::where('id_activity', $request->id_activity)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
@@ -1267,6 +1267,7 @@ class ActivityListController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 

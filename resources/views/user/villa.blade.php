@@ -572,7 +572,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -640,7 +640,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -681,7 +681,7 @@
                                                                                 </a>
                                                                             @endif
                                                                             </a>
-                                                                            <span class="title-story">Title story</span>
+                                                                            <span class="title-story">{{ $item->title }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

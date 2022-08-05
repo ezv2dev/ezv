@@ -7,16 +7,19 @@ $.ajaxSetup({
 let id_activity = $("#id_activity").val();
 
 function editShortDescriptionForm() {
-    var formattedText = asciiToString(document.getElementById("short-description-form-input").value);
-    document.getElementById("short-description-form-input").value = formattedText;
+    var formattedText = asciiToString(
+        document.getElementById("short-description-form-input").value
+    );
+    document.getElementById("short-description-form-input").value =
+        formattedText;
     var form = document.getElementById("short-description-form");
     var content = document.getElementById("short-description-content");
     var formInput = document.getElementById("short-description-form-input");
     form.classList.add("d-block");
     content.classList.add("d-none");
 
-    if (formInput.value == 'Make your short description here') {
-        formInput.value = '';
+    if (formInput.value == "Make your short description here") {
+        formInput.value = "";
     }
 }
 
@@ -28,13 +31,15 @@ function editShortDescriptionCancel() {
     content.classList.remove("d-none");
     // formInput.value = '{{ $activity->short_description }}';
 
-    if (formInput.value == 'Make your short description here') {
-        formInput.value = '';
+    if (formInput.value == "Make your short description here") {
+        formInput.value = "";
     }
 }
 
 function editDescriptionForm() {
-    var formattedText = asciiToString(document.getElementById("description-form-input").value);
+    var formattedText = asciiToString(
+        document.getElementById("description-form-input").value
+    );
     document.getElementById("description-form-input").value = formattedText;
     var form = document.getElementById("description-form");
     var content = document.getElementById("description-content");
@@ -60,7 +65,7 @@ function editDescriptionCancel() {
 }
 
 //ganti short description activity
-$(document).on("keyup", "textarea#short-description-form-input", function() {
+$(document).on("keyup", "textarea#short-description-form-input", function () {
     $("#short-description-form-input").css("border", "");
     $("#err-shrt-desc").hide();
 });
@@ -94,7 +99,7 @@ function saveShortDescription() {
                 id_activity: id_activity,
                 short_description: short_desc,
             },
-            success: function(response) {
+            success: function (response) {
                 // console.log(response.data.short_description);
                 let short_desc_input = document.getElementById(
                     "short-description-form-input"
@@ -117,7 +122,7 @@ function saveShortDescription() {
 
                 editShortDescriptionCancel();
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -151,7 +156,7 @@ function saveShortDescription() {
     }
 }
 
-$(document).on("keyup", "textarea#description-form-input", function() {
+$(document).on("keyup", "textarea#description-form-input", function () {
     $("#description-form-input").css("border", "");
     $("#err-desc").hide();
 });
@@ -185,7 +190,7 @@ function saveDescription() {
                 id_activity: id_activity,
                 description: desc,
             },
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 console.log(response.data.description.length);
 
@@ -193,10 +198,18 @@ function saveDescription() {
                     "description-form-input"
                 );
 
-                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-                    $("#description-content").html(response.data.description.substring(0, 400) + '...');
+                if (
+                    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+                        navigator.userAgent.toLowerCase()
+                    )
+                ) {
+                    $("#description-content").html(
+                        response.data.description.substring(0, 400) + "..."
+                    );
                 } else {
-                    $("#description-content").html(response.data.description.substring(0, 600) + '...');
+                    $("#description-content").html(
+                        response.data.description.substring(0, 600) + "..."
+                    );
                 }
 
                 desc_input.value = response.data.description;
@@ -225,7 +238,7 @@ function saveDescription() {
 
                 editDescriptionCancel();
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -254,7 +267,7 @@ function saveDescription() {
 }
 
 //ganti nama wow
-$(document).on("keyup", "textarea#name-form-input", function() {
+$(document).on("keyup", "textarea#name-form-input", function () {
     $("#name-form-input").css("border", "");
     $("#err-name").hide();
 });
@@ -288,7 +301,7 @@ function saveNameActivity() {
                 id_activity: id_activity,
                 name: $("#name-form-input").val(),
             },
-            success: function(response) {
+            success: function (response) {
                 console.log(response.data.name);
                 let name_input = document.getElementById("name-form-input");
 
@@ -309,7 +322,7 @@ function saveNameActivity() {
                 nameBackup = response.data.name;
                 name_input.value = response.data.name;
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -342,7 +355,7 @@ function saveNameActivity() {
 let imageProfileActivity;
 let readerImageActivity;
 
-$("#imageActivity").on("change", function(ev) {
+$("#imageActivity").on("change", function (ev) {
     if (document.getElementById("imageActivity").files.length != 0) {
         $(".image-box").css("border", "");
         $("#err-img").hide();
@@ -352,7 +365,7 @@ $("#imageActivity").on("change", function(ev) {
     readerImageActivity = new FileReader();
 });
 
-$("#updateImageForm").submit(function(e) {
+$("#updateImageForm").submit(function (e) {
     let error = 0;
     if (document.getElementById("imageActivity").files.length == 0) {
         $(".image-box").css("border", "solid #e04f1a 1px");
@@ -385,14 +398,14 @@ $("#updateImageForm").submit(function(e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
                     position: "topRight",
                 });
 
-                readerImageActivity.addEventListener("load", function() {
+                readerImageActivity.addEventListener("load", function () {
                     $(".imageProfileActivity").attr(
                         "src",
                         readerImageActivity.result
@@ -408,7 +421,7 @@ $("#updateImageForm").submit(function(e) {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 // console.log(jqXHR.responseJSON);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -441,7 +454,7 @@ $("#updateImageForm").submit(function(e) {
 function saveSubcategoryActivity() {
     let subcategory = [];
 
-    $("input[name='subcategory[]']:checked").each(function() {
+    $("input[name='subcategory[]']:checked").each(function () {
         subcategory.push(parseInt($(this).val()));
     });
 
@@ -459,7 +472,7 @@ function saveSubcategoryActivity() {
             id_activity: id_activity,
             subcategory: subcategory,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
             // console.log(response.data.tags.length);
 
@@ -528,7 +541,7 @@ function saveSubcategoryActivity() {
             btn.innerHTML = "<i class='fa fa-check'></i> Save";
             btn.classList.remove("disabled");
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -577,7 +590,7 @@ function saveTimeActivity() {
             open_time: open_time,
             closed_time: closed_time,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             iziToast.success({
@@ -600,7 +613,7 @@ function saveTimeActivity() {
             $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -650,7 +663,7 @@ function saveTimeActivityMobile() {
             open_time: open_time,
             closed_time: closed_time,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             iziToast.success({
@@ -673,7 +686,7 @@ function saveTimeActivityMobile() {
             $(btn).html("<i class='fa fa-check'></i> Save");
             $(btn).attr("disabled", false);
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -724,7 +737,7 @@ let priceImageActivity;
 $("#modal-add_price")
     .find("input[name='image']")
     .eq(0)
-    .on("change", function(ev) {
+    .on("change", function (ev) {
         priceImageActivity = this.files[0];
         console.log("hit data");
     });
@@ -882,82 +895,84 @@ $("#modal-add_price")
 //     });
 // });
 
-$('#name').keyup(function (e) {
-    $('#name').removeClass('is-invalid')
-    $('#err-xname').hide();
+$("#name").keyup(function (e) {
+    $("#name").removeClass("is-invalid");
+    $("#err-xname").hide();
 });
-$('#xprice').keyup(function (e) {
-    $('#xprice').removeClass('is-invalid')
-    $('#err-price').hide();
+$("#xprice").keyup(function (e) {
+    $("#xprice").removeClass("is-invalid");
+    $("#err-price").hide();
 });
-$('#xdescription').keyup(function (e) {
-    $('#xdescription').removeClass('is-invalid')
-    $('#err-descprc').hide();
+$("#xdescription").keyup(function (e) {
+    $("#xdescription").removeClass("is-invalid");
+    $("#err-descprc").hide();
 });
-$('#startDate').change(function (e) {
-    $('#startDate').removeClass('is-invalid')
-    $('#err-sdateprc').hide();
+$("#startDate").change(function (e) {
+    $("#startDate").removeClass("is-invalid");
+    $("#err-sdateprc").hide();
 });
-$('#endDate').change(function (e) {
-    $('#endDate').removeClass('is-invalid')
-    $('#err-edateprc').hide();
+$("#endDate").change(function (e) {
+    $("#endDate").removeClass("is-invalid");
+    $("#err-edateprc").hide();
 });
-$('#imgPrice').change(function (e) {
-    $('#file-upload1').children('.image-box').css('border-color', '')
-    $('#err-imgprc').hide();
+$("#imgPrice").change(function (e) {
+    $("#file-upload1").children(".image-box").css("border-color", "");
+    $("#err-imgprc").hide();
 });
 
-$("#addPriceForm").submit(function(e) {
+$("#addPriceForm").submit(function (e) {
     let error = 0;
-    if(!$('#name').val()) {
-        $('#name').addClass('is-invalid')
-        $('#err-xname').show();
+    if (!$("#name").val()) {
+        $("#name").addClass("is-invalid");
+        $("#err-xname").show();
         error = 1;
     } else {
-        $('#name').removeClass('is-invalid')
-        $('#err-xname').hide();
+        $("#name").removeClass("is-invalid");
+        $("#err-xname").hide();
     }
-    if(!$('#xprice').val()) {
-        $('#xprice').addClass('is-invalid')
-        $('#err-price').show();
+    if (!$("#xprice").val()) {
+        $("#xprice").addClass("is-invalid");
+        $("#err-price").show();
         error = 1;
     } else {
-        $('#xprice').removeClass('is-invalid')
-        $('#err-price').hide();
+        $("#xprice").removeClass("is-invalid");
+        $("#err-price").hide();
     }
-    if(!$('#startDate').val()) {
-        $('#startDate').addClass('is-invalid')
-        $('#err-sdateprc').show();
+    if (!$("#startDate").val()) {
+        $("#startDate").addClass("is-invalid");
+        $("#err-sdateprc").show();
         error = 1;
     } else {
-        $('#startDate').removeClass('is-invalid')
-        $('#err-sdateprc').hide();
+        $("#startDate").removeClass("is-invalid");
+        $("#err-sdateprc").hide();
     }
-    if(!$('#endDate').val()) {
-        $('#endDate').addClass('is-invalid')
-        $('#err-edateprc').show();
+    if (!$("#endDate").val()) {
+        $("#endDate").addClass("is-invalid");
+        $("#err-edateprc").show();
         error = 1;
     } else {
-        $('#endDate').removeClass('is-invalid')
-        $('#err-edateprc').hide();
+        $("#endDate").removeClass("is-invalid");
+        $("#err-edateprc").hide();
     }
-    if(!$('#xdescription').val()) {
-        $('#xdescription').addClass('is-invalid')
-        $('#err-descprc').show();
+    if (!$("#xdescription").val()) {
+        $("#xdescription").addClass("is-invalid");
+        $("#err-descprc").show();
         error = 1;
     } else {
-        $('#xdescription').removeClass('is-invalid')
-        $('#err-descprc').hide();
+        $("#xdescription").removeClass("is-invalid");
+        $("#err-descprc").hide();
     }
-    if(document.getElementById("imgPrice").files.length == 0 ){
-        $('#file-upload1').children('.image-box').css('border-color', '#e04f1a')
-        $('#err-imgprc').show();
+    if (document.getElementById("imgPrice").files.length == 0) {
+        $("#file-upload1")
+            .children(".image-box")
+            .css("border-color", "#e04f1a");
+        $("#err-imgprc").show();
         error = 1;
     } else {
-        $('#file-upload1').children('.image-box').css('border-color', '')
-        $('#err-imgprc').hide();
+        $("#file-upload1").children(".image-box").css("border-color", "");
+        $("#err-imgprc").hide();
     }
-    if(error == 1) {
+    if (error == 1) {
         e.preventDefault();
     } else {
         e.preventDefault();
@@ -979,7 +994,7 @@ $("#addPriceForm").submit(function(e) {
             contentType: false,
             enctype: "multipart/form-data",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 iziToast.success({
                     title: "Success",
                     message: response.message,
@@ -1004,7 +1019,13 @@ $("#addPriceForm").submit(function(e) {
                                             data-dots="false" data-arrows="true">`;
                 content += `<a href="/wow/price/${response.data.id_price}/details" target="_blank" class="grid-image-container">
                                 <img class="brd-radius img-fluid grid-image lozad" style="height: 200px; display: block;"`;
-                content += 'src="' + path + lowerCaseUid + slash + response.data.foto + '" alt="">';
+                content +=
+                    'src="' +
+                    path +
+                    lowerCaseUid +
+                    slash +
+                    response.data.foto +
+                    '" alt="">';
                 content += "</a>";
 
                 content += "</div> </div> </div>";
@@ -1071,7 +1092,7 @@ $("#addPriceForm").submit(function(e) {
 
                 $("#modal-add_price").modal("hide");
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 if (jqXHR.responseJSON.errors) {
                     for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
                         iziToast.error({
@@ -1102,7 +1123,7 @@ function limit(string = "", limit = 0) {
 function saveFacilities() {
     let facilities = [];
 
-    $("input[name='facilities[]']:checked").each(function() {
+    $("input[name='facilities[]']:checked").each(function () {
         facilities.push(parseInt($(this).val()));
     });
 
@@ -1120,7 +1141,7 @@ function saveFacilities() {
             id_activity: id_activity,
             facilities: facilities,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
 
             $("#modal-add_facilities").modal("hide");
@@ -1219,7 +1240,7 @@ function saveFacilities() {
                 $("#contentModalFacilities").html(contentFacilities);
             }
         },
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             if (jqXHR.responseJSON.errors) {
@@ -1245,11 +1266,11 @@ function saveFacilities() {
         },
     });
 }
-$("#emailWow").keyup(function(e) {
+$("#emailWow").keyup(function (e) {
     $("#emailWow").removeClass("is-invalid");
     $("#err-email").hide();
 });
-$("#phoneWow").keyup(function(e) {
+$("#phoneWow").keyup(function (e) {
     $("#phoneWow").removeClass("is-invalid");
     $("#err-phone").hide();
 });
@@ -1301,7 +1322,7 @@ function saveContactActivity() {
                 phone: phone,
                 email: email,
             },
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 $("#modal-edit_contact")
                     .find("input[name='phone']")
@@ -1325,8 +1346,8 @@ function saveContactActivity() {
                 } else {
                     $("#contentEmailActivity").html(
                         '<a id="btnEmailActivity" target="_blank" type="button" href="mailto:' +
-                        response.data.email +
-                        '"> <i class="fa-solid fa-envelope"></i> </a>'
+                            response.data.email +
+                            '"> <i class="fa-solid fa-envelope"></i> </a>'
                     );
                 }
 
@@ -1341,7 +1362,7 @@ function saveContactActivity() {
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 // console.log(jqXHR);
                 // console.log(exception);
                 if (jqXHR.responseJSON.errors) {
@@ -1377,18 +1398,18 @@ var storyVideoPreview = $(".story-upload").children(".story-video-preview");
 
 $(storyVideoInput)
     .children("input")
-    .on("change", function(value) {
+    .on("change", function (value) {
         storyActivity = this.files[0];
         if (document.getElementById("storyVideo").files.length != 0) {
             $(".story-video-form").css("border", "");
             $("#err-stry-vid").hide();
         }
     });
-$(document).on("keyup", "#title", function() {
+$(document).on("keyup", "#title", function () {
     $("#title").css("border", "");
     $("#err-stry-ttl").hide();
 });
-$("#storeStoryForm").submit(function(e) {
+$("#storeStoryForm").submit(function (e) {
     let error = 0;
     if (document.getElementById("storyVideo").files.length == 0) {
         $(".story-video-form").css("border", "solid #e04f1a 1px");
@@ -1437,7 +1458,7 @@ $("#storeStoryForm").submit(function(e) {
                 contentType: false,
                 enctype: "multipart/form-data",
                 dataType: "json",
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
 
                     iziToast.success({
@@ -1468,7 +1489,9 @@ $("#storeStoryForm").submit(function(e) {
                                 id_activity +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         } else {
                             content =
                                 content +
@@ -1485,7 +1508,9 @@ $("#storeStoryForm").submit(function(e) {
                                 id_activity +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         }
                     }
 
@@ -1532,13 +1557,15 @@ $("#storeStoryForm").submit(function(e) {
                     btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
                 },
-                error: function(jqXHR, exception) {
+                error: function (jqXHR, exception) {
                     // console.log(jqXHR);
                     // console.log(exception);
 
                     if (jqXHR.responseJSON.errors) {
                         for (
-                            let i = 0; i < jqXHR.responseJSON.errors.length; i++
+                            let i = 0;
+                            i < jqXHR.responseJSON.errors.length;
+                            i++
                         ) {
                             iziToast.error({
                                 title: "Error",
@@ -1586,9 +1613,9 @@ function saveLocation() {
         id_activity: parseInt(form.find(`input[name='id_activity']`).val()),
         id_location: parseInt(
             form
-            .find(`select[name=id_location] option`)
-            .filter(":selected")
-            .val()
+                .find(`select[name=id_location] option`)
+                .filter(":selected")
+                .val()
         ),
         longitude: form.find(`input[name='longitude']`).val(),
         latitude: form.find(`input[name='latitude']`).val(),
@@ -1609,7 +1636,7 @@ function saveLocation() {
         url: "/things-to-do/update/location",
         data: formData,
         // response data
-        success: function(response) {
+        success: function (response) {
             let latitudeOld = parseFloat(response.data.latitude);
             let longitudeOld = parseFloat(response.data.longitude);
             // variabel global edit marker
@@ -1631,7 +1658,7 @@ function saveLocation() {
             $("#modal-edit_location").modal("hide");
         },
         // response error
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             // console.log(jqXHR);
             // console.log(exception);
             // alert error

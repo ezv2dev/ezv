@@ -3165,6 +3165,7 @@ video {
     overflow: hidden;
     height: 260px;
     border-radius: 15px;
+    position: relative;
 }
 
 .copier::before {
@@ -3736,7 +3737,7 @@ span.flatpickr-weekday {
     }
     .modal-map-image-container,
     #modal-map-content .img-fluid {
-        height: 23vh !important;
+        height: 130px !important;
         border-radius: 15px;
     }
     .payment-warning {
@@ -4226,7 +4227,7 @@ span.flatpickr-weekday {
 .mobile-map {
     position: fixed;
     width: 96%;
-    height: 52% !important;
+    height: 80% !important;
     left: 2%;
     margin-top: 2%;
     z-index: 99;
@@ -4235,8 +4236,6 @@ span.flatpickr-weekday {
 
 .mobile-map-desc-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     position: relative;
 }
 
@@ -4260,7 +4259,6 @@ span.flatpickr-weekday {
     left: 0;
     width: 100%;
     display: flex !important;
-    height: 46%;
 }
 
 .map-mobile-overlay {
@@ -4294,6 +4292,28 @@ span.flatpickr-weekday {
     .liner {
         width: 72%;
     }
+
+    .modal-map-image-container{
+        width: 35%;
+    }
+
+    .map-desc-mobile{
+        width: 65%;
+        padding-left: 10px;
+    }
+
+    .story-container-mobile > a{
+        position: unset;
+    }
+
+    .text-xs-11 {
+        font-size: 11px !important;
+    }
+
+    .text-xs-15{
+        font-size: 15px !important;
+    }
+    
 }
 
 /* Small devices (landscape phones, 576px and up) */

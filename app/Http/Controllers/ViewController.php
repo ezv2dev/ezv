@@ -1858,7 +1858,7 @@ class ViewController extends Controller
             ]);
         }
 
-        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story')->latest()->get();
+        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story', 'title')->latest()->get();
         $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
         $villaVideo = VillaVideo::where('id_villa', $request->id_villa)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
@@ -1869,6 +1869,7 @@ class ViewController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 
