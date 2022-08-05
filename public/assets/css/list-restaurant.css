@@ -391,6 +391,12 @@
     }
 }
 
+@media (min-width: 769px) {
+    .button-prev,
+    .button-next{
+        width:34px;
+    }
+}
 
 @media (min-width: 950px) {
     .container-grid{
@@ -841,8 +847,8 @@
 }
 
 .button-next{
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     border : 1px solid grey;
     border-radius: 50%;
 }
@@ -856,8 +862,8 @@
 }
 
 .button-prev{
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     border : 1px solid grey;
     border-radius: 50%;
 }
