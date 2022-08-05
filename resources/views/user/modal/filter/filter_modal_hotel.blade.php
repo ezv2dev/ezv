@@ -157,42 +157,42 @@ $get_category = request()->get('fCategory');
                         {{ Translate::translate('Sort By') }}</h5>
                     <div class="col-12">
                         <div class="row modal-checkbox-row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Ezv top pick
                                     <input type="checkbox" class="fSort" name="fSort[]" value="ezv_top_pick"
                                         @if (request()->get('fSort') == 'ezv_top_pick') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Lowest to Highest Price
                                     <input type="checkbox" class="fSort" name="fSort[]" value="lowest"
                                         @if (request()->get('fSort') == 'lowest') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Best Reviewed
                                     <input type="checkbox" class="fSort" name="fSort[]" value="best_reviewed"
                                         @if (request()->get('fSort') == 'best_reviewed') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Popularity
                                     <input type="checkbox" class="fSort" name="fSort[]" value="popularity"
                                         @if (request()->get('fSort') == 'popularity') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Highest to Lowest Price
                                     <input type="checkbox" class="fSort" name="fSort[]" value="highest"
                                         @if (request()->get('fSort') == 'highest') checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Closest to the beach
                                     <input type="checkbox" class="fSort" name="fSort[]" value="beach"
                                         @if (request()->get('fSort') == 'beach') checked @endif>
@@ -316,35 +316,35 @@ $get_category = request()->get('fCategory');
                                 $starIds = explode(',', request()->get('fStar'));
                             @endphp
 
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter"> 5 Stars
                                     <input type="checkbox" name="fStar[]" value="5"
                                         @if (in_array(5, $starIds)) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter"> 4 Stars
                                     <input type="checkbox" name="fStar[]" value="4"
                                         @if (in_array(4, $starIds)) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter"> 3 Stars
                                     <input type="checkbox" name="fStar[]" value="3"
                                         @if (in_array(3, $starIds)) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter"> 2 Stars
                                     <input type="checkbox" name="fStar[]" value="2"
                                         @if (in_array(2, $starIds)) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                            <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter"> 1 Star
                                     <input type="checkbox" name="fStar[]" value="1"
                                         @if (in_array(1, $starIds)) checked @endif>
@@ -368,7 +368,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="filter[]" value="{{ $item->id_hotel_filter }}"
                                             {{ $isChecked }}>
@@ -395,7 +395,7 @@ $get_category = request()->get('fCategory');
                                         $isChecked = 'checked';
                                     }
                                 @endphp
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 checkdesign-gap">
+                                <div class="col-12 col-md-6 col-lg-4 checkdesign-gap">
                                     <label class="checkdesign checkdesign-modal-filter">{{ $item->name }}
                                         <input type="checkbox" name="filter[]" value="{{ $item->id_hotel_filter }}"
                                             {{ $isChecked }}>
