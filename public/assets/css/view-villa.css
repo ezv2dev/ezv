@@ -4528,10 +4528,14 @@ span.flatpickr-weekday {
         font-size: 16px;
         height: 80px;
     }
-    #storymodalrestaurant {
+    #storymodal,
+    #storymodalrestaurant,
+    #storymodalactivity {
         border-radius: 0px !important;
     }
-    #storymodalrestaurant .btn-close {
+    #storymodal .btn-close,
+    #storymodalrestaurant .btn-close,
+    #storymodalactivity .btn-close {
         position: absolute !important;
         top: 7px !important;
         right: 5px !important;
@@ -4539,7 +4543,9 @@ span.flatpickr-weekday {
         padding: 5px !important;
         opacity: 1 !important;
     }
-    #storymodalrestaurant #story-video {
+    #storymodal #video,
+    #storymodalrestaurant #story-video,
+    #storymodalactivity #story-video {
         max-height: none !important;
         border-radius: 0px !important;
     }

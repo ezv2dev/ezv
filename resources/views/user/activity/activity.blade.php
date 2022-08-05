@@ -3140,9 +3140,7 @@
 <div class="modal fade" id="storymodalactivity" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
     style="border-radius: 10px;">
-    <div class="modal-dialog modal-xl" role="document">
-        <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-            aria-label="Close"></button>
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
         <div class="modal-content modal-content-story video-container" style="width:980px;">
             <center>
                 <h5 class="video-title" id="story-title"></h5>
@@ -3150,6 +3148,8 @@
                     <source src="">
                     Your browser doesn't support HTML5 video tag.
                 </video>
+                <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
+                    aria-label="Close"></button>
             </center>
         </div>
     </div>
@@ -4148,6 +4148,12 @@
     $("#searchbox").click(function() {
         $("#search_bar").toggleClass("active");
     });
+</script>
+
+<script>
+    function close_story() {
+        $('#storymodalactivity').modal('hide');
+    }
 </script>
 
 {{-- IMAGE UPLOAD --}}
