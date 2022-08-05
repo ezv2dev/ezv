@@ -3554,7 +3554,11 @@
                         $safetyGet = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
                         $serviceGet = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
                     @endphp
-                    <div class="row-modal-amenities translate-text-group row-border-bottom" id="moreAmenities">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom" >
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Amenities') }}</h5>
+                        </div>
+                        <div id="moreAmenities">
                         @foreach ($amenitiesGet as $item)
                             <div class="col-md-6 mb-2">
                                 <span class='translate-text-group-items'>
@@ -3562,6 +3566,7 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
