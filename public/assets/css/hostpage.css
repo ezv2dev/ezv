@@ -192,3 +192,6 @@ input::placeholder {
     padding: 60px 30px;
     border-radius: 12px;
 }
+.text-white h1, .text-white h3, .text-white p {
+    text-shadow: 1px 1px 2px #000;
+}
