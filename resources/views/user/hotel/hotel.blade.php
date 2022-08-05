@@ -401,13 +401,6 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $hotel[0]->name }}</h2>
-                                @auth
-                                    @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
-                                            style="color:#FF7400; font-weight: 600; font-size: 14pt;">
-                                            {{ __('user_page.Edit Name') }}</a>
-                                    @endif
-                                @endauth
                             </div>
                         </div>
                     </div>
@@ -436,7 +429,7 @@
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         onclick="editNameHotel({{ $hotel[0]->id_hotel }})"
                                         style="background-color: #ff7400">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
@@ -452,15 +445,19 @@
                                 &nbsp;
                                 <a type="button" onclick="edit_hotel_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
-                                @if ($hotel[0]->image)
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
+                                <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
+                                    style="color:#FF7400; font-weight: 600; font-size: 10pt;">
+                                    {{ __('user_page.Edit Name') }}
+                                </a>
+                                {{-- @if ($hotel[0]->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none"
                                         href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $hotel[0]->id_hotel }}'})">
                                         <i class="fa fa-trash" style="color:red; margin-left: 25px;"
                                             data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom"
                                             title="{{ __('user_page.Delete') }}"></i></a>
-                                @endif
+                                @endif --}}
                             @endif
                         @endauth
                         {{-- END EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
@@ -631,7 +628,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_short_desc') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveShortDesc"
                                         onclick="editShortDesc({{ $hotel[0]->id_hotel }})">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary"
                                         onclick="editShortDescriptionCancel()">
@@ -1181,7 +1178,7 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-sm btn-primary" id="btnSaveDesc"
                                                 onclick="editDescriptionHotel({{ $hotel[0]->id_hotel }})">
-                                                <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                             </button>
                                             <button type="reset" class="btn btn-sm btn-secondary"
                                                 onclick="editDescriptionCancel()">
@@ -2556,7 +2553,7 @@
                                                             <center>
                                                                 <button type="submit"
                                                                     class="btn btn-block btn-sm btn-primary"
-                                                                    style="width: 200px">{{ __('user_page.Done') }}</button>
+                                                                    style="width: 200px">{{ __('user_page.Save') }}</button>
                                                             </center>
                                                         </div>
                                                     </div>
@@ -5239,7 +5236,7 @@
                         });
                     }
 
-                    btn.innerHTML = "<i class='fa fa-check'></i> Done";
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
                 },
             })

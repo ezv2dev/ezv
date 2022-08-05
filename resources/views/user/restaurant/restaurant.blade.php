@@ -502,13 +502,6 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $restaurant->name }}</h2>
-                                @auth
-                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
-                                            style="color:#FF7400; font-weight: 600; font-size: 14pt;">
-                                            {{ __('user_page.Edit Name') }}</a>
-                                    @endif
-                                @endauth
                             </div>
                         </div>
                     </div>
@@ -552,7 +545,11 @@
                                 &nbsp;
                                 <a type="button" onclick="edit_restaurant_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
+                                <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
+                                    style="color:#FF7400; font-weight: 600; font-size: 10pt;">
+                                    {{ __('user_page.Edit Name') }}
+                                </a>
                                 {{-- @if ($restaurant->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
