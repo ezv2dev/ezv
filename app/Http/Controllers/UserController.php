@@ -38,6 +38,12 @@ class UserController extends Controller
         return User::datatablestrash();
     }
 
+    public function getLoginInfo()
+    {
+        $info = Auth::check();
+        return response()->json($info, 200);
+    }
+
     public function login()
     {
         return view('auth.login');

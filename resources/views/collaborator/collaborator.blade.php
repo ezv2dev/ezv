@@ -932,7 +932,7 @@
                                         class="invalid-feedback">{{ __('auth.empty_name') }}</small><br>
                                     <button type="submit" class="btn btn-sm btn-primary" id="btnSaveName"
                                         style="background-color: #ff7400" onclick="editNameCollab({{ $user->id }})">
-                                        <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                        <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                     </button>
                                     <button type="reset" class="btn btn-sm btn-secondary" onclick="editNameCancel()">
                                         <i class="fa fa-xmark"></i> {{ __('user_page.Cancel') }}
@@ -942,12 +942,18 @@
                             @endif
                         @endauth
 
+                        {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $profile->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <a type="button" onclick="edit_collab_profile()"
                                     class="collab-edit-profile-btn-mobile d-md-none"
-                                    style="font-size: 12pt; font-weight: 600; color: #ff7400;"> Edit
-                                    Profile</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;"> Edit
+                                    Profile |</a>
+                            @endif
+                            @if (Auth::user()->id == $profile->created_by)
+                                &nbsp;<a type="button" class="edit-profile-name-btn-mobile d-md-none"
+                                        onclick="editNameForm({{ $profile->created_by }})"
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
                             @endif
                         @endauth
 
@@ -1127,6 +1133,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">Title story</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1193,6 +1200,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">Title story</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1233,6 +1241,7 @@
                                                                                 </a>
                                                                             @endif
                                                                             </a>
+                                                                            <span class="title-story">Title story</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1524,7 +1533,7 @@
                                                 <button type="submit" class="btn btn-sm btn-primary"
                                                     id="btnSaveDescription"
                                                     onclick="saveDescription({{ $profile->id_collab }});">
-                                                    <i class="fa fa-check"></i> {{ __('user_page.Done') }}
+                                                    <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-sm btn-secondary"
                                                     onclick="editDescriptionCancel()">

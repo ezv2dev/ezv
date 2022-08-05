@@ -410,16 +410,9 @@
                             </div>
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
-                                <h2 id="name-content-mobile">
+                                <h2 id="name-content-mobile" class="d-flex">
                                     <span
                                         id="name-content2-mobile">{{ $activity->name ?? __('user_page.There is no name yet') }}</span>
-                                    @auth
-                                        @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
-                                                style="color:#FF7400; font-weight: 600; font-size: 14pt;">
-                                                {{ __('user_page.Edit Name') }}</a>
-                                        @endif
-                                    @endauth
                                 </h2>
                             </div>
                         </div>
@@ -459,9 +452,13 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;<a type="button" style="color:#FF7400; font-weight: 600;"
+                                &nbsp;<a type="button" style="color:#FF7400; font-weight: 600; font-size: 10pt;"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }}</a>
+                                    onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }} |</a>
+                                <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
+                                    style="color:#FF7400; font-weight: 600; font-size: 10pt;">
+                                    {{ __('user_page.Edit Name') }}
+                                </a>
                                 {{-- @if ($activity->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': `{{ $activity->id_activity }}`})"><i
@@ -693,6 +690,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -761,6 +759,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -802,6 +801,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -4223,11 +4223,9 @@
         document.getElementById("name-form-input").value = formattedText;
         var form = document.getElementById("name-form");
         var content = document.getElementById("name-content");
-        var contentMobile = document.getElementById("name-content-mobile");
         var formInput = document.getElementById("name-form-input");
         form.classList.add("d-block");
         content.classList.add("d-none");
-        contentMobile.classList.add("d-none");
 
         if (formInput.value == 'Wow Name Here') {
             formInput.value = '';
@@ -4238,10 +4236,8 @@
         var form = document.getElementById("name-form");
         var formInput = document.getElementById("name-form-input");
         var content = document.getElementById("name-content");
-        var contentMobile = document.getElementById("name-content-mobile");
         form.classList.remove("d-block");
         content.classList.remove("d-none");
-        contentMobile.classList.remove("d-none");
         // formInput.value = '{{ $activity->name }}';
 
         if (formInput.value == 'Wow Name Here') {

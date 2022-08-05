@@ -1251,7 +1251,7 @@ class RestaurantListController extends Controller
             ]);
         }
 
-        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name', 'id_story')->latest()->get();
+        $getStory = RestaurantStory::where('id_restaurant', $request->id_restaurant)->select('name', 'id_story', 'title')->latest()->get();
         $getUID = Restaurant::where('id_restaurant', $request->id_restaurant)->select('uid')->first();
         $restaurantVideo = RestaurantVideo::where('id_restaurant', $request->id_restaurant)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
@@ -1262,6 +1262,7 @@ class RestaurantListController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 

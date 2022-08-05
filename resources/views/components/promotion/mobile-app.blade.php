@@ -1,7 +1,7 @@
 <!-- Fade In Default Modal -->
 <div class="modal p-0 fade" id="modal-promotion-mobile" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document" style="margin: 55px 0px 0px 0px !important; padding: 0px 6px;">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
         <div class="modal-content modal-content-promotion">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -502,13 +502,6 @@
                             {{-- SHORT NAME FOR MOBILE --}}
                             <div class="name-content-mobile ms-3 d-md-none">
                                 <h2 id="name-content-mobile">{{ $restaurant->name }}</h2>
-                                @auth
-                                    @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                        &nbsp;<a type="button" onclick="editNameForm()" class="edit-name-btn"
-                                            style="color:#FF7400; font-weight: 600; font-size: 14pt;">
-                                            {{ __('user_page.Edit Name') }}</a>
-                                    @endif
-                                @endauth
                             </div>
                         </div>
                     </div>
@@ -552,7 +545,11 @@
                                 &nbsp;
                                 <a type="button" onclick="edit_restaurant_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
+                                <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
+                                    style="color:#FF7400; font-weight: 600; font-size: 10pt;">
+                                    {{ __('user_page.Edit Name') }}
+                                </a>
                                 {{-- @if ($restaurant->image)
                                     <a class="delete-profile edit-profile-image-btn-mobile d-md-none" href="javascript:void(0);"
                                         onclick="delete_profile_image({'id': '{{ $restaurant->id_restaurant }}'})">
@@ -875,6 +872,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -945,6 +943,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -988,6 +987,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -3270,9 +3270,7 @@
 <div class="modal fade" id="storymodalrestaurant" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
     style="border-radius: 10px;">
-    <div class="modal-dialog modal-xl" role="document">
-        <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-            aria-label="Close"></button>
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
         <div class="modal-content modal-content-story video-container" style="width:980px;">
             <center>
                 <h5 class="video-title" id="story-title"></h5>
@@ -3280,6 +3278,8 @@
                     <source src="">
                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                 </video>
+                <button type="button" class="btn-close btn-close-white d-md-none" data-bs-dismiss="modal" onclick="close_story()"
+                    aria-label="Close"></button>
             </center>
         </div>
     </div>
@@ -3394,6 +3394,10 @@
 
     function close_amenities() {
         $('#modal-amenities').modal('hide');
+    }
+
+    function close_story() {
+        $('#storymodalrestaurant').modal('hide');
     }
 </script>
 

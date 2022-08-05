@@ -10,24 +10,46 @@ function asciiToString(str) {
     var arrAsciiIndex = [...str.matchAll(/[&#0-9;]/g)];
     if (arrAsciiIndex.length >= 3) {
         for (var i = 0; i < arrAsciiIndex.length; i++) {
-            if (str[arrAsciiIndex[i].index] === "&" && i != arrAsciiIndex.length - 1) {
+            if (
+                str[arrAsciiIndex[i].index] === "&" &&
+                i != arrAsciiIndex.length - 1
+            ) {
                 if (arrAsciiIndex[i + 1] != undefined) {
                     if (str[arrAsciiIndex[i + 1].index] === "#") {
                         if (arrAsciiIndex[i + 2] != undefined) {
-                            if (!isNaN(parseInt(str[arrAsciiIndex[i + 2].index]))) {
+                            if (
+                                !isNaN(
+                                    parseInt(str[arrAsciiIndex[i + 2].index])
+                                )
+                            ) {
                                 var lastIndex = i + 3;
                                 var number = str[arrAsciiIndex[i + 2].index];
-                                while(lastIndex < arrAsciiIndex.length) {
-                                    if (!isNaN(parseInt(str[arrAsciiIndex[lastIndex].index]))) {
-                                        number += str[arrAsciiIndex[lastIndex].index];
+                                while (lastIndex < arrAsciiIndex.length) {
+                                    if (
+                                        !isNaN(
+                                            parseInt(
+                                                str[
+                                                    arrAsciiIndex[lastIndex]
+                                                        .index
+                                                ]
+                                            )
+                                        )
+                                    ) {
+                                        number +=
+                                            str[arrAsciiIndex[lastIndex].index];
                                         lastIndex++;
                                     } else {
                                         break;
                                     }
                                 }
-                                var escapeChar = String.fromCharCode(parseInt(number));
-                                var pattern = str[arrAsciiIndex[i].index] + str[arrAsciiIndex[i + 1].index]
-                                            + number + ";"
+                                var escapeChar = String.fromCharCode(
+                                    parseInt(number)
+                                );
+                                var pattern =
+                                    str[arrAsciiIndex[i].index] +
+                                    str[arrAsciiIndex[i + 1].index] +
+                                    number +
+                                    ";";
                                 newStr = newStr.replace(pattern, escapeChar);
                             }
                         }
@@ -114,7 +136,9 @@ function editNameVilla() {
 }
 
 function editNameForm() {
-    var formattedText = asciiToString(document.getElementById("name-form-input").value);
+    var formattedText = asciiToString(
+        document.getElementById("name-form-input").value
+    );
     document.getElementById("name-form-input").value = formattedText;
     var form = document.getElementById("name-form");
     var formInput = document.getElementById("name-form-input");
@@ -213,8 +237,11 @@ function editShortDesc() {
 }
 
 function editShortDescriptionForm() {
-    var formattedText = asciiToString(document.getElementById("short-description-form-input").value);
-    document.getElementById("short-description-form-input").value = formattedText;
+    var formattedText = asciiToString(
+        document.getElementById("short-description-form-input").value
+    );
+    document.getElementById("short-description-form-input").value =
+        formattedText;
     var form = document.getElementById("short-description-form");
     var content = document.getElementById("short-description-content");
     var formInput = document.getElementById("short-description-form-input");
@@ -702,10 +729,18 @@ function editDescriptionVilla(id_villa) {
                 villa_description: $("#description-form-input").val(),
             },
             success: function (response) {
-                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-                    $("#description-content").html(response.data.substring(0, 400) + '...');
+                if (
+                    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+                        navigator.userAgent.toLowerCase()
+                    )
+                ) {
+                    $("#description-content").html(
+                        response.data.substring(0, 400) + "..."
+                    );
                 } else {
-                    $("#description-content").html(response.data.substring(0, 600) + '...');
+                    $("#description-content").html(
+                        response.data.substring(0, 600) + "..."
+                    );
                 }
 
                 console.log(response.data.length);
@@ -717,7 +752,11 @@ function editDescriptionVilla(id_villa) {
                     message: response.message,
                     position: "topRight",
                 });
-                if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                if (
+                    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+                        navigator.userAgent.toLowerCase()
+                    )
+                ) {
                     if (response.data.length > 400) {
                         $("#buttonShowMoreDescription").html("");
                         $("#buttonShowMoreDescription").append(
@@ -774,7 +813,9 @@ function editDescriptionVilla(id_villa) {
 }
 
 function editDescriptionForm() {
-    var formattedText = asciiToString(document.getElementById("description-form-input").value);
+    var formattedText = asciiToString(
+        document.getElementById("description-form-input").value
+    );
     document.getElementById("description-form-input").value = formattedText;
     var form = document.getElementById("description-form");
     var content = document.getElementById("description-content");
@@ -951,7 +992,16 @@ function editAmenitiesVilla(id_villa) {
 
             $("#listAmenities").html("");
 
-            if (lengthAmenities == 0) {
+            console.log(lengthAmenities);
+
+            let lengthAll =
+                lengthAmenities +
+                lengthBathroom +
+                lengthKitchen +
+                lengthSafety +
+                lengthService;
+
+            if (lengthAll == 0) {
                 $("#row-amenities").append(
                     `<p id="default-amen-null">There is no amenities</p>`
                 );
@@ -1142,6 +1192,21 @@ function editAmenitiesVilla(id_villa) {
                 }
 
                 count = count - lengthBathroom;
+            }
+
+            //memunculkan button more detail amenities
+            if (lengthAll >= 6) {
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <button class="amenities-button" type="button"
+                        onclick="view_amenities()">
+                        <i class="fa-solid fa-ellipsis text-orange"
+                            style="font-size: 40px;"></i>
+                        <div style="font-size: 15px;" class="translate-text-group-items">
+                            More</div>
+                    </button>
+                </div>
+                `);
             }
 
             $("#moreAmenities").html(`
@@ -1384,7 +1449,9 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         } else {
                             content =
                                 content +
@@ -1401,7 +1468,9 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-story="' +
                                 response.data[i].id_story +
-                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_story(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> <span class="title-story">' +
+                                response.data[i].title +
+                                "</span> </div> </div> </div>";
                         }
                     }
 
@@ -1421,7 +1490,7 @@ $("#updateStoryForm").submit(function (e) {
                                 id_villa +
                                 '" data-video="' +
                                 response.video[v].id_video +
-                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
+                                '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a>  </div> </div> </div>';
                         }
                     }
 

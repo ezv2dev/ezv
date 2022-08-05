@@ -81,6 +81,7 @@ use App\Models\RestaurantDetailReview;
 use Illuminate\Support\Facades\Validator;
 use App\Models\VillaAccessibilityFeatures;
 use App\Models\VillaAccessibilitiyFeaturesDetail;
+use App\Models\VillaExtra;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
 use App\Services\DestinationNearbyVillaService as Nearby;
 use App\Services\FileCompressionService as FileCompression;
@@ -274,6 +275,7 @@ class ViewController extends Controller
         $villaFilter = VillaFilter::all();
         $villaCategory = VillaCategory::all();
         $villaHasCategory = VillaHasCategory::where('id_villa', $id)->get();
+        $villaExtra = VillaExtra::where('id_villa', $id)->first();
 
         return view('user.villa', compact(
             'cancellation_policy',
@@ -307,6 +309,7 @@ class ViewController extends Controller
             'safety_m',
             'service_m',
             'createdby',
+            'villaExtra',
             // 'nearby_restaurant',
             // 'nearby_activities',
             'propertyType',
@@ -1855,7 +1858,7 @@ class ViewController extends Controller
             ]);
         }
 
-        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story')->latest()->get();
+        $getStory = VillaStory::where('id_villa', $request->id_villa)->select('name', 'id_story', 'title')->latest()->get();
         $getUID = Villa::where('id_villa', $request->id_villa)->select('uid')->first();
         $villaVideo = VillaVideo::where('id_villa', $request->id_villa)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
@@ -1866,6 +1869,7 @@ class ViewController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 
@@ -3102,115 +3106,46 @@ class ViewController extends Controller
 
     public function villa_update_extra(Request $request)
     {
-        // dd($request->all());
-        $this->authorize('listvilla_update');
-        $status = 500;
-
         try {
-            $find = Villa::where('id_villa', $request->id_villa)->first();
-
-            $checkVillaExtraGuest = VillaExtraGuest::where('id_villa', '=', $request->id_villa)->first();
-            $checkVillaExtraBed = VillaExtraBed::where('id_villa', '=', $request->id_villa)->first();
-            $checkVillaExtraPet = VillaExtraPet::where('id_villa', '=', $request->id_villa)->first();
-
-            if ($checkVillaExtraGuest == null) {
-                VillaExtraGuest::insertGetId(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_guest,
-                    'price' => $request->price_extra_guest,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            } else {
-                $checkVillaExtraGuest->update(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_guest,
-                    'price' => $request->price_extra_guest,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-
-            if ($checkVillaExtraBed == null) {
-                VillaExtraBed::insertGetId(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_bed,
-                    'price' => $request->price_extra_bed,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            } else {
-                $checkVillaExtraBed->update(array(
-                    'id_villa' => $request->id_villa,
-                    'max' => $request->max_bed,
-                    'price' => $request->price_extra_bed,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            }
-
-            if ($checkVillaExtraPet == null) {
-                VillaExtraPet::insertGetId(array(
-                    'deposit' => $request->deposit,
-                    'max' => $request->max_pet,
-                    'id_villa' => $request->id_villa,
-                    'price_deposit' => $request->price_deposit,
-                    'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
-                ));
-            } else {
-                if ($request->deposit == 0) {
-                    $checkVillaExtraPet->update(array(
-                        'deposit' => $request->deposit,
-                        'max' => $request->max_pet,
-                        'id_villa' => $request->id_villa,
-                        'price_deposit' => null,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            if ($request->max_guest != null && $request->price_extra_guest != null) {
+                VillaExtra::updateOrCreate(
+                    [
+                        'id_villa' => $request->id_villa
+                    ],
+                    [
+                        'type_extra' => 'extra_person',
+                        'max_extra' => $request->max_guest,
+                        'price' => $request->price_extra_guest,
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id,
-                    ));
-                } else if ($request->deposit == 1) {
-                    $checkVillaExtraPet->update(array(
-                        'deposit' => $request->deposit,
-                        'max' => $request->max_pet,
-                        'id_villa' => $request->id_villa,
-                        'price_deposit' => $request->price_deposit,
-                        'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                        'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                    ]
+                );
+            } else {
+                VillaExtra::updateOrCreate(
+                    [
+                        'id_villa' => $request->id_villa
+                    ],
+                    [
+                        'type_extra' => 'extra_bed',
+                        'max_extra' => $request->max_bed,
+                        'price' => $request->price_extra_bed,
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id,
-                    ));
-                }
+                    ]
+                );
             }
 
-            if ($find) {
-                $status = 200;
-            }
+            $status = 200;
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 500;
         }
 
         if ($status == 200) {
-            // return back()
-            //     ->with('success', 'Your data has been updated');
             return response()->json([
                 'success' => true,
-                'message' => 'Your data has been updated',
+                'message' => 'Successfuly Update Extra Price',
             ], 200);
         } else {
-            // return back()
-            //     ->with('error', 'Please check the form below for errors');
             return response()->json([
                 'success' => false,
                 'message' => 'Please check the form below for errors',

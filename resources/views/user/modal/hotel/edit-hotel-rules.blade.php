@@ -319,7 +319,7 @@
     <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" style="overflow-y: initial !important;">
         <div class="modal-content" style="background-color: #fff;">
             <div class="modal-header filter-modal d-flex justify-content-between">
-                <h3 class="mb-0">{{ __('user_page.House Rules') }}</h3>
+                <h3 class="mb-0">Hotel Rules</h3>
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
