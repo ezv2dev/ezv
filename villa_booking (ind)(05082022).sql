@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2022 at 07:02 AM
+-- Generation Time: Aug 05, 2022 at 09:40 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -38,13 +38,16 @@ CREATE TABLE `villa_booking` (
   `phone` varchar(15) DEFAULT NULL,
   `id_villa` int(11) NOT NULL,
   `adult` int(11) NOT NULL,
-  `child` int(11) NOT NULL,
-  `id_extra_price` int(11) NOT NULL,
-  `number_extra` int(11) NOT NULL,
+  `children` int(11) NOT NULL,
+  `infant` int(11) DEFAULT NULL,
+  `pet` int(11) DEFAULT NULL,
   `check_in` date NOT NULL,
   `check_out` date NOT NULL,
+  `id_extra` int(11) DEFAULT NULL,
+  `number_extra` int(11) DEFAULT NULL,
+  `type_extra` int(11) DEFAULT NULL,
+  `price_extra` int(11) DEFAULT NULL,
   `villa_price` int(11) NOT NULL,
-  `extra_price` int(11) NOT NULL,
   `total_price` int(11) NOT NULL,
   `service_price` int(11) NOT NULL,
   `cleaning_fee_price` int(11) DEFAULT NULL,
@@ -79,7 +82,7 @@ ALTER TABLE `villa_booking`
 -- AUTO_INCREMENT for table `villa_booking`
 --
 ALTER TABLE `villa_booking`
-  MODIFY `id_booking` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_booking` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
