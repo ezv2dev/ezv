@@ -329,8 +329,8 @@ function view_story(id) {
             let public = `/foto/hotel/`;
             let slash = "/";
             let hotel_uid = data.hotel.uid;
-            var lowerCaseUid = hotel_uid.toLowerCase();
-            video.src = public + lowerCaseUid + slash + data.name;
+            // var lowerCaseUid = hotel_uid.toLowerCase();
+            video.src = public + hotel_uid + slash + data.name;
             video.load();
             video.play();
             $("#storymodal-title").html(data.title);
@@ -486,8 +486,8 @@ function view_video(id) {
             var slash = "/";
             // var uid = data.villa.uid;
             var hotel_uid = data.hotel.uid;
-            var lowerCaseHotel = hotel_uid.toLowerCase();
-            video.src = public + lowerCaseHotel + slash + data.video;
+            // var lowerCaseHotel = hotel_uid.toLowerCase();
+            video.src = public + hotel_uid + slash + data.video;
             video.load();
             video.play();
             $("#title").html(data.hotel.name);
