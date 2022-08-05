@@ -1472,7 +1472,7 @@
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
                 if (window.scrollY == 0) {
-                    //$('#ul').show();
+                    $('#ul').show();
                     $('#ul').removeClass('ul-display-none').addClass('ul-display-block');
                     $('#bar').removeClass('display-none');
                     $('#searchbox').removeClass('display-block').addClass('display-none');
@@ -1529,8 +1529,8 @@
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
                     } else {
-                        if (!isFocused && $(window).scrollTop() > 200) {
-                            // $('#ul').hide();
+                        if (!isFocused && $(window).scrollTop() > 500) {
+                            $('#ul').hide();
                             $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
                             $('#bar').addClass('display-none');
                             $('#searchbox').removeClass('display-none').addClass('display-block');
@@ -1570,7 +1570,7 @@
 
         <script>
             function popUp() {
-                //$('#ul').show();
+                $('#ul').show();
                 document.getElementById("ul").classList.remove("ul-display-none");
                 document.getElementById("ul").classList.add("ul-display-block");
                 document.getElementById("bar").classList.remove("display-none");

@@ -572,6 +572,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -639,6 +640,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
+                                                                        <span class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -679,6 +681,7 @@
                                                                                 </a>
                                                                             @endif
                                                                             </a>
+                                                                            <span class="title-story">{{ $item->title }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3495,10 +3498,7 @@
     <div class="modal fade" id="storymodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
         style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content modal-content-story video-container" style="width:980px;">
                 <center>
                     <h5 class="video-title" id="storymodal-title"></h5>
@@ -3509,6 +3509,8 @@
                         <source src="">
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
+                        aria-label="Close"></button>
 
             </div>
             </center>
@@ -3554,7 +3556,11 @@
                         $safetyGet = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
                         $serviceGet = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
                     @endphp
-                    <div class="row-modal-amenities translate-text-group row-border-bottom" id="moreAmenities">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom" >
+                        <div class="col-md-12">
+                            <h5 class="mb-3">{{ __('user_page.Amenities') }}</h5>
+                        </div>
+                        <div id="moreAmenities">
                         @foreach ($amenitiesGet as $item)
                             <div class="col-md-6 mb-2">
                                 <span class='translate-text-group-items'>
@@ -3562,6 +3568,7 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
@@ -4122,6 +4129,12 @@
         }
     </script>
     {{-- End Header List --}}
+
+    <script>
+        function close_story() {
+            $('#storymodal').modal('hide');
+        }
+    </script>
 
     {{-- EDIT POSITION PHOTO & VIDEO --}}
     <script>
@@ -5709,25 +5722,9 @@
             $('.dropdwn').slideToggle('fast');
         });
 
-        <<
-        <<
-        <<
-        <
-        Updated upstream
         $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                    $('.dropdwn').slideUp('fast');
-                    // document.activeElement.blur();//lose focus
-                    ===
-                    ===
-                    =
-                    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
-                        $('.dropdwn').slideUp('fast');
-                        document.activeElement.blur(); //lose focus
-                        >>>
-                        >>>
-                        >
-                        Stashed changes
-                    });
+            $('.dropdwn').slideUp('fast');
+        });
     </script>
 </body>
 

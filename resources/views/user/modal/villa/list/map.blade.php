@@ -400,7 +400,7 @@
             const videoName = restaurantLocations.video[lastIndex].name;
             const url = `${videoLink}/${videoName}#1.0`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                         <video class="villa-list-video" loading="lazy"
@@ -413,7 +413,7 @@
             const photoName = restaurantLocations.photo[lastIndex].name;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -425,7 +425,7 @@
             const photoName = restaurantLocations.image;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -436,7 +436,7 @@
         } else {
             const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -510,8 +510,7 @@
         }
 
         var customContent = `
-                            <div class="card col-12 d-flex h-100 justify-content-between">
-                                <div>
+                            <div class="content-prop-in-modal">
                                     <div class="image-in-map-container">
                                         @guest
                                             <div
@@ -542,50 +541,55 @@
                                             ${image}
                                         </div>
                                     </div>
-                                    <div class="mt-3">
-                                        <a href="${contentLink}" target="_blank">
-                                            {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
-                                            <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
-                                            <p class="card-text text-grey-2 limit-text text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
-                                        </a>
-                                    </div>
-
-                                    <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
-                                        <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
-                                                <p class="text-align-center mb-0">
-                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                    </a>
-
-                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                    </a>
-                                                </p>
+                                    
+                                    <div class="description-prop-in-modal">
+                                        <div>
+                                            <a href="${contentLink}" target="_blank">
+                                                {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
+                                                    <div class="video-btn-container-in-map">
+                                                        ${video}
+                                                    </div>
+                                                </div>
+                                                <p class="card-text text-13 text-grey-1 fw-500 mt-1 cuisine-in-modal">${cuisine}</p>
+                                                <p class="card-text text-grey-2 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
+                                            </a>
+                                            <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
+                                                <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                        <p class="text-align-center mb-0">
+                                                            <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                                <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                            </a>
+    
+                                                            <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                                <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                            </a>
+                                                        </p>
+                                                </div>
+                                                <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+                                            </div>
                                         </div>
-                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-center mt-3 modal-view-detail">
-                                    <div class="col-6">
-                                        <a href="${contentLink}" target="_blank" class="link-detail">
-                                            <p class="card-text text-17 text-orange fw-600">View Detail</p>
-                                            <i class=" text-orange fa-solid fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end col-6">
-                                        <div class="me-2 d-flex align-items-center flex-column">
-                                            <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Prev</small>
-                                        </div>
-                                        <div class="d-flex align-items-center flex-column">
-                                            <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
-                                            <small class="text-13">Next</small>
+                                        <div class="d-flex align-items-center modal-view-detail">
+                                            <div class="col-6">
+                                                <a href="${contentLink}" target="_blank" class="link-detail">
+                                                    <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                    <i class=" text-orange fa-solid fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+        
+                                            <div class="d-flex justify-content-end col-6">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
                             </div>`;
 
@@ -709,7 +713,7 @@
             const videoName = villaLocations.video[lastIndex].name;
             const url = `${videoLink}/${videoName}#1.0`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                         <video class="villa-list-video" loading="lazy"
@@ -722,7 +726,7 @@
             const photoName = villaLocations.photo[lastIndex].name;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -734,7 +738,7 @@
             const photoName = villaLocations.image;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -745,7 +749,7 @@
         } else {
             const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -810,68 +814,72 @@
         }
 
         var customContent = `
-                            <div class="card col-12 h-100 d-flex justify-content-between">
-                                <div>
-                                    <div class="image-in-map-container">
-                                        @guest
-                                            <div
-                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                    onclick="loginForm(1)">
-                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                        focusable="false" class="favorite-button favorite-button-28">
-                                                        <path
-                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        @endguest
-                                        @auth
-                                            ${favorite}
-                                        @endauth
-                                        ${video}
-                                        <div class="like-sign like-sign-villa-${villaLocations.id_villa}">
-                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                            <div class="content-prop-in-modal">
+                                <div class="image-in-map-container">
+                                    @guest
+                                        <div
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
+                                                onclick="loginForm(1)">
+                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                    focusable="false" class="favorite-button favorite-button-28">
+                                                    <path
+                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <div id="location-map-content-right-image-loading">
-                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
-                                        </div>
-                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                        data-arrows="true">
-                                            ${image}
-                                        </div>
+                                    @endguest
+                                    @auth
+                                        ${favorite}
+                                    @endauth
+                                    ${video}
+                                    <div class="like-sign like-sign-villa-${villaLocations.id_villa}">
+                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                     </div>
-                                    <div class="mt-3">
+                                    <div id="location-map-content-right-image-loading">
+                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    </div>
+                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                    data-arrows="true">
+                                        ${image}
+                                    </div>
+                                </div>
+                                <div class="description-prop-in-modal">
+                                    <div>
                                         <a href="${contentLink}" target="_blank">
-                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
+                                                <div class="video-btn-container-in-map">
+                                                    ${video}
+                                                </div>
+                                            </div>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1 list-fasilitas">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
                                             <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description mb-2">${short_description}</p>
                                             <p class="card-text text-orange text-17 fw-500 map-price-dekstop">${price}/Night</p>
                                         </a>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center mt-3 modal-view-detail">
-                                    <div class="col-6 map-villa-detail-link">
-                                        <a href="${contentLink}" target="_blank" class="link-detail">
-                                            <p class="card-text text-17 text-orange fw-600">View Detail</p>
-                                            <i class=" text-orange fa-solid fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                    <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
-
-                                    <div class="d-flex justify-content-end col-6">
-                                        <div class="me-2 d-flex align-items-center flex-column">
-                                            <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Prev</small>
+                                    <div class="d-flex align-items-end modal-view-detail">
+                                        <div class="col-6 map-villa-detail-link">
+                                            <a href="${contentLink}" target="_blank" class="link-detail">
+                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <i class=" text-orange fa-solid fa-arrow-right"></i>
+                                            </a>
                                         </div>
-                                        <div class="d-flex align-items-center flex-column">
-                                            <button class="button-prev" id="modal-map-right-next" disabled="true" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
-                                            <small class="text-13">Next</small>
+                                        <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
+
+                                        <div class="d-flex justify-content-end col-6">
+                                            <div class="me-2 d-flex align-items-center flex-column">
+                                                <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                <small class="text-13">Prev</small>
+                                            </div>
+                                            <div class="d-flex align-items-center flex-column">
+                                                <button class="button-prev" id="modal-map-right-next" disabled="true" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                <small class="text-13">Next</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>`;
 
         return customContent;
@@ -987,7 +995,7 @@
             const videoName = hotelLocations.video[lastIndex].name;
             const url = `${videoLink}/${videoName}#1.0`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                         <video class="villa-list-video" loading="lazy"
@@ -1000,7 +1008,7 @@
             const photoName = hotelLocations.photo[lastIndex].name;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -1012,7 +1020,7 @@
             const photoName = hotelLocations.image;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -1070,78 +1078,83 @@
         }
 
         var customContent = `
-                            <div class="card col-12 h-100 d-flex justify-content-between">
-                                <div>
-                                    <div class="image-in-map-container">
-                                        @guest
-                                            <div
-                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                    onclick="loginForm(1)">
-                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                        focusable="false" class="favorite-button favorite-button-28">
-                                                        <path
-                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        @endguest
-                                        @auth
-                                            ${favorite}
-                                        @endauth
-                                        ${video}
-                                        <div class="like-sign like-sign-hotel-${hotelLocations.id_hotel}">
-                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                            <div class="content-prop-in-modal">
+                                <div class="image-in-map-container">
+                                    @guest
+                                        <div
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
+                                                onclick="loginForm(1)">
+                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                    focusable="false" class="favorite-button favorite-button-28">
+                                                    <path
+                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <div id="location-map-content-right-image-loading">
-                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
-                                        </div>
-                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                        data-arrows="true">
-                                            ${image}
-                                        </div>
+                                    @endguest
+                                    @auth
+                                        ${favorite}
+                                    @endauth
+                                    ${video}
+                                    <div class="like-sign like-sign-hotel-${hotelLocations.id_hotel}">
+                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                     </div>
-                                    <div class="mt-3">
+                                    <div id="location-map-content-right-image-loading">
+                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
+                                    </div>
+                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                    data-arrows="true">
+                                        ${image}
+                                    </div>
+                                </div>
+                                <div class="description-prop-in-modal">
+                                    <div>
                                         <a href="${contentLink}" target="_blank">
-                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${hotelLocations.name}</p>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${hotelLocations.name}</p>
+                                                <div class="video-btn-container-in-map">
+                                                    ${video}
+                                                </div>
+                                            </div>
                                         </a>
-                                    </div>
-                                    <div class="d-none d-md-flex mt-2" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden;">
-                                        <div style="position: absolute; height: 140px;" class="col-12 d-flex justify-content-center align-items-center">
-                                                <p class="text-align-center mb-0">
-                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                    </a>
-
-                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                    </a>
-                                                </p>
+                                        <div class="d-none d-md-flex mt-2" style="height: 140px; width: 100%; border-radius: 12px; overflow: hidden; position:relative;">
+                                            <div style="position: absolute; height: 140px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                    <p class="text-align-center mb-0">
+                                                        <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                            <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                        </a>
+    
+                                                        <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                            <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                        </a>
+                                                    </p>
+                                            </div>
+                                            <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                         </div>
-                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+                                    </div>
+                                    <div class="d-flex align-items-center mt-3 modal-view-detail">
+                                        <div class="col-6">
+                                            <a href="${contentLink}" target="_blank" class="link-detail">
+                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <i class=" text-orange fa-solid fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex justify-content-end col-6">
+                                            <div class="me-2 d-flex align-items-center flex-column">
+                                                <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                <small class="text-13">Prev</small>
+                                            </div>
+                                            <div class="d-flex align-items-center flex-column">
+                                                <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                <small class="text-13">Next</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
 
-                                <div class="d-flex align-items-center mt-3 modal-view-detail">
-                                    <div class="col-6">
-                                        <a href="${contentLink}" target="_blank" class="link-detail">
-                                            <p class="card-text text-17 text-orange fw-600">View Detail</p>
-                                            <i class=" text-orange fa-solid fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                    <div class="d-flex justify-content-end col-6">
-                                        <div class="me-2 d-flex align-items-center flex-column">
-                                            <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Prev</small>
-                                        </div>
-                                        <div class="d-flex align-items-center flex-column">
-                                            <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
-                                            <small class="text-13">Next</small>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>`;
 
         return customContent;
@@ -1257,7 +1270,7 @@
             const videoName = activityLocations.video[lastIndex].name;
             const url = `${videoLink}/${videoName}#1.0`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                         <video class="villa-list-video" loading="lazy"
@@ -1270,7 +1283,7 @@
             const photoName = activityLocations.photo[lastIndex].name;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -1282,7 +1295,7 @@
             const photoName = activityLocations.image;
             const url = `${imageLink}/${photoName}`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -1293,7 +1306,7 @@
         } else {
             const url = `{{ env('APP_URL') }}/foto/default/no-image.jpeg`;
             video = `
-                <a href="${contentLink}" target="_blank" class="absolute-right">
+                <a href="${contentLink}" target="_blank" class="absolute-right video-btn-in-map">
                     <div class="villa-list-video-container video-show-buttons">
                         <i class="fas fa-2x fa-play video-button"></i>
                             <img class="villa-list-video" loading="lazy"
@@ -1372,78 +1385,81 @@
         }
 
         var customContent = `
-                            <div class="card col-12 h-100 d-flex justify-content-between">
-                                <div>
-                                    <div class="image-in-map-container">
-                                        @guest
-                                            <div
-                                                style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                                <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                    onclick="loginForm(1)">
-                                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
-                                                        focusable="false" class="favorite-button favorite-button-28">
-                                                        <path
-                                                            d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        @endguest
-                                        @auth
-                                            ${favorite}
-                                        @endauth
-                                        ${video}
-                                        <div class="like-sign like-sign-activity-${activityLocations.id_activity}">
-                                            <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
+                            <div class="content-prop-in-modal">
+                                <div class="image-in-map-container">
+                                    @guest
+                                        <div
+                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
+                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
+                                                onclick="loginForm(1)">
+                                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                                                    focusable="false" class="favorite-button favorite-button-28">
+                                                    <path
+                                                        d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <div id="location-map-content-right-image-loading">
-                                            <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
-                                        </div>
-                                        <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
-                                        data-arrows="true">
-                                            ${image}
-                                        </div>
+                                    @endguest
+                                    @auth
+                                        ${favorite}
+                                    @endauth
+                                    ${video}
+                                    <div class="like-sign like-sign-activity-${activityLocations.id_activity}">
+                                        <i class="fa fa-heart fa-lg" style="color: #e31c5f"></i>
                                     </div>
-                                    <div class="mt-3">
-                                        <a href="${contentLink}" target="_blank">
-                                            <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
-                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
-                                            {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
-                                        </a>
+                                    <div id="location-map-content-right-image-loading">
+                                        <img style="height: 12px;" src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif">
                                     </div>
-                                    <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden;">
-                                        <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
-                                            <p class="text-align-center mb-0">
-                                                <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
-                                                    <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
-                                                </a>
-
-                                                <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
-                                                    <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+                                    <div class="js-slider js-slider-border-none js-slider-test slick-nav-black slick-dotted-inner slick-dotted-white" style="overflow:hidden" data-dots="true"
+                                    data-arrows="true">
+                                        ${image}
                                     </div>
                                 </div>
-
-
-                                <div class="d-flex align-items-center mt-3 modal-view-detail">
-                                    <div class="col-6">
-                                        <a href="${contentLink}" target="_blank" class="link-detail">
-                                            <p class="card-text text-17 text-orange fw-600">View Detail</p>
-                                            <i class=" text-orange fa-solid fa-arrow-right"></i>
+                                <div class="description-prop-in-modal">
+                                    <div>
+                                        <a href="${contentLink}" target="_blank">
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
+                                                <div class="video-btn-container-in-map">
+                                                    ${video}
+                                                </div>
+                                            </div>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
+                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description">${short_description}</p>
+                                            {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
                                         </a>
-                                    </div>
-                                    <div class="d-flex justify-content-end col-6">
-                                        <div class="me-2 d-flex align-items-center flex-column">
-                                            <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
-                                            <small class="text-13">Prev</small>
+                                        <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden; position:relative;">
+                                            <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
+                                                <p class="text-align-center mb-0">
+                                                    <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
+                                                        <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
+                                                    </a>
+    
+                                                    <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
+                                                        <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                         </div>
-                                        <div class="d-flex align-items-center flex-column">
-                                            <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
-                                            <small class="text-13">Next</small>
+                                    </div>
+                                    <div class="d-flex align-items-end modal-view-detail">
+                                        <div class="col-6">
+                                            <a href="${contentLink}" target="_blank" class="link-detail">
+                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <i class=" text-orange fa-solid fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex justify-content-end col-6">
+                                            <div class="me-2 d-flex align-items-center flex-column">
+                                                <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                <small class="text-13">Prev</small>
+                                            </div>
+                                            <div class="d-flex align-items-center flex-column">
+                                                <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                <small class="text-13">Next</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

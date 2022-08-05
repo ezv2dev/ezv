@@ -595,9 +595,9 @@ video {
 }
 
 .delete-story {
-    right: -4px;
-    position: relative;
-    top: 38px;
+    right: 0px;
+    position: absolute;
+    top: 0px;
 }
 
 .host {

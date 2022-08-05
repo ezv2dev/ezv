@@ -1185,7 +1185,7 @@ class HotelDetailController extends Controller
             ]);
         }
 
-        $getStory = HotelStory::where('id_hotel', $request->id_hotel)->select('name', 'id_story')->latest()->get();
+        $getStory = HotelStory::where('id_hotel', $request->id_hotel)->select('name', 'id_story', 'title')->latest()->get();
         $getUID = Hotel::where('id_hotel', $request->id_hotel)->select('uid')->first();
         $hotelVideo = HotelVideo::where('id_hotel', $request->id_hotel)->select('id_video', 'name')->orderBy('order', 'asc')->get();
 
@@ -1196,6 +1196,7 @@ class HotelDetailController extends Controller
         foreach ($getStory as $item) {
             $data[$i]['id_story'] = $item->id_story;
             $data[$i]['name'] = $item->name;
+            $data[$i]['title'] = $item->title;
             $i++;
         }
 
