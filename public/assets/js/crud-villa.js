@@ -1194,6 +1194,21 @@ function editAmenitiesVilla(id_villa) {
                 count = count - lengthBathroom;
             }
 
+            //memunculkan button more detail amenities
+            if (lengthAll >= 6) {
+                $("#listAmenities").append(`
+                <div class="list-amenities">
+                    <button class="amenities-button" type="button"
+                        onclick="view_amenities()">
+                        <i class="fa-solid fa-ellipsis text-orange"
+                            style="font-size: 40px;"></i>
+                        <div style="font-size: 15px;" class="translate-text-group-items">
+                            More</div>
+                    </button>
+                </div>
+                `);
+            }
+
             $("#moreAmenities").html(`
                 <div class="col-md-6 mb-2">
                     <span class='translate-text-group-items'>
@@ -1287,7 +1302,7 @@ function editAmenitiesVilla(id_villa) {
                 `);
             }
 
-            $("#moreBathroomz").html(`
+            $("#moreBathroom").html(`
                 <div class="col-md-6">
                     <span class="translate-text-group-items">
                         ${response.getBathroom[0].bathroom.name}
@@ -1296,7 +1311,7 @@ function editAmenitiesVilla(id_villa) {
             `);
 
             for (j = 1; j < lengthBathroom; j++) {
-                $("#moreBathroomz").append(`
+                $("#moreBathroom").append(`
                     <div class="col-md-6">
                         <span class='translate-text-group-items'>
                             ${response.getBathroom[j].bathroom.name}

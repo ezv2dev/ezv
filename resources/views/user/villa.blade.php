@@ -3562,11 +3562,11 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreKitchen">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
+                        <div id="moreKitchen">
                         @foreach ($kitchenGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3574,12 +3574,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreSafety">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
+                        <div id="moreSafety">
                         @foreach ($safetyGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3587,11 +3588,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
+                        <div id="moreService">
                         @foreach ($serviceGet as $item)
                             <div class='col-md-6'>
                                 <span class='translate-text-group-items'>
@@ -3599,12 +3602,13 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
-                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
-                        id="moreBathroom">
+                    <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
+                        <div id="moreBathroom">
                         @foreach ($bathroomGet as $item)
                             <div class="col-md-6">
                                 <span class="translate-text-group-items">
@@ -3612,6 +3616,7 @@
                                 </span>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                     {{-- @for ($i = 1; $i <= 3; $i++)
                         <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px"
