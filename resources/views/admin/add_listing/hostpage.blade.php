@@ -245,6 +245,8 @@
                 <h3>We got you covered</h3>
                 <div class="sp-200"></div>
                 <button class="letsgo">Learn More</button>
+                <div class="sp-75"></div>
+                <h3>Put your mind with easy when listing with EZV</h3>
             </div>
             <div class="text-white top-140 listing-text-section">
                 <h1>Put your mind with easy when listing with EZV</h1>
