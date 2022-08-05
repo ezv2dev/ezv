@@ -266,7 +266,7 @@
             })
 
             //validasi form when on keyup
-            $('.form-control').on('keyup focusout', function(){
+            $('#formChangePassword .form-control').on('keyup focusout', function(){
                 validate($(this))
             })
 

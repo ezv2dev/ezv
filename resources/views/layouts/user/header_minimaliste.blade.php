@@ -297,7 +297,7 @@
 
             $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
             $('.dropdown-content').slideUp('fast');
-            document.activeElement.blur();//lose focus
+            // document.activeElement.blur();//lose focus
             });
         </script>
 
