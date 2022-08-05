@@ -44,7 +44,7 @@
                                         <span><b>Upload an existing photo</b></span>
                                         <p>Recommended</p>
                                     </div>
-                                    <input class="float-right" type="radio" name="chooseHow" value="radio1">
+                                    <input class="float-right" type="radio" name="chooseHow" value="radio1" checked="checked">
                                 </div>
                             </div>
                             <div class="col-12">

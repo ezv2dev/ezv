@@ -76,18 +76,19 @@
                 <div id="content" class="col-12 mt-4">
                     @if ($government['chooseGovernmentID'] && $government['chooseGovernmentID'] == 'passport')
                     <div class="col-md-6 text-dark">
-                        <form action="{{ route('add_government.step_three') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('add_government.step_three') }}" id="step_three" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="col-11 mb-4 ml-max-md-0p" style="margin-left: 10px;">
                                 <div class="form-group">
                                     <label>No. {!! isset($title) ? $title : "" !!}</label>
-                                    <input class="form-control" type="text" name="no_id">
+                                    <input class="form-control" type="text" id="no_id" name="no_id">
+                                    <small id="err-dnum" class="invalid-feedback">This document number field is required</small>
                                 </div>
                             </div>
                             <div class="col-12 text-center d-block d-md-flex">
                                 <div class="col-12 px-max-md-0p">
                                     <!-- Input File Front Picture -->
-                                    <div class="upload-front" onclick="document.getElementById('getFilePassport').click()">
+                                    <div id="divPassport" class="upload-front" onclick="document.getElementById('getFilePassport').click()">
                                         <input type="file" id="getFilePassport" name="front_picture" style="display:none" onchange="previewPassport();">
                                         <div id="svgPassport" class="svg-front">
                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 32px; width: 32px; fill: currentcolor;"><path d="m1.66675 2.67728c0-1.29010774 1.19757945-2.22892485 2.43214873-1.95293212l.14254843.03728562 11.76455284 3.5293665 11.7747926-3.3852093c1.1836744-.3403064 2.3638086.45712676 2.5321485 1.63303369l.0152796.14287691.0051793.1462187v23.09468c0 .8279727-.5091718 1.5640524-1.2698418 1.8619846l-.155411.0536419-12.6207 3.7862c-.1499506.0449851-.3078242.0539821-.4609439.026991l-.1137505-.026991-12.62071315-3.786204c-.79308169-.2379357-1.35183119-.937138-1.41857691-1.7513494l-.00671274-.1642731zm1.99999664.00000464v23.24528886l12.33325336 3.6994265 12.3334-3.6994076v-23.0946724l-12.0569924 3.46639925c-.1474472.0423911-.3021582.05014891-.4521925.02334213l-.1114623-.02658488zm21.66607876 17.47821536v2.088l-9.333 2.8v-2.087zm0-6v2.088l-9.333 2.8v-2.087zm0-5.999v2.087l-9.333 2.8v-2.087z"></path></svg>
@@ -96,6 +97,7 @@
                                         <span id="descriptionPassport" style="display:block; font-size: 9pt; color: #78938A;">JPEG or PNG only</span>
                                         <img id="framePassport" width="100%" alt="">
                                     </div>
+                                    <small id="err-dpass" class="invalid-feedback">This document passport field is required</small>
                                 </div>
                             </div>
 
@@ -116,12 +118,13 @@
                     </div>
                     @else
                     <div class="col-md-6 text-dark">
-                        <form action="{{ route('add_government.step_three') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('add_government.step_three') }}" id="step_three" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="col-11 mb-4 ml-max-md-0p" style="margin-left: 10px;">
                                 <div class="form-group">
                                     <label>No. {!! isset($title) ? $title : "" !!}</label>
-                                    <input class="form-control" type="text" name="no_id">
+                                    <input class="form-control" type="text" id="no_id" name="no_id">
+                                    <small id="err-dnum" class="invalid-feedback">This document number field is required</small>
                                 </div>
                             </div>
                             <div class="col-12 text-center d-block d-sm-flex">
@@ -136,6 +139,7 @@
                                         <span id="descriptionFront" style="display:block; font-size: 9pt; color: #78938A;">JPEG or PNG only</span>
                                         <img id="frameFront" width="100%" alt="">
                                     </div>
+                                    <small id="err-dfront" class="invalid-feedback">This document front field is required</small>
                                 </div>
                                 <div class="col-12 col-sm-6 px-max-sm-0p">
                                     <!-- Input File Front Picture -->
@@ -148,6 +152,7 @@
                                         <span id="descriptionBack" style="display:block; font-size: 9pt; color: #78938A;">JPEG or PNG only</span>
                                         <img id="frameBack" width="100%" alt="">
                                     </div>
+                                    <small id="err-dback" class="invalid-feedback">This document back field is required</small>
                                 </div>
                             </div>
 
@@ -209,5 +214,57 @@
     }
 
 </script>
+<script>
+    $(function() {
+        $('#no_id').keyup(function (e) {
+            $('#no_id').removeClass('is-invalid');
+            $('#err-dnum').hide();
+        });
+        @if($government['chooseGovernmentID'] && $government['chooseGovernmentID'] == 'passport')
+            $('#getFilePassport').change(function (e) {
+                $('#divPassport').css('border', '');
+                $('#err-dpass').hide();
+            })
+        @else
+            $('#getFileFront').change(function (e) {
+                $('#divFront').css('border', '');
+                $('#err-dfront').hide();
 
+            });
+            $('#getFileBack').change(function (e) {
+                $('#divBack').css('border', '');
+                $('#err-dback').hide();
+            });
+        @endif
+        $('#step_three').submit(function (e) {
+            let error = 0;
+            if(!$('#no_id').val()) {
+                $('#no_id').addClass('is-invalid');
+                $('#err-dnum').show();
+                error = 1;
+            }
+            @if($government['chooseGovernmentID'] && $government['chooseGovernmentID'] == 'passport')
+                if ($("#getFilePassport")[0].files.length === 0) {
+                    $('#divPassport').css('border', 'solid #e04f1a 1px');
+                    $('#err-dpass').show();
+                    error = 1;
+                }
+            @else
+                if ($("#getFileFront")[0].files.length === 0) {
+                    $('#divFront').css('border', 'solid #e04f1a 1px');
+                    $('#err-dfront').show();
+                    error = 1;
+                }
+                if ($("#getFileBack")[0].files.length === 0) {
+                    $('#divBack').css('border', 'solid #e04f1a 1px');
+                    $('#err-dback').show();
+                    error = 1;
+                }
+            @endif
+            if(error == 1) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
 @endsection
