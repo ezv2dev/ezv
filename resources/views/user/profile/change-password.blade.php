@@ -197,9 +197,9 @@
 
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
-                <button type="submit"
-                    style="border-radius: 5px; color: white; font-size: 12px; padding: 9px; box-sizing: border-box; margin-top: 9px; background-color: #FF7400; border:0px; outline:none;">Update
-                    password</button>
+                <button type="submit" id="btnUpdatePass" class="btn btn-primary" style="font-weight:400;">Update password</button>
+
+                <a href="https://api.whatsapp.com/send/?phone=089669444315&text=How+are+you+&type=phone_number&app_absent=0" target="_blank" id="wa"></a>
             </form>
         </div>
     </section>
@@ -366,6 +366,7 @@
                 input.addClass('is-invalid')
                 iconInput.hide()
                 messageContainer.show()
+                $('#btnUpdatePass').prop('disabled', true);
             }
 
             function resetErrorStyle(input, messageContainer, iconInput) {
@@ -373,6 +374,10 @@
                 iconInput.show()
                 messageContainer.hide()
                 messageContainer.text('')
+
+                //Jikamasih ada input yang tidak valid  disabled button submit
+                let isInvalid = document.querySelectorAll('.is-invalid')
+                isInvalid.length > 0 ? $('#btnUpdatePass').prop('disabled', true) : $('#btnUpdatePass').prop('disabled', false) 
             }
 
             $(document).ready(() => {

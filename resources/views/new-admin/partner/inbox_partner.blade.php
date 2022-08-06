@@ -109,7 +109,7 @@
         
             <!-- di komen yang awal -->
             <!-- <div class="container justify-content-center"> -->
-            <div class="container px-5">
+            <div class="container px-3">
                 <div class="page-header-content">
 
                 <!-- di komen yang awal -->
@@ -151,7 +151,7 @@
 
                 <!-- di komen yang awal -->
                 <!-- <div class="row justify-content-center mt-2 "> -->
-                <div class="row justify-content-center mt-4 ">
+                <div class="mt-4 " style="overflow-x:hidden;">
                     {{-- <table class="table table-striped w-100" id="tabel">
                         <thead>
                             <tr>
