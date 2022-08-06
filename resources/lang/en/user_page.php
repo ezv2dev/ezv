@@ -68,6 +68,7 @@ return [
     'Swap Video Position' => 'Swap Video Position',
     'Add Photo Caption' => 'Add Photo Caption',
     'Add Photo Tag' => 'Add Photo Tag',
+    'Add Menu Tag' => 'Add Menu Tag',
     'Max x character' => 'Max :number character',
     'Swap Photo Position' => 'Swap Photo Position',
     'Delete Photo' => 'Delete Photo',

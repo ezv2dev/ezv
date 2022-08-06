@@ -1069,6 +1069,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::post('/restaurant/facilities/store', [Restaurant\RestaurantListController::class, 'restaurant_store_facilities'])->name('restaurant_store_facilities');
     Route::post('/restaurant/photo/caption/update', [Restaurant\RestaurantListController::class, 'restaurant_update_caption_photo'])->name('restaurant_update_caption_photo');
     Route::post('/restaurant/photo/tag/update', [Restaurant\RestaurantListController::class, 'restaurant_update_tag_photo'])->name('restaurant_update_tag_photo');
+    Route::post('/restaurant/menu/tag/update', [Restaurant\RestaurantListController::class, 'restaurant_update_tag_menu'])->name('restaurant_update_tag_menu');
     Route::post('/restaurant/update/image', [Restaurant\RestaurantListController::class, 'restaurant_update_image'])->name('restaurant_update_image');
     Route::post('/restaurant/store/tag', [Restaurant\RestaurantListController::class, 'restaurant_store_tag'])->name('restaurant_store_tag');
     Route::get('/restaurant/{id}/delete/story/{id_story}', [Restaurant\RestaurantListController::class, 'restaurant_delete_story'])->name('restaurant_delete_story');

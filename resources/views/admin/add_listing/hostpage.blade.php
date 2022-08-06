@@ -185,11 +185,12 @@
                 <div class="col-12 col-md-6">
                     <div class="host-video-section">
                         <div class="host-video-container">
-                        <video class="host-video" loop="true" autoplay="autoplay" controls muted>
-                        <source src="{{ asset('assets/media/videos/production ID_4434242.mp4') }}" type="video/mp4">
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                        </video>
+                            <div class="video-content">
+                                <video loop="true" autoplay="autoplay" controls muted>
+                                <source src="{{ asset('assets/media/videos/production ID_4434242.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -257,7 +258,56 @@
                 <h4>Request security deposit from guests before check-in to cover any potential damages</h4>
                 <h4>Leability insurance of $1.000.000 for all accommodation and activity bookings</h4>
             </div>
-            <div class="top-140"></div>
+            <div class="top-140">
+                <h1 class="text-pink text-center">We got you covered</h1>
+                <div class="row">
+                    <div class="col-12 col-md-3 text-black">
+                        <h4>My house My rules</h4>
+                        <p>Create your own personalized house rules for your proprty. Guests will be required to agree to your rules upon reservation.</p>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h4>24/7 Customer<br> support team</h4>
+                        <p>Our support will be available to hosts around the clock via hosts support.</p>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h4>Extra piece of mind</h4>
+                        <p>Hosts may require to pay for an additional security deposit to cover any damages to the property before check-in.</p>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h4>Liability Insurance</h4>
+                        <p>All bookings with EZV are covered with $1.000.000 liability insurenace in the rare event a guest in injured your protected.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="family-section text-center text-white top-140">
+                <h1>Join the EZV family today</h1>
+                <h3>Try hosting</h3>
+                <div class="sp-200"></div>
+                <p>Put your mind with easy when listing with EZV<br> we got you covered</p>
+                <button class="letsgo">Learn More</button>
+            </div>
+            <div class="top-140">&nbsp;</div>
+        </div>
+    </section>
+    <section class="h-100 w-100">
+        <div class="row bg-black">
+            <div class="col-12 col-md-6 pd-30">
+                <div class="bottom text-white">
+                    <h1>Benefits to list with EZV</h1>
+                    <p>List any tyupe of accommodation, restaurant, activities and anything in-between</p>
+                    <p>State of the art video search engine, show case your property with short video</p>
+                    <p>Easy import of existing listing information from other website</p>
+                    <p>Connect your existing calendar to avoid double bookings</p>
+                    <p>Worlds first booking platform with a visual page builder</p>
+                    <p>24/7 customers support for you and your guests</p>
+                    <p>Easy of use with stylish modern interface</p>
+                    <p>Liability insurance of $1.000.000 for all accommodation and activity bookings</p>
+                    <p>0% booking fees until 2023 - t&c apply</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="bottom-image">&nbsp;</div> 
+            </div>
         </div>
     </section>
     {{-- footer --}}

@@ -935,7 +935,7 @@ function editAmenitiesHotel(id_hotel) {
                 `);
             }
             */
-            if (lengthAmenities > 6) {
+            if (lengthAmenities >= 6) {
                 for (i = 0; i < lengthAmenities; i++) {
                     if (i === 6) {
                         break;
@@ -1121,15 +1121,6 @@ function editAmenitiesHotel(id_hotel) {
 
                 count = count - lengthBathroom;
             }
-            $("#listAmenities").append(`
-                <div class="list-amenities">
-                    <button class="amenities-button" type="button" onclick="view_amenities()">
-                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                        <div style="font-size: 15px;" class="translate-text-group-items">
-                            More</div>
-                    </button>
-                </div>
-            `);
 
             $("#moreAmenities").html(`
                 <div class="col-md-6 mb-2">

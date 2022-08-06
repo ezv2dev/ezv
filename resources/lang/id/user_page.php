@@ -68,6 +68,7 @@ return [
     'Swap Video Position' => 'Tukar Posisi Video',
     'Add Photo Caption' => 'Tambah Caption Photo',
     'Add Photo Tag' => 'Tambah Tag Foto',
+    'Add Menu Tag' => 'Tambah Tag Menu',
     'Max x character' => 'Maks :number karakter',
     'Swap Photo Position' => 'Tukar Posisi Foto',
     'Delete Photo' => 'Hapus Foto',

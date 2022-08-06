@@ -1577,6 +1577,8 @@ class HotelDetailController extends Controller
             return response()->json([
                 'message' => 'Success create room',
                 'status' => 200,
+                'id_hotel' => $request->id_hotel,
+                'id_room' => $data['id_hotel_room'],
                 'data' => route('room_hotel', ['id' => $data['id_hotel_room']])
             ], 200);
         } else {

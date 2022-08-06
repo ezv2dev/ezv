@@ -1600,7 +1600,7 @@ input:checked + .switch-background:active::before {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #parentBar {
-       left: 10%;
+       left: 0%;
     }
     /* #change_display_block {
         margin-left: 95px;

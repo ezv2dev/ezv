@@ -1743,4 +1743,41 @@ class RestaurantListController extends Controller
                 ->with('error', 'Please check the form below for errors');
         }
     }
+
+    public function restaurant_update_tag_menu(Request $request)
+    {
+        $this->authorize('restaurant_update');
+
+        $status = 500;
+
+        try {
+            // dd($request->all());
+
+            $data = RestaurantHasSubCategory::updateOrCreate(
+                [
+                    'id_restaurant' => $request->id_restaurant,
+                    'id_menu' => $request->id_menu
+                ],
+                [
+                    'id_subcategory' => $request->tag,
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id,
+                ]
+            );
+
+            if ($data) {
+                $status = 200;
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 500;
+        }
+
+        if ($status == 200) {
+            return back()
+                ->with('success', 'Your data has been updated');
+        } else {
+            return back()
+                ->with('error', 'Please check the form below for errors');
+        }
+    }
 }
