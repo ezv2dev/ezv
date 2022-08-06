@@ -81,10 +81,9 @@
                         <label for="" class="col-md-4">Price</label>
                         <div class="col-md-8">
                             <input type="text" name="price_room_details" id="price_room_details"
-                                class="modal-input form-control" placeholder="Price Room Details"
+                                class="modal-input form-control" placeholder="Price of room"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
-                            <small id="err-rname" style="display: none;" class="invalid-feedback">Price Room
-                                Details</small>
+                            <small id="err-rprice" class="invalid-feedback">This price room field is required</small>
                         </div>
                     </div>
 
@@ -94,8 +93,6 @@
                             <input type="text" name="price_discount_room_details" id="price_discount_room_details"
                                 class="modal-input form-control" placeholder="Price Room Details"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
-                            <small id="err-rname" style="display: none;" class="invalid-feedback">Price Discount Room
-                                Details</small>
                         </div>
                     </div>
 
@@ -122,6 +119,10 @@
 </div>
 {{-- blade-formatter-disable --}}
 <script>
+    $('#price_room_details').keyup(function (e) {
+        $("#price_room_details").removeClass('is-invalid');
+        $('#err-rprice').hide();
+    });
     function saveRoomDetails() {
         let priceRoomDetails = $("#price_room_details").val();
         let priceDiscountRoomDetails = $("#price_discount_room_details").val();
@@ -129,91 +130,94 @@
         let idHotelRoom = $("#idHotelRoom").val();
         let idHotel = $("#idHotel").val();
 
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: "/hotel/room/details/add",
-            data: {
-                priceRoomDetails: priceRoomDetails,
-                priceDiscountRoomDetails: priceDiscountRoomDetails,
-                roomDetailsCapacity: roomDetailsCapacity,
-                idHotelRoom: idHotelRoom,
-                idHotel: idHotel,
-            },
-            success: function(data) {
-                let priceDiscount = parseInt(data.discount_price);
-                let pricee = parseInt(data.price);
-                $('#modal-add-room-details').modal('hide');
+        if(!priceRoomDetails) {
+            $("#price_room_details").addClass('is-invalid');
+            $('#err-rprice').show();
+        } else {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/hotel/room/details/add",
+                data: {
+                    priceRoomDetails: priceRoomDetails,
+                    priceDiscountRoomDetails: priceDiscountRoomDetails,
+                    roomDetailsCapacity: roomDetailsCapacity,
+                    idHotelRoom: idHotelRoom,
+                    idHotel: idHotel,
+                },
+                success: function(data) {
+                    let priceDiscount = !isNaN(parseInt(data.discount_price)) ? parseInt(data.discount_price) : '0';
+                    let pricee = parseInt(data.price);
+                    let dec = (priceDiscount/100).toFixed(2);
+                    let mult = pricee*dec;
+                    let valDisc = pricee-mult;
 
-                let content = '<div class="col-12 m-0 ps-2 pe-2 row ">';
-                content += '<div class="col-2 border border-secondary border-end-0">';
+                    $('#modal-add-room-details').modal('hide');
 
-                for (let i = 0; i < data.capacity; i++) {
-                    content += '<i class="fas fa-user"></i>';
-                }
-                content += '</div>';
-
-                content += `
-                        <div class="col-4 border border-secondary border-end-0">
-                            <div class="price-tag">`;
-
-                content += '<p class="price-discount mb-2">IDR '+ priceDiscount.toLocaleString('en-US') + '</p>';
-
-                content += '<h6 class="price-current mb-0">IDR '+ pricee.toLocaleString('en-US') + '</h6>';
-
-                content += `
-                            </div>
-                            <p class="mb-0 text-secondary text-small">Includes taxes and charges</p>
+                    let content = `<div class="col-12 m-0 px-0 px-lg-2 row ">
+                        <div class="col-12 row m-0 p-0 mb-2" style="box-shadow: 1px 1px 10px rgb(63 62 62 / 16%); border-radius: 12px; border: 1px solid #d6d6d6;">
+                        <div class="col-2 d-flex align-items-center justify-content-center">`;
+                    for (let i = 0; i < data.capacity; i++) {
+                        content += '<i class="fas fa-user"></i>';
+                    }
+                    content += `</div>
+                        <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                        <div class="price-tag">
+                        <p class="price-discount mb-2">IDR ${pricee.toLocaleString('en-US')}</p>
+                        <h6 class="price-current mb-0">IDR ${valDisc.toLocaleString('en-US')}
+                        </h6>
                         </div>
-                        <div class="col-4 border border-secondary border-end-0">
-                            <div class="choice-item">
-                                <i class="fa-solid fa-mug-saucer regular-icon"></i>
-                                <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
-                            </div>
+                        <p class="mb-0 text-secondary text-small">Includes taxes and charges
+                        </p>
                         </div>
-                        <div class="col-2 border border-secondary">
-                            <select name="room-amount" id="room-amount" style="width: 3.5rem;">
-                                <option value="0">0</option>
-                                <option value="0">1 &nbsp; &nbsp; &nbsp; IDR
-                                    {{ number_format($item->price) }}
-                                </option>
-                            </select>
+                        <div class="col-4" style="border-left: 1px solid #d6d6d6;">
+                        <div class="choice-item">
+                        <i class="fa-solid fa-mug-saucer regular-icon"></i>
+                        <span class="regular-text">Breakfast Rp 171,600 (optional)</span>
                         </div>
-                    </div>`;
+                        </div>
+                        <div class="col-2 d-flex align-items-center justify-content-center" style="border-left: 1px solid #d6d6d6;">
+                        <select name="room-amount" id="room-amount" style="width: 3.5rem;">
+                        <option value="0">0</option>
+                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR {{ number_format($item->price) }}</option>
+                        </select>
+                        </div>
+                        </div>
+                        </div>`;
+                    $('#hotelTypeDetailList').append(content);
 
-                $('#hotelTypeDetailList').append(content);
-
-                iziToast.success({
-                    title: "Success",
-                    message: data.message,
-                    position: "topRight",
-                });
-                btn.innerHTML = "<i class='fa fa-check'></i> Save";
-                btn.classList.remove("disabled");
-            },
-            error: function(jqXHR, exception) {
-                if (jqXHR.responseJSON.errors) {
-                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.success({
+                        title: "Success",
+                        message: data.message,
+                        position: "topRight",
+                    });
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+                error: function(jqXHR, exception) {
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
                         iziToast.error({
                             title: "Error",
-                            message: jqXHR.responseJSON.errors[i],
+                            message: jqXHR.responseJSON.message,
                             position: "topRight",
                         });
                     }
-                } else {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.message,
-                        position: "topRight",
-                    });
-                }
 
-                btn.innerHTML = "<i class='fa fa-check'></i> Save";
-                btn.classList.remove("disabled");
-            },
-        });
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
+                },
+            });
+        }
     }
 </script>
 {{-- blade-formatter-enable --}}
