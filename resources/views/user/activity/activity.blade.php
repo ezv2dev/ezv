@@ -452,7 +452,7 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;<a type="button" style="color:#FF7400; font-weight: 600; font-size: 10pt;"
+                                <a type="button" style="color:#FF7400; font-weight: 600; font-size: 10pt;"
                                     class="edit-profile-image-btn-mobile d-md-none"
                                     onclick="edit_activity_profile()">{{ __('user_page.Edit Image Profile') }} |</a>
                                 <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"

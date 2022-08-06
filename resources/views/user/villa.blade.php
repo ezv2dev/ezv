@@ -397,7 +397,6 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;
                                 <a type="button" onclick="edit_villa_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |
