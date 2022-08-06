@@ -5187,7 +5187,9 @@
                     message.data.menu[i].foto +
                     '" title="' +
                     message.data.menu[i].name +
-                    '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                    '"> </a> <span class="edit-menu-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" type="button" title="{{ __('user_page.Add Menu Tag') }}" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                    message.data.menu[i].id_menu +
+                    '" onclick="add_menu_tag(this)"><i class="fa fa-pencil"></i></button> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
                     message.data.menu[i].id_menu +
                     '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
             }

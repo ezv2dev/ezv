@@ -1415,7 +1415,7 @@ $("#addMenuForm").submit(function (e) {
                     response.data.menu.foto +
                     '" title="' +
                     response.data.menu.name +
-                    '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="{{ $restaurant->id_restaurant }}" data-menu="' +
+                    '"> </a> <span class="edit-menu-icon"> <button style="height:40px" href="javascript:void(0);" data-id="'+id_restaurant+'" data-menu="' +
                     response.data.menu.id_menu +
                     '" onclick="delete_menu(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete Menu"><i class="fa fa-trash"></i></button> </span> </div>';
 
