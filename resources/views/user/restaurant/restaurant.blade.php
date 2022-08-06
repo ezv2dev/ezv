@@ -1304,6 +1304,13 @@
                                     @auth
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <span class="edit-menu-icon">
+                                                <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" type="button"
+                                                        title="{{ __('user_page.Add Menu Tag') }}"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-menu="{{ $menu->id_menu }}"
+                                                        onclick="add_menu_tag(this)"><i
+                                                            class="fa fa-pencil"></i></button>
                                                 {{-- <button data-bs-toggle="popover" data-bs-animation="true"
                                                     data-bs-placement="bottom"
                                                     title="{{ __('user_page.Add Photo Caption') }}"
@@ -3410,6 +3417,13 @@
 
         $('#modal-add_photo_tag').modal('show');
     }
+
+    function add_menu_tag(e) {
+        let id_menu = e.getAttribute("data-menu");
+        $('#id_menu').val(id_menu);
+
+        $('#modal-add_menu_tag').modal('show');
+    }
 </script>
 
 {{-- MODAL ADD PHOTO Tag --}}
@@ -3448,6 +3462,41 @@
     </div>
 </div>
 
+{{-- MODAL ADD PHOTO Tag --}}
+<div class="modal fade" id="modal-add_menu_tag" tabindex="-1" role="dialog"
+    aria-labelledby="modal-default-fadein" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background: white; border-radius:25px">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('user_page.Add Menu Tag') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('restaurant_update_tag_menu') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id_restaurant" value="{{ $restaurant->id_restaurant }}">
+                    <input type="hidden" id="id_menu" name="id_menu" value="">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Choose tag for this menu</label>
+                            <select name="tag">
+                                {{-- @php
+                                    $id_photo = "<script>document.write($('#id_photo').val());</script>";
+                                    @endphp --}}
+                                @foreach ($photoTag as $tag)
+                                    <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                            {{-- {{ $id_photo }} --}}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('user_page.Save') }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{-- MODAL TAGS --}}
 <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog"
