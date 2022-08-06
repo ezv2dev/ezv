@@ -281,6 +281,28 @@
                 $shadowColor = 'box-shadow-dark';
             }
         }
+
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+            $url = "https://";   
+        else  
+            $url = "http://";   
+        // Append the host(domain name, ip) to the URL.   
+        $url.= $_SERVER['HTTP_HOST'];   
+        
+        // Append the requested resource location to the URL   
+        $url.= $_SERVER['REQUEST_URI'];      
+
+        $url_homes = env('APP_URL')."/homes-list";
+        $url_food = env('APP_URL')."/food-list";
+        $url_wow = env('APP_URL')."/wow-list";
+        $url_hotel = env('APP_URL')."/hotel-list";
+
+        if ($url == $url_homes || $url == $url_food ||
+        $url == $url_wow || $url == $url_hotel) {
+            setcookie("sCheck_in", null, time() + (86400 * 30), "/");
+            setcookie("sCheck_out", null, time() + (86400 * 30), "/");
+            setcookie("sLocation", null, time() + (86400 * 30), "/");
+        }
     @endphp
 
     <div class="row nav-row">
@@ -4353,10 +4375,7 @@
 
 
             }
-            $(document).ready(() => {
-                // document.cookie = "cookiename= ; expires ="+ Date.now()
-                // initChangeBackgroundTrigger()
-            });
+            
         </script>
 
         <script>
