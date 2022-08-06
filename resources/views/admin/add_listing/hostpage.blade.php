@@ -258,7 +258,7 @@
                 <h4>Leability insurance of $1.000.000 for all accommodation and activity bookings</h4>
             </div>
             <div class="top-140">
-                <h1 class="text-pink text-center">We got you covered</div>
+                <h1 class="text-pink text-center">We got you covered</h1>
                 <div class="row">
                     <div class="col-12 col-md-3 text-black">
                         <h4>My house My rules</h4>
