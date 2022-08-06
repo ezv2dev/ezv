@@ -276,7 +276,6 @@
     }
 
     /*End of filter radio option*/
-
 </style>
 
 <style>
@@ -314,11 +313,11 @@
     }
 
     /* End Radio Button */
-
 </style>
 
 <div id="modal-edit-house-rules" class="modal fade bs-example-modal-lg">
-    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered" style="overflow-y: initial !important;">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered"
+        style="overflow-y: initial !important;">
         <div class="modal-content" style="background-color: #fff;">
             <div class="modal-header filter-modal d-flex justify-content-between">
                 <h3 class="mb-0">{{ __('user_page.House Rules') }}</h3>
@@ -333,9 +332,27 @@
                         <input type="hidden" id="villa" name="id_villa" value="{{ $villa[0]->id_villa }}">
 
                         <div class="container">
+                            <div class="row mb-12 mt-3">
+                                <label class="col-sm-4 col-form-label" for="price">
+                                    Check-in Time
+                                </label>
+                                <div class="col-sm-4">
+                                    <input type="time" class="form-control" id="checkInTime" name="check_in_time">
+                                </div>
+                            </div>
+                            <div class="row mb-12 mt-3">
+                                <label class="col-sm-4 col-form-label" for="price">
+                                    Check-out Time
+                                </label>
+                                <div class="col-sm-4">
+                                    <input type="time" class="form-control" id="checkOutTime" name="check_out_time">
+                                </div>
+                            </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-8">
-                                    <p><span class="translate-text-group-items">Suitable for children (2-12 years)</span></p>
+                                    <p><span class="translate-text-group-items">Suitable for children (2-12
+                                            years)</span></p>
                                     <p class="font-12" style="margin-top: -25px;">
                                         <span class="translate-text-group-items">
                                             You can let guests know that your place isn't suitable for
@@ -347,9 +364,11 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="children" id="children_1" value="no" {{ isset($house_rules->children) == 'no' ? 'checked' : '' }} />
+                                        <input type="radio" name="children" id="children_1" value="no"
+                                            {{ isset($house_rules->children) == 'no' ? 'checked' : '' }} />
                                         <label for="children_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="children" id="children_2" value="yes" {{ isset($house_rules->children) == 'yes' ? 'checked' : '' }}  />
+                                        <input type="radio" name="children" id="children_2" value="yes"
+                                            {{ isset($house_rules->children) == 'yes' ? 'checked' : '' }} />
                                         <label for="children_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -357,10 +376,12 @@
                             <hr style="margin-top: -10px;">
                             <div class="row">
                                 <div class="col-8">
-                                    <p><span class="translate-text-group-items">Suitable for infants (under 2 years)</span></p>
+                                    <p><span class="translate-text-group-items">Suitable for infants (under 2
+                                            years)</span></p>
                                     <p class="font-12" style="margin-top: -25px;">
                                         <span class="translate-text-group-items">
-                                            You can let guests know that your place isn't suitable for infants if there are
+                                            You can let guests know that your place isn't suitable for infants if there
+                                            are
                                             features
                                             that are dangerous for them. Guests will still be able to reach out for more
                                             details.
@@ -369,10 +390,12 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="infants" id="infant_1" value="no" {{ isset($house_rules->infants) == 'no' ? 'checked' : '' }}  />
+                                        <input type="radio" name="infants" id="infant_1" value="no"
+                                            {{ isset($house_rules->infants) == 'no' ? 'checked' : '' }} />
                                         <label for="infant_1"><i class="fa fa-times"></i></label>
 
-                                        <input type="radio" name="infants" id="infant_2" value="yes" {{ isset($house_rules->infants) == 'yes' ? 'checked' : '' }}  />
+                                        <input type="radio" name="infants" id="infant_2" value="yes"
+                                            {{ isset($house_rules->infants) == 'yes' ? 'checked' : '' }} />
                                         <label for="infant_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -392,9 +415,11 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="pets" id="pet_1" value="no" {{ isset($house_rules->pets) == 'no' ? 'checked' : '' }}  />
+                                        <input type="radio" name="pets" id="pet_1" value="no"
+                                            {{ isset($house_rules->pets) == 'no' ? 'checked' : '' }} />
                                         <label for="pet_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="pets" id="pet_2" value="yes" {{ isset($house_rules->pets) == 'yes' ? 'checked' : '' }}  />
+                                        <input type="radio" name="pets" id="pet_2" value="yes"
+                                            {{ isset($house_rules->pets) == 'yes' ? 'checked' : '' }} />
                                         <label for="pet_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -406,9 +431,11 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="smoking" id="smoke_1" value="no" {{ isset($house_rules->smoking) == 'no' ? 'checked' : '' }}  />
+                                        <input type="radio" name="smoking" id="smoke_1" value="no"
+                                            {{ isset($house_rules->smoking) == 'no' ? 'checked' : '' }} />
                                         <label for="smoke_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="smoking" id="smoke_2" value="yes" {{ isset($house_rules->smoking) == 'yes' ? 'checked' : '' }}  />
+                                        <input type="radio" name="smoking" id="smoke_2" value="yes"
+                                            {{ isset($house_rules->smoking) == 'yes' ? 'checked' : '' }} />
                                         <label for="smoke_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
@@ -420,14 +447,24 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <input type="radio" name="events" id="event_1" value="no" {{ isset($house_rules->events) == 'no' ? 'checked' : '' }}  />
+                                        <input type="radio" name="events" id="event_1" value="no"
+                                            {{ isset($house_rules->events) == 'no' ? 'checked' : '' }} />
                                         <label for="event_1"><i class="fa fa-times"></i></label>
-                                        <input type="radio" name="events" id="event_2" value="yes" {{ isset($house_rules->events) == 'yes' ? 'checked' : '' }}  />
+                                        <input type="radio" name="events" id="event_2" value="yes"
+                                            {{ isset($house_rules->events) == 'yes' ? 'checked' : '' }} />
                                         <label for="event_2"><i class="fa fa-check"></i></label>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                            <hr style="margin-top: -10px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p><span class="translate-text-group-items">Additional Rules</span></p>
+                                </div>
+                                <div class="col-12" style="margin-top: -10px;">
+                                    <textarea rows="4" cols="90" name="additional_rules" form="houseRuleForm"></textarea>
+                                </div>
+                            </div>
                         </div>
                 </div>
             </div>
@@ -446,7 +483,7 @@
                             Save
                         </button>
                     </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
