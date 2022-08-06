@@ -475,7 +475,7 @@
                                         </div>
                                     </div>
                                     <div class="">
-                                        <p class="card-text text-13 text-xs-11 text-grey-1 fw-500 mt-1">${cuisine}</p>
+                                        <p class="card-text text-13 max-lines text-xs-11 text-grey-1 fw-500 mt-1">${cuisine}</p>
                                         <p class="card-text d-none d-sm-block text-grey-2 text-14 fw-500 text-align-justify mt-1">${short_description}</p>
                                         <p class="card-text text-grey-1 mt-1 text-13 text-xs-11"><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
                                     </div>
@@ -1448,7 +1448,7 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <p class="card-text text-13 text-xs-11 text-grey-1 fw-500 mt-1">${facilities}</p>
+                                            <p class="card-text max-lines text-13 text-xs-11 text-grey-1 fw-500 mt-1">${facilities}</p>
                                             <p class="card-text d-none d-sm-block text-grey-2 text-13 fw-500 text-align-justify mt-1">${short_description}</p>
                                             <p class="card-text text-grey-1 mt-1 text-13 text-xs-11 "><i class="fa-solid text-orange fa-location-dot"></i> <span class="text-grey-1"><span class="text-grey-1" id="travelDistance"></span> from Property</span></p>
                                         </div>

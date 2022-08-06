@@ -3462,7 +3462,7 @@ span.flatpickr-weekday {
 
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
-        font-size: 24px !important;
+        font-size: 120% !important;
     }
     .edit-icon,
     .edit-video-icon,
@@ -3904,6 +3904,12 @@ span.flatpickr-weekday {
     .top-profile .profile-info {
         padding-left: 5px !important;
     }
+    .top-profile .profile-image {
+        margin-right: 0px !important;
+    }
+    .top-profile .profile-image .edit-profile-image-btn-dekstop {
+        display: block !important;
+    }
     .top-profile .profile-image img {
         width: 160px !important;
         height: 160px !important;
@@ -4009,6 +4015,9 @@ span.flatpickr-weekday {
     }
     .review-comment-container {
         height: 50vh;
+    }
+    .sidebar-popup {
+        top: 90px !important;
     }
 }
 
