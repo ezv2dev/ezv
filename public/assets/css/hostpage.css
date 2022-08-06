@@ -319,6 +319,7 @@ input::placeholder {
         padding-right: 0 !important;
     }
     .left-20 {
-        padding-left: 0 !important;
+        padding-left: 10px !important;
+        margin-top: 40px !important;
     }
 }
