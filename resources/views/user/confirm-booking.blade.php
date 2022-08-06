@@ -428,6 +428,10 @@
 
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
     <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
+    <script type="text/javascript" src="https://js.xendit.co/v1/xendit.min.js"></script>
+    <script type="text/javascript">
+        Xendit.setPublishableKey('xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F');
+    </script>
 </head>
 
 <body style="background-color:white">
@@ -743,12 +747,12 @@
                                             </div>
                                         </div>
                                         <div id="panel_credit" style="display: none;">
-                                            <form method="POST" id="payment-form" action="{{ route('api.creditcard') }}">
+                                            <form method="POST" id="payment-form" action="javascript:void(0)">
                                                 @csrf
                                                 @auth
                                                     <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
                                                 @endauth
-                                                <input type="hidden" name="price_total2" id="price_total2" value="">
+                                                <input type="hidden" name="price_total" value="">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
@@ -788,9 +792,9 @@
                                                 <input class="form-control" type="hidden" id="currency"
                                                     placeholder="IDR" value="IDR" />
 
-                                                <div class="mt-3 col-12 text-center"><input class="price-button" type="submit" id="submit-payment-form"
-                                                    value="{{ Translate::translate('RESERVE NOW') }}">
-                                                </div>
+                                                <button class="mt-3 col-12 text-center">
+                                                    <input class="price-button" type="submit" onclick="submitPaymentCredit(event)" id="submit-payment-form" value="{{ Translate::translate('RESERVE NOW') }}">
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
@@ -967,7 +971,7 @@
                     _token: "{{ csrf_token() }}",
                 },
                 success: function (response) {
-                    // disabled change on edit date form
+                    // enabled change on edit date form
                     $('#confirmBookingDateForm').find(`input[name='check_in']`).attr('readonly', false);
                     $('#confirmBookingDateForm').find(`input[name='check_out']`).attr('readonly', false);
 
@@ -984,6 +988,7 @@
                     }
                     $('#tax').html(response.tax);
                     $('#total_all').html(response.total_all);
+                    $('#payment-form').find(`input[name="price_total"]`).val(response.price);
 
                     $('#totalContent').removeClass('d-none');
                     $('#serviceContent').removeClass('d-none');
@@ -1049,9 +1054,13 @@
                                 instance.formatDate(selectedDates[1], "Y-m-d")
                             );
                             var sum_night = (end - start) / 1000 / 60 / 60 / 24;
-                            var min_stay = 3;
-                            if(sum_night < min_stay){
-                                alert("minimum stay is " + min_stay + " nights  ");
+                            var min_stay = @json($villa->min_stay);
+                            if(min_stay){
+                                if(sum_night < min_stay){
+                                    alert("minimum stay is " + min_stay + " nights  ");
+                                } else {
+                                    fetchTotalPrice();
+                                }
                             } else {
                                 fetchTotalPrice();
                             }
@@ -1235,200 +1244,216 @@
                     e.preventDefault();
                 }
             });
-
-            //Credit Card
-            $('#card-number').mask('0000 0000 0000 0000');
-            $('#card-exp-month').mask('00/00');
-            $('#card-cvn').mask('0000');
-
-            $(document).on("focusout", "#card-number", function () {
-                if(!$(this).val()) {
-                    $('#card-number').addClass('is-invalid');
-                    $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
-                    $('#err-cnm-pay').show();
-                }
-            });
-            $(document).on("focusout", "#card-exp-month", function () {
-                if(!$(this).val()) {
-                    $('#card-exp-month').addClass('is-invalid');
-                    $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
-                    $('#err-exp-pay').show();
-                }
-            });
-            $(document).on("focusout", "#card-cvn", function () {
-                if(!$(this).val()) {
-                    $('#card-cvn').addClass('is-invalid');
-                    $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
-                    $('#err-cvn-pay').show();
-                }
-            });
-
-            $(document).on("keyup", "#card-number", function () {
-                this.value = this.value.replace(/[a-zA-Z]+$/, '');
-                $("#payment-form").find('.submit').prop('disabled', false);
-                $('#card-number').removeClass('is-invalid');
-                $('#err-cnm-pay').hide();
-                $('#err-cnm-pay').text('');
-                $('#res-xnd-pay').text();
-                $('#res-xnd-pay').hide();
-            });
-            $(document).on("keyup", "#card-exp-month", function () {
-                this.value = this.value.replace(/[a-zA-Z]+$/, '');
-                $("#payment-form").find('.submit').prop('disabled', false);
-                $('#card-exp-month').removeClass('is-invalid');
-                $('#err-exp-pay').hide();
-                $('#err-exp-pay').text('');
-                $('#res-xnd-pay').text();
-                $('#res-xnd-pay').hide();
-            });
-            $(document).on("keyup", "#card-cvn", function () {
-                this.value = this.value.replace(/[a-zA-Z]+$/, '');
-                $("#payment-form").find('.submit').prop('disabled', false);
-                $('#card-cvn').removeClass('is-invalid');
-                $('#err-cvn-pay').hide();
-                $('#err-cvn-pay').text('');
-                $('#res-xnd-pay').text();
-                $('#res-xnd-pay').hide();
-            });
-            //================ Function ================
-            function xenditResponseHandler(err, creditCardToken) {
-                if(err) {
-                    return displayError(err);
-                }
-
-                if(creditCardToken.status === 'APPROVED' || creditCardToken.status === 'VERIFIED') {
-                    displaySuccess(creditCardToken);
-                } else if (creditCardToken.status === 'IN_REVIEW') {
-                    // window.open(creditCardToken.payer_authentication_url, 'sample-inline-frame');
-                    // $('.overlay').show();
-                    // $('#three-ds-container').show();
-                    // $('#modal-3ds').modal('show');
-                    displayError(creditCardToken);
-                } else if (creditCardToken.status === 'FRAUD') {
-                    displayError(creditCardToken);
-                } else if (creditCardToken.status === 'FAILED') {
-                    displayError(creditCardToken);
-                }
-            }
-
-            function displayError(err) {
-                let error = JSON.stringify(err, null, 4);
-                let xparse = JSON.parse(error);
-                let text = xparse.message;
-                if(text.match("number")) {
-                    $('#card-number').addClass('is-invalid');
-                    $('#err-cnm-pay').text(xparse.message);
-                    $('#err-cnm-pay').show();
-                }
-                if(text.match("expiration")) {
-                    $('#card-exp-month').addClass('is-invalid');
-                    $('#err-exp-pay').text(xparse.message);
-                    $('#err-exp-pay').show();
-                }
-                if(text.match("CVN")) {
-                    $('#card-cvn').addClass('is-invalid');
-                    $('#err-cvn-pay').text(xparse.message);
-                    $('#err-cvn-pay').show();
-                }
-                $('#res-xnd-pay').text("Error from API : " + xparse.message);
-                $('#res-xnd-pay').show();
-
-            };
-
-            function displaySuccess(creditCardToken) {
-                var requestData = {};
-                $.extend(requestData, getTokenData());
-                @auth
-                var saveData = $.ajax({
-                    type: 'POST',
-                    url: "/api/xendit/credit_card/charge",
-                    data: {
-                        dataresult: creditCardToken,
-                        datarequest: requestData,
-                        user: `{{ Auth::user()->id }}`,
-                        _token: "{{ csrf_token() }}",
-                    },
-                    dataType: "text",
-                    success: function(resultData) {
-                        alert("success ")
-                    }
-                });
-                @endauth
-                saveData.error(function() {
-                    alert("Something went wrong");
-                });
-            }
-
-            function getTokenData() {
-                let exp = $('#card-exp-month').val();
-                const split = exp.split("/");
-                var cnum = $('#card-number').val();
-                var cvn = $('#card-cvn').val();
-                return {
-                    amount: $('#price_total2').val(),
-                    card_number: cnum.replace(/\s/g, ''),
-                    card_exp_month: split[0],
-                    card_exp_year: 20 + split[1],
-                    card_cvn: $.trim(cvn),
-                    currency: $('#currency').val(),
-                };
-            }
-            //================ Function ================
-            $("#payment-form").submit(function(e) {
-                let error = 0;
-                let valname = /[a-zA-Z]+$/;
-                if(!$('#card-number').val()) {
-                    $('#card-number').addClass('is-invalid');
-                    $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
-                    $('#err-cnm-pay').show();
-                    error = 1;
-                } else {
-                    if (valname.test($('#card-number').val())) {
-                        $('#card-number').addClass('is-invalid');
-                        $('#err-lname-pay').text('{{ __('auth.empty_cnm') }}');
-                        $('#err-lname-pay').show();
-                        error = 1;
-                    }
-                }
-                if(!$('#card-exp-month').val()) {
-                    $('#card-exp-month').addClass('is-invalid');
-                    $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
-                    $('#err-exp-pay').show();
-                    error = 1;
-                } else {
-                    if (valname.test($('#card-exp-month').val())) {
-                        $('#card-exp-month').addClass('is-invalid');
-                        $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
-                        $('#err-exp-pay').show();
-                        error = 1;
-                    }
-                }
-                if(!$('#card-cvn').val()) {
-                    $('#card-cvn').addClass('is-invalid');
-                    $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
-                    $('#err-cvn-pay').show();
-                    error = 1;
-                } else {
-                    if (valname.test($('#card-cvn').val())) {
-                        $('#card-cvn').addClass('is-invalid');
-                        $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
-                        $('#err-cvn-pay').show();
-                        error = 1;
-                    }
-                }
-                if(error == 1) {
-                    e.preventDefault();
-                } else {
-                    Xendit.setPublishableKey(
-                        'xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F'
-                    );
-                    $("#payment-form").find('.submit').prop('disabled', true);
-                    var tokenData = getTokenData();
-                    Xendit.card.createToken(tokenData, xenditResponseHandler);
-                    return false;
-                }
-            });
         });
+    </script>
+    <script>
+    //Credit Card
+        $('#card-number').mask('0000 0000 0000 0000');
+        $('#card-exp-month').mask('00/00');
+        $('#card-cvn').mask('0000');
+
+        $(document).on("focusout", "#card-number", function () {
+            if(!$(this).val()) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
+                $('#err-cnm-pay').show();
+            }
+        });
+        $(document).on("focusout", "#card-exp-month", function () {
+            if(!$(this).val()) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                $('#err-exp-pay').show();
+            }
+        });
+        $(document).on("focusout", "#card-cvn", function () {
+            if(!$(this).val()) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                $('#err-cvn-pay').show();
+            }
+        });
+
+        $(document).on("keyup", "#card-number", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-number').removeClass('is-invalid');
+            $('#err-cnm-pay').hide();
+            $('#err-cnm-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        $(document).on("keyup", "#card-exp-month", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-exp-month').removeClass('is-invalid');
+            $('#err-exp-pay').hide();
+            $('#err-exp-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        $(document).on("keyup", "#card-cvn", function () {
+            this.value = this.value.replace(/[a-zA-Z]+$/, '');
+            $("#payment-form").find('.submit').prop('disabled', false);
+            $('#card-cvn').removeClass('is-invalid');
+            $('#err-cvn-pay').hide();
+            $('#err-cvn-pay').text('');
+            $('#res-xnd-pay').text();
+            $('#res-xnd-pay').hide();
+        });
+        //================ Function ================
+        function xenditResponseHandler(err, creditCardToken) {
+            if(err) {
+                return displayError(err);
+            }
+
+            if(creditCardToken.status === 'APPROVED' || creditCardToken.status === 'VERIFIED') {
+                displaySuccess(creditCardToken);
+            } else if (creditCardToken.status === 'IN_REVIEW') {
+                // window.open(creditCardToken.payer_authentication_url, 'sample-inline-frame');
+                // $('.overlay').show();
+                // $('#three-ds-container').show();
+                // $('#modal-3ds').modal('show');
+                displayError(creditCardToken);
+            } else if (creditCardToken.status === 'FRAUD') {
+                displayError(creditCardToken);
+            } else if (creditCardToken.status === 'FAILED') {
+                displayError(creditCardToken);
+            }
+        }
+
+        function displayError(err) {
+            let error = JSON.stringify(err, null, 4);
+            let xparse = JSON.parse(error);
+            let text = xparse.message;
+            if(text.match("number")) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text(xparse.message);
+                $('#err-cnm-pay').show();
+            }
+            if(text.match("expiration")) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text(xparse.message);
+                $('#err-exp-pay').show();
+            }
+            if(text.match("CVN")) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text(xparse.message);
+                $('#err-cvn-pay').show();
+            }
+            $('#res-xnd-pay').text("Error from API : " + xparse.message);
+            $('#res-xnd-pay').show();
+
+        };
+
+        function displaySuccess(creditCardToken) {
+            var requestData = {};
+            $.extend(requestData, getTokenData());
+            @auth
+            var saveData = $.ajax({
+                type: 'POST',
+                url: "/api/xendit/credit_card/charge",
+                data: {
+                    dataresult: creditCardToken,
+                    datarequest: requestData,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: "text",
+                success: function(resultData) {
+                    alert("success ")
+                }
+            });
+            @endauth
+            saveData.error(function() {
+                alert("Something went wrong");
+            });
+        }
+
+        // function getTokenData() {
+        //     let exp = $('#card-exp-month').val();
+        //     const split = exp.split("/");
+        //     var cnum = $('#card-number').val();
+        //     var cvn = $('#card-cvn').val();
+        //     return {
+        //         amount: $('#price_total2').val(),
+        //         card_number: cnum.replace(/\s/g, ''),
+        //         card_exp_month: split[0],
+        //         card_exp_year: 20 + split[1],
+        //         card_cvn: $.trim(cvn),
+        //         currency: $('#currency').val(),
+        //     };
+        // }
+        function getTokenData() {
+            let exp = $('#card-exp-month').val();
+            const split = exp.split("/");
+            var cnum = $('#card-number').val();
+            var cvn = $('#card-cvn').val();
+            return {
+                amount: $('#payment-form').find(`input[name="price_total"]`).val(),
+                card_number: cnum.replace(/\s/g, ''),
+                card_exp_month: split[0],
+                card_exp_year: 20 + split[1],
+                card_cvn: $.trim(cvn),
+                currency: $('#currency').val(),
+            };
+        }
+        //================ Function ================
+        function submitPaymentCredit(e) {
+            console.log('hit submt payment form');
+            let error = 0;
+            let valname = /[a-zA-Z]+$/;
+            if(!$('#card-number').val()) {
+                $('#card-number').addClass('is-invalid');
+                $('#err-cnm-pay').text('{{ __('auth.empty_cnm') }}');
+                $('#err-cnm-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-number').val())) {
+                    $('#card-number').addClass('is-invalid');
+                    $('#err-lname-pay').text('{{ __('auth.empty_cnm') }}');
+                    $('#err-lname-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#card-exp-month').val()) {
+                $('#card-exp-month').addClass('is-invalid');
+                $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                $('#err-exp-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-exp-month').val())) {
+                    $('#card-exp-month').addClass('is-invalid');
+                    $('#err-exp-pay').text('{{ __('auth.empty_exp') }}');
+                    $('#err-exp-pay').show();
+                    error = 1;
+                }
+            }
+            if(!$('#card-cvn').val()) {
+                $('#card-cvn').addClass('is-invalid');
+                $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                $('#err-cvn-pay').show();
+                error = 1;
+            } else {
+                if (valname.test($('#card-cvn').val())) {
+                    $('#card-cvn').addClass('is-invalid');
+                    $('#err-cvn-pay').text('{{ __('auth.empty_cvn') }}');
+                    $('#err-cvn-pay').show();
+                    error = 1;
+                }
+            }
+            if(error == 1) {
+                e.preventDefault();
+            } else {
+                Xendit.setPublishableKey(
+                    'xnd_public_development_3QHzee46oUGnQ0wEmtefdqdyy4FONKC1Rwfdl2j4IZ0fu74JQAwZHpdRJu1F'
+                );
+                $("#payment-form").find('.submit').prop('disabled', true);
+                var tokenData = getTokenData();
+                Xendit.card.createToken(tokenData, xenditResponseHandler);
+                return false;
+            }
+        }
     </script>
 </body>
 </html>
