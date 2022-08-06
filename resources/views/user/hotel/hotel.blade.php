@@ -1213,7 +1213,7 @@
                         </div>
                         <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                @if ($hotel_amenities->count() > 6)
+                                @if ($hotel_amenities->count() >= 6)
                                     @foreach ($hotel_amenities->take(6) as $item1)
                                         <div class="list-amenities ">
                                             <div class="text-align-center">
@@ -1240,7 +1240,7 @@
                                     </div>
                                 @endif
 
-                                @if ($hotel_amenities->count() <= 6)
+                                @if ($hotel_amenities->count() < 6)
                                     @php
                                         $i = 6 - $hotel_amenities->count();
                                     @endphp
