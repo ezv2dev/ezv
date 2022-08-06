@@ -4245,6 +4245,10 @@
                     $('#registerAlert').addClass('d-none');
                 }
                 sidebarhide();
+                
+                // close searchbar di mobile size
+                $( "#bodyList #overlay" ).trigger( "click" );
+
                 $('#LoginModal').modal('show');
                 if (type == 'login') {
                     $('#trigger-tab-register').removeClass('active');
@@ -4298,6 +4302,9 @@
                 $('#content-tab-language').addClass('active');
                 $('#trigger-tab-currency').removeClass('active');
                 $('#content-tab-currency').removeClass('active');
+
+                // close searchbar di mobile size
+                $( "#bodyList #overlay" ).trigger( "click" )
             }
 
             function currency() {
@@ -4307,6 +4314,9 @@
                 $('#content-tab-language').removeClass('active');
                 $('#trigger-tab-currency').addClass('active');
                 $('#content-tab-currency').addClass('active');
+
+                // close searchbar di mobile size
+                $( "#bodyList #overlay" ).trigger( "click" )
             }
         </script>
         <script>

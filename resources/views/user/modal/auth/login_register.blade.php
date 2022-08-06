@@ -205,7 +205,8 @@
 
     @media only screen and (max-width: 480px) {
         .modal-content-login {
-            width: 95% !important;
+            width: 100% !important;
+            border-radius: 0px !important;
         }
 
         .login-button {
@@ -217,9 +218,10 @@
         }
     }
 
-    @media only screen and (min-width: 481px) and (max-width: 768px) {
+    @media only screen and (min-width: 481px) and (max-width: 767px) {
         .modal-content-login {
-            width: 85% !important;
+            width: 100% !important;
+            border-radius: 0px !important;
         }
 
         .login-button {
@@ -231,7 +233,7 @@
         }
     }
 
-    @media only screen and (min-width: 769px) and (max-width: 991px) {
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
         .modal-content-login {
             width: 95% !important;
         }
@@ -304,7 +306,7 @@
 </style>
 
 <div id="LoginModal" class="modal modal-login fade bs-example-modal-lg">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered"
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-horizontal-centered modal-fullscreen-md-down"
         style="overflow-y: initial !important;">
         <div class="modal-content modal-content-login" style="border-radius:15px;">
             <div class="modal-header">

@@ -2786,6 +2786,9 @@ class ViewController extends Controller
                 'pets' => $request->pets,
                 'smoking' => $request->smoking,
                 'events' => $request->events,
+                'check_in' => $request->check_in_time,
+                'check_out' => $request->check_out_time,
+                'additional_rules' => $request->additional_rules
             ));
 
             return response()->json([
@@ -2800,6 +2803,9 @@ class ViewController extends Controller
                 'pets' => $request->pets,
                 'smoking' => $request->smoking,
                 'events' => $request->events,
+                'check_in' => $request->check_in_time,
+                'check_out' => $request->check_out_time,
+                'additional_rules' => $request->additional_rules
             ));
 
             return response()->json([

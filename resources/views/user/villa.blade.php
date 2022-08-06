@@ -397,10 +397,10 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;
                                 <a type="button" onclick="edit_villa_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
+                                    |
                                 </a>
                                 <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">
@@ -572,7 +572,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -640,7 +641,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -681,7 +683,8 @@
                                                                                 </a>
                                                                             @endif
                                                                             </a>
-                                                                            <span class="title-story">{{ $item->title }}</span>
+                                                                            <span
+                                                                                class="title-story">{{ $item->title }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1302,15 +1305,15 @@
                                             @endforeach
                                         @endif
                                         @if ($countAllAmenities >= 6)
-                                        <div class="list-amenities">
-                                            <button class="amenities-button" type="button"
-                                                onclick="view_amenities()">
-                                                <i class="fa-solid fa-ellipsis text-orange"
-                                                    style="font-size: 40px;"></i>
-                                                <div style="font-size: 15px;" class="translate-text-group-items">
-                                                    {{ __('user_page.More') }}</div>
-                                            </button>
-                                        </div>
+                                            <div class="list-amenities">
+                                                <button class="amenities-button" type="button"
+                                                    onclick="view_amenities()">
+                                                    <i class="fa-solid fa-ellipsis text-orange"
+                                                        style="font-size: 40px;"></i>
+                                                    <div style="font-size: 15px;" class="translate-text-group-items">
+                                                        {{ __('user_page.More') }}</div>
+                                                </button>
+                                            </div>
                                         @endIf
                                     @endif
                                 @endif
@@ -1803,10 +1806,10 @@
                         @endif
                     </a>
                     <!--
-                                                            <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                                style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                                                                <i class="fa-solid fa-user"></i>
-                                                            </a> -->
+                                                                <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
+                                                                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                                                    <i class="fa-solid fa-user"></i>
+                                                                </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -2339,6 +2342,17 @@
                                 @endif
 
                                 @if (isset($house_rules))
+                                    @if (isset($house_rules->check_in))
+                                        <i class="fas fa-clock"></i>
+                                        Check-in: After {{ date('h:i A', strtotime($house_rules->check_in)) }}
+                                        <br>
+                                    @endif
+                                    @if (isset($house_rules->check_out))
+                                        <i class="fas fa-clock"></i>
+                                        Check-out: {{ date('h:i A', strtotime($house_rules->check_out)) }}
+                                        <br>
+                                    @endif
+
                                     @if ($house_rules->children == 'yes')
                                         <i class="fas fa-child"></i>
                                         {{ __('user_page.Childrens are allowed') }}
@@ -2347,21 +2361,6 @@
                                     @if ($house_rules->infants == 'yes')
                                         <i class="fas fa-child"></i>
                                         {{ __('user_page.Infants are allowed') }}
-                                        <br>
-                                    @endif
-                                    @if ($house_rules->pets == 'yes')
-                                        <i class="fas fa-paw"></i>
-                                        {{ __('user_page.Pets are allowed') }}
-                                        <br>
-                                    @endif
-                                    @if ($house_rules->smoking == 'yes')
-                                        <i class="fas fa-smoking"></i>
-                                        {{ __('user_page.Smoking is allowed') }}
-                                        <br>
-                                    @endif
-                                    @if ($house_rules->events == 'yes')
-                                        <i class="fas fa-calendar"></i>
-                                        {{ __('user_page.Events are allowed') }}
                                         <br>
                                     @endif
 
@@ -2375,21 +2374,10 @@
                                         {{ __('user_page.No infants') }}
                                         <br>
                                     @endif
-                                    @if ($house_rules->pets == 'no')
-                                        <i class="fas fa-ban"></i>
-                                        {{ __('user_page.No pets') }}
-                                        <br>
-                                    @endif
-                                    @if ($house_rules->smoking == 'no')
-                                        <i class="fas fa-ban"></i>
-                                        {{ __('user_page.No smoking') }}
-                                        <br>
-                                    @endif
-                                    @if ($house_rules->events == 'no')
-                                        <i class="fas fa-ban"></i>
-                                        {{ __('user_page.No events') }}
-                                        <br>
-                                    @endif
+                                    <a href="javascript:void(0)" onclick="showMoreHouseRules()">
+                                        {{ __('user_page.Show more') }}
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
                                 @endif
                             </p>
                         </div>
@@ -3429,6 +3417,7 @@
 
     {{-- MODAL --}}
     @include('user.modal.villa.guest-safety')
+    @include('user.modal.villa.house-rules')
     @auth
         @include('user.modal.villa.price')
         @include('user.modal.villa.bedroom')
@@ -3509,8 +3498,8 @@
                         <source src="">
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                        onclick="close_story()" aria-label="Close"></button>
 
             </div>
             </center>
@@ -3556,18 +3545,18 @@
                         $safetyGet = App\Http\Controllers\ViewController::safety($villa[0]->id_villa);
                         $serviceGet = App\Http\Controllers\ViewController::service($villa[0]->id_villa);
                     @endphp
-                    <div class="row-modal-amenities translate-text-group row-border-bottom" >
+                    <div class="row-modal-amenities translate-text-group row-border-bottom">
                         <div class="col-md-12">
                             <h5 class="mb-3">{{ __('user_page.Amenities') }}</h5>
                         </div>
                         <div id="moreAmenities">
-                        @foreach ($amenitiesGet as $item)
-                            <div class="col-md-12 mb-2">
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                            @foreach ($amenitiesGet as $item)
+                                <div class="col-md-12 mb-2">
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
@@ -3575,13 +3564,13 @@
                             <h5 class="mb-3">{{ __('user_page.Kitchen') }}</h5>
                         </div>
                         <div id="moreKitchen">
-                        @foreach ($kitchenGet as $item)
-                            <div class='col-md-12'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                            @foreach ($kitchenGet as $item)
+                                <div class='col-md-12'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
@@ -3589,13 +3578,13 @@
                             <h5 class="mb-3">{{ __('user_page.Safety') }}</h5>
                         </div>
                         <div id="moreSafety">
-                        @foreach ($safetyGet as $item)
-                            <div class='col-md-12'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                            @foreach ($safetyGet as $item)
+                                <div class='col-md-12'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
@@ -3603,13 +3592,13 @@
                             <h5 class="mb-3">{{ __('user_page.Service') }}</h5>
                         </div>
                         <div id="moreService">
-                        @foreach ($serviceGet as $item)
-                            <div class='col-md-12'>
-                                <span class='translate-text-group-items'>
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                            @foreach ($serviceGet as $item)
+                                <div class='col-md-12'>
+                                    <span class='translate-text-group-items'>
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row-modal-amenities translate-text-group row-border-bottom padding-top-bottom-18px">
@@ -3617,13 +3606,13 @@
                             <h5 class="mb-3">{{ __('user_page.Bathroom') }}</h5>
                         </div>
                         <div id="moreBathroomz">
-                        @foreach ($bathroomGet as $item)
-                            <div class="col-md-12">
-                                <span class="translate-text-group-items">
-                                    {{ $item->name }}
-                                </span>
-                            </div>
-                        @endforeach
+                            @foreach ($bathroomGet as $item)
+                                <div class="col-md-12">
+                                    <span class="translate-text-group-items">
+                                        {{ $item->name }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     {{-- @for ($i = 1; $i <= 3; $i++)
@@ -3694,6 +3683,10 @@
         function view_amenities() {
             $('#modal-amenities').modal('show');
         }
+
+        function showMoreHouseRules() {
+            $('#modalHouseRules').modal('show');
+        }
     </script>
 
 
@@ -3756,7 +3749,7 @@
                             <div class="modal-share-container">
                                 <div class="col-lg col-12 p-3 border br-10">
                                     <!-- <input type="text" value="{{ route('villa', $villa[0]->id_villa) }}" id="share_link">
-                                                                                                <button onclick="share_function()">Copy link</button> -->
+                                                                                                    <button onclick="share_function()">Copy link</button> -->
                                     <button type="button" class="d-flex p-0 copier" onclick="copyURI()">
                                         {{ __('user_page.Copy Link') }}
                                     </button>

@@ -554,7 +554,7 @@
                                                     ${video}
                                                 </div>
                                             </div>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${cuisine}</p>
+                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1 hide-mobile">${cuisine}</p>
                                             <p class="card-text text-grey-2 fw-500 text-align-justify mt-1 map-text-description">${short_description}</p>
                                         </a>
                                         <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">

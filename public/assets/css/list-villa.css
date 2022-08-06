@@ -3421,7 +3421,14 @@ input::-webkit-inner-spin-button {
         height: auto !important;
     }
 
-    .map-text-description,
+    .map-text-description{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+
     .map-price-dekstop,
     .map-villa-detail-link{
         display: block !important;
