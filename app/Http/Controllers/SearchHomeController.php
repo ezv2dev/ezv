@@ -314,7 +314,6 @@ class SearchHomeController extends Controller
         //! find nearby function
         $i = 0;
         $j = 0;
-        $near = array();
         foreach ($villas as $item) {
             $point1 = array('lat' => $item->latitude, 'long' => $item->longitude, 'name' => $item->name);
             $airportPoint = array('lat2' => -8.7433916, 'long2' => 115.1644194);
@@ -330,10 +329,9 @@ class SearchHomeController extends Controller
             $miles = acos($miles);
             $miles = rad2deg($miles);
             $miles = $miles * 60 * 1.1515;
-            $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
-            $kilometers[$i][] = $name;
+            $kilometers[$i] = ($miles * 1.609344 / 40) * 60;
 
-            $item['km'] = $kilometers[$i][0];
+            $item['km'] = $kilometers[$i];
             $item['airport'] = 'Ngurah Rai Airport';
 
             $i++;

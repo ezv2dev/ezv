@@ -1572,6 +1572,26 @@ input:checked + .switch-background:active::before {
     position: relative;
     left: 25%;
 }
+@media only screen and (min-width: 1460px) {
+    #parentBar {
+        left: 22%;
+    }
+}
+@media only screen and (min-width: 1360px) and (max-width: 1459px) {
+    #parentBar {
+        left: 20%;
+    }
+}
+@media only screen and (min-width: 1260px) and (max-width: 1359px) {
+    #parentBar {
+        left: 18%;
+    }
+}
+@media only screen and (min-width: 1126px) and (max-width: 1259px) {
+    #parentBar {
+        left: 15%;
+    }
+}
 @media only screen and (min-width: 1025px) and (max-width: 1125px) {
     #parentBar {
        left: 12%;
@@ -1580,7 +1600,7 @@ input:checked + .switch-background:active::before {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #parentBar {
-       left: 10%;
+       left: 0%;
     }
     /* #change_display_block {
         margin-left: 95px;

@@ -199,9 +199,9 @@ class ViewController extends Controller
 
         $government = Government::where('user_id', $createdby[0]->id)->first();
         $get_villa = Villa::where('id_villa', $id)->first();
-        $point = array('lat' => $get_villa->latitude, 'long' => $get_villa->longitude, 'id_location' => $get_villa->id_location);
 
         //? Airport Start
+        $point = array('lat' => $get_villa->latitude, 'long' => $get_villa->longitude, 'id_location' => $get_villa->id_location);
         $airportPoint = array('lat' => -8.7433916, 'long' => 115.1644194);
 
         $lat7 = $point['lat'];
@@ -214,9 +214,10 @@ class ViewController extends Controller
         $miles4 = acos($miles4);
         $miles4 = rad2deg($miles4);
         $miles4 = $miles4 * 60 * 1.1515;
-        $airportDistance = number_format((float)$miles4 * 1.609344, 1, '.', '');
+        $airportDistance = ($miles4 * 1.609344 / 40) * 60;
         //? Airport End
 
+        // dd($airportDistance);
         // $nearby_activities = Nearby::activity($id);
         // // $nearby_activities = collect($nearby_activities);
         // $nearby_activities = collect($nearby_activities)->slice(0, 10);
@@ -2232,25 +2233,16 @@ class ViewController extends Controller
             $lon1 = $point1['long'];
             $lat2 = $airportPoint['lat2'];
             $lon2 = $airportPoint['long2'];
-            $name = 'Ngurah Rai Airport';
             $theta = $lon1 - $lon2;
 
             $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
             $miles = acos($miles);
             $miles = rad2deg($miles);
             $miles = $miles * 60 * 1.1515;
-            $kilometers[$i][] = ($miles * 1.609344 / 40) * 60;
-            $kilometers[$i][] = $name;
+            $kilometers[$i] = ($miles * 1.609344 / 40) * 60;
 
-            if ($near == null) {
-                $near[0] = $kilometers[$i];
-            } else {
-                if ($kilometers[$i][0] <= $near[0][0]) {
-                    $near[0] = $kilometers[$i];
-                }
-            }
-            $villa[$i]['km'] = $near[0][0];
-            $villa[$i]['airport'] = $near[0][1];
+            $villa[$i]['km'] = $kilometers[$i];
+            $villa[$i]['airport'] = 'Ngurah Rai Airport';
 
             $i++;
         }
@@ -2794,6 +2786,9 @@ class ViewController extends Controller
                 'pets' => $request->pets,
                 'smoking' => $request->smoking,
                 'events' => $request->events,
+                'check_in' => $request->check_in_time,
+                'check_out' => $request->check_out_time,
+                'additional_rules' => $request->additional_rules
             ));
 
             return response()->json([
@@ -2808,6 +2803,9 @@ class ViewController extends Controller
                 'pets' => $request->pets,
                 'smoking' => $request->smoking,
                 'events' => $request->events,
+                'check_in' => $request->check_in_time,
+                'check_out' => $request->check_out_time,
+                'additional_rules' => $request->additional_rules
             ));
 
             return response()->json([

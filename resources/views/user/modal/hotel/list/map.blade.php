@@ -2758,35 +2758,35 @@
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-villa" data-indicator="false" onclick="filter_map('villa')">
                                 <img
-                                    class="icon-filter-map" src="{{asset('assets/icon/map/villa.png')}}"
-                                    data-src-active="{{asset('assets/icon/map/villa_active.png')}}"
-                                    data-src="{{asset('assets/icon/map/villa.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/nav_villa.png')}}"
+                                    data-src-active="{{asset('assets/icon/map/nav_villa_active.png')}}"
+                                    data-src="{{asset('assets/icon/map/nav_villa.png')}}"
                                     alt="villa-icon">
                                 <p class="mb-0" style="font-size: 12px; font-weight: 600;">Homes</p>
                             </a>
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-restaurant" data-indicator="false" onclick="filter_map('restaurant')">
                                 <img
-                                    class="icon-filter-map" src="{{asset('assets/icon/map/restaurant.png')}}"
-                                    data-src-active="{{asset('assets/icon/map/restaurant_active.png')}}"
-                                    data-src="{{asset('assets/icon/map/restaurant.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/nav_restaurant.png')}}"
+                                    data-src-active="{{asset('assets/icon/map/nav_restaurant_active.png')}}"
+                                    data-src="{{asset('assets/icon/map/nav_restaurant.png')}}"
                                     alt="restaurant-icon">
                                 <p class="mb-0" style="font-size: 12px; font-weight: 600;">Food</p>
                             </a>
 
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-hotel" data-indicator="true" onclick="filter_map('hotel')">
                                 <img
-                                    class="icon-filter-map" src="{{asset('assets/icon/map/hotel_active.png')}}"
-                                    data-src-active="{{asset('assets/icon/map/hotel_active.png')}}"
-                                    data-src="{{asset('assets/icon/map/hotel.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/nav_hotel_active.png')}}"
+                                    data-src-active="{{asset('assets/icon/map/nav_hotel_active.png')}}"
+                                    data-src="{{asset('assets/icon/map/nav_hotel.png')}}"
                                     alt="hotel-icon">
                                 <p class="mb-0" style="font-size: 12px; font-weight: 600;">Hotel</p>
                             </a>
                             <a class="d-flex mx-2 flex-column align-items-center" id="map-filter-activity" data-indicator="false" onclick="filter_map('activity')">
                                 <img
-                                    class="icon-filter-map" src="{{asset('assets/icon/map/activity.png')}}"
-                                    data-src-active="{{asset('assets/icon/map/activity_active.png')}}"
-                                    data-src="{{asset('assets/icon/map/activity.png')}}"
+                                    class="icon-filter-map" src="{{asset('assets/icon/map/nav_activity.png')}}"
+                                    data-src-active="{{asset('assets/icon/map/nav_activity_active.png')}}"
+                                    data-src="{{asset('assets/icon/map/nav_activity.png')}}"
                                     alt="activity-icon">
                                 <p class="mb-0" style="font-size: 12px; font-weight: 600;">WoW</p>
                             </a>

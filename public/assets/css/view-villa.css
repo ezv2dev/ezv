@@ -3462,7 +3462,7 @@ span.flatpickr-weekday {
 
 @media only screen and (min-width: 346px) and (max-width: 767px) {
     .name-content-mobile #name-content-mobile {
-        font-size: 24px !important;
+        font-size: 120% !important;
     }
     .edit-icon,
     .edit-video-icon,
@@ -3904,6 +3904,12 @@ span.flatpickr-weekday {
     .top-profile .profile-info {
         padding-left: 5px !important;
     }
+    .top-profile .profile-image {
+        margin-right: 0px !important;
+    }
+    .top-profile .profile-image .edit-profile-image-btn-dekstop {
+        display: block !important;
+    }
     .top-profile .profile-image img {
         width: 160px !important;
         height: 160px !important;
@@ -4009,6 +4015,9 @@ span.flatpickr-weekday {
     }
     .review-comment-container {
         height: 50vh;
+    }
+    .sidebar-popup {
+        top: 90px !important;
     }
 }
 
@@ -4504,12 +4513,14 @@ span.flatpickr-weekday {
 .title-story {
     position: relative;
     top: 38px;
-    left: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 13px;
     font-weight: 600;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 @media only screen and (max-width: 575px) {
@@ -4548,10 +4559,14 @@ span.flatpickr-weekday {
         font-size: 16px;
         height: 80px;
     }
-    #storymodalrestaurant {
+    #storymodal,
+    #storymodalrestaurant,
+    #storymodalactivity {
         border-radius: 0px !important;
     }
-    #storymodalrestaurant .btn-close {
+    #storymodal .btn-close,
+    #storymodalrestaurant .btn-close,
+    #storymodalactivity .btn-close {
         position: absolute !important;
         top: 7px !important;
         right: 5px !important;
@@ -4559,7 +4574,9 @@ span.flatpickr-weekday {
         padding: 5px !important;
         opacity: 1 !important;
     }
-    #storymodalrestaurant #story-video {
+    #storymodal #video,
+    #storymodalrestaurant #story-video,
+    #storymodalactivity #story-video {
         max-height: none !important;
         border-radius: 0px !important;
     }

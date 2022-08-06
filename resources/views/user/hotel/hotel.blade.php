@@ -442,7 +442,6 @@
                         {{-- EDIT PROFILE IMAGE AND NAME CONTENT MOBILE --}}
                         @auth
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                &nbsp;
                                 <a type="button" onclick="edit_hotel_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
@@ -1213,7 +1212,7 @@
                         </div>
                         <div class="row-grid-amenities" id="row-amenities">
                             <div class="row-grid-list-amenities translate-text-group" id="listAmenities">
-                                @if ($hotel_amenities->count() > 6)
+                                @if ($hotel_amenities->count() >= 6)
                                     @foreach ($hotel_amenities->take(6) as $item1)
                                         <div class="list-amenities ">
                                             <div class="text-align-center">
@@ -1240,7 +1239,7 @@
                                     </div>
                                 @endif
 
-                                @if ($hotel_amenities->count() <= 6)
+                                @if ($hotel_amenities->count() < 6)
                                     @php
                                         $i = 6 - $hotel_amenities->count();
                                     @endphp
@@ -1870,7 +1869,7 @@
                                     </a>
                                 @endif
                             @endauth
-                            <hr class="mt-3 mb-3">
+                            {{-- <hr class="mt-3 mb-3"> --}}
                         </div>
                     @empty
                         <div class="col-12">{{ __('user_page.No data found') }}</div>
@@ -3716,9 +3715,7 @@
     <div class="modal fade" id="storymodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
         style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
 
             <div class="modal-content modal-content-story video-container" style="width:980px;">
                 <center>
@@ -3730,6 +3727,9 @@
                         <source src="">
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
+
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
+                        aria-label="Close"></button>
 
             </div>
             </center>
@@ -4557,6 +4557,12 @@
     </script>
 
     {{-- End Header List --}}
+
+    <script>
+        function close_story() {
+            $('#storymodal').modal('hide');
+        }
+    </script>
 
     {{-- EDIT POSITION PHOTO & VIDEO --}}
     <script>

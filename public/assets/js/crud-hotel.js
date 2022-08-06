@@ -426,7 +426,7 @@ $("#updateStoryForm").submit(function (e) {
                 let path = "/foto/hotel/";
                 let slash = "/";
                 let uid = response.uid;
-                var lowerCaseUid = uid.toLowerCase();
+                // var lowerCaseUid = uid.toLowerCase();
                 let content = "";
 
                 for (let i = 0; i < response.data.length; i++) {
@@ -437,7 +437,7 @@ $("#updateStoryForm").submit(function (e) {
                         response.data[i].id_story +
                         ');"> <div class="story-video-player"> <i class="fa fa-play" aria-hidden="true"></i> </div> <video href="javascript:void(0)" class="story-video-grid" style="object-fit: cover;" src="' +
                         path +
-                        lowerCaseUid +
+                        uid +
                         slash +
                         response.data[i].name +
                         '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-hotel="' +
@@ -457,7 +457,7 @@ $("#updateStoryForm").submit(function (e) {
                             response.video[v].id_video +
                             ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
                             path +
-                            lowerCaseUid +
+                            uid +
                             slash +
                             response.video[v].name +
                             '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
@@ -935,7 +935,7 @@ function editAmenitiesHotel(id_hotel) {
                 `);
             }
             */
-            if (lengthAmenities > 6) {
+            if (lengthAmenities >= 6) {
                 for (i = 0; i < lengthAmenities; i++) {
                     if (i === 6) {
                         break;
@@ -1121,15 +1121,6 @@ function editAmenitiesHotel(id_hotel) {
 
                 count = count - lengthBathroom;
             }
-            $("#listAmenities").append(`
-                <div class="list-amenities">
-                    <button class="amenities-button" type="button" onclick="view_amenities()">
-                        <i class="fa-solid fa-ellipsis text-orange" style="font-size: 40px;"></i>
-                        <div style="font-size: 15px;" class="translate-text-group-items">
-                            More</div>
-                    </button>
-                </div>
-            `);
 
             $("#moreAmenities").html(`
                 <div class="col-md-6 mb-2">
