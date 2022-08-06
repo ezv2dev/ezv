@@ -180,7 +180,7 @@
                     <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
                     <p>68% of costumers prefer watching videos to learn about new</p>
                     <p>Show case what makes your property unique with short videos</p>
-                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified cretators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="host-video-section">
