@@ -185,11 +185,12 @@
                 <div class="col-12 col-md-6">
                     <div class="host-video-section">
                         <div class="host-video-container">
-                        <video class="host-video" loop="true" autoplay="autoplay" controls muted>
-                        <source src="{{ asset('assets/media/videos/production ID_4434242.mp4') }}" type="video/mp4">
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                        </video>
+                            <div class="video-content">
+                                <video loop="true" autoplay="autoplay" controls muted>
+                                <source src="{{ asset('assets/media/videos/production ID_4434242.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
