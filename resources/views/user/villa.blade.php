@@ -3562,7 +3562,7 @@
                         </div>
                         <div id="moreAmenities">
                         @foreach ($amenitiesGet as $item)
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-2">
                                 <span class='translate-text-group-items'>
                                     {{ $item->name }}
                                 </span>
@@ -3576,7 +3576,7 @@
                         </div>
                         <div id="moreKitchen">
                         @foreach ($kitchenGet as $item)
-                            <div class='col-md-6'>
+                            <div class='col-md-12'>
                                 <span class='translate-text-group-items'>
                                     {{ $item->name }}
                                 </span>
@@ -3590,7 +3590,7 @@
                         </div>
                         <div id="moreSafety">
                         @foreach ($safetyGet as $item)
-                            <div class='col-md-6'>
+                            <div class='col-md-12'>
                                 <span class='translate-text-group-items'>
                                     {{ $item->name }}
                                 </span>
@@ -3604,7 +3604,7 @@
                         </div>
                         <div id="moreService">
                         @foreach ($serviceGet as $item)
-                            <div class='col-md-6'>
+                            <div class='col-md-12'>
                                 <span class='translate-text-group-items'>
                                     {{ $item->name }}
                                 </span>
@@ -3618,7 +3618,7 @@
                         </div>
                         <div id="moreBathroomz">
                         @foreach ($bathroomGet as $item)
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <span class="translate-text-group-items">
                                     {{ $item->name }}
                                 </span>
