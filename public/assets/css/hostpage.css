@@ -26,8 +26,8 @@ body, html {
     padding: 30px !important;
 }
 .header-image, .bottom-image {
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     min-height: 100%;
 }
 .header-image {
