@@ -3,6 +3,12 @@ body, html {
     max-width: 100%;
     overflow-x: hidden;
 }
+.bottom h1 {
+    margin-bottom: 1.6rem !important;
+}
+.bottom p {
+    margin-bottom: 0.9rem !important;
+}
 .host-header {
     height: 100vh;
     min-height: 768px;
@@ -19,12 +25,19 @@ body, html {
 .pd-30{
     padding: 30px !important;
 }
+.header-image, .bottom-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+}
 .header-image {
     background: url('/assets/media/photos/follow-that-dream-1.webp');
-    background-size: cover;
     background-position: 50% 50%;
     height: 100vh;
-    min-height: 100%;
+}
+.bottom-image {
+    background: url('/assets/media/photos/follow-that-dream-2.webp');
+    background-position: 80% 50%;
 }
 .text-header {
     margin: 70px 0;
@@ -194,4 +207,18 @@ input::placeholder {
 }
 .text-white h1, .text-white h3, .text-white p {
     text-shadow: 1px 1px 2px #000;
+}
+.text-pink {
+    color: #ff7400;
+}
+.family-section {
+    background: url('/assets/media/photos/family.webp');
+    background-color: #000;
+    background-size: cover;
+    background-position: 50% 50%;
+    padding: 60px 30px;
+    border-radius: 12px;
+}
+.footer {
+    border-top: solid 1px #878778;
 }
