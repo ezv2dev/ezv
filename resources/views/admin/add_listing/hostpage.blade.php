@@ -204,7 +204,7 @@
                 <div class="sp-75"></div>
                 <button class="letsgo">Support</button>
                 <div class="sp-75"></div>
-                <p>Click the support button above to connect with one<br> of our teamt to help speed up the lsiting process</p>
+                <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting process</p>
             </div>
         </div>
     </section>
