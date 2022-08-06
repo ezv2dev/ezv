@@ -3448,6 +3448,7 @@
                                 {{-- @php
                                     $id_photo = "<script>document.write($('#id_photo').val());</script>";
                                     @endphp --}}
+                                    <option value=""></option>
                                 @foreach ($photoTag as $tag)
                                     <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
                                 @endforeach
@@ -3484,6 +3485,7 @@
                                 {{-- @php
                                     $id_photo = "<script>document.write($('#id_photo').val());</script>";
                                     @endphp --}}
+                                    <option value=""></option>
                                 @foreach ($photoTag as $tag)
                                     <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
                                 @endforeach
