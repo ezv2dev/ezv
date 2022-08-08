@@ -573,14 +573,14 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-end modal-view-detail">
-                                        <div class="col-6">
+                                        <div class="col-md-6 map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
                                                 <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
     
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end col-12 col-md-6">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="tex-13">Prev</small>
@@ -1153,13 +1153,13 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-end modal-view-detail">
-                                        <div class="col-6">
+                                        <div class="col-md-6 map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
                                                 <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end col-12 col-md-6">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="text-13">Prev</small>
@@ -1462,13 +1462,13 @@
                                     </div>
 
                                     <div class="d-flex align-items-end modal-view-detail">
-                                        <div class="col-6">
+                                        <div class="col-md-6 map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
                                                 <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end col-12 col-md-6">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="text-13">Prev</small>
