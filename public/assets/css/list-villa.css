@@ -3639,6 +3639,27 @@ input::-webkit-inner-spin-button {
     }
 }
 @media only screen and (max-width: 425px) {
+    /* revisi text list villa */
+    .villa-list-name {
+        font-size: 15px !important;
+        padding-bottom: 8px;
+    }
+    .villa-location-description .text-orange,
+    .villa-list-title,
+    .villa-list-price {
+        font-size: 11px;
+    }
+    .villa-location-description .text-orange {
+        padding-bottom: 2px;
+    }
+    .mt-29p {
+        margin-top: 10px !important;
+    }
+    .ml-responsive .mt-3 {
+        margin-top: 0.25rem !important;
+    }
+    /* revisi text list villa */
+
     .cari {
         height: 40px !important;
         width: 40px !important;
@@ -3811,4 +3832,7 @@ a.orange-hover {
     .bar p {
         font-size: 147%;
     }
+}
+.tooltip.show {
+    z-index: 888;
 }

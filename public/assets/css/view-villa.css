@@ -3342,6 +3342,9 @@ span.flatpickr-weekday {
     background-color: transparent !important;
 } */
 #modal-show_description .modal-dialog,
+#videomodal .modal-dialog,
+#videomodalrestaurant .modal-dialog,
+#videomodalactivity .modal-dialog,
 #storymodal .modal-dialog,
 #edit_position_photo .modal-dialog {
     position: absolute !important;
@@ -3354,6 +3357,9 @@ span.flatpickr-weekday {
     width: 100% !important;
     margin: 0px !important;
 }
+#videomodal .modal-content .video-modal,
+#videomodalrestaurant .modal-content .video-modal,
+#videomodalactivity .modal-content .video-modal,
 #storymodal .modal-content .video-modal,
 #storymodalrestaurant .modal-dialog .modal-content .video-modal,
 #storymodalactivity .modal-dialog .modal-content .video-modal {
@@ -3380,6 +3386,9 @@ span.flatpickr-weekday {
 #modal-show_description #modalDescriptionHotel,
 #modal-show_description #modalDescriptionContent {
     white-space: pre-line;
+}
+.btn-del-disable {
+    background-color: rgba(57, 57, 57, 0.7) !important;
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n + 0) .edit-icon,
@@ -3799,8 +3808,8 @@ span.flatpickr-weekday {
         color: #000;
     }
     .video-grid-button {
-        top: -30%;
-        left: 37%;
+        top: -30% !important;
+        left: 37% !important;
     }
 }
 
@@ -3952,8 +3961,8 @@ span.flatpickr-weekday {
         width: 22% !important;
     }
     .video-grid-button {
-        left: 40%;
-        top: -37%;
+        left: 40% !important;
+        top: -37% !important;
     }
 }
 
@@ -3973,6 +3982,13 @@ span.flatpickr-weekday {
     }
     .navright.active {
         padding-right: 30px !important;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1360px) {
+    .video-grid-button {
+        left: 40% !important;
+        top: -40% !important;
     }
 }
 
@@ -4559,26 +4575,47 @@ span.flatpickr-weekday {
         font-size: 16px;
         height: 80px;
     }
+    #videomodal,
+    #videomodalrestaurant,
+    #videomodalactivity,
     #storymodal,
     #storymodalrestaurant,
     #storymodalactivity {
         border-radius: 0px !important;
     }
-    #storymodal .btn-close,
-    #storymodalrestaurant .btn-close,
-    #storymodalactivity .btn-close {
+    #videomodal .btn-close-container,
+    #videomodalrestaurant .btn-close-container,
+    #videomodalactivity .btn-close-container,
+    #storymodal .btn-close-container,
+    #storymodalrestaurant .btn-close-container,
+    #storymodalactivity .btn-close-container {
         position: absolute !important;
         top: 7px !important;
         right: 5px !important;
         z-index: 1 !important;
         padding: 5px !important;
+        border-radius: 50%;
+        background-color: rgb(118 118 118);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    #videomodal .btn-close,
+    #videomodalrestaurant .btn-close,
+    #videomodalactivity .btn-close,
+    #storymodal .btn-close,
+    #storymodalrestaurant .btn-close,
+    #storymodalactivity .btn-close {
         opacity: 1 !important;
     }
+    #videomodal #video1,
+    #videomodalrestaurant #video,
+    #videomodalactivity #video,
     #storymodal #video,
     #storymodalrestaurant #story-video,
     #storymodalactivity #story-video {
         max-height: none !important;
         border-radius: 0px !important;
+        height: 100vh !important;
     }
 }
 

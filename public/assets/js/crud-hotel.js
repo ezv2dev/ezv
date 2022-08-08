@@ -440,7 +440,7 @@ $("#updateStoryForm").submit(function (e) {
                         uid +
                         slash +
                         response.data[i].name +
-                        '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-hotel="' +
+                        '#t=0.1"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
                         id_hotel +
                         '" data-story="' +
                         response.data[i].id_story +

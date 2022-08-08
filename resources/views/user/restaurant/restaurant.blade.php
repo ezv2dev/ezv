@@ -3284,8 +3284,10 @@
                     <source src="">
                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                 </video>
-                <button type="button" class="btn-close btn-close-white d-md-none" data-bs-dismiss="modal" onclick="close_story()"
-                    aria-label="Close"></button>
+                <div class="btn-close-container">
+                    <button type="button" class="btn-close btn-close-white d-md-none" data-bs-dismiss="modal" onclick="close_story()"
+                        aria-label="Close"></button>
+                </div>
             </center>
         </div>
     </div>
@@ -3325,15 +3327,17 @@
 <div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
     style="border-radius: 10px;">
-    <div class="modal-dialog modal-xl" role="document">
-        <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        <h5 class="video-title" id="video-title"></h5><br>
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
         <div class="modal-content video-container">
             <center>
                 <video controls id="video" class="video-modal">
                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                 </video>
+                <h5 class="video-title" id="video-title"></h5>
+                <div class="btn-close-container">
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                        onclick="close_video()" aria-label="Close"></button>
+                </div>
             </center>
         </div>
     </div>
@@ -3404,6 +3408,10 @@
 
     function close_story() {
         $('#storymodalrestaurant').modal('hide');
+    }
+
+    function close_video() {
+        $('#videomodalrestaurant').modal('hide');
     }
 </script>
 
@@ -4891,6 +4899,7 @@
 
                     $("#button").html('Uploading Gallery...');
                     $("#button").addClass('disabled');
+                    $(".btn-del").addClass("btn-del-disable");
                 }
             });
 
@@ -4931,8 +4940,10 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    // Remove the file preview.
-                    _this.removeFile(file);
+                    if (!e.target.classList.contains("btn-del-disable")) {
+                        // Remove the file preview.
+                        _this.removeFile(file);
+                    }
                     // If you want to the delete the file on the server as well,
                     // you can do the AJAX request here.
                 });
@@ -5080,6 +5091,7 @@
 
                     $("#button_menu").html('Uploading Menu...');
                     $("#button_menu").addClass('disabled');
+                    $(".btn-del").addClass("btn-del-disable");
                 }
             });
 
@@ -5117,8 +5129,10 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    // Remove the file preview.
-                    _this.removeFile(file);
+                    if (!e.target.classList.contains("btn-del-disable")) {
+                        // Remove the file preview.
+                        _this.removeFile(file);
+                    }
                     // If you want to the delete the file on the server as well,
                     // you can do the AJAX request here.
                 });

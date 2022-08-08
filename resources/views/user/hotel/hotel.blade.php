@@ -1413,9 +1413,9 @@
                                         </div>
                                     </div>
                                     <div class="col-6 p-5-price">
-                                        <div class="col-12" style="text-align: center;">
+                                        <div class="col-12" style="text-align: center; position: relative;">
                                             <button type="button" class="collapsible_check"
-                                                style="background-color: white;">
+                                                style="position: absolute;background-color: white;left: 0;right: 0;">
                                                 <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-OUT') }}
                                                 </p>
@@ -3728,8 +3728,10 @@
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
 
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
-                        aria-label="Close"></button>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
+                            aria-label="Close"></button>
+                    </div>
 
             </div>
             </center>
@@ -3739,9 +3741,7 @@
     <div class="modal fade" id="videomodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
         style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content video-container">
                 <center>
                     <video controls id="video1" class="video-modal">
@@ -3749,6 +3749,10 @@
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_video()"
+                            aria-label="Close"></button>
+                    </div>
             </div>
             </center>
         </div>
@@ -4562,6 +4566,9 @@
         function close_story() {
             $('#storymodal').modal('hide');
         }
+        function close_video() {
+            $('#videomodal').modal('hide');
+        }
     </script>
 
     {{-- EDIT POSITION PHOTO & VIDEO --}}
@@ -4681,7 +4688,7 @@
                     let path = "/foto/hotel/";
                     let slash = "/";
                     let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
+                    // let lowerCaseUid = uid.toLowerCase();
                     let content = "";
                     let contentPositionModal = "";
 
@@ -4689,9 +4696,9 @@
                         content += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
                             '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            path + uid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            path + uid + slash + response.data.photo[i].name +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4699,7 +4706,7 @@
                         contentPositionModal += '<li class="ui-state-default" data-id="' + response.data.photo[
                                 i].id_photo + '" id="positionPhotoGallery' + response.data.photo[i].id_photo +
                             '"> <img src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            path + uid + slash + response.data.photo[i].name +
                             '" title="' + response.data.photo[i].name + '"> </li>';
                     }
 
@@ -4710,7 +4717,7 @@
                                 '"> <a class="pointer-normal" onclick="view_video(' + response.data.video[v]
                                 .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                path + uid + slash + response.data.video[v].name +
                                 '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_villa }}" data-video="' +
                                 response.data.video[v].id_video +
                                 '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4768,7 +4775,7 @@
                     let path = "/foto/hotel/";
                     let slash = "/";
                     let uid = response.data.uid.uid;
-                    let lowerCaseUid = uid.toLowerCase();
+                    // let lowerCaseUid = uid.toLowerCase();
                     let content = "";
                     let contentPositionModal = "";
 
@@ -4776,9 +4783,9 @@
                         content += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
                             '"> <a href="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            path + uid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            path + uid + slash + response.data.photo[i].name +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4791,7 +4798,7 @@
                                 '"> <a class="pointer-normal" onclick="view_video(' + response.data.video[v]
                                 .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                path + uid + slash + response.data.video[v].name +
                                 '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
                                 response.data.video[v].id_video +
                                 '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -4800,7 +4807,7 @@
                                 .video[v]
                                 .id_video + '" id="positionVideoGallery' + response.data.video[v].id_video +
                                 '"> <video loading="lazy" src="' +
-                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                path + uid + slash + response.data.video[v].name +
                                 '#t=1.0"> </li>';
                         }
                     }
@@ -5276,6 +5283,7 @@
                         myDropzone.processQueue();
                         $("#button").html('Uploading Gallery...');
                         $("#button").addClass('disabled');
+                        $(".btn-del").addClass("btn-del-disable");
                     }
                 });
 
@@ -5317,8 +5325,10 @@
                         e.preventDefault();
                         e.stopPropagation();
 
-                        // Remove the file preview.
-                        _this.removeFile(file);
+                        if (!e.target.classList.contains("btn-del-disable")) {
+                            // Remove the file preview.
+                            _this.removeFile(file);
+                        }
                         // If you want to the delete the file on the server as well,
                         // you can do the AJAX request here.
                     });
@@ -5354,7 +5364,7 @@
                 let path = "/foto/hotel/";
                 let slash = "/";
                 let uid = message.data.uid.uid;
-                let lowerCaseUid = uid.toLowerCase();
+                // let lowerCaseUid = uid.toLowerCase();
                 let content = "";
                 let contentStory = "";
                 let contentPositionModal;
@@ -5382,9 +5392,9 @@
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
                         '"> <a href="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        path + uid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        path + uid + slash + message.data.photo[0].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -5392,7 +5402,7 @@
                     contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
                         .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
                         '"> <img src="' +
-                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        path + uid + slash + message.data.photo[0].name +
                         '" title="' + message.data.photo[0].name + '"> </li>';
 
                     $('.gallery').append(content);
@@ -5402,7 +5412,7 @@
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
                         '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
                         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        path + uid + slash + message.data.video[0].name +
                         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -5413,7 +5423,7 @@
                         message.data.video[0].id_video +
                         ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
                         path +
-                        lowerCaseUid +
+                        uid +
                         slash +
                         message.data.video[0].name +
                         '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
@@ -5425,7 +5435,7 @@
                     contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
                         .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
                         '"> <video src="' +
-                        path + lowerCaseUid + slash + message.data.video[0].name +
+                        path + uid + slash + message.data.video[0].name +
                         '#t=1.0"> </li>';
 
                     $('.gallery').append(content);

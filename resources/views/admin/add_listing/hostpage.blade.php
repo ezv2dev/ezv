@@ -31,180 +31,182 @@
                         <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                     </a>
                 </div>
-                <div class="text-white text-center">
+                <div class="text-white text-center header-block">
                     <h1 class="text-header">Open your door to more<br> guests with EZV</h1>
                     <p class="text-content">Free to join<br> start growing your business today</p>
-                    <p class="text-content">0% Booking fees until 2023<br> terms & conditions apple</p>
+                    <p class="text-content">0% Booking fees until 2023<br> terms & conditions apply</p>
                     <button class="letsgo" onclick="window.location.href='#start';">Let's go</button>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 min-400">
                 <div class="header-image">&nbsp;</div> 
             </div>
         </div>
     </section>
     <section id="start" class="h1-00 w-100 pd-lr-content">
-        <p class="host-body-text text-center top-140">You can list anything, anywhere<br>Accommodation, Restaurant, Activities and More</p>
-        <div class="row-grid-img top-140">
-            <!-- Image row 1-->
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?people,student">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?cyscling,boxing">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?sunrise,shores">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?accident,crash">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?eating,drink">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?happy,sadness">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?rush,war">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?pool,garden">
-            </div>
-            <!-- Image row 2 -->
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?space,planet">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?rock,metal">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?horses,deer">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?angry,yelling">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?traditional,religion">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?music,tools">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?popular,newspaper">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?local,activity">
-            </div>
-            <!-- Image row 3 -->
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?teacher,teaching">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?machinal,musical">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?baby,givebirth">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?smile,teardrops">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?leaf,wind">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?kites,doll">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?studios,radios">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?xray,medicine">
-            </div>
-            <!-- Image row 4 -->
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?spider,gresshoper">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?winter,falls">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?plantation,farmer">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?boat,cannoe">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?girls,boys">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?night,speedboats">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?mick,amplifier">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?spotlights,thunder">
-            </div>
-            
-            <!-- Image row 5 -->
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?pig,cow">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?milk,toast,honey">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?december,spring">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?xmast,nuns">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?help,guide">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?line,linen">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?restaurant,bar">
-            </div>
-            <div class="grid-img-container">
-                <img src="https://source.unsplash.com/featured?eats,pray,love">
-            </div>
-        </div>
-        <div class="top-140">
-            <div class="row">
-                <div class="col-12 col-md-6 video-text-section"> 
-                    <h1>Video content is trending</h1>
-                    <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
-                    <p>68% of costumers prefer watching videos to learn about new</p>
-                    <p>Show case what makes your property unique with short videos</p>
-                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+        <div class=" top-140">
+            <p class="host-body-text text-center">You can list anything, anywhere<br>Accommodation, Restaurant, Activities and More</p>
+            <div class="row-grid-img top-140">
+                <!-- Image row 1-->
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?people,student">
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="host-video-section">
-                        <div class="host-video-container">
-                            <div class="video-content">
-                                <video loop="true" autoplay="autoplay" controls muted>
-                                <source src="{{ asset('assets/media/videos/production ID_4434242.mp4') }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                                </video>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?cyscling,boxing">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?sunrise,shores">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?accident,crash">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?eating,drink">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?happy,sadness">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?rush,war">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?pool,garden">
+                </div>
+                <!-- Image row 2 -->
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?space,planet">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?rock,metal">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?horses,deer">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?angry,yelling">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?traditional,religion">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?music,tools">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?popular,newspaper">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?local,activity">
+                </div>
+                <!-- Image row 3 -->
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?teacher,teaching">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?machinal,musical">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?baby,givebirth">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?smile,teardrops">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?leaf,wind">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?kites,doll">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?studios,radios">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?xray,medicine">
+                </div>
+                <!-- Image row 4 -->
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?spider,gresshoper">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?winter,falls">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?plantation,farmer">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?boat,cannoe">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?girls,boys">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?night,speedboats">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?mick,amplifier">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?spotlights,thunder">
+                </div>
+                
+                <!-- Image row 5 -->
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?pig,cow">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?milk,toast,honey">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?december,spring">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?xmast,nuns">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?help,guide">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?line,linen">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?restaurant,bar">
+                </div>
+                <div class="grid-img-container">
+                    <img src="https://source.unsplash.com/featured?eats,pray,love">
+                </div>
+            </div>
+            <div class="top-140">
+                <div class="row">
+                    <div class="col-12 col-md-6 video-text-section"> 
+                        <h1>Video content is trending</h1>
+                        <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
+                        <p>68% of costumers prefer watching videos to learn about new</p>
+                        <p>Show case what makes your property unique with short videos</p>
+                        <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="host-video-section">
+                            <div class="host-video-container">
+                                <div class="video-content">
+                                    <video controls="true" autoplay="autoplay" loop="true" muted defaultmuted playsinline>
+                                    <source src="{{ asset('assets/media/videos/hoses-sample-video.mp4') }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                    </video>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="top-140">
-            <div class="help-section text-right text-white">
-                <h1>We are here to help 24/7</h1>
-                <p>Would you like some assistance creating your new listing?</p>
-                <p>Already have your property listed on another travel platform?</p>
-                <div class="sp-75"></div>
-                <button class="letsgo">Support</button>
-                <div class="sp-75"></div>
-                <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting process</p>
+            <div class="top-140">
+                <div class="help-section text-right text-white">
+                    <h1>We are here to help 24/7</h1>
+                    <p>Would you like some assistance creating your new listing?</p>
+                    <p>Already have your property listed on another travel platform?</p>
+                    <div class="sp-75"></div>
+                    <button class="letsgo">Support</button>
+                    <div class="sp-75"></div>
+                    <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting process</p>
+                </div>
             </div>
         </div>
     </section>

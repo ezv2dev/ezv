@@ -71,7 +71,7 @@ class PartnerController extends Controller
         if (Auth::user()->role_id == 5) {
             return view('new-admin.collaborator.dashboard_collaborator', compact('today', 'count', 'arrivingSoon', 'upcoming', 'checkout'));
         } else {
-            return redirect()->action('ListingController@add_listing');
+            return redirect()->route('admin_add_listing');
         }
     }
 
@@ -123,7 +123,7 @@ class PartnerController extends Controller
             // dd($count);
             return view('new-admin.partner.dashboard_partner_arriving_soon', compact('today', 'count', 'arrivingSoon', 'upcoming', 'checkout'));
         } else {
-            return redirect()->action('ListingController@add_listing');
+            return redirect()->route('admin_add_listing');
         }
     }
 
@@ -175,7 +175,7 @@ class PartnerController extends Controller
             // dd($count);
             return view('new-admin.partner.dashboard_partner_checkout', compact('today', 'count', 'arrivingSoon', 'upcoming', 'checkout'));
         } else {
-            return redirect()->action('ListingController@add_listing');
+            return redirect()->route('admin_add_listing');
         }
     }
 
@@ -227,7 +227,7 @@ class PartnerController extends Controller
             // dd($count);
             return view('new-admin.partner.dashboard_partner_upcoming', compact('today', 'count', 'arrivingSoon', 'upcoming', 'checkout'));
         } else {
-            return redirect()->action('ListingController@add_listing');
+            return redirect()->route('admin_add_listing');
         }
     }
 

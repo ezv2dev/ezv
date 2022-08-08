@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Hotel;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
@@ -21,6 +22,7 @@ use App\Models\HotelStory;
 use App\Models\HotelTypeDetail;
 use App\Models\HotelType;
 use App\Models\HotelRoomBooking;
+use App\Models\HotelStatistic;
 use App\Models\HotelTypeDetailAmenities;
 use App\Models\HotelVideo;
 use App\Models\Kitchen;
@@ -334,8 +336,16 @@ class HotelDetailController extends Controller
             }
         }
 
-        // increase views
-        $hotelAddViews = Hotel::find($id)->increment('views');
+        $now = Carbon::now();
+        HotelStatistic::updateOrCreate(
+            [
+                'id_hotel' => $id,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        HotelStatistic::where('id_hotel', $id)->where('month', $now->month)->where('year', $now->year)->increment('hotel_views');
+
 
         $hotelRoomPhoto = HotelRoomPhoto::where('id_hotel', $id)->get();
 

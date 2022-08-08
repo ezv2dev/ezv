@@ -3498,8 +3498,10 @@
                         <source src="">
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                        onclick="close_story()" aria-label="Close"></button>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                            onclick="close_story()" aria-label="Close"></button>
+                    </div>
 
             </div>
             </center>
@@ -3510,9 +3512,7 @@
     <div class="modal fade" id="videomodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
         style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content video-container">
                 <center>
                     <video controls id="video1" class="video-modal">
@@ -3520,6 +3520,10 @@
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                            onclick="close_video()" aria-label="Close"></button>
+                    </div>
             </div>
             </center>
         </div>
@@ -4127,6 +4131,9 @@
         function close_story() {
             $('#storymodal').modal('hide');
         }
+        function close_video() {
+            $('#videomodal').modal('hide');
+        }
     </script>
 
     {{-- EDIT POSITION PHOTO & VIDEO --}}
@@ -4471,6 +4478,7 @@
                         myDropzone.processQueue();
                         $("#button").html('Uploading Gallery...');
                         $("#button").addClass('disabled');
+                        $(".btn-del").addClass("btn-del-disable");
                     }
                 });
 
@@ -4510,8 +4518,10 @@
                         e.preventDefault();
                         e.stopPropagation();
 
-                        // Remove the file preview.
-                        _this.removeFile(file);
+                        if (!e.target.classList.contains("btn-del-disable")) {
+                            // Remove the file preview.
+                            _this.removeFile(file);
+                        }
                         // If you want to the delete the file on the server as well,
                         // you can do the AJAX request here.
                     });

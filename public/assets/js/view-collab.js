@@ -302,7 +302,7 @@ function view_story(id) {
             video.src = public + lowerCaseName + slash + data.name;
             video.load();
             video.play();
-            $("#title").html(data.title);
+            $("#storymodal-title").html(data.title);
             $("#storymodal").modal("show");
         },
     });
@@ -449,7 +449,7 @@ function view(id) {
             video.load();
             video.play();
             $("#title").html(data.title);
-            $("#storymodal").modal("show");
+            $("#videomodal").modal("show");
         },
     });
 }
