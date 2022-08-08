@@ -88,11 +88,13 @@ class XenditController extends Controller
             "external_id" => $external_id,
             "bank_code" => $request->bank_option,
             "name" => $name,
-            "expected_amount" => $price,
+            "expected_amount" => (int)$price,
             "is_closed" => true,
             "expiration_date" => Carbon::now()->addDays(1)->toISOString(),
             "is_single_use" => true,
         ];
+
+        dd($params);
 
         $createVA = \Xendit\VirtualAccounts::create($params);
 
@@ -139,7 +141,7 @@ class XenditController extends Controller
     {
         try {
             // decode json callback
-            $requestEncoded = json_decode($request);
+            $requestEncoded = $request->json()->all();
 
             // TODO verify callback
 
@@ -586,12 +588,12 @@ class XenditController extends Controller
         //     'max_total_children' => $max_total_child,
         // ];
         $data = (object)[
-            'normal_price' => $normal_price,
-            'total' => $total,
-            'service' => ($total * $tax / 100),
-            'cleaning_fee' => $cleaning_fee,
-            'discount' => $discounts,
-            'total_all' => $total_all,
+            'normal_price' => (int)$normal_price,
+            'total' => (int)$total,
+            'service' => (int)($total * $tax / 100),
+            'cleaning_fee' => (int)$cleaning_fee,
+            'discount' => (int)$discounts,
+            'total_all' => (int)$total_all,
         ];
 
         return $data;
