@@ -24,7 +24,7 @@
 
 <body>
     <section class="h-100 w-100">
-        <div class="row bg-black">
+        <div class="row bg-black host-header">
             <div class="col-12 col-md-6 pd-30">
                 <div class="header-logo">
                     <a href="{{ route('index') }}">
@@ -38,8 +38,8 @@
                     <button class="letsgo" onclick="window.location.href='#start';">Let's go</button>
                 </div>
             </div>
-            <div class="col-12 col-md-6 right-image">
-                <img src="{{ asset('assets/media/photos/follow-that-dream-1.webp') }}">
+            <div class="col-12 col-md-6">
+                <div class="header-image">&nbsp;</div> 
             </div>
         </div>
     </section>
