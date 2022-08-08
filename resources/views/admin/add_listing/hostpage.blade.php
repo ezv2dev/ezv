@@ -34,7 +34,7 @@
                 <div class="text-white text-center header-block">
                     <h1 class="text-header">Open your door to more<br> guests with EZV</h1>
                     <p class="text-content">Free to join<br> start growing your business today</p>
-                    <p class="text-content">0% Booking fees until 2023<br> terms & conditions apple</p>
+                    <p class="text-content">0% Booking fees until 2023<br> terms & conditions apply</p>
                     <button class="letsgo" onclick="window.location.href='#start';">Let's go</button>
                 </div>
             </div>
