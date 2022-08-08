@@ -24,7 +24,7 @@ class ActivityStatistic extends Model
     ];
 
     // * Relationship
-    public function activityStatistic()
+    public function activity()
     {
         return $this->belongsTo(Activity::class, 'id_activity', 'id_activity');
     }

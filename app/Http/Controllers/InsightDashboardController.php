@@ -43,6 +43,7 @@ class InsightDashboardController extends Controller
             ->orderBy('name', 'desc')
             ->get();
 
+
         $array_month = array();
         foreach ($viewsMonth as $item) {
             $array_month[$item['name']][$item->month] = $item->data;
