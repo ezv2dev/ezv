@@ -228,7 +228,7 @@
                     </div>
                     <div class="col-12 col-md-6 left-20">
                         <button class="add-link" id="input-link-listing-button" onclick="open_input_link_listing()" >Add Link</button>
-                        <input id="input-link-listing" class="form-control d-none" placeholder="First Name">
+                        <input id="input-link-listing" class="form-control d-none" placeholder="Input your link here">
                         <p>Add link of your rental property listing</p>
                         <p>Please add a link to one of your current listings on another site to help with designing your first EZV listing even faster</p>
                         <div class="row">
