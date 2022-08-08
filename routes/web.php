@@ -72,6 +72,8 @@ use App\Http\Controllers\TransactionHistoryController;
 use App\Http\Controllers\Auth\RegisterCollabController;
 use App\Http\Controllers\Auth\RegisterPartnerController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ChannelManager as ChannelManager;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +86,7 @@ use App\Http\Controllers\BlogController;
 |
 */
 
+Route::get('/reterive-data', [ChannelManager\BookandlinkController::class, 'retrieve_data'])->name('bookandlink.retrieve');
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -226,6 +229,9 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::post('/account-settings/personal-info/add-government-id/step-two', [Dashboard\AddGovernmentController::class, 'store_step_two']);
     Route::get('/account-settings/personal-info/add-government-id/step-three', [Dashboard\AddGovernmentController::class, 'step_three_index'])->name('add_government.step_three');
     Route::post('/account-settings/personal-info/add-government-id/step-three', [Dashboard\AddGovernmentController::class, 'store_step_three']);
+
+    Route::get('/cohost-settings', [Dashboard\CoHostController::class, 'index'])->name('cohost_setting');
+    Route::post('/cohost-store', [Dashboard\CoHostController::class, 'store'])->name('cohost_store');
 
     Route::get('/account-settings/login-security', [Dashboard\AccountSettingController::class, 'login_security'])->name('login_security');
     Route::get('/account-settings/notification', [Dashboard\AccountSettingController::class, 'notification'])->name('notification_setting');
