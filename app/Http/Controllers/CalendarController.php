@@ -15,12 +15,21 @@ class CalendarController extends Controller
     {
         if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
         {
-            $data = Villa::select('id_villa', 'name', 'price')->where('status','=',1)->get();
+            $villa = Villa::select('id_villa', 'name', 'price')->where('status','=',1)->get();
             // dd($data);
         }
         elseif (Auth::user()->role_id == 3)
         {
-            $data = Villa::select('id_villa', 'name', 'price')->where('status','=',1)->where('created_by', Auth::user()->id)->get();
+            $villa = Villa::select('id_villa', 'name', 'price')->where('status','=',1)->where('created_by', Auth::user()->id)->get();
+        }
+
+        $data = [];
+        $i = 0;
+        foreach ($villa as $item)
+        {
+            $data[$i]['id'] = $item->id_villa;
+            $data[$i]['title'] = $item->name;
+            $i++;
         }
 
         return view('new-admin.calendar.calendar_index', compact('data'));

@@ -259,6 +259,9 @@
             }
         });
 
+        var datas = @json($data);
+        console.log(datas);
+
         let calendarEl = document.getElementById("calendar");
         let calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'resourceTimelineMonth',
@@ -268,12 +271,13 @@
                 center: 'title',
                 right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth',
             },
-            resourceAreaHeaderContent: 'Homes',
-            resources: [
-                { id: 'a', title: 'Room A' },
-                { id: 'b', title: 'Room B' },
-                { id: 'c', title: 'Room C' }
-            ],
+            resourceAreaHeaderContent: 'Homes List',
+            // resources: [
+            //     { id: 'a', title: 'Room A' },
+            //     { id: 'b', title: 'Room B' },
+            //     { id: 'c', title: 'Room C' },
+            // ],
+            resources : datas,
             // events : '{{ route('calendar.all') }}',
 
             // disable past day
