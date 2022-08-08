@@ -332,6 +332,11 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/dashboard/progress/cleaning', [InsightDashboardController::class, 'cleaning'])->name('insight_dashboard_cleaning');
     Route::get('/dashboard/progress/views', [InsightDashboardController::class, 'views'])->name('insight_dashboard_views');
 
+    Route::get('/insight-homes', [Dashboard\InsightController::class, 'homes'])->name('insight_homes');
+    Route::get('/insight-hotel', [Dashboard\InsightController::class, 'hotel'])->name('insight_hotel');
+    Route::get('/insight-food', [Dashboard\InsightController::class, 'food'])->name('insight_food');
+    Route::get('/insight-wow', [Dashboard\InsightController::class, 'wow'])->name('insight_wow');
+
     Route::get('/users/transaction_history/completed-payouts', [TransactionHistoryController::class, 'completed_payouts'])->name('completed_payouts');
     Route::get('/users/transaction_history/upcoming-payouts', [TransactionHistoryController::class, 'upcoming_payouts'])->name('upcoming_payouts');
     Route::get('/users/transaction_history/gross-earnings', [TransactionHistoryController::class, 'gross_earnings'])->name('gross_earnings');
