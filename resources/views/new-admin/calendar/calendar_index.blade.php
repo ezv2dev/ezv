@@ -273,12 +273,12 @@
             },
             resourceAreaHeaderContent: 'Homes List',
             // resources: [
-            //     { id: 'a', title: 'Room A' },
-            //     { id: 'b', title: 'Room B' },
-            //     { id: 'c', title: 'Room C' },
+            //     { id: 'a', title: 'Room A'},
+            //     { id: 'b', title: 'Room B'},
+            //     { id: 'c', title: 'Room C'},
             // ],
             resources : datas,
-            // events : '{{ route('calendar.all') }}',
+            events : `{{ route('calendar.all') }}`,
 
             // disable past day
             validRange: {
@@ -291,9 +291,10 @@
             dateClick: function (info) {
                 var start = moment(info.start).format("YYYY-MM-DD");
                 // $('#id_villa').val(data.id);
-                // $('#name_villa').val(data.name);
-                // $('#regular_price').val(data.price);
-                $('#start').val(info.start);
+                $('#id_villa').val(info.resource.id);
+                $('#name_villa').val(info.resource.title);
+                $('#start').val(start);
+                $('#end').val(start);
                 $('#addSpecialModal').modal('show');
             },
 
@@ -306,9 +307,9 @@
                 // }
                 var start = moment(info.start).format("YYYY-MM-DD");
                 var end = moment(info.end).subtract(1, "days").format('YYYY-MM-DD');
-                // $('#id_villa').val(data.id_villa);
-                // $('#name_villa').val(data.name);
-                // $('#regular_price').val(data.price);
+                $('#id_villa').val(info.resource.id);
+                $('#name_villa').val(info.resource.title);
+                // $('#regular_price').val(info.resource.price);
                 $('#start').val(start);
                 $('#end').val(end);
                 $('#addSpecialModal').modal('show');
