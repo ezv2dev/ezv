@@ -271,7 +271,7 @@
                 center: 'title',
                 right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth',
             },
-            resourceAreaHeaderContent: 'Homes List',
+            resourceAreaHeaderContent: 'Listing',
             // resources: [
             //     { id: 'a', title: 'Room A'},
             //     { id: 'b', title: 'Room B'},

@@ -2754,7 +2754,7 @@ input.error {
     text-align: center;
 }
 
-.row-grid-amenities {
+.row-grid-amenities, .row-grid-room-option {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-template-rows: repeat(1, auto) !important;
     display: grid;
@@ -3671,7 +3671,7 @@ span.flatpickr-weekday {
         height: 47px;
     }
     .about-place,
-    .row-grid-amenities {
+    .row-grid-amenities, .row-grid-room-option {
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
@@ -4338,7 +4338,7 @@ span.flatpickr-weekday {
     .text-xs-15{
         font-size: 15px !important;
     }
-    
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -4756,7 +4756,7 @@ input::placeholder {
         position: relative;
         margin: auto;
     }
-  
+
     .dropdwn {
     display: none;
     right: 23px !important;

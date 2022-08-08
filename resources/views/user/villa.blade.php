@@ -1323,6 +1323,109 @@
                             @endempty
                         </div>
                     </section>
+
+                    <section id="room_option" class="section-2 div-amenities px-xs-12p px-sm-24p">
+                        <div class="row-grid-room-option">
+                            <hr>
+                            <div>
+                                <h2>
+                                    {{ __('user_page.Room Option') }}
+                                    @auth
+                                        @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                            &nbsp;
+                                            <a type="button" onclick="edit_room_option()"
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Room Option') }}
+                                            </a>
+                                        @endif
+                                    @endauth
+                                </h2>
+                            </div>
+
+                        </div>
+                        <div class="row-grid-room-option" id="row-room-option">
+                            <div class="row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
+                                <!-- Left Sedtion -->
+                                <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
+                                    <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
+                                </div>
+                                <!-- End Left Section -->
+                                <!-- Right Section -->
+                                <div class="col-lg-6 py-2 col-xs-12 list-image-container">
+                                    <div class="mt-0"> <h4 class="mb-lg-4">Bedroom 1</h4>  </div>
+                                   <div class="w-100 ml-responsive" style="position:relative;">
+                                      <!-- Villa Description -->
+                                      <div class="row mt-3 mt-lg-0 " style="height:100%;">
+                                         <div class="col-12 row">
+                                            <div class="col-lg-6">
+                                               <div class="villa-list-title">
+                                                  <div class="" style="margin-right: 4px;">
+                                                     <span class="list-description font-black">
+                                                     • Bed Linens
+                                                     </span>
+                                                  </div>
+                                                  <div class="">
+                                                     <span class="list-description font-black ">
+                                                     • Drying rack for clothing
+                                                     </span>
+                                                  </div>
+                                                  <div class="">
+                                                     <span class="list-description font-black">
+                                                     • 6 Iron
+                                                     </span>
+                                                  </div>
+                                                  <div class="">
+                                                     <span class="list-description font-black">
+                                                     • Save
+                                                     </span>
+                                                  </div>
+                                                  <div class="">
+                                                    <span class="list-description font-black">
+                                                    • Bidet
+                                                    </span>
+                                                 </div>
+                                               </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="villa-list-title">
+                                                   <div class="" style="margin-right: 4px;">
+                                                      <span class="list-description font-black">
+                                                      • Bathtub
+                                                      </span>
+                                                   </div>
+                                                   <div class="">
+                                                      <span class="list-description font-black ">
+                                                      • Conditioner
+                                                      </span>
+                                                   </div>
+                                                   <div class="">
+                                                      <span class="list-description font-black">
+                                                      • Hot water
+                                                      </span>
+                                                   </div>
+                                                   <div class="">
+                                                      <span class="list-description font-black">
+                                                      • Shower gel
+                                                      </span>
+                                                   </div>
+                                                   <div class="">
+                                                     <span class="list-description font-black">
+                                                     • <span style="color: #ff7400;">+more</span>
+                                                     </span>
+                                                  </div>
+                                                </div>
+                                             </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="mt-lg-5 col-lg-2 py-2 col-xs-12 list-image-container">
+                                    <h4 style=" margin-bottom: 5px; ">IDR 1,200,000 / Night</h4>
+                                    <button type="submit" id="button" class="btn btn-primary">Select</button>
+                                </div>
+                                <!-- End Right Section -->
+                             </div>
+                        </div>
+                    </section>
                 </div>
                 {{-- END PAGE CONTENT --}}
             </div>
