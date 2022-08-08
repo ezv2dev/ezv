@@ -3510,9 +3510,7 @@
     <div class="modal fade" id="videomodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
         style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal"
-                aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content video-container">
                 <center>
                     <video controls id="video1" class="video-modal">
@@ -3520,6 +3518,8 @@
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                        onclick="close_video()" aria-label="Close"></button>
             </div>
             </center>
         </div>
@@ -4126,6 +4126,9 @@
     <script>
         function close_story() {
             $('#storymodal').modal('hide');
+        }
+        function close_video() {
+            $('#videomodal').modal('hide');
         }
     </script>
 
