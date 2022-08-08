@@ -10,10 +10,6 @@ body, html {
 .bottom p {
     margin-bottom: 0.9rem !important;
 }
-.host-header {
-    height: 100vh;
-    min-height: 768px;
-}
 .top-140 {
     margin-top: 140px;
 }
@@ -26,17 +22,18 @@ body, html {
 .pd-30{
     padding: 30px !important;
 }
-.header-image, .bottom-image {
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    min-height: 100%;
+.right-image img {
+    object-fit: cover;
+    max-height: 100vh;
+    width: 100%;
 }
-.header-image {
-    background: url('/assets/media/photos/follow-that-dream-1.webp');
-    background-position: 50% 50%;
+.right-image {
     height: 100vh;
 }
 .bottom-image {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    min-height: 100%;
     background: url('/assets/media/photos/follow-that-dream-2.webp');
     background-position: 80% 50%;
 }
@@ -266,9 +263,6 @@ input::placeholder {
     }
     .top-67 {
         margin-top: 17px;
-    }
-    .host-body-text {
-        margin-top: 280px !important;
     }
     .video-text-section {
         padding-right: 0 !important;
