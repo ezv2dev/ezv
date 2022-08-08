@@ -42,7 +42,31 @@
     {{-- CONTENT --}}
     <div class="container-calendar container d-flex" style="margin-top: 30px;padding-bottom: 50px;">
 
-        <div class="col-calendar2 col-lg-12">
+        <div class="col-calendar1 col-lg-4">
+            <div class="filter-calendar">
+                <div class="card" style="box-shadow: 0px 3px 15px -8px rgb(100,100,100);">
+                    <div class="card-header" style="background: #ff7400;">
+                        <span style="font-weight: 600; color: #FAF5E4;">Filter Calendar</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-block" style="padding: 20px;">
+                            <label style="font-weight: 500;">Select villa :</label>
+                            <select class="form-control" name="select_villa" id="select_villa"
+                            onchange="changeVillaName(this.value);">
+                                <option value="" disabled selected>Choose villa...</option>
+                                @foreach ($data as $item)
+                                    {{-- <option value="{{$item->id_villa}}">{{ $item->name }}</option> --}}
+                                    {{-- <option data-id="{{$item->id_villa}}" data-price="{{$item->price}}">{{ $item->name }}</option> --}}
+                                    <option data-price="{{ $item->price }}" value="{{ $item->id_villa }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-calendar2 col-lg-8">
             <div id='calendar' class="calendar"></div>
         </div>
 
@@ -171,19 +195,16 @@
 
 @section('scripts')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js" integrity="sha256-sR+oJaZ3c0FHR6+kKaX1zeXReUGbzuNI8QTKpGHE0sg=" crossorigin="anonymous"></script>
-{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" /> --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.2/main.min.css">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.2/main.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
 <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
 <script>
 
     // validasi agar tidak menginputkan selain angka ke input price
-    $('input[name="price"]').on('keypress', function(evt) {
+    $('input[name="price"]').on('keypress', function(evt) {        
         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
         {
             evt.preventDefault();
@@ -191,7 +212,7 @@
     });
 
     // validasi agar tidak menginputkan angka 0 sebelum angka lainnya ke input price
-    // $('input[name="price"]').on('keyup', function(evt) {
+    // $('input[name="price"]').on('keyup', function(evt) {        
     //     let splitVal = $(this).val().split('')
     //     if(splitVal.length > 1){
     //         for(let i = 0; i < splitVal.length; i++){
@@ -200,13 +221,13 @@
     //                     break;
     //                 }
     //             }
-
+    
     //             splitVal = splitVal.slice(i+1)
     //             let value = '';
     //             splitVal.forEach(char => {
     //                 value = value + char
     //             })
-
+    
     //             $(this).val(value)
     //         }
     //     }
@@ -258,63 +279,114 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+    });
 
-        let calendarEl = document.getElementById("calendar");
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'resourceTimelineMonth',
-            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives', //free trial premium features
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth',
-            },
-            resourceAreaHeaderContent: 'Homes',
-            resources: [
-                { id: 'a', title: 'Room A' },
-                { id: 'b', title: 'Room B' },
-                { id: 'c', title: 'Room C' }
-            ],
-            // events : '{{ route('calendar.all') }}',
+    //Filter
+    function changeVillaName(id)
+    {
+        // console.log('hit change villa');
+        var datas = @json($data);
+        var id = $('#select_villa').val();
+        var data = `data not found`;
+        for (let index = 0; index < datas.length; index++) {
+            if(datas[index].id_villa == id) {
+                data = datas[index];
+                break;
+            }
+        }
 
-            // disable past day
-            validRange: {
-                start: new Date(),
-            },
+        $('#id_villa').val(data.id_villa);
+        $('#name_villa').val(data.name);
+        $('#regular_price').val(data.price);
 
-            selectable: true,
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/calendar/villa/" + id,
+            dataType: "JSON",
+            success: function(events){
 
-            //one day click
-            dateClick: function (info) {
-                var start = moment(info.start).format("YYYY-MM-DD");
-                // $('#id_villa').val(data.id);
-                // $('#name_villa').val(data.name);
-                // $('#regular_price').val(data.price);
-                $('#start').val(info.start);
-                $('#addSpecialModal').modal('show');
-            },
+                //fullcalendar
+                let calendar = $('#calendar').fullCalendar({
+                    defaultView: 'month',
+                    displayEventTime: true,
+                    editable: false,
+                    // events : '{{ route('calendar.all') }}',
 
-            //selection date start until end
-            select: function (info) {
-                // if(start.isBefore(moment())) {
-                //     $('#calendar').fullCalendar('unselect');
-                //     alert('Min date is Today !');
-                //     return false;
-                // }
-                var start = moment(info.start).format("YYYY-MM-DD");
-                var end = moment(info.end).subtract(1, "days").format('YYYY-MM-DD');
-                // $('#id_villa').val(data.id_villa);
-                // $('#name_villa').val(data.name);
-                // $('#regular_price').val(data.price);
-                $('#start').val(start);
-                $('#end').val(end);
-                $('#addSpecialModal').modal('show');
+                    // disable past day
+                    validRange: {
+                        start: new Date(),
+                    },
+
+                    // eventRender: function (event, element, view) {
+                    //     if (event.allDay === 'true') {
+                    //         event.allDay = true;
+                    //     } else {
+                    //         event.allDay = false;
+                    //     }
+                    // },
+
+                    selectable: true,
+                    selectHelper: true,
+
+                    //one day click
+                    dayClick: function (date, view) {
+                        var start = $.fullCalendar.formatDate(date, "Y-MM-DD");
+                        // $('#id_villa').val(data.id);
+                        // $('#name_villa').val(data.name);
+                        // $('#regular_price').val(data.price);
+                        $('#start').val(date);
+                        $('#addSpecialModal').modal('show');
+                    },
+
+                    //selection date start until end
+                    select: function (start, end) {
+                        // if(start.isBefore(moment())) {
+                        //     $('#calendar').fullCalendar('unselect');
+                        //     alert('Min date is Today !');
+                        //     return false;
+                        // }
+                        var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                        var end = moment(end).subtract(1, "days").format('YYYY-MM-DD');
+                        // $('#id_villa').val(data.id_villa);
+                        // $('#name_villa').val(data.name);
+                        // $('#regular_price').val(data.price);
+                        $('#start').val(start);
+                        $('#end').val(end);
+                        $('#addSpecialModal').modal('show');
+                    },
+
+                    //special price click in date and update
+                    eventClick: function (event) {
+                        var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                        var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
+                        // console.log(event.id_detail);
+                        $('#id_detail').val(event.id_detail);
+                        $('#edit-start').val(start);
+                        $('#edit-end').val(end);
+                        $('#special-price').val(event.title);
+                        $('#villa_name').val(event.name);
+                        $('#disc').val(event.disc);
+                        $('#editSpecialModal').modal('show');
+                    }
+                });
+
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('addEventSource', events);
+                $('#calendar').fullCalendar('rerenderEvents');
             },
         });
 
-        calendar.render();
-    });
+    }
 
-
+    // let calendar2 = $('#calendar2').fullCalendar({
+    //     defaultView: 'month',
+    //     editable: true,
+    //     selectable: true,
+    //     selectHelper: true,
+    //     validRange: {
+    //         start: new Date(),
+    //     },
+    // });
 
 </script>
 
