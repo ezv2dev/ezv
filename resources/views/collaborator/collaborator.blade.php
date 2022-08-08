@@ -260,12 +260,6 @@
                 border-bottom: 0;
             }
 
-            #gallery {
-                background: #000;
-                padding-top: 0px !important;
-                border-bottom: solid 1px #000;
-            }
-
             .video-button {
                 margin-left: 55px !important;
                 margin-top: 45px !important;
@@ -346,10 +340,6 @@
                 top: 23px;
             }
 
-            .inner-wrap {
-                margin-left: -10px;
-            }
-
             .cards3 {
                 width: 335px;
                 margin-left: 10px;
@@ -357,10 +347,6 @@
 
             .card3 {
                 width: 60px;
-            }
-
-            .card4 {
-                margin-right: -10px;
             }
 
             .containerSlider3 {
@@ -374,19 +360,6 @@
                 .containerSlider3 {
                     margin-left: 0;
                 }
-            }
-
-
-            .containerSlider4 {
-                width: 283px;
-            }
-
-            .video-title {
-                top: 44px;
-                left: 0;
-                font-weight: 400;
-                font-size: 14px;
-                font-family: 'Poppins', sans-serif;
             }
 
             #review {
@@ -948,12 +921,12 @@
                                 <a type="button" onclick="edit_collab_profile()"
                                     class="collab-edit-profile-btn-mobile d-md-none"
                                     style="font-size: 10pt; font-weight: 600; color: #ff7400;"> Edit
-                                    Profile |</a>
+                                    Profile</a>
                             @endif
                             @if (Auth::user()->id == $profile->created_by)
-                                &nbsp;<a type="button" class="edit-profile-name-btn-mobile d-md-none"
+                                <a type="button" class="edit-profile-name-btn-mobile d-md-none"
                                         onclick="editNameForm({{ $profile->created_by }})"
-                                        style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Name') }}</a>
+                                        style="font-size: 10pt; font-weight: 600; color: #ff7400;">| {{ __('user_page.Edit Name') }}</a>
                             @endif
                         @endauth
 
@@ -1133,7 +1106,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1200,7 +1173,7 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">Title story</span>
+                                                                        <span class="title-story">{{$item->title}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1241,7 +1214,7 @@
                                                                                 </a>
                                                                             @endif
                                                                             </a>
-                                                                            <span class="title-story">Title story</span>
+                                                                            <span class="title-story">{{$item->title}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1980,7 +1953,7 @@
         </div>
 
         {{-- FULL WIDTH ABOVE FOOTER --}}
-        <div class="col-lg-12 bottom-content">
+        <div class="col-lg-12 bottom-content px-max-md-12p">
             <div class="col-12">
                 <section id="review" class="section-2">
                     <hr>
@@ -2275,11 +2248,10 @@
 
     <div class="modal fade" id="storymodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content modal-content-story video-container" style="width:980px;">
                 <center>
-                    <h5 class="video-title" id="title">test</h5>
+                    <h5 class="video-title" id="storymodal-title"></h5>
                     <input type="hidden" id="id_story" name="id_story" value="{{ $profile->id_collab }}">
                     <input type="hidden" id="villa" name="villa" value="{{ $profile->name }}">
 
@@ -2287,6 +2259,8 @@
                         <source src="">
                         Your browser doesn't support HTML5 video tag.
                     </video>
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" 
+                        onclick="close_story()" aria-label="Close"></button>
             </div>
             </center>
         </div>
@@ -2295,8 +2269,7 @@
     {{-- MODAL VIDEO --}}
     <div class="modal fade" id="videomodal" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true" style="border-radius: 10px;">
-        <div class="modal-dialog modal-xl" role="document">
-            <button type="button" class="btn-close btn-hidden" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content video-container">
                 <center>
                     <video controls id="video1" class="video-modal">
@@ -2304,6 +2277,8 @@
                         Your browser doesn't support HTML5 video tag.
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" 
+                        onclick="close_video()" aria-label="Close"></button>
             </div>
             </center>
         </div>
@@ -3082,6 +3057,16 @@
     </script>
 
     {{-- End Header List --}}
+
+    <script>
+        function close_story() {
+            $('#storymodal').modal('hide');
+        }
+        function close_video() {
+            $('#videomodal').modal('hide');
+        }
+    </script>
+
     <script>
         function position_photo() {
             $('#edit_position_photo').modal('show');
