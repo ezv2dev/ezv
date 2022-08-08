@@ -3323,13 +3323,13 @@ class ViewController extends Controller
         $data = VillaDetailPrice::where('id_detail', $id)->first();
         // $villa = Villa::where('id_villa', $data->id_villa)->first();
 
-        $this->authorize('listvilla_delete');
-        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
-        if ($condition) {
-            return response()->json([
-                'message' => 'This action is unauthorized',
-            ], 403);
-        }
+        // $this->authorize('listvilla_delete');
+        // $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
+        // if ($condition) {
+        //     return response()->json([
+        //         'message' => 'This action is unauthorized',
+        //     ], 403);
+        // }
 
         $delete = $data->delete();
 
