@@ -203,16 +203,17 @@
                     <p>Would you like some assistance creating your new listing?</p>
                     <p>Already have your property listed on another travel platform?</p>
                     <div class="sp-75"></div>
-                    <button class="letsgo">Support</button>
+                    <button class="letsgo" onclick="open_form()">Support</button>
                     <div class="sp-75"></div>
                     <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting process</p>
                 </div>
             </div>
         </div>
     </section>
-    <section class="top-67">
-        <div class="pd-lr-content background-light-grey">
-            <div class="customer-support-block">
+
+    <section class="top-67 d-none" id="form-section">
+        <div class="pd-lr-content">
+            <div class="customer-support-block background-light-grey">
                 <h1>24/7 customer support team</h1>
                 <p>We are here to help you set and design your first listing with EZV</p>
                 <p>Please fill in your contact details in the form bellow and one of our team<br> members will respond to you shortly</p>
@@ -226,7 +227,8 @@
                         <input class="form-control" placeholder="Website">
                     </div>
                     <div class="col-12 col-md-6 left-20">
-                        <button class="add-link"><i class="fa fa-plus" aria-hidden="true"></i>Add Link</button>
+                        <button class="add-link" id="input-link-listing-button" onclick="open_input_link_listing()" >Add Link</button>
+                        <input id="input-link-listing" class="form-control d-none" placeholder="First Name">
                         <p>Add link of your rental property listing</p>
                         <p>Please add a link to one of your current listings on another site to help with designing your first EZV listing even faster</p>
                         <div class="row">
@@ -242,6 +244,9 @@
                 </form>
             </div>
         </div>
+    </section>
+
+    <section class="top-67">
         <div class="pd-lr-content">
             <div class="protection-section text-center text-white top-140">
                 <h1>EZV Protection for Hosts</h1>
@@ -249,10 +254,10 @@
                 <div class="sp-200"></div>
                 <button class="letsgo">Learn More</button>
                 <div class="sp-75"></div>
-                <h3>Put your mind with easy when listing with EZV</h3>
+                <h3>Put your mind at ease when listing with EZV</h3>
             </div>
             <div class="text-white top-140 listing-text-section">
-                <h1>Put your mind with easy when listing with EZV</h1>
+                <h1>Put your mind at ease when listing with EZV</h1>
                 <h2>Hosts Benefits</h2>
                 <h4>Customer team available 24/7</h4>
                 <h4>Create prrsonalized hose rules guests must agrre to before check-in</h4>
@@ -285,7 +290,7 @@
                 <h1>Join the EZV family today</h1>
                 <h3>Try hosting</h3>
                 <div class="sp-200"></div>
-                <p>Put your mind with easy when listing with EZV<br> we got you covered</p>
+                <p>Put your mind at ease when listing with EZV<br> we got you covered</p>
                 <button class="letsgo">Learn More</button>
             </div>
             <div class="top-140">&nbsp;</div>
@@ -323,6 +328,18 @@
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <script>
+        function open_form() {
+            document.getElementById("form-section").classList.remove('d-none');
+            document.getElementById("form-section").classList.add('d-block');
+        }
+        function open_input_link_listing() {
+            document.getElementById("input-link-listing").classList.remove('d-none');
+            document.getElementById("input-link-listing").classList.add('d-block');
+            document.getElementById("input-link-listing-button").classList.add('d-none');
+        }
+    </script>
 </body>
 
 </html>
