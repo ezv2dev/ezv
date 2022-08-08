@@ -26,6 +26,7 @@ use App\Models\Restaurant;
 use App\Models\TaxSetting;
 use App\Models\VillaPhoto;
 use App\Models\VillaStory;
+use App\Models\VillaStatistic;
 
 use App\Models\VillaVideo;
 
@@ -153,12 +154,23 @@ class ViewController extends Controller
             }
         }
 
+
         // check if villa exist
         abort_if($villa->count() == 0, 404);
 
         // increase views
         $villaAddViews = Villa::find($id)->increment('views');
-        abort_if(!$villaAddViews, 404);
+
+        $now = Carbon::now();
+        VillaStatistic::updateOrCreate(
+            [
+                'id_villa' => $id,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        VillaStatistic::where('id_villa', $id)->where('month', $now->month)->where('year', $now->year)->increment('villa_views');
+
 
         // appends additional data to hotel list
         // $villa->each(function ($item, $key) {

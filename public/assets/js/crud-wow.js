@@ -1440,8 +1440,12 @@ $("#storeStoryForm").submit(function (e) {
             var formData = new FormData(this);
 
             var btn = document.getElementById("btnSaveStory");
+            var btnRemove = document.querySelector(".story-video-preview .button-reset");
+            var btnChooseAnother = document.querySelector(".story-video-preview .button-choose-other");
             btn.textContent = "Saving Story...";
             btn.classList.add("disabled");
+            btnRemove.disabled = true;
+            btnChooseAnother.disabled = true;
 
             $.ajax({
                 type: "POST",
@@ -1556,6 +1560,8 @@ $("#storeStoryForm").submit(function (e) {
 
                     btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
+                    btnRemove.disabled = true;
+                    btnChooseAnother.disabled = true;
                 },
                 error: function (jqXHR, exception) {
                     // console.log(jqXHR);
@@ -1587,6 +1593,8 @@ $("#storeStoryForm").submit(function (e) {
 
                     btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
+                    btnRemove.disabled = true;
+                    btnChooseAnother.disabled = true;
                 },
             });
         } else {

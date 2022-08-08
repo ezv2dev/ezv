@@ -3148,8 +3148,10 @@
                     <source src="">
                     Your browser doesn't support HTML5 video tag.
                 </video>
-                <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
-                    aria-label="Close"></button>
+                <div class="btn-close-container">
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
+                        aria-label="Close"></button>
+                </div>
             </center>
         </div>
     </div>
@@ -3198,8 +3200,10 @@
                     <source src="">
                     Your browser doesn't support HTML5 video tag.
                 </video>
-                <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                    onclick="close_video()" aria-label="Close"></button>
+                <div class="btn-close-container">
+                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                        onclick="close_video()" aria-label="Close"></button>
+                </div>
             </center>
         </div>
     </div>

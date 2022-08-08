@@ -15,6 +15,7 @@ use App\Models\ActivityHasGuestSafety;
 use App\Models\ActivityHasSubcategory;
 use App\Models\ActivityRules;
 use App\Models\ActivitySave;
+use App\Models\ActivityStatistic;
 use App\Models\ActivitySubcategory;
 use App\Models\Hotel;
 use App\Models\Location;
@@ -26,6 +27,7 @@ use App\Services\DeviceCheckService;
 use Illuminate\Support\Facades\Auth;
 use App\Services\DestinationNearbyActivityService as Nearby;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
+use Carbon\Carbon;
 
 class ActivityController extends Controller
 {
@@ -226,6 +228,16 @@ class ActivityController extends Controller
 
         //     $h++;
         // }
+
+        $now = Carbon::now();
+        ActivityStatistic::updateOrCreate(
+            [
+                'id_activity' => $id,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        ActivityStatistic::where('id_activity', $id)->where('month', $now->month)->where('year', $now->year)->increment('activity_views');
 
         $wowHasSubCategory = ActivityHasSubcategory::where('id_activity', $id)->get();
         $wowSubCategory = ActivitySubcategory::all();

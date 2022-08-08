@@ -26,6 +26,7 @@ use App\Models\RestaurantSave;
 use App\Models\RestaurantType;
 use App\Models\RestaurantVideo;
 use App\Models\RestaurantHasSubCategory;
+use App\Models\RestaurantStatistic;
 use App\Services\DeviceCheckService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,7 @@ use App\Services\DestinationNearbyRestaurantService as Nearby;
 use App\Services\GoogleMapsAPIService as GoogleMaps;
 
 use App\Models\RestaurantSubCategory;
+use Carbon\Carbon;
 
 class RestaurantController extends Controller
 {
@@ -256,6 +258,17 @@ class RestaurantController extends Controller
             ->whereIn('id_villa', $locArray2)->orderByRaw("FIELD(id_villa, $ids_ordered2)")->limit(5)->get();
 
         // dd($restaurant->detailComment[0]->user[0]);
+
+        $now = Carbon::now();
+        RestaurantStatistic::updateOrCreate(
+            [
+                'id_restaurant' => $id,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        RestaurantStatistic::where('id_restaurant', $id)->where('month', $now->month)->where('year', $now->year)->increment('restaurant_views');
+
 
         return view('user.restaurant.restaurant', compact(
             'restaurant',
