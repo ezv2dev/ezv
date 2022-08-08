@@ -1413,9 +1413,9 @@
                                         </div>
                                     </div>
                                     <div class="col-6 p-5-price">
-                                        <div class="col-12" style="text-align: center;">
+                                        <div class="col-12" style="text-align: center; position: relative;">
                                             <button type="button" class="collapsible_check"
-                                                style="background-color: white;">
+                                                style="position: absolute;background-color: white;left: 0;right: 0;">
                                                 <p style="margin-left: 0px; margin-bottom: 0px; font-size: 12px;">
                                                     {{ __('user_page.CHECK-OUT') }}
                                                 </p>
