@@ -3342,6 +3342,9 @@ span.flatpickr-weekday {
     background-color: transparent !important;
 } */
 #modal-show_description .modal-dialog,
+#videomodal .modal-dialog,
+#videomodalrestaurant .modal-dialog,
+#videomodalactivity .modal-dialog,
 #storymodal .modal-dialog,
 #edit_position_photo .modal-dialog {
     position: absolute !important;
@@ -3354,6 +3357,9 @@ span.flatpickr-weekday {
     width: 100% !important;
     margin: 0px !important;
 }
+#videomodal .modal-content .video-modal,
+#videomodalrestaurant .modal-content .video-modal,
+#videomodalactivity .modal-content .video-modal,
 #storymodal .modal-content .video-modal,
 #storymodalrestaurant .modal-dialog .modal-content .video-modal,
 #storymodalactivity .modal-dialog .modal-content .video-modal {
@@ -3802,8 +3808,8 @@ span.flatpickr-weekday {
         color: #000;
     }
     .video-grid-button {
-        top: -30%;
-        left: 37%;
+        top: -30% !important;
+        left: 37% !important;
     }
 }
 
@@ -3955,8 +3961,8 @@ span.flatpickr-weekday {
         width: 22% !important;
     }
     .video-grid-button {
-        left: 40%;
-        top: -37%;
+        left: 40% !important;
+        top: -37% !important;
     }
 }
 
@@ -3976,6 +3982,13 @@ span.flatpickr-weekday {
     }
     .navright.active {
         padding-right: 30px !important;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1360px) {
+    .video-grid-button {
+        left: 40% !important;
+        top: -40% !important;
     }
 }
 
@@ -4562,11 +4575,17 @@ span.flatpickr-weekday {
         font-size: 16px;
         height: 80px;
     }
+    #videomodal,
+    #videomodalrestaurant,
+    #videomodalactivity,
     #storymodal,
     #storymodalrestaurant,
     #storymodalactivity {
         border-radius: 0px !important;
     }
+    #videomodal .btn-close,
+    #videomodalrestaurant .btn-close,
+    #videomodalactivity .btn-close,
     #storymodal .btn-close,
     #storymodalrestaurant .btn-close,
     #storymodalactivity .btn-close {
@@ -4577,6 +4596,9 @@ span.flatpickr-weekday {
         padding: 5px !important;
         opacity: 1 !important;
     }
+    #videomodal #video1,
+    #videomodalrestaurant #video,
+    #videomodalactivity #video,
     #storymodal #video,
     #storymodalrestaurant #story-video,
     #storymodalactivity #story-video {
