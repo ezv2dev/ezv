@@ -3381,6 +3381,9 @@ span.flatpickr-weekday {
 #modal-show_description #modalDescriptionContent {
     white-space: pre-line;
 }
+.btn-del-disable {
+    background-color: rgba(57, 57, 57, 0.7) !important;
+}
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #gallery .gallery .grid-photo:nth-child(3n + 0) .edit-icon,
     #gallery .gallery .grid-photo:nth-child(3n + 0) .edit-video-icon,
