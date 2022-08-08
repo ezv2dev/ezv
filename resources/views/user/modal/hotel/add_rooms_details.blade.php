@@ -109,7 +109,7 @@
             <div class="modal-filter-footer d-flex justify-content-center"
                 style="background-color: white; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; height: 50px;">
                 <div class="col-4" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-sm w-100" onclick="saveRoomDetails()">
+                    <button id="SaveRoomDetails" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveRoomDetails()">
                         <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                     </button>
                 </div>
@@ -134,6 +134,9 @@
             $("#price_room_details").addClass('is-invalid');
             $('#err-rprice').show();
         } else {
+            btn = document.getElementById("SaveRoomDetails");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
             $.ajax({
                 type: "POST",
                 headers: {
@@ -153,6 +156,9 @@
                     let dec = (priceDiscount/100).toFixed(2);
                     let mult = pricee*dec;
                     let valDisc = pricee-mult;
+
+                    btn.innerHTML = "<i class='fa fa-check'></i> Save";
+                    btn.classList.remove("disabled");
 
                     $('#modal-add-room-details').modal('hide');
 
@@ -212,7 +218,6 @@
                             position: "topRight",
                         });
                     }
-
                     btn.innerHTML = "<i class='fa fa-check'></i> Save";
                     btn.classList.remove("disabled");
                 },
