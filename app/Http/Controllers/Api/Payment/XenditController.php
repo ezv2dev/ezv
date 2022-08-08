@@ -137,25 +137,33 @@ class XenditController extends Controller
 
     public function callbackVa(Request $request)
     {
-        $external_id = $request->external_id;
-        $status = $request->status;
-        $payment = Payment::where('external_id', $external_id)->exists();
-        if($payment)
-        {
-            if($status == "ACTIVE"){
+        try {
+            // decode json callback
+            $requestEncoded = json_decode($request);
+
+            // TODO verify callback
+
+            // proceed data if verified
+            $external_id = $requestEncoded["external_id"];
+            $payment = Payment::where('external_id', $external_id)->exists();
+            if($payment)
+            {
                 $update = Payment::where('external_id', $external_id)->update([
                     'status' => 1
                 ]);
                 if($update > 0)
                 {
-                    return 'your payment complete';
+                    return response()->json([
+                        'message' => 'success'
+                    ], 200);
                 }
-                return 'false';
+            }else{
+                return response()->json([
+                    'message' => 'data not found'
+                ], 404);
             }
-        }else{
-            return response()->json([
-                'message' => 'Data Tidak Ditemukan'
-            ]);
+        } catch (\Throwable $e) {
+            abort(500);
         }
     }
 
