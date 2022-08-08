@@ -4410,6 +4410,7 @@
                     myDropzone.processQueue();
                     $("#button").html('Uploading Gallery...');
                     $("#button").addClass('disabled');
+                    $(".btn-del").addClass("btn-del-disable");
                 }
             });
 
@@ -4450,8 +4451,10 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    // Remove the file preview.
-                    _this.removeFile(file);
+                    if (!e.target.classList.contains("btn-del-disable")) {
+                        // Remove the file preview.
+                        _this.removeFile(file);
+                    }
                     // If you want to the delete the file on the server as well,
                     // you can do the AJAX request here.
                 });
