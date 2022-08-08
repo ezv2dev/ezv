@@ -262,12 +262,13 @@
         let calendarEl = document.getElementById("calendar");
         let calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'resourceTimelineMonth',
-            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives', //free trial premium features
             headerToolbar: {
-                left: 'title',
-                center: '',
-                right: 'today prev,next',
+                left: 'prev,next today',
+                center: 'title',
+                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth',
             },
+            resourceAreaHeaderContent: 'Homes',
             resources: [
                 { id: 'a', title: 'Room A' },
                 { id: 'b', title: 'Room B' },
