@@ -65,7 +65,7 @@
             gap: 25px;
             display: grid;
         }
-        @media only screen and (max-width: 450px) {
+        @media only screen and (max-width: 768px) {
             .row-grid-listing {
             grid-template-columns: repeat(1, minmax(0, 1fr));
             }
