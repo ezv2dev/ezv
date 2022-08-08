@@ -24,7 +24,7 @@ class RestaurantStatistic extends Model
     ];
 
     // * Relationship
-    public function restaurantStatistic()
+    public function restaurant()
     {
         return $this->belongsTo(Restaurant::class, 'id_restaurant', 'id_restaurant');
     }

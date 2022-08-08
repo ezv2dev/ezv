@@ -97,7 +97,6 @@
 
 @section('content_admin')
 
-    <!-- Main page content-->
     <div class="container pt-4">
         <div class="views text-dark text-center my-3 my-lg-5">
             <div class="mt-1">
@@ -123,9 +122,6 @@
             title: {
                 text: 'Total Homes Views'
             },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
-            },
             xAxis: {
                 categories: [
                     'Jan',
@@ -146,13 +142,13 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Rainfall (mm)'
+                    text: 'Views'
                 }
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -163,23 +159,14 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Tokyo',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-            }, {
-                name: 'New York',
-                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-            }, {
-                name: 'London',
-                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-            }, {
-                name: 'Berlin',
-                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-            }]
+            series: [
+                @foreach ($arrayVilla as $key => $value)
+                    {
+                        name: {!! json_encode($key) !!},
+                        data: {!! json_encode(array_values($value)) !!}
+                    },
+                @endforeach
+            ]
         });
     </script>
 @endsection
