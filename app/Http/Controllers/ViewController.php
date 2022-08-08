@@ -3321,7 +3321,7 @@ class ViewController extends Controller
     public function delete_special_price($id)
     {
         $data = VillaDetailPrice::where('id_detail', $id)->first();
-        $villa = Villa::where('id_villa', $data->id_villa)->first();
+        // $villa = Villa::where('id_villa', $data->id_villa)->first();
 
         $this->authorize('listvilla_delete');
         $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;

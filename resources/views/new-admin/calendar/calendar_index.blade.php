@@ -260,7 +260,7 @@
         });
 
         var datas = @json($data);
-        console.log(datas);
+        // console.log(datas);
 
         let calendarEl = document.getElementById("calendar");
         let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -279,6 +279,22 @@
             // ],
             resources : datas,
             events : `{{ route('calendar.all') }}`,
+            // events: [
+            //     {
+            //         title  : 'event1',
+            //         start  : '2010-01-01'
+            //     },
+            //     {
+            //         title  : 'event2',
+            //         start  : '2010-01-05',
+            //         end    : '2010-01-07'
+            //     },
+            //     {
+            //         title  : 'event3',
+            //         start  : '2010-01-09T12:30:00',
+            //         allDay : false // will make the time show
+            //     }
+            // ],
 
             // disable past day
             validRange: {
@@ -313,6 +329,48 @@
                 $('#start').val(start);
                 $('#end').val(end);
                 $('#addSpecialModal').modal('show');
+            },
+
+            eventClick: function(info) {
+                // var start = moment(event.start).format('YYYY-MM-DD');
+                // var end = moment(event.end).subtract(1, "days").format('YYYY-MM-DD');
+                // $('#start').val(start);
+                // $('#end').val(end);
+                let id = info.event.id;
+                Swal.fire({
+                    title: `{{ __('user_page.Delete Special Price?') }}`,
+                    text: `{{ __('user_page.You will not be able to recover this imaginary file!') }}`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ff7400',
+                    cancelButtonColor: '#000',
+                    confirmButtonText: `{{ __('user_page.Yes, deleted it') }}`,
+                    cancelButtonText: `{{ __('user_page.Cancel') }}`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "get",
+                            dataType: 'json',
+                            url: `/villa/special-price/${id}/delete/`,
+                            success: function(response) {
+                                Swal.fire('Deleted', response.message, 'success');
+                                // tableSpecialPrice.draw();
+
+                                // render Event FullCalendar
+                                var event = calendar.getEventById(id);
+                                event.remove();
+                            },
+                            error: function(jqXHR, response) {
+                                console.log(jqXHR);
+                                Swal.fire('Failed', jqXHR.responseJSON.message, 'error');
+                            }
+                        });
+                    } else {
+                        Swal.fire(`{{ __('user_page.Cancel') }}`,
+                            `{{ __('user_page.Canceled Deleted Data') }}`,
+                            'error')
+                    }
+                });
             },
         });
 

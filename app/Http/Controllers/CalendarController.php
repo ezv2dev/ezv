@@ -53,7 +53,7 @@ class CalendarController extends Controller
 
         $event = array([
             'id_detail' => 0,
-            'id_villa' => 0,
+            'resourceId' => 0,
             'start' => 0,
             'end' => 0,
             'disc' => 0,
@@ -66,8 +66,8 @@ class CalendarController extends Controller
 
         foreach ($data as $item)
         {
-            $event[$i]['id_detail'] = $item->id_detail;
-            $event[$i]['id_villa'] = $item->id_villa;
+            $event[$i]['id'] = $item->id_detail;
+            $event[$i]['resourceId'] = $item->id_villa;
             $event[$i]['start'] = $item->start;
             $event[$i]['end'] = date('Y-m-d', strtotime($item->end . " +1 days"));
             $event[$i]['disc'] = $item->disc;
