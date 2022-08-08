@@ -188,7 +188,7 @@
                             <div class="host-video-container">
                                 <div class="video-content">
                                     <video controls="true" autoplay="autoplay" loop="true" muted defaultmuted playsinline>
-                                    <source src="{{ asset('assets/media/videos/smart-watch.mp4') }}" type="video/mp4">
+                                    <source src="{{ asset('assets/media/videos/hoses-sample-video.mp4') }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                     </video>
                                 </div>
