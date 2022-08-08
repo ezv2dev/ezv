@@ -3498,8 +3498,10 @@
                         <source src="">
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                        onclick="close_story()" aria-label="Close"></button>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                            onclick="close_story()" aria-label="Close"></button>
+                    </div>
 
             </div>
             </center>
@@ -3518,8 +3520,10 @@
                         {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                        onclick="close_video()" aria-label="Close"></button>
+                    <div class="btn-close-container">
+                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
+                            onclick="close_video()" aria-label="Close"></button>
+                    </div>
             </div>
             </center>
         </div>
