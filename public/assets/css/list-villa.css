@@ -3781,3 +3781,6 @@ a.orange-hover {
         font-size: 147%;
     }
 }
+.tooltip.show {
+    z-index: 888;
+}
