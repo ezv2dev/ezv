@@ -207,7 +207,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/hHz4yrvxwlA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Bharada E Brand New Luxury Villa</p>
                         <p class="last-mod">Last Modified 1 Hours Ago</p>
                         <p class="listing-status inactive">Inactive Listing</p>
@@ -226,7 +226,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/qlOyTwSyypA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Ferdy Sambo Family Villa and Spa</p>
                         <p class="last-mod">Last Modified 12 Hours Ago</p>
                         <p class="listing-status activated">Active Listing</p>
@@ -245,7 +245,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/hHz4yrvxwlA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Bharada E Brand New Luxury Villa</p>
                         <p class="last-mod">Last Modified 1 Hours Ago</p>
                         <p class="listing-status inactive">Inactive Listing</p>
@@ -264,7 +264,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/qlOyTwSyypA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Ferdy Sambo Family Villa and Spa</p>
                         <p class="last-mod">Last Modified 12 Hours Ago</p>
                         <p class="listing-status activated">Active Listing</p>
@@ -283,7 +283,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/hHz4yrvxwlA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Bharada E Brand New Luxury Villa</p>
                         <p class="last-mod">Last Modified 1 Hours Ago</p>
                         <p class="listing-status inactive">Inactive Listing</p>
@@ -302,7 +302,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/qlOyTwSyypA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Ferdy Sambo Family Villa and Spa</p>
                         <p class="last-mod">Last Modified 12 Hours Ago</p>
                         <p class="listing-status activated">Active Listing</p>
@@ -321,7 +321,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/hHz4yrvxwlA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Bharada E Brand New Luxury Villa</p>
                         <p class="last-mod">Last Modified 1 Hours Ago</p>
                         <p class="listing-status inactive">Inactive Listing</p>
@@ -340,7 +340,7 @@
                     <div class="col-12 col-md-6  list-listing-img">
                         <img src="https://source.unsplash.com/qlOyTwSyypA/">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p class="listing-card-title">Ferdy Sambo Family Villa and Spa</p>
                         <p class="last-mod">Last Modified 12 Hours Ago</p>
                         <p class="listing-status activated">Active Listing</p>
