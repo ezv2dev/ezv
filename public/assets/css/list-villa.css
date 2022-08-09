@@ -507,6 +507,16 @@ span .irs-bar,
     height:136px;
 }
 
+.modal-view-detail{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.modal-view-detail.view__detail-villa{
+    justify-content: space-between;
+}
+
 /* .map-text-description,
 .map-price-dekstop,
 .map-villa-detail-link
@@ -520,11 +530,9 @@ span .irs-bar,
 }
 
 .map-price-mobile{
-    display:block !important;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
+    display: block !important;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
@@ -3434,6 +3442,9 @@ input::-webkit-inner-spin-button {
         width: 100%;
         min-height: 260px;
         height: 260px;
+    }
+    .modal-view-detail{
+        justify-content: space-between;
     }
 
     .modal-view-detail .link-detail{
