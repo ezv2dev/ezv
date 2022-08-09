@@ -436,7 +436,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6  list-listing-img">
                             <img class="lozad" loading="lazy" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('/foto/restaurant/' . strtolower($item->name) . '/' . $item->image) }}"
+                                data-src="{{ URL::asset('/foto/restaurant/' . strtolower($item->uid) . '/' . $item->image) }}"
                                 alt="EZV_{{ $item->image }}">
                         </div>
                         <div class="col-12 col-md-6">
