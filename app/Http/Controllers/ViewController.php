@@ -99,6 +99,11 @@ class ViewController extends Controller
         return $location;
     }
 
+    public static function get_name()
+    {
+        $villa = Villa::where('created_by', Auth::user()->id)->select('name')->get();
+    }
+
     public static function get_location_ajax(Request $request)
     {
         $location = Location::select('name')->where('name', 'like', '%' . $request->name . '%')->get();

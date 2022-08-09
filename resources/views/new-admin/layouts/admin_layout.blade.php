@@ -1308,6 +1308,9 @@
             });
         })
     </script>
+
+    @include('components.lazy-load.lazy-load')
+
 </body>
 
 </html>
