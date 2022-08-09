@@ -1091,7 +1091,8 @@ input:checked + .switch-background:active::before {
         height: 40px;
     }
     .nav-row {
-        padding: 0px !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
     }
     #sugest {
         left: -2px;
@@ -1135,9 +1136,6 @@ input:checked + .switch-background:active::before {
     .user-avatar {
         width: 40px !important;
     }
-    .nav-row {
-        padding: 0px !important;
-    }
     #sugest {
         left: -2px;
         width: calc(100% + 5px) !important;
@@ -1157,16 +1155,24 @@ input:checked + .switch-background:active::before {
         width: 80vw !important;
     }
 }
+@media only screen and (min-width: 426px) and (max-width: 549px) {
+    .nav-row {
+        padding-right: 1.5rem !important;
+        padding-left: 1.5rem !important;
+    }
+}
+@media only screen and (min-width: 550px) and (max-width: 991px) {
+    .nav-row {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
 @media only screen and (min-width: 426px) and (max-width: 991px) {
     #sugest {
         left: -2px;
     }
     #sugest2 {
         width: 50vw !important;
-    }
-    .nav-row {
-        padding-right: 2rem !important;
-        padding-left: 2rem !important;
     }
 }
 

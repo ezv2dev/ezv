@@ -237,7 +237,7 @@ if (isset($_COOKIE['tema'])) {
                                                 {{ $data->beach }}
                                             @endif
                                         </span>
-                                        <span class="villa-list-location-desktop">
+                                        <span class="villa-list-location-desktop text-orange">
                                             •
                                             @if (isset($data->km))
                                                 {{ number_format($data->km, 1) }}

@@ -398,8 +398,12 @@ $("#updateStoryForm").submit(function (e) {
         console.log(formData);
 
         var btn = document.getElementById("btnSaveStory");
+        var btnRemove = document.querySelector(".story-video-preview .button-reset");
+        var btnChooseAnother = document.querySelector(".story-video-preview .button-choose-other");
         btn.textContent = "Saving Story...";
         btn.classList.add("disabled");
+        btnRemove.disabled = true;
+        btnChooseAnother.disabled = true;
 
         $.ajax({
             type: "POST",
@@ -485,6 +489,8 @@ $("#updateStoryForm").submit(function (e) {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
+                btnRemove.disabled = false;
+                btnChooseAnother.disabled = false;
             },
             error: function (jqXHR, exception) {
                 console.log(jqXHR);
@@ -500,6 +506,8 @@ $("#updateStoryForm").submit(function (e) {
 
                 btn.innerHTML = "<i class='fa fa-check'></i> Save";
                 btn.classList.remove("disabled");
+                btnRemove.disabled = false;
+                btnChooseAnother.disabled = false;
             },
         });
     } else {
