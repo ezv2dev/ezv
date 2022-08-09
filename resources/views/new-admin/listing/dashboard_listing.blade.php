@@ -7,11 +7,14 @@
         .overflow-x-scroll {
             overflow-x: auto;
         }
+        .px-md-4 {
+            padding: 4px 0 15px 0;
+        }
+        .px-md-4:hover {
+            padding: 6px 0 13px 0;
+        }
         .fs-3 {
             font-size: 1.15rem!important;
-        }
-        a.borderr.nav-link.px-md-4 {
-            padding: 4px 0;
         }
         .layout-header-footer {
             display: flex;
