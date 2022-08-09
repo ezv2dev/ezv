@@ -10,6 +10,9 @@
         .fs-3 {
             font-size: 1.15rem!important;
         }
+        a.borderr.nav-link.px-md-4 {
+            padding: 4px 0;
+        }
         .layout-header-footer {
             display: flex;
             flex-direction: column;
@@ -41,7 +44,7 @@
             height: 40px;
             padding: 10px 20px;
             border-radius: 12px;
-            border: solid 1px #757575;
+            border: solid 1px #d5d5d5;
             outline: none;
             min-height: 50px;
         }
