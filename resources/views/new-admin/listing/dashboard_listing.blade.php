@@ -8,10 +8,10 @@
             overflow-x: auto;
         }
         .px-md-4 {
-            padding: 4px 0 15px 0;
+            padding: 3px 0 16px 0;
         }
         .px-md-4:hover {
-            padding: 6px 0 13px 0;
+            padding: 5px 0 14px 0;
         }
         .fs-3 {
             font-size: 1.15rem!important;
