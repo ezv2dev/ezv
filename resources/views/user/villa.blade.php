@@ -4526,8 +4526,7 @@
                 },
                 url: "/villa/video/views",
                 data: {
-                    id_villa: id_villa,
-                    id_video: id_video,
+                    id_villa: id_villa
                 }
             });
         }
