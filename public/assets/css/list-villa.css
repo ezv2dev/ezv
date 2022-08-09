@@ -3385,6 +3385,13 @@ input::-webkit-inner-spin-button {
     .list-image-content-villa .absolute-right {
         right: 15px !important;
     }
+    .pagination .page-item{
+        width: unset !important;
+    }
+    .pagination .page-item .page-link{
+        width: 100% !important;
+        height: unset !important;
+    }
 }
 @media only screen and (min-width: 576px) {
     .dots-container {
@@ -3555,7 +3562,6 @@ input::-webkit-inner-spin-button {
     }
     .pagination .page-item .page-link {
         width: 100% !important;
-        height: 30px !important;
     }
     .search-box {
         height: 0px !important;
