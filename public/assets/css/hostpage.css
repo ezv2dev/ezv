@@ -13,28 +13,18 @@ body, html {
 .host-header {
     height: fit-content;
 }
-.header-block {
-    margin-bottom: 50px;
-}
+
 .min-400 {
     min-height: 400px;
 }
-.top-140 {
-    margin-top: 140px;
-}
-.top-67 {
-    margin-top: 67px;
-}
+
 .ptb-67 {
     padding: 0 67px;
 }
-.pd-30{
-    padding: 30px !important;
-}
+
 .header-image, .bottom-image {
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    min-height: 100%;
 }
 .header-image {
     background: url('/assets/media/photos/follow-that-dream-1.webp');
@@ -90,9 +80,7 @@ body, html {
     border: solid 1px #cdcdcd;
     background: #cdcdcd;
 }
-.pd-lr-content {
-    padding: 0 30px;
-}
+
 .video-text-section {
     padding-right: 60px !important;
 }
@@ -152,7 +140,6 @@ body, html {
     background: #f7f7f7;
 }
 .customer-support-block {
-    padding: 30px;
     border-radius: 12px;
 }
 .customer-support-block h1 {
@@ -242,17 +229,11 @@ input::placeholder {
     }
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
-    .pd-lr-content {
-        padding: 0 20px;
-    }
     .video-text-section p {
         font-size: 20px;
     }
 }
 @media only screen and (min-width: 426px) and (max-width: 768px) {
-    .pd-lr-content {
-        padding: 0 15px;
-    }
     .video-text-section p {
         font-size: 16px;
     }
@@ -260,17 +241,11 @@ input::placeholder {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 10px;
     }
-    .top-140 {
-        margin-top: 70px;
-    }
     .top-67 {
         margin-top: 34px;
     }
 }
 @media only screen and (max-width: 425px) {
-    .pd-lr-content {
-        padding: 0 10px;
-    }
     .host-header {
         min-height: fit-content;
     }
@@ -283,9 +258,6 @@ input::placeholder {
     }
     .row-grid-img img {
         border-radius: 5px;
-    }
-    .top-140 {
-        margin-top: 34px;
     }
     .top-67 {
         margin-top: 17px;
@@ -302,9 +274,6 @@ input::placeholder {
     }
     .text-content {
         margin: 0 0 35px 0;
-    }
-    .pd-30 {
-        padding: 15px !important;
     }
     .sp-75 {
         height: 37px;

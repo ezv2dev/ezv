@@ -3575,7 +3575,7 @@
                                 <i class="fa-solid fa-user icon-clear"></i>
                             </a> -->
                             <div class="dropdown">
-                                <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                                <button type="button" id="btnMenuDropdown" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
                                     <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
                                     <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
@@ -3598,15 +3598,23 @@
             //     event.stopPropagation();
             //     $('.dropdown-content').slideToggle('fast');
             // });
-            
-            $('.dropbtn').on('click', function (event) {
+
+            $('#btnMenuDropdown').on('click', function (event) {
                 $('.dropdown-content').slideToggle('fast');
             });
 
             // $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-            // $('.dropdown-content').slideUp('fast');
+            //     $('.dropdown-content').slideUp('fast');
             // // document.activeElement.blur();//lose focus
             // });
+
+            $(document).on('click', function (event) {
+                if(event.target.id != 'btnMenuDropdown'){
+                    if($('.dropdown-content:visible').length > 0){
+                        $('.dropdown-content').slideUp('fast');
+                    }
+                }
+            });
         </script>
 
         {{-- Search Location --}}
