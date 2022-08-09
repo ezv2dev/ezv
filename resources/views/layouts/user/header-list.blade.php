@@ -3593,16 +3593,20 @@
 
         <script>
             //Drop down login
-            var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-            $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
-            event.stopPropagation();
-            $('.dropdown-content').slideToggle('fast');
+            // var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+            // $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+            //     event.stopPropagation();
+            //     $('.dropdown-content').slideToggle('fast');
+            // });
+            
+            $('.dropbtn').on('click', function (event) {
+                $('.dropdown-content').slideToggle('fast');
             });
 
-            $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-            $('.dropdown-content').slideUp('fast');
-            // document.activeElement.blur();//lose focus
-            });
+            // $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+            // $('.dropdown-content').slideUp('fast');
+            // // document.activeElement.blur();//lose focus
+            // });
         </script>
 
         {{-- Search Location --}}
