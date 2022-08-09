@@ -7,7 +7,9 @@
         .overflow-x-scroll {
             overflow-x: auto;
         }
-
+        .fs-3 {
+            font-size: 1.15rem!important;
+        }
         .layout-header-footer {
             display: flex;
             flex-direction: column;
@@ -72,7 +74,7 @@
         }
         @media only screen and (min-width: 426px) and (max-width: 768px) {
             .list-listing-img img {
-                aspect-ratio: 7/5 !important;
+                aspect-ratio: 11/7.2 !important;
             }
         }
         .listing-card {
@@ -83,27 +85,27 @@
         }
         .list-listing-img img {
             max-width: 100%;
-            aspect-ratio: 4/5;
+            aspect-ratio: 4/3.9;
             border-radius: 12px;
-            min-height: 100%;
             object-fit: cover;
         }
         .listing-card-title {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
             line-height: 1.2;
             color: #ff7400;
         }
         .last-mod {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             color: #767676;
         }
         .listing-status {
+            margin-top: 10px;
             color: #fff;
             width: fit-content;
-            padding: 5px 10px;
-            font-size: 12px;
+            padding: 3px 8px;
+            font-size: 10px;
             border-radius: 12px;
             font-weight: 600;
         }
@@ -118,7 +120,7 @@
             line-height: 1.4;
         }
         .listing-info {
-            font-size: 13px;
+            font-size: 11px;
             color: #7e8282;
             font-weight: 600;
         }
@@ -134,13 +136,14 @@
             font-weight: 600;
             border-radius: 12px;
             padding: 4px 12px;
+            font-size: 12px;
         }
         .last-mod span, .listing-info span {
             display: block;
         }
         @media only screen and (max-width: 425px) {
             .fs-3 {
-                font-size: calc(0.9rem + .6vw)!important;
+                font-size: calc(0.7rem + .6vw)!important;
             }
             .search-listing input {
                 height: 30px;
@@ -185,7 +188,6 @@
                 display: inline-flex;
                 margin-right: 10px;
                 margin-left: -10px;
-                font-size: 12px;
             }
             .listing-info span::before {
                 content: '•';
@@ -195,7 +197,7 @@
                 margin-top: 20px;
             }
             .listing-action {
-                width: 80%;
+                width: 70%;
                 padding: 2px 10px;
                 border-radius: 6px;
             }
@@ -221,7 +223,8 @@
                 </div> -->
                 <div class="row">
                     <div class="col-4 pt-10">
-                        <h1 class="flex-grow-1 fs-3 fw-semibold ">{{ $data }} Listing</h1>
+                        <!-- Note: The 1 is current page -- please change following the shown page -->
+                        <h1 class="flex-grow-1 fs-3 fw-semibold ">1 of {{ $data }} Listing</h1>
                     </div>
                     <div class="col-4 text-center search-listing">
                         <input type="text" placeholder="Search...">
