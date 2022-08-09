@@ -290,11 +290,11 @@
         }
 
         .list-notif-container:hover::-webkit-scrollbar {
-            background-color: rgb(0, 0, 0, .2);
+            background-color: rgb(0, 0, 0, 0);
         }
 
         .list-notif-container:hover::-webkit-scrollbar-thumb {
-            background-color: rgb(0, 0, 0, .5);
+            background-color: rgb(0, 0, 0, .2);
         }
     </style>
 </head>
