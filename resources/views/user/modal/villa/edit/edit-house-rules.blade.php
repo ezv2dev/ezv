@@ -462,7 +462,7 @@
                                     <p><span class="translate-text-group-items">Additional Rules</span></p>
                                 </div>
                                 <div class="col-12" style="margin-top: -10px;">
-                                    <textarea rows="4" cols="90" name="additional_rules" form="houseRuleForm"></textarea>
+                                    <textarea class="w-100" rows="4" cols="90" name="additional_rules" form="houseRuleForm"></textarea>
                                 </div>
                             </div>
                         </div>

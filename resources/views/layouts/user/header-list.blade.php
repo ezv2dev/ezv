@@ -332,7 +332,7 @@
                         </span>
                     </p>
                 </div>
-                <button class="navbar-toggler" type="button" id="expand-mobile-btn">
+                <button class="navbar-toggler ps-1" type="button" id="expand-mobile-btn">
                     <i class="fa-solid fa-bars list-description {{ $textColor }}"></i>
                 </button>
             </div>

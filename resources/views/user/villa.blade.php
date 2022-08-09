@@ -1324,7 +1324,7 @@
                         </div>
                     </section>
 
-                    <section id="room_option" class="section-2 div-room_option px-xs-12p px-sm-24p">
+                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
                         <div class="row-grid-room-option">
                             <hr>
                             <div>
