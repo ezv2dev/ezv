@@ -507,6 +507,32 @@ class HotelDetailController extends Controller
         return view('user.hotel.hotel', compact('hotelRoomPhoto', 'hotelRoomDetails', 'hotelTags', 'hotelRules', 'hotelFilter', 'hotelCategory', 'hotelHasCategory', 'hotelRoomBooking', 'hotelType', 'beds', 'video', 'detail', 'hotel_amenities', 'bathroom', 'bedroom', 'kitchen', 'safety', 'service', 'hotel', 'photo', 'amenities', 'ratting', 'stories', 'location', 'amenities_m', 'bathroom_m', 'bedroom_m', 'kitchen_m', 'safety_m', 'service_m', 'propertyType', 'hotelTypeDetail'));
     }
 
+    public function hotel_photo_views(Request $request)
+    {
+        $now = Carbon::now();
+        HotelStatistic::updateOrCreate(
+            [
+                'id_hotel' => $request->id_hotel,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        HotelStatistic::where('id_hotel', $request->id_hotel)->where('month', $now->month)->where('year', $now->year)->increment('photo_views');
+    }
+
+    public function hotel_video_views(Request $request)
+    {
+        $now = Carbon::now();
+        HotelStatistic::updateOrCreate(
+            [
+                'id_hotel' => $request->id_hotel,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        HotelStatistic::where('id_hotel', $request->id_hotel)->where('month', $now->month)->where('year', $now->year)->increment('video_views');
+    }
+
     public function hotel_update_hotel_rules(Request $request)
     {
         $validator = Validator::make($request->all(), [
