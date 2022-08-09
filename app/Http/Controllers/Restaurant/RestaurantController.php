@@ -294,6 +294,32 @@ class RestaurantController extends Controller
         ));
     }
 
+    public function food_photo_views(Request $request)
+    {
+        $now = Carbon::now();
+        RestaurantStatistic::updateOrCreate(
+            [
+                'id_restaurant' => $request->id_restaurant,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        RestaurantStatistic::where('id_restaurant', $request->id_restaurant)->where('month', $now->month)->where('year', $now->year)->increment('photo_views');
+    }
+
+    public function food_video_views(Request $request)
+    {
+        $now = Carbon::now();
+        RestaurantStatistic::updateOrCreate(
+            [
+                'id_restaurant' => $request->id_restaurant,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        RestaurantStatistic::where('id_restaurant', $request->id_restaurant)->where('month', $now->month)->where('year', $now->year)->increment('video_views');
+    }
+
     public function update_status(Request $request, $id)
     {
         $find = Restaurant::where('id_restaurant', $id)->first();

@@ -245,6 +245,33 @@ class ActivityController extends Controller
         return view('user.activity.activity', compact('villaRandom', 'wowSubCategory', 'wowHasSubCategory', 'activity', 'locations', 'facilities', 'subCategory', 'villas_advertise', 'villa_amenities', 'activity_rules'));
     }
 
+    public function wow_photo_views(Request $request)
+    {
+        $now = Carbon::now();
+        ActivityStatistic::updateOrCreate(
+            [
+                'id_activity' => $request->id_activity,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        ActivityStatistic::where('id_activity', $request->id_activity)->where('month', $now->month)->where('year', $now->year)->increment('photo_views');
+    }
+
+    public function wow_video_views(Request $request)
+    {
+        $now = Carbon::now();
+        ActivityStatistic::updateOrCreate(
+            [
+                'id_activity' => $request->id_activity,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        ActivityStatistic::where('id_activity', $request->id_activity)->where('month', $now->month)->where('year', $now->year)->increment('video_views');
+    }
+
+
     public function grade(Request $request, $id)
     {
         $find = Activity::where('id_activity', $id)->first();

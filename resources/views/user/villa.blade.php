@@ -862,7 +862,7 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
                                         <a
                                             href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -896,7 +896,7 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
                                         @auth
                                             @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
                                                 <a class="pointer-normal" onclick="view({{ $item->id_video }})"
@@ -4503,6 +4503,35 @@
         }
     </script>
     {{-- END EDIT POSITION PHOTO & VIDEO --}}
+
+        <script>
+        function photoViews() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/villa/photo/views",
+                data: {
+                    id_villa: id_villa
+                }
+            });
+        }
+
+        function videoViews() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/villa/video/views",
+                data: {
+                    id_villa: id_villa,
+                    id_video: id_video,
+                }
+            });
+        }
+    </script>
 
     <script>
         $("#searchbox").click(function() {

@@ -2372,6 +2372,32 @@ class ViewController extends Controller
         echo json_encode($data);
     }
 
+    public function photo_views(Request $request)
+    {
+        $now = Carbon::now();
+        VillaStatistic::updateOrCreate(
+            [
+                'id_villa' => $request->id_villa,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        VillaStatistic::where('id_villa', $request->id_villa)->where('month', $now->month)->where('year', $now->year)->increment('photo_views');
+    }
+
+    public function video_views(Request $request)
+    {
+        $now = Carbon::now();
+        VillaStatistic::updateOrCreate(
+            [
+                'id_villa' => $request->id_villa,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        VillaStatistic::where('id_villa', $request->id_villa)->where('month', $now->month)->where('year', $now->year)->increment('video_views');
+    }
+
     public function video_open($id)
     {
         // $data = VillaVideo::select('villa_video.name as video', 'villa.name as name', 'villa.price as price')

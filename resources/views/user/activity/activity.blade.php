@@ -242,7 +242,8 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -349,7 +350,8 @@
                                             <form action="javascript:void(0)" onsubmit="saveTimeActivity()">
                                                 <input type="hidden" name="id_activity"
                                                     value="{{ $activity->id_activity }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
+                                                <div
+                                                    class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $activity->open_time }}"
@@ -690,7 +692,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -759,7 +762,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -801,7 +805,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -937,7 +942,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem" onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem"
+                            onClick="document.getElementById('location-map').scrollIntoView();">
                             <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
@@ -965,7 +971,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none" onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none"
+                            onClick="document.getElementById('first-detail-content').scrollIntoView();">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
@@ -983,7 +990,8 @@
                         <div class="col-12 row gallery">
                             @if ($activity->photo->count() > 0)
                                 @foreach ($activity->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}"
+                                        onclick="photoViews()">
                                         <a
                                             href="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -1018,7 +1026,8 @@
                             @endif
                             @if ($activity->video->count() > 0)
                                 @foreach ($activity->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}"
+                                        onclick="videoViews()">
                                         @auth
                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
                                                 <a class="pointer-normal"
@@ -1450,13 +1459,14 @@
                                                         </div>
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
-                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != "")
+                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '')
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
-                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format('d M Y') }}</b>
+                                                                        to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format('d M Y') }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
@@ -1687,10 +1697,10 @@
                     <div class="dropdwn dropdown-content">
                         <a href="#" onclick="view_LoginModal('login');">Login</a>
                         <a href="#" onclick="view_LoginModal('register');">Register</a>
-                    <hr>
-                    <a href="{{ route('ahost') }}">Become a Host</a>
-                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
-                    <a href="{{ route('faq') }}">FAQ</a>
+                        <hr>
+                        <a href="{{ route('ahost') }}">Become a Host</a>
+                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
                     </div>
                 </div>
 
@@ -3149,8 +3159,8 @@
                     Your browser doesn't support HTML5 video tag.
                 </video>
                 <div class="btn-close-container">
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white btn-hidden"
+                        data-bs-dismiss="modal" onclick="close_story()" aria-label="Close"></button>
                 </div>
             </center>
         </div>
@@ -3201,8 +3211,8 @@
                     Your browser doesn't support HTML5 video tag.
                 </video>
                 <div class="btn-close-container">
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                        onclick="close_video()" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white btn-hidden"
+                        data-bs-dismiss="modal" onclick="close_video()" aria-label="Close"></button>
                 </div>
             </center>
         </div>
@@ -4158,6 +4168,7 @@
     function close_story() {
         $('#storymodalactivity').modal('hide');
     }
+
     function close_video() {
         $('#videomodalactivity').modal('hide');
     }
@@ -4191,6 +4202,35 @@
     });
 </script>
 {{-- END IMAGE UPLOAD --}}
+
+<script>
+    function photoViews() {
+        // console.log(`leak ${id_activity}`);
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/wow/photo/views",
+            data: {
+                id_activity: id_activity
+            }
+        });
+    }
+
+    function videoViews() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/food/video/views",
+            data: {
+                id_activity: id_activity
+            }
+        });
+    }
+</script>
 
 <script>
     // function replace ascii to string in every input
@@ -5414,6 +5454,7 @@
         $(".expand-navbar-mobile").attr("aria-expanded", "false");
         $("#overlay").css("display", "none");
     }
+
     function language() {
         sidebarhide();
         $('#LegalModal').modal('show');
@@ -6051,14 +6092,14 @@
 <script>
     //Drop down login 2
     var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-    $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
-    event.stopPropagation();
-    $('.dropdwn').slideToggle('fast');
+    $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function(event) {
+        event.stopPropagation();
+        $('.dropdwn').slideToggle('fast');
     });
 
-    $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-    $('.dropdwn').slideUp('fast');
-    // document.activeElement.blur();//lose focus
+    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+        $('.dropdwn').slideUp('fast');
+        // document.activeElement.blur();//lose focus
     });
 </script>
 

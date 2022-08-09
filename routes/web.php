@@ -132,6 +132,16 @@ Route::get('/license', function () {
     return view('user.license');
 })->name('license');
 
+// Views Count
+Route::post('/villa/photo/views', [ViewController::class, 'photo_views'])->name('photo_views');
+Route::post('/villa/video/views', [ViewController::class, 'video_views'])->name('video_views');
+Route::post('/hotel/photo/views', [Hotel\HotelDetailController::class, 'hotel_photo_views'])->name('hotel_photo_views');
+Route::post('/hotel/video/views', [Hotel\HotelDetailController::class, 'hotel_video_views'])->name('hotel_video_views');
+Route::post('/food/photo/views', [Restaurant\RestaurantController::class, 'food_photo_views'])->name('food_photo_views');
+Route::post('/food/video/views', [Restaurant\RestaurantController::class, 'food_video_views'])->name('food_video_views');
+Route::post('/wow/photo/views', [Activity\ActivityController::class, 'wow_photo_views'])->name('wow_photo_views');
+Route::post('/wow/video/views', [Activity\ActivityController::class, 'wow_video_views'])->name('wow_video_views');
+
 // partner auth
 Route::get('/register/partner', [RegisterPartnerController::class, 'showRegistrationForm'])->name('register.partner');
 Route::post('/register/partner', [RegisterPartnerController::class, 'register'])->name('register.partner.store');
