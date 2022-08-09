@@ -22,7 +22,7 @@ class MenuListingController extends Controller
             $villa = Villa::with('location')->where('created_by', Auth::user()->id)->paginate(10);
         }
 
-        return view('new-admin.listing.dashboard_listing', compact('data', 'villa'));
+        return view('new-admin.listing.dashboard_homes_listing', compact('data', 'villa'));
     }
 
     public function datatable()

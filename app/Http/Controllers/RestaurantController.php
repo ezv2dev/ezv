@@ -17,10 +17,14 @@ class RestaurantController extends Controller
     public function index()
     {
         $this->authorize('restaurant_index');
-        $data = Restaurant::latest()->get();
+        $data = Restaurant::where('created_by', Auth::user()->id)->count();
 
-        // return view('admin.restaurant.index', compact('data'));
-        return view('new-admin.restaurant.index', compact('data'));
+        if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
+            $restaurant = Restaurant::with('location')->paginate(10);
+        } else {
+            $restaurant = Restaurant::with('location')->where('created_by', Auth::user()->id)->paginate(10);
+        }
+        return view('new-admin.restaurant.dashboard_food_listing', compact('restaurant', 'data'));
     }
 
     public function datatable()

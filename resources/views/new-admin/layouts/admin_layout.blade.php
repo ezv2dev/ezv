@@ -422,7 +422,7 @@
                             <i id="f-food" class="f-arrow f-right"></i>{{ __('user_page.Food') }}
                         </a>
                         <div class="collapse" id="dropFood">
-                            <a class="dropdown-item sub-drop" href="{{ route('admin_restaurant') }}">List Restaurant</a>
+                            <a class="dropdown-item sub-drop" href="{{ route('admin_restaurant') }}">List Food</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
                             <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
@@ -435,7 +435,7 @@
                             <i id="f-wow" class="f-arrow f-right"></i>Wow
                         </a>
                         <div class="collapse" id="dropWow">
-                            <a class="dropdown-item sub-drop" href="{{ route('admin_activity') }}">List Things To Do</a>
+                            <a class="dropdown-item sub-drop" href="{{ route('admin_activity') }}">List WoW</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
                             <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
@@ -722,7 +722,7 @@
                             </div>
                         </li>
 
-                        {{-- Restaurant --}}
+                        {{-- Food --}}
                         <li class="nav-item dropdown no-caret mr-2 ml-2 dropdown-notifications">
                             <a class="{{ Request::is('dashboard/restaurant*') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
@@ -745,7 +745,7 @@
                                 <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('admin_restaurant') }}">
                                     <div class="dropdown-notifications-item-content">
-                                        <div class="dropdown-notifications-item-content-text">List Restaurant</div>
+                                        <div class="dropdown-notifications-item-content-text">List Food</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item dropdown-notifications-item"
@@ -778,7 +778,7 @@
                             </div>
                         </li>
 
-                        {{-- Things To Do --}}
+                        {{-- WoW --}}
                         <li class="nav-item dropdown no-caret ml-2 dropdown-notifications">
                             <a class="{{ Request::is('dashboard/things-to-do*') ? 'border-bottom' : '' }} borderr nav-link px-md-5 btn btn-icon btn-transparent-dark dropdown-toggle"
                                 id="navbarDropdownMessages" href="javascript:void(0);" role="button"
@@ -800,7 +800,7 @@
                                 <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('admin_activity') }}">
                                     <div class="dropdown-notifications-item-content">
-                                        <div class="dropdown-notifications-item-content-text">List Things To Do
+                                        <div class="dropdown-notifications-item-content-text">List WoW
                                         </div>
                                     </div>
                                 </a>
