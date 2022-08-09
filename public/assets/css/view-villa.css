@@ -241,6 +241,11 @@ hr.pendek {
     margin-left: 15px;
 }
 
+.div-room_option {
+    margin-bottom: 30px;
+    margin-left: 15px;
+}
+
 .section-title {
     display: block;
 }
@@ -263,6 +268,10 @@ hr.pendek {
     position: relative;
     max-width: 100%;
     background: transparent !important;
+}
+.container-room-option {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .video-container .overlay-desc {
@@ -4760,4 +4769,28 @@ input::placeholder {
     .dropdwn {
     display: none;
     right: 23px !important;
+    }
+    @media only screen and (max-width: 767px) {
+        .container-room-option {
+            flex-direction: row;
+            column-gap: 10px
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .container-room-option {
+            flex-direction: column;
+            column-gap: 25px;
+            height: 105px;
+        }
+    }
+    .room-price-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    @media only screen and (min-width: 992px) {
+        .room-price-container {
+            height: 103px;
+        }
     }
