@@ -4,6 +4,9 @@
 @section('title', 'Calendar - EZV2')
 
 <style>
+    .fc-event {
+        cursor: pointer;
+    }
     .fc-widget-header span{
         color: black !important;
     }

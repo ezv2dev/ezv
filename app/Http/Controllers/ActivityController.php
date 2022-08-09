@@ -17,9 +17,14 @@ class ActivityController extends Controller
     public function index()
     {
         $this->authorize('activity_index');
-        $data = Activity::where('step', '<>', 0)->where('created_by', Auth::user()->id)->count();
+        $data = Activity::where('created_by', Auth::user()->id)->count();
 
-        return view('new-admin.activity.index', compact('data'));
+        if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
+            $activity = Activity::with('location')->paginate(10);
+        } else {
+            $activity = Activity::with('location')->where('created_by', Auth::user()->id)->paginate(10);
+        }
+        return view('new-admin.activity.dashboard_wow_listing', compact('data', 'activity'));
     }
 
     public function grade()

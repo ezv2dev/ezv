@@ -293,10 +293,10 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/help-travel-admin', [Dashboard\HelpController::class, 'help_travel_admin'])->name('help_travel_admin');
 
 
-    Route::get('/dashboard/listing', [MenuListingController::class, 'index'])->name('listing_dashboard');
+    Route::get('/dashboard/homes', [MenuListingController::class, 'index'])->name('listing_dashboard');
     Route::get('/manage-your-space', [MenuListingController::class, 'editListing'])->name('edit_listing_villa_dashboard');
 
-    Route::get('/dashboard/hotel/listing', [Dashboard\HotelListingController::class, 'index'])->name('dashboard_listing_hotel');
+    Route::get('/dashboard/hotel', [Dashboard\HotelListingController::class, 'index'])->name('dashboard_listing_hotel');
     Route::get('/dashboard/hotel/listing/datatable', [Dashboard\HotelListingController::class, 'datatable'])->name('dashboard_listing_hotel_datatable');
 
     Route::get('/dashboard/government/unapproval', [Dashboard\GovernmentApprovalController::class, 'index'])->name('government_approval_index');
@@ -850,7 +850,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     // Route::get('/admin/restaurant', 'RestaurantController@index')->name('admin_restaurant');
     // Route::get('/admin/restaurant/datatable', 'RestaurantController@datatable')->name('admin_restaurant_datatable');
 
-    Route::get('/dashboard/restaurant', [RestaurantController::class, 'index'])->name('admin_restaurant');
+    Route::get('/dashboard/food', [RestaurantController::class, 'index'])->name('admin_restaurant');
     Route::get('/dashboard/restaurant/datatable', [RestaurantController::class, 'datatable'])->name('admin_restaurant_datatable');
 
     Route::get('/dashboard/restaurant/trash', [RestaurantController::class, 'trash'])->name('admin_restaurant_trash');
@@ -1104,7 +1104,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
 Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     // Route::get('/admin/things-to-do', 'ActivityController@index')->name('admin_activity');
     // Route::get('/admin/things-to-do/datatable', 'ActivityController@datatable')->name('admin_activity_datatable');
-    Route::get('/dashboard/things-to-do', [ActivityController::class, 'index'])->name('admin_activity');
+    Route::get('/dashboard/wow', [ActivityController::class, 'index'])->name('admin_activity');
     Route::get('/dashboard/things-to-do/datatable', [ActivityController::class, 'datatable'])->name('admin_activity_datatable');
 
     Route::get('/dashboard/things-to-do/soft-delete/{id}', [ActivityListingController::class, 'softDestroy'])->name('admin_activity_soft_delete');

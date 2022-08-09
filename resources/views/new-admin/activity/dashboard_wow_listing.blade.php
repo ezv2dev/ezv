@@ -1,6 +1,6 @@
 @extends('new-admin.layouts.admin_layout')
 
-@section('title', 'Listing Dashboard - EZV2')
+@section('title', 'WoW Listing - EZV2')
 
 @section('content_admin')
     <style>
@@ -352,12 +352,25 @@
         }
     </style>
     <!-- Hero -->
+    @php
+    if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
+        $activityName = App\Models\Activity::select('id_activity', 'name')->get();
+    } else {
+        $activityName = App\Models\Activity::where('created_by', Auth::user()->id)
+            ->select('id_activity', 'name')
+            ->get();
+    }
+    @endphp
     <div class="container container-dashboard px-4">
         <div class="bg-body-light">
             <div class="content content-full">
                 <div class="row">
                     <div class="col-4 pt-10">
-                        <h1 class="flex-grow-1 fs-3 fw-semibold ">{{ $data }} Listing</h1>
+                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                            <h1 class="flex-grow-1 fs-3 fw-semibold ">{{ $activityName->count() }} Total Listing</h1>
+                        @else
+                            <h1 class="flex-grow-1 fs-3 fw-semibold ">{{ $data }} Total Listing</h1>
+                        @endif
                     </div>
                     <div class="col-4 text-center search-listing">
                         <input type="text" onfocus="this.value=''" autocomplete="off"
@@ -365,24 +378,16 @@
                             name="sLocation" placeholder="Search your listing here...">
 
                         <div id="sugest" class="location-popup d-none">
-                            @php
-                                if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
-                                    $villaName = App\Models\Villa::select('id_villa', 'name')->get();
-                                } else {
-                                    $villaName = App\Models\Villa::where('created_by', Auth::user()->id)
-                                        ->select('id_villa', 'name')
-                                        ->get();
-                                }
-                            @endphp
                             <div class="location-popup-container h-100">
-                                @foreach ($villaName->take(20) as $item)
-                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                                        onclick="window.open('{{ route('villa', $item->id_villa) }}', '_blank');"
+                                @foreach ($activityName as $item)
+                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first lozad"
+                                        loading="lazy"
+                                        onclick="window.open('{{ route('activity', $item->id_activity) }}', '_blank');"
                                         style="display: none">
                                         <div class="location-popup-map sugest-list-map">
                                             <img class="location-popup-map-image lozad" loading="lazy"
                                                 src="{{ LazyLoad::show() }}"
-                                                data-src="{{ asset('assets/icon/map/villa.png') }}">
+                                                data-src="{{ asset('assets/icon/map/activity.png') }}">
                                         </div>
                                         <div class="location-popup-text sugest-list-text">
                                             <a type="button" class="location_op"
@@ -390,17 +395,17 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                @foreach ($villaName as $item)
+                                @foreach ($activityName as $item)
                                     <div class="col-lg-12 location-popup-desc-container sugest-list"
                                         style="display: none; cursor: pointer;"
-                                        onclick="window.open('{{ route('villa', $item->id_villa) }}', '_blank');">
+                                        onclick="window.open('{{ route('activity', $item->id_activity) }}', '_blank');">
                                         <div class="location-popup-map sugest-list-map">
                                             <img class="location-popup-map-image lozad" loading="lazy"
                                                 src="{{ LazyLoad::show() }}"
-                                                data-src="{{ asset('assets/icon/map/villa.png') }}">
+                                                data-src="{{ asset('assets/icon/map/activity.png') }}">
                                         </div>
                                         <div class="location-popup-text sugest-list-text">
-                                            <a href="{{ route('villa', $item->id_villa) }}" type="button"
+                                            <a href="{{ route('activity', $item->id_activity) }}" type="button"
                                                 class="location_op" target="_blank"
                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
                                         </div>
@@ -426,12 +431,12 @@
     {{-- CONTENT --}}
     <div class="container px-4">
         <div class="row-grid-listing">
-            @foreach ($villa as $item)
+            @foreach ($activity as $item)
                 <div class="listing-card">
                     <div class="row">
                         <div class="col-12 col-md-6  list-listing-img">
                             <img class="lozad" loading="lazy" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('/foto/gallery/' . $item->id_villa . '/' . $item->image) }}"
+                                data-src="{{ URL::asset('/foto/activity/' . strtolower($item->name) . '/' . $item->image) }}"
                                 alt="EZV_{{ $item->image }}">
                         </div>
                         <div class="col-12 col-md-6">
@@ -445,13 +450,11 @@
                                 @endif
                             </p>
                             <p class="listing-info">
-                                <span>Bedroom: {{ $item->bedroom }}</span>
-                                <span>Beds: {{ $item->beds }}</span>
-                                <span>Bathroom: {{ $item->bathroom }}</span>
-                                <span>Location: {{ $item->location->name }}</span>
+                                <span>Phone: {{ $item->phone }}</span>
+                                <span>Email: {{ $item->email }}</span>
                             </p>
                             <p class="listing-button">
-                                <a type="button" href="{{ route('villa', $item->id_villa) }}" target="_blank"
+                                <a type="button" href="{{ route('activity', $item->id_activity) }}" target="_blank"
                                     class="listing-action">Action</a>
                             </p>
                         </div>
@@ -462,7 +465,7 @@
     </div>
     <div class="mt-3 d-flex justify-content-center">
         <div class="mt-3">
-            {{ $villa->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
+            {{ $activity->onEachSide(0)->appends(Request::all())->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
 
