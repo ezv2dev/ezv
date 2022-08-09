@@ -115,16 +115,12 @@
             padding-right:34px;
         }
 
-        #header-container{
-            position:fixed;
-            width:100%;
-        }
     </style>
 </head>
 <body>
 <div id="page-container">
      {{-- navbar --}}
-     <section id="header-container" class="header">
+     <section id="header-container" class="header" style="position:sticky;top:0;">
         <!-- Header -->
         @include('layouts.user.header_minimaliste')
     </section>
@@ -198,8 +194,6 @@
                     <span class="invalid-feedback" role="alert"></span>
                 </div>
                 <button type="submit" id="btnUpdatePass" class="btn btn-primary" style="font-weight:400;">Update password</button>
-
-                <a href="https://api.whatsapp.com/send/?phone=089669444315&text=How+are+you+&type=phone_number&app_absent=0" target="_blank" id="wa"></a>
             </form>
         </div>
     </section>
@@ -242,11 +236,6 @@
             //     }
             //     });
             // });
-
-            $(document).ready(function(){
-                let heightNav =  $("#header-container").outerHeight();
-                $('.homes').css('margin-top', heightNav)
-            })
         </script>
         {{-- Search Location --}}
         <script>

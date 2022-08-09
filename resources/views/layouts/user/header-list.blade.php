@@ -4149,7 +4149,11 @@
                     document.getElementById("new-bar-black").classList.remove("search-height");
                     document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
-                    $("#overlay").css("display", "none");
+
+                    // hide overlay ketika scroll, dan ketika sidebar close di mobile size
+                    if($('.expand-navbar-mobile').attr('aria-expanded') == 'false'){
+                        $("#overlay").css("display", "none");
+                    }
 
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     addClass(els, 'display-none');

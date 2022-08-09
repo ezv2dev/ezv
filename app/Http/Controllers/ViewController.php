@@ -2372,6 +2372,32 @@ class ViewController extends Controller
         echo json_encode($data);
     }
 
+    public function photo_views(Request $request)
+    {
+        $now = Carbon::now();
+        VillaStatistic::updateOrCreate(
+            [
+                'id_villa' => $request->id_villa,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        VillaStatistic::where('id_villa', $request->id_villa)->where('month', $now->month)->where('year', $now->year)->increment('photo_views');
+    }
+
+    public function video_views(Request $request)
+    {
+        $now = Carbon::now();
+        VillaStatistic::updateOrCreate(
+            [
+                'id_villa' => $request->id_villa,
+                'month' => $now->month,
+                'year' => $now->year
+            ]
+        );
+        VillaStatistic::where('id_villa', $request->id_villa)->where('month', $now->month)->where('year', $now->year)->increment('video_views');
+    }
+
     public function video_open($id)
     {
         // $data = VillaVideo::select('villa_video.name as video', 'villa.name as name', 'villa.price as price')
@@ -3321,15 +3347,15 @@ class ViewController extends Controller
     public function delete_special_price($id)
     {
         $data = VillaDetailPrice::where('id_detail', $id)->first();
-        $villa = Villa::where('id_villa', $data->id_villa)->first();
+        // $villa = Villa::where('id_villa', $data->id_villa)->first();
 
-        $this->authorize('listvilla_delete');
-        $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
-        if ($condition) {
-            return response()->json([
-                'message' => 'This action is unauthorized',
-            ], 403);
-        }
+        // $this->authorize('listvilla_delete');
+        // $condition = !in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by;
+        // if ($condition) {
+        //     return response()->json([
+        //         'message' => 'This action is unauthorized',
+        //     ], 403);
+        // }
 
         $delete = $data->delete();
 

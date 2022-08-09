@@ -24,7 +24,7 @@ class VillaStatistic extends Model
     ];
 
     // * Relationship
-    public function villaStatistic()
+    public function villa()
     {
         return $this->belongsTo(Villa::class, 'id_villa', 'id_villa');
     }

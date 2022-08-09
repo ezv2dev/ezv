@@ -360,141 +360,139 @@
 
 </style>
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 text-center p-0 mb-2">
-            <div class="card px-0 pt-4 pb-0 mb-3">
-                <form id="msform" action="{{ route('account-store-delete') }}" method="post">
-                    @csrf
-                    <!-- progressbar -->
-                    <ul id="progressbar" class="d-flex justify-content-center" style="padding-right: 2rem;">
-                        <li class="active" id="account"><strong>Select reason</strong></li>
-                        <li id="personal"><strong>Confirm</strong></li>
-                        <li id="confirm"><strong>Done</strong></li>
-                    </ul>
-                    <div class="progress mx-max-md-2r">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <br> <!-- fieldsets -->
-                    <fieldset class="px-max-md-2r">
-                        <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">What prompted you to deactivate?</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 1 - 3</h2>
-                                </div>
+<div class="container-fluid py-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card">
+            <form id="msform" action="{{ route('account-store-delete') }}" method="post">
+                @csrf
+                <!-- progressbar -->
+                <ul id="progressbar" class="d-flex justify-content-center" style="padding-right: 2rem;">
+                    <li class="active" id="account"><strong>Select reason</strong></li>
+                    <li id="personal"><strong>Confirm</strong></li>
+                    <li id="confirm"><strong>Done</strong></li>
+                </ul>
+                <div class="progress mx-max-md-2r">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                </div> <br> <!-- fieldsets -->
+                <fieldset class="px-max-md-2r">
+                    <div class="form-card">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="fs-title">What prompted you to deactivate?</h2>
                             </div>
-                            <div class="d-flex">
-                                <div class="flex-fill">
-                                    <p>I have safety or privacy concerns.</p>
-                                </div>
-                                <div>
-                                    <input type="radio" value="I have safety or privacy concerns" id="test1" name="reasonn" onclick="function1()">
-                                    <label for="test1"></label>
-                                </div>
+                            <div class="col-5">
+                                <h2 class="steps">Step 1 - 3</h2>
                             </div>
-                            <hr>
-                            <div class="d-flex">
-                                <div class="flex-fill">
-                                    <p>I can’t host anymore.</p>
-                                </div>
-                                <div>
-                                    <input type="radio" value="I can’t host anymore" id="test2" name="reasonn" onclick="function2()">
-                                    <label for="test2"></label>
-                                </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <p>I have safety or privacy concerns.</p>
                             </div>
-                            <hr>
-                            <div class="d-flex">
-                                <div class="flex-fill">
-                                    <p>I can't comply with EZV's Terms of Service / Community Commitment.</p>
-                                </div>
-                                <div>
-                                    <input type="radio" value="I can't comply with EZV's Terms of Service / Community Commitment" id="test3" name="reasonn" onclick="function3()">
-                                    <label for="test3"></label>
-                                </div>
+                            <div>
+                                <input type="radio" value="I have safety or privacy concerns" id="test1" name="reasonn" onclick="function1()">
+                                <label for="test1"></label>
                             </div>
-                            <hr>
-                            <div class="d-flex">
-                                <div class="flex-fill">
-                                    <p>Others</p>
-                                </div>
-                                <div>
-                                    <input type="radio" id="test4" name="reasonn" value="" onclick="function4()">
-                                    <label for="test4"></label>
-                                </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <p>I can’t host anymore.</p>
                             </div>
-                            <hr>
-                            <div class="row display-none" id="reason">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="reason" style="color: #484848; font-weight: bolder;">Reason</label>
-                                        <input type="text" class="form-control" name="reason" id="reason">
-                                    </div>
+                            <div>
+                                <input type="radio" value="I can’t host anymore" id="test2" name="reasonn" onclick="function2()">
+                                <label for="test2"></label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <p>I can't comply with EZV's Terms of Service / Community Commitment.</p>
+                            </div>
+                            <div>
+                                <input type="radio" value="I can't comply with EZV's Terms of Service / Community Commitment" id="test3" name="reasonn" onclick="function3()">
+                                <label for="test3"></label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <p>Others</p>
+                            </div>
+                            <div>
+                                <input type="radio" id="test4" name="reasonn" value="" onclick="function4()">
+                                <label for="test4"></label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row display-none" id="reason">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="reason" style="color: #484848; font-weight: bolder;">Reason</label>
+                                    <input type="text" class="form-control" name="reason" id="reason">
                                 </div>
                             </div>
                         </div>
-                        <input type="button" name="next" class="next action-button" value="Next" />
-                    </fieldset>
-                    <fieldset class="px-max-md-2r">
-                        <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Deactivate account?</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 2 - 3</h2>
-                                </div>
+                    </div>
+                    <input type="button" name="next" class="next action-button" value="Next" />
+                </fieldset>
+                <fieldset class="px-max-md-2r">
+                    <div class="form-card">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="fs-title">Deactivate account?</h2>
                             </div>
-                            <div class="row">
-                                <div class="col-1">
-                                    <i class="fa-solid fa-check" style="color: #000;"></i>
+                            <div class="col-5">
+                                <h2 class="steps">Step 2 - 3</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fa-solid fa-check" style="color: #000;"></i>
 
-                                </div>
-                                <div class="col-11">
-                                    <p>The profile and listings associated with this account will disappear.</p>
-                                </div>
-                                <hr>
                             </div>
-                            <div class="row">
-                                <div class="col-1">
-                                    <i class="fa-solid fa-check" style="color: #000;"></i>
-                                </div>
-                                <div class="col-11">
-                                    <p>You won’t be able to access the account info or past reservations.</p>
-                                </div>
-                                <hr>
+                            <div class="col-11">
+                                <p>The profile and listings associated with this account will disappear.</p>
                             </div>
-                        </div> <input type="button" name="submit" class="submit action-button" value="Deactivate" />
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    </fieldset>
-                    <fieldset class="px-max-md-2r">
-                        <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Done</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 3 - 3</h2>
-                                </div>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fa-solid fa-check" style="color: #000;"></i>
                             </div>
+                            <div class="col-11">
+                                <p>You won’t be able to access the account info or past reservations.</p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div> <input type="button" name="submit" class="submit action-button" value="Deactivate" />
+                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                </fieldset>
+                <fieldset class="px-max-md-2r">
+                    <div class="form-card">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="fs-title">Done</h2>
+                            </div>
+                            <div class="col-5">
+                                <h2 class="steps">Step 3 - 3</h2>
+                            </div>
+                        </div>
 
-                            <div class="checkmark">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 161.2 161.2"
-                                    enable-background="new 0 0 161.2 161.2" xml:space="preserve">
-                                    <circle class="circle" fill="none" stroke="#33b057" stroke-width="7"
-                                        stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"></circle>
-                                    <polyline class="icon" fill="none" stroke="#33b057" stroke-width="7"
-                                        stroke-linecap="round" stroke-miterlimit="10"
-                                        points="113,52.8 74.1,108.4 48.2,86.4"></polyline>
-                                </svg>
-                            </div>
-                        </div> <input type="submit" class="next action-button" value="Finish" />
-                    </fieldset>
-                </form>
-            </div>
+                        <div class="checkmark">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 161.2 161.2"
+                                enable-background="new 0 0 161.2 161.2" xml:space="preserve">
+                                <circle class="circle" fill="none" stroke="#33b057" stroke-width="7"
+                                    stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"></circle>
+                                <polyline class="icon" fill="none" stroke="#33b057" stroke-width="7"
+                                    stroke-linecap="round" stroke-miterlimit="10"
+                                    points="113,52.8 74.1,108.4 48.2,86.4"></polyline>
+                            </svg>
+                        </div>
+                    </div> <input type="submit" class="next action-button" value="Finish" />
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>

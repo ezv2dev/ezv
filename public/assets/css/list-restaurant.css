@@ -875,6 +875,7 @@
         border-radius: 50%;
         aspect-ratio: 1/1;
         box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
+        border: 1px solid black;
     }
 }
 
@@ -885,6 +886,7 @@
         border-radius: 50%;
         aspect-ratio: 1/1;
         box-shadow: 1px 1px 5px rgb(0 0 0 / 73%);
+        border: 1px solid black;
     }
 }
 

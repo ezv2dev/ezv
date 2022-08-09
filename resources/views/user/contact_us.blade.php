@@ -56,7 +56,7 @@
 <body>
 <div id="page-container">
      {{-- navbar --}}
-     <section id="header-container" class="header">
+     <section id="header-container" class="header" style="position:sticky;top:0;">
         <!-- Header -->
         @include('layouts.user.header_minimaliste')
     </section>
@@ -99,16 +99,16 @@
     </script>
     <script>
         //Sticky Bar
-        $(function(){
-        $(window).scroll(function(){
-            var winTop = $(window).scrollTop();
-            if(winTop >= 100){
-            $("#header-container").addClass("fix-header");
-            }else{
-            $("#header-container").removeClass("fix-header");
-            }
-            });
-        });
+        // $(function(){
+        // $(window).scroll(function(){
+        //     var winTop = $(window).scrollTop();
+        //     if(winTop >= 100){
+        //     $("#header-container").addClass("fix-header");
+        //     }else{
+        //     $("#header-container").removeClass("fix-header");
+        //     }
+        //     });
+        // });
     </script>
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>

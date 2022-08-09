@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
     <title>{{ $restaurant->name }} - EZV2</title>
     <meta name="description" content="EZV2 ">
@@ -235,7 +235,8 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -347,7 +348,8 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center edit-time">
+                                                <div
+                                                    class="form-group d-flex justify-content-center align-items-center edit-time">
                                                     <div class="col-auto">
                                                         <input type="time" name="open_time" class="form-control"
                                                             id="open-time-input" value="{{ $restaurant->open_time }}"
@@ -448,7 +450,8 @@
                                                 @method('PATCH') --}}
                                                 <input type="hidden" name="id_restaurant"
                                                     value="{{ $restaurant->id_restaurant }}" required>
-                                                <div class="form-group d-flex justify-content-center align-items-center range-edit-price">
+                                                <div
+                                                    class="form-group d-flex justify-content-center align-items-center range-edit-price">
                                                     <div class="col-auto">
                                                         <select name="id_type" id="restaurant-type-input"
                                                             class="form-control">
@@ -544,7 +547,8 @@
                             @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <a type="button" onclick="edit_restaurant_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
+                                    |</a>
                                 <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
                                     style="color:#FF7400; font-weight: 600; font-size: 10pt;">
                                     {{ __('user_page.Edit Name') }}
@@ -581,7 +585,7 @@
                                     <div id="time-form-mobile" style="display:none;">
                                         <form action="{{ route('restaurant_update_time') }}" method="post">
                                             <!-- @csrf
-                                                                                                                                                                                                                    @method('PATCH') -->
+                                                                                                                                                                                                                        @method('PATCH') -->
                                             <input type="hidden" name="id_restaurant"
                                                 value="{{ $restaurant->id_restaurant }}" required>
                                             <div class="form-group d-flex justify-content-start align-items-center">
@@ -871,7 +875,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{$item->title}}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -942,7 +947,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -986,7 +992,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{ $item->title }}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1118,7 +1125,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem" onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem"
+                            onClick="document.getElementById('location-map').scrollIntoView();">
                             <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
@@ -1146,7 +1154,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none" onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none"
+                            onClick="document.getElementById('first-detail-content').scrollIntoView();">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
@@ -1164,7 +1173,7 @@
                         <div class="col-12 row gallery">
                             @if ($restaurant->photo->count() > 0)
                                 @foreach ($restaurant->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
                                         <a
                                             href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -1201,7 +1210,7 @@
                             @endif
                             @if ($restaurant->video->count() > 0)
                                 @foreach ($restaurant->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
                                         @auth
                                             @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
                                                 <a class="pointer-normal"
@@ -1304,12 +1313,11 @@
                                         @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             <span class="edit-menu-icon">
                                                 <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom" type="button"
-                                                        title="{{ __('user_page.Add Menu Tag') }}"
-                                                        data-id="{{ $restaurant->id_restaurant }}"
-                                                        data-menu="{{ $menu->id_menu }}"
-                                                        onclick="add_menu_tag(this)"><i
-                                                            class="fa fa-pencil"></i></button>
+                                                    data-bs-placement="bottom" type="button"
+                                                    title="{{ __('user_page.Add Menu Tag') }}"
+                                                    data-id="{{ $restaurant->id_restaurant }}"
+                                                    data-menu="{{ $menu->id_menu }}" onclick="add_menu_tag(this)"><i
+                                                        class="fa fa-pencil"></i></button>
                                                 {{-- <button data-bs-toggle="popover" data-bs-animation="true"
                                                     data-bs-placement="bottom"
                                                     title="{{ __('user_page.Add Photo Caption') }}"
@@ -1604,13 +1612,14 @@
                                                         </div>
                                                         <div class="popular-card-price">
                                                             @if (!empty($popular->price))
-                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != "")
+                                                                @if (isset($_COOKIE['sCheck_in']) && $_COOKIE['sCheck_in'] != '')
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price * $dateDiffe) }}/
                                                                         {{ $dateDiffe }}
                                                                         {{ __('user_page.night') }}
                                                                         <br>
-                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format("d M Y"); }}</b> to
-                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format("d M Y"); }}</b>
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_in)->format('d M Y') }}</b>
+                                                                        to
+                                                                        <b>{{ \Carbon\Carbon::parse($get_check_out)->format('d M Y') }}</b>
                                                                     </p>
                                                                 @else
                                                                     <p>{{ CurrencyConversion::exchangeWithUnit($popular->price) }}/
@@ -1828,17 +1837,17 @@
                     <i class="fa-solid fa-user"></i>
                 </a> -->
 
-                    <div class="drodwn-container">
-                        <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
-                        <div class="dropdwn dropdown-content">
+                <div class="drodwn-container">
+                    <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                    <div class="dropdwn dropdown-content">
                         <a href="#" onclick="view_LoginModal('login');">Login</a>
                         <a href="#" onclick="view_LoginModal('register');">Register</a>
                         <hr>
                         <a href="{{ route('ahost') }}">Become a Host</a>
                         <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
                         <a href="{{ route('faq') }}">FAQ</a>
-                        </div>
                     </div>
+                </div>
             @endauth
 
         </div>
@@ -1914,23 +1923,23 @@
                                     </div>
                                 </div>
                             @else
-                            <div class="col-12 col-md-6 d-flex">
-                                <div class="col-1 icon-review-container">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                                        aria-hidden="true" role="presentation" focusable="false"
-                                        style="display: block; height: 24px; width: 24px; fill: currentcolor;">
-                                        <path
-                                            d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
-                                        </path>
-                                    </svg>
+                                <div class="col-12 col-md-6 d-flex">
+                                    <div class="col-1 icon-review-container">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                            aria-hidden="true" role="presentation" focusable="false"
+                                            style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                            <path
+                                                d="M14.998 1.032a2 2 0 0 0-.815.89l-3.606 7.766L1.951 10.8a2 2 0 0 0-1.728 2.24l.031.175A2 2 0 0 0 .87 14.27l6.36 5.726-1.716 8.608a2 2 0 0 0 1.57 2.352l.18.028a2 2 0 0 0 1.215-.259l7.519-4.358 7.52 4.358a2 2 0 0 0 2.734-.727l.084-.162a2 2 0 0 0 .147-1.232l-1.717-8.608 6.361-5.726a2 2 0 0 0 .148-2.825l-.125-.127a2 2 0 0 0-1.105-.518l-8.627-1.113-3.606-7.765a2 2 0 0 0-2.656-.971zm-3.07 10.499l4.07-8.766 4.07 8.766 9.72 1.252-7.206 6.489 1.938 9.723-8.523-4.94-8.522 4.94 1.939-9.723-7.207-6.489z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="review-txt">
+                                            {{ __('user_page.There is no reviews yet') }}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-8">
-                                    <p class="review-txt">
-                                        {{ __('user_page.There is no reviews yet') }}
-                                    </p>
-                                </div>
-                            </div>
-                            {{-- <div class="col-12 col-md-6 d-flex">
+                                {{-- <div class="col-12 col-md-6 d-flex">
                                 <div class="col-1 icon-review-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                         aria-hidden="true" role="presentation" focusable="false"
@@ -3285,8 +3294,8 @@
                     {{ __("user_page.Your browser doesn't support HTML5 video tag") }}
                 </video>
                 <div class="btn-close-container">
-                    <button type="button" class="btn-close btn-close-white d-md-none" data-bs-dismiss="modal" onclick="close_story()"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white d-md-none" data-bs-dismiss="modal"
+                        onclick="close_story()" aria-label="Close"></button>
                 </div>
             </center>
         </div>
@@ -3323,6 +3332,36 @@
         });
     });
 </script>
+
+<script>
+    function photoViews() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/food/photo/views",
+            data: {
+                id_restaurant: id_restaurant
+            }
+        });
+    }
+
+    function videoViews() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/food/video/views",
+            data: {
+                id_restaurant: id_restaurant
+            }
+        });
+    }
+</script>
+
+
 {{-- MODAL VIDEO --}}
 <div class="modal fade" id="videomodalrestaurant" tabindex="-1" role="dialog"
     aria-labelledby="modal-default-large modal-default-fadein" aria-hidden="true"
@@ -3335,8 +3374,8 @@
                 </video>
                 <h5 class="video-title" id="video-title"></h5>
                 <div class="btn-close-container">
-                    <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal"
-                        onclick="close_video()" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white btn-hidden"
+                        data-bs-dismiss="modal" onclick="close_video()" aria-label="Close"></button>
                 </div>
             </center>
         </div>
@@ -3455,7 +3494,7 @@
                                 {{-- @php
                                     $id_photo = "<script>document.write($('#id_photo').val());</script>";
                                     @endphp --}}
-                                    <option value=""></option>
+                                <option value=""></option>
                                 @foreach ($photoTag as $tag)
                                     <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
                                 @endforeach
@@ -3492,7 +3531,7 @@
                                 {{-- @php
                                     $id_photo = "<script>document.write($('#id_photo').val());</script>";
                                     @endphp --}}
-                                    <option value=""></option>
+                                <option value=""></option>
                                 @foreach ($photoTag as $tag)
                                     <option value="{{ $tag->id_subcategory }}">{{ $tag->name }}</option>
                                 @endforeach
@@ -5704,15 +5743,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
     function sidebarhide() {
-                $("body").css({
-                    "height": "auto",
-                    "overflow": "auto"
-                })
-                $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
-                $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
-                $(".expand-navbar-mobile").attr("aria-expanded", "false");
-                $("#overlay").css("display", "none");
-            }
+        $("body").css({
+            "height": "auto",
+            "overflow": "auto"
+        })
+        $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");
+        $(".expand-navbar-mobile").addClass("closing-navbar-mobile");
+        $(".expand-navbar-mobile").attr("aria-expanded", "false");
+        $("#overlay").css("display", "none");
+    }
+
     function language() {
         sidebarhide();
         $('#LegalModal').modal('show');
@@ -6285,16 +6325,16 @@
 @endif
 
 <script>
-        //Drop down login 2
-        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
+    //Drop down login 2
+    var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+    $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function(event) {
         event.stopPropagation();
         $('.dropdwn').slideToggle('fast');
-        });
+    });
 
-        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
+    $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
         $('.dropdwn').slideUp('fast');
         // document.activeElement.blur();//lose focus
-        });
-    </script>
+    });
+</script>
 </body>

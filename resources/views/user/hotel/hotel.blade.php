@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
     <title id="hotelTitle">{{ $hotel[0]->name }} - EZV2</title>
 
@@ -233,7 +233,8 @@
                 @else
                     <div class="d-flex align-items-center">
                         <div class="flex-fill d-flex align-items-center">
-                            <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
                                 style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
                                 id="login">
                                 <i class="fa-solid fa-user"></i>
@@ -444,7 +445,8 @@
                             @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <a type="button" onclick="edit_hotel_profile()"
                                     class="edit-profile-image-btn-mobile d-md-none"
-                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }} |</a>
+                                    style="font-size: 10pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Image Profile') }}
+                                    |</a>
                                 <a type="button" onclick="editNameForm()" class="edit-profile-name-btn-mobile d-md-none"
                                     style="color:#FF7400; font-weight: 600; font-size: 10pt;">
                                     {{ __('user_page.Edit Name') }}
@@ -715,7 +717,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{$item->title}}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -787,7 +790,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{$item->title}}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -832,7 +836,8 @@
                                                                             </a>
                                                                         @endif
                                                                         </a>
-                                                                        <span class="title-story">{{$item->title}}</span>
+                                                                        <span
+                                                                            class="title-story">{{ $item->title }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -959,7 +964,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem" onClick="document.getElementById('location-map').scrollIntoView();">
+                        <li class="navigationItem"
+                            onClick="document.getElementById('location-map').scrollIntoView();">
                             <a id="location-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-map-marker-alt navigationItem__Icon svg-icon"
@@ -977,7 +983,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navigationItem d-flex d-md-none" onClick="document.getElementById('first-detail-content').scrollIntoView();">
+                        <li class="navigationItem d-flex d-md-none"
+                            onClick="document.getElementById('first-detail-content').scrollIntoView();">
                             <a id="review-sticky" class="hoover font-13 navigationItem__Button">
                                 <span>
                                     <i aria-label="Posts" class="fas fa-play navigationItem__Icon svg-icon"
@@ -996,7 +1003,8 @@
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}"
+                                        onclick="photoViews()">
                                         <a
                                             href="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
@@ -1030,7 +1038,8 @@
                             @endif
                             @if ($video->count() > 0)
                                 @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}">
+                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}"
+                                        onclick="videoViews()">
                                         @auth
                                             @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
                                                 <a class="pointer-normal" onclick="view_video({{ $item->id_video }})"
@@ -2069,19 +2078,19 @@
                     </a>
 
                     <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                        style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                        <i class="fa-solid fa-user"></i>
-                    </a> -->
+                                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                    <i class="fa-solid fa-user"></i>
+                                </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                         <div class="dropdwn dropdown-content">
-                        <a href="#" onclick="view_LoginModal('login');">Login</a>
-                        <a href="#" onclick="view_LoginModal('register');">Register</a>
-                        <hr>
-                        <a href="{{ route('ahost') }}">Become a Host</a>
-                        <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
-                        <a href="{{ route('faq') }}">FAQ</a>
+                            <a href="#" onclick="view_LoginModal('login');">Login</a>
+                            <a href="#" onclick="view_LoginModal('register');">Register</a>
+                            <hr>
+                            <a href="{{ route('ahost') }}">Become a Host</a>
+                            <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                            <a href="{{ route('faq') }}">FAQ</a>
                         </div>
                     </div>
                 @endauth
@@ -3729,8 +3738,8 @@
                     </video>
 
                     <div class="btn-close-container">
-                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_story()"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white btn-hidden"
+                            data-bs-dismiss="modal" onclick="close_story()" aria-label="Close"></button>
                     </div>
 
             </div>
@@ -3750,8 +3759,8 @@
                     </video>
                     <h5 class="video-title" id="title"></h5><br>
                     <div class="btn-close-container">
-                        <button type="button" class="btn-close btn-close-white btn-hidden" data-bs-dismiss="modal" onclick="close_video()"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white btn-hidden"
+                            data-bs-dismiss="modal" onclick="close_video()" aria-label="Close"></button>
                     </div>
             </div>
             </center>
@@ -3761,7 +3770,8 @@
     {{-- MODAL AMENITIES --}}
     <div class="modal fade" id="modal-amenities" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-amenities modal-fullscreen-md-down" role="document" style="overflow-y: initial !important">
+        <div class="modal-dialog modal-dialog-amenities modal-fullscreen-md-down" role="document"
+            style="overflow-y: initial !important">
             <div class="modal-content modal-content-amenities" style="background: white;">
                 <div class="modal-header modal-header-amenities">
                     <h5 class="modal-title">{{ __('user_page.All Amenities') }}</h5>
@@ -4426,6 +4436,34 @@
         }
     </script>
 
+    <script>
+        function photoViews() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/hotel/photo/views",
+                data: {
+                    id_hotel: id_hotel
+                }
+            });
+        }
+
+        function videoViews() {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/hotel/video/views",
+                data: {
+                    id_hotel: id_hotel
+                }
+            });
+        }
+    </script>
+
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -4495,77 +4533,13 @@
         }
     </script>
 
-    {{-- Header List --}}
-    <script>
-        function villaRefreshFilter(suburl) {
-            window.location.href = '{{ env('APP_URL') }}/searchvillacombine?${suburl}';
-        }
-    </script>
-
-    <script>
-        function villaFilter() {
-            var fMaxPriceFormInput = [];
-            $("input[name='fMaxPrice[]']").each(function() {
-                fMaxPriceFormInput.push(parseInt($(this).val()));
-            });
-
-            var fMinPriceFormInput = [];
-            $("input[name='fMinPrice[]']").each(function() {
-                fMinPriceFormInput.push(parseInt($(this).val()));
-            });
-
-            var fPropertyFormInput = [];
-            $("input[name='fProperty[]']:checked").each(function() {
-                fPropertyFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBedroomFormInput = [];
-            $("input[name='fBedroom[]']").each(function() {
-                fBedroomFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBathroomFormInput = [];
-            $("input[name='fBathroom[]']").each(function() {
-                fBathroomFormInput.push(parseInt($(this).val()));
-            });
-
-            var fBedsFormInput = [];
-            $("input[name='fBeds[]']").each(function() {
-                fBedsFormInput.push(parseInt($(this).val()));
-            });
-
-            var fFacilitiesFormInput = [];
-            $("input[name='fFacilities[]']:checked").each(function() {
-                fFacilitiesFormInput.push(parseInt($(this).val()));
-            });
-
-            var fSuitableFormInput = [];
-            $("input[name='fSuitable[]']:checked").each(function() {
-                fSuitableFormInput.push(parseInt($(this).val()));
-            });
-
-            var sLocationFormInput = $("input[name='sLocation']").val();
-
-            var sCheck_inFormInput = $("input[name='sCheck_in']").val();
-
-            var sCheck_outFormInput = $("input[name='sCheck_out']").val();
-
-            var sAdultFormInput = $("input[name='sAdult']").val();
-
-            var sChildFormInput = $("input[name='sChild']").val();
-
-            var subUrl =
-                `fMaxPrice=${fMaxPriceFormInput}&fMinPrice=${fMinPriceFormInput}&fProperty=${fPropertyFormInput}&fBedroom=${fBedroomFormInput}&fBathroom=${fBathroomFormInput}&fBeds=${fBedsFormInput}&fFacilities=${fFacilitiesFormInput}&fSuitable=${fSuitableFormInput}&sLocation=${sLocationFormInput}&sCheck_in=${sCheck_inFormInput}&sCheck_out=${sCheck_outFormInput}&sAdult=${sAdultFormInput}&sChild=${sChildFormInput}`;
-            villaRefreshFilter(subUrl);
-        }
-    </script>
-
     {{-- End Header List --}}
 
     <script>
         function close_story() {
             $('#storymodal').modal('hide');
         }
+
         function close_video() {
             $('#videomodal').modal('hide');
         }
@@ -6016,6 +5990,7 @@
             $(".expand-navbar-mobile").attr("aria-expanded", "false");
             $("#overlay").css("display", "none");
         }
+
         function language() {
             sidebarhide();
             $('#LegalModal').modal('show');
@@ -6112,7 +6087,7 @@
                     for (let i = 0; i < response.data; i++) {
                         $("#showStar").append(`<i class="star-active fa fa-star" aria-hidden="true"></i>`);
                         $("#showStarMobile").append(
-                        `<i class="star-active fa fa-star" aria-hidden="true"></i>`);
+                            `<i class="star-active fa fa-star" aria-hidden="true"></i>`);
                     }
 
                     let j = 5 - response.data;
@@ -6320,14 +6295,14 @@
     <script>
         //Drop down login 2
         var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function (event) {
-        event.stopPropagation();
-        $('.dropdwn').slideToggle('fast');
+        $('.btn-dropdwn').on(supportsTouch ? 'touchend' : 'click', function(event) {
+            event.stopPropagation();
+            $('.dropdwn').slideToggle('fast');
         });
 
-        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-        $('.dropdwn').slideUp('fast');
-        // document.activeElement.blur();//lose focus
+        $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+            $('.dropdwn').slideUp('fast');
+            // document.activeElement.blur();//lose focus
         });
     </script>
 </body>

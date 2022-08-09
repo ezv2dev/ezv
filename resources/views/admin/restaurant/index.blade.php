@@ -1,6 +1,7 @@
 @extends('layouts.admin.dashboard')
 
 @section('hero')
+
 <!-- Hero -->
 <div class="bg-body-light">
     <div class="content content-full">

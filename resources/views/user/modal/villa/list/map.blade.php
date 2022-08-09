@@ -547,13 +547,13 @@
                                             <a href="${contentLink}" target="_blank">
                                                 {{--<p class="card-text text-13 text-grey-1 fw-500">${review}</p>--}}
                                                 <div class="d-flex justify-content-between">
-                                                    <p class="card-text text-20 text-orange fw-600 mt-1">${restaurantLocations.name}</p>
+                                                    <p class="map-title-description">${restaurantLocations.name}</p>
                                                     <div class="video-btn-container-in-map">
                                                         ${video}
                                                     </div>
                                                 </div>
-                                                <p class="card-text text-13 text-grey-1 fw-500 mt-1 cuisine-in-modal">${cuisine}</p>
-                                                <p class="card-text text-grey-2 fw-500 text-align-justify mt-1 limit-short-description">${short_description}</p>
+                                                <p class="map-cuisine map-content-hide-mobile">${cuisine}</p>
+                                                <p class="map-short-description mb-2">${short_description}</p>
                                             </a>
                                             <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 10px; overflow: hidden; position: relative;">
                                                 <div style="position: absolute; height: 70px;" class="col-12 d-flex justify-content-center align-items-center">
@@ -570,15 +570,15 @@
                                                 <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-center modal-view-detail">
-                                            <div class="col-6">
+                                        <div class="modal-view-detail">
+                                            <div class="map-content-hide-mobile">
                                                 <a href="${contentLink}" target="_blank" class="link-detail">
-                                                    <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                    <p class="map-text-detail-link">View Detail</p>
                                                     <i class=" text-orange fa-solid fa-arrow-right"></i>
                                                 </a>
                                             </div>
         
-                                            <div class="d-flex justify-content-end col-6">
+                                            <div class="d-flex justify-content-end">
                                                 <div class="me-2 d-flex align-items-center flex-column">
                                                     <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
                                                     <small class="text-13">Prev</small>
@@ -849,26 +849,26 @@
                                     <div>
                                         <a href="${contentLink}" target="_blank">
                                             <div class="d-flex justify-content-between">
-                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${villaLocations.name}</p>
+                                                <p class="map-title-description">${villaLocations.name}</p>
                                                 <div class="video-btn-container-in-map">
                                                     ${video}
                                                 </div>
                                             </div>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1 list-fasilitas">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
-                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description mb-2">${short_description}</p>
-                                            <p class="card-text text-orange text-17 fw-500 map-price-dekstop">${price}/Night</p>
+                                            <p class="map-list-fasilitas">${villaLocations.adult ?? 0} Guest • ${villaLocations.bedroom ?? 0} Bedroom • ${villaLocations.bathroom ?? 0} Bath • ${villaLocations.parking ?? 0} Parking • ${villaLocations.size ?? 0}m² living</p>
+                                            <p class="map-short-description mb-2 map-content-hide-mobile">${short_description}</p>
+                                            <p class="map-price-dekstop map-content-hide-mobile">${price}/Night</p>
                                         </a>
                                     </div>
-                                    <div class="d-flex align-items-end modal-view-detail">
-                                        <div class="col-6 map-villa-detail-link">
+                                    <div class="modal-view-detail view__detail-villa ">
+                                        <div class="map-villa-detail-link map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
-                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <p class="col-6 card-text text-orange text-17 fw-500 map-price-mobile">${price}/Night</p>
+                                        <p class="map-price-mobile">${price}/Night</p>
 
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="text-13">Prev</small>
@@ -1113,7 +1113,7 @@
                                     <div>
                                         <a href="${contentLink}" target="_blank">
                                             <div class="d-flex justify-content-between">
-                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${hotelLocations.name}</p>
+                                                <p class="map-title-description">${hotelLocations.name}</p>
                                                 <div class="video-btn-container-in-map">
                                                     ${video}
                                                 </div>
@@ -1134,14 +1134,14 @@
                                             <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center mt-3 modal-view-detail">
-                                        <div class="col-6">
+                                    <div class="modal-view-detail">
+                                        <div class="map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
-                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="text-13">Prev</small>
@@ -1420,13 +1420,13 @@
                                     <div>
                                         <a href="${contentLink}" target="_blank">
                                             <div class="d-flex justify-content-between">
-                                                <p class="card-text text-orange mb-0 text-20 fw-600 map-title-description">${activityLocations.name}</p>
+                                                <p class="map-title-description">${activityLocations.name}</p>
                                                 <div class="video-btn-container-in-map">
                                                     ${video}
                                                 </div>
                                             </div>
-                                            <p class="card-text text-13 text-grey-1 fw-500 mt-1">${facilities}</p>
-                                            <p class="card-text text-grey-2 text-14 fw-500 text-align-justify mt-1 map-text-description">${short_description}</p>
+                                            <p class="map-list-fasilitas map-content-hide-mobile">${facilities}</p>
+                                            <p class="map-short-description mb-2">${short_description}</p>
                                             {{-- <p class="card-text text-orange text-13 fw-500 mt-1">${review}</p> --}}
                                         </a>
                                         <div class="d-none d-md-flex mt-2" style="height: 70px; width: 100%; border-radius: 12px; overflow: hidden; position:relative;">
@@ -1444,14 +1444,14 @@
                                             <img style="object-fit: cover; width: 100%;" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-end modal-view-detail">
-                                        <div class="col-6">
+                                    <div class="modal-view-detail">
+                                        <div class="map-content-hide-mobile">
                                             <a href="${contentLink}" target="_blank" class="link-detail">
-                                                <p class="card-text text-17 text-orange fw-600">View Detail</p>
+                                                <p class="map-text-detail-link">View Detail</p>
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end col-6">
+                                        <div class="d-flex justify-content-end">
                                             <div class="me-2 d-flex align-items-center flex-column">
                                                 <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <small class="text-13">Prev</small>

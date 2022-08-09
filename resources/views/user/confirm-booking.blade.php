@@ -669,7 +669,7 @@
                                                     @auth
                                                         <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
                                                     @endauth
-                                                        <input type="hidden" name="price_total" id="price_total" value="{{ Crypt::encryptString($villa->id_villa) }}">
+                                                        <input type="hidden" name="id_villa" id="price_total" value="{{ $villa->id_villa }}">
                                                         <input type="hidden" name="check_in" value="{{ request()->check_in }}">
                                                         <input type="hidden" name="check_out" value="{{ request()->check_out }}">
                                                         <input type="hidden" name="adult" value="{{ request()->adult }}">

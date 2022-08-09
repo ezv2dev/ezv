@@ -152,7 +152,8 @@ body, html {
     background: #f7f7f7;
 }
 .customer-support-block {
-    padding: 67px 0;
+    padding: 30px;
+    border-radius: 12px;
 }
 .customer-support-block h1 {
     color: #000;

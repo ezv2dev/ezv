@@ -1056,9 +1056,6 @@
                                     <a class="dropdown-item sub-drop" href="{{ route('account_setting') }}">
                                         Account
                                     </a>
-                                    <a class="dropdown-item sub-drop" href="{{ route('cohost_setting') }}">
-                                        Cohost
-                                    </a>
                                     <a class="dropdown-item sub-drop" href="{{ route('help_guest') }}">
                                         Get Help
                                     </a>
@@ -1082,7 +1079,48 @@
                                         @endif
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    {{-- <a class="dropdown-item sub-drop" href="{{ route('refer_host') }}">
+                                    {{-- <a class="dropdown-item sub-drop" href="{{ route('refer_host') }}
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
+                                        {{ Auth::user()->last_name }}</div>
+                                    <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                                </div>
+                            </h6>
+                            @if (in_array(Auth::user()->role_id, [1, 2, 3]))
+                                <a class="dropdown-item sub-drop" href="{{ route('profile_user') }}">
+                                    Profile
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('account_setting') }}">
+                                    Account
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('help_guest') }}">
+                                    Get Help
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item sub-drop" href="{{ route('cohost_setting') }}">
+                                    Cohost
+                                </a>
+                                <a class="dropdown-item sub-drop" href="{{ route('partner_inbox') }}">
+                                    Inbox
+                                </a><a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">
+                                    Calendar
+                                </a><a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
+                                    Insight
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="language()">
+                                    Language and translation
+                                </a>
+                                <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="currency()">
+                                    @if (isset(Auth::user()->currency->symbol) || isset(Auth::user()->currency->code))
+                                        {{ Auth::user()->currency->symbol }} {{ Auth::user()->currency->code }}
+                                    @else
+                                        $ USD
+                                    @endif
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                {{-- <a class="dropdown-item sub-drop" href="{{ route('refer_host') }}">
+
                                 Your Referral Code
                             </a> --}}
                                 @endIf

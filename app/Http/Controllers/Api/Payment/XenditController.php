@@ -26,6 +26,7 @@ use App\Services\CurrencyConversionService as CurrencyConversion;
 class XenditController extends Controller
 {
     private $token = 'xnd_development_ev0koCvH7zPR6z1uX8T7DbHmaqaNPSoQV2DTGBzWFFNe6YNEgoVIK6eLt64GVzc';
+    private $xenditCallbackToken = 'MAfggTCtsF26SjeyQsZfJHQ1brZv1fyOYfMDhSZhhG0CNPrz';
 
     //virtual account
 
@@ -45,8 +46,8 @@ class XenditController extends Controller
         // dd(auth()->check());
         // dd($request->all());
         //get id villa
-        $decrypt_id = Crypt::decryptString($request->price_total);
-        $villa = Villa::select('price', 'adult', 'children')->where('id_villa', $decrypt_id)->where('status', 1)->first();
+        $id_villa = $request->id_villa;
+        $villa = Villa::select('price', 'adult', 'children')->where('id_villa', $id_villa)->where('status', 1)->first();
 
         // abort if villa not found
         abort_if(!$villa, 404);
@@ -70,7 +71,7 @@ class XenditController extends Controller
         }
 
         //price villa
-        $price = $this->count($decrypt_id, $villa, $check_in, $check_out);
+        $price = $this->count($id_villa, $villa, $check_in, $check_out);
 
         Xendit::setApiKey($this->token);
 
@@ -88,7 +89,7 @@ class XenditController extends Controller
             "external_id" => $external_id,
             "bank_code" => $request->bank_option,
             "name" => $name,
-            "expected_amount" => $price,
+            "expected_amount" => (int)$price,
             "is_closed" => true,
             "expiration_date" => Carbon::now()->addDays(1)->toISOString(),
             "is_single_use" => true,
@@ -139,13 +140,20 @@ class XenditController extends Controller
     {
         try {
             // decode json callback
-            $requestEncoded = json_decode($request);
+            $requestEncoded = $request->json()->all();
 
-            // TODO verify callback
+            // verify callback the callback come from xendit or not
+            $callbackToken = $request->header('x-callback-token');
+            if(!$callbackToken || $callbackToken != $this->xenditCallbackToken){
+                abort(403);
+            }
 
             // proceed data if verified
             $external_id = $requestEncoded["external_id"];
-            $payment = Payment::where('external_id', $external_id)->exists();
+            $payment = Payment::where('external_id', '=',$external_id)
+                ->where('bank', '=',$requestEncoded["bank_code"])
+                ->where('price', '=',$requestEncoded["amount"])
+                ->first();
             if($payment)
             {
                 $update = Payment::where('external_id', $external_id)->update([
@@ -219,14 +227,14 @@ class XenditController extends Controller
 
 
     //function count price
-    private function count($decrypt_id, $villa, $check_in, $check_out)
+    private function count($id_villa, $villa, $check_in, $check_out)
     {
-        $special = VillaDetailPrice::where('id_villa', $decrypt_id)->get();
+        $special = VillaDetailPrice::where('id_villa', $id_villa)->get();
         $tax_setting = TaxSetting::select('total_tax')->first();
         $tax = $tax_setting->total_tax;
-        $cleaning = VillaCleaningFee::where('id_villa', $decrypt_id)->get();
-        $extra_guest = VillaExtraGuest::where('id_villa', $decrypt_id)->get();
-        $extra_bed = VillaExtraBed::where('id_villa', $decrypt_id)->get();
+        $cleaning = VillaCleaningFee::where('id_villa', $id_villa)->get();
+        $extra_guest = VillaExtraGuest::where('id_villa', $id_villa)->get();
+        $extra_bed = VillaExtraBed::where('id_villa', $id_villa)->get();
 
          //get normal price
          $normal_price = $villa->price;
@@ -369,7 +377,7 @@ class XenditController extends Controller
         $invoice_code = $companyCode.'-'.$dateSection.'-'.$numberSection;
 
         // find villa
-        $id_villa = Crypt::decryptString($request->price_total) ?? null;
+        $id_villa = $request->id_villa ?? null;
         $villa = Villa::where('id_villa', $id_villa)->where('status', 1)->first();
         if(!$villa){
             return false;
@@ -586,12 +594,12 @@ class XenditController extends Controller
         //     'max_total_children' => $max_total_child,
         // ];
         $data = (object)[
-            'normal_price' => $normal_price,
-            'total' => $total,
-            'service' => ($total * $tax / 100),
-            'cleaning_fee' => $cleaning_fee,
-            'discount' => $discounts,
-            'total_all' => $total_all,
+            'normal_price' => (int)$normal_price,
+            'total' => (int)$total,
+            'service' => (int)($total * $tax / 100),
+            'cleaning_fee' => (int)$cleaning_fee,
+            'discount' => (int)$discounts,
+            'total_all' => (int)$total_all,
         ];
 
         return $data;

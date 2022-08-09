@@ -24,7 +24,7 @@ class HotelStatistic extends Model
     ];
 
     // * Relationship
-    public function hotelStatistic()
+    public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'id_hotel', 'id_hotel');
     }
