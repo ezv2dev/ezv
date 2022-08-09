@@ -368,11 +368,11 @@
                                     Switch to traveling
                                 </a>
                             @endIf
-                            @if (in_array(Auth::user()->role_id, [1, 2, 3]))
+                            {{-- @if (in_array(Auth::user()->role_id, [1, 2, 3]))
                                 <a class="dropdown-item sub-drop" href="{{ route('admin_tax_setting') }}">
                                     Tax Setting
                                 </a>
-                            @endIf
+                            @endIf --}}
                             <a class="dropdown-item sub-drop" href="#!"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                                 <div class="dropdown-item-icon"><i data-feather="log-out"
@@ -391,13 +391,14 @@
                         </a>
                         <div class="collapse" id="dropHomes">
                             <a class="dropdown-item sub-drop" href="{{ route('listing_dashboard') }}">Listing</a>
+                            <a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">Calendar</a>
                             <a class="dropdown-item sub-drop"
                                 href="{{ route('reservations_dashboard') }}">Reservations</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
-                                history</a>
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a> --}}
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
+                                history</a> --}}
                         </div>
                         <a id="nav-hotels" class="navbar-gap d-block mb-2"
                             style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;"
@@ -411,9 +412,9 @@
                                 href="{{ route('hotel_room_reservations_dashboard') }}">Reservations</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
-                                history</a>
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a> --}}
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
+                                history</a> --}}
                         </div>
                         <a id="nav-food" class="navbar-gap d-block mb-2"
                             style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;"
@@ -425,9 +426,9 @@
                             <a class="dropdown-item sub-drop" href="{{ route('admin_restaurant') }}">List Food</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
-                                history</a>
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a> --}}
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
+                                history</a> --}}
                         </div>
                         <a id="nav-wow" class="navbar-gap d-block mb-2"
                             style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;"
@@ -438,11 +439,12 @@
                             <a class="dropdown-item sub-drop" href="{{ route('admin_activity') }}">List WoW</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_add_listing') }}">Create new
                                 listing</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a>
-                            <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
-                                history</a>
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('manage_guidebook') }}">Guidebooks</a> --}}
+                            {{-- <a class="dropdown-item sub-drop" href="{{ route('completed_payouts') }}">Transaction
+                                history</a> --}}
                         </div>
-                        <a id="nav-reward" class="navbar-gap d-block mb-2"
+                        {{-- ! REWARD PROGRAM JANGAN HAPUS DIOLAS --}}
+                        {{-- <a id="nav-reward" class="navbar-gap d-block mb-2"
                             style="cursor:pointer; color:#585656; width: fit-content; text-decoration: none;"
                             data-toggle="collapse" data-target="#dropReward" aria-expanded="false"
                             aria-controls="dropReward">
@@ -456,7 +458,8 @@
                                 Balance</a>
                             <a class="dropdown-item sub-drop" href="{{ route('admin_staff_reward_balance') }}">Staff
                                 Reward Balance</a>
-                        </div>
+                        </div> --}}
+                        {{-- ! END REWARD PROGRAM --}}
                     </div>
                     <hr>
                     <div class="d-flex align-items-center mb-2">
@@ -627,7 +630,13 @@
                                 <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('listing_dashboard') }}">
                                     <div class="dropdown-notifications-item-content">
-                                        <div class="dropdown-notifications-item-content-text">Listing</div>
+                                        <div class="dropdown-notifications-item-content-text">List Homes</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item dropdown-notifications-item"
+                                    href="{{ route('calendar_index') }}">
+                                    <div class="dropdown-notifications-item-content">
+                                        <div class="dropdown-notifications-item-content-text">Calendar</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item dropdown-notifications-item"
@@ -648,18 +657,18 @@
                                         <div class="dropdown-notifications-item-content-text">Insight</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('manage_guidebook') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Guidebooks</div>
                                     </div>
-                                </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                </a> --}}
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('completed_payouts') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Transaction history</div>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                         </li>
 
@@ -686,7 +695,7 @@
                                 <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('dashboard_listing_hotel') }}">
                                     <div class="dropdown-notifications-item-content">
-                                        <div class="dropdown-notifications-item-content-text">Listing</div>
+                                        <div class="dropdown-notifications-item-content-text">List Hotel</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item dropdown-notifications-item"
@@ -707,18 +716,18 @@
                                         <div class="dropdown-notifications-item-content-text">Insight</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('manage_guidebook') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Guidebooks</div>
                                     </div>
-                                </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                </a> --}}
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('completed_payouts') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Transaction history</div>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                         </li>
 
@@ -762,19 +771,19 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('manage_guidebook') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Guidebooks</div>
                                     </div>
-                                </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                </a> --}}
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('completed_payouts') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Transaction history
                                         </div>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                         </li>
 
@@ -818,24 +827,24 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('manage_guidebook') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Guidebooks</div>
                                     </div>
-                                </a>
-                                <a class="dropdown-item dropdown-notifications-item"
+                                </a> --}}
+                                {{-- <a class="dropdown-item dropdown-notifications-item"
                                     href="{{ route('completed_payouts') }}">
                                     <div class="dropdown-notifications-item-content">
                                         <div class="dropdown-notifications-item-content-text">Transaction history
                                         </div>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                         </li>
 
-                        {{-- Reward --}}
-                        @if (Auth::user()->role_id == 1)
+                        {{-- ! REWARD PROGRAM JANGAN HAPUS DIOLAS --}}
+                        {{-- @if (Auth::user()->role_id == 1)
                             <li class="nav-item dropdown no-caret dropdown-notifications">
                                 <a style="padding: 0px 60px;"
                                     class="{{ Request::is('dashboard/reward-category') || Request::is('dashboard/user-reward') || Request::is('dashboard/user-reward-balance') || Request::is('dashboard/staff-reward-balance') ? 'border-bottom' : '' }} borderr nav-link btn btn-icon btn-transparent-dark dropdown-toggle"
@@ -885,7 +894,8 @@
                                     </a>
                                 </div>
                             </li>
-                        @endif
+                        @endif --}}
+                        {{-- ! END REWARD PROGRAM JANGAN HAPUS DIOLAS --}}
                     @endif
 
                 </ul>
@@ -1020,8 +1030,7 @@
                                         style="object-fit:cover;">
                                 @else
                                     <img class="w-100 h-100 border rounded-circle"
-                                        src="{{ asset('assets/icon/menu/user_default.svg') }}"
-                                        style="object-fit:cover;">
+                                        src="{{ asset('assets/icon/menu/user_default.svg') }}" style="object-fit:cover;">
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
@@ -1065,11 +1074,13 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item sub-drop" href="{{ route('partner_inbox') }}">
                                         Inbox
-                                    </a><a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">
-                                        Calendar
-                                    </a><a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
-                                        Insight
                                     </a>
+                                    {{-- <a class="dropdown-item sub-drop" href="{{ route('calendar_index') }}">
+                                        Calendar
+                                    </a>
+                                    <a class="dropdown-item sub-drop" href="{{ route('insight_dashboard') }}">
+                                        Insight
+                                    </a> --}}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item sub-drop" href="javascript:void(0);" onclick="language()">
                                         Language and translation
@@ -1091,11 +1102,11 @@
                                         Switch to traveling
                                     </a>
                                 @endIf
-                                @if (in_array(Auth::user()->role_id, [1, 2, 3]))
+                                {{-- @if (in_array(Auth::user()->role_id, [1, 2, 3]))
                                     <a class="dropdown-item sub-drop" href="{{ route('admin_tax_setting') }}">
                                         Tax Setting
                                     </a>
-                                @endIf
+                                @endIf --}}
                                 <a class="dropdown-item sub-drop" href="#!"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
