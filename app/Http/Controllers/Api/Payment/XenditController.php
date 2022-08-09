@@ -22,6 +22,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Services\CurrencyConversionService as CurrencyConversion;
+use App\Models\VillaAvailability;
 
 class XenditController extends Controller
 {
@@ -43,11 +44,32 @@ class XenditController extends Controller
 
     public function createVa(Request $request)
     {
-        // dd(auth()->check());
         // dd($request->all());
         //get id villa
         $id_villa = $request->id_villa;
-        $villa = Villa::select('price', 'adult', 'children')->where('id_villa', $id_villa)->where('status', 1)->first();
+        $villa = Villa::select('price', 'adult', 'children', 'min_stay')->where('id_villa', $id_villa)->where('status', 1)->first();
+
+        // check if date availability is valid
+        $unavailableDate = $this->getUnavailableDate($id_villa);
+        $isUnavailable = false;
+
+        $check_in = date('Y-m-d', strtotime($request->check_in));
+        $check_out = date('Y-m-d', strtotime($request->check_out));
+        foreach ($unavailableDate as $item) {
+            $date = date('Y-m-d', strtotime($item));
+            if(($date >= $check_in) && ($date <= $check_out)){
+                $isUnavailable = true;
+            }
+        }
+        if($isUnavailable){
+            abort(500);
+        }
+
+        // check if min stay is valid
+        $stay = date_diff(date_create($request->check_out), date_create($request->check_in));
+        if(!($stay->d >= $villa->min_stay)){
+            abort(500);
+        }
 
         // abort if villa not found
         abort_if(!$villa, 404);
@@ -603,5 +625,35 @@ class XenditController extends Controller
         ];
 
         return $data;
+    }
+
+    private function getUnavailableDate($id)
+    {
+        $blog = VillaBooking::where('id_villa', $id)->get();
+
+        $availability = VillaAvailability::where('id_villa', $id)->get();
+
+        if ($blog->count() > 0)
+            foreach ($blog as $item) {
+                $period = CarbonPeriod::create($item->check_in, $item->check_out);
+                foreach ($period as $date) {
+                    $dates[] = $date->format('Y-m-d');
+                }
+            }
+        else {
+            $dates[] = Carbon::yesterday()->format('Y-m-d');
+        }
+
+        if ($availability->count() > 0)
+        {
+            foreach ($availability as $item2) {
+                $period2 = CarbonPeriod::create($item2->start, $item2->end);
+                foreach ($period2 as $date2) {
+                    $dates[] = $date2->format('Y-m-d');
+                }
+            }
+        }
+
+        return $dates;
     }
 }

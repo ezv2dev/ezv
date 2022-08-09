@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
     <title id="villaTitle">{{ $villa[0]->name }} - EZV2</title>
     <meta name="description" content="EZV2 ">
@@ -1324,7 +1324,7 @@
                         </div>
                     </section>
 
-                    <section id="room_option" class="section-2 div-room_option px-xs-12p px-sm-24p">
+                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
                         <div class="row-grid-room-option">
                             <hr>
                             <div>
@@ -4526,8 +4526,7 @@
                 },
                 url: "/villa/video/views",
                 data: {
-                    id_villa: id_villa,
-                    id_video: id_video,
+                    id_villa: id_villa
                 }
             });
         }

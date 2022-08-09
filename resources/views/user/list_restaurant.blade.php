@@ -61,7 +61,7 @@
                     <div>
                         <a href="#" class="grid-img-container"
                             onclick="foodFilter({{ $item->id_cuisine }}, null, true, false)">
-                            <img @if ($fCuisine == $item->id_cuisine) style="border: 5px solid #ff7400;" @endif
+                            <img @if ($fCuisine == $item->id_cuisine) style="border: 2px solid #ff7400;" @endif
                                 class="grid-img-filter lozad"
                                 data-src="https://source.unsplash.com/random/?{{ $item->name }}"
                                 src="{{ LazyLoad::show() }}">

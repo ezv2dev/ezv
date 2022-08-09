@@ -3590,6 +3590,8 @@ input::-webkit-inner-spin-button {
     #navbar-first-dekstop {
         padding-top: 0.7rem !important;
         padding-bottom: 0.5rem !important;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
     }
     #villa-data hr:last-of-type {
         margin-bottom: 19px !important;
@@ -3599,7 +3601,7 @@ input::-webkit-inner-spin-button {
     }
 }
 
-@media only screen and (min-width: 991px) {
+@media only screen and (min-width: 992px) {
     .villa-list-title {
         flex-direction: column;
         column-gap: 0px;
@@ -3692,7 +3694,7 @@ input::-webkit-inner-spin-button {
         gap: 5px !important;
     }
 }
-@media only screen and (min-width: 426px) and (max-width: 645px) {
+@media only screen and (min-width: 426px) and (max-width: 549px) {
     #villa-data {
         padding-right: 1.5rem !important;
         padding-left: 1.5rem !important;
@@ -3703,13 +3705,15 @@ input::-webkit-inner-spin-button {
         padding-left: 1.5rem !important;
     }
 }
-@media only screen and (min-width: 646px) and (max-width: 991px) {
-    #villa-data {
-        max-width: 758px !important;
-        margin-right: auto !important;
-        margin-left: auto !important;
+@media only screen and (min-width: 550px) and (max-width: 799px) {
+    #villa-data,
+    #villa-search-data {
+        padding-right: 40px !important;
+        padding-left: 40px !important;
     }
-
+}
+@media only screen and (min-width: 800px) and (max-width: 991px) {
+    #villa-data,
     #villa-search-data {
         max-width: 758px !important;
         margin-right: auto !important;

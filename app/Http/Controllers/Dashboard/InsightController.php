@@ -19,18 +19,18 @@ class InsightController extends Controller
     public function homes()
     {
         $villa_created = Villa::where('created_by', Auth::user()->id)->select('id_villa')->get();
-        $viewsMonth = VillaStatistic::with('villa')->whereIn('id_villa', $villa_created)->get();
+        $villaStatistic = VillaStatistic::with('villa')->whereIn('id_villa', $villa_created)->get();
 
-        $array_month = array();
-        foreach ($viewsMonth as $item) {
-            $array_month[$item->villa->name][$item->month] = $item->villa_views;
+        $tempVilla = array();
+        foreach ($villaStatistic as $item) {
+            $tempVilla[$item->villa->name][$item->month] = $item->villa_views;
         }
 
         $arrayVilla = array();
-        foreach ($array_month as $key => $value) {
+        foreach ($tempVilla as $key => $value) {
             $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            foreach ($array_month[$key] as $key2 => $value2) {
+            foreach ($tempVilla[$key] as $key2 => $value2) {
                 $monthArray[$key2] = $value2;
             }
 
@@ -38,24 +38,58 @@ class InsightController extends Controller
             unset($arrayVilla[$key][0]);
         }
 
-        return view('new-admin.insight.insight_homes', compact('arrayVilla'));
+        $tempPhoto = array();
+        foreach ($villaStatistic as $item) {
+            $tempPhoto[$item->villa->name][$item->month] = $item->photo_views;
+        }
+
+        $arrayPhoto = array();
+        foreach ($tempPhoto as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempPhoto[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayPhoto[$key] = $monthArray;
+            unset($arrayPhoto[$key][0]);
+        }
+
+        $tempVideo = array();
+        foreach ($villaStatistic as $item) {
+            $tempVideo[$item->villa->name][$item->month] = $item->video_views;
+        }
+
+        $arrayVideo = array();
+        foreach ($tempVideo as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempVideo[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayVideo[$key] = $monthArray;
+            unset($arrayVideo[$key][0]);
+        }
+
+        return view('new-admin.insight.insight_homes', compact('arrayVilla', 'arrayPhoto', 'arrayVideo'));
     }
 
     public function hotel()
     {
-        $hotel_created = Hotel::where('created_by', Auth::user()->id)->select('id_hotel')->get();
-        $viewsMonth = HotelStatistic::with('hotel')->whereIn('id_hotel', $hotel_created)->get();
+        $hotelCreated = Hotel::where('created_by', Auth::user()->id)->select('id_hotel')->get();
+        $hotelStatistic = HotelStatistic::with('hotel')->whereIn('id_hotel', $hotelCreated)->get();
 
-        $array_month = array();
-        foreach ($viewsMonth as $item) {
-            $array_month[$item->hotel->name][$item->month] = $item->hotel_views;
+        $tempHotel = array();
+        foreach ($hotelStatistic as $item) {
+            $tempHotel[$item->hotel->name][$item->month] = $item->hotel_views;
         }
 
         $arrayHotel = array();
-        foreach ($array_month as $key => $value) {
+        foreach ($tempHotel as $key => $value) {
             $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            foreach ($array_month[$key] as $key2 => $value2) {
+            foreach ($tempHotel[$key] as $key2 => $value2) {
                 $monthArray[$key2] = $value2;
             }
 
@@ -63,54 +97,158 @@ class InsightController extends Controller
             unset($arrayHotel[$key][0]);
         }
 
-        return view('new-admin.insight.insight_hotel', compact('arrayHotel'));
+        $tempPhoto = array();
+        foreach ($hotelStatistic as $item) {
+            $tempPhoto[$item->hotel->name][$item->month] = $item->photo_views;
+        }
+
+        $arrayPhoto = array();
+        foreach ($tempPhoto as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempPhoto[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayPhoto[$key] = $monthArray;
+            unset($arrayPhoto[$key][0]);
+        }
+
+        $tempVideo = array();
+        foreach ($hotelStatistic as $item) {
+            $tempVideo[$item->hotel->name][$item->month] = $item->video_views;
+        }
+
+        $arrayVideo = array();
+        foreach ($tempVideo as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempVideo[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayVideo[$key] = $monthArray;
+            unset($arrayVideo[$key][0]);
+        }
+
+        return view('new-admin.insight.insight_hotel', compact('arrayHotel', 'arrayPhoto', 'arrayVideo'));
     }
 
     public function food()
     {
-        $restaurant_created = Restaurant::where('created_by', Auth::user()->id)->select('id_restaurant')->get();
-        $viewsMonth = RestaurantStatistic::with('restaurant')->whereIn('id_restaurant', $restaurant_created)->get();
+        $restaurantCreated = Restaurant::where('created_by', Auth::user()->id)->select('id_restaurant')->get();
+        $restaurantStatistic = RestaurantStatistic::with('restaurant')->whereIn('id_restaurant', $restaurantCreated)->get();
 
-        $array_month = array();
-        foreach ($viewsMonth as $item) {
-            $array_month[$item->restaurant->name][$item->month] = $item->restaurant_views;
+        $tempRestaurant = array();
+        foreach ($restaurantStatistic as $item) {
+            $tempRestaurant[$item->restaurant->name][$item->month] = $item->restaurant_views;
         }
 
         $arrayRestaurant = array();
-        foreach ($array_month as $key => $value) {
+        foreach ($tempRestaurant as $key => $value) {
             $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            foreach ($array_month[$key] as $key2 => $value2) {
+            foreach ($tempRestaurant[$key] as $key2 => $value2) {
                 $monthArray[$key2] = $value2;
             }
 
             $arrayRestaurant[$key] = $monthArray;
             unset($arrayRestaurant[$key][0]);
         }
-        return view('new-admin.insight.insight_food', compact('arrayRestaurant'));
+
+        $tempPhoto = array();
+        foreach ($restaurantStatistic as $item) {
+            $tempPhoto[$item->restaurant->name][$item->month] = $item->photo_views;
+        }
+
+        $arrayPhoto = array();
+        foreach ($tempPhoto as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempPhoto[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayPhoto[$key] = $monthArray;
+            unset($arrayPhoto[$key][0]);
+        }
+
+        $tempVideo = array();
+        foreach ($restaurantStatistic as $item) {
+            $tempVideo[$item->restaurant->name][$item->month] = $item->video_views;
+        }
+
+        $arrayVideo = array();
+        foreach ($tempVideo as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempVideo[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayVideo[$key] = $monthArray;
+            unset($arrayVideo[$key][0]);
+        }
+
+        return view('new-admin.insight.insight_food', compact('arrayRestaurant', 'arrayPhoto', 'arrayVideo'));
     }
 
     public function wow()
     {
-        $activity_created = Activity::where('created_by', Auth::user()->id)->select('id_activity')->get();
-        $viewsMonth = ActivityStatistic::with('activity')->whereIn('id_activity', $activity_created)->get();
+        $activityCreated = Activity::where('created_by', Auth::user()->id)->select('id_activity')->get();
+        $activityStatistic = ActivityStatistic::with('activity')->whereIn('id_activity', $activityCreated)->get();
 
-        $array_month = array();
-        foreach ($viewsMonth as $item) {
-            $array_month[$item->activity->name][$item->month] = $item->activity_views;
+        $tempActivity = array();
+        foreach ($activityStatistic as $item) {
+            $tempActivity[$item->activity->name][$item->month] = $item->activity_views;
         }
 
         $arrayActivity = array();
-        foreach ($array_month as $key => $value) {
+        foreach ($tempActivity as $key => $value) {
             $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            foreach ($array_month[$key] as $key2 => $value2) {
+            foreach ($tempActivity[$key] as $key2 => $value2) {
                 $monthArray[$key2] = $value2;
             }
 
             $arrayActivity[$key] = $monthArray;
             unset($arrayActivity[$key][0]);
         }
-        return view('new-admin.insight.insight_wow', compact('arrayActivity'));
+
+        $tempPhoto = array();
+        foreach ($activityStatistic as $item) {
+            $tempPhoto[$item->activity->name][$item->month] = $item->photo_views;
+        }
+
+        $arrayPhoto = array();
+        foreach ($tempPhoto as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempPhoto[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayPhoto[$key] = $monthArray;
+            unset($arrayPhoto[$key][0]);
+        }
+
+        $tempVideo = array();
+        foreach ($activityStatistic as $item) {
+            $tempVideo[$item->activity->name][$item->month] = $item->video_views;
+        }
+
+        $arrayVideo = array();
+        foreach ($tempVideo as $key => $value) {
+            $monthArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            foreach ($tempVideo[$key] as $key2 => $value2) {
+                $monthArray[$key2] = $value2;
+            }
+
+            $arrayVideo[$key] = $monthArray;
+            unset($arrayVideo[$key][0]);
+        }
+
+        return view('new-admin.insight.insight_wow', compact('arrayActivity', 'arrayPhoto', 'arrayVideo'));
     }
 }

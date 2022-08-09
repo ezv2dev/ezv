@@ -230,11 +230,16 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
+                            <button class="btn-company d-block d-lg-none listing-mobile-btn me-1" style="font-size: 9px; padding: 10px !important; border: none;">
+                                <a href="{{ route('ahost') }}" style="color: white;">
+                                    Create listing
+                                </a>
+                            </button>
                             <div id="searchbox-mob" class="searchbox display-none" onclick="popUp();"
                                 style="cursor: pointer; border: none; margin:0;">
                                 <span class="top-search"><i class="fa fa-search"></i></span>
                             </div>
-                            <button class="navbar-toggler" type="button" id="expand-mobile-btn">
+                            <button class="navbar-toggler px-0" type="button" id="expand-mobile-btn">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                         </div>
@@ -1437,6 +1442,39 @@
 
         <script>
             jQuery(document).ready(function(e) {
+                if (window.scrollY > 0 && window.innerWidth > 991) {
+                    $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
+                        $('#bar').addClass('display-none');
+                        $('#searchbox').removeClass('display-none').addClass('display-block');
+                        $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
+                        $('#searchbox-mob').removeClass('display-none').addClass('display-block');
+
+                        function addClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.add(className);
+                                } else {
+                                    element.className += ' ' + className;
+                                }
+                            }
+                        }
+
+                        function removeClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.remove(className);
+                                } else {
+                                    element.className = element.className.replace(new RegExp('(^|\\b)' + className
+                                        .split(' ')
+                                        .join('|') + '(\\b|$)', 'gi'), ' ');
+                                }
+                            }
+                        }
+                        var els = document.getElementsByClassName("flatpickr-calendar");
+                        addClass(els, 'display-none');
+                }
                 function t(t) {
                     e(t).bind("click", function(t) {
                         t.preventDefault();
@@ -1471,13 +1509,31 @@
             window.addEventListener('scroll', function() {
                 var st = window.pageYOffset || document.documentElement.scrollTop;
                 var isFocused = document.querySelector("#loc_sugest") == document.activeElement;
-                if (window.scrollY == 0) {
-                    $('#ul').show();
+                if (window.scrollY > 400 && window.innerWidth < 992 && !$("#ul").hasClass("ul-display-block")) {
+                    $("#navbar-first-dekstop").addClass("navbar-mobile-position-fixed");
+                    $('#searchbox-mob').removeClass('display-none').addClass('display-block');
+                    $('#ul').removeAttr("style");
+                    $('#bar').removeAttr("style");
+                    $('#searchbox').removeAttr("style");
+                }
+                if (window.innerWidth > 991) {
+                    $('#ul').removeAttr("style");
+                    $('#bar').removeAttr("style");
+                    $('#searchbox').removeAttr("style");
+                }
+                if (window.scrollY < 400 && window.innerWidth < 992) {
+                    $('#ul').attr("style", "transition: none !important");
+                    $('#bar').attr("style", "transition: none !important");
+                    $('#searchbox').attr("style", "transition: none !important");
+                }
+                if (window.scrollY == 0 || (window.scrollY < 400 && window.innerWidth < 992)) {
+                    // $('#ul').show();
                     $('#ul').removeClass('ul-display-none').addClass('ul-display-block');
                     $('#bar').removeClass('display-none');
                     $('#searchbox').removeClass('display-block').addClass('display-none');
                     $('#nav').removeClass('position-fixed').removeClass('padding-top-0');
                     $('#searchbox-mob').removeClass('display-block').addClass('display-none');
+                    $("#navbar-first-dekstop").removeClass("navbar-mobile-position-fixed");
 
                     function removeClass(elements, className) {
                         for (var i = 0; i < elements.length; i++) {
@@ -1495,7 +1551,7 @@
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     removeClass(els, 'display-none');
                 } else {
-                    if (!isFocused && window.innerWidth > 991) {
+                    if (!isFocused && window.innerWidth < 992 && window.scrollY > 400) {
                         console.log("oke");
                         $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
                         $('#bar').addClass('display-none');
@@ -1528,41 +1584,39 @@
                         }
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
-                    } else {
-                        if (!isFocused && $(window).scrollTop() > 500) {
-                            $('#ul').hide();
-                            $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
-                            $('#bar').addClass('display-none');
-                            $('#searchbox').removeClass('display-none').addClass('display-block');
-                            $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
-                            $('#searchbox-mob').removeClass('display-none').addClass('display-block');
+                    } else if (!isFocused || window.innerWidth > 991) {
+                        console.log("oke");
+                        $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
+                        $('#bar').addClass('display-none');
+                        $('#searchbox').removeClass('display-none').addClass('display-block');
+                        $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
+                        $('#searchbox-mob').removeClass('display-none').addClass('display-block');
 
-                            function addClass(elements, className) {
-                                for (var i = 0; i < elements.length; i++) {
-                                    var element = elements[i];
-                                    if (element.classList) {
-                                        element.classList.add(className);
-                                    } else {
-                                        element.className += ' ' + className;
-                                    }
+                        function addClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.add(className);
+                                } else {
+                                    element.className += ' ' + className;
                                 }
                             }
-
-                            function removeClass(elements, className) {
-                                for (var i = 0; i < elements.length; i++) {
-                                    var element = elements[i];
-                                    if (element.classList) {
-                                        element.classList.remove(className);
-                                    } else {
-                                        element.className = element.className.replace(new RegExp('(^|\\b)' + className
-                                            .split(' ')
-                                            .join('|') + '(\\b|$)', 'gi'), ' ');
-                                    }
-                                }
-                            }
-                            var els = document.getElementsByClassName("flatpickr-calendar");
-                            addClass(els, 'display-none');
                         }
+
+                        function removeClass(elements, className) {
+                            for (var i = 0; i < elements.length; i++) {
+                                var element = elements[i];
+                                if (element.classList) {
+                                    element.classList.remove(className);
+                                } else {
+                                    element.className = element.className.replace(new RegExp('(^|\\b)' + className
+                                        .split(' ')
+                                        .join('|') + '(\\b|$)', 'gi'), ' ');
+                                }
+                            }
+                        }
+                        var els = document.getElementsByClassName("flatpickr-calendar");
+                        addClass(els, 'display-none');
                     }
                 }
             });
@@ -1570,13 +1624,17 @@
 
         <script>
             function popUp() {
-                $('#ul').show();
+                // $('#ul').show();
                 document.getElementById("ul").classList.remove("ul-display-none");
                 document.getElementById("ul").classList.add("ul-display-block");
                 document.getElementById("bar").classList.remove("display-none");
                 document.getElementById("searchbox").classList.add("display-none");
                 document.getElementById("searchbox").classList.remove("display-block");
                 document.getElementById("nav").classList.add("search-height");
+                if (window.innerWidth < 992) {
+                    $("#navbar-first-dekstop").removeClass("navbar-mobile-position-fixed");
+                    document.getElementById("nav").classList.add("position-fixed");
+                }
 
                 function removeClass(elements, className) {
                     for (var i = 0; i < elements.length; i++) {
@@ -1664,6 +1722,7 @@
                         $("#bar .guests").removeClass("col-10");
                         $("#bar .button").removeClass("col-2 p-0 px-2");
                         $(".header-4-4 #nav .navbar-collapse .col-lg-4").css("height", "90px");
+                        $("#navbar-first-dekstop").removeClass("navbar-mobile-position-fixed");
                     }
                 }
                 var windowWidth = $(window).width();

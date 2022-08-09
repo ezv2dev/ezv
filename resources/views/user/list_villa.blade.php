@@ -95,7 +95,7 @@
                             <a href="#" class="grid-img-container"
                                 onclick="homesFilter({{ $item->id_villa_category }}, null, true)">
                                 <img class="grid-img-filter lozad" src="{{ LazyLoad::show() }}"
-                                    @if ($fCategory == $item->id_villa_category) style="border: 5px solid #ff7400;" @endif
+                                    @if ($fCategory == $item->id_villa_category) style="border: 2px solid #ff7400;" @endif
                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                                 <div class="grid-text translate-text-group-items">
                                     {{ $item->name }}

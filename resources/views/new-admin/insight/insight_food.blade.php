@@ -105,6 +105,16 @@
                         <div id="chartViews"></div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <div id="photoViews"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <div id="videoViews"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -161,6 +171,112 @@
             },
             series: [
                 @foreach ($arrayRestaurant as $key => $value)
+                    {
+                        name: {!! json_encode($key) !!},
+                        data: {!! json_encode(array_values($value)) !!}
+                    },
+                @endforeach
+            ]
+        });
+        Highcharts.chart('photoViews', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Total Photo Views'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Views'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [
+                @foreach ($arrayPhoto as $key => $value)
+                    {
+                        name: {!! json_encode($key) !!},
+                        data: {!! json_encode(array_values($value)) !!}
+                    },
+                @endforeach
+            ]
+        });
+        Highcharts.chart('videoViews', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Total Video Views'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Views'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [
+                @foreach ($arrayVideo as $key => $value)
                     {
                         name: {!! json_encode($key) !!},
                         data: {!! json_encode(array_values($value)) !!}

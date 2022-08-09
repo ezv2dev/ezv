@@ -396,7 +396,7 @@ if (request()->fCategory) {
                             <a href="#" class="grid-img-container"
                                 onclick="collabFilter({{ $item->id_collab_category }}, null)">
                                 <img class="grid-img-filter lozad"
-                                    @if ($fCategory == $item->id_collab_category) style="border: 5px solid #ff7400;" @endif
+                                    @if ($fCategory == $item->id_collab_category) style="border: 2px solid #ff7400;" @endif
                                     data-src="https://source.unsplash.com/random/?{{ $item->name }}"
                                     src="{{ LazyLoad::show() }}">
                                 <div class="grid-text translate-text-group-items">
