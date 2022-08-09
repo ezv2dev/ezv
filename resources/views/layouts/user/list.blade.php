@@ -174,27 +174,27 @@ if (isset($_COOKIE['tema'])) {
                     @if ($role == 1 || $role == 2 || $role == 3)
                         <a class="list-link-sidebar mb-2" href="{{ route('partner_dashboard') }}">
                             <i class="fa fa-tachometer text-center" aria-hidden="true"></i>
-                            {{ __('user_page.Dashboard') }}
+                            <p class="m-0">{{ __('user_page.Dashboard') }}</p>
                         </a>
                     @endif
                     @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
                         <a class="list-link-sidebar mb-2" href="{{ route('collaborator_list') }}">
                             <i class="fa fa-handshake-o text-center" aria-hidden="true"></i>
-                            {{ __('user_page.Collab Portal') }}
+                            <p class="m-0">{{ __('user_page.Collab Portal') }}</p>
                         </a>
                     @endif
                     <a class="list-link-sidebar  mb-2" href="{{ route('profile_index') }}">
                         <i class="fa-solid fa-user text-center"></i>
-                        {{ __('user_page.My Profile') }}
+                        <p class="m-0">{{ __('user_page.My Profile') }}</p>
                     </a>
                     <a class="list-link-sidebar  mb-2" href="{{ route('change_password') }}">
                         <i class="fa-solid fa-key text-center"></i>
-                        {{ __('user_page.Change Password') }}
+                        <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
                     <a class="list-link-sidebar  mb-2" href="#!"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                         <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
-                        {{ __('user_page.Sign Out') }}
+                        <p class="m-0">{{ __('user_page.Sign Out') }}</p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -202,7 +202,7 @@ if (isset($_COOKIE['tema'])) {
 
                     <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
-                        {{ __('user_page.Switch to Hosting') }}
+                        <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
                     </a>
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
                         <i class="fa fa-th text-center" aria-hidden="true"></i>
@@ -283,9 +283,9 @@ if (isset($_COOKIE['tema'])) {
                 </div>
             @else
                 <div class="d-flex align-items-center justify-content-between py-3">
-                    <a onclick="loginRegisterForm(2, 'login');" class="list-link-sidebar" id="login">
+                    <a onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar" id="login">
                         <i class="fa-solid fa-user text-center"></i>
-                        <p class="mb-0">Login</p>
+                        <p class="mb-0">Create Account</p>
                     </a>
                     <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
                         style="background: transparent; border: 0;">
