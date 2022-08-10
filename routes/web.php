@@ -1051,6 +1051,7 @@ Route::get('/food-list', [Restaurant\RestaurantListController::class, 'restauran
 // Route::get('/restaurant/s', 'Restaurant\RestaurantSearchController@index')->name('search_restaurant');
 Route::get('/food/search', [Restaurant\FoodSearchController::class, 'index'])->name('search_food');
 Route::get('/food/subcategory', [Restaurant\FoodSearchController::class, 'get_food_sub_id'])->name('get_food_sub_id');
+Route::get('/food/cuisine', [Restaurant\FoodSearchController::class, 'get_food_cuisine'])->name('get_food_cuisine');
 
 //RESTAURANT DETAIL
 // Route::get('/restaurant/{id}', 'ViewController@restaurant')->name('restaurant');

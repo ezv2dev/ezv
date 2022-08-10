@@ -195,11 +195,20 @@ class FoodSearchController extends Controller
     public function get_food_sub_id(Request $request)
     {
         $foodSub = RestaurantSubCategory::where('name', 'like', $request->name)->select('id_subcategory')->first();
-        // dd($foodSub->id_subcategory);
 
         return response()->json([
             'success' => true,
             'data' => $foodSub->id_subcategory,
+        ]);
+    }
+
+    public function get_food_cuisine(Request $request)
+    {
+        $foodCuisine = RestaurantCuisine::where('name', 'like', $request->name)->select('id_cuisine')->first();
+
+        return response()->json([
+            'success' => true,
+            'data' => $foodCuisine->id_subcategory,
         ]);
     }
 }
