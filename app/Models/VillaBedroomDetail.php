@@ -11,6 +11,8 @@ class VillaBedroomDetail extends Model
 
     protected $fillable = [
         'id_villa',
+        'price',
+        'image',
         'created_at',
         'updated_at',
         'created_by',

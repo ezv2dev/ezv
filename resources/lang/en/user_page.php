@@ -356,6 +356,7 @@ return [
     'Input name' => 'Input name',
     'Input price (number only)' => 'Input price (number only)',
     'Create Listing' => 'Create Listing',
+    'Create Account' => 'Create Account',
 
     'FAVORITE' => 'FAVORITE',
     'CANCEL' => 'CANCEL',
@@ -445,6 +446,7 @@ return [
     "Number of Room" => "Number of Room",
 
     'Add Room' => 'Add Room',
+    'Add Room Option' => 'Add Room Option',
     'Add New Room' => 'Add New Room',
     'Name of Room' => 'Name of Room',
     'No Data' => 'No Data',

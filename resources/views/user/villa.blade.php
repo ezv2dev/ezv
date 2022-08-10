@@ -68,6 +68,40 @@
 
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
     <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
+<style>
+        .list-link-sidebar {
+            gap: 12px;
+            display: flex;
+            align-items:center;
+        }
+
+        .list-link-sidebar i {
+            width: 30px;
+        }
+        .subcategory-in-sidebar:hover {
+            cursor: pointer;
+        }
+        .list-link-sidebar>*,
+        .list-link-sidebar:hover>* {
+            color: #585656;
+        }
+        @media only screen and (min-width: 748px) {
+            .mobile {
+                display: none;
+            }
+            .desktop {
+                display: block;
+            }
+        }
+        @media only screen and (max-width: 747px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body style="background-color:white">
@@ -859,88 +893,174 @@
                 <div class="js-gallery">
                     {{-- GALLERY --}}
                     <section id="gallery" class="section">
-                        <div class="col-12 row gallery">
-                            @if ($photo->count() > 0)
-                                @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
-                                        <a
-                                            href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
-                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
-                                                title="{{ $item->caption }}">
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Add Photo Caption') }}"
-                                                        onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button> --}}
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="delete_photo_photo(this)"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($video->count() > 0)
-                                @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
-                                        @auth
-                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
-                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                                @else
-                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
+                    {{-- Desktop --}}
+                        <div class="desktop">
+                            <div class="col-12 row gallery">
+                                @if ($photo->count() > 0)
+                                    @foreach ($photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
+                                            <a
+                                                href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
+                                                    title="{{ $item->caption }}">
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($video->count() > 0)
+                                    @foreach ($video as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal" onclick="view({{ $item->id_video }})"
                                                         href="javascript:void(0);">
-                                            @endif
-                                        @endauth
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
 
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                            @endguest
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
 
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $villa[0]->id_villa }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($photo->count() <= 0 && $video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
+                        </div>
+                    {{-- Mobile --}}
+                        <div class="mobile">
+                            <div class="col-12 row gallery">
+                                @if ($photo->count() > 0)
+                                    @foreach ($photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                        <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}"> 
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}" title="{{ $item->caption }}">
                                         </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $villa[0]->id_villa }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($photo->count() <= 0 && $video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
-                            @endif
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($video->count() > 0)
+                                    @foreach ($video as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal" onclick="view({{ $item->id_video }})"
+                                                        href="javascript:void(0);">
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
+
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
+
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $villa[0]->id_villa }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($photo->count() <= 0 && $video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
                         </div>
                     </section>
                     {{-- END GALLERY --}}
@@ -1324,6 +1444,16 @@
                         </div>
                     </section>
 
+                    @php
+                        $isSharedRoom = '';
+                        foreach ($villaHasCategory as $item) {
+                            if ($item->name == 'Shared Room') {
+                                $isSharedRoom = 'yes';
+                            }
+                        }
+                    @endphp
+
+                    @if ($isSharedRoom == 'yes')
                     <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
                         <div class="row-grid-room-option">
                             <hr>
@@ -1334,7 +1464,7 @@
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;
                                             <a type="button" onclick="edit_room_option()"
-                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Room Option') }}
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Add Room Option') }}
                                             </a>
                                         @endif
                                     @endauth
@@ -1342,86 +1472,69 @@
                             </div>
 
                         </div>
-                        <div class="row-grid-room-option" id="row-room-option">
-                            <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
-                                <!-- Left Sedtion -->
-                                <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
-                                    <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
-                                </div>
-                                <!-- End Left Section -->
-                                <!-- Right Section -->
-                                <div class="col-lg-6 py-2 col-xs-12 list-image-container">
-                                    <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">Bedroom 1</h6></div>
-                                   <div class="w-100 ml-responsive" style="position:relative;">
-                                      <!-- Villa Description -->
-                                      <div class="mt-3 mt-lg-0 " style="height:100%;">
-                                         <div class="col-12" style="font-size: 13px;">
-                                            <div class="col-lg-6">
-                                               <div class="container-room-option villa-list-title">
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Bed Linens
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black ">
-                                                     • Drying rack for clothing
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • 6 Iron
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Save
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                    <span class="list-description font-black">
-                                                    • Bidet
-                                                    </span>
-                                                 </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Bathtub
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black ">
-                                                      • Conditioner
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Hot water
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Shower gel
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                     <span class="list-description font-black">
-                                                     • <span style="color: #ff7400;">+more</span>
-                                                     </span>
-                                                  </div>
+                        
+                        @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
+                            <div class="row-grid-room-option" id="row-room-option">
+                                <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
+                                    <!-- Left Sedtion -->
+                                    <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
+                                        <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
+                                    </div>
+                                    <!-- End Left Section -->
+                                    <!-- Right Section -->
+                                    <div class="col-lg-6 py-2 col-xs-12 list-image-container">
+                                        <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h6></div>
+                                    <div class="w-100 ml-responsive" style="position:relative;">
+                                        <!-- Villa Description -->
+                                        <div class="mt-3 mt-lg-0 " style="height:100%;">
+                                            <div class="col-12" style="font-size: 13px;">
+                                                <div class="col-lg-6">
+                                                <div class="container-room-option villa-list-title">
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->bed->name }} x{{ $item->qty }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    {{-- <div class="">
+                                                        <span class="list-description font-black">
+                                                        • <span style="color: #ff7400;">+more</span>
+                                                        </span>
+                                                    </div> --}}
+                                                    </div>
                                                 </div>
-                                             </div>
-                                         </div>
-                                      </div>
-                                   </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
+                                        <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
+                                        <button type="submit" id="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                    <!-- End Right Section -->
                                 </div>
-                                <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
-                                    <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
-                                    <button type="submit" id="button" class="btn btn-primary">Select</button>
-                                </div>
-                                <!-- End Right Section -->
-                             </div>
-                        </div>
+                            </div>
+                        @endfor
                     </section>
+                    @endIf
                 </div>
                 {{-- END PAGE CONTENT --}}
             </div>
@@ -3517,9 +3630,11 @@
     {{-- MODAL --}}
     @include('user.modal.villa.guest-safety')
     @include('user.modal.villa.house-rules')
+    @include('user.modal.villa.image-slider')
     @auth
         @include('user.modal.villa.price')
         @include('user.modal.villa.bedroom')
+        @include('user.modal.villa.room_option')
         {{-- @include('user.modal.villa.guest') --}}
         @include('user.modal.villa.location')
         @include('user.modal.villa.amenities_add')
@@ -3789,6 +3904,10 @@
 
         function showMoreHouseRules() {
             $('#modalHouseRules').modal('show');
+        }
+
+        function edit_room_option() {
+            $('#modal-add_room_option').modal('show');
         }
     </script>
 
@@ -5854,6 +5973,19 @@
 
         $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
             $('.dropdwn').slideUp('fast');
+        });
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
+        // reset the scroll to top
+        $('#modal-photo-gallery .modal-body-gallery').scrollTop();
+        // get the section using data
+        var section = $(event.relatedTarget).data('section');
+        // get the div position
+        var position = $('#' + section).position();
+        // scroll modal to position top
+        $("#modal-photo-gallery").scrollTop(position.top);
         });
     </script>
 </body>

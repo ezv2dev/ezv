@@ -62,16 +62,11 @@
     }
 
     .profile-right{
-        margin-top:1rem !important;
+        margin-top:2rem !important;
     }
 
     .section-form-profile{
         margin-top:1rem;
-    }
-
-    .profile-right hr{
-        display:block;
-        margin:1rem 0;
     }
 
     .button{
@@ -93,11 +88,6 @@
         .profile-right{
             padding: 0 1.5rem !important;
             margin-top:0 !important;
-        }
-
-        .profile-right hr{
-            display:none;
-            margin: 0;
         }
     }
 </style>
@@ -133,7 +123,6 @@
         </div>
 
         <div class="col-md-8 profile-right">
-            <hr>
             <div class="section-profile">
                 <h3 class="name-user">Hi, I'm {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h3>
                 <span class="text-grey">Joined in {{ Auth::user()->created_at->format('Y') }}</span>

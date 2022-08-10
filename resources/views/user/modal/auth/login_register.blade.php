@@ -203,6 +203,35 @@
         border-radius: 5px
     }
 
+    .tab-modal-logreg{
+        position:relative;
+    }
+
+    .tab-modal-logreg:hover a{
+        color:black !important;
+    }
+
+    .tab-modal-logreg::before{
+        position:absolute;
+        top:auto;
+        bottom:-1rem; /** samakan dengan ukuran padding modal header, agar sejajar*/
+        left:50%;
+        transform:translateX(-50%);
+        content:'';
+        background:#ff7400;
+        width:0;
+        transition: all .3s;
+    }
+
+    .tab-modal-logreg.active::before,
+    .tab-modal-logreg:hover::before
+    {
+        position:absolute;
+        transition: all .3s;
+        width:100%;
+        height:4px;
+    }
+
     @media only screen and (max-width: 480px) {
         .modal-content-login {
             width: 100% !important;
@@ -314,11 +343,13 @@
                     <ul class="nav filter-language-option-container nav-tabs sideTab column"
                         style="display: flex; flex-wrap: nowrap; padding: 0px;">
 
-                        <li id="trigger-tab-register" onclick="switchTabLogin('register')" class="active"><a
-                                class="filter-language-option-text">{{ __('user_page.Register') }}</a></li>
+                        <li id="trigger-tab-register" onclick="switchTabLogin('register')" class="active tab-modal-logreg">
+                            <a class="filter-language-option-text">{{ __('user_page.Register') }}</a>
+                        </li>
 
-                        <li id="trigger-tab-login" onclick="switchTabLogin('login')"><a
-                                class="tab1 filter-language-option-text">{{ __('user_page.Login') }}</a></li>
+                        <li id="trigger-tab-login" onclick="switchTabLogin('login')" class="tab-modal-logreg">
+                            <a class="tab1 filter-language-option-text">{{ __('user_page.Login') }}</a>
+                        </li>
 
                     </ul>
                 </div>

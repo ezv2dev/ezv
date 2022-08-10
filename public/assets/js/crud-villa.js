@@ -267,15 +267,19 @@ function editShortDescriptionCancel() {
     }
 }
 
-function editBedroomVilla(id_villa) {
-    var bedroom = $("input[name='bedroom']:checked").val();
-    var beds = $("input[name='beds']:checked").val();
+async function editBedroomVilla(id_villa, bedroomDetails) {
+    // save bedrroom
+    var bedroom =
+        bedroomDetails.room_count ?? $("input[name='bedroom']:checked").val();
+    var beds =
+        bedroomDetails.bed_count ?? $("input[name='beds']:checked").val();
     var bathroom = $("input[name='bathroom']:checked").val();
     var adult = $("input[name='adult']:checked").val();
     var children = $("input[name='children']:checked").val();
 
-    var bedroom1 = $("input[name='bedroom1']").val();
-    var beds1 = $("input[name='beds1']").val();
+    var bedroom1 =
+        bedroomDetails.room_count ?? $("input[name='bedroom1']").val();
+    var beds1 = bedroomDetails.bed_count ?? $("input[name='beds1']").val();
     var bathroom1 = $("input[name='bathroom1']").val();
     var adult1 = $("input[name='adult1']").val();
     var children1 = $("input[name='children1']").val();
@@ -361,8 +365,6 @@ function editBedroomVilla(id_villa) {
             console.log(jqXHR);
         },
     });
-
-    saveBedroomDetail(id_villa);
 }
 
 async function saveBedroomDetail(id_villa) {
@@ -446,6 +448,7 @@ async function saveBedroomDetail(id_villa) {
             //     $('#btnSelectBedroomNumber').removeClass('d-none');
             //     $('#btnAddBedroom').addClass('d-none');
             // }
+            editBedroomVilla(id_villa, response);
         },
         error: function (jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
@@ -1400,8 +1403,12 @@ $("#updateStoryForm").submit(function (e) {
             console.log(formData);
 
             var btn = document.getElementById("btnSaveStory");
-            var btnRemove = document.querySelector(".story-video-preview .button-reset");
-            var btnChooseAnother = document.querySelector(".story-video-preview .button-choose-other");
+            var btnRemove = document.querySelector(
+                ".story-video-preview .button-reset"
+            );
+            var btnChooseAnother = document.querySelector(
+                ".story-video-preview .button-choose-other"
+            );
             btn.textContent = "Saving Story...";
             btn.classList.add("disabled");
             btnRemove.disabled = true;
@@ -1967,6 +1974,87 @@ function saveLocation() {
             btn.removeClass("disabled");
             // close modal
             $("#modal-edit_location").modal("hide");
+        },
+    });
+}
+
+function saveRoomDetail(id_villa) {
+    console.log("hit save room detail");
+
+    let formData = [];
+    const content = $("#roomDetailFormContent");
+
+    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+    let bedroomIds = [];
+    let bathroomIds = [];
+    for (let index = 0; index < bedroomRawContent.length; index++) {
+        bedroomIds.push(bedroomRawContent.eq(index).val());
+    }
+    for (let index = 0; index < bathroomRawContent.length; index++) {
+        bathroomIds.push(bathroomRawContent.eq(index).val());
+    }
+
+    let bedRawContent = content.find(".bedroomDetailFormContentBed");
+    let bed = [];
+    for (let index = 0; index < bedRawContent.length; index++) {
+        bed.push({
+            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+        });
+    }
+
+    // let image = content.find("input[name='image']").val();
+    let price = content.find("#room-price").val();
+
+    formData.push({
+        bathroom_ids: bathroomIds,
+        bedroom_ids: bedroomIds,
+        bed: bed,
+    });
+
+    $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: "/villa/add-room",
+        data: {
+            data: formData,
+            id_villa: id_villa,
+            price: price,
+            // image: image,
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: "multipart/form-data",
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+
+            iziToast.success({
+                title: "Success",
+                message: response.message,
+                position: "topRight",
+            });
+        },
+        error: function (jqXHR, exception) {
+            if (jqXHR.responseJSON.errors) {
+                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.errors[i],
+                        position: "topRight",
+                    });
+                }
+            } else {
+                iziToast.error({
+                    title: "Error",
+                    message: jqXHR.responseJSON.message,
+                    position: "topRight",
+                });
+            }
         },
     });
 }

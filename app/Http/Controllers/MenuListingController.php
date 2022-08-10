@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Villa;
+use Carbon\Carbon;
 use File;
 
 class MenuListingController extends Controller
@@ -15,7 +16,13 @@ class MenuListingController extends Controller
 
         $data = Villa::where('created_by', Auth::user()->id)->count();
 
-        return view('new-admin.listing.dashboard_listing', compact('data'));
+        if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
+            $villa = Villa::with('location')->paginate(10);
+        } else {
+            $villa = Villa::with('location')->where('created_by', Auth::user()->id)->paginate(10);
+        }
+
+        return view('new-admin.listing.dashboard_homes_listing', compact('data', 'villa'));
     }
 
     public function datatable()

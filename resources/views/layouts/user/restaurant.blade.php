@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
     @include('layouts.admin.title')
     <meta name="description" content="EZV2 ">
@@ -168,6 +168,25 @@
             margin-left: 55px;
             font-family: 'Poppins', san-serif;
             font-weight: 400;
+        }
+
+        .list-link-sidebar {
+            gap: 12px;
+            display: flex;
+            align-items:center;
+        }
+
+        .list-link-sidebar i {
+            width: 30px;
+        }
+
+        .subcategory-in-sidebar:hover {
+            cursor: pointer;
+        }
+
+        .list-link-sidebar>*,
+        .list-link-sidebar:hover>* {
+            color: #585656;
         }
 
         @media only screen and (max-width: 480px) {

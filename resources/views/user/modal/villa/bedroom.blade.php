@@ -515,7 +515,7 @@
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
                         <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
-                            onclick="editBedroomVilla({{ $villa[0]->id_villa }})">
+                            onclick="saveBedroomDetail({{ $villa[0]->id_villa }})">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>
@@ -1104,7 +1104,7 @@
             <div class="row mb-5 bedroomDetailFormContent" id="bedroomDetailFormContent${index}">
                 <label class="form-label">
                     <b>{{ __('user_page.Bedroom') }} ${index+1}</b>
-                    <a href="javascript:void(0);" onclick="deleteAddBedroomDetailForm(${index})">
+                    <a href="javascript:void(0);" class="deleteAddBedroomDetailForm" onclick="deleteAddBedroomDetailForm(${index})">
                         <i class="fa fa-trash" style="color:red; margin-left: 25px;" title="{{ __('user_page.Delete') }}"></i>
                     </a>
                 </label>
@@ -1183,6 +1183,7 @@
         return content;
     }
     function deleteAddBedroomDetailForm(index) {
+        console.log('hit deleteAddBedroomDetailForm');
         // remove tag
         $(`#bedroomDetailFormContent${index}`).remove();
 
@@ -1218,6 +1219,13 @@
             template += content;
         }
         $('#bedroomDetailForm').html(template);
+
+        // hide button delete form when form is only 1
+        if ($(`.bedroomDetailFormContent`).length <= 1){
+            console.log('length <= 1');
+            console.log('deleteAddBedroomDetailForm length: '+$(`.deleteAddBedroomDetailForm`).length);
+            $(`.deleteAddBedroomDetailForm`).eq(0).addClass('d-none');
+        }
     }
     function addAddBedroomDetailForm() {
         console.log('hit addAddBedroomDetailForm');
@@ -1225,5 +1233,10 @@
         let content = contentBedroomDetailForm(index, null);
         $('#bedroomDetailForm').append(content);
         $('#btnAddBedroom').attr('data-index', index+1);
+
+        // show button delete form when form is only 1
+        if ($(`.bedroomDetailFormContent`).length >= 1){
+            $(`.deleteAddBedroomDetailForm`).eq(0).removeClass('d-none');
+        }
     }
 </script>

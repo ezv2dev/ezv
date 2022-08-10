@@ -99,6 +99,11 @@ class ViewController extends Controller
         return $location;
     }
 
+    public static function get_name()
+    {
+        $villa = Villa::where('created_by', Auth::user()->id)->select('name')->get();
+    }
+
     public static function get_location_ajax(Request $request)
     {
         $location = Location::select('name')->where('name', 'like', '%' . $request->name . '%')->get();
@@ -154,7 +159,6 @@ class ViewController extends Controller
             }
         }
 
-
         // check if villa exist
         abort_if($villa->count() == 0, 404);
 
@@ -170,7 +174,6 @@ class ViewController extends Controller
             ]
         );
         VillaStatistic::where('id_villa', $id)->where('month', $now->month)->where('year', $now->year)->increment('villa_views');
-
 
         // appends additional data to hotel list
         // $villa->each(function ($item, $key) {
@@ -287,7 +290,7 @@ class ViewController extends Controller
         $villaTags = VillaHasFilter::where('id_villa', $id)->get();
         $villaFilter = VillaFilter::all();
         $villaCategory = VillaCategory::all();
-        $villaHasCategory = VillaHasCategory::where('id_villa', $id)->get();
+        $villaHasCategory = VillaHasCategory::join('villa_category', 'villa_has_category.id_villa_category', '=', 'villa_category.id_villa_category')->where('id_villa', $id)->get();
         $villaExtra = VillaExtra::where('id_villa', $id)->first();
 
         return view('user.villa', compact(
@@ -874,6 +877,7 @@ class ViewController extends Controller
                 'message' => 'authenticated',
             ], 401);
         }
+
         // validation
         $validator = Validator::make($request->all(), [
             'id_villa' => ['integer', 'required'],
@@ -3369,5 +3373,45 @@ class ViewController extends Controller
                 'message' => 'Failed Delete Data',
             ], 500);
         }
+    }
+
+    public function add_room(Request $request)
+    {
+        // check if editor not authenticated
+        if (!auth()->check()) {
+            return response()->json([
+                'message' => 'unauthenticated',
+            ], 401);
+        }
+
+        $validator = Validator::make($request->all(), [
+            // 'id_villa' => ['integer', 'required'],
+            'data' => ['array', 'nullable'],
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
+
+        // villa data
+        $villa = Villa::where('id_villa', $request->id_villa)->first();
+
+        // check if villa does not exist, abort 404
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
+        }
+
+        // check if the editor does not have authorization
+        // $this->authorize('listvilla_update');
+        // if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+        //     return response()->json([
+        //         'message' => 'This action is unauthorized',
+        //     ], 403);
+        // }
     }
 }

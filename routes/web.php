@@ -293,10 +293,10 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/help-travel-admin', [Dashboard\HelpController::class, 'help_travel_admin'])->name('help_travel_admin');
 
 
-    Route::get('/dashboard/listing', [MenuListingController::class, 'index'])->name('listing_dashboard');
+    Route::get('/dashboard/homes', [MenuListingController::class, 'index'])->name('listing_dashboard');
     Route::get('/manage-your-space', [MenuListingController::class, 'editListing'])->name('edit_listing_villa_dashboard');
 
-    Route::get('/dashboard/hotel/listing', [Dashboard\HotelListingController::class, 'index'])->name('dashboard_listing_hotel');
+    Route::get('/dashboard/hotel', [Dashboard\HotelListingController::class, 'index'])->name('dashboard_listing_hotel');
     Route::get('/dashboard/hotel/listing/datatable', [Dashboard\HotelListingController::class, 'datatable'])->name('dashboard_listing_hotel_datatable');
 
     Route::get('/dashboard/government/unapproval', [Dashboard\GovernmentApprovalController::class, 'index'])->name('government_approval_index');
@@ -513,7 +513,7 @@ Route::get('/villa/{id}/delete/image', [ViewController::class, 'villa_delete_ima
 Route::get('/villa/{id}/delete/photo/video/{id_video}', [ViewController::class, 'villa_delete_photo_video'])->name('villa_delete_photo_video');
 Route::get('/villa/{id}/delete/photo/photo/{id_photo}', [ViewController::class, 'villa_delete_photo_photo'])->name('villa_delete_photo_photo');
 Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra'])->name('villa_update_extra');
-
+Route::post('/villa/add-room', [ViewController::class, 'add_room'])->name('villa_add_room');
 // ! Verified
 // Route::middleware(['auth'])->group(
 //     function () {
@@ -850,7 +850,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     // Route::get('/admin/restaurant', 'RestaurantController@index')->name('admin_restaurant');
     // Route::get('/admin/restaurant/datatable', 'RestaurantController@datatable')->name('admin_restaurant_datatable');
 
-    Route::get('/dashboard/restaurant', [RestaurantController::class, 'index'])->name('admin_restaurant');
+    Route::get('/dashboard/food', [RestaurantController::class, 'index'])->name('admin_restaurant');
     Route::get('/dashboard/restaurant/datatable', [RestaurantController::class, 'datatable'])->name('admin_restaurant_datatable');
 
     Route::get('/dashboard/restaurant/trash', [RestaurantController::class, 'trash'])->name('admin_restaurant_trash');
@@ -1051,6 +1051,7 @@ Route::get('/food-list', [Restaurant\RestaurantListController::class, 'restauran
 // Route::get('/restaurant/s', 'Restaurant\RestaurantSearchController@index')->name('search_restaurant');
 Route::get('/food/search', [Restaurant\FoodSearchController::class, 'index'])->name('search_food');
 Route::get('/food/subcategory', [Restaurant\FoodSearchController::class, 'get_food_sub_id'])->name('get_food_sub_id');
+Route::get('/food/cuisine', [Restaurant\FoodSearchController::class, 'get_food_cuisine'])->name('get_food_cuisine');
 
 //RESTAURANT DETAIL
 // Route::get('/restaurant/{id}', 'ViewController@restaurant')->name('restaurant');
@@ -1104,7 +1105,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
 Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     // Route::get('/admin/things-to-do', 'ActivityController@index')->name('admin_activity');
     // Route::get('/admin/things-to-do/datatable', 'ActivityController@datatable')->name('admin_activity_datatable');
-    Route::get('/dashboard/things-to-do', [ActivityController::class, 'index'])->name('admin_activity');
+    Route::get('/dashboard/wow', [ActivityController::class, 'index'])->name('admin_activity');
     Route::get('/dashboard/things-to-do/datatable', [ActivityController::class, 'datatable'])->name('admin_activity_datatable');
 
     Route::get('/dashboard/things-to-do/soft-delete/{id}', [ActivityListingController::class, 'softDestroy'])->name('admin_activity_soft_delete');
@@ -1476,3 +1477,4 @@ Route::get('/session/theme', [CookiesController::class, 'set_cookie_theme'])->na
 
 // xendit
 Route::post('xendit/va/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
+Route::post('xendit/credit-card/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createCreditCard'])->name('api.createCreditCard');

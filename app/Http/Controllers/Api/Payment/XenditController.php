@@ -50,24 +50,14 @@ class XenditController extends Controller
         $villa = Villa::select('price', 'adult', 'children', 'min_stay')->where('id_villa', $id_villa)->where('status', 1)->first();
 
         // check if date availability is valid
-        $unavailableDate = $this->getUnavailableDate($id_villa);
-        $isUnavailable = false;
-
-        $check_in = date('Y-m-d', strtotime($request->check_in));
-        $check_out = date('Y-m-d', strtotime($request->check_out));
-        foreach ($unavailableDate as $item) {
-            $date = date('Y-m-d', strtotime($item));
-            if(($date >= $check_in) && ($date <= $check_out)){
-                $isUnavailable = true;
-            }
-        }
+        $isUnavailable = $this->checkDateIsUnavailable($request, $id_villa);
         if($isUnavailable){
             abort(500);
         }
 
         // check if min stay is valid
-        $stay = date_diff(date_create($request->check_out), date_create($request->check_in));
-        if(!($stay->d >= $villa->min_stay)){
+        $stayCountMoreThanMinStay = $this->checkStayCountMoreThanMinStay($request, $villa);
+        if($stayCountMoreThanMinStay){
             abort(500);
         }
 
@@ -147,12 +137,14 @@ class XenditController extends Controller
         // save data booking
         if($storePayment){
             $storeBooking = $this->storeUsersBooking($request, 'virtual_account', $storePayment);
+        } else {
+            abort(500);
         }
 
         if($storeBooking){
             return 'success';
         } else {
-            return 'fail';
+            abort(500);
         }
 
         // return redirect()->route('api.invoiceVa');
@@ -211,6 +203,82 @@ class XenditController extends Controller
     //end payment channel
 
     //payment credit card
+    public function createCreditCard(Request $request)
+    {
+        try {
+            //get id villa
+            $id_villa = $request["formData"]["id_villa"];
+            $villa = Villa::select('price', 'adult', 'children', 'min_stay')->where('id_villa', $id_villa)->where('status', 1)->first();
+
+            // check if date availability is valid
+            $isUnavailable = $this->checkDateIsUnavailable($request, $id_villa);
+            if($isUnavailable){
+                abort(500);
+            }
+
+            // check if min stay is valid
+            $stayCountMoreThanMinStay = $this->checkStayCountMoreThanMinStay($request, $villa);
+            if($stayCountMoreThanMinStay){
+                abort(500);
+            }
+
+            // return 'hit continue';
+
+            // set xendit token
+            Xendit::setApiKey($this->token);
+            // process charge
+            $params = [
+                'token_id' => $request['dataresult']['id'],
+                'external_id' => 'card_' . time(),
+                'authentication_id' => $request['dataresult']['authentication_id'],
+                'amount' => $request['datarequest']['amount'],
+                'card_cvn' => $request['datarequest']['card_cvn'],
+                'capture' => false
+            ];
+            return $request->all();
+            $createCharge = \Xendit\Cards::create($params);
+
+            // check if amount is valid
+            // if valid, capture charge for the credit card
+            // if not, reverse authorization/cancel payment for the credit card
+            if(false){
+                // capture charge for the credit card
+                $id = $createCharge['id'];
+                $captureCharge = \Xendit\Cards::capture($id, $params);
+                return $captureCharge;
+                // save data payment
+                if($captureCharge){
+                    $storePayment = $this->storeUsersPayment($request, 'credit_card', $captureCharge);
+                } else {
+                    abort(500);
+                }
+
+                // save data booking
+                if($storePayment){
+                    $storeBooking = $this->storeUsersBooking($request, 'credit_card', $storePayment);
+                } else {
+                    abort(500);
+                }
+
+                return response()->json((object)[
+                    'message' => 'success',
+                    'storePayment' => $storePayment,
+                    'storeBooking' => $storeBooking
+
+                ], 200);
+            } else {
+                // reverse authorization/cancel payment for the credit card
+                $id = $createCharge['id'];
+                $paramsReverseAuth = ['external_id' => 'reverse_authorization_'.time()];
+                $reverseAuth = \Xendit\Cards::reverseAuthorization($id, $paramsReverseAuth);
+                // return response()->json((object)[
+                //     'message' => 'total amount not equal'
+                // ], 500);
+            }
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
     public function creditcard(Request $request)
     {
         dd($request->all());
@@ -411,6 +479,9 @@ class XenditController extends Controller
         if($paymentMethod == 'virtual_account'){
             $check_in = $request->check_in;
             $check_out = $request->check_out;
+        } else if($paymentMethod == 'credit_card'){
+            $check_in = $request->check_in;
+            $check_out = $request->check_out;
         } else {
             return false;
         }
@@ -484,9 +555,97 @@ class XenditController extends Controller
             // Mail::to($storeBooking->email)->send(new \App\Mail\MyTestMail($details));
             // Mail::to($villa->email)->send(new \App\Mail\BlockDateToVilla($details));
             return $storeBooking;
-        } else {
-            return false;
+        } else if($paymentMethod == 'credit_card'){
+            // store booking
+            $data = [
+                'id_payment' => $paymentDetail->id_payment,
+                'no_invoice' =>$invoice_code,
+                'firstname' => auth()->user()->first_name ?? $request->firstname ?? NULL,
+                'lastname' => auth()->user()->last_name ?? $request->lastname ?? NULL,
+                'email' => auth()->user()->email ?? $request->email ?? NULL,
+                'phone' => NULL,
+                'id_villa' => $id_villa,
+                'adult' => $request->adult,
+                'children' => $request->children,
+                'infant' => $request->infant,
+                'pet' => $request->pet,
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
+                'id_extra' => NULL,
+                'number_extra' => NULL,
+                'type_extra' => NULL,
+                'price_extra' => NULL,
+                'villa_price' => $detailPrice->normal_price,
+                'total_price' => $detailPrice->total,
+                'service_price' => $detailPrice->service,
+                'cleaning_fee_price' => $detailPrice->cleaning_fee,
+                'discount_price' => $detailPrice->discount,
+                'total_all_price' => $detailPrice->total_all,
+                'status' =>  1,
+                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+                'created_by' => Auth::user()->id ?? NULL,
+                'updated_by' => Auth::user()->id ?? NULL,
+            ];
+            $storeBooking = villabooking::create($data);
+            // // send email
+            $details = [
+                'no_invoice' => $storeBooking->no_invoice,
+                'name' => $storeBooking->firstname . ", " . $storeBooking->lastname,
+                'email' => $storeBooking->email,
+                'phone' => $storeBooking->phone,
+                'villa_name' => $villa->name,
+                'villa_photo' => $villa->image ?? null,
+                'villa_price' => $storeBooking->villa_price,
+                'total_price' => $storeBooking->total_price,
+                'service_price' => $storeBooking->service_price,
+                'cleaning_fee_price' => $storeBooking->cleaning_fee_price,
+                'discount_price' => $storeBooking->discount_price,
+                'total_all_price' => $storeBooking->total_all_price,
+                'stay' => $stay->d,
+                'check_in' => $storeBooking->check_in,
+                'check_out' => $storeBooking->check_out,
+                'adult' => $storeBooking->adult,
+                'children' => $storeBooking->children,
+                'status' => $storeBooking->status
+            ];
+
+            // Mail::to($storeBooking->email)->send(new \App\Mail\MyTestMail($details));
+            // Mail::to($villa->email)->send(new \App\Mail\BlockDateToVilla($details));
+            return $storeBooking;
         }
+    }
+
+    private function storeUsersPayment($request, $paymentMethod, $paymentGatewayDetail)
+    {
+        // check if user authenticated
+        if(auth()->check())
+        {
+            $user_id = auth()->user()->id;
+            $email = auth()->user()->email;
+        }else{
+            $user_id = NULL;
+            $email = $request->email ?? NULL;
+        }
+
+        // store payment process
+        $storePayment = false;
+        if($paymentMethod == 'virtual_account'){
+            //
+            $storePayment = true;
+        } else if($paymentMethod == 'credit_card'){
+            $storePayment = Payment::create([
+                'external_id' => $paymentGatewayDetail['external_id'],
+                'id_user' => $user_id ?? NULL,
+                'payment_channel' => 'Credit Card',
+                'bank' => NULL,
+                'name' => NULL,
+                'email' => $email ?? NULL,
+                'cc_number' => $paymentGatewayDetail['masked_card_number'],
+                'price' => $paymentGatewayDetail['authorized_amount'],
+            ]);
+        }
+        return $storePayment;
     }
 
     private function getPriceDetail($date, $id_villa)
@@ -655,5 +814,28 @@ class XenditController extends Controller
         }
 
         return $dates;
+    }
+
+    private function checkDateIsUnavailable($request, $id_villa)
+    {
+        $unavailableDate = $this->getUnavailableDate($id_villa);
+        $isUnavailable = false;
+
+        $check_in = date('Y-m-d', strtotime($request->check_in));
+        $check_out = date('Y-m-d', strtotime($request->check_out));
+        foreach ($unavailableDate as $item) {
+            $date = date('Y-m-d', strtotime($item));
+            if(($date >= $check_in) && ($date <= $check_out)){
+                $isUnavailable = true;
+            }
+        }
+
+        return $isUnavailable;
+    }
+
+    private function checkStayCountMoreThanMinStay($request, $villa)
+    {
+        $stay = date_diff(date_create($request->check_out), date_create($request->check_in));
+        return !($stay->d < ($villa->min_stay ?? 1));
     }
 }

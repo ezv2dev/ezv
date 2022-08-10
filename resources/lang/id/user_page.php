@@ -350,6 +350,7 @@ return [
     'Input name' => 'Masukkan nama',
     'Input price (number only)' => 'Masukkan harga (hanya angka)',
     'Create Listing' => 'Buat Daftar',
+    'Create Account' => 'Buat Akun',
 
     'FAVORITE' => 'FAVORIT',
     'CANCEL' => 'BATAL',
@@ -437,6 +438,7 @@ return [
 
     'Add Room' => 'Tambah Kamar',
     'Add New Room' => 'Tambah Kamar Baru',
+    'Add Room Option' => 'Tambah Pilihan Kamar',
     'Name of Room' => 'Nama Kamar',
     'No Data' => 'Tidak Ada Data',
     'Choose Type of Room' => 'Pilih Tipe Kamar',

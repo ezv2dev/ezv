@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
     <title>@yield('title')</title>
 
@@ -61,27 +61,28 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/skeleton-load.css') }}">
 
     <style>
-        .subcategory-in-sidebar {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin: 6px;
-            gap: 6px;
-            padding-left: 1rem;
+        .list-link-sidebar {
+            gap: 12px;
             display: flex;
+            align-items:center;
+        }
+
+        .list-link-sidebar i {
+            width: 30px;
         }
 
         .subcategory-in-sidebar:hover {
             cursor: pointer;
         }
 
+        .list-link-sidebar>*,
+        .list-link-sidebar:hover>*,
         .subcategory-in-sidebar-container>*,
         .subcategory-in-sidebar>* {
             color: #585656;
         }
 
-        .subcategory-in-sidebar i {
-            width: 30px;
-        }
+
     </style>
 </head>
 
@@ -171,53 +172,73 @@ if (isset($_COOKIE['tema'])) {
                         $role = Auth::user()->role_id;
                     @endphp
                     @if ($role == 1 || $role == 2 || $role == 3)
-                        <a class="d-block mb-2" href="{{ route('partner_dashboard') }}"
-                            style="width: fit-content; color:#585656;">
-                            {{ __('user_page.Dashboard') }}
+                        <a class="list-link-sidebar mb-2" href="{{ route('partner_dashboard') }}">
+                            <i class="fa fa-tachometer text-center" aria-hidden="true"></i>
+                            <p class="m-0">{{ __('user_page.Dashboard') }}</p>
                         </a>
                     @endif
                     @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
-                        <a class="d-block mb-2" href="{{ route('collaborator_list') }}"
-                            style="width: fit-content; color:#585656;">
-                            {{ __('user_page.Collab Portal') }}
+                        <a class="list-link-sidebar mb-2" href="{{ route('collaborator_list') }}">
+                            <i class="fa fa-handshake-o text-center" aria-hidden="true"></i>
+                            <p class="m-0">{{ __('user_page.Collab Portal') }}</p>
                         </a>
                     @endif
-                    <a class="d-block mb-2" href="{{ route('profile_index') }}"
-                        style="width: fit-content; color:#585656;">
-                        {{ __('user_page.My Profile') }}
+                    <a class="list-link-sidebar  mb-2" href="{{ route('profile_index') }}">
+                        <i class="fa-solid fa-user text-center"></i>
+                        <p class="m-0">{{ __('user_page.My Profile') }}</p>
                     </a>
-                    <a class="d-block mb-2" href="{{ route('change_password') }}"
-                        style="width: fit-content; color:#585656;">
-                        {{ __('user_page.Change Password') }}
+                    <a class="list-link-sidebar  mb-2" href="{{ route('change_password') }}">
+                        <i class="fa-solid fa-key text-center"></i>
+                        <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a class="d-block mb-2" href="#!"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
-                        style="width: fit-content; color:#585656;">
-                        <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                        {{ __('user_page.Sign Out') }}
+                    <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                        <i class="fa fa-refresh text-center" aria-hidden="true"></i>
+                        <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
+                    </a>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
+                        <i class="fa fa-th text-center" aria-hidden="true"></i>
+                        <p class="m-0">{{ __('user_page.Category') }}</p>
+                    </div>
+                    @if ($condition_villa)
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                        <i class="fas fa-ellipsis text-center"></i>
+                        <p class="m-0">Filters</p>
+                    </div>
+                    @elseif($condition_restaurant)
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
+                    @elseif($condition_hotel)
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
+                    @elseif($condition_things_to_do)
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
+                    @endif
+                    <a class="list-link-sidebar mb-2" href="#!"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                        <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
+                        <p class="m-0">{{ __('user_page.Sign Out') }}</p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     </form>
-
-                    <a href="{{ route('switch') }}" class="d-block mb-2"
-                        style="color:#585656; width: fit-content;">
-                        {{ __('user_page.Switch to Hosting') }}
-                    </a>
                     <hr>
-                    <div class="d-flex align-items-center mb-2">
-                        <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
-                            style="color: white;">
-                            @if (session()->has('locale'))
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                            @else
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                            @endif
-                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
-                        </a>
-                    </div>
+                    <a type="button" onclick="language()" class="list-link-sidebar navbar-gap mb-2">
+                        @if (session()->has('locale'))
+                            <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                        @else
+                            <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                        @endif
+                        <p class="mb-0">{{ __('user_page.Choose a Language') }}</p>
+                    </a>
                     <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -228,7 +249,7 @@ if (isset($_COOKIE['tema'])) {
                             </div>
                         </a>
                     </div>
-                    <div class="d-flex align-items navbar-gap mb-2" id="changeThemeMobile">
+                    <div class="list-link-sidebar navbar-gap mb-2" id="changeThemeMobile">
                         <div class="logged-user-menu">
                             <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }} ">
                                 <input type="checkbox" id="background-color-switch"
@@ -239,80 +260,14 @@ if (isset($_COOKIE['tema'])) {
                         </div>
                         <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
-                            style="color: white;">
-                            <img class="lozad"
-                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
-                                src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                            @if (session()->has('currency'))
-                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
-                                </p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                            @else
-                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                            @endif
-
-                        </a>
-                    </div>
-
-                </div>
-            @else
-                <div class="d-flex align-items-center">
-                    <div class="flex-fill d-flex align-items-center">
-                        <a onclick="loginRegisterForm(2, 'login');" class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
-                            style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
-                            id="login">
-                            <i class="fa-solid fa-user"></i>
-                            <p class="mb-0 ms-2" style="color:#585656">Login</p>
-                        </a>
-                    </div>
-                    <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
-                        style="background: transparent; border: 0;">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <hr>
-                <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
-                    style="color: #585656; width: fit-content;" target="_blank">
-                    {{ __('user_page.Become a host') }}
-                </a>
-                <div class="d-flex align-items-center mb-2">
-                    <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
-                        style="color: white; " id="language">
-                        @if (session()->has('locale'))
-                            <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                        @else
-                            <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                        @endif
-                        <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
-                    </a>
-                </div>
-                <div class="d-flex align-items-center mb-2" id="changeThemeMobile" style="padding-left: 7px;">
-                    <div class="logged-user-menu" style="">
-                        <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }}">
-                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
-                                {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
-                            <span class="checkmark-mode"></span>
-                        </label>
-                    </div>
-                    <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
-                        style="color: white;">
+                    <a type="button" onclick="currency()" class="list-link-sidebar navbar-gap mb-2">
                         <img class="lozad"
                             style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
                             src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                         @if (session()->has('currency'))
-                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                            </p>
                             {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
                         @else
@@ -322,19 +277,97 @@ if (isset($_COOKIE['tema'])) {
                         @endif
 
                     </a>
-                </div>
 
+                </div>
+            @else
+                <div class="d-flex align-items-center justify-content-between pt-3 pb-0">
+                    <a onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar" id="login">
+                        <i class="fa-solid fa-user text-center"></i>
+                        <p class="mb-0">{{ __('user_page.Create Account') }}</p>
+                    </a>
+                    <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
+                        style="background: transparent; border: 0;">
+                        <i class="fa-solid fa-xmark" style="color:#585656"></i>
+                    </button>
+                </div>
+                <hr>
+                <a href="{{ route('ahost') }}" class="list-link-sidebar mb-2" target="_blank">
+                    <i class="fa fa-pencil-square text-center" aria-hidden="true"></i>
+                    <p class="m-0">{{ __('user_page.Create Listing') }}</p>
+                </a>
+                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
+                    <i class="fa fa-th text-center" aria-hidden="true"></i>
+                    <p class="m-0">{{ __('user_page.Category') }}</p>
+                </div>
+                @if ($condition_villa)
+                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                    <i class="fas fa-ellipsis text-center"></i>
+                    <p class="m-0">Filters</p>
+                </div>
+                @elseif($condition_restaurant)
+                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                    <i class="fa-solid fa-ellipsis text-center"></i>
+                    <p class="m-0">{{ __('user_page.Filters') }}</p>
+                </div>
+                @elseif($condition_hotel)
+                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                    <i class="fa-solid fa-ellipsis text-center"></i>
+                    <p class="m-0">{{ __('user_page.Filters') }}</p>
+                </div>
+                @elseif($condition_things_to_do)
+                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                    <i class="fa-solid fa-ellipsis text-center"></i>
+                    <p class="m-0">{{ __('user_page.Filters') }}</p>
+                </div>
+                @endif
+                <hr>
+                <a type="button" onclick="language()" class="navbar-gap list-link-sidebar mb-2" id="language">
+                    @if (session()->has('locale'))
+                        <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                    @else
+                        <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                    @endif
+                    <p class="mb-0" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
+                </a>
+                <div class="list-link-sidebar mb-2" id="changeThemeMobile">
+                    <div class="logged-user-menu" style="">
+                        <label class="container-mode {{ $condition_collaborator ? 'container-mode-collab' : '' }}">
+                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)"
+                                {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-mobile">
+                            <span class="checkmark-mode"></span>
+                        </label>
+                    </div>
+                    <p class="mb-0" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
+                </div>
+                <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2"
+                        style="color: white;">
+                        <img class="lozad"
+                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                            src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                        @if (session()->has('currency'))
+                            <p class="mb-0" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                        @else
+                            <p class="mb-0" style="color: #585656">Choose Currency</p>
+                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                            data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                        @endif
+
+                </a>
             @endauth
 
             <hr>
             @if ($condition_villa)
-                <div class="subcategory-in-sidebar-container ">
-                    <p class="m-0">Choose Sub Category</p>
+                <div class="subcategory-in-sidebar-container">
                     <div class="mt-2">
                         @foreach ($amenities->sortBy('order')->take(4) as $item)
-                            <div class="subcategory-in-sidebar py-2"
+                            <div class="list-link-sidebar subcategory-in-sidebar mb-2"
                                 onclick="homesFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_amenities }})">
-                                <i class="fas fa-{{ $item->icon }}" @php
+                                <i class="fas fa-{{ $item->icon }} text-center" @php
                                     $amenitiesIds = explode(',', request()->get('fAmenities'));
                                 @endphp @if (in_array($item->id_amenities, $amenitiesIds))
                                     style="color: #ff7400;"
@@ -343,20 +376,15 @@ if (isset($_COOKIE['tema'])) {
                         <p class="m-0">{{ $item->name }}</p>
                     </div>
             @endforeach
-            <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHomes()">
-                <i class="fas fa-ellipsis"></i>
-                <p class="m-0">Filters</p>
-            </div>
         </div>
     </div>
 @elseif($condition_restaurant)
     <div class="subcategory-in-sidebar-container ">
-        <p class="m-0">Choose Sub Category</p>
         <div class="mt-2">
             @foreach ($subcategories->take(4) as $item)
                 <div
-                    class="subcategory-in-sidebar py-2"onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }}, false)">
-                    <i class="{{ $item->icon }}" @php
+                    class="list-link-sidebar subcategory-in-sidebar mb-2"onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }}, false)">
+                    <i class="{{ $item->icon }} text-center" @php
                         $isChecked = '';
                         $filterIds = explode(',', request()->get('fSubCategory'));
                     @endphp @if (in_array($item->id_subcategory, $filterIds))
@@ -366,19 +394,14 @@ if (isset($_COOKIE['tema'])) {
             <p class="m-0">{{ $item->name }}</p>
         </div>
         @endforeach
-        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
-            <i class="fa-solid fa-ellipsis"></i>
-            <p class="m-0">{{ __('user_page.More') }}</p>
-        </div>
     </div>
     </div>
 @elseif($condition_hotel)
     <div class="subcategory-in-sidebar-container">
-        <p class="m-0">Choose Sub Category</p>
         @foreach ($hotelFilter->take(4)->sortBy('order') as $item)
-            <div class="subcategory-in-sidebar py-2"
+            <div class="list-link-sidebar subcategory-in-sidebar mb-2"
                 onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ $item->id_hotel_filter }}, false)">
-                <i class="{{ $item->icon }}" @php
+                <i class="{{ $item->icon }} text-center" @php
                     $isChecked = '';
                     $filterIds = explode(',', request()->get('filter'));
                 @endphp @if (in_array($item->id_hotel_filter, $filterIds))
@@ -388,18 +411,13 @@ if (isset($_COOKIE['tema'])) {
         <p class="m-0">{{ $item->name }}</p>
     </div>
     @endforeach
-    <div class="subcategory-in-sidebar py-2" onclick="modalFiltersHotel()">
-        <i class="fa-solid fa-ellipsis"></i>
-        <p class="m-0">{{ __('user_page.Filters') }}</p>
-    </div>
     </div>
 @elseif($condition_things_to_do)
     <div class="subcategory-in-sidebar-container">
-        <p class="m-0">Choose Sub Category</p>
         @foreach ($subCategory->take(4) as $item)
-            <div class="subcategory-in-sidebar py-2"
+            <div class="list-link-sidebar subcategory-in-sidebar mb-2"
                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
-                <i class="{{ $item->icon }} text-18 list-description {{ $textColor }} sub-icon"
+                <i class="{{ $item->icon }} text-center"
                     @php
                         $isChecked = '';
                         $filterIds = explode(',', request()->get('fSubCategory'));
@@ -410,14 +428,8 @@ if (isset($_COOKIE['tema'])) {
         <p class="m-0">{{ $item->name }}</p>
     </div>
     @endforeach
-    @if ($subCategory->count() > 6)
-        <div class="subcategory-in-sidebar py-2" onclick="moreSubCategory()">
-            <i class="fa-solid fa-ellipsis text-18 list-description {{ $textColor }} sub-icon"></i>
-            <p class="m-0">{{ __('user_page.More') }}</p>
-        </div>
-    @endif
     </div>
-    @endif
+@endif
     </div>
 
     </div>
@@ -1343,6 +1355,7 @@ if (isset($_COOKIE['tema'])) {
             $("#overlay").css("display", "none");
         }
         function moreCategory() {
+            sidebarhide();
             $('#categoryModal').modal('show');
         }
 
