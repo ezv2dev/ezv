@@ -219,6 +219,402 @@
 
     </div>
     <div id="overlay"></div>
+    {{-- NEW SEARCH MOBILE
+    new search ui untuk mobile --}}
+    <div class="search-container-mobile">
+        {{-- NEW SEARCH MOBILE
+        tombol dipaling atas untuk close atau kembali --}}
+        <button class="btn-top-search me-2">
+            <i class="fa-solid fa-xmark close"></i>
+            <i class="fa-solid fa-angle-left back d-none"></i>
+        </button>
+        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form"
+            autocomplete="off">
+            {{-- NEW SEARCH MOBILE
+            location untuk mobile --}}
+            <div class="location-container mx-2 mt-2">
+                {{-- NEW SEARCH MOBILE
+                ui ketika user belum pilih location untuk mobile
+                berisi input dan location paling populer --}}
+                <div class="select-location-mobile-container">
+                    <h3 class="mb-2">{{ __('user_page.Location') }}</h3>
+                    <input type="text" onfocus="this.value=''"
+                        class="form-control input-transparant d-block"
+                        id="loc_sugest" name="sLocation"
+                        placeholder="{{ __('user_page.Where are you going?') }}" readonly>
+                    <div class="row mt-2 first-sugest-location">
+                        <div class="col-4">
+                            <img class="d-block w-100 lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://pix10.agoda.net/hotelImages/931/931511/931511_15082814490035280393.jpg?ca=5&ce=1&s=768x1024">
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Canggu">Canggu</a>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <img class="d-block w-100 lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://pix10.agoda.net/hotelImages/71995/-1/090e900e653bb0af941ba8ae8ccc6a77.jpg?ca=11&ce=1&s=1024x768">
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Seminyak">Seminyak</a>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <img class="d-block w-100 lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://cf.bstatic.com/xdata/images/xphoto/max500_ao/85179701.jpg?k=ce7f1e159c7c0a6ce44bab2342d2145165d0d5dd2235dce5df882ae89ee01f07&o=">
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Berawa">Berawa</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                ui ketika user sudah pilih location untuk mobile --}}
+                <div class="location-has-selected-container d-none">
+                    <p class="text-secondary text-small mb-0 loc_sugest_mobile">Location</p>
+                    <div class="btn-transparent-action ms-auto">{{ __('user_page.Where are you going?') }}</div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                popup location untuk mobile --}}
+                <div id="sugest" class="location-popup display-none">
+                    @php
+                        $location = App\Http\Controllers\ViewController::get_location();
+                        $hotelName = App\Http\Controllers\HotelController::get_name();
+                        $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                        $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                    @endphp
+                    <div class="location-popup-container h-100">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none;">
+                            <div onclick="checkGeo();"
+                                class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://icon-library.com/images/current-location-icon/current-location-icon-23.jpg">
+                            </div>
+                            <div onclick="checkGeo();"
+                                class="location-popup-text sugest-list-text">
+                                <a id="current_location" type="button"
+                                    class="location_op" data-value="">Current
+                                    Location</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none ">
+                            <div class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                            </div>
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Canggu">Canggu</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none ">
+                            <div class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                            </div>
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Seminyak">Seminyak</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none ">
+                            <div class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                            </div>
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Ubud">Ubud</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none ">
+                            <div class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                            </div>
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Kuta">Kuta</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                            style="display: none ">
+                            <div class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                            </div>
+                            <div class="location-popup-text sugest-list-text">
+                                <a type="button" class="location_op"
+                                    data-value="Pecatu">Pecatu</a>
+                            </div>
+                        </div>
+                        @foreach ($location as $item)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad"
+                                        src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op"
+                                        data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($location as $item)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad"
+                                        src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op"
+                                        data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($hotelName as $item2)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none; cursor: pointer;"
+                                onclick="window.open('{{ route('hotel', $item2->id_hotel) }}', '_blank');">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image"
+                                        src="{{ asset('assets/icon/hotel/hotel.png') }}">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a href="{{ route('hotel', $item2->id_hotel) }}"
+                                        type="button" class="location_op"
+                                        target="_blank"
+                                        data-value="{{ $item2->name }}">{{ $item2->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($restaurantName as $item3)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none; cursor: pointer;"
+                                onclick="window.open('{{ route('restaurant', $item3->id_restaurant) }}', '_blank');">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image"
+                                        src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a href="{{ route('restaurant', $item3->id_restaurant) }}"
+                                        type="button" class="location_op"
+                                        target="_blank"
+                                        data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($activityName as $item4)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none; cursor: pointer;"
+                                onclick="window.open('{{ route('activity', $item4->id_activity) }}', '_blank');">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image"
+                                        src="{{ asset('assets/icon/map/activity.png') }}">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a href="{{ route('activity', $item4->id_activity) }}"
+                                        type="button" class="location_op"
+                                        target="_blank"
+                                        data-value="{{ $item4->name }}">{{ $item4->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
+                            style="display: none">
+                            <p>{{ __('user_page.Location not found') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- NEW SEARCH MOBILE
+            date untuk mobile --}}
+            <div class="dates-container mx-2 mt-2">
+                {{-- NEW SEARCH MOBILE
+                ui ketika user belum atau sudah pilih date untuk mobile --}}
+                <div class="d-flex collapsible_check_search">
+                    <p class="text-secondary text-small mb-0 dates-mobile">When</p>
+                    <div class="btn-transparent-action ms-auto">Add Dates</div>
+                </div>
+                {{-- calendar --}}
+                <div class="content sidebar-popup" id="popup_check_search">
+                    <div class="flatpickr" id="inline_reserve_search"
+                        style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+            {{-- NEW SEARCH MOBILE
+            guests untuk mobile --}}
+            <div class="guests-container mx-2 mt-2">
+                {{-- NEW SEARCH MOBILE
+                ui ketika user belum atau sudah pilih guests untuk mobile --}}
+                <div class="d-flex selected-guest-mobile">
+                    <p class="text-secondary text-small mb-0 guests-mobile">1 Guests</p>
+                    <div class="btn-transparent-action ms-auto">Add Guests</div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                ui popup guest untuk mobile --}}
+                <div class="guest-popup dropdown-menu">
+                    <h5 class="mb-2">Guests</h5>
+                    <div class="d-flex mb-2">
+                        <div class="guest-type-container flex-fill">
+                            <p class="guest-type-title mb-0">
+                                {{ __('user_page.Adults') }}
+                            </p>
+                            <p class="guest-type-desc mb-0">
+                                {{ __('user_page.Age 13 or above') }}
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a type="button"
+                                onclick="adult_decrement_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-minus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                            <div
+                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="adult2"
+                                    name="sAdult" value="1"
+                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                    min="0" readonly>
+                            </div>
+                            <a type="button"
+                                onclick="adult_increment_index()"
+                                style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-plus"
+                                    style="padding:0px;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-2">
+                        <div class="guest-type-container flex-fill">
+                            <p class="guest-type-title mb-0">
+                                {{ __('user_page.Children') }}
+                            </p>
+                            <p class="guest-type-desc mb-0">
+                                {{ __('user_page.Ages 2–12') }}
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a type="button"
+                                onclick="child_decrement_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-minus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                            <div
+                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="child2"
+                                    name="sChild" value="0"
+                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                    min="0" readonly>
+                            </div>
+                            <a type="button"
+                                onclick="child_increment_index()"
+                                style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-plus"
+                                    style="padding:0px;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-2">
+                        <div class="guest-type-container flex-fill">
+                            <p class="guest-type-title mb-0">
+                                {{ __('user_page.Infants') }}
+                            </p>
+                            <p class="guest-type-desc mb-0">
+                                {{ __('user_page.Under 2') }}
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a type="button"
+                                onclick="infant_decrement_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-minus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                            <div
+                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="infant2"
+                                    name="" value="0"
+                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                    min="0" readonly>
+                            </div>
+                            <a type="button"
+                                onclick="infant_increment_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-plus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-2">
+                        <div class="guest-type-container flex-fill">
+                            <p class="guest-type-title mb-0">
+                                {{ __('user_page.Pets') }}
+                            </p>
+                            <p class="guest-type-desc mb-0">
+                                {{ __('user_page.Service animal ?') }}
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a type="button" onclick="pet_decrement_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-minus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                            <div
+                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="pet2"
+                                    name="" value="0"
+                                    style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                    min="0" readonly>
+                            </div>
+                            <a type="button" onclick="pet_increment_index()"
+                                style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-plus guests-style"
+                                    style="padding:0px"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {{-- NEW SEARCH MOBILE
+            tombol action dipaling bawah untuk mobile --}}
+            <div class="bottom-action-container">
+                <div class="d-flex">
+                    <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">{{ __('user_page.Clear Dates') }}</div>
+                    <div class="btn-transparent-action clear-all-mobile">Clear All</div>
+                    <div class="btn-company next-mobile ms-auto">Next</div>
+                    <button class="btn-company submit-mobile ms-auto d-none">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
     {{-- navbar --}}
     <section class="h-100 w-100" style="box-sizing: border-box; background-color: #000000;">
         <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
@@ -1192,24 +1588,40 @@
                 document.getElementById('adult2').stepUp();
                 document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
                     parseInt(document.getElementById('child2').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value) + " Guests";
             }
 
             function adult_decrement_index() {
                 document.getElementById('adult2').stepDown();
                 document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
                     parseInt(document.getElementById('child2').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value) + " Guests";
             }
 
             function child_increment_index() {
                 document.getElementById('child2').stepUp();
                 document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
                     parseInt(document.getElementById('child2').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value) + " Guests";
             }
 
             function child_decrement_index() {
                 document.getElementById('child2').stepDown();
                 document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
                     parseInt(document.getElementById('child2').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
+                    parseInt(document.getElementById('child2').value) + " Guests";
             }
 
             function infant_increment_index() {
@@ -1226,6 +1638,115 @@
 
             function pet_decrement_index() {
                 document.getElementById('pet2').stepDown();
+            }
+        </script>
+
+        <script>
+            // NEW SEARCH MOBILE
+            // fungsi untuk kembali ke bagian awal search di mobile
+            function backToMainMobile() {
+                $(".search-container-mobile form").removeClass("h-100");
+                $("#sugest").removeClass("display-block").addClass("display-none");
+                $(".search-container-mobile .first-sugest-location").removeClass("d-none");
+                $(".search-container-mobile .dates-container").removeClass("d-none h-100 px-0");
+                $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .guests-container").removeClass("d-none p-0");
+                $(".search-container-mobile .selected-guest-mobile").removeClass("d-none").addClass("d-flex");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
+                $(".search-container-mobile .clear-date-mobile").addClass("d-none");
+                if ($("#check_in2").val() != "" && $("#check_out2").val() != "" 
+                    && parseInt($("#total_guest2").val()) >= 1 && $("#loc_sugest").val() != "") {
+                    $(".search-container-mobile .submit-mobile").removeClass("d-none");
+                    $(".search-container-mobile .next-mobile").addClass("d-none");
+                } else {
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .next-mobile").html("Next");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                }
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
+                $('#sugest').removeClass("display-block").addClass("display-none");
+                $("#loc_sugest").attr("readonly", true);
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select location di mobile
+            function moveToLocationMobile() {
+                $("#loc_sugest").removeAttr("readonly");
+                var ids = $(".sugest-list-first");
+                ids.hide();
+                for (let index = 0; index < 5; index++) {
+                    // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                    // console.log(rndInt);
+                    ids.show();
+                };
+                $(".search-container-mobile form").addClass("h-100");
+                $(".search-container-mobile .first-sugest-location").addClass("d-none");
+                $(".search-container-mobile .dates-container").addClass("d-none");
+                $(".search-container-mobile .guests-container").addClass("d-none");
+                $(".search-container-mobile .guest-popup").removeClass("d-block");
+                $(".search-container-mobile .bottom-action-container").addClass("d-none");
+                $(".search-container-mobile .btn-top-search .close").addClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").removeClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .removeClass("mx-2").addClass("h-100");
+                $(".search-container-mobile .location-has-selected-container")
+                    .removeClass("d-flex").addClass("d-none");
+                $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
+                $('#sugest').removeClass("display-none");
+                $('#sugest').addClass("display-block");
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select date di mobile
+            function moveToDateMobile() {
+                $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
+                $(".select-location-mobile-container").addClass("d-none");
+                $(".search-container-mobile form").addClass("h-100");
+                $(".search-container-mobile .first-sugest-location").removeClass("d-none");
+                $(".search-container-mobile .dates-container").removeClass("d-none").addClass("h-100 px-0");
+                $(".search-container-mobile .guests-container").addClass("d-none");
+                $(".search-container-mobile .guest-popup").removeClass("d-block");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none").addClass("bottom-select-date");
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
+                $('#sugest').removeClass("display-block").addClass("display-none");
+                $("#loc_sugest").attr("readonly", true);
+                $(".search-container-mobile .clear-date-mobile").removeClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").addClass("d-none");
+                if ($("#check_in2").val() == "" && $("#check_out2").val() == "") {
+                    $(".search-container-mobile .next-mobile").html("Skip");
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                } else {
+                    $(".search-container-mobile .next-mobile").html("Next");
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                }
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select guest di mobile
+            function moveToGuestsMobile() {
+                $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
+                $(".select-location-mobile-container").addClass("d-none");
+                $(".search-container-mobile form").removeClass("h-100");
+                $(".search-container-mobile .first-sugest-location").addClass("d-none");
+                $(".search-container-mobile .guests-container").removeClass("d-none").addClass("p-0");
+                $(".search-container-mobile .dates-container").removeClass("d-none px-0");
+                $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .selected-guest-mobile").removeClass("d-flex").addClass("d-none");
+                $(".search-container-mobile .guest-popup").addClass("d-block");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .clear-date-mobile").addClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
+                $(".search-container-mobile .next-mobile").addClass("d-none");
+                $(".search-container-mobile .submit-mobile").removeClass("d-none");
             }
         </script>
 
@@ -1262,6 +1783,18 @@
                     $(".expand-navbar-mobile").attr("aria-expanded", "false");
                     $("#overlay").css("display", "none");
                 })
+                // NEW SEARCH MOBILE
+                // fungsi untuk ketika tombol kembali diklik
+                $(".search-container-mobile .btn-top-search .back").on('click', backToMainMobile);
+
+                // NEW SEARCH MOBILE
+                // fungsi untuk munculin location-popup ketika input search location di mobile diklik
+                $(".search-container-mobile #loc_sugest").on('click', moveToLocationMobile);
+
+                // NEW SEARCH MOBILE
+                // fungsi untuk munculin location-popup ketika search location di mobile diklik
+                $(".search-container-mobile .location-has-selected-container").on('click', moveToLocationMobile);
+
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
                     ids.hide();
@@ -1279,7 +1812,9 @@
                     var container = $('#sugest');
 
                     // if the target of the click isn't the container nor a descendant of the container
-                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan location-popup hanya berlaku ketika bukan dimobile
+                    if (!container.is(e.target) && container.has(e.target).length === 0 && window.innerWidth > 649) {
                         container.removeClass("display-block");
                         container.addClass("display-none");
                     }
@@ -1316,25 +1851,108 @@
                     console.log('done');
                 });
 
-                $(".location_op").on('click', function(e) {
-                    $('#loc_sugest').val($(this).data("value"));
+                // NEW SEARCH MOBILE
+                // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                // dari location yang paling populer di mobile
+                $(".first-sugest-location img").on('click', function(e) {
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                    $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(".location_op").data("value"));
+                    $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text").children(".location_op").data("value"));
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk sembunyiin popup location
                     $('#sugest').removeClass("display-block");
                     $('#sugest').addClass("display-none");
 
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk berpindah ke select date di mobile
+                    moveToDateMobile();
+
                     //calendar show when user filled location
                     var content_flatpickr = document.getElementById('popup_check_search');
-                    if (content_flatpickr.style.display === "block") {
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
                         content_flatpickr.style.display = "none";
                     } else {
                         content_flatpickr.style.display = "block";
                         document.addEventListener('mouseup', function(e) {
                             let container = content_flatpickr;
-                            if (!container.contains(e.target)) {
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
                                 container.style.display = 'none';
                             }
                         });
                     }
                 });
+
+                $(".location_op").on('click', function(e) {
+                    $('#loc_sugest').val($(this).data("value"));
+                    
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                    $('.loc_sugest_mobile').html($(this).data("value"));
+
+                    $('#sugest').removeClass("display-block");
+                    $('#sugest').addClass("display-none");
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk berpindah ke select date di mobile
+                    moveToDateMobile();
+
+                    //calendar show when user filled location
+                    var content_flatpickr = document.getElementById('popup_check_search');
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
+                // NEW SEARCH MOBILE
+                // Guest mobile
+                $(".selected-guest-mobile").on("click", moveToGuestsMobile);
+            });
+        </script>
+
+        <script>
+            // NEW SEARCH MOBILE
+            // fungsi untuk tombol next atau skip di mobile
+            $(".next-mobile").on("click", function() {
+                if ($("#loc_sugest").val() == "" && $("#check_in2").val() == ""
+                    && $("#check_out2").val() == "" && $(".search-container-mobile .sidebar-popup").css("display") != "block") {
+                        moveToLocationMobile();
+                }else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == ""
+                    && $("#check_out2").val() == "" && parseInt($("#total_guest2").val()) < 1) {
+                        moveToDateMobile();
+                }else if (($("#check_in2").val() == ""
+                    || $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") == "block"){
+                        moveToGuestsMobile();
+                }
+            });
+            // NEW SEARCH MOBILE
+            // fungsi untuk clear all di mobile
+            $(".clear-all-mobile").on("click", function() {
+                $("#loc_sugest").val("");
+                $("#check_in2").val("");
+                $("#check_out2").val("");
+                $(".search-container-mobile .loc_sugest_mobile").val("");
+                $(".search-container-mobile .dates-mobile").val("");
+                $(".search-container-mobile .guests-mobile").val("");
             });
         </script>
 
@@ -1346,54 +1964,20 @@
                 coll[i].addEventListener("click", function() {
                     this.classList.toggle("active");
                     var content_flatpickr = document.getElementById('popup_check_search');
-                    if (content_flatpickr.style.display === "block") {
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
                         content_flatpickr.style.display = "none";
                     } else {
                         content_flatpickr.style.display = "block";
+                        moveToDateMobile();
                         document.addEventListener('mouseup', function(e) {
                             let container = content_flatpickr;
-                            if (!container.contains(e.target)) {
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
                                 container.style.display = 'none';
                             }
                         });
                     }
                 });
             }
-        </script>
-
-        <script>
-            function calendar_search(months) {
-                if (!$("#check_in2").val()) {
-                    var check_in_val = "";
-                } else {
-                    var check_in_val = $("#check_in2").val();
-                }
-
-                if (!$("#check_out2").val()) {
-                    var check_out_val = "";
-                } else {
-                    var check_out_val = $("#check_out2").val();
-                }
-                $("#inline_reserve_search").flatpickr({
-                    enableTime: false,
-                    dateFormat: "Y-m-d",
-                    minDate: "today",
-                    inline: true,
-                    mode: "range",
-                    showMonths: months,
-                    // disable: data,
-                    defaultDate: [check_in_val, check_out_val],
-                    onChange: function(selectedDates, dateStr, instance) {
-                        $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                        $("#check_out2").val(
-                            instance.formatDate(selectedDates[1], "Y-m-d")
-                        );
-                        let content = document.getElementById("popup_check_search");
-                        content.style.display = "none";
-                    },
-                });
-            }
-            calendar_search(2);
         </script>
 
         <script>
@@ -1685,21 +2269,137 @@
         </script>
 
         <script>
+            // NEW SEARCH MOBILE
+            $(document).ready(function() {
+                var countMonthsMobile = 3;
+                function calendar_search(months) {
+                    if (!$("#check_in2").val()) {
+                        var check_in_val = "";
+                    } else {
+                        var check_in_val = $("#check_in2").val();
+                    }
+
+                    if (!$("#check_out2").val()) {
+                        var check_out_val = "";
+                    } else {
+                        var check_out_val = $("#check_out2").val();
+                    }
+                    $("#inline_reserve_search").flatpickr({
+                        enableTime: false,
+                        dateFormat: "Y-m-d",
+                        minDate: "today",
+                        inline: true,
+                        mode: "range",
+                        showMonths: months,
+                        // disable: data,
+                        defaultDate: [check_in_val, check_out_val],
+                        onReady: function(selectedDates, dateStr, instance) {
+                            // NEW SEARCH MOBILE
+                            // Meredesign calendar untuk mobile
+                            if (window.innerWidth <= 649) {
+                                var indexMonth = instance.currentMonth;
+                                var year = instance.currentYear;
+                                $(".dayContainer").each(function(i, curr) {
+                                    var month = instance.l10n.months.longhand[indexMonth];
+                                    $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                                    if (indexMonth == 11) {
+                                        indexMonth = 0;
+                                        year++;
+                                    }else {
+                                        indexMonth++;
+                                    }
+                                });
+                                $(".flatpickr-weekdaycontainer").addClass("d-none");
+                                $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                                $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                                $(".btn-load-more-calendar-mobile").on("click", function() {
+                                    countMonthsMobile+=3;
+                                    calendar_search(countMonthsMobile);
+                                });
+                            }
+                        },
+                        onChange: function(selectedDates, dateStr, instance) {
+                            $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $(".search-container-mobile .dates-mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            if (selectedDates.length > 1) {
+                                $("#check_out2").val(
+                                    instance.formatDate(selectedDates[1], "Y-m-d")
+                                );
+                                // NEW SEARCH MOBILE
+                                // fungsi untuk isi date di mobile
+                                $(".search-container-mobile .dates-mobile").val(instance.formatDate(selectedDates[0], "Y-m-d") + "-" instance.formatDate(selectedDates[1], "Y-m-d"));
+                                // NEW SEARCH MOBILE
+                                // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
+                                $(".search-container-mobile .next-mobile").html("Next");
+                            }
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
+                            if (window.innerWidth > 649) {
+                                let content = document.getElementById("popup_check_search");
+                                content.style.display = "none";
+                            }
+                            // NEW SEARCH MOBILE
+                            // Meredesign calendar mobile
+                            if (window.innerWidth <= 649) {
+                                var indexMonth = instance.currentMonth;
+                                var year = instance.currentYear;
+                                $(".dayContainer").each(function(i, curr) {
+                                    var month = instance.l10n.months.longhand[indexMonth];
+                                    $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                                    if (indexMonth == 11) {
+                                        indexMonth = 0;
+                                        year++;
+                                    }else {
+                                        indexMonth++;
+                                    }
+                                });
+                                $(".flatpickr-weekdaycontainer").addClass("d-none");
+                                $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                                $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                                $(".btn-load-more-calendar-mobile").on("click", function() {
+                                    countMonthsMobile+=3;
+                                    calendar_search(countMonthsMobile);
+                                });
+                            }
+                        }
+                    });
+                }
+                calendar_search(2);
+            })
+            
+        </script>
+
+        <script>
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
-                        calendar_search(1);
+                        calendar_search(3);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
-                            let content = document.getElementById("popup_check_search");
-                            content.style.display = "none";
-                            calendar_search(1);
+                            
+                            // NEW SEARCH MOBILE
+                            // clear date untuk mobile
+                            $(".search-container-mobile .dates-mobile").val("");
+                            $(".search-container-mobile .next-mobile").html("Skip");
+
+                            // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
+                            if (windowWidth > 649) {
+                                let content = document.getElementById("popup_check_search");
+                                content.style.display = "none";
+                            }
+                            calendar_search(3);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
+
+                            // NEW SEARCH MOBILE
+                            // clear date untuk mobile
+                            $(".search-container-mobile .dates-mobile").val("");
+                            $(".search-container-mobile .next-mobile").html("Skip");
+
                             let content = document.getElementById("popup_check_search");
                             content.style.display = "none";
                             calendar_search(2);

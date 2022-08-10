@@ -2107,6 +2107,89 @@ span.flatpickr-weekday {
     background-color: #ff7400 !important;
 }
 
+/* NEW SEARCH MOBILE */
+.search-container-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: #f7f7f7;
+    width: 100%;
+    height: 100%;
+}
+
+.search-container-mobile .btn-top-search {
+    display: block;
+    margin-left: auto;
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    border: solid 1px #b3b3b3;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.search-container-mobile .location-container,
+.search-container-mobile .dates-container,
+.search-container-mobile .guests-container {
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+.search-container-mobile .bottom-action-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+.search-container-mobile .text-small {
+    font-size: 14px;
+}
+
+.search-container-mobile .btn-company {
+    border: none !important;
+    padding: 10px 20px !important;
+}
+
+.search-container-mobile .location-container input {
+    border-color: #ff7400;
+    color: #ff7400;
+    border-radius: 5px;
+    height: 50px;
+}
+
+.search-container-mobile .location-container input::placeholder {
+    color: #ff7400;
+}
+
+.search-container-mobile .location-container .first-sugest-location img {
+    border-radius: 10px;
+    aspect-ratio: 2/1.5;
+    object-fit: cover;
+}
+
+.search-container-mobile .btn-transparent-action {
+    font-weight: 600;
+    font-size: 14px;
+    color: #ff7400;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.search-container-mobile .location-popup {
+    position: relative !important;
+    border-color: transparent !important;
+    top: 0 !important;
+    height: 100% !important;
+}
+/* END NEW SEARCH MOBILE */
+
 @media only screen and (max-width: 500px) {
     .grid-text{
         font-size: 75%;
@@ -2181,7 +2264,62 @@ span.flatpickr-weekday {
     }
 }
 
+@media only screen and (min-width: 650px) {
+    /* NEW SEARCH MOBILE */
+    .search-container-mobile {
+        display: none !important;
+    }
+    /* END NEW SEARCH MOBILE */
+}
+
 @media only screen and (max-width: 649px) {
+    /* NEW SEARCH MOBILE */
+    .search-container-mobile .sidebar-popup {
+        position: relative !important;
+        margin-left: 0px !important;
+        left: 0px !important;
+        top: 0px !important;
+        padding: 0px !important;
+        margin-top: 0px !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 10px !important;
+    }
+    .search-container-mobile .bottom-select-date {
+        width: 94% !important;
+        left: 2% !important;
+        right: 2% !important;
+    }
+    .search-container-mobile .sidebar-popup .flatpickr-calendar {
+        position: relative !important;
+        top: -3px !important;
+        width: 100% !important;
+        border-radius: 10px !important;
+        height: 100% !important;
+        max-height: none !important;
+    }
+    .flatpickr-calendar {
+        margin-top: -30px !important;
+    }
+    .flatpickr-days {
+        display: block !important;
+        height: 50vh !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+    .flatpickr-months {
+        display: none !important;
+    }
+    .search-container-mobile .guest-popup {
+        position: relative !important;
+        top: 0px !important;
+        left: 0px !important;
+        width: 100% !important;
+        padding: 10px !important;
+        border-color: transparent !important;
+        border-radius: 10px !important;
+    }
+    /* END NEW SEARCH MOBILE */
     .flatpickr-rContainer {
         width: 100% !important;
     }
