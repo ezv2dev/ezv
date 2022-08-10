@@ -979,7 +979,7 @@
                         </div>
                     </section>
                     {{-- Mobile --}}
-                    <section class="section mobile">
+                    <section id="gallery" class="section mobile">
                         <div class="col-12 row gallery">
                             @if ($photo->count() > 0)
                                 @foreach ($photo->sortBy('order') as $item)
