@@ -1958,9 +1958,10 @@
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
-                $(".search-container-mobile .loc_sugest_mobile").val("");
-                $(".search-container-mobile .dates-mobile").val("");
-                $(".search-container-mobile .guests-mobile").val("");
+                $("#total_guest2").val("");
+                $(".search-container-mobile .loc_sugest_mobile").html("Location");
+                $(".search-container-mobile .dates-mobile").html("When");
+                $(".search-container-mobile .guests-mobile").html("1 Guests");
             });
         </script>
 
@@ -2278,102 +2279,104 @@
 
         <script>
             // NEW SEARCH MOBILE
-            $(document).ready(function() {
-                var countMonthsMobile = 3;
-                function calendar_search(months) {
-                    if (!$("#check_in2").val()) {
-                        var check_in_val = "";
-                    } else {
-                        var check_in_val = $("#check_in2").val();
-                    }
-
-                    if (!$("#check_out2").val()) {
-                        var check_out_val = "";
-                    } else {
-                        var check_out_val = $("#check_out2").val();
-                    }
-                    $("#inline_reserve_search").flatpickr({
-                        enableTime: false,
-                        dateFormat: "Y-m-d",
-                        minDate: "today",
-                        inline: true,
-                        mode: "range",
-                        showMonths: months,
-                        // disable: data,
-                        defaultDate: [check_in_val, check_out_val],
-                        onReady: function(selectedDates, dateStr, instance) {
-                            // NEW SEARCH MOBILE
-                            // Meredesign calendar untuk mobile
-                            if (window.innerWidth <= 649) {
-                                var indexMonth = instance.currentMonth;
-                                var year = instance.currentYear;
-                                $(".dayContainer").each(function(i, curr) {
-                                    var month = instance.l10n.months.longhand[indexMonth];
-                                    $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
-                                    if (indexMonth == 11) {
-                                        indexMonth = 0;
-                                        year++;
-                                    }else {
-                                        indexMonth++;
-                                    }
-                                });
-                                $(".flatpickr-weekdaycontainer").addClass("d-none");
-                                $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
-                                $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
-                                $(".btn-load-more-calendar-mobile").on("click", function() {
-                                    countMonthsMobile+=3;
-                                    calendar_search(countMonthsMobile);
-                                });
-                            }
-                        },
-                        onChange: function(selectedDates, dateStr, instance) {
-                            $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                            $(".search-container-mobile .dates-mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                            if (selectedDates.length > 1) {
-                                $("#check_out2").val(
-                                    instance.formatDate(selectedDates[1], "Y-m-d")
-                                );
-                                // NEW SEARCH MOBILE
-                                // fungsi untuk isi date di mobile
-                                $(".search-container-mobile .dates-mobile").val(instance.formatDate(selectedDates[0], "Y-m-d") + "-" instance.formatDate(selectedDates[1], "Y-m-d"));
-                                // NEW SEARCH MOBILE
-                                // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
-                                $(".search-container-mobile .next-mobile").html("Next");
-                            }
-                            // NEW SEARCH MOBILE
-                            // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
-                            if (window.innerWidth > 649) {
-                                let content = document.getElementById("popup_check_search");
-                                content.style.display = "none";
-                            }
-                            // NEW SEARCH MOBILE
-                            // Meredesign calendar mobile
-                            if (window.innerWidth <= 649) {
-                                var indexMonth = instance.currentMonth;
-                                var year = instance.currentYear;
-                                $(".dayContainer").each(function(i, curr) {
-                                    var month = instance.l10n.months.longhand[indexMonth];
-                                    $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
-                                    if (indexMonth == 11) {
-                                        indexMonth = 0;
-                                        year++;
-                                    }else {
-                                        indexMonth++;
-                                    }
-                                });
-                                $(".flatpickr-weekdaycontainer").addClass("d-none");
-                                $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
-                                $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
-                                $(".btn-load-more-calendar-mobile").on("click", function() {
-                                    countMonthsMobile+=3;
-                                    calendar_search(countMonthsMobile);
-                                });
-                            }
-                        }
-                    });
+            window.countMonthsMobile = 3;
+            function calendar_search(months) {
+                if (!$("#check_in2").val()) {
+                    var check_in_val = "";
+                } else {
+                    var check_in_val = $("#check_in2").val();
                 }
-                calendar_search(2);
-            })
+
+                if (!$("#check_out2").val()) {
+                    var check_out_val = "";
+                } else {
+                    var check_out_val = $("#check_out2").val();
+                }
+                $("#inline_reserve_search").flatpickr({
+                    enableTime: false,
+                    dateFormat: "Y-m-d",
+                    minDate: "today",
+                    inline: true,
+                    mode: "range",
+                    showMonths: months,
+                    // disable: data,
+                    defaultDate: [check_in_val, check_out_val],
+                    onReady: function(selectedDates, dateStr, instance) {
+                        // NEW SEARCH MOBILE
+                        // Meredesign calendar untuk mobile
+                        if (window.innerWidth <= 649) {
+                            var indexMonth = instance.currentMonth;
+                            var year = instance.currentYear;
+                            $(".dayContainer").each(function(i, curr) {
+                                var month = instance.l10n.months.longhand[indexMonth];
+                                $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                                if (indexMonth == 11) {
+                                    indexMonth = 0;
+                                    year++;
+                                }else {
+                                    indexMonth++;
+                                }
+                            });
+                            $(".flatpickr-weekdaycontainer").addClass("d-none");
+                            $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                            $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                            $(".btn-load-more-calendar-mobile").on("click", function() {
+                                window.countMonthsMobile+=3;
+                                calendar_search(window.countMonthsMobile);
+                            });
+                        }
+                    },
+                    onChange: function(selectedDates, dateStr, instance) {
+                        $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $(".search-container-mobile .dates-mobile").html(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        if (selectedDates.length > 1) {
+                            $("#check_out2").val(
+                                instance.formatDate(selectedDates[1], "Y-m-d")
+                            );
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk isi date di mobile
+                            $(".search-container-mobile .dates-mobile").html(
+                                instance.formatDate(selectedDates[0], "Y-m-d")
+                                + "-" +
+                                instance.formatDate(selectedDates[1], "Y-m-d")
+                            );
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
+                            $(".search-container-mobile .next-mobile").html("Next");
+                        }
+                        // NEW SEARCH MOBILE
+                        // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
+                        if (window.innerWidth > 649) {
+                            let content = document.getElementById("popup_check_search");
+                            content.style.display = "none";
+                        }
+                        // NEW SEARCH MOBILE
+                        // Meredesign calendar mobile
+                        if (window.innerWidth <= 649) {
+                            var indexMonth = instance.currentMonth;
+                            var year = instance.currentYear;
+                            $(".dayContainer").each(function(i, curr) {
+                                var month = instance.l10n.months.longhand[indexMonth];
+                                $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                                if (indexMonth == 11) {
+                                    indexMonth = 0;
+                                    year++;
+                                }else {
+                                    indexMonth++;
+                                }
+                            });
+                            $(".flatpickr-weekdaycontainer").addClass("d-none");
+                            $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                            $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                            $(".btn-load-more-calendar-mobile").on("click", function() {
+                                window.countMonthsMobile+=3;
+                                calendar_search(window.countMonthsMobile);
+                            });
+                        }
+                    }
+                });
+            }
+            calendar_search(2);
             
         </script>
 
@@ -2381,14 +2384,14 @@
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
-                        calendar_search(3);
+                        calendar_search(window.countMonthsMobile);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
                             
                             // NEW SEARCH MOBILE
                             // clear date untuk mobile
-                            $(".search-container-mobile .dates-mobile").val("");
+                            $(".search-container-mobile .dates-mobile").html("");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
                             // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
@@ -2396,7 +2399,7 @@
                                 let content = document.getElementById("popup_check_search");
                                 content.style.display = "none";
                             }
-                            calendar_search(3);
+                            calendar_search(window.countMonthsMobile);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
@@ -2405,7 +2408,7 @@
 
                             // NEW SEARCH MOBILE
                             // clear date untuk mobile
-                            $(".search-container-mobile .dates-mobile").val("");
+                            $(".search-container-mobile .dates-mobile").html("");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
                             let content = document.getElementById("popup_check_search");
