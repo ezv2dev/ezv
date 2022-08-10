@@ -310,11 +310,11 @@
                             <a class="ms-0 orange-hover" href="#!"
                                 onclick="view_maps('{{ $data->id_restaurant }}')"><i
                                     class="fa-solid fa-location-dot text-13 text-orange"></i>
-                                {{ $data->location->name ?? __('user_page.Location not found') }}</a>
+                                {{ $data->location->name ?? __('user_page.Location not found') }}aaaaaaaaaa</a>
                             </a>
                         </div>
                         <div class="skeleton">
-                            <span 
+                            <span
                             @if(in_array($data->price->name, ['Cheap Prices','Middle Range','Fine Dining'])) style="color: #FF7400" @endif>
                                 @if ($data->price->name == 'Cheap Prices')
                                 $
