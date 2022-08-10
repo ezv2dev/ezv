@@ -50,128 +50,248 @@
             <!-- Image row 1-->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?people,student">
+                <div class="grid-text">
+                    Pizza
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?cyscling,boxing">
+                <div class="grid-text">
+                    Villa
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?sunrise,shores">
+                <div class="grid-text">
+                    Diving
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?accident,crash">
+                <div class="grid-text">
+                    Beach
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?eating,drink">
+                <div class="grid-text">
+                    waterfall
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?happy,sadness">
+                <div class="grid-text">
+                    Hiking
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?rush,war">
+                <div class="grid-text">
+                    Surf
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?pool,garden">
+                <div class="grid-text">
+                    Paintball
+                </div>
             </div>
             <!-- Image row 2 -->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?space,planet">
+                <div class="grid-text">
+                    Soccer
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?rock,metal">
+                <div class="grid-text">
+                    Luxury Villa
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?horses,deer">
+                <div class="grid-text">
+                    Hotel
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?angry,yelling">
+                <div class="grid-text">
+                    Babi guling
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?traditional,religion">
+                <div class="grid-text">
+                    Bakery
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?music,tools">
+                <div class="grid-text">
+                    Bakso
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?popular,newspaper">
+                <div class="grid-text">
+                    Cabins
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?local,activity">
+                <div class="grid-text">
+                    Bungalow
+                </div>
             </div>
             <!-- Image row 3 -->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?teacher,teaching">
+                <div class="grid-text">
+                    Cottage
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?machinal,musical">
+                <div class="grid-text">
+                    Glamping
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?baby,givebirth">
+                <div class="grid-text">
+                    Boat
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?smile,teardrops">
+                <div class="grid-text">
+                    Estate
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?leaf,wind">
+                <div class="grid-text">
+                    Bowling
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?kites,doll">
+                <div class="grid-text">
+                    Day Spa
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?studios,radios">
+                <div class="grid-text">
+                    Water Park
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?xray,medicine">
+                <div class="grid-text">
+                    ATM
+                </div>
             </div>
             <!-- Image row 4 -->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?spider,gresshoper">
+                <div class="grid-text">
+                    Cultural
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?winter,falls">
+                <div class="grid-text">
+                    Night Club
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?plantation,farmer">
+                <div class="grid-text">
+                    Beach Club
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?boat,cannoe">
+                <div class="grid-text">
+                    Zoo
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?girls,boys">
+                <div class="grid-text">
+                    Yoga
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?night,speedboats">
+                <div class="grid-text">
+                    Rental (Vehicle)
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?mick,amplifier">
+                <div class="grid-text">
+                    Cinema
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?spotlights,thunder">
+                <div class="grid-text">
+                    Pizza
+                </div>
             </div>
             
             <!-- Image row 5 -->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?pig,cow">
+                <div class="grid-text">
+                    Medical
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?milk,toast,honey">
+                <div class="grid-text">
+                    Sushi
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?december,spring">
+                <div class="grid-text">
+                    Gas Station
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?xmast,nuns">
+                <div class="grid-text">
+                    Money Exchange
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?help,guide">
+                <div class="grid-text">
+                    Nature
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?line,linen">
+                <div class="grid-text">
+                    Kids / Family
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?restaurant,bar">
+                <div class="grid-text">
+                    Attraction
+                </div>
             </div>
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?eats,pray,love">
+                <div class="grid-text">
+                    Motel
+                </div>
             </div>
         </div>
     </section>

@@ -41,9 +41,12 @@
 <div id="modal-photo-gallery" class="modal fade bs-example-modal-lg">
     <div class="modal-dialog modal-fullwidth modal-lg" role="document">
         <div class="modal-content-photo">
-            <div class="modal-body-gallery">
-                        <button type="button" class="btn-close-modal-photo" data-bs-dismiss="modal" aria-label="Close"><i
+            <div class="modal-header">
+            <button type="button" class="btn-close-modal-photo" data-bs-dismiss="modal" aria-label="Close"><i
                             class="fa-solid fa-xlose"></i></button>
+            </div>
+            <div class="modal-body-gallery">
+                        
                 @if ($photo->count() > 0)
                     @foreach ($photo->sortBy('order') as $item)
                     <div id="{{ $item->id_photo }}">
