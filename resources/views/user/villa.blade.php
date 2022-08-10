@@ -1675,7 +1675,7 @@
                                 style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
                                 <input class="price-button" onclick="details_reserve()"
                                     style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                    value="{{ __('user_page.VIEW DETAILS'x) }}" readonly>
+                                    value="{{ __('user_page.VIEW DETAILS') }}" readonly>
                                 <input type="submit" class="price-button d-none" id="btnBookingDetail"
                                     style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                     value="{{ __('user_page.VIEW DETAILS') }}">
