@@ -85,7 +85,7 @@
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
                         <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
-                        onclick="saveRoomDetail()">
+                        onclick="saveRoomDetail({{ $villa[0]->id_villa }})">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>

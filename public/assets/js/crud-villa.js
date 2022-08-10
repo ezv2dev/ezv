@@ -1978,10 +1978,10 @@ function saveLocation() {
     });
 }
 
-function saveRoomDetail() {
+function saveRoomDetail(id_villa) {
     console.log("hit save room detail");
 
-    let id_villa = $("input[name='id_villa").val();
+    let formData = [];
     const content = $("#roomDetailFormContent");
 
     let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
@@ -2004,8 +2004,14 @@ function saveRoomDetail() {
         });
     }
 
-    let image = content.find("input[name='image']").val();
+    // let image = content.find("input[name='image']").val();
     let price = content.find("#room-price").val();
+
+    formData.push({
+        bathroom_ids: bathroomIds,
+        bedroom_ids: bedroomIds,
+        bed: bed,
+    });
 
     $.ajax({
         type: "POST",
@@ -2014,12 +2020,10 @@ function saveRoomDetail() {
         },
         url: "/villa/add-room",
         data: {
-            bathroom_ids: bathroomIds,
-            bedroom_ids: bedroomIds,
-            bed: bed,
-            image: image,
-            price: price,
+            data: formData,
             id_villa: id_villa,
+            price: price,
+            // image: image,
         },
         cache: false,
         processData: false,

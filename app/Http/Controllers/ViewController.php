@@ -877,6 +877,7 @@ class ViewController extends Controller
                 'message' => 'authenticated',
             ], 401);
         }
+
         // validation
         $validator = Validator::make($request->all(), [
             'id_villa' => ['integer', 'required'],
@@ -3383,15 +3384,34 @@ class ViewController extends Controller
             ], 401);
         }
 
-        // villa data
-        $villa = Villa::find($request->id_villa);
+        $validator = Validator::make($request->all(), [
+            // 'id_villa' => ['integer', 'required'],
+            'data' => ['array', 'nullable'],
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'something error',
+                'errors' => $validator->errors()->all(),
+            ], 500);
+        }
 
-        return $villa;
+        // villa data
+        $villa = Villa::where('id_villa', $request->id_villa)->first();
+
         // check if villa does not exist, abort 404
         if (!$villa) {
             return response()->json([
                 'message' => 'Home Not Found',
             ], 404);
         }
+
+        // check if the editor does not have authorization
+        // $this->authorize('listvilla_update');
+        // if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+        //     return response()->json([
+        //         'message' => 'This action is unauthorized',
+        //     ], 403);
+        // }
     }
 }
