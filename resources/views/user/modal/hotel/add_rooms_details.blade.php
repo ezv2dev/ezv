@@ -187,7 +187,7 @@
                         <div class="col-2 d-flex align-items-center justify-content-center" style="border-left: 1px solid #d6d6d6;">
                         <select name="room-amount" id="room-amount" style="width: 3.5rem;">
                         <option value="0">0</option>
-                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR {{ number_format($item->price) }}</option>
+                        <option value="0">1 &nbsp; &nbsp; &nbsp; IDR {{ isset($item->price) ? number_format($item->price) : 'null' }}</option>
                         </select>
                         </div>
                         </div>
