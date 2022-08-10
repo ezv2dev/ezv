@@ -3234,6 +3234,10 @@ input::-webkit-inner-spin-button {
     padding-right: 0.5rem;
 }
 
+.villa-list-name{
+    color: #ff7400;
+}
+
 .container-grid-hotel .grid-list-container {
     border: solid 1px #bbb;
     padding: 8px;
@@ -3660,8 +3664,9 @@ input::-webkit-inner-spin-button {
 @media only screen and (max-width: 425px) {
     /* revisi text list villa */
     .villa-list-name {
-        font-size: 15px !important;
+        font-size: 14px !important;
         padding-bottom: 8px;
+        color: black;
     }
     .villa-location-description .text-orange,
     .villa-list-title,
