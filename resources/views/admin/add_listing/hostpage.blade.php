@@ -35,17 +35,19 @@
                     <h1 class="text-header">Open your door to more<br> guests with EZV</h1>
                     <p class="text-content">Free to join<br> start growing your business today</p>
                     <p class="text-content">0% Booking fees until 2023<br> terms & conditions apply</p>
-                    <button class="letsgo" onclick="window.location.href='#start';">Let's go</button>
+                    <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">Let's
+                        go</button>
                 </div>
             </div>
             <div class="col-12 d-none d-sm-block col-md-6 min-400">
-                <div class="header-image vh-100">&nbsp;</div> 
+                <div class="header-image vh-100">&nbsp;</div>
             </div>
         </div>
     </section>
 
     <section class="p-3 p-lg-5">
-        <p class="host-body-text mb-0 text-center">You can list anything, anywhere<br>Accommodation, Restaurant, Activities and More</p>
+        <p class="host-body-text mb-0 text-center">You can list anything, anywhere<br>Accommodation, Restaurant,
+            Activities and More</p>
         <div class="row-grid-img pt-4 pt-lg-7">
             <!-- Image row 1-->
             <div class="grid-img-container">
@@ -243,7 +245,7 @@
                     Pizza
                 </div>
             </div>
-            
+
             <!-- Image row 5 -->
             <div class="grid-img-container">
                 <img src="https://source.unsplash.com/featured?pig,cow">
@@ -299,20 +301,23 @@
     <section id="start" class="p-3 p-lg-5 h1-00 w-100">
         <div>
             <div class="row">
-                <div class="col-12 col-md-6 video-text-section"> 
+                <div class="col-12 col-md-6 video-text-section">
                     <h1>Video content is trending</h1>
                     <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
                     <p>68% of costumers prefer watching videos to learn about new</p>
                     <p>Show case what makes your property unique with short videos</p>
-                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified
+                        creators from Videographers, Photographers, Drone Pilots, Blogger and more</p>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="host-video-section">
                         <div class="host-video-container">
                             <div class="video-content">
-                                <video controls="true" autoplay="autoplay" loop="true" muted defaultmuted playsinline>
-                                <source src="{{ asset('assets/media/videos/hoses-sample-video.mp4') }}" type="video/mp4">
-                                Your browser does not support the video tag.
+                                <video controls="true" autoplay="autoplay" loop="true" muted defaultmuted
+                                    playsinline>
+                                    <source src="{{ asset('assets/media/videos/hoses-sample-video.mp4') }}"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                         </div>
@@ -331,43 +336,49 @@
                 <div class="sp-75"></div>
                 <button class="letsgo" onclick="open_form()">Support</button>
                 <div class="sp-75"></div>
-                <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting process</p>
+                <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting
+                    process</p>
             </div>
         </div>
     </section>
-        
-    
+
+
 
     <section class="p-3 p-lg-5 d-none" id="form-section">
         <div>
             <div class="customer-support-block p-3 p-lg-5 background-light-grey">
                 <h1>24/7 customer support team</h1>
                 <p>We are here to help you set and design your first listing with EZV</p>
-                <p>Please fill in your contact details in the form bellow and one of our team<br> members will respond to you shortly</p>
+                <p>Please fill in your contact details in the form bellow and one of our team<br> members will respond
+                    to you shortly</p>
                 <form action="">
-                <div class="d-flex flex-column flex-lg-row">
-                    <div class="col-12 col-md-6 right-20">
-                        <input class="form-control" placeholder="First Name">
-                        <input class="form-control" placeholder="Last Name">
-                        <input class="form-control" placeholder="Email address [Example: me@localhost.com]">
-                        <input class="form-control" placeholder="Phone">
-                        <input class="form-control" placeholder="Website">
-                    </div>
-                    <div class="col-12 col-md-6 left-20">
-                        <div class="add-link d-block" id="input-link-listing-button" onclick="open_input_link_listing()" >Add Link</div>
-                        <input style="margin-bottom: 40px;" id="input-link-listing" class="form-control d-none" placeholder="Input your link here">
-                        <p>Add link of your rental property listing</p>
-                        <p>Please add a link to one of your current listings on another site to help with designing your first EZV listing even faster</p>
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="v-middle">Cutomer Support: <a href="tel:+6281667548765">+62 8166 7548 765</a></p>
-                            </div>
-                            <div class="col-4">
-                            <button class="add-link">Submit</button>
+                    <div class="d-flex flex-column flex-lg-row">
+                        <div class="col-12 col-md-6 right-20">
+                            <input class="form-control" placeholder="First Name">
+                            <input class="form-control" placeholder="Last Name">
+                            <input class="form-control" placeholder="Email address [Example: me@localhost.com]">
+                            <input class="form-control" placeholder="Phone">
+                            <input class="form-control" placeholder="Website">
+                        </div>
+                        <div class="col-12 col-md-6 left-20">
+                            <div class="add-link d-block" id="input-link-listing-button"
+                                onclick="open_input_link_listing()">Add Link</div>
+                            <input style="margin-bottom: 40px;" id="input-link-listing" class="form-control d-none"
+                                placeholder="Input your link here">
+                            <p>Add link of your rental property listing</p>
+                            <p>Please add a link to one of your current listings on another site to help with designing
+                                your first EZV listing even faster</p>
+                            <div class="row">
+                                <div class="col-8">
+                                    <p class="v-middle">Cutomer Support: <a href="tel:+6281667548765">+62 8166 7548
+                                            765</a></p>
+                                </div>
+                                <div class="col-4">
+                                    <button class="add-link">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -402,7 +413,8 @@
             <div class="row">
                 <div class="col-12 col-md-3 text-black">
                     <h4>My house My rules</h4>
-                    <p>Create your own personalized house rules for your proprty. Guests will be required to agree to your rules upon reservation.</p>
+                    <p>Create your own personalized house rules for your proprty. Guests will be required to agree to
+                        your rules upon reservation.</p>
                 </div>
                 <div class="col-12 col-md-3">
                     <h4>24/7 Customer<br> support team</h4>
@@ -410,11 +422,13 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <h4>Extra piece of mind</h4>
-                    <p>Hosts may require to pay for an additional security deposit to cover any damages to the property before check-in.</p>
+                    <p>Hosts may require to pay for an additional security deposit to cover any damages to the property
+                        before check-in.</p>
                 </div>
                 <div class="col-12 col-md-3">
                     <h4>Liability Insurance</h4>
-                    <p>All bookings with EZV are covered with $1.000.000 liability insurenace in the rare event a guest in injured your protected.</p>
+                    <p>All bookings with EZV are covered with $1.000.000 liability insurenace in the rare event a guest
+                        in injured your protected.</p>
                 </div>
             </div>
         </div>
@@ -426,7 +440,8 @@
             <h3>Try hosting</h3>
             <div class="sp-200"></div>
             <p>Put your mind at ease when listing with EZV<br> we got you covered</p>
-            <button class="letsgo">Learn More</button>
+            <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">Learn
+                More</button>
         </div>
     </section>
 
@@ -447,7 +462,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-sm-block">
-                <div class="bottom-image vh-100">&nbsp;</div> 
+                <div class="bottom-image vh-100">&nbsp;</div>
             </div>
         </div>
     </section>
@@ -468,6 +483,7 @@
             document.getElementById("form-section").classList.remove('d-none');
             document.getElementById("form-section").classList.add('d-block');
         }
+
         function open_input_link_listing() {
             document.getElementById("input-link-listing").classList.remove('d-none');
             document.getElementById("input-link-listing").classList.add('d-block');
