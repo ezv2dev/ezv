@@ -79,6 +79,7 @@ body, html {
     box-shadow: 1px 1px 1px rgb(0 0 0 / 4%);
     border: solid 1px #cdcdcd;
     background: #cdcdcd;
+    filter: brightness(60%);
 }
 
 .video-text-section {

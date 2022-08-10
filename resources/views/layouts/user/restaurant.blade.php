@@ -170,6 +170,25 @@
             font-weight: 400;
         }
 
+        .list-link-sidebar {
+            gap: 12px;
+            display: flex;
+            align-items:center;
+        }
+
+        .list-link-sidebar i {
+            width: 30px;
+        }
+
+        .subcategory-in-sidebar:hover {
+            cursor: pointer;
+        }
+
+        .list-link-sidebar>*,
+        .list-link-sidebar:hover>* {
+            color: #585656;
+        }
+
         @media only screen and (max-width: 480px) {
             .related-items h6 {
                 padding: 20px 0 20px 0;

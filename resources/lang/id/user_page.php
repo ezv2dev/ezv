@@ -350,6 +350,7 @@ return [
     'Input name' => 'Masukkan nama',
     'Input price (number only)' => 'Masukkan harga (hanya angka)',
     'Create Listing' => 'Buat Daftar',
+    'Create Account' => 'Buat Akun',
 
     'FAVORITE' => 'FAVORIT',
     'CANCEL' => 'BATAL',

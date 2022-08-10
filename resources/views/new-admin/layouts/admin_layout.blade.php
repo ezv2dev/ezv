@@ -1175,6 +1175,13 @@
             $('.main').css('margin-top', navBarHeight)
             $('#layoutSidenav_nav').css('top', navBarHeight)
         })
+
+        $(window).resize(function(){
+            if (window.innerWidth > 991) {
+                $(".btn-close-expand-navbar-mobile").trigger('click')
+            }
+        })
+        
         $(".btn-close-expand-navbar-mobile").on("click", function() {
             $("body").css({
                 "height": "auto",
