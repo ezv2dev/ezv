@@ -3373,4 +3373,25 @@ class ViewController extends Controller
             ], 500);
         }
     }
+
+    public function add_room(Request $request)
+    {
+        // check if editor not authenticated
+        if (!auth()->check()) {
+            return response()->json([
+                'message' => 'unauthenticated',
+            ], 401);
+        }
+
+        // villa data
+        $villa = Villa::find($request->id_villa);
+
+        return $villa;
+        // check if villa does not exist, abort 404
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
+        }
+    }
 }

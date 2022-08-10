@@ -513,7 +513,7 @@ Route::get('/villa/{id}/delete/image', [ViewController::class, 'villa_delete_ima
 Route::get('/villa/{id}/delete/photo/video/{id_video}', [ViewController::class, 'villa_delete_photo_video'])->name('villa_delete_photo_video');
 Route::get('/villa/{id}/delete/photo/photo/{id_photo}', [ViewController::class, 'villa_delete_photo_photo'])->name('villa_delete_photo_photo');
 Route::post('/villa/update/extra', [ViewController::class, 'villa_update_extra'])->name('villa_update_extra');
-
+Route::post('/villa/add-room', [ViewController::class, 'add_room'])->name('villa_add_room');
 // ! Verified
 // Route::middleware(['auth'])->group(
 //     function () {
