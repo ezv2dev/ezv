@@ -1673,16 +1673,16 @@
 
                             <div class="col-12 p-5-price text-center"
                                 style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
-                                @if ($villa[0]->instant_book == 'yes')
-                                    <input class="price-button" onclick="details_reserve()"
+                                <input class="price-button" onclick="details_reserve()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.VIEW DETAILS'x) }}" readonly>
+                                <input type="submit" class="price-button d-none" id="btnBookingDetail"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.VIEW DETAILS') }}">
+                                {{-- @if ($villa[0]->instant_book == 'yes')
+                                    <a class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-                                    <input type="submit" class="price-button d-none" id="btnBookingDetail"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.VIEW DETAILS') }}">
-                                    {{-- <a class="price-button"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a> --}}
+                                        href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a>
                                 @else
                                     @guest
                                         <input class="price-button" onclick="loginForm(2)"
@@ -1694,7 +1694,7 @@
                                             style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                             value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
                                     @endauth
-                                @endif
+                                @endif --}}
                             </div>
 
                             <div class="rightbar-advert-container"

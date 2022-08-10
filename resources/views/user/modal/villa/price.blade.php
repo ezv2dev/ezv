@@ -333,7 +333,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row mb-12 mt-3">
+                                            {{-- <div class="row mb-12 mt-3">
                                                 <label class="col-sm-4 col-form-label" for="price">
                                                     <strong>
                                                         {{ __('user_page.Instant Book') }}
@@ -356,7 +356,7 @@
                                                         </label>
                                                     @endif
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="row mb-12 mt-3">
                                                 <label class="col-sm-4 col-form-label" for="min_stay">
