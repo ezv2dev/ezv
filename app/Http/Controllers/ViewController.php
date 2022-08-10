@@ -159,7 +159,6 @@ class ViewController extends Controller
             }
         }
 
-
         // check if villa exist
         abort_if($villa->count() == 0, 404);
 
@@ -175,7 +174,6 @@ class ViewController extends Controller
             ]
         );
         VillaStatistic::where('id_villa', $id)->where('month', $now->month)->where('year', $now->year)->increment('villa_views');
-
 
         // appends additional data to hotel list
         // $villa->each(function ($item, $key) {

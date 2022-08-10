@@ -1324,6 +1324,16 @@
                         </div>
                     </section>
 
+                    @php
+                        $isSharedRoom = '';
+                        foreach ($villaHasCategory as $item) {
+                            if ($item->id_villa_category == 40) {
+                                $isSharedRoom = 'yes';
+                            }
+                        }
+                    @endphp
+
+                    @if ($isSharedRoom == 'yes')
                     <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
                         <div class="row-grid-room-option">
                             <hr>
@@ -1342,86 +1352,68 @@
                             </div>
 
                         </div>
-                        <div class="row-grid-room-option" id="row-room-option">
-                            <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
-                                <!-- Left Sedtion -->
-                                <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
-                                    <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
-                                </div>
-                                <!-- End Left Section -->
-                                <!-- Right Section -->
-                                <div class="col-lg-6 py-2 col-xs-12 list-image-container">
-                                    <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">Bedroom 1</h6></div>
-                                   <div class="w-100 ml-responsive" style="position:relative;">
-                                      <!-- Villa Description -->
-                                      <div class="mt-3 mt-lg-0 " style="height:100%;">
-                                         <div class="col-12" style="font-size: 13px;">
-                                            <div class="col-lg-6">
-                                               <div class="container-room-option villa-list-title">
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Bed Linens
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black ">
-                                                     • Drying rack for clothing
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • 6 Iron
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Save
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                    <span class="list-description font-black">
-                                                    • Bidet
-                                                    </span>
-                                                 </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Bathtub
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black ">
-                                                      • Conditioner
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Hot water
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Shower gel
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                     <span class="list-description font-black">
-                                                     • <span style="color: #ff7400;">+more</span>
-                                                     </span>
-                                                  </div>
+                        @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
+                            <div class="row-grid-room-option" id="row-room-option">
+                                <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
+                                    <!-- Left Sedtion -->
+                                    <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
+                                        <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
+                                    </div>
+                                    <!-- End Left Section -->
+                                    <!-- Right Section -->
+                                    <div class="col-lg-6 py-2 col-xs-12 list-image-container">
+                                        <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h6></div>
+                                    <div class="w-100 ml-responsive" style="position:relative;">
+                                        <!-- Villa Description -->
+                                        <div class="mt-3 mt-lg-0 " style="height:100%;">
+                                            <div class="col-12" style="font-size: 13px;">
+                                                <div class="col-lg-6">
+                                                <div class="container-room-option villa-list-title">
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->bed->name }} x{{ $item->qty }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    {{-- <div class="">
+                                                        <span class="list-description font-black">
+                                                        • <span style="color: #ff7400;">+more</span>
+                                                        </span>
+                                                    </div> --}}
+                                                    </div>
                                                 </div>
-                                             </div>
-                                         </div>
-                                      </div>
-                                   </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
+                                        <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
+                                        <button type="submit" id="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                    <!-- End Right Section -->
                                 </div>
-                                <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
-                                    <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
-                                    <button type="submit" id="button" class="btn btn-primary">Select</button>
-                                </div>
-                                <!-- End Right Section -->
-                             </div>
-                        </div>
+                            </div>
+                        @endfor
                     </section>
+                    @endIf
                 </div>
                 {{-- END PAGE CONTENT --}}
             </div>
