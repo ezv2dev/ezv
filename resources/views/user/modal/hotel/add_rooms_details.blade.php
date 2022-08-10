@@ -192,7 +192,8 @@
                         </div>
                         </div>
                         </div>`;
-                    $('#hotelTypeDetailList').append(content);
+                    var id_room_hotelz = '#hotelTypeDetailList' + idHotelRoom;
+                    $(id_room_hotelz).append(content);
 
                     iziToast.success({
                         title: "Success",
