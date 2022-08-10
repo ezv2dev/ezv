@@ -1344,7 +1344,7 @@
                                         @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                             &nbsp;
                                             <a type="button" onclick="edit_room_option()"
-                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Room Option') }}
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Add Room Option') }}
                                             </a>
                                         @endif
                                     @endauth
@@ -3512,6 +3512,7 @@
     @auth
         @include('user.modal.villa.price')
         @include('user.modal.villa.bedroom')
+        @include('user.modal.villa.room_option')
         {{-- @include('user.modal.villa.guest') --}}
         @include('user.modal.villa.location')
         @include('user.modal.villa.amenities_add')
@@ -3781,6 +3782,10 @@
 
         function showMoreHouseRules() {
             $('#modalHouseRules').modal('show');
+        }
+
+        function edit_room_option() {
+            $('#modal-add_room_option').modal('show');
         }
     </script>
 
