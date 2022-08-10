@@ -173,12 +173,12 @@
                                     <p style="font-size: 12px; font-weight: 600; color: #767676; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                 </div>
                                 <div class="col-12 mt-5">
-                                    <a type="button" style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; bottom: 0rem; right: 0rem;" class="btn btn-sm btn-create-listing" href="#">Reply </a>
+                                    <a id="rep_btn" type="button" style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; bottom: 0rem; right: 0rem;" class="btn btn-sm btn-create-listing" href="#">Reply </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-5" style="border-radius: 12px; background: #fff; box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);">
+                    <div id="rep_form" class="col-12 mt-5" style="display:none; border-radius: 12px; background: #fff; box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);">
                         <div style="padding: 15px;">
                             <div class="row p-2" style="position: relative;">
                                 <div class="col-2 p-0">
@@ -278,7 +278,12 @@
         $('.list_msg').click(function (e) {
             console.log('kontol');
             $('#bg_msg').hide();
+            $('#rep_form').hide();
             $('#rep_msg').show();
+        });
+        $('#rep_btn').click(function (e) {
+            $('#rep_form').show();
+
         });
     </script>
     <script>
