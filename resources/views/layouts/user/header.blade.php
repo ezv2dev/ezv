@@ -114,7 +114,8 @@
             font-size: 18px;
         }
 
-        .dropbtn:hover, .dropbtn1:focus {
+        .dropbtn:hover,
+        .dropbtn1:focus {
             background-color: #ff7400;
         }
 
@@ -125,7 +126,7 @@
 
         @media only screen and (max-width: 767px) {
             .dropdown {
-            display: none !important;
+                display: none !important;
             }
         }
 
@@ -1024,7 +1025,7 @@
 
                             <div>
                                 <div class="bar bar-restaurant-detail" id="parentBar">
-                                    <div class="location-restaurant">
+                                    <div class="location">
                                         <p>{{ __('user_page.Location / Restaurant') }}</p>
                                         <input type="text" onfocus="this.value=''"
                                             class="form-control input-transparant" name="sLocation"
@@ -1180,6 +1181,57 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="check-out">
+                                        <p> <i class="fa-solid fa-magnifying-glass"></i> Search Cuisine</p>
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sCuisine" value=""
+                                            id="search_sugest2" placeholder="{{ __('user_page.Search here') }}">
+
+                                        <div id="sugest3" class="location-popup display-none"
+                                            style="width: 560px; left: -262px; height: 390px;">
+                                            <div class="location-popup-container h-100">
+                                                <div class="row location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    @foreach ($cuisine as $item)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex"
+                                                            style="padding-left: 0px !important; align-items: center;">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    style="background: #222222;"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="https://source.unsplash.com/random/1920x1080/?{{ $item->name }},landscape">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op3"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                @foreach ($cuisine as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                style="background: #222222;"
+                                                                src="https://source.unsplash.com/random/?{{ $item->name }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op3" target="_blank"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty2"
+                                                    style="display: none">
+                                                    <p>Cuisine not found
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="guests" style="width: auto;">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
@@ -1246,7 +1298,6 @@
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -1601,8 +1652,8 @@
                                         <div class="location">
                                             <p>{{ __('user_page.Location') }}</p>
                                             <input type="text" onfocus="this.value=''"
-                                                class="form-control input-transparant" value="" id="loc_sugest"
-                                                name="sLocation"
+                                                class="form-control input-transparant" value=""
+                                                id="loc_sugest" name="sLocation"
                                                 style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
                                                 placeholder="Where are you going?">
 
@@ -2928,9 +2979,9 @@
                 </a>
 
                 <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap login-btn"
-                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                    <i class="fa-solid fa-user"></i>
-                </a> -->
+                                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                    <i class="fa-solid fa-user"></i>
+                                </a> -->
 
                 <div class="dropdown">
                     <button type="button" class="btn-dropdown dropbtn btn border-0 navbar-gap"></button>
@@ -3317,8 +3368,6 @@
 
                 setCookie2("sLocation", sLocationFormInput, 1);
 
-                console.log($("input[name='sKeyword']").val());
-
                 var sKeywordFormInput = function() {
                     var tmp = null;
                     $.ajax({
@@ -3337,11 +3386,31 @@
                     return tmp;
                 }();
 
+                var sCuisineFormInput = function() {
+                    var tmp = null;
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        global: false,
+                        dataType: 'json',
+                        url: "/food/cuisine",
+                        data: {
+                            name: $("input[name='sCuisine']").val()
+                        },
+                        success: function(response) {
+                            tmp = response.data;
+                        }
+                    });
+                    return tmp;
+                }();
+
+                cuisineTemp = [];
+                cuisineTemp.push(sCuisineFormInput);
                 keyWordTemp = [];
                 keyWordTemp.push(sKeywordFormInput);
 
                 var subUrl =
-                    `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${keyWordTemp}`;
+                    `sLocation=${sLocationFormInput}&fCuisine=${cuisineTemp}&fSubCategory=${keyWordTemp}`;
                 restaurantRefreshFilter(subUrl);
             }
         </script>
@@ -3396,9 +3465,21 @@
                     $('#sugest2').removeClass("display-none");
                     $('#sugest2').addClass("display-block"); //add the class to the clicked element
                 });
+                $("#search_sugest2").on('click', function() { //use a class, since your ID gets mangled
+                    var ids = $(".sugest-list-first");
+                    ids.hide();
+                    for (let index = 0; index < 5; index++) {
+                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                        // console.log(rndInt);
+                        ids.show();
+                    };
+
+                    $('#sugest3').removeClass("display-none");
+                    $('#sugest3').addClass("display-block"); //add the class to the clicked element
+                });
 
                 $(document).mouseup(function(e) {
-                    var container = $('#sugest2');
+                    var container = $('#sugest2, #sugest3');
 
                     // if the target of the click isn't the container nor a descendant of the container
                     if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -3443,6 +3524,11 @@
                     $('#sugest2').removeClass("display-block");
                     $('#sugest2').addClass("display-none");
                 });
+                $(".location_op3").on('click', function(e) {
+                    $('#search_sugest2').val($(this).data("value"));
+                    $('#sugest3').removeClass("display-block");
+                    $('#sugest3').addClass("display-none");
+                });
             });
         </script>
         {{-- END ACTIVITY FILTER --}}
@@ -3471,63 +3557,62 @@
             }
         </script>
 
-    <script>
-        //Drop down login
-        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-        $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
-        event.stopPropagation();
-        $('.dropdown-content').slideToggle('fast');
-        });
+        <script>
+            //Drop down login
+            var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+            $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function(event) {
+                event.stopPropagation();
+                $('.dropdown-content').slideToggle('fast');
+            });
 
-        $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-        $('.dropdown-content').slideUp('fast');
-        // document.activeElement.blur();//lose focus
-        });
-    </script>
+            $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+                $('.dropdown-content').slideUp('fast');
+                // document.activeElement.blur();//lose focus
+            });
+        </script>
 
-    <script>
-        function view_LoginModal(type) {
-            sidebarhide();
-            $('#LoginModal').modal('show');
-            if (type == 'login') {
-                $('#trigger-tab-register').removeClass('active');
-                $('#content-tab-register').removeClass('active');
-                $('#trigger-tab-login').addClass('active');
-                $('#content-tab-login').addClass('active');
-            } else {
-                $('#trigger-tab-register').addClass('active');
-                $('#content-tab-register').addClass('active');
-                $('#trigger-tab-login').removeClass('active');
-                $('#content-tab-login').removeClass('active');
+        <script>
+            function view_LoginModal(type) {
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
+
             }
+        </script>
 
-        }
-    </script>
-
-    <script>
-        function loginRegisterForm(value, type) {
-            console.log(value);
-            if (value == 1) {
-                $('#loginAlert').removeClass('d-none');
-                $('#registerAlert').removeClass('d-none');
+        <script>
+            function loginRegisterForm(value, type) {
+                console.log(value);
+                if (value == 1) {
+                    $('#loginAlert').removeClass('d-none');
+                    $('#registerAlert').removeClass('d-none');
+                }
+                if (value == 2) {
+                    $('#loginAlert').addClass('d-none');
+                    $('#registerAlert').addClass('d-none');
+                }
+                sidebarhide();
+                $('#LoginModal').modal('show');
+                if (type == 'login') {
+                    $('#trigger-tab-register').removeClass('active');
+                    $('#content-tab-register').removeClass('active');
+                    $('#trigger-tab-login').addClass('active');
+                    $('#content-tab-login').addClass('active');
+                } else {
+                    $('#trigger-tab-register').addClass('active');
+                    $('#content-tab-register').addClass('active');
+                    $('#trigger-tab-login').removeClass('active');
+                    $('#content-tab-login').removeClass('active');
+                }
             }
-            if (value == 2) {
-                $('#loginAlert').addClass('d-none');
-                $('#registerAlert').addClass('d-none');
-            }
-            sidebarhide();
-            $('#LoginModal').modal('show');
-            if (type == 'login') {
-                $('#trigger-tab-register').removeClass('active');
-                $('#content-tab-register').removeClass('active');
-                $('#trigger-tab-login').addClass('active');
-                $('#content-tab-login').addClass('active');
-            } else {
-                $('#trigger-tab-register').addClass('active');
-                $('#content-tab-register').addClass('active');
-                $('#trigger-tab-login').removeClass('active');
-                $('#content-tab-login').removeClass('active');
-            }
-        }
-    </script>
-
+        </script>
