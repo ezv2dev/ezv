@@ -48,6 +48,10 @@
     .overflow-x-auto{
         overflow-x:auto;
     }
+.list_msg:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 
 </style>
 
@@ -58,44 +62,51 @@
 <div id="layoutSidenav">
     <!-- di komen yang awal -->
     <!-- <div id="layoutSidenav_nav"> -->
-    <div id="layoutSidenav_nav" class="border-right">
+    <div id="layoutSidenav_nav" class="border-right" style="z-index: 3">
 
         <!-- di komen yang awal -->
         <!-- <nav class="sidenav shadow-right sidenav-light" style="margin-top: 90px;" > -->
         <nav class="sidenav shadow-right sidenav-light"  >
-            <div class="sidenav-menu">
-        
+            <div class="sidenav-menu" style="background-color: #f1ece7;">
+
                 <!-- di komen yang awal -->
                 <!-- <div class="nav accordion" id="accordionSidenav" style="margin-top: -28px;> -->
                 <div class="nav accordion" id="accordionSidenav">
-                    <div class="sidenav-menu-heading mb-3" style="font-size: 16px; color: #000">Inbox</div>
-                    <a class="nav-link" href="tables.html">
-                        <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                        All messages
+                    <div class="dropdown mb-3">
+                    <a type="button" class="sidenav-menu-heading" style="font-size: 16px; color: #ff7400"  data-toggle="collapse" data-target="#dropProfile" aria-expanded="false" aria-controls="dropProfile">Inbox</a>
+                    <div class="collapse show mt-2" id="dropProfile">
+                    <div class="d-flex flex-row align-items-center justify-content-between pr-4">
+                        <a class="nav-link py-1" href="#" style="color: #767676;">
+                            <div class="nav-link-icon" style="padding-right: 0px;"><img style="width: 25px;" src="/assets/logo.png" alt="EZV"></div>
+                            EZV
+                        </a>
+                        <span style="color: #ff7400;">10</span>
+                    </div>
+                    <div class="d-flex flex-row align-items-center justify-content-between pr-4">
+                    <a class="nav-link py-1" href="#" style="color: #767676;">
+                        <div class="nav-link-icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+                        Collaboration
                     </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                        EZV Support
+                    <span style="color: #ff7400;">10</span>
+                    </div>
+                    <div class="d-flex flex-row align-items-center justify-content-between pr-4">
+                    <a class="nav-link py-1" href="#" style="color: #767676;">
+                        <div class="nav-link-icon"><i class="fas fa-star"></i></div>
+                        Review
                     </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                        Archive
+                    <span style="color: #ff7400;">10</span>
+                    </div>
+                    <div class="d-flex flex-row align-items-center justify-content-between pr-4">
+                    <a class="nav-link py-1" href="#" style="color: #767676;">
+                        <div class="nav-link-icon"><i class="fas fa-bug"></i></div>
+                        Report Misconduct
                     </a>
-
-                    <div class="sidenav-menu-heading">Settings</div>
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
-                        Quick Replies
-                    </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                        Scheduled Messages
-                    </a>
-                </div>
-                <div style="margin-top: 100px; margin-left: 30px; beckground-color:#fff">
-                    <a type="button" class="btn btn-light"
-                        style="color: #000; border-radius: 10px; border: 1px solid black; background-color:#fff;">
-                        <i class="fa fa-plane" aria-hidden="true" style="color: #000"></i> Give Feedback</a>
+                    <span style="color: #ff7400;">10</span>
+                    </div>
+                    </div>
+                    </div>
+                    <a href="#" type="button" class="sidenav-menu-heading mb-3" style="font-size: 16px; color: #ff7400">Sent Items</a>
+                    <a href="#" type="button" class="sidenav-menu-heading mb-3" style="font-size: 16px; color: #ff7400">Deleted Items</a>
                 </div>
             </div>
         </nav>
@@ -103,111 +114,87 @@
 
     <!-- di komen yang awal -->
     <!-- <div id="layoutSidenav_content"> -->
-    <div id="layoutSidenav_content" class="pt-4">
+    <div id="layoutSidenav_content">
         <div class="sidebar-background"></div>
         <main>
-        
+
             <!-- di komen yang awal -->
             <!-- <div class="container justify-content-center"> -->
-            <div class="container px-3">
-                <div class="page-header-content">
-
-                <!-- di komen yang awal -->
-                <!-- <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <h1 style="color: black" class="page-header-title">
-                                <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2"
-                                    id="sidebarToggle" href="#"><i data-feather="menu"
-                                        style="color: black"></i></button>
-                                All messages
-                            </h1>
-                            {{-- <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control empty" id="iconified"
-                                    placeholder="&#xF002; Search inbox" />
+            <div class="h-100" style="position: fixed;background-color: #efefef; width:20rem;">
+                <div class="row">
+                    <div class="col-12">
+                        <div style="padding: 15px;">
+                            <div>
+                                <div id="list_msg1" class="row p-2 list_msg" style="border-bottom: 1px solid #d5d5d5;">
+                                    <div class="col-2 p-0">
+                                        <img style="width: 100%; aspect-ratio: 4/3.9; border-radius: 30px; object-fit: cover;" class="lozad" loading="lazy" src="https://source.unsplash.com/random/?city,night" data-src="https://source.unsplash.com/random/?city,night" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+                                    </div>
+                                    <div class="col-10">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">Reservation information</p>
+                                        <p style="font-size: 10px; font-weight: 600; color: #767676; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    </div>
+                                </div>
+                                <div id="list_msg2" class="row p-2 list_msg" style="border-bottom: 1px solid #d5d5d5;">
+                                    <div class="col-2 p-0">
+                                        <img style="width: 100%; aspect-ratio: 4/3.9; border-radius: 30px; object-fit: cover;" class="lozad" loading="lazy" src="https://source.unsplash.com/random/?city,night" data-src="https://source.unsplash.com/random/?city,night" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+                                    </div>
+                                    <div class="col-10">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">Reservation information</p>
+                                        <p style="font-size: 10px; font-weight: 600; color: #767676; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    </div>
+                                </div>
+                                <div id="list_msg3" class="row p-2 list_msg" style="border-bottom: 1px solid #d5d5d5;">
+                                    <div class="col-2 p-0">
+                                        <img style="width: 100%; aspect-ratio: 4/3.9; border-radius: 30px; object-fit: cover;" class="lozad" loading="lazy" src="https://source.unsplash.com/random/?city,night" data-src="https://source.unsplash.com/random/?city,night" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+                                    </div>
+                                    <div class="col-10">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">Reservation information</p>
+                                        <p style="font-size: 10px; font-weight: 600; color: #767676; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </form> --}}
-                    </div>
-                </div> -->
-                    <div class="d-flex align-items-center">
-                        <button class="btn btn-icon border btn-transparent-dark mr-3" id="sidebarToggle" href="#">
-                            <i data-feather="menu" style="color: black"></i>
-                        </button>
-                        <h1 style="color: black" class="page-header-title m-0">
-                            All messages
-                        </h1>
-
-                        {{-- <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control empty" id="iconified"
-                                    placeholder="&#xF002; Search inbox" />
-                            </div>
-                        </form> --}}
+                        </div>
                     </div>
                 </div>
-                {{-- <div class="row justify-content-center mt-10">
-                    <i class="fa fa-check" aria-hidden="true" style="color: #000"></i>
-                </div> --}}
-
-                <!-- di komen yang awal -->
-                <!-- <div class="row justify-content-center mt-2 "> -->
-                <div class="mt-4 " style="overflow-x:hidden;">
-                    {{-- <table class="table table-striped w-100" id="tabel">
-                        <thead>
-                            <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">SENDER</th>
-                                <th class="text-center">MESSAGES</th>
-                                <th class="text-center">SENDER TYPE</th>
-                                <th class="text-center">REPLY STATUS</th>
-                                <th class="text-center" style="width: 15%;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table> --}}
-    
-                    <!-- di komen yang awal -->
-                    <!-- <div class="datatable px-5"> -->
-                    <div class="datatable ">
-                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">NO</th>
-                                    <th class="text-center">SENDER</th>
-                                    <th class="text-center">MESSAGES</th>
-                                    <th class="text-center">SENDER TYPE</th>
-                                    <th class="text-center">REPLY STATUS</th>
-                                    <th class="text-center" style="width: 15%;">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center">NO</th>
-                                    <th class="text-center">SENDER</th>
-                                    <th class="text-center">MESSAGES</th>
-                                    <th class="text-center">SENDER TYPE</th>
-                                    <th class="text-center">REPLY STATUS</th>
-                                    <th class="text-center" style="width: 15%;">ACTION</th>
-                                </tr>
-                            </tfoot>
-                            <tbody class="text-center">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <center>
-                        <b style="color: #000"> No new messages</b>
-                    </center>
-                </div>
-                {{-- <div class="row justify-content-center mt-2">
-                    <p style="color: #717171">If you're looking for a message, check the archive.</p>
-                </div>
-                <div class="row justify-content-center mt-3">
-                    <a href="#" type="submit" class="btn btn-black" style="background-color: #222222"> Go to archive</a>
-                </div> --}}
             </div>
+            <div id="bg_msg" class="container justify-content-center">
+                <img style="height: 70%; top: 20%; right: 5%; left: 60%; border-radius: 30px; object-fit: cover; position: fixed;" class="lozad" loading="lazy" src="https://cdn.eraspace.com/pub/media/catalog/product/i/p/iphone_13_green_1_1_2.jpg" data-src="https://cdn.eraspace.com/pub/media/catalog/product/i/p/iphone_13_green_1_1_2.jpg" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+            </div>
+            <div id="rep_msg" class="h-100" style="display: none;">
+                <div class="row" style="top: 20%; right: 8%; width: 45%; left: 48%; position: fixed;">
+                    <div class="col-12" style="border-radius: 12px; background: #fff; box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);">
+                        <div style="padding: 15px;">
+                            <div class="row p-2" style="position: relative;">
+                                <div class="col-2 p-0">
+                                    <img style="width: 70%; aspect-ratio: 4/3.9; border-radius: 50px; object-fit: cover;" class="lozad" loading="lazy" src="https://source.unsplash.com/random/?city,night" data-src="https://source.unsplash.com/random/?city,night" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+                                </div>
+                                <div class="col-10">
+                                    <p style="font-size: 20px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">Reservation information</p>
+                                    <p style="font-size: 12px; font-weight: 600; color: #767676; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                </div>
+                                <div class="col-12 mt-5">
+                                    <a id="rep_btn" type="button" style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; bottom: 0rem; right: 0rem;" class="btn btn-sm btn-create-listing" href="#">Reply </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="rep_form" class="col-12 mt-5" style="display:none; border-radius: 12px; background: #fff; box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);">
+                        <div style="padding: 15px;">
+                            <div class="row p-2" style="position: relative;">
+                                <div class="col-2 p-0">
+                                    <img style="width: 70%; aspect-ratio: 4/3.9; border-radius: 50px; object-fit: cover;" class="lozad" loading="lazy" src="https://source.unsplash.com/random/?city,night" data-src="https://source.unsplash.com/random/?city,night" alt="EZV_1657614819_jason-leung-poI7DelFiVA-unsplash.webp" data-loaded="true">
+                                </div>
+                                <div class="col-10">
+                                    <p style="font-size: 20px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">To: Reservation information</p>
+                                    <a type="button" style="position: absolute; background: #b7b7b7; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #b7b7b7; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 5rem;" class="btn btn-sm btn-create-listing" href="#">cancel</a>
+                                    <a type="button" style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 0rem;" class="btn btn-sm btn-create-listing" href="#">send</a>
+                                    <textarea style="width: 100%; border-radius: 15px;" class="mt-4" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
         </main>
     </div>
 </div>
@@ -287,7 +274,18 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('assets/js/pages/be_tables_datatables.min.js') }}"></script>
+    <script>
+        $('.list_msg').click(function (e) {
+            console.log('kontol');
+            $('#bg_msg').hide();
+            $('#rep_form').hide();
+            $('#rep_msg').show();
+        });
+        $('#rep_btn').click(function (e) {
+            $('#rep_form').show();
 
+        });
+    </script>
     <script>
         // load_tabel_first();
         var table = $('#dataTable').dataTable({
@@ -336,3 +334,4 @@
         }
     </script>
 @endsection
+
