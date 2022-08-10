@@ -2168,7 +2168,6 @@ class ViewController extends Controller
 
     public function list(Request $request)
     {
-        dd("test");
         $host_language = HostLanguage::all();
 
         $accessibility_features = VillaAccessibilityFeatures::all();
