@@ -1327,7 +1327,7 @@
                     @php
                         $isSharedRoom = '';
                         foreach ($villaHasCategory as $item) {
-                            if ($item->id_villa_category == 40) {
+                            if ($item->name == "Shared Room") {
                                 $isSharedRoom = 'yes';
                             }
                         }

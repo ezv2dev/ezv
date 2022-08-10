@@ -290,7 +290,7 @@ class ViewController extends Controller
         $villaTags = VillaHasFilter::where('id_villa', $id)->get();
         $villaFilter = VillaFilter::all();
         $villaCategory = VillaCategory::all();
-        $villaHasCategory = VillaHasCategory::where('id_villa', $id)->get();
+        $villaHasCategory = VillaHasCategory::join('villa_category', 'villa_has_category.id_villa_category', '=', 'villa_category.id_villa_category')->where('id_villa', $id)->get();
         $villaExtra = VillaExtra::where('id_villa', $id)->first();
 
         return view('user.villa', compact(
