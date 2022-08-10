@@ -310,7 +310,7 @@
                             <a class="ms-0 orange-hover" href="#!"
                                 onclick="view_maps('{{ $data->id_restaurant }}')"><i
                                     class="fa-solid fa-location-dot text-13 text-orange"></i>
-                                {{ $data->location->name ?? __('user_page.Location not found') }}aaaaaaaaaa</a>
+                                {{ $data->location->name ?? __('user_page.Location not found') }}</a>
                             </a>
                         </div>
                         <div class="skeleton">
