@@ -206,121 +206,137 @@
                             $role = Auth::user()->role_id;
                         @endphp
                         @if ($role == 1 || $role == 2 || $role == 3)
-                            <a class="list-link-sidebar mb-2" href="{{ route('partner_dashboard') }}">
-                                <i class="fa fa-tachometer text-center" aria-hidden="true"></i>
-                                <p class="m-0">{{ __('user_page.Dashboard') }}</p>
+                            <a class="d-block mb-2" href="{{ route('partner_dashboard') }}"
+                                style="width: fit-content; color:#585656;">
+                                {{ __('user_page.Dashboard') }}
                             </a>
                         @endif
                         @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
-                            <a class="list-link-sidebar mb-2" href="{{ route('collaborator_list') }}">
-                                <i class="fa fa-handshake-o text-center" aria-hidden="true"></i>
-                                <p class="m-0">{{ __('user_page.Collab Portal') }}</p>
+                            <a class="d-block mb-2" href="{{ route('collaborator_list') }}"
+                                style="width: fit-content; color:#585656;">
+                                {{ __('user_page.Collab Portal') }}
                             </a>
                         @endif
-                        <a class="list-link-sidebar mb-2" href="{{ route('profile_index') }}">
-                            <i class="fa-solid fa-user text-center"></i>
-                            <p class="m-0">{{ __('user_page.My Profile') }}</p>
+                        <a class="d-block mb-2" href="{{ route('profile_index') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.My Profile') }}
                         </a>
-                        <a class="list-link-sidebar mb-2" href="{{ route('change_password') }}">
-                            <i class="fa-solid fa-key text-center"></i>
-                            <p class="m-0">{{ __('user_page.Change Password') }}</p>
+                        <a class="d-block mb-2" href="{{ route('change_password') }}"
+                            style="width: fit-content; color:#585656;">
+                            {{ __('user_page.Change Password') }}
                         </a>
-                        <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
-                            <i class="fa fa-refresh text-center" aria-hidden="true"></i>
-                            <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                        </a>
-                        <a class="list-link-sidebar mb-2" href="#!"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                            <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
-                            <p class="m-0">{{ __('user_page.Sign Out') }}</p>
+                        <a class="d-block mb-2" href="#!"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                            style="width: fit-content; color:#585656;">
+                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                            {{ __('user_page.Sign Out') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </form>
                         <hr>
-                        <a type="button" onclick="language()" class="list-link-sidebar mb-2">
-                            @if (session()->has('locale'))
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                            @else
-                                <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                            @endif
-                            <p class="mb-0">{{ __('user_page.Choose a Language') }}</p>
-                        </a>
-                        <a type="button" onclick="currency()" class="list-link-sidebar mb-2">
-                            <img class="lozad"
-                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
-                                src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                            @if (session()->has('currency'))
-                                <p class="mb-0">Change Currency
-                                    ({{ session('currency') }})
-                                </p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                            @else
-                                <p class="mb-0">Choose Currency</p>
-                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                            @endif
-                        </a>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="language()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
+                                @if (session()->has('locale'))
+                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                                @else
+                                    <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                        data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                                @endif
+                                <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                                style="color: white;">
+                                <img class="lozad"
+                                    style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                                @if (session()->has('currency'))
+                                    <p class="mb-0 ms-2" style="color: #585656">Change Currency
+                                        ({{ session('currency') }})
+                                    </p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                                @else
+                                    <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                    {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                                @endif
+
+                            </a>
+                        </div>
+
                         <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                                 aria-expanded="false">
 
                                 <div class="dropdown-menu user-dropdown-menu dropdown-menu-right shadow animated--fade-in-up"
                                     aria-labelledby="navbarDropdownUserImage" style="left:-210px; top: 120%;">
+
                                 </div>
                             </a>
                         </div>
                     </div>
                 @else
-                    <div class="d-flex align-items-center justify-content-between pt-3 pb-0">
-                        <a onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar mb-2" id="login">
-                            <i class="fa-solid fa-user text-center"></i>
-                            <p class="mb-0">{{ __('user_page.Create Account') }}</p>
-                        </a>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-fill d-flex align-items-center">
+                            <a onclick="loginRegisterForm(2, 'login');"
+                                class="btn btn-fill border-0 navbar-gap d-flex align-items-center"
+                                style="margin-right: 0px; padding-top: 15px; padding-bottom: 7px; padding-left:7px; padding-right:8px; width: 50px; height: 50px; border-radius: 50%;"
+                                id="login">
+                                <i class="fa-solid fa-user"></i>
+                                <p class="mb-0 ms-2" style="color:#585656">{{ __('user_page.Login') }}</p>
+                            </a>
+                        </div>
                         <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
                             style="background: transparent; border: 0;">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
                     <hr>
-                    <a href="{{ route('ahost') }}" class="list-link-sidebar mb-2" target="_blank">
-                        <i class="fa fa-pencil-square text-center" aria-hidden="true"></i>
-                        <p class="mb-0">{{ __('user_page.Create Listing') }}</p>
+                    <a href="{{ route('ahost') }}" class="navbar-gap d-block mb-3"
+                        style="color: #585656; width: fit-content;" target="_blank">
+                        {{ __('user_page.Become a host') }}
                     </a>
-                    <hr>
-                    <a type="button" onclick="language()" class="list-link-sidebar mb-2" id="language">
-                        @if (session()->has('locale'))
-                            <img style="border-radius: 3px; width: 27px;" class="lozad"
+                    <div class="d-flex align-items-center">
+                        <a type="button" onclick="language()" class="navbar-gap d-blok d-flex align-items-center"
+                            style="color: white; margin-right: 9px;" id="language">
+                            @if (session()->has('locale'))
+                                <img style="border-radius: 3px; width: 27px;" class="lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
+                            @else
+                                <img style="border-radius: 3px; width: 27px;" class="lozad"
+                                    src="{{ LazyLoad::show() }}"
+                                    data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
+                            @endif
+                            <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <a type="button" onclick="currency()" class="navbar-gap d-flex align-items-center"
+                            style="color: white;">
+                            <img class="lozad"
+                                style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
                                 src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
-                        @else
-                            <img style="border-radius: 3px; width: 27px;" class="lozad"
-                                src="{{ LazyLoad::show() }}"
-                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
-                        @endif
-                        <p class="mb-0">{{ __('user_page.Choose a Language') }}</p>
-                    </a>
-                    <a type="button" onclick="currency()" class="list-link-sidebar mb-2">
-                        <img class="lozad"
-                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
-                            src="{{ LazyLoad::show() }}"
-                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                        @if (session()->has('currency'))
-                            <p class="mb-0">Change Currency ({{ session('currency') }})
-                            </p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                            data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                            <p class="mb-0">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
-                            data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                                data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                            @if (session()->has('currency'))
+                                <p class="mb-0 ms-2" style="color: #585656">Change Currency ({{ session('currency') }})
+                                </p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
+                            @else
+                                <p class="mb-0 ms-2" style="color: #585656">Choose Currency</p>
+                                {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                                data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
+                            @endif
 
-                    </a>
+                        </a>
+                    </div>
                 @endauth
             </div>
 
@@ -876,173 +892,175 @@
                 {{-- PAGE CONTENT --}}
                 <div class="js-gallery">
                     {{-- GALLERY --}}
+                    <section id="gallery" class="section">
                     {{-- Desktop --}}
-                    <section id="gallery" class="section desktop">
-                        <div class="col-12 row gallery">
-                            @if ($photo->count() > 0)
-                                @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
-                                        <a
-                                            href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
-                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
-                                                title="{{ $item->caption }}">
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Add Photo Caption') }}"
-                                                        onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button> --}}
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="delete_photo_photo(this)"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($video->count() > 0)
-                                @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
-                                        @auth
-                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
-                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                                @else
-                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
+                        <div class="desktop">
+                            <div class="col-12 row gallery">
+                                @if ($photo->count() > 0)
+                                    @foreach ($photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
+                                            <a
+                                                href="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
+                                                    title="{{ $item->caption }}">
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($video->count() > 0)
+                                    @foreach ($video as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal" onclick="view({{ $item->id_video }})"
                                                         href="javascript:void(0);">
-                                            @endif
-                                        @endauth
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
 
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                            @endguest
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
 
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $villa[0]->id_villa }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($photo->count() <= 0 && $video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
-                            @endif
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $villa[0]->id_villa }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($photo->count() <= 0 && $video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
                         </div>
-                    </section>
                     {{-- Mobile --}}
-                    <section id="gallery" class="section mobile">
-                        <div class="col-12 row gallery">
-                            @if ($photo->count() > 0)
-                                @foreach ($photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
-                                    <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}"> 
-                                        <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}" title="{{ $item->caption }}">
-                                    </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Add Photo Caption') }}"
-                                                        onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button> --}}
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}"
-                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="delete_photo_photo(this)"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($video->count() > 0)
-                                @foreach ($video as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
-                                        @auth
-                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
-                                                <a class="pointer-normal" onclick="view({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                                @else
-                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                        href="javascript:void(0);">
-                                            @endif
-                                        @endauth
-
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                            @endguest
-
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                        <div class="mobile">
+                            <div class="col-12 row gallery">
+                                @if ($photo->count() > 0)
+                                    @foreach ($photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                        <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}"> 
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}" title="{{ $item->caption }}">
                                         </a>
-                                        @auth
-                                            @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $villa[0]->id_villa }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($photo->count() <= 0 && $video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
-                            @endif
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $villa[0]->id_villa }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($video->count() > 0)
+                                    @foreach ($video as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal" onclick="view({{ $item->id_video }})"
+                                                        href="javascript:void(0);">
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
+
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
+
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}#t=5.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $villa[0]->id_villa }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($photo->count() <= 0 && $video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
                         </div>
                     </section>
                     {{-- END GALLERY --}}
