@@ -1671,7 +1671,7 @@
 
 
             <section id="room" class="section px-xs-12p px-sm-24p px-md-12p">
-                <div class="row room">
+                <div class="row room" id="room-content">
                     <hr>
                     <h2>{{ __('user_page.Rooms') }}
                         @auth
@@ -1690,7 +1690,7 @@
                                 <div class="col-12">
                                     <div class="col-12">
                                         <div class="content list-image-content">
-                                            <input type="hidden" value="" id="id_hotel" name="id_hotel">
+                                            <input type="hidden" value="{{ $item->id_hotel }}" id="id_hotel" name="id_hotel">
                                             <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                                                 data-dots="false" data-arrows="true">
                                                 @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
@@ -1816,7 +1816,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList">
+                            <div class="col-12 col-lg-7 p-0" id="hotelTypeDetailList{{ $item->id_hotel_room }}">
                                 @foreach ($hotelRoomDetails->where('id_hotel_room', $item->id_hotel_room) as $item2)
                                     <div class="col-12 m-0 px-0 px-lg-2 row ">
                                         <div class="col-12 row m-0 p-0 mb-2"

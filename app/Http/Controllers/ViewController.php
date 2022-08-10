@@ -159,7 +159,6 @@ class ViewController extends Controller
             }
         }
 
-
         // check if villa exist
         abort_if($villa->count() == 0, 404);
 
@@ -175,7 +174,6 @@ class ViewController extends Controller
             ]
         );
         VillaStatistic::where('id_villa', $id)->where('month', $now->month)->where('year', $now->year)->increment('villa_views');
-
 
         // appends additional data to hotel list
         // $villa->each(function ($item, $key) {
@@ -292,7 +290,7 @@ class ViewController extends Controller
         $villaTags = VillaHasFilter::where('id_villa', $id)->get();
         $villaFilter = VillaFilter::all();
         $villaCategory = VillaCategory::all();
-        $villaHasCategory = VillaHasCategory::where('id_villa', $id)->get();
+        $villaHasCategory = VillaHasCategory::join('villa_category', 'villa_has_category.id_villa_category', '=', 'villa_category.id_villa_category')->where('id_villa', $id)->get();
         $villaExtra = VillaExtra::where('id_villa', $id)->first();
 
         return view('user.villa', compact(
@@ -3373,6 +3371,27 @@ class ViewController extends Controller
             return response()->json([
                 'message' => 'Failed Delete Data',
             ], 500);
+        }
+    }
+
+    public function add_room(Request $request)
+    {
+        // check if editor not authenticated
+        if (!auth()->check()) {
+            return response()->json([
+                'message' => 'unauthenticated',
+            ], 401);
+        }
+
+        // villa data
+        $villa = Villa::find($request->id_villa);
+
+        return $villa;
+        // check if villa does not exist, abort 404
+        if (!$villa) {
+            return response()->json([
+                'message' => 'Home Not Found',
+            ], 404);
         }
     }
 }

@@ -314,16 +314,15 @@
                             </a>
                         </div>
                         <div class="skeleton">
-                            <span 
-                            @if(in_array($data->price->name, ['Cheap Prices','Middle Range','Fine Dining'])) style="color: #FF7400" @endif>
+                            <span @if (in_array($data->price->name, ['Cheap Prices', 'Middle Range', 'Fine Dining'])) style="color: #FF7400" @endif>
                                 @if ($data->price->name == 'Cheap Prices')
-                                $
+                                    $
                                 @elseif ($data->price->name == 'Middle Range')
-                                $$
+                                    $$
                                 @elseif ($data->price->name == 'Fine Dining')
-                                $$$
+                                    $$$
                                 @else
-                                {{ __('user_page.no price rate yet') }}
+                                    {{ __('user_page.no price rate yet') }}
                                 @endif
                             </span>
                         </div>
@@ -546,11 +545,6 @@
 
             setCookie2("sLocation", sLocationFormInput, 1);
 
-            var sCuisineFormInput = [];
-            $("input[name='sKeywords[]']:checked").each(function() {
-                sCuisineFormInput.push(parseInt($(this).val()));
-            });
-
             if (whatToEat == true) {
                 var sKeywordFormInput = function() {
                     var tmp = null;
@@ -569,9 +563,28 @@
                     });
                     return tmp;
                 }();
+
+                var sCuisineFormInput = function() {
+                    var tmp = null;
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        global: false,
+                        dataType: 'json',
+                        url: "/food/cuisine",
+                        data: {
+                            name: $("input[name='sCuisine']").val()
+                        },
+                        success: function(response) {
+                            tmp = response.data;
+                        }
+                    });
+                    return tmp;
+                }();
             }
 
             var filterFormInput = [];
+            var filterFormInputCuisine = [];
 
             $("input[name='subCategory[]']:checked").each(function() {
                 filterFormInput.push(parseInt($(this).val()));
@@ -600,6 +613,32 @@
                 }
                 var filteredArray = filterFormInput.filter(function(item, pos) {
                     return filterFormInput.indexOf(item) == pos;
+                });
+            }
+
+            if (whatToEat == true) {
+                filterFormInputCuisine.push(sCuisineFormInput);
+                var valueCuisine = filterFormInputCuisine
+            } else if (filterFormInputCuisine.includes(valueCuisine) == true) {
+                if (whatToEat == true) {
+                    filterFormInputCuisine.push(sCuisineFormInput);
+                }
+                var filterCheck = filterFormInputCuisine.filter(unCheck);
+
+                function unCheck(dataCheck) {
+                    return dataCheck != valueCuisine;
+                }
+
+                var valueCuisine = filterCheck.filter(function(item, pos) {
+                    return filterCheck.indexOf(item) == pos;
+                });
+            } else {
+                filterFormInputCuisine.push(valueCuisine);
+                if (whatToEat == true) {
+                    filterFormInputCuisine.push(sKeywordFormInput);
+                }
+                var valueCuisine = filterFormInputCuisine.filter(function(item, pos) {
+                    return filterFormInputCuisine.indexOf(item) == pos;
                 });
             }
 

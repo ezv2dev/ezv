@@ -282,26 +282,26 @@
             }
         }
 
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-            $url = "https://";
-        else
-            $url = "http://";
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = 'https://';
+        } else {
+            $url = 'http://';
+        }
         // Append the host(domain name, ip) to the URL.
-        $url.= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['HTTP_HOST'];
 
         // Append the requested resource location to the URL
-        $url.= $_SERVER['REQUEST_URI'];
+        $url .= $_SERVER['REQUEST_URI'];
 
-        $url_homes = env('APP_URL')."/homes-list";
-        $url_food = env('APP_URL')."/food-list";
-        $url_wow = env('APP_URL')."/wow-list";
-        $url_hotel = env('APP_URL')."/hotel-list";
+        $url_homes = env('APP_URL') . '/homes-list';
+        $url_food = env('APP_URL') . '/food-list';
+        $url_wow = env('APP_URL') . '/wow-list';
+        $url_hotel = env('APP_URL') . '/hotel-list';
 
-        if ($url == $url_homes || $url == $url_food ||
-        $url == $url_wow || $url == $url_hotel) {
-            setcookie("sCheck_in", null, time() + (86400 * 30), "/");
-            setcookie("sCheck_out", null, time() + (86400 * 30), "/");
-            setcookie("sLocation", null, time() + (86400 * 30), "/");
+        if ($url == $url_homes || $url == $url_food || $url == $url_wow || $url == $url_hotel) {
+            setcookie('sCheck_in', null, time() + 86400 * 30, '/');
+            setcookie('sCheck_out', null, time() + 86400 * 30, '/');
+            setcookie('sLocation', null, time() + 86400 * 30, '/');
         }
     @endphp
 
@@ -365,8 +365,8 @@
                 // if (isset($_COOKIE['sCheck_out'])) {
                 //     $get_check_out = $_COOKIE['sCheck_out'];
                 // }
-                $get_check_in = "";
-                $get_check_out = "";
+                $get_check_in = '';
+                $get_check_out = '';
 
                 if (request()->sCheck_in) {
                     $get_check_in = request()->sCheck_in;
@@ -2097,8 +2097,8 @@
                             </div>
 
                             <div>
-                                <div class="bar bar-restaurant">
-                                    <div class="location-restaurant">
+                                {{-- <div class="bar bar-restaurant">
+                                    <div class="location">
                                         <p>{{ __('user_page.Location / Restaurant') }}
                                         </p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
@@ -2257,6 +2257,111 @@
 
                                         </div>
                                     </div>
+                                    <div class="check-out">
+                                        <p>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            {{ __('user_page.Search') }}
+                                        </p>
+
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sKeyword" value=""
+                                            id="search_sugest"
+                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
+                                            placeholder="{{ __('user_page.Search here') }}">
+
+                                        <div id="sugest2" class="location-popup display-none">
+                                            <div class="location-popup-container h-100">
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            style="background: #222222;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ asset('assets/icon/map/activity.png') }}">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op2"
+                                                            data-value="Beach">Beach</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            style="background: #222222;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ asset('assets/icon/map/activity.png') }}">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op2"
+                                                            data-value="Lake">Lake</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            style="background: #222222;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ asset('assets/icon/map/activity.png') }}">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op2"
+                                                            data-value="Mountain">Mountain</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            style="background: #222222;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ asset('assets/icon/map/activity.png') }}">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op2"
+                                                            data-value="Museum">Museum</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            style="background: #222222;"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="{{ asset('assets/icon/map/activity.png') }}">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op2"
+                                                            data-value="Zoo">Zoo</a>
+                                                    </div>
+                                                </div>
+                                                @php
+                                                    $activitySubCategory = App\Http\Controllers\Activity\ActivityController::get_subcategory();
+                                                @endphp
+                                                @foreach ($activitySubCategory as $item3)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                style="background: #222222;"
+                                                                src="{{ asset('assets/icon/map/activity.png') }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op2" target="_blank"
+                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty2"
+                                                    style="display: none">
+                                                    <p>{{ __('user_page.location not found') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="guests">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
@@ -2323,7 +2428,285 @@
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
+                                </div> --}}
 
+                                <div class="bar bar-activity">
+                                    <div class="location">
+                                        <p>{{ __('user_page.Location / Restaurant') }}
+                                        </p>
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sLocation"
+                                            value="{{ Request::is('food-list*') || $get_loc == null ? '' : $get_loc }}"
+                                            id="loc_sugest"
+                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 20px; top: 4px; left: 3px; cursor: pointer;"
+                                            placeholder="{{ __('user_page.Where are you going?') }}">
+
+                                        <div id="sugest" class="location-popup display-none">
+                                            <div class="location-popup-container h-100">
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none ">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op"
+                                                            data-value="Canggu">Canggu</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none ">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op"
+                                                            data-value="Seminyak">Seminyak</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none ">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op"
+                                                            data-value="Ubud">Ubud</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none ">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op"
+                                                            data-value="Kuta">Kuta</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    style="display: none ">
+                                                    <div class="location-popup-map sugest-list-map">
+                                                        <img class="location-popup-map-image lozad"
+                                                            src="{{ LazyLoad::show() }}"
+                                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                    </div>
+                                                    <div class="location-popup-text sugest-list-text">
+                                                        <a type="button" class="location_op"
+                                                            data-value="Pecatu">Pecatu</a>
+                                                    </div>
+                                                </div>
+                                                @php
+                                                    $location = App\Http\Controllers\ViewController::get_location();
+                                                    $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                    $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                                                    $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                                                @endphp
+                                                @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image lozad"
+                                                                src="{{ LazyLoad::show() }}"
+                                                                data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($location as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($hotelName as $item2)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;"
+                                                        onclick="window.open('{{ route('hotel', $item2->id_hotel) }}', '_blank');">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="{{ asset('assets/icon/hotel/hotel.png') }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a href="{{ route('hotel', $item2->id_hotel) }}"
+                                                                type="button" class="location_op" target="_blank"
+                                                                data-value="{{ $item2->name }}">{{ $item2->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($restaurantName as $item3)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;"
+                                                        onclick="window.open('{{ route('restaurant', $item3->id_restaurant) }}', '_blank');">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a href="{{ route('restaurant', $item3->id_restaurant) }}"
+                                                                type="button" class="location_op" target="_blank"
+                                                                data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($activityName as $item4)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;"
+                                                        onclick="window.open('{{ route('activity', $item4->id_activity) }}', '_blank');">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="{{ asset('assets/icon/map/activity.png') }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a href="{{ route('activity', $item4->id_activity) }}"
+                                                                type="button" class="location_op" target="_blank"
+                                                                data-value="{{ $item4->name }}">{{ $item4->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
+                                                    style="display: none">
+                                                    <p>{{ __('user_page.location not found') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="check-out">
+                                        <p> <i class="fa-solid fa-magnifying-glass"></i> Search Cuisine</p>
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sCuisine" value=""
+                                            id="search_sugest2" placeholder="{{ __('user_page.Search here') }}">
+
+                                        <div id="sugest3" class="location-popup display-none"
+                                            style="width: 560px; left: -262px; height: 390px;">
+                                            <div class="location-popup-container h-100">
+                                                <div class="row location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    @foreach ($cuisines as $item)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex"
+                                                            style="padding-left: 0px !important; align-items: center;">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    style="background: #222222;"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="https://source.unsplash.com/random/1920x1080/?{{ $item->name }},landscape">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op3"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                @foreach ($cuisines as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                style="background: #222222;"
+                                                                src="https://source.unsplash.com/random/?{{ $item->name }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op3" target="_blank"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty2"
+                                                    style="display: none">
+                                                    <p>Cuisine not found
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="guests" style="min-width: max-content !important;">
+                                        <p>{{ __('user_page.What do you want to eat ?') }}</p>
+                                        <input autocomplete="off" type="text" onfocus="this.value=''"
+                                            class="form-control input-transparant" name="sKeyword" value=""
+                                            id="search_sugest" placeholder="{{ __('user_page.Search here') }}">
+
+                                        <div id="sugest2" class="location-popup display-none"
+                                            style="width: 560px; left: -262px; height: 390px;">
+                                            <div class="location-popup-container h-100">
+                                                <div class="row location-popup-desc-container sugest-list-first"
+                                                    style="display: none;">
+                                                    @php
+                                                        $restaurantSubCategory = App\Http\Controllers\Restaurant\RestaurantController::restaurant_subcategory();
+                                                    @endphp
+
+                                                    @foreach ($restaurantSubCategory as $item)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex"
+                                                            style="padding-left: 0px !important; align-items: center;">
+                                                            <div class="location-popup-map sugest-list-map">
+                                                                <img class="location-popup-map-image lozad"
+                                                                    style="background: #222222;"
+                                                                    src="{{ LazyLoad::show() }}"
+                                                                    data-src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                            </div>
+                                                            <div class="location-popup-text sugest-list-text">
+                                                                <a type="button" class="location_op2"
+                                                                    data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                @foreach ($restaurantSubCategory as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none; cursor: pointer;">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                style="background: #222222;"
+                                                                src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op2" target="_blank"
+                                                                data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty2"
+                                                    style="display: none">
+                                                    <p>{{ __('user_page.location not found') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="button">
+                                        <button class="d-block ms-auto me-1"
+                                            onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ request()->get('fSubCategory') ?? 'null' }}, false, true)"
+                                            style="z-index: 1; border: none; background: transparent;">
+                                            <div class="cari">
+                                                <img src="{{ asset('assets/icon/menu/search.svg') }}"
+                                                    style="width: 20px; height: auto;">
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3571,20 +3954,21 @@
                     </label>
                     <div style="width: 60%;">
                         <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-user icon-clear"></i>
-                            </a> -->
-                            <div class="dropdown">
-                                <button type="button" id="btnMenuDropdown" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
-                                <div class="dropdown-content">
-                                    <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
-                                    <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
-                                    <hr>
-                                    <a href="{{ route('ahost') }}">Become a Host</a>
-                                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
-                                    <a href="{{ route('faq') }}">FAQ</a>
-                                </div>
+                                                                                                                                                                                                                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
+                                                                                                                                                                                                                                <i class="fa-solid fa-user icon-clear"></i>
+                                                                                                                                                                                                                            </a> -->
+                        <div class="dropdown">
+                            <button type="button" id="btnMenuDropdown"
+                                class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
+                            <div class="dropdown-content">
+                                <a href="#" onclick="loginRegisterForm(2, 'login');">Login</a>
+                                <a href="#" onclick="loginRegisterForm(2, 'register');">Register</a>
+                                <hr>
+                                <a href="{{ route('ahost') }}">Become a Host</a>
+                                <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                                <a href="{{ route('faq') }}">FAQ</a>
                             </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3599,7 +3983,7 @@
             //     $('.dropdown-content').slideToggle('fast');
             // });
 
-            $('#btnMenuDropdown').on('click', function (event) {
+            $('#btnMenuDropdown').on('click', function(event) {
                 $('.dropdown-content').slideToggle('fast');
             });
 
@@ -3608,9 +3992,9 @@
             // // document.activeElement.blur();//lose focus
             // });
 
-            $(document).on('click', function (event) {
-                if(event.target.id != 'btnMenuDropdown'){
-                    if($('.dropdown-content:visible').length > 0){
+            $(document).on('click', function(event) {
+                if (event.target.id != 'btnMenuDropdown') {
+                    if ($('.dropdown-content:visible').length > 0) {
                         $('.dropdown-content').slideUp('fast');
                     }
                 }
@@ -3980,9 +4364,21 @@
                     $('#sugest2').removeClass("display-none");
                     $('#sugest2').addClass("display-block"); //add the class to the clicked element
                 });
+                $("#search_sugest2").on('click', function() { //use a class, since your ID gets mangled
+                    var ids = $(".sugest-list-first");
+                    ids.hide();
+                    for (let index = 0; index < 5; index++) {
+                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                        // console.log(rndInt);
+                        ids.show();
+                    };
+
+                    $('#sugest3').removeClass("display-none");
+                    $('#sugest3').addClass("display-block"); //add the class to the clicked element
+                });
 
                 $(document).mouseup(function(e) {
-                    var container = $('#sugest2');
+                    var container = $('#sugest2, #sugest3');
 
                     // if the target of the click isn't the container nor a descendant of the container
                     if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -4018,14 +4414,17 @@
                         close.show();
                         ids.hide();
                     }
-
-                    console.log('done');
                 });
 
                 $(".location_op2").on('click', function(e) {
                     $('#search_sugest').val($(this).data("value"));
                     $('#sugest2').removeClass("display-block");
                     $('#sugest2').addClass("display-none");
+                });
+                $(".location_op3").on('click', function(e) {
+                    $('#search_sugest2').val($(this).data("value"));
+                    $('#sugest3').removeClass("display-block");
+                    $('#sugest3').addClass("display-none");
                 });
             });
         </script>
@@ -4169,7 +4568,7 @@
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
 
                     // hide overlay ketika scroll, dan ketika sidebar close di mobile size
-                    if($('.expand-navbar-mobile').attr('aria-expanded') == 'false'){
+                    if ($('.expand-navbar-mobile').attr('aria-expanded') == 'false') {
                         $("#overlay").css("display", "none");
                     }
 
@@ -4256,6 +4655,7 @@
                 sidebarhide();
                 $('#LoginModal').modal('show');
             }
+
             function loginRegisterForm(value, type) {
                 console.log(value);
                 if (value == 1) {
@@ -4267,9 +4667,9 @@
                     $('#registerAlert').addClass('d-none');
                 }
                 sidebarhide();
-                
+
                 // close searchbar di mobile size
-                $( "#bodyList #overlay" ).trigger( "click" );
+                $("#bodyList #overlay").trigger("click");
 
                 $('#LoginModal').modal('show');
                 if (type == 'login') {
@@ -4326,7 +4726,7 @@
                 $('#content-tab-currency').removeClass('active');
 
                 // close searchbar di mobile size
-                $( "#bodyList #overlay" ).trigger( "click" )
+                $("#bodyList #overlay").trigger("click")
             }
 
             function currency() {
@@ -4338,7 +4738,7 @@
                 $('#content-tab-currency').addClass('active');
 
                 // close searchbar di mobile size
-                $( "#bodyList #overlay" ).trigger( "click" )
+                $("#bodyList #overlay").trigger("click")
             }
         </script>
         <script>
@@ -4409,7 +4809,6 @@
 
 
             }
-
         </script>
 
         <script>

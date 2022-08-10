@@ -1131,6 +1131,97 @@
                             </div>
                     </section>
 
+                    @php
+                        $isSharedRoom = '';
+                        foreach ($villaHasCategory as $item) {
+                            if ($item->name == "Shared Room") {
+                                $isSharedRoom = 'yes';
+                            }
+                        }
+                    @endphp
+
+                    @if ($isSharedRoom == 'yes')
+                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
+                        <div class="row-grid-room-option">
+                            <hr>
+                            <div>
+                                <h2>
+                                    {{ __('user_page.Room Option') }}
+                                    @auth
+                                        @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                            &nbsp;
+                                            <a type="button" onclick="edit_room_option()"
+                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Add Room Option') }}
+                                            </a>
+                                        @endif
+                                    @endauth
+                                </h2>
+                            </div>
+
+                        </div>
+                        @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
+                            <div class="row-grid-room-option" id="row-room-option">
+                                <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
+                                    <!-- Left Sedtion -->
+                                    <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
+                                        <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
+                                    </div>
+                                    <!-- End Left Section -->
+                                    <!-- Right Section -->
+                                    <div class="col-lg-6 py-2 col-xs-12 list-image-container">
+                                        <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h6></div>
+                                    <div class="w-100 ml-responsive" style="position:relative;">
+                                        <!-- Villa Description -->
+                                        <div class="mt-3 mt-lg-0 " style="height:100%;">
+                                            <div class="col-12" style="font-size: 13px;">
+                                                <div class="col-lg-6">
+                                                <div class="container-room-option villa-list-title">
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBedroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->bed->name }} x{{ $item->qty }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    {{-- <div class="">
+                                                        <span class="list-description font-black">
+                                                        • <span style="color: #ff7400;">+more</span>
+                                                        </span>
+                                                    </div> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
+                                        <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
+                                        <button type="submit" id="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                    <!-- End Right Section -->
+                                </div>
+                            </div>
+                        @endfor
+                    </section>
+                    @endIf
+
                     <section id="amenities" class="section-2 div-amenities px-xs-12p px-sm-24p">
                         <div class="row-grid-amenities">
                             <hr>
@@ -1325,105 +1416,6 @@
                             @empty($countAllAmenities)
                                 <p id="default-amen-null">{{ __('user_page.There is no amenities') }}</p>
                             @endempty
-                        </div>
-                    </section>
-
-                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
-                        <div class="row-grid-room-option">
-                            <hr>
-                            <div>
-                                <h2>
-                                    {{ __('user_page.Room Option') }}
-                                    @auth
-                                        @if (Auth::user()->id == $villa[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            &nbsp;
-                                            <a type="button" onclick="edit_room_option()"
-                                                style="font-size: 12pt; font-weight: 600; color: #ff7400;">{{ __('user_page.Edit Room Option') }}
-                                            </a>
-                                        @endif
-                                    @endauth
-                                </h2>
-                            </div>
-
-                        </div>
-                        <div class="row-grid-room-option" id="row-room-option">
-                            <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
-                                <!-- Left Sedtion -->
-                                <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
-                                    <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
-                                </div>
-                                <!-- End Left Section -->
-                                <!-- Right Section -->
-                                <div class="col-lg-6 py-2 col-xs-12 list-image-container">
-                                    <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">Bedroom 1</h6></div>
-                                   <div class="w-100 ml-responsive" style="position:relative;">
-                                      <!-- Villa Description -->
-                                      <div class="mt-3 mt-lg-0 " style="height:100%;">
-                                         <div class="col-12" style="font-size: 13px;">
-                                            <div class="col-lg-6">
-                                               <div class="container-room-option villa-list-title">
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Bed Linens
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black ">
-                                                     • Drying rack for clothing
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • 6 Iron
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                     <span class="list-description font-black">
-                                                     • Save
-                                                     </span>
-                                                  </div>
-                                                  <div class="">
-                                                    <span class="list-description font-black">
-                                                    • Bidet
-                                                    </span>
-                                                 </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Bathtub
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black ">
-                                                      • Conditioner
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Hot water
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                      <span class="list-description font-black">
-                                                      • Shower gel
-                                                      </span>
-                                                   </div>
-                                                   <div class="">
-                                                     <span class="list-description font-black">
-                                                     • <span style="color: #ff7400;">+more</span>
-                                                     </span>
-                                                  </div>
-                                                </div>
-                                             </div>
-                                         </div>
-                                      </div>
-                                   </div>
-                                </div>
-                                <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
-                                    <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
-                                    <button type="submit" id="button" class="btn btn-primary">Select</button>
-                                </div>
-                                <!-- End Right Section -->
-                             </div>
                         </div>
                     </section>
                 </div>
@@ -1677,16 +1669,16 @@
 
                             <div class="col-12 p-5-price text-center"
                                 style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
-                                @if ($villa[0]->instant_book == 'yes')
-                                    <input class="price-button" onclick="details_reserve()"
+                                <input class="price-button" onclick="details_reserve()"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                                <input type="submit" class="price-button d-none" id="btnBookingDetail"
+                                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                    value="{{ __('user_page.VIEW DETAILS') }}">
+                                {{-- @if ($villa[0]->instant_book == 'yes')
+                                    <a class="price-button"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.VIEW DETAILS') }}" readonly>
-                                    <input type="submit" class="price-button d-none" id="btnBookingDetail"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="{{ __('user_page.VIEW DETAILS') }}">
-                                    {{-- <a class="price-button"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a> --}}
+                                        href="{{ route('villa_booking_confirm') }}" target="_blank">{{ __('user_page.VIEW DETAILS') }}</a>
                                 @else
                                     @guest
                                         <input class="price-button" onclick="loginForm(2)"
@@ -1698,7 +1690,7 @@
                                             style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                             value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
                                     @endauth
-                                @endif
+                                @endif --}}
                             </div>
 
                             <div class="rightbar-advert-container"
@@ -3524,6 +3516,7 @@
     @auth
         @include('user.modal.villa.price')
         @include('user.modal.villa.bedroom')
+        @include('user.modal.villa.room_option')
         {{-- @include('user.modal.villa.guest') --}}
         @include('user.modal.villa.location')
         @include('user.modal.villa.amenities_add')
@@ -3793,6 +3786,10 @@
 
         function showMoreHouseRules() {
             $('#modalHouseRules').modal('show');
+        }
+
+        function edit_room_option() {
+            $('#modal-add_room_option').modal('show');
         }
     </script>
 
@@ -4783,22 +4780,22 @@
         $(document).ready(function() {
             var $window = $(window);
             var $sidebar = $("#sidebar_fix");
-            var $availabilityTop = ($('#room_option').offset().top + $('#room_option').outerHeight()) - ($(
+            var $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
                 '#sidebar_fix .reserve-block').height() + parseInt($('#sidebar_fix .reserve-block').css(
-                "top")) - parseInt($('.div-room_option').css("margin-bottom")) - 15);
+                "top")) - parseInt($('.div-amenities').css("margin-bottom")) - 15);
 
             //console.log($footerOffsetTop);
             $window.on("resize", function() {
-                $availabilityTop = ($('#room_option').offset().top + $('#room_option').outerHeight()) - ($(
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
                     '#sidebar_fix .reserve-block').height() + parseInt($(
-                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-room_option').css(
+                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-amenities').css(
                     "margin-bottom")) - 15);
             });
 
             $window.scroll(function() {
-                $availabilityTop = ($('#room_option').offset().top + $('#room_option').outerHeight()) - ($(
+                $availabilityTop = ($('#amenities').offset().top + $('#amenities').outerHeight()) - ($(
                     '#sidebar_fix .reserve-block').height() + parseInt($(
-                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-room_option').css(
+                    '#sidebar_fix .reserve-block').css("top")) - parseInt($('.div-amenities').css(
                     "margin-bottom")) - 15);
                 if ($window.scrollTop() >= 0 && $window.scrollTop() < $availabilityTop) {
                     $sidebar.addClass("fixed");
