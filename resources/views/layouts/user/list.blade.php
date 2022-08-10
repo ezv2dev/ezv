@@ -191,15 +191,6 @@ if (isset($_COOKIE['tema'])) {
                         <i class="fa-solid fa-key text-center"></i>
                         <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a class="list-link-sidebar  mb-2" href="#!"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                        <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
-                        <p class="m-0">{{ __('user_page.Sign Out') }}</p>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    </form>
-
                     <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
@@ -216,7 +207,7 @@ if (isset($_COOKIE['tema'])) {
                     @elseif($condition_restaurant)
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
                         <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.More') }}</p>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
                     </div>
                     @elseif($condition_hotel)
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
@@ -226,12 +217,19 @@ if (isset($_COOKIE['tema'])) {
                     @elseif($condition_things_to_do)
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
                         <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.More') }}</p>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
                     </div>
                     @endif
+                    <a class="list-link-sidebar mb-2" href="#!"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                        <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
+                        <p class="m-0">{{ __('user_page.Sign Out') }}</p>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    </form>
                     <hr>
-                    <a type="button" onclick="language()" class="list-link-sidebar navbar-gap mb-2"
-                        style="color: white;">
+                    <a type="button" onclick="language()" class="list-link-sidebar navbar-gap mb-2">
                         @if (session()->has('locale'))
                             <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
@@ -239,7 +237,7 @@ if (isset($_COOKIE['tema'])) {
                             <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
-                        <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
+                        <p class="mb-0">{{ __('user_page.Choose a Language') }}</p>
                     </a>
                     <div class="d-flex user-logged nav-item dropdown navbar-gap no-arrow">
                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -282,10 +280,10 @@ if (isset($_COOKIE['tema'])) {
 
                 </div>
             @else
-                <div class="d-flex align-items-center justify-content-between py-3">
+                <div class="d-flex align-items-center justify-content-between pt-3 pb-0">
                     <a onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar" id="login">
                         <i class="fa-solid fa-user text-center"></i>
-                        <p class="mb-0">Create Account</p>
+                        <p class="mb-0">{{ __('user_page.Create Account') }}</p>
                     </a>
                     <button type="button" class="btn-close-expand-navbar-mobile" aria-label="Close"
                         style="background: transparent; border: 0;">
@@ -295,7 +293,7 @@ if (isset($_COOKIE['tema'])) {
                 <hr>
                 <a href="{{ route('ahost') }}" class="list-link-sidebar mb-2" target="_blank">
                     <i class="fa fa-pencil-square text-center" aria-hidden="true"></i>
-                    <p class="m-0">{{ __('user_page.Become a host') }}</p>
+                    <p class="m-0">{{ __('user_page.Create Listing') }}</p>
                 </a>
                 <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
                     <i class="fa fa-th text-center" aria-hidden="true"></i>
@@ -309,7 +307,7 @@ if (isset($_COOKIE['tema'])) {
                 @elseif($condition_restaurant)
                 <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
                     <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.More') }}</p>
+                    <p class="m-0">{{ __('user_page.Filters') }}</p>
                 </div>
                 @elseif($condition_hotel)
                 <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
@@ -319,7 +317,7 @@ if (isset($_COOKIE['tema'])) {
                 @elseif($condition_things_to_do)
                 <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
                     <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.More') }}</p>
+                    <p class="m-0">{{ __('user_page.Filters') }}</p>
                 </div>
                 @endif
                 <hr>

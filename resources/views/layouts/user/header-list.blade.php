@@ -670,7 +670,7 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                    <a href="{{ route('ahost') }}" id="activity-form"
                                         class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
@@ -680,7 +680,7 @@
                                         <!-- <i id="activity-button" style="font-size: 24px;"
                                             class="list-description fa-solid fa-clipboard-list nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}"></i> -->
                                         <p class="list-description {{ $textColor }}">
-                                            {{ __('user_page.create listing') }}
+                                            {{ __('user_page.Create Listing') }}
                                         </p>
                                     </a>
                                 </ul>
@@ -1398,7 +1398,7 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('admin_add_listing') }}" id="activity-form" target="_blank"
+                                    <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
                                         class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
@@ -1408,7 +1408,7 @@
                                         <!-- <i id="activity-button" style="font-size: 24px;"
                                             class="list-description fa-solid fa-clipboard-list nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}"></i> -->
                                         <p class="list-description {{ $textColor }}">
-                                            {{ __('user_page.create listing') }}
+                                            {{ __('user_page.Create Listing') }}
                                         </p>
                                     </a>
                                 </ul>
@@ -2080,7 +2080,7 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                    <a href="{{ route('ahost') }}" id="activity-form"
                                         target="_blank" class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
@@ -2090,7 +2090,7 @@
                                         <!-- <i id="activity-button" style="font-size: 24px;"
                                             class="list-description fa-solid fa-clipboard-list nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}"></i> -->
                                         <p class="list-description {{ $textColor }}">
-                                            {{ __('user_page.create listing') }}
+                                            {{ __('user_page.Create Listing') }}
                                         </p>
                                     </a>
                                 </ul>
@@ -2654,7 +2654,7 @@
                                                 </p>
                                             </a>
                                         @endif
-                                        <a href="{{ route('admin_add_listing') }}" id="activity-form"
+                                        <a href="{{ route('ahost') }}" id="activity-form"
                                             target="_blank" class="nav-link-form-detail"
                                             style="margin-left: 64px;">
                                             <div
@@ -2665,7 +2665,7 @@
                                             <!-- <i id="activity-button" style="font-size: 24px;"
                                                 class="list-description fa-solid fa-clipboard-list nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}"></i> -->
                                             <p class="list-description {{ $textColor }}">
-                                                {{ __('user_page.create listing') }}
+                                                {{ __('user_page.Create Listing') }}
                                             </p>
                                         </a>
                                     </ul>
@@ -3198,7 +3198,7 @@
                                         @if ($condition_collaborator)
                                             <div
                                                 class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-style-detail-active nav-link-icon-style-detail">
-                                                <img src="{{ asset('assets/icon/menu/collab1.svg') }}"
+                                                <img src="{{ asset('assets/icon/menu/collab1-white.svg') }}"
                                                     style="width: 29px; height: auto; ">
                                             </div>
                                             <!-- <i id="activity-button" style="font-size: 24px;"
@@ -3206,7 +3206,7 @@
                                         @else
                                             <div
                                                 class="{{ $textColor }} list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail">
-                                                <img src="{{ asset('assets/icon/menu/collab1.svg') }}"
+                                                <img src="{{ asset('assets/icon/menu/collab1-white.svg') }}"
                                                     style="width: 29px; height: auto; ">
                                             </div>
                                             <!-- <i id="activity-button" style="font-size: 24px;"
@@ -3752,6 +3752,12 @@
                 $("body").on("hidden.bs.modal", function() {
                     $(this).removeAttr("style");
                 });
+
+                $(window).resize(function(){
+                    if (window.innerWidth > 991) {
+                        $(".btn-close-expand-navbar-mobile").trigger('click')
+                    }
+                })
                 $(".btn-close-expand-navbar-mobile").on("click", function() {
                     $("body").removeAttr("style");
                     $(".expand-navbar-mobile").removeClass("expanding-navbar-mobile");

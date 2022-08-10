@@ -356,6 +356,7 @@ return [
     'Input name' => 'Input name',
     'Input price (number only)' => 'Input price (number only)',
     'Create Listing' => 'Create Listing',
+    'Create Account' => 'Create Account',
 
     'FAVORITE' => 'FAVORITE',
     'CANCEL' => 'CANCEL',
