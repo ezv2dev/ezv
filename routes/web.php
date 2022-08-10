@@ -1477,3 +1477,4 @@ Route::get('/session/theme', [CookiesController::class, 'set_cookie_theme'])->na
 
 // xendit
 Route::post('xendit/va/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createVa'])->name('api.createVa');
+Route::post('xendit/credit-card/invoice', [App\Http\Controllers\Api\Payment\XenditController::class, 'createCreditCard'])->name('api.createCreditCard');

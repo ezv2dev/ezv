@@ -749,34 +749,17 @@
                                         <div id="panel_credit" style="display: none;">
                                             <form method="POST" id="payment-form" action="javascript:void(0)">
                                                 @csrf
-                                                @guest
-                                                    <div class="col-12">
-                                                        <label style="margin: 0px; font-weight: 500;">{{ __('user_page.First Name') }}</label>
-                                                        <input type="text" class="form-control" name="firstname" id="firstname_va" value="" placeholder="firstname">
-                                                        <small id="err-fname-pay" style="display: none;" class="invalid-feedback"></small>
-                                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Last Name') }}</label>
-                                                        <input type="text" class="form-control" name="lastname" id="lastname_va" value="" placeholder="lastname">
-                                                        <small id="err-lname-pay" style="display: none;" class="invalid-feedback"></small>
-                                                        <label class="mt-3" style="margin: 0px; font-weight: 500;">{{ __('user_page.Email Address') }}</label>
-                                                        <input type="email" class="form-control" name="email" id="email_va" value="" placeholder="email">
-                                                        <small id="err-eml-pay" style="display: none;" class="invalid-feedback"></small>
-                                                    </div>
-                                                @endguest
-                                                <input type="hidden" name="id_villa" value="{{ $villa->id_villa }}">
-                                                <input type="hidden" name="check_in" value="{{ request()->check_in }}">
-                                                <input type="hidden" name="check_out" value="{{ request()->check_out }}">
-                                                <input type="hidden" name="adult" value="{{ request()->adult }}">
-                                                <input type="hidden" name="children" value="{{ request()->child }}">
-                                                <input type="hidden" name="infant" value="{{ request()->infant }}">
-                                                <input type="hidden" name="pet" value="{{ request()->pet }}">
+                                                @auth
+                                                    <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+                                                @endauth
                                                 <input type="hidden" name="price_total" value="">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label style="margin: 0px; font-weight: 500;">{{ __('user_page.Card Number') }}</label>
                                                             <div class="input-group">
-                                                                {{-- <input class="form-control" type="text" id="card-number" placeholder="Card number" value="" onpaste="return false" oncut="return false" /> --}}
-                                                                <input class="form-control" type="text" id="card-number" placeholder="Card number" value=""/>
+                                                                <input class="form-control" type="text" id="card-number"
+                                                                    placeholder="Card number" value="" onpaste="return false" oncut="return false" />
                                                                 <small id="err-cnm-pay" style="display: none;" class="invalid-feedback"></small>
                                                                 {{-- <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> --}}
                                                             </div>
@@ -1063,9 +1046,6 @@
                             // update virtual account date form value
                             $('#va-form').find(`input[name='check_in']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
                             $('#va-form').find(`input[name='check_out']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
-                            // update credit card date form value
-                            $('#payment-form').find(`input[name='check_in']`).val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                            $('#payment-form').find(`input[name='check_out']`).val(instance.formatDate(selectedDates[1], "Y-m-d"));
 
                             var start = new Date(
                                 instance.formatDate(selectedDates[0], "Y-m-d")
@@ -1119,16 +1099,10 @@
             let childTotal = $('#child').val();
             let infantTotal = $('#infant').val();
             let petTotal = $('#pet').val();
-            // update hidden input on va-form
             $('#va-form').find(`input[name="adult"]`).val(adultTotal);
             $('#va-form').find(`input[name="children"]`).val(childTotal);
             $('#va-form').find(`input[name="infant"]`).val(infantTotal);
             $('#va-form').find(`input[name="pet"]`).val(petTotal);
-            // update hidden input on payment-form
-            $('#payment-form').find(`input[name="adult"]`).val(adultTotal);
-            $('#payment-form').find(`input[name="children"]`).val(childTotal);
-            $('#payment-form').find(`input[name="infant"]`).val(infantTotal);
-            $('#payment-form').find(`input[name="pet"]`).val(petTotal);
         }
         function increment_by_id(elementId) {
             document.getElementById(elementId).stepUp();
@@ -1273,7 +1247,7 @@
         });
     </script>
     <script>
-        //Credit Card
+    //Credit Card
         $('#card-number').mask('0000 0000 0000 0000');
         $('#card-exp-month').mask('00/00');
         $('#card-cvn').mask('0000');
@@ -1375,37 +1349,41 @@
         function displaySuccess(creditCardToken) {
             var requestData = {};
             $.extend(requestData, getTokenData());
-            let formData = {
-                firstname: $('#payment-form').find(`input[name="firstname"]`).val(),
-                lastname: $('#payment-form').find(`input[name="lastname"]`).val(),
-                email: $('#payment-form').find(`input[name="email"]`).val(),
-                id_villa: $('#payment-form').find(`input[name="id_villa"]`).val(),
-                check_in: $('#payment-form').find(`input[name="check_in"]`).val(),
-                check_out: $('#payment-form').find(`input[name="check_out"]`).val(),
-                adult: $('#payment-form').find(`input[name="adult"]`).val(),
-                children: $('#payment-form').find(`input[name="children"]`).val(),
-                infant: $('#payment-form').find(`input[name="infant"]`).val(),
-                pet: $('#payment-form').find(`input[name="pet"]`).val(),
-            };
+            @auth
             var saveData = $.ajax({
                 type: 'POST',
-                url: "{{ ENV('APP_URL') }}/xendit/credit-card/invoice",
+                url: "/api/xendit/credit_card/charge",
                 data: {
-                    _token: "{{ csrf_token() }}",
                     dataresult: creditCardToken,
                     datarequest: requestData,
-                    formData: formData,
+                    user: `{{ Auth::user()->id }}`,
+                    _token: "{{ csrf_token() }}",
                 },
                 dataType: "text",
                 success: function(resultData) {
-                    alert("success")
+                    alert("success ")
                 }
             });
+            @endauth
             saveData.error(function() {
                 alert("Something went wrong");
             });
         }
 
+        // function getTokenData() {
+        //     let exp = $('#card-exp-month').val();
+        //     const split = exp.split("/");
+        //     var cnum = $('#card-number').val();
+        //     var cvn = $('#card-cvn').val();
+        //     return {
+        //         amount: $('#price_total2').val(),
+        //         card_number: cnum.replace(/\s/g, ''),
+        //         card_exp_month: split[0],
+        //         card_exp_year: 20 + split[1],
+        //         card_cvn: $.trim(cvn),
+        //         currency: $('#currency').val(),
+        //     };
+        // }
         function getTokenData() {
             let exp = $('#card-exp-month').val();
             const split = exp.split("/");
