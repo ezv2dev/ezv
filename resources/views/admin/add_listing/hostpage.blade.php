@@ -35,8 +35,9 @@
                     <h1 class="text-header">Open your door to more<br> guests with EZV</h1>
                     <p class="text-content">Free to join<br> start growing your business today</p>
                     <p class="text-content">0% Booking fees until 2023<br> terms & conditions apply</p>
-                    <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">Let's
-                        go</button>
+                    <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">
+                        Let's go
+                    </button>
                 </div>
             </div>
             <div class="col-12 d-none d-sm-block col-md-6 min-400">
@@ -46,8 +47,9 @@
     </section>
 
     <section class="p-3 p-lg-5">
-        <p class="host-body-text mb-0 text-center">You can list anything, anywhere<br>Accommodation, Restaurant,
-            Activities and More</p>
+
+        <p class="host-body-text mb-0 text-center">You can list anything, anywhere<br>Accommodation, Restaurants, Activities and More</p>
+
         <div class="row-grid-img pt-4 pt-lg-7">
             <!-- Image row 1-->
             <div class="grid-img-container">
@@ -296,19 +298,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 d-flex justify-content-center pt-5">
+            <button class="letsgo" onclick="window.location.href='#start';">Create Listing</button>
+        </div>
     </section>
 
     <section id="start" class="p-3 p-lg-5 h1-00 w-100">
         <div>
             <div class="row">
-                <div class="col-12 col-md-6 video-text-section">
-                    <h1>Video content is trending</h1>
+
+                <div class="col-12 col-md-6 video-text-section"> 
+                    <h1 style="color: #ff7400;">Video content is trending</h1>
                     <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
                     <p>68% of costumers prefer watching videos to learn about new</p>
                     <p>Show case what makes your property unique with short videos</p>
-                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified
-                        creators from Videographers, Photographers, Drone Pilots, Blogger and more</p>
+                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+                    <div class="col-12 d-flex justify-content-center pt-5">
+                        <button class="letsgo" onclick="window.location.href='#start';">Get Started</button>
+                    </div>
                 </div>
+
                 <div class="col-12 col-md-6">
                     <div class="host-video-section">
                         <div class="host-video-container">
