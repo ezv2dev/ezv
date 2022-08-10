@@ -545,11 +545,6 @@
 
             setCookie2("sLocation", sLocationFormInput, 1);
 
-            // var sCuisineFormInput = [];
-            // $("input[name='sKeywords[]']:checked").each(function() {
-            //     sCuisineFormInput.push(parseInt($(this).val()));
-            // });
-
             if (whatToEat == true) {
                 var sKeywordFormInput = function() {
                     var tmp = null;
@@ -589,6 +584,7 @@
             }
 
             var filterFormInput = [];
+            var filterFormInputCuisine = [];
 
             $("input[name='subCategory[]']:checked").each(function() {
                 filterFormInput.push(parseInt($(this).val()));
@@ -620,6 +616,32 @@
                 });
             }
 
+            if (whatToEat == true) {
+                filterFormInputCuisine.push(sCuisineFormInput);
+                var valueCuisine = filterFormInputCuisine
+            } else if (filterFormInputCuisine.includes(valueCuisine) == true) {
+                if (whatToEat == true) {
+                    filterFormInputCuisine.push(sCuisineFormInput);
+                }
+                var filterCheck = filterFormInputCuisine.filter(unCheck);
+
+                function unCheck(dataCheck) {
+                    return dataCheck != valueCuisine;
+                }
+
+                var valueCuisine = filterCheck.filter(function(item, pos) {
+                    return filterCheck.indexOf(item) == pos;
+                });
+            } else {
+                filterFormInputCuisine.push(valueCuisine);
+                if (whatToEat == true) {
+                    filterFormInputCuisine.push(sKeywordFormInput);
+                }
+                var valueCuisine = filterFormInputCuisine.filter(function(item, pos) {
+                    return filterFormInputCuisine.indexOf(item) == pos;
+                });
+            }
+
             if (valueCuisine == null) {
                 subArray = [];
                 filteredArray.forEach(element => {
@@ -629,15 +651,6 @@
                 });
                 var subUrl =
                     `sLocation=${sLocationFormInput}&fCuisine=&fSubCategory=${subArray}`;
-            } else if (sCuisineFormInput != null) {
-                subArray = [];
-                filteredArray.forEach(element => {
-                    if (element !== null) {
-                        subArray.push(element);
-                    }
-                });
-                var subUrl =
-                    `sLocation=${sLocationFormInput}&fCuisine=${sCuisineFormInput}&fSubCategory=${subArray}`;
             } else {
                 subArray = [];
                 filteredArray.forEach(element => {
