@@ -13,7 +13,7 @@
                     </span>
                 </li>
             @else
-                <li class="page-item ms-3 ms-lg-0">
+                <li class="page-item me-2 ms-lg-0">
                     <a class="page-link font-light" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
                         <button style="width: 50px; height: 50px;" class="button-next d-block d-sm-none" id="modal-map-right-prev"><i class="fa-solid fa-chevron-left"></i></button>
                         <div class="d-none d-sm-block">
