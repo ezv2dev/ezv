@@ -12,6 +12,7 @@ body, html {
 }
 .host-header {
     height: fit-content;
+    max-height: 100vh;
 }
 
 .min-400 {
@@ -245,10 +246,20 @@ input::placeholder {
     .top-67 {
         margin-top: 34px;
     }
+    .text-header {
+        font-size: 22px;
+    }
+    .right-20 {
+        padding-right: 0 !important;
+    }
+    .left-20 {
+        padding-left: 0 !important;
+        margin-top: 20px;
+    }
 }
 @media only screen and (max-width: 425px) {
-    .host-header {
-        min-height: fit-content;
+    .video-text-section {
+        margin-bottom: 50px;
     }
     .video-text-section p {
         font-size: 14px;
@@ -313,4 +324,8 @@ input::placeholder {
         padding-left: 10px !important;
         margin-top: 40px !important;
     }
+}
+#input-link-listing-button {
+    text-align: center;
+    padding-top: 10px;
 }

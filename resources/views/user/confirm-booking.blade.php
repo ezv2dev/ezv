@@ -1039,8 +1039,9 @@
             $.ajax({
                 //create an ajax request to display.php
                 type: "GET",
-                url: "/villa/date_disabled/" + $("#id_villa").val(),
+                url: "/villa/date_disabled/" + `{{ $villa->id_villa }}`,
                 success: function (data) {
+                    console.log(data);
                     const check_in_val = $('#confirmBookingDateForm').find(`input[name='check_in']`).val();
                     const check_out_val = $('#confirmBookingDateForm').find(`input[name='check_out']`).val();
 
