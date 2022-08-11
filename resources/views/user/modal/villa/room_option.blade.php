@@ -8,7 +8,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1" style="height: 450px; overflow-x: hidden; overflow-y: auto; border-radius: 0px;">
-                <div id="bedroomDetailForm">
+                <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
+                    id="roomDetailForm">
+                    @csrf
+                    <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
+                <div>
                     <div class="row mb-5 bedroomDetailFormContent" id="roomDetailFormContent">
                         <div class="form-group mb-4">
                             <div class="file-upload" id="file-upload1">
@@ -57,8 +61,8 @@
                                             <i class="fa fa-circle-minus fa-lg" aria-hidden="true"></i>
                                         </a>
                                         <div style="width: 40px; height:20px; text-align: center; color: grey; font-size: 13px;">
-                                            <input type="hidden" name="id_bed" value="{{ $data->id_bed }}" readonly="">
-                                            <p><input type="number" id="bed{{ $data->name }}" name="qty" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
+                                            <input type="hidden" name="id_bed{{$data->id_bed}}" value="{{ $data->id_bed }}" readonly="">
+                                            <p><input type="number" id="bed{{ $data->name }}" name="qty{{$data->id_bed}}" value="0" min="0" style="text-align: center; border:none; width:30px;" readonly=""></p>
                                         </div>
                                         <a type="button" onclick="increment_qty_bed('bed{{ $data->name }}')" style="/*height: 28px; width: 28px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px;*/">
                                             <i class="fa fa-circle-plus fa-lg" aria-hidden="true"></i>
@@ -79,13 +83,13 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <!-- Submit -->
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
-                        <button type="submit" class="btn btn-sm btn-primary" style="width: 200px;"
-                        onclick="saveRoomDetail({{ $villa[0]->id_villa }})">
+                        <button type="submit" form="roomDetailForm" class="btn btn-sm btn-primary" style="width: 200px;">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>

@@ -1478,7 +1478,7 @@
                                 <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
                                     <!-- Left Sedtion -->
                                     <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
-                                        <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">
+                                        <img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" @if ($villa[0]->villaBedroomDetail[$i]->image == null) src="https://source.unsplash.com/random/?bed" @else src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $villa[0]->villaBedroomDetail[$i]->image) }} @endIf">
                                     </div>
                                     <!-- End Left Section -->
                                     <!-- Right Section -->
@@ -1526,7 +1526,7 @@
                                     </div>
                                     </div>
                                     <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
-                                        <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR 1,200,000 / Night</h4>
+                                        <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">{{ CurrencyConversion::exchangeWithUnit($villa[0]->villaBedroomDetail[$i]->price) }} / Night</h4>
                                         <button type="submit" id="button" class="btn btn-primary">Select</button>
                                     </div>
                                     <!-- End Right Section -->

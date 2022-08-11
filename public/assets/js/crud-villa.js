@@ -1978,40 +1978,36 @@ function saveLocation() {
     });
 }
 
-function saveRoomDetail(id_villa) {
+$("#roomDetailForm").submit(function (e) {
+    e.preventDefault();
     console.log("hit save room detail");
 
-    let formData = [];
-    const content = $("#roomDetailFormContent");
+    // let formData = [];
+    // const content = $("#roomDetailFormContent");
+    let formData = new FormData(this);
 
-    let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
-    let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
-    let bedroomIds = [];
-    let bathroomIds = [];
-    for (let index = 0; index < bedroomRawContent.length; index++) {
-        bedroomIds.push(bedroomRawContent.eq(index).val());
-    }
-    for (let index = 0; index < bathroomRawContent.length; index++) {
-        bathroomIds.push(bathroomRawContent.eq(index).val());
-    }
+    // let bedroomRawContent = content.find("input[name='bedroom[]']:checked");
+    // let bathroomRawContent = content.find("input[name='bathroom[]']:checked");
+    // let bedroomIds = [];
+    // let bathroomIds = [];
+    // for (let index = 0; index < bedroomRawContent.length; index++) {
+    //     bedroomIds.push(bedroomRawContent.eq(index).val());
+    // }
+    // for (let index = 0; index < bathroomRawContent.length; index++) {
+    //     bathroomIds.push(bathroomRawContent.eq(index).val());
+    // }
 
-    let bedRawContent = content.find(".bedroomDetailFormContentBed");
-    let bed = [];
-    for (let index = 0; index < bedRawContent.length; index++) {
-        bed.push({
-            id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
-            qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
-        });
-    }
+    // let bedRawContent = content.find(".bedroomDetailFormContentBed");
+    // let bed = [];
+    // for (let index = 0; index < bedRawContent.length; index++) {
+    //     bed.push({
+    //         id_bed: bedRawContent.eq(index).find(`input[name='id_bed']`).val(),
+    //         qty: bedRawContent.eq(index).find(`input[name='qty']`).val(),
+    //     });
+    // }
 
     // let image = content.find("input[name='image']").val();
-    let price = content.find("#room-price").val();
-
-    formData.push({
-        bathroom_ids: bathroomIds,
-        bedroom_ids: bedroomIds,
-        bed: bed,
-    });
+    // let price = content.find("#room-price").val();
 
     $.ajax({
         type: "POST",
@@ -2019,12 +2015,7 @@ function saveRoomDetail(id_villa) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         url: "/villa/add-room",
-        data: {
-            data: formData,
-            id_villa: id_villa,
-            price: price,
-            // image: image,
-        },
+        data: formData,
         cache: false,
         processData: false,
         contentType: false,
@@ -2057,4 +2048,4 @@ function saveRoomDetail(id_villa) {
             }
         },
     });
-}
+});

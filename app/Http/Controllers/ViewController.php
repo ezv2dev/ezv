@@ -3385,8 +3385,8 @@ class ViewController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            // 'id_villa' => ['integer', 'required'],
-            'data' => ['array', 'nullable'],
+            'id_villa' => ['integer', 'required'],
+            // 'data' => ['array', 'nullable'],
         ]);
         
         if ($validator->fails()) {
@@ -3407,11 +3407,104 @@ class ViewController extends Controller
         }
 
         // check if the editor does not have authorization
-        // $this->authorize('listvilla_update');
-        // if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
-        //     return response()->json([
-        //         'message' => 'This action is unauthorized',
-        //     ], 403);
-        // }
+        $this->authorize('listvilla_update');
+        if (!in_array(auth()->user()->role->name, ['admin', 'superadmin']) && auth()->user()->id != $villa->created_by) {
+            return response()->json([
+                'message' => 'This action is unauthorized',
+            ], 403);
+        }
+
+        try {
+            $folder = $villa->uid;
+            $path = env("VILLA_FILE_PATH") . $folder;
+
+            if (!File::isDirectory($path)) {
+
+                File::makeDirectory($path, 0777, true, true);
+            }
+
+            $ext = strtolower($request->image->getClientOriginalExtension());
+            
+            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+                $original_name = $request->image->getClientOriginalName();
+                $name_file = time() . "_" . $original_name;
+                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+            }
+
+            // remove old bedroom detail
+            $removedDetail = VillaBedroomDetail::where('id_villa', $request->id_villa)->delete();
+            // save bedroom detail
+            if ($request->id_villa) {
+                $createdDetail = VillaBedroomDetail::create([
+                    'id_villa' => $request->id_villa,
+                    'price' => $request->price ?? null,
+                    'image' => $name_file ?? null,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+                ]);
+            }
+
+            // save bedroom detail bed    
+            if ($request->qty1 != 0) {
+                VillaBedroomDetailBed::create([
+                    'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,
+                    'id_bed' => $request->id_bed1,
+                    'qty' => $request->qty1,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+                ]);
+            }
+
+            if ($request->qty2 != 0) {
+                VillaBedroomDetailBed::create([
+                    'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,
+                    'id_bed' => $request->id_bed2,
+                    'qty' => $request->qty2,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+                ]);
+            }
+
+            // save bedroom bedroom amenities
+            if (isset($request->bedroom)) {
+                $createdDetail->villaBedroomDetailBedroomAmenities()->sync($request->bedroom);
+            }
+            // save bedroom bathroom amenities
+            if (isset($request->bathroom)) {
+                $createdDetail->villaBedroomDetailBathroomAmenities()->sync($request->bathroom);
+            }
+
+            // get created bedroom detail
+            $createdDetail = VillaBedroomDetail::with([
+                'villaBedroomDetailBed',
+                'villaBedroomDetailBedroomAmenities',
+                'villaBedroomDetailBathroomAmenities',
+                'villaBedroomDetailBed.bed'
+            ])->where('id_villa', $request->id_villa)->get();
+
+            if ($createdDetail) {
+                $bedCount = 0;
+                for ($i = 0; $i < $createdDetail->count(); $i++) {
+                    $bedCount = $bedCount + $createdDetail[$i]->bed_count;
+                }
+
+                $data = (object)[
+                    'message' => 'Added New Room Option',
+                    'room_count' => $createdDetail->count(),
+                    'bed_count' => $bedCount,
+                    'data' => $createdDetail,
+                ];
+
+                return response()->json($data, 200);
+            } else {
+                return response()->json([
+                    'message' => 'data not found',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Something error',
+            ], 500);
+        }
     }
 }
