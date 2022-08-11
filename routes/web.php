@@ -316,6 +316,7 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
     Route::get('/dashboard/reservations/datatableCompleted', [MenuReservationsController::class, 'datatableCompleted'])->name('reservations_datatable_completed');
     Route::get('/dashboard/reservations/datatableCanceled', [MenuReservationsController::class, 'datatableCanceled'])->name('reservations_datatable_canceled');
 
+    Route::get('/user/message', [InboxController::class, 'user_message'])->name('user_message');
     Route::get('/dashboard/inbox', [InboxController::class, 'index'])->name('partner_inbox');
     Route::get('/dashboard/inbox/datatable', [InboxController::class, 'datatable'])->name('partner_inbox_datatable');
     Route::get('/dashboard/inbox/show/{id}', [InboxController::class, 'show'])->name('partner_inbox_show');
