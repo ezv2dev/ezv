@@ -6,7 +6,7 @@
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled me-2 me-lg-0" aria-disabled="true" aria-label="@lang('pagination.previous')">
                     <span class="page-link font-light" aria-hidden="true">
-                        <button style="width: 50px; height: 50px;" class="button-next 	d-block d-sm-none" id="modal-map-right-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button style="width: 42px; height: 42px;" class="button-next 	d-block d-sm-none" id="modal-map-right-prev"><i class="fa-solid fa-chevron-left"></i></button>
                         <div class="d-none d-sm-block">
                             &lsaquo;
                         </div>
@@ -15,7 +15,7 @@
             @else
                 <li class="page-item me-2 ms-lg-0">
                     <a class="page-link font-light" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
-                        <button style="width: 50px; height: 50px;" class="button-next d-block d-sm-none" id="modal-map-right-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button style="width: 42px; height: 42px;" class="button-next d-block d-sm-none" id="modal-map-right-prev"><i class="fa-solid fa-chevron-left"></i></button>
                         <div class="d-none d-sm-block">
                             &lsaquo;
                         </div>
@@ -53,7 +53,7 @@
             @if ($paginator->hasMorePages())
                 <li class="page-item ms-3 ms-lg-0">
                     <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
-                        <button style="width: 50px; height: 50px;" class="button-prev d-block d-sm-none" id="modal-map-right-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button style="width: 42px; height: 42px;" class="button-prev d-block d-sm-none" id="modal-map-right-next"><i class="fa-solid fa-chevron-right"></i></button>
                         <div class="d-none d-sm-block">
                             &rsaquo;
                         </div>
@@ -62,7 +62,7 @@
             @else
                 <li class="page-item disabled ms-3 ms-lg-0" aria-disabled="true" aria-label="@lang('pagination.next')">
                     <span class="page-link" aria-hidden="true">
-                        <button style="width: 50px; height: 50px;" class="button-prev d-block d-sm-none" id="modal-map-right-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button style="width: 42px; height: 42px;" class="button-prev d-block d-sm-none" id="modal-map-right-next"><i class="fa-solid fa-chevron-right"></i></button>
                         <div class="d-none d-sm-block">
                             &rsaquo;
                         </div>
