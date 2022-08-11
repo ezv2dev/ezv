@@ -24,15 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Table structure for table `credit_card_payment`
 --
 
-CREATE TABLE `payment` (
+CREATE TABLE `credit_card_payment` (
+  `id_cc` bigint(20) NOT NULL,
   `id_payment` bigint(20) NOT NULL,
-  `external_id` varchar(200) NOT NULL,
-  `payment_channel` enum('virtual_account','credit_card','','') NOT NULL,
-  `price` int(11) NOT NULL,
-  `status` int(1) NOT NULL,
+  `id_user` bigint(20) DEFAULT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `card_brand` varchar(200) NOT NULL,
+  `masked_card_number` varchar(50) NOT NULL,
+  `id_charge` varchar(200) NOT NULL,
+  `paid_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -42,20 +46,31 @@ CREATE TABLE `payment` (
 --
 
 --
--- Indexes for table `payment`
+-- Indexes for table `credit_card_payment`
 --
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`id_payment`);
+ALTER TABLE `credit_card_payment`
+  ADD PRIMARY KEY (`id_cc`),
+  ADD KEY `id_payment` (`id_payment`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `payment`
+-- AUTO_INCREMENT for table `credit_card_payment`
 --
-ALTER TABLE `payment`
-  MODIFY `id_payment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE `credit_card_payment`
+  MODIFY `id_cc` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `credit_card_payment`
+--
+ALTER TABLE `credit_card_payment`
+  ADD CONSTRAINT `credit_card_payment_ibfk_1` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id_payment`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

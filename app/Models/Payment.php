@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
-        'external_id', 'id_user', 'payment_channel', 'bank', 'va_number', 'cc_number','name', 'email', 'price', 'status'
+        "external_id",
+        "payment_channel",
+        "price",
+        "status",
+        "created_at",
+        "updated_at"
     ];
 
     protected $table = 'payment';

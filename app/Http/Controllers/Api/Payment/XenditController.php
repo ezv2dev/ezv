@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\CreditCardPayment;
 use Illuminate\Http\Request;
 
 use Xendit\Xendit;
@@ -56,8 +57,8 @@ class XenditController extends Controller
         }
 
         // check if min stay is valid
-        $stayCountMoreThanMinStay = $this->checkStayCountMoreThanMinStay($request, $villa);
-        if($stayCountMoreThanMinStay){
+        $stayCountLessThanMinStay = $this->checkStayCountLessThanMinStay($request, $villa);
+        if($stayCountLessThanMinStay){
             abort(500);
         }
 
@@ -213,70 +214,105 @@ class XenditController extends Controller
             // check if date availability is valid
             $isUnavailable = $this->checkDateIsUnavailable($request, $id_villa);
             if($isUnavailable){
-                abort(500);
+                return response()->json((object)[
+                    'message' => 'the dates is unavailable to book'
+                ], 500);
             }
 
             // check if min stay is valid
-            $stayCountMoreThanMinStay = $this->checkStayCountMoreThanMinStay($request, $villa);
-            if($stayCountMoreThanMinStay){
-                abort(500);
+            $stayCountLessThanMinStay = $this->checkStayCountLessThanMinStay($request, $villa);
+            if($stayCountLessThanMinStay){
+                return response()->json((object)[
+                    'message' => 'stay count is less than min stay'
+                ], 500);
             }
 
-            // return 'hit continue';
+            // abort if villa not found
+            if(!$villa){
+                return response()->json((object)[
+                    'message' => 'data villa not found'
+                ], 404);
+            }
 
-            // set xendit token
-            Xendit::setApiKey($this->token);
-            // process charge
-            $params = [
-                'token_id' => $request['dataresult']['id'],
-                'external_id' => 'card_' . time(),
-                'authentication_id' => $request['dataresult']['authentication_id'],
-                'amount' => $request['datarequest']['amount'],
-                'card_cvn' => $request['datarequest']['card_cvn'],
-                'capture' => false
-            ];
-            return $request->all();
-            $createCharge = \Xendit\Cards::create($params);
+            //get check_in, check_out, night
+            $check_in = $request["formData"]["check_in"];
+            $check_out = $request["formData"]["check_out"];
+
+            //get adult child
+            if($request["formData"]["adult"] == null || $request["formData"]["adult"] == 0)
+            {
+                $adult = 1;
+            }else{
+                $adult = $request["formData"]["adult"];
+            }
+            if($request["formData"]["children"] == null || $request["formData"]["children"] == 0)
+            {
+                $child = 0;
+            }else{
+                $child = $request["formData"]["children"];
+            }
+
+            //price villa
+            $price = $this->count($id_villa, $villa, $check_in, $check_out);
 
             // check if amount is valid
-            // if valid, capture charge for the credit card
-            // if not, reverse authorization/cancel payment for the credit card
-            if(false){
+            // if valid, make & capture charge for the credit card
+            // if not, return error
+            if($request['datarequest']['amount'] == $price){
+                // set xendit token
+                Xendit::setApiKey($this->token);
+
+                // process charge
+                $params = [
+                    'token_id' => $request['dataresult']['id'],
+                    'external_id' => 'card_' . time(),
+                    'authentication_id' => $request['dataresult']['authentication_id'],
+                    'amount' => $request['datarequest']['amount'],
+                    'card_cvn' => $request['datarequest']['card_cvn'],
+                    'capture' => false
+                ];
+                $createCharge = \Xendit\Cards::create($params);
+
                 // capture charge for the credit card
                 $id = $createCharge['id'];
                 $captureCharge = \Xendit\Cards::capture($id, $params);
-                return $captureCharge;
+
                 // save data payment
                 if($captureCharge){
                     $storePayment = $this->storeUsersPayment($request, 'credit_card', $captureCharge);
                 } else {
-                    abort(500);
+                    return response()->json((object)[
+                        'message' => 'fail to do payment'
+                    ], 500);
                 }
 
                 // save data booking
                 if($storePayment){
                     $storeBooking = $this->storeUsersBooking($request, 'credit_card', $storePayment);
                 } else {
-                    abort(500);
+                    return response()->json((object)[
+                        'message' => 'fail to store payment'
+                    ], 500);
                 }
 
-                return response()->json((object)[
-                    'message' => 'success',
-                    'storePayment' => $storePayment,
-                    'storeBooking' => $storeBooking
-
-                ], 200);
+                if($storeBooking){
+                    return response()->json((object)[
+                        'message' => 'success',
+                    ], 200);
+                } else {
+                    return response()->json((object)[
+                        'message' => 'fail to store booking'
+                    ], 500);
+                }
             } else {
-                // reverse authorization/cancel payment for the credit card
-                $id = $createCharge['id'];
-                $paramsReverseAuth = ['external_id' => 'reverse_authorization_'.time()];
-                $reverseAuth = \Xendit\Cards::reverseAuthorization($id, $paramsReverseAuth);
-                // return response()->json((object)[
-                //     'message' => 'total amount not equal'
-                // ], 500);
+                return response()->json((object)[
+                    'message' => 'total amount not equal'
+                ], 500);
             }
         } catch (\Throwable $e) {
-            return $e;
+            return response()->json((object)[
+                'message' => 'internal server error'
+            ], 500);
         }
     }
     public function creditcard(Request $request)
@@ -467,7 +503,14 @@ class XenditController extends Controller
         $invoice_code = $companyCode.'-'.$dateSection.'-'.$numberSection;
 
         // find villa
-        $id_villa = $request->id_villa ?? null;
+        if($paymentMethod == 'virtual_account'){
+            $id_villa = $request->id_villa ?? null;
+        } else if($paymentMethod == 'credit_card'){
+            $id_villa = $request['formData']["id_villa"] ?? null;
+        } else {
+            $id_villa = null;
+        }
+
         $villa = Villa::where('id_villa', $id_villa)->where('status', 1)->first();
         if(!$villa){
             return false;
@@ -480,8 +523,8 @@ class XenditController extends Controller
             $check_in = $request->check_in;
             $check_out = $request->check_out;
         } else if($paymentMethod == 'credit_card'){
-            $check_in = $request->check_in;
-            $check_out = $request->check_out;
+            $check_in = $request["formData"]["check_in"];
+            $check_out = $request["formData"]["check_out"];
         } else {
             return false;
         }
@@ -560,17 +603,17 @@ class XenditController extends Controller
             $data = [
                 'id_payment' => $paymentDetail->id_payment,
                 'no_invoice' =>$invoice_code,
-                'firstname' => auth()->user()->first_name ?? $request->firstname ?? NULL,
-                'lastname' => auth()->user()->last_name ?? $request->lastname ?? NULL,
-                'email' => auth()->user()->email ?? $request->email ?? NULL,
+                'firstname' => auth()->user()->first_name ?? $request["formData"]["firstname"] ?? NULL,
+                'lastname' => auth()->user()->last_name ?? $request["formData"]["lastname"] ?? NULL,
+                'email' => auth()->user()->email ?? $request["formData"]["email"] ?? NULL,
                 'phone' => NULL,
                 'id_villa' => $id_villa,
-                'adult' => $request->adult,
-                'children' => $request->children,
-                'infant' => $request->infant,
-                'pet' => $request->pet,
-                'check_in' => $request->check_in,
-                'check_out' => $request->check_out,
+                'adult' => $request["formData"]["adult"],
+                'children' => $request["formData"]["children"],
+                'infant' => $request["formData"]["infant"],
+                'pet' => $request["formData"]["pet"],
+                'check_in' => $request["formData"]["check_in"],
+                'check_out' => $request["formData"]["check_out"],
                 'id_extra' => NULL,
                 'number_extra' => NULL,
                 'type_extra' => NULL,
@@ -616,34 +659,52 @@ class XenditController extends Controller
         }
     }
 
-    private function storeUsersPayment($request, $paymentMethod, $paymentGatewayDetail)
+    private function storeUsersPayment($request, $paymentMethod, $paymentGatewayResponse)
     {
         // check if user authenticated
-        if(auth()->check())
-        {
-            $user_id = auth()->user()->id;
+        if(auth()->check()) {
+            $user = auth()->user();
+            $user_id = $user->id;
+            $name = $user->first_name." ".$user->last_name;
             $email = auth()->user()->email;
         }else{
             $user_id = NULL;
-            $email = $request->email ?? NULL;
+            $email = $request["formData"]["email"] ?? NULL;
+            $name = $request["formData"]["firstname"]." ".$request["formData"]["lastname"];
         }
 
         // store payment process
         $storePayment = false;
         if($paymentMethod == 'virtual_account'){
-            //
             $storePayment = true;
         } else if($paymentMethod == 'credit_card'){
-            $storePayment = Payment::create([
-                'external_id' => $paymentGatewayDetail['external_id'],
-                'id_user' => $user_id ?? NULL,
-                'payment_channel' => 'Credit Card',
-                'bank' => NULL,
-                'name' => NULL,
-                'email' => $email ?? NULL,
-                'cc_number' => $paymentGatewayDetail['masked_card_number'],
-                'price' => $paymentGatewayDetail['authorized_amount'],
-            ]);
+            $data = [
+                "external_id" => $paymentGatewayResponse['external_id'],
+                "payment_channel" => 'credit_card',
+                "price" => $paymentGatewayResponse['authorized_amount'],
+                "status" => 1,
+            ];
+            $storePayment = Payment::create($data);
+
+            if($storePayment){
+                $data = [
+                    "id_payment" => $storePayment->id_payment,
+                    "id_user" => $user_id,
+                    "name" => $name,
+                    "email" => $email,
+                    "card_brand" => $paymentGatewayResponse['card_brand'],
+                    "masked_card_number" => $paymentGatewayResponse['masked_card_number'],
+                    "id_charge" => $paymentGatewayResponse['id'],
+                    "paid_at" => date('Y-m-d H:i:s', strtotime($paymentGatewayResponse['created'])),
+                ];
+                $storeCreditCardPayment = CreditCardPayment::create($data);
+            } else {
+                return false;
+            }
+
+            if(!$storeCreditCardPayment){
+                return false;
+            }
         }
         return $storePayment;
     }
@@ -833,7 +894,7 @@ class XenditController extends Controller
         return $isUnavailable;
     }
 
-    private function checkStayCountMoreThanMinStay($request, $villa)
+    private function checkStayCountLessThanMinStay($request, $villa)
     {
         $stay = date_diff(date_create($request->check_out), date_create($request->check_in));
         return !($stay->d < ($villa->min_stay ?? 1));
