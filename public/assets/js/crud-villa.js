@@ -674,7 +674,9 @@ function editCategoryV(id_villa) {
                                     <!-- End Left Section -->
                                     <!-- Right Section -->
                                     <div class="col-lg-6 py-2 col-xs-12 list-image-container">
-                                        <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">{{ __('user_page.Bedroom') }} {{ $i + 1 }}</h6></div>
+                                        <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">Bedroom ${
+                                            $i + 1
+                                        }</h6></div>
                                     <div class="w-100 ml-responsive" style="position:relative;">
                                         <!-- Villa Description -->
                                         <div class="mt-3 mt-lg-0 " style="height:100%;">
@@ -725,8 +727,8 @@ function editCategoryV(id_villa) {
                     $("#room_option").addClass("d-none");
                 }
 
-                $("#room_option").html("");
-                $("#room_option").append(contentRoomOption);
+                $("#row-room-option").html("");
+                $("#row-room-option").append(contentRoomOption);
             },
         });
     }
@@ -2072,6 +2074,9 @@ $("#roomDetailForm").submit(function (e) {
     e.preventDefault();
     console.log("hit save room detail");
 
+    let btn = document.getElementById("btnSaveRoomOption");
+    btn.classList.add("disabled");
+    btn.textContent = "Saving...";
     // let formData = [];
     // const content = $("#roomDetailFormContent");
     let formData = new FormData(this);
@@ -2119,6 +2124,100 @@ $("#roomDetailForm").submit(function (e) {
                 message: response.message,
                 position: "topRight",
             });
+
+            let path = "/foto/gallery/";
+            let slash = "/";
+            let uid = response.uid.uid;
+            var lowerCaseUid = uid.toLowerCase();
+
+            let contentRoomOption = "";
+            for (let p = 0; p < response.data.length; p++) {
+                contentRoomOption += `<div class="row-grid-room-option" id="row-room-option">
+                <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
+                    <!-- Left Sedtion -->
+                    <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">`;
+                if (response.data[p].image != null) {
+                    contentRoomOption +=
+                        '<img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="' +
+                        path +
+                        lowerCaseUid +
+                        slash +
+                        response.data[p].image +
+                        '">';
+                } else {
+                    contentRoomOption += `<img class="img-fluid" style="display: block; border-radius: 10px; height: 210px;" src="https://source.unsplash.com/random/?bed">`;
+                }
+                contentRoomOption += `</div>
+                        <!-- End Left Section -->
+                        <!-- Right Section -->
+                        <div class="col-lg-6 py-2 col-xs-12 list-image-container">
+                            <div class="mt-0"><h6 class="mt-2 mt-md-3 mt-lg-0 mb-lg-4">Bedroom ${
+                                p + 1
+                            }</h6></div>
+                        <div class="w-100 ml-responsive" style="position:relative;">
+                            <!-- Villa Description -->
+                            <div class="mt-3 mt-lg-0 " style="height:100%;">
+                                <div class="col-12" style="font-size: 13px;">
+                                    <div class="col-lg-6">
+                                    <div class="container-room-option villa-list-title">`;
+                for (
+                    let i = 0;
+                    i <
+                    response.data[p].villa_bedroom_detail_bedroom_amenities
+                        .length;
+                    i++
+                ) {
+                    contentRoomOption += `<div class="">
+                                                <span class="list-description font-black">
+                                                • ${response.data[p].villa_bedroom_detail_bedroom_amenities[i].name}
+                                                </span>
+                                            </div>`;
+                }
+                for (
+                    let h = 0;
+                    h <
+                    response.data[p].villa_bedroom_detail_bathroom_amenities
+                        .length;
+                    h++
+                ) {
+                    contentRoomOption += `<div class="">
+                                                <span class="list-description font-black">
+                                                • ${response.data[p].villa_bedroom_detail_bathroom_amenities[h].name}
+                                                </span>
+                                            </div>`;
+                }
+                for (
+                    let j = 0;
+                    j < response.data[p].villa_bedroom_detail_bed.length;
+                    j++
+                ) {
+                    contentRoomOption += `<div class="">
+                                                <span class="list-description font-black">
+                                                • ${response.data[p].villa_bedroom_detail_bed[j].bed.name} x${response.data[p].villa_bedroom_detail_bed[j].qty}
+                                                </span>
+                                            </div>`;
+                }
+                contentRoomOption += `</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="mt-lg-4 col-lg-2 py-2 col-xs-12 room-price-container">
+                            <h4 style=" margin-bottom: 5px; margin-top: 15px; font-size: 16px;">IDR ${response.data[p].price} / Night</h4>
+                            <button type="submit" id="button" class="btn btn-primary">Select</button>
+                        </div>
+                        <!-- End Right Section -->
+                    </div>
+                </div>`;
+            }
+
+            $("#row-room-option").html("");
+            $("#row-room-option").append(contentRoomOption);
+            $("#modal-add_room_option").modal("hide");
+
+            btn.classList.remove("disabled");
+            btn.textContent = "Save";
         },
         error: function (jqXHR, exception) {
             if (jqXHR.responseJSON.errors) {
@@ -2136,6 +2235,9 @@ $("#roomDetailForm").submit(function (e) {
                     position: "topRight",
                 });
             }
+
+            btn.classList.remove("disabled");
+            btn.textContent = "Save";
         },
     });
 });

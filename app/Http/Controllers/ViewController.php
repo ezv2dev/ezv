@@ -1371,7 +1371,12 @@ class ViewController extends Controller
         }
 
         $data = VillaHasCategory::with('villaCategory')->where('id_villa', $request->id_villa)->get();
-        $villa = VillaBedroomDetail::where('id_villa', $request->id_villa)->get();
+        $villa = VillaBedroomDetail::with([
+            'villaBedroomDetailBed',
+            'villaBedroomDetailBedroomAmenities',
+            'villaBedroomDetailBathroomAmenities',
+            'villaBedroomDetailBed.bed'
+        ])->where('id_villa', $request->id_villa)->get();
 
         return response()->json(['success' => true, 'data' => $data, 'villa' => $villa, 'message' => 'Updated Property Type']);
     }
@@ -3483,6 +3488,8 @@ class ViewController extends Controller
                 'villaBedroomDetailBed.bed'
             ])->where('id_villa', $request->id_villa)->get();
 
+            $uid = Villa::where('id_villa', $request->id_villa)->first('uid');
+
             if ($createdDetail) {
                 $bedCount = 0;
                 for ($i = 0; $i < $createdDetail->count(); $i++) {
@@ -3491,8 +3498,7 @@ class ViewController extends Controller
 
                 $data = (object)[
                     'message' => 'Added New Room Option',
-                    'room_count' => $createdDetail->count(),
-                    'bed_count' => $bedCount,
+                    'uid' => $uid,
                     'data' => $createdDetail,
                 ];
 

@@ -1473,8 +1473,9 @@
 
                         </div>
 
+                        <div id="row-room-option">
                         @for ($i = 0; $i < $villa[0]->villaBedroomDetail->count(); $i++)
-                            <div class="row-grid-room-option" id="row-room-option">
+                            <div class="row-grid-room-option">
                                 <div class="mx-0 row list-row-gap pt-xxs-20p pt-xs-15p pt-sm-35p pt-xlg-0p pt-lg-10p pb-0" style="margin-bottom: 1.5rem; box-shadow: 1px 1px 10px #a4a4a4;border: solid 1px #fff;padding: 10px !important;border-radius: 20px;height: fit-content;">
                                     <!-- Left Sedtion -->
                                     <div class="col-lg-4 py-0 col-xs-12 list-image-container grid-desc-container list-image-container">
@@ -1498,18 +1499,18 @@
                                                     </div>
                                                     @empty
                                                     @endforelse
-                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
-                                                    <div class="">
-                                                        <span class="list-description font-black">
-                                                        • {{ $item->bed->name }} x{{ $item->qty }}
-                                                        </span>
-                                                    </div>
-                                                    @empty
-                                                    @endforelse
                                                     @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBathroomAmenities as $item)
                                                     <div class="">
                                                         <span class="list-description font-black">
                                                         • {{ $item->name }}
+                                                        </span>
+                                                    </div>
+                                                    @empty
+                                                    @endforelse
+                                                    @forelse ($villa[0]->villaBedroomDetail[$i]->villaBedroomDetailBed as $item)
+                                                    <div class="">
+                                                        <span class="list-description font-black">
+                                                        • {{ $item->bed->name }} x{{ $item->qty }}
                                                         </span>
                                                     </div>
                                                     @empty
@@ -1533,6 +1534,8 @@
                                 </div>
                             </div>
                         @endfor
+                        </div>
+                        
                         @endIf
                     </section>
                 </div>
