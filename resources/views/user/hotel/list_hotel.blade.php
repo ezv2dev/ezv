@@ -6,7 +6,7 @@
     {{-- function get data --}}
 
     @php
-    $hotels = $hotel->shuffle();
+    $hotels = $hotel->shuffle()->sortBy('grade');
     $list = [];
     foreach ($hotels as $item) {
         array_push($list, $item->id_hotel);

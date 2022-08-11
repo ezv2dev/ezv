@@ -2180,7 +2180,7 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
-        $villa = Villa::where('status', 1)->inRandomOrder()->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
+        $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
         $villa->appends(request()->query());
 
         // TODO uncomment when lazy load, start
@@ -3394,7 +3394,7 @@ class ViewController extends Controller
             'id_villa' => ['integer', 'required'],
             // 'data' => ['array', 'nullable'],
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'something error',
@@ -3424,14 +3424,14 @@ class ViewController extends Controller
             if ($request->image) {
                 $folder = $villa->uid;
                 $path = env("VILLA_FILE_PATH") . $folder;
-    
+
                 if (!File::isDirectory($path)) {
-    
+
                     File::makeDirectory($path, 0777, true, true);
                 }
-    
+
                 $ext = strtolower($request->image->getClientOriginalExtension());
-                
+
                 if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
                     $original_name = $request->image->getClientOriginalName();
                     $name_file = time() . "_" . $original_name;
@@ -3450,7 +3450,7 @@ class ViewController extends Controller
                 ]);
             }
 
-            // save bedroom detail bed    
+            // save bedroom detail bed
             if ($request->qty1 != 0) {
                 VillaBedroomDetailBed::create([
                     'id_villa_bedroom_detail' => $createdDetail->id_villa_bedroom_detail,

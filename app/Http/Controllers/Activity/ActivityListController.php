@@ -41,7 +41,7 @@ class ActivityListController extends Controller
             'photo',
             'detailReview',
             'facilities'
-        ])->where('status', 1)->inRandomOrder()->orderBy('grade')->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
+        ])->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_ACTIVITY'));
 
         // $activity->each(function ($item, $key) {
         //     $item->setAppends(['villa_nearby', 'restaurant_nearby', 'hotel_nearby']);

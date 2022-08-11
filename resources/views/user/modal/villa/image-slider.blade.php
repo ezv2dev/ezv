@@ -1,6 +1,6 @@
 <!-- Fade In Default Modal -->
 <style>
-    .modal-header {
+    .modal-header-photo {
         background: #000;
     }
     .modal-content-photo {
@@ -18,7 +18,7 @@
         display: flex;
         padding: 25px 15px;
         justify-content: right;
-    }    
+    }
     .modal-gallery {
         background: #000;
     }
@@ -49,7 +49,7 @@
                             class="fa-solid fa-xlose"></i></button>
             </div>
             <div class="modal-body-gallery">
-                        
+
                 @if ($photo->count() > 0)
                     @foreach ($photo->sortBy('order') as $item)
                     <div id="{{ $item->id_photo }}">
