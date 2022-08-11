@@ -20,12 +20,13 @@
             position: absolute;
             width: 345px;
             background-color: white;
-            left: 0px;
+            left: 50%;
+            transform:translateX(-50%);
             padding-top: 1px !important;
             padding-bottom: 10px !important;
             padding-left: 3px !important;
             padding-right: 3px !important;
-            top: 76px;
+            top: 60px;
             z-index: 99;
             border-radius: 12px !important;
             text-align: left;
@@ -546,6 +547,13 @@
                     container.addClass("d-none");
                 }
             });
+
+            $(document).on('scroll', function(){
+                if(!$('#sugest').hasClass('d-none')){
+                    $('#sugest').addClass("d-none");
+                    $('#sugest').removeClass("d-block"); 
+                }
+            })
 
             $("#loc_sugest").on('keyup change', async () => {
                 var close = $(".sugest-list-first");
