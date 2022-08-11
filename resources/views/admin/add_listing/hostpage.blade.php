@@ -457,7 +457,7 @@
     <section class="h-100 pt-3 pt-lg-5 w-100">
 
         <div class="row flex-column flex-lg-row bg-black">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-lg-6">
 
                 <div class="bottom text-white p-3 p-lg-5">
                     <h1>Benefits to list with EZV</h1>
@@ -471,8 +471,8 @@
                     <p>Liability insurance of $1.000.000 for all accommodation and activity bookings</p>
                     <p>0% booking fees until 2023 - T&Cs apply</p>
                 </div>
-</div>
-            <div class="col-12 col-md-6 d-none d-sm-block">
+            </div>
+            <div class="col-12 col-lg-6 d-none d-sm-block">
                 <div class="bottom-image">
                     <div style="width: 100%; height: 92vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
                         <h1 style="color: white;">
