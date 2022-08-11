@@ -307,11 +307,17 @@
 
                     <div class="text-14 fw-400 text-grey-2 grid-one-line text-orange mt-1 d-flex justify-content-between">
                         <div class="skeleton">
-                            <a class="ms-0 orange-hover" href="#!"
-                                onclick="view_maps('{{ $data->id_restaurant }}')"><i
-                                    class="fa-solid fa-location-dot text-13 text-orange"></i>
-                                {{ $data->location->name ?? __('user_page.Location not found') }}</a>
+                            <a class="ms-0 orange-hover" href="#!" onclick="view_maps('{{ $data->id_restaurant }}')">
+                                <i class="fa-solid fa-location-dot text-13 text-orange"></i>
+                                {{ $data->location->name ?? __('user_page.Location not found') }}
                             </a>
+                            @php
+                                $open = date_create($data->open_time);
+                                $closed = date_create($data->closed_time);
+                            @endphp
+                            <span>
+                                {{ date_format($open, 'h:i A') }} - {{ date_format($closed, 'h:i A') }}
+                            </span>
                         </div>
                         <div class="skeleton">
                             <span @if (in_array($data->price->name, ['Cheap Prices', 'Middle Range', 'Fine Dining'])) style="color: #FF7400" @endif>
