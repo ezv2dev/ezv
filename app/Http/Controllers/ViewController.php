@@ -3431,8 +3431,6 @@ class ViewController extends Controller
                 $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
             }
 
-            // remove old bedroom detail
-            $removedDetail = VillaBedroomDetail::where('id_villa', $request->id_villa)->delete();
             // save bedroom detail
             if ($request->id_villa) {
                 $createdDetail = VillaBedroomDetail::create([
