@@ -3375,7 +3375,7 @@ input::-webkit-inner-spin-button {
 }
 @media only screen and (max-width: 569px) {
     .list-image-content-villa .slick-slide {
-        width: 100vw !important;
+        width: 94vw !important;
     }
 }
 @media only screen and (max-width: 575px) {

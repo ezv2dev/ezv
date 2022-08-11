@@ -16,21 +16,33 @@ class InboxController extends Controller
      */
     public function index()
     {
-        abort_if(auth()->user()->role->name != 'partner', 403);
-        $allConversationList = VillaContactHost::where('id_owner', auth()->user()->id)
-        ->where('approve_by', '!=', null)
-        ->where('disapprove_by', '=', null)
-        ->orderBy('created_at')->get();
-        $i = 1;
-        return view('new-admin.partner.inbox_partner')->with(compact('i', 'allConversationList'));
+        abort_if(auth()->user()->role_id != 3, 403);
+        // $allConversationList = VillaContactHost::where('id_owner', auth()->user()->id)
+        //     ->where('approve_by', '!=', null)
+        //     ->where('disapprove_by', '=', null)
+        //     ->orderBy('created_at')->get();
+        // $i = 1;
+        $messageReply = VillaContactHostReply::select('id_message')->get();
+        $tempReply = array();
+        foreach ($messageReply as $item) {
+            array_push($tempReply, $item->id_message);
+        }
+        $messageList = VillaContactHost::with('user')->where('id_owner', auth()->user()->id)->whereNotIn('id_message', $tempReply)->orderBy('created_at', 'DESC')->get();
+        return view('new-admin.partner.inbox_partner', compact('messageList'));
+    }
+
+    public function user_message(Request $request)
+    {
+        $data = VillaContactHost::with('user')->where('id_message', $request->id_message)->first();
+        return response()->json(['data' => $data]);
     }
 
     public function datatable()
-	{
+    {
         // $this->authorize('amenities_index');
 
-		return VillaContactHost::PartnerConversations();
-	}
+        return VillaContactHost::PartnerConversations();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -74,7 +86,7 @@ class InboxController extends Controller
             'id_message' => $data->id_message,
             'id_owner' => $data->id_owner,
         ];
-        if($data->is_reply) {
+        if ($data->is_reply) {
             array_push($sendedData, [
                 'message_reply' => $data->conversationReply->message
             ]);
