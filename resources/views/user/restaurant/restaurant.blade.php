@@ -77,6 +77,22 @@
         .list-link-sidebar:hover>*{
             color: #585656;
         }
+        @media only screen and (min-width: 748px) {
+            .mobile {
+                display: none;
+            }
+            .desktop {
+                display: block;
+            }
+        }
+        @media only screen and (max-width: 747px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -1171,92 +1187,182 @@
                 <div class="js-gallery">
                     {{-- GALLERY --}}
                     <section id="gallery" class="section">
-                        <div class="col-12 row gallery">
-                            @if ($restaurant->photo->count() > 0)
-                                @foreach ($restaurant->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
-                                        <a
-                                            href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
-                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
-                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
-                                                title="{{ $item->caption }}">
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom" type="button"
-                                                        title="{{ __('user_page.Add Photo Tag') }}"
-                                                        data-id="{{ $restaurant->id_restaurant }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="add_photo_tag(this)"><i
-                                                            class="fa fa-pencil"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}" type="button"
-                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);"
-                                                        data-id="{{ $restaurant->id_restaurant }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="delete_photo_photo(this)"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($restaurant->video->count() > 0)
-                                @foreach ($restaurant->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
-                                        @auth
-                                            @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
-                                                <a class="pointer-normal"
-                                                    onclick="view_video_restaurant({{ $item->id_video }})"
-                                                    href="javascript:void(0);">
-                                                @else
-                                                    <a class="pointer-normal" onclick="showPromotionMobile()"
+                    {{-- DESKTOP --}}
+                        <div class="desktop">
+                            <div class="col-12 row gallery">
+                                @if ($restaurant->photo->count() > 0)
+                                    @foreach ($restaurant->photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
+                                            <a
+                                                href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
+                                                    title="{{ $item->caption }}">
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom" type="button"
+                                                            title="{{ __('user_page.Add Photo Tag') }}"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="add_photo_tag(this)"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($restaurant->video->count() > 0)
+                                    @foreach ($restaurant->video->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal"
+                                                        onclick="view_video_restaurant({{ $item->id_video }})"
                                                         href="javascript:void(0);">
-                                            @endif
-                                        @endauth
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
 
-                                        @guest
-                                            <a class="pointer-normal" onclick="showPromotionMobile()"
-                                                href="javascript:void(0);">
-                                            @endguest
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
 
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=1.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=1.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($restaurant->photo->count() <= 0 && $restaurant->video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
+                        </div>
+                    {{-- MOBILE --}}
+                        <div class="mobile">
+                            <div class="col-12 row gallery">
+                                @if ($restaurant->photo->count() > 0)
+                                    @foreach ($restaurant->photo->sortBy('order') as $item)
+                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                        <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}"> 
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
                                         </a>
-                                        @auth
-                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $restaurant->id_restaurant }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($restaurant->photo->count() <= 0 && $restaurant->video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
-                            @endif
+                                            @auth
+                                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom" type="button"
+                                                            title="{{ __('user_page.Add Photo Tag') }}"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="add_photo_tag(this)"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($restaurant->video->count() > 0)
+                                    @foreach ($restaurant->video->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}" onclick="videoViews()">
+                                            @auth
+                                                @if (auth()->check() && in_array(Auth::user()->role_id, [1, 2, 3]))
+                                                    <a class="pointer-normal"
+                                                        onclick="view_video_restaurant({{ $item->id_video }})"
+                                                        href="javascript:void(0);">
+                                                    @else
+                                                        <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                            href="javascript:void(0);">
+                                                @endif
+                                            @endauth
+
+                                            @guest
+                                                <a class="pointer-normal" onclick="showPromotionMobile()"
+                                                    href="javascript:void(0);">
+                                                @endguest
+
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}#t=1.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $restaurant->id_restaurant }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($restaurant->photo->count() <= 0 && $restaurant->video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
                         </div>
                     </section>
                     {{-- END GALLERY --}}
@@ -1297,50 +1403,98 @@
                                 @endauth
                             </h2>
                         </div>
-                        <div class="col-12 row gallery2" id="contentMenu">
-                            @forelse ($restaurant->menu as $menu)
-                                <div class="col-4 grid-photo" id="displayMenu{{ $menu->id_menu }}">
-                                    {{-- Popup modal --}}
-                                    {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
-                                    style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
-                                    </a> --}}
-                                    <a class="itemsMenu"
-                                        href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}">
-                                        <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
-                                            src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}"
-                                            title="{{ $menu->name }}">
-                                    </a>
-                                    @auth
-                                        @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                            <span class="edit-menu-icon">
-                                                <button data-bs-toggle="popover" data-bs-animation="true"
-                                                    data-bs-placement="bottom" type="button"
-                                                    title="{{ __('user_page.Add Menu Tag') }}"
-                                                    data-id="{{ $restaurant->id_restaurant }}"
-                                                    data-menu="{{ $menu->id_menu }}" onclick="add_menu_tag(this)"><i
-                                                        class="fa fa-pencil"></i></button>
-                                                {{-- <button data-bs-toggle="popover" data-bs-animation="true"
-                                                    data-bs-placement="bottom"
-                                                    title="{{ __('user_page.Add Photo Caption') }}"
-                                                    onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"><i
-                                                        class="fa fa-pencil"></i></button> --}}
-                                                <button style="height:40px" href="javascript:void(0);"
-                                                    data-id="{{ $restaurant->id_restaurant }}"
-                                                    data-menu="{{ $menu->id_menu }}" onclick="delete_menu(this)"
-                                                    data-bs-toggle="popover" data-bs-animation="true"
-                                                    data-bs-placement="bottom"
-                                                    title="{{ __('user_page.Delete Menu') }}"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </span>
-                                        @endif
-                                    @endauth
-                                </div>
-                            @empty
-                                <p
-                                    style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">
-                                    {{ __('user_page.There is no menu yet') }}
-                                </p>
-                            @endforelse
+                        {{-- DESKTOP --}}
+                        <div class="desktop">
+                            <div class="col-12 row gallery2" id="contentMenu">
+                                @forelse ($restaurant->menu as $menu)
+                                    <div class="col-4 grid-photo" id="displayMenu{{ $menu->id_menu }}">
+                                        {{-- Popup modal --}}
+                                        {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
+                                        style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
+                                        </a> --}}
+                                        <a class="itemsMenu"
+                                            href="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}">
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}"
+                                                title="{{ $menu->name }}">
+                                        </a>
+                                        @auth
+                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                <span class="edit-menu-icon">
+                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" type="button"
+                                                        title="{{ __('user_page.Add Menu Tag') }}"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-menu="{{ $menu->id_menu }}" onclick="add_menu_tag(this)"><i
+                                                            class="fa fa-pencil"></i></button>
+                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Add Photo Caption') }}"
+                                                        onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"><i
+                                                            class="fa fa-pencil"></i></button> --}}
+                                                    <button style="height:40px" href="javascript:void(0);"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-menu="{{ $menu->id_menu }}" onclick="delete_menu(this)"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Delete Menu') }}"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </span>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                @empty
+                                    <p
+                                        style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">
+                                        {{ __('user_page.There is no menu yet') }}
+                                    </p>
+                                @endforelse
+                            </div>
+                        </div>
+                        {{-- MOBILE --}}
+                        <div class="mobile">
+                            <div class="col-12 row gallery2" id="contentMenu">
+                                @forelse ($restaurant->menu as $menu)
+                                    <div class="col-4 grid-photo" id="displayMenu{{ $menu->id_menu }}">
+                                        {{-- Popup modal --}}
+                                        {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
+                                        style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
+                                        </a> --}}
+                                        <a data-toggle="modal" data-target="#modal-menu-gallery" data-section="{{ $menu->id_menu }}"> 
+                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}" title="{{ $menu->name }}">
+                                        </a>
+                                        @auth
+                                            @if (Auth::user()->id == $restaurant->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                <span class="edit-menu-icon">
+                                                    <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom" type="button"
+                                                        title="{{ __('user_page.Add Menu Tag') }}"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-menu="{{ $menu->id_menu }}" onclick="add_menu_tag(this)"><i
+                                                            class="fa fa-pencil"></i></button>
+                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Add Photo Caption') }}"
+                                                        onclick="view_add_caption({'id': '{{ $restaurant->id_restaurant }}', 'id_menu': '{{ $menu->id_menu }}'})"><i
+                                                            class="fa fa-pencil"></i></button> --}}
+                                                    <button style="height:40px" href="javascript:void(0);"
+                                                        data-id="{{ $restaurant->id_restaurant }}"
+                                                        data-menu="{{ $menu->id_menu }}" onclick="delete_menu(this)"
+                                                        data-bs-toggle="popover" data-bs-animation="true"
+                                                        data-bs-placement="bottom"
+                                                        title="{{ __('user_page.Delete Menu') }}"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </span>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                @empty
+                                    <p
+                                        style="text-align: justify; padding-top:10px; padding-bottom:12px; padding-left:10px; padding-right:10px;">
+                                        {{ __('user_page.There is no menu yet') }}
+                                    </p>
+                                @endforelse
+                            </div>
                         </div>
                         @guest
                             @if ($restaurant->menu->count() > 3)
@@ -3207,6 +3361,8 @@
 
 {{-- OTHER MODAL --}}
 @include('user.modal.restaurant.restaurant-guest-safety')
+@include('user.modal.restaurant.image-slider')
+@include('user.modal.restaurant.menu-slider')
 @auth
     @if (in_array(auth()->user()->role->name, ['admin', 'superadmin']) ||
         auth()->user()->id == $restaurant->created_by)
@@ -6338,4 +6494,23 @@
         // document.activeElement.blur();//lose focus
     });
 </script>
+<script>
+    // image gallery
+    $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
+    $('#modal-photo-gallery .modal-body-gallery').scrollTop();
+    var section = $(event.relatedTarget).data('section');
+    var position = $('#' + section).position();
+    $("#modal-photo-gallery").scrollTop(position.top);
+    });
+</script>
+<script>
+    // menu gallery
+    $('#modal-menu-gallery').on('shown.bs.modal', function(event) {
+    $('#modal-menu-gallery .modal-body-gallery').scrollTop();
+    var section = $(event.relatedTarget).data('section');
+    var position = $('#' + section).position();
+    $("#modal-menu-gallery").scrollTop(position.top);
+    });
+</script>
+</body>
 </body>
