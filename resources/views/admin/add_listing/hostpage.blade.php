@@ -471,14 +471,10 @@
                     <p>Liability insurance of $1.000.000 for all accommodation and activity bookings</p>
                     <p>0% booking fees until 2023 - T&Cs apply</p>
                 </div>
-            </div>
-
-           
-                
-
+</div>
             <div class="col-12 col-md-6 d-none d-sm-block">
-                <div class="bottom-image vh-100">
-                    <div style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <div class="bottom-image">
+                    <div style="width: 100%; height: 92vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
                         <h1 style="color: white;">
                             Hosting made Easy with EZV
                         </h1>
