@@ -6,7 +6,7 @@
     {{-- function get data --}}
     @php
     // $villas = $villa->shuffle()->sortBy('grade');
-    $villas = $villa->->shuffle()->sortBy('grade');
+    $villas = $villa->shuffle()->sortBy('grade');
     $list = [];
     foreach ($villas as $item) {
         array_push($list, $item->id_villa);

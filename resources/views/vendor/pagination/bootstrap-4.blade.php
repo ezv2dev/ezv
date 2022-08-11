@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <nav>
         <ul class="pagination">
-            
+
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled me-2 me-lg-0" aria-disabled="true" aria-label="@lang('pagination.previous')">
@@ -41,6 +41,13 @@
                     @endforeach
                 @endif
             @endforeach
+
+            {{-- show pagination number when on small size --}}
+            <div class="d-flex align-items-center">
+                <span class="d-block d-sm-none">
+                    {{ $paginator->currentPage() }}/{{ $paginator->lastPage() }}
+                </span>
+            </div>
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
