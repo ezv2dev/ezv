@@ -49,13 +49,13 @@
                             class="fa-solid fa-xlose"></i></button>
             </div>
             <div class="modal-body-gallery">
-                        
-                @if ($photo->count() > 0)
-                    @foreach ($photo->sortBy('order') as $item)
+                
+                @if ($restaurant->photo->count() > 0)
+                    @foreach ($restaurant->photo->sortBy('order') as $item)
                     <div id="{{ $item->id_photo }}">
                         <div class="modal-gallery">
                             <img id="displayPhoto{{ $item->id_photo }}" class="lozad-gallery-load lozad-gallery"
-                                    src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}"
+                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
                                     title="{{ $item->caption }}">
                             </div>
                     </div>

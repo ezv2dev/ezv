@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-10">
                                     <p style="font-size: 20px; font-weight: 600; line-height: 1.2; color: #ff7400; margin-bottom: 5px;">To: Reservation information</p>
-                                    <a type="button" style="position: absolute; background: #b7b7b7; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #b7b7b7; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 5rem;" class="btn btn-sm btn-create-listing" href="#">cancel</a>
+                                    <a type="button" style="position: absolute; background: #b7b7b7; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #b7b7b7; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 5rem;" class="btn btn-sm btn-create-listing" id="cancel_rep">cancel</a>
                                     <a type="button" style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 0rem;" class="btn btn-sm btn-create-listing" href="#">send</a>
                                     <textarea style="width: 100%; border-radius: 15px;" class="mt-4" id="" cols="30" rows="10"></textarea>
                                 </div>
@@ -276,7 +276,6 @@
     <script src="{{ asset('assets/js/pages/be_tables_datatables.min.js') }}"></script>
     <script>
         $('.list_msg').click(function (e) {
-            console.log('kontol');
             $('#bg_msg').hide();
             $('#rep_form').hide();
             $('#rep_msg').show();
@@ -284,6 +283,9 @@
         $('#rep_btn').click(function (e) {
             $('#rep_form').show();
 
+        });
+        $('#cancel_rep').click(function (e) {
+            $('#rep_form').hide();
         });
     </script>
     <script>

@@ -6004,13 +6004,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script>
         $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
-        // reset the scroll to top
         $('#modal-photo-gallery .modal-body-gallery').scrollTop();
-        // get the section using data
         var section = $(event.relatedTarget).data('section');
-        // get the div position
         var position = $('#' + section).position();
-        // scroll modal to position top
         $("#modal-photo-gallery").scrollTop(position.top);
         });
     </script>
