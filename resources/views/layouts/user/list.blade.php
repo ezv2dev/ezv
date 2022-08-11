@@ -258,7 +258,7 @@ if (isset($_COOKIE['tema'])) {
                                 <div class="checkmark-mode"></div>
                             </label>
                         </div>
-                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
+                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
                     </div>
                     <a type="button" onclick="currency()" class="list-link-sidebar navbar-gap mb-2">
                         <img class="lozad"
@@ -339,7 +339,7 @@ if (isset($_COOKIE['tema'])) {
                             <span class="checkmark-mode"></span>
                         </label>
                     </div>
-                    <p class="mb-0" id="switcher" style="cursor: pointer; color: #585656;">Day / Night </p>
+                    <p class="mb-0" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
                 </div>
                 <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2"
                         style="color: white;">
