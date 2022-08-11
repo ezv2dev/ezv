@@ -89,7 +89,7 @@
                 <!-- Submit -->
                 <div class="row items-push">
                     <div class="col-lg-12" style="text-align: center;">
-                        <button type="submit" form="roomDetailForm" class="btn btn-sm btn-primary" style="width: 200px;">
+                        <button type="submit" id="btnSaveRoomOption" form="roomDetailForm" class="btn btn-sm btn-primary" style="width: 200px;">
                             <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                         </button>
                     </div>

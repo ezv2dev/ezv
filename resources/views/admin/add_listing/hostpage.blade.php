@@ -362,14 +362,14 @@
                     to you shortly</p>
                 <form action="">
                     <div class="d-flex flex-column flex-lg-row">
-                        <div class="col-12 col-md-6 right-20">
+                        <div class="col-12 col-lg-6 right-20">
                             <input class="form-control" placeholder="First Name">
                             <input class="form-control" placeholder="Last Name">
                             <input class="form-control" placeholder="Email address [Example: me@localhost.com]">
                             <input class="form-control" placeholder="Phone">
                             <input class="form-control" placeholder="Website">
                         </div>
-                        <div class="col-12 col-md-6 left-20">
+                        <div class="col-12 col-lg-6 left-20">
                             <div class="add-link d-block" id="input-link-listing-button"
                                 onclick="open_input_link_listing()">Add Link</div>
                             <input style="margin-bottom: 40px;" id="input-link-listing" class="form-control d-none"
@@ -457,7 +457,7 @@
     <section class="h-100 pt-3 pt-lg-5 w-100">
 
         <div class="row flex-column flex-lg-row bg-black">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-lg-6">
 
                 <div class="bottom text-white p-3 p-lg-5">
                     <h1>Benefits to list with EZV</h1>
@@ -472,13 +472,9 @@
                     <p>0% booking fees until 2023 - T&Cs apply</p>
                 </div>
             </div>
-
-           
-                
-
-            <div class="col-12 col-md-6 d-none d-sm-block">
-                <div class="bottom-image vh-100">
-                    <div style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <div class="col-12 col-lg-6 d-none d-sm-block">
+                <div class="bottom-image">
+                    <div style="width: 100%; height: 92vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
                         <h1 style="color: white;">
                             Hosting made Easy with EZV
                         </h1>
