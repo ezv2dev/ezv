@@ -39,7 +39,7 @@ class HotelController extends Controller
     {
         $hotel = Hotel::with([
             'location', 'photo', 'video', 'detailReview'
-        ])->where('status', 1)->inRandomOrder()->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL'));
+        ])->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_HOTEL') ?? 5);
 
         $amenities = Amenities::all();
         $hotelCategory = HotelCategory::all();
