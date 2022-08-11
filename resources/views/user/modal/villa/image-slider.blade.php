@@ -1,5 +1,8 @@
 <!-- Fade In Default Modal -->
 <style>
+    .modal-header {
+        background: #000;
+    }
     .modal-content-photo {
         display: flex;
         flex-direction: column;
