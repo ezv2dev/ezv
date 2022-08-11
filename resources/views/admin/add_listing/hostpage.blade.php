@@ -456,7 +456,7 @@
 
     <section class="h-100 pt-3 pt-lg-5 w-100">
         <div class="d-flex flex-column flex-lg-row bg-black">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-lg-6">
                 <div class="bottom text-white p-3 p-lg-5">
                     <h1>Benefits to list with EZV</h1>
                     <p>List any tyupe of accommodation, restaurant, activities and anything in-between</p>
@@ -470,7 +470,7 @@
                     <p>0% booking fees until 2023 - t&c apply</p>
                 </div>
             </div>
-            <div class="col-12 col-md-6 d-none d-sm-block">
+            <div class="col-12 col-lg-6 d-none d-sm-block">
                 <div class="bottom-image vh-100">&nbsp;</div>
             </div>
         </div>
