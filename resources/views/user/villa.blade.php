@@ -1453,8 +1453,8 @@
                         }
                     @endphp
 
-                    @if ($isSharedRoom == 'yes')
-                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p" style="padding-right: 15px;">
+                    <section id="room_option" class="section-2 div-room_option px-xs-8p px-sm-14p @if ($isSharedRoom == 'yes') @else d-none @endIf" style="padding-right: 15px;">
+                        @if ($isSharedRoom == 'yes')                    
                         <div class="row-grid-room-option">
                             <hr>
                             <div>
@@ -1533,8 +1533,8 @@
                                 </div>
                             </div>
                         @endfor
+                        @endIf
                     </section>
-                    @endIf
                 </div>
                 {{-- END PAGE CONTENT --}}
             </div>
