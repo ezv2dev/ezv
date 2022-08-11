@@ -17,7 +17,7 @@ class VillaContactHostController extends Controller
         abort_if(auth()->user()->role->name != 'user', 403);
 
         $allConversationList = VillaContactHost::where('id_user', auth()->user()->id)
-        ->orderBy('created_at')->get();
+            ->orderBy('created_at')->get();
         // dd('hit');
 
         $user = User::get();
@@ -35,7 +35,7 @@ class VillaContactHostController extends Controller
     public function admin_index()
     {
         abort_if(!in_array(auth()->user()->role->name, ['admin', 'superadmin']), 403);
-        if(in_array(auth()->user()->role->name, ['admin', 'superadmin'])) {
+        if (in_array(auth()->user()->role->name, ['admin', 'superadmin'])) {
             $allConversationList = collect();
             $conversationList = VillaContactHost::all();
             $conversationReplyList = VillaContactHostReply::all();
@@ -50,9 +50,9 @@ class VillaContactHostController extends Controller
     {
         abort_if(auth()->user()->role->name != 'partner', 403);
         $allConversationList = VillaContactHost::where('id_owner', auth()->user()->id)
-        ->where('approve_by', '!=', null)
-        ->where('disapprove_by', '=', null)
-        ->orderBy('created_at')->get();
+            ->where('approve_by', '!=', null)
+            ->where('disapprove_by', '=', null)
+            ->orderBy('created_at')->get();
         $i = 1;
         // dd($allConversationList);
         return view('admin.villa.messages.owner')->with(compact('allConversationList', 'i'));
@@ -65,8 +65,6 @@ class VillaContactHostController extends Controller
             'message' => ['required', 'string'],
         ]);
 
-        // abort_if(!auth()->user()->role->name == 'user', 403);
-
         $createdMessage = VillaContactHost::create([
             'id_owner' => $request->id_owner,
             'id_user' => auth()->user()->id,
@@ -76,11 +74,15 @@ class VillaContactHostController extends Controller
         ]);
 
         if ($createdMessage) {
-            return back()
-                ->with('success', 'Your data has been updated');
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfuly Sent Message to the Host',
+            ], 200);
         } else {
-            return back()
-                ->with('error', 'Please check the form below for errors');
+            return response()->json([
+                'success' => false,
+                'message' => 'Please check the form below for errors',
+            ], 500);
         }
     }
 
@@ -94,7 +96,7 @@ class VillaContactHostController extends Controller
 
         // abort_if(auth()->user()->id != $request->id_owner, 403);
         $messageReply = VillaContactHostReply::where('id_message', $request->id_message)->get();
-        if($messageReply->count() > 0) {
+        if ($messageReply->count() > 0) {
             return back()
                 ->with('error', 'you already reply the message');
         }

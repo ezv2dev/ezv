@@ -2765,7 +2765,7 @@
                             @auth
                                 @if (Auth::user()->role_id == 4)
                                     <button type="button" onclick="contactHostForm()"
-                                        class="member-profile-button">{{ __('user_page.Contact Host') }}</button>
+                                        class="member-profile-button chost">{{ __('user_page.Contact Host') }}</button>
                                 @endif
                             @endauth
                             <div class="row mt-20">
@@ -4093,14 +4093,17 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-1">
-                    <form action="{{ route('villa_store_user_message') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="id_owner" value="{{ $villa[0]->created_by }}">
-                        <div class="form-group">
-                            <textarea name="message" rows="10" class="form-control w-100" value="{{ old('message') }}" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">{{ __('user_page.Send') }}</button>
-                    </form>
+                    <input type="hidden" name="id_owner" id="idOwner" value="{{ $villa[0]->created_by }}">
+                    <div class="form-group">
+                        <textarea name="message" id="contactForm" rows="10" class="form-control w-100"
+                            placeholder="Type your question here..." required></textarea>
+                        <small id="err-faq" style="display: none;" class="invalid-feedback">This field is
+                            required</small><br>
+                    </div>
+                    <center>
+                        <button type="submit" class="btn btn-primary mb-3 w-50"
+                            onclick="contactHost()">{{ __('user_page.Send') }}</button>
+                    </center>
                 </div>
             </div>
         </div>
@@ -4715,6 +4718,60 @@
     <script>
         function contactHostForm() {
             $('#modal-contact-host').modal('show');
+        }
+
+        function contactHost() {
+            let error = 0;
+            if (!$("textarea#contactForm").val()) {
+                $("#contactForm").css("border", "solid #e04f1a 1px");
+                $("#err-faq").show();
+                error = 1;
+            } else {
+                $("#contactForm").css("border", "");
+                $("#err-faq").hide();
+            }
+            if (error == 1) {
+                return false;
+            } else {
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    url: `/villa/contact-host/user/store-message`,
+                    data: {
+                        id_owner: $('#idOwner').val(),
+                        message: $('#contactForm').val(),
+                    },
+                    success: function(response) {
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                        $('#modal-contact-host').modal('hide');
+                    },
+                    error: function(jqXHR, exception) {
+                        if (jqXHR.responseJSON.errors) {
+                            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                                iziToast.error({
+                                    title: "Error",
+                                    message: jqXHR.responseJSON.errors[i],
+                                    position: "topRight",
+                                });
+                                $('#modal-contact-host').modal('hide');
+                            }
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.message,
+                                position: "topRight",
+                            });
+                            $('#modal-contact-host').modal('hide');
+                        }
+                    }
+                });
+            }
         }
 
         function view_subcategory() {
