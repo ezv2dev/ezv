@@ -362,14 +362,14 @@
                     to you shortly</p>
                 <form action="">
                     <div class="d-flex flex-column flex-lg-row">
-                        <div class="col-12 col-md-6 right-20">
+                        <div class="col-12 col-lg-6 right-20">
                             <input class="form-control" placeholder="First Name">
                             <input class="form-control" placeholder="Last Name">
                             <input class="form-control" placeholder="Email address [Example: me@localhost.com]">
                             <input class="form-control" placeholder="Phone">
                             <input class="form-control" placeholder="Website">
                         </div>
-                        <div class="col-12 col-md-6 left-20">
+                        <div class="col-12 col-lg-6 left-20">
                             <div class="add-link d-block" id="input-link-listing-button"
                                 onclick="open_input_link_listing()">Add Link</div>
                             <input style="margin-bottom: 40px;" id="input-link-listing" class="form-control d-none"
