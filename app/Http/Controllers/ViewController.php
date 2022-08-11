@@ -1371,8 +1371,9 @@ class ViewController extends Controller
         }
 
         $data = VillaHasCategory::with('villaCategory')->where('id_villa', $request->id_villa)->get();
+        $villa = VillaBedroomDetail::where('id_villa', $request->id_villa)->get();
 
-        return response()->json(['success' => true, 'data' => $data, 'message' => 'Updated Property Type']);
+        return response()->json(['success' => true, 'data' => $data, 'villa' => $villa, 'message' => 'Updated Property Type']);
     }
 
     public function villa_update_property_type(Request $request)
@@ -3415,20 +3416,22 @@ class ViewController extends Controller
         }
 
         try {
-            $folder = $villa->uid;
-            $path = env("VILLA_FILE_PATH") . $folder;
-
-            if (!File::isDirectory($path)) {
-
-                File::makeDirectory($path, 0777, true, true);
-            }
-
-            $ext = strtolower($request->image->getClientOriginalExtension());
-            
-            if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
-                $original_name = $request->image->getClientOriginalName();
-                $name_file = time() . "_" . $original_name;
-                $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+            if ($request->image) {
+                $folder = $villa->uid;
+                $path = env("VILLA_FILE_PATH") . $folder;
+    
+                if (!File::isDirectory($path)) {
+    
+                    File::makeDirectory($path, 0777, true, true);
+                }
+    
+                $ext = strtolower($request->image->getClientOriginalExtension());
+                
+                if ($ext == 'jpeg' || $ext == 'jpg' || $ext == 'png' || $ext == 'webp') {
+                    $original_name = $request->image->getClientOriginalName();
+                    $name_file = time() . "_" . $original_name;
+                    $name_file = FileCompression::compressImageToCustomExt($request->image, $path, pathinfo($name_file, PATHINFO_FILENAME), 'webp');
+                }
             }
 
             // save bedroom detail
