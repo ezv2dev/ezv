@@ -1354,13 +1354,23 @@ if (isset($_COOKIE['tema'])) {
             $(".expand-navbar-mobile").attr("aria-expanded", "false");
             $("#overlay").css("display", "none");
         }
+
         function moreCategory() {
             sidebarhide();
             $('#categoryModal').modal('show');
+            $('html').css("overflow-y", "hidden")
+
+            // close sidebar di mobile size
+            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+
+            // close searchbar di mobile size
+            $( "#bodyList #overlay" ).trigger( "click" )
         }
 
         function moreSubCategory() {
+            sidebarhide();
             $('#modalSubCategory').modal('show');
+            $('html').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
             $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1372,6 +1382,7 @@ if (isset($_COOKIE['tema'])) {
         function modalFiltersHomes() {
             sidebarhide();
             $('#modalFiltersHome').modal('show');
+            $('html').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
             $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1382,6 +1393,7 @@ if (isset($_COOKIE['tema'])) {
 
         function modalFiltersHotel() {
             $('#modalFiltersHotel').modal('show');
+            $('html').css("overflow-y", "hidden")
 
            // close sidebar di mobile size
            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1392,6 +1404,7 @@ if (isset($_COOKIE['tema'])) {
 
         function filterCollab() {
             $('#modalFiltersCollab').modal('show');
+            $('html').css("overflow-y", "hidden")
 
            // close sidebar di mobile size
            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1401,8 +1414,8 @@ if (isset($_COOKIE['tema'])) {
         }
 
         // fix bug scroll ketika open sidebar dan open modal subcategory di mobile size
-        $('#modalSubCategory, #modalFiltersHome, #modalFiltersHotel, #modalFiltersCollab').on('hidden.bs.modal', function (e) {
-            $('body').css({"overflow": ""})
+        $('#categoryModal, #modalSubCategory, #modalFiltersHome, #modalFiltersHotel, #modalFiltersCollab').on('hidden.bs.modal', function (e) {
+            $('html').css("overflow-y", "")
         })
     </script>
 

@@ -157,7 +157,7 @@ $get_category = request()->get('fCategory');
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="filter-modal-body modal-body" style=" height: 450px; overflow-y: auto;">
+            <div class="filter-modal-body modal-body" style=" height: 70vh; overflow-y: auto;">
 
                 <div class="filter-modal-row">
                     <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
