@@ -455,24 +455,43 @@
     </section>
 
     <section class="h-100 pt-3 pt-lg-5 w-100">
-        <div class="d-flex flex-column flex-lg-row bg-black">
-            <div class="col-12 col-lg-6">
+
+        <div class="row flex-column flex-lg-row bg-black">
+            <div class="col-12 col-md-6">
+
                 <div class="bottom text-white p-3 p-lg-5">
                     <h1>Benefits to list with EZV</h1>
-                    <p>List any tyupe of accommodation, restaurant, activities and anything in-between</p>
+                    <p>List any tyupe of accommodation, restaurants, activities and anything in-between</p>
                     <p>State of the art video search engine, show case your property with short video</p>
                     <p>Easy import of existing listing information from other website</p>
                     <p>Connect your existing calendar to avoid double bookings</p>
                     <p>Worlds first booking platform with a visual page builder</p>
                     <p>24/7 customers support for you and your guests</p>
-                    <p>Easy of use with stylish modern interface</p>
+                    <p>Ease of use with stylish modern interface</p>
                     <p>Liability insurance of $1.000.000 for all accommodation and activity bookings</p>
-                    <p>0% booking fees until 2023 - t&c apply</p>
+                    <p>0% booking fees until 2023 - T&Cs apply</p>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 d-none d-sm-block">
-                <div class="bottom-image vh-100">&nbsp;</div>
+
+           
+                
+
+            <div class="col-12 col-md-6 d-none d-sm-block">
+                <div class="bottom-image vh-100">
+                    <div style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                        <h1 style="color: white;">
+                            Hosting made Easy with EZV
+                        </h1>
+                        <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">
+                            Let's go
+                        </button>
+                        <h4 style="color: white;">
+                            Join the EZV family today
+                        </h4>
+                    </div>
+                </div>
             </div>
+
         </div>
     </section>
     {{-- footer --}}
