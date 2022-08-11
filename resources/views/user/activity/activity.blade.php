@@ -100,6 +100,22 @@
         .list-link-sidebar:hover>*{
             color: #585656;
         }
+        @media only screen and (min-width: 748px) {
+            .mobile {
+                display: none;
+            }
+            .desktop {
+                display: block;
+            }
+        }
+        @media only screen and (max-width: 747px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -989,88 +1005,173 @@
                 <div class="js-gallery">
                     {{-- GALLERY --}}
                     <section id="gallery" class="section">
-                        <div class="col-12 row gallery">
-                            @if ($activity->photo->count() > 0)
-                                @foreach ($activity->photo->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}"
-                                        onclick="photoViews()">
-                                        <a
-                                            href="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}">
-                                            <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
-                                                src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}"
-                                                title="{{ $item->caption }}">
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-icon">
-                                                    {{-- <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom" type="button"
-                                                        title="{{ __('user_page.Add Photo Caption') }}"
-                                                        onclick="view_add_caption({'id': '{{ $activity->id_activity }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
-                                                            class="fa fa-pencil"></i></button> --}}
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Photo Position') }}" type="button"
-                                                        onclick="position_photo()"><i class="fa fa-arrows"></i></button>
-                                                    <button data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Photo') }}"
-                                                        href="javascript:void(0);"
-                                                        data-id="{{ $activity->id_activity }}"
-                                                        data-photo="{{ $item->id_photo }}"
-                                                        onclick="delete_photo_photo(this)"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($activity->video->count() > 0)
-                                @foreach ($activity->video->sortBy('order') as $item)
-                                    <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}"
-                                        onclick="videoViews()">
-                                        @auth
-                                            @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
-                                                <a class="pointer-normal"
-                                                    type="button"onclick="view_video_activity({{ $item->id_video }})">
-                                                @else
-                                                    <a class="pointer-normal" type="button"
-                                                        onclick="showPromotionMobile()">
-                                            @endif
-                                        @endauth
-                                        @guest
-                                            <a class="pointer-normal" type="button" onclick="showPromotionMobile()">
-                                            @endguest
-                                            <video href="javascript:void(0)" class="photo-grid" loading="lazy"
-                                                src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}#t=1.0">
-                                            </video>
-                                            <span class="video-grid-button"><i class="fa fa-play"></i></span>
-                                        </a>
-                                        @auth
-                                            @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                                                <span class="edit-video-icon">
-                                                    <button type="button" onclick="position_video()"
-                                                        data-bs-toggle="popover" data-bs-animation="true"
-                                                        data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Swap Video Position') }}"><i
-                                                            class="fa fa-arrows"></i></button>
-                                                    <button href="javascript:void(0);"
-                                                        data-id="{{ $activity->id_activity }}"
-                                                        data-video="{{ $item->id_video }}"
-                                                        onclick="delete_photo_video(this)" data-bs-toggle="popover"
-                                                        data-bs-animation="true" data-bs-placement="bottom"
-                                                        title="{{ __('user_page.Delete Video') }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </span>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if ($activity->photo->count() <= 0 && $activity->video->count() <= 0)
-                                {{ __('user_page.there is no gallery yet') }}
-                            @endif
+                        {{-- DESKTOP --}}
+                        <div class="desktop">
+                            <div class="col-12 row gallery">
+                                @if ($activity->photo->count() > 0)
+                                    @foreach ($activity->photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}"
+                                            onclick="photoViews()">
+                                            <a
+                                                href="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                    src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}"
+                                                    title="{{ $item->caption }}">
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom" type="button"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $activity->id_activity }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $activity->id_activity }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($activity->video->count() > 0)
+                                    @foreach ($activity->video->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}"
+                                            onclick="videoViews()">
+                                            @auth
+                                                @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
+                                                    <a class="pointer-normal"
+                                                        type="button"onclick="view_video_activity({{ $item->id_video }})">
+                                                    @else
+                                                        <a class="pointer-normal" type="button"
+                                                            onclick="showPromotionMobile()">
+                                                @endif
+                                            @endauth
+                                            @guest
+                                                <a class="pointer-normal" type="button" onclick="showPromotionMobile()">
+                                                @endguest
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}#t=1.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $activity->id_activity }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($activity->photo->count() <= 0 && $activity->video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
+                        </div>
+                        {{-- MOBILE --}}
+                        <div class="mobile">
+                            <div class="col-12 row gallery">
+                                @if ($activity->photo->count() > 0)
+                                    @foreach ($activity->photo->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                            <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-icon">
+                                                        {{-- <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom" type="button"
+                                                            title="{{ __('user_page.Add Photo Caption') }}"
+                                                            onclick="view_add_caption({'id': '{{ $activity->id_activity }}', 'id_photo': '{{ $item->id_photo }}', 'caption': '{{ $item->caption }}'})"><i
+                                                                class="fa fa-pencil"></i></button> --}}
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
+                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                        <button data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Photo') }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $activity->id_activity }}"
+                                                            data-photo="{{ $item->id_photo }}"
+                                                            onclick="delete_photo_photo(this)"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($activity->video->count() > 0)
+                                    @foreach ($activity->video->sortBy('order') as $item)
+                                        <div class="col-4 grid-photo" id="displayVideo{{ $item->id_video }}"
+                                            onclick="videoViews()">
+                                            @auth
+                                                @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $activity->created_by)
+                                                    <a class="pointer-normal"
+                                                        type="button"onclick="view_video_activity({{ $item->id_video }})">
+                                                    @else
+                                                        <a class="pointer-normal" type="button"
+                                                            onclick="showPromotionMobile()">
+                                                @endif
+                                            @endauth
+                                            @guest
+                                                <a class="pointer-normal" type="button" onclick="showPromotionMobile()">
+                                                @endguest
+                                                <video href="javascript:void(0)" class="photo-grid" loading="lazy"
+                                                    src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}#t=1.0">
+                                                </video>
+                                                <span class="video-grid-button"><i class="fa fa-play"></i></span>
+                                            </a>
+                                            @auth
+                                                @if (Auth::user()->id == $activity->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                                    <span class="edit-video-icon">
+                                                        <button type="button" onclick="position_video()"
+                                                            data-bs-toggle="popover" data-bs-animation="true"
+                                                            data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Swap Video Position') }}"><i
+                                                                class="fa fa-arrows"></i></button>
+                                                        <button href="javascript:void(0);"
+                                                            data-id="{{ $activity->id_activity }}"
+                                                            data-video="{{ $item->id_video }}"
+                                                            onclick="delete_photo_video(this)" data-bs-toggle="popover"
+                                                            data-bs-animation="true" data-bs-placement="bottom"
+                                                            title="{{ __('user_page.Delete Video') }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </span>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if ($activity->photo->count() <= 0 && $activity->video->count() <= 0)
+                                    {{ __('user_page.there is no gallery yet') }}
+                                @endif
+                            </div>
                         </div>
                     </section>
                     {{-- END GALLERY --}}
@@ -3001,6 +3102,7 @@
     @include('user.modal.advert-listing')
 @endauth
 @include('user.modal.activity.description')
+@include('user.modal.activity.image-slider')
 {{-- END OTHER MODAL --}}
 
 {{-- script recomendation --}}
@@ -6115,6 +6217,16 @@
     </script>
 @endif
 @include('user.modal.activity.detail_price')
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
+        $('#modal-photo-gallery .modal-body-gallery').scrollTop();
+        var section = $(event.relatedTarget).data('section');
+        var position = $('#' + section).position();
+        $("#modal-photo-gallery").scrollTop(position.top);
+        });
+    </script>
+</body>
 </body>
 
 </html>
