@@ -1378,7 +1378,9 @@ class ViewController extends Controller
             'villaBedroomDetailBed.bed'
         ])->where('id_villa', $request->id_villa)->get();
 
-        return response()->json(['success' => true, 'data' => $data, 'villa' => $villa, 'message' => 'Updated Property Type']);
+        $uid = Villa::where('id_villa', $request->id_villa)->first('uid');
+
+        return response()->json(['success' => true, 'data' => $data, 'villa' => $villa, 'uid' => $uid, 'message' => 'Updated Property Type']);
     }
 
     public function villa_update_property_type(Request $request)
