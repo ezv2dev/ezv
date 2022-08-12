@@ -23,6 +23,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\VillaAvailability;
+use Illuminate\Support\Facades\Validator;
 
 class XenditController extends Controller
 {
@@ -206,6 +207,18 @@ class XenditController extends Controller
     public function createCreditCard(Request $request)
     {
         try {
+            // check validation
+            $request->validate([
+                'formData' => ['required', 'array'],
+                'datarequest' => ['required', 'array'],
+                'dataresult' => ['required', 'array'],
+            ]);
+            // if ($validator->fails()) {
+            //     return response()->json([
+            //         'message' => $validator->errors(),
+            //     ], 422);
+            // };
+
             //get id villa
             $id_villa = $request["formData"]["id_villa"];
             $villa = Villa::select('price', 'adult', 'children', 'min_stay')->where('id_villa', $id_villa)->where('status', 1)->first();
@@ -310,7 +323,8 @@ class XenditController extends Controller
             }
         } catch (\Throwable $e) {
             return response()->json((object)[
-                'message' => 'internal server error'
+                'message' => 'internal server error',
+                // 'message' => $e
             ], 500);
         }
     }
