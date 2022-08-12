@@ -40,7 +40,7 @@ if (isset($_COOKIE['tema'])) {
         var height = $(window).height(); 
 
         if ((width >= 500)) {
-            $(".villa-list-price-trigger").attr("onclick", "");   
+            $(".villa-list-price-trigger").attr("onclick", "modal_price_breakdown()");   
         }
         else {   
             $(".villa-list-price-trigger").attr("onclick", "showpricebreakdown()");
@@ -360,7 +360,7 @@ if (isset($_COOKIE['tema'])) {
                                 <div class="villa-list-price">
                                     @if ($data->price)
                                         @if (empty($dateDiff))
-                                            <span class="villa-list-price villa-list-price-trigger">
+                                            <span class="villa-list-price">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                         @else
@@ -369,11 +369,11 @@ if (isset($_COOKIE['tema'])) {
                                                 $service = App\Http\Controllers\VillabookingController::get_service(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
                                                 $get_total = App\Http\Controllers\VillabookingController::get_total_all(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
                                             @endphp
-                                            <span class="villa-list-price villa-list-price-trigger">
+                                            <span class="villa-list-price">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                             <span> • </span>
-                                            <span class="villa-list-price" onclick="modal_price_breakdown()">
+                                            <span class="villa-list-price villa-list-price-trigger" onclick="modal_price_breakdown()">
                                                 <a tabindex="0" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="top" data-bs-trigger="focus"
                                                 data-bs-custom-class="custom-popover" title='Price Breakdown <a type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                                                     class="fa-solid fa-xmark"></i></a>' data-bs-html="true" data-bs-content="
