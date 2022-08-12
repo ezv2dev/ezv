@@ -9,7 +9,7 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3fa51a741b.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"> --}}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
