@@ -729,7 +729,7 @@ $("#add-room-hotel").submit(function (e) {
                       </g>
                    </svg>
                 </div>`;
-                room = `<div class="col-12 m-0 row px-2 px-lg-0">
+                room = `<div class="col-12 m-0 row px-2 px-lg-0 pb-5">
                    <div class="col-12 col-lg-3 mb-2 mb-lg-0" style="border: 1px solid #d6d6d6; border-radius: 15px; padding: 10px; background-color: white; box-shadow: 1px 1px 10px rgb(63 62 62 / 16%);">
                       <div class="col-12">
                          <div class="col-12">
