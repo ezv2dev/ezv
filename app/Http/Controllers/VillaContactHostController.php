@@ -76,7 +76,7 @@ class VillaContactHostController extends Controller
         if ($createdMessage) {
             return response()->json([
                 'success' => true,
-                'message' => 'Successfuly Sent Message to the Host',
+                'message' => 'Successfully Sent Message to the Host',
             ], 200);
         } else {
             return response()->json([

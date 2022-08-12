@@ -16,9 +16,8 @@ class AddGovernmentController extends Controller
     {
         // dd(\App\Government::where('user_id',Auth::user()->id)->first());
 
-        if (Government::where('user_id',Auth::user()->id)->first())
-        {
-            return redirect()->route('personal_info')->with('error','You have been added Government ID');
+        if (Government::where('user_id', Auth::user()->id)->first()) {
+            return redirect()->route('personal_info')->with('error', 'You have been added Government ID');
         }
 
         return view('new-admin.partner.account.personal-info.add_government');
@@ -39,16 +38,15 @@ class AddGovernmentController extends Controller
 
         $government = $request->session()->get('government');
 
-        if (Government::where('user_id',Auth::user()->id)->first())
-        {
-            return redirect()->route('personal_info')->with('error','You have been added Government ID');
+        if (Government::where('user_id', Auth::user()->id)->first()) {
+            return redirect()->route('personal_info')->with('error', 'You have been added Government ID');
         }
 
         return view('new-admin.partner.account.personal-info.add_government_step_two')
-        ->with([
-            'countries' => $countries,
-            'government' => $government
-        ]);
+            ->with([
+                'countries' => $countries,
+                'government' => $government
+            ]);
     }
 
     public function store_step_two(Request $request)
@@ -60,14 +58,14 @@ class AddGovernmentController extends Controller
 
         // dd($validatedData);
 
-        if(empty($request->session()->get('government'))){
+        if (empty($request->session()->get('government'))) {
             $government = new Government();
             // $government->fill($validatedData);
-            $request->session()->put('government', ['chooseGovernmentID' => $request->get('chooseGovernmentID'), 'country' => $request->get('country') ]);
-        }else{
+            $request->session()->put('government', ['chooseGovernmentID' => $request->get('chooseGovernmentID'), 'country' => $request->get('country')]);
+        } else {
             $government = $request->session()->get('government');
             // $government->fill($validatedData);
-            $request->session()->put('government', ['chooseGovernmentID' => $request->get('chooseGovernmentID'), 'country' => $request->get('country') ]);
+            $request->session()->put('government', ['chooseGovernmentID' => $request->get('chooseGovernmentID'), 'country' => $request->get('country')]);
         }
 
         return redirect()->route('add_government.step_three');
@@ -77,28 +75,23 @@ class AddGovernmentController extends Controller
     {
         $government = $request->session()->get('government');
 
-        if (Government::where('user_id',Auth::user()->id)->first() != null)
-        {
-            return redirect()->route('personal_info')->with('error','You have been added Government ID');
+        if (Government::where('user_id', Auth::user()->id)->first() != null) {
+            return redirect()->route('personal_info')->with('error', 'You have been added Government ID');
         }
 
-        if ($government['chooseGovernmentID'] == 'driver_license')
-        {
+        if ($government['chooseGovernmentID'] == 'driver_license') {
             $title = "driver license";
-        }
-        else if ($government['chooseGovernmentID'] == 'identity_card')
-        {
+        } else if ($government['chooseGovernmentID'] == 'identity_card') {
             $title = "identity card";
-        }
-        else {
+        } else {
             $title = "passport";
         }
 
         return view('new-admin.partner.account.personal-info.add_government_step_three')
-        ->with([
-            "government" => $government,
-            "title" => $title
-        ]);
+            ->with([
+                "government" => $government,
+                "title" => $title
+            ]);
     }
 
     public function store_step_three(Request $request)
@@ -113,30 +106,26 @@ class AddGovernmentController extends Controller
             'no_id' => 'required|numeric',
         ]);
 
-        if($request->file('front_picture'))
-        {
+        if ($request->file('front_picture')) {
             $request->validate([
                 'front_picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             ]);
             $front_picture = $request->file('front_picture');
             $filenameFrontPicture = time() . '.' . $front_picture->getClientOriginalExtension();
-            $front_picture->move(public_path('government'),$filenameFrontPicture);
+            $front_picture->move(public_path('government'), $filenameFrontPicture);
         }
 
-        if($request->file('back_picture'))
-        {
+        if ($request->file('back_picture')) {
             $request->validate([
                 'back_picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             ]);
             $back_picture = $request->file('back_picture');
             $filenameBackPicture = time() . '.' . $back_picture->getClientOriginalExtension();
-            $back_picture->move(public_path('government'),$filenameBackPicture);
+            $back_picture->move(public_path('government'), $filenameBackPicture);
         }
 
-        if ($government['chooseGovernmentID'] == 'passport')
-        {
-            if(!isset($filenameFrontPicture))
-            {
+        if ($government['chooseGovernmentID'] == 'passport') {
+            if (!isset($filenameFrontPicture)) {
                 return redirect()->back();
             }
 
@@ -149,11 +138,8 @@ class AddGovernmentController extends Controller
                 'user_id' => Auth::user()->id,
                 'approved_status' => 0,
             ]);
-        }
-        else
-        {
-            if(!isset($filenameFrontPicture) && !isset($filenameBackPicture))
-            {
+        } else {
+            if (!isset($filenameFrontPicture) && !isset($filenameBackPicture)) {
                 return redirect()->back();
             }
 
@@ -170,6 +156,6 @@ class AddGovernmentController extends Controller
 
         $request->session()->forget('government');
 
-        return redirect()->route('personal_info')->with('success','Successfuly Added Government ID');
+        return redirect()->route('personal_info')->with('success', 'Successfully Added Government ID');
     }
 }

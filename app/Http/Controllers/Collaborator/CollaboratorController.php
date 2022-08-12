@@ -335,7 +335,7 @@ class CollaboratorController extends Controller
 
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Collaborator Profile',
+                'message' => 'Successfully Updated Collaborator Profile',
                 'status' => 200,
                 'data' => $profileData
             ]);
@@ -439,7 +439,7 @@ class CollaboratorController extends Controller
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Gender',
+                'message' => 'Successfully Updated Gender',
                 'data' => $collabData
             ], 200);
         } else {
@@ -514,7 +514,7 @@ class CollaboratorController extends Controller
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Tags',
+                'message' => 'Successfully Updated Tags',
                 'data' => $collabData->category
             ], 200);
         } else {
@@ -581,7 +581,7 @@ class CollaboratorController extends Controller
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Location',
+                'message' => 'Successfully Updated Location',
                 'data' => (object)[
                     'latitude' => $collabData->latitude,
                     'longitude' => $collabData->longitude,
@@ -680,7 +680,7 @@ class CollaboratorController extends Controller
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Social Media',
+                'message' => 'Successfully Updated Social Media',
                 'data' => $collab
             ], 200);
         } else {
@@ -879,7 +879,7 @@ class CollaboratorController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -922,7 +922,7 @@ class CollaboratorController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -963,7 +963,7 @@ class CollaboratorController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1070,7 +1070,7 @@ class CollaboratorController extends Controller
         // check if update is success or not
         if ($updatedCollab) {
             return response()->json([
-                'message' => 'Successfuly Updated Language',
+                'message' => 'Successfully Updated Language',
                 'data' => $collab
             ], 200);
         } else {

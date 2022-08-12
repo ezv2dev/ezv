@@ -137,7 +137,7 @@
                             <div style="padding: 15px;">
                                 <div>
                                     @foreach ($messageList as $item)
-                                        <div id="list_msg" class="row p-2 list_msg"
+                                        <div id="list_msg{{ $item->id_message }}" class="row p-2 list_msg"
                                             onclick="listMsg({{ $item->id_message }})"
                                             style="border-bottom: 1px solid #d5d5d5;">
                                             <div class="col-2 p-0">
@@ -213,8 +213,15 @@
                                             class="btn btn-sm btn-create-listing" id="cancel_rep">cancel</a>
                                         <a type="button"
                                             style="position: absolute; background: #ff7400; color: #fff; border-radius: 6px; padding: 10px 20px; border: solid 1px #ff7400; outline: none; font-weight: 600; width: 4rem; height: 2rem; top: 0rem; right: 0rem;"
-                                            class="btn btn-sm btn-create-listing" href="#">send</a>
-                                        <textarea style="width: 100%; border-radius: 15px;" class="mt-4" id="" cols="30" rows="10"></textarea>
+                                            class="btn btn-sm btn-create-listing" href="#"
+                                            onclick="sendReply()">send</a>
+                                        <input type="hidden" value="" name="idMessage" id="idMessage">
+                                        <input type="hidden" value="{{ Auth::user()->id }}" name="idOwner"
+                                            id="idOwner">
+                                        <textarea id="replyBox" style="width: 100%; border-radius: 15px;" class="mt-4" id="" cols="30"
+                                            rows="10"></textarea>
+                                        <small id="errReply" style="display: none;" class="invalid-feedback">This field
+                                            is required</small><br>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +233,7 @@
     </div>
 
     {{-- MODAL MESSAGE DETAIL --}}
-    <div class="modal fade" id="modal-message_detail" tabindex="-1" role="dialog"
+    {{-- <div class="modal fade" id="modal-message_detail" tabindex="-1" role="dialog"
         aria-labelledby="modal-default-fadein" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -259,7 +266,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- END MODAL MESSAGE DETAIL --}}
 
     <script>
@@ -322,7 +329,7 @@
                             `<img style="width: 70%; aspect-ratio: 4/3.9; border-radius: 50px; object-fit: cover;" class="lozad" loading="lazy" src="${response.data.user.avatar}">`
                         );
                     }
-
+                    $("#idMessage").val(response.data.id_message);
                     $('#senderInfo').html(`${response.data.user.first_name} ${response.data.user.last_name}`);
                     $('#senderReplyTo').html(
                         `To : ${response.data.user.first_name} ${response.data.user.last_name}`);
@@ -331,12 +338,71 @@
             });
         }
 
+        function sendReply() {
+            let error = 0;
+            if (!$("textarea#replyBox").val()) {
+                $("#replyBox").css("border", "solid #e04f1a 1px");
+                $("#errReply").show();
+                error = 1;
+            } else {
+                $("#replyBox").css("border", "");
+                $("#errReply").hide();
+            }
+            if (error == 1) {
+                return false;
+            } else {
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    url: `/reply/message`,
+                    data: {
+                        id_message: $('#idMessage').val(),
+                        message: $('#replyBox').val(),
+                        id_owner: $('#idOwner').val(),
+                    },
+                    success: function(response) {
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+                        $('#replyBox').val("");
+                        $(`#list_msg${response.data.id_message}`).remove();
+                        $('replyMsg').hide();
+                        $('#rep_form').hide();;
+                        $('#bg_msg').show();
+                    },
+                    error: function(jqXHR, exception) {
+                        if (jqXHR.responseJSON.errors) {
+                            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                                iziToast.error({
+                                    title: "Error",
+                                    message: jqXHR.responseJSON.errors[i],
+                                    position: "topRight",
+                                });
+                            }
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.message,
+                                position: "topRight",
+                            });
+                        }
+                    }
+                });
+            }
+        }
+
         function repMsg() {
             $('#replyMsg').hide();
             $('#rep_form').show();
         }
 
         $('#cancel_rep').click(function(e) {
+            $("#replyBox").css("border", "");
+            $("#errReply").hide();
             $('#replyMsg').show();
             $('#rep_form').hide();
         });
@@ -402,7 +468,7 @@
                         $("#message-detail-form").show();
                         $("#message-detail-already-reply").hide();
                         $("#id_owner").val(data.id_owner);
-                        $("#id_message").val(data.id_message);
+                        $("#idMessage").val(data.id_message);
                     }
 
                     $('#modal-message_detail').modal('show');

@@ -296,7 +296,7 @@ class ActivityController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 1, 'grade' => $request->grade]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 1, 'grade' => $request->grade]);
         } else {
             $find->update(array(
                 'status' =>  0,
@@ -304,7 +304,7 @@ class ActivityController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 0]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 0]);
         }
     }
 
@@ -319,7 +319,7 @@ class ActivityController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 2]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 2]);
         }
 
         if ($find->status == 1) {
@@ -328,7 +328,7 @@ class ActivityController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly request for deactivation', 'data' => 3]);
+            return response()->json(['message' => 'Successfully request for deactivation', 'data' => 3]);
         }
     }
 
@@ -343,7 +343,7 @@ class ActivityController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly cancel request activiation', 'data' => 0]);
+            return response()->json(['message' => 'Successfully cancel request activiation', 'data' => 0]);
         }
 
         if ($find->status == 3) {
@@ -352,7 +352,7 @@ class ActivityController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly cancel request deactiviation', 'data' => 1]);
+            return response()->json(['message' => 'Successfully cancel request deactiviation', 'data' => 1]);
         }
     }
 
