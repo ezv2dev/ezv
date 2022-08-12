@@ -4845,8 +4845,12 @@
                 var floatingmapbutton = $('.map-floating-button')
                 // var FooterLink = $('.footer-link');
                 var bodyList = document.getElementById("bodyList");
-
+                var fontBlack = $('.font-black');
+                var fontLight = $('.font-light');
                 if (tipe == 'light') {
+                    fontLight.addClass('font-black');
+                    fontLight.removeClass('font-light');
+                    
                     text.classList.remove('bg-body-black');
                     text.classList.add('bg-body-light');
                     nav.classList.remove('bg-body-black');
@@ -4881,6 +4885,11 @@
                     bodyList.classList.remove('bg-body-black');
                     bodyList.classList.add('bg-body-light');
                 } else {
+
+
+                    fontBlack.addClass('font-light');
+                    fontBlack.removeClass('font-black');
+
                     text.classList.remove('bg-body-light');
                     text.classList.add('bg-body-black');
                     nav.classList.remove('bg-body-light');
