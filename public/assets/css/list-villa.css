@@ -36,18 +36,21 @@ input {
     max-height: 1vh;
 }
 
+.love-btn-container{
+    position: absolute; 
+    left: 10px; 
+    top: 10px; 
+    z-index: 99; 
+}
+
 .like-sign {
     display: none;
     position: absolute;
-    top: 40%;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: 0 auto;
+    top: 50%;
+    left: 50%;
     z-index: 1;
-    height: 50px;
-    width: 90px;
-    font-size: 70px;
+    font-size: 55px;
+    transform:translate(-50%, -50%);
 }
 
 .flatpickr-container .flatpickr-calendar {
@@ -3528,6 +3531,10 @@ input::-webkit-inner-spin-button {
     }
     .video-btn-container-in-map .video-btn-in-map {
         display: none;
+    }
+
+    .like-sign {
+        font-size: 70px;
     }
 }
 

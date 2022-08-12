@@ -318,6 +318,9 @@ Route::middleware(['auth', 'allowedRolesToAccessBackend'])->group(function () {
 
     Route::get('/user/message', [InboxController::class, 'user_message'])->name('user_message');
     Route::post('/reply/message', [InboxController::class, 'reply_message'])->name('reply_message');
+    Route::get('/inbox', [InboxController::class, 'index'])->name('inbox');
+    Route::get('/inbox/datatable', [InboxController::class, 'datatable'])->name('inbox_datatable');
+
     Route::get('/dashboard/inbox', [InboxController::class, 'index'])->name('partner_inbox');
     Route::get('/dashboard/inbox/datatable', [InboxController::class, 'datatable'])->name('partner_inbox_datatable');
     Route::get('/dashboard/inbox/show/{id}', [InboxController::class, 'show'])->name('partner_inbox_show');

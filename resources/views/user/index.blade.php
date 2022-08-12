@@ -223,7 +223,7 @@
     <div id="overlay"></div>
     {{-- NEW SEARCH MOBILE
     new search ui untuk mobile --}}
-    <!-- <div class="search-container-mobile">
+    <div class="search-container-mobile">
         {{-- NEW SEARCH MOBILE
         tombol dipaling atas untuk close atau kembali --}}
         <button class="btn-top-search me-2">
@@ -616,7 +616,7 @@
                 </div>
             </div>
         </form>
-    </div> -->
+    </div>
     {{-- navbar --}}
     <section class="h-100 w-100" style="box-sizing: border-box; background-color: #000000;">
         <div class="header-4-4 container-xxl mx-auto p-0 position-relative"

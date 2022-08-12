@@ -1187,8 +1187,7 @@
                                             class="form-control input-transparant" name="sCuisine" value=""
                                             id="search_sugest2" placeholder="{{ __('user_page.Search here') }}">
 
-                                        <div id="sugest3" class="location-popup display-none"
-                                            style="width: 560px; left: -262px; height: 390px;">
+                                        <div id="sugest3" class="location-popup display-none">
                                             <div class="location-popup-container h-100">
                                                 <div class="row location-popup-desc-container sugest-list-first"
                                                     style="display: none;">
