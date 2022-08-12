@@ -2061,11 +2061,11 @@ li.button-dropdown {
 }
 
 .font-black {
-    color: black;
+    color: black !important;
 }
 
 .font-light {
-    color: white;
+    color: white !important;
 }
 
 .villa-location-description {

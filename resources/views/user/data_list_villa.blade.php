@@ -233,7 +233,7 @@ if (isset($_COOKIE['tema'])) {
                     <div class="col-12 row">
                         <div class="col-lg-9">
                             <div class="skeleton skeleton-h-2 skeleton-lg-h-3 skeleton-w-100 mt-0">
-                                <p class="villa-list-name " style="position:relative;">
+                                <p class="villa-list-name {{ $textColor }}" style="position:relative;">
                                     {{-- {{ $data->name ?? __('user_page.There is no name yet') }} --}}
                                     {{ $data->name ?? __('user_page.There is no name yet') }}
                                     <!-- ({{ $data->grade }}) -->
