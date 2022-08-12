@@ -367,19 +367,40 @@ if (isset($_COOKIE['tema'])) {
                                             </span>
 
                                             <div class="price-breakdown-mobile" id="modal-price-{{$data->id_villa}}">
-                                                <header class="price-breakdown-header p-3 d-flex justify-content-between border-bottom">
-                                                    <div class="font-black">
+                                                <header class="price-breakdown-header py-3 px-4 d-flex justify-content-between border-bottom">
+                                                    <div class="font-black" style="font-size: 1.5em;">
                                                         Price Breakdown
                                                     </div>
                                                     <div onclick="closepricebreakdown()">
-                                                        <i class="fa-solid fa-xmark"></i>
+                                                        <i class="fa-solid fa-xmark" style="font-size: 22px; color: grey;"></i>
                                                     </div>
                                                 </header>
-                                                <div class="col-12">
-                                                    <span>{{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights</span>
-                                                    <span>{{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}</span></br>
-                                                    <span>Discount</span><span>{{ $disc }}</span></br>
-                                                    <span>Service Fee</span><span>{{ $service }}</span></br>
+                                                <div class="col-12 p-4" style="font-size: 15px; font-weight: 400;">
+                                                    <div class="col-12 d-flex justify-content-between mb-2">
+                                                        <div>
+                                                            {{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights
+                                                        </div>
+                                                        <div>
+                                                            {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-between mb-2">
+                                                        <div>
+                                                            Discount
+                                                        </div>
+                                                        <div>
+                                                            {{ $disc }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-between">
+                                                        <div>
+                                                            Service Fee
+                                                        </div>
+                                                        <div>
+                                                            {{ $service }}
+                                                        </div>
+                                                    
+                                                    </div>
                                                 </div>
                                             </div>
 
