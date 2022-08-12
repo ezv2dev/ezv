@@ -328,16 +328,30 @@ if (isset($_COOKIE['tema'])) {
                                     @if ($data->price)
                                         @if (empty($dateDiff))
                                             <span class="villa-list-price">
-                                                {{ CurrencyConversion::exchangeWithUnit($data->price) }} /
-                                                {{ __('user_page.night') }}
-
+                                                {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                         @else
                                             <span class="villa-list-price">
-                                                {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
-                                                / {{ $dateDiff }}
-                                                {{ __('user_page.night') }}
+                                                {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
+                                            <span> • </span>
+                                            <span class="villa-list-price">
+                                                <a tabindex="0" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="top" data-bs-trigger="focus"
+                                                title="Price Breakdown <a type='button' class='btn-close-modal' data-bs-dismiss='modal' aria-label='Close'><i
+                                                    class='fa-solid fa-xmark'></i></a>" data-bs-html="true" data-bs-content="
+                                                    <div class='col-12'>
+                                                        <div class='col-6'>
+                                                        {{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights
+                                                        </div>
+                                                        <div class='col-6'>
+                                                        {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-12'>
+                                                Discount
+                                                    </div>">{{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }} Total</a>
+                                            </span>
+
                                         @endif
                                     @else
                                         {{ __('user_page.Price is unknown') }}
@@ -375,8 +389,8 @@ if (isset($_COOKIE['tema'])) {
                                 </div> -->
                             </div>
                         </div>
-                        <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
-                            style="position:absolute;top:0;left:0;right:0;bottom:0;"></a>
+                        {{-- <a href="{{ route('villa', $data->id_villa) }}" target="_blank"
+                            style="position:absolute;top:0;left:0;right:0;bottom:0;"></a> --}}
                     </div>
                 </div>
 
