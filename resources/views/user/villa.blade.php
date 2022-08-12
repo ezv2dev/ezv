@@ -141,7 +141,10 @@
                             style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                             value="{{ __('user_page.Check Availability') }}" readonly>
                     @else
-                        @if ($villa[0]->instant_book == 'yes')
+                        <input class="price-button" onclick="details_reserve()"
+                                style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                value="{{ __('user_page.VIEW DETAILS') }}" readonly>
+                        {{-- @if ($villa[0]->instant_book == 'yes')
                             <input class="price-button" onclick="details_reserve()"
                                 style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                 value="{{ __('user_page.VIEW DETAILS') }}" readonly>
@@ -157,7 +160,7 @@
                                     style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                     value="{{ __('user_page.QUICK ENQUIRY') }}" readonly>
                             @endauth
-                        @endif
+                        @endif --}}
                     @endIf
                 </div>
 

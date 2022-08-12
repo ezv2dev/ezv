@@ -14,11 +14,11 @@ Dashmix.helpersOnLoad(["jq-magnific-popup"]);
 // Date Picker
 let user_info;
 
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/user-check/login",
-        success: function(response) {
+        success: function (response) {
             user_info = response;
         },
     });
@@ -47,7 +47,7 @@ function getCookie2(name) {
     return null;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     let checkIn = getCookie2("sCheck_in");
     let checkOut = getCookie2("sCheck_out");
     let adult = getCookie2("sAdult");
@@ -58,7 +58,8 @@ $(document).ready(function() {
     if (checkIn < today) {
         setCookie2("sCheck_in", null);
         setCookie2("sCheck_out", null);
-    } else if (checkIn == null && checkOut == null) {} else {
+    } else if (checkIn == null && checkOut == null) {
+    } else {
         $.ajax({
             type: "GET",
             url: "/villa/calendar/check",
@@ -68,7 +69,7 @@ $(document).ready(function() {
                 id: id_villa,
                 _token: "{{ csrf_token() }}",
             },
-            success: function(response) {
+            success: function (response) {
                 // console.log(response.status);
                 console.log(response.data.length);
                 if (response.data.length > 0) {
@@ -129,7 +130,7 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
             end: checkOut,
             _token: "{{ csrf_token() }}",
         },
-        success: function(data) {
+        success: function (data) {
             var total = data;
 
             // console.log(total);
@@ -213,27 +214,31 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
 
             let buttonBottomMob = "";
 
-            if (instant_book == "yes") {
-                if (user_info == true) {
-                    buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+            buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
                     style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                     value="VIEW DETAILS" readonly>`;
-                } else {
-                    buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
-                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                    value="VIEW DETAILS" readonly>`;
-                }
-            } else {
-                if (user_info == true) {
-                    buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
-                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                    value="QUICK ENQUIRY" readonly>`;
-                } else {
-                    buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
-                    style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                    value="QUICK ENQUIRY" readonly>`;
-                }
-            }
+
+            // if (instant_book == "yes") {
+            //     if (user_info == true) {
+            //         buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+            //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+            //         value="VIEW DETAILS" readonly>`;
+            //     } else {
+            //         buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+            //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+            //         value="VIEW DETAILS" readonly>`;
+            //     }
+            // } else {
+            //     if (user_info == true) {
+            //         buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+            //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+            //         value="QUICK ENQUIRY" readonly>`;
+            //     } else {
+            //         buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+            //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+            //         value="QUICK ENQUIRY" readonly>`;
+            //     }
+            // }
 
             $(".button-view-detail").html("");
             $(".button-view-detail").html(buttonBottomMob);
@@ -245,7 +250,7 @@ function runningCookiesDate(checkIn, checkOut, adult, child) {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     if ($(window).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
@@ -255,7 +260,7 @@ $(document).ready(function() {
     }
 });
 
-$(window).on("resize", function() {
+$(window).on("resize", function () {
     if ($(this).width() <= 991) {
         calendar_availability(1);
         calendar_reserve2(1);
@@ -270,7 +275,7 @@ function calendar_availability(months) {
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function(data) {
+        success: function (data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -291,7 +296,7 @@ function calendar_availability(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function(selectedDates, dateStr, instance) {
+                onClose: function (selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -313,7 +318,7 @@ function calendar_availability(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function(data) {
+                        success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -389,7 +394,8 @@ function calendar_availability(months) {
                                 $("#tax3").text(total["tax"]);
                                 $("#total_all3").text(total["total_all"]);
 
-                                if (!total["total_all"] ||
+                                if (
+                                    !total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -463,34 +469,37 @@ function calendar_availability(months) {
 
                                 $("#priceBottomFilled").html(
                                     total["total_all"] +
-                                    "/" +
-                                    sum_night +
-                                    " night"
+                                        "/" +
+                                        sum_night +
+                                        " night"
                                 );
 
                                 let buttonBottomMob = "";
 
-                                if (instant_book == "yes") {
-                                    if (user_info == true) {
-                                        buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                                buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         value="VIEW DETAILS" readonly>`;
-                                    } else {
-                                        buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="VIEW DETAILS" readonly>`;
-                                    }
-                                } else {
-                                    if (user_info == true) {
-                                        buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="QUICK ENQUIRY" readonly>`;
-                                    } else {
-                                        buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
-                                        style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
-                                        value="QUICK ENQUIRY" readonly>`;
-                                    }
-                                }
+                                // if (instant_book == "yes") {
+                                //     if (user_info == true) {
+                                //         buttonBottomMob = `<input class="price-button" onclick="details_reserve()"
+                                //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                //         value="VIEW DETAILS" readonly>`;
+                                //     } else {
+                                //         buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                                //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                //         value="VIEW DETAILS" readonly>`;
+                                //     }
+                                // } else {
+                                //     if (user_info == true) {
+                                //         buttonBottomMob = `<input class="price-button" onclick="details_quick_enquiry()"
+                                //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                //         value="QUICK ENQUIRY" readonly>`;
+                                //     } else {
+                                //         buttonBottomMob = `<input class="price-button" onclick="loginRegisterForm(2, 'login')"
+                                //         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
+                                //         value="QUICK ENQUIRY" readonly>`;
+                                //     }
+                                // }
 
                                 $(".button-view-detail").html("");
                                 $(".button-view-detail").html(buttonBottomMob);
@@ -507,7 +516,7 @@ function calendar_availability(months) {
     });
 }
 
-$("#clear1").click(function() {
+$("#clear1").click(function () {
     document.getElementById("dateSelected").classList.add("d-none");
     $("#priceBottom").removeClass("d-none");
     $("#priceBottomFilled").addClass("d-none");
@@ -547,7 +556,7 @@ $("#clear1").click(function() {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date").click(function() {
+$("#clear_date").click(function () {
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -575,7 +584,7 @@ $("#clear_date").click(function() {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date2").click(function() {
+$("#clear_date2").click(function () {
     document.getElementById("dateSelected").classList.add("d-none");
     $("#priceBottom").removeClass("d-none");
     $("#priceBottomFilled").addClass("d-none");
@@ -619,7 +628,7 @@ $("#clear_date2").click(function() {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date3").click(function() {
+$("#clear_date3").click(function () {
     $("#check_in").val("");
     $("#check_in3").val("");
     $("#check_out").val("");
@@ -650,7 +659,7 @@ $("#clear_date3").click(function() {
     $("#total_all2_div").css({ display: "none" });
 });
 
-$("#clear_date_header").click(function() {
+$("#clear_date_header").click(function () {
     $("#check_in4").val("");
     $("#check_out4").val("");
     calendar_header(2);
@@ -661,7 +670,7 @@ function calendar_reserve(months) {
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function(data) {
+        success: function (data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -683,7 +692,7 @@ function calendar_reserve(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function(selectedDates, dateStr, instance) {
+                onClose: function (selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -705,7 +714,7 @@ function calendar_reserve(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function(data) {
+                        success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -764,7 +773,8 @@ function calendar_reserve(months) {
                                 $("#sum_night2").val($("#sum_night3").val());
                                 $("#total").text(total["total"]);
 
-                                if (!total["total_all"] ||
+                                if (
+                                    !total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -805,7 +815,8 @@ function calendar_reserve(months) {
                                 $("#tax3").text(total["tax"]);
                                 $("#total_all3").text(total["total_all"]);
 
-                                if (!total["total_all"] ||
+                                if (
+                                    !total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -862,14 +873,14 @@ function calendar_reserve(months) {
 
 function calendar_reserve2(months) {
     months = $(window).width() <= 991 ? 1 : 2;
-    months == 1 ?
-        $("#popup_check2").addClass("width-full-absolute") :
-        $("#popup_check2").removeClass("width-full-absolute");
+    months == 1
+        ? $("#popup_check2").addClass("width-full-absolute")
+        : $("#popup_check2").removeClass("width-full-absolute");
     $.ajax({
         //create an ajax request to display.php
         type: "GET",
         url: "/villa/date_disabled/" + $("#id_villa").val(),
-        success: function(data) {
+        success: function (data) {
             if (!$("#check_in3").val()) {
                 var check_in_val = $("#check_in").val();
             } else {
@@ -890,7 +901,7 @@ function calendar_reserve2(months) {
                 showMonths: months,
                 defaultDate: [check_in_val, check_out_val],
                 disable: data,
-                onClose: function(selectedDates, dateStr, instance) {
+                onClose: function (selectedDates, dateStr, instance) {
                     var start = new Date(
                         instance.formatDate(selectedDates[0], "Y-m-d")
                     );
@@ -911,7 +922,7 @@ function calendar_reserve2(months) {
                             end: end.toISOString().split("T")[0],
                             _token: "{{ csrf_token() }}",
                         },
-                        success: function(data) {
+                        success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
                                 alert("minimum stay is " + min_stay + " days");
@@ -962,7 +973,8 @@ function calendar_reserve2(months) {
 
                                 // $("#price_total").val(total["price"]);
                                 // $("#price_total2").val(total["price"]);
-                                if (!total["total_all"] ||
+                                if (
+                                    !total["total_all"] ||
                                     total["total_all"] == 0
                                 ) {
                                     $("#total_all2_div").css({
@@ -1055,7 +1067,7 @@ function calendar_header(months) {
         showMonths: months,
         // disable: data,
         defaultDate: [check_in_val, check_out_val],
-        onChange: function(selectedDates, dateStr, instance) {
+        onChange: function (selectedDates, dateStr, instance) {
             $("#check_in4").val(instance.formatDate(selectedDates[0], "Y-m-d"));
             $("#check_out4").val(
                 instance.formatDate(selectedDates[1], "Y-m-d")
@@ -1099,7 +1111,7 @@ function view_story(id) {
         type: "GET",
         url: "/story/" + id,
         dataType: "JSON",
-        success: function(data) {
+        success: function (data) {
             $('[name="id_story"]').val(data.id_story);
             let villa = document.getElementById("villa").value;
             // let video = document.getElementById('video');
@@ -1116,18 +1128,18 @@ function view_story(id) {
     });
 }
 
-$(function() {
+$(function () {
     $("#storymodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function() {
+        .on("hidden.bs.modal", function () {
             $(this).find("video")[0].pause();
         });
 });
 
 // Sticky Menu
-window.onscroll = function() {
+window.onscroll = function () {
     myFunction();
     if ((document.getElementById("popup_check").style.display = "block")) {
         document.getElementById("popup_check").style.display = "none";
@@ -1329,7 +1341,7 @@ function view(id) {
         type: "GET",
         url: "/villa/video/open/" + id,
         dataType: "JSON",
-        success: function(data) {
+        success: function (data) {
             var video = document.getElementById("video1");
             var public = "/foto/gallery/";
             var slash = "/";
@@ -1343,12 +1355,12 @@ function view(id) {
         },
     });
 }
-$(function() {
+$(function () {
     $("#videomodal")
         .modal({
             show: false,
         })
-        .on("hidden.bs.modal", function() {
+        .on("hidden.bs.modal", function () {
             $(this).find("video")[0].pause();
         });
 });
@@ -1358,18 +1370,18 @@ function showingLoading() {
     $("#loading-content").show();
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     $(".modal")
-        .on("shown.bs.modal", function() {
+        .on("shown.bs.modal", function () {
             $("html").css("overflow", "hidden");
         })
-        .on("hidden.bs.modal", function() {
+        .on("hidden.bs.modal", function () {
             $("html").css("overflow", "auto");
         });
 });
 
 //validasi agar tidak menginputkan selain angka ke input phone
-$("#VillaQuickEnquiry #phone").on("keypress", function(evt) {
+$("#VillaQuickEnquiry #phone").on("keypress", function (evt) {
     if (
         (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
         evt.which > 57
