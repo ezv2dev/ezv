@@ -574,7 +574,7 @@ class RestaurantListController extends Controller
             'description' => ['required', 'string'],
             'name' => 'required',
             'price' => ['required', 'numeric'],
-            'image' => ['required', 'mimes:jpeg,png,jpg,webp', 'dimensions:min_width=960']
+            'image' => ['required', 'mimes:jpeg,png,jpg,webp']
         ]);
 
         if ($validator->fails()) {

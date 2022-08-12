@@ -17,21 +17,21 @@ document.getElementById("activity-button").onclick = function () {
     document.getElementById("activity-form").submit();
 };
 
-
-function showpricebreakdown() {
+function showpricebreakdown(e) {
+    let id_villa = e.getAttribute("data-villa");
     $("body").css({
-        "height": "auto",
-        "overflow": "auto"
-    })
+        height: "auto",
+        overflow: "auto",
+    });
     $(".price-breakdown-overlay").removeClass("d-none");
-    $(".price-breakdown-mobile").addClass("price-breakdown-mobile-expand");
+    $("#modal-price-" + id_villa).addClass("price-breakdown-mobile-expand");
 }
 
 function closepricebreakdown() {
     $("body").css({
-        "height": "auto",
-        "overflow": "auto"
-    })
+        height: "auto",
+        overflow: "auto",
+    });
     $(".price-breakdown-overlay").addClass("d-none");
     $(".price-breakdown-mobile").removeClass("price-breakdown-mobile-expand");
 }
@@ -62,5 +62,3 @@ $("#check_in").flatpickr({
 });
 
 Dashmix.helpersOnLoad(["jq-magnific-popup"]);
-
-
