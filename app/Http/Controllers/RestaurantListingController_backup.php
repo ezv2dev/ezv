@@ -34,7 +34,7 @@ class RestaurantListingController extends Controller
         $folder = strtolower($request->name);
         // $path = '/home/ezvillas/public_html/ezv2/foto/restaurant/' . $folder; //online path
         // $path = public_path() . '/foto/restaurant/' . $folder;
-        $path = env("RESTAURANT_FILE_PATH"). $folder;
+        $path = env("RESTAURANT_FILE_PATH") . $folder;
         if (!File::isDirectory($path)) {
 
             File::makeDirectory($path, 0777, true, true);
@@ -96,7 +96,7 @@ class RestaurantListingController extends Controller
                 abort(403);
             }
             $folder = strtolower($find->name);
-            $path = env("RESTAURANT_FILE_PATH"). $folder;
+            $path = env("RESTAURANT_FILE_PATH") . $folder;
             File::deleteDirectory($path);
             // File::deleteDirectory(public_path('foto/restaurant/' . $find->name));
             // $find->delete();
@@ -113,7 +113,7 @@ class RestaurantListingController extends Controller
         if ($status == 200) {
             // return redirect()->route('admin_restaurant')->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

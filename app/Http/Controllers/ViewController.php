@@ -1065,7 +1065,7 @@ class ViewController extends Controller
         // check if update is success or not
         if ($updatedVilla) {
             return response()->json([
-                'message' => 'Successfuly Updated Home Location',
+                'message' => 'Successfully Updated Home Location',
                 'data' => $homeData
             ], 200);
         } else {
@@ -1131,7 +1131,7 @@ class ViewController extends Controller
 
         if ($updatedVilla) {
             return response()->json([
-                'message' => 'Successfuly Updated Villa Profile',
+                'message' => 'Successfully Updated Villa Profile',
                 'status' => 200,
                 'data' => $villaData
             ]);
@@ -1175,7 +1175,7 @@ class ViewController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1724,7 +1724,7 @@ class ViewController extends Controller
         // return back();
         if ($quick->save()) {
             return response()->json([
-                'message' => 'Data sent Successfuly',
+                'message' => 'Data sent Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1763,7 +1763,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if ($deletedVillaVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1802,7 +1802,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if ($deletedVillaPhoto) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1940,7 +1940,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if ($deletedVillaStory) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -2124,7 +2124,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 2]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 2]);
         }
 
         if ($find->status == 1) {
@@ -2133,7 +2133,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly request for deactivation', 'data' => 3]);
+            return response()->json(['message' => 'Successfully request for deactivation', 'data' => 3]);
         }
     }
 
@@ -2148,7 +2148,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly cancel request activiation', 'data' => 0]);
+            return response()->json(['message' => 'Successfully cancel request activiation', 'data' => 0]);
         }
 
         if ($find->status == 3) {
@@ -2157,7 +2157,7 @@ class ViewController extends Controller
                 'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
                 'updated_by' => Auth::user()->id,
             ));
-            return response()->json(['message' => 'Successfuly cancel request deactiviation', 'data' => 1]);
+            return response()->json(['message' => 'Successfully cancel request deactiviation', 'data' => 1]);
         }
     }
 
@@ -3189,7 +3189,7 @@ class ViewController extends Controller
         if ($status == 200) {
             return response()->json([
                 'success' => true,
-                'message' => 'Successfuly Update Extra Price',
+                'message' => 'Successfully Update Extra Price',
             ], 200);
         } else {
             return response()->json([
@@ -3256,7 +3256,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if (isset($delete) == true) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
             ], 200);
         } else {
             return response()->json([
@@ -3372,7 +3372,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if (isset($delete) == true) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
             ], 200);
         } else {
             return response()->json([

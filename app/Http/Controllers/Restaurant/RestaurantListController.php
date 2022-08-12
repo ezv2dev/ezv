@@ -477,7 +477,7 @@ class RestaurantListController extends Controller
         // check if update is success or not
         if ($updatedRestaurant) {
             return response()->json([
-                'message' => 'Successfuly Updated Food Location',
+                'message' => 'Successfully Updated Food Location',
                 'data' => $foodData
             ], 200);
         } else {
@@ -763,7 +763,7 @@ class RestaurantListController extends Controller
         // check if delete is success or not
         if ($deletedRestaurantMenu) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -890,7 +890,7 @@ class RestaurantListController extends Controller
         // check if delete is success or not
         if ($deletedRestaurantImage) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1059,7 +1059,7 @@ class RestaurantListController extends Controller
         // check if delete is success or not
         if ($deletedRestaurantVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1098,7 +1098,7 @@ class RestaurantListController extends Controller
         // check if delete is success or not
         if ($deletedRestaurantPhoto) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1311,7 +1311,7 @@ class RestaurantListController extends Controller
         // check if delete is success or not
         if ($deletedRestaurantStory) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

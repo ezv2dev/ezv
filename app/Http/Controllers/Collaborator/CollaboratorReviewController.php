@@ -14,8 +14,7 @@ class CollaboratorReviewController extends Controller
     public function store(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -25,7 +24,7 @@ class CollaboratorReviewController extends Controller
         $validator = Validator::make($request->all(), [
             'id_collab' => ['required', 'integer'],
             'experience' => ['required', 'numeric'],
-            'comment' => ['nullable','string']
+            'comment' => ['nullable', 'string']
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -86,7 +85,7 @@ class CollaboratorReviewController extends Controller
 
         if ($createdReview) {
             return response()->json([
-                'message' => 'Successfuly Create Review',
+                'message' => 'Successfully Create Review',
                 'data' => (object)[
                     'reviews' => $reviews,
                     'detailReview' => $detailReview,
@@ -102,8 +101,7 @@ class CollaboratorReviewController extends Controller
     public function destroy(Request $request)
     {
         // check if editor not authenticated
-        if(!auth()->check())
-        {
+        if (!auth()->check()) {
             return response()->json([
                 'message' => 'Error, Please Login !'
             ], 401);
@@ -172,7 +170,7 @@ class CollaboratorReviewController extends Controller
 
         if ($deletedReview) {
             return response()->json([
-                'message' => 'Successfuly Delete Review',
+                'message' => 'Successfully Delete Review',
                 'data' => (object)[
                     'reviews' => $reviews,
                     'detailReview' => $detailReview,

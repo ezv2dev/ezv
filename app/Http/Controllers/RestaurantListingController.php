@@ -18,7 +18,7 @@ class RestaurantListingController extends Controller
 
         //insert into database
         $data = Restaurant::insertGetId(array(
-            'uid' => rand(10000, 99999).time(),
+            'uid' => rand(10000, 99999) . time(),
             'name' => "Food Name Here",
             'id_type' => 1,
             'id_price' => 1,
@@ -61,7 +61,7 @@ class RestaurantListingController extends Controller
                 abort(403);
             }
             $folder = strtolower($find->name);
-            $path = env("RESTAURANT_FILE_PATH"). $folder;
+            $path = env("RESTAURANT_FILE_PATH") . $folder;
             File::deleteDirectory($path);
             // File::deleteDirectory(public_path('foto/restaurant/' . $find->name));
             // $find->delete();
@@ -78,7 +78,7 @@ class RestaurantListingController extends Controller
         if ($status == 200) {
             // return redirect()->route('admin_restaurant')->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

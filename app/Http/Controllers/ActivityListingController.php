@@ -41,26 +41,26 @@ class ActivityListingController extends Controller
         //     // isi dengan nama folder tempat kemana file diupload
         //     $request->image->move($path, $name_file);
 
-            //insert into database
-            $data = Activity::insertGetId(array(
-                'uid' => rand(10000, 99999).time(),
-                'name' => 'Wow Name Here',
-                'id_location' => 1,
-                'short_description' => "Make your short description here",
-                'status' => 0,
-                'latitude' => -8.4553718,
-                'longitude' => 114.7913786,
-                'open_time' => '00:00',
-                'closed_time' => '00:00',
-                // 'phone' => $request->phone,
-                // 'email' => $request->email,
-                // 'image' => $name_file,
-                'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
-                'created_by' => Auth::user()->id,
-                'updated_by' => Auth::user()->id,
-            ));
-            return redirect()->route('activity', $data)->with('success', 'Your data has been submited');
+        //insert into database
+        $data = Activity::insertGetId(array(
+            'uid' => rand(10000, 99999) . time(),
+            'name' => 'Wow Name Here',
+            'id_location' => 1,
+            'short_description' => "Make your short description here",
+            'status' => 0,
+            'latitude' => -8.4553718,
+            'longitude' => 114.7913786,
+            'open_time' => '00:00',
+            'closed_time' => '00:00',
+            // 'phone' => $request->phone,
+            // 'email' => $request->email,
+            // 'image' => $name_file,
+            'created_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            'updated_at' => gmdate("Y-m-d H:i:s", time() + 60 * 60 * 8),
+            'created_by' => Auth::user()->id,
+            'updated_by' => Auth::user()->id,
+        ));
+        return redirect()->route('activity', $data)->with('success', 'Your data has been submited');
         // return back()->with('error', 'Please check the form below for errors');
     }
 
@@ -77,7 +77,7 @@ class ActivityListingController extends Controller
             $deletedVilla = $find->forceDelete();
             // $find = Activity::where('id_activity', $id)->first();
             $folder = strtolower($find->name);
-            $path = env("ACTIVITY_FILE_PATH"). $folder;
+            $path = env("ACTIVITY_FILE_PATH") . $folder;
             File::deleteDirectory($path);
             // File::deleteDirectory(public_path('foto/activity/' . $find->name));
             // $find->delete();
@@ -94,7 +94,7 @@ class ActivityListingController extends Controller
         if ($status == 200) {
             // return redirect()->route('admin_activity')->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

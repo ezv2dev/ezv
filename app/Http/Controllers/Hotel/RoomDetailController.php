@@ -448,7 +448,7 @@ class RoomDetailController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -658,7 +658,7 @@ class RoomDetailController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -697,7 +697,7 @@ class RoomDetailController extends Controller
         // check if delete is success or not
         if ($deletedHotelVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -826,7 +826,7 @@ class RoomDetailController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

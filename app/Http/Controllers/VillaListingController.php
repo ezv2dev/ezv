@@ -71,7 +71,7 @@ class VillaListingController extends Controller
             // return redirect()->route('admin_villa')
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -93,7 +93,7 @@ class VillaListingController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 1, 'grade' => $request->grade]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 1, 'grade' => $request->grade]);
         } else {
             $find->update(array(
                 'status' =>  0,
@@ -101,7 +101,7 @@ class VillaListingController extends Controller
                 'updated_by' => Auth::user()->id,
             ));
 
-            return response()->json(['message' => 'Successfuly request for activiation', 'data' => 0]);
+            return response()->json(['message' => 'Successfully request for activiation', 'data' => 0]);
         }
     }
 

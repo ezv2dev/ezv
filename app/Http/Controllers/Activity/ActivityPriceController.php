@@ -194,7 +194,7 @@ class ActivityPriceController extends Controller
 
         if ($deletedWowPrice) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -512,7 +512,7 @@ class ActivityPriceController extends Controller
         // check if delete is success or not
         if ($deletedActivityPhoto) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -552,7 +552,7 @@ class ActivityPriceController extends Controller
         // check if delete is success or not
         if ($deletedActivityVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -595,7 +595,7 @@ class ActivityPriceController extends Controller
         // check if delete is success or not
         if ($deletedActivityImage) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -768,7 +768,7 @@ class ActivityPriceController extends Controller
         // check if delete is success or not
         if ($deletedActivityStory) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
