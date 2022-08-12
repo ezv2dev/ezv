@@ -838,13 +838,13 @@
                                                 <p>{{ __('user_page.Check in') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
-                                                    id="check_in_desktop" name="sCheck_in">
+                                                    id="check_in2" name="sCheck_in">
                                             </div>
                                             <div class="check-out" onclick="calendar_search_desktop()">
                                                 <p>{{ __('user_page.Check out') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
-                                                    id="check_out_desktop" name="sCheck_out">
+                                                    id="check_out2" name="sCheck_out">
                                             </div>
                                             <div class="guests">
                                                 <p>{{ __('user_page.Guests') }}</p>
@@ -1151,11 +1151,11 @@
                                 @endif
                             </a>
                             <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                            class="btn btn-fill border-0 navbar-gap"
-                                            style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                            id="login">
-                                            <i class="fa-solid fa-user"></i>
-                                        </a> -->
+                                                                        class="btn btn-fill border-0 navbar-gap"
+                                                                        style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
+                                                                        id="login">
+                                                                        <i class="fa-solid fa-user"></i>
+                                                                    </a> -->
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
@@ -1647,6 +1647,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select date di mobile
             function moveToDateMobile() {
+                $('#popup_check_search').removeClass('d-none').addClass('d-block');
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").addClass("h-100");
@@ -1676,6 +1677,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select guest di mobile
             function moveToGuestsMobile() {
+                $('#popup_check_search').addClass("d-none");
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").removeClass("h-100");
@@ -1855,7 +1857,11 @@
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk berpindah ke select date di mobile
-                    moveToDateMobile();
+                    if ($("#check_in2").val() == "") {
+                        moveToDateMobile();
+                    } else {
+                        moveToGuestsMobile();
+                    }
 
                     //calendar show when user filled location
                     var content_flatpickr = document.getElementById('popup_check_search');
@@ -1876,7 +1882,6 @@
                         });
                     }
                 });
-
 
                 $("#loc_sugest_desktop").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
@@ -1985,6 +1990,7 @@
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
+                calendar_search(2);
             });
         </script>
 
@@ -2012,7 +2018,7 @@
             }
         </script>
 
-        <script>
+        {{-- <script>
             $("#dates").flatpickr({
                 enableTime: false,
                 dateFormat: "Y-m-d",
@@ -2029,7 +2035,7 @@
                     $('#check_out2').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"))
                 }
             });
-        </script>
+        </script> --}}
 
         <script>
             function addClass(elements, className) {
@@ -2169,7 +2175,6 @@
                     removeClass(els, 'display-none');
                 } else {
                     if (!isFocused && window.innerWidth < 992 && window.scrollY > 400) {
-                        console.log("oke");
                         $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
                         $('#bar').addClass('display-none');
                         $('#searchbox').removeClass('display-none').addClass('display-block');
@@ -2202,7 +2207,6 @@
                         var els = document.getElementsByClassName("flatpickr-calendar");
                         addClass(els, 'display-none');
                     } else if (!isFocused || window.innerWidth > 991) {
-                        console.log("oke");
                         $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
                         $('#bar').addClass('display-none');
                         $('#searchbox').removeClass('display-none').addClass('display-block');
