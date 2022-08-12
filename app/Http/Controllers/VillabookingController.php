@@ -230,9 +230,9 @@ class VillabookingController extends Controller
                 'total_price' => ($request->villa_price * $stay->d),
             ];
 
-            \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
+            // \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
 
-            \Mail::to($villa[0]->email)->send(new \App\Mail\BlockDateToVilla($details));
+            // \Mail::to($villa[0]->email)->send(new \App\Mail\BlockDateToVilla($details));
 
             dd("Email sudah terkirim.");
         }
@@ -266,6 +266,308 @@ class VillabookingController extends Controller
         }
 
         return $dates;
+    }
+
+    public static function get_disc(array $data){
+        $start = $data['start'];
+        $end = $data['end'];
+        // $end_count = date('Y-m-d', strtotime($end .' -1 day'));
+        $regular = Villa::select('price', 'adult', 'children')->where('id_villa', $data['id_villa'])->get();
+        $special = VillaDetailPrice::where('id_villa', $data['id_villa'])->get();
+
+        //get normal price
+        $normal_price = $regular[0]->price;
+
+        //get booking date
+        $period_pick = CarbonPeriod::create($start, $end);
+        foreach ($period_pick as $date) {
+            $date_pick[] = $date->format('Y-m-d');
+        }
+
+        array_pop($date_pick);
+
+        //count
+        if (count($special) != 0)
+        {
+            //get special date
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $special_price = VillaDetailPrice::select('price')->where('start', $item->start)->where('end', $item->end)->get();
+                foreach ($period_price as $date) {
+                    $date_price[] = array($date->format('Y-m-d'), $special_price[0]->price);
+                }
+            }
+
+            //get discount
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $discount = VillaDetailPrice::select('disc')->where('start', $item->start)->where('end', $item->end)->get();
+                if(count($discount) != 0){
+                    foreach ($period_price as $date) {
+                        $date_discount[] = array($date->format('Y-m-d'), $discount[0]->disc);
+                    }
+                }
+            }
+        }
+
+        $total = 0;
+        $discounts = 0;
+        $disc = 0;
+        foreach ($date_pick as $booking) {
+            $price = $regular[0]->price;
+
+            if (count($special) != 0)
+            {
+                foreach ($date_price as $item) {
+                    if ($booking == $item[0]) {
+                        $price = $item[1];
+                    }
+                }
+
+                foreach ($date_discount as $item)
+                {
+                    if ($booking == $item[0]) {
+                        $disc = $item[1] / 100 * $price;
+                    }
+                }
+            }
+
+            $discounts += $disc;
+            $total += $price;
+            $disc = 0;
+            $price = 0;
+        }
+
+        $discount = CurrencyConversion::exchangeWithUnit($discounts);
+        return $discount;
+    }
+
+    public static function get_service(array $data)
+    {
+        $start = $data['start'];
+        $end = $data['end'];
+        // $end_count = date('Y-m-d', strtotime($end .' -1 day'));
+        $regular = Villa::select('price', 'adult', 'children')->where('id_villa', $data['id_villa'])->get();
+        $special = VillaDetailPrice::where('id_villa', $data['id_villa'])->get();
+        $tax_setting = TaxSetting::select('total_tax')->first();
+        $tax = $tax_setting->total_tax;
+        $cleaning = VillaCleaningFee::where('id_villa', $data['id_villa'])->get();
+        $extra_guest = VillaExtraGuest::where('id_villa', $data['id_villa'])->get();
+        $extra_bed = VillaExtraBed::where('id_villa', $data['id_villa'])->get();
+
+        //get normal price
+        $normal_price = $regular[0]->price;
+
+        //cek if there is  cleaning fee
+        if(count($cleaning) != 0)
+        {
+            $cleaning_fee = $cleaning[0]->price;
+        }else{
+            $cleaning_fee = 0;
+        }
+
+        //cek if there is extra bed
+        if(count($extra_bed) != 0)
+        {
+            $extra_bed_price = $extra_bed[0]->price;
+            $extra_bed_max = $extra_bed[0]->max;
+        }else{
+            $extra_bed_price = 0;
+            $extra_bed_max = 0;
+        }
+
+        //cek if there is extra guest
+        if(count($extra_guest) != 0)
+        {
+            $extra_guest_price = $extra_guest[0]->price;
+            $extra_guest_max = $extra_guest[0]->max;
+        }else{
+            $extra_guest_price = 0;
+            $extra_guest_max = 0;
+        }
+
+        //count regular guest + extra guest
+        $max_total_guest = $regular[0]->adult + $extra_guest_max;
+        $max_total_child = $regular[0]->children;
+
+        //get booking date
+        $period_pick = CarbonPeriod::create($start, $end);
+        foreach ($period_pick as $date) {
+            $date_pick[] = $date->format('Y-m-d');
+        }
+
+        array_pop($date_pick);
+
+        //count
+        if (count($special) != 0)
+        {
+            //get special date
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $special_price = VillaDetailPrice::select('price')->where('start', $item->start)->where('end', $item->end)->get();
+                foreach ($period_price as $date) {
+                    $date_price[] = array($date->format('Y-m-d'), $special_price[0]->price);
+                }
+            }
+
+            //get discount
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $discount = VillaDetailPrice::select('disc')->where('start', $item->start)->where('end', $item->end)->get();
+                if(count($discount) != 0){
+                    foreach ($period_price as $date) {
+                        $date_discount[] = array($date->format('Y-m-d'), $discount[0]->disc);
+                    }
+                }
+            }
+        }
+
+        $total = 0;
+        $discounts = 0;
+        $disc = 0;
+        foreach ($date_pick as $booking) {
+            $price = $regular[0]->price;
+
+            if (count($special) != 0)
+            {
+                foreach ($date_price as $item) {
+                    if ($booking == $item[0]) {
+                        $price = $item[1];
+                    }
+                }
+
+                foreach ($date_discount as $item)
+                {
+                    if ($booking == $item[0]) {
+                        $disc = $item[1] / 100 * $price;
+                    }
+                }
+            }
+
+            $discounts += $disc;
+            $total += $price;
+            $disc = 0;
+            $price = 0;
+        }
+
+        $tax = CurrencyConversion::exchangeWithUnit(($total * $tax / 100));
+
+        return $tax;
+    }
+
+    public static function get_total_all(array $data)
+    {
+        $start = $data['start'];
+        $end = $data['end'];
+        // $end_count = date('Y-m-d', strtotime($end .' -1 day'));
+        $regular = Villa::select('price', 'adult', 'children')->where('id_villa', $data['id_villa'])->get();
+        $special = VillaDetailPrice::where('id_villa', $data['id_villa'])->get();
+        $tax_setting = TaxSetting::select('total_tax')->first();
+        $tax = $tax_setting->total_tax;
+        $cleaning = VillaCleaningFee::where('id_villa', $data['id_villa'])->get();
+        $extra_guest = VillaExtraGuest::where('id_villa', $data['id_villa'])->get();
+        $extra_bed = VillaExtraBed::where('id_villa', $data['id_villa'])->get();
+
+        //get normal price
+        $normal_price = $regular[0]->price;
+
+        //cek if there is  cleaning fee
+        if(count($cleaning) != 0)
+        {
+            $cleaning_fee = $cleaning[0]->price;
+        }else{
+            $cleaning_fee = 0;
+        }
+
+        //cek if there is extra bed
+        if(count($extra_bed) != 0)
+        {
+            $extra_bed_price = $extra_bed[0]->price;
+            $extra_bed_max = $extra_bed[0]->max;
+        }else{
+            $extra_bed_price = 0;
+            $extra_bed_max = 0;
+        }
+
+        //cek if there is extra guest
+        if(count($extra_guest) != 0)
+        {
+            $extra_guest_price = $extra_guest[0]->price;
+            $extra_guest_max = $extra_guest[0]->max;
+        }else{
+            $extra_guest_price = 0;
+            $extra_guest_max = 0;
+        }
+
+        //count regular guest + extra guest
+        $max_total_guest = $regular[0]->adult + $extra_guest_max;
+        $max_total_child = $regular[0]->children;
+
+        //get booking date
+        $period_pick = CarbonPeriod::create($start, $end);
+        foreach ($period_pick as $date) {
+            $date_pick[] = $date->format('Y-m-d');
+        }
+
+        array_pop($date_pick);
+
+        //count
+        if (count($special) != 0)
+        {
+            //get special date
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $special_price = VillaDetailPrice::select('price')->where('start', $item->start)->where('end', $item->end)->get();
+                foreach ($period_price as $date) {
+                    $date_price[] = array($date->format('Y-m-d'), $special_price[0]->price);
+                }
+            }
+
+            //get discount
+            foreach ($special as $item) {
+                $period_price = CarbonPeriod::create($item->start, $item->end);
+                $discount = VillaDetailPrice::select('disc')->where('start', $item->start)->where('end', $item->end)->get();
+                if(count($discount) != 0){
+                    foreach ($period_price as $date) {
+                        $date_discount[] = array($date->format('Y-m-d'), $discount[0]->disc);
+                    }
+                }
+            }
+        }
+
+        $total = 0;
+        $discounts = 0;
+        $disc = 0;
+        foreach ($date_pick as $booking) {
+            $price = $regular[0]->price;
+
+            if (count($special) != 0)
+            {
+                foreach ($date_price as $item) {
+                    if ($booking == $item[0]) {
+                        $price = $item[1];
+                    }
+                }
+
+                foreach ($date_discount as $item)
+                {
+                    if ($booking == $item[0]) {
+                        $disc = $item[1] / 100 * $price;
+                    }
+                }
+            }
+
+            $discounts += $disc;
+            $total += $price;
+            $disc = 0;
+            $price = 0;
+        }
+
+        //count total all
+        $total_all = $total + ($total * $tax / 100) - $discounts + $cleaning_fee;
+        $total_alls = CurrencyConversion::exchangeWithUnit($total_all);
+
+        return $total_alls;
     }
 
     public function get_total(Request $request, $id)
@@ -379,7 +681,7 @@ class VillabookingController extends Controller
             'total' => CurrencyConversion::exchangeWithUnit($total),
             'tax' => CurrencyConversion::exchangeWithUnit(($total * $tax / 100)),
             'total_all' => CurrencyConversion::exchangeWithUnit($total_all),
-            'price' => (int)(round($total_all)),
+            'price' => (int)($total_all),
             'discount' => CurrencyConversion::exchangeWithUnit($discounts),
             'cleaning_fee' => CurrencyConversion::exchangeWithUnit($cleaning_fee),
             'max_total_guest' => $max_total_guest,

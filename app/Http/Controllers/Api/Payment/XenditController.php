@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Crypt;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Services\CurrencyConversionService as CurrencyConversion;
 use App\Models\VillaAvailability;
 
 class XenditController extends Controller
@@ -102,7 +101,7 @@ class XenditController extends Controller
             "external_id" => $external_id,
             "bank_code" => $request->bank_option,
             "name" => $name,
-            "expected_amount" => (int)$price,
+            "expected_amount" => $price,
             "is_closed" => true,
             "expiration_date" => Carbon::now()->addDays(1)->toISOString(),
             "is_single_use" => true,
@@ -460,7 +459,7 @@ class XenditController extends Controller
          //count total all
          $total_all = $total + ($total * $tax / 100) - $discounts + $cleaning_fee;
 
-         return $total_all;
+         return (int)($total_all);
     }
     //endfunction
 
@@ -823,25 +822,13 @@ class XenditController extends Controller
         $total_all = $total + ($total * $tax / 100) - $discounts + $cleaning_fee;
 
         //return data
-        // $data = [
-        //     'normal_price' => CurrencyConversion::exchangeWithUnit($normal_price),
-        //     'total' => CurrencyConversion::exchangeWithUnit($total),
-        //     'tax' => CurrencyConversion::exchangeWithUnit(($total * $tax / 100)),
-        //     'total_all' => CurrencyConversion::exchangeWithUnit($total_all),
-        //     'price' => (int)(round($total_all)),
-        //     'discount' => CurrencyConversion::exchangeWithUnit($discounts),
-        //     'cleaning_fee' => CurrencyConversion::exchangeWithUnit($cleaning_fee),
-        //     'max_total_guest' => $max_total_guest,
-        //     'normal_guest' => $regular[0]->adult,
-        //     'max_total_children' => $max_total_child,
-        // ];
         $data = (object)[
-            'normal_price' => (int)$normal_price,
-            'total' => (int)$total,
-            'service' => (int)($total * $tax / 100),
-            'cleaning_fee' => (int)$cleaning_fee,
-            'discount' => (int)$discounts,
-            'total_all' => (int)$total_all,
+            'normal_price' => (int)($normal_price),
+            'total' => (int)($total),
+            'service' => (int)(($total * $tax / 100)),
+            'cleaning_fee' => (int)($cleaning_fee),
+            'discount' => (int)($discounts),
+            'total_all' => (int)($total_all),
         ];
 
         return $data;

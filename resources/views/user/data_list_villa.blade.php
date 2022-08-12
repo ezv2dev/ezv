@@ -32,6 +32,39 @@ if (isset($_COOKIE['tema'])) {
         }
     }
 </style>
+<script>
+    
+
+    $(window).on('load resize', ()=>{
+        var width = $(window).width(); 
+        var height = $(window).height(); 
+
+        if ((width >= 500)) {
+            $(".villa-list-price-trigger").attr("onclick", "modal_price_breakdown()");   
+        }
+        else {   
+            $(".villa-list-price-trigger").attr("onclick", "showpricebreakdown()");
+            $(".price-breakdown-overlay").addClass("d-none");
+            $(".price-breakdown-mobile").removeClass("price-breakdown-mobile-expand");
+        }
+    });
+
+    function modal_price_breakdown() {
+        $('#modal_price_breakdown').modal('show');
+    }
+</script>
+
+<div class="price-breakdown-overlay d-none" onclick="closepricebreakdown()"></div>
+<div class="price-breakdown-mobile">
+    <header class="price-breakdown-header p-3 d-flex justify-content-between border-bottom">
+        <div class="font-black">
+            Price Breakdown
+        </div>
+        <div onclick="closepricebreakdown()">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </header>
+</div>
 @if (count($villas) == 0)
     <div class="container">
         <div class="row justify-content-center">
@@ -331,27 +364,24 @@ if (isset($_COOKIE['tema'])) {
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                         @else
+                                            @php
+                                                $disc = App\Http\Controllers\VillabookingController::get_disc(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                                $service = App\Http\Controllers\VillabookingController::get_service(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                                $get_total = App\Http\Controllers\VillabookingController::get_total_all(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                            @endphp
                                             <span class="villa-list-price">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                             <span> • </span>
-                                            <span class="villa-list-price">
+                                            <span class="villa-list-price villa-list-price-trigger" onclick="modal_price_breakdown()">
                                                 <a tabindex="0" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="top" data-bs-trigger="focus"
-                                                title="Price Breakdown <a type='button' class='btn-close-modal' data-bs-dismiss='modal' aria-label='Close'><i
-                                                    class='fa-solid fa-xmark'></i></a>" data-bs-html="true" data-bs-content="
-                                                    <div class='col-12'>
-                                                        <div class='col-6'>
+                                                data-bs-custom-class="custom-popover" title='Price Breakdown <a type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
+                                                    class="fa-solid fa-xmark"></i></a>' data-bs-html="true" data-bs-content="
                                                         {{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights
-                                                        </div>
-                                                        <div class='col-6'>
-                                                        {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
-                                                        </div>
-                                                    </div>
-                                                    <div class='col-12'>
-                                                Discount
-                                                    </div>">{{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }} Total</a>
+                                                        {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}</br>
+                                                Discount {{ $disc }}</br>
+                                                Service Fee {{ $service }}</br>">{{ $get_total }} Total</a>
                                             </span>
-
                                         @endif
                                     @else
                                         {{ __('user_page.Price is unknown') }}
@@ -398,6 +428,30 @@ if (isset($_COOKIE['tema'])) {
         </div>
         <!-- End Right Section -->
     </div>
+
+    <!-- Start modal price breakdown -->
+    <div class="modal fade" id="modal_price_breakdown" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered"
+        role="document" style="overflow-y: initial !important">
+        <div class="modal-content" style="background: #fff;">
+            <div class="modal-header filter-modal">
+                <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="filter-modal-body modal-body" style=" height: 70vh; overflow-y: auto;">
+ 
+            </div>
+            <!-- Submit -->
+            <div class="modal-filter-footer">
+               
+            </div>
+            <!-- END Submit -->
+        </div>
+    </div>
+    </div>
+    <!-- End modal price breakdown -->
+
     <hr class="list-row row-line-grey mt-29p mb-xxs-2p mb-xs-4p mb-min-sm-16p mb-xlg-16p mb-lg-14p">
 @endforeach
 

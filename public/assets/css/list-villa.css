@@ -3865,3 +3865,43 @@ a.orange-hover {
 .tooltip.show {
     z-index: 888;
 }
+
+
+.price-breakdown-overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(64, 64, 64, 0.5);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.price-breakdown-mobile-expand{
+    bottom: -0% !important;
+    transition: all 0.2s ease;
+}
+
+.price-breakdown-mobile-close{
+    bottom: -30%;
+    transition: all 0.2s ease;
+}
+
+.price-breakdown-mobile{
+    width: 100%;
+    height: 22%;
+    position: fixed;
+    z-index: 1001;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    bottom: -30%;
+    transition: all 0.2s ease;
+    right: 0;
+}
+
+.price-breakdown-header{
+    border-radius: 15px 15px 0px 0px;
+}

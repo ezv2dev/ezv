@@ -6,19 +6,23 @@ use App\Models\Villa;
 use App\Models\VillaContactHost;
 use App\Models\VillaContactHostReply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InboxController extends Controller
 {
     public function index()
     {
-        abort_if(auth()->user()->role_id != 3, 403);
-        $messageReply = VillaContactHostReply::select('id_message')->get();
-        $tempReply = array();
-        foreach ($messageReply as $item) {
-            array_push($tempReply, $item->id_message);
+        if (in_array(Auth::user()->role_id, [1, 2])) {
+            return view('new-admin.partner.inbox_admin');
+        } else {
+            $messageReply = VillaContactHostReply::select('id_message')->get();
+            $tempReply = array();
+            foreach ($messageReply as $item) {
+                array_push($tempReply, $item->id_message);
+            }
+            $messageList = VillaContactHost::with('user')->where('id_owner', auth()->user()->id)->whereNotIn('id_message', $tempReply)->where('approve_at', '!=', null)->orderBy('created_at', 'DESC')->get();
+            return view('new-admin.partner.inbox_partner', compact('messageList'));
         }
-        $messageList = VillaContactHost::with('user')->where('id_owner', auth()->user()->id)->whereNotIn('id_message', $tempReply)->where('approve_at', '!=', null)->orderBy('created_at', 'DESC')->get();
-        return view('new-admin.partner.inbox_partner', compact('messageList'));
     }
 
     public function user_message(Request $request)
@@ -41,7 +45,7 @@ class InboxController extends Controller
 
     public function datatable()
     {
-        return VillaContactHost::PartnerConversations();
+        return VillaContactHost::datatables();
     }
 
     public function show(Request $request)

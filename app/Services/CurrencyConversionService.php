@@ -20,7 +20,7 @@ class CurrencyConversionService {
                 ->get();
         }
 
-        return $number;
+        return (int)$number;
     }
 
     public static function exchangeWithUnit($number)
@@ -37,9 +37,9 @@ class CurrencyConversionService {
         }
 
         if(session()->has('currency')) {
-            return session('currency').' '.number_format($number, 0, ".", ",");
+            return session('currency').' '.number_format((int)$number, 0, ".", ",");
         }
 
-        return 'IDR '.number_format($number, 0, ".", ",");
+        return 'IDR '.number_format((int)$number, 0, ".", ",");
     }
 }
