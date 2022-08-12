@@ -331,27 +331,24 @@ if (isset($_COOKIE['tema'])) {
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                         @else
+                                            @php
+                                                $disc = App\Http\Controllers\VillabookingController::get_disc(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                                $service = App\Http\Controllers\VillabookingController::get_service(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                                $get_total = App\Http\Controllers\VillabookingController::get_total_all(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
+                                            @endphp
                                             <span class="villa-list-price">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                             <span> • </span>
                                             <span class="villa-list-price">
                                                 <a tabindex="0" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="top" data-bs-trigger="focus"
-                                                title="Price Breakdown <a type='button' class='btn-close-modal' data-bs-dismiss='modal' aria-label='Close'><i
-                                                    class='fa-solid fa-xmark'></i></a>" data-bs-html="true" data-bs-content="
-                                                    <div class='col-12'>
-                                                        <div class='col-6'>
+                                                data-bs-custom-class="custom-popover" title='Price Breakdown <a type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
+                                                    class="fa-solid fa-xmark"></i></a>' data-bs-html="true" data-bs-content="
                                                         {{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights
-                                                        </div>
-                                                        <div class='col-6'>
-                                                        {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
-                                                        </div>
-                                                    </div>
-                                                    <div class='col-12'>
-                                                Discount
-                                                    </div>">{{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }} Total</a>
+                                                        {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}</br>
+                                                Discount {{ $disc }}</br>
+                                                Service Fee {{ $service }}</br>">{{ $get_total }} Total</a>
                                             </span>
-
                                         @endif
                                     @else
                                         {{ __('user_page.Price is unknown') }}
