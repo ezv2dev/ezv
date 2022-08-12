@@ -80,7 +80,7 @@
                 <button type="button" class="btn-close-modal col-2 d-flex justify-content-end pe-3"
                     data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="filter-modal-body" style=" height: 450px; overflow-y: auto;">
+            <div class="filter-modal-body">
                 <div class="filter-modal-row" id="sortByMobile">
                     <h5 class="filter-modal-row-title">Sort By</h5>
                     <ul class="p-0">

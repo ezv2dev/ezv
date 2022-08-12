@@ -1275,7 +1275,7 @@ input:checked + .switch-background:active::before {
     .bar-restaurant .guests p,
     .bar-restaurant .guests input,
     .bar-activity .guests p,
-    .bar-collaborator .guests p {
+    .bar-collaborator .guests p{
         position: absolute !important;
         width: 83.33% !important;
         left: 16.66% !important;
@@ -1455,7 +1455,9 @@ input:checked + .switch-background:active::before {
         margin-left: 0px !important;
         right: 10px !important;
     }
-    .bar-collaborator-detail .guests p {
+    .bar-collaborator-detail .guests p,
+    .guests .input-search-food
+    {
         position: absolute !important;
         width: 83.33% !important;
         left: 16.66% !important;

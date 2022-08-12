@@ -88,7 +88,7 @@ $accessibility_features_detail2 = App\Models\VillaAccessibilitiyFeaturesDetail::
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="filter-modal-body" style=" height: 450px; overflow-y: auto;">
+            <div class="filter-modal-body">
                 <form action="{{ route('filters') }}" method="GET" id="basic-form" class="js-validation col-12" enctype="multipart/form-data"
                     style="display: table">
                     <div class="filter-modal-row">

@@ -1368,6 +1368,7 @@ if (isset($_COOKIE['tema'])) {
 
         function moreSubCategory() {
             sidebarhide();
+            $('.modal').modal('hide');
             $('#modalSubCategory').modal('show');
             $('html').css("overflow-y", "hidden")
 
@@ -1380,6 +1381,7 @@ if (isset($_COOKIE['tema'])) {
 
         function modalFiltersHomes() {
             sidebarhide();
+            $('.modal').modal('hide');
             $('#modalFiltersHome').modal('show');
             $('html').css("overflow-y", "hidden")
 
@@ -1391,6 +1393,7 @@ if (isset($_COOKIE['tema'])) {
         }
 
         function modalFiltersHotel() {
+            $('.modal').modal('hide');
             $('#modalFiltersHotel').modal('show');
             $('html').css("overflow-y", "hidden")
 
@@ -1402,6 +1405,7 @@ if (isset($_COOKIE['tema'])) {
         }
 
         function filterCollab() {
+            $('.modal').modal('hide');
             $('#modalFiltersCollab').modal('show');
             $('html').css("overflow-y", "hidden")
 
