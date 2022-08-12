@@ -350,9 +350,6 @@
             </div>
         </div>
     </section>
-
-
-
     <section class="p-3 p-lg-5 d-none" id="form-section">
         <div>
             <div class="customer-support-block p-3 p-lg-5 background-light-grey">
@@ -370,12 +367,10 @@
                             <input class="form-control" placeholder="Website">
                         </div>
                         <div class="col-12 col-lg-6 left-20">
-                            <div class="add-link d-block" id="input-link-listing-button"
-                                onclick="open_input_link_listing()">Add Link</div>
-                            <input style="margin-bottom: 40px;" id="input-link-listing" class="form-control d-none"
-                                placeholder="Input your link here">
-                            <p>Add link of your rental property listing</p>
-                            <p>Please add a link to one of your current listings on another site to help with designing
+                            <!-- <div class="add-link d-block" id="input-link-listing-button"
+                                onclick="open_input_link_listing()">Add Link</div> -->
+                            <input class="form-control" placeholder="Add link">
+                            <p class="top-50">Please add a link to one of your current listings on another site to help with designing
                                 your first EZV listing even faster</p>
                             <div class="row">
                                 <div class="col-8">
@@ -398,62 +393,12 @@
             <h1>EZV Protection for Hosts</h1>
             <h3>We got you covered</h3>
             <div class="sp-200"></div>
-            <button class="letsgo">Learn More</button>
+            <button class="letsgo" onclick="viewModalhost()">Learn
+            More</button>
             <div class="sp-75"></div>
             <h3>Put your mind at ease when listing with EZV</h3>
         </div>
     </section>
-
-    <section class="p-3 p-lg-5">
-        <div class="text-white top-140 listing-text-section">
-            <h1>Put your mind at ease when listing with EZV</h1>
-            <h2>Hosts Benefits</h2>
-            <h4>Customer team available 24/7</h4>
-            <h4>Create prrsonalized hose rules guests must agrre to before check-in</h4>
-            <h4>Report any missconduct of guests when necessary directly to Customer Support</h4>
-            <h4>Request security deposit from guests before check-in to cover any potential damages</h4>
-            <h4>Leability insurance of $1.000.000 for all accommodation and activity bookings</h4>
-        </div>
-    </section>
-
-    <section class="p-3 p-lg-5">
-        <div class="top-140">
-            <h1 class="text-pink mb-5 text-center">We got you covered</h1>
-            <div class="row">
-                <div class="col-12 col-md-3 text-black">
-                    <h4>My house My rules</h4>
-                    <p>Create your own personalized house rules for your proprty. Guests will be required to agree to
-                        your rules upon reservation.</p>
-                </div>
-                <div class="col-12 col-md-3">
-                    <h4>24/7 Customer<br> support team</h4>
-                    <p>Our support will be available to hosts around the clock via hosts support.</p>
-                </div>
-                <div class="col-12 col-md-3">
-                    <h4>Extra piece of mind</h4>
-                    <p>Hosts may require to pay for an additional security deposit to cover any damages to the property
-                        before check-in.</p>
-                </div>
-                <div class="col-12 col-md-3">
-                    <h4>Liability Insurance</h4>
-                    <p>All bookings with EZV are covered with $1.000.000 liability insurenace in the rare event a guest
-                        in injured your protected.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="p-3 p-lg-5">
-        <div class="family-section text-center text-white top-140">
-            <h1>Join the EZV family today</h1>
-            <h3>Try hosting</h3>
-            <div class="sp-200"></div>
-            <p>Put your mind at ease when listing with EZV<br> we got you covered</p>
-            <button class="letsgo" onclick="window.location.href='{{ route('register.partner') }}';">Learn
-                More</button>
-        </div>
-    </section>
-
     <section class="h-100 pt-3 pt-lg-5 w-100">
 
         <div class="row flex-column flex-lg-row bg-black">
@@ -461,7 +406,7 @@
 
                 <div class="bottom text-white p-3 p-lg-5">
                     <h1>Benefits to list with EZV</h1>
-                    <p>List any tyupe of accommodation, restaurants, activities and anything in-between</p>
+                    <p>List any type of accommodation, restaurants, activities and anything in-between</p>
                     <p>State of the art video search engine, show case your property with short video</p>
                     <p>Easy import of existing listing information from other website</p>
                     <p>Connect your existing calendar to avoid double bookings</p>
@@ -474,7 +419,7 @@
             </div>
             <div class="col-12 col-lg-6 d-none d-sm-block">
                 <div class="bottom-image">
-                    <div style="width: 100%; height: 92vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <div class="bottom-content">
                         <h1 style="color: white;">
                             Hosting made Easy with EZV
                         </h1>
@@ -490,6 +435,8 @@
 
         </div>
     </section>
+    {{-- Modal --}}
+    @include('user.modal.hostpage-modal')
     {{-- footer --}}
     <section class="h1-00 w-100">
         @include('layouts.user.footer')
@@ -508,11 +455,17 @@
             document.getElementById("form-section").classList.add('d-block');
         }
 
-        function open_input_link_listing() {
-            document.getElementById("input-link-listing").classList.remove('d-none');
-            document.getElementById("input-link-listing").classList.add('d-block');
-            document.getElementById("input-link-listing-button").classList.remove('d-block');
-            document.getElementById("input-link-listing-button").classList.add('d-none');
+        // function open_input_link_listing() {
+        //     document.getElementById("input-link-listing").classList.remove('d-none');
+        //     document.getElementById("input-link-listing").classList.add('d-block');
+        //     document.getElementById("input-link-listing-button").classList.remove('d-block');
+        //     document.getElementById("input-link-listing-button").classList.add('d-none');
+        // }
+    </script>
+
+    <script>
+        function viewModalhost() {
+            $('#modalHost').modal('show');
         }
     </script>
 </body>
