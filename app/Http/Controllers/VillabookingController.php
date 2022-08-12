@@ -230,9 +230,9 @@ class VillabookingController extends Controller
                 'total_price' => ($request->villa_price * $stay->d),
             ];
 
-            \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
+            // \Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
 
-            \Mail::to($villa[0]->email)->send(new \App\Mail\BlockDateToVilla($details));
+            // \Mail::to($villa[0]->email)->send(new \App\Mail\BlockDateToVilla($details));
 
             dd("Email sudah terkirim.");
         }
@@ -681,7 +681,7 @@ class VillabookingController extends Controller
             'total' => CurrencyConversion::exchangeWithUnit($total),
             'tax' => CurrencyConversion::exchangeWithUnit(($total * $tax / 100)),
             'total_all' => CurrencyConversion::exchangeWithUnit($total_all),
-            'price' => (int)(round($total_all)),
+            'price' => (int)($total_all),
             'discount' => CurrencyConversion::exchangeWithUnit($discounts),
             'cleaning_fee' => CurrencyConversion::exchangeWithUnit($cleaning_fee),
             'max_total_guest' => $max_total_guest,
