@@ -271,12 +271,17 @@
             font-size: 12px;
         }
 
+        .listing-action:hover{
+            text-decoration:none;
+            color:white;
+        }
+
         .last-mod span,
         .listing-info span {
             display: block;
         }
 
-        @media only screen and (max-width: 425px) {
+        @media only screen and (max-width: 768px) {
             .fs-3 {
                 font-size: calc(0.7rem + .6vw) !important;
             }
@@ -346,10 +351,11 @@
             }
 
             .listing-action {
-                width: 70%;
+                /* width: 70%; */
                 padding: 2px 10px;
                 border-radius: 6px;
             }
+
         }
     </style>
     <!-- Hero -->
@@ -440,7 +446,7 @@
                                 data-src="{{ URL::asset('/foto/activity/' . strtolower($item->uid) . '/' . $item->image) }}"
                                 alt="EZV_{{ $item->image }}">
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 listing-description-container">
                             <p class="listing-card-title">{{ $item->name }}</p>
                             <p class="last-mod">Last Modified
                                 {{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}
@@ -454,10 +460,8 @@
                                 <span>Phone: {{ $item->phone }}</span>
                                 <span>Email: {{ $item->email }}</span>
                             </p>
-                            <p class="listing-button">
-                                <a type="button" href="{{ route('activity', $item->id_activity) }}" target="_blank"
-                                    class="listing-action">Action</a>
-                            </p>
+                            <a type="button" href="{{ route('activity', $item->id_activity) }}" target="_blank"
+                                    class="listing-action listing-button">Action</a>
                         </div>
                     </div>
                 </div>
