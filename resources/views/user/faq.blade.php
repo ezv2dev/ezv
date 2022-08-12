@@ -75,7 +75,7 @@
         }
         .accordion-header {
             margin-bottom: 0;
-            background: #dfdfdf;
+            background: #f7f7f7;
             padding: 1rem 1.25rem;
             border-bottom: solid 1px #fff;
             cursor: pointer;
