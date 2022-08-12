@@ -46,7 +46,7 @@
         .list-link-sidebar {
             gap: 12px;
             display: flex;
-            align-items:center;
+            align-items: center;
         }
 
         .list-link-sidebar i {
@@ -54,7 +54,7 @@
         }
 
         .list-link-sidebar>*,
-        .list-link-sidebar:hover>*{
+        .list-link-sidebar:hover>* {
             color: #585656;
         }
     </style>
@@ -125,7 +125,8 @@
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
                     </a>
-                    <a class="list-link-sidebar mb-2" href="#!" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                    <a class="list-link-sidebar mb-2" href="#!"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                         <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Sign Out') }}</p>
                     </a>
@@ -173,7 +174,8 @@
                 </div>
             @else
                 <div class="d-flex align-items-center justify-content-between pt-3 pb-0">
-                    <a type="button" onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar btn-login" id="login">
+                    <a type="button" onclick="loginRegisterForm(2, 'registration');" class="list-link-sidebar btn-login"
+                        id="login">
                         <i class="fa-solid fa-user text-center"></i>
                         <p class="mb-0">{{ __('user_page.Create Account') }}</p>
                     </a>
@@ -199,10 +201,8 @@
                     @endif
                     <p class="mb-0 ms-2" style="color: #585656">{{ __('user_page.Choose a Language') }}</p>
                 </a>
-                <a type="button" onclick="currency()" class="list-link-sidebar mb-2"
-                    style="color: white;">
-                    <img class="lozad"
-                        style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                <a type="button" onclick="currency()" class="list-link-sidebar mb-2" style="color: white;">
+                    <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
                         src="{{ LazyLoad::show() }}"
                         data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
                     @if (session()->has('currency'))
@@ -230,8 +230,7 @@
             <i class="fa-solid fa-xmark close"></i>
             <i class="fa-solid fa-angle-left back d-none"></i>
         </button>
-        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form"
-            autocomplete="off">
+        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form" autocomplete="off">
             {{-- NEW SEARCH MOBILE
             location untuk mobile --}}
             <div class="location-container mx-2 mt-2">
@@ -240,36 +239,29 @@
                 berisi input dan location paling populer --}}
                 <div class="select-location-mobile-container">
                     <h3 class="mb-2">{{ __('user_page.Location') }}</h3>
-                    <input type="text" onfocus="this.value=''"
-                        class="form-control input-transparant d-block"
-                        id="loc_sugest" name="sLocation"
-                        placeholder="{{ __('user_page.Where are you going?') }}" readonly>
+                    <input type="text" onfocus="this.value=''" class="form-control input-transparant d-block"
+                        id="loc_sugest" name="sLocation" placeholder="{{ __('user_page.Where are you going?') }}"
+                        readonly>
                     <div class="row mt-2 first-sugest-location">
                         <div class="col-4">
-                            <img class="d-block w-100 lozad"
-                                    src="{{ LazyLoad::show() }}"
-                                    data-src="https://pix10.agoda.net/hotelImages/931/931511/931511_15082814490035280393.jpg?ca=5&ce=1&s=768x1024">
+                            <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                data-src="https://pix10.agoda.net/hotelImages/931/931511/931511_15082814490035280393.jpg?ca=5&ce=1&s=768x1024">
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Canggu">Canggu</a>
+                                <a type="button" class="location_op" data-value="Canggu">Canggu</a>
                             </div>
                         </div>
                         <div class="col-4">
-                            <img class="d-block w-100 lozad"
-                                    src="{{ LazyLoad::show() }}"
-                                    data-src="https://pix10.agoda.net/hotelImages/71995/-1/090e900e653bb0af941ba8ae8ccc6a77.jpg?ca=11&ce=1&s=1024x768">
+                            <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                data-src="https://pix10.agoda.net/hotelImages/71995/-1/090e900e653bb0af941ba8ae8ccc6a77.jpg?ca=11&ce=1&s=1024x768">
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Seminyak">Seminyak</a>
+                                <a type="button" class="location_op" data-value="Seminyak">Seminyak</a>
                             </div>
                         </div>
                         <div class="col-4">
-                            <img class="d-block w-100 lozad"
-                                    src="{{ LazyLoad::show() }}"
-                                    data-src="https://cf.bstatic.com/xdata/images/xphoto/max500_ao/85179701.jpg?k=ce7f1e159c7c0a6ce44bab2342d2145165d0d5dd2235dce5df882ae89ee01f07&o=">
+                            <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                data-src="https://cf.bstatic.com/xdata/images/xphoto/max500_ao/85179701.jpg?k=ce7f1e159c7c0a6ce44bab2342d2145165d0d5dd2235dce5df882ae89ee01f07&o=">
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Berawa">Berawa</a>
+                                <a type="button" class="location_op" data-value="Berawa">Berawa</a>
                             </div>
                         </div>
                     </div>
@@ -290,87 +282,66 @@
                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                     @endphp
                     <div class="location-popup-container h-100">
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none;">
-                            <div onclick="checkGeo();"
-                                class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none;">
+                            <div onclick="checkGeo();" class="location-popup-map sugest-list-map">
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://icon-library.com/images/current-location-icon/current-location-icon-23.jpg">
                             </div>
-                            <div onclick="checkGeo();"
-                                class="location-popup-text sugest-list-text">
-                                <a id="current_location" type="button"
-                                    class="location_op" data-value="">Current
+                            <div onclick="checkGeo();" class="location-popup-text sugest-list-text">
+                                <a id="current_location" type="button" class="location_op" data-value="">Current
                                     Location</a>
                             </div>
                         </div>
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none ">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
                             <div class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                             </div>
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Canggu">Canggu</a>
+                                <a type="button" class="location_op" data-value="Canggu">Canggu</a>
                             </div>
                         </div>
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none ">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
                             <div class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                             </div>
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Seminyak">Seminyak</a>
+                                <a type="button" class="location_op" data-value="Seminyak">Seminyak</a>
                             </div>
                         </div>
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none ">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
                             <div class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                             </div>
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Ubud">Ubud</a>
+                                <a type="button" class="location_op" data-value="Ubud">Ubud</a>
                             </div>
                         </div>
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none ">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
                             <div class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                             </div>
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Kuta">Kuta</a>
+                                <a type="button" class="location_op" data-value="Kuta">Kuta</a>
                             </div>
                         </div>
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
-                            style="display: none ">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
                             <div class="location-popup-map sugest-list-map">
-                                <img class="location-popup-map-image lozad"
-                                    src="{{ LazyLoad::show() }}"
+                                <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                             </div>
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op"
-                                    data-value="Pecatu">Pecatu</a>
+                                <a type="button" class="location_op" data-value="Pecatu">Pecatu</a>
                             </div>
                         </div>
                         @foreach ($location as $item)
                             <div class="col-lg-12 location-popup-desc-container sugest-list-first"
                                 style="display: none ">
                                 <div class="location-popup-map sugest-list-map">
-                                    <img class="location-popup-map-image lozad"
-                                        src="{{ LazyLoad::show() }}"
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                         data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                 </div>
                                 <div class="location-popup-text sugest-list-text">
@@ -380,11 +351,9 @@
                             </div>
                         @endforeach
                         @foreach ($location as $item)
-                            <div class="col-lg-12 location-popup-desc-container sugest-list"
-                                style="display: none ">
+                            <div class="col-lg-12 location-popup-desc-container sugest-list" style="display: none ">
                                 <div class="location-popup-map sugest-list-map">
-                                    <img class="location-popup-map-image lozad"
-                                        src="{{ LazyLoad::show() }}"
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
                                         data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                 </div>
                                 <div class="location-popup-text sugest-list-text">
@@ -402,9 +371,8 @@
                                         src="{{ asset('assets/icon/hotel/hotel.png') }}">
                                 </div>
                                 <div class="location-popup-text sugest-list-text">
-                                    <a href="{{ route('hotel', $item2->id_hotel) }}"
-                                        type="button" class="location_op"
-                                        target="_blank"
+                                    <a href="{{ route('hotel', $item2->id_hotel) }}" type="button"
+                                        class="location_op" target="_blank"
                                         data-value="{{ $item2->name }}">{{ $item2->name }}</a>
                                 </div>
                             </div>
@@ -418,9 +386,8 @@
                                         src="{{ asset('assets/icon/map/restaurant.png') }}">
                                 </div>
                                 <div class="location-popup-text sugest-list-text">
-                                    <a href="{{ route('restaurant', $item3->id_restaurant) }}"
-                                        type="button" class="location_op"
-                                        target="_blank"
+                                    <a href="{{ route('restaurant', $item3->id_restaurant) }}" type="button"
+                                        class="location_op" target="_blank"
                                         data-value="{{ $item3->name }}">{{ $item3->name }}</a>
                                 </div>
                             </div>
@@ -434,15 +401,13 @@
                                         src="{{ asset('assets/icon/map/activity.png') }}">
                                 </div>
                                 <div class="location-popup-text sugest-list-text">
-                                    <a href="{{ route('activity', $item4->id_activity) }}"
-                                        type="button" class="location_op"
-                                        target="_blank"
+                                    <a href="{{ route('activity', $item4->id_activity) }}" type="button"
+                                        class="location_op" target="_blank"
                                         data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                 </div>
                             </div>
                         @endforeach
-                        <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
-                            style="display: none">
+                        <div class="col-lg-12 location-popup-desc-container sugest-list-empty" style="display: none">
                             <p>{{ __('user_page.Location not found') }}</p>
                         </div>
                     </div>
@@ -459,8 +424,7 @@
                 </div>
                 {{-- calendar --}}
                 <div class="content sidebar-popup" id="popup_check_search">
-                    <div class="flatpickr" id="inline_reserve_search"
-                        style="text-align: left;">
+                    <div class="flatpickr" id="inline_reserve_search" style="text-align: left;">
                     </div>
                 </div>
             </div>
@@ -487,24 +451,18 @@
                             </p>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a type="button"
-                                onclick="adult_decrement_index()"
+                            <a type="button" onclick="adult_decrement_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-minus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
-                            <div
-                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="adult2"
-                                    name="sAdult" value="1"
+                            <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="adult2" name="sAdult" value="1"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
-                            <a type="button"
-                                onclick="adult_increment_index()"
+                            <a type="button" onclick="adult_increment_index()"
                                 style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-plus"
-                                    style="padding:0px;"></i>
+                                <i class="fa-solid fa-plus" style="padding:0px;"></i>
                             </a>
                         </div>
                     </div>
@@ -519,24 +477,18 @@
                             </p>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a type="button"
-                                onclick="child_decrement_index()"
+                            <a type="button" onclick="child_decrement_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-minus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
-                            <div
-                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="child2"
-                                    name="sChild" value="0"
+                            <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="child2" name="sChild" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
-                            <a type="button"
-                                onclick="child_increment_index()"
+                            <a type="button" onclick="child_increment_index()"
                                 style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-plus"
-                                    style="padding:0px;"></i>
+                                <i class="fa-solid fa-plus" style="padding:0px;"></i>
                             </a>
                         </div>
                     </div>
@@ -551,24 +503,18 @@
                             </p>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a type="button"
-                                onclick="infant_decrement_index()"
+                            <a type="button" onclick="infant_decrement_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-minus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
-                            <div
-                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="infant2"
-                                    name="" value="0"
+                            <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="infant2" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
-                            <a type="button"
-                                onclick="infant_increment_index()"
+                            <a type="button" onclick="infant_increment_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-plus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-plus guests-style" style="padding:0px"></i>
                             </a>
                         </div>
                     </div>
@@ -585,20 +531,16 @@
                         <div class="d-flex align-items-center">
                             <a type="button" onclick="pet_decrement_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-minus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
-                            <div
-                                style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="pet2"
-                                    name="" value="0"
+                            <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                <input type="number" id="pet2" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
                             <a type="button" onclick="pet_increment_index()"
                                 style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-plus guests-style"
-                                    style="padding:0px"></i>
+                                <i class="fa-solid fa-plus guests-style" style="padding:0px"></i>
                             </a>
                         </div>
                     </div>
@@ -609,7 +551,8 @@
             tombol action dipaling bawah untuk mobile --}}
             <div class="bottom-action-container">
                 <div class="d-flex">
-                    <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">{{ __('user_page.Clear Dates') }}</div>
+                    <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">
+                        {{ __('user_page.Clear Dates') }}</div>
                     <div class="btn-transparent-action clear-all-mobile">Clear All</div>
                     <div class="btn-company next-mobile ms-auto">Next</div>
                     <button class="btn-company submit-mobile ms-auto d-none">Search</button>
@@ -628,7 +571,8 @@
                             <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
                         </a>
                         <div id="navbar-collapse-button" class="flex-fill d-flex justify-content-end">
-                            <button class="btn-company d-block d-lg-none listing-mobile-btn me-1" style="font-size: 9px; padding: 10px !important; border: none;">
+                            <button class="btn-company d-block d-lg-none listing-mobile-btn me-1"
+                                style="font-size: 9px; padding: 10px !important; border: none;">
                                 <a href="{{ route('ahost') }}" style="color: white;">
                                     Create listing
                                 </a>
@@ -710,17 +654,18 @@
                             {{-- Header Search --}}
                             <div class="search-box">
                                 <div id="search_bar">
-                                    <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form"
-                                        autocomplete="off">
+                                    <form action="{{ route('search_home_combine') }}" method="GET"
+                                        id="basic-form" autocomplete="off">
                                         <div id="bar" class="bar">
                                             <div class="location">
                                                 <p>{{ __('user_page.Location') }}</p>
                                                 <input type="text" onfocus="this.value=''"
                                                     class="form-control input-transparant input-location"
-                                                    style="margin-top: -2px;" id="loc_sugest" name="sLocation"
+                                                    style="margin-top: -2px;" id="loc_sugest_desktop"
+                                                    name="sLocation"
                                                     placeholder="{{ __('user_page.Where are you going?') }}">
 
-                                                <div id="sugest" class="location-popup display-none">
+                                                <div id="sugest_desktop" class="location-popup display-none">
                                                     @php
                                                         $location = App\Http\Controllers\ViewController::get_location();
                                                         $hotelName = App\Http\Controllers\HotelController::get_name();
@@ -739,7 +684,7 @@
                                                             <div onclick="checkGeo();"
                                                                 class="location-popup-text sugest-list-text">
                                                                 <a id="current_location" type="button"
-                                                                    class="location_op" data-value="">Current
+                                                                    class="location_op_desktop" data-value="">Current
                                                                     Location</a>
                                                             </div>
                                                         </div>
@@ -751,7 +696,7 @@
                                                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                             </div>
                                                             <div class="location-popup-text sugest-list-text">
-                                                                <a type="button" class="location_op"
+                                                                <a type="button" class="location_op_desktop"
                                                                     data-value="Canggu">Canggu</a>
                                                             </div>
                                                         </div>
@@ -763,7 +708,7 @@
                                                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                             </div>
                                                             <div class="location-popup-text sugest-list-text">
-                                                                <a type="button" class="location_op"
+                                                                <a type="button" class="location_op_desktop"
                                                                     data-value="Seminyak">Seminyak</a>
                                                             </div>
                                                         </div>
@@ -775,7 +720,7 @@
                                                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                             </div>
                                                             <div class="location-popup-text sugest-list-text">
-                                                                <a type="button" class="location_op"
+                                                                <a type="button" class="location_op_desktop"
                                                                     data-value="Ubud">Ubud</a>
                                                             </div>
                                                         </div>
@@ -787,7 +732,7 @@
                                                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                             </div>
                                                             <div class="location-popup-text sugest-list-text">
-                                                                <a type="button" class="location_op"
+                                                                <a type="button" class="location_op_desktop"
                                                                     data-value="Kuta">Kuta</a>
                                                             </div>
                                                         </div>
@@ -799,7 +744,7 @@
                                                                     data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                             </div>
                                                             <div class="location-popup-text sugest-list-text">
-                                                                <a type="button" class="location_op"
+                                                                <a type="button" class="location_op_desktop"
                                                                     data-value="Pecatu">Pecatu</a>
                                                             </div>
                                                         </div>
@@ -812,7 +757,7 @@
                                                                         data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                                 </div>
                                                                 <div class="location-popup-text sugest-list-text">
-                                                                    <a type="button" class="location_op"
+                                                                    <a type="button" class="location_op_desktop"
                                                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                                 </div>
                                                             </div>
@@ -826,7 +771,7 @@
                                                                         data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                                 </div>
                                                                 <div class="location-popup-text sugest-list-text">
-                                                                    <a type="button" class="location_op"
+                                                                    <a type="button" class="location_op_desktop"
                                                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                                 </div>
                                                             </div>
@@ -841,7 +786,7 @@
                                                                 </div>
                                                                 <div class="location-popup-text sugest-list-text">
                                                                     <a href="{{ route('hotel', $item2->id_hotel) }}"
-                                                                        type="button" class="location_op"
+                                                                        type="button" class="location_op_desktop"
                                                                         target="_blank"
                                                                         data-value="{{ $item2->name }}">{{ $item2->name }}</a>
                                                                 </div>
@@ -857,7 +802,7 @@
                                                                 </div>
                                                                 <div class="location-popup-text sugest-list-text">
                                                                     <a href="{{ route('restaurant', $item3->id_restaurant) }}"
-                                                                        type="button" class="location_op"
+                                                                        type="button" class="location_op_desktop"
                                                                         target="_blank"
                                                                         data-value="{{ $item3->name }}">{{ $item3->name }}</a>
                                                                 </div>
@@ -873,33 +818,33 @@
                                                                 </div>
                                                                 <div class="location-popup-text sugest-list-text">
                                                                     <a href="{{ route('activity', $item4->id_activity) }}"
-                                                                        type="button" class="location_op"
+                                                                        type="button" class="location_op_desktop"
                                                                         target="_blank"
                                                                         data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-empty-desktop"
                                                             style="display: none">
                                                             <p>{{ __('user_page.Location not found') }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="check-in">
+                                            <div class="check-in" onclick="calendar_search_desktop()">
                                                 <a type="button"
                                                     style="position : absolute; z-index:1; width:367px; height: 60px; margin-left: -90px; margin-top: -8px"
                                                     class="collapsible_check_search"></a>
                                                 <p>{{ __('user_page.Check in') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
-                                                    id="check_in2" name="sCheck_in">
+                                                    id="check_in_desktop" name="sCheck_in">
                                             </div>
-                                            <div class="check-out">
+                                            <div class="check-out" onclick="calendar_search_desktop()">
                                                 <p>{{ __('user_page.Check out') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
-                                                    id="check_out2" name="sCheck_out">
+                                                    id="check_out_desktop" name="sCheck_out">
                                             </div>
                                             <div class="guests">
                                                 <p>{{ __('user_page.Guests') }}</p>
@@ -1061,7 +1006,6 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1076,7 +1020,7 @@
                                     </form>
                                 </div>
                                 {{-- calendar --}}
-                                <div class="content sidebar-popup" id="popup_check_search"
+                                <div class="content sidebar-popup" id="popup_check_search_desktop"
                                     style="margin-left: -1116px; width:fit-content; padding:0px;z-index: 999; margin-top: 10px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
@@ -1090,14 +1034,13 @@
                                                         style="margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     <p style="margin: 0px; font-size: 13px;"></p>
                                                 </div>
-                                                <div class="flatpickr" id="inline_reserve_search"
+                                                <div class="flatpickr" id="inline_reserve_search_desktop"
                                                     style="text-align: left;">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- calendar --}}
                             </div>
                         </div>
                         {{-- End Header Search --}}
@@ -1208,11 +1151,11 @@
                                 @endif
                             </a>
                             <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                    class="btn btn-fill border-0 navbar-gap"
-                                    style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                    id="login">
-                                    <i class="fa-solid fa-user"></i>
-                                </a> -->
+                                            class="btn btn-fill border-0 navbar-gap"
+                                            style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
+                                            id="login">
+                                            <i class="fa-solid fa-user"></i>
+                                        </a> -->
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
@@ -1658,8 +1601,8 @@
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none");
                 $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
                 $(".search-container-mobile .clear-date-mobile").addClass("d-none");
-                if ($("#check_in2").val() != "" && $("#check_out2").val() != "" 
-                    && parseInt($("#total_guest2").val()) >= 1 && $("#loc_sugest").val() != "") {
+                if ($("#check_in2").val() != "" && $("#check_out2").val() != "" &&
+                    parseInt($("#total_guest2").val()) >= 1 && $("#loc_sugest").val() != "") {
                     $(".search-container-mobile .submit-mobile").removeClass("d-none");
                     $(".search-container-mobile .next-mobile").addClass("d-none");
                 } else {
@@ -1766,7 +1709,7 @@
                     $("#overlay").css("display", "none");
                 })
 
-                $(window).resize(function(){
+                $(window).resize(function() {
                     if (window.innerWidth > 991) {
                         $(".btn-close-expand-navbar-mobile").trigger('click')
                     }
@@ -1822,7 +1765,8 @@
                     // if the target of the click isn't the container nor a descendant of the container
                     // NEW SEARCH MOBILE
                     // fungsi untuk menyembunyikan location-popup hanya berlaku ketika bukan dimobile
-                    if (!container.is(e.target) && container.has(e.target).length === 0 && window.innerWidth > 649) {
+                    if (!container.is(e.target) && container.has(e.target).length === 0 && window.innerWidth >
+                        649) {
                         container.removeClass("display-block");
                         container.addClass("display-none");
                     }
@@ -1865,8 +1809,10 @@
                 $(".first-sugest-location img").on('click', function(e) {
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
-                    $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(".location_op").data("value"));
-                    $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text").children(".location_op").data("value"));
+                    $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(
+                        ".location_op").data("value"));
+                    $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text")
+                        .children(".location_op").data("value"));
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk sembunyiin popup location
@@ -1899,7 +1845,7 @@
 
                 $(".location_op").on('click', function(e) {
                     $('#loc_sugest').val($(this).data("value"));
-                    
+
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('.loc_sugest_mobile').html($(this).data("value"));
@@ -1931,6 +1877,81 @@
                     }
                 });
 
+
+                $("#loc_sugest_desktop").on('click', function() { //use a class, since your ID gets mangled
+                    var ids = $(".sugest-list-first");
+                    ids.hide();
+                    for (let index = 0; index < 5; index++) {
+                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                        // console.log(rndInt);
+                        ids.show();
+                    };
+
+                    $('#sugest_desktop').removeClass("display-none");
+                    $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
+                });
+
+                $(document).mouseup(function(e) {
+                    var container = $('#sugest_desktop');
+
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                        container.removeClass("display-block");
+                        container.addClass("display-none");
+                    }
+                });
+
+                $("#loc_sugest_desktop").on('keyup change', async () => {
+                    var close = $(".sugest-list-first");
+                    close.hide();
+                    var ids = $(".sugest-list");
+                    ids.hide();
+                    $(".sugest-list-empty-desktop").eq(0).hide();
+
+                    var formValue = $("#loc_sugest_desktop").val();
+                    var isEmpty = true;
+
+                    $(".sugest-list").map((data) => {
+                        var name = $(".sugest-list").eq(data).children(".sugest-list-text")
+                            .children('a').text();
+                        if (name.toLowerCase().includes(formValue.toLowerCase())) {
+                            $(".sugest-list").eq(data).show();
+                            isEmpty = false;
+                        }
+                    });
+
+                    if (isEmpty) {
+                        $(".sugest-list-empty-desktop").eq(0).show();
+                    }
+
+                    if (formValue.length === 0) {
+                        close.show();
+                        ids.hide();
+                    }
+
+                    console.log('done');
+                });
+
+                $(".location_op_desktop").on('click', function(e) {
+                    $('#loc_sugest_desktop').val($(this).data("value"));
+                    $('#sugest_desktop').removeClass("display-block");
+                    $('#sugest_desktop').addClass("display-none");
+
+                    //calendar show when location click
+                    var content_flatpickr = document.getElementById('popup_check_search');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
                 // NEW SEARCH MOBILE
                 // Guest mobile
                 $(".selected-guest-mobile").on("click", moveToGuestsMobile);
@@ -1941,15 +1962,17 @@
             // NEW SEARCH MOBILE
             // fungsi untuk tombol next atau skip di mobile
             $(".next-mobile").on("click", function() {
-                if ($("#loc_sugest").val() == "" && $("#check_in2").val() == ""
-                    && $("#check_out2").val() == "" && $(".search-container-mobile .sidebar-popup").css("display") != "block") {
-                        moveToLocationMobile();
-                }else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == ""
-                    && $("#check_out2").val() == "" && parseInt($("#total_guest2").val()) < 1) {
-                        moveToDateMobile();
-                }else if (($("#check_in2").val() == ""
-                    || $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") == "block"){
-                        moveToGuestsMobile();
+                if ($("#loc_sugest").val() == "" && $("#check_in2").val() == "" &&
+                    $("#check_out2").val() == "" && $(".search-container-mobile .sidebar-popup").css("display") !=
+                    "block") {
+                    moveToLocationMobile();
+                } else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == "" &&
+                    $("#check_out2").val() == "" && parseInt($("#total_guest2").val()) < 1) {
+                    moveToDateMobile();
+                } else if (($("#check_in2").val() == "" ||
+                        $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") ==
+                    "block") {
+                    moveToGuestsMobile();
                 }
             });
             // NEW SEARCH MOBILE
@@ -2037,37 +2060,38 @@
             jQuery(document).ready(function(e) {
                 if (window.scrollY > 0 && window.innerWidth > 991) {
                     $('#ul').removeClass('ul-display-block').addClass('ul-display-none');
-                        $('#bar').addClass('display-none');
-                        $('#searchbox').removeClass('display-none').addClass('display-block');
-                        $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
-                        $('#searchbox-mob').removeClass('display-none').addClass('display-block');
+                    $('#bar').addClass('display-none');
+                    $('#searchbox').removeClass('display-none').addClass('display-block');
+                    $('#nav').removeClass('search-height').addClass('position-fixed').addClass('padding-top-0');
+                    $('#searchbox-mob').removeClass('display-none').addClass('display-block');
 
-                        function addClass(elements, className) {
-                            for (var i = 0; i < elements.length; i++) {
-                                var element = elements[i];
-                                if (element.classList) {
-                                    element.classList.add(className);
-                                } else {
-                                    element.className += ' ' + className;
-                                }
+                    function addClass(elements, className) {
+                        for (var i = 0; i < elements.length; i++) {
+                            var element = elements[i];
+                            if (element.classList) {
+                                element.classList.add(className);
+                            } else {
+                                element.className += ' ' + className;
                             }
                         }
+                    }
 
-                        function removeClass(elements, className) {
-                            for (var i = 0; i < elements.length; i++) {
-                                var element = elements[i];
-                                if (element.classList) {
-                                    element.classList.remove(className);
-                                } else {
-                                    element.className = element.className.replace(new RegExp('(^|\\b)' + className
-                                        .split(' ')
-                                        .join('|') + '(\\b|$)', 'gi'), ' ');
-                                }
+                    function removeClass(elements, className) {
+                        for (var i = 0; i < elements.length; i++) {
+                            var element = elements[i];
+                            if (element.classList) {
+                                element.classList.remove(className);
+                            } else {
+                                element.className = element.className.replace(new RegExp('(^|\\b)' + className
+                                    .split(' ')
+                                    .join('|') + '(\\b|$)', 'gi'), ' ');
                             }
                         }
-                        var els = document.getElementsByClassName("flatpickr-calendar");
-                        addClass(els, 'display-none');
+                    }
+                    var els = document.getElementsByClassName("flatpickr-calendar");
+                    addClass(els, 'display-none');
                 }
+
                 function t(t) {
                     e(t).bind("click", function(t) {
                         t.preventDefault();
@@ -2280,6 +2304,7 @@
         <script>
             // NEW SEARCH MOBILE
             window.countMonthsMobile = 3;
+
             function calendar_search(months) {
                 if (!$("#check_in2").val()) {
                     var check_in_val = "";
@@ -2313,22 +2338,25 @@
                                 if (indexMonth == 11) {
                                     indexMonth = 0;
                                     year++;
-                                }else {
+                                } else {
                                     indexMonth++;
                                 }
                             });
                             $(".flatpickr-weekdaycontainer").addClass("d-none");
                             $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
-                            $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                            $(".flatpickr-days").append(
+                                "<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>"
+                            );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
-                                window.countMonthsMobile+=3;
+                                window.countMonthsMobile += 3;
                                 calendar_search(window.countMonthsMobile);
                             });
                         }
                     },
                     onChange: function(selectedDates, dateStr, instance) {
                         $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                        $(".search-container-mobile .dates-mobile").html(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $(".search-container-mobile .dates-mobile").html(instance.formatDate(selectedDates[0],
+                            "Y-m-d"));
                         if (selectedDates.length > 1) {
                             $("#check_out2").val(
                                 instance.formatDate(selectedDates[1], "Y-m-d")
@@ -2336,8 +2364,8 @@
                             // NEW SEARCH MOBILE
                             // fungsi untuk isi date di mobile
                             $(".search-container-mobile .dates-mobile").html(
-                                instance.formatDate(selectedDates[0], "Y-m-d")
-                                + "-" +
+                                instance.formatDate(selectedDates[0], "Y-m-d") +
+                                "-" +
                                 instance.formatDate(selectedDates[1], "Y-m-d")
                             );
                             // NEW SEARCH MOBILE
@@ -2361,15 +2389,17 @@
                                 if (indexMonth == 11) {
                                     indexMonth = 0;
                                     year++;
-                                }else {
+                                } else {
                                     indexMonth++;
                                 }
                             });
                             $(".flatpickr-weekdaycontainer").addClass("d-none");
                             $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
-                            $(".flatpickr-days").append("<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>");
+                            $(".flatpickr-days").append(
+                                "<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>"
+                            );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
-                                window.countMonthsMobile+=3;
+                                window.countMonthsMobile += 3;
                                 calendar_search(window.countMonthsMobile);
                             });
                         }
@@ -2377,7 +2407,6 @@
                 });
             }
             calendar_search(2);
-            
         </script>
 
         <script>
@@ -2388,7 +2417,7 @@
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
-                            
+
                             // NEW SEARCH MOBILE
                             // clear date untuk mobile
                             $(".search-container-mobile .dates-mobile").html("");
@@ -2625,22 +2654,21 @@
             }
         </script>
 
-    <script>
-        //Drop down login
-        $(document).ready(function () {
-            var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-            $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function (event) {
-                event.stopPropagation();
-                $('.dropdown-content').slideToggle('fast');
-            });
+        <script>
+            //Drop down login
+            $(document).ready(function() {
+                var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+                $('.dropbtn').on(supportsTouch ? 'touchend' : 'click', function(event) {
+                    event.stopPropagation();
+                    $('.dropdown-content').slideToggle('fast');
+                });
 
-            $(document).on(supportsTouch ? 'touchend' : 'click', function (event) {
-                $('.dropdown-content').slideUp('fast');
-                // document.activeElement.blur();//lose focus
+                $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
+                    $('.dropdown-content').slideUp('fast');
+                    // document.activeElement.blur();//lose focus
+                });
             });
-        });
-
-    </script>
+        </script>
 
         {{-- LAZY LOAD --}}
         @include('components.lazy-load.lazy-load')
