@@ -37,10 +37,10 @@ input {
 }
 
 .love-btn-container{
-    position: absolute; 
-    left: 10px; 
-    top: 10px; 
-    z-index: 99; 
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 99;
 }
 
 .like-sign {
@@ -3067,7 +3067,11 @@ div#view-map-button-float {
 .modal-header-map {
     padding: 0.75rem 1.5rem !important;
 }
-
+@media only screen and (max-width: 349px) {
+    .modal-header-map {
+        padding: 0.75rem 0.5rem !important;
+    }
+}
 .favorite-button-28 {
     height: 28px;
     width: 28px;
