@@ -1500,13 +1500,13 @@ nav.menu {
 #search_bar {
     transition: all 0.5s ease;
     transform: scale(0);
-    z-index: 999;
+    z-index: 99;
     position: relative;
 }
 
 #search_bar.active {
     transform: scale(1);
-    z-index: 99;
+    /* z-index: 99; */
     position: relative;
 }
 
@@ -2725,6 +2725,7 @@ li.button-dropdown {
 
 .filter-modal-body {
     padding: 0rem 2rem 2rem 2rem !important;
+    overflow-y: auto;
 }
 
 .filter-modal-row {
@@ -3536,6 +3537,10 @@ input::-webkit-inner-spin-button {
     .like-sign {
         font-size: 70px;
     }
+
+    .filter-modal-body{
+        max-height:70vh;
+    }
 }
 
 @media only screen and (max-width: 949px) {
@@ -3649,6 +3654,14 @@ input::-webkit-inner-spin-button {
     }
     .map-modal-container .map-content {
         min-width: 30%;
+    }
+
+    .villa-list-name.font-black {
+        color: #ff7400 !important;
+    }
+    
+    .villa-list-name.font-light {
+        color: #ff7400 !important;
     }
 }
 

@@ -2647,7 +2647,7 @@
                                     <div class="guests" style="min-width: max-content !important;">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
-                                            class="form-control input-transparant" name="sKeyword" value=""
+                                            class="form-control input-transparant input-search-food" name="sKeyword" value=""
                                             id="search_sugest" placeholder="{{ __('user_page.Search here') }}">
 
                                         <div id="sugest2" class="location-popup display-none"

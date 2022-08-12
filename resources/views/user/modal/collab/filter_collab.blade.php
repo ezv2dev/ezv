@@ -85,7 +85,7 @@ if (!$get_max) {
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="filter-modal-body" style=" height: 70vh; overflow-y: auto;">
+            <div class="filter-modal-body">
                 <div class="filter-modal-row">
                     <h5 class="col-12 filter-modal-row-title" style="cursor: pointer;">
                         {{ Translate::translate('Price Range') }}</h5>
@@ -137,13 +137,13 @@ if (!$get_max) {
                         <div class="row modal-checkbox-row">
                             <div class="col-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Male
-                                    <input type="checkbox" name="gender[]" value="male">
+                                    <input type="radio" name="gender[]" value="male">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="col-4 checkdesign-gap">
                                 <label class="checkdesign checkdesign-modal-filter">Female
-                                    <input type="checkbox" name="gender[]" value="female">
+                                    <input type="radio" name="gender[]" value="female">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
