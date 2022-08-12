@@ -1055,6 +1055,12 @@ input:checked + .switch-background:active::before {
     cursor: pointer;
 }
 
+#sugest3 {
+    width: 560px;
+    left: -262px;
+    height: 390px;
+}
+
 .expanding-navbar-mobile {
     transform: translate(-100%, 0px);
     transition: all 0.2s ease;
@@ -1098,9 +1104,6 @@ input:checked + .switch-background:active::before {
         left: -2px;
         width: calc(100% + 5px) !important;
     }
-    #sugest2 {
-        width: 95vw !important;
-    }
 
 }
 
@@ -1129,7 +1132,7 @@ input:checked + .switch-background:active::before {
 }
 @media only screen and (max-width: 425px) {
     .guest-popup {
-        left: -6px !important;
+        left: -18px !important;
         top: -160px !important;
         width: 98vw !important;
     }
@@ -1141,7 +1144,7 @@ input:checked + .switch-background:active::before {
         width: calc(100% + 5px) !important;
     }
     #sugest2 {
-        width: 95vw !important;
+        width: 87vw !important;
     }
     #search_bar .nav-link-form-detail {
         width: 20% !important;
@@ -1175,7 +1178,16 @@ input:checked + .switch-background:active::before {
         width: 50vw !important;
     }
 }
-
+@media only screen and (min-width: 320px) and (max-width: 991px) {
+    #sugest3 {
+        left: -2px;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    #sugest3 {
+        width: 280px;
+    }
+}
 @media only screen and (min-width: 426px) and (max-width: 500px) {
     .guest-popup {
         top: -160px !important;
@@ -1404,7 +1416,7 @@ input:checked + .switch-background:active::before {
         width: 83.33333333% !important;
     }
     .row .guests {
-        margin-left: 0px !important;
+        margin-left: -1px !important;
     }
     .bar-villa .guests,
     .bar-villa .button,
@@ -1620,9 +1632,3 @@ input:checked + .switch-background:active::before {
         min-height: 40px !important;
     }
 }
-@media only screen and (max-width: 328px) {
-    .row .guests {
-        margin-left: -1px !important;
-    }
-}
-
