@@ -81,8 +81,6 @@
         .subcategory-in-sidebar>* {
             color: #585656;
         }
-
-
     </style>
 </head>
 

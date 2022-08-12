@@ -478,10 +478,8 @@
         // check if favorit is true
         if (restaurantLocations.is_favorit) {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button-active favorite-button-28 unlikeButtonrestaurant${restaurantLocations.id_restaurant}">
@@ -494,10 +492,8 @@
             `;
         } else {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${restaurantLocations.id_restaurant}, 'restaurant')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button favorite-button-28 likeButtonrestaurant${restaurantLocations.id_restaurant}">
@@ -514,10 +510,8 @@
                             <div class="content-prop-in-modal">
                                 <div class="image-in-map-container">
                                     @guest
-                                        <div
-                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
+                                        <div class="love-btn-container">
+                                            <a onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -781,10 +775,8 @@
         // check if favorit is true
         if (villaLocations.is_favorit) {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button-active favorite-button-28 unlikeButtonvilla${villaLocations.id_villa}">
@@ -797,10 +789,8 @@
             `;
         } else {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${villaLocations.id_villa}, 'villa')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button favorite-button-28 likeButtonvilla${villaLocations.id_villa}">
@@ -817,10 +807,8 @@
                             <div class="content-prop-in-modal">
                                 <div class="image-in-map-container">
                                     @guest
-                                        <div
-                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
+                                        <div class="love-btn-container">
+                                            <a onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -1061,10 +1049,8 @@
         // check if favorit is true
         if (hotelLocations.is_favorit) {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button-active favorite-button-28 unlikeButtonhotel${hotelLocations.id_hotel}">
@@ -1077,10 +1063,8 @@
             `;
         } else {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${hotelLocations.id_hotel}, 'hotel')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button favorite-button-28 likeButtonhotel${hotelLocations.id_hotel}">
@@ -1097,10 +1081,8 @@
                             <div class="content-prop-in-modal">
                                 <div class="image-in-map-container">
                                     @guest
-                                        <div
-                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
+                                        <div class="love-btn-container">
+                                            <a onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path
@@ -1369,10 +1351,8 @@
         // check if favorit is true
         if (activityLocations.is_favorit) {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button-active favorite-button-28 unlikeButtonactivity${activityLocations.id_activity}">
@@ -1385,10 +1365,8 @@
             `;
         } else {
             favorite = `
-                <div
-                    style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                    <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                        onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
+                <div class="love-btn-container">
+                    <a onclick="likeFavorit(${activityLocations.id_activity}, 'activity')">
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             role="presentation" focusable="false"
                             class="favorite-button favorite-button-28 likeButtonactivity${activityLocations.id_activity}">
@@ -1405,10 +1383,8 @@
                             <div class="content-prop-in-modal">
                                 <div class="image-in-map-container">
                                     @guest
-                                        <div
-                                            style="position: absolute; left: 10px; top: 10px; z-index: 99; display: flex; font-size: 24px; border-radius: 9px;">
-                                            <a style="position: absolute; z-index: 99; top: 10px; left: 10px; cursor: pointer;"
-                                                onclick="loginForm(1)">
+                                        <div class="love-btn-container">
+                                            <a onclick="loginForm(1)">
                                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                                                     focusable="false" class="favorite-button favorite-button-28">
                                                     <path

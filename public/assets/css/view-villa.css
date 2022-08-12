@@ -119,7 +119,7 @@ textarea.error {
 .favorite-button-active {
     display: block;
     fill: #e31c5f;
-    margin-left: 16px;
+    /* margin-left: 16px; */
 }
 
 .detail-share-button {
